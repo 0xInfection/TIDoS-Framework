@@ -27,7 +27,7 @@ header = """
 """
 
 print header
-print "\033[1;36m            Operating Systems Available:\033[1;36m "
+print "\033[1;36m          Operating Systems Available:\033[1;36m "
 print "\n           -------------------------------------"
 print "             (1) Kali Linux / Ubuntu / Raspbian"
 print "            ------------------------------------\n"
@@ -46,7 +46,6 @@ if option == "1":
     install = os.system("apt-get update && apt-get install -y build-essential git")
     install2 = os.system("cp -R tidos/ /opt/ && cp tidos.py /opt/tidos && cp runon.sh /opt/tidos && cp runon.sh /usr/bin/tidos && chmod +x /usr/bin/tidos")
     os.system('apt-get install libncurses5')
-    pip.main(["install", "scapy", "requests", "google"])
     print "\033[1;32m[!] Finished Installing! Run 'tidos' to run program [!]\033[0m"
     sys.exit()
 else:
