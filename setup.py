@@ -41,7 +41,6 @@ if option == "1":
     import pip
     os.system('pip install google')
     os.system('pip install requests')
-    os.system('pip install requests[security]')
     print "\033[1;33m[*] Installing...\033[0m"
     install = os.system("apt-get update && apt-get install -y build-essential git")
     install2 = os.system("cp -R tidos/ /opt/ && cp tidos.py /opt/tidos && cp runon.sh /opt/tidos && cp runon.sh /usr/bin/tidos && chmod +x /usr/bin/tidos")
