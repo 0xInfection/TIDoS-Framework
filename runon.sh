@@ -1,4 +1,4 @@
 #!/bin/sh
 
-cd /opt/TIDoS/
-python /opt/TIDoS/tidos.py
+cd /opt/tidos
+python /opt/tidos/tidos.py
