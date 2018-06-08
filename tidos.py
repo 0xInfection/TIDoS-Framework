@@ -107,8 +107,8 @@ def banner1():
 	print color.BLUE + "                             +=============================================+"
 	print color.CYAN + "                             | +-----------------------------------------+ |"
 	print color.DARKCYAN + "                             | |   Author: The-Infected-Drake (@_tID)    | |".format(VersionNum)
-	print color.WARNING + "                             | |               Version: 1.0              | |" 
-	print color.PURPLE + "                             | |      Team  : Dark Error Cyber Team      | |"
+	print color.WARNING + "                             | |               Version: v0.1             | |" 
+	print color.PURPLE + "                             | |     Basic Version of this Framework     | |"
 	print color.BLUE + "                             | |         Website Pentesting Tool         | |"
 	print color.YELLOW + "                             | |         Have FUN, stay LEGAL !!!        | |"
 	print color.CYAN + "                             | +-----------------------------------------+ |"
@@ -120,9 +120,9 @@ print color.CYAN + "                             | +----------------------------
 time.sleep(0.5)
 print color.DARKCYAN + "                             | |   Author: The-Infected-Drake (@_tID)    | |"
 time.sleep(0.5)
-print color.WARNING + "                             | |               Version: 1.0              | |"
+print color.WARNING + "                             | |               Version: v0.1             | |"
 time.sleep(0.5)
-print color.PURPLE + "                             | |      Team  : Dark Error Cyber Team      | |"
+print color.PURPLE + "                             | |     Basic Version of this Framework     | |"
 time.sleep(0.5)
 print color.GREEN + "                             | |         Website Pentesting Tool         | |"
 time.sleep(0.5)
@@ -229,8 +229,6 @@ def tidosmain():
                 time.sleep(0.1)
                 print(''+O+'                     ============================================================' + color.END)
                 print (""+M+"                                         [*] \033[91m" + "Exiting..." + color.END)
-                time.sleep(0.3)
-                print (""+T+"                                [*] " + "Remember the Infected Drake" + color.END)
                 time.sleep(0.3)
                 print (""+O+"                                        [*] " + "GoodBye... ^_^" + color.END)
                 time.sleep(0.3)
