@@ -44,7 +44,8 @@ if option == "1":
     print "\033[1;33m[*] Installing...\033[0m"
     install = os.system("apt-get update && apt-get install -y build-essential git")
     install2 = os.system("cp -R tidos/ /opt/ && cp tidos.py /opt/tidos && cp runon.sh /opt/tidos && cp runon.sh /usr/bin/tidos && chmod +x /usr/bin/tidos")
-    os.system('apt-get install libncurses5')
+    print '\033[1;33m[*] Giving permissions...\033[0m'
+    os.system('chmod +x /opt/tidos/*')
     print "\033[1;32m[!] Finished Installing! Run 'tidos' to run program [!]\033[0m"
     sys.exit()
 else:
