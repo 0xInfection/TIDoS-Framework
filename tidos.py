@@ -11,6 +11,7 @@ from banner import *
 from googleSearch import *
 from UDoS import *
 from info import *
+from piweb import *
 
 VersionNum = "1.0.0" ####### Main for all
 
@@ -107,7 +108,7 @@ def banner1():
 	print color.BLUE + "                             +=============================================+"
 	print color.CYAN + "                             | +-----------------------------------------+ |"
 	print color.DARKCYAN + "                             | |   Author: The-Infected-Drake (@_tID)    | |".format(VersionNum)
-	print color.WARNING + "                             | |               Version: v0.1             | |" 
+	print color.WARNING + "                             | |             Version: v0.1.2             | |" 
 	print color.PURPLE + "                             | |     Basic Version of this Framework     | |"
 	print color.BLUE + "                             | |         Website Pentesting Tool         | |"
 	print color.YELLOW + "                             | |         Have FUN, stay LEGAL !!!        | |"
@@ -120,7 +121,7 @@ print color.CYAN + "                             | +----------------------------
 time.sleep(0.5)
 print color.DARKCYAN + "                             | |   Author: The-Infected-Drake (@_tID)    | |"
 time.sleep(0.5)
-print color.WARNING + "                             | |               Version: v0.1             | |"
+print color.WARNING + "                             | |             Version: v0.1.2             | |"
 time.sleep(0.5)
 print color.PURPLE + "                             | |     Basic Version of this Framework     | |"
 time.sleep(0.5)
@@ -189,17 +190,7 @@ def tidosmain():
                 print(''+T+'                          ' + color.UNDERLINE + 'Email me :>'+GR+'' + color.BOLD + ' robinsonpinaxx2000@gmail.com' + color.END)
                 print(''+O+'                   =====================================================================' + color.END)
             elif main == "piweb":
-                print(""+C+"                                                                              ")
-                print(""+C+"                                     ____  ____  _    _  ____  ____  ")
-                print(""+C+"                                    (  _ \(_  _)( \/\/ )( ___)(  _ \ ")
-                print(""+C+"                                     )___/ _)(_  )    (  )__)  ) _ < ")
-                print(""+C+"                                    (__)  (____)(__/\__)(____)(____/ ")
-                time.sleep (0.3)
-                print(''+O+'                       +=======================================================+' + color.END)
-                print''
-                while True:
-                    hostname = raw_input(''+T+'                                     Website :> ' + color.END)
-                    os.system("ping " + hostname)
+                piweb()
             elif main == "banner":
                 print (""+C+"                                   ╔╗╔╔═╗╦ ╦  ╔╗ ╔═╗╔╗╔╔╗╔╔═╗╦═╗")
                 time.sleep(0.1)
