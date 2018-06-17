@@ -22,17 +22,17 @@ def passiveban():
     print ''
     print B+'      [1] '+C+'Ping Check (Using external APi)'+W
     time.sleep(0.1)
-    print B+'      [2] '+C+'WhoIS Lookup'+W
+    print B+'      [2] '+C+'WhoIS Lookup (Get domain info)'+W
     time.sleep(0.1)
-    print B+'      [3] '+C+'GeoIP Lookup'+W
+    print B+'      [3] '+C+'GeoIP Lookup (Pinpoint Server Location)'+W
     time.sleep(0.1)
     print B+'      [4]'+C+' DNS Configuration Lookup'+W
     time.sleep(0.1)
-    print B+'      [5]'+C+' Gather Subsomains '+W
+    print B+'      [5]'+C+' Gather Subdomains (Only indexed visible ones)'+W
     time.sleep(0.1)
-    print B+'      [6]'+C+' Reverse DNS Lookup'+W
+    print B+'      [6]'+C+' Reverse DNS Configuration Lookup '+W
     time.sleep(0.1)
-    print B+'      [7]'+C+' Reverse IP Lookup (Find hosts on'+W
+    print B+'      [7]'+C+' Reverse IP Lookup (Find hosts on same server)'+W
     time.sleep(0.1)
     print B+'      [8]'+C+' Gather All Links from WebPage'+W
     time.sleep(0.1)
