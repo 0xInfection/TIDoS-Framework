@@ -1,17 +1,17 @@
-<<<<<<< HEAD
-<p align="middle"><img src='https://i.imgur.com/jqIT7UB.png' /></p>                    
+<p align="middle"><img src='https://i.imgur.com/QAbaVdU.png' /></p>                    
 
-# TIDoS-Framework v2.5
-TIDoS-Framework is a python toolkit for comprehensive penetration testing of websites. It is presently suited for reconnaissance purposes.
+# TIDoS Framework 
+TIDoS Framework is a comprehensive web application audit framework with some serious perks.
 
-A list of features TIDoS-Framework has to offer:
+### Features:
+A small list of features TIDoS-Framework has to offer:
 
-- [x] Has capabilities of effective Reconnaissance about a website with just its domain.
-- [x] FootPrinting solutions include Reverse-DNS, Reverse-IP LookUp of the website.
-- [x] Can detect serious vulnerabilities in websites like clickjackability, zone transfer, SQLi, XSS, etc...
-- [x] Can detect if you are being tricked into a honeypot.
-- [x] Can check the connectivity strength of your website by flooding it at the UDP level.
-- [x] Its written mostly using pre-defined APIs so results are pretty accurate.
+- [x] Has 4 main modules subdivided in further numerous modules (pressently .
+    - Reconnaissance & OSINT
+    - Scanning & Enumeration
+    - Vulnerability Analysis
+    - Exploitation (beta)
+- [x] 
 
 <img src='https://i.imgur.com/rJR5ciH.jpg' />
 
@@ -52,14 +52,5 @@ Examples :-
 <img src='https://i.imgur.com/5K4T6qs.jpg' />
 
 Check out other modules... : )
-=======
-# TIDoS
 
-This is a web-penetration testing tool. This tool is comprehensively built for pentesting website.
 
-### Update
-A huge update to version 1.0.0 is on the way.
-
-### Version:
-v0.1.2
->>>>>>> 536b967491752fe81f11fa1695f432cd87cb4bdc
