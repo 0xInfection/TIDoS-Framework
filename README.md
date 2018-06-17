@@ -54,52 +54,51 @@ As the framework opens up, enter the website name `eg. http://www.example.com` a
 TIDoS Framework presently supports the following:
 
 * __Reconnaissance + OSINT__
-    + Passive Reconnaissance:
-	- Ping/Nping Enumeration
-	- WhoIS Lookup
-	- GeoIP Lookup
-	- DNS Config. Lookup 
-	- Subdomains Lookup
-	- Reverse DNS Lookup
-	- Reverse IP Lookup
-	- Web Links Gatherer
-	- Google Search (manual search)
-	- Google Dorking (multiple modules) `automated`
+	+ Passive Reconnaissance:
+	    - Ping/Nping Enumeration
+	    - WhoIS Lookup
+	    - GeoIP Lookup
+	    - DNS Config. Lookup 
+	    - Subdomains Lookup
+	    - Reverse DNS Lookup
+	    - Reverse IP Lookup
+	    - Web Links Gatherer
+	    - Google Search (manual search)
+	    - Google Dorking (multiple modules) `automated`
 
-    + Active Reconnaissance
-	- HPing3 enumeration `(automated)`
-	- CMS Detection `(185+ CMSs supported)`
-	- Advanced Traceroute `IMPROVED`
-	- Grab HTTP Headers
-	- Detect Server `IMPROVED`
-	- Examine SSL Certificate
-	- `robots.txt` and `sitemap.xml` Checker
-	- Subnets Enumeration
-	- Find Shared DNS Hosts
-	- Operaing System Fingerprint
+	+ Active Reconnaissance
+	    - HPing3 enumeration `(automated)`
+	    - CMS Detection `(185+ CMSs supported)`
+	    - Advanced Traceroute `IMPROVED`
+	    - Grab HTTP Headers
+	    - Detect Server `IMPROVED`
+	    - Examine SSL Certificate
+	    - `robots.txt` and `sitemap.xml` Checker
+	    - Subnets Enumeration
+	    - Find Shared DNS Hosts
+	    - Operaing System Fingerprint
 
-    + Information Disclosure
-	- Credit Cards Disclosure in Plaintext
-	- Email Harvester
-	- Fatal Errors Enumeration `Includes Full Path Disclosure checks`
-	- Internal IP Disclosure
-	- Phone Number Havester
-	- Social Security Number Harvester
+	+ Information Disclosure
+	    - Credit Cards Disclosure in Plaintext
+	    - Email Harvester
+	    - Fatal Errors Enumeration `Includes Full Path Disclosure checks`
+	    - Internal IP Disclosure
+	    - Phone Number Havester
+	    - Social Security Number Harvester
 
 * __Scanning & Enumeration__
 
-    + Remote Server WAF Analysis
-    + Port Scanning `Ingenious Modules`
-	- Simple Port Scanner `via Socket Connections`
-	- TCP SYN Scan
-	- TCP Connect Scan
-	- XMAS Flag Scan 
-	- Fin Flag Scan
-	- Service Detector
-    - Interactive Scanning with NMap `Preloaded multiple modules`
-    + Crawlers
-	- Depth 1
-	- Depth 2 `IMPROVED`
+	+ Remote Server WAF Analysis
+	+ Port Scanning `Ingenious Modules`
+	    - Simple Port Scanner `via Socket Connections`
+	    - TCP SYN Scan
+	    - TCP Connect Scan
+	    - XMAS Flag Scan 
+	    - Fin Flag Scan
+	    - Service Detector
+	+ Crawlers
+	    - Depth 1
+	    - Depth 2 `IMPROVED`
 
 + __Vulnerability Analysis__
 
