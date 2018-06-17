@@ -81,7 +81,7 @@ def install():
 		print GR+'Finalising options...'
 		time.sleep(0.5)
 		raw_input(''+G+"\nPress 'Enter' to start the installation...") 
-		Preinstall="rm -v -rf /opt/TIDoS-Framework; rm -v -rf /usr/bin/tidos"
+		Preinstall="rm -v -rf /opt/tidos-framework && rm -v -rf /usr/bin/tidos"
 		print B+ '\nChecking for pre-installations...'
 		time.sleep(0.5)
 		print GR+'Removing any trace of pre-installations...'+O+''
@@ -95,16 +95,16 @@ def install():
 		os.system('sudo bash dependencies')
 		print GR+'Creating directories...'+O+''
 		time.sleep(0.5)
-		os.system('mkdir -v -p /opt/TIDoS-Framework')
+		os.system('mkdir -v -p /opt/tidos-framework')
 		print GR+'Copying new files...'+O+''
 		time.sleep(0.5)
-		os.system('cp -v -r * /opt/TIDoS-Framework/')
+		os.system('cp -v -r * /opt/tidos-framework/')
 		print GR+'Creating shortcuts...'+O+''
 		time.sleep(0.5)
 		os.system('cp -v runon.sh /usr/bin/tidos')
 		print GR+'Giving priviledges...'+O+''
 		time.sleep(0.7)
-		os.system('chmod -R -v 750 /opt/TIDoS-Framework/*')
+		os.system('chmod -R -v 750 /opt/tidos-framework/*')
 		os.system('chmod -v 755 /usr/bin/tidos')
 		time.sleep(1.5)
 
