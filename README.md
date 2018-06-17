@@ -132,7 +132,7 @@ TIDoS Framework presently supports the following:
 	    - Referer Value Based
 	    - User-Agent Value Based
 
-    * __Auxillaries__
+    + __Auxillaries__
 
 	+ Protocol Credential Bruteforce `3 more under dev.`
 	    - FTP Bruteforce
