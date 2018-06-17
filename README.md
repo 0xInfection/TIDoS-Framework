@@ -101,7 +101,7 @@ TIDoS Framework presently supports the following:
 	- Depth 1
 	- Depth 2 `IMPROVED`
 
-- __Vulnerability Analysis__
++ __Vulnerability Analysis__
 
     __Web-Bugs & Server Misconfigurations__
     
