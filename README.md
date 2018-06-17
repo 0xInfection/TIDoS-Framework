@@ -16,7 +16,8 @@ The main highlights of this framework is:
 - [x] All four phases each have a auto-awesome module which automates every module for you.
 - [x] You just need the domain, and leave everything is to this tool.
 - [x] TIDoS has full verbose out support, so you'll know whats going on.
-- [x] User friendly interaction environment. `(no real shits)` 
+- [x] User friendly interaction environment. `(no real shits)`
+
 `Note:` For more info on various modules please refer to the [wiki](https://github.com/theinfecteddrake/TIDOS-Framework/wiki).
 
 <img src='https://i.imgur.com/jBphn0h.png' />
