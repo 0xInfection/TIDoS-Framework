@@ -86,9 +86,9 @@ TIDoS Framework presently supports the following:
 	- Phone Number Havester
 	- Social Security Number Harvester
 
-- __Scanning & Enumeration__
++ __Scanning & Enumeration__
 
-    + Remote Server WAF Analysis
+    - Remote Server WAF Analysis
     + Port Scanning `Ingenious Modules`
 	- Simple Port Scanner `via Socket Connections`
 	- TCP SYN Scan
@@ -96,7 +96,7 @@ TIDoS Framework presently supports the following:
 	- XMAS Flag Scan 
 	- Fin Flag Scan
 	- Service Detector
-    + Interactive Scanning with NMap `Preloaded multiple modules`
+    - Interactive Scanning with NMap `Preloaded multiple modules`
     + Crawlers
 	- Depth 1
 	- Depth 2 `IMPROVED`
