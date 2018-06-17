@@ -1,0 +1,83 @@
+Memory management
+=================
+
+There can be two types of nodes:
+
+* those connected to an existing tree
+
+* those unconnected. These may be the top node of a tree
+
+Nodes consist of a C-level libxml2 node, Node for short, and
+optionally a Python-level proxy node, Proxy. Zero, one or more Proxies can
+exist for a single Node.
+
+Proxies are garbage collected automatically by Python. Nodes are not
+garbage collected at all. Instead, explicit mechanisms exist for
+Nodes to clear them and the tree they may be the top of.
+
+A Node can be safely freed when:
+
+* no Proxy is connected to this Node
+
+* no Proxy cannot be created for this Node
+
+A Proxy cannot be created to a CNode when:
+
+* no Proxy exist for nodes that are connected to that Node
+
+This is the case when:
+
+* the Node is in a tree that has no Proxy connected to any of the nodes.
+
+This means that the whole tree in such a condition can be freed.
+
+Detecting whether a Node is in a tree that has no Proxies connected to
+it can be done by relying on Python's garbage collection
+algorithm. Each Proxy can have a reference to the Proxy that points to
+the top of the tree. In case of a document tree, this reference is to
+the Document Proxy. When no more references exist in the system to the
+top Proxy, this means no more Proxies exist that point to the Node
+tree the top Proxy is the top of. If this Node tree is unconnected;
+i.e. it is not a subtree, this means that tree can be safely garbage
+collected.
+
+A special case exists for document references. Each Proxy will always
+have a reference to the Document Proxy, as any Node will have such a
+reference to the Document Node. This means that a Document Node can
+only be garbage collected when no more Proxies at all exist anymore
+which refer to the Document. This is a separate system from the
+top-Node references, even though the top-node in many cases will be
+the Document. This because there is no way to get to a node that is
+not connected to the Document tree from a Document Proxy.
+
+This approach requires a system that can keep track of the top of the
+tree in any case. Usually this is simple: when a Proxy gets connected,
+the tree top becomes the tree top of whatever node it is connected
+to. 
+
+Sometimes this is more difficult: a Proxy may exist pointing to a node
+in a subtree that just got connected. The top reference cannot be
+updated. This is a problem in the following case:
+
+    a
+  b    c         h
+d  e  f  g     i  j
+              k
+
+now imagine we have a proxy to k, K, and a proxy of i, I. They both
+have a pointer to proxy H.
+
+Now imagine i gets moved under g through proxy I. Proxy I will have an
+updated pointer to proxy A. However, proxy K cannot be updated and still
+points to H, from which it is now in fact disconnected.
+
+proxy H cannot be removed now until proxy A is removed. In addition,
+proxy A has a refcount that is too low because proxy K doesn't point
+to it but should.
+
+Another strategy involves having a reference count on the underlying
+nodes, one per proxy. A node can only be freed if there is no
+descendant-or-self that has the refcount higher than 0. A node, when
+no more Python references to it exist, will check for refcounts first.
+The drawback of this is potentially heavy tree-walking each time a proxy
+can be removed.

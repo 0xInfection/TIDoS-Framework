@@ -1,0 +1,388 @@
+Changelog
+=========
+
+Version: 1.11.11
+Date   : 31/12/2017
+Author : rbsec <robin@rbsec.net>
+Changes: The following are a list of changes
+         > Added -4 and -6 options to force IPv4 and IPv6.
+         > Fix build on Solaris and Windows.
+         > Fix cross-compiling.
+
+Version: 1.11.10
+Date   : 04/05/2017
+Author : rbsec <robin@rbsec.net>
+Changes: The following are a list of changes
+         > Build against Peter Mosmans' branch of OpenSSL
+         > Support for ChaCha ciphers
+         > NOTE: you will need to run `make clean && make static`.
+
+Version: 1.11.9
+Date   : 09/04/2017
+Author : rbsec <robin@rbsec.net>
+Changes: The following are a list of changes
+         > Add support for STARTTLS on mysql (--starttls-mysql)
+         > Display SNI information in XML output
+         > Fix some compiler warnings
+         > Mark SHA-1 certificates as weak
+         > Fix build on some platforms
+
+Version: 1.11.8
+Date   : 06/11/2016
+Author : rbsec <robin@rbsec.net>
+Changes: The following are a list of changes
+         > Support alternate SNI hostnames (--sni=)
+         > Allow building with no support for TLS SCSV Fallback
+
+Version: 1.11.7
+Date   : 13/06/2016
+Author : rbsec <robin@rbsec.net>
+Changes: The following are a list of changes
+         > Check for TLS Fallback SCSV
+         > Allow xml to be output on stdout (--xml=-)
+
+Version: 1.11.6
+Date   : 09/04/2016
+Author : rbsec <robin@rbsec.net>
+Changes: The following are a list of changes
+         > Re-eanble support for weak (<1024) DH keys in OpenSSL
+
+Version: 1.11.5
+Date   : 24/03/2016
+Author : rbsec <robin@rbsec.net>
+Changes: The following are a list of changes
+         > Fix bug in heartbleed check (credit nuxi)
+         > Makefile improvements and fixes for OSX and FreeBSD
+         > Optimize OpenSSL clone
+         > Implement --show-times to display handshake times in milliseconds
+
+Version: 1.11.4
+Date   : 06/03/2016
+Author : rbsec <robin@rbsec.net>
+Changes: The following are a list of changes
+         > Fix compression detection (credit nuxi)
+         > Added support for PostgreSQL (credit nuxi)
+
+Version: 1.11.3
+Date   : 03/03/2016
+Author : rbsec <robin@rbsec.net>
+Changes: The following are a list of changes
+         > Properly fix missing SSLv2 EXPORT ciphers by patching OpenSSL
+
+Version: 1.11.2
+Date   : 02/03/2016
+Author : rbsec <robin@rbsec.net>
+Changes: The following are a list of changes
+         > Makefile improvements
+         > Update OpenSSL from Git when statically building
+         > Use enable-ssl2 and enable-weak-ciphers when building statically
+
+Version: 1.11.1
+Date   : 11/12/2015
+Author : rbsec <robin@rbsec.net>
+Changes: The following are a list of changes
+         > Show cipher IDs with --show-cipher-ids (credit maurice2k)
+         > Warn when building agsinst system OpenSSL rather than statically
+         > Allow building statically on OSX (experimental)
+
+Version: 1.11.0
+Date   : 24/09/2015
+Author : rbsec <robin@rbsec.net>
+Changes: The following are a list of changes
+         > Rewrote ciphersuite scanning engine to be much faster
+         > Ciphers are now output in order of server preference
+         > Most secure protocols are scanned first (TLSv1.2 -> SSLv2)
+         > All protocols are tried when trying to obtain the certificate
+         > Obselete --failed and --no-preferred-ciphers options removed
+         > Flag TLSv1.0 ciphers in output
+         > Flag 56 bit ciphers as red, not yellow
+         > Fix building on OpenBSD (credit Stuart Henderson)
+         > Fix incorrect output when server prefers NULL ciphers
+
+Version: 1.10.6
+Date   : 06/08/2015
+Author : rbsec <robin@rbsec.net>
+Changes: The following are a list of changes
+         > Fix --sleep only working for whole seconds (credit dmke)
+         > Fix compiling against OpenSSL 0.9.8 (credit aclemons)
+         > Flag expired certificates (credit jacktrice)
+
+Version: 1.10.5
+Date   : 07/07/2015
+Author : rbsec <robin@rbsec.net>
+Changes: The following are a list of changes
+         > Added IRC STARTTLS support (--starttls-irc, credit jkent)
+         > Highlight weak RSA keys in output
+         > Added option to show OCSP status (--ocsp, credit kelbyludwig)
+         > Fix a segfault with certificate parsing
+
+Version: 1.10.4
+Date   : 21/06/2015
+Author : rbsec <robin@rbsec.net>
+Changes: The following are a list of changes
+         > Display cipher details by default (hide with --no-cipher-details)
+         > Fix scanning multiple targets if one fails (credit shellster)
+         > Fix bug with --no-color and --failed (credit yasulib)
+         > Minor bugfixes to output
+
+Version: 1.10.3
+Date   : 22/05/2015
+Author : rbsec <robin@rbsec.net>
+Changes: The following are a list of changes
+         > Flag weak DHE keys in --cipher-details
+         > Report DHE key bits in XML
+         > Change ECDHE key bits to "ecdhebits" rather than "dhebits" in XML
+
+Version: 1.10.2
+Date   : 12/05/2015
+Author : rbsec <robin@rbsec.net>
+Changes: The following are a list of changes
+         > Wrap TLS extensions in CDATA blocks in XML output.
+         > Fix incorrect TLS versions in heartbleed checks
+
+Version: 1.10.1
+Date   : 06/04/2015
+Author : rbsec <robin@rbsec.net>
+Changes: The following are a list of changes
+         > Fix XML output to use "TLSv1.0" in preferred ciphers, not "TLSv1"
+         > Added --cipher-details option to display EC curves and EDH keys
+         Note that this feature requires OpenSSL >= 1.0.2
+         > Update static build options to compile against OpenSSL 1.0.2
+
+Version: 1.10.0
+Date   : 28/02/2015
+Author : rbsec <robin@rbsec.net>
+Changes: The following are a list of changes
+         > Experimental build support (credit jtesta).
+         > Support XMPP server-to-server connections (--xmpp-server).
+
+Version: 1.9.11
+Date   : 03/02/2015
+Author : rbsec <robin@rbsec.net>
+Changes: The following are a list of changes
+         > Makefile updates to assist packaging in Kali.
+         > Fix missing static build number when compiling from tarball.
+
+Version: 1.9.10
+Date   : 24/01/2015
+Author : rbsec <robin@rbsec.net>
+Changes: The following are a list of changes
+         > Display certificate CN, Altnames and Issuer in default output.
+         > Flag certificates where CN == issuer, or CN = *
+         > Highlight GCM ciphersuites as good
+
+Version: 1.9.9
+Date   : 22/01/2015
+Author : kyprizel <eldar@kyprizel.net>
+Changes: The following are a list of changes
+         > Added --show-client-cas option to determine trusted CAs
+         for client authentication
+         > Added --no-preferred option to disable any output except specified
+
+Version: 1.9.8
+Date   : 08/12/2014
+Author : rbsec <robin@rbsec.net>
+Changes: The following are a list of changes
+         > Added --sleep option to pause between request
+         > Only check for heartbleed against specified TLS version
+         > Added --sleep option to pause between request
+         > Fix issues compiling against OpenSSL 0.9.8
+         > Highlight CBC ciphersuites on SSLv3 (POODLE)
+         > Experimental build support on OSX (credit MikeSchroll)
+
+Version: 1.9.7
+Date   : 26/10/2014
+Author : rbsec <robin@rbsec.net>
+Changes: The following are a list of changes
+         > Added option for static compilation with OpenSSL (credit dmke)
+         > Added "sslmethod" attribute to Heartbleed XML output (credit dmke)
+         > Split headers into sslscan.h (credit dmke)
+
+Version: 1.9.6
+Date   : 10/10/2014
+Author : rbsec <robin@rbsec.net>
+Changes: The following are a list of changes
+         > Highlight NULL ciphers in output.
+         > Highlight SSLv3 ciphers.
+         > Added --rdp option to support RDP servers (credit skettler).
+         > Added --timeout option to set socket timeout (default 3s).
+
+Version: 1.9.5
+Date   : 13/09/2014
+Author : rbsec <robin@rbsec.net>
+Changes: The following are a list of changes
+         > Renamed --get-certificate option to --show-certficate.
+         > Display certificate signing algorithm highlighting weak algorithms.
+         > Display certificate key strength highlighting weak keys.
+         > Bumped XML version to 1.9.5 due to minor changes.
+
+Version: 1.9.4
+Date   : 22/05/2014
+Author : rbsec <robin@rbsec.net>
+Changes: The following are a list of changes
+         > Check for SSLv2 and SSLv3 ciphers over STARTTLS.
+
+Version: 1.9.3
+Date   : 20/05/2014
+Author : rbsec <robin@rbsec.net>
+Changes: The following are a list of changes
+         > Fixed broken STARTTLS SMTP check.
+
+Version: 1.9.2
+Date   : 09/04/2014
+Author : rbsec <robin@rbsec.net>
+Changes: The following are a list of changes
+         > Added check for OpenSSL Heartbleed (CVE-2014-0160).
+
+Version: 1.9.1
+Date   : 06/03/2014
+Author : rbsec <robin@rbsec.net>
+Changes: The following are a list of changes
+         > Added --tlsall option to only scan TLS ciphersuites.
+         > Scan all TLS versions by default for STARTTLS services.
+         > Added support for IPv6 addresses using square bracket notation [:1].
+         > Highlight anonymous (ADH and AECDH) ciphers in output.
+         > Added option to disable colour in output (--no-colour).
+         > Removed undocumented -p output option.
+         > Removed old references to titania.co.uk domain.
+
+Version: 1.9
+Date   : 30/12/2013
+Author : rbsec <robin@rbsec.net>
+Changes: The following are a list of changes
+         > Highlight SSLv2 ciphers
+         > Highlight weak (n <= 40 bit) and medium (40 < n <= 56 bit) ciphers
+         > Highlight RC4 ciphers
+         > Highlight anonymous (ADH) ciphers
+         > Hide certificate information by default
+         > Hide rejected ciphers by default (display with --failed).
+         > Added TLSv1.1 and TLSv1.2 support (merged from twwbond/sslscan).
+         > Compiles if OpenSSL does not support SSLv2 ciphers (merged from digineo/sslscan).
+         > Supports IPv6 hostnames (can be forced with --ipv6).
+         > Check for TLS compression (CRIME, disable with --no-compression)
+
+Version: 1.8.4
+Date   : xx/xx/2010
+Author : Jacob Appelbaum <jacob@appelbaum.net>
+Changes: The following are a list of changes
+         > Add demo targets in Makefile
+         > Refactoring of code by Adam Langley
+         > Add SNI patch from Tim Brown
+         > Bug fixes from craSH and Cygwin build improvements
+
+Version: 1.8.3
+Date   : 11/08/2010
+Author : Jacob Appelbaum <jacob@appelbaum.net>
+Changes: The following are a list of changes
+         > Improve new protocol setup support for STARTTLS:
+         POP3, IMAP, FTP, and XMPP
+         This modeled after the support found in OpenSSL's s_client
+         > Add verbose option to print more info
+         > Add default ports when a STARTTLS setup flag is called without
+         any port at all
+
+Version: 1.8.2
+Date   : 19/06/2009
+Author : Ian Ventura-Whiting (Fizz)
+Changes: The following are a list of changes
+         since the previous version:
+            > Fixed output with HTML disabled
+            > Fixed XML critical
+
+Version: 1.8.1
+Date   : 25/05/2009
+Author : Ian Ventura-Whiting (Fizz)
+Changes: The following are a list of changes
+         since the previous version:
+            > Fixed some compiler warnings.
+
+Version: 1.8.0
+Date   : 19/05/2009
+Author : Ian Ventura-Whiting (Fizz)
+Thanks : John Nichols
+Changes: The following are a list of changes
+         since the previous version:
+            > Added SSL implementation workaround
+              option.
+            > Added HTTP connection testing.
+            > Fixed Certification validation XML
+              output.
+
+Version: 1.7.1
+Date   : 20/04/2008
+Author : Ian Ventura-Whiting (Fizz)
+Thanks : Mark Lowe
+Changes: The following are a list of changes
+         since the previous version:
+            > Added HELO for SMTP checks
+            > Increased read buffer size
+
+
+Version: 1.7
+Date   : 18/04/2008
+Author : Ian Ventura-Whiting (Fizz)
+Changes: The following are a list of changes
+         since the previous version:
+            > Added STARTTLS SMTP capability
+            > Fixed XML output format bug
+
+Version: 1.6
+Date   : 30/12/2007
+Author : Ian Ventura-Whiting (Fizz)
+Changes: The following are a list of changes
+         since the previous version:
+            > Added man page.
+            > Improved certificate checking
+            > Added Makefile
+
+Version: 1.5
+Date   : 25/09/2007
+Author : Ian Ventura-Whiting (Fizz)
+Changes: The following are a list of changes
+         since the previous version:
+            > Update to the license to make it
+              BINARY compatible with OpenSSL. Its
+              then easier for the packagers.
+
+Version: 1.4
+Date   : 03/09/2007
+Author : Ian Ventura-Whiting (Fizz)
+Changes: The following are a list of changes
+         since the previous version:
+            > Added Server Certificate ouput.
+            > Added support for client certs.
+            > Added support for private keys
+              and password.
+            > Added support for PKCS#12.
+            > Fixed xml output.
+
+Version: 1.3
+Date   : 06/08/2007
+Author : Ian Ventura-Whiting (Fizz)
+Changes: The following are a list of changes
+         since the previous version:
+            > Added XML file output option.
+            > Improved help text.
+            > Added program URL.
+
+Version: 1.2
+Date   : 16/07/2007
+Author : Ian Ventura-Whiting (Fizz)
+Changes: The following are a list of changes
+         since the previous version:
+            > Removed unused variable
+            > Other minor changes.
+
+Version: 1.1
+Date   : 13/07/2007
+Author : Ian Ventura-Whiting (Fizz)
+Changes: The following are a list of changes
+         since the previous version:
+            > Correction in banner text
+            > Host:Port now directly from the
+              command-line.
+
+Version: 1.0
+Date   : 13/07/2007
+Author : Ian Ventura-Whiting (Fizz)
+Notes  : Initial version of sslscan

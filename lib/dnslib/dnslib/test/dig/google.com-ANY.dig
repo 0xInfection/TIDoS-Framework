@@ -1,0 +1,60 @@
+
+; <<>> DiG 9.8.5-P1 <<>> +qr google.com ANY @8.8.8.8
+;; global options: +cmd
+;; Sending:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 64619
+;; flags: rd; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 0
+
+;; QUESTION SECTION:
+;google.com.			IN	ANY
+
+;; Truncated, retrying in TCP mode.
+;; Sending:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 42748
+;; flags: rd; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 0
+
+;; QUESTION SECTION:
+;google.com.			IN	ANY
+
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 42748
+;; flags: qr rd ra; QUERY: 1, ANSWER: 28, AUTHORITY: 0, ADDITIONAL: 0
+
+;; QUESTION SECTION:
+;google.com.			IN	ANY
+
+;; ANSWER SECTION:
+google.com.		299	IN	A	62.252.169.183
+google.com.		299	IN	A	62.252.169.152
+google.com.		299	IN	A	62.252.169.172
+google.com.		299	IN	A	62.252.169.177
+google.com.		299	IN	A	62.252.169.157
+google.com.		299	IN	A	62.252.169.153
+google.com.		299	IN	A	62.252.169.182
+google.com.		299	IN	A	62.252.169.168
+google.com.		299	IN	A	62.252.169.178
+google.com.		299	IN	A	62.252.169.162
+google.com.		299	IN	A	62.252.169.187
+google.com.		299	IN	A	62.252.169.167
+google.com.		299	IN	A	62.252.169.148
+google.com.		299	IN	A	62.252.169.173
+google.com.		299	IN	A	62.252.169.158
+google.com.		299	IN	A	62.252.169.163
+google.com.		21599	IN	NS	ns4.google.com.
+google.com.		599	IN	MX	50 alt4.aspmx.l.google.com.
+google.com.		21599	IN	NS	ns2.google.com.
+google.com.		599	IN	MX	10 aspmx.l.google.com.
+google.com.		21599	IN	NS	ns3.google.com.
+google.com.		21599	IN	SOA	ns1.google.com. dns-admin.google.com. 2014021800 7200 1800 1209600 300
+google.com.		599	IN	MX	40 alt3.aspmx.l.google.com.
+google.com.		599	IN	MX	20 alt1.aspmx.l.google.com.
+google.com.		21599	IN	TYPE257	\# 19 0005697373756573796D616E7465632E636F6D
+google.com.		3599	IN	TXT	"v=spf1 include:_spf.google.com ip4:216.73.93.70/31 ip4:216.73.93.72/31 ~all"
+google.com.		599	IN	MX	30 alt2.aspmx.l.google.com.
+google.com.		21599	IN	NS	ns1.google.com.
+
+;; Query time: 36 msec
+;; SERVER: 8.8.8.8#53(8.8.8.8)
+;; WHEN: Mon May 05 12:12:07 BST 2014
+;; MSG SIZE  rcvd: 629
+

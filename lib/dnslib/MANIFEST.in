@@ -1,0 +1,4 @@
+include README.github
+include run_tests.sh
+include fuzz.py
+recursive-include dnslib/test *
