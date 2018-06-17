@@ -6,7 +6,6 @@
 TIDoS Framework is a comprehensive web application audit framework with some serious perks.
 
 ### Highlights :-
-
 The main highlights of this framework is:
 - [x] Basic first release (but huge).
 - [x] Has 4 main phases, subdivided into __13 sub-phases__ containing total of __73 modules__.
@@ -18,8 +17,7 @@ The main highlights of this framework is:
 - [x] You just need the domain, and leave everything is to this tool.
 - [x] TIDoS has full verbose out support, so you'll know whats going on.
 - [x] User friendly interaction environment. `(no real shits)` 
-
-  `Note:` For more info on various modules please refer to the [wiki](https://github.com/theinfecteddrake/TIDOS-Framework/wiki).
+`Note:` For more info on various modules please refer to the [wiki](https://github.com/theinfecteddrake/TIDOS-Framework/wiki).
 
 <img src='https://i.imgur.com/jBphn0h.png' />
 
