@@ -23,3 +23,5 @@ def dispmenu():
 	time.sleep(0.1)
 	print ''+B+' [4] \033[1;36mExploitation (beta)\n'
 	time.sleep(0.1)
+	print ''+B+'\n [99] \033[1;36mSay "alvida"! (Exit TIDoS)\n'
+	time.sleep(0.1)

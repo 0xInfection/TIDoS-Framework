@@ -46,6 +46,7 @@ def tidosmain(web):
         try:
 	    dispmenu()
 	    zop = raw_input(''+GR+' [#] \033[1;4mTID\033[0m'+GR+' :> ' + color.END)
+	    zop = zop.strip()
 
 	    if zop == '1':
 
@@ -70,6 +71,12 @@ def tidosmain(web):
 	        print G+'\n [+] Module loaded : Exploits Castle'
 		exploitsban()
 		exploits(web)
+
+	    elif zop == '99':
+		
+		print R+'\n [-] Exiting...'
+		time.sleep(0.5)
+		print O+' [+] Goodluck mate, alvida!\n'
 	
         except KeyboardInterrupt:
                 print R+"\n [!] " + color.UNDERLINE+ "User Interruption detected!"+color.END
