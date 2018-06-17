@@ -166,7 +166,7 @@ def passiveo(web):
 	time.sleep(1)
 
 	print G+' [+] All modules successfully completed!'
-	time.sleep(0.2)
+	time.sleep(3)
 	print GR+' [*] Going back...'
 	os.system('clear')
 	footprintban1()

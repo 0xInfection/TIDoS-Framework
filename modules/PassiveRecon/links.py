@@ -68,5 +68,3 @@ def links(web):
 		print R+' [-] Outbound Query Exception!'
 		time.sleep(0.8)
 
-web = 'http://www.hemsheela.in'
-links(web)

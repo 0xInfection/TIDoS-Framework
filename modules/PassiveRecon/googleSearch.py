@@ -11,6 +11,7 @@
 
 import time
 import sys, platform
+import os
 import urllib2
 try:
 	from google import search
@@ -28,11 +29,12 @@ def googleSearch():
 	print R+'   ===========================\n'
 	lol = raw_input(O+ " [#] QUERY :> " + color.END)
 	time.sleep(0.8)
-	print(""+ M + color.BOLD + " [!] Below are the list of websites with info on '" +lol+ "'" +color.END)
-
-	x = search(lol, tld='com', lang='es', stop=30)
+	m = raw_input(O+' [#] Search limit (not recommended above 30) :> ') 
+	print G+ " [!] Below are the list of websites with info on '" +lol+ "'"
+	x = search(lol, tld='com', lang='es', stop=int(m))
 	for url in x:
 		print(""+O+color.BOLD+"   [!] Site Found :> "+W + url)
+		os.system('rm -f .google-cookie')
     except urllib2.HTTPError:
 	print R+' [-] You have used google many times.'
 	print R+' [-] Service temporarily unavailable.'
