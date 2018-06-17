@@ -115,9 +115,7 @@ TIDoS Framework presently supports the following:
 	- Security Headers Analysis 
 	- Cross-Site Tracing `(Port Based)`
 	- Network Security Misconfig. `(Telnet Enabled)`
-
     - Serious Web Vulnerabilities
-
 	+ File Intrusions
 	    - Local File Intrusion (LFI)
 	    - Remote File Inclusion (RFI)
