@@ -1,0 +1,82 @@
+Why lxml?
+=========
+
+.. contents::
+..
+   1  Motto
+   2  Aims
+
+
+Motto
+-----
+
+"the thrills without the strangeness"
+
+To explain the motto:
+
+"Programming with libxml2 is like the thrilling embrace of an exotic stranger.
+It seems to have the potential to fulfill your wildest dreams, but there's a
+nagging voice somewhere in your head warning you that you're about to get
+screwed in the worst way."  (`a quote by Mark Pilgrim`_)
+
+Mark Pilgrim was describing in particular the experience a Python programmer
+has when dealing with libxml2.  The default Python bindings of libxml2 are
+fast, thrilling, powerful, and your code might fail in some horrible way that
+you really shouldn't have to worry about when writing Python code.  lxml
+combines the power of libxml2 with the ease of use of Python.
+
+.. _`a quote by Mark Pilgrim`: http://diveintomark.org/archives/2004/02/18/libxml2
+
+
+Aims
+----
+
+The C libraries libxml2_ and libxslt_ have huge benefits:
+
+* Standards-compliant XML support.
+
+* Support for (broken) HTML.
+
+* Full-featured.
+
+* Actively maintained by XML experts.
+
+* fast. fast! FAST!
+
+.. _libxml2: http://www.xmlsoft.org
+
+.. _libxslt: http://xmlsoft.org/XSLT
+
+
+These libraries already ship with Python bindings, but these Python bindings
+mimic the C-level interface.  This yields a number of problems:
+
+* very low level and C-ish (not Pythonic).
+
+* underdocumented and huge, you get lost in them.
+
+* UTF-8 in API, instead of Python unicode strings.
+
+* Can easily cause segfaults from Python.
+
+* Require manual memory management!
+
+
+lxml is a new Python binding for libxml2 and libxslt, completely independent
+from these existing Python bindings.  Its aims:
+
+* Pythonic API.
+
+* Documented.
+
+* Use Python unicode strings in API.
+
+* Safe (no segfaults).
+
+* No manual memory management!
+
+lxml aims to provide a Pythonic API by following as much as possible the
+`ElementTree API`_.  We're trying to avoid inventing too many new APIs, or you
+having to learn new things -- XML is complicated enough.
+
+.. _`ElementTree API`: http://effbot.org/zone/element-index.htm

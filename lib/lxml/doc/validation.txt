@@ -1,0 +1,677 @@
+====================
+Validation with lxml
+====================
+
+Apart from the built-in DTD support in parsers, lxml currently supports three
+schema languages: DTD_, `Relax NG`_ and `XML Schema`_.  All three provide
+identical APIs in lxml, represented by validator classes with the obvious
+names.
+
+.. _DTD:          http://en.wikipedia.org/wiki/Document_Type_Definition
+.. _`Relax NG`:   http://www.relaxng.org/
+.. _`XML Schema`: http://www.w3.org/XML/Schema
+
+lxml also provides support for ISO-`Schematron`_, based on the pure-XSLT 
+`skeleton implementation`_ of Schematron:
+
+.. _Schematron: http://www.schematron.com
+.. _`skeleton implementation`: http://www.schematron.com/implementation.html
+
+There is also basic support for `pre-ISO-Schematron` through the libxml2 
+Schematron features. However, this does not currently support error reporting
+in the validation phase due to insufficiencies in the implementation as of
+libxml2 2.6.30.
+
+.. _`pre-ISO-Schematron`:   http://www.ascc.net/xml/schematron
+
+.. contents::
+.. 
+   1  Validation at parse time
+   2  DTD
+   3  RelaxNG
+   4  XMLSchema
+   5  Schematron
+   6  (Pre-ISO-Schematron)
+
+The usual setup procedure:
+
+.. sourcecode:: pycon
+
+  >>> from lxml import etree
+
+..
+  >>> try: from StringIO import StringIO
+  ... except ImportError:
+  ...    from io import BytesIO
+  ...    def StringIO(s):
+  ...        if isinstance(s, str): s = s.encode("UTF-8")
+  ...        return BytesIO(s)
+
+
+Validation at parse time
+------------------------
+
+The parser in lxml can do on-the-fly validation of a document against
+a DTD or an XML schema.  The DTD is retrieved automatically based on
+the DOCTYPE of the parsed document.  All you have to do is use a
+parser that has DTD validation enabled:
+
+.. sourcecode:: pycon
+
+  >>> parser = etree.XMLParser(dtd_validation=True)
+
+Obviously, a request for validation enables the DTD loading feature.
+There are two other options that enable loading the DTD, but that do
+not perform any validation.  The first is the ``load_dtd`` keyword
+option, which simply loads the DTD into the parser and makes it
+available to the document as external subset.  You can retrieve the
+DTD from the parsed document using the ``docinfo`` property of the
+result ElementTree object.  The internal subset is available as
+``internalDTD``, the external subset is provided as ``externalDTD``.
+
+The third way to activate DTD loading is with the
+``attribute_defaults`` option, which loads the DTD and weaves
+attribute default values into the document.  Again, no validation is
+performed unless explicitly requested.
+
+XML schema is supported in a similar way, but requires an explicit
+schema to be provided:
+
+.. sourcecode:: pycon
+
+  >>> schema_root = etree.XML('''\
+  ...   <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  ...     <xsd:element name="a" type="xsd:integer"/>
+  ...   </xsd:schema>
+  ... ''')
+  >>> schema = etree.XMLSchema(schema_root)
+
+  >>> parser = etree.XMLParser(schema = schema)
+  >>> root = etree.fromstring("<a>5</a>", parser)
+
+If the validation fails (be it for a DTD or an XML schema), the parser
+will raise an exception:
+
+.. sourcecode:: pycon
+
+  >>> root = etree.fromstring("<a>no int</a>", parser)  # doctest: +ELLIPSIS
+  Traceback (most recent call last):
+  lxml.etree.XMLSyntaxError: Element 'a': 'no int' is not a valid value of the atomic type 'xs:integer'...
+
+If you want the parser to succeed regardless of the outcome of the
+validation, you should use a non validating parser and run the
+validation separately after parsing the document.
+
+
+DTD
+---
+
+As described above, the parser support for DTDs depends on internal or
+external subsets of the XML file.  This means that the XML file itself
+must either contain a DTD or must reference a DTD to make this work.
+If you want to validate an XML document against a DTD that is not
+referenced by the document itself, you can use the ``DTD`` class.
+
+To use the ``DTD`` class, you must first pass a filename or file-like object
+into the constructor to parse a DTD:
+
+.. sourcecode:: pycon
+
+  >>> f = StringIO("<!ELEMENT b EMPTY>")
+  >>> dtd = etree.DTD(f)
+
+Now you can use it to validate documents:
+
+.. sourcecode:: pycon
+
+  >>> root = etree.XML("<b/>")
+  >>> print(dtd.validate(root))
+  True
+
+  >>> root = etree.XML("<b><a/></b>")
+  >>> print(dtd.validate(root))
+  False
+
+The reason for the validation failure can be found in the error log:
+
+.. sourcecode:: pycon
+
+  >>> print(dtd.error_log.filter_from_errors()[0])
+  <string>:1:0:ERROR:VALID:DTD_NOT_EMPTY: Element b was declared EMPTY this one has content
+
+As an alternative to parsing from a file, you can use the
+``external_id`` keyword argument to parse from a catalog.  The
+following example reads the DocBook DTD in version 4.2, if available
+in the system catalog:
+
+.. sourcecode:: python
+
+  dtd = etree.DTD(external_id = "-//OASIS//DTD DocBook XML V4.2//EN")
+
+The DTD information is available as attributes on the DTD object. The method
+``iterelements`` provides an iterator over the element declarations:
+
+.. sourcecode:: pycon
+
+  >>> dtd = etree.DTD(StringIO('<!ELEMENT a EMPTY><!ELEMENT b EMPTY>'))
+  >>> for el in dtd.iterelements():
+  ...     print(el.name)
+  a
+  b
+
+The method ``elements`` returns the element declarations as a list:
+
+.. sourcecode:: pycon
+
+  >>> dtd = etree.DTD(StringIO('<!ELEMENT a EMPTY><!ELEMENT b EMPTY>'))
+  >>> len(dtd.elements())
+  2
+
+An element declaration object provides the following attributes/methods:
+
+  - ``name``: The name of the element;
+
+  - ``type``: The element type, one of "undefined", "empty", "any", "mixed", or "element";
+
+  - ``content``: Element content declaration (see below);
+
+  - ``iterattributes()``: Return an iterator over attribute declarations (see below);
+
+  - ``attributes()``: Return a list of attribute declarations.
+
+The ``content`` attribute contains information about the content model of the element.
+These element content declaration objects form a binary tree (via the ``left`` and ``right``
+attributes), that makes it possible to reconstruct the content model expression. Here's a
+list of all attributes:
+
+  - ``name``: If this object represents an element in the content model expression,
+    ``name`` is the name of the element, otherwise it is ``None``;
+
+  - ``type``: The type of the node: one of "pcdata", "element", "seq", or "or";
+
+  - ``occur``: How often this element (or this combination of elements) may occur:
+    one of "once", "opt", "mult", or "plus"
+
+  - ``left``: The left hand subexpression
+
+  - ``right``: The right hand subexpression
+
+For example, the element declaration ``<!ELEMENT a (a|b)+>`` results
+in the following element content declaration objects:
+
+.. sourcecode:: pycon
+
+  >>> dtd = etree.DTD(StringIO('<!ELEMENT a (a|b)+>'))
+  >>> content = dtd.elements()[0].content
+  >>> content.type, content.occur, content.name
+  ('or', 'plus', None)
+
+  >>> left, right = content.left, content.right
+  >>> left.type, left.occur, left.name
+  ('element', 'once', 'a')
+  >>> right.type, right.occur, right.name
+  ('element', 'once', 'b')
+
+Attributes declarations have the following attributes/methods:
+
+  - ``name``: The name of the attribute;
+
+  - ``elemname``: The name of the element the attribute belongs to;
+
+  - ``type``: The attribute type, one of "cdata", "id", "idref", "idrefs", "entity",
+    "entities", "nmtoken", "nmtokens", "enumeration", or "notation";
+
+  - ``default``: The type of the default value, one of "none", "required", "implied",
+    or "fixed";
+
+  - ``defaultValue``: The default value;
+
+  - ``itervalues()``: Return an iterator over the allowed attribute values (if the attribute
+    is of type "enumeration");
+
+  - ``values()``: Return a list of allowed attribute values.
+
+Entity declarations are available via the ``iterentities`` and ``entities`` methods:
+
+  >>> dtd = etree.DTD(StringIO('<!ENTITY hurz "&#x40;">'))
+  >>> entity = dtd.entities()[0]
+  >>> entity.name, entity.orig, entity.content
+  ('hurz', '&#x40;', '@')
+
+
+RelaxNG
+-------
+
+The ``RelaxNG`` class takes an ElementTree object to construct a Relax NG
+validator:
+
+.. sourcecode:: pycon
+
+  >>> f = StringIO('''\
+  ... <element name="a" xmlns="http://relaxng.org/ns/structure/1.0">
+  ...  <zeroOrMore>
+  ...     <element name="b">
+  ...       <text />
+  ...     </element>
+  ...  </zeroOrMore>
+  ... </element>
+  ... ''')
+  >>> relaxng_doc = etree.parse(f)
+  >>> relaxng = etree.RelaxNG(relaxng_doc)
+
+Alternatively, pass a filename to the ``file`` keyword argument to parse from
+a file.  This also enables correct handling of include files from within the
+RelaxNG parser.
+
+You can then validate some ElementTree document against the schema. You'll get
+back True if the document is valid against the Relax NG schema, and False if
+not:
+
+.. sourcecode:: pycon
+
+  >>> valid = StringIO('<a><b></b></a>')
+  >>> doc = etree.parse(valid)
+  >>> relaxng.validate(doc)
+  True
+
+  >>> invalid = StringIO('<a><c></c></a>')
+  >>> doc2 = etree.parse(invalid)
+  >>> relaxng.validate(doc2)
+  False
+
+Calling the schema object has the same effect as calling its validate
+method. This is sometimes used in conditional statements:
+
+.. sourcecode:: pycon
+
+  >>> invalid = StringIO('<a><c></c></a>')
+  >>> doc2 = etree.parse(invalid)
+  >>> if not relaxng(doc2):
+  ...     print("invalid!")
+  invalid!
+
+If you prefer getting an exception when validating, you can use the
+``assert_`` or ``assertValid`` methods:
+
+.. sourcecode:: pycon
+
+  >>> relaxng.assertValid(doc2)
+  Traceback (most recent call last):
+    ...
+  lxml.etree.DocumentInvalid: Did not expect element c there, line 1
+
+  >>> relaxng.assert_(doc2)
+  Traceback (most recent call last):
+    ...
+  AssertionError: Did not expect element c there, line 1
+
+If you want to find out why the validation failed in the second case, you can
+look up the error log of the validation process and check it for relevant
+messages:
+
+.. sourcecode:: pycon
+
+  >>> log = relaxng.error_log
+  >>> print(log.last_error)
+  <string>:1:0:ERROR:RELAXNGV:RELAXNG_ERR_ELEMWRONG: Did not expect element c there
+
+You can see that the error (ERROR) happened during RelaxNG validation
+(RELAXNGV).  The message then tells you what went wrong.  You can also
+look at the error domain and its type directly:
+
+.. sourcecode:: pycon
+
+  >>> error = log.last_error
+  >>> print(error.domain_name)
+  RELAXNGV
+  >>> print(error.type_name)
+  RELAXNG_ERR_ELEMWRONG
+
+Note that this error log is local to the RelaxNG object.  It will only
+contain log entries that appeared during the validation.
+
+Similar to XSLT, there's also a less efficient but easier shortcut method to
+do one-shot RelaxNG validation:
+
+.. sourcecode:: pycon
+
+  >>> doc.relaxng(relaxng_doc)
+  True
+  >>> doc2.relaxng(relaxng_doc)
+  False
+
+libxml2 does not currently support the `RelaxNG Compact Syntax`_.
+However, if `rnc2rng`_ is installed, lxml 3.6 and later can use it
+internally to parse the input schema.  It recognises the `.rnc` file
+extension and also allows parsing an RNC schema from a string using
+`RelaxNG.from_rnc_string()`.
+
+Alternatively, the trang_ translator can convert the compact syntax
+to the XML syntax, which can then be used with lxml.
+
+.. _`rnc2rng`: https://pypi.python.org/pypi/rnc2rng
+.. _`RelaxNG Compact Syntax`: http://relaxng.org/compact-tutorial.html
+.. _trang: http://www.thaiopensource.com/relaxng/trang.html
+
+
+XMLSchema
+---------
+
+lxml.etree also has XML Schema (XSD) support, using the class
+lxml.etree.XMLSchema.  The API is very similar to the Relax NG and DTD
+classes.  Pass an ElementTree object to construct a XMLSchema validator:
+
+.. sourcecode:: pycon
+
+  >>> f = StringIO('''\
+  ... <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  ... <xsd:element name="a" type="AType"/>
+  ... <xsd:complexType name="AType">
+  ...   <xsd:sequence>
+  ...     <xsd:element name="b" type="xsd:string" />
+  ...   </xsd:sequence>
+  ... </xsd:complexType>
+  ... </xsd:schema>
+  ... ''')
+  >>> xmlschema_doc = etree.parse(f)
+  >>> xmlschema = etree.XMLSchema(xmlschema_doc)
+
+You can then validate some ElementTree document with this.  Like with RelaxNG,
+you'll get back true if the document is valid against the XML schema, and
+false if not:
+
+.. sourcecode:: pycon
+
+  >>> valid = StringIO('<a><b></b></a>')
+  >>> doc = etree.parse(valid)
+  >>> xmlschema.validate(doc)
+  True
+
+  >>> invalid = StringIO('<a><c></c></a>')
+  >>> doc2 = etree.parse(invalid)
+  >>> xmlschema.validate(doc2)
+  False
+
+Calling the schema object has the same effect as calling its validate method.
+This is sometimes used in conditional statements:
+
+.. sourcecode:: pycon
+
+  >>> invalid = StringIO('<a><c></c></a>')
+  >>> doc2 = etree.parse(invalid)
+  >>> if not xmlschema(doc2):
+  ...     print("invalid!")
+  invalid!
+
+If you prefer getting an exception when validating, you can use the
+``assert_`` or ``assertValid`` methods:
+
+.. sourcecode:: pycon
+
+  >>> xmlschema.assertValid(doc2)
+  Traceback (most recent call last):
+    ...
+  lxml.etree.DocumentInvalid: Element 'c': This element is not expected. Expected is ( b )., line 1
+
+  >>> xmlschema.assert_(doc2)
+  Traceback (most recent call last):
+    ...
+  AssertionError: Element 'c': This element is not expected. Expected is ( b )., line 1
+
+Error reporting works as for the RelaxNG class:
+
+.. sourcecode:: pycon
+
+  >>> log = xmlschema.error_log
+  >>> error = log.last_error
+  >>> print(error.domain_name)
+  SCHEMASV
+  >>> print(error.type_name)
+  SCHEMAV_ELEMENT_CONTENT
+
+If you were to print this log entry, you would get something like the
+following.  Note that the error message depends on the libxml2 version in
+use::
+
+  <string>:1:ERROR::SCHEMAV_ELEMENT_CONTENT: Element 'c': This element is not expected. Expected is ( b ).
+
+Similar to XSLT and RelaxNG, there's also a less efficient but easier shortcut
+method to do XML Schema validation:
+
+.. sourcecode:: pycon
+
+  >>> doc.xmlschema(xmlschema_doc)
+  True
+  >>> doc2.xmlschema(xmlschema_doc)
+  False
+
+Schematron
+----------
+
+From version 2.3 on lxml features ISO-`Schematron`_ support built on the 
+de-facto reference implementation of Schematron, the pure-XSLT-1.0 
+`skeleton implementation`_. This is provided by the lxml.isoschematron package 
+that implements the Schematron class, with an API compatible to the other 
+validators'.  Pass an Element or ElementTree object to construct a Schematron 
+validator:
+
+.. sourcecode:: pycon
+
+  >>> from lxml import isoschematron
+  >>> f = StringIO('''\
+  ... <schema xmlns="http://purl.oclc.org/dsdl/schematron" >
+  ...   <pattern id="sum_equals_100_percent">
+  ...     <title>Sum equals 100%.</title>
+  ...     <rule context="Total">
+  ...       <assert test="sum(//Percent)=100">Sum is not 100%.</assert>
+  ...     </rule>
+  ...   </pattern>
+  ... </schema>
+  ... ''')
+
+  >>> sct_doc = etree.parse(f)
+  >>> schematron = isoschematron.Schematron(sct_doc)
+
+You can then validate some ElementTree document with this. Just like with 
+XMLSchema or RelaxNG, you'll get back true if the document is valid against the
+schema, and false if not:
+
+.. sourcecode:: pycon
+
+  >>> valid = StringIO('''\
+  ... <Total>
+  ...   <Percent>20</Percent>
+  ...   <Percent>30</Percent>
+  ...   <Percent>50</Percent>
+  ... </Total>
+  ... ''')
+
+  >>> doc = etree.parse(valid)
+  >>> schematron.validate(doc)
+  True
+
+  >>> etree.SubElement(doc.getroot(), "Percent").text = "10"
+
+  >>> schematron.validate(doc)
+  False
+
+Calling the schema object has the same effect as calling its validate method.
+This can be useful for conditional statements:
+
+.. sourcecode:: pycon
+
+  >>> is_valid = isoschematron.Schematron(sct_doc)
+
+  >>> if not is_valid(doc):
+  ...     print("invalid!")
+  invalid!
+
+Built on a pure-xslt implementation, the actual validator is created as an 
+XSLT 1.0 stylesheet using these steps:
+
+0. (Extract embedded Schematron from XML Schema or RelaxNG schema)
+1. Process inclusions
+2. Process abstract patterns
+3. Compile the schematron schema to XSLT
+
+To allow more control over the individual steps, isoschematron.Schematron
+supports an extended API:
+
+The ``include`` and ``expand`` keyword arguments can be used to switch off
+steps 1) and 2).
+
+To set parameters for steps 1), 2) and 3) dictionaries containing parameters 
+for XSLT can be provided using the keyword arguments ``include_params``,
+``expand_params`` or ``compile_params``. Schematron automatically converts these
+parameters to stylesheet parameters so you need not worry to set string 
+parameters using quotes or to use XSLT.strparam(). If you ever need to pass an
+XPath as argument to the XSLT stylesheet you can pass in an etree.XPath object
+(see XPath and XSLT with lxml: Stylesheet-parameters_ for background on this).
+
+The ``phase`` parameter of the compile step is additionally exposed as a keyword
+argument. If set, it overrides occurrence in ``compile_params``. Note that 
+isoschematron.Schematron might expose more common parameters as additional keyword
+args in the future.
+
+By setting ``store_schematron`` to True, the (included-and-expanded) schematron
+document tree is stored and made available through the ``schematron`` property.
+
+Similarly, setting ``store_xslt`` to True will result in the validation XSLT 
+document tree being kept; it can be retrieved through the ``validator_xslt``
+property.
+
+Finally, with ``store_report`` set to True (default: False), the resulting 
+validation report document gets stored and can be accessed as the 
+``validation_report`` property.
+
+.. _Stylesheet-parameters: xpathxslt.html#stylesheet-parameters
+
+Using the ``phase`` parameter of isoschematron.Schematron allows for selective 
+validation of predefined pattern groups:
+
+.. sourcecode:: pycon
+
+  >>> f = StringIO('''\
+  ... <schema xmlns="http://purl.oclc.org/dsdl/schematron" >
+  ...   <phase id="phase.sum_check">
+  ...     <active pattern="sum_equals_100_percent"/>
+  ...   </phase>
+  ...   <phase id="phase.entries_check">
+  ...     <active pattern="all_positive"/>
+  ...   </phase>
+  ...   <pattern id="sum_equals_100_percent">
+  ...     <title>Sum equals 100%.</title>
+  ...     <rule context="Total">
+  ...       <assert test="sum(//Percent)=100">Sum is not 100%.</assert>
+  ...     </rule>
+  ...   </pattern>
+  ...   <pattern id="all_positive">
+  ...     <title>All entries must be positive.</title>
+  ...     <rule context="Percent">
+  ...       <assert test="number(.)>0">Number (<value-of select="."/>) not positive</assert>
+  ...     </rule>
+  ...   </pattern>
+  ... </schema>
+  ... ''')
+
+  >>> sct_doc = etree.parse(f)
+  >>> schematron = isoschematron.Schematron(sct_doc)
+
+  >>> valid = StringIO('''\
+  ... <Total>
+  ...   <Percent>20</Percent>
+  ...   <Percent>30</Percent>
+  ...   <Percent>50</Percent>
+  ... </Total>
+  ... ''')
+
+  >>> doc = etree.parse(valid)
+  >>> schematron.validate(doc)
+  True
+
+  >>> invalid_positive = StringIO('''\
+  ... <Total>
+  ...   <Percent>0</Percent>
+  ...   <Percent>50</Percent>
+  ...   <Percent>50</Percent>
+  ... </Total>
+  ... ''')
+
+  >>> doc = etree.parse(invalid_positive)
+
+  >>> schematron.validate(doc)
+  False
+
+If the constraint of Percent entries being positive is not of interest in a 
+certain validation scenario, it can now be disabled:
+
+.. sourcecode:: pycon
+
+  >>> selective = isoschematron.Schematron(sct_doc, phase="phase.sum_check")
+  >>> selective.validate(doc)
+  True
+
+The usage of validation phases is a unique feature of ISO-Schematron and can be
+a very powerful tool e.g. for establishing validation stages or to provide 
+different validators for different "validation audiences".
+
+(Pre-ISO-Schematron)
+--------------------
+
+Since version 2.0, lxml.etree features `pre-ISO-Schematron`_ support, using the
+class lxml.etree.Schematron.  It requires at least libxml2 2.6.21 to
+work.  The API is the same as for the other validators.  Pass an
+ElementTree object to construct a Schematron validator:
+
+.. sourcecode:: pycon
+
+  >>> f = StringIO('''\
+  ... <schema xmlns="http://www.ascc.net/xml/schematron" >
+  ...   <pattern name="Sum equals 100%.">
+  ...     <rule context="Total">
+  ...       <assert test="sum(//Percent)=100">Sum is not 100%.</assert>
+  ...     </rule>
+  ...   </pattern>
+  ... </schema>
+  ... ''')
+
+  >>> sct_doc = etree.parse(f)
+  >>> schematron = etree.Schematron(sct_doc)
+
+You can then validate some ElementTree document with this.  Like with RelaxNG,
+you'll get back true if the document is valid against the schema, and false if
+not:
+
+.. sourcecode:: pycon
+
+  >>> valid = StringIO('''\
+  ... <Total>
+  ...   <Percent>20</Percent>
+  ...   <Percent>30</Percent>
+  ...   <Percent>50</Percent>
+  ... </Total>
+  ... ''')
+
+  >>> doc = etree.parse(valid)
+  >>> schematron.validate(doc)
+  True
+
+  >>> etree.SubElement(doc.getroot(), "Percent").text = "10"
+
+  >>> schematron.validate(doc)
+  False
+
+Calling the schema object has the same effect as calling its validate method.
+This is sometimes used in conditional statements:
+
+.. sourcecode:: pycon
+
+  >>> is_valid = etree.Schematron(sct_doc)
+
+  >>> if not is_valid(doc):
+  ...     print("invalid!")
+  invalid!
+
+Note that libxml2 restricts error reporting to the parsing step (when creating
+the Schematron instance).  There is not currently any support for error
+reporting during validation.

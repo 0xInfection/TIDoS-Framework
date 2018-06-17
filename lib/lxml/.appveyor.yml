@@ -1,0 +1,30 @@
+version: 1.0.{build}
+
+environment:
+  matrix:
+  - python: 26
+  - python: 26-x64
+  - python: 27
+  - python: 27-x64
+  - python: 33
+  - python: 33-x64
+  - python: 34
+  - python: 34-x64
+  - python: 35
+  - python: 35-x64
+  - python: 36
+  - python: 36-x64
+
+install:
+    - SET PATH=C:\\Python%PYTHON%;c:\\Python%PYTHON%\\scripts;%PATH%
+    - python -m pip.__main__ install -U pip wheel setuptools
+    - pip install -r requirements.txt --install-option="--no-cython-compile"
+
+build: off
+build_script:
+    - python -u setup.py clean
+    - python -u setup.py bdist_wheel --static-deps
+
+test: off
+test_script:
+  - ps: Get-ChildItem dist\*.whl | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }

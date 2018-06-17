@@ -1,0 +1,54 @@
+
+CHANGELOG
+=========
+
+* v1.0.0
+
+   - Initial release
+   - Contained 5 modules 
+	- UDoS
+	- whois
+	- revip
+	- revdns
+	- geoip
+
+* v1.1.0
+
+   - Fixed 2 major bugs in the code
+   - Replaced the 'webex' module with the 'piweb' module
+
+* v2.0.0
+
+   - Frustrated with the low efficiency, decided to make this something worthwhile.
+   - 11 new modules added
+	- grabhead
+	- subdom
+	- subnet
+	- gsearch
+	- pglink
+	- adminpnl
+	- clickjack
+	- honeypot
+	- zonetrans
+	- nmap
+	- fl00d (improved)
+   - Tool now serves reconnaisance purposes.
+
+* v2.1.0 (beta)
+
+   - New look for a faster approach to user interactions
+   - CMS Detection, Cloudflare bypass and many other enumeration modules adeed.
+   - Fuzzing of websites with payloads with the VulnLysis module.
+   - On a whole, 36 new modules added.
+   - Total modules in total adds up to 52!
+   - Now on the way to a comprehensive penetration testing toolkit. :)
+
+* v2.1.1 (stable)
+
+   - Huge bug fixes in many different modules across the framework.
+   - Improvement of the File Inclusion Modules.
+   - TIDoS gained stability as a whole huge framework. :)
+   - Now a comprehensive web-app audit framework.
+   - Still many more exploits and vulnerability detection modules to be added! (._.')
+
+# EOF

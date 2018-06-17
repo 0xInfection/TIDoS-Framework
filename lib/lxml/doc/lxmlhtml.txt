@@ -1,0 +1,766 @@
+=========
+lxml.html
+=========
+
+:Author:
+  Ian Bicking
+
+Since version 2.0, lxml comes with a dedicated Python package for
+dealing with HTML: ``lxml.html``.  It is based on lxml's HTML parser,
+but provides a special Element API for HTML elements, as well as a
+number of utilities for common HTML processing tasks.
+
+.. contents::
+.. 
+   1  Parsing HTML
+     1.1  Parsing HTML fragments
+     1.2  Really broken pages
+   2  HTML Element Methods
+   3  Running HTML doctests
+   4  Creating HTML with the E-factory
+     4.1  Viewing your HTML
+   5  Working with links
+     5.1  Functions
+   6  Forms
+     6.1  Form Filling Example
+     6.2  Form Submission
+   7  Cleaning up HTML
+     7.1  autolink
+     7.2  wordwrap
+   8  HTML Diff
+   9  Examples
+     9.1  Microformat Example
+
+The main API is based on the `lxml.etree`_ API, and thus, on the ElementTree_
+API.
+
+.. _`lxml.etree`: tutorial.html
+.. _ElementTree:  http://effbot.org/zone/element-index.htm
+
+
+Parsing HTML
+============
+
+Parsing HTML fragments
+----------------------
+
+There are several functions available to parse HTML:
+
+``parse(filename_url_or_file)``:
+    Parses the named file or url, or if the object has a ``.read()``
+    method, parses from that.
+
+    If you give a URL, or if the object has a ``.geturl()`` method (as
+    file-like objects from ``urllib.urlopen()`` have), then that URL
+    is used as the base URL.  You can also provide an explicit
+    ``base_url`` keyword argument.
+
+``document_fromstring(string)``:
+    Parses a document from the given string.  This always creates a
+    correct HTML document, which means the parent node is ``<html>``,
+    and there is a body and possibly a head.
+
+``fragment_fromstring(string, create_parent=False)``:
+    Returns an HTML fragment from a string.  The fragment must contain
+    just a single element, unless ``create_parent`` is given;
+    e.g., ``fragment_fromstring(string, create_parent='div')`` will
+    wrap the element in a ``<div>``.
+
+``fragments_fromstring(string)``:
+    Returns a list of the elements found in the fragment.
+
+``fromstring(string)``:
+    Returns ``document_fromstring`` or ``fragment_fromstring``, based
+    on whether the string looks like a full document, or just a
+    fragment.
+
+Really broken pages
+-------------------
+
+The normal HTML parser is capable of handling broken HTML, but for
+pages that are far enough from HTML to call them 'tag soup', it may
+still fail to parse the page in a useful way.  A way to deal with this
+is ElementSoup_, which deploys the well-known BeautifulSoup_ parser to
+build an lxml HTML tree.
+
+.. _BeautifulSoup: http://www.crummy.com/software/BeautifulSoup/
+.. _ElementSoup: elementsoup.html
+
+However, note that the most common problem with web pages is the lack
+of (or the existence of incorrect) encoding declarations.  It is
+therefore often sufficient to only use the encoding detection of
+BeautifulSoup, called UnicodeDammit, and to leave the rest to lxml's
+own HTML parser, which is several times faster.
+
+
+HTML Element Methods
+====================
+
+HTML elements have all the methods that come with ElementTree, but
+also include some extra methods:
+
+``.drop_tree()``:
+    Drops the element and all its children.  Unlike
+    ``el.getparent().remove(el)`` this does *not* remove the tail
+    text; with ``drop_tree`` the tail text is merged with the previous
+    element.
+
+``.drop_tag()``:
+    Drops the tag, but keeps its children and text.
+
+``.find_class(class_name)``:
+    Returns a list of all the elements with the given CSS class name.
+    Note that class names are space separated in HTML, so
+    ``doc.find_class_name('highlight')`` will find an element like
+    ``<div class="sidebar highlight">``.  Class names *are* case
+    sensitive.
+
+``.find_rel_links(rel)``:
+    Returns a list of all the ``<a rel="{rel}">`` elements.  E.g.,
+    ``doc.find_rel_links('tag')`` returns all the links `marked as
+    tags <http://microformats.org/wiki/rel-tag>`_.
+
+``.get_element_by_id(id, default=None)``:
+    Return the element with the given ``id``, or the ``default`` if
+    none is found.  If there are multiple elements with the same id
+    (which there shouldn't be, but there often is), this returns only
+    the first.
+
+``.text_content()``:
+    Returns the text content of the element, including the text
+    content of its children, with no markup.
+
+``.cssselect(expr)``:
+    Select elements from this element and its children, using a CSS
+    selector expression.  (Note that ``.xpath(expr)`` is also
+    available as on all lxml elements.)
+
+``.label``:
+    Returns the corresponding ``<label>`` element for this element, if
+    any exists (None if there is none).  Label elements have a
+    ``label.for_element`` attribute that points back to the element.
+
+``.base_url``:
+    The base URL for this element, if one was saved from the parsing.
+    This attribute is not settable.  Is None when no base URL was
+    saved.
+
+``.classes``:
+    Returns a set-like object that allows accessing and modifying the
+    names in the 'class' attribute of the element.  (New in lxml 3.5).
+
+``.set(key, value=None)``:
+    Sets an HTML attribute.  If no value is given, or if the value is
+    ``None``, it creates a boolean attribute like ``<form novalidate></form>``
+    or ``<div custom-attribute></div>``.  In XML, attributes must
+    have at least the empty string as their value like ``<form
+    novalidate=""></form>``, but HTML boolean attributes can also be
+    just present or absent from an element without having a value.
+
+Running HTML doctests
+=====================
+
+One of the interesting modules in the ``lxml.html`` package deals with
+doctests.  It can be hard to compare two HTML pages for equality, as
+whitespace differences aren't meaningful and the structural formatting
+can differ.  This is even more a problem in doctests, where output is
+tested for equality and small differences in whitespace or the order
+of attributes can let a test fail.  And given the verbosity of
+tag-based languages, it may take more than a quick look to find the
+actual differences in the doctest output.
+
+Luckily, lxml provides the ``lxml.doctestcompare`` module that
+supports relaxed comparison of XML and HTML pages and provides a
+readable diff in the output when a test fails.  The HTML comparison is
+most easily used by importing the ``usedoctest`` module in a doctest:
+
+.. sourcecode:: pycon
+
+    >>> import lxml.html.usedoctest
+
+Now, if you have an HTML document and want to compare it to an expected result
+document in a doctest, you can do the following:
+
+.. sourcecode:: pycon
+
+    >>> import lxml.html
+    >>> html = lxml.html.fromstring('''\
+    ...    <html><body onload="" color="white">
+    ...      <p>Hi  !</p>
+    ...    </body></html>
+    ... ''')
+
+    >>> print lxml.html.tostring(html)
+    <html><body onload="" color="white"><p>Hi !</p></body></html>
+
+    >>> print lxml.html.tostring(html)
+    <html> <body color="white" onload=""> <p>Hi    !</p> </body> </html>
+
+    >>> print lxml.html.tostring(html)
+    <html>
+      <body color="white" onload="">
+        <p>Hi !</p>
+      </body>
+    </html>
+
+In documentation, you would likely prefer the pretty printed HTML output, as
+it is the most readable.  However, the three documents are equivalent from the
+point of view of an HTML tool, so the doctest will silently accept any of the
+above.  This allows you to concentrate on readability in your doctests, even
+if the real output is a straight ugly HTML one-liner.
+
+Note that there is also an ``lxml.usedoctest`` module which you can
+import for XML comparisons.  The HTML parser notably ignores
+namespaces and some other XMLisms.
+
+
+Creating HTML with the E-factory
+================================
+
+.. _`E-factory`: http://online.effbot.org/2006_11_01_archive.htm#et-builder
+
+lxml.html comes with a predefined HTML vocabulary for the `E-factory`_,
+originally written by Fredrik Lundh.  This allows you to quickly generate HTML
+pages and fragments:
+
+.. sourcecode:: pycon
+
+    >>> from lxml.html import builder as E
+    >>> from lxml.html import usedoctest
+    >>> html = E.HTML(
+    ...   E.HEAD(
+    ...     E.LINK(rel="stylesheet", href="great.css", type="text/css"),
+    ...     E.TITLE("Best Page Ever")
+    ...   ),
+    ...   E.BODY(
+    ...     E.H1(E.CLASS("heading"), "Top News"),
+    ...     E.P("World News only on this page", style="font-size: 200%"),
+    ...     "Ah, and here's some more text, by the way.",
+    ...     lxml.html.fromstring("<p>... and this is a parsed fragment ...</p>")
+    ...   )
+    ... )
+
+    >>> print lxml.html.tostring(html)
+    <html>
+      <head>
+        <link href="great.css" rel="stylesheet" type="text/css">
+        <title>Best Page Ever</title>
+      </head>
+      <body>
+        <h1 class="heading">Top News</h1>
+        <p style="font-size: 200%">World News only on this page</p>
+        Ah, and here's some more text, by the way.
+        <p>... and this is a parsed fragment ...</p>
+      </body>
+    </html>
+
+Note that you should use ``lxml.html.tostring`` and **not**
+``lxml.tostring``.  ``lxml.tostring(doc)`` will return the XML
+representation of the document, which is not valid HTML.  In
+particular, things like ``<script src="..."></script>`` will be
+serialized as ``<script src="..." />``, which completely confuses
+browsers.
+
+Viewing your HTML
+-----------------
+
+A handy method for viewing your HTML:
+``lxml.html.open_in_browser(lxml_doc)`` will write the document to
+disk and open it in a browser (with the `webbrowser module
+<http://python.org/doc/current/lib/module-webbrowser.html>`_).
+
+Working with links
+==================
+
+There are several methods on elements that allow you to see and modify
+the links in a document.
+
+``.iterlinks()``:
+    This yields ``(element, attribute, link, pos)`` for every link in
+    the document.  ``attribute`` may be None if the link is in the
+    text (as will be the case with a ``<style>`` tag with
+    ``@import``).  
+
+    This finds any link in an ``action``, ``archive``, ``background``,
+    ``cite``, ``classid``, ``codebase``, ``data``, ``href``,
+    ``longdesc``, ``profile``, ``src``, ``usemap``, ``dynsrc``, or
+    ``lowsrc`` attribute.  It also searches ``style`` attributes for
+    ``url(link)``, and ``<style>`` tags for ``@import`` and ``url()``.
+
+    This function does *not* pay attention to ``<base href>``.
+
+``.resolve_base_href()``:
+    This function will modify the document in-place to take account of
+    ``<base href>`` if the document contains that tag.  In the process
+    it will also remove that tag from the document.
+
+``.make_links_absolute(base_href, resolve_base_href=True)``:
+    This makes all links in the document absolute, assuming that
+    ``base_href`` is the URL of the document.  So if you pass
+    ``base_href="http://localhost/foo/bar.html"`` and there is a link
+    to ``baz.html`` that will be rewritten as
+    ``http://localhost/foo/baz.html``.
+
+    If ``resolve_base_href`` is true, then any ``<base href>`` tag
+    will be taken into account (just calling
+    ``self.resolve_base_href()``).
+
+``.rewrite_links(link_repl_func, resolve_base_href=True, base_href=None)``:
+    This rewrites all the links in the document using your given link
+    replacement function.  If you give a ``base_href`` value, all
+    links will be passed in after they are joined with this URL.
+
+    For each link ``link_repl_func(link)`` is called.  That function
+    then returns the new link, or None to remove the attribute or tag
+    that contains the link.  Note that all links will be passed in,
+    including links like ``"#anchor"`` (which is purely internal), and
+    things like ``"mailto:bob@example.com"`` (or ``javascript:...``).
+
+    If you want access to the context of the link, you should use
+    ``.iterlinks()`` instead.
+
+Functions
+---------
+
+In addition to these methods, there are corresponding functions:
+
+* ``iterlinks(html)``
+* ``make_links_absolute(html, base_href, ...)``
+* ``rewrite_links(html, link_repl_func, ...)``
+* ``resolve_base_href(html)``
+
+These functions will parse ``html`` if it is a string, then return the new
+HTML as a string.  If you pass in a document, the document will be copied
+(except for ``iterlinks()``), the method performed, and the new document
+returned.
+
+Forms
+=====
+
+Any ``<form>`` elements in a document are available through
+the list ``doc.forms`` (e.g., ``doc.forms[0]``).  Form, input, select,
+and textarea elements each have special methods.
+
+Input elements (including ``<select>`` and ``<textarea>``) have these
+attributes:
+
+``.name``:
+    The name of the element.
+
+``.value``:
+    The value of an input, the content of a textarea, the selected
+    option(s) of a select.  This attribute can be set.  
+
+    In the case of a select that takes multiple options (``<select
+    multiple>``) this will be a set of the selected options; you can
+    add or remove items to select and unselect the options.
+
+Select attributes:
+
+``.value_options``:
+    For select elements, this is all the *possible* values (the values
+    of all the options).
+
+``.multiple``:
+    For select elements, true if this is a ``<select multiple>``
+    element.
+
+Input attributes:
+
+``.type``:
+    The type attribute in ``<input>`` elements.
+
+``.checkable``:
+    True if this can be checked (i.e., true for type=radio and
+    type=checkbox).
+
+``.checked``:
+    If this element is checkable, the checked state.  Raises
+    AttributeError on non-checkable inputs.
+
+The form itself has these attributes:
+
+``.inputs``:
+    A dictionary-like object that can be used to access input elements
+    by name.  When there are multiple input elements with the same
+    name, this returns list-like structures that can also be used to
+    access the options and their values as a group.
+
+``.fields``:
+    A dictionary-like object used to access *values* by their name.
+    ``form.inputs`` returns elements, this only returns values.
+    Setting values in this dictionary will effect the form inputs.
+    Basically ``form.fields[x]`` is equivalent to
+    ``form.inputs[x].value`` and ``form.fields[x] = y`` is equivalent
+    to ``form.inputs[x].value = y``.  (Note that sometimes
+    ``form.inputs[x]`` returns a compound object, but these objects
+    also have ``.value`` attributes.)
+
+    If you set this attribute, it is equivalent to
+    ``form.fields.clear(); form.fields.update(new_value)``
+
+``.form_values()``:
+    Returns a list of ``[(name, value), ...]``, suitable to be passed
+    to ``urllib.urlencode()`` for form submission.
+
+``.action``:
+    The ``action`` attribute.  This is resolved to an absolute URL if
+    possible.
+
+``.method``:
+    The ``method`` attribute, which defaults to ``GET``.
+
+Form Filling Example
+--------------------
+
+Note that you can change any of these attributes (values, method,
+action, etc) and then serialize the form to see the updated values.
+You can, for instance, do:
+
+.. sourcecode:: pycon
+
+    >>> from lxml.html import fromstring, tostring
+    >>> form_page = fromstring('''<html><body><form>
+    ...   Your name: <input type="text" name="name"> <br>
+    ...   Your phone: <input type="text" name="phone"> <br>
+    ...   Your favorite pets: <br>
+    ...   Dogs: <input type="checkbox" name="interest" value="dogs"> <br>
+    ...   Cats: <input type="checkbox" name="interest" value="cats"> <br>
+    ...   Llamas: <input type="checkbox" name="interest" value="llamas"> <br>
+    ...   <input type="submit"></form></body></html>''')
+    >>> form = form_page.forms[0]
+    >>> form.fields = dict(
+    ...     name='John Smith',
+    ...     phone='555-555-3949',
+    ...     interest=set(['cats', 'llamas']))
+    >>> print tostring(form)
+    <html>
+      <body>
+        <form>
+        Your name:
+          <input name="name" type="text" value="John Smith">
+          <br>Your phone:
+          <input name="phone" type="text" value="555-555-3949">
+          <br>Your favorite pets:
+          <br>Dogs:
+          <input name="interest" type="checkbox" value="dogs">
+          <br>Cats:
+          <input checked name="interest" type="checkbox" value="cats">
+          <br>Llamas:
+          <input checked name="interest" type="checkbox" value="llamas">
+          <br>
+          <input type="submit">
+        </form>
+      </body>
+    </html>
+
+
+Form Submission
+---------------
+
+You can submit a form with ``lxml.html.submit_form(form_element)``.
+This will return a file-like object (the result of
+``urllib.urlopen()``).
+
+If you have extra input values you want to pass you can use the
+keyword argument ``extra_values``, like ``extra_values={'submit':
+'Yes!'}``.  This is the only way to get submit values into the form,
+as there is no state of "submitted" for these elements.
+
+You can pass in an alternate opener with the ``open_http`` keyword
+argument, which is a function with the signature ``open_http(method,
+url, values)``.
+
+Example:
+
+.. sourcecode:: pycon
+
+    >>> from lxml.html import parse, submit_form
+    >>> page = parse('http://tinyurl.com').getroot()
+    >>> page.forms[0].fields['url'] = 'http://lxml.de/'
+    >>> result = parse(submit_form(page.forms[0])).getroot()
+    >>> [a.attrib['href'] for a in result.xpath("//a[@target='_blank']")]
+    ['http://tinyurl.com/2xae8s', 'http://preview.tinyurl.com/2xae8s']
+
+Cleaning up HTML
+================
+
+The module ``lxml.html.clean`` provides a ``Cleaner`` class for cleaning up
+HTML pages.  It supports removing embedded or script content, special tags,
+CSS style annotations and much more.
+
+Say, you have an evil web page from an untrusted source that contains lots of
+content that upsets browsers and tries to run evil code on the client side:
+
+.. sourcecode:: pycon
+
+    >>> html = '''\
+    ... <html>
+    ...  <head>
+    ...    <script type="text/javascript" src="evil-site"></script>
+    ...    <link rel="alternate" type="text/rss" src="evil-rss">
+    ...    <style>
+    ...      body {background-image: url(javascript:do_evil)};
+    ...      div {color: expression(evil)};
+    ...    </style>
+    ...  </head>
+    ...  <body onload="evil_function()">
+    ...    <!-- I am interpreted for EVIL! -->
+    ...    <a href="javascript:evil_function()">a link</a>
+    ...    <a href="#" onclick="evil_function()">another link</a>
+    ...    <p onclick="evil_function()">a paragraph</p>
+    ...    <div style="display: none">secret EVIL!</div>
+    ...    <object> of EVIL! </object>
+    ...    <iframe src="evil-site"></iframe>
+    ...    <form action="evil-site">
+    ...      Password: <input type="password" name="password">
+    ...    </form>
+    ...    <blink>annoying EVIL!</blink>
+    ...    <a href="evil-site">spam spam SPAM!</a>
+    ...    <image src="evil!">
+    ...  </body>
+    ... </html>'''
+
+To remove the all suspicious content from this unparsed document, use the
+``clean_html`` function:
+
+.. sourcecode:: pycon
+
+    >>> from lxml.html.clean import clean_html
+    >>> print clean_html(html)
+    <div><style>/* deleted */</style><body>
+       
+       <a href="">a link</a>
+       <a href="#">another link</a>
+       <p>a paragraph</p>
+       <div>secret EVIL!</div>
+        of EVIL! 
+                                                                                                       
+                                                                                                       
+         Password:                                                                                     
+       annoying EVIL!<a href="evil-site">spam spam SPAM!</a>                                           
+       <img src="evil!"></body></div>   
+
+The ``Cleaner`` class supports several keyword arguments to control exactly
+which content is removed:
+
+.. sourcecode:: pycon
+
+    >>> from lxml.html.clean import Cleaner
+
+    >>> cleaner = Cleaner(page_structure=False, links=False)
+    >>> print cleaner.clean_html(html)
+    <html>
+      <head>
+        <link rel="alternate" src="evil-rss" type="text/rss">
+        <style>/* deleted */</style>
+      </head>
+      <body>
+        <a href="">a link</a>
+        <a href="#">another link</a>
+        <p>a paragraph</p>
+        <div>secret EVIL!</div>
+        of EVIL!
+        Password:
+        annoying EVIL!
+        <a href="evil-site">spam spam SPAM!</a>
+        <img src="evil!">
+      </body>
+    </html>
+
+    >>> cleaner = Cleaner(style=True, links=True, add_nofollow=True,
+    ...                   page_structure=False, safe_attrs_only=False)
+    
+    >>> print cleaner.clean_html(html)
+    <html>
+      <head>
+      </head>
+      <body>
+        <a href="">a link</a>
+        <a href="#">another link</a>
+        <p>a paragraph</p>
+        <div>secret EVIL!</div>
+        of EVIL!
+        Password:
+        annoying EVIL!
+        <a href="evil-site" rel="nofollow">spam spam SPAM!</a>
+        <img src="evil!">
+      </body>
+    </html>
+
+You can also whitelist some otherwise dangerous content with
+``Cleaner(host_whitelist=['www.youtube.com'])``, which would allow
+embedded media from YouTube, while still filtering out embedded media
+from other sites.
+
+See the docstring of ``Cleaner`` for the details of what can be
+cleaned.
+
+
+autolink
+--------
+
+In addition to cleaning up malicious HTML, ``lxml.html.clean``
+contains functions to do other things to your HTML.  This includes
+autolinking::
+
+   autolink(doc, ...)
+
+   autolink_html(html, ...)
+
+This finds anything that looks like a link (e.g.,
+``http://example.com``) in the *text* of an HTML document, and
+turns it into an anchor.  It avoids making bad links.
+
+Links in the elements ``<textarea>``, ``<pre>``, ``<code>``,
+anything in the head of the document.  You can pass in a list of
+elements to avoid in ``avoid_elements=['textarea', ...]``.
+
+Links to some hosts can be avoided.  By default links to
+``localhost*``, ``example.*`` and ``127.0.0.1`` are not
+autolinked.  Pass in ``avoid_hosts=[list_of_regexes]`` to control
+this.
+
+Elements with the ``nolink`` CSS class are not autolinked.  Pass
+in ``avoid_classes=['code', ...]`` to control this.
+
+The ``autolink_html()`` version of the function parses the HTML
+string first, and returns a string.
+
+
+wordwrap
+--------
+
+You can also wrap long words in your html::
+
+   word_break(doc, max_width=40, ...)
+
+   word_break_html(html, ...)
+
+This finds any long words in the text of the document and inserts
+``&#8203;`` in the document (which is the Unicode zero-width space).
+
+This avoids the elements ``<pre>``, ``<textarea>``, and ``<code>``.
+You can control this with ``avoid_elements=['textarea', ...]``.
+
+It also avoids elements with the CSS class ``nobreak``.  You can
+control this with ``avoid_classes=['code', ...]``.
+
+Lastly you can control the character that is inserted with
+``break_character=u'\u200b'``.  However, you cannot insert markup,
+only text.
+
+``word_break_html(html)`` parses the HTML document and returns a
+string.
+
+HTML Diff
+=========
+
+The module ``lxml.html.diff`` offers some ways to visualize
+differences in HTML documents.  These differences are *content*
+oriented.  That is, changes in markup are largely ignored; only
+changes in the content itself are highlighted.
+
+There are two ways to view differences: ``htmldiff`` and
+``html_annotate``.  One shows differences with ``<ins>`` and
+``<del>``, while the other annotates a set of changes similar to ``svn
+blame``.  Both these functions operate on text, and work best with
+content fragments (only what goes in ``<body>``), not complete
+documents.
+
+Example of ``htmldiff``:
+
+.. sourcecode:: pycon
+
+    >>> from lxml.html.diff import htmldiff, html_annotate
+    >>> doc1 = '''<p>Here is some text.</p>'''
+    >>> doc2 = '''<p>Here is <b>a lot</b> of <i>text</i>.</p>'''
+    >>> doc3 = '''<p>Here is <b>a little</b> <i>text</i>.</p>'''
+    >>> print htmldiff(doc1, doc2)
+    <p>Here is <ins><b>a lot</b> of <i>text</i>.</ins> <del>some text.</del> </p>
+    >>> print html_annotate([(doc1, 'author1'), (doc2, 'author2'),
+    ...                      (doc3, 'author3')])
+    <p><span title="author1">Here is</span>
+       <b><span title="author2">a</span>
+       <span title="author3">little</span></b>
+       <i><span title="author2">text</span></i>
+       <span title="author2">.</span></p>
+
+As you can see, it is imperfect as such things tend to be.  On larger
+tracts of text with larger edits it will generally do better.
+
+The ``html_annotate`` function can also take an optional second
+argument, ``markup``.  This is a function like ``markup(text,
+version)`` that returns the given text marked up with the given
+version.  The default version, the output of which you see in the
+example, looks like:
+
+.. sourcecode:: python
+
+    def default_markup(text, version):
+        return '<span title="%s">%s</span>' % (
+            cgi.escape(unicode(version), 1), text)
+
+Examples
+========
+
+Microformat Example
+-------------------
+
+This example parses the `hCard <http://microformats.org/wiki/hcard>`_
+microformat.
+
+First we get the page:
+
+.. sourcecode:: pycon
+
+    >>> import urllib
+    >>> from lxml.html import fromstring
+    >>> url = 'http://microformats.org/'
+    >>> content = urllib.urlopen(url).read()
+    >>> doc = fromstring(content)
+    >>> doc.make_links_absolute(url)
+
+Then we create some objects to put the information in:
+
+.. sourcecode:: pycon
+
+    >>> class Card(object):
+    ...     def __init__(self, **kw):
+    ...         for name, value in kw:
+    ...             setattr(self, name, value)
+    >>> class Phone(object):
+    ...     def __init__(self, phone, types=()):
+    ...         self.phone, self.types = phone, types
+
+And some generally handy functions for microformats:
+
+.. sourcecode:: pycon
+
+    >>> def get_text(el, class_name):
+    ...     els = el.find_class(class_name)
+    ...     if els:
+    ...         return els[0].text_content()
+    ...     else:
+    ...         return ''
+    >>> def get_value(el):
+    ...     return get_text(el, 'value') or el.text_content()
+    >>> def get_all_texts(el, class_name):
+    ...     return [e.text_content() for e in els.find_class(class_name)]
+    >>> def parse_addresses(el):
+    ...     # Ideally this would parse street, etc.
+    ...     return el.find_class('adr')
+
+Then the parsing:
+
+.. sourcecode:: pycon
+
+    >>> for el in doc.find_class('hcard'):
+    ...     card = Card()
+    ...     card.el = el
+    ...     card.fn = get_text(el, 'fn')
+    ...     card.tels = []
+    ...     for tel_el in card.find_class('tel'):
+    ...         card.tels.append(Phone(get_value(tel_el),
+    ...                                get_all_texts(tel_el, 'type')))
+    ...     card.addresses = parse_addresses(el)

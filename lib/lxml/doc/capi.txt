@@ -1,0 +1,116 @@
+==============================
+The public C-API of lxml.etree
+==============================
+
+As of version 1.1, lxml.etree provides a public C-API.  This allows external
+C extensions to efficiently access public functions and classes of lxml,
+without going through the Python API.
+
+The API is described in the file `etreepublic.pxd`_, which is directly
+c-importable by extension modules implemented in Pyrex_ or Cython_.
+
+.. _`etreepublic.pxd`: https://github.com/lxml/lxml/blob/master/src/lxml/includes/etreepublic.pxd
+.. _Cython: http://cython.org
+.. _Pyrex: http://www.cosc.canterbury.ac.nz/~greg/python/Pyrex/
+
+.. contents::
+..
+   1  Passing generated trees through Python
+   2  Writing external modules in Cython
+   3  Writing external modules in C
+
+
+Passing generated trees through Python
+--------------------------------------
+
+This is the most simple way to integrate with lxml.  It does not require
+any C-level integration but uses a Python function to wrap an externally
+generated libxml2 document in lxml.
+
+The external module that creates the libxml2 tree must pack the document
+pointer into a `PyCapsule <https://docs.python.org/3/c-api/capsule.html>`_
+object.  This can then be passed into lxml with the function
+``lxml.etree.adopt_external_document()``.  It also takes an optional lxml
+parser instance to associate with the document, in order to configure the
+Element class lookup, relative URL lookups, etc.
+
+See the `API reference <api/lxml.etree-module.html#adopt_external_document>`_
+for further details.
+
+The same functionality is available as part of the public C-API in form
+of the C function ``adoptExternalDocument()``.
+
+
+Writing external modules in Cython
+----------------------------------
+
+This is the easiest way of extending lxml at the C level.  A Cython_
+(or Pyrex_) module should start like this::
+
+    # My Cython extension
+
+    # import the public functions and classes of lxml.etree
+    cimport etreepublic as cetree
+
+    # import the lxml.etree module in Python
+    cdef object etree
+    from lxml import etree
+
+    # initialize the access to the C-API of lxml.etree
+    cetree.import_lxml__etree()
+
+From this line on, you can access all public functions of lxml.etree
+from the ``cetree`` namespace like this::
+
+    # build a tag name from namespace and element name
+    py_tag = cetree.namespacedNameFromNsName("http://some/url", "myelement")
+
+Public lxml classes are easily subclassed.  For example, to implement
+and set a new default element class, you can write Cython code like
+the following::
+
+    from etreepublic cimport ElementBase
+    cdef class NewElementClass(ElementBase):
+         def set_value(self, myval):
+             self.set("my_attribute", myval)
+
+    etree.set_element_class_lookup(
+         etree.DefaultElementClassLookup(element=NewElementClass))
+
+
+Writing external modules in C
+-----------------------------
+
+If you really feel like it, you can also interface with lxml.etree straight
+from C code.  All you have to do is include the header file for the public
+API, import the ``lxml.etree`` module and then call the import function:
+
+.. sourcecode:: c
+
+    /* My C extension */
+
+    /* common includes */
+    #include "Python.h"
+    #include "stdio.h"
+    #include "string.h"
+    #include "stdarg.h"
+    #include "libxml/xmlversion.h"
+    #include "libxml/encoding.h"
+    #include "libxml/hash.h"
+    #include "libxml/tree.h"
+    #include "libxml/xmlIO.h"
+    #include "libxml/xmlsave.h"
+    #include "libxml/globals.h"
+    #include "libxml/xmlstring.h"
+
+    /* lxml.etree specific includes */
+    #include "lxml-version.h"
+    #include "etree_defs.h"
+    #include "etree.h"
+
+    /* setup code */
+    import_lxml__etree()
+
+Note that including ``etree.h`` does not automatically include the
+header files it requires.  Note also that the above list of common
+includes may not be sufficient.

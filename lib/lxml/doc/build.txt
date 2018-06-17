@@ -1,0 +1,333 @@
+How to build lxml from source
+=============================
+
+To build lxml from source, you need libxml2 and libxslt properly
+installed, *including the header files*.  These are likely shipped in
+separate ``-dev`` or ``-devel`` packages like ``libxml2-dev``, which
+you must install before trying to build lxml.
+
+.. contents::
+..
+   1  Cython
+   2  Github, git and hg
+   3  Building the sources
+   4  Running the tests and reporting errors
+   5  Building an egg
+   6  Building lxml on MacOS-X
+   7  Static linking on Windows
+   8  Building Debian packages from SVN sources
+
+
+Cython
+------
+
+.. _pip: http://pypi.python.org/pypi/pip
+.. _Cython: http://cython.org
+.. _wheel: https://wheel.readthedocs.io/en/latest/
+
+The lxml.etree and lxml.objectify modules are written in Cython_.
+Since we distribute the Cython-generated .c files with lxml releases,
+however, you do not need Cython to build lxml from the normal release
+sources.  We even encourage you to *not install Cython* for a normal
+release build, as the generated C code can vary quite heavily between
+Cython versions, which may or may not generate correct code for lxml.
+The pre-generated release sources were tested and therefore are known
+to work.
+
+So, if you want a reliable build of lxml, we suggest to a) use a
+source release of lxml and b) disable or uninstall Cython for the
+build.
+
+*Only* if you are interested in building lxml from a checkout of the
+developer sources (e.g. to test a bug fix that has not been release
+yet) or if you want to be an lxml developer, then you do need a
+working Cython installation.  You can use pip_ to install it::
+
+    pip install -r requirements.txt
+
+https://github.com/lxml/lxml/blob/master/requirements.txt
+
+lxml currently requires at least Cython 0.20, later release versions
+should work as well.
+
+
+Github, git and hg
+-------------------
+
+The lxml package is developed in a repository on Github_ using
+Mercurial_ and the `hg-git`_ plugin.  You can retrieve the current
+developer version using::
+
+  hg clone git+ssh://git@github.com/lxml/lxml.git lxml
+
+Or, using git::
+
+  git clone ssh://git@github.com/lxml/lxml.git lxml
+
+This will create a directory ``lxml`` and download the source into it,
+including the complete development history.  Don't be afraid, the
+repository download is fairly quick.  You can also browse the
+`lxml repository`_ through the web or download a ZIP archive with the
+`latest master branch <https://github.com/lxml/lxml/archive/master.zip>`_.
+
+.. _Github: https://github.com/lxml/
+.. _Mercurial: http://mercurial.selenic.com/
+.. _`hg-git`: http://hg-git.github.com/
+.. _`lxml repository`: https://github.com/lxml/lxml
+.. _`source tar-ball`: https://github.com/lxml/lxml/tarball/master
+
+
+Building the sources
+---------------------
+
+Clone the source repository as described above (or download
+the `source tar-ball`_ and unpack it) and then type::
+
+  python setup.py build
+
+or::
+
+  python setup.py bdist_egg     # requires 'setuptools' or 'distribute'
+
+To (re-)build the C sources with Cython, you must additionally pass the
+option ``--with-cython``::
+
+  python setup.py build --with-cython
+
+If you want to test lxml from the source directory, it is better to build it
+in-place like this::
+
+  python setup.py build_ext -i --with-cython
+
+or, in Unix-like environments::
+
+  make inplace
+
+To speed up the build in test environments (e.g. on a continuous
+integration server), set the ``CFLAGS`` environment variable to
+disable C compiler optimisations (e.g. "-O0" for gcc, that's
+minus-oh-zero), for example::
+
+  CFLAGS="-O0"  make inplace
+
+If you get errors about missing header files (e.g. ``Python.h`` or
+``libxml/xmlversion.h``) then you need to make sure the development
+packages of Python, libxml2 and libxslt are properly installed.  On
+Linux distributions, they are usually called something like
+``libxml2-dev`` or ``libxslt-devel``.  If these packages were
+installed in non-standard places, try passing the following option to
+setup.py to make sure the right config is found::
+
+  python setup.py build --with-xslt-config=/path/to/xslt-config
+
+If this doesn't help, you may have to add the location of the header
+files to the include path like::
+
+  python setup.py build_ext -i  -I /usr/include/libxml2
+
+where the file is in ``/usr/include/libxml2/libxml/xmlversion.h``
+
+To use lxml.etree in-place, you can place lxml's ``src`` directory
+on your Python module search path (PYTHONPATH) and then import
+``lxml.etree`` to play with it::
+
+  # cd lxml
+  # PYTHONPATH=src python
+  Python 2.7.2
+  Type "help", "copyright", "credits" or "license" for more information.
+  >>> from lxml import etree
+  >>>
+
+To make sure everything gets recompiled cleanly after changes, you can
+run ``make clean`` or delete the file ``src/lxml/etree.c``.
+
+
+Running the tests and reporting errors
+--------------------------------------
+
+The source distribution (tgz) and the source repository contain a test
+suite for lxml.  You can run it from the top-level directory::
+
+  python test.py
+
+Note that the test script only tests the in-place build (see distutils
+building above), as it searches the ``src`` directory.  You can use the
+following one-step command to trigger an in-place build and test it::
+
+  make test
+
+This also runs the ElementTree and cElementTree compatibility tests.  To call
+them separately, make sure you have lxml on your PYTHONPATH first, then run::
+
+  python selftest.py
+
+and::
+
+  python selftest2.py
+
+If the tests give failures, errors, or worse, segmentation faults, we'd really
+like to know.  Please contact us on the `mailing list`_, and please specify
+the version of lxml, libxml2, libxslt and Python you were using, as well as
+your operating system type (Linux, Windows, MacOS-X, ...).
+
+.. _`mailing list`: http://lxml.de/mailinglist/
+
+
+Building an egg or wheel
+------------------------
+
+This is the procedure to make an lxml egg or wheel_ for your platform.
+It assumes that you have ``setuptools`` or ``distribute`` installed, as well
+as the ``wheel`` package.
+
+First, download the lxml-x.y.tar.gz release.  This contains the pregenerated
+C files so that you can be sure you build exactly from the release sources.
+Unpack them and ``cd`` into the resulting directory.  Then, to build a wheel,
+simply run the command
+
+::
+
+  python setup.py bdist_wheel
+
+or, to build a statically linked wheel with all of libxml2, libxslt and
+friends compiled in, run
+
+  python setup.py bdist_wheel --static-deps
+
+The resulting .whl file will be written into the ``dist`` directory.
+
+To build an egg file, run
+
+::
+
+  python setup.py build_egg
+
+If you are on a Unix-like platform, you can first build the extension modules
+using
+
+::
+
+  python setup.py build
+
+and then ``cd`` into the directory ``build/lib.your.platform`` to call
+``strip`` on any ``.so`` file you find there.  This reduces the size of
+the binary distribution considerably.  Then, from the package root directory,
+call
+
+::
+
+  python setup.py bdist_egg
+
+This will quickly package the pre-built packages into an egg file and
+drop it into the ``dist`` directory.
+
+
+Building lxml on MacOS-X
+------------------------
+
+Apple regularly ships new system releases with horribly outdated
+system libraries.  This is specifically the case for libxml2 and
+libxslt, where the system provided versions used to be too old
+to even build lxml for a long time.
+
+While the Unix environment in MacOS-X makes it relatively easy to
+install Unix/Linux style package management tools and new software, it
+actually seems to be hard to get libraries set up for exclusive usage
+that MacOS-X ships in an older version.  Alternative distributions
+(like macports) install their libraries in addition to the system
+libraries, but the compiler and the runtime loader on MacOS still sees
+the system libraries before the new libraries.  This can lead to
+undebuggable crashes where the newer library seems to be loaded but
+the older system library is used.
+
+Apple discourages static building against libraries, which would help
+working around this problem.  Apple does not ship static library
+binaries with its system and several package management systems follow
+this decision.  Therefore, building static binaries requires building
+the dependencies first.  The ``setup.py`` script does this
+automatically when you call it like this::
+
+  python setup.py build --static-deps
+
+This will download and build the latest versions of libxml2 and
+libxslt from the official FTP download site.  If you want to use
+specific versions, or want to prevent any online access, you can
+download both ``tar.gz`` release files yourself, place them into a
+subdirectory ``libs`` in the lxml distribution, and call ``setup.py``
+with the desired target versions like this::
+
+  python setup.py build --static-deps \
+         --libxml2-version=2.9.1 \
+         --libxslt-version=1.1.28 \
+
+  sudo python setup.py install
+
+Instead of ``build``, you can use any target, like ``bdist_egg``
+if you want to use setuptools to build an installable egg, or
+``bdist_wheel`` for a wheel package.
+
+Note that this also works with pip_.  Since you can't pass
+command line options in this case, you have to use an environment
+variable instead::
+
+  STATIC_DEPS=true pip install lxml
+
+To install the package into the system Python package directory,
+run the installation with "sudo"::
+
+  STATIC_DEPS=true sudo pip install lxml
+
+The ``STATICBUILD`` environment variable is handled equivalently to
+the ``STATIC_DEPS`` variable, but is used by some other extension
+packages, too.
+
+If you decide to do a non-static build, you may also have to install
+the command line tools in addition to the XCode build environment.
+They are available as a restricted download from here:
+
+https://developer.apple.com/downloads/index.action?=command%20line%20tools#
+
+Without them, the compiler may not find the necessary header files of
+the XML libraries, according to the second comment in this ticket:
+
+https://bugs.launchpad.net/lxml/+bug/1244094
+
+
+Static linking on Windows
+-------------------------
+
+Most operating systems have proper package management that makes installing
+current versions of libxml2 and libxslt easy.  The most famous exception is
+Microsoft Windows, which entirely lacks these capabilities.  To work around
+the limits of this platform, lxml's installation can download pre-built
+packages of the dependencies and build statically against them.  Assuming
+you have a proper C compiler setup to build Python extensions, this should
+work::
+
+  python setup.py bdist_wininst --static-deps
+
+It should create a windows installer in the ``pkg`` directory.
+
+
+Building Debian packages from SVN sources
+-----------------------------------------
+
+`Andreas Pakulat`_ proposed the following approach.
+
+.. _`Andreas Pakulat`: http://thread.gmane.org/gmane.comp.python.lxml.devel/1239/focus=1249
+
+* ``apt-get source lxml``
+* remove the unpacked directory
+* tar.gz the lxml SVN version and replace the orig.tar.gz that lies in the
+  directory
+* check md5sum of created tar.gz file and place new sum and size in dsc file
+* do ``dpkg-source -x lxml-[VERSION].dsc`` and cd into the newly created directory
+* run ``dch -i`` and add a comment like "use trunk version", this will
+  increase the debian version number so apt/dpkg won't get confused
+* run ``dpkg-buildpackage -rfakeroot -us -uc`` to build the package
+
+In case ``dpkg-buildpackage`` tells you that some dependencies are missing, you
+can either install them manually or run ``apt-get build-dep lxml``.
+
+That will give you .deb packages in the parent directory which can be
+installed using ``dpkg -i``.
