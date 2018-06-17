@@ -1,4 +1,6 @@
 #!/usr/bin/env python2
+# -*- coding: utf-8 -*-
+
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 #    TIDoS Framework     #
 #-:-:-:-:-:-:-:-:-:-:-:-:#
@@ -23,9 +25,8 @@ def banner1():
 	sleep(0.2)
 	print ''+B+'[---]     \033[1;35m4 Phases  |  \033[1;31m10 Sub-Phases  |  \033[1;37m63 Modules    \033[1;34m[---]'
 	sleep(0.2)
-	print ''+B+'[---]     
 	print ''
 	print ''+B+'             Welcome to '+C+'The-TIDoS-Framework (TTF)'
 	sleep(0.2)
 	print ''+GR+'      The TIDoS Framework is a project by '+O+'Team CodeSploit \n'
-s
+

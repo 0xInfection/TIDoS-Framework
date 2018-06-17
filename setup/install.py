@@ -21,9 +21,9 @@ def install():
 
 	time.sleep(1)
 	print ""+B+color.BOLD+" [!] Gathering info..."+color.END
-	time.sleep(2)
+	time.sleep(1)
 	print ""+GR+color.BOLD+" [*] Checking your resources..."+color.END
-	time.sleep(3)
+	time.sleep(2)
 
 	if os.geteuid() == 0:
 
