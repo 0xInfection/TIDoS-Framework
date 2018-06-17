@@ -10,8 +10,10 @@
 def agreement():
 
     print """
-
-                               \033[1;95mT I D O S   F R A M E W O R K   v2.1.0\033[0m
+\033[1;32m
+				=====================================================
+	                               T I D O S   F R A M E W O R K   v1.0.0
+				=====================================================
 \033[1;37m
 	TIDoS is a open-source tool developed as a royalty-free website penetration testing tool.
 
