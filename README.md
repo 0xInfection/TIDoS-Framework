@@ -12,11 +12,10 @@ A small list of features TIDoS-Framework has to offer:
     - Scanning & Enumeration
     - Vulnerability Analysis
     - Exploitation (beta)
-
-    `Note:` For more info on various modules please refer to the [wiki](https://github.com/theinfecteddrake/TIDOS-Framework/wiki)
 - [x] Reconnaissance Phase has 26 modules of its own (including active, passive and information disclosure modules).
 - [x] All four phases have a auto-awesome module which automates every module for you.
 - [x] You just need the domain, and leave everything is to this tool.
+  `Note:` For more info on various modules please refer to the [wiki](https://github.com/theinfecteddrake/TIDOS-Framework/wiki)
 
 <img src='https://i.imgur.com/jBphn0h.png' />
 
@@ -45,7 +44,7 @@ As the framework opens up, enter the website name `eg. http://www.example.com` a
 
 > Recommended:
 > - Follow the order of the tool (Run in a schematic way).
-
+> 
 >    Reconnaissance ⤃ Scanning & Enumeration ⤃ Vulnerability Analysis
 
 
