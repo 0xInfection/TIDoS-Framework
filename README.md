@@ -47,13 +47,13 @@ As the framework opens up, enter the website name `eg. http://www.example.com` a
 
 > Recommended:
 > - Follow the order of the tool (Run in a schematic way).
->    `Reconnaissance ⤃ Scanning & Enumeration ⤃ Vulnerability Analysis`
+>    `Reconnaissance ⮚ Scanning & Enumeration ⮚ Vulnerability Analysis`
 
 ### Flawless Features :-
 
 TIDoS Framework presently supports the following:
 
-- __Reconnaissance + OSINT__
+* __Reconnaissance + OSINT__
     + Passive Reconnaissance:
 	- Ping/Nping Enumeration
 	- WhoIS Lookup
@@ -86,9 +86,9 @@ TIDoS Framework presently supports the following:
 	- Phone Number Havester
 	- Social Security Number Harvester
 
-+ __Scanning & Enumeration__
+* __Scanning & Enumeration__
 
-    - Remote Server WAF Analysis
+    + Remote Server WAF Analysis
     + Port Scanning `Ingenious Modules`
 	- Simple Port Scanner `via Socket Connections`
 	- TCP SYN Scan
