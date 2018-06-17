@@ -1,6 +1,6 @@
 <p align="middle"><img src='https://i.imgur.com/QAbaVdU.png' /></p>
 
-![Python](https://img.shields.io/badge/Python-2.7-green.svg) ![Supported OS](https://img.shields.io/badge/Supported%20OS-Linux-yellow.svg) ![License](https://img.shields.io/badge/License-GPLv3-blue.svg) ![Build](https://img.shields.io/badge/Build-0049-red.svg) ![Modules](https://img.shields.io/badge/Modules-63-cyan.svg) ![Status](https://img.shields.io/badge/Build%20Status-passing-green.svg)
+![Python](https://img.shields.io/badge/Python-2.7-green.svg) ![Supported OS](https://img.shields.io/badge/Supported%20OS-Linux-yellow.svg) ![License](https://img.shields.io/badge/License-GPLv3-blue.svg) ![Build](https://img.shields.io/badge/Build-0049-red.svg) ![Modules](https://img.shields.io/badge/Modules-63-blue.svg) ![Status](https://img.shields.io/badge/Build%20Status-passing-green.svg)
 
 # TIDoS Framework 
 TIDoS Framework is a comprehensive web application audit framework with some serious perks.
