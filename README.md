@@ -18,7 +18,7 @@ A main highlights of this framework is:
 - [x] All four phases have a auto-awesome module which automates every module for you.
 - [x] You just need the domain, and leave everything is to this tool.
 
-  `Note:` For more info on various modules please refer to the [wiki](https://github.com/theinfecteddrake/TIDOS-Framework/wiki)
+  `Note:` For more info on various modules please refer to the [wiki](https://github.com/theinfecteddrake/TIDOS-Framework/wiki).
 
 <img src='https://i.imgur.com/jBphn0h.png' />
 
@@ -40,7 +40,7 @@ Thats it! Now you are good to go! Now lets run the tool:
 tidos
 ```
 
-### Using TIDoS :-
+### Usage :-
 TIDoS is made to be comprehensive. Its highly flexible framework where you just have to select and use modules. 
 
 As the framework opens up, enter the website name `eg. http://www.example.com` and let TIDoS lead you. Thats it! Its as easy as that.
@@ -49,8 +49,104 @@ As the framework opens up, enter the website name `eg. http://www.example.com` a
 > - Follow the order of the tool (Run in a schematic way).
 >    `Reconnaissance ⤃ Scanning & Enumeration ⤃ Vulnerability Analysis`
 
-### Some Flawless Features :-
+### Flawless Features :-
 
-TIDoS Framework 
+TIDoS Framework presently supports the following:
 
+- __Reconnaissance + OSINT__
+    - Passive Reconnaissance:
+	+ Ping/Nping Enumeration
+	+ WhoIS Lookup
+	+ GeoIP Lookup
+	+ DNS Config. Lookup 
+	+ Subdomains Lookup
+	+ Reverse DNS Lookup
+	+ Reverse IP Lookup
+	+ Web Links Gatherer
+	+ Google Search (manual search)
+	+ Google Dorking (multiple modules) `automated`
 
+    - Active Reconnaissance
+	+ HPing3 enumeration `(automated)`
+	+ CMS Detection `(185+ CMSs supported)`
+	+ Advanced Traceroute `IMPROVED`
+	+ Grab HTTP Headers
+	+ Detect Server `IMPROVED`
+	+ Examine SSL Certificate
+	+ `robots.txt` and `sitemap.xml` Checker
+	+ Subnets Enumeration
+	+ Find Shared DNS Hosts
+	+ Operaing System Fingerprint
+
+    - Information Disclosure
+	+ Credit Cards Disclosure in Plaintext
+	+ Email Harvester
+	+ Fatal Errors Enumeration `Includes Full Path Disclosure checks`
+	+ Internal IP Disclosure
+	+ Phone Number Havester
+	+ Social Security Number Harvester
+
+- __Scanning & Enumeration__
+
+    - Remote Server WAF Analysis
+    - Port Scanning `Ingenious Modules`
+	+ Simple Port Scanner `via Socket Connections`
+	+ TCP SYN Scan
+	+ TCP Connect Scan
+	+ XMAS Flag Scan 
+	+ Fin Flag Scan
+	+ Service Detector
+    - Interactive Scanning with NMap `Preloaded modules`
+    - Crawlers
+	+ Depth 1
+	+ Depth 2 `IMPROVED`
+
+- __Vulnerability Analysis__
+
+    - Web-Bugs & Server Misconfigurations
+
+	+ Insecure CORS `iCORS`
+	+ Same-Site Scripting
+	+ Zone Transfer `DNS Server based`
+	+ Clickjacking `Framable Response`
+	+ Security on Cookies `HTTPOnly/Secure Flags`
+	+ Cloudflare Misconfiguration Check `+ Getting Real IP` 
+	+ HTTP High Transport Security Usage
+	+ Security Headers Analysis 
+	+ Cross-Site Tracing `(Port Based)`
+	+ Network Security Misconfig. `(Telnet Enabled)`
+
+    - Serious Web Vulnerabilities
+
+	+ File Intrusions
+	    - Local File Intrusion (LFI)
+	    - Remote File Inclusion (RFI)
+	+ OS Command Execution `Linux & Windows (RCE)`
+	+ Path Traversal (Sensitive Paths) 
+	+ Cross-Site Request Forgery 
+	+ SQL Injection
+	    - Cookie Value Based
+	    - Referer Value Based
+	    - User-Agent Value Based
+	+ Host Header Injection 
+	+ Bash Command Injection `Shellshock` 
+	+ Cross-Site Scripting `beta`
+	    - Cookie Value Based
+	    - Referer Value Based
+	    - User-Agent Value Based
+
+- __Exploitation__ `purely developmental`
+
+	+ ShellShock
+
+### Known Bugs:
+
+This version of TIDoS is purely developmental `beta`. There are bugs in resolving the `[99] Back` at various end-points. Also TIDoS needs to develop more on logging all info displayed on the screen `(help needed)`.
+
+### Final Words:
+
+This project is one of the best frameworks I have ever built and I would really like your constructive criticism, suggestions and help in converting this project into the best web penetration testing framework ever built `and it will be ;)`.
+
+> Thank you
+> ✎ @_tID_
+> [Team CodeSploit](https://www.facebook.com/codesploit)
