@@ -12,7 +12,7 @@ from colors import *
 
 def banner1():
 
-	print ''+B+'[---]       '+C+'The TIDoS Framework  \033[36m|  \033[1;37mVersion 1.0        \033[1;34m[---]'
+	print ''+B+'[---]       '+C+'The TIDoS Framework  \033[36m|  \033[1;37mVersion v1.0       \033[1;34m[---]'
 	sleep(0.2)
 	print ''+B+'[---]                                                  [---]'
 	print ''+B+'[---]               \033[1;31m~  Author \033[1;31m: \033[1;33m@_tID_  ~              \033[1;34m[---]'
@@ -21,11 +21,11 @@ def banner1():
 	sleep(0.2)
 	print ''+B+'[---]                                                  [---]'
 	sleep(0.2)
-	print ''+B+'[---]             \033[1;35mTotal 63 Modules  |  \033[1;31m4 new           \033[1;34m[---]'
+	print ''+B+'[---]     \033[1;35m4 Phases  |  \033[1;31m10 Sub-Phases  |  \033[1;37m63 Modules    \033[1;34m[---]'
 	sleep(0.2)
+	print ''+B+'[---]     
 	print ''
 	print ''+B+'             Welcome to '+C+'The-TIDoS-Framework (TTF)'
 	sleep(0.2)
 	print ''+GR+'      The TIDoS Framework is a project by '+O+'Team CodeSploit \n'
-
-banner1()
+s
