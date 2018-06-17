@@ -77,15 +77,16 @@ def tidosmain(web):
 		print R+'\n [-] Exiting...'
 		time.sleep(0.5)
 		print O+' [+] Goodluck mate, alvida!\n'
+		sys.exit(0)
 	
         except KeyboardInterrupt:
-                print R+"\n [!] " + color.UNDERLINE+ "User Interruption detected!"+color.END
+                print R+"\n [-] " + color.UNDERLINE+ "User Interruption detected!"+color.END
                 print GR+' [!] Stopping jobs...'
 		time.sleep(0.4)
-		print C+' [!] Goodbye, see ya!\n'
+		print C+' [+] Alvida, see ya!\n'
 		sys.exit(0)
 
-	#except Exception as e:
+	except Exception as e:
 		print R+' [-] Something happened! :('
 		print R+' [!] Error : '+str(e)
 
