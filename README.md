@@ -20,7 +20,7 @@ The main highlights of this framework is:
 
 `Note:` For more info on various modules please refer to the [wiki](https://github.com/theinfecteddrake/TIDOS-Framework/wiki).
 
-<img src='https://i.imgur.com/jBphn0h.png' />
+<img src='https://i.imgur.com/ZhBUrDB.png' />
 
 ### Installing TIDoS :-
 * Clone the repository locally and navigate there:
