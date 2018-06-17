@@ -20,25 +20,25 @@ def passiveban():
     print G+'     +-----------------+'
     time.sleep(0.6)
     print ''
-    print B+'      [1] '+C+'Ping Check'+W
+    print B+'      [1] '+C+'Ping Check (Using external APi)'+W
     time.sleep(0.1)
-    print B+'      [2] '+C+'WhoIS Checkup'+W
+    print B+'      [2] '+C+'WhoIS Lookup'+W
     time.sleep(0.1)
     print B+'      [3] '+C+'GeoIP Lookup'+W
     time.sleep(0.1)
-    print B+'      [4]'+C+' DNS Look Up'+W
+    print B+'      [4]'+C+' DNS Configuration Lookup'+W
     time.sleep(0.1)
-    print B+'      [5]'+C+' Subdomain Scan'+W
+    print B+'      [5]'+C+' Gather Subsomains '+W
     time.sleep(0.1)
     print B+'      [6]'+C+' Reverse DNS Lookup'+W
     time.sleep(0.1)
     print B+'      [7]'+C+' Reverse IP Lookup'+W
     time.sleep(0.1)
-    print B+'      [8]'+C+' Web Links'+W
+    print B+'      [8]'+C+' Gather Links ('+W
     time.sleep(0.1)
-    print B+'      [9]'+C+' Google Search'+W
+    print B+'      [9]'+C+' Google Search (Search your own Query or Dork)'+W
     time.sleep(0.1)
-    print B+'      [10] '+C+'Google Dorking'+W+'\n'
+    print B+'      [10] '+C+'Google Dorking (Multiple Modules)'+W+'\n'
     time.sleep(0.1)
     print B+'      [A] '+C+'Test all modules against the target 1 by 1\n'
     time.sleep(0.1)
