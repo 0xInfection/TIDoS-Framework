@@ -80,7 +80,7 @@ def encodeall():
 	print R+'    =============================\n'
 	st = raw_input(O+' [-] Enter a string to be encoded :> ')
 	def encode0x00(st):
-
+	    while True:
 		print O+'\n  Choose from the options to encode to:\n'
 		print B+'    [1]'+C+' URL Encode'
 		print B+'    [2]'+C+' HTML Encode'
@@ -91,7 +91,7 @@ def encodeall():
 		print B+'    [7]'+C+' Binary Encode'
 		print B+'    [8]'+C+' GZip Encode\n'
 		r = input(O+' [#] Enter your option...')
-		print GR+' [*] Encoding Url...'
+		print GR+' [*] Encoding string...'
 		sleep(0.5)
 		if r == '1':
 			url0x00(st)

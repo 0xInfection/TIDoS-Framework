@@ -9,14 +9,16 @@ TIDoS Framework is a comprehensive web application audit framework with some ser
 
 A main highlights of this framework is:
 
-- [x] Has 4 main modules subdivided into further numerous modules (presently 67):
-    - Reconnaissance & OSINT
-    - Scanning & Enumeration
-    - Vulnerability Analysis
-    - Exploitation (beta)
+- [x] Basic first release. `a big point to note`
+- [x] Has 4 main phases, subdivided into __13 sub-phases__ containing total of __73 modules__.
 - [x] Reconnaissance Phase has 26 modules of its own (including active, passive and information disclosure modules).
-- [x] All four phases have a auto-awesome module which automates every module for you.
+- [x] Scanning & Enumeration Phase has got 12 modules (including port scans, WAF analysis, etc)
+- [x] Vulnerability Analysis Phase has 32 modules (including most common vulnerabilites in action.
+- [x] Exploitation Phase has only 1 exploit. `(thats in alpha phase)`
+- [x] All four phases each have a auto-awesome module which automates every module for you.
 - [x] You just need the domain, and leave everything is to this tool.
+- [x] TIDoS has full verbose out support, so you'll know whats going on.
+- [x] User friendly interaction environment. `(no real shits)` 
 
   `Note:` For more info on various modules please refer to the [wiki](https://github.com/theinfecteddrake/TIDOS-Framework/wiki).
 
@@ -96,7 +98,7 @@ TIDoS Framework presently supports the following:
 	+ XMAS Flag Scan 
 	+ Fin Flag Scan
 	+ Service Detector
-    - Interactive Scanning with NMap `Preloaded modules`
+    - Interactive Scanning with NMap `Preloaded multiple modules`
     - Crawlers
 	+ Depth 1
 	+ Depth 2 `IMPROVED`
@@ -134,6 +136,23 @@ TIDoS Framework presently supports the following:
 	    - Cookie Value Based
 	    - Referer Value Based
 	    - User-Agent Value Based
+
+    - Auxillaries
+
+	+ Protocol Credential Bruteforce `3 more under dev.`
+	    - FTP Bruteforce
+	    - SSH Bruteforce
+	    - POP 2/3 Bruteforce
+	    - SQL Bruteforce
+	+ String & Payload Encoder
+	    - URL Encode
+	    - Base64 Encode
+	    - HTML Encode
+	    - Plain ASCII Encode
+	    - Hex Encode
+	    - Octal Encode
+	    - Binary Encode
+	    - GZip Encode
 
 - __Exploitation__ `purely developmental`
 
