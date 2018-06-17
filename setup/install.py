@@ -23,7 +23,7 @@ def install():
 	print ""+B+color.BOLD+" [!] Gathering info..."+color.END
 	time.sleep(1)
 	print ""+GR+color.BOLD+" [*] Checking your resources..."+color.END
-	time.sleep(2)
+	time.sleep(1.5)
 
 	if os.geteuid() == 0:
 
@@ -98,13 +98,13 @@ def install():
 		os.system('mkdir -v -p /opt/tidos-framework')
 		print GR+'Copying new files...'+O+''
 		time.sleep(0.5)
-		os.system('cp -v -r * /opt/tidos-framework/')
+		os.system('cp -r * /opt/tidos-framework/')
 		print GR+'Creating shortcuts...'+O+''
 		time.sleep(0.5)
 		os.system('cp -v runon.sh /usr/bin/tidos')
 		print GR+'Giving priviledges...'+O+''
 		time.sleep(0.7)
-		os.system('chmod -R -v 750 /opt/tidos-framework/*')
+		os.system('chmod -R 750 /opt/tidos-framework/*')
 		os.system('chmod -v 755 /usr/bin/tidos')
 		time.sleep(1.5)
 
