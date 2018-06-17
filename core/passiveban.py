@@ -32,9 +32,9 @@ def passiveban():
     time.sleep(0.1)
     print B+'      [6]'+C+' Reverse DNS Lookup'+W
     time.sleep(0.1)
-    print B+'      [7]'+C+' Reverse IP Lookup'+W
+    print B+'      [7]'+C+' Reverse IP Lookup (Find hosts on'+W
     time.sleep(0.1)
-    print B+'      [8]'+C+' Gather Links ('+W
+    print B+'      [8]'+C+' Gather All Links from WebPage'+W
     time.sleep(0.1)
     print B+'      [9]'+C+' Google Search (Search your own Query or Dork)'+W
     time.sleep(0.1)
