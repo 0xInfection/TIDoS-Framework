@@ -103,7 +103,8 @@ TIDoS Framework presently supports the following:
 
 - __Vulnerability Analysis__
 
-    + Web-Bugs & Server Misconfigurations
+    __Web-Bugs & Server Misconfigurations__
+    
 	- Insecure CORS `iCORS`
 	- Same-Site Scripting
 	- Zone Transfer `DNS Server based`
@@ -114,7 +115,9 @@ TIDoS Framework presently supports the following:
 	- Security Headers Analysis 
 	- Cross-Site Tracing `(Port Based)`
 	- Network Security Misconfig. `(Telnet Enabled)`
-    * __Serious Web Vulnerabilities__
+	
+    __Serious Web Vulnerabilities__
+    
 	+ File Intrusions
 	    - Local File Intrusion (LFI)
 	    - Remote File Inclusion (RFI)
@@ -132,7 +135,7 @@ TIDoS Framework presently supports the following:
 	    - Referer Value Based
 	    - User-Agent Value Based
 
-    + __Auxillaries__
+    __Auxillaries__
 
 	+ Protocol Credential Bruteforce `3 more under dev.`
 	    - FTP Bruteforce
