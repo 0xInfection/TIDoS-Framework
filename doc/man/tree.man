@@ -1,0 +1,149 @@
+
+   ===============================================
+    T H E   T I D O S   F R A M E W O R K  V1.0.0
+   ===============================================
+
+  ================
+   Tree Structure
+  ================
+
+ > TIDoS has 4 phases as below:
+
+    - Reconnaissance & OSINT
+    - Scanning and Enumeration
+    - Vulnerability Analysis
+    - Exploitation (presently in beta phase)
+
+
+ > TIDoS has 13 sub-phases as below:
+
+  * Reconnaissance (OSINT)
+	- Active Reconnaissance
+	- Passive Reconnaissance
+	- Information Disclosure
+
+  * Scanning and Enumeration
+	- WAF Analysis
+	- Various Port Scanning Techniques
+	- Preloaded moduled NMap
+	- Crawlers (Depth 1 and 2)
+
+  * Vulnerability Analysis
+	- Server-based Misconfigurations
+	- Serious Vulnerabilities
+	- Auxillaries
+
+  * Exploitation (beta)
+	- ShellShock
+ 
+
+ > TIDoS has 73 modules as the whole, so on expanding:
+
+* __Reconnaissance + OSINT__
+
+	+ Passive Reconnaissance:
+
+	    - Ping/Nping Enumeration
+	    - WhoIS Lookup
+	    - GeoIP Lookup
+	    - DNS Config. Lookup 
+	    - Subdomains Lookup
+	    - Reverse DNS Lookup
+	    - Reverse IP Lookup
+	    - Web Links Gatherer
+	    - Google Search (manual search)
+	    - Google Dorking (multiple modules) `automated`
+
+	+ Active Reconnaissance
+
+	    - HPing3 enumeration `(automated)`
+	    - CMS Detection `(185+ CMSs supported)`
+	    - Advanced Traceroute `IMPROVED`
+	    - Grab HTTP Headers
+	    - Detect Server `IMPROVED`
+	    - Examine SSL Certificate
+	    - `robots.txt` and `sitemap.xml` Checker
+	    - Subnets Enumeration
+	    - Find Shared DNS Hosts
+	    - Operaing System Fingerprint
+
+	+ Information Disclosure
+
+	    - Credit Cards Disclosure in Plaintext
+	    - Email Harvester
+	    - Fatal Errors Enumeration `Includes Full Path Disclosure checks`
+	    - Internal IP Disclosure
+	    - Phone Number Havester
+	    - Social Security Number Harvester
+
+* __Scanning & Enumeration__
+
+	+ Remote Server WAF Analysis
+	+ Port Scanning `Ingenious Modules`
+	    - Simple Port Scanner `via Socket Connections`
+	    - TCP SYN Scan
+	    - TCP Connect Scan
+	    - XMAS Flag Scan 
+	    - Fin Flag Scan
+	    - Service Detector
+
+	+ Crawlers
+	    - Depth 1
+	    - Depth 2 `IMPROVED`
+
++ __Vulnerability Analysis__
+
+    __Web-Bugs & Server Misconfigurations__
+    
+	- Insecure CORS `iCORS`
+	- Same-Site Scripting
+	- Zone Transfer `DNS Server based`
+	- Clickjacking `Framable Response`
+	- Security on Cookies `HTTPOnly/Secure Flags`
+	- Cloudflare Misconfiguration Check `+ Getting Real IP` 
+	- HTTP High Transport Security Usage
+	- Security Headers Analysis 
+	- Cross-Site Tracing `(Port Based)`
+	- Network Security Misconfig. `(Telnet Enabled)`
+	
+    __Serious Web Vulnerabilities__
+    
+	+ File Intrusions
+	    - Local File Intrusion (LFI)
+	    - Remote File Inclusion (RFI)
+	+ OS Command Execution `Linux & Windows (RCE)`
+	+ Path Traversal (Sensitive Paths) 
+	+ Cross-Site Request Forgery 
+	+ SQL Injection
+	    - Cookie Value Based
+	    - Referer Value Based
+	    - User-Agent Value Based
+	+ Host Header Injection 
+	+ Bash Command Injection `Shellshock` 
+	+ Cross-Site Scripting `beta`
+	    - Cookie Value Based
+	    - Referer Value Based
+	    - User-Agent Value Based
+	+ CRLF Injection & HTTP Response Splitting
+
+    __Auxillaries__
+
+	+ Protocol Credential Bruteforce `3 more under dev.`
+	    - FTP Bruteforce
+	    - SSH Bruteforce
+	    - POP 2/3 Bruteforce
+	    - SQL Bruteforce
+	+ String & Payload Encoder
+	    - URL Encode
+	    - Base64 Encode
+	    - HTML Encode
+	    - Plain ASCII Encode
+	    - Hex Encode
+	    - Octal Encode
+	    - Binary Encode
+	    - GZip Encode
+
+- __Exploitation__ `purely developmental`
+
+	+ ShellShock
+
