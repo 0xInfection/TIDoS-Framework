@@ -111,6 +111,7 @@ TIDoS Framework presently supports the following:
 	- Security on Cookies `HTTPOnly/Secure Flags`
 	- Cloudflare Misconfiguration Check `+ Getting Real IP` 
 	- HTTP High Transport Security Usage
+	- Spoofable Email `(Missing SPF and DMARC Records)`
 	- Security Headers Analysis 
 	- Cross-Site Tracing `(Port Based)`
 	- Network Security Misconfig. `(Telnet Enabled)`
@@ -133,6 +134,7 @@ TIDoS Framework presently supports the following:
 	    - Cookie Value Based
 	    - Referer Value Based
 	    - User-Agent Value Based
+	+ CRLF Injection and HTTP Response Splitting
 
     __Auxillaries__
 
