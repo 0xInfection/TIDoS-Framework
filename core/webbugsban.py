@@ -49,7 +49,9 @@ def webbugsban():
     time.sleep(0.1)
     print O+'  [9]'+GR+' Cross-Site Tracing (Port Based)'
     time.sleep(0.1)
-    print O+'  [10]'+GR+' Network Security Misconfig. (Telnet Enabled)\n'
+    print O+'  [10]'+GR+' Network Security Misconfig. (Telnet Enabled)'
+    time.sleep(0.1)
+    print O+'  [11]'+GR+' Spoofable Emails (Missing SPF & DMARC Records)\n '
     time.sleep(0.1)
     print O+'  [A]'+GR+' Load all the modules 1 by 1\n'
     time.sleep(0.1)

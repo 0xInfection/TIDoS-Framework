@@ -25,23 +25,23 @@ def agree():
 	if 'no' in open('agree').read():
 	    agreement()
 
-	    agree = raw_input(''+G+color.BOLD+ 'Do you agree to these terms and conditions? :> ' + color.END)
-	    if agree == "yes":
+	    a1 = raw_input(''+G+color.BOLD+ 'Do you agree to these terms and conditions? :> ' + color.END)
+	    if a1 == "yes":
 		print ('[!] '+G+ color.BOLD+'Awesome !!! Now drift ahead...' + color.END)
 		time.sleep(3)
-		FILE = open("agree.txt","w")
+		FILE = open("agree","w")
 		FILE.write('yes')
 		FILE.close()
-	    elif agree == "y":
+	    elif a1 == "y":
 		print ('[!] '+G+ color.BOLD+'Awesome !!! Now drift ahead...' + color.END)
 		time.sleep(3)
-		FILE = open("agree.txt","w")
+		FILE = open("agree","w")
 		FILE.write('yes')
 		FILE.close()
-	    elif agree == "Y":
+	    elif a1 == "Y":
 		print ('[!] '+G+ color.BOLD+'Awesome !!! Now Drift Ahead...' + color.END)
 		time.sleep(3)
-		FILE = open("agree.txt","w")
+		FILE = open("agree","w")
 		FILE.write('yes')
 		FILE.close()
 	    else:

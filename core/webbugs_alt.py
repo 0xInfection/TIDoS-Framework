@@ -22,6 +22,7 @@ from cloudflare import *
 from headers import *
 from colors import *
 from xsstrace import *
+from mailspoof import *
 from cookiecheck import * 
 
 def webbugs_alt(web):
@@ -78,6 +79,12 @@ def webbugs_alt(web):
 	webbugs_alt(web)
 	time.sleep(1)
 
+    elif v == '11':
+	print B+' [!] Type Selected :'+C+' Email Spoof'
+	mailspoof(web)	
+	webbugs(web)
+	time.sleep(1)
+
     elif v == '9':
 	print B+' [!] Type Selected :'+C+' Telnet Enabled'
 	netmisc(web)	
@@ -123,6 +130,11 @@ def webbugs_alt(web):
 	cloudflare(web)
 	print B+'\n [!] Module Completed -->'+C+' Cloudflare Misconfig.\n'
 	time.sleep(1)
+
+	print B+' [*] Firing up module -->'+C+' Mail Spoofing'
+	mailspoof(web)
+	print B+'\n [!] Module Completed -->'+C+' Mail Spoofing\n'
+	time.sleep(0.5)
 
 	print B+' [*] Firing up module -->'+C+' Cross Site Tracing'
 	xsstrace(web)

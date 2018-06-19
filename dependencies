@@ -19,6 +19,7 @@ if ! hash build-essential 2>/dev/null; then sudo apt-get install --yes build-ess
 if ! hash python-pip 2>/dev/null; then sudo apt-get install --yes python-pip ; fi
 if ! hash python-mysqldb 2>/dev/null; then sudo apt-get install --yes python-mysqldb ; fi
 pip install sslscan
+pip install emailprotectionslib
 
 DIR=$(dirname $0)
 

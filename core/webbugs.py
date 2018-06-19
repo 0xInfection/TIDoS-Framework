@@ -23,7 +23,8 @@ from hsts import *
 from headers import *
 from colors import *
 from xsstrace import *
-from cookiecheck import * 
+from cookiecheck import *
+from mailspoof import *
 
 def webbugs(web):
 
@@ -91,6 +92,12 @@ def webbugs(web):
 	webbugs(web)
 	time.sleep(1)
 
+    elif v == '11':
+	print B+' [!] Type Selected :'+C+' Email Spoof'
+	mailspoof(web)	
+	webbugs(web)
+	time.sleep(1)
+
 
     elif v == 'A':
 	print B+' [!] Type Selected : All Modules'
@@ -130,6 +137,11 @@ def webbugs(web):
 	cloudflare(web)
 	print B+'\n [!] Module Completed -->'+C+' Cloudflare Misconfig.\n'
 	time.sleep(1)
+
+	print B+' [*] Firing up module -->'+C+' Mail Spoofing'
+	mailspoof(web)
+	print B+'\n [!] Module Completed -->'+C+' Mail Spoofing\n'
+	time.sleep(0.5)
 
 	print B+' [*] Firing up module -->'+C+' HSTS Checker'
 	hsts(web)
