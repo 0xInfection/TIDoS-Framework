@@ -67,7 +67,7 @@ TIDoS Framework presently supports the following:
 	    - Google Dorking (multiple modules) `automated`
 
 	+ Active Reconnaissance
-	    - HPing3 enumeration `(automated)`
+	    - HPing3 enumeration `(under dev)`
 	    - CMS Detection `(185+ CMSs supported)`
 	    - Advanced Traceroute `IMPROVED`
 	    - Grab HTTP Headers
@@ -96,6 +96,7 @@ TIDoS Framework presently supports the following:
 	    - XMAS Flag Scan 
 	    - Fin Flag Scan
 	    - Service Detector
+	+ Interactive Scanning with NMap `16 modules`
 	+ Crawlers
 	    - Depth 1
 	    - Depth 2 `IMPROVED`
