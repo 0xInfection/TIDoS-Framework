@@ -187,7 +187,7 @@ def brute0x00(web):
 			if c == '200' or c == '302' or c == '300':
 				print G+' [+] Possible RFi at : '+O+web0x00+G+' (200)'
 			elif c == '404':
-				print B+' [*] Checking dir : '+C+web0x00+R+' (404)
+				print B+' [*] Checking dir : '+C+web0x00+R+' (404)'
 			else:
 				print O+' [*] Interesting response : '+GR+web0x00+O+' ('+c+')'
     except Exception as e:

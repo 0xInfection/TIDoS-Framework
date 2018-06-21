@@ -148,7 +148,7 @@ def crlf(web):
 			print B+' [+] Using !nfected Url : '+GR+str(web0x00) 
 			p = getHeaders0x00(web0x00, gen_headers)
 			check0x00(p, pay)
-	except Exception as e;
+	except Exception as e:
 		print R+' [-] Unexpected Exception Encountered!'
 		print R+' [-] Exception : '+str(e)
 	print G+' [+] CRLF Module Completed!'

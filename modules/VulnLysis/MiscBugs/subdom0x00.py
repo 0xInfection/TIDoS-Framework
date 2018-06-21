@@ -40,7 +40,8 @@ def subdombrute(web):
 			print R+' [-] Wordlist not found!'
 	    else:
 		pass
-	
+	except Exception as f:
+		print R+' [-] Exception : '+str(f)
 
 	global found
 	if 'http://' in web:
