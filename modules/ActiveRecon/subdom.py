@@ -11,14 +11,10 @@
 
 import time
 import os
-import re
 import sys
 import tld
-import socket
 import requests
-sys.path.append('files/')
 from time import sleep
-from bs4 import BeautifulSoup
 from tld import get_tld
 from colors import *
 
@@ -31,7 +27,7 @@ def subdombrute(web):
 
 	try:
 	    print GR+' [*] Importing wordlist path to be bruteforced... "files/subdomains.lst"'
-	    with open('files/subdomains.lst','r') as lol:
+	    with open('files/fuzz-db/subdomain_paths.lst','r') as lol:
 		for path in lol:
 		    a = path.replace("\n","")
 		    sublist.append(a)
@@ -70,7 +66,7 @@ def subdombrute(web):
 		    pass
 		try:
 		    ip = socket.gethostbyname(url)
-		    print G+'\n [!] Subdomain Found : '+O+url+P+' ['+str(ip)+']'
+		    print G+'\n [+] Subdomain Found : '+O+url+P+' ['+str(ip)+']'
 		    found.append(url)
 		except:
 		    sys.stdout.write(B+'\r [*] Checking : '+C+url)
@@ -96,7 +92,7 @@ def outer(web):
 	    print G + result
 	    mopo = result.splitlines()
 	    for mo in mopo:
-		ro = mo.partition(',')[0]
+		ro = mo.split(',')[0]
 		final.append(str(ro))
 
 def report(web, found, final):
@@ -127,7 +123,7 @@ def subdom(web):
 		web = web.replace('http://','')
 		web = web.replace('https://','')
 
-	fileo = web+'-subdomains.lst'
+	fileo = 'tmp/'+web+'-subdomains.lst'
 	p = open(fileo,'w+')
 	p.close
 	print R+'\n   ====================================='
@@ -149,5 +145,4 @@ def subdom(web):
 		miv.write(vul)
 		miv.close()
 	print G+' [+] Done!'
-
 
