@@ -28,14 +28,19 @@ total = []
 def subdombrute(web):
 
 	try:
-	    print GR+' [*] Importing wordlist path to be bruteforced... "files/subdomains.lst"'
-	    with open('files/subdomains.lst','r') as lol:
-		for path in lol:
-		    a = path.replace("\n","")
-		    sublist.append(a)
+	    if os.path.exists(fileo) == False:
+		    try:
+			    print GR+' [*] Importing wordlist path to be bruteforced... "files/subdomains.lst"'
+			    with open('files/fuzz-db/subdomain_paths.lst','r') as lol:
+				for path in lol:
+				    a = path.replace("\n","")
+				    sublist.append(a)
 
-	except IOError:
-	    print R+' [-] Wordlist not found!'
+		    except IOError:
+			print R+' [-] Wordlist not found!'
+	    else:
+		pass
+	
 
 	global found
 	if 'http://' in web:
@@ -94,7 +99,7 @@ def outer(web):
 	    print G + result
 	    mopo = result.splitlines()
 	    for mo in mopo:
-		ro = mo.partition(',')[0]
+		ro = mo.split(',')[0]
 		final.append(str(ro))
 
 def report(web, found, final):
@@ -122,10 +127,10 @@ def subdom0x00(web):
     global fileo
 
     if 'http' in web:
-		web = web.replace('http://','')
-		web = web.replace('https://','')
+		web = web.strip('http://')
+		web = web.strip('https://')
     try:
-	fileo = web+'-subdomains.lst'
+	fileo = 'tmp/'+web+'-subdomains.lst'
 	p = open(fileo,'w+')
 	p.close
 	print R+'\n    S U B D O M A I N   G A T H E R E R'
