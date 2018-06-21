@@ -98,7 +98,7 @@ def install():
 		os.system('mkdir -v -p /opt/tidos-framework')
 		print GR+'Copying new files...'+O+''
 		time.sleep(0.5)
-		os.system('cp -r * /opt/tidos-framework/')
+		os.system('cp -r -v * /opt/tidos-framework/')
 		print GR+'Creating shortcuts...'+O+''
 		time.sleep(0.5)
 		os.system('cp -v runon.sh /usr/bin/tidos')
