@@ -1,0 +1,24 @@
+Metadata-Version: 1.1
+Name: google
+Version: 2.0.1
+Summary: Python bindings to the Google search engine.
+Home-page: http://breakingcode.wordpress.com/
+Author: Mario Vilas
+Author-email: mvilas@gmail.com
+License: UNKNOWN
+Description: googlesearch
+        ============
+        
+        Google search from Python.
+        
+        https://breakingcode.wordpress.com/2010/06/29/google-search-python/
+        
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Environment :: Console
+Classifier: Programming Language :: Python
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires: beautifulsoup4
+Provides: googlesearch

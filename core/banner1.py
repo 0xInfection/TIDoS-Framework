@@ -28,5 +28,5 @@ def banner1():
 	print ''
 	print ''+B+'             Welcome to '+C+'The-TIDoS-Framework (TTF)'
 	sleep(0.2)
-	print ''+GR+'      The TIDoS Framework is a project by '+O+'Team CodeSploit \n'
+	print ''+GR+'      The TIDoS Framework is a project by '+R+'Team CodeSploit \n'
 

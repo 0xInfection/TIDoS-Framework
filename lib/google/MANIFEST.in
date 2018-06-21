@@ -1,0 +1,5 @@
+include README.md
+include MANIFEST.in
+include setup.py
+include scripts/google
+include requirements.txt

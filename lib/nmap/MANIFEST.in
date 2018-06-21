@@ -1,0 +1,6 @@
+include *.txt
+include CHANGELOG
+include Makefile
+include nmap.html
+include MANIFEST.in
+include example.py

@@ -1,0 +1,12 @@
+MANIFEST.in
+README.md
+requirements.txt
+setup.cfg
+setup.py
+google.egg-info/PKG-INFO
+google.egg-info/SOURCES.txt
+google.egg-info/dependency_links.txt
+google.egg-info/requires.txt
+google.egg-info/top_level.txt
+googlesearch/__init__.py
+scripts/google

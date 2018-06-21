@@ -18,7 +18,6 @@ import time
 import scapy
 import atexit
 from os import path
-from json import dumps, loads
 from scapy.all import *
 from time import sleep
 from subprocess import call
@@ -30,7 +29,7 @@ getLogger("scapy.runtime").setLevel(ERROR)
 try:
 	agree()
 	loadstyle()
-	#tid()
+	tid()
 	banner()
 	banner1()
 	web = inputin()

@@ -1,4 +1,5 @@
 #!/usr/bin/env python2
+# -*- coding: utf-8 -*-
 
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 #    TIDoS Framework     #
@@ -18,12 +19,14 @@ def agreement():
 
 	I was developed by \033[1;33mPinaxx Robinson\033[1;37m, known by the name \033[1;36m@_tID\033[1;37m aka \033[1;36mThe Infected Drake\033[1;37m of \033[1;33mTeam CodeSploit.\033[1;37m
 
-	This is to make you note that I was purely developed for Penetration Testing purposes. The developer is not responsible for any damage or data loss due to my misuse. If you intend to use me for any malicious purposes, use it at your own risk, coz I am dangerous... ;)
+	This is to make you note that I was purely developed for Penetration Testing purposes. The developer is not responsible for any damage or data loss due to my misuse. If you intend to use me for any malicious purposes, use it at your own risk... ;)
 
-	Also by using this tool, you agree to be a awesome person. Try to help others, strive not being a scriptkid, speak fairly to everyone, offer free hugs to everyone (provided the other person agrees in a mutual hug, don't FORCE xD), and never underestimate anyone.
+	Also by using this tool, you agree to be a awesome person. Try to help others, and do not pollute the community with unwanted stuff. 
 
 	You can edit these scripts within me as per your own needs, provided you use it only for yourself. If u wanna publish me again in a reformed appearance, give the developer some credits... :)
 
-	And yeah, NO COMMERCIAL USE! \033[0m
+	And yeah, NO COMMERCIAL USE! \033[1;91m
+
+	P.S. - If you find any bugs with this tool, report it.
 
 """

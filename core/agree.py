@@ -21,30 +21,19 @@ def agree():
 	if str(platform.system()) != "Linux":
 	    sys.exit(""+R+"[!] " + color.UNDERLINE + "\033[91m" + "You are not using a Linux Based OS! Linux is a must-have for this script!" + color.END)
 	if not os.geteuid() == 0:
-	    sys.exit(""+R+"[!] " + color.UNDERLINE + "\033[91m" + "Must be run as root. :) " + color.END)
+	    sys.exit("[!] " + color.UNDERLINE + "\033[91m" + "Must be run as root. :) " + color.END)
 	if 'no' in open('agree').read():
 	    agreement()
 
-	    a1 = raw_input(''+G+color.BOLD+ 'Do you agree to these terms and conditions? :> ' + color.END)
-	    if a1 == "yes":
-		print ('[!] '+G+ color.BOLD+'Awesome !!! Now drift ahead...' + color.END)
+	    a1 = raw_input(O+' [0x00] '+G+'Do you agree to these terms and conditions? :> '+C)
+	    if a1 == "yes" or a1 == 'y' or a1 == 'Y' or a1 == 'Yes' or a1 == 'yo' or a1 == 'YES' or a1 == 'yep' or a1 == 'Yep' or a1 == 'YEP':
+		print G+' [0x01] '+O+'Thats awesome! Move on...'
 		time.sleep(3)
 		FILE = open("agree","w")
 		FILE.write('yes')
 		FILE.close()
-	    elif a1 == "y":
-		print ('[!] '+G+ color.BOLD+'Awesome !!! Now drift ahead...' + color.END)
-		time.sleep(3)
-		FILE = open("agree","w")
-		FILE.write('yes')
-		FILE.close()
-	    elif a1 == "Y":
-		print ('[!] '+G+ color.BOLD+'Awesome !!! Now Drift Ahead...' + color.END)
-		time.sleep(3)
-		FILE = open("agree","w")
-		FILE.write('yes')
-		FILE.close()
+
 	    else:
-		print (''+R+color.BOLD+'[!] You have to agree!' + color.END)
+		print O+' [0x0F] '+R+'You have to agree!'
 		time.sleep(1)
-		sys.exit()
+		sys.exit(0)
