@@ -31,7 +31,7 @@ def scanner0x00(website0, gen_headers):
 	fname = raw_input(O+" [*] Custom filepath (press Enter for default) :> ")
 	if fname == '':
 		print GR+' [*] Using default filepath...'
-		fname = filecheck0x00('files/lfi_paths.lst')
+		fname = filecheck0x00('files/fuzz-db/lfi_paths.lst')
 	else:
 		fname = filecheck0x00(fname)
 
@@ -51,6 +51,7 @@ def scanner0x00(website0, gen_headers):
 	    print G+' [+] Code obtained : '+content
 
 	    if(req.status_code == 200):
+		# took some help from lfisuite
 	        if ("[<a href='function.main'>function.main</a>" not in content
 	        	and "[<a href='function.include'>function.include</a>" not in content
 	        	and ("Failed opening" not in content and "for inclusion" not in content)
@@ -62,7 +63,7 @@ def scanner0x00(website0, gen_headers):
 	            or "users:x" in content or ("GET /" in content and ("HTTP/1.1" in content or "HTTP/1.0" in content))
 	            or "apache_port=" in content or "cpanel/logs/access" in content or "allow_login_autocomplete" in content
 	            or "database_prefix=" in content or "emailusersbandwidth" in content or "adminuser=" in content
-		    or 'daemon:x:' in content or 'bin:x:2:' in content or 'mail:x:' in content or 'user:x:' in content
+		    or 'daemon:x:' in content or 'bin:x:' in content or 'mail:x:' in content or 'user:x:' in content
 	            or ("error]" in content and "[client" in content and "log" in website)
 	            or ("[error] [client" in content and "File does not exist:" in content and "proc/self/fd/" in website)
 	            or ("State: R (running)" in content and ("Tgid:" in content or "TracerPid:" in content or "Uid:" in content)

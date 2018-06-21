@@ -77,13 +77,13 @@ def RCEfunction(url):
 
 def rce(web):
 
-	web0 = raw_input(O+' [#] Enter point scope path parameter (eg. /ping.php?site=foo) :> ')
+	web0 = raw_input(O+' [#] Scope path parameter (eg. /ping.php?site=foo) :> ')
 	if "?" in web0 and '=' in web0:
 		if web0.startswith('/'):
-			m = raw_input(GR+'\n [!] Your path starts with "/".\n [#] Do you mean root directory? (y/n) :> ')
-			if m == 'y':
+			m = raw_input(GR+'\n [!] Your path starts with "/".\n [#] Do you mean root directory? (Y/n) :> ')
+			if m == 'y' or m == 'Y':
 				web00 = web + web0
-			elif m == 'n':
+			elif m == 'n' or m == 'N':
 				web00 = web + web0
 			else:
 				print R+' [-] U mad?'

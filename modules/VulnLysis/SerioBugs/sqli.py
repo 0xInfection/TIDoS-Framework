@@ -97,7 +97,7 @@ def manual0x00(web):
 	print R+'\n    ========================'
 	print R+'     S Q L i  (Manual Mode)'
 	print R+'    ========================\n'
-	bug = raw_input(' [#] Enter the scope parameter path (eg. /open/fetch.php?id=x) :> ')
+	bug = raw_input(' [#] Enter the scope parameter path (eg. /sqli/fetch.php?id=x) :> ')
 	bugs = web + bug
 	print O+' [!] Using Url : '+GR+bugs
 	if '?' in str(bugs) and '=' in str(bugs):
@@ -128,7 +128,7 @@ def sqli(web):
 	print GR+' [*] Importing error parameters...'
 	sleep(0.8)
 	try:
-		with open('files/sql_payloads.lst' ,'r') as payloads:
+		with open('files/payload-db/sql_payloads.lst','r') as payloads:
 			for payload in payloads:
 				payload = payload.replace('\n','')
 				pay.append(payload)

