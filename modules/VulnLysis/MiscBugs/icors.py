@@ -31,7 +31,7 @@ def check0x00(url):
 	if acao:
 
 	    if (acao == "no_acac" or "*" == acao): 
-		print O+'\n [*] Access Control Allow Origin present (Without Credentials)...'
+		print O+'\n [+] Access Control Allow Origin present (Without Credentials)...'
 	    elif acao == "*": 
 		print O+' [!] Access Control Allow Origin present (point blank)...'
 	    elif acao in ["//", "://"]: 
@@ -101,4 +101,4 @@ def icors(web):
 	print R+'    =========================================\n'
 
 	check0x00(web)
-
+	time.sleep(1)

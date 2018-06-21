@@ -28,7 +28,9 @@ total = []
 def subdombrute(web):
 
 	try:
-	    if os.path.exists(fileo) == False:
+	    if os.path.exists(fileo):
+		pass
+	    else:
 		    try:
 			    print GR+' [*] Importing wordlist path to be bruteforced... "files/subdomains.lst"'
 			    with open('files/fuzz-db/subdomain_paths.lst','r') as lol:
@@ -38,8 +40,7 @@ def subdombrute(web):
 
 		    except IOError:
 			print R+' [-] Wordlist not found!'
-	    else:
-		pass
+
 	except Exception as f:
 		print R+' [-] Exception : '+str(f)
 
@@ -50,10 +51,6 @@ def subdombrute(web):
 		web = web.replace('https://','')
 	else:
 		pass
-
-	web = 'http://' + web
-
-	tld0 = get_tld(web, as_object=True)
 
 	if len(sublist) > 0:
 	    for m in sublist: 
@@ -79,6 +76,9 @@ def subdombrute(web):
 		except:
 		    sys.stdout.write(B+'\r [*] Checking : '+C+url)
 		    sys.stdout.flush()
+	else:
+		print R+' [-] No wordlist found under tmp/.'
+		print R+' [-] Fatal Exception!'
 	return found
 
 def outer(web):
@@ -101,6 +101,7 @@ def outer(web):
 	    mopo = result.splitlines()
 	    for mo in mopo:
 		ro = mo.split(',')[0]
+		print G+' [+] Reveived : '+ro
 		final.append(str(ro))
 
 def report(web, found, final):
