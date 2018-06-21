@@ -8,9 +8,10 @@
 #Author : @_tID
 #This module requires TIDoS Framework
 #https://github.com/the-Infected-Drake/TIDoS-Framework 
-
-import google
-from google import search
+try:
+    from google import search
+except IOError:
+    from googlesearch import search
 import os
 import time
 import urllib2
