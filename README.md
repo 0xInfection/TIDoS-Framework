@@ -144,6 +144,10 @@ TIDoS Framework presently supports the following:
 	    - SSH Bruteforce
 	    - POP 2/3 Bruteforce
 	    - SQL Bruteforce
+	    - XMPP Bruteforce
+	    - SMTP Bruteforce
+	    - TELNET Bruteforce
+	    
 	+ String & Payload Encoder
 	    - URL Encode
 	    - Base64 Encode
