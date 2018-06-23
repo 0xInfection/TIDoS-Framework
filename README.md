@@ -12,7 +12,7 @@ The main highlights of this framework is:
 - [x] Reconnaissance Phase has 26 modules of its own (including active, passive and information disclosure modules).
 - [x] Scanning & Enumeration Phase has got 12 modules (including port scans, WAF analysis, etc)
 - [x] Vulnerability Analysis Phase has 32 modules (including most common vulnerabilites in action.
-- [x] Exploitation Phase has only 1 exploit. `(thats in alpha phase)`
+- [x] Exploits Castle has only 1 exploit. `(thats in alpha phase)`
 - [x] All four phases each have a auto-awesome module which automates every module for you.
 - [x] You just need the domain, and leave everything is to this tool.
 - [x] TIDoS has full verbose out support, so you'll know whats going on.
