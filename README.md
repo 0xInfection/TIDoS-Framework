@@ -9,7 +9,7 @@ TIDoS Framework is a comprehensive web application audit framework with some ser
 The main highlights of this framework is:
 - [x] Basic first release (but huge).
 - [x] Has 4 main phases, subdivided into __13 sub-phases__ containing total of __73 modules__.
-- [x] Reconnaissance Phase has 26 modules of its own (including active, passive and information disclosure modules).
+- [x] Reconnaissance Phase has 26 modules of its own (including active reconnaissance, passive reconnaissance and information disclosure modules).
 - [x] Scanning & Enumeration Phase has got 12 modules (including port scans, WAF analysis, etc)
 - [x] Vulnerability Analysis Phase has 32 modules (including most common vulnerabilites in action.
 - [x] Exploits Castle has only 1 exploit. `(thats in alpha phase)`
