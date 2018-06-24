@@ -171,7 +171,7 @@ This version of TIDoS is purely developmental `beta`. There are bugs in resolvin
 
 This project is one of the best frameworks I have ever built and I would really like your constructive criticism, suggestions and help in converting this project into the best web penetration testing framework ever built `and it will be ;)`.
 
-> Thank you
+> Thank you,
 >
 > ✎ @_tID | Codesploit
 
