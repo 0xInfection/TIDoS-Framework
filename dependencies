@@ -5,11 +5,11 @@
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 
 #This module requires TIDoS Framework
-#https://github.com/the-Infected-Drake/TIDoS-Framework 
+#https://github.com/the-Infected-Drake/TIDoS
 
-#please update ur distro after of the installation. 
+# Update ur distro after of the installation.
 
-# USE 
+# USE
 # sudo apt-get update
 # sudo apt-get upgrade
 
@@ -42,7 +42,7 @@ sudo python setup.py install
 cd ..
 cd ..
 
-cd lib/nmap/
+cd lib/pynmap/
 sudo python setup.py install
 cd ..
 cd ..

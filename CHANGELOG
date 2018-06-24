@@ -1,0 +1,67 @@
+
+  ===============================
+   T I D o S   F R A M E W O R K
+  ===============================
+
+  ============
+   Changelog:
+  ============
+  
+   * v0.1.0
+
+	Just an init to this repository. A long way to go.
+	
+	Changelog:
+	This release features:
+	
+	- fl00d - A UDP Flooder (basic).
+	- gsearch - A google searching facility via console.
+	- info - A module that displays info about your network.
+	- webex - A module for determining website status.
+
+   * v0.1.1
+
+	Small improvements in code. Added a new module.
+	
+	Changelog:
+	This release features a new module.
+	
+	- piweb - For pinging websites.
+	- Separate bug fixes.
+
+   * v0.1.2
+
+	Added some serious bug fixes occurring at setup.py. That was real quick.
+	
+	Changelog:
+	- This feature includes just some small bug fixes.
+	- Addition of setup.py file.
+
+   * v1.0.0
+
+	A comprehensive penetration testing toolkit framework ready. Now on the way to be the best framework ever released.
+	
+	Changelog:
+	- The biggest release till now.
+	- Total modules now comprise of 73 modules.
+	- Complete change of interface for easy interactions.
+	- This is something real. *fire*
+
+   * v1.1.0
+
+	Small minor additions to the framework.
+	
+	Changelog:
+	- Huge bug fixes.
+	- Addition of CRLF to VulnLysis
+	- Proper configuration of the payload database.
+
+   * v1.1.1 (latest release) [#stable]
+
+	Addition of modules + bug fixes.
+	
+	Changelog:
+	- Added 3 more brutemods_ modules.
+	- Bug fix to the main modules.
+	- Brute database updated with more default protocol changes.
+	- Addition of pre-config. database.
