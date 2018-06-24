@@ -18,15 +18,15 @@ The main highlights of this framework is:
 - [x] TIDoS has full verbose out support, so you'll know whats going on.
 - [x] User friendly interaction environment. `(no real shits)`
 
-`Note:` For more info on various modules please refer to the [wiki](https://github.com/theinfecteddrake/TIDOS-Framework/wiki).
+`Note:` For more info on various modules please refer to the [wiki](https://github.com/theinfecteddrake/tidos/wiki).
 
 <img src='https://i.imgur.com/ZhBUrDB.png' />
 
 ### Installing TIDoS :-
 * Clone the repository locally and navigate there:
 ```
-git clone https://github.com/theinfecteddrake/tidos-framework.git
-cd tidos-framework
+git clone https://github.com/theinfecteddrake/tidos.git
+cd tidos
 ```
 * Install the dependencies:
 ```
@@ -54,6 +54,7 @@ As the framework opens up, enter the website name `eg. http://www.example.com` a
 TIDoS Framework presently supports the following:
 
 * __Reconnaissance + OSINT__
+
 	+ Passive Reconnaissance:
 	    - Ping/Nping Enumeration
 	    - WhoIS Lookup
@@ -173,4 +174,4 @@ This project is one of the best frameworks I have ever built and I would really 
 > Thank you
 >
 > ✎ @_tID_
-> ([Team CodeSploit](https://www.facebook.com/codesploit))
+> Team CodeSploit
