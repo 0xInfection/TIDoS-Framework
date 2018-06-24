@@ -10,7 +10,7 @@
 #https://github.com/the-Infected-Drake/TIDoS-Framework 
 try:
     from google import search
-except IOError:
+except:
     from googlesearch import search
 import os
 import time
