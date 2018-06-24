@@ -173,5 +173,5 @@ This project is one of the best frameworks I have ever built and I would really 
 
 > Thank you
 >
-> ✎ @_tID_ | Codesploit
+> ✎ @_tID | Codesploit
 
