@@ -18,6 +18,8 @@ if ! hash nmap 2>/dev/null; then sudo apt-get install --yes nmap ; fi
 if ! hash build-essential 2>/dev/null; then sudo apt-get install --yes build-essential ; fi
 if ! hash python-pip 2>/dev/null; then sudo apt-get install --yes python-pip ; fi
 pip install sslscan
+pip install tld
+pip install emailprotectionslib
 
 DIR=$(dirname $0)
 
