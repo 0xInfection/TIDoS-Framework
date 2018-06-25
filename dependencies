@@ -20,6 +20,7 @@ if ! hash python-pip 2>/dev/null; then sudo apt-get install --yes python-pip ; f
 pip install sslscan
 pip install tld
 pip install emailprotectionslib
+pip install requests
 
 DIR=$(dirname $0)
 
