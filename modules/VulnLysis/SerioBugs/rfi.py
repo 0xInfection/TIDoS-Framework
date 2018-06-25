@@ -13,9 +13,9 @@ import os
 import sys
 import requests
 import time
-try:
-    from google import search
-except:
+
+from googlesearch import search
+
 	
 import urllib2
 from random import randint
