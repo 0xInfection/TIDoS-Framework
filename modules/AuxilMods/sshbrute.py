@@ -62,4 +62,4 @@ def sshbrute(web):
 	    print R+' [-] Target seems to be down!'
 
 
-sshbrute(web)
+
