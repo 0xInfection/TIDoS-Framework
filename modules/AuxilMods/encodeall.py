@@ -74,7 +74,7 @@ def gzip0x00(st):
 	
 
 def encodeall():
-
+    try:
 	print R+'\n    ============================='
 	print R+'     S T R I N G   E N C O D E R'
 	print R+'    =============================\n'
@@ -125,4 +125,5 @@ def encodeall():
 			gzip0x00(st)
 			time.sleep(2)
 			encode0x00(st)
-
+    except Exception as e:
+        print R+" [-] Caught Exception : "+str(e)
