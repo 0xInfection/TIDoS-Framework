@@ -60,6 +60,6 @@ def sshbrute(web):
 
 	except:
 	    print R+' [-] Target seems to be down!'
-
+        print G+" [+] Done!"
 
 
