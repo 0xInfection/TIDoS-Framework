@@ -13,8 +13,10 @@ import os
 import sys
 import requests
 import time
-import google
-from google import search
+try:
+    from google import search
+except:
+	
 import urllib2
 from random import randint
 from time import sleep
