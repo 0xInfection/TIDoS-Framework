@@ -22,6 +22,7 @@ pip install sslscan
 pip install tld
 pip install emailprotectionslib
 pip install requests
+pip install pexpect
 
 DIR=$(dirname $0)
 
