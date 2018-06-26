@@ -211,7 +211,7 @@ def dmCheck0x00(domain):
 
     return dmVal
 
-def spoofmail(web):
+def mailspoof(web):
 
     print GR+' [*] Loading module...'
     time.sleep(0.5)

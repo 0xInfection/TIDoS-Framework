@@ -72,7 +72,7 @@ def sca_alt(web):
 	time.sleep(1)
 
 	print B+' [*] Firing up module -->'+C+' Crawlers'
-	crawlers(web)
+	crawlers_hunt(web)
 	print B+' [!] Module Completed -->'+C+' Crawlers\n'
 	time.sleep(0.5)
 	print G+' [+] All modules successfully completed!'

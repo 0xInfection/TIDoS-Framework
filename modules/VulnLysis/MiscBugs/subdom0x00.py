@@ -28,18 +28,14 @@ total = []
 def subdombrute(web):
 
 	try:
-	    if os.path.exists(fileo):
-		pass
-	    else:
-		    try:
-			    print GR+' [*] Importing wordlist path to be bruteforced... "files/subdomains.lst"'
-			    with open('files/fuzz-db/subdomain_paths.lst','r') as lol:
-				for path in lol:
-				    a = path.replace("\n","")
-				    sublist.append(a)
-
-		    except IOError:
-			print R+' [-] Wordlist not found!'
+	    try:
+		    print GR+' [*] Importing wordlist path to be bruteforced... "files/subdomains.lst"'
+		    with open('files/fuzz-db/subdomain_paths.lst','r') as lol:
+			for path in lol:
+			    a = path.strip("\n")
+			    sublist.append(a)
+	    except IOError:
+		print R+' [-] Wordlist not found!'
 
 	except Exception as f:
 		print R+' [-] Exception : '+str(f)
@@ -54,7 +50,7 @@ def subdombrute(web):
 
 	if len(sublist) > 0:
 	    for m in sublist: 
-		furl = str(m) + '.' + str(tld0)
+		furl = str(m) + '.' + str(web)
 		flist.append(furl)
 
         if flist:

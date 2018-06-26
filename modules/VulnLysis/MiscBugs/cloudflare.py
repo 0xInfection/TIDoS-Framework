@@ -36,8 +36,11 @@ br.addheaders = [
 
 def cloud0x00(web):
 
-	print R+'\n    D E T E C T   S E R V E R'
-	print R+'   ===========================\n'
+	web = web.strip('https://')
+	web = web.strip('http://')
+	print R+'\n   ========================================='
+	print R+'    C L O U D F L A R E   M I S C O N F I G.'
+	print R+'   =========================================\n'
 	time.sleep(0.4)
 	print GR+' [*] Checking server status...'
 	try:
@@ -73,7 +76,7 @@ def cloud0x00(web):
 	    else:
 		print R+' [-] Website does not seem to be a part of Cloudflare Network...' 
 	except:
-	    print R+' [-] Failed to identify server. Some error occured!'
+	    print R+' [-] Failed to identify server.\n [-] Some error occured!'
 	    pass
 
 def bypass(domain):

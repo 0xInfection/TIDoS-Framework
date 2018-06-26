@@ -28,7 +28,6 @@ def geoIP(web):
     domains = socket.gethostbyname(web)
     text = requests.get('http://api.hackertarget.com/geoip/?q=' + domains).text
     result = str(text)
-    print("\n"+G+ color.BOLD + result)
     if 'error' not in result and 'invalid' not in result:
 	res = result.splitlines()
 	for r in res:
