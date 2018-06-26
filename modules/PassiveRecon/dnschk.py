@@ -40,14 +40,13 @@ def dnschk(domain):
     print(G+"\n [+] Host Records (A)")
     for entry in res['dns_records']['host']:
         if entry['reverse_dns']:
-            print(
-                (''+O+"{domain} ({reverse_dns}) ({ip}) {as} {provider} {country}".format(**entry)))
+            print((O+"{domain} ({reverse_dns}) ({ip}) {as} {provider} {country}".format(**entry)))
         else:
-            print(''+O+("{domain} ({ip}) {as} {provider} {country}".format(**entry)))
+            print(O+("{domain} ({ip}) {as} {provider} {country}".format(**entry)))
     print(G+'\n [+] TXT Records:')
     for entry in res['dns_records']['txt']:
         print(''+O+entry)
-    print GR+' [*] Preparing DNS Map...'
+    print GR+'\n [*] Preparing DNS Map...'
     time.sleep(0.5)
     url = 'https://dnsdumpster.com/static/map/' + str(domain) + '.png'
     print GR+' [!] Fetching map...'

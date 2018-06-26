@@ -23,14 +23,16 @@ def revip(web):
     time.sleep(0.4)
     print('' + GR + color.BOLD + ' [!] Looking Up for Reverse IP Info...')
     time.sleep(0.4)
-    print(""+ GR + color.BOLD + " [~] Result: "+ color.END)
+    print(""+ GR + color.BOLD + " [~] Result : \n"+ color.END)
     domains = [web]
     for dom in domains:
         text = requests.get('http://api.hackertarget.com/reverseiplookup/?q=' + dom).text
 	result = str(text)
-	print "\n"+G+ color.BOLD + result
+	res = result.splitlines()
 	if 'error' not in result:
-		print G+ result
-	else:
+	    for r in res:
+		print O+' [+] Site :> '+G+r
+
+	elif 'error' in result:
 		print R+' [-] Outbound Query Exception!'
 		time.sleep(0.8)

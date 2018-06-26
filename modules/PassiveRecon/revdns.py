@@ -28,9 +28,10 @@ def revdns(web):
     for dom in domains:
         text = requests.get('http://api.hackertarget.com/reversedns/?q=' + dom).text
 	result = str(text)
-	print(""+G+ color.BOLD + result)
 	if 'error' not in result:
 		print G+ result
+	elif 'No results found' in result:
+		print R+' [-] No result found!'
 	else:
 		print R+' [-] Outbound Query Exception!'
 		time.sleep(0.8)

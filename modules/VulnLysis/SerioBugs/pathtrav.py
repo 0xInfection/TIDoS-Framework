@@ -157,5 +157,3 @@ def pathtrav(web):
 		print R+' [-] Exception encountered during processing...'
 		print R+' [-] Error : '+str(e)
 
-web = 'https://github.com'
-pathtrav(web)

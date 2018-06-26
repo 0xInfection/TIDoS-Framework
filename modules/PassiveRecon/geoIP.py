@@ -24,13 +24,17 @@ def geoIP(web):
     time.sleep(0.4)
     print('' + GR + color.BOLD + ' [!] Looking Up for WhoIS Information...')
     time.sleep(0.4)
-    print(""+ GR + color.BOLD + " [~] Result: "+ color.END)
+    print(""+ GR + color.BOLD + " [~] Found GeoIp Location: "+ color.END)
     domains = socket.gethostbyname(web)
     text = requests.get('http://api.hackertarget.com/geoip/?q=' + domains).text
     result = str(text)
     print("\n"+G+ color.BOLD + result)
-    if 'error' not in result:
-	print G+ result
+    if 'error' not in result and 'invalid' not in result:
+	res = result.splitlines()
+	for r in res:
+		print G+' ' + r
+		time.sleep(0.1)
+
     else:
 	print R+' [-] Outbound Query Exception!'
 	time.sleep(0.8)

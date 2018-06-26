@@ -41,7 +41,7 @@ def googledorker(web):
 	print O+' [-] Warning! You may get a captcha if you are being too frequent...'
 	print GR+' [*] Initializing google dorking...'
 	print (C+" [*] Finding Login Pages for "+site+"...\n")
-	google_it (site,"site:"+site+" inurl:wp- OR inurl:login OR inurl:signin OR inurl:sign-in OR inurl:sign_in")
+	google_it (site,"site:"+site+" inurl:wp- OR inurl:login OR inurl:signin OR inurl:checkin")
 	print O+' [!] Pausing to avoid captcha...'
 	sleep(randint(20,50))
 	print (C+" [*] Finding Subdomains for "+site+"...\n")
