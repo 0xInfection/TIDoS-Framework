@@ -16,8 +16,8 @@ from colors import *
 def piwebenum(web):
 
     time.sleep(0.4)
-    d = web.strip('http://')
-    d = web.strip('https://')
+    d = web.replace('http://','')
+    d = web.replace('https://','')
     print R+'\n   ============================================='
     print R+'    P I N G / N P I N G   E N U M E R A T I O N'
     print R+'   =============================================\n'
