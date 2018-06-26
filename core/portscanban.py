@@ -21,19 +21,19 @@ def portscanban():
 	sleep(0.1)
 	print B+"     [1]"+C+" A Simple Port Scan"
 	sleep(0.1)
-	print B+"     [2]"+C+" A TCP Connect Scan"
+	print B+"     [2]"+C+" A TCP Connect Scan"+G+' (Highly Reliable)'
 	sleep(0.1)
 #	print B+"     [3]"+C+" A TCP-ACK Scan"
 #	sleep(0.1)
-	print B+"     [4]"+C+" A TCP Stealth Scan"
+	print B+"     [4]"+C+" A TCP Stealth Scan"+G+' (Highly Reliable)'
 	sleep(0.1)
 #	print B+"     [5]"+C+" A UDP Scan"
 #	sleep(0.1)
-	print B+"     [6]"+C+" A XMAS Scan"
+	print B+"     [6]"+C+" A XMAS Flag Scan "+R+"(Reliable only in LANs)"
 	sleep(0.1)
 #	print B+"     [7]"+C+" A NULL Scan"
 #	sleep(0.1)
-	print B+"     [8]"+C+" A FIN Scan"
+	print B+"     [8]"+C+" A FIN Flag Scan "+R+"(Reliable only in LANs)"
 	sleep(0.1)
 	print B+"     [9]"+C+" A Open Ports Services Detector"
 	sleep(0.1)

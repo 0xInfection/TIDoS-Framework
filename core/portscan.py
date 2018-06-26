@@ -152,7 +152,7 @@ def portscan(web):
 	    print GR+' [*] Going back...'
 	    scanenumban1()
 	    time.sleep(0.5)
-	    scanenum_dup(web) 
+	    scenum_dup(web) 
 
 	else:
 	    dope = ['You high dude?','Shit! Enter a valid option','Whoops! Thats not an option','Sorry! You just typed shit']
