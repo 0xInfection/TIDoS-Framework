@@ -60,6 +60,7 @@ def check0x00(url):
 
 	else: 
 		print R+' [-] Not vulnerable to iCORS...'
+	time.sleep(1)
 
 def cors0x00(url, ssltest, firstrun=False):
 

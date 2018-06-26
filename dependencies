@@ -19,10 +19,6 @@ if ! hash build-essential 2>/dev/null; then sudo apt-get install --yes build-ess
 if ! hash python-pip 2>/dev/null; then sudo apt-get install --yes python-pip ; fi
 if ! hash python-xmpp 2>/dev/null; then sudo apt-get install --yes python-xmpp ; fi
 pip install sslscan
-pip install tld
-pip install emailprotectionslib
-pip install requests
-pip install pexpect
 
 DIR=$(dirname $0)
 
@@ -31,13 +27,22 @@ sudo python setup.py install
 cd ..
 cd ..
 
+cd lib/pexpect/
+sudo python setup.py install
+cd .. 
+cd ..
+
 cd lib/bs4/
 sudo python setup.py install
 cd .. 
 cd .. 
 
-cd lib/setuptools/
-sudo python bootstrap.py
+cd lib/tld/
+sudo python setup.py install
+cd .. 
+cd .. 
+
+cd lib/requests/
 sudo python setup.py install
 cd ..
 cd ..
@@ -53,6 +58,11 @@ cd ..
 cd ..
 
 cd lib/google/
+sudo python setup.py install
+cd ..
+cd ..
+
+cd lib/emailprotectionslib/
 sudo python setup.py install
 cd ..
 cd ..

@@ -7,7 +7,7 @@
 
 #Author: @_tID
 #This module requires TIDoS Framework
-#https://github.com/the-Infected-Drake/TIDoS-Framework 
+#https://github.com/theInfectedDrake/TIDoS-Framework 
 
 import os
 import re
@@ -16,6 +16,9 @@ import urllib
 import requests
 import time
 from colors import *
+from requests.packages.urllib3.exceptions import InsecureRequestWarning
+
+requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 active0 = False
 
@@ -51,7 +54,7 @@ def scanner0x00(website0, gen_headers):
 	    print G+' [+] Code obtained : '+content
 
 	    if(req.status_code == 200):
-		# took some help from lfisuite
+		# forked from lfisuite
 	        if ("[<a href='function.main'>function.main</a>" not in content
 	        	and "[<a href='function.include'>function.include</a>" not in content
 	        	and ("Failed opening" not in content and "for inclusion" not in content)
@@ -125,7 +128,7 @@ def lfi(web):
 	print R+'      L F I   S C A N N E R'
 	print R+'     =======================\n'
 	try:
-		web0 = raw_input(O+' [#] Enter point scope path parameter (eg. /ping.php?site=foo) :> ')
+		web0 = raw_input(O+' [#] Parameter path to test (eg. /load.php?file=foo) :> ')
 		if "?" in web0 and '=' in web0:
 			if web0.startswith('/'):
 				m = raw_input(GR+'\n [!] Your path starts with "/".\n [#] Do you mean root directory? (Y/n) :> ')
@@ -154,7 +157,7 @@ def lfi(web):
 		print R+' [-] User Interruption!'
 		pass
 
-	#except Exception as e:
+	except Exception as e:
 		print R+' [-] Exception encountered during processing...'
 		print R+' [-] Error : '+str(e)
 
