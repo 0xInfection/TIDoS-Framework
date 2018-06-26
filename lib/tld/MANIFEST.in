@@ -1,0 +1,7 @@
+recursive-include  src/tld/res *
+include README.rst
+include CHANGELOG.rst
+include CREDITS.rst
+include LICENSE_GPL2.0.txt
+include LICENSE_LGPL_2.1.txt
+graft docs/
