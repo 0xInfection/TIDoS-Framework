@@ -1,0 +1,458 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>lxml.html.builder</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lxml-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="/">lxml API</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="lxml-module.html">Package&nbsp;lxml</a> ::
+        <a href="lxml.html-module.html">Package&nbsp;html</a> ::
+        Module&nbsp;builder
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="lxml.html.builder-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="lxml.html.builder-module.html">Module lxml.html.builder</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-comment"># --------------------------------------------------------------------</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-comment"># The ElementTree toolkit is</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-comment"># Copyright (c) 1999-2004 by Fredrik Lundh</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-comment"># --------------------------------------------------------------------</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-docstring">A set of HTML generator tags for building HTML documents.</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-docstring">Usage::</tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; from lxml.html.builder import *</tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; html = HTML(</tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-docstring">    ...            HEAD( TITLE("Hello World") ),</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt class="py-docstring">    ...            BODY( CLASS("main"),</tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt class="py-docstring">    ...                  H1("Hello World !")</tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"><tt class="py-docstring">    ...            )</tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"><tt class="py-docstring">    ...        )</tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; import lxml.etree</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; print lxml.etree.tostring(html, pretty_print=True)</tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"><tt class="py-docstring">    &lt;html&gt;</tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line"><tt class="py-docstring">      &lt;head&gt;</tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line"><tt class="py-docstring">        &lt;title&gt;Hello World&lt;/title&gt;</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line"><tt class="py-docstring">      &lt;/head&gt;</tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line"><tt class="py-docstring">      &lt;body class="main"&gt;</tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line"><tt class="py-docstring">        &lt;h1&gt;Hello World !&lt;/h1&gt;</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line"><tt class="py-docstring">      &lt;/body&gt;</tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line"><tt class="py-docstring">    &lt;/html&gt;</tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line"> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Package lxml=lxml-module.html"><a title="lxml" class="py-name" href="#" onclick="return doclink('link-0', 'lxml', 'link-0');">lxml</a></tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Module lxml.builder=lxml.builder-module.html,Module lxml.html.builder=lxml.html.builder-module.html"><a title="lxml.builder
+lxml.html.builder" class="py-name" href="#" onclick="return doclink('link-1', 'builder', 'link-1');">builder</a></tt> <tt class="py-keyword">import</tt> <tt id="link-2" class="py-name" targets="Class lxml.builder.ElementMaker=lxml.builder.ElementMaker-class.html,Class lxml.objectify.ElementMaker=lxml.objectify.ElementMaker-class.html"><a title="lxml.builder.ElementMaker
+lxml.objectify.ElementMaker" class="py-name" href="#" onclick="return doclink('link-2', 'ElementMaker', 'link-2');">ElementMaker</a></tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-3" class="py-name"><a title="lxml" class="py-name" href="#" onclick="return doclink('link-3', 'lxml', 'link-0');">lxml</a></tt><tt class="py-op">.</tt><tt id="link-4" class="py-name" targets="Package lxml.html=lxml.html-module.html,Method lxml.html.diff.href_token.html()=lxml.html.diff.href_token-class.html#html,Method lxml.html.diff.tag_token.html()=lxml.html.diff.tag_token-class.html#html,Method lxml.html.diff.token.html()=lxml.html.diff.token-class.html#html"><a title="lxml.html
+lxml.html.diff.href_token.html
+lxml.html.diff.tag_token.html
+lxml.html.diff.token.html" class="py-name" href="#" onclick="return doclink('link-4', 'html', 'link-4');">html</a></tt> <tt class="py-keyword">import</tt> <tt id="link-5" class="py-name" targets="Variable lxml.html.html5parser.html_parser=lxml.html.html5parser-module.html#html_parser,Variable lxml.html.html_parser=lxml.html-module.html#html_parser"><a title="lxml.html.html5parser.html_parser
+lxml.html.html_parser" class="py-name" href="#" onclick="return doclink('link-5', 'html_parser', 'link-5');">html_parser</a></tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line"> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line"><tt id="link-6" class="py-name" targets="Variable lxml.builder.E=lxml.builder-module.html#E,Variable lxml.html.builder.E=lxml.html.builder-module.html#E,Variable lxml.objectify.E=lxml.objectify-module.html#E"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-6', 'E', 'link-6');">E</a></tt> <tt class="py-op">=</tt> <tt id="link-7" class="py-name"><a title="lxml.builder.ElementMaker
+lxml.objectify.ElementMaker" class="py-name" href="#" onclick="return doclink('link-7', 'ElementMaker', 'link-2');">ElementMaker</a></tt><tt class="py-op">(</tt><tt id="link-8" class="py-name" targets="Method lxml.etree._Element.makeelement()=lxml.etree._Element-class.html#makeelement,Method lxml.etree.iterparse.makeelement()=lxml.etree.iterparse-class.html#makeelement,Function lxml.tests.selftest2.makeelement()=lxml.tests.selftest2-module.html#makeelement"><a title="lxml.etree._Element.makeelement
+lxml.etree.iterparse.makeelement
+lxml.tests.selftest2.makeelement" class="py-name" href="#" onclick="return doclink('link-8', 'makeelement', 'link-8');">makeelement</a></tt><tt class="py-op">=</tt><tt id="link-9" class="py-name"><a title="lxml.html.html5parser.html_parser
+lxml.html.html_parser" class="py-name" href="#" onclick="return doclink('link-9', 'html_parser', 'link-5');">html_parser</a></tt><tt class="py-op">.</tt><tt id="link-10" class="py-name"><a title="lxml.etree._Element.makeelement
+lxml.etree.iterparse.makeelement
+lxml.tests.selftest2.makeelement" class="py-name" href="#" onclick="return doclink('link-10', 'makeelement', 'link-8');">makeelement</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line"> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line"><tt class="py-comment"># elements</tt> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line"><tt id="link-11" class="py-name" targets="Variable lxml.html.builder.A=lxml.html.builder-module.html#A"><a title="lxml.html.builder.A" class="py-name" href="#" onclick="return doclink('link-11', 'A', 'link-11');">A</a></tt> <tt class="py-op">=</tt> <tt id="link-12" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-12', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">a</tt> <tt class="py-comment"># anchor</tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line"><tt id="link-13" class="py-name" targets="Variable lxml.html.builder.ABBR=lxml.html.builder-module.html#ABBR"><a title="lxml.html.builder.ABBR" class="py-name" href="#" onclick="return doclink('link-13', 'ABBR', 'link-13');">ABBR</a></tt> <tt class="py-op">=</tt> <tt id="link-14" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-14', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">abbr</tt> <tt class="py-comment"># abbreviated form (e.g., WWW, HTTP, etc.)</tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line"><tt id="link-15" class="py-name" targets="Variable lxml.html.builder.ACRONYM=lxml.html.builder-module.html#ACRONYM"><a title="lxml.html.builder.ACRONYM" class="py-name" href="#" onclick="return doclink('link-15', 'ACRONYM', 'link-15');">ACRONYM</a></tt> <tt class="py-op">=</tt> <tt id="link-16" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-16', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">acronym</tt> <tt class="py-comment"># </tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line"><tt id="link-17" class="py-name" targets="Variable lxml.html.builder.ADDRESS=lxml.html.builder-module.html#ADDRESS"><a title="lxml.html.builder.ADDRESS" class="py-name" href="#" onclick="return doclink('link-17', 'ADDRESS', 'link-17');">ADDRESS</a></tt> <tt class="py-op">=</tt> <tt id="link-18" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-18', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">address</tt> <tt class="py-comment"># information on author</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line"><tt id="link-19" class="py-name" targets="Variable lxml.html.builder.APPLET=lxml.html.builder-module.html#APPLET"><a title="lxml.html.builder.APPLET" class="py-name" href="#" onclick="return doclink('link-19', 'APPLET', 'link-19');">APPLET</a></tt> <tt class="py-op">=</tt> <tt id="link-20" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-20', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">applet</tt> <tt class="py-comment"># Java applet (DEPRECATED)</tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line"><tt id="link-21" class="py-name" targets="Variable lxml.html.builder.AREA=lxml.html.builder-module.html#AREA"><a title="lxml.html.builder.AREA" class="py-name" href="#" onclick="return doclink('link-21', 'AREA', 'link-21');">AREA</a></tt> <tt class="py-op">=</tt> <tt id="link-22" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-22', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">area</tt> <tt class="py-comment"># client-side image map area</tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line"><tt id="link-23" class="py-name" targets="Variable lxml.html.builder.B=lxml.html.builder-module.html#B"><a title="lxml.html.builder.B" class="py-name" href="#" onclick="return doclink('link-23', 'B', 'link-23');">B</a></tt> <tt class="py-op">=</tt> <tt id="link-24" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-24', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">b</tt> <tt class="py-comment"># bold text style</tt> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line"><tt id="link-25" class="py-name" targets="Variable lxml.html.builder.BASE=lxml.html.builder-module.html#BASE"><a title="lxml.html.builder.BASE" class="py-name" href="#" onclick="return doclink('link-25', 'BASE', 'link-25');">BASE</a></tt> <tt class="py-op">=</tt> <tt id="link-26" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-26', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt id="link-27" class="py-name" targets="Variable lxml.etree._Element.base=lxml.etree._Element-class.html#base"><a title="lxml.etree._Element.base" class="py-name" href="#" onclick="return doclink('link-27', 'base', 'link-27');">base</a></tt> <tt class="py-comment"># document base URI</tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line"><tt id="link-28" class="py-name" targets="Variable lxml.html.builder.BASEFONT=lxml.html.builder-module.html#BASEFONT"><a title="lxml.html.builder.BASEFONT" class="py-name" href="#" onclick="return doclink('link-28', 'BASEFONT', 'link-28');">BASEFONT</a></tt> <tt class="py-op">=</tt> <tt id="link-29" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-29', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">basefont</tt> <tt class="py-comment"># base font size (DEPRECATED)</tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line"><tt id="link-30" class="py-name" targets="Variable lxml.html.builder.BDO=lxml.html.builder-module.html#BDO"><a title="lxml.html.builder.BDO" class="py-name" href="#" onclick="return doclink('link-30', 'BDO', 'link-30');">BDO</a></tt> <tt class="py-op">=</tt> <tt id="link-31" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-31', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">bdo</tt> <tt class="py-comment"># I18N BiDi over-ride</tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line"><tt id="link-32" class="py-name" targets="Variable lxml.html.builder.BIG=lxml.html.builder-module.html#BIG"><a title="lxml.html.builder.BIG" class="py-name" href="#" onclick="return doclink('link-32', 'BIG', 'link-32');">BIG</a></tt> <tt class="py-op">=</tt> <tt id="link-33" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-33', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">big</tt> <tt class="py-comment"># large text style</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line"><tt id="link-34" class="py-name" targets="Variable lxml.html.builder.BLOCKQUOTE=lxml.html.builder-module.html#BLOCKQUOTE"><a title="lxml.html.builder.BLOCKQUOTE" class="py-name" href="#" onclick="return doclink('link-34', 'BLOCKQUOTE', 'link-34');">BLOCKQUOTE</a></tt> <tt class="py-op">=</tt> <tt id="link-35" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-35', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">blockquote</tt> <tt class="py-comment"># long quotation</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line"><tt id="link-36" class="py-name" targets="Variable lxml.html.builder.BODY=lxml.html.builder-module.html#BODY"><a title="lxml.html.builder.BODY" class="py-name" href="#" onclick="return doclink('link-36', 'BODY', 'link-36');">BODY</a></tt> <tt class="py-op">=</tt> <tt id="link-37" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-37', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt id="link-38" class="py-name" targets="Variable lxml.html.HtmlMixin.body=lxml.html.HtmlMixin-class.html#body"><a title="lxml.html.HtmlMixin.body" class="py-name" href="#" onclick="return doclink('link-38', 'body', 'link-38');">body</a></tt> <tt class="py-comment"># document body</tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line"><tt id="link-39" class="py-name" targets="Variable lxml.html.builder.BR=lxml.html.builder-module.html#BR"><a title="lxml.html.builder.BR" class="py-name" href="#" onclick="return doclink('link-39', 'BR', 'link-39');">BR</a></tt> <tt class="py-op">=</tt> <tt id="link-40" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-40', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">br</tt> <tt class="py-comment"># forced line break</tt> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line"><tt id="link-41" class="py-name" targets="Variable lxml.html.builder.BUTTON=lxml.html.builder-module.html#BUTTON"><a title="lxml.html.builder.BUTTON" class="py-name" href="#" onclick="return doclink('link-41', 'BUTTON', 'link-41');">BUTTON</a></tt> <tt class="py-op">=</tt> <tt id="link-42" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-42', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">button</tt> <tt class="py-comment"># push button</tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line"><tt id="link-43" class="py-name" targets="Variable lxml.html.builder.CAPTION=lxml.html.builder-module.html#CAPTION"><a title="lxml.html.builder.CAPTION" class="py-name" href="#" onclick="return doclink('link-43', 'CAPTION', 'link-43');">CAPTION</a></tt> <tt class="py-op">=</tt> <tt id="link-44" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-44', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">caption</tt> <tt class="py-comment"># table caption</tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line"><tt id="link-45" class="py-name" targets="Variable lxml.html.builder.CENTER=lxml.html.builder-module.html#CENTER"><a title="lxml.html.builder.CENTER" class="py-name" href="#" onclick="return doclink('link-45', 'CENTER', 'link-45');">CENTER</a></tt> <tt class="py-op">=</tt> <tt id="link-46" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-46', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">center</tt> <tt class="py-comment"># shorthand for DIV align=center (DEPRECATED)</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line"><tt id="link-47" class="py-name" targets="Variable lxml.html.builder.CITE=lxml.html.builder-module.html#CITE"><a title="lxml.html.builder.CITE" class="py-name" href="#" onclick="return doclink('link-47', 'CITE', 'link-47');">CITE</a></tt> <tt class="py-op">=</tt> <tt id="link-48" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-48', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">cite</tt> <tt class="py-comment"># citation</tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line"><tt id="link-49" class="py-name" targets="Variable lxml.html.builder.CODE=lxml.html.builder-module.html#CODE"><a title="lxml.html.builder.CODE" class="py-name" href="#" onclick="return doclink('link-49', 'CODE', 'link-49');">CODE</a></tt> <tt class="py-op">=</tt> <tt id="link-50" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-50', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">code</tt> <tt class="py-comment"># computer code fragment</tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line"><tt id="link-51" class="py-name" targets="Variable lxml.html.builder.COL=lxml.html.builder-module.html#COL"><a title="lxml.html.builder.COL" class="py-name" href="#" onclick="return doclink('link-51', 'COL', 'link-51');">COL</a></tt> <tt class="py-op">=</tt> <tt id="link-52" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-52', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">col</tt> <tt class="py-comment"># table column</tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line"><tt id="link-53" class="py-name" targets="Variable lxml.html.builder.COLGROUP=lxml.html.builder-module.html#COLGROUP"><a title="lxml.html.builder.COLGROUP" class="py-name" href="#" onclick="return doclink('link-53', 'COLGROUP', 'link-53');">COLGROUP</a></tt> <tt class="py-op">=</tt> <tt id="link-54" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-54', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">colgroup</tt> <tt class="py-comment"># table column group</tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line"><tt id="link-55" class="py-name" targets="Variable lxml.html.builder.DD=lxml.html.builder-module.html#DD"><a title="lxml.html.builder.DD" class="py-name" href="#" onclick="return doclink('link-55', 'DD', 'link-55');">DD</a></tt> <tt class="py-op">=</tt> <tt id="link-56" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-56', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">dd</tt> <tt class="py-comment"># definition description</tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line"><tt id="link-57" class="py-name" targets="Variable lxml.html.builder.DEL=lxml.html.builder-module.html#DEL"><a title="lxml.html.builder.DEL" class="py-name" href="#" onclick="return doclink('link-57', 'DEL', 'link-57');">DEL</a></tt> <tt class="py-op">=</tt> <tt class="py-name">getattr</tt><tt class="py-op">(</tt><tt id="link-58" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-58', 'E', 'link-6');">E</a></tt><tt class="py-op">,</tt> <tt class="py-string">'del'</tt><tt class="py-op">)</tt> <tt class="py-comment"># deleted text</tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line"><tt id="link-59" class="py-name" targets="Variable lxml.html.builder.DFN=lxml.html.builder-module.html#DFN"><a title="lxml.html.builder.DFN" class="py-name" href="#" onclick="return doclink('link-59', 'DFN', 'link-59');">DFN</a></tt> <tt class="py-op">=</tt> <tt id="link-60" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-60', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">dfn</tt> <tt class="py-comment"># instance definition</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line"><tt id="link-61" class="py-name" targets="Variable lxml.html.builder.DIR=lxml.html.builder-module.html#DIR"><a title="lxml.html.builder.DIR" class="py-name" href="#" onclick="return doclink('link-61', 'DIR', 'link-61');">DIR</a></tt> <tt class="py-op">=</tt> <tt id="link-62" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-62', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">dir</tt> <tt class="py-comment"># directory list (DEPRECATED)</tt> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line"><tt id="link-63" class="py-name" targets="Variable lxml.html.builder.DIV=lxml.html.builder-module.html#DIV"><a title="lxml.html.builder.DIV" class="py-name" href="#" onclick="return doclink('link-63', 'DIV', 'link-63');">DIV</a></tt> <tt class="py-op">=</tt> <tt id="link-64" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-64', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">div</tt> <tt class="py-comment"># generic language/style container</tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line"><tt id="link-65" class="py-name" targets="Variable lxml.html.builder.DL=lxml.html.builder-module.html#DL"><a title="lxml.html.builder.DL" class="py-name" href="#" onclick="return doclink('link-65', 'DL', 'link-65');">DL</a></tt> <tt class="py-op">=</tt> <tt id="link-66" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-66', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">dl</tt> <tt class="py-comment"># definition list</tt> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line"><tt id="link-67" class="py-name" targets="Variable lxml.html.builder.DT=lxml.html.builder-module.html#DT"><a title="lxml.html.builder.DT" class="py-name" href="#" onclick="return doclink('link-67', 'DT', 'link-67');">DT</a></tt> <tt class="py-op">=</tt> <tt id="link-68" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-68', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">dt</tt> <tt class="py-comment"># definition term</tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line"><tt id="link-69" class="py-name" targets="Variable lxml.html.builder.EM=lxml.html.builder-module.html#EM"><a title="lxml.html.builder.EM" class="py-name" href="#" onclick="return doclink('link-69', 'EM', 'link-69');">EM</a></tt> <tt class="py-op">=</tt> <tt id="link-70" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-70', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">em</tt> <tt class="py-comment"># emphasis</tt> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line"><tt id="link-71" class="py-name" targets="Variable lxml.html.builder.FIELDSET=lxml.html.builder-module.html#FIELDSET"><a title="lxml.html.builder.FIELDSET" class="py-name" href="#" onclick="return doclink('link-71', 'FIELDSET', 'link-71');">FIELDSET</a></tt> <tt class="py-op">=</tt> <tt id="link-72" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-72', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">fieldset</tt> <tt class="py-comment"># form control group</tt> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line"><tt id="link-73" class="py-name" targets="Variable lxml.html.builder.FONT=lxml.html.builder-module.html#FONT"><a title="lxml.html.builder.FONT" class="py-name" href="#" onclick="return doclink('link-73', 'FONT', 'link-73');">FONT</a></tt> <tt class="py-op">=</tt> <tt id="link-74" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-74', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">font</tt> <tt class="py-comment"># local change to font (DEPRECATED)</tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line"><tt id="link-75" class="py-name" targets="Variable lxml.html.builder.FORM=lxml.html.builder-module.html#FORM"><a title="lxml.html.builder.FORM" class="py-name" href="#" onclick="return doclink('link-75', 'FORM', 'link-75');">FORM</a></tt> <tt class="py-op">=</tt> <tt id="link-76" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-76', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">form</tt> <tt class="py-comment"># interactive form</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line"><tt id="link-77" class="py-name" targets="Variable lxml.html.builder.FRAME=lxml.html.builder-module.html#FRAME"><a title="lxml.html.builder.FRAME" class="py-name" href="#" onclick="return doclink('link-77', 'FRAME', 'link-77');">FRAME</a></tt> <tt class="py-op">=</tt> <tt id="link-78" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-78', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">frame</tt> <tt class="py-comment"># subwindow</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line"><tt id="link-79" class="py-name" targets="Variable lxml.html.builder.FRAMESET=lxml.html.builder-module.html#FRAMESET"><a title="lxml.html.builder.FRAMESET" class="py-name" href="#" onclick="return doclink('link-79', 'FRAMESET', 'link-79');">FRAMESET</a></tt> <tt class="py-op">=</tt> <tt id="link-80" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-80', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">frameset</tt> <tt class="py-comment"># window subdivision</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line"><tt id="link-81" class="py-name" targets="Variable lxml.html.builder.H1=lxml.html.builder-module.html#H1"><a title="lxml.html.builder.H1" class="py-name" href="#" onclick="return doclink('link-81', 'H1', 'link-81');">H1</a></tt> <tt class="py-op">=</tt> <tt id="link-82" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-82', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">h1</tt> <tt class="py-comment"># heading</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line"><tt id="link-83" class="py-name" targets="Variable lxml.html.builder.H2=lxml.html.builder-module.html#H2"><a title="lxml.html.builder.H2" class="py-name" href="#" onclick="return doclink('link-83', 'H2', 'link-83');">H2</a></tt> <tt class="py-op">=</tt> <tt id="link-84" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-84', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">h2</tt> <tt class="py-comment"># heading</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line"><tt id="link-85" class="py-name" targets="Variable lxml.html.builder.H3=lxml.html.builder-module.html#H3"><a title="lxml.html.builder.H3" class="py-name" href="#" onclick="return doclink('link-85', 'H3', 'link-85');">H3</a></tt> <tt class="py-op">=</tt> <tt id="link-86" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-86', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">h3</tt> <tt class="py-comment"># heading</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line"><tt id="link-87" class="py-name" targets="Variable lxml.html.builder.H4=lxml.html.builder-module.html#H4"><a title="lxml.html.builder.H4" class="py-name" href="#" onclick="return doclink('link-87', 'H4', 'link-87');">H4</a></tt> <tt class="py-op">=</tt> <tt id="link-88" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-88', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">h4</tt> <tt class="py-comment"># heading</tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line"><tt id="link-89" class="py-name" targets="Variable lxml.html.builder.H5=lxml.html.builder-module.html#H5"><a title="lxml.html.builder.H5" class="py-name" href="#" onclick="return doclink('link-89', 'H5', 'link-89');">H5</a></tt> <tt class="py-op">=</tt> <tt id="link-90" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-90', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">h5</tt> <tt class="py-comment"># heading</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line"><tt id="link-91" class="py-name" targets="Variable lxml.html.builder.H6=lxml.html.builder-module.html#H6"><a title="lxml.html.builder.H6" class="py-name" href="#" onclick="return doclink('link-91', 'H6', 'link-91');">H6</a></tt> <tt class="py-op">=</tt> <tt id="link-92" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-92', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">h6</tt> <tt class="py-comment"># heading</tt> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line"><tt id="link-93" class="py-name" targets="Variable lxml.html.builder.HEAD=lxml.html.builder-module.html#HEAD"><a title="lxml.html.builder.HEAD" class="py-name" href="#" onclick="return doclink('link-93', 'HEAD', 'link-93');">HEAD</a></tt> <tt class="py-op">=</tt> <tt id="link-94" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-94', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt id="link-95" class="py-name" targets="Variable lxml.html.HtmlMixin.head=lxml.html.HtmlMixin-class.html#head"><a title="lxml.html.HtmlMixin.head" class="py-name" href="#" onclick="return doclink('link-95', 'head', 'link-95');">head</a></tt> <tt class="py-comment"># document head</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line"><tt id="link-96" class="py-name" targets="Variable lxml.html.builder.HR=lxml.html.builder-module.html#HR"><a title="lxml.html.builder.HR" class="py-name" href="#" onclick="return doclink('link-96', 'HR', 'link-96');">HR</a></tt> <tt class="py-op">=</tt> <tt id="link-97" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-97', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">hr</tt> <tt class="py-comment"># horizontal rule</tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line"><tt id="link-98" class="py-name" targets="Variable lxml.etree.ErrorDomains.HTML=lxml.etree.ErrorDomains-class.html#HTML,Function lxml.etree.HTML()=lxml.etree-module.html#HTML,Variable lxml.html.builder.HTML=lxml.html.builder-module.html#HTML,Variable lxml.tests.test_css.HTML=lxml.tests.test_css-module.html#HTML"><a title="lxml.etree.ErrorDomains.HTML
+lxml.etree.HTML
+lxml.html.builder.HTML
+lxml.tests.test_css.HTML" class="py-name" href="#" onclick="return doclink('link-98', 'HTML', 'link-98');">HTML</a></tt> <tt class="py-op">=</tt> <tt id="link-99" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-99', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt id="link-100" class="py-name"><a title="lxml.html
+lxml.html.diff.href_token.html
+lxml.html.diff.tag_token.html
+lxml.html.diff.token.html" class="py-name" href="#" onclick="return doclink('link-100', 'html', 'link-4');">html</a></tt> <tt class="py-comment"># document root element</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line"><tt id="link-101" class="py-name" targets="Variable lxml.html.builder.I=lxml.html.builder-module.html#I"><a title="lxml.html.builder.I" class="py-name" href="#" onclick="return doclink('link-101', 'I', 'link-101');">I</a></tt> <tt class="py-op">=</tt> <tt id="link-102" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-102', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">i</tt> <tt class="py-comment"># italic text style</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line"><tt id="link-103" class="py-name" targets="Variable lxml.html.builder.IFRAME=lxml.html.builder-module.html#IFRAME"><a title="lxml.html.builder.IFRAME" class="py-name" href="#" onclick="return doclink('link-103', 'IFRAME', 'link-103');">IFRAME</a></tt> <tt class="py-op">=</tt> <tt id="link-104" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-104', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">iframe</tt> <tt class="py-comment"># inline subwindow</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line"><tt id="link-105" class="py-name" targets="Variable lxml.html.builder.IMG=lxml.html.builder-module.html#IMG"><a title="lxml.html.builder.IMG" class="py-name" href="#" onclick="return doclink('link-105', 'IMG', 'link-105');">IMG</a></tt> <tt class="py-op">=</tt> <tt id="link-106" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-106', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">img</tt> <tt class="py-comment"># Embedded image</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line"><tt id="link-107" class="py-name" targets="Variable lxml.html.builder.INPUT=lxml.html.builder-module.html#INPUT"><a title="lxml.html.builder.INPUT" class="py-name" href="#" onclick="return doclink('link-107', 'INPUT', 'link-107');">INPUT</a></tt> <tt class="py-op">=</tt> <tt id="link-108" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-108', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">input</tt> <tt class="py-comment"># form control</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line"><tt id="link-109" class="py-name" targets="Variable lxml.html.builder.INS=lxml.html.builder-module.html#INS"><a title="lxml.html.builder.INS" class="py-name" href="#" onclick="return doclink('link-109', 'INS', 'link-109');">INS</a></tt> <tt class="py-op">=</tt> <tt id="link-110" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-110', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">ins</tt> <tt class="py-comment"># inserted text</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line"><tt id="link-111" class="py-name" targets="Variable lxml.html.builder.ISINDEX=lxml.html.builder-module.html#ISINDEX"><a title="lxml.html.builder.ISINDEX" class="py-name" href="#" onclick="return doclink('link-111', 'ISINDEX', 'link-111');">ISINDEX</a></tt> <tt class="py-op">=</tt> <tt id="link-112" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-112', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">isindex</tt> <tt class="py-comment"># single line prompt (DEPRECATED)</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line"><tt id="link-113" class="py-name" targets="Variable lxml.html.builder.KBD=lxml.html.builder-module.html#KBD"><a title="lxml.html.builder.KBD" class="py-name" href="#" onclick="return doclink('link-113', 'KBD', 'link-113');">KBD</a></tt> <tt class="py-op">=</tt> <tt id="link-114" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-114', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">kbd</tt> <tt class="py-comment"># text to be entered by the user</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line"><tt id="link-115" class="py-name" targets="Variable lxml.html.builder.LABEL=lxml.html.builder-module.html#LABEL"><a title="lxml.html.builder.LABEL" class="py-name" href="#" onclick="return doclink('link-115', 'LABEL', 'link-115');">LABEL</a></tt> <tt class="py-op">=</tt> <tt id="link-116" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-116', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt id="link-117" class="py-name" targets="Variable lxml.html.HtmlMixin.label=lxml.html.HtmlMixin-class.html#label"><a title="lxml.html.HtmlMixin.label" class="py-name" href="#" onclick="return doclink('link-117', 'label', 'link-117');">label</a></tt> <tt class="py-comment"># form field label text</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line"><tt id="link-118" class="py-name" targets="Variable lxml.html.builder.LEGEND=lxml.html.builder-module.html#LEGEND"><a title="lxml.html.builder.LEGEND" class="py-name" href="#" onclick="return doclink('link-118', 'LEGEND', 'link-118');">LEGEND</a></tt> <tt class="py-op">=</tt> <tt id="link-119" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-119', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">legend</tt> <tt class="py-comment"># fieldset legend</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line"><tt id="link-120" class="py-name" targets="Variable lxml.html.builder.LI=lxml.html.builder-module.html#LI"><a title="lxml.html.builder.LI" class="py-name" href="#" onclick="return doclink('link-120', 'LI', 'link-120');">LI</a></tt> <tt class="py-op">=</tt> <tt id="link-121" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-121', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">li</tt> <tt class="py-comment"># list item</tt> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line"><tt id="link-122" class="py-name" targets="Variable lxml.html.builder.LINK=lxml.html.builder-module.html#LINK"><a title="lxml.html.builder.LINK" class="py-name" href="#" onclick="return doclink('link-122', 'LINK', 'link-122');">LINK</a></tt> <tt class="py-op">=</tt> <tt id="link-123" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-123', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">link</tt> <tt class="py-comment"># a media-independent link</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line"><tt id="link-124" class="py-name" targets="Variable lxml.html.builder.MAP=lxml.html.builder-module.html#MAP"><a title="lxml.html.builder.MAP" class="py-name" href="#" onclick="return doclink('link-124', 'MAP', 'link-124');">MAP</a></tt> <tt class="py-op">=</tt> <tt id="link-125" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-125', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">map</tt> <tt class="py-comment"># client-side image map</tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line"><tt id="link-126" class="py-name" targets="Variable lxml.html.builder.MENU=lxml.html.builder-module.html#MENU"><a title="lxml.html.builder.MENU" class="py-name" href="#" onclick="return doclink('link-126', 'MENU', 'link-126');">MENU</a></tt> <tt class="py-op">=</tt> <tt id="link-127" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-127', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">menu</tt> <tt class="py-comment"># menu list (DEPRECATED)</tt> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line"><tt id="link-128" class="py-name" targets="Variable lxml.html.builder.META=lxml.html.builder-module.html#META"><a title="lxml.html.builder.META" class="py-name" href="#" onclick="return doclink('link-128', 'META', 'link-128');">META</a></tt> <tt class="py-op">=</tt> <tt id="link-129" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-129', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt id="link-130" class="py-name" targets="Variable lxml.html.clean.Cleaner.meta=lxml.html.clean.Cleaner-class.html#meta"><a title="lxml.html.clean.Cleaner.meta" class="py-name" href="#" onclick="return doclink('link-130', 'meta', 'link-130');">meta</a></tt> <tt class="py-comment"># generic metainformation</tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line"><tt id="link-131" class="py-name" targets="Variable lxml.html.builder.NOFRAMES=lxml.html.builder-module.html#NOFRAMES"><a title="lxml.html.builder.NOFRAMES" class="py-name" href="#" onclick="return doclink('link-131', 'NOFRAMES', 'link-131');">NOFRAMES</a></tt> <tt class="py-op">=</tt> <tt id="link-132" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-132', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">noframes</tt> <tt class="py-comment"># alternate content container for non frame-based rendering</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line"><tt id="link-133" class="py-name" targets="Variable lxml.html.builder.NOSCRIPT=lxml.html.builder-module.html#NOSCRIPT"><a title="lxml.html.builder.NOSCRIPT" class="py-name" href="#" onclick="return doclink('link-133', 'NOSCRIPT', 'link-133');">NOSCRIPT</a></tt> <tt class="py-op">=</tt> <tt id="link-134" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-134', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">noscript</tt> <tt class="py-comment"># alternate content container for non script-based rendering</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line"><tt id="link-135" class="py-name" targets="Variable lxml.html.builder.OBJECT=lxml.html.builder-module.html#OBJECT"><a title="lxml.html.builder.OBJECT" class="py-name" href="#" onclick="return doclink('link-135', 'OBJECT', 'link-135');">OBJECT</a></tt> <tt class="py-op">=</tt> <tt id="link-136" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-136', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">object</tt> <tt class="py-comment"># generic embedded object</tt> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line"><tt id="link-137" class="py-name" targets="Variable lxml.html.builder.OL=lxml.html.builder-module.html#OL"><a title="lxml.html.builder.OL" class="py-name" href="#" onclick="return doclink('link-137', 'OL', 'link-137');">OL</a></tt> <tt class="py-op">=</tt> <tt id="link-138" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-138', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">ol</tt> <tt class="py-comment"># ordered list</tt> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line"><tt id="link-139" class="py-name" targets="Variable lxml.html.builder.OPTGROUP=lxml.html.builder-module.html#OPTGROUP"><a title="lxml.html.builder.OPTGROUP" class="py-name" href="#" onclick="return doclink('link-139', 'OPTGROUP', 'link-139');">OPTGROUP</a></tt> <tt class="py-op">=</tt> <tt id="link-140" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-140', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">optgroup</tt> <tt class="py-comment"># option group</tt> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line"><tt id="link-141" class="py-name" targets="Variable lxml.html.builder.OPTION=lxml.html.builder-module.html#OPTION"><a title="lxml.html.builder.OPTION" class="py-name" href="#" onclick="return doclink('link-141', 'OPTION', 'link-141');">OPTION</a></tt> <tt class="py-op">=</tt> <tt id="link-142" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-142', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">option</tt> <tt class="py-comment"># selectable choice</tt> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line"><tt id="link-143" class="py-name" targets="Variable lxml.html.builder.P=lxml.html.builder-module.html#P"><a title="lxml.html.builder.P" class="py-name" href="#" onclick="return doclink('link-143', 'P', 'link-143');">P</a></tt> <tt class="py-op">=</tt> <tt id="link-144" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-144', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">p</tt> <tt class="py-comment"># paragraph</tt> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line"><tt id="link-145" class="py-name" targets="Variable lxml.html.builder.PARAM=lxml.html.builder-module.html#PARAM"><a title="lxml.html.builder.PARAM" class="py-name" href="#" onclick="return doclink('link-145', 'PARAM', 'link-145');">PARAM</a></tt> <tt class="py-op">=</tt> <tt id="link-146" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-146', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">param</tt> <tt class="py-comment"># named property value</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line"><tt id="link-147" class="py-name" targets="Variable lxml.html.builder.PRE=lxml.html.builder-module.html#PRE"><a title="lxml.html.builder.PRE" class="py-name" href="#" onclick="return doclink('link-147', 'PRE', 'link-147');">PRE</a></tt> <tt class="py-op">=</tt> <tt id="link-148" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-148', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">pre</tt> <tt class="py-comment"># preformatted text</tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line"><tt id="link-149" class="py-name" targets="Variable lxml.html.builder.Q=lxml.html.builder-module.html#Q"><a title="lxml.html.builder.Q" class="py-name" href="#" onclick="return doclink('link-149', 'Q', 'link-149');">Q</a></tt> <tt class="py-op">=</tt> <tt id="link-150" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-150', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">q</tt> <tt class="py-comment"># short inline quotation</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line"><tt id="link-151" class="py-name" targets="Variable lxml.html.builder.S=lxml.html.builder-module.html#S"><a title="lxml.html.builder.S" class="py-name" href="#" onclick="return doclink('link-151', 'S', 'link-151');">S</a></tt> <tt class="py-op">=</tt> <tt id="link-152" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-152', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">s</tt> <tt class="py-comment"># strike-through text style (DEPRECATED)</tt> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line"><tt id="link-153" class="py-name" targets="Variable lxml.html.builder.SAMP=lxml.html.builder-module.html#SAMP"><a title="lxml.html.builder.SAMP" class="py-name" href="#" onclick="return doclink('link-153', 'SAMP', 'link-153');">SAMP</a></tt> <tt class="py-op">=</tt> <tt id="link-154" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-154', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">samp</tt> <tt class="py-comment"># sample program output, scripts, etc.</tt> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line"><tt id="link-155" class="py-name" targets="Variable lxml.html.builder.SCRIPT=lxml.html.builder-module.html#SCRIPT"><a title="lxml.html.builder.SCRIPT" class="py-name" href="#" onclick="return doclink('link-155', 'SCRIPT', 'link-155');">SCRIPT</a></tt> <tt class="py-op">=</tt> <tt id="link-156" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-156', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">script</tt> <tt class="py-comment"># script statements</tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line"><tt id="link-157" class="py-name" targets="Variable lxml.html.builder.SELECT=lxml.html.builder-module.html#SELECT"><a title="lxml.html.builder.SELECT" class="py-name" href="#" onclick="return doclink('link-157', 'SELECT', 'link-157');">SELECT</a></tt> <tt class="py-op">=</tt> <tt id="link-158" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-158', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">select</tt> <tt class="py-comment"># option selector</tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line"><tt id="link-159" class="py-name" targets="Variable lxml.html.builder.SMALL=lxml.html.builder-module.html#SMALL"><a title="lxml.html.builder.SMALL" class="py-name" href="#" onclick="return doclink('link-159', 'SMALL', 'link-159');">SMALL</a></tt> <tt class="py-op">=</tt> <tt id="link-160" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-160', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">small</tt> <tt class="py-comment"># small text style</tt> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line"><tt id="link-161" class="py-name" targets="Variable lxml.html.builder.SPAN=lxml.html.builder-module.html#SPAN"><a title="lxml.html.builder.SPAN" class="py-name" href="#" onclick="return doclink('link-161', 'SPAN', 'link-161');">SPAN</a></tt> <tt class="py-op">=</tt> <tt id="link-162" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-162', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">span</tt> <tt class="py-comment"># generic language/style container</tt> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line"><tt id="link-163" class="py-name" targets="Variable lxml.html.builder.STRIKE=lxml.html.builder-module.html#STRIKE"><a title="lxml.html.builder.STRIKE" class="py-name" href="#" onclick="return doclink('link-163', 'STRIKE', 'link-163');">STRIKE</a></tt> <tt class="py-op">=</tt> <tt id="link-164" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-164', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">strike</tt> <tt class="py-comment"># strike-through text (DEPRECATED)</tt> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line"><tt id="link-165" class="py-name" targets="Variable lxml.html.builder.STRONG=lxml.html.builder-module.html#STRONG"><a title="lxml.html.builder.STRONG" class="py-name" href="#" onclick="return doclink('link-165', 'STRONG', 'link-165');">STRONG</a></tt> <tt class="py-op">=</tt> <tt id="link-166" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-166', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">strong</tt> <tt class="py-comment"># strong emphasis</tt> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line"><tt id="link-167" class="py-name" targets="Variable lxml.html.builder.STYLE=lxml.html.builder-module.html#STYLE"><a title="lxml.html.builder.STYLE" class="py-name" href="#" onclick="return doclink('link-167', 'STYLE', 'link-167');">STYLE</a></tt> <tt class="py-op">=</tt> <tt id="link-168" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-168', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt id="link-169" class="py-name" targets="Variable lxml.html.clean.Cleaner.style=lxml.html.clean.Cleaner-class.html#style"><a title="lxml.html.clean.Cleaner.style" class="py-name" href="#" onclick="return doclink('link-169', 'style', 'link-169');">style</a></tt> <tt class="py-comment"># style info</tt> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line"><tt id="link-170" class="py-name" targets="Variable lxml.html.builder.SUB=lxml.html.builder-module.html#SUB"><a title="lxml.html.builder.SUB" class="py-name" href="#" onclick="return doclink('link-170', 'SUB', 'link-170');">SUB</a></tt> <tt class="py-op">=</tt> <tt id="link-171" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-171', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">sub</tt> <tt class="py-comment"># subscript</tt> </tt>
+<a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line"><tt id="link-172" class="py-name" targets="Variable lxml.html.builder.SUP=lxml.html.builder-module.html#SUP"><a title="lxml.html.builder.SUP" class="py-name" href="#" onclick="return doclink('link-172', 'SUP', 'link-172');">SUP</a></tt> <tt class="py-op">=</tt> <tt id="link-173" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-173', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">sup</tt> <tt class="py-comment"># superscript</tt> </tt>
+<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line"><tt id="link-174" class="py-name" targets="Variable lxml.html.builder.TABLE=lxml.html.builder-module.html#TABLE"><a title="lxml.html.builder.TABLE" class="py-name" href="#" onclick="return doclink('link-174', 'TABLE', 'link-174');">TABLE</a></tt> <tt class="py-op">=</tt> <tt id="link-175" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-175', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">table</tt> <tt class="py-comment"># </tt> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line"><tt id="link-176" class="py-name" targets="Variable lxml.html.builder.TBODY=lxml.html.builder-module.html#TBODY"><a title="lxml.html.builder.TBODY" class="py-name" href="#" onclick="return doclink('link-176', 'TBODY', 'link-176');">TBODY</a></tt> <tt class="py-op">=</tt> <tt id="link-177" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-177', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">tbody</tt> <tt class="py-comment"># table body</tt> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line"><tt id="link-178" class="py-name" targets="Variable lxml.html.builder.TD=lxml.html.builder-module.html#TD"><a title="lxml.html.builder.TD" class="py-name" href="#" onclick="return doclink('link-178', 'TD', 'link-178');">TD</a></tt> <tt class="py-op">=</tt> <tt id="link-179" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-179', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">td</tt> <tt class="py-comment"># table data cell</tt> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line"><tt id="link-180" class="py-name" targets="Variable lxml.html.builder.TEXTAREA=lxml.html.builder-module.html#TEXTAREA"><a title="lxml.html.builder.TEXTAREA" class="py-name" href="#" onclick="return doclink('link-180', 'TEXTAREA', 'link-180');">TEXTAREA</a></tt> <tt class="py-op">=</tt> <tt id="link-181" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-181', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">textarea</tt> <tt class="py-comment"># multi-line text field</tt> </tt>
+<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line"><tt id="link-182" class="py-name" targets="Variable lxml.html.builder.TFOOT=lxml.html.builder-module.html#TFOOT"><a title="lxml.html.builder.TFOOT" class="py-name" href="#" onclick="return doclink('link-182', 'TFOOT', 'link-182');">TFOOT</a></tt> <tt class="py-op">=</tt> <tt id="link-183" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-183', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">tfoot</tt> <tt class="py-comment"># table footer</tt> </tt>
+<a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line"><tt id="link-184" class="py-name" targets="Variable lxml.html.builder.TH=lxml.html.builder-module.html#TH"><a title="lxml.html.builder.TH" class="py-name" href="#" onclick="return doclink('link-184', 'TH', 'link-184');">TH</a></tt> <tt class="py-op">=</tt> <tt id="link-185" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-185', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">th</tt> <tt class="py-comment"># table header cell</tt> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line"><tt id="link-186" class="py-name" targets="Variable lxml.html.builder.THEAD=lxml.html.builder-module.html#THEAD"><a title="lxml.html.builder.THEAD" class="py-name" href="#" onclick="return doclink('link-186', 'THEAD', 'link-186');">THEAD</a></tt> <tt class="py-op">=</tt> <tt id="link-187" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-187', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">thead</tt> <tt class="py-comment"># table header</tt> </tt>
+<a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line"><tt id="link-188" class="py-name" targets="Variable lxml.html.builder.TITLE=lxml.html.builder-module.html#TITLE"><a title="lxml.html.builder.TITLE" class="py-name" href="#" onclick="return doclink('link-188', 'TITLE', 'link-188');">TITLE</a></tt> <tt class="py-op">=</tt> <tt id="link-189" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-189', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">title</tt> <tt class="py-comment"># document title</tt> </tt>
+<a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line"><tt id="link-190" class="py-name" targets="Variable lxml.html.builder.TR=lxml.html.builder-module.html#TR"><a title="lxml.html.builder.TR" class="py-name" href="#" onclick="return doclink('link-190', 'TR', 'link-190');">TR</a></tt> <tt class="py-op">=</tt> <tt id="link-191" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-191', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">tr</tt> <tt class="py-comment"># table row</tt> </tt>
+<a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line"><tt id="link-192" class="py-name" targets="Variable lxml.html.builder.TT=lxml.html.builder-module.html#TT"><a title="lxml.html.builder.TT" class="py-name" href="#" onclick="return doclink('link-192', 'TT', 'link-192');">TT</a></tt> <tt class="py-op">=</tt> <tt id="link-193" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-193', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">tt</tt> <tt class="py-comment"># teletype or monospaced text style</tt> </tt>
+<a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line"><tt id="link-194" class="py-name" targets="Variable lxml.html.builder.U=lxml.html.builder-module.html#U"><a title="lxml.html.builder.U" class="py-name" href="#" onclick="return doclink('link-194', 'U', 'link-194');">U</a></tt> <tt class="py-op">=</tt> <tt id="link-195" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-195', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">u</tt> <tt class="py-comment"># underlined text style (DEPRECATED)</tt> </tt>
+<a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line"><tt id="link-196" class="py-name" targets="Variable lxml.html.builder.UL=lxml.html.builder-module.html#UL"><a title="lxml.html.builder.UL" class="py-name" href="#" onclick="return doclink('link-196', 'UL', 'link-196');">UL</a></tt> <tt class="py-op">=</tt> <tt id="link-197" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-197', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">ul</tt> <tt class="py-comment"># unordered list</tt> </tt>
+<a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line"><tt id="link-198" class="py-name" targets="Variable lxml.html.builder.VAR=lxml.html.builder-module.html#VAR"><a title="lxml.html.builder.VAR" class="py-name" href="#" onclick="return doclink('link-198', 'VAR', 'link-198');">VAR</a></tt> <tt class="py-op">=</tt> <tt id="link-199" class="py-name"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-199', 'E', 'link-6');">E</a></tt><tt class="py-op">.</tt><tt class="py-name">var</tt> <tt class="py-comment"># instance of a variable or program argument</tt> </tt>
+<a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line"> </tt>
+<a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line"><tt class="py-comment"># attributes (only reserved words are included here)</tt> </tt>
+<a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line"><tt class="py-name">ATTR</tt> <tt class="py-op">=</tt> <tt class="py-name">dict</tt> </tt>
+<a name="CLASS"></a><div id="CLASS-def"><a name="L132"></a><tt class="py-lineno">132</tt> <a class="py-toggle" href="#" id="CLASS-toggle" onclick="return toggle('CLASS');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.html.builder-module.html#CLASS">CLASS</a><tt class="py-op">(</tt><tt class="py-param">v</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> <tt class="py-keyword">return</tt> <tt class="py-op">{</tt><tt class="py-string">'class'</tt><tt class="py-op">:</tt> <tt id="link-200" class="py-name" targets="Variable lxml.tests.test_objectify.v=lxml.tests.test_objectify-module.html#v"><a title="lxml.tests.test_objectify.v" class="py-name" href="#" onclick="return doclink('link-200', 'v', 'link-200');">v</a></tt><tt class="py-op">}</tt> </tt>
+</div><a name="FOR"></a><div id="FOR-def"><a name="L133"></a><tt class="py-lineno">133</tt> <a class="py-toggle" href="#" id="FOR-toggle" onclick="return toggle('FOR');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.html.builder-module.html#FOR">FOR</a><tt class="py-op">(</tt><tt class="py-param">v</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> <tt class="py-keyword">return</tt> <tt class="py-op">{</tt><tt class="py-string">'for'</tt><tt class="py-op">:</tt> <tt id="link-201" class="py-name"><a title="lxml.tests.test_objectify.v" class="py-name" href="#" onclick="return doclink('link-201', 'v', 'link-200');">v</a></tt><tt class="py-op">}</tt> </tt>
+</div><a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lxml-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="/">lxml API</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Fri Jun 22 18:59:52 2018
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>lxml.tests.test_css</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lxml-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="/">lxml API</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="lxml-module.html">Package&nbsp;lxml</a> ::
+        <a href="lxml.tests-module.html">Package&nbsp;tests</a> ::
+        Module&nbsp;test_css
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="lxml.tests.test_css-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="lxml.tests.test_css-module.html">Module lxml.tests.test_css</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">unittest</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-0" class="py-name" targets="Package lxml=lxml-module.html"><a title="lxml" class="py-name" href="#" onclick="return doclink('link-0', 'lxml', 'link-0');">lxml</a></tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Package lxml.html=lxml.html-module.html,Method lxml.html.diff.href_token.html()=lxml.html.diff.href_token-class.html#html,Method lxml.html.diff.tag_token.html()=lxml.html.diff.tag_token-class.html#html,Method lxml.html.diff.token.html()=lxml.html.diff.token-class.html#html"><a title="lxml.html
+lxml.html.diff.href_token.html
+lxml.html.diff.tag_token.html
+lxml.html.diff.token.html" class="py-name" href="#" onclick="return doclink('link-1', 'html', 'link-1');">html</a></tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-2" class="py-name"><a title="lxml" class="py-name" href="#" onclick="return doclink('link-2', 'lxml', 'link-0');">lxml</a></tt><tt class="py-op">.</tt><tt id="link-3" class="py-name" targets="Package lxml.tests=lxml.tests-module.html"><a title="lxml.tests" class="py-name" href="#" onclick="return doclink('link-3', 'tests', 'link-3');">tests</a></tt><tt class="py-op">.</tt><tt id="link-4" class="py-name" targets="Module lxml.tests.common_imports=lxml.tests.common_imports-module.html"><a title="lxml.tests.common_imports" class="py-name" href="#" onclick="return doclink('link-4', 'common_imports', 'link-4');">common_imports</a></tt> <tt class="py-keyword">import</tt> <tt class="py-name">doctest</tt><tt class="py-op">,</tt> <tt id="link-5" class="py-name" targets="Class lxml.tests.common_imports.HelperTestCase=lxml.tests.common_imports.HelperTestCase-class.html"><a title="lxml.tests.common_imports.HelperTestCase" class="py-name" href="#" onclick="return doclink('link-5', 'HelperTestCase', 'link-5');">HelperTestCase</a></tt><tt class="py-op">,</tt> <tt id="link-6" class="py-name" targets="Class lxml.tests.common_imports.skipif=lxml.tests.common_imports.skipif-class.html"><a title="lxml.tests.common_imports.skipif" class="py-name" href="#" onclick="return doclink('link-6', 'skipif', 'link-6');">skipif</a></tt> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"><tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line">    <tt class="py-keyword">import</tt> <tt id="link-7" class="py-name" targets="Module lxml.cssselect=lxml.cssselect-module.html,Method lxml.etree._Element.cssselect()=lxml.etree._Element-class.html#cssselect,Method lxml.html.HtmlElement.cssselect()=lxml.html.HtmlElement-class.html#cssselect,Method lxml.html.HtmlMixin.cssselect()=lxml.html.HtmlMixin-class.html#cssselect"><a title="lxml.cssselect
+lxml.etree._Element.cssselect
+lxml.html.HtmlElement.cssselect
+lxml.html.HtmlMixin.cssselect" class="py-name" href="#" onclick="return doclink('link-7', 'cssselect', 'link-7');">cssselect</a></tt> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"><tt class="py-keyword">except</tt> <tt class="py-name">ImportError</tt><tt class="py-op">:</tt> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line">    <tt id="link-8" class="py-name"><a title="lxml.cssselect
+lxml.etree._Element.cssselect
+lxml.html.HtmlElement.cssselect
+lxml.html.HtmlMixin.cssselect" class="py-name" href="#" onclick="return doclink('link-8', 'cssselect', 'link-7');">cssselect</a></tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line"> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line"> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line"><tt id="link-9" class="py-name" targets="Variable lxml.etree.ErrorDomains.HTML=lxml.etree.ErrorDomains-class.html#HTML,Function lxml.etree.HTML()=lxml.etree-module.html#HTML,Variable lxml.html.builder.HTML=lxml.html.builder-module.html#HTML,Variable lxml.tests.test_css.HTML=lxml.tests.test_css-module.html#HTML"><a title="lxml.etree.ErrorDomains.HTML
+lxml.etree.HTML
+lxml.html.builder.HTML
+lxml.tests.test_css.HTML" class="py-name" href="#" onclick="return doclink('link-9', 'HTML', 'link-9');">HTML</a></tt> <tt class="py-op">=</tt> <tt class="py-string">'''</tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line"><tt class="py-string">&lt;div&gt;</tt> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line"><tt class="py-string">  &lt;a href="foo"&gt;link&lt;/a&gt;</tt> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line"><tt class="py-string">  &lt;a&gt;anchor&lt;/a&gt;</tt> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line"><tt class="py-string">&lt;/div&gt;</tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line"><tt class="py-string">'''</tt> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line"> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line"> </tt>
+<a name="CSSTestCase"></a><div id="CSSTestCase-def"><a name="L21"></a><tt class="py-lineno">21</tt> <a class="py-toggle" href="#" id="CSSTestCase-toggle" onclick="return toggle('CSSTestCase');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lxml.tests.test_css.CSSTestCase-class.html">CSSTestCase</a><tt class="py-op">(</tt><tt class="py-base-class">HelperTestCase</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="CSSTestCase-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="CSSTestCase-expanded"><a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line"> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line">    <tt id="link-10" class="py-name" targets="Variable lxml.tests.test_css.CSSTestCase.pytestmark=lxml.tests.test_css.CSSTestCase-class.html#pytestmark,Variable lxml.tests.test_relaxng.RelaxNGCompactTestCase.pytestmark=lxml.tests.test_relaxng.RelaxNGCompactTestCase-class.html#pytestmark,Variable lxml.tests.test_xslt.Py3XSLTTestCase.pytestmark=lxml.tests.test_xslt.Py3XSLTTestCase-class.html#pytestmark"><a title="lxml.tests.test_css.CSSTestCase.pytestmark
+lxml.tests.test_relaxng.RelaxNGCompactTestCase.pytestmark
+lxml.tests.test_xslt.Py3XSLTTestCase.pytestmark" class="py-name" href="#" onclick="return doclink('link-10', 'pytestmark', 'link-10');">pytestmark</a></tt> <tt class="py-op">=</tt> <tt id="link-11" class="py-name"><a title="lxml.tests.common_imports.skipif" class="py-name" href="#" onclick="return doclink('link-11', 'skipif', 'link-6');">skipif</a></tt><tt class="py-op">(</tt><tt class="py-string">'cssselect is None'</tt><tt class="py-op">)</tt> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line"> </tt>
+<a name="CSSTestCase.test_cssselect"></a><div id="CSSTestCase.test_cssselect-def"><a name="L25"></a><tt class="py-lineno">25</tt> <a class="py-toggle" href="#" id="CSSTestCase.test_cssselect-toggle" onclick="return toggle('CSSTestCase.test_cssselect');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.test_css.CSSTestCase-class.html#test_cssselect">test_cssselect</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="CSSTestCase.test_cssselect-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="CSSTestCase.test_cssselect-expanded"><a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line">        <tt class="py-name">div</tt><tt class="py-op">,</tt> <tt class="py-op">=</tt> <tt id="link-12" class="py-name"><a title="lxml" class="py-name" href="#" onclick="return doclink('link-12', 'lxml', 'link-0');">lxml</a></tt><tt class="py-op">.</tt><tt id="link-13" class="py-name"><a title="lxml.html
+lxml.html.diff.href_token.html
+lxml.html.diff.tag_token.html
+lxml.html.diff.token.html" class="py-name" href="#" onclick="return doclink('link-13', 'html', 'link-1');">html</a></tt><tt class="py-op">.</tt><tt id="link-14" class="py-name" targets="Function lxml.etree.fromstring()=lxml.etree-module.html#fromstring,Function lxml.html.html5parser.fromstring()=lxml.html.html5parser-module.html#fromstring,Function lxml.html.soupparser.fromstring()=lxml.html.soupparser-module.html#fromstring,Function lxml.objectify.fromstring()=lxml.objectify-module.html#fromstring"><a title="lxml.etree.fromstring
+lxml.html.html5parser.fromstring
+lxml.html.soupparser.fromstring
+lxml.objectify.fromstring" class="py-name" href="#" onclick="return doclink('link-14', 'fromstring', 'link-14');">fromstring</a></tt><tt class="py-op">(</tt><tt id="link-15" class="py-name"><a title="lxml.etree.ErrorDomains.HTML
+lxml.etree.HTML
+lxml.html.builder.HTML
+lxml.tests.test_css.HTML" class="py-name" href="#" onclick="return doclink('link-15', 'HTML', 'link-9');">HTML</a></tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-16" class="py-name" targets="Method lxml.etree._Element.xpath()=lxml.etree._Element-class.html#xpath,Method lxml.etree._ElementTree.xpath()=lxml.etree._ElementTree-class.html#xpath,Function lxml.tests.test_xpathevaluator.xpath()=lxml.tests.test_xpathevaluator-module.html#xpath"><a title="lxml.etree._Element.xpath
+lxml.etree._ElementTree.xpath
+lxml.tests.test_xpathevaluator.xpath" class="py-name" href="#" onclick="return doclink('link-16', 'xpath', 'link-16');">xpath</a></tt><tt class="py-op">(</tt><tt class="py-string">'//div'</tt><tt class="py-op">)</tt> </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line"> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line">        <tt class="py-keyword">def</tt> <tt class="py-def-name">count</tt><tt class="py-op">(</tt><tt class="py-param">selector</tt><tt class="py-op">,</tt> <tt class="py-param">expected_count</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-param">kwargs</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line">            <tt class="py-name">result</tt> <tt class="py-op">=</tt> <tt class="py-name">div</tt><tt class="py-op">.</tt><tt id="link-17" class="py-name"><a title="lxml.cssselect
+lxml.etree._Element.cssselect
+lxml.html.HtmlElement.cssselect
+lxml.html.HtmlMixin.cssselect" class="py-name" href="#" onclick="return doclink('link-17', 'cssselect', 'link-7');">cssselect</a></tt><tt class="py-op">(</tt><tt class="py-name">selector</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-name">kwargs</tt><tt class="py-op">)</tt> </tt>
+<a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertEqual</tt><tt class="py-op">(</tt><tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">result</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">expected_count</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line"> </tt>
+<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line">        <tt class="py-name">count</tt><tt class="py-op">(</tt><tt class="py-string">'div'</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line">        <tt class="py-name">count</tt><tt class="py-op">(</tt><tt class="py-string">'a'</tt><tt class="py-op">,</tt> <tt class="py-number">2</tt><tt class="py-op">)</tt> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line">        <tt class="py-name">count</tt><tt class="py-op">(</tt><tt class="py-string">'em'</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">)</tt> </tt>
+<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line">        <tt class="py-comment"># Element names are case-insensitive in HTML</tt> </tt>
+<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line">        <tt class="py-name">count</tt><tt class="py-op">(</tt><tt class="py-string">'DIV'</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line">        <tt class="py-comment"># ... but not in XHTML or XML</tt> </tt>
+<a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line">        <tt class="py-name">count</tt><tt class="py-op">(</tt><tt class="py-string">'DIV'</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-name">translator</tt><tt class="py-op">=</tt><tt class="py-string">'xhtml'</tt><tt class="py-op">)</tt> </tt>
+<a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line">        <tt class="py-name">count</tt><tt class="py-op">(</tt><tt class="py-string">'DIV'</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-name">translator</tt><tt class="py-op">=</tt><tt class="py-string">'xml'</tt><tt class="py-op">)</tt> </tt>
+<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line"> </tt>
+<a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line">        <tt class="py-comment"># :contains() is case-insensitive in lxml</tt> </tt>
+<a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line">        <tt class="py-name">count</tt><tt class="py-op">(</tt><tt class="py-string">':contains("link")'</tt><tt class="py-op">,</tt> <tt class="py-number">2</tt><tt class="py-op">)</tt>  <tt class="py-comment"># div, a</tt> </tt>
+<a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line">        <tt class="py-name">count</tt><tt class="py-op">(</tt><tt class="py-string">':contains("LInk")'</tt><tt class="py-op">,</tt> <tt class="py-number">2</tt><tt class="py-op">)</tt> </tt>
+<a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line">        <tt class="py-comment"># Whatever the document language</tt> </tt>
+<a name="L45"></a><tt class="py-lineno">45</tt>  <tt class="py-line">        <tt class="py-name">count</tt><tt class="py-op">(</tt><tt class="py-string">':contains("LInk")'</tt><tt class="py-op">,</tt> <tt class="py-number">2</tt><tt class="py-op">,</tt> <tt class="py-name">translator</tt><tt class="py-op">=</tt><tt class="py-string">'xhtml'</tt><tt class="py-op">)</tt> </tt>
+<a name="L46"></a><tt class="py-lineno">46</tt>  <tt class="py-line">        <tt class="py-name">count</tt><tt class="py-op">(</tt><tt class="py-string">':contains("LInk")'</tt><tt class="py-op">,</tt> <tt class="py-number">2</tt><tt class="py-op">,</tt> <tt class="py-name">translator</tt><tt class="py-op">=</tt><tt class="py-string">'xml'</tt><tt class="py-op">)</tt> </tt>
+<a name="L47"></a><tt class="py-lineno">47</tt>  <tt class="py-line">        <tt class="py-comment"># ... but not in upstream cssselect</tt> </tt>
+<a name="L48"></a><tt class="py-lineno">48</tt>  <tt class="py-line">        <tt class="py-keyword">import</tt> <tt id="link-18" class="py-name"><a title="lxml.cssselect
+lxml.etree._Element.cssselect
+lxml.html.HtmlElement.cssselect
+lxml.html.HtmlMixin.cssselect" class="py-name" href="#" onclick="return doclink('link-18', 'cssselect', 'link-7');">cssselect</a></tt> </tt>
+<a name="L49"></a><tt class="py-lineno">49</tt>  <tt class="py-line">        <tt class="py-name">count</tt><tt class="py-op">(</tt><tt class="py-string">':contains("link")'</tt><tt class="py-op">,</tt> <tt class="py-number">2</tt><tt class="py-op">,</tt> <tt class="py-name">translator</tt><tt class="py-op">=</tt><tt id="link-19" class="py-name"><a title="lxml.cssselect
+lxml.etree._Element.cssselect
+lxml.html.HtmlElement.cssselect
+lxml.html.HtmlMixin.cssselect" class="py-name" href="#" onclick="return doclink('link-19', 'cssselect', 'link-7');">cssselect</a></tt><tt class="py-op">.</tt><tt class="py-name">HTMLTranslator</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L50"></a><tt class="py-lineno">50</tt>  <tt class="py-line">        <tt class="py-name">count</tt><tt class="py-op">(</tt><tt class="py-string">':contains("LInk")'</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-name">translator</tt><tt class="py-op">=</tt><tt id="link-20" class="py-name"><a title="lxml.cssselect
+lxml.etree._Element.cssselect
+lxml.html.HtmlElement.cssselect
+lxml.html.HtmlMixin.cssselect" class="py-name" href="#" onclick="return doclink('link-20', 'cssselect', 'link-7');">cssselect</a></tt><tt class="py-op">.</tt><tt class="py-name">HTMLTranslator</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L51"></a><tt class="py-lineno">51</tt>  <tt class="py-line"> </tt>
+<a name="L52"></a><tt class="py-lineno">52</tt>  <tt class="py-line"> </tt>
+<a name="test_suite"></a><div id="test_suite-def"><a name="L53"></a><tt class="py-lineno">53</tt> <a class="py-toggle" href="#" id="test_suite-toggle" onclick="return toggle('test_suite');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.test_css-module.html#test_suite">test_suite</a><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="test_suite-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="test_suite-expanded"><a name="L54"></a><tt class="py-lineno">54</tt>  <tt class="py-line">    <tt class="py-name">suite</tt> <tt class="py-op">=</tt> <tt class="py-name">unittest</tt><tt class="py-op">.</tt><tt class="py-name">TestSuite</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L55"></a><tt class="py-lineno">55</tt>  <tt class="py-line">    <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L56"></a><tt class="py-lineno">56</tt>  <tt class="py-line">        <tt class="py-keyword">import</tt> <tt id="link-21" class="py-name"><a title="lxml.cssselect
+lxml.etree._Element.cssselect
+lxml.html.HtmlElement.cssselect
+lxml.html.HtmlMixin.cssselect" class="py-name" href="#" onclick="return doclink('link-21', 'cssselect', 'link-7');">cssselect</a></tt> </tt>
+<a name="L57"></a><tt class="py-lineno">57</tt>  <tt class="py-line">    <tt class="py-keyword">except</tt> <tt class="py-name">ImportError</tt><tt class="py-op">:</tt> </tt>
+<a name="L58"></a><tt class="py-lineno">58</tt>  <tt class="py-line">        <tt class="py-comment"># no 'cssselect' installed</tt> </tt>
+<a name="L59"></a><tt class="py-lineno">59</tt>  <tt class="py-line">        <tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-string">"Skipping tests in lxml.cssselect - external cssselect package is not installed"</tt><tt class="py-op">)</tt> </tt>
+<a name="L60"></a><tt class="py-lineno">60</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">suite</tt> </tt>
+<a name="L61"></a><tt class="py-lineno">61</tt>  <tt class="py-line"> </tt>
+<a name="L62"></a><tt class="py-lineno">62</tt>  <tt class="py-line">    <tt class="py-keyword">import</tt> <tt id="link-22" class="py-name"><a title="lxml" class="py-name" href="#" onclick="return doclink('link-22', 'lxml', 'link-0');">lxml</a></tt><tt class="py-op">.</tt><tt id="link-23" class="py-name"><a title="lxml.cssselect
+lxml.etree._Element.cssselect
+lxml.html.HtmlElement.cssselect
+lxml.html.HtmlMixin.cssselect" class="py-name" href="#" onclick="return doclink('link-23', 'cssselect', 'link-7');">cssselect</a></tt> </tt>
+<a name="L63"></a><tt class="py-lineno">63</tt>  <tt class="py-line">    <tt class="py-name">suite</tt><tt class="py-op">.</tt><tt class="py-name">addTests</tt><tt class="py-op">(</tt><tt class="py-name">doctest</tt><tt class="py-op">.</tt><tt class="py-name">DocTestSuite</tt><tt class="py-op">(</tt><tt id="link-24" class="py-name"><a title="lxml" class="py-name" href="#" onclick="return doclink('link-24', 'lxml', 'link-0');">lxml</a></tt><tt class="py-op">.</tt><tt id="link-25" class="py-name"><a title="lxml.cssselect
+lxml.etree._Element.cssselect
+lxml.html.HtmlElement.cssselect
+lxml.html.HtmlMixin.cssselect" class="py-name" href="#" onclick="return doclink('link-25', 'cssselect', 'link-7');">cssselect</a></tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L64"></a><tt class="py-lineno">64</tt>  <tt class="py-line">    <tt class="py-name">suite</tt><tt class="py-op">.</tt><tt class="py-name">addTests</tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt class="py-name">unittest</tt><tt class="py-op">.</tt><tt class="py-name">makeSuite</tt><tt class="py-op">(</tt><tt id="link-26" class="py-name" targets="Class lxml.tests.test_css.CSSTestCase=lxml.tests.test_css.CSSTestCase-class.html"><a title="lxml.tests.test_css.CSSTestCase" class="py-name" href="#" onclick="return doclink('link-26', 'CSSTestCase', 'link-26');">CSSTestCase</a></tt><tt class="py-op">)</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L65"></a><tt class="py-lineno">65</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">suite</tt> </tt>
+</div><a name="L66"></a><tt class="py-lineno">66</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lxml-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="/">lxml API</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Fri Jun 22 18:59:52 2018
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

@@ -1,0 +1,650 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>lxml.isoschematron.Schematron</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lxml-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="/">lxml API</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="lxml-module.html">Package&nbsp;lxml</a> ::
+        <a href="lxml.isoschematron-module.html">Package&nbsp;isoschematron</a> ::
+        Class&nbsp;Schematron
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="lxml.isoschematron.Schematron-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class Schematron</h1><p class="nomargin-top"><span class="codelink"><a href="lxml.isoschematron-pysrc.html#Schematron">source&nbsp;code</a></span></p>
+<pre class="base-tree">
+      object --+    
+               |    
+<a href="lxml.etree._Validator-class.html" onclick="show_private();">etree._Validator</a> --+
+                   |
+                  <strong class="uidshort">Schematron</strong>
+</pre>
+
+<hr />
+<p>An ISO Schematron validator.</p>
+<p>Pass a root Element or an ElementTree to turn it into a validator.
+Alternatively, pass a filename as keyword argument 'file' to parse from
+the file system.</p>
+<p>Schematron is a less well known, but very powerful schema language.
+The main idea is to use the capabilities of XPath to put restrictions on
+the structure and the content of XML documents.</p>
+<p>The standard behaviour is to fail on <tt class="rst-docutils literal"><span class="pre">failed-assert</span></tt> findings only
+(<tt class="rst-docutils literal">ASSERTS_ONLY</tt>).  To change this, you can either pass a report filter
+function to the <tt class="rst-docutils literal">error_finder</tt> parameter (e.g. <tt class="rst-docutils literal">ASSERTS_AND_REPORTS</tt>
+or a custom <tt class="rst-docutils literal">XPath</tt> object), or subclass isoschematron.Schematron for
+complete control of the validation process.</p>
+<p>Built on the Schematron language 'reference' skeleton pure-xslt
+implementation, the validator is created as an XSLT 1.0 stylesheet using
+these steps:</p>
+<blockquote>
+<ol class="rst-arabic simple" start="0">
+<li>(Extract from XML Schema or RelaxNG schema)</li>
+<li>Process inclusions</li>
+<li>Process abstract patterns</li>
+<li>Compile the schematron schema to XSLT</li>
+</ol>
+</blockquote>
+<p>The <tt class="rst-docutils literal">include</tt> and <tt class="rst-docutils literal">expand</tt> keyword arguments can be used to switch off
+steps 1) and 2).
+To set parameters for steps 1), 2) and 3) hand parameter dictionaries to the
+keyword arguments <tt class="rst-docutils literal">include_params</tt>, <tt class="rst-docutils literal">expand_params</tt> or
+<tt class="rst-docutils literal">compile_params</tt>.
+For convenience, the compile-step parameter <tt class="rst-docutils literal">phase</tt> is also exposed as a
+keyword argument <tt class="rst-docutils literal">phase</tt>. This takes precedence if the parameter is also
+given in the parameter dictionary.</p>
+<p>If <tt class="rst-docutils literal">store_schematron</tt> is set to True, the (included-and-expanded)
+schematron document tree is stored and available through the <tt class="rst-docutils literal">schematron</tt>
+property.
+If <tt class="rst-docutils literal">store_xslt</tt> is set to True, the validation XSLT document tree will be
+stored and can be retrieved through the <tt class="rst-docutils literal">validator_xslt</tt> property.
+With <tt class="rst-docutils literal">store_report</tt> set to True (default: False), the resulting validation
+report document gets stored and can be accessed as the <tt class="rst-docutils literal">validation_report</tt>
+property.</p>
+<p>Here is a usage example:</p>
+<pre class="rst-literal-block">
+&gt;&gt;&gt; from lxml import etree
+&gt;&gt;&gt; from lxml.isoschematron import Schematron
+
+&gt;&gt;&gt; schematron = Schematron(etree.XML('''
+... &lt;schema xmlns=&quot;http://purl.oclc.org/dsdl/schematron&quot; &gt;
+...   &lt;pattern id=&quot;id_only_attribute&quot;&gt;
+...     &lt;title&gt;id is the only permitted attribute name&lt;/title&gt;
+...     &lt;rule context=&quot;*&quot;&gt;
+...       &lt;report test=&quot;&#64;*[not(name()='id')]&quot;&gt;Attribute
+...         &lt;name path=&quot;&#64;*[not(name()='id')]&quot;/&gt; is forbidden&lt;name/&gt;
+...       &lt;/report&gt;
+...     &lt;/rule&gt;
+...   &lt;/pattern&gt;
+... &lt;/schema&gt;'''),
+... error_finder=Schematron.ASSERTS_AND_REPORTS)
+
+&gt;&gt;&gt; xml = etree.XML('''
+... &lt;AAA name=&quot;aaa&quot;&gt;
+...   &lt;BBB id=&quot;bbb&quot;/&gt;
+...   &lt;CCC color=&quot;ccc&quot;/&gt;
+... &lt;/AAA&gt;
+... ''')
+
+&gt;&gt;&gt; schematron.validate(xml)
+False
+
+&gt;&gt;&gt; xml = etree.XML('''
+... &lt;AAA id=&quot;aaa&quot;&gt;
+...   &lt;BBB id=&quot;bbb&quot;/&gt;
+...   &lt;CCC/&gt;
+... &lt;/AAA&gt;
+... ''')
+
+&gt;&gt;&gt; schematron.validate(xml)
+True
+</pre>
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_extract"></a><span class="summary-sig-name">_extract</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">element</span>)</span><br />
+      Extract embedded schematron schema from non-schematron host schema.
+This method will only be called by __init__ if the given schema document
+is not a schematron schema by itself.
+Must return a schematron schema document tree or None.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.isoschematron-pysrc.html#Schematron._extract">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lxml.isoschematron.Schematron-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">etree</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">file</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">include</span>=<span class="summary-sig-default">True</span>,
+        <span class="summary-sig-arg">expand</span>=<span class="summary-sig-default">True</span>,
+        <span class="summary-sig-arg">include_params</span>=<span class="summary-sig-default"><code class="variable-group">{</code><code class="variable-group">}</code></span>,
+        <span class="summary-sig-arg">expand_params</span>=<span class="summary-sig-default"><code class="variable-group">{</code><code class="variable-group">}</code></span>,
+        <span class="summary-sig-arg">compile_params</span>=<span class="summary-sig-default"><code class="variable-group">{</code><code class="variable-group">}</code></span>,
+        <span class="summary-sig-arg">store_schematron</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">store_xslt</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">store_report</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">phase</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">error_finder</span>=<span class="summary-sig-default">//svrl:failed-assert</span>)</span><br />
+      x.__init__(...) initializes x; see help(type(x)) for signature</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.isoschematron-pysrc.html#Schematron.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lxml.isoschematron.Schematron-class.html#__call__" class="summary-sig-name">__call__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">etree</span>)</span><br />
+      Validate doc using Schematron.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.isoschematron-pysrc.html#Schematron.__call__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="lxml.etree._Validator-class.html" onclick="show_private();">etree._Validator</a></code></b>:
+      <code><a href="lxml.etree._Validator-class.html#__new__">__new__</a></code>,
+      <code><a href="lxml.etree._Validator-class.html#assertValid">assertValid</a></code>,
+      <code><a href="lxml.etree._Validator-class.html#assert_">assert_</a></code>,
+      <code><a href="lxml.etree._Validator-class.html#validate">validate</a></code>
+      </p>
+    <div class="private">    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="lxml.etree._Validator-class.html" onclick="show_private();">etree._Validator</a></code></b> (private):
+      <code><a href="lxml.etree._Validator-class.html#_append_log_message" onclick="show_private();">_append_log_message</a></code>,
+      <code><a href="lxml.etree._Validator-class.html#_clear_error_log" onclick="show_private();">_clear_error_log</a></code>
+      </p></div>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__repr__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__str__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS VARIABLES ==================== -->
+<a name="section-ClassVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassVariables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="_domain"></a><span class="summary-name">_domain</span> = <code title="28">28</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="_level"></a><span class="summary-name">_level</span> = <code title="2">2</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="_error_type"></a><span class="summary-name">_error_type</span> = <code title="4000">4000</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="ASSERTS_ONLY"></a><span class="summary-name">ASSERTS_ONLY</span> = <code title="//svrl:failed-assert">//svrl:failed-assert</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.isoschematron.Schematron-class.html#ASSERTS_AND_REPORTS" class="summary-name">ASSERTS_AND_REPORTS</a> = <code title="//svrl:failed-assert | //svrl:successful-report">//svrl:failed-assert | //svrl:successful<code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="_extract_xsd"></a><span class="summary-name">_extract_xsd</span> = <code title="&lt;lxml.etree.XSLT object&gt;">&lt;lxml.etree.XSLT object&gt;</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="_extract_rng"></a><span class="summary-name">_extract_rng</span> = <code title="&lt;lxml.etree.XSLT object&gt;">&lt;lxml.etree.XSLT object&gt;</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="_include"></a><span class="summary-name">_include</span> = <code title="&lt;lxml.etree.XSLT object&gt;">&lt;lxml.etree.XSLT object&gt;</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="_expand"></a><span class="summary-name">_expand</span> = <code title="&lt;lxml.etree.XSLT object&gt;">&lt;lxml.etree.XSLT object&gt;</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="_compile"></a><span class="summary-name">_compile</span> = <code title="&lt;lxml.etree.XSLT object&gt;">&lt;lxml.etree.XSLT object&gt;</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="_validation_errors"></a><span class="summary-name">_validation_errors</span> = <code title="//svrl:failed-assert">//svrl:failed-assert</code>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.isoschematron.Schematron-class.html#schematron" class="summary-name">schematron</a><br />
+      ISO-schematron schema document (None if object has been initialized
+with store_schematron=False).
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.isoschematron.Schematron-class.html#validator_xslt" class="summary-name">validator_xslt</a><br />
+      ISO-schematron skeleton implementation XSLT validator document (None
+if object has been initialized with store_xslt=False).
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.isoschematron.Schematron-class.html#validation_report" class="summary-name">validation_report</a><br />
+      ISO-schematron validation result report (None if result-storing has
+been turned off).
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="lxml.etree._Validator-class.html" onclick="show_private();">etree._Validator</a></code></b>:
+      <code><a href="lxml.etree._Validator-class.html#error_log">error_log</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">etree</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">file</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">include</span>=<span class="sig-default">True</span>,
+        <span class="sig-arg">expand</span>=<span class="sig-default">True</span>,
+        <span class="sig-arg">include_params</span>=<span class="sig-default"><code class="variable-group">{</code><code class="variable-group">}</code></span>,
+        <span class="sig-arg">expand_params</span>=<span class="sig-default"><code class="variable-group">{</code><code class="variable-group">}</code></span>,
+        <span class="sig-arg">compile_params</span>=<span class="sig-default"><code class="variable-group">{</code><code class="variable-group">}</code></span>,
+        <span class="sig-arg">store_schematron</span>=<span class="sig-default">False</span>,
+        <span class="sig-arg">store_xslt</span>=<span class="sig-default">False</span>,
+        <span class="sig-arg">store_report</span>=<span class="sig-default">False</span>,
+        <span class="sig-arg">phase</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">error_finder</span>=<span class="sig-default">//svrl:failed-assert</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lxml.isoschematron-pysrc.html#Schematron.__init__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  x.__init__(...) initializes x; see help(type(x)) for signature
+  <dl class="fields">
+    <dt>Overrides:
+        object.__init__
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="__call__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__call__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">etree</span>)</span>
+    <br /><em class="fname">(Call operator)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lxml.isoschematron-pysrc.html#Schematron.__call__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Validate doc using Schematron.</p>
+<p>Returns true if document is valid, false if not.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== CLASS VARIABLE DETAILS ==================== -->
+<a name="section-ClassVariableDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Variable Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassVariableDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="ASSERTS_AND_REPORTS"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">ASSERTS_AND_REPORTS</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+//svrl:failed-assert | //svrl:successful-report
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== PROPERTY DETAILS ==================== -->
+<a name="section-PropertyDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Property Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-PropertyDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="schematron"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">schematron</h3>
+  ISO-schematron schema document (None if object has been initialized
+with store_schematron=False).
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>.schematron(<span class="summary-sig-arg">self</span>)</span>
+        - ISO-schematron schema document (None if object has been initialized
+with store_schematron=False).
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="validator_xslt"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">validator_xslt</h3>
+  ISO-schematron skeleton implementation XSLT validator document (None
+if object has been initialized with store_xslt=False).
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>.validator_xslt(<span class="summary-sig-arg">self</span>)</span>
+        - ISO-schematron skeleton implementation XSLT validator document (None
+if object has been initialized with store_xslt=False).
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="validation_report"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">validation_report</h3>
+  ISO-schematron validation result report (None if result-storing has
+been turned off).
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>.validation_report(<span class="summary-sig-arg">self</span>)</span>
+        - ISO-schematron validation result report (None if result-storing has
+been turned off).
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lxml-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="/">lxml API</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Fri Jun 22 18:59:52 2018
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

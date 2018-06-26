@@ -1,0 +1,703 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.12: http://docutils.sourceforge.net/" />
+<title>lxml.html</title>
+<meta name="author" content="Ian Bicking" />
+<link rel="stylesheet" href="style.css" type="text/css" />
+<script type="text/javascript">
+function trigger_menu(event) {
+    var sidemenu = document.getElementById("sidemenu");
+    var classes = sidemenu.getAttribute("class");
+    classes = (classes.indexOf(" visible") === -1) ? classes + " visible" : classes.replace(" visible", "");
+    sidemenu.setAttribute("class", classes);
+    event.preventDefault();
+    event.stopPropagation();
+}
+function hide_menu() {
+    var sidemenu = document.getElementById("sidemenu");
+    var classes = sidemenu.getAttribute("class");
+    if (classes.indexOf(" visible") !== -1) {
+        sidemenu.setAttribute("class", classes.replace(" visible", ""));
+    }
+}
+</script><meta content="width=device-width, initial-scale=1" name="viewport" /></head>
+<body onclick="hide_menu()">
+<div class="document" id="lxml-html">
+<div class="sidemenu" id="sidemenu"><div class="menutrigger" onclick="trigger_menu(event)">Menu</div><div class="menu"><ul id="lxml-section"><li><span class="section title">lxml</span><ul class="menu foreign" id="index-menu"><li class="menu title"><a href="index.html">lxml</a><ul class="submenu"><li class="menu item"><a href="index.html#introduction">Introduction</a></li><li class="menu item"><a href="index.html#support-the-project">Support the project</a></li><li class="menu item"><a href="index.html#documentation">Documentation</a></li><li class="menu item"><a href="index.html#download">Download</a></li><li class="menu item"><a href="index.html#mailing-list">Mailing list</a></li><li class="menu item"><a href="index.html#bug-tracker">Bug tracker</a></li><li class="menu item"><a href="index.html#license">License</a></li><li class="menu item"><a href="index.html#old-versions">Old Versions</a></li><li class="menu item"><a href="index.html#docutils-system-messages">Docutils System Messages</a></li><li class="menu item"><a href="index.html#legal-notice-for-donations">Legal Notice for Donations</a></li></ul></li></ul><ul class="menu foreign" id="intro-menu"><li class="menu title"><a href="intro.html">Why lxml?</a><ul class="submenu"><li class="menu item"><a href="intro.html#motto">Motto</a></li><li class="menu item"><a href="intro.html#aims">Aims</a></li></ul></li></ul><ul class="menu foreign" id="installation-menu"><li class="menu title"><a href="installation.html">Installing lxml</a><ul class="submenu"><li class="menu item"><a href="installation.html#where-to-get-it">Where to get it</a></li><li class="menu item"><a href="installation.html#requirements">Requirements</a></li><li class="menu item"><a href="installation.html#installation">Installation</a></li><li class="menu item"><a href="installation.html#building-lxml-from-dev-sources">Building lxml from dev sources</a></li><li class="menu item"><a href="installation.html#using-lxml-with-python-libxml2">Using lxml with python-libxml2</a></li><li class="menu item"><a href="installation.html#source-builds-on-ms-windows">Source builds on MS Windows</a></li><li class="menu item"><a href="installation.html#source-builds-on-macos-x">Source builds on MacOS-X</a></li></ul></li></ul><ul class="menu foreign" id="performance-menu"><li class="menu title"><a href="performance.html">Benchmarks and Speed</a><ul class="submenu"><li class="menu item"><a href="performance.html#general-notes">General notes</a></li><li class="menu item"><a href="performance.html#how-to-read-the-timings">How to read the timings</a></li><li class="menu item"><a href="performance.html#parsing-and-serialising">Parsing and Serialising</a></li><li class="menu item"><a href="performance.html#the-elementtree-api">The ElementTree API</a></li><li class="menu item"><a href="performance.html#xpath">XPath</a></li><li class="menu item"><a href="performance.html#a-longer-example">A longer example</a></li><li class="menu item"><a href="performance.html#lxml-objectify">lxml.objectify</a></li></ul></li></ul><ul class="menu foreign" id="compatibility-menu"><li class="menu title"><a href="compatibility.html">ElementTree compatibility of lxml.etree</a></li></ul><ul class="menu foreign" id="FAQ-menu"><li class="menu title"><a href="FAQ.html">lxml FAQ - Frequently Asked Questions</a><ul class="submenu"><li class="menu item"><a href="FAQ.html#general-questions">General Questions</a></li><li class="menu item"><a href="FAQ.html#installation">Installation</a></li><li class="menu item"><a href="FAQ.html#contributing">Contributing</a></li><li class="menu item"><a href="FAQ.html#bugs">Bugs</a></li><li class="menu item"><a href="FAQ.html#id1">Threading</a></li><li class="menu item"><a href="FAQ.html#parsing-and-serialisation">Parsing and Serialisation</a></li><li class="menu item"><a href="FAQ.html#xpath-and-document-traversal">XPath and Document Traversal</a></li></ul></li></ul></li></ul><ul id="Developing with lxml-section"><li><span class="section title">Developing with lxml</span><ul class="menu foreign" id="tutorial-menu"><li class="menu title"><a href="tutorial.html">The lxml.etree Tutorial</a><ul class="submenu"><li class="menu item"><a href="tutorial.html#the-element-class">The Element class</a></li><li class="menu item"><a href="tutorial.html#the-elementtree-class">The ElementTree class</a></li><li class="menu item"><a href="tutorial.html#parsing-from-strings-and-files">Parsing from strings and files</a></li><li class="menu item"><a href="tutorial.html#namespaces">Namespaces</a></li><li class="menu item"><a href="tutorial.html#the-e-factory">The E-factory</a></li><li class="menu item"><a href="tutorial.html#elementpath">ElementPath</a></li></ul></li></ul><ul class="menu foreign" id="api index-menu"><li class="menu title"><a href="api/index.html">API reference</a></li></ul><ul class="menu foreign" id="api-menu"><li class="menu title"><a href="api.html">APIs specific to lxml.etree</a><ul class="submenu"><li class="menu item"><a href="api.html#lxml-etree">lxml.etree</a></li><li class="menu item"><a href="api.html#other-element-apis">Other Element APIs</a></li><li class="menu item"><a href="api.html#trees-and-documents">Trees and Documents</a></li><li class="menu item"><a href="api.html#iteration">Iteration</a></li><li class="menu item"><a href="api.html#error-handling-on-exceptions">Error handling on exceptions</a></li><li class="menu item"><a href="api.html#error-logging">Error logging</a></li><li class="menu item"><a href="api.html#serialisation">Serialisation</a></li><li class="menu item"><a href="api.html#incremental-xml-generation">Incremental XML generation</a></li><li class="menu item"><a href="api.html#cdata">CDATA</a></li><li class="menu item"><a href="api.html#xinclude-and-elementinclude">XInclude and ElementInclude</a></li><li class="menu item"><a href="api.html#write-c14n-on-elementtree">write_c14n on ElementTree</a></li></ul></li></ul><ul class="menu foreign" id="parsing-menu"><li class="menu title"><a href="parsing.html">Parsing XML and HTML with lxml</a><ul class="submenu"><li class="menu item"><a href="parsing.html#parsers">Parsers</a></li><li class="menu item"><a href="parsing.html#the-target-parser-interface">The target parser interface</a></li><li class="menu item"><a href="parsing.html#the-feed-parser-interface">The feed parser interface</a></li><li class="menu item"><a href="parsing.html#incremental-event-parsing">Incremental event parsing</a></li><li class="menu item"><a href="parsing.html#iterparse-and-iterwalk">iterparse and iterwalk</a></li><li class="menu item"><a href="parsing.html#python-unicode-strings">Python unicode strings</a></li></ul></li></ul><ul class="menu foreign" id="validation-menu"><li class="menu title"><a href="validation.html">Validation with lxml</a><ul class="submenu"><li class="menu item"><a href="validation.html#validation-at-parse-time">Validation at parse time</a></li><li class="menu item"><a href="validation.html#id1">DTD</a></li><li class="menu item"><a href="validation.html#relaxng">RelaxNG</a></li><li class="menu item"><a href="validation.html#xmlschema">XMLSchema</a></li><li class="menu item"><a href="validation.html#id2">Schematron</a></li><li class="menu item"><a href="validation.html#id3">(Pre-ISO-Schematron)</a></li></ul></li></ul><ul class="menu foreign" id="xpathxslt-menu"><li class="menu title"><a href="xpathxslt.html">XPath and XSLT with lxml</a><ul class="submenu"><li class="menu item"><a href="xpathxslt.html#xpath">XPath</a></li><li class="menu item"><a href="xpathxslt.html#xslt">XSLT</a></li></ul></li></ul><ul class="menu foreign" id="objectify-menu"><li class="menu title"><a href="objectify.html">lxml.objectify</a><ul class="submenu"><li class="menu item"><a href="objectify.html#the-lxml-objectify-api">The lxml.objectify API</a></li><li class="menu item"><a href="objectify.html#asserting-a-schema">Asserting a Schema</a></li><li class="menu item"><a href="objectify.html#objectpath">ObjectPath</a></li><li class="menu item"><a href="objectify.html#python-data-types">Python data types</a></li><li class="menu item"><a href="objectify.html#how-data-types-are-matched">How data types are matched</a></li><li class="menu item"><a href="objectify.html#what-is-different-from-lxml-etree">What is different from lxml.etree?</a></li></ul></li></ul><ul class="menu current" id="lxmlhtml-menu"><li class="menu title"><a href="lxmlhtml.html">lxml.html</a><ul class="submenu"><li class="menu item"><a href="lxmlhtml.html#parsing-html">Parsing HTML</a></li><li class="menu item"><a href="lxmlhtml.html#html-element-methods">HTML Element Methods</a></li><li class="menu item"><a href="lxmlhtml.html#running-html-doctests">Running HTML doctests</a></li><li class="menu item"><a href="lxmlhtml.html#creating-html-with-the-e-factory">Creating HTML with the E-factory</a></li><li class="menu item"><a href="lxmlhtml.html#working-with-links">Working with links</a></li><li class="menu item"><a href="lxmlhtml.html#forms">Forms</a></li><li class="menu item"><a href="lxmlhtml.html#cleaning-up-html">Cleaning up HTML</a></li><li class="menu item"><a href="lxmlhtml.html#html-diff">HTML Diff</a></li><li class="menu item"><a href="lxmlhtml.html#examples">Examples</a></li></ul></li></ul><ul class="menu foreign" id="cssselect-menu"><li class="menu title"><a href="cssselect.html">lxml.cssselect</a><ul class="submenu"><li class="menu item"><a href="cssselect.html#the-cssselector-class">The CSSSelector class</a></li><li class="menu item"><a href="cssselect.html#the-cssselect-method">The cssselect method</a></li><li class="menu item"><a href="cssselect.html#supported-selectors">Supported Selectors</a></li><li class="menu item"><a href="cssselect.html#namespaces">Namespaces</a></li></ul></li></ul><ul class="menu foreign" id="elementsoup-menu"><li class="menu title"><a href="elementsoup.html">BeautifulSoup Parser</a><ul class="submenu"><li class="menu item"><a href="elementsoup.html#parsing-with-the-soupparser">Parsing with the soupparser</a></li><li class="menu item"><a href="elementsoup.html#entity-handling">Entity handling</a></li><li class="menu item"><a href="elementsoup.html#using-soupparser-as-a-fallback">Using soupparser as a fallback</a></li><li class="menu item"><a href="elementsoup.html#using-only-the-encoding-detection">Using only the encoding detection</a></li></ul></li></ul><ul class="menu foreign" id="html5parser-menu"><li class="menu title"><a href="html5parser.html">html5lib Parser</a><ul class="submenu"><li class="menu item"><a href="html5parser.html#differences-to-regular-html-parsing">Differences to regular HTML parsing</a></li><li class="menu item"><a href="html5parser.html#function-reference">Function Reference</a></li></ul></li></ul></li></ul><ul id="Extending lxml-section"><li><span class="section title">Extending lxml</span><ul class="menu foreign" id="resolvers-menu"><li class="menu title"><a href="resolvers.html">Document loading and URL resolving</a><ul class="submenu"><li class="menu item"><a href="resolvers.html#xml-catalogs">XML Catalogs</a></li><li class="menu item"><a href="resolvers.html#uri-resolvers">URI Resolvers</a></li><li class="menu item"><a href="resolvers.html#document-loading-in-context">Document loading in context</a></li><li class="menu item"><a href="resolvers.html#i-o-access-control-in-xslt">I/O access control in XSLT</a></li></ul></li></ul><ul class="menu foreign" id="extensions-menu"><li class="menu title"><a href="extensions.html">Python extensions for XPath and XSLT</a><ul class="submenu"><li class="menu item"><a href="extensions.html#xpath-extension-functions">XPath Extension functions</a></li><li class="menu item"><a href="extensions.html#xslt-extension-elements">XSLT extension elements</a></li></ul></li></ul><ul class="menu foreign" id="element classes-menu"><li class="menu title"><a href="element_classes.html">Using custom Element classes in lxml</a><ul class="submenu"><li class="menu item"><a href="element_classes.html#background-on-element-proxies">Background on Element proxies</a></li><li class="menu item"><a href="element_classes.html#element-initialization">Element initialization</a></li><li class="menu item"><a href="element_classes.html#setting-up-a-class-lookup-scheme">Setting up a class lookup scheme</a></li><li class="menu item"><a href="element_classes.html#generating-xml-with-custom-classes">Generating XML with custom classes</a></li><li class="menu item"><a href="element_classes.html#id1">Implementing namespaces</a></li></ul></li></ul><ul class="menu foreign" id="sax-menu"><li class="menu title"><a href="sax.html">Sax support</a><ul class="submenu"><li class="menu item"><a href="sax.html#building-a-tree-from-sax-events">Building a tree from SAX events</a></li><li class="menu item"><a href="sax.html#producing-sax-events-from-an-elementtree-or-element">Producing SAX events from an ElementTree or Element</a></li><li class="menu item"><a href="sax.html#interfacing-with-pulldom-minidom">Interfacing with pulldom/minidom</a></li></ul></li></ul><ul class="menu foreign" id="capi-menu"><li class="menu title"><a href="capi.html">The public C-API of lxml.etree</a><ul class="submenu"><li class="menu item"><a href="capi.html#passing-generated-trees-through-python">Passing generated trees through Python</a></li><li class="menu item"><a href="capi.html#writing-external-modules-in-cython">Writing external modules in Cython</a></li><li class="menu item"><a href="capi.html#writing-external-modules-in-c">Writing external modules in C</a></li></ul></li></ul></li></ul><ul id="Developing lxml-section"><li><span class="section title">Developing lxml</span><ul class="menu foreign" id="build-menu"><li class="menu title"><a href="build.html">How to build lxml from source</a><ul class="submenu"><li class="menu item"><a href="build.html#cython">Cython</a></li><li class="menu item"><a href="build.html#github-git-and-hg">Github, git and hg</a></li><li class="menu item"><a href="build.html#building-the-sources">Building the sources</a></li><li class="menu item"><a href="build.html#running-the-tests-and-reporting-errors">Running the tests and reporting errors</a></li><li class="menu item"><a href="build.html#building-an-egg-or-wheel">Building an egg or wheel</a></li><li class="menu item"><a href="build.html#building-lxml-on-macos-x">Building lxml on MacOS-X</a></li><li class="menu item"><a href="build.html#static-linking-on-windows">Static linking on Windows</a></li><li class="menu item"><a href="build.html#building-debian-packages-from-svn-sources">Building Debian packages from SVN sources</a></li></ul></li></ul><ul class="menu foreign" id="lxml source howto-menu"><li class="menu title"><a href="lxml-source-howto.html">How to read the source of lxml</a><ul class="submenu"><li class="menu item"><a href="lxml-source-howto.html#what-is-cython">What is Cython?</a></li><li class="menu item"><a href="lxml-source-howto.html#where-to-start">Where to start?</a></li><li class="menu item"><a href="lxml-source-howto.html#lxml-etree">lxml.etree</a></li><li class="menu item"><a href="lxml-source-howto.html#python-modules">Python modules</a></li><li class="menu item"><a href="lxml-source-howto.html#lxml-objectify">lxml.objectify</a></li><li class="menu item"><a href="lxml-source-howto.html#lxml-html">lxml.html</a></li></ul></li></ul><ul class="menu foreign" id="changes 4 2 2-menu"><li class="menu title"><a href="changes-4.2.2.html">Release Changelog</a></li></ul><ul class="menu foreign" id="credits-menu"><li class="menu title"><a href="credits.html">Credits</a><ul class="submenu"><li class="menu item"><a href="credits.html#main-contributors">Main contributors</a></li><li class="menu item"><a href="credits.html#special-thanks-goes-to">Special thanks goes to:</a></li></ul></li></ul></li><li><a href="/sitemap.html">Sitemap</a></li></ul></div></div><h1 class="title">lxml.html</h1>
+<table class="docinfo" frame="void" rules="none">
+<col class="docinfo-name" />
+<col class="docinfo-content" />
+<tbody valign="top">
+<tr><th class="docinfo-name">Author:</th>
+<td>Ian Bicking</td></tr>
+</tbody>
+</table>
+<p>Since version 2.0, lxml comes with a dedicated Python package for
+dealing with HTML: <tt class="docutils literal">lxml.html</tt>.  It is based on lxml's HTML parser,
+but provides a special Element API for HTML elements, as well as a
+number of utilities for common HTML processing tasks.</p>
+<div class="contents topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#parsing-html" id="id1">Parsing HTML</a><ul>
+<li><a class="reference internal" href="#parsing-html-fragments" id="id2">Parsing HTML fragments</a></li>
+<li><a class="reference internal" href="#really-broken-pages" id="id3">Really broken pages</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#html-element-methods" id="id4">HTML Element Methods</a></li>
+<li><a class="reference internal" href="#running-html-doctests" id="id5">Running HTML doctests</a></li>
+<li><a class="reference internal" href="#creating-html-with-the-e-factory" id="id6">Creating HTML with the E-factory</a><ul>
+<li><a class="reference internal" href="#viewing-your-html" id="id7">Viewing your HTML</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#working-with-links" id="id8">Working with links</a><ul>
+<li><a class="reference internal" href="#functions" id="id9">Functions</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#forms" id="id10">Forms</a><ul>
+<li><a class="reference internal" href="#form-filling-example" id="id11">Form Filling Example</a></li>
+<li><a class="reference internal" href="#form-submission" id="id12">Form Submission</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cleaning-up-html" id="id13">Cleaning up HTML</a><ul>
+<li><a class="reference internal" href="#autolink" id="id14">autolink</a></li>
+<li><a class="reference internal" href="#wordwrap" id="id15">wordwrap</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#html-diff" id="id16">HTML Diff</a></li>
+<li><a class="reference internal" href="#examples" id="id17">Examples</a><ul>
+<li><a class="reference internal" href="#microformat-example" id="id18">Microformat Example</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>The main API is based on the <a class="reference external" href="tutorial.html">lxml.etree</a> API, and thus, on the <a class="reference external" href="http://effbot.org/zone/element-index.htm">ElementTree</a>
+API.</p>
+<div class="section" id="parsing-html">
+<h1>Parsing HTML</h1>
+<div class="section" id="parsing-html-fragments">
+<h2>Parsing HTML fragments</h2>
+<p>There are several functions available to parse HTML:</p>
+<dl class="docutils">
+<dt><tt class="docutils literal">parse(filename_url_or_file)</tt>:</dt>
+<dd><p class="first">Parses the named file or url, or if the object has a <tt class="docutils literal">.read()</tt>
+method, parses from that.</p>
+<p class="last">If you give a URL, or if the object has a <tt class="docutils literal">.geturl()</tt> method (as
+file-like objects from <tt class="docutils literal">urllib.urlopen()</tt> have), then that URL
+is used as the base URL.  You can also provide an explicit
+<tt class="docutils literal">base_url</tt> keyword argument.</p>
+</dd>
+<dt><tt class="docutils literal">document_fromstring(string)</tt>:</dt>
+<dd>Parses a document from the given string.  This always creates a
+correct HTML document, which means the parent node is <tt class="docutils literal">&lt;html&gt;</tt>,
+and there is a body and possibly a head.</dd>
+<dt><tt class="docutils literal">fragment_fromstring(string, create_parent=False)</tt>:</dt>
+<dd>Returns an HTML fragment from a string.  The fragment must contain
+just a single element, unless <tt class="docutils literal">create_parent</tt> is given;
+e.g., <tt class="docutils literal">fragment_fromstring(string, <span class="pre">create_parent='div')</span></tt> will
+wrap the element in a <tt class="docutils literal">&lt;div&gt;</tt>.</dd>
+<dt><tt class="docutils literal">fragments_fromstring(string)</tt>:</dt>
+<dd>Returns a list of the elements found in the fragment.</dd>
+<dt><tt class="docutils literal">fromstring(string)</tt>:</dt>
+<dd>Returns <tt class="docutils literal">document_fromstring</tt> or <tt class="docutils literal">fragment_fromstring</tt>, based
+on whether the string looks like a full document, or just a
+fragment.</dd>
+</dl>
+</div>
+<div class="section" id="really-broken-pages">
+<h2>Really broken pages</h2>
+<p>The normal HTML parser is capable of handling broken HTML, but for
+pages that are far enough from HTML to call them 'tag soup', it may
+still fail to parse the page in a useful way.  A way to deal with this
+is <a class="reference external" href="elementsoup.html">ElementSoup</a>, which deploys the well-known <a class="reference external" href="http://www.crummy.com/software/BeautifulSoup/">BeautifulSoup</a> parser to
+build an lxml HTML tree.</p>
+<p>However, note that the most common problem with web pages is the lack
+of (or the existence of incorrect) encoding declarations.  It is
+therefore often sufficient to only use the encoding detection of
+BeautifulSoup, called UnicodeDammit, and to leave the rest to lxml's
+own HTML parser, which is several times faster.</p>
+</div>
+</div>
+<div class="section" id="html-element-methods">
+<h1>HTML Element Methods</h1>
+<p>HTML elements have all the methods that come with ElementTree, but
+also include some extra methods:</p>
+<dl class="docutils">
+<dt><tt class="docutils literal">.drop_tree()</tt>:</dt>
+<dd>Drops the element and all its children.  Unlike
+<tt class="docutils literal"><span class="pre">el.getparent().remove(el)</span></tt> this does <em>not</em> remove the tail
+text; with <tt class="docutils literal">drop_tree</tt> the tail text is merged with the previous
+element.</dd>
+<dt><tt class="docutils literal">.drop_tag()</tt>:</dt>
+<dd>Drops the tag, but keeps its children and text.</dd>
+<dt><tt class="docutils literal">.find_class(class_name)</tt>:</dt>
+<dd>Returns a list of all the elements with the given CSS class name.
+Note that class names are space separated in HTML, so
+<tt class="docutils literal"><span class="pre">doc.find_class_name('highlight')</span></tt> will find an element like
+<tt class="docutils literal">&lt;div <span class="pre">class="sidebar</span> highlight"&gt;</tt>.  Class names <em>are</em> case
+sensitive.</dd>
+<dt><tt class="docutils literal">.find_rel_links(rel)</tt>:</dt>
+<dd>Returns a list of all the <tt class="docutils literal">&lt;a <span class="pre">rel="{rel}"&gt;</span></tt> elements.  E.g.,
+<tt class="docutils literal"><span class="pre">doc.find_rel_links('tag')</span></tt> returns all the links <a class="reference external" href="http://microformats.org/wiki/rel-tag">marked as
+tags</a>.</dd>
+<dt><tt class="docutils literal">.get_element_by_id(id, default=None)</tt>:</dt>
+<dd>Return the element with the given <tt class="docutils literal">id</tt>, or the <tt class="docutils literal">default</tt> if
+none is found.  If there are multiple elements with the same id
+(which there shouldn't be, but there often is), this returns only
+the first.</dd>
+<dt><tt class="docutils literal">.text_content()</tt>:</dt>
+<dd>Returns the text content of the element, including the text
+content of its children, with no markup.</dd>
+<dt><tt class="docutils literal">.cssselect(expr)</tt>:</dt>
+<dd>Select elements from this element and its children, using a CSS
+selector expression.  (Note that <tt class="docutils literal">.xpath(expr)</tt> is also
+available as on all lxml elements.)</dd>
+<dt><tt class="docutils literal">.label</tt>:</dt>
+<dd>Returns the corresponding <tt class="docutils literal">&lt;label&gt;</tt> element for this element, if
+any exists (None if there is none).  Label elements have a
+<tt class="docutils literal">label.for_element</tt> attribute that points back to the element.</dd>
+<dt><tt class="docutils literal">.base_url</tt>:</dt>
+<dd>The base URL for this element, if one was saved from the parsing.
+This attribute is not settable.  Is None when no base URL was
+saved.</dd>
+<dt><tt class="docutils literal">.classes</tt>:</dt>
+<dd>Returns a set-like object that allows accessing and modifying the
+names in the 'class' attribute of the element.  (New in lxml 3.5).</dd>
+<dt><tt class="docutils literal">.set(key, value=None)</tt>:</dt>
+<dd>Sets an HTML attribute.  If no value is given, or if the value is
+<tt class="docutils literal">None</tt>, it creates a boolean attribute like <tt class="docutils literal">&lt;form <span class="pre">novalidate&gt;&lt;/form&gt;</span></tt>
+or <tt class="docutils literal">&lt;div <span class="pre">custom-attribute&gt;&lt;/div&gt;</span></tt>.  In XML, attributes must
+have at least the empty string as their value like <tt class="docutils literal">&lt;form
+<span class="pre">novalidate=""&gt;&lt;/form&gt;</span></tt>, but HTML boolean attributes can also be
+just present or absent from an element without having a value.</dd>
+</dl>
+</div>
+<div class="section" id="running-html-doctests">
+<h1>Running HTML doctests</h1>
+<p>One of the interesting modules in the <tt class="docutils literal">lxml.html</tt> package deals with
+doctests.  It can be hard to compare two HTML pages for equality, as
+whitespace differences aren't meaningful and the structural formatting
+can differ.  This is even more a problem in doctests, where output is
+tested for equality and small differences in whitespace or the order
+of attributes can let a test fail.  And given the verbosity of
+tag-based languages, it may take more than a quick look to find the
+actual differences in the doctest output.</p>
+<p>Luckily, lxml provides the <tt class="docutils literal">lxml.doctestcompare</tt> module that
+supports relaxed comparison of XML and HTML pages and provides a
+readable diff in the output when a test fails.  The HTML comparison is
+most easily used by importing the <tt class="docutils literal">usedoctest</tt> module in a doctest:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">lxml.html.usedoctest</span>
+</pre></div>
+<p>Now, if you have an HTML document and want to compare it to an expected result
+document in a doctest, you can do the following:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">lxml.html</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">html</span> <span class="o">=</span> <span class="n">lxml</span><span class="o">.</span><span class="n">html</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="s1">'''</span><span class="se">\</span>
+<span class="gp">... </span><span class="s1">   &lt;html&gt;&lt;body onload="" color="white"&gt;</span>
+<span class="gp">... </span><span class="s1">     &lt;p&gt;Hi  !&lt;/p&gt;</span>
+<span class="gp">... </span><span class="s1">   &lt;/body&gt;&lt;/html&gt;</span>
+<span class="gp">... </span><span class="s1">'''</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">lxml</span><span class="o">.</span><span class="n">html</span><span class="o">.</span><span class="n">tostring</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
+<span class="go">&lt;html&gt;&lt;body onload="" color="white"&gt;&lt;p&gt;Hi !&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">lxml</span><span class="o">.</span><span class="n">html</span><span class="o">.</span><span class="n">tostring</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
+<span class="go">&lt;html&gt; &lt;body color="white" onload=""&gt; &lt;p&gt;Hi    !&lt;/p&gt; &lt;/body&gt; &lt;/html&gt;</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">lxml</span><span class="o">.</span><span class="n">html</span><span class="o">.</span><span class="n">tostring</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
+<span class="go">&lt;html&gt;</span>
+<span class="go">  &lt;body color="white" onload=""&gt;</span>
+<span class="go">    &lt;p&gt;Hi !&lt;/p&gt;</span>
+<span class="go">  &lt;/body&gt;</span>
+<span class="go">&lt;/html&gt;</span>
+</pre></div>
+<p>In documentation, you would likely prefer the pretty printed HTML output, as
+it is the most readable.  However, the three documents are equivalent from the
+point of view of an HTML tool, so the doctest will silently accept any of the
+above.  This allows you to concentrate on readability in your doctests, even
+if the real output is a straight ugly HTML one-liner.</p>
+<p>Note that there is also an <tt class="docutils literal">lxml.usedoctest</tt> module which you can
+import for XML comparisons.  The HTML parser notably ignores
+namespaces and some other XMLisms.</p>
+</div>
+<div class="section" id="creating-html-with-the-e-factory">
+<h1>Creating HTML with the E-factory</h1>
+<p>lxml.html comes with a predefined HTML vocabulary for the <a class="reference external" href="http://online.effbot.org/2006_11_01_archive.htm#et-builder">E-factory</a>,
+originally written by Fredrik Lundh.  This allows you to quickly generate HTML
+pages and fragments:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">lxml.html</span> <span class="kn">import</span> <span class="n">builder</span> <span class="k">as</span> <span class="n">E</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">lxml.html</span> <span class="kn">import</span> <span class="n">usedoctest</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">html</span> <span class="o">=</span> <span class="n">E</span><span class="o">.</span><span class="n">HTML</span><span class="p">(</span>
+<span class="gp">... </span>  <span class="n">E</span><span class="o">.</span><span class="n">HEAD</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">E</span><span class="o">.</span><span class="n">LINK</span><span class="p">(</span><span class="n">rel</span><span class="o">=</span><span class="s2">"stylesheet"</span><span class="p">,</span> <span class="n">href</span><span class="o">=</span><span class="s2">"great.css"</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s2">"text/css"</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="n">E</span><span class="o">.</span><span class="n">TITLE</span><span class="p">(</span><span class="s2">"Best Page Ever"</span><span class="p">)</span>
+<span class="gp">... </span>  <span class="p">),</span>
+<span class="gp">... </span>  <span class="n">E</span><span class="o">.</span><span class="n">BODY</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">E</span><span class="o">.</span><span class="n">H1</span><span class="p">(</span><span class="n">E</span><span class="o">.</span><span class="n">CLASS</span><span class="p">(</span><span class="s2">"heading"</span><span class="p">),</span> <span class="s2">"Top News"</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="n">E</span><span class="o">.</span><span class="n">P</span><span class="p">(</span><span class="s2">"World News only on this page"</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">"font-size: 200%"</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="s2">"Ah, and here's some more text, by the way."</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">lxml</span><span class="o">.</span><span class="n">html</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="s2">"&lt;p&gt;... and this is a parsed fragment ...&lt;/p&gt;"</span><span class="p">)</span>
+<span class="gp">... </span>  <span class="p">)</span>
+<span class="gp">... </span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">lxml</span><span class="o">.</span><span class="n">html</span><span class="o">.</span><span class="n">tostring</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
+<span class="go">&lt;html&gt;</span>
+<span class="go">  &lt;head&gt;</span>
+<span class="go">    &lt;link href="great.css" rel="stylesheet" type="text/css"&gt;</span>
+<span class="go">    &lt;title&gt;Best Page Ever&lt;/title&gt;</span>
+<span class="go">  &lt;/head&gt;</span>
+<span class="go">  &lt;body&gt;</span>
+<span class="go">    &lt;h1 class="heading"&gt;Top News&lt;/h1&gt;</span>
+<span class="go">    &lt;p style="font-size: 200%"&gt;World News only on this page&lt;/p&gt;</span>
+<span class="go">    Ah, and here's some more text, by the way.</span>
+<span class="go">    &lt;p&gt;... and this is a parsed fragment ...&lt;/p&gt;</span>
+<span class="go">  &lt;/body&gt;</span>
+<span class="go">&lt;/html&gt;</span>
+</pre></div>
+<p>Note that you should use <tt class="docutils literal">lxml.html.tostring</tt> and <strong>not</strong>
+<tt class="docutils literal">lxml.tostring</tt>.  <tt class="docutils literal">lxml.tostring(doc)</tt> will return the XML
+representation of the document, which is not valid HTML.  In
+particular, things like <tt class="docutils literal">&lt;script <span class="pre">src="..."&gt;&lt;/script&gt;</span></tt> will be
+serialized as <tt class="docutils literal">&lt;script <span class="pre">src="..."</span> /&gt;</tt>, which completely confuses
+browsers.</p>
+<div class="section" id="viewing-your-html">
+<h2>Viewing your HTML</h2>
+<p>A handy method for viewing your HTML:
+<tt class="docutils literal">lxml.html.open_in_browser(lxml_doc)</tt> will write the document to
+disk and open it in a browser (with the <a class="reference external" href="http://python.org/doc/current/lib/module-webbrowser.html">webbrowser module</a>).</p>
+</div>
+</div>
+<div class="section" id="working-with-links">
+<h1>Working with links</h1>
+<p>There are several methods on elements that allow you to see and modify
+the links in a document.</p>
+<dl class="docutils">
+<dt><tt class="docutils literal">.iterlinks()</tt>:</dt>
+<dd><p class="first">This yields <tt class="docutils literal">(element, attribute, link, pos)</tt> for every link in
+the document.  <tt class="docutils literal">attribute</tt> may be None if the link is in the
+text (as will be the case with a <tt class="docutils literal">&lt;style&gt;</tt> tag with
+<tt class="docutils literal">@import</tt>).</p>
+<p>This finds any link in an <tt class="docutils literal">action</tt>, <tt class="docutils literal">archive</tt>, <tt class="docutils literal">background</tt>,
+<tt class="docutils literal">cite</tt>, <tt class="docutils literal">classid</tt>, <tt class="docutils literal">codebase</tt>, <tt class="docutils literal">data</tt>, <tt class="docutils literal">href</tt>,
+<tt class="docutils literal">longdesc</tt>, <tt class="docutils literal">profile</tt>, <tt class="docutils literal">src</tt>, <tt class="docutils literal">usemap</tt>, <tt class="docutils literal">dynsrc</tt>, or
+<tt class="docutils literal">lowsrc</tt> attribute.  It also searches <tt class="docutils literal">style</tt> attributes for
+<tt class="docutils literal">url(link)</tt>, and <tt class="docutils literal">&lt;style&gt;</tt> tags for <tt class="docutils literal">@import</tt> and <tt class="docutils literal">url()</tt>.</p>
+<p class="last">This function does <em>not</em> pay attention to <tt class="docutils literal">&lt;base href&gt;</tt>.</p>
+</dd>
+<dt><tt class="docutils literal">.resolve_base_href()</tt>:</dt>
+<dd>This function will modify the document in-place to take account of
+<tt class="docutils literal">&lt;base href&gt;</tt> if the document contains that tag.  In the process
+it will also remove that tag from the document.</dd>
+<dt><tt class="docutils literal">.make_links_absolute(base_href, resolve_base_href=True)</tt>:</dt>
+<dd><p class="first">This makes all links in the document absolute, assuming that
+<tt class="docutils literal">base_href</tt> is the URL of the document.  So if you pass
+<tt class="docutils literal"><span class="pre">base_href="http://localhost/foo/bar.html"</span></tt> and there is a link
+to <tt class="docutils literal">baz.html</tt> that will be rewritten as
+<tt class="docutils literal"><span class="pre">http://localhost/foo/baz.html</span></tt>.</p>
+<p class="last">If <tt class="docutils literal">resolve_base_href</tt> is true, then any <tt class="docutils literal">&lt;base href&gt;</tt> tag
+will be taken into account (just calling
+<tt class="docutils literal">self.resolve_base_href()</tt>).</p>
+</dd>
+<dt><tt class="docutils literal">.rewrite_links(link_repl_func, resolve_base_href=True, base_href=None)</tt>:</dt>
+<dd><p class="first">This rewrites all the links in the document using your given link
+replacement function.  If you give a <tt class="docutils literal">base_href</tt> value, all
+links will be passed in after they are joined with this URL.</p>
+<p>For each link <tt class="docutils literal">link_repl_func(link)</tt> is called.  That function
+then returns the new link, or None to remove the attribute or tag
+that contains the link.  Note that all links will be passed in,
+including links like <tt class="docutils literal">"#anchor"</tt> (which is purely internal), and
+things like <tt class="docutils literal">"mailto:bob@example.com"</tt> (or <tt class="docutils literal"><span class="pre">javascript:...</span></tt>).</p>
+<p class="last">If you want access to the context of the link, you should use
+<tt class="docutils literal">.iterlinks()</tt> instead.</p>
+</dd>
+</dl>
+<div class="section" id="functions">
+<h2>Functions</h2>
+<p>In addition to these methods, there are corresponding functions:</p>
+<ul class="simple">
+<li><tt class="docutils literal">iterlinks(html)</tt></li>
+<li><tt class="docutils literal">make_links_absolute(html, base_href, <span class="pre">...)</span></tt></li>
+<li><tt class="docutils literal">rewrite_links(html, link_repl_func, <span class="pre">...)</span></tt></li>
+<li><tt class="docutils literal">resolve_base_href(html)</tt></li>
+</ul>
+<p>These functions will parse <tt class="docutils literal">html</tt> if it is a string, then return the new
+HTML as a string.  If you pass in a document, the document will be copied
+(except for <tt class="docutils literal">iterlinks()</tt>), the method performed, and the new document
+returned.</p>
+</div>
+</div>
+<div class="section" id="forms">
+<h1>Forms</h1>
+<p>Any <tt class="docutils literal">&lt;form&gt;</tt> elements in a document are available through
+the list <tt class="docutils literal">doc.forms</tt> (e.g., <tt class="docutils literal">doc.forms[0]</tt>).  Form, input, select,
+and textarea elements each have special methods.</p>
+<p>Input elements (including <tt class="docutils literal">&lt;select&gt;</tt> and <tt class="docutils literal">&lt;textarea&gt;</tt>) have these
+attributes:</p>
+<dl class="docutils">
+<dt><tt class="docutils literal">.name</tt>:</dt>
+<dd>The name of the element.</dd>
+<dt><tt class="docutils literal">.value</tt>:</dt>
+<dd><p class="first">The value of an input, the content of a textarea, the selected
+option(s) of a select.  This attribute can be set.</p>
+<p class="last">In the case of a select that takes multiple options (<tt class="docutils literal">&lt;select
+multiple&gt;</tt>) this will be a set of the selected options; you can
+add or remove items to select and unselect the options.</p>
+</dd>
+</dl>
+<p>Select attributes:</p>
+<dl class="docutils">
+<dt><tt class="docutils literal">.value_options</tt>:</dt>
+<dd>For select elements, this is all the <em>possible</em> values (the values
+of all the options).</dd>
+<dt><tt class="docutils literal">.multiple</tt>:</dt>
+<dd>For select elements, true if this is a <tt class="docutils literal">&lt;select multiple&gt;</tt>
+element.</dd>
+</dl>
+<p>Input attributes:</p>
+<dl class="docutils">
+<dt><tt class="docutils literal">.type</tt>:</dt>
+<dd>The type attribute in <tt class="docutils literal">&lt;input&gt;</tt> elements.</dd>
+<dt><tt class="docutils literal">.checkable</tt>:</dt>
+<dd>True if this can be checked (i.e., true for type=radio and
+type=checkbox).</dd>
+<dt><tt class="docutils literal">.checked</tt>:</dt>
+<dd>If this element is checkable, the checked state.  Raises
+AttributeError on non-checkable inputs.</dd>
+</dl>
+<p>The form itself has these attributes:</p>
+<dl class="docutils">
+<dt><tt class="docutils literal">.inputs</tt>:</dt>
+<dd>A dictionary-like object that can be used to access input elements
+by name.  When there are multiple input elements with the same
+name, this returns list-like structures that can also be used to
+access the options and their values as a group.</dd>
+<dt><tt class="docutils literal">.fields</tt>:</dt>
+<dd><p class="first">A dictionary-like object used to access <em>values</em> by their name.
+<tt class="docutils literal">form.inputs</tt> returns elements, this only returns values.
+Setting values in this dictionary will effect the form inputs.
+Basically <tt class="docutils literal">form.fields[x]</tt> is equivalent to
+<tt class="docutils literal"><span class="pre">form.inputs[x].value</span></tt> and <tt class="docutils literal">form.fields[x] = y</tt> is equivalent
+to <tt class="docutils literal"><span class="pre">form.inputs[x].value</span> = y</tt>.  (Note that sometimes
+<tt class="docutils literal">form.inputs[x]</tt> returns a compound object, but these objects
+also have <tt class="docutils literal">.value</tt> attributes.)</p>
+<p class="last">If you set this attribute, it is equivalent to
+<tt class="docutils literal"><span class="pre">form.fields.clear();</span> form.fields.update(new_value)</tt></p>
+</dd>
+<dt><tt class="docutils literal">.form_values()</tt>:</dt>
+<dd>Returns a list of <tt class="docutils literal">[(name, value), <span class="pre">...]</span></tt>, suitable to be passed
+to <tt class="docutils literal">urllib.urlencode()</tt> for form submission.</dd>
+<dt><tt class="docutils literal">.action</tt>:</dt>
+<dd>The <tt class="docutils literal">action</tt> attribute.  This is resolved to an absolute URL if
+possible.</dd>
+<dt><tt class="docutils literal">.method</tt>:</dt>
+<dd>The <tt class="docutils literal">method</tt> attribute, which defaults to <tt class="docutils literal">GET</tt>.</dd>
+</dl>
+<div class="section" id="form-filling-example">
+<h2>Form Filling Example</h2>
+<p>Note that you can change any of these attributes (values, method,
+action, etc) and then serialize the form to see the updated values.
+You can, for instance, do:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">lxml.html</span> <span class="kn">import</span> <span class="n">fromstring</span><span class="p">,</span> <span class="n">tostring</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">form_page</span> <span class="o">=</span> <span class="n">fromstring</span><span class="p">(</span><span class="s1">'''&lt;html&gt;&lt;body&gt;&lt;form&gt;</span>
+<span class="gp">... </span><span class="s1">  Your name: &lt;input type="text" name="name"&gt; &lt;br&gt;</span>
+<span class="gp">... </span><span class="s1">  Your phone: &lt;input type="text" name="phone"&gt; &lt;br&gt;</span>
+<span class="gp">... </span><span class="s1">  Your favorite pets: &lt;br&gt;</span>
+<span class="gp">... </span><span class="s1">  Dogs: &lt;input type="checkbox" name="interest" value="dogs"&gt; &lt;br&gt;</span>
+<span class="gp">... </span><span class="s1">  Cats: &lt;input type="checkbox" name="interest" value="cats"&gt; &lt;br&gt;</span>
+<span class="gp">... </span><span class="s1">  Llamas: &lt;input type="checkbox" name="interest" value="llamas"&gt; &lt;br&gt;</span>
+<span class="gp">... </span><span class="s1">  &lt;input type="submit"&gt;&lt;/form&gt;&lt;/body&gt;&lt;/html&gt;'''</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">form</span> <span class="o">=</span> <span class="n">form_page</span><span class="o">.</span><span class="n">forms</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">form</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">name</span><span class="o">=</span><span class="s1">'John Smith'</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">phone</span><span class="o">=</span><span class="s1">'555-555-3949'</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">interest</span><span class="o">=</span><span class="nb">set</span><span class="p">([</span><span class="s1">'cats'</span><span class="p">,</span> <span class="s1">'llamas'</span><span class="p">]))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">tostring</span><span class="p">(</span><span class="n">form</span><span class="p">)</span>
+<span class="go">&lt;html&gt;</span>
+<span class="go">  &lt;body&gt;</span>
+<span class="go">    &lt;form&gt;</span>
+<span class="go">    Your name:</span>
+<span class="go">      &lt;input name="name" type="text" value="John Smith"&gt;</span>
+<span class="go">      &lt;br&gt;Your phone:</span>
+<span class="go">      &lt;input name="phone" type="text" value="555-555-3949"&gt;</span>
+<span class="go">      &lt;br&gt;Your favorite pets:</span>
+<span class="go">      &lt;br&gt;Dogs:</span>
+<span class="go">      &lt;input name="interest" type="checkbox" value="dogs"&gt;</span>
+<span class="go">      &lt;br&gt;Cats:</span>
+<span class="go">      &lt;input checked name="interest" type="checkbox" value="cats"&gt;</span>
+<span class="go">      &lt;br&gt;Llamas:</span>
+<span class="go">      &lt;input checked name="interest" type="checkbox" value="llamas"&gt;</span>
+<span class="go">      &lt;br&gt;</span>
+<span class="go">      &lt;input type="submit"&gt;</span>
+<span class="go">    &lt;/form&gt;</span>
+<span class="go">  &lt;/body&gt;</span>
+<span class="go">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<div class="section" id="form-submission">
+<h2>Form Submission</h2>
+<p>You can submit a form with <tt class="docutils literal">lxml.html.submit_form(form_element)</tt>.
+This will return a file-like object (the result of
+<tt class="docutils literal">urllib.urlopen()</tt>).</p>
+<p>If you have extra input values you want to pass you can use the
+keyword argument <tt class="docutils literal">extra_values</tt>, like <tt class="docutils literal"><span class="pre">extra_values={'submit':</span>
+<span class="pre">'Yes!'}</span></tt>.  This is the only way to get submit values into the form,
+as there is no state of "submitted" for these elements.</p>
+<p>You can pass in an alternate opener with the <tt class="docutils literal">open_http</tt> keyword
+argument, which is a function with the signature <tt class="docutils literal">open_http(method,
+url, values)</tt>.</p>
+<p>Example:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">lxml.html</span> <span class="kn">import</span> <span class="n">parse</span><span class="p">,</span> <span class="n">submit_form</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">page</span> <span class="o">=</span> <span class="n">parse</span><span class="p">(</span><span class="s1">'http://tinyurl.com'</span><span class="p">)</span><span class="o">.</span><span class="n">getroot</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">page</span><span class="o">.</span><span class="n">forms</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="s1">'url'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'http://lxml.de/'</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">parse</span><span class="p">(</span><span class="n">submit_form</span><span class="p">(</span><span class="n">page</span><span class="o">.</span><span class="n">forms</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span><span class="o">.</span><span class="n">getroot</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">a</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s1">'href'</span><span class="p">]</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">result</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s2">"//a[@target='_blank']"</span><span class="p">)]</span>
+<span class="go">['http://tinyurl.com/2xae8s', 'http://preview.tinyurl.com/2xae8s']</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="cleaning-up-html">
+<h1>Cleaning up HTML</h1>
+<p>The module <tt class="docutils literal">lxml.html.clean</tt> provides a <tt class="docutils literal">Cleaner</tt> class for cleaning up
+HTML pages.  It supports removing embedded or script content, special tags,
+CSS style annotations and much more.</p>
+<p>Say, you have an evil web page from an untrusted source that contains lots of
+content that upsets browsers and tries to run evil code on the client side:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">html</span> <span class="o">=</span> <span class="s1">'''</span><span class="se">\</span>
+<span class="gp">... </span><span class="s1">&lt;html&gt;</span>
+<span class="gp">... </span><span class="s1"> &lt;head&gt;</span>
+<span class="gp">... </span><span class="s1">   &lt;script type="text/javascript" src="evil-site"&gt;&lt;/script&gt;</span>
+<span class="gp">... </span><span class="s1">   &lt;link rel="alternate" type="text/rss" src="evil-rss"&gt;</span>
+<span class="gp">... </span><span class="s1">   &lt;style&gt;</span>
+<span class="gp">... </span><span class="s1">     body {background-image: url(javascript:do_evil)};</span>
+<span class="gp">... </span><span class="s1">     div {color: expression(evil)};</span>
+<span class="gp">... </span><span class="s1">   &lt;/style&gt;</span>
+<span class="gp">... </span><span class="s1"> &lt;/head&gt;</span>
+<span class="gp">... </span><span class="s1"> &lt;body onload="evil_function()"&gt;</span>
+<span class="gp">... </span><span class="s1">   &lt;!-- I am interpreted for EVIL! --&gt;</span>
+<span class="gp">... </span><span class="s1">   &lt;a href="javascript:evil_function()"&gt;a link&lt;/a&gt;</span>
+<span class="gp">... </span><span class="s1">   &lt;a href="#" onclick="evil_function()"&gt;another link&lt;/a&gt;</span>
+<span class="gp">... </span><span class="s1">   &lt;p onclick="evil_function()"&gt;a paragraph&lt;/p&gt;</span>
+<span class="gp">... </span><span class="s1">   &lt;div style="display: none"&gt;secret EVIL!&lt;/div&gt;</span>
+<span class="gp">... </span><span class="s1">   &lt;object&gt; of EVIL! &lt;/object&gt;</span>
+<span class="gp">... </span><span class="s1">   &lt;iframe src="evil-site"&gt;&lt;/iframe&gt;</span>
+<span class="gp">... </span><span class="s1">   &lt;form action="evil-site"&gt;</span>
+<span class="gp">... </span><span class="s1">     Password: &lt;input type="password" name="password"&gt;</span>
+<span class="gp">... </span><span class="s1">   &lt;/form&gt;</span>
+<span class="gp">... </span><span class="s1">   &lt;blink&gt;annoying EVIL!&lt;/blink&gt;</span>
+<span class="gp">... </span><span class="s1">   &lt;a href="evil-site"&gt;spam spam SPAM!&lt;/a&gt;</span>
+<span class="gp">... </span><span class="s1">   &lt;image src="evil!"&gt;</span>
+<span class="gp">... </span><span class="s1"> &lt;/body&gt;</span>
+<span class="gp">... </span><span class="s1">&lt;/html&gt;'''</span>
+</pre></div>
+<p>To remove the all suspicious content from this unparsed document, use the
+<tt class="docutils literal">clean_html</tt> function:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">lxml.html.clean</span> <span class="kn">import</span> <span class="n">clean_html</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">clean_html</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
+<span class="go">&lt;div&gt;&lt;style&gt;/* deleted */&lt;/style&gt;&lt;body&gt;</span>
+
+<span class="go">   &lt;a href=""&gt;a link&lt;/a&gt;</span>
+<span class="go">   &lt;a href="#"&gt;another link&lt;/a&gt;</span>
+<span class="go">   &lt;p&gt;a paragraph&lt;/p&gt;</span>
+<span class="go">   &lt;div&gt;secret EVIL!&lt;/div&gt;</span>
+<span class="go">    of EVIL!</span>
+
+
+<span class="go">     Password:</span>
+<span class="go">   annoying EVIL!&lt;a href="evil-site"&gt;spam spam SPAM!&lt;/a&gt;</span>
+<span class="go">   &lt;img src="evil!"&gt;&lt;/body&gt;&lt;/div&gt;</span>
+</pre></div>
+<p>The <tt class="docutils literal">Cleaner</tt> class supports several keyword arguments to control exactly
+which content is removed:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">lxml.html.clean</span> <span class="kn">import</span> <span class="n">Cleaner</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cleaner</span> <span class="o">=</span> <span class="n">Cleaner</span><span class="p">(</span><span class="n">page_structure</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">links</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">cleaner</span><span class="o">.</span><span class="n">clean_html</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
+<span class="go">&lt;html&gt;</span>
+<span class="go">  &lt;head&gt;</span>
+<span class="go">    &lt;link rel="alternate" src="evil-rss" type="text/rss"&gt;</span>
+<span class="go">    &lt;style&gt;/* deleted */&lt;/style&gt;</span>
+<span class="go">  &lt;/head&gt;</span>
+<span class="go">  &lt;body&gt;</span>
+<span class="go">    &lt;a href=""&gt;a link&lt;/a&gt;</span>
+<span class="go">    &lt;a href="#"&gt;another link&lt;/a&gt;</span>
+<span class="go">    &lt;p&gt;a paragraph&lt;/p&gt;</span>
+<span class="go">    &lt;div&gt;secret EVIL!&lt;/div&gt;</span>
+<span class="go">    of EVIL!</span>
+<span class="go">    Password:</span>
+<span class="go">    annoying EVIL!</span>
+<span class="go">    &lt;a href="evil-site"&gt;spam spam SPAM!&lt;/a&gt;</span>
+<span class="go">    &lt;img src="evil!"&gt;</span>
+<span class="go">  &lt;/body&gt;</span>
+<span class="go">&lt;/html&gt;</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cleaner</span> <span class="o">=</span> <span class="n">Cleaner</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">links</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">add_nofollow</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+<span class="gp">... </span>                  <span class="n">page_structure</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">safe_attrs_only</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">cleaner</span><span class="o">.</span><span class="n">clean_html</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
+<span class="go">&lt;html&gt;</span>
+<span class="go">  &lt;head&gt;</span>
+<span class="go">  &lt;/head&gt;</span>
+<span class="go">  &lt;body&gt;</span>
+<span class="go">    &lt;a href=""&gt;a link&lt;/a&gt;</span>
+<span class="go">    &lt;a href="#"&gt;another link&lt;/a&gt;</span>
+<span class="go">    &lt;p&gt;a paragraph&lt;/p&gt;</span>
+<span class="go">    &lt;div&gt;secret EVIL!&lt;/div&gt;</span>
+<span class="go">    of EVIL!</span>
+<span class="go">    Password:</span>
+<span class="go">    annoying EVIL!</span>
+<span class="go">    &lt;a href="evil-site" rel="nofollow"&gt;spam spam SPAM!&lt;/a&gt;</span>
+<span class="go">    &lt;img src="evil!"&gt;</span>
+<span class="go">  &lt;/body&gt;</span>
+<span class="go">&lt;/html&gt;</span>
+</pre></div>
+<p>You can also whitelist some otherwise dangerous content with
+<tt class="docutils literal"><span class="pre">Cleaner(host_whitelist=['www.youtube.com'])</span></tt>, which would allow
+embedded media from YouTube, while still filtering out embedded media
+from other sites.</p>
+<p>See the docstring of <tt class="docutils literal">Cleaner</tt> for the details of what can be
+cleaned.</p>
+<div class="section" id="autolink">
+<h2>autolink</h2>
+<p>In addition to cleaning up malicious HTML, <tt class="docutils literal">lxml.html.clean</tt>
+contains functions to do other things to your HTML.  This includes
+autolinking:</p>
+<pre class="literal-block">
+autolink(doc, ...)
+
+autolink_html(html, ...)
+</pre>
+<p>This finds anything that looks like a link (e.g.,
+<tt class="docutils literal"><span class="pre">http://example.com</span></tt>) in the <em>text</em> of an HTML document, and
+turns it into an anchor.  It avoids making bad links.</p>
+<p>Links in the elements <tt class="docutils literal">&lt;textarea&gt;</tt>, <tt class="docutils literal">&lt;pre&gt;</tt>, <tt class="docutils literal">&lt;code&gt;</tt>,
+anything in the head of the document.  You can pass in a list of
+elements to avoid in <tt class="docutils literal"><span class="pre">avoid_elements=['textarea',</span> <span class="pre">...]</span></tt>.</p>
+<p>Links to some hosts can be avoided.  By default links to
+<tt class="docutils literal">localhost*</tt>, <tt class="docutils literal">example.*</tt> and <tt class="docutils literal">127.0.0.1</tt> are not
+autolinked.  Pass in <tt class="docutils literal"><span class="pre">avoid_hosts=[list_of_regexes]</span></tt> to control
+this.</p>
+<p>Elements with the <tt class="docutils literal">nolink</tt> CSS class are not autolinked.  Pass
+in <tt class="docutils literal"><span class="pre">avoid_classes=['code',</span> <span class="pre">...]</span></tt> to control this.</p>
+<p>The <tt class="docutils literal">autolink_html()</tt> version of the function parses the HTML
+string first, and returns a string.</p>
+</div>
+<div class="section" id="wordwrap">
+<h2>wordwrap</h2>
+<p>You can also wrap long words in your html:</p>
+<pre class="literal-block">
+word_break(doc, max_width=40, ...)
+
+word_break_html(html, ...)
+</pre>
+<p>This finds any long words in the text of the document and inserts
+<tt class="docutils literal">&amp;#8203;</tt> in the document (which is the Unicode zero-width space).</p>
+<p>This avoids the elements <tt class="docutils literal">&lt;pre&gt;</tt>, <tt class="docutils literal">&lt;textarea&gt;</tt>, and <tt class="docutils literal">&lt;code&gt;</tt>.
+You can control this with <tt class="docutils literal"><span class="pre">avoid_elements=['textarea',</span> <span class="pre">...]</span></tt>.</p>
+<p>It also avoids elements with the CSS class <tt class="docutils literal">nobreak</tt>.  You can
+control this with <tt class="docutils literal"><span class="pre">avoid_classes=['code',</span> <span class="pre">...]</span></tt>.</p>
+<p>Lastly you can control the character that is inserted with
+<tt class="docutils literal"><span class="pre">break_character=u'\u200b'</span></tt>.  However, you cannot insert markup,
+only text.</p>
+<p><tt class="docutils literal">word_break_html(html)</tt> parses the HTML document and returns a
+string.</p>
+</div>
+</div>
+<div class="section" id="html-diff">
+<h1>HTML Diff</h1>
+<p>The module <tt class="docutils literal">lxml.html.diff</tt> offers some ways to visualize
+differences in HTML documents.  These differences are <em>content</em>
+oriented.  That is, changes in markup are largely ignored; only
+changes in the content itself are highlighted.</p>
+<p>There are two ways to view differences: <tt class="docutils literal">htmldiff</tt> and
+<tt class="docutils literal">html_annotate</tt>.  One shows differences with <tt class="docutils literal">&lt;ins&gt;</tt> and
+<tt class="docutils literal">&lt;del&gt;</tt>, while the other annotates a set of changes similar to <tt class="docutils literal">svn
+blame</tt>.  Both these functions operate on text, and work best with
+content fragments (only what goes in <tt class="docutils literal">&lt;body&gt;</tt>), not complete
+documents.</p>
+<p>Example of <tt class="docutils literal">htmldiff</tt>:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">lxml.html.diff</span> <span class="kn">import</span> <span class="n">htmldiff</span><span class="p">,</span> <span class="n">html_annotate</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">doc1</span> <span class="o">=</span> <span class="s1">'''&lt;p&gt;Here is some text.&lt;/p&gt;'''</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">doc2</span> <span class="o">=</span> <span class="s1">'''&lt;p&gt;Here is &lt;b&gt;a lot&lt;/b&gt; of &lt;i&gt;text&lt;/i&gt;.&lt;/p&gt;'''</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">doc3</span> <span class="o">=</span> <span class="s1">'''&lt;p&gt;Here is &lt;b&gt;a little&lt;/b&gt; &lt;i&gt;text&lt;/i&gt;.&lt;/p&gt;'''</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">htmldiff</span><span class="p">(</span><span class="n">doc1</span><span class="p">,</span> <span class="n">doc2</span><span class="p">)</span>
+<span class="go">&lt;p&gt;Here is &lt;ins&gt;&lt;b&gt;a lot&lt;/b&gt; of &lt;i&gt;text&lt;/i&gt;.&lt;/ins&gt; &lt;del&gt;some text.&lt;/del&gt; &lt;/p&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">html_annotate</span><span class="p">([(</span><span class="n">doc1</span><span class="p">,</span> <span class="s1">'author1'</span><span class="p">),</span> <span class="p">(</span><span class="n">doc2</span><span class="p">,</span> <span class="s1">'author2'</span><span class="p">),</span>
+<span class="gp">... </span>                     <span class="p">(</span><span class="n">doc3</span><span class="p">,</span> <span class="s1">'author3'</span><span class="p">)])</span>
+<span class="go">&lt;p&gt;&lt;span title="author1"&gt;Here is&lt;/span&gt;</span>
+<span class="go">   &lt;b&gt;&lt;span title="author2"&gt;a&lt;/span&gt;</span>
+<span class="go">   &lt;span title="author3"&gt;little&lt;/span&gt;&lt;/b&gt;</span>
+<span class="go">   &lt;i&gt;&lt;span title="author2"&gt;text&lt;/span&gt;&lt;/i&gt;</span>
+<span class="go">   &lt;span title="author2"&gt;.&lt;/span&gt;&lt;/p&gt;</span>
+</pre></div>
+<p>As you can see, it is imperfect as such things tend to be.  On larger
+tracts of text with larger edits it will generally do better.</p>
+<p>The <tt class="docutils literal">html_annotate</tt> function can also take an optional second
+argument, <tt class="docutils literal">markup</tt>.  This is a function like <tt class="docutils literal">markup(text,
+version)</tt> that returns the given text marked up with the given
+version.  The default version, the output of which you see in the
+example, looks like:</p>
+<div class="syntax"><pre><span class="k">def</span> <span class="nf">default_markup</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">version</span><span class="p">):</span>
+    <span class="k">return</span> <span class="s1">'&lt;span title="</span><span class="si">%s</span><span class="s1">"&gt;</span><span class="si">%s</span><span class="s1">&lt;/span&gt;'</span> <span class="o">%</span> <span class="p">(</span>
+        <span class="n">cgi</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="nb">unicode</span><span class="p">(</span><span class="n">version</span><span class="p">),</span> <span class="mi">1</span><span class="p">),</span> <span class="n">text</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="section" id="examples">
+<h1>Examples</h1>
+<div class="section" id="microformat-example">
+<h2>Microformat Example</h2>
+<p>This example parses the <a class="reference external" href="http://microformats.org/wiki/hcard">hCard</a>
+microformat.</p>
+<p>First we get the page:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">urllib</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">lxml.html</span> <span class="kn">import</span> <span class="n">fromstring</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">url</span> <span class="o">=</span> <span class="s1">'http://microformats.org/'</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">content</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">doc</span> <span class="o">=</span> <span class="n">fromstring</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">doc</span><span class="o">.</span><span class="n">make_links_absolute</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+</pre></div>
+<p>Then we create some objects to put the information in:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">Card</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">kw</span><span class="p">:</span>
+<span class="gp">... </span>            <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">Phone</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">phone</span><span class="p">,</span> <span class="n">types</span><span class="o">=</span><span class="p">()):</span>
+<span class="gp">... </span>        <span class="bp">self</span><span class="o">.</span><span class="n">phone</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">types</span> <span class="o">=</span> <span class="n">phone</span><span class="p">,</span> <span class="n">types</span>
+</pre></div>
+<p>And some generally handy functions for microformats:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">get_text</span><span class="p">(</span><span class="n">el</span><span class="p">,</span> <span class="n">class_name</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">els</span> <span class="o">=</span> <span class="n">el</span><span class="o">.</span><span class="n">find_class</span><span class="p">(</span><span class="n">class_name</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="k">if</span> <span class="n">els</span><span class="p">:</span>
+<span class="gp">... </span>        <span class="k">return</span> <span class="n">els</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text_content</span><span class="p">()</span>
+<span class="gp">... </span>    <span class="k">else</span><span class="p">:</span>
+<span class="gp">... </span>        <span class="k">return</span> <span class="s1">''</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">get_value</span><span class="p">(</span><span class="n">el</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="n">get_text</span><span class="p">(</span><span class="n">el</span><span class="p">,</span> <span class="s1">'value'</span><span class="p">)</span> <span class="ow">or</span> <span class="n">el</span><span class="o">.</span><span class="n">text_content</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">get_all_texts</span><span class="p">(</span><span class="n">el</span><span class="p">,</span> <span class="n">class_name</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="p">[</span><span class="n">e</span><span class="o">.</span><span class="n">text_content</span><span class="p">()</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">els</span><span class="o">.</span><span class="n">find_class</span><span class="p">(</span><span class="n">class_name</span><span class="p">)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">parse_addresses</span><span class="p">(</span><span class="n">el</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="c1"># Ideally this would parse street, etc.</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="n">el</span><span class="o">.</span><span class="n">find_class</span><span class="p">(</span><span class="s1">'adr'</span><span class="p">)</span>
+</pre></div>
+<p>Then the parsing:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">doc</span><span class="o">.</span><span class="n">find_class</span><span class="p">(</span><span class="s1">'hcard'</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">card</span> <span class="o">=</span> <span class="n">Card</span><span class="p">()</span>
+<span class="gp">... </span>    <span class="n">card</span><span class="o">.</span><span class="n">el</span> <span class="o">=</span> <span class="n">el</span>
+<span class="gp">... </span>    <span class="n">card</span><span class="o">.</span><span class="n">fn</span> <span class="o">=</span> <span class="n">get_text</span><span class="p">(</span><span class="n">el</span><span class="p">,</span> <span class="s1">'fn'</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">card</span><span class="o">.</span><span class="n">tels</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="gp">... </span>    <span class="k">for</span> <span class="n">tel_el</span> <span class="ow">in</span> <span class="n">card</span><span class="o">.</span><span class="n">find_class</span><span class="p">(</span><span class="s1">'tel'</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="n">card</span><span class="o">.</span><span class="n">tels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Phone</span><span class="p">(</span><span class="n">get_value</span><span class="p">(</span><span class="n">tel_el</span><span class="p">),</span>
+<span class="gp">... </span>                               <span class="n">get_all_texts</span><span class="p">(</span><span class="n">tel_el</span><span class="p">,</span> <span class="s1">'type'</span><span class="p">)))</span>
+<span class="gp">... </span>    <span class="n">card</span><span class="o">.</span><span class="n">addresses</span> <span class="o">=</span> <span class="n">parse_addresses</span><span class="p">(</span><span class="n">el</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr class="footer" />
+Generated on: 2018-06-22.
+
+</div>
+</body>
+</html>

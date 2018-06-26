@@ -1,0 +1,805 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.12: http://docutils.sourceforge.net/" />
+<title>Benchmarks and Speed</title>
+<meta name="author" content="Stefan Behnel" />
+<meta content="Performance evaluation of lxml and ElementTree: fast operations, common pitfalls and optimisation hints." name="description" />
+<meta content="Python XML parser performance, XML processing, performance comparison, lxml performance, lxml.etree, lxml.objectify, benchmarks, ElementTree" name="keywords" />
+<link rel="stylesheet" href="style.css" type="text/css" />
+<script type="text/javascript">
+function trigger_menu(event) {
+    var sidemenu = document.getElementById("sidemenu");
+    var classes = sidemenu.getAttribute("class");
+    classes = (classes.indexOf(" visible") === -1) ? classes + " visible" : classes.replace(" visible", "");
+    sidemenu.setAttribute("class", classes);
+    event.preventDefault();
+    event.stopPropagation();
+}
+function hide_menu() {
+    var sidemenu = document.getElementById("sidemenu");
+    var classes = sidemenu.getAttribute("class");
+    if (classes.indexOf(" visible") !== -1) {
+        sidemenu.setAttribute("class", classes.replace(" visible", ""));
+    }
+}
+</script><meta content="width=device-width, initial-scale=1" name="viewport" /></head>
+<body onclick="hide_menu()">
+<div class="document" id="benchmarks-and-speed">
+<div class="sidemenu" id="sidemenu"><div class="menutrigger" onclick="trigger_menu(event)">Menu</div><div class="menu"><ul id="lxml-section"><li><span class="section title">lxml</span><ul class="menu foreign" id="index-menu"><li class="menu title"><a href="index.html">lxml</a><ul class="submenu"><li class="menu item"><a href="index.html#introduction">Introduction</a></li><li class="menu item"><a href="index.html#support-the-project">Support the project</a></li><li class="menu item"><a href="index.html#documentation">Documentation</a></li><li class="menu item"><a href="index.html#download">Download</a></li><li class="menu item"><a href="index.html#mailing-list">Mailing list</a></li><li class="menu item"><a href="index.html#bug-tracker">Bug tracker</a></li><li class="menu item"><a href="index.html#license">License</a></li><li class="menu item"><a href="index.html#old-versions">Old Versions</a></li><li class="menu item"><a href="index.html#docutils-system-messages">Docutils System Messages</a></li><li class="menu item"><a href="index.html#legal-notice-for-donations">Legal Notice for Donations</a></li></ul></li></ul><ul class="menu foreign" id="intro-menu"><li class="menu title"><a href="intro.html">Why lxml?</a><ul class="submenu"><li class="menu item"><a href="intro.html#motto">Motto</a></li><li class="menu item"><a href="intro.html#aims">Aims</a></li></ul></li></ul><ul class="menu foreign" id="installation-menu"><li class="menu title"><a href="installation.html">Installing lxml</a><ul class="submenu"><li class="menu item"><a href="installation.html#where-to-get-it">Where to get it</a></li><li class="menu item"><a href="installation.html#requirements">Requirements</a></li><li class="menu item"><a href="installation.html#installation">Installation</a></li><li class="menu item"><a href="installation.html#building-lxml-from-dev-sources">Building lxml from dev sources</a></li><li class="menu item"><a href="installation.html#using-lxml-with-python-libxml2">Using lxml with python-libxml2</a></li><li class="menu item"><a href="installation.html#source-builds-on-ms-windows">Source builds on MS Windows</a></li><li class="menu item"><a href="installation.html#source-builds-on-macos-x">Source builds on MacOS-X</a></li></ul></li></ul><ul class="menu current" id="performance-menu"><li class="menu title"><a href="performance.html">Benchmarks and Speed</a><ul class="submenu"><li class="menu item"><a href="performance.html#general-notes">General notes</a></li><li class="menu item"><a href="performance.html#how-to-read-the-timings">How to read the timings</a></li><li class="menu item"><a href="performance.html#parsing-and-serialising">Parsing and Serialising</a></li><li class="menu item"><a href="performance.html#the-elementtree-api">The ElementTree API</a></li><li class="menu item"><a href="performance.html#xpath">XPath</a></li><li class="menu item"><a href="performance.html#a-longer-example">A longer example</a></li><li class="menu item"><a href="performance.html#lxml-objectify">lxml.objectify</a></li></ul></li></ul><ul class="menu foreign" id="compatibility-menu"><li class="menu title"><a href="compatibility.html">ElementTree compatibility of lxml.etree</a></li></ul><ul class="menu foreign" id="FAQ-menu"><li class="menu title"><a href="FAQ.html">lxml FAQ - Frequently Asked Questions</a><ul class="submenu"><li class="menu item"><a href="FAQ.html#general-questions">General Questions</a></li><li class="menu item"><a href="FAQ.html#installation">Installation</a></li><li class="menu item"><a href="FAQ.html#contributing">Contributing</a></li><li class="menu item"><a href="FAQ.html#bugs">Bugs</a></li><li class="menu item"><a href="FAQ.html#id1">Threading</a></li><li class="menu item"><a href="FAQ.html#parsing-and-serialisation">Parsing and Serialisation</a></li><li class="menu item"><a href="FAQ.html#xpath-and-document-traversal">XPath and Document Traversal</a></li></ul></li></ul></li></ul><ul id="Developing with lxml-section"><li><span class="section title">Developing with lxml</span><ul class="menu foreign" id="tutorial-menu"><li class="menu title"><a href="tutorial.html">The lxml.etree Tutorial</a><ul class="submenu"><li class="menu item"><a href="tutorial.html#the-element-class">The Element class</a></li><li class="menu item"><a href="tutorial.html#the-elementtree-class">The ElementTree class</a></li><li class="menu item"><a href="tutorial.html#parsing-from-strings-and-files">Parsing from strings and files</a></li><li class="menu item"><a href="tutorial.html#namespaces">Namespaces</a></li><li class="menu item"><a href="tutorial.html#the-e-factory">The E-factory</a></li><li class="menu item"><a href="tutorial.html#elementpath">ElementPath</a></li></ul></li></ul><ul class="menu foreign" id="api index-menu"><li class="menu title"><a href="api/index.html">API reference</a></li></ul><ul class="menu foreign" id="api-menu"><li class="menu title"><a href="api.html">APIs specific to lxml.etree</a><ul class="submenu"><li class="menu item"><a href="api.html#lxml-etree">lxml.etree</a></li><li class="menu item"><a href="api.html#other-element-apis">Other Element APIs</a></li><li class="menu item"><a href="api.html#trees-and-documents">Trees and Documents</a></li><li class="menu item"><a href="api.html#iteration">Iteration</a></li><li class="menu item"><a href="api.html#error-handling-on-exceptions">Error handling on exceptions</a></li><li class="menu item"><a href="api.html#error-logging">Error logging</a></li><li class="menu item"><a href="api.html#serialisation">Serialisation</a></li><li class="menu item"><a href="api.html#incremental-xml-generation">Incremental XML generation</a></li><li class="menu item"><a href="api.html#cdata">CDATA</a></li><li class="menu item"><a href="api.html#xinclude-and-elementinclude">XInclude and ElementInclude</a></li><li class="menu item"><a href="api.html#write-c14n-on-elementtree">write_c14n on ElementTree</a></li></ul></li></ul><ul class="menu foreign" id="parsing-menu"><li class="menu title"><a href="parsing.html">Parsing XML and HTML with lxml</a><ul class="submenu"><li class="menu item"><a href="parsing.html#parsers">Parsers</a></li><li class="menu item"><a href="parsing.html#the-target-parser-interface">The target parser interface</a></li><li class="menu item"><a href="parsing.html#the-feed-parser-interface">The feed parser interface</a></li><li class="menu item"><a href="parsing.html#incremental-event-parsing">Incremental event parsing</a></li><li class="menu item"><a href="parsing.html#iterparse-and-iterwalk">iterparse and iterwalk</a></li><li class="menu item"><a href="parsing.html#python-unicode-strings">Python unicode strings</a></li></ul></li></ul><ul class="menu foreign" id="validation-menu"><li class="menu title"><a href="validation.html">Validation with lxml</a><ul class="submenu"><li class="menu item"><a href="validation.html#validation-at-parse-time">Validation at parse time</a></li><li class="menu item"><a href="validation.html#id1">DTD</a></li><li class="menu item"><a href="validation.html#relaxng">RelaxNG</a></li><li class="menu item"><a href="validation.html#xmlschema">XMLSchema</a></li><li class="menu item"><a href="validation.html#id2">Schematron</a></li><li class="menu item"><a href="validation.html#id3">(Pre-ISO-Schematron)</a></li></ul></li></ul><ul class="menu foreign" id="xpathxslt-menu"><li class="menu title"><a href="xpathxslt.html">XPath and XSLT with lxml</a><ul class="submenu"><li class="menu item"><a href="xpathxslt.html#xpath">XPath</a></li><li class="menu item"><a href="xpathxslt.html#xslt">XSLT</a></li></ul></li></ul><ul class="menu foreign" id="objectify-menu"><li class="menu title"><a href="objectify.html">lxml.objectify</a><ul class="submenu"><li class="menu item"><a href="objectify.html#the-lxml-objectify-api">The lxml.objectify API</a></li><li class="menu item"><a href="objectify.html#asserting-a-schema">Asserting a Schema</a></li><li class="menu item"><a href="objectify.html#objectpath">ObjectPath</a></li><li class="menu item"><a href="objectify.html#python-data-types">Python data types</a></li><li class="menu item"><a href="objectify.html#how-data-types-are-matched">How data types are matched</a></li><li class="menu item"><a href="objectify.html#what-is-different-from-lxml-etree">What is different from lxml.etree?</a></li></ul></li></ul><ul class="menu foreign" id="lxmlhtml-menu"><li class="menu title"><a href="lxmlhtml.html">lxml.html</a><ul class="submenu"><li class="menu item"><a href="lxmlhtml.html#parsing-html">Parsing HTML</a></li><li class="menu item"><a href="lxmlhtml.html#html-element-methods">HTML Element Methods</a></li><li class="menu item"><a href="lxmlhtml.html#running-html-doctests">Running HTML doctests</a></li><li class="menu item"><a href="lxmlhtml.html#creating-html-with-the-e-factory">Creating HTML with the E-factory</a></li><li class="menu item"><a href="lxmlhtml.html#working-with-links">Working with links</a></li><li class="menu item"><a href="lxmlhtml.html#forms">Forms</a></li><li class="menu item"><a href="lxmlhtml.html#cleaning-up-html">Cleaning up HTML</a></li><li class="menu item"><a href="lxmlhtml.html#html-diff">HTML Diff</a></li><li class="menu item"><a href="lxmlhtml.html#examples">Examples</a></li></ul></li></ul><ul class="menu foreign" id="cssselect-menu"><li class="menu title"><a href="cssselect.html">lxml.cssselect</a><ul class="submenu"><li class="menu item"><a href="cssselect.html#the-cssselector-class">The CSSSelector class</a></li><li class="menu item"><a href="cssselect.html#the-cssselect-method">The cssselect method</a></li><li class="menu item"><a href="cssselect.html#supported-selectors">Supported Selectors</a></li><li class="menu item"><a href="cssselect.html#namespaces">Namespaces</a></li></ul></li></ul><ul class="menu foreign" id="elementsoup-menu"><li class="menu title"><a href="elementsoup.html">BeautifulSoup Parser</a><ul class="submenu"><li class="menu item"><a href="elementsoup.html#parsing-with-the-soupparser">Parsing with the soupparser</a></li><li class="menu item"><a href="elementsoup.html#entity-handling">Entity handling</a></li><li class="menu item"><a href="elementsoup.html#using-soupparser-as-a-fallback">Using soupparser as a fallback</a></li><li class="menu item"><a href="elementsoup.html#using-only-the-encoding-detection">Using only the encoding detection</a></li></ul></li></ul><ul class="menu foreign" id="html5parser-menu"><li class="menu title"><a href="html5parser.html">html5lib Parser</a><ul class="submenu"><li class="menu item"><a href="html5parser.html#differences-to-regular-html-parsing">Differences to regular HTML parsing</a></li><li class="menu item"><a href="html5parser.html#function-reference">Function Reference</a></li></ul></li></ul></li></ul><ul id="Extending lxml-section"><li><span class="section title">Extending lxml</span><ul class="menu foreign" id="resolvers-menu"><li class="menu title"><a href="resolvers.html">Document loading and URL resolving</a><ul class="submenu"><li class="menu item"><a href="resolvers.html#xml-catalogs">XML Catalogs</a></li><li class="menu item"><a href="resolvers.html#uri-resolvers">URI Resolvers</a></li><li class="menu item"><a href="resolvers.html#document-loading-in-context">Document loading in context</a></li><li class="menu item"><a href="resolvers.html#i-o-access-control-in-xslt">I/O access control in XSLT</a></li></ul></li></ul><ul class="menu foreign" id="extensions-menu"><li class="menu title"><a href="extensions.html">Python extensions for XPath and XSLT</a><ul class="submenu"><li class="menu item"><a href="extensions.html#xpath-extension-functions">XPath Extension functions</a></li><li class="menu item"><a href="extensions.html#xslt-extension-elements">XSLT extension elements</a></li></ul></li></ul><ul class="menu foreign" id="element classes-menu"><li class="menu title"><a href="element_classes.html">Using custom Element classes in lxml</a><ul class="submenu"><li class="menu item"><a href="element_classes.html#background-on-element-proxies">Background on Element proxies</a></li><li class="menu item"><a href="element_classes.html#element-initialization">Element initialization</a></li><li class="menu item"><a href="element_classes.html#setting-up-a-class-lookup-scheme">Setting up a class lookup scheme</a></li><li class="menu item"><a href="element_classes.html#generating-xml-with-custom-classes">Generating XML with custom classes</a></li><li class="menu item"><a href="element_classes.html#id1">Implementing namespaces</a></li></ul></li></ul><ul class="menu foreign" id="sax-menu"><li class="menu title"><a href="sax.html">Sax support</a><ul class="submenu"><li class="menu item"><a href="sax.html#building-a-tree-from-sax-events">Building a tree from SAX events</a></li><li class="menu item"><a href="sax.html#producing-sax-events-from-an-elementtree-or-element">Producing SAX events from an ElementTree or Element</a></li><li class="menu item"><a href="sax.html#interfacing-with-pulldom-minidom">Interfacing with pulldom/minidom</a></li></ul></li></ul><ul class="menu foreign" id="capi-menu"><li class="menu title"><a href="capi.html">The public C-API of lxml.etree</a><ul class="submenu"><li class="menu item"><a href="capi.html#passing-generated-trees-through-python">Passing generated trees through Python</a></li><li class="menu item"><a href="capi.html#writing-external-modules-in-cython">Writing external modules in Cython</a></li><li class="menu item"><a href="capi.html#writing-external-modules-in-c">Writing external modules in C</a></li></ul></li></ul></li></ul><ul id="Developing lxml-section"><li><span class="section title">Developing lxml</span><ul class="menu foreign" id="build-menu"><li class="menu title"><a href="build.html">How to build lxml from source</a><ul class="submenu"><li class="menu item"><a href="build.html#cython">Cython</a></li><li class="menu item"><a href="build.html#github-git-and-hg">Github, git and hg</a></li><li class="menu item"><a href="build.html#building-the-sources">Building the sources</a></li><li class="menu item"><a href="build.html#running-the-tests-and-reporting-errors">Running the tests and reporting errors</a></li><li class="menu item"><a href="build.html#building-an-egg-or-wheel">Building an egg or wheel</a></li><li class="menu item"><a href="build.html#building-lxml-on-macos-x">Building lxml on MacOS-X</a></li><li class="menu item"><a href="build.html#static-linking-on-windows">Static linking on Windows</a></li><li class="menu item"><a href="build.html#building-debian-packages-from-svn-sources">Building Debian packages from SVN sources</a></li></ul></li></ul><ul class="menu foreign" id="lxml source howto-menu"><li class="menu title"><a href="lxml-source-howto.html">How to read the source of lxml</a><ul class="submenu"><li class="menu item"><a href="lxml-source-howto.html#what-is-cython">What is Cython?</a></li><li class="menu item"><a href="lxml-source-howto.html#where-to-start">Where to start?</a></li><li class="menu item"><a href="lxml-source-howto.html#lxml-etree">lxml.etree</a></li><li class="menu item"><a href="lxml-source-howto.html#python-modules">Python modules</a></li><li class="menu item"><a href="lxml-source-howto.html#lxml-objectify">lxml.objectify</a></li><li class="menu item"><a href="lxml-source-howto.html#lxml-html">lxml.html</a></li></ul></li></ul><ul class="menu foreign" id="changes 4 2 2-menu"><li class="menu title"><a href="changes-4.2.2.html">Release Changelog</a></li></ul><ul class="menu foreign" id="credits-menu"><li class="menu title"><a href="credits.html">Credits</a><ul class="submenu"><li class="menu item"><a href="credits.html#main-contributors">Main contributors</a></li><li class="menu item"><a href="credits.html#special-thanks-goes-to">Special thanks goes to:</a></li></ul></li></ul></li><li><a href="/sitemap.html">Sitemap</a></li></ul></div></div><h1 class="title">Benchmarks and Speed</h1>
+<table class="docinfo" frame="void" rules="none">
+<col class="docinfo-name" />
+<col class="docinfo-content" />
+<tbody valign="top">
+<tr><th class="docinfo-name">Author:</th>
+<td>Stefan Behnel</td></tr>
+</tbody>
+</table>
+<p>lxml.etree is a very fast XML library.  Most of this is due to the
+speed of libxml2, e.g. the parser and serialiser, or the XPath engine.
+Other areas of lxml were specifically written for high performance in
+high-level operations, such as the tree iterators.</p>
+<p>On the other hand, the simplicity of lxml sometimes hides internal
+operations that are more costly than the API suggests.  If you are not
+aware of these cases, lxml may not always perform as you expect.  A
+common example in the Python world is the Python list type.  New users
+often expect it to be a linked list, while it actually is implemented
+as an array, which results in a completely different complexity for
+common operations.</p>
+<p>Similarly, the tree model of libxml2 is more complex than what lxml's
+ElementTree API projects into Python space, so some operations may
+show unexpected performance.  Rest assured that most lxml users will
+not notice this in real life, as lxml is very fast in absolute
+numbers.  It is definitely fast enough for most applications, so lxml
+is probably somewhere between 'fast enough' and 'the best choice' for
+yours.  Read some <a class="reference external" href="http://permalink.gmane.org/gmane.comp.python.lxml.devel/3250">messages</a> from <a class="reference external" href="http://article.gmane.org/gmane.comp.python.lxml.devel/3246">happy</a> <a class="reference external" href="http://thread.gmane.org/gmane.comp.python.lxml.devel/3244/focus=3244">users</a> to see what we mean.</p>
+<p>This text describes where lxml.etree (abbreviated to 'lxe') excels, gives
+hints on some performance traps and compares the overall performance to the
+original <a class="reference external" href="http://effbot.org/zone/element-index.htm">ElementTree</a> (ET) and <a class="reference external" href="http://effbot.org/zone/celementtree.htm">cElementTree</a> (cET) libraries by Fredrik Lundh.
+The cElementTree library is a fast C-implementation of the original
+ElementTree.</p>
+<div class="contents topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#general-notes" id="id1">General notes</a></li>
+<li><a class="reference internal" href="#how-to-read-the-timings" id="id2">How to read the timings</a></li>
+<li><a class="reference internal" href="#parsing-and-serialising" id="id3">Parsing and Serialising</a></li>
+<li><a class="reference internal" href="#the-elementtree-api" id="id4">The ElementTree API</a><ul>
+<li><a class="reference internal" href="#child-access" id="id5">Child access</a></li>
+<li><a class="reference internal" href="#element-creation" id="id6">Element creation</a></li>
+<li><a class="reference internal" href="#merging-different-sources" id="id7">Merging different sources</a></li>
+<li><a class="reference internal" href="#deepcopy" id="id8">deepcopy</a></li>
+<li><a class="reference internal" href="#tree-traversal" id="id9">Tree traversal</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#xpath" id="id10">XPath</a></li>
+<li><a class="reference internal" href="#a-longer-example" id="id11">A longer example</a></li>
+<li><a class="reference internal" href="#lxml-objectify" id="id12">lxml.objectify</a><ul>
+<li><a class="reference internal" href="#objectpath" id="id13">ObjectPath</a></li>
+<li><a class="reference internal" href="#caching-elements" id="id14">Caching Elements</a></li>
+<li><a class="reference internal" href="#further-optimisations" id="id15">Further optimisations</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="general-notes">
+<h1>General notes</h1>
+<p>First thing to say: there <em>is</em> an overhead involved in having a DOM-like C
+library mimic the ElementTree API.  As opposed to ElementTree, lxml has to
+generate Python representations of tree nodes on the fly when asked for them,
+and the internal tree structure of libxml2 results in a higher maintenance
+overhead than the simpler top-down structure of ElementTree.  What this means
+is: the more of your code runs in Python, the less you can benefit from the
+speed of lxml and libxml2.  Note, however, that this is true for most
+performance critical Python applications.  No one would implement Fourier
+transformations in pure Python when you can use NumPy.</p>
+<p>The up side then is that lxml provides powerful tools like tree iterators,
+XPath and XSLT, that can handle complex operations at the speed of C.  Their
+pythonic API in lxml makes them so flexible that most applications can easily
+benefit from them.</p>
+</div>
+<div class="section" id="how-to-read-the-timings">
+<h1>How to read the timings</h1>
+<p>The statements made here are backed by the (micro-)benchmark scripts
+<a class="reference external" href="https://github.com/lxml/lxml/blob/master/benchmark/bench_etree.py">bench_etree.py</a>, <a class="reference external" href="https://github.com/lxml/lxml/blob/master/benchmark/bench_xpath.py">bench_xpath.py</a> and <a class="reference external" href="https://github.com/lxml/lxml/blob/master/benchmark/bench_objectify.py">bench_objectify.py</a> that come with
+the lxml source distribution.  They are distributed under the same BSD license
+as lxml itself, and the lxml project would like to promote them as a general
+benchmarking suite for all ElementTree implementations.  New benchmarks are
+very easy to add as tiny test methods, so if you write a performance test for
+a specific part of the API yourself, please consider sending it to the lxml
+mailing list.</p>
+<p>The timings presented below compare lxml 3.1.1 (with libxml2 2.9.0) to the
+latest released versions of ElementTree (with cElementTree as accelerator
+module) in the standard library of CPython 3.3.0.  They were run
+single-threaded on a 2.9GHz 64bit double core Intel i7 machine under
+Ubuntu Linux 12.10 (Quantal).  The C libraries were compiled with the
+same platform specific optimisation flags.  The Python interpreter was
+also manually compiled for the platform.  Note that many of the following
+ElementTree timings are therefore better than what a normal Python
+installation with the standard library (c)ElementTree modules would yield.
+Note also that CPython 2.7 and 3.2+ come with a newer ElementTree version,
+so older Python installations will not perform as good for (c)ElementTree,
+and sometimes substantially worse.</p>
+<p>The scripts run a number of simple tests on the different libraries, using
+different XML tree configurations: different tree sizes (T1-4), with or
+without attributes (-/A), with or without ASCII string or unicode text
+(-/S/U), and either against a tree or its serialised XML form (T/X).  In the
+result extracts cited below, T1 refers to a 3-level tree with many children at
+the third level, T2 is swapped around to have many children below the root
+element, T3 is a deep tree with few children at each level and T4 is a small
+tree, slightly broader than deep.  If repetition is involved, this usually
+means running the benchmark in a loop over all children of the tree root,
+otherwise, the operation is run on the root node (C/R).</p>
+<p>As an example, the character code <tt class="docutils literal">(SATR T1)</tt> states that the benchmark was
+running for tree T1, with plain string text (S) and attributes (A).  It was
+run against the root element (R) in the tree structure of the data (T).</p>
+<p>Note that very small operations are repeated in integer loops to make them
+measurable.  It is therefore not always possible to compare the absolute
+timings of, say, a single access benchmark (which usually loops) and a 'get
+all in one step' benchmark, which already takes enough time to be measurable
+and is therefore measured as is.  An example is the index access to a single
+child, which cannot be compared to the timings for <tt class="docutils literal">getchildren()</tt>.  Take a
+look at the concrete benchmarks in the scripts to understand how the numbers
+compare.</p>
+</div>
+<div class="section" id="parsing-and-serialising">
+<h1>Parsing and Serialising</h1>
+<p>Serialisation is an area where lxml excels.  The reason is that it
+executes entirely at the C level, without any interaction with Python
+code.  The results are rather impressive, especially for UTF-8, which
+is native to libxml2.  While 20 to 40 times faster than (c)ElementTree
+1.2 (which was part of the standard library before Python 2.7/3.2),
+lxml is still more than 10 times as fast as the much improved
+ElementTree 1.3 in recent Python versions:</p>
+<pre class="literal-block">
+lxe: tostring_utf16  (S-TR T1)    7.9958 msec/pass
+cET: tostring_utf16  (S-TR T1)   83.1358 msec/pass
+
+lxe: tostring_utf16  (UATR T1)    8.3222 msec/pass
+cET: tostring_utf16  (UATR T1)   84.4688 msec/pass
+
+lxe: tostring_utf16  (S-TR T2)    8.2297 msec/pass
+cET: tostring_utf16  (S-TR T2)   87.3415 msec/pass
+
+lxe: tostring_utf8   (S-TR T2)    6.5677 msec/pass
+cET: tostring_utf8   (S-TR T2)   76.2064 msec/pass
+
+lxe: tostring_utf8   (U-TR T3)    1.1952 msec/pass
+cET: tostring_utf8   (U-TR T3)   22.0058 msec/pass
+</pre>
+<p>The difference is somewhat smaller for plain text serialisation:</p>
+<pre class="literal-block">
+lxe: tostring_text_ascii     (S-TR T1)    2.7738 msec/pass
+cET: tostring_text_ascii     (S-TR T1)    4.7629 msec/pass
+
+lxe: tostring_text_ascii     (S-TR T3)    0.8273 msec/pass
+cET: tostring_text_ascii     (S-TR T3)    1.5273 msec/pass
+
+lxe: tostring_text_utf16     (S-TR T1)    2.7659 msec/pass
+cET: tostring_text_utf16     (S-TR T1)   10.5038 msec/pass
+
+lxe: tostring_text_utf16     (U-TR T1)    2.8017 msec/pass
+cET: tostring_text_utf16     (U-TR T1)   10.5207 msec/pass
+</pre>
+<p>The <tt class="docutils literal">tostring()</tt> function also supports serialisation to a Python
+unicode string object, which is currently faster in ElementTree
+under CPython 3.3:</p>
+<pre class="literal-block">
+lxe: tostring_text_unicode   (S-TR T1)    2.6896 msec/pass
+cET: tostring_text_unicode   (S-TR T1)    1.0056 msec/pass
+
+lxe: tostring_text_unicode   (U-TR T1)    2.7366 msec/pass
+cET: tostring_text_unicode   (U-TR T1)    1.0154 msec/pass
+
+lxe: tostring_text_unicode   (S-TR T3)    0.7997 msec/pass
+cET: tostring_text_unicode   (S-TR T3)    0.3154 msec/pass
+
+lxe: tostring_text_unicode   (U-TR T4)    0.0048 msec/pass
+cET: tostring_text_unicode   (U-TR T4)    0.0160 msec/pass
+</pre>
+<p>For parsing, lxml.etree and cElementTree compete for the medal.
+Depending on the input, either of the two can be faster.  The (c)ET
+libraries use a very thin layer on top of the expat parser, which is
+known to be very fast.  Here are some timings from the benchmarking
+suite:</p>
+<pre class="literal-block">
+lxe: parse_bytesIO   (SAXR T1)   13.0246 msec/pass
+cET: parse_bytesIO   (SAXR T1)    8.2929 msec/pass
+
+lxe: parse_bytesIO   (S-XR T3)    1.3542 msec/pass
+cET: parse_bytesIO   (S-XR T3)    2.4023 msec/pass
+
+lxe: parse_bytesIO   (UAXR T3)    7.5610 msec/pass
+cET: parse_bytesIO   (UAXR T3)   11.2455 msec/pass
+</pre>
+<p>And another couple of timings <a class="reference external" href="http://svn.effbot.org/public/elementtree-1.3/benchmark.py">from a benchmark</a> that Fredrik Lundh
+<a class="reference external" href="http://effbot.org/zone/celementtree.htm#benchmarks">used to promote cElementTree</a>, comparing a number of different
+parsers.  First, parsing a 274KB XML file containing Shakespeare's
+Hamlet:</p>
+<pre class="literal-block">
+xml.etree.ElementTree.parse done in 0.017 seconds
+xml.etree.cElementTree.parse done in 0.007 seconds
+xml.etree.cElementTree.XMLParser.feed(): 6636 nodes read in 0.007 seconds
+lxml.etree.parse done in 0.003 seconds
+drop_whitespace.parse done in 0.003 seconds
+lxml.etree.XMLParser.feed(): 6636 nodes read in 0.004 seconds
+minidom tree read in 0.080 seconds
+</pre>
+<p>And a 3.4MB XML file containing the Old Testament:</p>
+<pre class="literal-block">
+xml.etree.ElementTree.parse done in 0.038 seconds
+xml.etree.cElementTree.parse done in 0.030 seconds
+xml.etree.cElementTree.XMLParser.feed(): 25317 nodes read in 0.030 seconds
+lxml.etree.parse done in 0.016 seconds
+drop_whitespace.parse done in 0.015 seconds
+lxml.etree.XMLParser.feed(): 25317 nodes read in 0.022 seconds
+minidom tree read in 0.288 seconds
+</pre>
+<p>Here are the same benchmarks again, but including the memory usage
+of the process in KB before and after parsing (using os.fork() to
+make sure we start from a clean state each time).  For the 274KB
+hamlet.xml file:</p>
+<pre class="literal-block">
+Memory usage: 7284
+xml.etree.ElementTree.parse done in 0.017 seconds
+Memory usage: 9432 (+2148)
+xml.etree.cElementTree.parse done in 0.007 seconds
+Memory usage: 9432 (+2152)
+xml.etree.cElementTree.XMLParser.feed(): 6636 nodes read in 0.007 seconds
+Memory usage: 9448 (+2164)
+lxml.etree.parse done in 0.003 seconds
+Memory usage: 11032 (+3748)
+drop_whitespace.parse done in 0.003 seconds
+Memory usage: 10224 (+2940)
+lxml.etree.XMLParser.feed(): 6636 nodes read in 0.004 seconds
+Memory usage: 11804 (+4520)
+minidom tree read in 0.080 seconds
+Memory usage: 12324 (+5040)
+</pre>
+<p>And for the 3.4MB Old Testament XML file:</p>
+<pre class="literal-block">
+Memory usage: 10420
+xml.etree.ElementTree.parse done in 0.038 seconds
+Memory usage: 20660 (+10240)
+xml.etree.cElementTree.parse done in 0.030 seconds
+Memory usage: 20660 (+10240)
+xml.etree.cElementTree.XMLParser.feed(): 25317 nodes read in 0.030 seconds
+Memory usage: 20844 (+10424)
+lxml.etree.parse done in 0.016 seconds
+Memory usage: 27624 (+17204)
+drop_whitespace.parse done in 0.015 seconds
+Memory usage: 24468 (+14052)
+lxml.etree.XMLParser.feed(): 25317 nodes read in 0.022 seconds
+Memory usage: 29844 (+19424)
+minidom tree read in 0.288 seconds
+Memory usage: 28788 (+18368)
+</pre>
+<p>As can be seen from the sizes, both lxml.etree and cElementTree are
+rather memory friendly compared to the pure Python libraries
+ElementTree and (especially) minidom.  Comparing to older CPython
+versions, the memory footprint of the minidom library was considerably
+reduced in CPython 3.3, by about a factor of 4 in this case.</p>
+<p>For plain parser performance, lxml.etree and cElementTree tend to stay
+rather close to each other, usually within a factor of two, with
+winners well distributed over both sides.  Similar timings can be
+observed for the <tt class="docutils literal">iterparse()</tt> function:</p>
+<pre class="literal-block">
+lxe: iterparse_bytesIO   (SAXR T1)   17.9198 msec/pass
+cET: iterparse_bytesIO   (SAXR T1)   14.4982 msec/pass
+
+lxe: iterparse_bytesIO   (UAXR T3)    8.8522 msec/pass
+cET: iterparse_bytesIO   (UAXR T3)   12.9857 msec/pass
+</pre>
+<p>However, if you benchmark the complete round-trip of a serialise-parse
+cycle, the numbers will look similar to these:</p>
+<pre class="literal-block">
+lxe: write_utf8_parse_bytesIO   (S-TR T1)   19.8867 msec/pass
+cET: write_utf8_parse_bytesIO   (S-TR T1)   80.7259 msec/pass
+
+lxe: write_utf8_parse_bytesIO   (UATR T2)   23.7896 msec/pass
+cET: write_utf8_parse_bytesIO   (UATR T2)   98.0766 msec/pass
+
+lxe: write_utf8_parse_bytesIO   (S-TR T3)    3.0684 msec/pass
+cET: write_utf8_parse_bytesIO   (S-TR T3)   24.6122 msec/pass
+
+lxe: write_utf8_parse_bytesIO   (SATR T4)    0.3495 msec/pass
+cET: write_utf8_parse_bytesIO   (SATR T4)    1.9610 msec/pass
+</pre>
+<p>For applications that require a high parser throughput of large files,
+and that do little to no serialization, both cET and lxml.etree are a
+good choice.  The cET library is particularly fast for iterparse
+applications that extract small amounts of data or aggregate
+information from large XML data sets that do not fit into memory.  If
+it comes to round-trip performance, however, lxml is multiple times
+faster in total.  So, whenever the input documents are not
+considerably larger than the output, lxml is the clear winner.</p>
+<p>Regarding HTML parsing, Ian Bicking has done some <a class="reference external" href="http://blog.ianbicking.org/2008/03/30/python-html-parser-performance/">benchmarking on
+lxml's HTML parser</a>, comparing it to a number of other famous HTML
+parser tools for Python.  lxml wins this contest by quite a length.
+To give an idea, the numbers suggest that lxml.html can run a couple
+of parse-serialise cycles in the time that other tools need for
+parsing alone.  The comparison even shows some very favourable results
+regarding memory consumption.</p>
+<p>Liza Daly has written an article that presents a couple of tweaks to
+get the most out of lxml's parser for very large XML documents.  She
+quite favourably positions <tt class="docutils literal">lxml.etree</tt> as a tool for
+<a class="reference external" href="http://www.ibm.com/developerworks/xml/library/x-hiperfparse/">high-performance XML parsing</a>.</p>
+<p>Finally, <a class="reference external" href="http://www.xml.com/">xml.com</a> has a couple of publications about XML parser
+performance.  Farwick and Hafner have written two interesting articles
+that compare the parser of libxml2 to some major Java based XML
+parsers.  One deals with <a class="reference external" href="http://www.xml.com/lpt/a/1702">event-driven parser performance</a>, the other
+one presents <a class="reference external" href="http://www.xml.com/lpt/a/1703">benchmark results comparing DOM parsers</a>.  Both
+comparisons suggest that libxml2's parser performance is largely
+superior to all commonly used Java parsers in almost all cases.  Note
+that the C parser benchmark results are based on <a class="reference external" href="http://xmlbench.sourceforge.net/">xmlbench</a>, which uses
+a simpler setup for libxml2 than lxml does.</p>
+</div>
+<div class="section" id="the-elementtree-api">
+<h1>The ElementTree API</h1>
+<p>Since all three libraries implement the same API, their performance is
+easy to compare in this area.  A major disadvantage for lxml's
+performance is the different tree model that underlies libxml2.  It
+allows lxml to provide parent pointers for elements and full XPath
+support, but also increases the overhead of tree building and
+restructuring.  This can be seen from the tree setup times of the
+benchmark (given in seconds):</p>
+<pre class="literal-block">
+lxe:       --     S-     U-     -A     SA     UA
+     T1: 0.0299 0.0343 0.0344 0.0293 0.0345 0.0342
+     T2: 0.0368 0.0423 0.0418 0.0427 0.0474 0.0459
+     T3: 0.0088 0.0084 0.0086 0.0251 0.0258 0.0261
+     T4: 0.0002 0.0002 0.0002 0.0005 0.0006 0.0006
+cET:       --     S-     U-     -A     SA     UA
+     T1: 0.0050 0.0045 0.0093 0.0044 0.0043 0.0043
+     T2: 0.0073 0.0075 0.0074 0.0201 0.0075 0.0074
+     T3: 0.0033 0.0213 0.0032 0.0034 0.0033 0.0035
+     T4: 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000
+</pre>
+<p>The timings are somewhat close to each other, although cET can be
+several times faster than lxml for larger trees.  One of the
+reasons is that lxml must encode incoming string data and tag names
+into UTF-8, and additionally discard the created Python elements
+after their use, when they are no longer referenced.  ElementTree
+represents the tree itself through these objects, which reduces
+the overhead in creating them.</p>
+<div class="section" id="child-access">
+<h2>Child access</h2>
+<p>The same tree overhead makes operations like collecting children as in
+<tt class="docutils literal">list(element)</tt> more costly in lxml.  Where cET can quickly create
+a shallow copy of their list of children, lxml has to create a Python
+object for each child and collect them in a list:</p>
+<pre class="literal-block">
+lxe: root_list_children        (--TR T1)    0.0038 msec/pass
+cET: root_list_children        (--TR T1)    0.0010 msec/pass
+
+lxe: root_list_children        (--TR T2)    0.0455 msec/pass
+cET: root_list_children        (--TR T2)    0.0050 msec/pass
+</pre>
+<p>This handicap is also visible when accessing single children:</p>
+<pre class="literal-block">
+lxe: first_child               (--TR T2)    0.0424 msec/pass
+cET: first_child               (--TR T2)    0.0384 msec/pass
+
+lxe: last_child                (--TR T1)    0.0477 msec/pass
+cET: last_child                (--TR T1)    0.0467 msec/pass
+</pre>
+<p>... unless you also add the time to find a child index in a bigger
+list.  ET and cET use Python lists here, which are based on arrays.
+The data structure used by libxml2 is a linked tree, and thus, a
+linked list of children:</p>
+<pre class="literal-block">
+lxe: middle_child              (--TR T1)    0.0710 msec/pass
+cET: middle_child              (--TR T1)    0.0420 msec/pass
+
+lxe: middle_child              (--TR T2)    1.7393 msec/pass
+cET: middle_child              (--TR T2)    0.0396 msec/pass
+</pre>
+</div>
+<div class="section" id="element-creation">
+<h2>Element creation</h2>
+<p>As opposed to ET, libxml2 has a notion of documents that each element must be
+in.  This results in a major performance difference for creating independent
+Elements that end up in independently created documents:</p>
+<pre class="literal-block">
+lxe: create_elements           (--TC T2)    1.0045 msec/pass
+cET: create_elements           (--TC T2)    0.0753 msec/pass
+</pre>
+<p>Therefore, it is always preferable to create Elements for the document they
+are supposed to end up in, either as SubElements of an Element or using the
+explicit <tt class="docutils literal">Element.makeelement()</tt> call:</p>
+<pre class="literal-block">
+lxe: makeelement               (--TC T2)    1.0586 msec/pass
+cET: makeelement               (--TC T2)    0.1483 msec/pass
+
+lxe: create_subelements        (--TC T2)    0.8826 msec/pass
+cET: create_subelements        (--TC T2)    0.0827 msec/pass
+</pre>
+<p>So, if the main performance bottleneck of an application is creating large XML
+trees in memory through calls to Element and SubElement, cET is the best
+choice.  Note, however, that the serialisation performance may even out this
+advantage, especially for smaller trees and trees with many attributes.</p>
+</div>
+<div class="section" id="merging-different-sources">
+<h2>Merging different sources</h2>
+<p>A critical action for lxml is moving elements between document contexts.  It
+requires lxml to do recursive adaptations throughout the moved tree structure.</p>
+<p>The following benchmark appends all root children of the second tree to the
+root of the first tree:</p>
+<pre class="literal-block">
+lxe: append_from_document      (--TR T1,T2)    1.0812 msec/pass
+cET: append_from_document      (--TR T1,T2)    0.1104 msec/pass
+
+lxe: append_from_document      (--TR T3,T4)    0.0155 msec/pass
+cET: append_from_document      (--TR T3,T4)    0.0060 msec/pass
+</pre>
+<p>Although these are fairly small numbers compared to parsing, this easily shows
+the different performance classes for lxml and (c)ET.  Where the latter do not
+have to care about parent pointers and tree structures, lxml has to deep
+traverse the appended tree.  The performance difference therefore increases
+with the size of the tree that is moved.</p>
+<p>This difference is not always as visible, but applies to most parts of the
+API, like inserting newly created elements:</p>
+<pre class="literal-block">
+lxe: insert_from_document         (--TR T1,T2)    3.9763 msec/pass
+cET: insert_from_document         (--TR T1,T2)    0.1459 msec/pass
+</pre>
+<p>or replacing the child slice by a newly created element:</p>
+<pre class="literal-block">
+lxe: replace_children_element   (--TC T1)    0.0749 msec/pass
+cET: replace_children_element   (--TC T1)    0.0081 msec/pass
+</pre>
+<p>as opposed to replacing the slice with an existing element from the
+same document:</p>
+<pre class="literal-block">
+lxe: replace_children           (--TC T1)    0.0052 msec/pass
+cET: replace_children           (--TC T1)    0.0036 msec/pass
+</pre>
+<p>While these numbers are too small to provide a major performance
+impact in practice, you should keep this difference in mind when you
+merge very large trees.  Note that Elements have a <tt class="docutils literal">makeelement()</tt>
+method that allows to create an Element within the same document,
+thus avoiding the merge overhead when inserting it into that tree.</p>
+</div>
+<div class="section" id="deepcopy">
+<h2>deepcopy</h2>
+<p>Deep copying a tree is fast in lxml:</p>
+<pre class="literal-block">
+lxe: deepcopy_all              (--TR T1)    3.1650 msec/pass
+cET: deepcopy_all              (--TR T1)   53.9973 msec/pass
+
+lxe: deepcopy_all              (-ATR T2)    3.7365 msec/pass
+cET: deepcopy_all              (-ATR T2)   61.6267 msec/pass
+
+lxe: deepcopy_all              (S-TR T3)    0.7913 msec/pass
+cET: deepcopy_all              (S-TR T3)   13.6220 msec/pass
+</pre>
+<p>So, for example, if you have a database-like scenario where you parse in a
+large tree and then search and copy independent subtrees from it for further
+processing, lxml is by far the best choice here.</p>
+</div>
+<div class="section" id="tree-traversal">
+<h2>Tree traversal</h2>
+<p>Another important area in XML processing is iteration for tree
+traversal.  If your algorithms can benefit from step-by-step
+traversal of the XML tree and especially if few elements are of
+interest or the target element tag name is known, the <tt class="docutils literal">.iter()</tt>
+method is a good choice:</p>
+<pre class="literal-block">
+lxe: iter_all             (--TR T1)    1.0529 msec/pass
+cET: iter_all             (--TR T1)    0.2635 msec/pass
+
+lxe: iter_islice          (--TR T2)    0.0110 msec/pass
+cET: iter_islice          (--TR T2)    0.0050 msec/pass
+
+lxe: iter_tag             (--TR T2)    0.0079 msec/pass
+cET: iter_tag             (--TR T2)    0.0112 msec/pass
+
+lxe: iter_tag_all         (--TR T2)    0.1822 msec/pass
+cET: iter_tag_all         (--TR T2)    0.5343 msec/pass
+</pre>
+<p>This translates directly into similar timings for <tt class="docutils literal">Element.findall()</tt>:</p>
+<pre class="literal-block">
+lxe: findall              (--TR T2)    1.7176 msec/pass
+cET: findall              (--TR T2)    0.9973 msec/pass
+
+lxe: findall              (--TR T3)    0.3967 msec/pass
+cET: findall              (--TR T3)    0.2525 msec/pass
+
+lxe: findall_tag          (--TR T2)    0.2258 msec/pass
+cET: findall_tag          (--TR T2)    0.5770 msec/pass
+
+lxe: findall_tag          (--TR T3)    0.1085 msec/pass
+cET: findall_tag          (--TR T3)    0.1919 msec/pass
+</pre>
+<p>Note that all three libraries currently use the same Python
+implementation for <tt class="docutils literal">.findall()</tt>, except for their native tree
+iterator (<tt class="docutils literal">element.iter()</tt>).  In general, lxml is very fast
+for iteration, but loses ground against cET when many Elements
+are found and need to be instantiated.  So, the more selective
+your search is, the faster lxml will run.</p>
+</div>
+</div>
+<div class="section" id="xpath">
+<h1>XPath</h1>
+<p>The following timings are based on the benchmark script <a class="reference external" href="https://github.com/lxml/lxml/blob/master/benchmark/bench_xpath.py">bench_xpath.py</a>.</p>
+<p>This part of lxml does not have an equivalent in ElementTree.  However, lxml
+provides more than one way of accessing it and you should take care which part
+of the lxml API you use.  The most straight forward way is to call the
+<tt class="docutils literal">xpath()</tt> method on an Element or ElementTree:</p>
+<pre class="literal-block">
+lxe: xpath_method         (--TC T1)    0.3982 msec/pass
+lxe: xpath_method         (--TC T2)    7.8895 msec/pass
+lxe: xpath_method         (--TC T3)    0.0477 msec/pass
+lxe: xpath_method         (--TC T4)    0.3982 msec/pass
+</pre>
+<p>This is well suited for testing and when the XPath expressions are as diverse
+as the trees they are called on.  However, if you have a single XPath
+expression that you want to apply to a larger number of different elements,
+the <tt class="docutils literal">XPath</tt> class is the most efficient way to do it:</p>
+<pre class="literal-block">
+lxe: xpath_class          (--TC T1)    0.0713 msec/pass
+lxe: xpath_class          (--TC T2)    1.1325 msec/pass
+lxe: xpath_class          (--TC T3)    0.0215 msec/pass
+lxe: xpath_class          (--TC T4)    0.0722 msec/pass
+</pre>
+<p>Note that this still allows you to use variables in the expression, so you can
+parse it once and then adapt it through variables at call time.  In other
+cases, where you have a fixed Element or ElementTree and want to run different
+expressions on it, you should consider the <tt class="docutils literal">XPathEvaluator</tt>:</p>
+<pre class="literal-block">
+lxe: xpath_element        (--TR T1)    0.1101 msec/pass
+lxe: xpath_element        (--TR T2)    2.0473 msec/pass
+lxe: xpath_element        (--TR T3)    0.0267 msec/pass
+lxe: xpath_element        (--TR T4)    0.1087 msec/pass
+</pre>
+<p>While it looks slightly slower, creating an XPath object for each of the
+expressions generates a much higher overhead here:</p>
+<pre class="literal-block">
+lxe: xpath_class_repeat           (--TC T1   )    0.3884 msec/pass
+lxe: xpath_class_repeat           (--TC T2   )    7.6182 msec/pass
+lxe: xpath_class_repeat           (--TC T3   )    0.0465 msec/pass
+lxe: xpath_class_repeat           (--TC T4   )    0.3877 msec/pass
+</pre>
+<p>Note that tree iteration can be substantially faster than XPath if
+your code short-circuits after the first couple of elements were
+found.  The XPath engine will always return the complete result set,
+regardless of how much of it will actually be used.</p>
+<p>Here is an example where only the first matching element is being
+searched, a case for which XPath has syntax support as well:</p>
+<pre class="literal-block">
+lxe: find_single                (--TR T2)    0.0184 msec/pass
+cET: find_single                (--TR T2)    0.0052 msec/pass
+
+lxe: iter_single                (--TR T2)    0.0024 msec/pass
+cET: iter_single                (--TR T2)    0.0007 msec/pass
+
+lxe: xpath_single               (--TR T2)    0.0033 msec/pass
+</pre>
+<p>When looking for the first two elements out of many, the numbers
+explode for XPath, as restricting the result subset requires a
+more complex expression:</p>
+<pre class="literal-block">
+lxe: iterfind_two               (--TR T2)    0.0184 msec/pass
+cET: iterfind_two               (--TR T2)    0.0062 msec/pass
+
+lxe: iter_two                   (--TR T2)    0.0029 msec/pass
+cET: iter_two                   (--TR T2)    0.0017 msec/pass
+
+lxe: xpath_two                  (--TR T2)    0.2768 msec/pass
+</pre>
+</div>
+<div class="section" id="a-longer-example">
+<h1>A longer example</h1>
+<p>... based on lxml 1.3.</p>
+<p>A while ago, Uche Ogbuji posted a <a class="reference external" href="http://www.onlamp.com/pub/wlg/6291">benchmark proposal</a> that would
+read in a 3MB XML version of the <a class="reference external" href="http://www.ibiblio.org/bosak/xml/eg/religion.2.00.xml.zip">Old Testament</a> of the Bible and
+look for the word <em>begat</em> in all verses.  Apparently, it is contained
+in 120 out of almost 24000 verses.  This is easy to implement in
+ElementTree using <tt class="docutils literal">findall()</tt>.  However, the fastest and most memory
+friendly way to do this is obviously <tt class="docutils literal">iterparse()</tt>, as most of the
+data is not of any interest.</p>
+<p>Now, Uche's original proposal was more or less the following:</p>
+<div class="syntax"><pre><span class="k">def</span> <span class="nf">bench_ET</span><span class="p">():</span>
+    <span class="n">tree</span> <span class="o">=</span> <span class="n">ElementTree</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s2">"ot.xml"</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">tree</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s2">"//v"</span><span class="p">):</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">text</span>
+        <span class="k">if</span> <span class="s1">'begat'</span> <span class="ow">in</span> <span class="n">text</span><span class="p">:</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+<p>which takes about one second on my machine today.  The faster <tt class="docutils literal">iterparse()</tt>
+variant looks like this:</p>
+<div class="syntax"><pre><span class="k">def</span> <span class="nf">bench_ET_iterparse</span><span class="p">():</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">event</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">ElementTree</span><span class="o">.</span><span class="n">iterparse</span><span class="p">(</span><span class="s2">"ot.xml"</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">v</span><span class="o">.</span><span class="n">tag</span> <span class="o">==</span> <span class="s1">'v'</span><span class="p">:</span>
+            <span class="n">text</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">text</span>
+            <span class="k">if</span> <span class="s1">'begat'</span> <span class="ow">in</span> <span class="n">text</span><span class="p">:</span>
+                <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+        <span class="n">v</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+<p>The improvement is about 10%.  At the time I first tried (early 2006), lxml
+didn't have <tt class="docutils literal">iterparse()</tt> support, but the <tt class="docutils literal">findall()</tt> variant was already
+faster than ElementTree.  This changes immediately when you switch to
+cElementTree.  The latter only needs 0.17 seconds to do the trick today and
+only some impressive 0.10 seconds when running the iterparse version.  And
+even back then, it was quite a bit faster than what lxml could achieve.</p>
+<p>Since then, lxml has matured a lot and has gotten much faster.  The iterparse
+variant now runs in 0.14 seconds, and if you remove the <tt class="docutils literal">v.clear()</tt>, it is
+even a little faster (which isn't the case for cElementTree).</p>
+<p>One of the many great tools in lxml is XPath, a Swiss army knife for finding
+things in XML documents.  It is possible to move the whole thing to a pure
+XPath implementation, which looks like this:</p>
+<div class="syntax"><pre><span class="k">def</span> <span class="nf">bench_lxml_xpath_all</span><span class="p">():</span>
+    <span class="n">tree</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s2">"ot.xml"</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s2">"//v[contains(., 'begat')]/text()"</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+<p>This runs in about 0.13 seconds and is about the shortest possible
+implementation (in lines of Python code) that I could come up with.  Now, this
+is already a rather complex XPath expression compared to the simple "//v"
+ElementPath expression we started with.  Since this is also valid XPath, let's
+try this instead:</p>
+<div class="syntax"><pre><span class="k">def</span> <span class="nf">bench_lxml_xpath</span><span class="p">():</span>
+    <span class="n">tree</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s2">"ot.xml"</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">tree</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s2">"//v"</span><span class="p">):</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">text</span>
+        <span class="k">if</span> <span class="s1">'begat'</span> <span class="ow">in</span> <span class="n">text</span><span class="p">:</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+<p>This gets us down to 0.12 seconds, thus showing that a generic XPath
+evaluation engine cannot always compete with a simpler, tailored solution.
+However, since this is not much different from the original findall variant,
+we can remove the complexity of the XPath call completely and just go with
+what we had in the beginning.  Under lxml, this runs in the same 0.12 seconds.</p>
+<p>But there is one thing left to try.  We can replace the simple ElementPath
+expression with a native tree iterator:</p>
+<div class="syntax"><pre><span class="k">def</span> <span class="nf">bench_lxml_getiterator</span><span class="p">():</span>
+    <span class="n">tree</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s2">"ot.xml"</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">tree</span><span class="o">.</span><span class="n">getiterator</span><span class="p">(</span><span class="s2">"v"</span><span class="p">):</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">text</span>
+        <span class="k">if</span> <span class="s1">'begat'</span> <span class="ow">in</span> <span class="n">text</span><span class="p">:</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+<p>This implements the same thing, just without the overhead of parsing and
+evaluating a path expression.  And this makes it another bit faster, down to
+0.11 seconds.  For comparison, cElementTree runs this version in 0.17 seconds.</p>
+<p>So, what have we learned?</p>
+<ul class="simple">
+<li>Python code is not slow.  The pure XPath solution was not even as fast as
+the first shot Python implementation.  In general, a few more lines in
+Python make things more readable, which is much more important than the last
+5% of performance.</li>
+<li>It's important to know the available options - and it's worth starting with
+the most simple one.  In this case, a programmer would then probably have
+started with <tt class="docutils literal"><span class="pre">getiterator("v")</span></tt> or <tt class="docutils literal">iterparse()</tt>.  Either of them would
+already have been the most efficient, depending on which library is used.</li>
+<li>It's important to know your tool.  lxml and cElementTree are both very fast
+libraries, but they do not have the same performance characteristics.  The
+fastest solution in one library can be comparatively slow in the other.  If
+you optimise, optimise for the specific target platform.</li>
+<li>It's not always worth optimising.  After all that hassle we got from 0.12
+seconds for the initial implementation to 0.11 seconds.  Switching over to
+cElementTree and writing an <tt class="docutils literal">iterparse()</tt> based version would have given
+us 0.10 seconds - not a big difference for 3MB of XML.</li>
+<li>Take care what operation is really dominating in your use case.  If we split
+up the operations, we can see that lxml is slightly slower than cElementTree
+on <tt class="docutils literal">parse()</tt> (both about 0.06 seconds), but more visibly slower on
+<tt class="docutils literal">iterparse()</tt>: 0.07 versus 0.10 seconds.  However, tree iteration in lxml
+is incredibly fast, so it can be better to parse the whole tree and then
+iterate over it rather than using <tt class="docutils literal">iterparse()</tt> to do both in one step.
+Or, you can just wait for the lxml developers to optimise iterparse in one
+of the next releases...</li>
+</ul>
+</div>
+<div class="section" id="lxml-objectify">
+<h1>lxml.objectify</h1>
+<p>The following timings are based on the benchmark script <a class="reference external" href="https://github.com/lxml/lxml/blob/master/benchmark/bench_objectify.py">bench_objectify.py</a>.</p>
+<p>Objectify is a data-binding API for XML based on lxml.etree, that was added in
+version 1.1.  It uses standard Python attribute access to traverse the XML
+tree.  It also features ObjectPath, a fast path language based on the same
+meme.</p>
+<p>Just like lxml.etree, lxml.objectify creates Python representations of
+elements on the fly.  To save memory, the normal Python garbage collection
+mechanisms will discard them when their last reference is gone.  In cases
+where deeply nested elements are frequently accessed through the objectify
+API, the create-discard cycles can become a bottleneck, as elements have to be
+instantiated over and over again.</p>
+<div class="section" id="objectpath">
+<h2>ObjectPath</h2>
+<p>ObjectPath can be used to speed up the access to elements that are deep in the
+tree.  It avoids step-by-step Python element instantiations along the path,
+which can substantially improve the access time:</p>
+<pre class="literal-block">
+lxe: attribute                  (--TR T1)    4.1828 msec/pass
+lxe: attribute                  (--TR T2)   17.3802 msec/pass
+lxe: attribute                  (--TR T4)    3.8657 msec/pass
+
+lxe: objectpath                 (--TR T1)    0.9289 msec/pass
+lxe: objectpath                 (--TR T2)   13.3109 msec/pass
+lxe: objectpath                 (--TR T4)    0.9289 msec/pass
+
+lxe: attributes_deep            (--TR T1)    6.2900 msec/pass
+lxe: attributes_deep            (--TR T2)   20.4713 msec/pass
+lxe: attributes_deep            (--TR T4)    6.1679 msec/pass
+
+lxe: objectpath_deep            (--TR T1)    1.3049 msec/pass
+lxe: objectpath_deep            (--TR T2)   14.0815 msec/pass
+lxe: objectpath_deep            (--TR T4)    1.3051 msec/pass
+</pre>
+<p>Note, however, that parsing ObjectPath expressions is not for free either, so
+this is most effective for frequently accessing the same element.</p>
+</div>
+<div class="section" id="caching-elements">
+<h2>Caching Elements</h2>
+<p>A way to improve the normal attribute access time is static instantiation of
+the Python objects, thus trading memory for speed.  Just create a cache
+dictionary and run:</p>
+<div class="syntax"><pre><span class="n">cache</span><span class="p">[</span><span class="n">root</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">iter</span><span class="p">())</span>
+</pre></div>
+<p>after parsing and:</p>
+<div class="syntax"><pre><span class="k">del</span> <span class="n">cache</span><span class="p">[</span><span class="n">root</span><span class="p">]</span>
+</pre></div>
+<p>when you are done with the tree.  This will keep the Python element
+representations of all elements alive and thus avoid the overhead of repeated
+Python object creation.  You can also consider using filters or generator
+expressions to be more selective.  By choosing the right trees (or even
+subtrees and elements) to cache, you can trade memory usage against access
+speed:</p>
+<pre class="literal-block">
+lxe: attribute_cached           (--TR T1)    3.1357 msec/pass
+lxe: attribute_cached           (--TR T2)   15.8911 msec/pass
+lxe: attribute_cached           (--TR T4)    2.9194 msec/pass
+
+lxe: attributes_deep_cached     (--TR T1)    3.8984 msec/pass
+lxe: attributes_deep_cached     (--TR T2)   16.8300 msec/pass
+lxe: attributes_deep_cached     (--TR T4)    3.6936 msec/pass
+
+lxe: objectpath_deep_cached     (--TR T1)    0.7496 msec/pass
+lxe: objectpath_deep_cached     (--TR T2)   12.3763 msec/pass
+lxe: objectpath_deep_cached     (--TR T4)    0.7427 msec/pass
+</pre>
+<p>Things to note: you cannot currently use <tt class="docutils literal">weakref.WeakKeyDictionary</tt> objects
+for this as lxml's element objects do not support weak references (which are
+costly in terms of memory).  Also note that new element objects that you add
+to these trees will not turn up in the cache automatically and will therefore
+still be garbage collected when all their Python references are gone, so this
+is most effective for largely immutable trees.  You should consider using a
+set instead of a list in this case and add new elements by hand.</p>
+</div>
+<div class="section" id="further-optimisations">
+<h2>Further optimisations</h2>
+<p>Here are some more things to try if optimisation is required:</p>
+<ul class="simple">
+<li>A lot of time is usually spent in tree traversal to find the addressed
+elements in the tree.  If you often work in subtrees, do what you would also
+do with deep Python objects: assign the parent of the subtree to a variable
+or pass it into functions instead of starting at the root.  This allows
+accessing its descendants more directly.</li>
+<li>Try assigning data values directly to attributes instead of passing them
+through DataElement.</li>
+<li>If you use custom data types that are costly to parse, try running
+<tt class="docutils literal">objectify.annotate()</tt> over read-only trees to speed up the attribute type
+inference on read access.</li>
+</ul>
+<p>Note that none of these measures is guaranteed to speed up your application.
+As usual, you should prefer readable code over premature optimisations and
+profile your expected use cases before bothering to apply optimisations at
+random.</p>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr class="footer" />
+Generated on: 2018-06-22.
+
+</div>
+</body>
+</html>

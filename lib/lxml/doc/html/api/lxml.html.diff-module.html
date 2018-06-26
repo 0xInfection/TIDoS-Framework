@@ -1,0 +1,1434 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>lxml.html.diff</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lxml-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="/">lxml API</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="lxml-module.html">Package&nbsp;lxml</a> ::
+        <a href="lxml.html-module.html">Package&nbsp;html</a> ::
+        Module&nbsp;diff
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="lxml.html.diff-module.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== MODULE DESCRIPTION ==================== -->
+<h1 class="epydoc">Module diff</h1><p class="nomargin-top"><span class="codelink"><a href="lxml.html.diff-pysrc.html">source&nbsp;code</a></span></p>
+<!-- ==================== CLASSES ==================== -->
+<a name="section-Classes"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Classes</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Classes"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="str-class.html" class="summary-name" onclick="show_private();">basestring</a><br />
+      str(object='') -&gt; string
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.html.diff.DEL_START-class.html" class="summary-name" onclick="show_private();">DEL_START</a>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.html.diff.DEL_END-class.html" class="summary-name" onclick="show_private();">DEL_END</a>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.html.diff.NoDeletes-class.html" class="summary-name" onclick="show_private();">NoDeletes</a><br />
+      Raised when the document no longer contains any pending deletes
+(DEL_START/DEL_END)
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.html.diff.token-class.html" class="summary-name" onclick="show_private();">token</a><br />
+      Represents a diffable token, generally a word that is displayed to
+the user.  Opening tags are attached to this token when they are
+adjacent (pre_tags) and closing tags that follow the word
+(post_tags).  Some exceptions occur when there are empty tags
+adjacent to a word, so there may be close tags in pre_tags, or
+open tags in post_tags.
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.html.diff.tag_token-class.html" class="summary-name" onclick="show_private();">tag_token</a><br />
+      Represents a token that is actually a tag.  Currently this is just
+the &lt;img&gt; tag, which takes up visible space just like a word but
+is only represented in a document by a tag.
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.html.diff.href_token-class.html" class="summary-name" onclick="show_private();">href_token</a><br />
+      Represents the href in an anchor tag.  Unlike other words, we only
+show the href when it changes.
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.html.diff.InsensitiveSequenceMatcher-class.html" class="summary-name" onclick="show_private();">InsensitiveSequenceMatcher</a><br />
+      Acts like SequenceMatcher, but tries not to find very small equal
+blocks amidst large spans of changes
+    </td>
+  </tr>
+</table>
+<!-- ==================== FUNCTIONS ==================== -->
+<a name="section-Functions"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Functions</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Functions"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="default_markup"></a><span class="summary-sig-name">default_markup</span>(<span class="summary-sig-arg">text</span>,
+        <span class="summary-sig-arg">version</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.html.diff-pysrc.html#default_markup">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lxml.html.diff-module.html#html_annotate" class="summary-sig-name">html_annotate</a>(<span class="summary-sig-arg">doclist</span>,
+        <span class="summary-sig-arg">markup</span>=<span class="summary-sig-default">default_markup</span>)</span><br />
+      doclist should be ordered from oldest to newest, like:</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.html.diff-pysrc.html#html_annotate">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="tokenize_annotated"></a><span class="summary-sig-name">tokenize_annotated</span>(<span class="summary-sig-arg">doc</span>,
+        <span class="summary-sig-arg">annotation</span>)</span><br />
+      Tokenize a document and add an annotation attribute to each token</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.html.diff-pysrc.html#tokenize_annotated">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="html_annotate_merge_annotations"></a><span class="summary-sig-name">html_annotate_merge_annotations</span>(<span class="summary-sig-arg">tokens_old</span>,
+        <span class="summary-sig-arg">tokens_new</span>)</span><br />
+      Merge the annotations from tokens_old into tokens_new, when the
+tokens in the new document already existed in the old document.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.html.diff-pysrc.html#html_annotate_merge_annotations">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="copy_annotations"></a><span class="summary-sig-name">copy_annotations</span>(<span class="summary-sig-arg">src</span>,
+        <span class="summary-sig-arg">dest</span>)</span><br />
+      Copy annotations from the tokens listed in src to the tokens in dest</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.html.diff-pysrc.html#copy_annotations">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="compress_tokens"></a><span class="summary-sig-name">compress_tokens</span>(<span class="summary-sig-arg">tokens</span>)</span><br />
+      Combine adjacent tokens when there is no HTML between the tokens,
+and they share an annotation</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.html.diff-pysrc.html#compress_tokens">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="compress_merge_back"></a><span class="summary-sig-name">compress_merge_back</span>(<span class="summary-sig-arg">tokens</span>,
+        <span class="summary-sig-arg">tok</span>)</span><br />
+      Merge tok into the last element of tokens (modifying the list of
+tokens in-place).</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.html.diff-pysrc.html#compress_merge_back">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="markup_serialize_tokens"></a><span class="summary-sig-name">markup_serialize_tokens</span>(<span class="summary-sig-arg">tokens</span>,
+        <span class="summary-sig-arg">markup_func</span>)</span><br />
+      Serialize the list of tokens into a list of text chunks, calling
+markup_func around text to add annotations.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.html.diff-pysrc.html#markup_serialize_tokens">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lxml.html.diff-module.html#htmldiff" class="summary-sig-name">htmldiff</a>(<span class="summary-sig-arg">old_html</span>,
+        <span class="summary-sig-arg">new_html</span>)</span><br />
+      Do a diff of the old and new document.  The documents are HTML
+<em>fragments</em> (str/UTF8 or unicode), they are not complete documents
+(i.e., no &lt;html&gt; tag).</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.html.diff-pysrc.html#htmldiff">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="htmldiff_tokens"></a><span class="summary-sig-name">htmldiff_tokens</span>(<span class="summary-sig-arg">html1_tokens</span>,
+        <span class="summary-sig-arg">html2_tokens</span>)</span><br />
+      Does a diff on the tokens themselves, returning a list of text
+chunks (not tokens).</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.html.diff-pysrc.html#htmldiff_tokens">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="expand_tokens"></a><span class="summary-sig-name">expand_tokens</span>(<span class="summary-sig-arg">tokens</span>,
+        <span class="summary-sig-arg">equal</span>=<span class="summary-sig-default">False</span>)</span><br />
+      Given a list of tokens, return a generator of the chunks of
+text for the data in the tokens.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.html.diff-pysrc.html#expand_tokens">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="merge_insert"></a><span class="summary-sig-name">merge_insert</span>(<span class="summary-sig-arg">ins_chunks</span>,
+        <span class="summary-sig-arg">doc</span>)</span><br />
+      doc is the already-handled document (as a list of text chunks);
+here we add &lt;ins&gt;ins_chunks&lt;/ins&gt; to the end of that.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.html.diff-pysrc.html#merge_insert">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="merge_delete"></a><span class="summary-sig-name">merge_delete</span>(<span class="summary-sig-arg">del_chunks</span>,
+        <span class="summary-sig-arg">doc</span>)</span><br />
+      Adds the text chunks in del_chunks to the document doc (another
+list of text chunks) with marker to show it is a delete.
+cleanup_delete later resolves these markers into &lt;del&gt; tags.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.html.diff-pysrc.html#merge_delete">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lxml.html.diff-module.html#cleanup_delete" class="summary-sig-name" onclick="show_private();">cleanup_delete</a>(<span class="summary-sig-arg">chunks</span>)</span><br />
+      Cleans up any DEL_START/DEL_END markers in the document, replacing
+them with &lt;del&gt;&lt;/del&gt;.  To do this while keeping the document
+valid, it may need to drop some tags (either start or end tags).</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.html.diff-pysrc.html#cleanup_delete">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lxml.html.diff-module.html#split_unbalanced" class="summary-sig-name" onclick="show_private();">split_unbalanced</a>(<span class="summary-sig-arg">chunks</span>)</span><br />
+      Return (unbalanced_start, balanced, unbalanced_end), where each is
+a list of text and tag chunks.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.html.diff-pysrc.html#split_unbalanced">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="split_delete"></a><span class="summary-sig-name">split_delete</span>(<span class="summary-sig-arg">chunks</span>)</span><br />
+      Returns (stuff_before_DEL_START, stuff_inside_DEL_START_END,
+stuff_after_DEL_END).  Returns the first case found (there may be
+more DEL_STARTs in stuff_after_DEL_END).  Raises NoDeletes if
+there's no DEL_START found.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.html.diff-pysrc.html#split_delete">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lxml.html.diff-module.html#locate_unbalanced_start" class="summary-sig-name" onclick="show_private();">locate_unbalanced_start</a>(<span class="summary-sig-arg">unbalanced_start</span>,
+        <span class="summary-sig-arg">pre_delete</span>,
+        <span class="summary-sig-arg">post_delete</span>)</span><br />
+      pre_delete and post_delete implicitly point to a place in the
+document (where the two were split).  This moves that point (by
+popping items from one and pushing them onto the other).  It moves
+the point to try to find a place where unbalanced_start applies.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.html.diff-pysrc.html#locate_unbalanced_start">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="locate_unbalanced_end"></a><span class="summary-sig-name">locate_unbalanced_end</span>(<span class="summary-sig-arg">unbalanced_end</span>,
+        <span class="summary-sig-arg">pre_delete</span>,
+        <span class="summary-sig-arg">post_delete</span>)</span><br />
+      like locate_unbalanced_start, except handling end tags and
+possibly moving the point earlier in the document.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.html.diff-pysrc.html#locate_unbalanced_end">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lxml.html.diff-module.html#tokenize" class="summary-sig-name" onclick="show_private();">tokenize</a>(<span class="summary-sig-arg">html</span>,
+        <span class="summary-sig-arg">include_hrefs</span>=<span class="summary-sig-default">True</span>)</span><br />
+      Parse the given HTML and returns token objects (words with attached tags).</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.html.diff-pysrc.html#tokenize">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lxml.html.diff-module.html#parse_html" class="summary-sig-name" onclick="show_private();">parse_html</a>(<span class="summary-sig-arg">html</span>,
+        <span class="summary-sig-arg">cleanup</span>=<span class="summary-sig-default">True</span>)</span><br />
+      Parses an HTML fragment, returning an lxml element.  Note that the HTML will be
+wrapped in a &lt;div&gt; tag that was not in the original document.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.html.diff-pysrc.html#parse_html">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="cleanup_html"></a><span class="summary-sig-name">cleanup_html</span>(<span class="summary-sig-arg">html</span>)</span><br />
+      This 'cleans' the HTML, meaning that any page structure is removed
+(only the contents of &lt;body&gt; are used, if there is any &lt;body).
+Also &lt;ins&gt; and &lt;del&gt; tags are removed.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.html.diff-pysrc.html#cleanup_html">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lxml.html.diff-module.html#split_trailing_whitespace" class="summary-sig-name" onclick="show_private();">split_trailing_whitespace</a>(<span class="summary-sig-arg">word</span>)</span><br />
+      This function takes a word, such as 'test</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.html.diff-pysrc.html#split_trailing_whitespace">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="fixup_chunks"></a><span class="summary-sig-name">fixup_chunks</span>(<span class="summary-sig-arg">chunks</span>)</span><br />
+      This function takes a list of chunks and produces a list of tokens.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.html.diff-pysrc.html#fixup_chunks">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lxml.html.diff-module.html#flatten_el" class="summary-sig-name" onclick="show_private();">flatten_el</a>(<span class="summary-sig-arg">el</span>,
+        <span class="summary-sig-arg">include_hrefs</span>,
+        <span class="summary-sig-arg">skip_tag</span>=<span class="summary-sig-default">False</span>)</span><br />
+      Takes an lxml element el, and generates all the text chunks for
+that tag.  Each start tag is a chunk, each word is a chunk, and each
+end tag is a chunk.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.html.diff-pysrc.html#flatten_el">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="split_words"></a><span class="summary-sig-name">split_words</span>(<span class="summary-sig-arg">text</span>)</span><br />
+      Splits some text into words. Includes trailing whitespace
+on each word when appropriate.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.html.diff-pysrc.html#split_words">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="start_tag"></a><span class="summary-sig-name">start_tag</span>(<span class="summary-sig-arg">el</span>)</span><br />
+      The text representation of the start tag for a tag.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.html.diff-pysrc.html#start_tag">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="end_tag"></a><span class="summary-sig-name">end_tag</span>(<span class="summary-sig-arg">el</span>)</span><br />
+      The text representation of an end tag for a tag.  Includes
+trailing whitespace when appropriate.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.html.diff-pysrc.html#end_tag">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="is_word"></a><span class="summary-sig-name">is_word</span>(<span class="summary-sig-arg">tok</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.html.diff-pysrc.html#is_word">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="is_end_tag"></a><span class="summary-sig-name">is_end_tag</span>(<span class="summary-sig-arg">tok</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.html.diff-pysrc.html#is_end_tag">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="is_start_tag"></a><span class="summary-sig-name">is_start_tag</span>(<span class="summary-sig-arg">tok</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.html.diff-pysrc.html#is_start_tag">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="fixup_ins_del_tags"></a><span class="summary-sig-name">fixup_ins_del_tags</span>(<span class="summary-sig-arg">html</span>)</span><br />
+      Given an html string, move any &lt;ins&gt; or &lt;del&gt; tags inside of any
+block-level elements, e.g. transform &lt;ins&gt;&lt;p&gt;word&lt;/p&gt;&lt;/ins&gt; to
+&lt;p&gt;&lt;ins&gt;word&lt;/ins&gt;&lt;/p&gt;</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.html.diff-pysrc.html#fixup_ins_del_tags">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lxml.html.diff-module.html#serialize_html_fragment" class="summary-sig-name" onclick="show_private();">serialize_html_fragment</a>(<span class="summary-sig-arg">el</span>,
+        <span class="summary-sig-arg">skip_outer</span>=<span class="summary-sig-default">False</span>)</span><br />
+      Serialize a single lxml element as HTML.  The serialized form
+includes the elements tail.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.html.diff-pysrc.html#serialize_html_fragment">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_fixup_ins_del_tags"></a><span class="summary-sig-name">_fixup_ins_del_tags</span>(<span class="summary-sig-arg">doc</span>)</span><br />
+      fixup_ins_del_tags that works on an lxml document in-place</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.html.diff-pysrc.html#_fixup_ins_del_tags">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_contains_block_level_tag"></a><span class="summary-sig-name">_contains_block_level_tag</span>(<span class="summary-sig-arg">el</span>)</span><br />
+      True if the element contains any block-level elements, like &lt;p&gt;, &lt;td&gt;, etc.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.html.diff-pysrc.html#_contains_block_level_tag">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_move_el_inside_block"></a><span class="summary-sig-name">_move_el_inside_block</span>(<span class="summary-sig-arg">el</span>,
+        <span class="summary-sig-arg">tag</span>)</span><br />
+      helper for _fixup_ins_del_tags; actually takes the &lt;ins&gt; etc tags
+and moves them inside any block-level tags.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.html.diff-pysrc.html#_move_el_inside_block">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_merge_element_contents"></a><span class="summary-sig-name">_merge_element_contents</span>(<span class="summary-sig-arg">el</span>)</span><br />
+      Removes an element, but merges its contents into its place, e.g.,
+given &lt;p&gt;Hi &lt;i&gt;there!&lt;/i&gt;&lt;/p&gt;, if you remove the &lt;i&gt; element you get
+&lt;p&gt;Hi there!&lt;/p&gt;</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.html.diff-pysrc.html#_merge_element_contents">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== VARIABLES ==================== -->
+<a name="section-Variables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Variables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="_body_re"></a><span class="summary-name">_body_re</span> = <code title="re.compile(r'(?is)&lt;body.*?&gt;')">re.compile(r'<code class="re-flags">(?is)</code>&lt;body.<code class="re-op">*?</code>&gt;')</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="_end_body_re"></a><span class="summary-name">_end_body_re</span> = <code title="re.compile(r'(?is)&lt;/body.*?&gt;')">re.compile(r'<code class="re-flags">(?is)</code>&lt;/body.<code class="re-op">*?</code>&gt;')</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="_ins_del_re"></a><span class="summary-name">_ins_del_re</span> = <code title="re.compile(r'(?is)&lt;/?(ins|del).*?&gt;')">re.compile(r'<code class="re-flags">(?is)</code>&lt;/<code class="re-op">?</code><code class="re-group">(</code>ins<code class="re-op">|</code>del<code class="re-group">)</code>.<code class="re-op">*?</code>&gt;')</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="end_whitespace_re"></a><span class="summary-name">end_whitespace_re</span> = <code title="re.compile(r'[ \t\n\r]$')">re.compile(r'<code class="re-group">[</code> \t\n\r<code class="re-group">]</code>$')</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.html.diff-module.html#empty_tags" class="summary-name" onclick="show_private();">empty_tags</a> = <code title="('param',
+ 'img',
+ 'area',
+ 'br',
+ 'basefont',
+ 'input',
+ 'base',
+ 'meta',
+..."><code class="variable-group">(</code><code class="variable-quote">'</code><code class="variable-string">param</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">img</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">area</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">br</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">basefont</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">input</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.html.diff-module.html#block_level_tags" class="summary-name" onclick="show_private();">block_level_tags</a> = <code title="('address',
+ 'blockquote',
+ 'center',
+ 'dir',
+ 'div',
+ 'dl',
+ 'fieldset',
+ 'form',
+..."><code class="variable-group">(</code><code class="variable-quote">'</code><code class="variable-string">address</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">blockquote</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">center</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">dir</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.html.diff-module.html#block_level_container_tags" class="summary-name" onclick="show_private();">block_level_container_tags</a> = <code title="('dd',
+ 'dt',
+ 'frameset',
+ 'li',
+ 'tbody',
+ 'td',
+ 'tfoot',
+ 'th',
+..."><code class="variable-group">(</code><code class="variable-quote">'</code><code class="variable-string">dd</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">dt</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">frameset</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">li</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">t</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="split_words_re"></a><span class="summary-name">split_words_re</span> = <code title="re.compile(r'(?u)\S+(?:\s+|$)')">re.compile(r'<code class="re-flags">(?u)</code>\S<code class="re-op">+</code><code class="re-group">(?:</code>\s<code class="re-op">+</code><code class="re-op">|</code>$<code class="re-group">)</code>')</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="start_whitespace_re"></a><span class="summary-name">start_whitespace_re</span> = <code title="re.compile(r'^[ \t\n\r]')">re.compile(r'^<code class="re-group">[</code> \t\n\r<code class="re-group">]</code>')</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="__package__"></a><span class="summary-name">__package__</span> = <code title="'lxml.html'"><code class="variable-quote">'</code><code class="variable-string">lxml.html</code><code class="variable-quote">'</code></code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.html.diff-module.html#__test__" class="summary-name" onclick="show_private();">__test__</a> = <code title="{u'html_annotate (line 31)': u'''
+    doclist should be ordered from oldest to newest, like::
+
+        &gt;&gt;&gt; version1 = 'Hello World'
+        &gt;&gt;&gt; version2 = 'Goodbye World'
+        &gt;&gt;&gt; print(html_annotate([(version1, 'version 1'),
+        ...                      (version2, 'version 2')]))
+        &lt;span title=&quot;version 2&quot;&gt;Goodbye&lt;/span&gt; &lt;span title=&quot;version 1&quot;\
+..."><code class="variable-group">{</code><code class="variable-quote">u'</code><code class="variable-string">html_annotate (line 31)</code><code class="variable-quote">'</code><code class="variable-op">:</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+</table>
+<!-- ==================== FUNCTION DETAILS ==================== -->
+<a name="section-FunctionDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Function Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-FunctionDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="html_annotate"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">html_annotate</span>(<span class="sig-arg">doclist</span>,
+        <span class="sig-arg">markup</span>=<span class="sig-default">default_markup</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lxml.html.diff-pysrc.html#html_annotate">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>doclist should be ordered from oldest to newest, like:</p>
+<pre class="rst-literal-block">
+&gt;&gt;&gt; version1 = 'Hello World'
+&gt;&gt;&gt; version2 = 'Goodbye World'
+&gt;&gt;&gt; print(html_annotate([(version1, 'version 1'),
+...                      (version2, 'version 2')]))
+&lt;span title=&quot;version 2&quot;&gt;Goodbye&lt;/span&gt; &lt;span title=&quot;version 1&quot;&gt;World&lt;/span&gt;
+</pre>
+<p>The documents must be <em>fragments</em> (str/UTF8 or unicode), not
+complete documents</p>
+<p>The markup argument is a function to markup the spans of words.
+This function is called like markup('Hello', 'version 2'), and
+returns HTML.  The first argument is text and never includes any
+markup.  The default uses a span with a title:</p>
+<blockquote>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">print</span>(default_markup(<span class="py-string">'Some Text'</span>, <span class="py-string">'by Joe'</span>))
+<span class="py-output">&lt;span title=&quot;by Joe&quot;&gt;Some Text&lt;/span&gt;</span></pre>
+</blockquote>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="htmldiff"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">htmldiff</span>(<span class="sig-arg">old_html</span>,
+        <span class="sig-arg">new_html</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lxml.html.diff-pysrc.html#htmldiff">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Do a diff of the old and new document.  The documents are HTML
+<em>fragments</em> (str/UTF8 or unicode), they are not complete documents
+(i.e., no &lt;html&gt; tag).</p>
+<p>Returns HTML with &lt;ins&gt; and &lt;del&gt; tags added around the
+appropriate text.</p>
+<p>Markup is generally ignored, with the markup from new_html
+preserved, and possibly some markup from old_html (though it is
+considered acceptable to lose some of the old markup).  Only the
+words in the HTML are diffed.  The exception is &lt;img&gt; tags, which
+are treated like words, and the href attribute of &lt;a&gt; tags, which
+are noted inside the tag itself when there are changes.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="cleanup_delete"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">cleanup_delete</span>(<span class="sig-arg">chunks</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lxml.html.diff-pysrc.html#cleanup_delete">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Cleans up any DEL_START/DEL_END markers in the document, replacing
+them with &lt;del&gt;&lt;/del&gt;.  To do this while keeping the document
+valid, it may need to drop some tags (either start or end tags).</p>
+<p>It may also move the del into adjacent tags to try to move it to a
+similar location where it was originally located (e.g., moving a
+delete into preceding &lt;div&gt; tag, if the del looks like (DEL_START,
+'Text&lt;/div&gt;', DEL_END)</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="split_unbalanced"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">split_unbalanced</span>(<span class="sig-arg">chunks</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lxml.html.diff-pysrc.html#split_unbalanced">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Return (unbalanced_start, balanced, unbalanced_end), where each is
+a list of text and tag chunks.</p>
+<p>unbalanced_start is a list of all the tags that are opened, but
+not closed in this span.  Similarly, unbalanced_end is a list of
+tags that are closed but were not opened.  Extracting these might
+mean some reordering of the chunks.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="locate_unbalanced_start"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">locate_unbalanced_start</span>(<span class="sig-arg">unbalanced_start</span>,
+        <span class="sig-arg">pre_delete</span>,
+        <span class="sig-arg">post_delete</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lxml.html.diff-pysrc.html#locate_unbalanced_start">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>pre_delete and post_delete implicitly point to a place in the
+document (where the two were split).  This moves that point (by
+popping items from one and pushing them onto the other).  It moves
+the point to try to find a place where unbalanced_start applies.</p>
+<p>As an example:</p>
+<pre class="rst-literal-block">
+&gt;&gt;&gt; unbalanced_start = ['&lt;div&gt;']
+&gt;&gt;&gt; doc = ['&lt;p&gt;', 'Text', '&lt;/p&gt;', '&lt;div&gt;', 'More Text', '&lt;/div&gt;']
+&gt;&gt;&gt; pre, post = doc[:3], doc[3:]
+&gt;&gt;&gt; pre, post
+(['&lt;p&gt;', 'Text', '&lt;/p&gt;'], ['&lt;div&gt;', 'More Text', '&lt;/div&gt;'])
+&gt;&gt;&gt; locate_unbalanced_start(unbalanced_start, pre, post)
+&gt;&gt;&gt; pre, post
+(['&lt;p&gt;', 'Text', '&lt;/p&gt;', '&lt;div&gt;'], ['More Text', '&lt;/div&gt;'])
+</pre>
+<p>As you can see, we moved the point so that the dangling &lt;div&gt; that
+we found will be effectively replaced by the div in the original
+document.  If this doesn't work out, we just throw away
+unbalanced_start without doing anything.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="tokenize"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">tokenize</span>(<span class="sig-arg">html</span>,
+        <span class="sig-arg">include_hrefs</span>=<span class="sig-default">True</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lxml.html.diff-pysrc.html#tokenize">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Parse the given HTML and returns token objects (words with attached tags).</p>
+<p>This parses only the content of a page; anything in the head is
+ignored, and the &lt;head&gt; and &lt;body&gt; elements are themselves
+optional.  The content is then parsed by lxml, which ensures the
+validity of the resulting parsed document (though lxml may make
+incorrect guesses when the markup is particular bad).</p>
+<p>&lt;ins&gt; and &lt;del&gt; tags are also eliminated from the document, as
+that gets confusing.</p>
+<p>If include_hrefs is true, then the href attribute of &lt;a&gt; tags is
+included as a special kind of diffable token.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="parse_html"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">parse_html</span>(<span class="sig-arg">html</span>,
+        <span class="sig-arg">cleanup</span>=<span class="sig-default">True</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lxml.html.diff-pysrc.html#parse_html">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Parses an HTML fragment, returning an lxml element.  Note that the HTML will be
+wrapped in a &lt;div&gt; tag that was not in the original document.</p>
+<p>If cleanup is true, make sure there's no &lt;head&gt; or &lt;body&gt;, and get
+rid of any &lt;ins&gt; and &lt;del&gt; tags.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="split_trailing_whitespace"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">split_trailing_whitespace</span>(<span class="sig-arg">word</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lxml.html.diff-pysrc.html#split_trailing_whitespace">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <blockquote>
+This function takes a word, such as 'test</blockquote>
+<p>' and returns ('test','</p>
+<p>')</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="flatten_el"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">flatten_el</span>(<span class="sig-arg">el</span>,
+        <span class="sig-arg">include_hrefs</span>,
+        <span class="sig-arg">skip_tag</span>=<span class="sig-default">False</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lxml.html.diff-pysrc.html#flatten_el">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Takes an lxml element el, and generates all the text chunks for
+that tag.  Each start tag is a chunk, each word is a chunk, and each
+end tag is a chunk.</p>
+<p>If skip_tag is true, then the outermost container tag is
+not returned (just its contents).</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="serialize_html_fragment"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">serialize_html_fragment</span>(<span class="sig-arg">el</span>,
+        <span class="sig-arg">skip_outer</span>=<span class="sig-default">False</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lxml.html.diff-pysrc.html#serialize_html_fragment">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Serialize a single lxml element as HTML.  The serialized form
+includes the elements tail.</p>
+<p>If skip_outer is true, then don't serialize the outermost tag</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== VARIABLES DETAILS ==================== -->
+<a name="section-VariablesDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Variables Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-VariablesDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="empty_tags"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">empty_tags</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">(</code><code class="variable-quote">'</code><code class="variable-string">param</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">img</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">area</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">br</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">basefont</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">input</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">base</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">meta</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="block_level_tags"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">block_level_tags</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">(</code><code class="variable-quote">'</code><code class="variable-string">address</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">blockquote</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">center</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">dir</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">div</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">dl</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">fieldset</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">form</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="block_level_container_tags"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">block_level_container_tags</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">(</code><code class="variable-quote">'</code><code class="variable-string">dd</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">dt</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">frameset</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">li</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">tbody</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">td</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">tfoot</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">th</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="__test__"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">__test__</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code><code class="variable-quote">u'</code><code class="variable-string">html_annotate (line 31)</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-quote">u'''</code><code class="variable-string"></code>
+<code class="variable-string">    doclist should be ordered from oldest to newest, like::</code>
+<code class="variable-string"></code>
+<code class="variable-string">        &gt;&gt;&gt; version1 = 'Hello World'</code>
+<code class="variable-string">        &gt;&gt;&gt; version2 = 'Goodbye World'</code>
+<code class="variable-string">        &gt;&gt;&gt; print(html_annotate([(version1, 'version 1'),</code>
+<code class="variable-string">        ...                      (version2, 'version 2')]))</code>
+<code class="variable-string">        &lt;span title=&quot;version 2&quot;&gt;Goodbye&lt;/span&gt; &lt;span title=&quot;version 1&quot;</code><span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lxml-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="/">lxml API</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Fri Jun 22 18:59:52 2018
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

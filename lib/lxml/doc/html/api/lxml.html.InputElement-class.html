@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>lxml.html.InputElement</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lxml-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="/">lxml API</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        lxml ::
+        html ::
+        InputElement ::
+        Class&nbsp;InputElement
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="lxml.html.InputElement-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class InputElement</h1><p class="nomargin-top"><span class="codelink"><a href="lxml.html-pysrc.html#InputElement">source&nbsp;code</a></span></p>
+<pre class="base-tree">
+            object --+    
+                     |    
+            <a href="lxml.html.InputMixin-class.html">InputMixin</a> --+
+                         |
+    object --+           |
+             |           |
+<a href="lxml.etree._Element-class.html" onclick="show_private();">etree._Element</a> --+       |
+                 |       |
+ <a href="lxml.etree.ElementBase-class.html">etree.ElementBase</a> --+   |
+                     |   |
+        object --+   |   |
+                 |   |   |
+         <a href="lxml.html.HtmlMixin-class.html">HtmlMixin</a> --+   |
+                     |   |
+           <a href="lxml.html.HtmlElement-class.html">HtmlElement</a> --+
+                         |
+                        <strong class="uidshort">InputElement</strong>
+</pre>
+
+<hr />
+<p>Represents an <tt class="rst-docutils literal">&lt;input&gt;</tt> element.</p>
+<p>You can get the type with <tt class="rst-docutils literal">.type</tt> (which is lower-cased and
+defaults to <tt class="rst-docutils literal">'text'</tt>).</p>
+<p>Also you can get and set the value with <tt class="rst-docutils literal">.value</tt></p>
+<p>Checkboxes and radios have the attribute <tt class="rst-docutils literal">input.checkable ==
+True</tt> (for all others it is false) and a boolean attribute
+<tt class="rst-docutils literal">.checked</tt>.</p>
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="lxml.html.InputMixin-class.html">InputMixin</a></code></b>:
+      <code><a href="lxml.html.InputMixin-class.html#__repr__">__repr__</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="lxml.html.HtmlElement-class.html">HtmlElement</a></code></b>:
+      <code><a href="lxml.html.HtmlElement-class.html#cssselect">cssselect</a></code>,
+      <code><a href="lxml.html.HtmlElement-class.html#set">set</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="lxml.etree.ElementBase-class.html">etree.ElementBase</a></code></b>:
+      <code><a href="lxml.etree.ElementBase-class.html#__init__">__init__</a></code>,
+      <code><a href="lxml.etree.ElementBase-class.html#__new__">__new__</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="lxml.etree._Element-class.html" onclick="show_private();">etree._Element</a></code></b>:
+      <code><a href="lxml.etree._Element-class.html#__contains__">__contains__</a></code>,
+      <code><a href="lxml.etree._Element-class.html#__copy__">__copy__</a></code>,
+      <code><a href="lxml.etree._Element-class.html#__deepcopy__">__deepcopy__</a></code>,
+      <code><a href="lxml.etree._Element-class.html#__delitem__">__delitem__</a></code>,
+      <code><a href="lxml.etree._Element-class.html#__getitem__">__getitem__</a></code>,
+      <code><a href="lxml.etree._Element-class.html#__iter__">__iter__</a></code>,
+      <code><a href="lxml.etree._Element-class.html#__len__">__len__</a></code>,
+      <code><a href="lxml.etree._Element-class.html#__nonzero__">__nonzero__</a></code>,
+      <code><a href="lxml.etree._Element-class.html#__reversed__">__reversed__</a></code>,
+      <code><a href="lxml.etree._Element-class.html#__setitem__">__setitem__</a></code>,
+      <code><a href="lxml.etree._Element-class.html#addnext">addnext</a></code>,
+      <code><a href="lxml.etree._Element-class.html#addprevious">addprevious</a></code>,
+      <code><a href="lxml.etree._Element-class.html#append">append</a></code>,
+      <code><a href="lxml.etree._Element-class.html#clear">clear</a></code>,
+      <code><a href="lxml.etree._Element-class.html#extend">extend</a></code>,
+      <code><a href="lxml.etree._Element-class.html#find">find</a></code>,
+      <code><a href="lxml.etree._Element-class.html#findall">findall</a></code>,
+      <code><a href="lxml.etree._Element-class.html#findtext">findtext</a></code>,
+      <code><a href="lxml.etree._Element-class.html#get">get</a></code>,
+      <code><a href="lxml.etree._Element-class.html#getchildren">getchildren</a></code>,
+      <code><a href="lxml.etree._Element-class.html#getiterator">getiterator</a></code>,
+      <code><a href="lxml.etree._Element-class.html#getnext">getnext</a></code>,
+      <code><a href="lxml.etree._Element-class.html#getparent">getparent</a></code>,
+      <code><a href="lxml.etree._Element-class.html#getprevious">getprevious</a></code>,
+      <code><a href="lxml.etree._Element-class.html#getroottree">getroottree</a></code>,
+      <code><a href="lxml.etree._Element-class.html#index">index</a></code>,
+      <code><a href="lxml.etree._Element-class.html#insert">insert</a></code>,
+      <code><a href="lxml.etree._Element-class.html#items">items</a></code>,
+      <code><a href="lxml.etree._Element-class.html#iter">iter</a></code>,
+      <code><a href="lxml.etree._Element-class.html#iterancestors">iterancestors</a></code>,
+      <code><a href="lxml.etree._Element-class.html#iterchildren">iterchildren</a></code>,
+      <code><a href="lxml.etree._Element-class.html#iterdescendants">iterdescendants</a></code>,
+      <code><a href="lxml.etree._Element-class.html#iterfind">iterfind</a></code>,
+      <code><a href="lxml.etree._Element-class.html#itersiblings">itersiblings</a></code>,
+      <code><a href="lxml.etree._Element-class.html#itertext">itertext</a></code>,
+      <code><a href="lxml.etree._Element-class.html#keys">keys</a></code>,
+      <code><a href="lxml.etree._Element-class.html#makeelement">makeelement</a></code>,
+      <code><a href="lxml.etree._Element-class.html#remove">remove</a></code>,
+      <code><a href="lxml.etree._Element-class.html#replace">replace</a></code>,
+      <code><a href="lxml.etree._Element-class.html#values">values</a></code>,
+      <code><a href="lxml.etree._Element-class.html#xpath">xpath</a></code>
+      </p>
+    <div class="private">    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="lxml.etree._Element-class.html" onclick="show_private();">etree._Element</a></code></b> (private):
+      <code><a href="lxml.etree._Element-class.html#_init" onclick="show_private();">_init</a></code>
+      </p></div>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="lxml.html.HtmlMixin-class.html">HtmlMixin</a></code></b>:
+      <code><a href="lxml.html.HtmlMixin-class.html#drop_tag">drop_tag</a></code>,
+      <code><a href="lxml.html.HtmlMixin-class.html#drop_tree">drop_tree</a></code>,
+      <code><a href="lxml.html.HtmlMixin-class.html#find_class">find_class</a></code>,
+      <code><a href="lxml.html.HtmlMixin-class.html#find_rel_links">find_rel_links</a></code>,
+      <code><a href="lxml.html.HtmlMixin-class.html#get_element_by_id">get_element_by_id</a></code>,
+      <code><a href="lxml.html.HtmlMixin-class.html#iterlinks">iterlinks</a></code>,
+      <code><a href="lxml.html.HtmlMixin-class.html#make_links_absolute">make_links_absolute</a></code>,
+      <code><a href="lxml.html.HtmlMixin-class.html#resolve_base_href">resolve_base_href</a></code>,
+      <code><a href="lxml.html.HtmlMixin-class.html#rewrite_links">rewrite_links</a></code>,
+      <code><a href="lxml.html.HtmlMixin-class.html#text_content">text_content</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__str__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.html.InputElement-class.html#checkable" class="summary-name">checkable</a><br />
+      Boolean: can this element be checked?
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.html.InputElement-class.html#checked" class="summary-name">checked</a><br />
+      Boolean attribute to get/set the presence of the <tt class="rst-docutils literal">checked</tt>
+attribute.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.html.InputElement-class.html#type" class="summary-name">type</a><br />
+      Return the type of this element (using the type attribute).
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.html.InputElement-class.html#value" class="summary-name">value</a><br />
+      Get/set the value of this element, using the <tt class="rst-docutils literal">value</tt> attribute.
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="lxml.html.InputMixin-class.html">InputMixin</a></code></b>:
+      <code><a href="lxml.html.InputMixin-class.html#name">name</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="lxml.etree._Element-class.html" onclick="show_private();">etree._Element</a></code></b>:
+      <code><a href="lxml.etree._Element-class.html#attrib">attrib</a></code>,
+      <code><a href="lxml.etree._Element-class.html#base">base</a></code>,
+      <code><a href="lxml.etree._Element-class.html#nsmap">nsmap</a></code>,
+      <code><a href="lxml.etree._Element-class.html#prefix">prefix</a></code>,
+      <code><a href="lxml.etree._Element-class.html#sourceline">sourceline</a></code>,
+      <code><a href="lxml.etree._Element-class.html#tag">tag</a></code>,
+      <code><a href="lxml.etree._Element-class.html#tail">tail</a></code>,
+      <code><a href="lxml.etree._Element-class.html#text">text</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="lxml.html.HtmlMixin-class.html">HtmlMixin</a></code></b>:
+      <code><a href="lxml.html.HtmlMixin-class.html#base_url">base_url</a></code>,
+      <code><a href="lxml.html.HtmlMixin-class.html#body">body</a></code>,
+      <code><a href="lxml.html.HtmlMixin-class.html#classes">classes</a></code>,
+      <code><a href="lxml.html.HtmlMixin-class.html#forms">forms</a></code>,
+      <code><a href="lxml.html.HtmlMixin-class.html#head">head</a></code>,
+      <code><a href="lxml.html.HtmlMixin-class.html#label">label</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTY DETAILS ==================== -->
+<a name="section-PropertyDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Property Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-PropertyDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="checkable"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">checkable</h3>
+  Boolean: can this element be checked?
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>.checkable(<span class="summary-sig-arg">self</span>)</span>
+        - Boolean: can this element be checked?
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="checked"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">checked</h3>
+  <p>Boolean attribute to get/set the presence of the <tt class="rst-docutils literal">checked</tt>
+attribute.</p>
+<p>You can only use this on checkable input types.</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>.checked(<span class="summary-sig-arg">self</span>)</span>
+        - Boolean attribute to get/set the presence of the <tt class="rst-docutils literal">checked</tt>
+attribute.
+    </dd>
+    <dt>Set Method:</dt>
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>.checked(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">value</span>)</span>
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="type"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">type</h3>
+  Return the type of this element (using the type attribute).
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>.type(<span class="summary-sig-arg">self</span>)</span>
+        - Return the type of this element (using the type attribute).
+    </dd>
+    <dt>Set Method:</dt>
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>.type(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">value</span>)</span>
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="value"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">value</h3>
+  <p>Get/set the value of this element, using the <tt class="rst-docutils literal">value</tt> attribute.</p>
+<p>Also, if this is a checkbox and it has no value, this defaults
+to <tt class="rst-docutils literal">'on'</tt>.  If it is a checkbox or radio that is not
+checked, this returns None.</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>.value(<span class="summary-sig-arg">self</span>)</span>
+        - Get/set the value of this element, using the <tt class="rst-docutils literal">value</tt> attribute.
+    </dd>
+    <dt>Set Method:</dt>
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>.value(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">value</span>)</span>
+    </dd>
+    <dt>Delete Method:</dt>
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>.value(<span class="summary-sig-arg">self</span>)</span>
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lxml-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="/">lxml API</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Fri Jun 22 18:59:52 2018
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

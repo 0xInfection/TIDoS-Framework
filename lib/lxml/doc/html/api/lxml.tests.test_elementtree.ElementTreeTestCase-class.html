@@ -1,0 +1,732 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>lxml.tests.test_elementtree.ElementTreeTestCase</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lxml-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="/">lxml API</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="lxml-module.html">Package&nbsp;lxml</a> ::
+        <a href="lxml.tests-module.html">Package&nbsp;tests</a> ::
+        <a href="lxml.tests.test_elementtree-module.html">Module&nbsp;test_elementtree</a> ::
+        Class&nbsp;ElementTreeTestCase
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="lxml.tests.test_elementtree.ElementTreeTestCase-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class ElementTreeTestCase</h1><p class="nomargin-top"><span class="codelink"><a href="lxml.tests.test_elementtree-pysrc.html#ElementTreeTestCase">source&nbsp;code</a></span></p>
+<pre class="base-tree">
+               object --+            
+                        |            
+   unittest.case.TestCase --+        
+                            |        
+<a href="lxml.tests.common_imports.HelperTestCase-class.html">common_imports.HelperTestCase</a> --+    
+                                |    
+               <a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html" onclick="show_private();">_ETreeTestCaseBase</a> --+
+                                    |
+                                   <strong class="uidshort">ElementTreeTestCase</strong>
+</pre>
+
+<hr />
+<!-- ==================== NESTED CLASSES ==================== -->
+<a name="section-NestedClasses"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Nested Classes</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-NestedClasses"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>unittest.case.TestCase</code></b>:
+      <code><a href="exceptions.AssertionError-class.html">failureException</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html" onclick="show_private();">_ETreeTestCaseBase</a></code></b>:
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#XMLParser">XMLParser</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#assertEncodingDeclaration">assertEncodingDeclaration</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#assertXML">assertXML</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_ElementTree">test_ElementTree</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_XML">test_XML</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_XMLID">test_XMLID</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_attrib">test_attrib</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_attrib_as_attrib">test_attrib_as_attrib</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_attrib_clear">test_attrib_clear</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_attrib_copy">test_attrib_copy</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_attrib_deepcopy">test_attrib_deepcopy</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_attrib_dict">test_attrib_dict</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_attrib_get">test_attrib_get</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_attrib_ns_clear">test_attrib_ns_clear</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_attrib_pop">test_attrib_pop</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_attrib_pop_default">test_attrib_pop_default</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_attrib_pop_empty_default">test_attrib_pop_empty_default</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_attrib_pop_invalid_args">test_attrib_pop_invalid_args</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_attrib_pop_unknown">test_attrib_pop_unknown</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_attrib_set_clear">test_attrib_set_clear</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_attribute_contains">test_attribute_contains</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_attribute_items">test_attribute_items</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_attribute_items2">test_attribute_items2</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_attribute_items_ns">test_attribute_items_ns</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_attribute_iterator">test_attribute_iterator</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_attribute_keys">test_attribute_keys</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_attribute_keys2">test_attribute_keys2</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_attribute_keys_ns">test_attribute_keys_ns</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_attribute_manipulation">test_attribute_manipulation</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_attribute_namespace_roundtrip">test_attribute_namespace_roundtrip</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_attribute_namespace_roundtrip_replaced">test_attribute_namespace_roundtrip_replaced</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_attribute_set">test_attribute_set</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_attribute_str">test_attribute_str</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_attribute_update_attrib">test_attribute_update_attrib</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_attribute_update_dict">test_attribute_update_dict</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_attribute_update_iter">test_attribute_update_iter</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_attribute_update_sequence">test_attribute_update_sequence</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_attribute_values">test_attribute_values</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_attribute_values_ns">test_attribute_values_ns</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_attribute_xmlns_move">test_attribute_xmlns_move</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_attributes_get">test_attributes_get</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_clear">test_clear</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_clear_sub">test_clear_sub</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_clear_tail">test_clear_tail</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_comment">test_comment</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_comment_getitem_getslice">test_comment_getitem_getslice</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_comment_nonsense">test_comment_nonsense</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_comment_text">test_comment_text</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_comment_whitespace">test_comment_whitespace</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_crash">test_crash</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_deepcopy">test_deepcopy</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_deepcopy_append">test_deepcopy_append</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_deepcopy_comment">test_deepcopy_comment</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_deepcopy_elementtree">test_deepcopy_elementtree</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_deepcopy_namespaces">test_deepcopy_namespaces</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_deepcopy_subelement">test_deepcopy_subelement</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_deepcopy_tail">test_deepcopy_tail</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_del_attribute_ns">test_del_attribute_ns</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_del_attribute_ns_parsed">test_del_attribute_ns_parsed</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_del_insert">test_del_insert</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_del_setitem">test_del_setitem</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_del_setslice">test_del_setslice</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_delitem">test_delitem</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_delitem_tail">test_delitem_tail</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_delslice">test_delslice</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_delslice_child_tail">test_delslice_child_tail</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_delslice_memory">test_delslice_memory</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_delslice_negative1">test_delslice_negative1</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_delslice_negative2">test_delslice_negative2</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_delslice_step">test_delslice_step</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_delslice_step_negative">test_delslice_step_negative</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_delslice_step_negative2">test_delslice_step_negative2</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_delslice_tail">test_delslice_tail</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_element">test_element</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_element_contains">test_element_contains</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_element_indexing_negative">test_element_indexing_negative</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_element_indexing_only_text">test_element_indexing_only_text</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_element_indexing_with_text">test_element_indexing_with_text</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_element_indexing_with_text2">test_element_indexing_with_text2</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_element_with_attributes">test_element_with_attributes</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_element_with_attributes_extra">test_element_with_attributes_extra</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_element_with_attributes_extra_duplicate">test_element_with_attributes_extra_duplicate</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_element_with_attributes_keywords">test_element_with_attributes_keywords</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_element_with_attributes_ns">test_element_with_attributes_ns</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_elementtree">test_elementtree</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_elementtree_getiterator">test_elementtree_getiterator</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_elementtree_getiterator_filter">test_elementtree_getiterator_filter</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_elementtree_parser_target">test_elementtree_parser_target</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_encoding">test_encoding</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_encoding_8bit_latin1">test_encoding_8bit_latin1</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_encoding_8bit_parse_stringio">test_encoding_8bit_parse_stringio</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_encoding_8bit_xml">test_encoding_8bit_xml</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_encoding_exact">test_encoding_exact</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_encoding_sub_tostring_default_encoding">test_encoding_sub_tostring_default_encoding</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_encoding_tostring">test_encoding_tostring</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_encoding_tostring_default_encoding">test_encoding_tostring_default_encoding</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_encoding_tostring_sub">test_encoding_tostring_sub</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_encoding_tostring_sub_tail">test_encoding_tostring_sub_tail</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_encoding_tostring_unknown">test_encoding_tostring_unknown</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_encoding_utf8_bom">test_encoding_utf8_bom</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_encoding_write_default_encoding">test_encoding_write_default_encoding</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_extend">test_extend</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_feed_parser_bytes">test_feed_parser_bytes</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_feed_parser_error_broken">test_feed_parser_error_broken</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_feed_parser_error_close_empty">test_feed_parser_error_close_empty</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_feed_parser_error_close_incomplete">test_feed_parser_error_close_incomplete</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_feed_parser_error_position">test_feed_parser_error_position</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_feed_parser_unicode">test_feed_parser_unicode</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_findall">test_findall</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_findall_ns">test_findall_ns</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_fromstring">test_fromstring</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_fromstringlist">test_fromstringlist</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_fromstringlist_characters">test_fromstringlist_characters</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_fromstringlist_single">test_fromstringlist_single</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_getiterator">test_getiterator</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_getiterator_empty">test_getiterator_empty</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_getiterator_filter">test_getiterator_filter</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_getiterator_filter_all">test_getiterator_filter_all</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_getiterator_filter_comment">test_getiterator_filter_comment</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_getiterator_filter_pi">test_getiterator_filter_pi</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_getiterator_filter_with_text">test_getiterator_filter_with_text</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_getiterator_with_text">test_getiterator_with_text</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_getslice">test_getslice</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_getslice_negative">test_getslice_negative</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_getslice_step">test_getslice_step</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_getslice_text">test_getslice_text</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_insert">test_insert</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_insert_beyond_index">test_insert_beyond_index</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_insert_negative">test_insert_negative</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_insert_tail">test_insert_tail</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_iselement">test_iselement</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_iter">test_iter</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_iteration">test_iteration</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_iteration_crash">test_iteration_crash</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_iteration_del_child">test_iteration_del_child</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_iteration_double">test_iteration_double</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_iteration_empty">test_iteration_empty</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_iteration_reversed">test_iteration_reversed</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_iteration_subelement">test_iteration_subelement</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_iteration_text_only">test_iteration_text_only</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_iterparse">test_iterparse</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_iterparse_attrib_ns">test_iterparse_attrib_ns</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_iterparse_cdata">test_iterparse_cdata</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_iterparse_clear">test_iterparse_clear</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_iterparse_file">test_iterparse_file</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_iterparse_getiterator">test_iterparse_getiterator</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_iterparse_incomplete">test_iterparse_incomplete</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_iterparse_large">test_iterparse_large</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_iterparse_move_elements">test_iterparse_move_elements</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_iterparse_start">test_iterparse_start</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_iterparse_start_end">test_iterparse_start_end</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_itertext">test_itertext</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_itertext_child">test_itertext_child</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_makeelement">test_makeelement</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_merge_namespaced_subtree_as_slice">test_merge_namespaced_subtree_as_slice</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_multiple_elementrees">test_multiple_elementrees</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_namespaces_after_serialize">test_namespaces_after_serialize</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_ns_access">test_ns_access</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_ns_access2">test_ns_access2</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_ns_attr">test_ns_attr</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_ns_decl_tostring">test_ns_decl_tostring</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_ns_decl_tostring_default">test_ns_decl_tostring_default</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_ns_decl_tostring_element">test_ns_decl_tostring_element</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_ns_decl_tostring_root">test_ns_decl_tostring_root</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_ns_move">test_ns_move</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_ns_setting">test_ns_setting</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_ns_tag_parse">test_ns_tag_parse</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_parse_cdata">test_parse_cdata</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_parse_encoding_8bit_explicit">test_parse_encoding_8bit_explicit</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_parse_encoding_8bit_override">test_parse_encoding_8bit_override</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_parse_error">test_parse_error</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_parse_error_from_file">test_parse_error_from_file</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_parse_error_none">test_parse_error_none</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_parse_file">test_parse_file</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_parse_file_encoding">test_parse_file_encoding</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_parse_file_nonexistent">test_parse_file_nonexistent</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_parse_file_object">test_parse_file_object</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_parse_file_object_encoding">test_parse_file_object_encoding</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_parse_stringio">test_parse_stringio</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_parse_with_encoding">test_parse_with_encoding</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_parser_target_attrib">test_parser_target_attrib</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_parser_target_data">test_parser_target_data</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_parser_target_entity">test_parser_target_entity</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_parser_target_entity_unknown">test_parser_target_entity_unknown</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_parser_target_error_in_close">test_parser_target_error_in_close</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_parser_target_error_in_end">test_parser_target_error_in_end</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_parser_target_error_in_start">test_parser_target_error_in_start</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_parser_target_error_in_start_and_close">test_parser_target_error_in_start_and_close</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_parser_target_property">test_parser_target_property</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_parser_target_tag">test_parser_target_tag</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_parser_version">test_parser_version</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_pi">test_pi</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_pi_nonsense">test_pi_nonsense</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_processinginstruction">test_processinginstruction</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_qname">test_qname</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_qname_attrib">test_qname_attrib</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_qname_attrib_resolve">test_qname_attrib_resolve</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_qname_attribute_getset">test_qname_attribute_getset</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_qname_attribute_resolve">test_qname_attribute_resolve</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_qname_attribute_resolve_new">test_qname_attribute_resolve_new</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_qname_cmp">test_qname_cmp</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_register_namespace">test_register_namespace</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_remove">test_remove</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_remove_nonexisting">test_remove_nonexisting</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_remove_ns">test_remove_ns</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_remove_tail">test_remove_tail</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_replace_slice_tail">test_replace_slice_tail</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_set_text">test_set_text</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_set_text2">test_set_text2</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_set_text_empty">test_set_text_empty</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_set_text_none">test_set_text_none</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_setitem">test_setitem</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_setitem2">test_setitem2</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_setitem_indexerror">test_setitem_indexerror</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_setitem_replace">test_setitem_replace</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_setitem_tail">test_setitem_tail</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_setslice">test_setslice</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_setslice_all">test_setslice_all</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_setslice_all_empty">test_setslice_all_empty</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_setslice_all_replace">test_setslice_all_replace</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_setslice_all_replace_reversed">test_setslice_all_replace_reversed</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_setslice_all_replace_reversed_ns1">test_setslice_all_replace_reversed_ns1</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_setslice_all_replace_reversed_ns2">test_setslice_all_replace_reversed_ns2</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_setslice_empty">test_setslice_empty</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_setslice_end">test_setslice_end</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_setslice_end_exact">test_setslice_end_exact</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_setslice_negative">test_setslice_negative</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_setslice_negative2">test_setslice_negative2</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_setslice_single">test_setslice_single</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_setslice_tail">test_setslice_tail</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_shallowcopy">test_shallowcopy</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_shallowcopy_elementtree">test_shallowcopy_elementtree</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_simple">test_simple</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_subelement">test_subelement</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_subelement_reference">test_subelement_reference</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_subelement_with_attributes">test_subelement_with_attributes</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_subelement_with_attributes_ns">test_subelement_with_attributes_ns</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_tag_reset_ns">test_tag_reset_ns</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_tag_reset_root_ns">test_tag_reset_root_ns</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_tag_str_subclass">test_tag_str_subclass</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_tag_write">test_tag_write</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_tail">test_tail</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_tail1">test_tail1</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_tail_append">test_tail_append</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_tail_elementtree_root">test_tail_elementtree_root</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_tail_set_none">test_tail_set_none</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_tail_set_twice">test_tail_set_twice</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_tail_str_subclass">test_tail_str_subclass</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_text">test_text</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_text_empty">test_text_empty</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_text_escape_in">test_text_escape_in</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_text_escape_out">test_text_escape_out</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_text_escape_tostring">test_text_escape_tostring</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_text_other">test_text_other</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_text_str_subclass">test_text_str_subclass</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_tostring">test_tostring</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_tostring_element">test_tostring_element</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_tostring_element_tail">test_tostring_element_tail</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_tostring_method_html">test_tostring_method_html</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_tostring_method_text">test_tostring_method_text</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_treebuilder">test_treebuilder</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_treebuilder_target">test_treebuilder_target</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_weird_dict_interaction">test_weird_dict_interaction</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_write">test_write</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_write_ElementTreeDoctest">test_write_ElementTreeDoctest</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_write_fail">test_write_fail</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_write_method_html">test_write_method_html</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#test_write_method_text">test_write_method_text</a></code>
+      </p>
+    <div class="private">    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html" onclick="show_private();">_ETreeTestCaseBase</a></code></b> (private):
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#_check_element" onclick="show_private();">_check_element</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#_check_element_tree" onclick="show_private();">_check_element_tree</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#_check_mapping" onclick="show_private();">_check_mapping</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#_check_string" onclick="show_private();">_check_string</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#_rootstring" onclick="show_private();">_rootstring</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#_test_del_tail" onclick="show_private();">_test_del_tail</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#_test_element_boolean" onclick="show_private();">_test_element_boolean</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#_test_getchildren" onclick="show_private();">_test_getchildren</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#_test_wrong_unicode_encoding" onclick="show_private();">_test_wrong_unicode_encoding</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#_writeElement" onclick="show_private();">_writeElement</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#_writeElementFile" onclick="show_private();">_writeElementFile</a></code>
+      </p></div>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="lxml.tests.common_imports.HelperTestCase-class.html">common_imports.HelperTestCase</a></code></b>:
+      <code><a href="lxml.tests.common_imports.HelperTestCase-class.html#parse">parse</a></code>,
+      <code><a href="lxml.tests.common_imports.HelperTestCase-class.html#tearDown">tearDown</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>unittest.case.TestCase</code></b>:
+      <code>__call__</code>,
+      <code>__eq__</code>,
+      <code>__hash__</code>,
+      <code>__init__</code>,
+      <code>__ne__</code>,
+      <code>__repr__</code>,
+      <code>__str__</code>,
+      <code>addCleanup</code>,
+      <code>addTypeEqualityFunc</code>,
+      <code>assertAlmostEqual</code>,
+      <code>assertAlmostEquals</code>,
+      <code>assertDictContainsSubset</code>,
+      <code>assertDictEqual</code>,
+      <code>assertEqual</code>,
+      <code>assertEquals</code>,
+      <code>assertFalse</code>,
+      <code>assertGreater</code>,
+      <code>assertGreaterEqual</code>,
+      <code>assertIn</code>,
+      <code>assertIs</code>,
+      <code>assertIsInstance</code>,
+      <code>assertIsNone</code>,
+      <code>assertIsNot</code>,
+      <code>assertIsNotNone</code>,
+      <code>assertItemsEqual</code>,
+      <code>assertLess</code>,
+      <code>assertLessEqual</code>,
+      <code>assertListEqual</code>,
+      <code>assertMultiLineEqual</code>,
+      <code>assertNotAlmostEqual</code>,
+      <code>assertNotAlmostEquals</code>,
+      <code>assertNotEqual</code>,
+      <code>assertNotEquals</code>,
+      <code>assertNotIn</code>,
+      <code>assertNotIsInstance</code>,
+      <code>assertNotRegexpMatches</code>,
+      <code>assertRaises</code>,
+      <code>assertRaisesRegexp</code>,
+      <code>assertRegexpMatches</code>,
+      <code>assertSequenceEqual</code>,
+      <code>assertSetEqual</code>,
+      <code>assertTrue</code>,
+      <code>assertTupleEqual</code>,
+      <code>assert_</code>,
+      <code>countTestCases</code>,
+      <code>debug</code>,
+      <code>defaultTestResult</code>,
+      <code>doCleanups</code>,
+      <code>fail</code>,
+      <code>failIf</code>,
+      <code>failIfAlmostEqual</code>,
+      <code>failIfEqual</code>,
+      <code>failUnless</code>,
+      <code>failUnlessAlmostEqual</code>,
+      <code>failUnlessEqual</code>,
+      <code>failUnlessRaises</code>,
+      <code>id</code>,
+      <code>run</code>,
+      <code>setUp</code>,
+      <code>shortDescription</code>,
+      <code>skipTest</code>
+      </p>
+    <div class="private">    <p class="indent-wrapped-lines"><b>Inherited from <code>unittest.case.TestCase</code></b> (private):
+      <code>_addSkip</code>,
+      <code>_baseAssertEqual</code>,
+      <code>_deprecate</code>,
+      <code>_formatMessage</code>,
+      <code>_getAssertEqualityFunc</code>,
+      <code>_truncateMessage</code>
+      </p></div>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__new__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS METHODS ==================== -->
+<a name="section-ClassMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lxml.tests.test_elementtree.ElementTreeTestCase-class.html#setUpClass" class="summary-sig-name">setUpClass</a>(<span class="summary-sig-arg">cls</span>)</span><br />
+      Hook method for setting up class fixture before running tests in the class.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.tests.test_elementtree-pysrc.html#ElementTreeTestCase.setUpClass">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>unittest.case.TestCase</code></b>:
+      <code>tearDownClass</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS VARIABLES ==================== -->
+<a name="section-ClassVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassVariables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="xml.etree.ElementTree-module.html" class="summary-name">etree</a><br />
+      hash(x)
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html" onclick="show_private();">_ETreeTestCaseBase</a></code></b>:
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#required_versions_ET">required_versions_ET</a></code>,
+      <code><a href="lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#required_versions_cET">required_versions_cET</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>unittest.case.TestCase</code></b>:
+      <code>longMessage</code>,
+      <code>maxDiff</code>
+      </p>
+    <div class="private">    <p class="indent-wrapped-lines"><b>Inherited from <code>unittest.case.TestCase</code></b> (private):
+      <code>_classSetupFailed</code>,
+      <code>_diffThreshold</code>
+      </p></div>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="setUpClass"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">setUpClass</span>(<span class="sig-arg">cls</span>)</span>
+    <br /><em class="fname">Class Method</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lxml.tests.test_elementtree-pysrc.html#ElementTreeTestCase.setUpClass">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Hook method for setting up class fixture before running tests in the class.
+  <dl class="fields">
+    <dt>Overrides:
+        unittest.case.TestCase.setUpClass
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== CLASS VARIABLE DETAILS ==================== -->
+<a name="section-ClassVariableDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Variable Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassVariableDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="etree"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">etree</h3>
+  hash(x)
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><a href="xml.etree.ElementTree-module.html">xml.etree.ElementTree</a></dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lxml-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="/">lxml API</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Fri Jun 22 18:59:52 2018
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

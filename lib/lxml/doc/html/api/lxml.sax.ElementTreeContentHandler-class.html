@@ -1,0 +1,894 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>lxml.sax.ElementTreeContentHandler</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lxml-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="/">lxml API</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="lxml-module.html">Package&nbsp;lxml</a> ::
+        <a href="lxml.sax-module.html">Module&nbsp;sax</a> ::
+        Class&nbsp;ElementTreeContentHandler
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="lxml.sax.ElementTreeContentHandler-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class ElementTreeContentHandler</h1><p class="nomargin-top"><span class="codelink"><a href="lxml.sax-pysrc.html#ElementTreeContentHandler">source&nbsp;code</a></span></p>
+<pre class="base-tree">
+xml.sax.handler.ContentHandler --+
+                                 |
+                                <strong class="uidshort">ElementTreeContentHandler</strong>
+</pre>
+
+<hr />
+Build an lxml ElementTree from SAX events.
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lxml.sax.ElementTreeContentHandler-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">makeelement</span>=<span class="summary-sig-default">None</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.sax-pysrc.html#ElementTreeContentHandler.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_get_etree"></a><span class="summary-sig-name">_get_etree</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Contains the generated ElementTree after parsing is finished.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.sax-pysrc.html#ElementTreeContentHandler._get_etree">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lxml.sax.ElementTreeContentHandler-class.html#setDocumentLocator" class="summary-sig-name">setDocumentLocator</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">locator</span>)</span><br />
+      Called by the parser to give the application a locator for
+locating the origin of document events.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.sax-pysrc.html#ElementTreeContentHandler.setDocumentLocator">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lxml.sax.ElementTreeContentHandler-class.html#startDocument" class="summary-sig-name">startDocument</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Receive notification of the beginning of a document.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.sax-pysrc.html#ElementTreeContentHandler.startDocument">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lxml.sax.ElementTreeContentHandler-class.html#endDocument" class="summary-sig-name">endDocument</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Receive notification of the end of a document.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.sax-pysrc.html#ElementTreeContentHandler.endDocument">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lxml.sax.ElementTreeContentHandler-class.html#startPrefixMapping" class="summary-sig-name">startPrefixMapping</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">prefix</span>,
+        <span class="summary-sig-arg">uri</span>)</span><br />
+      Begin the scope of a prefix-URI Namespace mapping.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.sax-pysrc.html#ElementTreeContentHandler.startPrefixMapping">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lxml.sax.ElementTreeContentHandler-class.html#endPrefixMapping" class="summary-sig-name">endPrefixMapping</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">prefix</span>)</span><br />
+      End the scope of a prefix-URI mapping.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.sax-pysrc.html#ElementTreeContentHandler.endPrefixMapping">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_buildTag"></a><span class="summary-sig-name">_buildTag</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">ns_name_tuple</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.sax-pysrc.html#ElementTreeContentHandler._buildTag">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lxml.sax.ElementTreeContentHandler-class.html#startElementNS" class="summary-sig-name">startElementNS</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">ns_name</span>,
+        <span class="summary-sig-arg">qname</span>,
+        <span class="summary-sig-arg">attributes</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Signals the start of an element in namespace mode.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.sax-pysrc.html#ElementTreeContentHandler.startElementNS">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lxml.sax.ElementTreeContentHandler-class.html#processingInstruction" class="summary-sig-name">processingInstruction</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">target</span>,
+        <span class="summary-sig-arg">data</span>)</span><br />
+      Receive notification of a processing instruction.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.sax-pysrc.html#ElementTreeContentHandler.processingInstruction">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lxml.sax.ElementTreeContentHandler-class.html#endElementNS" class="summary-sig-name">endElementNS</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">ns_name</span>,
+        <span class="summary-sig-arg">qname</span>)</span><br />
+      Signals the end of an element in namespace mode.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.sax-pysrc.html#ElementTreeContentHandler.endElementNS">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lxml.sax.ElementTreeContentHandler-class.html#startElement" class="summary-sig-name">startElement</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">name</span>,
+        <span class="summary-sig-arg">attributes</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Signals the start of an element in non-namespace mode.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.sax-pysrc.html#ElementTreeContentHandler.startElement">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lxml.sax.ElementTreeContentHandler-class.html#endElement" class="summary-sig-name">endElement</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">name</span>)</span><br />
+      Signals the end of an element in non-namespace mode.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.sax-pysrc.html#ElementTreeContentHandler.endElement">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lxml.sax.ElementTreeContentHandler-class.html#characters" class="summary-sig-name">characters</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">data</span>)</span><br />
+      Receive notification of character data.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.sax-pysrc.html#ElementTreeContentHandler.characters">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lxml.sax.ElementTreeContentHandler-class.html#ignorableWhitespace" class="summary-sig-name">ignorableWhitespace</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">data</span>)</span><br />
+      Receive notification of character data.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.sax-pysrc.html#ElementTreeContentHandler.characters">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>xml.sax.handler.ContentHandler</code></b>:
+      <code>skippedEntity</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.sax.ElementTreeContentHandler-class.html#etree" class="summary-name">etree</a><br />
+      Contains the generated ElementTree after parsing is finished.
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">makeelement</span>=<span class="sig-default">None</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lxml.sax-pysrc.html#ElementTreeContentHandler.__init__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Overrides:
+        xml.sax.handler.ContentHandler.__init__
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="setDocumentLocator"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">setDocumentLocator</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">locator</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lxml.sax-pysrc.html#ElementTreeContentHandler.setDocumentLocator">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Called by the parser to give the application a locator for
+locating the origin of document events.</p>
+<p>SAX parsers are strongly encouraged (though not absolutely
+required) to supply a locator: if it does so, it must supply
+the locator to the application by invoking this method before
+invoking any of the other methods in the DocumentHandler
+interface.</p>
+<p>The locator allows the application to determine the end
+position of any document-related event, even if the parser is
+not reporting an error. Typically, the application will use
+this information for reporting its own errors (such as
+character content that does not match an application's
+business rules). The information returned by the locator is
+probably not sufficient for use with a search engine.</p>
+<p>Note that the locator will return correct information only
+during the invocation of the events in this interface. The
+application should not attempt to use it at any other time.</p>
+  <dl class="fields">
+    <dt>Overrides:
+        xml.sax.handler.ContentHandler.setDocumentLocator
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="startDocument"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">startDocument</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lxml.sax-pysrc.html#ElementTreeContentHandler.startDocument">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Receive notification of the beginning of a document.</p>
+<p>The SAX parser will invoke this method only once, before any
+other methods in this interface or in DTDHandler (except for
+setDocumentLocator).</p>
+  <dl class="fields">
+    <dt>Overrides:
+        xml.sax.handler.ContentHandler.startDocument
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="endDocument"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">endDocument</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lxml.sax-pysrc.html#ElementTreeContentHandler.endDocument">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Receive notification of the end of a document.</p>
+<p>The SAX parser will invoke this method only once, and it will
+be the last method invoked during the parse. The parser shall
+not invoke this method until it has either abandoned parsing
+(because of an unrecoverable error) or reached the end of
+input.</p>
+  <dl class="fields">
+    <dt>Overrides:
+        xml.sax.handler.ContentHandler.endDocument
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="startPrefixMapping"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">startPrefixMapping</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">prefix</span>,
+        <span class="sig-arg">uri</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lxml.sax-pysrc.html#ElementTreeContentHandler.startPrefixMapping">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Begin the scope of a prefix-URI Namespace mapping.</p>
+<p>The information from this event is not necessary for normal
+Namespace processing: the SAX XML reader will automatically
+replace prefixes for element and attribute names when the
+<a class="rst-reference external" href="http://xml.org/sax/features/namespaces" target="_top">http://xml.org/sax/features/namespaces</a> feature is true (the
+default).</p>
+<p>There are cases, however, when applications need to use
+prefixes in character data or in attribute values, where they
+cannot safely be expanded automatically; the
+start/endPrefixMapping event supplies the information to the
+application to expand prefixes in those contexts itself, if
+necessary.</p>
+<p>Note that start/endPrefixMapping events are not guaranteed to
+be properly nested relative to each-other: all
+startPrefixMapping events will occur before the corresponding
+startElement event, and all endPrefixMapping events will occur
+after the corresponding endElement event, but their order is
+not guaranteed.</p>
+  <dl class="fields">
+    <dt>Overrides:
+        xml.sax.handler.ContentHandler.startPrefixMapping
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="endPrefixMapping"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">endPrefixMapping</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">prefix</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lxml.sax-pysrc.html#ElementTreeContentHandler.endPrefixMapping">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>End the scope of a prefix-URI mapping.</p>
+<p>See startPrefixMapping for details. This event will always
+occur after the corresponding endElement event, but the order
+of endPrefixMapping events is not otherwise guaranteed.</p>
+  <dl class="fields">
+    <dt>Overrides:
+        xml.sax.handler.ContentHandler.endPrefixMapping
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="startElementNS"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">startElementNS</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">ns_name</span>,
+        <span class="sig-arg">qname</span>,
+        <span class="sig-arg">attributes</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lxml.sax-pysrc.html#ElementTreeContentHandler.startElementNS">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Signals the start of an element in namespace mode.</p>
+<p>The name parameter contains the name of the element type as a
+(uri, localname) tuple, the qname parameter the raw XML 1.0
+name used in the source document, and the attrs parameter
+holds an instance of the Attributes class containing the
+attributes of the element.</p>
+<p>The uri part of the name tuple is None for elements which have
+no namespace.</p>
+  <dl class="fields">
+    <dt>Overrides:
+        xml.sax.handler.ContentHandler.startElementNS
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="processingInstruction"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">processingInstruction</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">target</span>,
+        <span class="sig-arg">data</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lxml.sax-pysrc.html#ElementTreeContentHandler.processingInstruction">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Receive notification of a processing instruction.</p>
+<p>The Parser will invoke this method once for each processing
+instruction found: note that processing instructions may occur
+before or after the main document element.</p>
+<p>A SAX parser should never report an XML declaration (XML 1.0,
+section 2.8) or a text declaration (XML 1.0, section 4.3.1)
+using this method.</p>
+  <dl class="fields">
+    <dt>Overrides:
+        xml.sax.handler.ContentHandler.processingInstruction
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="endElementNS"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">endElementNS</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">ns_name</span>,
+        <span class="sig-arg">qname</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lxml.sax-pysrc.html#ElementTreeContentHandler.endElementNS">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Signals the end of an element in namespace mode.</p>
+<p>The name parameter contains the name of the element type, just
+as with the startElementNS event.</p>
+  <dl class="fields">
+    <dt>Overrides:
+        xml.sax.handler.ContentHandler.endElementNS
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="startElement"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">startElement</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">name</span>,
+        <span class="sig-arg">attributes</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lxml.sax-pysrc.html#ElementTreeContentHandler.startElement">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Signals the start of an element in non-namespace mode.</p>
+<p>The name parameter contains the raw XML 1.0 name of the
+element type as a string and the attrs parameter holds an
+instance of the Attributes class containing the attributes of
+the element.</p>
+  <dl class="fields">
+    <dt>Overrides:
+        xml.sax.handler.ContentHandler.startElement
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="endElement"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">endElement</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">name</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lxml.sax-pysrc.html#ElementTreeContentHandler.endElement">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Signals the end of an element in non-namespace mode.</p>
+<p>The name parameter contains the name of the element type, just
+as with the startElement event.</p>
+  <dl class="fields">
+    <dt>Overrides:
+        xml.sax.handler.ContentHandler.endElement
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="characters"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">characters</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">data</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lxml.sax-pysrc.html#ElementTreeContentHandler.characters">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Receive notification of character data.</p>
+<p>The Parser will call this method to report each chunk of
+character data. SAX parsers may return all contiguous
+character data in a single chunk, or they may split it into
+several chunks; however, all of the characters in any single
+event must come from the same external entity so that the
+Locator provides useful information.</p>
+  <dl class="fields">
+    <dt>Overrides:
+        xml.sax.handler.ContentHandler.characters
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="ignorableWhitespace"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">ignorableWhitespace</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">data</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lxml.sax-pysrc.html#ElementTreeContentHandler.characters">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Receive notification of character data.</p>
+<p>The Parser will call this method to report each chunk of
+character data. SAX parsers may return all contiguous
+character data in a single chunk, or they may split it into
+several chunks; however, all of the characters in any single
+event must come from the same external entity so that the
+Locator provides useful information.</p>
+  <dl class="fields">
+    <dt>Overrides:
+        xml.sax.handler.ContentHandler.ignorableWhitespace
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== PROPERTY DETAILS ==================== -->
+<a name="section-PropertyDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Property Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-PropertyDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="etree"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">etree</h3>
+  Contains the generated ElementTree after parsing is finished.
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="lxml.sax.ElementTreeContentHandler-class.html#_get_etree" class="summary-sig-name" onclick="show_private();">_get_etree</a>(<span class="summary-sig-arg">self</span>)</span>
+        - Contains the generated ElementTree after parsing is finished.
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lxml-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="/">lxml API</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Fri Jun 22 18:59:52 2018
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

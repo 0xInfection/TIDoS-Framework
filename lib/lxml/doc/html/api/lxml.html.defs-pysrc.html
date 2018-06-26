@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>lxml.html.defs</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lxml-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="/">lxml API</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="lxml-module.html">Package&nbsp;lxml</a> ::
+        <a href="lxml.html-module.html">Package&nbsp;html</a> ::
+        Module&nbsp;defs
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="lxml.html.defs-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="lxml.html.defs-module.html">Module lxml.html.defs</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-comment"># FIXME: this should all be confirmed against what a DTD says</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-comment"># (probably in a test; this may not match the DTD exactly, but we</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-comment"># should document just how it differs).</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-comment"># Data taken from http://www.w3.org/TR/html401/index/elements.html</tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-comment"># and http://www.w3.org/community/webed/wiki/HTML/New_HTML5_Elements</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-comment"># for html5_tags.</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt id="link-0" class="py-name" targets="Variable lxml.doctestcompare.LXMLOutputChecker.empty_tags=lxml.doctestcompare.LXMLOutputChecker-class.html#empty_tags,Variable lxml.html.defs.empty_tags=lxml.html.defs-module.html#empty_tags,Variable lxml.html.diff.empty_tags=lxml.html.diff-module.html#empty_tags"><a title="lxml.doctestcompare.LXMLOutputChecker.empty_tags
+lxml.html.defs.empty_tags
+lxml.html.diff.empty_tags" class="py-name" href="#" onclick="return doclink('link-0', 'empty_tags', 'link-0');">empty_tags</a></tt> <tt class="py-op">=</tt> <tt class="py-name">frozenset</tt><tt class="py-op">(</tt><tt class="py-op">[</tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line">    <tt class="py-string">'area'</tt><tt class="py-op">,</tt> <tt class="py-string">'base'</tt><tt class="py-op">,</tt> <tt class="py-string">'basefont'</tt><tt class="py-op">,</tt> <tt class="py-string">'br'</tt><tt class="py-op">,</tt> <tt class="py-string">'col'</tt><tt class="py-op">,</tt> <tt class="py-string">'frame'</tt><tt class="py-op">,</tt> <tt class="py-string">'hr'</tt><tt class="py-op">,</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line">    <tt class="py-string">'img'</tt><tt class="py-op">,</tt> <tt class="py-string">'input'</tt><tt class="py-op">,</tt> <tt class="py-string">'isindex'</tt><tt class="py-op">,</tt> <tt class="py-string">'link'</tt><tt class="py-op">,</tt> <tt class="py-string">'meta'</tt><tt class="py-op">,</tt> <tt class="py-string">'param'</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt id="link-1" class="py-name" targets="Variable lxml.html.defs.deprecated_tags=lxml.html.defs-module.html#deprecated_tags"><a title="lxml.html.defs.deprecated_tags" class="py-name" href="#" onclick="return doclink('link-1', 'deprecated_tags', 'link-1');">deprecated_tags</a></tt> <tt class="py-op">=</tt> <tt class="py-name">frozenset</tt><tt class="py-op">(</tt><tt class="py-op">[</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line">    <tt class="py-string">'applet'</tt><tt class="py-op">,</tt> <tt class="py-string">'basefont'</tt><tt class="py-op">,</tt> <tt class="py-string">'center'</tt><tt class="py-op">,</tt> <tt class="py-string">'dir'</tt><tt class="py-op">,</tt> <tt class="py-string">'font'</tt><tt class="py-op">,</tt> <tt class="py-string">'isindex'</tt><tt class="py-op">,</tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line">    <tt class="py-string">'menu'</tt><tt class="py-op">,</tt> <tt class="py-string">'s'</tt><tt class="py-op">,</tt> <tt class="py-string">'strike'</tt><tt class="py-op">,</tt> <tt class="py-string">'u'</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"><tt class="py-comment"># archive actually takes a space-separated list of URIs</tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"><tt id="link-2" class="py-name" targets="Variable lxml.html.defs.link_attrs=lxml.html.defs-module.html#link_attrs"><a title="lxml.html.defs.link_attrs" class="py-name" href="#" onclick="return doclink('link-2', 'link_attrs', 'link-2');">link_attrs</a></tt> <tt class="py-op">=</tt> <tt class="py-name">frozenset</tt><tt class="py-op">(</tt><tt class="py-op">[</tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line">    <tt class="py-string">'action'</tt><tt class="py-op">,</tt> <tt class="py-string">'archive'</tt><tt class="py-op">,</tt> <tt class="py-string">'background'</tt><tt class="py-op">,</tt> <tt class="py-string">'cite'</tt><tt class="py-op">,</tt> <tt class="py-string">'classid'</tt><tt class="py-op">,</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line">    <tt class="py-string">'codebase'</tt><tt class="py-op">,</tt> <tt class="py-string">'data'</tt><tt class="py-op">,</tt> <tt class="py-string">'href'</tt><tt class="py-op">,</tt> <tt class="py-string">'longdesc'</tt><tt class="py-op">,</tt> <tt class="py-string">'profile'</tt><tt class="py-op">,</tt> <tt class="py-string">'src'</tt><tt class="py-op">,</tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line">    <tt class="py-string">'usemap'</tt><tt class="py-op">,</tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line">    <tt class="py-comment"># Not standard:</tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line">    <tt class="py-string">'dynsrc'</tt><tt class="py-op">,</tt> <tt class="py-string">'lowsrc'</tt><tt class="py-op">,</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line">    <tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line"> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line"><tt class="py-comment"># Not in the HTML 4 spec:</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line"><tt class="py-comment"># onerror, onresize</tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line"><tt id="link-3" class="py-name" targets="Variable lxml.html.defs.event_attrs=lxml.html.defs-module.html#event_attrs"><a title="lxml.html.defs.event_attrs" class="py-name" href="#" onclick="return doclink('link-3', 'event_attrs', 'link-3');">event_attrs</a></tt> <tt class="py-op">=</tt> <tt class="py-name">frozenset</tt><tt class="py-op">(</tt><tt class="py-op">[</tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line">    <tt class="py-string">'onblur'</tt><tt class="py-op">,</tt> <tt class="py-string">'onchange'</tt><tt class="py-op">,</tt> <tt class="py-string">'onclick'</tt><tt class="py-op">,</tt> <tt class="py-string">'ondblclick'</tt><tt class="py-op">,</tt> <tt class="py-string">'onerror'</tt><tt class="py-op">,</tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line">    <tt class="py-string">'onfocus'</tt><tt class="py-op">,</tt> <tt class="py-string">'onkeydown'</tt><tt class="py-op">,</tt> <tt class="py-string">'onkeypress'</tt><tt class="py-op">,</tt> <tt class="py-string">'onkeyup'</tt><tt class="py-op">,</tt> <tt class="py-string">'onload'</tt><tt class="py-op">,</tt> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line">    <tt class="py-string">'onmousedown'</tt><tt class="py-op">,</tt> <tt class="py-string">'onmousemove'</tt><tt class="py-op">,</tt> <tt class="py-string">'onmouseout'</tt><tt class="py-op">,</tt> <tt class="py-string">'onmouseover'</tt><tt class="py-op">,</tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line">    <tt class="py-string">'onmouseup'</tt><tt class="py-op">,</tt> <tt class="py-string">'onreset'</tt><tt class="py-op">,</tt> <tt class="py-string">'onresize'</tt><tt class="py-op">,</tt> <tt class="py-string">'onselect'</tt><tt class="py-op">,</tt> <tt class="py-string">'onsubmit'</tt><tt class="py-op">,</tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line">    <tt class="py-string">'onunload'</tt><tt class="py-op">,</tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line">    <tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line"> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line"><tt id="link-4" class="py-name" targets="Variable lxml.html.clean.Cleaner.safe_attrs=lxml.html.clean.Cleaner-class.html#safe_attrs,Variable lxml.html.defs.safe_attrs=lxml.html.defs-module.html#safe_attrs"><a title="lxml.html.clean.Cleaner.safe_attrs
+lxml.html.defs.safe_attrs" class="py-name" href="#" onclick="return doclink('link-4', 'safe_attrs', 'link-4');">safe_attrs</a></tt> <tt class="py-op">=</tt> <tt class="py-name">frozenset</tt><tt class="py-op">(</tt><tt class="py-op">[</tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line">    <tt class="py-string">'abbr'</tt><tt class="py-op">,</tt> <tt class="py-string">'accept'</tt><tt class="py-op">,</tt> <tt class="py-string">'accept-charset'</tt><tt class="py-op">,</tt> <tt class="py-string">'accesskey'</tt><tt class="py-op">,</tt> <tt class="py-string">'action'</tt><tt class="py-op">,</tt> <tt class="py-string">'align'</tt><tt class="py-op">,</tt> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line">    <tt class="py-string">'alt'</tt><tt class="py-op">,</tt> <tt class="py-string">'axis'</tt><tt class="py-op">,</tt> <tt class="py-string">'border'</tt><tt class="py-op">,</tt> <tt class="py-string">'cellpadding'</tt><tt class="py-op">,</tt> <tt class="py-string">'cellspacing'</tt><tt class="py-op">,</tt> <tt class="py-string">'char'</tt><tt class="py-op">,</tt> <tt class="py-string">'charoff'</tt><tt class="py-op">,</tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line">    <tt class="py-string">'charset'</tt><tt class="py-op">,</tt> <tt class="py-string">'checked'</tt><tt class="py-op">,</tt> <tt class="py-string">'cite'</tt><tt class="py-op">,</tt> <tt class="py-string">'class'</tt><tt class="py-op">,</tt> <tt class="py-string">'clear'</tt><tt class="py-op">,</tt> <tt class="py-string">'cols'</tt><tt class="py-op">,</tt> <tt class="py-string">'colspan'</tt><tt class="py-op">,</tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line">    <tt class="py-string">'color'</tt><tt class="py-op">,</tt> <tt class="py-string">'compact'</tt><tt class="py-op">,</tt> <tt class="py-string">'coords'</tt><tt class="py-op">,</tt> <tt class="py-string">'datetime'</tt><tt class="py-op">,</tt> <tt class="py-string">'dir'</tt><tt class="py-op">,</tt> <tt class="py-string">'disabled'</tt><tt class="py-op">,</tt> <tt class="py-string">'enctype'</tt><tt class="py-op">,</tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line">    <tt class="py-string">'for'</tt><tt class="py-op">,</tt> <tt class="py-string">'frame'</tt><tt class="py-op">,</tt> <tt class="py-string">'headers'</tt><tt class="py-op">,</tt> <tt class="py-string">'height'</tt><tt class="py-op">,</tt> <tt class="py-string">'href'</tt><tt class="py-op">,</tt> <tt class="py-string">'hreflang'</tt><tt class="py-op">,</tt> <tt class="py-string">'hspace'</tt><tt class="py-op">,</tt> <tt class="py-string">'id'</tt><tt class="py-op">,</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line">    <tt class="py-string">'ismap'</tt><tt class="py-op">,</tt> <tt class="py-string">'label'</tt><tt class="py-op">,</tt> <tt class="py-string">'lang'</tt><tt class="py-op">,</tt> <tt class="py-string">'longdesc'</tt><tt class="py-op">,</tt> <tt class="py-string">'maxlength'</tt><tt class="py-op">,</tt> <tt class="py-string">'media'</tt><tt class="py-op">,</tt> <tt class="py-string">'method'</tt><tt class="py-op">,</tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line">    <tt class="py-string">'multiple'</tt><tt class="py-op">,</tt> <tt class="py-string">'name'</tt><tt class="py-op">,</tt> <tt class="py-string">'nohref'</tt><tt class="py-op">,</tt> <tt class="py-string">'noshade'</tt><tt class="py-op">,</tt> <tt class="py-string">'nowrap'</tt><tt class="py-op">,</tt> <tt class="py-string">'prompt'</tt><tt class="py-op">,</tt> <tt class="py-string">'readonly'</tt><tt class="py-op">,</tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line">    <tt class="py-string">'rel'</tt><tt class="py-op">,</tt> <tt class="py-string">'rev'</tt><tt class="py-op">,</tt> <tt class="py-string">'rows'</tt><tt class="py-op">,</tt> <tt class="py-string">'rowspan'</tt><tt class="py-op">,</tt> <tt class="py-string">'rules'</tt><tt class="py-op">,</tt> <tt class="py-string">'scope'</tt><tt class="py-op">,</tt> <tt class="py-string">'selected'</tt><tt class="py-op">,</tt> <tt class="py-string">'shape'</tt><tt class="py-op">,</tt> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line">    <tt class="py-string">'size'</tt><tt class="py-op">,</tt> <tt class="py-string">'span'</tt><tt class="py-op">,</tt> <tt class="py-string">'src'</tt><tt class="py-op">,</tt> <tt class="py-string">'start'</tt><tt class="py-op">,</tt> <tt class="py-string">'summary'</tt><tt class="py-op">,</tt> <tt class="py-string">'tabindex'</tt><tt class="py-op">,</tt> <tt class="py-string">'target'</tt><tt class="py-op">,</tt> <tt class="py-string">'title'</tt><tt class="py-op">,</tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line">    <tt class="py-string">'type'</tt><tt class="py-op">,</tt> <tt class="py-string">'usemap'</tt><tt class="py-op">,</tt> <tt class="py-string">'valign'</tt><tt class="py-op">,</tt> <tt class="py-string">'value'</tt><tt class="py-op">,</tt> <tt class="py-string">'vspace'</tt><tt class="py-op">,</tt> <tt class="py-string">'width'</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line"> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line"><tt class="py-comment"># From http://htmlhelp.com/reference/html40/olist.html</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line"><tt id="link-5" class="py-name" targets="Variable lxml.html.defs.top_level_tags=lxml.html.defs-module.html#top_level_tags"><a title="lxml.html.defs.top_level_tags" class="py-name" href="#" onclick="return doclink('link-5', 'top_level_tags', 'link-5');">top_level_tags</a></tt> <tt class="py-op">=</tt> <tt class="py-name">frozenset</tt><tt class="py-op">(</tt><tt class="py-op">[</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line">    <tt class="py-string">'html'</tt><tt class="py-op">,</tt> <tt class="py-string">'head'</tt><tt class="py-op">,</tt> <tt class="py-string">'body'</tt><tt class="py-op">,</tt> <tt class="py-string">'frameset'</tt><tt class="py-op">,</tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line">    <tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line"> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line"><tt id="link-6" class="py-name" targets="Variable lxml.html.defs.head_tags=lxml.html.defs-module.html#head_tags"><a title="lxml.html.defs.head_tags" class="py-name" href="#" onclick="return doclink('link-6', 'head_tags', 'link-6');">head_tags</a></tt> <tt class="py-op">=</tt> <tt class="py-name">frozenset</tt><tt class="py-op">(</tt><tt class="py-op">[</tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line">    <tt class="py-string">'base'</tt><tt class="py-op">,</tt> <tt class="py-string">'isindex'</tt><tt class="py-op">,</tt> <tt class="py-string">'link'</tt><tt class="py-op">,</tt> <tt class="py-string">'meta'</tt><tt class="py-op">,</tt> <tt class="py-string">'script'</tt><tt class="py-op">,</tt> <tt class="py-string">'style'</tt><tt class="py-op">,</tt> <tt class="py-string">'title'</tt><tt class="py-op">,</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line">    <tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line"> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line"><tt id="link-7" class="py-name" targets="Variable lxml.html.defs.general_block_tags=lxml.html.defs-module.html#general_block_tags"><a title="lxml.html.defs.general_block_tags" class="py-name" href="#" onclick="return doclink('link-7', 'general_block_tags', 'link-7');">general_block_tags</a></tt> <tt class="py-op">=</tt> <tt class="py-name">frozenset</tt><tt class="py-op">(</tt><tt class="py-op">[</tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line">    <tt class="py-string">'address'</tt><tt class="py-op">,</tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line">    <tt class="py-string">'blockquote'</tt><tt class="py-op">,</tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line">    <tt class="py-string">'center'</tt><tt class="py-op">,</tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line">    <tt class="py-string">'del'</tt><tt class="py-op">,</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line">    <tt class="py-string">'div'</tt><tt class="py-op">,</tt> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line">    <tt class="py-string">'h1'</tt><tt class="py-op">,</tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line">    <tt class="py-string">'h2'</tt><tt class="py-op">,</tt> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line">    <tt class="py-string">'h3'</tt><tt class="py-op">,</tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line">    <tt class="py-string">'h4'</tt><tt class="py-op">,</tt> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line">    <tt class="py-string">'h5'</tt><tt class="py-op">,</tt> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line">    <tt class="py-string">'h6'</tt><tt class="py-op">,</tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line">    <tt class="py-string">'hr'</tt><tt class="py-op">,</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line">    <tt class="py-string">'ins'</tt><tt class="py-op">,</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line">    <tt class="py-string">'isindex'</tt><tt class="py-op">,</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line">    <tt class="py-string">'noscript'</tt><tt class="py-op">,</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">    <tt class="py-string">'p'</tt><tt class="py-op">,</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line">    <tt class="py-string">'pre'</tt><tt class="py-op">,</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line">    <tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line"> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line"><tt id="link-8" class="py-name" targets="Variable lxml.html.defs.list_tags=lxml.html.defs-module.html#list_tags"><a title="lxml.html.defs.list_tags" class="py-name" href="#" onclick="return doclink('link-8', 'list_tags', 'link-8');">list_tags</a></tt> <tt class="py-op">=</tt> <tt class="py-name">frozenset</tt><tt class="py-op">(</tt><tt class="py-op">[</tt> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line">    <tt class="py-string">'dir'</tt><tt class="py-op">,</tt> <tt class="py-string">'dl'</tt><tt class="py-op">,</tt> <tt class="py-string">'dt'</tt><tt class="py-op">,</tt> <tt class="py-string">'dd'</tt><tt class="py-op">,</tt> <tt class="py-string">'li'</tt><tt class="py-op">,</tt> <tt class="py-string">'menu'</tt><tt class="py-op">,</tt> <tt class="py-string">'ol'</tt><tt class="py-op">,</tt> <tt class="py-string">'ul'</tt><tt class="py-op">,</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line">    <tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line"> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line"><tt id="link-9" class="py-name" targets="Variable lxml.html.defs.table_tags=lxml.html.defs-module.html#table_tags"><a title="lxml.html.defs.table_tags" class="py-name" href="#" onclick="return doclink('link-9', 'table_tags', 'link-9');">table_tags</a></tt> <tt class="py-op">=</tt> <tt class="py-name">frozenset</tt><tt class="py-op">(</tt><tt class="py-op">[</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line">    <tt class="py-string">'table'</tt><tt class="py-op">,</tt> <tt class="py-string">'caption'</tt><tt class="py-op">,</tt> <tt class="py-string">'colgroup'</tt><tt class="py-op">,</tt> <tt class="py-string">'col'</tt><tt class="py-op">,</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line">    <tt class="py-string">'thead'</tt><tt class="py-op">,</tt> <tt class="py-string">'tfoot'</tt><tt class="py-op">,</tt> <tt class="py-string">'tbody'</tt><tt class="py-op">,</tt> <tt class="py-string">'tr'</tt><tt class="py-op">,</tt> <tt class="py-string">'td'</tt><tt class="py-op">,</tt> <tt class="py-string">'th'</tt><tt class="py-op">,</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line">    <tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line"> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line"><tt class="py-comment"># just this one from</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line"><tt class="py-comment"># http://www.georgehernandez.com/h/XComputers/HTML/2BlockLevel.htm</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line"><tt id="link-10" class="py-name" targets="Variable lxml.html.defs.block_tags=lxml.html.defs-module.html#block_tags"><a title="lxml.html.defs.block_tags" class="py-name" href="#" onclick="return doclink('link-10', 'block_tags', 'link-10');">block_tags</a></tt> <tt class="py-op">=</tt> <tt id="link-11" class="py-name"><a title="lxml.html.defs.general_block_tags" class="py-name" href="#" onclick="return doclink('link-11', 'general_block_tags', 'link-7');">general_block_tags</a></tt> <tt class="py-op">|</tt> <tt id="link-12" class="py-name"><a title="lxml.html.defs.list_tags" class="py-name" href="#" onclick="return doclink('link-12', 'list_tags', 'link-8');">list_tags</a></tt> <tt class="py-op">|</tt> <tt id="link-13" class="py-name"><a title="lxml.html.defs.table_tags" class="py-name" href="#" onclick="return doclink('link-13', 'table_tags', 'link-9');">table_tags</a></tt> <tt class="py-op">|</tt> <tt class="py-name">frozenset</tt><tt class="py-op">(</tt><tt class="py-op">[</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">    <tt class="py-comment"># Partial form tags</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line">    <tt class="py-string">'fieldset'</tt><tt class="py-op">,</tt> <tt class="py-string">'form'</tt><tt class="py-op">,</tt> <tt class="py-string">'legend'</tt><tt class="py-op">,</tt> <tt class="py-string">'optgroup'</tt><tt class="py-op">,</tt> <tt class="py-string">'option'</tt><tt class="py-op">,</tt> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">    <tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line"> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line"><tt id="link-14" class="py-name" targets="Variable lxml.html.defs.form_tags=lxml.html.defs-module.html#form_tags"><a title="lxml.html.defs.form_tags" class="py-name" href="#" onclick="return doclink('link-14', 'form_tags', 'link-14');">form_tags</a></tt> <tt class="py-op">=</tt> <tt class="py-name">frozenset</tt><tt class="py-op">(</tt><tt class="py-op">[</tt> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line">    <tt class="py-string">'form'</tt><tt class="py-op">,</tt> <tt class="py-string">'button'</tt><tt class="py-op">,</tt> <tt class="py-string">'fieldset'</tt><tt class="py-op">,</tt> <tt class="py-string">'legend'</tt><tt class="py-op">,</tt> <tt class="py-string">'input'</tt><tt class="py-op">,</tt> <tt class="py-string">'label'</tt><tt class="py-op">,</tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line">    <tt class="py-string">'select'</tt><tt class="py-op">,</tt> <tt class="py-string">'optgroup'</tt><tt class="py-op">,</tt> <tt class="py-string">'option'</tt><tt class="py-op">,</tt> <tt class="py-string">'textarea'</tt><tt class="py-op">,</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">    <tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line"> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line"><tt id="link-15" class="py-name" targets="Variable lxml.html.defs.special_inline_tags=lxml.html.defs-module.html#special_inline_tags"><a title="lxml.html.defs.special_inline_tags" class="py-name" href="#" onclick="return doclink('link-15', 'special_inline_tags', 'link-15');">special_inline_tags</a></tt> <tt class="py-op">=</tt> <tt class="py-name">frozenset</tt><tt class="py-op">(</tt><tt class="py-op">[</tt> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line">    <tt class="py-string">'a'</tt><tt class="py-op">,</tt> <tt class="py-string">'applet'</tt><tt class="py-op">,</tt> <tt class="py-string">'basefont'</tt><tt class="py-op">,</tt> <tt class="py-string">'bdo'</tt><tt class="py-op">,</tt> <tt class="py-string">'br'</tt><tt class="py-op">,</tt> <tt class="py-string">'embed'</tt><tt class="py-op">,</tt> <tt class="py-string">'font'</tt><tt class="py-op">,</tt> <tt class="py-string">'iframe'</tt><tt class="py-op">,</tt> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line">    <tt class="py-string">'img'</tt><tt class="py-op">,</tt> <tt class="py-string">'map'</tt><tt class="py-op">,</tt> <tt class="py-string">'area'</tt><tt class="py-op">,</tt> <tt class="py-string">'object'</tt><tt class="py-op">,</tt> <tt class="py-string">'param'</tt><tt class="py-op">,</tt> <tt class="py-string">'q'</tt><tt class="py-op">,</tt> <tt class="py-string">'script'</tt><tt class="py-op">,</tt> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line">    <tt class="py-string">'span'</tt><tt class="py-op">,</tt> <tt class="py-string">'sub'</tt><tt class="py-op">,</tt> <tt class="py-string">'sup'</tt><tt class="py-op">,</tt> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line">    <tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line"> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line"><tt id="link-16" class="py-name" targets="Variable lxml.html.defs.phrase_tags=lxml.html.defs-module.html#phrase_tags"><a title="lxml.html.defs.phrase_tags" class="py-name" href="#" onclick="return doclink('link-16', 'phrase_tags', 'link-16');">phrase_tags</a></tt> <tt class="py-op">=</tt> <tt class="py-name">frozenset</tt><tt class="py-op">(</tt><tt class="py-op">[</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line">    <tt class="py-string">'abbr'</tt><tt class="py-op">,</tt> <tt class="py-string">'acronym'</tt><tt class="py-op">,</tt> <tt class="py-string">'cite'</tt><tt class="py-op">,</tt> <tt class="py-string">'code'</tt><tt class="py-op">,</tt> <tt class="py-string">'del'</tt><tt class="py-op">,</tt> <tt class="py-string">'dfn'</tt><tt class="py-op">,</tt> <tt class="py-string">'em'</tt><tt class="py-op">,</tt> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line">    <tt class="py-string">'ins'</tt><tt class="py-op">,</tt> <tt class="py-string">'kbd'</tt><tt class="py-op">,</tt> <tt class="py-string">'samp'</tt><tt class="py-op">,</tt> <tt class="py-string">'strong'</tt><tt class="py-op">,</tt> <tt class="py-string">'var'</tt><tt class="py-op">,</tt> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line">    <tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line"> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line"><tt id="link-17" class="py-name" targets="Variable lxml.html.defs.font_style_tags=lxml.html.defs-module.html#font_style_tags"><a title="lxml.html.defs.font_style_tags" class="py-name" href="#" onclick="return doclink('link-17', 'font_style_tags', 'link-17');">font_style_tags</a></tt> <tt class="py-op">=</tt> <tt class="py-name">frozenset</tt><tt class="py-op">(</tt><tt class="py-op">[</tt> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line">    <tt class="py-string">'b'</tt><tt class="py-op">,</tt> <tt class="py-string">'big'</tt><tt class="py-op">,</tt> <tt class="py-string">'i'</tt><tt class="py-op">,</tt> <tt class="py-string">'s'</tt><tt class="py-op">,</tt> <tt class="py-string">'small'</tt><tt class="py-op">,</tt> <tt class="py-string">'strike'</tt><tt class="py-op">,</tt> <tt class="py-string">'tt'</tt><tt class="py-op">,</tt> <tt class="py-string">'u'</tt><tt class="py-op">,</tt> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line">    <tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line"> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line"><tt id="link-18" class="py-name" targets="Variable lxml.html.defs.frame_tags=lxml.html.defs-module.html#frame_tags"><a title="lxml.html.defs.frame_tags" class="py-name" href="#" onclick="return doclink('link-18', 'frame_tags', 'link-18');">frame_tags</a></tt> <tt class="py-op">=</tt> <tt class="py-name">frozenset</tt><tt class="py-op">(</tt><tt class="py-op">[</tt> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line">    <tt class="py-string">'frameset'</tt><tt class="py-op">,</tt> <tt class="py-string">'frame'</tt><tt class="py-op">,</tt> <tt class="py-string">'noframes'</tt><tt class="py-op">,</tt> </tt>
+<a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line">    <tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line">     </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line"><tt id="link-19" class="py-name" targets="Variable lxml.html.defs.html5_tags=lxml.html.defs-module.html#html5_tags"><a title="lxml.html.defs.html5_tags" class="py-name" href="#" onclick="return doclink('link-19', 'html5_tags', 'link-19');">html5_tags</a></tt> <tt class="py-op">=</tt> <tt class="py-name">frozenset</tt><tt class="py-op">(</tt><tt class="py-op">[</tt> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line">    <tt class="py-string">'article'</tt><tt class="py-op">,</tt> <tt class="py-string">'aside'</tt><tt class="py-op">,</tt> <tt class="py-string">'audio'</tt><tt class="py-op">,</tt> <tt class="py-string">'canvas'</tt><tt class="py-op">,</tt> <tt class="py-string">'command'</tt><tt class="py-op">,</tt> <tt class="py-string">'datalist'</tt><tt class="py-op">,</tt> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line">    <tt class="py-string">'details'</tt><tt class="py-op">,</tt> <tt class="py-string">'embed'</tt><tt class="py-op">,</tt> <tt class="py-string">'figcaption'</tt><tt class="py-op">,</tt> <tt class="py-string">'figure'</tt><tt class="py-op">,</tt> <tt class="py-string">'footer'</tt><tt class="py-op">,</tt> <tt class="py-string">'header'</tt><tt class="py-op">,</tt> </tt>
+<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line">    <tt class="py-string">'hgroup'</tt><tt class="py-op">,</tt> <tt class="py-string">'keygen'</tt><tt class="py-op">,</tt> <tt class="py-string">'mark'</tt><tt class="py-op">,</tt> <tt class="py-string">'math'</tt><tt class="py-op">,</tt> <tt class="py-string">'meter'</tt><tt class="py-op">,</tt> <tt class="py-string">'nav'</tt><tt class="py-op">,</tt> <tt class="py-string">'output'</tt><tt class="py-op">,</tt> </tt>
+<a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line">    <tt class="py-string">'progress'</tt><tt class="py-op">,</tt> <tt class="py-string">'rp'</tt><tt class="py-op">,</tt> <tt class="py-string">'rt'</tt><tt class="py-op">,</tt> <tt class="py-string">'ruby'</tt><tt class="py-op">,</tt> <tt class="py-string">'section'</tt><tt class="py-op">,</tt> <tt class="py-string">'source'</tt><tt class="py-op">,</tt> <tt class="py-string">'summary'</tt><tt class="py-op">,</tt> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line">    <tt class="py-string">'svg'</tt><tt class="py-op">,</tt> <tt class="py-string">'time'</tt><tt class="py-op">,</tt> <tt class="py-string">'track'</tt><tt class="py-op">,</tt> <tt class="py-string">'video'</tt><tt class="py-op">,</tt> <tt class="py-string">'wbr'</tt> </tt>
+<a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line">    <tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line"> </tt>
+<a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line"><tt class="py-comment"># These tags aren't standard</tt> </tt>
+<a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line"><tt id="link-20" class="py-name" targets="Variable lxml.html.defs.nonstandard_tags=lxml.html.defs-module.html#nonstandard_tags"><a title="lxml.html.defs.nonstandard_tags" class="py-name" href="#" onclick="return doclink('link-20', 'nonstandard_tags', 'link-20');">nonstandard_tags</a></tt> <tt class="py-op">=</tt> <tt class="py-name">frozenset</tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt class="py-string">'blink'</tt><tt class="py-op">,</tt> <tt class="py-string">'marquee'</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line"> </tt>
+<a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line"> </tt>
+<a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line"><tt id="link-21" class="py-name" targets="Variable lxml.html.defs.tags=lxml.html.defs-module.html#tags"><a title="lxml.html.defs.tags" class="py-name" href="#" onclick="return doclink('link-21', 'tags', 'link-21');">tags</a></tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt id="link-22" class="py-name"><a title="lxml.html.defs.top_level_tags" class="py-name" href="#" onclick="return doclink('link-22', 'top_level_tags', 'link-5');">top_level_tags</a></tt> <tt class="py-op">|</tt> <tt id="link-23" class="py-name"><a title="lxml.html.defs.head_tags" class="py-name" href="#" onclick="return doclink('link-23', 'head_tags', 'link-6');">head_tags</a></tt> <tt class="py-op">|</tt> <tt id="link-24" class="py-name"><a title="lxml.html.defs.general_block_tags" class="py-name" href="#" onclick="return doclink('link-24', 'general_block_tags', 'link-7');">general_block_tags</a></tt> <tt class="py-op">|</tt> <tt id="link-25" class="py-name"><a title="lxml.html.defs.list_tags" class="py-name" href="#" onclick="return doclink('link-25', 'list_tags', 'link-8');">list_tags</a></tt> </tt>
+<a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line">        <tt class="py-op">|</tt> <tt id="link-26" class="py-name"><a title="lxml.html.defs.table_tags" class="py-name" href="#" onclick="return doclink('link-26', 'table_tags', 'link-9');">table_tags</a></tt> <tt class="py-op">|</tt> <tt id="link-27" class="py-name"><a title="lxml.html.defs.form_tags" class="py-name" href="#" onclick="return doclink('link-27', 'form_tags', 'link-14');">form_tags</a></tt> <tt class="py-op">|</tt> <tt id="link-28" class="py-name"><a title="lxml.html.defs.special_inline_tags" class="py-name" href="#" onclick="return doclink('link-28', 'special_inline_tags', 'link-15');">special_inline_tags</a></tt> <tt class="py-op">|</tt> <tt id="link-29" class="py-name"><a title="lxml.html.defs.phrase_tags" class="py-name" href="#" onclick="return doclink('link-29', 'phrase_tags', 'link-16');">phrase_tags</a></tt> </tt>
+<a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line">        <tt class="py-op">|</tt> <tt id="link-30" class="py-name"><a title="lxml.html.defs.font_style_tags" class="py-name" href="#" onclick="return doclink('link-30', 'font_style_tags', 'link-17');">font_style_tags</a></tt> <tt class="py-op">|</tt> <tt id="link-31" class="py-name"><a title="lxml.html.defs.nonstandard_tags" class="py-name" href="#" onclick="return doclink('link-31', 'nonstandard_tags', 'link-20');">nonstandard_tags</a></tt> <tt class="py-op">|</tt> <tt id="link-32" class="py-name"><a title="lxml.html.defs.html5_tags" class="py-name" href="#" onclick="return doclink('link-32', 'html5_tags', 'link-19');">html5_tags</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lxml-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="/">lxml API</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Fri Jun 22 18:59:52 2018
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

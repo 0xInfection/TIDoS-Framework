@@ -1,0 +1,559 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>lxml.ElementInclude</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lxml-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="/">lxml API</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="lxml-module.html">Package&nbsp;lxml</a> ::
+        Module&nbsp;ElementInclude
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="lxml.ElementInclude-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="lxml.ElementInclude-module.html">Module lxml.ElementInclude</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-comment"># ElementTree</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-comment"># $Id: ElementInclude.py 1862 2004-06-18 07:31:02Z Fredrik $</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-comment"># limited xinclude support for element trees</tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-comment"># history:</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-comment"># 2003-08-15 fl   created</tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-comment"># 2003-11-14 fl   fixed default loader</tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-comment"># Copyright (c) 2003-2004 by Fredrik Lundh.  All rights reserved.</tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-comment"># fredrik@pythonware.com</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt class="py-comment"># http://www.pythonware.com</tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"><tt class="py-comment"># --------------------------------------------------------------------</tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"><tt class="py-comment"># The ElementTree toolkit is</tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"><tt class="py-comment"># Copyright (c) 1999-2004 by Fredrik Lundh</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"><tt class="py-comment"># By obtaining, using, and/or copying this software and/or its</tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line"><tt class="py-comment"># associated documentation, you agree that you have read, understood,</tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line"><tt class="py-comment"># and will comply with the following terms and conditions:</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line"><tt class="py-comment"># Permission to use, copy, modify, and distribute this software and</tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line"><tt class="py-comment"># its associated documentation for any purpose and without fee is</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line"><tt class="py-comment"># hereby granted, provided that the above copyright notice appears in</tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line"><tt class="py-comment"># all copies, and that both that copyright notice and this permission</tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line"><tt class="py-comment"># notice appear in supporting documentation, and that the name of</tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line"><tt class="py-comment"># Secret Labs AB or the author not be used in advertising or publicity</tt> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line"><tt class="py-comment"># pertaining to distribution of the software without specific, written</tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line"><tt class="py-comment"># prior permission.</tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line"><tt class="py-comment"># SECRET LABS AB AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD</tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line"><tt class="py-comment"># TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF MERCHANT-</tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line"><tt class="py-comment"># ABILITY AND FITNESS.  IN NO EVENT SHALL SECRET LABS AB OR THE AUTHOR</tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line"><tt class="py-comment"># BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL DAMAGES OR ANY</tt> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line"><tt class="py-comment"># DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS,</tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line"><tt class="py-comment"># WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS</tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line"><tt class="py-comment"># ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE</tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line"><tt class="py-comment"># OF THIS SOFTWARE.</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line"><tt class="py-comment"># --------------------------------------------------------------------</tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line"> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line"><tt class="py-docstring">Limited XInclude support for the ElementTree package.</tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line"><tt class="py-docstring">While lxml.etree has full support for XInclude (see</tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line"><tt class="py-docstring">`etree.ElementTree.xinclude()`), this module provides a simpler, pure</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line"><tt class="py-docstring">Python, ElementTree compatible implementation that supports a simple</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line"><tt class="py-docstring">form of custom URL resolvers.</tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line"> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Package lxml=lxml-module.html"><a title="lxml" class="py-name" href="#" onclick="return doclink('link-0', 'lxml', 'link-0');">lxml</a></tt> <tt class="py-keyword">import</tt> <tt id="link-1" class="py-name" targets="Module lxml.etree=lxml.etree-module.html,Variable lxml.sax.ElementTreeContentHandler.etree=lxml.sax.ElementTreeContentHandler-class.html#etree,Variable lxml.tests.test_elementtree.CElementTreeTestCase.etree=lxml.tests.test_elementtree.CElementTreeTestCase-class.html#etree,Variable lxml.tests.test_elementtree._ETreeTestCaseBase.etree=lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#etree,Variable lxml.tests.test_elementtree._XMLPullParserTest.etree=lxml.tests.test_elementtree._XMLPullParserTest-class.html#etree,Variable lxml.tests.test_io._IOTestCaseBase.etree=lxml.tests.test_io._IOTestCaseBase-class.html#etree"><a title="lxml.etree
+lxml.sax.ElementTreeContentHandler.etree
+lxml.tests.test_elementtree.CElementTreeTestCase.etree
+lxml.tests.test_elementtree._ETreeTestCaseBase.etree
+lxml.tests.test_elementtree._XMLPullParserTest.etree
+lxml.tests.test_io._IOTestCaseBase.etree" class="py-name" href="#" onclick="return doclink('link-1', 'etree', 'link-1');">etree</a></tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line"><tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line">    <tt class="py-keyword">from</tt> <tt class="py-name">urlparse</tt> <tt class="py-keyword">import</tt> <tt class="py-name">urljoin</tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line">    <tt class="py-keyword">from</tt> <tt class="py-name">urllib2</tt> <tt class="py-keyword">import</tt> <tt class="py-name">urlopen</tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line"><tt class="py-keyword">except</tt> <tt class="py-name">ImportError</tt><tt class="py-op">:</tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line">    <tt class="py-comment"># Python 3</tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line">    <tt class="py-keyword">from</tt> <tt class="py-name">urllib</tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Method lxml.etree._ElementTree.parse()=lxml.etree._ElementTree-class.html#parse,Function lxml.etree.parse()=lxml.etree-module.html#parse,Function lxml.html.ElementSoup.parse()=lxml.html.ElementSoup-module.html#parse,Function lxml.html.html5parser.parse()=lxml.html.html5parser-module.html#parse,Function lxml.html.soupparser.parse()=lxml.html.soupparser-module.html#parse,Function lxml.objectify.parse()=lxml.objectify-module.html#parse,Method lxml.tests.common_imports.HelperTestCase.parse()=lxml.tests.common_imports.HelperTestCase-class.html#parse"><a title="lxml.etree._ElementTree.parse
+lxml.etree.parse
+lxml.html.ElementSoup.parse
+lxml.html.html5parser.parse
+lxml.html.soupparser.parse
+lxml.objectify.parse
+lxml.tests.common_imports.HelperTestCase.parse" class="py-name" href="#" onclick="return doclink('link-2', 'parse', 'link-2');">parse</a></tt> <tt class="py-keyword">import</tt> <tt class="py-name">urljoin</tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line">    <tt class="py-keyword">from</tt> <tt class="py-name">urllib</tt><tt class="py-op">.</tt><tt class="py-name">request</tt> <tt class="py-keyword">import</tt> <tt class="py-name">urlopen</tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line"> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line"><tt id="link-3" class="py-name" targets="Variable lxml.ElementInclude.XINCLUDE=lxml.ElementInclude-module.html#XINCLUDE,Variable lxml.etree.ErrorDomains.XINCLUDE=lxml.etree.ErrorDomains-class.html#XINCLUDE,Variable lxml.tests.selftest.XINCLUDE=lxml.tests.selftest-module.html#XINCLUDE"><a title="lxml.ElementInclude.XINCLUDE
+lxml.etree.ErrorDomains.XINCLUDE
+lxml.tests.selftest.XINCLUDE" class="py-name" href="#" onclick="return doclink('link-3', 'XINCLUDE', 'link-3');">XINCLUDE</a></tt> <tt class="py-op">=</tt> <tt class="py-string">"{http://www.w3.org/2001/XInclude}"</tt> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line"> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line"><tt id="link-4" class="py-name" targets="Variable lxml.ElementInclude.XINCLUDE_INCLUDE=lxml.ElementInclude-module.html#XINCLUDE_INCLUDE"><a title="lxml.ElementInclude.XINCLUDE_INCLUDE" class="py-name" href="#" onclick="return doclink('link-4', 'XINCLUDE_INCLUDE', 'link-4');">XINCLUDE_INCLUDE</a></tt> <tt class="py-op">=</tt> <tt id="link-5" class="py-name"><a title="lxml.ElementInclude.XINCLUDE
+lxml.etree.ErrorDomains.XINCLUDE
+lxml.tests.selftest.XINCLUDE" class="py-name" href="#" onclick="return doclink('link-5', 'XINCLUDE', 'link-3');">XINCLUDE</a></tt> <tt class="py-op">+</tt> <tt class="py-string">"include"</tt> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line"><tt id="link-6" class="py-name" targets="Variable lxml.ElementInclude.XINCLUDE_FALLBACK=lxml.ElementInclude-module.html#XINCLUDE_FALLBACK"><a title="lxml.ElementInclude.XINCLUDE_FALLBACK" class="py-name" href="#" onclick="return doclink('link-6', 'XINCLUDE_FALLBACK', 'link-6');">XINCLUDE_FALLBACK</a></tt> <tt class="py-op">=</tt> <tt id="link-7" class="py-name"><a title="lxml.ElementInclude.XINCLUDE
+lxml.etree.ErrorDomains.XINCLUDE
+lxml.tests.selftest.XINCLUDE" class="py-name" href="#" onclick="return doclink('link-7', 'XINCLUDE', 'link-3');">XINCLUDE</a></tt> <tt class="py-op">+</tt> <tt class="py-string">"fallback"</tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line"><tt id="link-8" class="py-name" targets="Variable lxml.ElementInclude.XINCLUDE_ITER_TAG=lxml.ElementInclude-module.html#XINCLUDE_ITER_TAG"><a title="lxml.ElementInclude.XINCLUDE_ITER_TAG" class="py-name" href="#" onclick="return doclink('link-8', 'XINCLUDE_ITER_TAG', 'link-8');">XINCLUDE_ITER_TAG</a></tt> <tt class="py-op">=</tt> <tt id="link-9" class="py-name"><a title="lxml.ElementInclude.XINCLUDE
+lxml.etree.ErrorDomains.XINCLUDE
+lxml.tests.selftest.XINCLUDE" class="py-name" href="#" onclick="return doclink('link-9', 'XINCLUDE', 'link-3');">XINCLUDE</a></tt> <tt class="py-op">+</tt> <tt class="py-string">"*"</tt> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line"> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line"><tt class="py-comment">##</tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line"><tt class="py-comment"># Fatal include error.</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line"> </tt>
+<a name="FatalIncludeError"></a><div id="FatalIncludeError-def"><a name="L71"></a><tt class="py-lineno"> 71</tt> <a class="py-toggle" href="#" id="FatalIncludeError-toggle" onclick="return toggle('FatalIncludeError');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lxml.ElementInclude.FatalIncludeError-class.html">FatalIncludeError</a><tt class="py-op">(</tt><tt class="py-base-class">etree</tt><tt class="py-op">.</tt><tt class="py-base-class">LxmlSyntaxError</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="FatalIncludeError-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="FatalIncludeError-expanded"><a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line">    <tt class="py-keyword">pass</tt> </tt>
+</div><a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line"> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line"><tt class="py-comment">##</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line"><tt class="py-comment"># ET compatible default loader.</tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line"><tt class="py-comment"># This loader reads an included resource from disk.</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line"><tt class="py-comment"># @param href Resource reference.</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line"><tt class="py-comment"># @param parse Parse mode.  Either "xml" or "text".</tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line"><tt class="py-comment"># @param encoding Optional text encoding.</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line"><tt class="py-comment"># @return The expanded resource.  If the parse mode is "xml", this</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line"><tt class="py-comment">#    is an ElementTree instance.  If the parse mode is "text", this</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line"><tt class="py-comment">#    is a Unicode string.  If the loader fails, it can return None</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line"><tt class="py-comment">#    or raise an IOError exception.</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line"><tt class="py-comment"># @throws IOError If the loader fails to load the resource.</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line"> </tt>
+<a name="default_loader"></a><div id="default_loader-def"><a name="L87"></a><tt class="py-lineno"> 87</tt> <a class="py-toggle" href="#" id="default_loader-toggle" onclick="return toggle('default_loader');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.ElementInclude-module.html#default_loader">default_loader</a><tt class="py-op">(</tt><tt class="py-param">href</tt><tt class="py-op">,</tt> <tt class="py-param">parse</tt><tt class="py-op">,</tt> <tt class="py-param">encoding</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="default_loader-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="default_loader-expanded"><a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">    <tt class="py-name">file</tt> <tt class="py-op">=</tt> <tt class="py-name">open</tt><tt class="py-op">(</tt><tt class="py-name">href</tt><tt class="py-op">,</tt> <tt class="py-string">'rb'</tt><tt class="py-op">)</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt id="link-10" class="py-name"><a title="lxml.etree._ElementTree.parse
+lxml.etree.parse
+lxml.html.ElementSoup.parse
+lxml.html.html5parser.parse
+lxml.html.soupparser.parse
+lxml.objectify.parse
+lxml.tests.common_imports.HelperTestCase.parse" class="py-name" href="#" onclick="return doclink('link-10', 'parse', 'link-2');">parse</a></tt> <tt class="py-op">==</tt> <tt class="py-string">"xml"</tt><tt class="py-op">:</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line">        <tt id="link-11" class="py-name" targets="Method lxml.etree.TreeBuilder.data()=lxml.etree.TreeBuilder-class.html#data"><a title="lxml.etree.TreeBuilder.data" class="py-name" href="#" onclick="return doclink('link-11', 'data', 'link-11');">data</a></tt> <tt class="py-op">=</tt> <tt id="link-12" class="py-name"><a title="lxml.etree
+lxml.sax.ElementTreeContentHandler.etree
+lxml.tests.test_elementtree.CElementTreeTestCase.etree
+lxml.tests.test_elementtree._ETreeTestCaseBase.etree
+lxml.tests.test_elementtree._XMLPullParserTest.etree
+lxml.tests.test_io._IOTestCaseBase.etree" class="py-name" href="#" onclick="return doclink('link-12', 'etree', 'link-1');">etree</a></tt><tt class="py-op">.</tt><tt id="link-13" class="py-name"><a title="lxml.etree._ElementTree.parse
+lxml.etree.parse
+lxml.html.ElementSoup.parse
+lxml.html.html5parser.parse
+lxml.html.soupparser.parse
+lxml.objectify.parse
+lxml.tests.common_imports.HelperTestCase.parse" class="py-name" href="#" onclick="return doclink('link-13', 'parse', 'link-2');">parse</a></tt><tt class="py-op">(</tt><tt class="py-name">file</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-14" class="py-name" targets="Method lxml.etree._ElementTree.getroot()=lxml.etree._ElementTree-class.html#getroot"><a title="lxml.etree._ElementTree.getroot" class="py-name" href="#" onclick="return doclink('link-14', 'getroot', 'link-14');">getroot</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">        <tt id="link-15" class="py-name"><a title="lxml.etree.TreeBuilder.data" class="py-name" href="#" onclick="return doclink('link-15', 'data', 'link-11');">data</a></tt> <tt class="py-op">=</tt> <tt class="py-name">file</tt><tt class="py-op">.</tt><tt id="link-16" class="py-name" targets="Method lxml.tests.common_imports.LargeFileLike.read()=lxml.tests.common_imports.LargeFileLike-class.html#read,Method lxml.tests.common_imports.SillyFileLike.read()=lxml.tests.common_imports.SillyFileLike-class.html#read"><a title="lxml.tests.common_imports.LargeFileLike.read
+lxml.tests.common_imports.SillyFileLike.read" class="py-name" href="#" onclick="return doclink('link-16', 'read', 'link-16');">read</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt id="link-17" class="py-name" targets="Variable lxml.etree.DocInfo.encoding=lxml.etree.DocInfo-class.html#encoding,Function lxml.tests.selftest.encoding()=lxml.tests.selftest-module.html#encoding,Function lxml.tests.selftest2.encoding()=lxml.tests.selftest2-module.html#encoding"><a title="lxml.etree.DocInfo.encoding
+lxml.tests.selftest.encoding
+lxml.tests.selftest2.encoding" class="py-name" href="#" onclick="return doclink('link-17', 'encoding', 'link-17');">encoding</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line">            <tt id="link-18" class="py-name"><a title="lxml.etree.DocInfo.encoding
+lxml.tests.selftest.encoding
+lxml.tests.selftest2.encoding" class="py-name" href="#" onclick="return doclink('link-18', 'encoding', 'link-17');">encoding</a></tt> <tt class="py-op">=</tt> <tt class="py-string">'utf-8'</tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line">        <tt id="link-19" class="py-name"><a title="lxml.etree.TreeBuilder.data" class="py-name" href="#" onclick="return doclink('link-19', 'data', 'link-11');">data</a></tt> <tt class="py-op">=</tt> <tt id="link-20" class="py-name"><a title="lxml.etree.TreeBuilder.data" class="py-name" href="#" onclick="return doclink('link-20', 'data', 'link-11');">data</a></tt><tt class="py-op">.</tt><tt class="py-name">decode</tt><tt class="py-op">(</tt><tt id="link-21" class="py-name"><a title="lxml.etree.DocInfo.encoding
+lxml.tests.selftest.encoding
+lxml.tests.selftest2.encoding" class="py-name" href="#" onclick="return doclink('link-21', 'encoding', 'link-17');">encoding</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">    <tt class="py-name">file</tt><tt class="py-op">.</tt><tt id="link-22" class="py-name" targets="Method lxml.etree.TreeBuilder.close()=lxml.etree.TreeBuilder-class.html#close,Method lxml.etree._FeedParser.close()=lxml.etree._FeedParser-class.html#close,Method lxml.tests.test_incremental_xmlfile.SimpleFileLikeXmlFileTestCase.SimpleFileLike.close()=lxml.tests.test_incremental_xmlfile.SimpleFileLikeXmlFileTestCase.SimpleFileLike-class.html#close"><a title="lxml.etree.TreeBuilder.close
+lxml.etree._FeedParser.close
+lxml.tests.test_incremental_xmlfile.SimpleFileLikeXmlFileTestCase.SimpleFileLike.close" class="py-name" href="#" onclick="return doclink('link-22', 'close', 'link-22');">close</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt id="link-23" class="py-name"><a title="lxml.etree.TreeBuilder.data" class="py-name" href="#" onclick="return doclink('link-23', 'data', 'link-11');">data</a></tt> </tt>
+</div><a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line"> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line"><tt class="py-comment">##</tt> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line"><tt class="py-comment"># Default loader used by lxml.etree - handles custom resolvers properly</tt> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line"><tt class="py-comment"># </tt> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line"> </tt>
+<a name="_lxml_default_loader"></a><div id="_lxml_default_loader-def"><a name="L103"></a><tt class="py-lineno">103</tt> <a class="py-toggle" href="#" id="_lxml_default_loader-toggle" onclick="return toggle('_lxml_default_loader');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.ElementInclude-module.html#_lxml_default_loader">_lxml_default_loader</a><tt class="py-op">(</tt><tt class="py-param">href</tt><tt class="py-op">,</tt> <tt class="py-param">parse</tt><tt class="py-op">,</tt> <tt class="py-param">encoding</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-param">parser</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="_lxml_default_loader-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="_lxml_default_loader-expanded"><a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt id="link-24" class="py-name"><a title="lxml.etree._ElementTree.parse
+lxml.etree.parse
+lxml.html.ElementSoup.parse
+lxml.html.html5parser.parse
+lxml.html.soupparser.parse
+lxml.objectify.parse
+lxml.tests.common_imports.HelperTestCase.parse" class="py-name" href="#" onclick="return doclink('link-24', 'parse', 'link-2');">parse</a></tt> <tt class="py-op">==</tt> <tt class="py-string">"xml"</tt><tt class="py-op">:</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line">        <tt id="link-25" class="py-name"><a title="lxml.etree.TreeBuilder.data" class="py-name" href="#" onclick="return doclink('link-25', 'data', 'link-11');">data</a></tt> <tt class="py-op">=</tt> <tt id="link-26" class="py-name"><a title="lxml.etree
+lxml.sax.ElementTreeContentHandler.etree
+lxml.tests.test_elementtree.CElementTreeTestCase.etree
+lxml.tests.test_elementtree._ETreeTestCaseBase.etree
+lxml.tests.test_elementtree._XMLPullParserTest.etree
+lxml.tests.test_io._IOTestCaseBase.etree" class="py-name" href="#" onclick="return doclink('link-26', 'etree', 'link-1');">etree</a></tt><tt class="py-op">.</tt><tt id="link-27" class="py-name"><a title="lxml.etree._ElementTree.parse
+lxml.etree.parse
+lxml.html.ElementSoup.parse
+lxml.html.html5parser.parse
+lxml.html.soupparser.parse
+lxml.objectify.parse
+lxml.tests.common_imports.HelperTestCase.parse" class="py-name" href="#" onclick="return doclink('link-27', 'parse', 'link-2');">parse</a></tt><tt class="py-op">(</tt><tt class="py-name">href</tt><tt class="py-op">,</tt> <tt id="link-28" class="py-name" targets="Variable lxml.etree._ElementTree.parser=lxml.etree._ElementTree-class.html#parser,Variable lxml.tests.test_pyclasslookup.PyClassLookupTestCase.parser=lxml.tests.test_pyclasslookup.PyClassLookupTestCase-class.html#parser"><a title="lxml.etree._ElementTree.parser
+lxml.tests.test_pyclasslookup.PyClassLookupTestCase.parser" class="py-name" href="#" onclick="return doclink('link-28', 'parser', 'link-28');">parser</a></tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-29" class="py-name"><a title="lxml.etree._ElementTree.getroot" class="py-name" href="#" onclick="return doclink('link-29', 'getroot', 'link-14');">getroot</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-string">"://"</tt> <tt class="py-keyword">in</tt> <tt class="py-name">href</tt><tt class="py-op">:</tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line">            <tt class="py-name">f</tt> <tt class="py-op">=</tt> <tt class="py-name">urlopen</tt><tt class="py-op">(</tt><tt class="py-name">href</tt><tt class="py-op">)</tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line">            <tt class="py-name">f</tt> <tt class="py-op">=</tt> <tt class="py-name">open</tt><tt class="py-op">(</tt><tt class="py-name">href</tt><tt class="py-op">,</tt> <tt class="py-string">'rb'</tt><tt class="py-op">)</tt> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line">        <tt id="link-30" class="py-name"><a title="lxml.etree.TreeBuilder.data" class="py-name" href="#" onclick="return doclink('link-30', 'data', 'link-11');">data</a></tt> <tt class="py-op">=</tt> <tt class="py-name">f</tt><tt class="py-op">.</tt><tt id="link-31" class="py-name"><a title="lxml.tests.common_imports.LargeFileLike.read
+lxml.tests.common_imports.SillyFileLike.read" class="py-name" href="#" onclick="return doclink('link-31', 'read', 'link-16');">read</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line">        <tt class="py-name">f</tt><tt class="py-op">.</tt><tt id="link-32" class="py-name"><a title="lxml.etree.TreeBuilder.close
+lxml.etree._FeedParser.close
+lxml.tests.test_incremental_xmlfile.SimpleFileLikeXmlFileTestCase.SimpleFileLike.close" class="py-name" href="#" onclick="return doclink('link-32', 'close', 'link-22');">close</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt id="link-33" class="py-name"><a title="lxml.etree.DocInfo.encoding
+lxml.tests.selftest.encoding
+lxml.tests.selftest2.encoding" class="py-name" href="#" onclick="return doclink('link-33', 'encoding', 'link-17');">encoding</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line">            <tt id="link-34" class="py-name"><a title="lxml.etree.DocInfo.encoding
+lxml.tests.selftest.encoding
+lxml.tests.selftest2.encoding" class="py-name" href="#" onclick="return doclink('link-34', 'encoding', 'link-17');">encoding</a></tt> <tt class="py-op">=</tt> <tt class="py-string">'utf-8'</tt> </tt>
+<a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line">        <tt id="link-35" class="py-name"><a title="lxml.etree.TreeBuilder.data" class="py-name" href="#" onclick="return doclink('link-35', 'data', 'link-11');">data</a></tt> <tt class="py-op">=</tt> <tt id="link-36" class="py-name"><a title="lxml.etree.TreeBuilder.data" class="py-name" href="#" onclick="return doclink('link-36', 'data', 'link-11');">data</a></tt><tt class="py-op">.</tt><tt class="py-name">decode</tt><tt class="py-op">(</tt><tt id="link-37" class="py-name"><a title="lxml.etree.DocInfo.encoding
+lxml.tests.selftest.encoding
+lxml.tests.selftest2.encoding" class="py-name" href="#" onclick="return doclink('link-37', 'encoding', 'link-17');">encoding</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt id="link-38" class="py-name"><a title="lxml.etree.TreeBuilder.data" class="py-name" href="#" onclick="return doclink('link-38', 'data', 'link-11');">data</a></tt> </tt>
+</div><a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line"> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line"><tt class="py-comment">##</tt> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line"><tt class="py-comment"># Wrapper for ET compatibility - drops the parser</tt> </tt>
+<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line"> </tt>
+<a name="_wrap_et_loader"></a><div id="_wrap_et_loader-def"><a name="L121"></a><tt class="py-lineno">121</tt> <a class="py-toggle" href="#" id="_wrap_et_loader-toggle" onclick="return toggle('_wrap_et_loader');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.ElementInclude-module.html#_wrap_et_loader">_wrap_et_loader</a><tt class="py-op">(</tt><tt class="py-param">loader</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="_wrap_et_loader-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="_wrap_et_loader-expanded"><a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line">    <tt class="py-keyword">def</tt> <tt class="py-def-name">load</tt><tt class="py-op">(</tt><tt class="py-param">href</tt><tt class="py-op">,</tt> <tt class="py-param">parse</tt><tt class="py-op">,</tt> <tt class="py-param">encoding</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-param">parser</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">loader</tt><tt class="py-op">(</tt><tt class="py-name">href</tt><tt class="py-op">,</tt> <tt id="link-39" class="py-name"><a title="lxml.etree._ElementTree.parse
+lxml.etree.parse
+lxml.html.ElementSoup.parse
+lxml.html.html5parser.parse
+lxml.html.soupparser.parse
+lxml.objectify.parse
+lxml.tests.common_imports.HelperTestCase.parse" class="py-name" href="#" onclick="return doclink('link-39', 'parse', 'link-2');">parse</a></tt><tt class="py-op">,</tt> <tt id="link-40" class="py-name"><a title="lxml.etree.DocInfo.encoding
+lxml.tests.selftest.encoding
+lxml.tests.selftest2.encoding" class="py-name" href="#" onclick="return doclink('link-40', 'encoding', 'link-17');">encoding</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">load</tt> </tt>
+</div><a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line"> </tt>
+<a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line"> </tt>
+<a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line"><tt class="py-comment">##</tt> </tt>
+<a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line"><tt class="py-comment"># Expand XInclude directives.</tt> </tt>
+<a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line"><tt class="py-comment"># @param elem Root element.</tt> </tt>
+<a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line"><tt class="py-comment"># @param loader Optional resource loader.  If omitted, it defaults</tt> </tt>
+<a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line"><tt class="py-comment">#     to {@link default_loader}.  If given, it should be a callable</tt> </tt>
+<a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line"><tt class="py-comment">#     that implements the same interface as &lt;b&gt;default_loader&lt;/b&gt;.</tt> </tt>
+<a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line"><tt class="py-comment"># @param base_url The base URL of the original file, to resolve</tt> </tt>
+<a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line"><tt class="py-comment">#     relative include file references.</tt> </tt>
+<a name="L136"></a><tt class="py-lineno">136</tt>  <tt class="py-line"><tt class="py-comment"># @throws FatalIncludeError If the function fails to include a given</tt> </tt>
+<a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line"><tt class="py-comment">#     resource, or if the tree contains malformed XInclude elements.</tt> </tt>
+<a name="L138"></a><tt class="py-lineno">138</tt>  <tt class="py-line"><tt class="py-comment"># @throws IOError If the function fails to load a given resource.</tt> </tt>
+<a name="L139"></a><tt class="py-lineno">139</tt>  <tt class="py-line"><tt class="py-comment"># @returns the node or its replacement if it was an XInclude node</tt> </tt>
+<a name="L140"></a><tt class="py-lineno">140</tt>  <tt class="py-line"> </tt>
+<a name="include"></a><div id="include-def"><a name="L141"></a><tt class="py-lineno">141</tt> <a class="py-toggle" href="#" id="include-toggle" onclick="return toggle('include');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.ElementInclude-module.html#include">include</a><tt class="py-op">(</tt><tt class="py-param">elem</tt><tt class="py-op">,</tt> <tt class="py-param">loader</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-param">base_url</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="include-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="include-expanded"><a name="L142"></a><tt class="py-lineno">142</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt id="link-41" class="py-name" targets="Variable lxml.html.HtmlMixin.base_url=lxml.html.HtmlMixin-class.html#base_url"><a title="lxml.html.HtmlMixin.base_url" class="py-name" href="#" onclick="return doclink('link-41', 'base_url', 'link-41');">base_url</a></tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L143"></a><tt class="py-lineno">143</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt id="link-42" class="py-name" targets="Method lxml.objectify.ObjectPath.hasattr()=lxml.objectify.ObjectPath-class.html#hasattr"><a title="lxml.objectify.ObjectPath.hasattr" class="py-name" href="#" onclick="return doclink('link-42', 'hasattr', 'link-42');">hasattr</a></tt><tt class="py-op">(</tt><tt class="py-name">elem</tt><tt class="py-op">,</tt> <tt class="py-string">'getroot'</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L144"></a><tt class="py-lineno">144</tt>  <tt class="py-line">            <tt class="py-name">tree</tt> <tt class="py-op">=</tt> <tt class="py-name">elem</tt> </tt>
+<a name="L145"></a><tt class="py-lineno">145</tt>  <tt class="py-line">            <tt class="py-name">elem</tt> <tt class="py-op">=</tt> <tt class="py-name">elem</tt><tt class="py-op">.</tt><tt id="link-43" class="py-name"><a title="lxml.etree._ElementTree.getroot" class="py-name" href="#" onclick="return doclink('link-43', 'getroot', 'link-14');">getroot</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L146"></a><tt class="py-lineno">146</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L147"></a><tt class="py-lineno">147</tt>  <tt class="py-line">            <tt class="py-name">tree</tt> <tt class="py-op">=</tt> <tt class="py-name">elem</tt><tt class="py-op">.</tt><tt id="link-44" class="py-name" targets="Method lxml.etree._Element.getroottree()=lxml.etree._Element-class.html#getroottree"><a title="lxml.etree._Element.getroottree" class="py-name" href="#" onclick="return doclink('link-44', 'getroottree', 'link-44');">getroottree</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L148"></a><tt class="py-lineno">148</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt id="link-45" class="py-name"><a title="lxml.objectify.ObjectPath.hasattr" class="py-name" href="#" onclick="return doclink('link-45', 'hasattr', 'link-42');">hasattr</a></tt><tt class="py-op">(</tt><tt class="py-name">tree</tt><tt class="py-op">,</tt> <tt class="py-string">'docinfo'</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L149"></a><tt class="py-lineno">149</tt>  <tt class="py-line">            <tt id="link-46" class="py-name"><a title="lxml.html.HtmlMixin.base_url" class="py-name" href="#" onclick="return doclink('link-46', 'base_url', 'link-41');">base_url</a></tt> <tt class="py-op">=</tt> <tt class="py-name">tree</tt><tt class="py-op">.</tt><tt id="link-47" class="py-name" targets="Variable lxml.etree._ElementTree.docinfo=lxml.etree._ElementTree-class.html#docinfo"><a title="lxml.etree._ElementTree.docinfo" class="py-name" href="#" onclick="return doclink('link-47', 'docinfo', 'link-47');">docinfo</a></tt><tt class="py-op">.</tt><tt id="link-48" class="py-name" targets="Variable lxml.etree.DocInfo.URL=lxml.etree.DocInfo-class.html#URL"><a title="lxml.etree.DocInfo.URL" class="py-name" href="#" onclick="return doclink('link-48', 'URL', 'link-48');">URL</a></tt> </tt>
+<a name="L150"></a><tt class="py-lineno">150</tt>  <tt class="py-line">    <tt class="py-keyword">elif</tt> <tt id="link-49" class="py-name"><a title="lxml.objectify.ObjectPath.hasattr" class="py-name" href="#" onclick="return doclink('link-49', 'hasattr', 'link-42');">hasattr</a></tt><tt class="py-op">(</tt><tt class="py-name">elem</tt><tt class="py-op">,</tt> <tt class="py-string">'getroot'</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L151"></a><tt class="py-lineno">151</tt>  <tt class="py-line">        <tt class="py-name">elem</tt> <tt class="py-op">=</tt> <tt class="py-name">elem</tt><tt class="py-op">.</tt><tt id="link-50" class="py-name"><a title="lxml.etree._ElementTree.getroot" class="py-name" href="#" onclick="return doclink('link-50', 'getroot', 'link-14');">getroot</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L152"></a><tt class="py-lineno">152</tt>  <tt class="py-line">    <tt id="link-51" class="py-name" targets="Function lxml.ElementInclude._include()=lxml.ElementInclude-module.html#_include,Variable lxml.isoschematron.Schematron._include=lxml.isoschematron.Schematron-class.html#_include"><a title="lxml.ElementInclude._include
+lxml.isoschematron.Schematron._include" class="py-name" href="#" onclick="return doclink('link-51', '_include', 'link-51');">_include</a></tt><tt class="py-op">(</tt><tt class="py-name">elem</tt><tt class="py-op">,</tt> <tt class="py-name">loader</tt><tt class="py-op">,</tt> <tt id="link-52" class="py-name"><a title="lxml.html.HtmlMixin.base_url" class="py-name" href="#" onclick="return doclink('link-52', 'base_url', 'link-41');">base_url</a></tt><tt class="py-op">=</tt><tt id="link-53" class="py-name"><a title="lxml.html.HtmlMixin.base_url" class="py-name" href="#" onclick="return doclink('link-53', 'base_url', 'link-41');">base_url</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L153"></a><tt class="py-lineno">153</tt>  <tt class="py-line"> </tt>
+<a name="_include"></a><div id="_include-def"><a name="L154"></a><tt class="py-lineno">154</tt> <a class="py-toggle" href="#" id="_include-toggle" onclick="return toggle('_include');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.ElementInclude-module.html#_include">_include</a><tt class="py-op">(</tt><tt class="py-param">elem</tt><tt class="py-op">,</tt> <tt class="py-param">loader</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-param">_parent_hrefs</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-param">base_url</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="_include-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="_include-expanded"><a name="L155"></a><tt class="py-lineno">155</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">loader</tt> <tt class="py-keyword">is</tt> <tt class="py-keyword">not</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L156"></a><tt class="py-lineno">156</tt>  <tt class="py-line">        <tt class="py-name">load_include</tt> <tt class="py-op">=</tt> <tt id="link-54" class="py-name" targets="Function lxml.ElementInclude._wrap_et_loader()=lxml.ElementInclude-module.html#_wrap_et_loader"><a title="lxml.ElementInclude._wrap_et_loader" class="py-name" href="#" onclick="return doclink('link-54', '_wrap_et_loader', 'link-54');">_wrap_et_loader</a></tt><tt class="py-op">(</tt><tt class="py-name">loader</tt><tt class="py-op">)</tt> </tt>
+<a name="L157"></a><tt class="py-lineno">157</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L158"></a><tt class="py-lineno">158</tt>  <tt class="py-line">        <tt class="py-name">load_include</tt> <tt class="py-op">=</tt> <tt id="link-55" class="py-name" targets="Function lxml.ElementInclude._lxml_default_loader()=lxml.ElementInclude-module.html#_lxml_default_loader"><a title="lxml.ElementInclude._lxml_default_loader" class="py-name" href="#" onclick="return doclink('link-55', '_lxml_default_loader', 'link-55');">_lxml_default_loader</a></tt> </tt>
+<a name="L159"></a><tt class="py-lineno">159</tt>  <tt class="py-line"> </tt>
+<a name="L160"></a><tt class="py-lineno">160</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">_parent_hrefs</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L161"></a><tt class="py-lineno">161</tt>  <tt class="py-line">        <tt class="py-name">_parent_hrefs</tt> <tt class="py-op">=</tt> <tt id="link-56" class="py-name" targets="Method lxml.etree._Element.set()=lxml.etree._Element-class.html#set,Method lxml.etree._XSLTProcessingInstruction.set()=lxml.etree._XSLTProcessingInstruction-class.html#set,Method lxml.html.HtmlElement.set()=lxml.html.HtmlElement-class.html#set,Method lxml.html.HtmlMixin.set()=lxml.html.HtmlMixin-class.html#set"><a title="lxml.etree._Element.set
+lxml.etree._XSLTProcessingInstruction.set
+lxml.html.HtmlElement.set
+lxml.html.HtmlMixin.set" class="py-name" href="#" onclick="return doclink('link-56', 'set', 'link-56');">set</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L162"></a><tt class="py-lineno">162</tt>  <tt class="py-line"> </tt>
+<a name="L163"></a><tt class="py-lineno">163</tt>  <tt class="py-line">    <tt id="link-57" class="py-name"><a title="lxml.etree._ElementTree.parser
+lxml.tests.test_pyclasslookup.PyClassLookupTestCase.parser" class="py-name" href="#" onclick="return doclink('link-57', 'parser', 'link-28');">parser</a></tt> <tt class="py-op">=</tt> <tt class="py-name">elem</tt><tt class="py-op">.</tt><tt id="link-58" class="py-name"><a title="lxml.etree._Element.getroottree" class="py-name" href="#" onclick="return doclink('link-58', 'getroottree', 'link-44');">getroottree</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-59" class="py-name"><a title="lxml.etree._ElementTree.parser
+lxml.tests.test_pyclasslookup.PyClassLookupTestCase.parser" class="py-name" href="#" onclick="return doclink('link-59', 'parser', 'link-28');">parser</a></tt> </tt>
+<a name="L164"></a><tt class="py-lineno">164</tt>  <tt class="py-line"> </tt>
+<a name="L165"></a><tt class="py-lineno">165</tt>  <tt class="py-line">    <tt class="py-name">include_elements</tt> <tt class="py-op">=</tt> <tt class="py-name">list</tt><tt class="py-op">(</tt> </tt>
+<a name="L166"></a><tt class="py-lineno">166</tt>  <tt class="py-line">        <tt class="py-name">elem</tt><tt class="py-op">.</tt><tt id="link-60" class="py-name" targets="Method lxml.etree._Element.iter()=lxml.etree._Element-class.html#iter,Method lxml.etree._ElementTree.iter()=lxml.etree._ElementTree-class.html#iter"><a title="lxml.etree._Element.iter
+lxml.etree._ElementTree.iter" class="py-name" href="#" onclick="return doclink('link-60', 'iter', 'link-60');">iter</a></tt><tt class="py-op">(</tt><tt id="link-61" class="py-name"><a title="lxml.ElementInclude.XINCLUDE_ITER_TAG" class="py-name" href="#" onclick="return doclink('link-61', 'XINCLUDE_ITER_TAG', 'link-8');">XINCLUDE_ITER_TAG</a></tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L167"></a><tt class="py-lineno">167</tt>  <tt class="py-line"> </tt>
+<a name="L168"></a><tt class="py-lineno">168</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">e</tt> <tt class="py-keyword">in</tt> <tt class="py-name">include_elements</tt><tt class="py-op">:</tt> </tt>
+<a name="L169"></a><tt class="py-lineno">169</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">e</tt><tt class="py-op">.</tt><tt id="link-62" class="py-name" targets="Variable lxml.etree._Comment.tag=lxml.etree._Comment-class.html#tag,Variable lxml.etree._Element.tag=lxml.etree._Element-class.html#tag,Variable lxml.etree._Entity.tag=lxml.etree._Entity-class.html#tag,Variable lxml.etree._ProcessingInstruction.tag=lxml.etree._ProcessingInstruction-class.html#tag,Function lxml.tests.test_xpathevaluator.tag()=lxml.tests.test_xpathevaluator-module.html#tag,Variable xml.etree.ElementTree.Element.tag=xml.etree.ElementTree.Element-class.html#tag"><a title="lxml.etree._Comment.tag
+lxml.etree._Element.tag
+lxml.etree._Entity.tag
+lxml.etree._ProcessingInstruction.tag
+lxml.tests.test_xpathevaluator.tag
+xml.etree.ElementTree.Element.tag" class="py-name" href="#" onclick="return doclink('link-62', 'tag', 'link-62');">tag</a></tt> <tt class="py-op">==</tt> <tt id="link-63" class="py-name"><a title="lxml.ElementInclude.XINCLUDE_INCLUDE" class="py-name" href="#" onclick="return doclink('link-63', 'XINCLUDE_INCLUDE', 'link-4');">XINCLUDE_INCLUDE</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L170"></a><tt class="py-lineno">170</tt>  <tt class="py-line">            <tt class="py-comment"># process xinclude directive</tt> </tt>
+<a name="L171"></a><tt class="py-lineno">171</tt>  <tt class="py-line">            <tt class="py-name">href</tt> <tt class="py-op">=</tt> <tt class="py-name">urljoin</tt><tt class="py-op">(</tt><tt id="link-64" class="py-name"><a title="lxml.html.HtmlMixin.base_url" class="py-name" href="#" onclick="return doclink('link-64', 'base_url', 'link-41');">base_url</a></tt><tt class="py-op">,</tt> <tt class="py-name">e</tt><tt class="py-op">.</tt><tt id="link-65" class="py-name" targets="Method lxml.etree._Attrib.get()=lxml.etree._Attrib-class.html#get,Method lxml.etree._Element.get()=lxml.etree._Element-class.html#get,Method lxml.etree._IDDict.get()=lxml.etree._IDDict-class.html#get,Method lxml.etree._ProcessingInstruction.get()=lxml.etree._ProcessingInstruction-class.html#get"><a title="lxml.etree._Attrib.get
+lxml.etree._Element.get
+lxml.etree._IDDict.get
+lxml.etree._ProcessingInstruction.get" class="py-name" href="#" onclick="return doclink('link-65', 'get', 'link-65');">get</a></tt><tt class="py-op">(</tt><tt class="py-string">"href"</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L172"></a><tt class="py-lineno">172</tt>  <tt class="py-line">            <tt id="link-66" class="py-name"><a title="lxml.etree._ElementTree.parse
+lxml.etree.parse
+lxml.html.ElementSoup.parse
+lxml.html.html5parser.parse
+lxml.html.soupparser.parse
+lxml.objectify.parse
+lxml.tests.common_imports.HelperTestCase.parse" class="py-name" href="#" onclick="return doclink('link-66', 'parse', 'link-2');">parse</a></tt> <tt class="py-op">=</tt> <tt class="py-name">e</tt><tt class="py-op">.</tt><tt id="link-67" class="py-name"><a title="lxml.etree._Attrib.get
+lxml.etree._Element.get
+lxml.etree._IDDict.get
+lxml.etree._ProcessingInstruction.get" class="py-name" href="#" onclick="return doclink('link-67', 'get', 'link-65');">get</a></tt><tt class="py-op">(</tt><tt class="py-string">"parse"</tt><tt class="py-op">,</tt> <tt class="py-string">"xml"</tt><tt class="py-op">)</tt> </tt>
+<a name="L173"></a><tt class="py-lineno">173</tt>  <tt class="py-line">            <tt class="py-name">parent</tt> <tt class="py-op">=</tt> <tt class="py-name">e</tt><tt class="py-op">.</tt><tt id="link-68" class="py-name" targets="Method lxml.etree._Element.getparent()=lxml.etree._Element-class.html#getparent,Method lxml.etree._ElementStringResult.getparent()=lxml.etree._ElementStringResult-class.html#getparent,Method lxml.etree._ElementUnicodeResult.getparent()=lxml.etree._ElementUnicodeResult-class.html#getparent"><a title="lxml.etree._Element.getparent
+lxml.etree._ElementStringResult.getparent
+lxml.etree._ElementUnicodeResult.getparent" class="py-name" href="#" onclick="return doclink('link-68', 'getparent', 'link-68');">getparent</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L174"></a><tt class="py-lineno">174</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt id="link-69" class="py-name"><a title="lxml.etree._ElementTree.parse
+lxml.etree.parse
+lxml.html.ElementSoup.parse
+lxml.html.html5parser.parse
+lxml.html.soupparser.parse
+lxml.objectify.parse
+lxml.tests.common_imports.HelperTestCase.parse" class="py-name" href="#" onclick="return doclink('link-69', 'parse', 'link-2');">parse</a></tt> <tt class="py-op">==</tt> <tt class="py-string">"xml"</tt><tt class="py-op">:</tt> </tt>
+<a name="L175"></a><tt class="py-lineno">175</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">href</tt> <tt class="py-keyword">in</tt> <tt class="py-name">_parent_hrefs</tt><tt class="py-op">:</tt> </tt>
+<a name="L176"></a><tt class="py-lineno">176</tt>  <tt class="py-line">                    <tt class="py-keyword">raise</tt> <tt id="link-70" class="py-name" targets="Class lxml.ElementInclude.FatalIncludeError=lxml.ElementInclude.FatalIncludeError-class.html"><a title="lxml.ElementInclude.FatalIncludeError" class="py-name" href="#" onclick="return doclink('link-70', 'FatalIncludeError', 'link-70');">FatalIncludeError</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L177"></a><tt class="py-lineno">177</tt>  <tt class="py-line">                        <tt class="py-string">"recursive include of %r detected"</tt> <tt class="py-op">%</tt> <tt class="py-name">href</tt> </tt>
+<a name="L178"></a><tt class="py-lineno">178</tt>  <tt class="py-line">                        <tt class="py-op">)</tt> </tt>
+<a name="L179"></a><tt class="py-lineno">179</tt>  <tt class="py-line">                <tt class="py-name">_parent_hrefs</tt><tt class="py-op">.</tt><tt id="link-71" class="py-name" targets="Method lxml.html.CheckboxValues.add()=lxml.html.CheckboxValues-class.html#add,Method lxml.html.Classes.add()=lxml.html.Classes-class.html#add,Method lxml.html.MultipleSelectOptions.add()=lxml.html.MultipleSelectOptions-class.html#add"><a title="lxml.html.CheckboxValues.add
+lxml.html.Classes.add
+lxml.html.MultipleSelectOptions.add" class="py-name" href="#" onclick="return doclink('link-71', 'add', 'link-71');">add</a></tt><tt class="py-op">(</tt><tt class="py-name">href</tt><tt class="py-op">)</tt> </tt>
+<a name="L180"></a><tt class="py-lineno">180</tt>  <tt class="py-line">                <tt class="py-name">node</tt> <tt class="py-op">=</tt> <tt class="py-name">load_include</tt><tt class="py-op">(</tt><tt class="py-name">href</tt><tt class="py-op">,</tt> <tt id="link-72" class="py-name"><a title="lxml.etree._ElementTree.parse
+lxml.etree.parse
+lxml.html.ElementSoup.parse
+lxml.html.html5parser.parse
+lxml.html.soupparser.parse
+lxml.objectify.parse
+lxml.tests.common_imports.HelperTestCase.parse" class="py-name" href="#" onclick="return doclink('link-72', 'parse', 'link-2');">parse</a></tt><tt class="py-op">,</tt> <tt id="link-73" class="py-name"><a title="lxml.etree._ElementTree.parser
+lxml.tests.test_pyclasslookup.PyClassLookupTestCase.parser" class="py-name" href="#" onclick="return doclink('link-73', 'parser', 'link-28');">parser</a></tt><tt class="py-op">=</tt><tt id="link-74" class="py-name"><a title="lxml.etree._ElementTree.parser
+lxml.tests.test_pyclasslookup.PyClassLookupTestCase.parser" class="py-name" href="#" onclick="return doclink('link-74', 'parser', 'link-28');">parser</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L181"></a><tt class="py-lineno">181</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">node</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L182"></a><tt class="py-lineno">182</tt>  <tt class="py-line">                    <tt class="py-keyword">raise</tt> <tt id="link-75" class="py-name"><a title="lxml.ElementInclude.FatalIncludeError" class="py-name" href="#" onclick="return doclink('link-75', 'FatalIncludeError', 'link-70');">FatalIncludeError</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L183"></a><tt class="py-lineno">183</tt>  <tt class="py-line">                        <tt class="py-string">"cannot load %r as %r"</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">href</tt><tt class="py-op">,</tt> <tt id="link-76" class="py-name"><a title="lxml.etree._ElementTree.parse
+lxml.etree.parse
+lxml.html.ElementSoup.parse
+lxml.html.html5parser.parse
+lxml.html.soupparser.parse
+lxml.objectify.parse
+lxml.tests.common_imports.HelperTestCase.parse" class="py-name" href="#" onclick="return doclink('link-76', 'parse', 'link-2');">parse</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L184"></a><tt class="py-lineno">184</tt>  <tt class="py-line">                        <tt class="py-op">)</tt> </tt>
+<a name="L185"></a><tt class="py-lineno">185</tt>  <tt class="py-line">                <tt class="py-name">node</tt> <tt class="py-op">=</tt> <tt id="link-77" class="py-name"><a title="lxml.ElementInclude._include
+lxml.isoschematron.Schematron._include" class="py-name" href="#" onclick="return doclink('link-77', '_include', 'link-51');">_include</a></tt><tt class="py-op">(</tt><tt class="py-name">node</tt><tt class="py-op">,</tt> <tt class="py-name">loader</tt><tt class="py-op">,</tt> <tt class="py-name">_parent_hrefs</tt><tt class="py-op">)</tt> </tt>
+<a name="L186"></a><tt class="py-lineno">186</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">e</tt><tt class="py-op">.</tt><tt id="link-78" class="py-name" targets="Variable lxml.etree._Element.tail=lxml.etree._Element-class.html#tail,Variable xml.etree.ElementTree.Element.tail=xml.etree.ElementTree.Element-class.html#tail"><a title="lxml.etree._Element.tail
+xml.etree.ElementTree.Element.tail" class="py-name" href="#" onclick="return doclink('link-78', 'tail', 'link-78');">tail</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L187"></a><tt class="py-lineno">187</tt>  <tt class="py-line">                    <tt class="py-name">node</tt><tt class="py-op">.</tt><tt id="link-79" class="py-name"><a title="lxml.etree._Element.tail
+xml.etree.ElementTree.Element.tail" class="py-name" href="#" onclick="return doclink('link-79', 'tail', 'link-78');">tail</a></tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-name">node</tt><tt class="py-op">.</tt><tt id="link-80" class="py-name"><a title="lxml.etree._Element.tail
+xml.etree.ElementTree.Element.tail" class="py-name" href="#" onclick="return doclink('link-80', 'tail', 'link-78');">tail</a></tt> <tt class="py-keyword">or</tt> <tt class="py-string">""</tt><tt class="py-op">)</tt> <tt class="py-op">+</tt> <tt class="py-name">e</tt><tt class="py-op">.</tt><tt id="link-81" class="py-name"><a title="lxml.etree._Element.tail
+xml.etree.ElementTree.Element.tail" class="py-name" href="#" onclick="return doclink('link-81', 'tail', 'link-78');">tail</a></tt> </tt>
+<a name="L188"></a><tt class="py-lineno">188</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">parent</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L189"></a><tt class="py-lineno">189</tt>  <tt class="py-line">                    <tt class="py-keyword">return</tt> <tt class="py-name">node</tt> <tt class="py-comment"># replaced the root node!</tt> </tt>
+<a name="L190"></a><tt class="py-lineno">190</tt>  <tt class="py-line">                <tt class="py-name">parent</tt><tt class="py-op">.</tt><tt id="link-82" class="py-name" targets="Method lxml.etree._Element.replace()=lxml.etree._Element-class.html#replace"><a title="lxml.etree._Element.replace" class="py-name" href="#" onclick="return doclink('link-82', 'replace', 'link-82');">replace</a></tt><tt class="py-op">(</tt><tt class="py-name">e</tt><tt class="py-op">,</tt> <tt class="py-name">node</tt><tt class="py-op">)</tt> </tt>
+<a name="L191"></a><tt class="py-lineno">191</tt>  <tt class="py-line">            <tt class="py-keyword">elif</tt> <tt id="link-83" class="py-name"><a title="lxml.etree._ElementTree.parse
+lxml.etree.parse
+lxml.html.ElementSoup.parse
+lxml.html.html5parser.parse
+lxml.html.soupparser.parse
+lxml.objectify.parse
+lxml.tests.common_imports.HelperTestCase.parse" class="py-name" href="#" onclick="return doclink('link-83', 'parse', 'link-2');">parse</a></tt> <tt class="py-op">==</tt> <tt class="py-string">"text"</tt><tt class="py-op">:</tt> </tt>
+<a name="L192"></a><tt class="py-lineno">192</tt>  <tt class="py-line">                <tt id="link-84" class="py-name" targets="Variable lxml.etree.QName.text=lxml.etree.QName-class.html#text,Variable lxml.etree._Element.text=lxml.etree._Element-class.html#text,Variable lxml.etree._Entity.text=lxml.etree._Entity-class.html#text,Variable lxml.objectify.ObjectifiedElement.text=lxml.objectify.ObjectifiedElement-class.html#text,Variable xml.etree.ElementTree.Element.text=xml.etree.ElementTree.Element-class.html#text"><a title="lxml.etree.QName.text
+lxml.etree._Element.text
+lxml.etree._Entity.text
+lxml.objectify.ObjectifiedElement.text
+xml.etree.ElementTree.Element.text" class="py-name" href="#" onclick="return doclink('link-84', 'text', 'link-84');">text</a></tt> <tt class="py-op">=</tt> <tt class="py-name">load_include</tt><tt class="py-op">(</tt><tt class="py-name">href</tt><tt class="py-op">,</tt> <tt id="link-85" class="py-name"><a title="lxml.etree._ElementTree.parse
+lxml.etree.parse
+lxml.html.ElementSoup.parse
+lxml.html.html5parser.parse
+lxml.html.soupparser.parse
+lxml.objectify.parse
+lxml.tests.common_imports.HelperTestCase.parse" class="py-name" href="#" onclick="return doclink('link-85', 'parse', 'link-2');">parse</a></tt><tt class="py-op">,</tt> <tt id="link-86" class="py-name"><a title="lxml.etree.DocInfo.encoding
+lxml.tests.selftest.encoding
+lxml.tests.selftest2.encoding" class="py-name" href="#" onclick="return doclink('link-86', 'encoding', 'link-17');">encoding</a></tt><tt class="py-op">=</tt><tt class="py-name">e</tt><tt class="py-op">.</tt><tt id="link-87" class="py-name"><a title="lxml.etree._Attrib.get
+lxml.etree._Element.get
+lxml.etree._IDDict.get
+lxml.etree._ProcessingInstruction.get" class="py-name" href="#" onclick="return doclink('link-87', 'get', 'link-65');">get</a></tt><tt class="py-op">(</tt><tt class="py-string">"encoding"</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L193"></a><tt class="py-lineno">193</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt id="link-88" class="py-name"><a title="lxml.etree.QName.text
+lxml.etree._Element.text
+lxml.etree._Entity.text
+lxml.objectify.ObjectifiedElement.text
+xml.etree.ElementTree.Element.text" class="py-name" href="#" onclick="return doclink('link-88', 'text', 'link-84');">text</a></tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L194"></a><tt class="py-lineno">194</tt>  <tt class="py-line">                    <tt class="py-keyword">raise</tt> <tt id="link-89" class="py-name"><a title="lxml.ElementInclude.FatalIncludeError" class="py-name" href="#" onclick="return doclink('link-89', 'FatalIncludeError', 'link-70');">FatalIncludeError</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L195"></a><tt class="py-lineno">195</tt>  <tt class="py-line">                        <tt class="py-string">"cannot load %r as %r"</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">href</tt><tt class="py-op">,</tt> <tt id="link-90" class="py-name"><a title="lxml.etree._ElementTree.parse
+lxml.etree.parse
+lxml.html.ElementSoup.parse
+lxml.html.html5parser.parse
+lxml.html.soupparser.parse
+lxml.objectify.parse
+lxml.tests.common_imports.HelperTestCase.parse" class="py-name" href="#" onclick="return doclink('link-90', 'parse', 'link-2');">parse</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L196"></a><tt class="py-lineno">196</tt>  <tt class="py-line">                        <tt class="py-op">)</tt> </tt>
+<a name="L197"></a><tt class="py-lineno">197</tt>  <tt class="py-line">                <tt class="py-name">predecessor</tt> <tt class="py-op">=</tt> <tt class="py-name">e</tt><tt class="py-op">.</tt><tt id="link-91" class="py-name" targets="Method lxml.etree._Element.getprevious()=lxml.etree._Element-class.html#getprevious"><a title="lxml.etree._Element.getprevious" class="py-name" href="#" onclick="return doclink('link-91', 'getprevious', 'link-91');">getprevious</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L198"></a><tt class="py-lineno">198</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">predecessor</tt> <tt class="py-keyword">is</tt> <tt class="py-keyword">not</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L199"></a><tt class="py-lineno">199</tt>  <tt class="py-line">                    <tt class="py-name">predecessor</tt><tt class="py-op">.</tt><tt id="link-92" class="py-name"><a title="lxml.etree._Element.tail
+xml.etree.ElementTree.Element.tail" class="py-name" href="#" onclick="return doclink('link-92', 'tail', 'link-78');">tail</a></tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-name">predecessor</tt><tt class="py-op">.</tt><tt id="link-93" class="py-name"><a title="lxml.etree._Element.tail
+xml.etree.ElementTree.Element.tail" class="py-name" href="#" onclick="return doclink('link-93', 'tail', 'link-78');">tail</a></tt> <tt class="py-keyword">or</tt> <tt class="py-string">""</tt><tt class="py-op">)</tt> <tt class="py-op">+</tt> <tt id="link-94" class="py-name"><a title="lxml.etree.QName.text
+lxml.etree._Element.text
+lxml.etree._Entity.text
+lxml.objectify.ObjectifiedElement.text
+xml.etree.ElementTree.Element.text" class="py-name" href="#" onclick="return doclink('link-94', 'text', 'link-84');">text</a></tt> </tt>
+<a name="L200"></a><tt class="py-lineno">200</tt>  <tt class="py-line">                <tt class="py-keyword">elif</tt> <tt class="py-name">parent</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L201"></a><tt class="py-lineno">201</tt>  <tt class="py-line">                    <tt class="py-keyword">return</tt> <tt id="link-95" class="py-name"><a title="lxml.etree.QName.text
+lxml.etree._Element.text
+lxml.etree._Entity.text
+lxml.objectify.ObjectifiedElement.text
+xml.etree.ElementTree.Element.text" class="py-name" href="#" onclick="return doclink('link-95', 'text', 'link-84');">text</a></tt> <tt class="py-comment"># replaced the root node!</tt> </tt>
+<a name="L202"></a><tt class="py-lineno">202</tt>  <tt class="py-line">                <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L203"></a><tt class="py-lineno">203</tt>  <tt class="py-line">                    <tt class="py-name">parent</tt><tt class="py-op">.</tt><tt id="link-96" class="py-name"><a title="lxml.etree.QName.text
+lxml.etree._Element.text
+lxml.etree._Entity.text
+lxml.objectify.ObjectifiedElement.text
+xml.etree.ElementTree.Element.text" class="py-name" href="#" onclick="return doclink('link-96', 'text', 'link-84');">text</a></tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-name">parent</tt><tt class="py-op">.</tt><tt id="link-97" class="py-name"><a title="lxml.etree.QName.text
+lxml.etree._Element.text
+lxml.etree._Entity.text
+lxml.objectify.ObjectifiedElement.text
+xml.etree.ElementTree.Element.text" class="py-name" href="#" onclick="return doclink('link-97', 'text', 'link-84');">text</a></tt> <tt class="py-keyword">or</tt> <tt class="py-string">""</tt><tt class="py-op">)</tt> <tt class="py-op">+</tt> <tt id="link-98" class="py-name"><a title="lxml.etree.QName.text
+lxml.etree._Element.text
+lxml.etree._Entity.text
+lxml.objectify.ObjectifiedElement.text
+xml.etree.ElementTree.Element.text" class="py-name" href="#" onclick="return doclink('link-98', 'text', 'link-84');">text</a></tt> <tt class="py-op">+</tt> <tt class="py-op">(</tt><tt class="py-name">e</tt><tt class="py-op">.</tt><tt id="link-99" class="py-name"><a title="lxml.etree._Element.tail
+xml.etree.ElementTree.Element.tail" class="py-name" href="#" onclick="return doclink('link-99', 'tail', 'link-78');">tail</a></tt> <tt class="py-keyword">or</tt> <tt class="py-string">""</tt><tt class="py-op">)</tt> </tt>
+<a name="L204"></a><tt class="py-lineno">204</tt>  <tt class="py-line">                <tt class="py-name">parent</tt><tt class="py-op">.</tt><tt id="link-100" class="py-name" targets="Method lxml.etree._Element.remove()=lxml.etree._Element-class.html#remove,Method lxml.html.CheckboxValues.remove()=lxml.html.CheckboxValues-class.html#remove,Method lxml.html.Classes.remove()=lxml.html.Classes-class.html#remove,Method lxml.html.MultipleSelectOptions.remove()=lxml.html.MultipleSelectOptions-class.html#remove"><a title="lxml.etree._Element.remove
+lxml.html.CheckboxValues.remove
+lxml.html.Classes.remove
+lxml.html.MultipleSelectOptions.remove" class="py-name" href="#" onclick="return doclink('link-100', 'remove', 'link-100');">remove</a></tt><tt class="py-op">(</tt><tt class="py-name">e</tt><tt class="py-op">)</tt> </tt>
+<a name="L205"></a><tt class="py-lineno">205</tt>  <tt class="py-line">            <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L206"></a><tt class="py-lineno">206</tt>  <tt class="py-line">                <tt class="py-keyword">raise</tt> <tt id="link-101" class="py-name"><a title="lxml.ElementInclude.FatalIncludeError" class="py-name" href="#" onclick="return doclink('link-101', 'FatalIncludeError', 'link-70');">FatalIncludeError</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L207"></a><tt class="py-lineno">207</tt>  <tt class="py-line">                    <tt class="py-string">"unknown parse type in xi:include tag (%r)"</tt> <tt class="py-op">%</tt> <tt id="link-102" class="py-name"><a title="lxml.etree._ElementTree.parse
+lxml.etree.parse
+lxml.html.ElementSoup.parse
+lxml.html.html5parser.parse
+lxml.html.soupparser.parse
+lxml.objectify.parse
+lxml.tests.common_imports.HelperTestCase.parse" class="py-name" href="#" onclick="return doclink('link-102', 'parse', 'link-2');">parse</a></tt> </tt>
+<a name="L208"></a><tt class="py-lineno">208</tt>  <tt class="py-line">                <tt class="py-op">)</tt> </tt>
+<a name="L209"></a><tt class="py-lineno">209</tt>  <tt class="py-line">        <tt class="py-keyword">elif</tt> <tt class="py-name">e</tt><tt class="py-op">.</tt><tt id="link-103" class="py-name"><a title="lxml.etree._Comment.tag
+lxml.etree._Element.tag
+lxml.etree._Entity.tag
+lxml.etree._ProcessingInstruction.tag
+lxml.tests.test_xpathevaluator.tag
+xml.etree.ElementTree.Element.tag" class="py-name" href="#" onclick="return doclink('link-103', 'tag', 'link-62');">tag</a></tt> <tt class="py-op">==</tt> <tt id="link-104" class="py-name"><a title="lxml.ElementInclude.XINCLUDE_FALLBACK" class="py-name" href="#" onclick="return doclink('link-104', 'XINCLUDE_FALLBACK', 'link-6');">XINCLUDE_FALLBACK</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L210"></a><tt class="py-lineno">210</tt>  <tt class="py-line">            <tt class="py-name">parent</tt> <tt class="py-op">=</tt> <tt class="py-name">e</tt><tt class="py-op">.</tt><tt id="link-105" class="py-name"><a title="lxml.etree._Element.getparent
+lxml.etree._ElementStringResult.getparent
+lxml.etree._ElementUnicodeResult.getparent" class="py-name" href="#" onclick="return doclink('link-105', 'getparent', 'link-68');">getparent</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L211"></a><tt class="py-lineno">211</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">parent</tt> <tt class="py-keyword">is</tt> <tt class="py-keyword">not</tt> <tt class="py-name">None</tt> <tt class="py-keyword">and</tt> <tt class="py-name">parent</tt><tt class="py-op">.</tt><tt id="link-106" class="py-name"><a title="lxml.etree._Comment.tag
+lxml.etree._Element.tag
+lxml.etree._Entity.tag
+lxml.etree._ProcessingInstruction.tag
+lxml.tests.test_xpathevaluator.tag
+xml.etree.ElementTree.Element.tag" class="py-name" href="#" onclick="return doclink('link-106', 'tag', 'link-62');">tag</a></tt> <tt class="py-op">!=</tt> <tt id="link-107" class="py-name"><a title="lxml.ElementInclude.XINCLUDE_INCLUDE" class="py-name" href="#" onclick="return doclink('link-107', 'XINCLUDE_INCLUDE', 'link-4');">XINCLUDE_INCLUDE</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L212"></a><tt class="py-lineno">212</tt>  <tt class="py-line">                <tt class="py-keyword">raise</tt> <tt id="link-108" class="py-name"><a title="lxml.ElementInclude.FatalIncludeError" class="py-name" href="#" onclick="return doclink('link-108', 'FatalIncludeError', 'link-70');">FatalIncludeError</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L213"></a><tt class="py-lineno">213</tt>  <tt class="py-line">                    <tt class="py-string">"xi:fallback tag must be child of xi:include (%r)"</tt> <tt class="py-op">%</tt> <tt class="py-name">e</tt><tt class="py-op">.</tt><tt id="link-109" class="py-name"><a title="lxml.etree._Comment.tag
+lxml.etree._Element.tag
+lxml.etree._Entity.tag
+lxml.etree._ProcessingInstruction.tag
+lxml.tests.test_xpathevaluator.tag
+xml.etree.ElementTree.Element.tag" class="py-name" href="#" onclick="return doclink('link-109', 'tag', 'link-62');">tag</a></tt> </tt>
+<a name="L214"></a><tt class="py-lineno">214</tt>  <tt class="py-line">                    <tt class="py-op">)</tt> </tt>
+<a name="L215"></a><tt class="py-lineno">215</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L216"></a><tt class="py-lineno">216</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt id="link-110" class="py-name"><a title="lxml.ElementInclude.FatalIncludeError" class="py-name" href="#" onclick="return doclink('link-110', 'FatalIncludeError', 'link-70');">FatalIncludeError</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L217"></a><tt class="py-lineno">217</tt>  <tt class="py-line">                <tt class="py-string">"Invalid element found in XInclude namespace (%r)"</tt> <tt class="py-op">%</tt> <tt class="py-name">e</tt><tt class="py-op">.</tt><tt id="link-111" class="py-name"><a title="lxml.etree._Comment.tag
+lxml.etree._Element.tag
+lxml.etree._Entity.tag
+lxml.etree._ProcessingInstruction.tag
+lxml.tests.test_xpathevaluator.tag
+xml.etree.ElementTree.Element.tag" class="py-name" href="#" onclick="return doclink('link-111', 'tag', 'link-62');">tag</a></tt> </tt>
+<a name="L218"></a><tt class="py-lineno">218</tt>  <tt class="py-line">                <tt class="py-op">)</tt> </tt>
+<a name="L219"></a><tt class="py-lineno">219</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">elem</tt> </tt>
+</div><a name="L220"></a><tt class="py-lineno">220</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lxml-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="/">lxml API</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Fri Jun 22 18:59:52 2018
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

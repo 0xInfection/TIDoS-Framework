@@ -1,0 +1,713 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>lxml.tests.test_unicode</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lxml-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="/">lxml API</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="lxml-module.html">Package&nbsp;lxml</a> ::
+        <a href="lxml.tests-module.html">Package&nbsp;tests</a> ::
+        Module&nbsp;test_unicode
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="lxml.tests.test_unicode-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="lxml.tests.test_unicode-module.html">Module lxml.tests.test_unicode</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-comment"># -*- coding: utf-8 -*-</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">unittest</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">sys</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt id="link-0" class="py-name" targets="Variable lxml.etree.XPath.path=lxml.etree.XPath-class.html#path,Variable lxml.etree._LogEntry.path=lxml.etree._LogEntry-class.html#path"><a title="lxml.etree.XPath.path
+lxml.etree._LogEntry.path" class="py-name" href="#" onclick="return doclink('link-0', 'path', 'link-0');">path</a></tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt id="link-1" class="py-name" targets="Variable lxml.tests.test_builder.this_dir=lxml.tests.test_builder-module.html#this_dir,Variable lxml.tests.test_classlookup.this_dir=lxml.tests.test_classlookup-module.html#this_dir,Variable lxml.tests.test_dtd.this_dir=lxml.tests.test_dtd-module.html#this_dir,Variable lxml.tests.test_elementtree.this_dir=lxml.tests.test_elementtree-module.html#this_dir,Variable lxml.tests.test_errors.this_dir=lxml.tests.test_errors-module.html#this_dir,Variable lxml.tests.test_htmlparser.this_dir=lxml.tests.test_htmlparser-module.html#this_dir,Variable lxml.tests.test_http_io.this_dir=lxml.tests.test_http_io-module.html#this_dir,Variable lxml.tests.test_incremental_xmlfile.this_dir=lxml.tests.test_incremental_xmlfile-module.html#this_dir,Variable lxml.tests.test_io.this_dir=lxml.tests.test_io-module.html#this_dir,Variable lxml.tests.test_isoschematron.this_dir=lxml.tests.test_isoschematron-module.html#this_dir,Variable lxml.tests.test_nsclasses.this_dir=lxml.tests.test_nsclasses-module.html#this_dir,Variable lxml.tests.test_objectify.this_dir=lxml.tests.test_objectify-module.html#this_dir,Variable lxml.tests.test_pyclasslookup.this_dir=lxml.tests.test_pyclasslookup-module.html#this_dir,Variable lxml.tests.test_relaxng.this_dir=lxml.tests.test_relaxng-module.html#this_dir,Variable lxml.tests.test_sax.this_dir=lxml.tests.test_sax-module.html#this_dir,Variable lxml.tests.test_schematron.this_dir=lxml.tests.test_schematron-module.html#this_dir,Variable lxml.tests.test_threading.this_dir=lxml.tests.test_threading-module.html#this_dir,Variable lxml.tests.test_unicode.this_dir=lxml.tests.test_unicode-module.html#this_dir,Variable lxml.tests.test_xmlschema.this_dir=lxml.tests.test_xmlschema-module.html#this_dir,Variable lxml.tests.test_xpathevaluator.this_dir=lxml.tests.test_xpathevaluator-module.html#this_dir,Variable lxml.tests.test_xslt.this_dir=lxml.tests.test_xslt-module.html#this_dir"><a title="lxml.tests.test_builder.this_dir
+lxml.tests.test_classlookup.this_dir
+lxml.tests.test_dtd.this_dir
+lxml.tests.test_elementtree.this_dir
+lxml.tests.test_errors.this_dir
+lxml.tests.test_htmlparser.this_dir
+lxml.tests.test_http_io.this_dir
+lxml.tests.test_incremental_xmlfile.this_dir
+lxml.tests.test_io.this_dir
+lxml.tests.test_isoschematron.this_dir
+lxml.tests.test_nsclasses.this_dir
+lxml.tests.test_objectify.this_dir
+lxml.tests.test_pyclasslookup.this_dir
+lxml.tests.test_relaxng.this_dir
+lxml.tests.test_sax.this_dir
+lxml.tests.test_schematron.this_dir
+lxml.tests.test_threading.this_dir
+lxml.tests.test_unicode.this_dir
+lxml.tests.test_xmlschema.this_dir
+lxml.tests.test_xpathevaluator.this_dir
+lxml.tests.test_xslt.this_dir" class="py-name" href="#" onclick="return doclink('link-1', 'this_dir', 'link-1');">this_dir</a></tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt id="link-2" class="py-name"><a title="lxml.etree.XPath.path
+lxml.etree._LogEntry.path" class="py-name" href="#" onclick="return doclink('link-2', 'path', 'link-0');">path</a></tt><tt class="py-op">.</tt><tt class="py-name">dirname</tt><tt class="py-op">(</tt><tt class="py-name">__file__</tt><tt class="py-op">)</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-keyword">if</tt> <tt id="link-3" class="py-name"><a title="lxml.tests.test_builder.this_dir
+lxml.tests.test_classlookup.this_dir
+lxml.tests.test_dtd.this_dir
+lxml.tests.test_elementtree.this_dir
+lxml.tests.test_errors.this_dir
+lxml.tests.test_htmlparser.this_dir
+lxml.tests.test_http_io.this_dir
+lxml.tests.test_incremental_xmlfile.this_dir
+lxml.tests.test_io.this_dir
+lxml.tests.test_isoschematron.this_dir
+lxml.tests.test_nsclasses.this_dir
+lxml.tests.test_objectify.this_dir
+lxml.tests.test_pyclasslookup.this_dir
+lxml.tests.test_relaxng.this_dir
+lxml.tests.test_sax.this_dir
+lxml.tests.test_schematron.this_dir
+lxml.tests.test_threading.this_dir
+lxml.tests.test_unicode.this_dir
+lxml.tests.test_xmlschema.this_dir
+lxml.tests.test_xpathevaluator.this_dir
+lxml.tests.test_xslt.this_dir" class="py-name" href="#" onclick="return doclink('link-3', 'this_dir', 'link-1');">this_dir</a></tt> <tt class="py-keyword">not</tt> <tt class="py-keyword">in</tt> <tt class="py-name">sys</tt><tt class="py-op">.</tt><tt id="link-4" class="py-name"><a title="lxml.etree.XPath.path
+lxml.etree._LogEntry.path" class="py-name" href="#" onclick="return doclink('link-4', 'path', 'link-0');">path</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line">    <tt class="py-name">sys</tt><tt class="py-op">.</tt><tt id="link-5" class="py-name"><a title="lxml.etree.XPath.path
+lxml.etree._LogEntry.path" class="py-name" href="#" onclick="return doclink('link-5', 'path', 'link-0');">path</a></tt><tt class="py-op">.</tt><tt id="link-6" class="py-name" targets="Method lxml.etree._Element.insert()=lxml.etree._Element-class.html#insert"><a title="lxml.etree._Element.insert" class="py-name" href="#" onclick="return doclink('link-6', 'insert', 'link-6');">insert</a></tt><tt class="py-op">(</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> <tt id="link-7" class="py-name"><a title="lxml.tests.test_builder.this_dir
+lxml.tests.test_classlookup.this_dir
+lxml.tests.test_dtd.this_dir
+lxml.tests.test_elementtree.this_dir
+lxml.tests.test_errors.this_dir
+lxml.tests.test_htmlparser.this_dir
+lxml.tests.test_http_io.this_dir
+lxml.tests.test_incremental_xmlfile.this_dir
+lxml.tests.test_io.this_dir
+lxml.tests.test_isoschematron.this_dir
+lxml.tests.test_nsclasses.this_dir
+lxml.tests.test_objectify.this_dir
+lxml.tests.test_pyclasslookup.this_dir
+lxml.tests.test_relaxng.this_dir
+lxml.tests.test_sax.this_dir
+lxml.tests.test_schematron.this_dir
+lxml.tests.test_threading.this_dir
+lxml.tests.test_unicode.this_dir
+lxml.tests.test_xmlschema.this_dir
+lxml.tests.test_xpathevaluator.this_dir
+lxml.tests.test_xslt.this_dir" class="py-name" href="#" onclick="return doclink('link-7', 'this_dir', 'link-1');">this_dir</a></tt><tt class="py-op">)</tt>  <tt class="py-comment"># needed for Py3</tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-8" class="py-name" targets="Module lxml.tests.common_imports=lxml.tests.common_imports-module.html"><a title="lxml.tests.common_imports" class="py-name" href="#" onclick="return doclink('link-8', 'common_imports', 'link-8');">common_imports</a></tt> <tt class="py-keyword">import</tt> <tt class="py-name">StringIO</tt><tt class="py-op">,</tt> <tt id="link-9" class="py-name" targets="Module lxml.etree=lxml.etree-module.html,Variable lxml.sax.ElementTreeContentHandler.etree=lxml.sax.ElementTreeContentHandler-class.html#etree,Variable lxml.tests.test_elementtree.CElementTreeTestCase.etree=lxml.tests.test_elementtree.CElementTreeTestCase-class.html#etree,Variable lxml.tests.test_elementtree._ETreeTestCaseBase.etree=lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#etree,Variable lxml.tests.test_elementtree._XMLPullParserTest.etree=lxml.tests.test_elementtree._XMLPullParserTest-class.html#etree,Variable lxml.tests.test_io._IOTestCaseBase.etree=lxml.tests.test_io._IOTestCaseBase-class.html#etree"><a title="lxml.etree
+lxml.sax.ElementTreeContentHandler.etree
+lxml.tests.test_elementtree.CElementTreeTestCase.etree
+lxml.tests.test_elementtree._ETreeTestCaseBase.etree
+lxml.tests.test_elementtree._XMLPullParserTest.etree
+lxml.tests.test_io._IOTestCaseBase.etree" class="py-name" href="#" onclick="return doclink('link-9', 'etree', 'link-9');">etree</a></tt><tt class="py-op">,</tt> <tt id="link-10" class="py-name" targets="Class lxml.tests.common_imports.SillyFileLike=lxml.tests.common_imports.SillyFileLike-class.html"><a title="lxml.tests.common_imports.SillyFileLike" class="py-name" href="#" onclick="return doclink('link-10', 'SillyFileLike', 'link-10');">SillyFileLike</a></tt><tt class="py-op">,</tt> <tt id="link-11" class="py-name" targets="Class lxml.tests.common_imports.HelperTestCase=lxml.tests.common_imports.HelperTestCase-class.html"><a title="lxml.tests.common_imports.HelperTestCase" class="py-name" href="#" onclick="return doclink('link-11', 'HelperTestCase', 'link-11');">HelperTestCase</a></tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-12" class="py-name"><a title="lxml.tests.common_imports" class="py-name" href="#" onclick="return doclink('link-12', 'common_imports', 'link-8');">common_imports</a></tt> <tt class="py-keyword">import</tt> <tt id="link-13" class="py-name" targets="Function lxml.tests.common_imports._str()=lxml.tests.common_imports-module.html#_str"><a title="lxml.tests.common_imports._str" class="py-name" href="#" onclick="return doclink('link-13', '_str', 'link-13');">_str</a></tt><tt class="py-op">,</tt> <tt id="link-14" class="py-name" targets="Function lxml.tests.common_imports._bytes()=lxml.tests.common_imports-module.html#_bytes"><a title="lxml.tests.common_imports._bytes" class="py-name" href="#" onclick="return doclink('link-14', '_bytes', 'link-14');">_bytes</a></tt><tt class="py-op">,</tt> <tt class="py-name">_chr</tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line">    <tt class="py-name">unicode</tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt class="py-keyword">except</tt> <tt class="py-name">NameError</tt><tt class="py-op">:</tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line">    <tt class="py-name">unicode</tt> <tt class="py-op">=</tt> <tt id="link-15" class="py-name" targets="Class str=str-class.html"><a title="str" class="py-name" href="#" onclick="return doclink('link-15', 'str', 'link-15');">str</a></tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"><tt id="link-16" class="py-name" targets="Variable lxml.tests.test_unicode.ascii_uni=lxml.tests.test_unicode-module.html#ascii_uni"><a title="lxml.tests.test_unicode.ascii_uni" class="py-name" href="#" onclick="return doclink('link-16', 'ascii_uni', 'link-16');">ascii_uni</a></tt> <tt class="py-op">=</tt> <tt id="link-17" class="py-name"><a title="lxml.tests.common_imports._bytes" class="py-name" href="#" onclick="return doclink('link-17', '_bytes', 'link-14');">_bytes</a></tt><tt class="py-op">(</tt><tt class="py-string">'a'</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">decode</tt><tt class="py-op">(</tt><tt class="py-string">'utf8'</tt><tt class="py-op">)</tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"><tt id="link-18" class="py-name" targets="Variable lxml.tests.test_unicode.klingon=lxml.tests.test_unicode-module.html#klingon"><a title="lxml.tests.test_unicode.klingon" class="py-name" href="#" onclick="return doclink('link-18', 'klingon', 'link-18');">klingon</a></tt> <tt class="py-op">=</tt> <tt id="link-19" class="py-name"><a title="lxml.tests.common_imports._bytes" class="py-name" href="#" onclick="return doclink('link-19', '_bytes', 'link-14');">_bytes</a></tt><tt class="py-op">(</tt><tt class="py-string">"\\uF8D2"</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">decode</tt><tt class="py-op">(</tt><tt class="py-string">"unicode_escape"</tt><tt class="py-op">)</tt> <tt class="py-comment"># not valid for XML names</tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line"><tt id="link-20" class="py-name" targets="Variable lxml.tests.test_unicode.invalid_tag=lxml.tests.test_unicode-module.html#invalid_tag"><a title="lxml.tests.test_unicode.invalid_tag" class="py-name" href="#" onclick="return doclink('link-20', 'invalid_tag', 'link-20');">invalid_tag</a></tt> <tt class="py-op">=</tt> <tt id="link-21" class="py-name"><a title="lxml.tests.common_imports._bytes" class="py-name" href="#" onclick="return doclink('link-21', '_bytes', 'link-14');">_bytes</a></tt><tt class="py-op">(</tt><tt class="py-string">"test"</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">decode</tt><tt class="py-op">(</tt><tt class="py-string">'utf8'</tt><tt class="py-op">)</tt> <tt class="py-op">+</tt> <tt id="link-22" class="py-name"><a title="lxml.tests.test_unicode.klingon" class="py-name" href="#" onclick="return doclink('link-22', 'klingon', 'link-18');">klingon</a></tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line"> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line"><tt id="link-23" class="py-name" targets="Variable lxml.tests.test_unicode.uni=lxml.tests.test_unicode-module.html#uni"><a title="lxml.tests.test_unicode.uni" class="py-name" href="#" onclick="return doclink('link-23', 'uni', 'link-23');">uni</a></tt> <tt class="py-op">=</tt> <tt id="link-24" class="py-name"><a title="lxml.tests.common_imports._bytes" class="py-name" href="#" onclick="return doclink('link-24', '_bytes', 'link-14');">_bytes</a></tt><tt class="py-op">(</tt><tt class="py-string">'\\xc3\\u0680\\u3120'</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">decode</tt><tt class="py-op">(</tt><tt class="py-string">"unicode_escape"</tt><tt class="py-op">)</tt> <tt class="py-comment"># some non-ASCII characters</tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line"> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line"><tt id="link-25" class="py-name" targets="Variable lxml.tests.test_unicode.uxml=lxml.tests.test_unicode-module.html#uxml"><a title="lxml.tests.test_unicode.uxml" class="py-name" href="#" onclick="return doclink('link-25', 'uxml', 'link-25');">uxml</a></tt> <tt class="py-op">=</tt> <tt id="link-26" class="py-name"><a title="lxml.tests.common_imports._bytes" class="py-name" href="#" onclick="return doclink('link-26', '_bytes', 'link-14');">_bytes</a></tt><tt class="py-op">(</tt><tt class="py-string">"&lt;test&gt;&lt;title&gt;test \\xc3\\xa1\\u3120&lt;/title&gt;&lt;h1&gt;page \\xc3\\xa1\\u3120 title&lt;/h1&gt;&lt;/test&gt;"</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line">              <tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">decode</tt><tt class="py-op">(</tt><tt class="py-string">"unicode_escape"</tt><tt class="py-op">)</tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line"> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line"> </tt>
+<a name="UnicodeTestCase"></a><div id="UnicodeTestCase-def"><a name="L30"></a><tt class="py-lineno"> 30</tt> <a class="py-toggle" href="#" id="UnicodeTestCase-toggle" onclick="return toggle('UnicodeTestCase');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lxml.tests.test_unicode.UnicodeTestCase-class.html">UnicodeTestCase</a><tt class="py-op">(</tt><tt class="py-base-class">HelperTestCase</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="UnicodeTestCase-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="UnicodeTestCase-expanded"><a name="UnicodeTestCase.test__str"></a><div id="UnicodeTestCase.test__str-def"><a name="L31"></a><tt class="py-lineno"> 31</tt> <a class="py-toggle" href="#" id="UnicodeTestCase.test__str-toggle" onclick="return toggle('UnicodeTestCase.test__str');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.test_unicode.UnicodeTestCase-class.html#test__str">test__str</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="UnicodeTestCase.test__str-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="UnicodeTestCase.test__str-expanded"><a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line">        <tt class="py-comment"># test the testing framework, namely _str from common_imports</tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertEqual</tt><tt class="py-op">(</tt><tt id="link-27" class="py-name"><a title="lxml.tests.common_imports._str" class="py-name" href="#" onclick="return doclink('link-27', '_str', 'link-13');">_str</a></tt><tt class="py-op">(</tt><tt class="py-string">'\x10'</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt id="link-28" class="py-name"><a title="lxml.tests.common_imports._str" class="py-name" href="#" onclick="return doclink('link-28', '_str', 'link-13');">_str</a></tt><tt class="py-op">(</tt><tt class="py-string">'\u0010'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertEqual</tt><tt class="py-op">(</tt><tt id="link-29" class="py-name"><a title="lxml.tests.common_imports._str" class="py-name" href="#" onclick="return doclink('link-29', '_str', 'link-13');">_str</a></tt><tt class="py-op">(</tt><tt class="py-string">'\x10'</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt id="link-30" class="py-name"><a title="lxml.tests.common_imports._str" class="py-name" href="#" onclick="return doclink('link-30', '_str', 'link-13');">_str</a></tt><tt class="py-op">(</tt><tt class="py-string">'\U00000010'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertEqual</tt><tt class="py-op">(</tt><tt id="link-31" class="py-name"><a title="lxml.tests.common_imports._str" class="py-name" href="#" onclick="return doclink('link-31', '_str', 'link-13');">_str</a></tt><tt class="py-op">(</tt><tt class="py-string">'\u1234'</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt id="link-32" class="py-name"><a title="lxml.tests.common_imports._str" class="py-name" href="#" onclick="return doclink('link-32', '_str', 'link-13');">_str</a></tt><tt class="py-op">(</tt><tt class="py-string">'\U00001234'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line"> </tt>
+<a name="UnicodeTestCase.test_unicode_xml"></a><div id="UnicodeTestCase.test_unicode_xml-def"><a name="L37"></a><tt class="py-lineno"> 37</tt> <a class="py-toggle" href="#" id="UnicodeTestCase.test_unicode_xml-toggle" onclick="return toggle('UnicodeTestCase.test_unicode_xml');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.test_unicode.UnicodeTestCase-class.html#test_unicode_xml">test_unicode_xml</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="UnicodeTestCase.test_unicode_xml-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="UnicodeTestCase.test_unicode_xml-expanded"><a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line">        <tt class="py-name">tree</tt> <tt class="py-op">=</tt> <tt id="link-33" class="py-name"><a title="lxml.etree
+lxml.sax.ElementTreeContentHandler.etree
+lxml.tests.test_elementtree.CElementTreeTestCase.etree
+lxml.tests.test_elementtree._ETreeTestCaseBase.etree
+lxml.tests.test_elementtree._XMLPullParserTest.etree
+lxml.tests.test_io._IOTestCaseBase.etree" class="py-name" href="#" onclick="return doclink('link-33', 'etree', 'link-9');">etree</a></tt><tt class="py-op">.</tt><tt id="link-34" class="py-name" targets="Function lxml.etree.XML()=lxml.etree-module.html#XML,Function lxml.objectify.XML()=lxml.objectify-module.html#XML,Method lxml.tests.test_objectify.ObjectifyTestCase.XML()=lxml.tests.test_objectify.ObjectifyTestCase-class.html#XML,Method lxml.tests.test_pyclasslookup.PyClassLookupTestCase.XML()=lxml.tests.test_pyclasslookup.PyClassLookupTestCase-class.html#XML"><a title="lxml.etree.XML
+lxml.objectify.XML
+lxml.tests.test_objectify.ObjectifyTestCase.XML
+lxml.tests.test_pyclasslookup.PyClassLookupTestCase.XML" class="py-name" href="#" onclick="return doclink('link-34', 'XML', 'link-34');">XML</a></tt><tt class="py-op">(</tt><tt class="py-string">'&lt;p&gt;%s&lt;/p&gt;'</tt> <tt class="py-op">%</tt> <tt id="link-35" class="py-name"><a title="lxml.tests.test_unicode.uni" class="py-name" href="#" onclick="return doclink('link-35', 'uni', 'link-23');">uni</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertEqual</tt><tt class="py-op">(</tt><tt id="link-36" class="py-name"><a title="lxml.tests.test_unicode.uni" class="py-name" href="#" onclick="return doclink('link-36', 'uni', 'link-23');">uni</a></tt><tt class="py-op">,</tt> <tt class="py-name">tree</tt><tt class="py-op">.</tt><tt id="link-37" class="py-name" targets="Variable lxml.etree.QName.text=lxml.etree.QName-class.html#text,Variable lxml.etree._Element.text=lxml.etree._Element-class.html#text,Variable lxml.etree._Entity.text=lxml.etree._Entity-class.html#text,Variable lxml.objectify.ObjectifiedElement.text=lxml.objectify.ObjectifiedElement-class.html#text,Variable xml.etree.ElementTree.Element.text=xml.etree.ElementTree.Element-class.html#text"><a title="lxml.etree.QName.text
+lxml.etree._Element.text
+lxml.etree._Entity.text
+lxml.objectify.ObjectifiedElement.text
+xml.etree.ElementTree.Element.text" class="py-name" href="#" onclick="return doclink('link-37', 'text', 'link-37');">text</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line"> </tt>
+<a name="UnicodeTestCase.test_wide_unicode_xml"></a><div id="UnicodeTestCase.test_wide_unicode_xml-def"><a name="L41"></a><tt class="py-lineno"> 41</tt> <a class="py-toggle" href="#" id="UnicodeTestCase.test_wide_unicode_xml-toggle" onclick="return toggle('UnicodeTestCase.test_wide_unicode_xml');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.test_unicode.UnicodeTestCase-class.html#test_wide_unicode_xml">test_wide_unicode_xml</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="UnicodeTestCase.test_wide_unicode_xml-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="UnicodeTestCase.test_wide_unicode_xml-expanded"><a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">maxunicode</tt> <tt class="py-op">&lt;</tt> <tt class="py-number">1114111</tt><tt class="py-op">:</tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt>  <tt class="py-comment"># skip test</tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line">        <tt class="py-name">tree</tt> <tt class="py-op">=</tt> <tt id="link-38" class="py-name"><a title="lxml.etree
+lxml.sax.ElementTreeContentHandler.etree
+lxml.tests.test_elementtree.CElementTreeTestCase.etree
+lxml.tests.test_elementtree._ETreeTestCaseBase.etree
+lxml.tests.test_elementtree._XMLPullParserTest.etree
+lxml.tests.test_io._IOTestCaseBase.etree" class="py-name" href="#" onclick="return doclink('link-38', 'etree', 'link-9');">etree</a></tt><tt class="py-op">.</tt><tt id="link-39" class="py-name"><a title="lxml.etree.XML
+lxml.objectify.XML
+lxml.tests.test_objectify.ObjectifyTestCase.XML
+lxml.tests.test_pyclasslookup.PyClassLookupTestCase.XML" class="py-name" href="#" onclick="return doclink('link-39', 'XML', 'link-34');">XML</a></tt><tt class="py-op">(</tt><tt id="link-40" class="py-name"><a title="lxml.tests.common_imports._bytes" class="py-name" href="#" onclick="return doclink('link-40', '_bytes', 'link-14');">_bytes</a></tt><tt class="py-op">(</tt><tt class="py-string">'&lt;p&gt;\\U00026007&lt;/p&gt;'</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">decode</tt><tt class="py-op">(</tt><tt class="py-string">'unicode_escape'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertEqual</tt><tt class="py-op">(</tt><tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">tree</tt><tt class="py-op">.</tt><tt id="link-41" class="py-name"><a title="lxml.etree.QName.text
+lxml.etree._Element.text
+lxml.etree._Entity.text
+lxml.objectify.ObjectifiedElement.text
+xml.etree.ElementTree.Element.text" class="py-name" href="#" onclick="return doclink('link-41', 'text', 'link-37');">text</a></tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertEqual</tt><tt class="py-op">(</tt><tt id="link-42" class="py-name"><a title="lxml.tests.common_imports._bytes" class="py-name" href="#" onclick="return doclink('link-42', '_bytes', 'link-14');">_bytes</a></tt><tt class="py-op">(</tt><tt class="py-string">'\\U00026007'</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">decode</tt><tt class="py-op">(</tt><tt class="py-string">'unicode_escape'</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line">                         <tt class="py-name">tree</tt><tt class="py-op">.</tt><tt id="link-43" class="py-name"><a title="lxml.etree.QName.text
+lxml.etree._Element.text
+lxml.etree._Entity.text
+lxml.objectify.ObjectifiedElement.text
+xml.etree.ElementTree.Element.text" class="py-name" href="#" onclick="return doclink('link-43', 'text', 'link-37');">text</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line"> </tt>
+<a name="UnicodeTestCase.test_unicode_xml_broken"></a><div id="UnicodeTestCase.test_unicode_xml_broken-def"><a name="L49"></a><tt class="py-lineno"> 49</tt> <a class="py-toggle" href="#" id="UnicodeTestCase.test_unicode_xml_broken-toggle" onclick="return toggle('UnicodeTestCase.test_unicode_xml_broken');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.test_unicode.UnicodeTestCase-class.html#test_unicode_xml_broken">test_unicode_xml_broken</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="UnicodeTestCase.test_unicode_xml_broken-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="UnicodeTestCase.test_unicode_xml_broken-expanded"><a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line">        <tt id="link-44" class="py-name"><a title="lxml.tests.test_unicode.uxml" class="py-name" href="#" onclick="return doclink('link-44', 'uxml', 'link-25');">uxml</a></tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-string">'&lt;?xml version="1.0" encoding="UTF-8"?&gt;'</tt> <tt class="py-op">+</tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line">                <tt class="py-string">'&lt;p&gt;%s&lt;/p&gt;'</tt> <tt class="py-op">%</tt> <tt id="link-45" class="py-name"><a title="lxml.tests.test_unicode.uni" class="py-name" href="#" onclick="return doclink('link-45', 'uni', 'link-23');">uni</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertRaises</tt><tt class="py-op">(</tt><tt class="py-name">ValueError</tt><tt class="py-op">,</tt> <tt id="link-46" class="py-name"><a title="lxml.etree
+lxml.sax.ElementTreeContentHandler.etree
+lxml.tests.test_elementtree.CElementTreeTestCase.etree
+lxml.tests.test_elementtree._ETreeTestCaseBase.etree
+lxml.tests.test_elementtree._XMLPullParserTest.etree
+lxml.tests.test_io._IOTestCaseBase.etree" class="py-name" href="#" onclick="return doclink('link-46', 'etree', 'link-9');">etree</a></tt><tt class="py-op">.</tt><tt id="link-47" class="py-name"><a title="lxml.etree.XML
+lxml.objectify.XML
+lxml.tests.test_objectify.ObjectifyTestCase.XML
+lxml.tests.test_pyclasslookup.PyClassLookupTestCase.XML" class="py-name" href="#" onclick="return doclink('link-47', 'XML', 'link-34');">XML</a></tt><tt class="py-op">,</tt> <tt id="link-48" class="py-name"><a title="lxml.tests.test_unicode.uxml" class="py-name" href="#" onclick="return doclink('link-48', 'uxml', 'link-25');">uxml</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line"> </tt>
+<a name="UnicodeTestCase.test_unicode_tag"></a><div id="UnicodeTestCase.test_unicode_tag-def"><a name="L54"></a><tt class="py-lineno"> 54</tt> <a class="py-toggle" href="#" id="UnicodeTestCase.test_unicode_tag-toggle" onclick="return toggle('UnicodeTestCase.test_unicode_tag');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.test_unicode.UnicodeTestCase-class.html#test_unicode_tag">test_unicode_tag</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="UnicodeTestCase.test_unicode_tag-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="UnicodeTestCase.test_unicode_tag-expanded"><a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line">        <tt class="py-name">el</tt> <tt class="py-op">=</tt> <tt id="link-49" class="py-name"><a title="lxml.etree
+lxml.sax.ElementTreeContentHandler.etree
+lxml.tests.test_elementtree.CElementTreeTestCase.etree
+lxml.tests.test_elementtree._ETreeTestCaseBase.etree
+lxml.tests.test_elementtree._XMLPullParserTest.etree
+lxml.tests.test_io._IOTestCaseBase.etree" class="py-name" href="#" onclick="return doclink('link-49', 'etree', 'link-9');">etree</a></tt><tt class="py-op">.</tt><tt id="link-50" class="py-name" targets="Function lxml.etree.Element()=lxml.etree-module.html#Element,Function lxml.objectify.Element()=lxml.objectify-module.html#Element,Method lxml.tests.test_pyclasslookup.PyClassLookupTestCase.Element()=lxml.tests.test_pyclasslookup.PyClassLookupTestCase-class.html#Element,Class xml.etree.ElementTree.Element=xml.etree.ElementTree.Element-class.html"><a title="lxml.etree.Element
+lxml.objectify.Element
+lxml.tests.test_pyclasslookup.PyClassLookupTestCase.Element
+xml.etree.ElementTree.Element" class="py-name" href="#" onclick="return doclink('link-50', 'Element', 'link-50');">Element</a></tt><tt class="py-op">(</tt><tt id="link-51" class="py-name"><a title="lxml.tests.test_unicode.uni" class="py-name" href="#" onclick="return doclink('link-51', 'uni', 'link-23');">uni</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertEqual</tt><tt class="py-op">(</tt><tt id="link-52" class="py-name"><a title="lxml.tests.test_unicode.uni" class="py-name" href="#" onclick="return doclink('link-52', 'uni', 'link-23');">uni</a></tt><tt class="py-op">,</tt> <tt class="py-name">el</tt><tt class="py-op">.</tt><tt id="link-53" class="py-name" targets="Variable lxml.etree._Comment.tag=lxml.etree._Comment-class.html#tag,Variable lxml.etree._Element.tag=lxml.etree._Element-class.html#tag,Variable lxml.etree._Entity.tag=lxml.etree._Entity-class.html#tag,Variable lxml.etree._ProcessingInstruction.tag=lxml.etree._ProcessingInstruction-class.html#tag,Function lxml.tests.test_xpathevaluator.tag()=lxml.tests.test_xpathevaluator-module.html#tag,Variable xml.etree.ElementTree.Element.tag=xml.etree.ElementTree.Element-class.html#tag"><a title="lxml.etree._Comment.tag
+lxml.etree._Element.tag
+lxml.etree._Entity.tag
+lxml.etree._ProcessingInstruction.tag
+lxml.tests.test_xpathevaluator.tag
+xml.etree.ElementTree.Element.tag" class="py-name" href="#" onclick="return doclink('link-53', 'tag', 'link-53');">tag</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line"> </tt>
+<a name="UnicodeTestCase.test_unicode_tag_invalid"></a><div id="UnicodeTestCase.test_unicode_tag_invalid-def"><a name="L58"></a><tt class="py-lineno"> 58</tt> <a class="py-toggle" href="#" id="UnicodeTestCase.test_unicode_tag_invalid-toggle" onclick="return toggle('UnicodeTestCase.test_unicode_tag_invalid');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.test_unicode.UnicodeTestCase-class.html#test_unicode_tag_invalid">test_unicode_tag_invalid</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="UnicodeTestCase.test_unicode_tag_invalid-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="UnicodeTestCase.test_unicode_tag_invalid-expanded"><a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line">        <tt class="py-comment"># sadly, Klingon is not well-formed</tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertRaises</tt><tt class="py-op">(</tt><tt class="py-name">ValueError</tt><tt class="py-op">,</tt> <tt id="link-54" class="py-name"><a title="lxml.etree
+lxml.sax.ElementTreeContentHandler.etree
+lxml.tests.test_elementtree.CElementTreeTestCase.etree
+lxml.tests.test_elementtree._ETreeTestCaseBase.etree
+lxml.tests.test_elementtree._XMLPullParserTest.etree
+lxml.tests.test_io._IOTestCaseBase.etree" class="py-name" href="#" onclick="return doclink('link-54', 'etree', 'link-9');">etree</a></tt><tt class="py-op">.</tt><tt id="link-55" class="py-name"><a title="lxml.etree.Element
+lxml.objectify.Element
+lxml.tests.test_pyclasslookup.PyClassLookupTestCase.Element
+xml.etree.ElementTree.Element" class="py-name" href="#" onclick="return doclink('link-55', 'Element', 'link-50');">Element</a></tt><tt class="py-op">,</tt> <tt id="link-56" class="py-name"><a title="lxml.tests.test_unicode.invalid_tag" class="py-name" href="#" onclick="return doclink('link-56', 'invalid_tag', 'link-20');">invalid_tag</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line"> </tt>
+<a name="UnicodeTestCase.test_unicode_nstag"></a><div id="UnicodeTestCase.test_unicode_nstag-def"><a name="L62"></a><tt class="py-lineno"> 62</tt> <a class="py-toggle" href="#" id="UnicodeTestCase.test_unicode_nstag-toggle" onclick="return toggle('UnicodeTestCase.test_unicode_nstag');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.test_unicode.UnicodeTestCase-class.html#test_unicode_nstag">test_unicode_nstag</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="UnicodeTestCase.test_unicode_nstag-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="UnicodeTestCase.test_unicode_nstag-expanded"><a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line">        <tt id="link-57" class="py-name"><a title="lxml.etree._Comment.tag
+lxml.etree._Element.tag
+lxml.etree._Entity.tag
+lxml.etree._ProcessingInstruction.tag
+lxml.tests.test_xpathevaluator.tag
+xml.etree.ElementTree.Element.tag" class="py-name" href="#" onclick="return doclink('link-57', 'tag', 'link-53');">tag</a></tt> <tt class="py-op">=</tt> <tt class="py-string">"{http://abc/}%s"</tt> <tt class="py-op">%</tt> <tt id="link-58" class="py-name"><a title="lxml.tests.test_unicode.uni" class="py-name" href="#" onclick="return doclink('link-58', 'uni', 'link-23');">uni</a></tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line">        <tt class="py-name">el</tt> <tt class="py-op">=</tt> <tt id="link-59" class="py-name"><a title="lxml.etree
+lxml.sax.ElementTreeContentHandler.etree
+lxml.tests.test_elementtree.CElementTreeTestCase.etree
+lxml.tests.test_elementtree._ETreeTestCaseBase.etree
+lxml.tests.test_elementtree._XMLPullParserTest.etree
+lxml.tests.test_io._IOTestCaseBase.etree" class="py-name" href="#" onclick="return doclink('link-59', 'etree', 'link-9');">etree</a></tt><tt class="py-op">.</tt><tt id="link-60" class="py-name"><a title="lxml.etree.Element
+lxml.objectify.Element
+lxml.tests.test_pyclasslookup.PyClassLookupTestCase.Element
+xml.etree.ElementTree.Element" class="py-name" href="#" onclick="return doclink('link-60', 'Element', 'link-50');">Element</a></tt><tt class="py-op">(</tt><tt id="link-61" class="py-name"><a title="lxml.etree._Comment.tag
+lxml.etree._Element.tag
+lxml.etree._Entity.tag
+lxml.etree._ProcessingInstruction.tag
+lxml.tests.test_xpathevaluator.tag
+xml.etree.ElementTree.Element.tag" class="py-name" href="#" onclick="return doclink('link-61', 'tag', 'link-53');">tag</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertEqual</tt><tt class="py-op">(</tt><tt id="link-62" class="py-name"><a title="lxml.etree._Comment.tag
+lxml.etree._Element.tag
+lxml.etree._Entity.tag
+lxml.etree._ProcessingInstruction.tag
+lxml.tests.test_xpathevaluator.tag
+xml.etree.ElementTree.Element.tag" class="py-name" href="#" onclick="return doclink('link-62', 'tag', 'link-53');">tag</a></tt><tt class="py-op">,</tt> <tt class="py-name">el</tt><tt class="py-op">.</tt><tt id="link-63" class="py-name"><a title="lxml.etree._Comment.tag
+lxml.etree._Element.tag
+lxml.etree._Entity.tag
+lxml.etree._ProcessingInstruction.tag
+lxml.tests.test_xpathevaluator.tag
+xml.etree.ElementTree.Element.tag" class="py-name" href="#" onclick="return doclink('link-63', 'tag', 'link-53');">tag</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line"> </tt>
+<a name="UnicodeTestCase.test_unicode_ns_invalid"></a><div id="UnicodeTestCase.test_unicode_ns_invalid-def"><a name="L67"></a><tt class="py-lineno"> 67</tt> <a class="py-toggle" href="#" id="UnicodeTestCase.test_unicode_ns_invalid-toggle" onclick="return toggle('UnicodeTestCase.test_unicode_ns_invalid');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.test_unicode.UnicodeTestCase-class.html#test_unicode_ns_invalid">test_unicode_ns_invalid</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="UnicodeTestCase.test_unicode_ns_invalid-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="UnicodeTestCase.test_unicode_ns_invalid-expanded"><a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line">        <tt class="py-comment"># namespace URIs must conform to RFC 3986</tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line">        <tt id="link-64" class="py-name"><a title="lxml.etree._Comment.tag
+lxml.etree._Element.tag
+lxml.etree._Entity.tag
+lxml.etree._ProcessingInstruction.tag
+lxml.tests.test_xpathevaluator.tag
+xml.etree.ElementTree.Element.tag" class="py-name" href="#" onclick="return doclink('link-64', 'tag', 'link-53');">tag</a></tt> <tt class="py-op">=</tt> <tt class="py-string">"{http://%s/}abc"</tt> <tt class="py-op">%</tt> <tt id="link-65" class="py-name"><a title="lxml.tests.test_unicode.uni" class="py-name" href="#" onclick="return doclink('link-65', 'uni', 'link-23');">uni</a></tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertRaises</tt><tt class="py-op">(</tt><tt class="py-name">ValueError</tt><tt class="py-op">,</tt> <tt id="link-66" class="py-name"><a title="lxml.etree
+lxml.sax.ElementTreeContentHandler.etree
+lxml.tests.test_elementtree.CElementTreeTestCase.etree
+lxml.tests.test_elementtree._ETreeTestCaseBase.etree
+lxml.tests.test_elementtree._XMLPullParserTest.etree
+lxml.tests.test_io._IOTestCaseBase.etree" class="py-name" href="#" onclick="return doclink('link-66', 'etree', 'link-9');">etree</a></tt><tt class="py-op">.</tt><tt id="link-67" class="py-name"><a title="lxml.etree.Element
+lxml.objectify.Element
+lxml.tests.test_pyclasslookup.PyClassLookupTestCase.Element
+xml.etree.ElementTree.Element" class="py-name" href="#" onclick="return doclink('link-67', 'Element', 'link-50');">Element</a></tt><tt class="py-op">,</tt> <tt id="link-68" class="py-name"><a title="lxml.etree._Comment.tag
+lxml.etree._Element.tag
+lxml.etree._Entity.tag
+lxml.etree._ProcessingInstruction.tag
+lxml.tests.test_xpathevaluator.tag
+xml.etree.ElementTree.Element.tag" class="py-name" href="#" onclick="return doclink('link-68', 'tag', 'link-53');">tag</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line"> </tt>
+<a name="UnicodeTestCase.test_unicode_nstag_invalid"></a><div id="UnicodeTestCase.test_unicode_nstag_invalid-def"><a name="L72"></a><tt class="py-lineno"> 72</tt> <a class="py-toggle" href="#" id="UnicodeTestCase.test_unicode_nstag_invalid-toggle" onclick="return toggle('UnicodeTestCase.test_unicode_nstag_invalid');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.test_unicode.UnicodeTestCase-class.html#test_unicode_nstag_invalid">test_unicode_nstag_invalid</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="UnicodeTestCase.test_unicode_nstag_invalid-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="UnicodeTestCase.test_unicode_nstag_invalid-expanded"><a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">        <tt class="py-comment"># sadly, Klingon is not well-formed</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line">        <tt id="link-69" class="py-name"><a title="lxml.etree._Comment.tag
+lxml.etree._Element.tag
+lxml.etree._Entity.tag
+lxml.etree._ProcessingInstruction.tag
+lxml.tests.test_xpathevaluator.tag
+xml.etree.ElementTree.Element.tag" class="py-name" href="#" onclick="return doclink('link-69', 'tag', 'link-53');">tag</a></tt> <tt class="py-op">=</tt> <tt class="py-string">"{http://abc/}%s"</tt> <tt class="py-op">%</tt> <tt id="link-70" class="py-name"><a title="lxml.tests.test_unicode.invalid_tag" class="py-name" href="#" onclick="return doclink('link-70', 'invalid_tag', 'link-20');">invalid_tag</a></tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertRaises</tt><tt class="py-op">(</tt><tt class="py-name">ValueError</tt><tt class="py-op">,</tt> <tt id="link-71" class="py-name"><a title="lxml.etree
+lxml.sax.ElementTreeContentHandler.etree
+lxml.tests.test_elementtree.CElementTreeTestCase.etree
+lxml.tests.test_elementtree._ETreeTestCaseBase.etree
+lxml.tests.test_elementtree._XMLPullParserTest.etree
+lxml.tests.test_io._IOTestCaseBase.etree" class="py-name" href="#" onclick="return doclink('link-71', 'etree', 'link-9');">etree</a></tt><tt class="py-op">.</tt><tt id="link-72" class="py-name"><a title="lxml.etree.Element
+lxml.objectify.Element
+lxml.tests.test_pyclasslookup.PyClassLookupTestCase.Element
+xml.etree.ElementTree.Element" class="py-name" href="#" onclick="return doclink('link-72', 'Element', 'link-50');">Element</a></tt><tt class="py-op">,</tt> <tt id="link-73" class="py-name"><a title="lxml.etree._Comment.tag
+lxml.etree._Element.tag
+lxml.etree._Entity.tag
+lxml.etree._ProcessingInstruction.tag
+lxml.tests.test_xpathevaluator.tag
+xml.etree.ElementTree.Element.tag" class="py-name" href="#" onclick="return doclink('link-73', 'tag', 'link-53');">tag</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line"> </tt>
+<a name="UnicodeTestCase.test_unicode_qname"></a><div id="UnicodeTestCase.test_unicode_qname-def"><a name="L77"></a><tt class="py-lineno"> 77</tt> <a class="py-toggle" href="#" id="UnicodeTestCase.test_unicode_qname-toggle" onclick="return toggle('UnicodeTestCase.test_unicode_qname');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.test_unicode.UnicodeTestCase-class.html#test_unicode_qname">test_unicode_qname</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="UnicodeTestCase.test_unicode_qname-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="UnicodeTestCase.test_unicode_qname-expanded"><a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line">        <tt id="link-74" class="py-name" targets="Function lxml.tests.selftest.qname()=lxml.tests.selftest-module.html#qname,Function lxml.tests.selftest2.qname()=lxml.tests.selftest2-module.html#qname"><a title="lxml.tests.selftest.qname
+lxml.tests.selftest2.qname" class="py-name" href="#" onclick="return doclink('link-74', 'qname', 'link-74');">qname</a></tt> <tt class="py-op">=</tt> <tt id="link-75" class="py-name"><a title="lxml.etree
+lxml.sax.ElementTreeContentHandler.etree
+lxml.tests.test_elementtree.CElementTreeTestCase.etree
+lxml.tests.test_elementtree._ETreeTestCaseBase.etree
+lxml.tests.test_elementtree._XMLPullParserTest.etree
+lxml.tests.test_io._IOTestCaseBase.etree" class="py-name" href="#" onclick="return doclink('link-75', 'etree', 'link-9');">etree</a></tt><tt class="py-op">.</tt><tt id="link-76" class="py-name" targets="Class lxml.etree.QName=lxml.etree.QName-class.html,Class xml.etree.ElementTree.QName=xml.etree.ElementTree.QName-class.html"><a title="lxml.etree.QName
+xml.etree.ElementTree.QName" class="py-name" href="#" onclick="return doclink('link-76', 'QName', 'link-76');">QName</a></tt><tt class="py-op">(</tt><tt id="link-77" class="py-name"><a title="lxml.tests.test_unicode.uni" class="py-name" href="#" onclick="return doclink('link-77', 'uni', 'link-23');">uni</a></tt><tt class="py-op">,</tt> <tt id="link-78" class="py-name"><a title="lxml.tests.test_unicode.uni" class="py-name" href="#" onclick="return doclink('link-78', 'uni', 'link-23');">uni</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line">        <tt id="link-79" class="py-name"><a title="lxml.etree._Comment.tag
+lxml.etree._Element.tag
+lxml.etree._Entity.tag
+lxml.etree._ProcessingInstruction.tag
+lxml.tests.test_xpathevaluator.tag
+xml.etree.ElementTree.Element.tag" class="py-name" href="#" onclick="return doclink('link-79', 'tag', 'link-53');">tag</a></tt> <tt class="py-op">=</tt> <tt class="py-string">"{%s}%s"</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt id="link-80" class="py-name"><a title="lxml.tests.test_unicode.uni" class="py-name" href="#" onclick="return doclink('link-80', 'uni', 'link-23');">uni</a></tt><tt class="py-op">,</tt> <tt id="link-81" class="py-name"><a title="lxml.tests.test_unicode.uni" class="py-name" href="#" onclick="return doclink('link-81', 'uni', 'link-23');">uni</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertEqual</tt><tt class="py-op">(</tt><tt id="link-82" class="py-name"><a title="lxml.tests.selftest.qname
+lxml.tests.selftest2.qname" class="py-name" href="#" onclick="return doclink('link-82', 'qname', 'link-74');">qname</a></tt><tt class="py-op">.</tt><tt id="link-83" class="py-name"><a title="lxml.etree.QName.text
+lxml.etree._Element.text
+lxml.etree._Entity.text
+lxml.objectify.ObjectifiedElement.text
+xml.etree.ElementTree.Element.text" class="py-name" href="#" onclick="return doclink('link-83', 'text', 'link-37');">text</a></tt><tt class="py-op">,</tt> <tt id="link-84" class="py-name"><a title="lxml.etree._Comment.tag
+lxml.etree._Element.tag
+lxml.etree._Entity.tag
+lxml.etree._ProcessingInstruction.tag
+lxml.tests.test_xpathevaluator.tag
+xml.etree.ElementTree.Element.tag" class="py-name" href="#" onclick="return doclink('link-84', 'tag', 'link-53');">tag</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertEqual</tt><tt class="py-op">(</tt><tt class="py-name">unicode</tt><tt class="py-op">(</tt><tt id="link-85" class="py-name"><a title="lxml.tests.selftest.qname
+lxml.tests.selftest2.qname" class="py-name" href="#" onclick="return doclink('link-85', 'qname', 'link-74');">qname</a></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt id="link-86" class="py-name"><a title="lxml.etree._Comment.tag
+lxml.etree._Element.tag
+lxml.etree._Entity.tag
+lxml.etree._ProcessingInstruction.tag
+lxml.tests.test_xpathevaluator.tag
+xml.etree.ElementTree.Element.tag" class="py-name" href="#" onclick="return doclink('link-86', 'tag', 'link-53');">tag</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line"> </tt>
+<a name="UnicodeTestCase.test_unicode_qname_invalid"></a><div id="UnicodeTestCase.test_unicode_qname_invalid-def"><a name="L83"></a><tt class="py-lineno"> 83</tt> <a class="py-toggle" href="#" id="UnicodeTestCase.test_unicode_qname_invalid-toggle" onclick="return toggle('UnicodeTestCase.test_unicode_qname_invalid');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.test_unicode.UnicodeTestCase-class.html#test_unicode_qname_invalid">test_unicode_qname_invalid</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="UnicodeTestCase.test_unicode_qname_invalid-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="UnicodeTestCase.test_unicode_qname_invalid-expanded"><a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertRaises</tt><tt class="py-op">(</tt><tt class="py-name">ValueError</tt><tt class="py-op">,</tt> <tt id="link-87" class="py-name"><a title="lxml.etree
+lxml.sax.ElementTreeContentHandler.etree
+lxml.tests.test_elementtree.CElementTreeTestCase.etree
+lxml.tests.test_elementtree._ETreeTestCaseBase.etree
+lxml.tests.test_elementtree._XMLPullParserTest.etree
+lxml.tests.test_io._IOTestCaseBase.etree" class="py-name" href="#" onclick="return doclink('link-87', 'etree', 'link-9');">etree</a></tt><tt class="py-op">.</tt><tt id="link-88" class="py-name"><a title="lxml.etree.QName
+xml.etree.ElementTree.QName" class="py-name" href="#" onclick="return doclink('link-88', 'QName', 'link-76');">QName</a></tt><tt class="py-op">,</tt> <tt id="link-89" class="py-name"><a title="lxml.tests.test_unicode.invalid_tag" class="py-name" href="#" onclick="return doclink('link-89', 'invalid_tag', 'link-20');">invalid_tag</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line"> </tt>
+<a name="UnicodeTestCase.test_unicode_attr"></a><div id="UnicodeTestCase.test_unicode_attr-def"><a name="L86"></a><tt class="py-lineno"> 86</tt> <a class="py-toggle" href="#" id="UnicodeTestCase.test_unicode_attr-toggle" onclick="return toggle('UnicodeTestCase.test_unicode_attr');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.test_unicode.UnicodeTestCase-class.html#test_unicode_attr">test_unicode_attr</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="UnicodeTestCase.test_unicode_attr-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="UnicodeTestCase.test_unicode_attr-expanded"><a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line">        <tt class="py-name">el</tt> <tt class="py-op">=</tt> <tt id="link-90" class="py-name"><a title="lxml.etree
+lxml.sax.ElementTreeContentHandler.etree
+lxml.tests.test_elementtree.CElementTreeTestCase.etree
+lxml.tests.test_elementtree._ETreeTestCaseBase.etree
+lxml.tests.test_elementtree._XMLPullParserTest.etree
+lxml.tests.test_io._IOTestCaseBase.etree" class="py-name" href="#" onclick="return doclink('link-90', 'etree', 'link-9');">etree</a></tt><tt class="py-op">.</tt><tt id="link-91" class="py-name"><a title="lxml.etree.Element
+lxml.objectify.Element
+lxml.tests.test_pyclasslookup.PyClassLookupTestCase.Element
+xml.etree.ElementTree.Element" class="py-name" href="#" onclick="return doclink('link-91', 'Element', 'link-50');">Element</a></tt><tt class="py-op">(</tt><tt class="py-string">'foo'</tt><tt class="py-op">,</tt> <tt class="py-op">{</tt><tt class="py-string">'bar'</tt><tt class="py-op">:</tt> <tt id="link-92" class="py-name"><a title="lxml.tests.test_unicode.uni" class="py-name" href="#" onclick="return doclink('link-92', 'uni', 'link-23');">uni</a></tt><tt class="py-op">}</tt><tt class="py-op">)</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertEqual</tt><tt class="py-op">(</tt><tt id="link-93" class="py-name"><a title="lxml.tests.test_unicode.uni" class="py-name" href="#" onclick="return doclink('link-93', 'uni', 'link-23');">uni</a></tt><tt class="py-op">,</tt> <tt class="py-name">el</tt><tt class="py-op">.</tt><tt id="link-94" class="py-name" targets="Variable lxml.etree._Element.attrib=lxml.etree._Element-class.html#attrib,Variable lxml.etree._ProcessingInstruction.attrib=lxml.etree._ProcessingInstruction-class.html#attrib,Function lxml.tests.selftest2.attrib()=lxml.tests.selftest2-module.html#attrib,Variable xml.etree.ElementTree.Element.attrib=xml.etree.ElementTree.Element-class.html#attrib"><a title="lxml.etree._Element.attrib
+lxml.etree._ProcessingInstruction.attrib
+lxml.tests.selftest2.attrib
+xml.etree.ElementTree.Element.attrib" class="py-name" href="#" onclick="return doclink('link-94', 'attrib', 'link-94');">attrib</a></tt><tt class="py-op">[</tt><tt class="py-string">'bar'</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line"> </tt>
+<a name="UnicodeTestCase.test_unicode_comment"></a><div id="UnicodeTestCase.test_unicode_comment-def"><a name="L90"></a><tt class="py-lineno"> 90</tt> <a class="py-toggle" href="#" id="UnicodeTestCase.test_unicode_comment-toggle" onclick="return toggle('UnicodeTestCase.test_unicode_comment');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.test_unicode.UnicodeTestCase-class.html#test_unicode_comment">test_unicode_comment</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="UnicodeTestCase.test_unicode_comment-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="UnicodeTestCase.test_unicode_comment-expanded"><a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">        <tt class="py-name">el</tt> <tt class="py-op">=</tt> <tt id="link-95" class="py-name"><a title="lxml.etree
+lxml.sax.ElementTreeContentHandler.etree
+lxml.tests.test_elementtree.CElementTreeTestCase.etree
+lxml.tests.test_elementtree._ETreeTestCaseBase.etree
+lxml.tests.test_elementtree._XMLPullParserTest.etree
+lxml.tests.test_io._IOTestCaseBase.etree" class="py-name" href="#" onclick="return doclink('link-95', 'etree', 'link-9');">etree</a></tt><tt class="py-op">.</tt><tt id="link-96" class="py-name" targets="Function lxml.etree.Comment()=lxml.etree-module.html#Comment"><a title="lxml.etree.Comment" class="py-name" href="#" onclick="return doclink('link-96', 'Comment', 'link-96');">Comment</a></tt><tt class="py-op">(</tt><tt id="link-97" class="py-name"><a title="lxml.tests.test_unicode.uni" class="py-name" href="#" onclick="return doclink('link-97', 'uni', 'link-23');">uni</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertEqual</tt><tt class="py-op">(</tt><tt id="link-98" class="py-name"><a title="lxml.tests.test_unicode.uni" class="py-name" href="#" onclick="return doclink('link-98', 'uni', 'link-23');">uni</a></tt><tt class="py-op">,</tt> <tt class="py-name">el</tt><tt class="py-op">.</tt><tt id="link-99" class="py-name"><a title="lxml.etree.QName.text
+lxml.etree._Element.text
+lxml.etree._Entity.text
+lxml.objectify.ObjectifiedElement.text
+xml.etree.ElementTree.Element.text" class="py-name" href="#" onclick="return doclink('link-99', 'text', 'link-37');">text</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line"> </tt>
+<a name="UnicodeTestCase.test_unicode_repr1"></a><div id="UnicodeTestCase.test_unicode_repr1-def"><a name="L94"></a><tt class="py-lineno"> 94</tt> <a class="py-toggle" href="#" id="UnicodeTestCase.test_unicode_repr1-toggle" onclick="return toggle('UnicodeTestCase.test_unicode_repr1');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.test_unicode.UnicodeTestCase-class.html#test_unicode_repr1">test_unicode_repr1</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="UnicodeTestCase.test_unicode_repr1-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="UnicodeTestCase.test_unicode_repr1-expanded"><a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line">        <tt class="py-name">x</tt> <tt class="py-op">=</tt> <tt id="link-100" class="py-name"><a title="lxml.etree
+lxml.sax.ElementTreeContentHandler.etree
+lxml.tests.test_elementtree.CElementTreeTestCase.etree
+lxml.tests.test_elementtree._ETreeTestCaseBase.etree
+lxml.tests.test_elementtree._XMLPullParserTest.etree
+lxml.tests.test_io._IOTestCaseBase.etree" class="py-name" href="#" onclick="return doclink('link-100', 'etree', 'link-9');">etree</a></tt><tt class="py-op">.</tt><tt id="link-101" class="py-name"><a title="lxml.etree.Element
+lxml.objectify.Element
+lxml.tests.test_pyclasslookup.PyClassLookupTestCase.Element
+xml.etree.ElementTree.Element" class="py-name" href="#" onclick="return doclink('link-101', 'Element', 'link-50');">Element</a></tt><tt class="py-op">(</tt><tt id="link-102" class="py-name"><a title="lxml.tests.common_imports._str" class="py-name" href="#" onclick="return doclink('link-102', '_str', 'link-13');">_str</a></tt><tt class="py-op">(</tt><tt class="py-string">'&#229;'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">        <tt class="py-comment"># must not raise UnicodeEncodeError</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line">        <tt class="py-name">repr</tt><tt class="py-op">(</tt><tt class="py-name">x</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line"> </tt>
+<a name="UnicodeTestCase.test_unicode_repr2"></a><div id="UnicodeTestCase.test_unicode_repr2-def"><a name="L99"></a><tt class="py-lineno"> 99</tt> <a class="py-toggle" href="#" id="UnicodeTestCase.test_unicode_repr2-toggle" onclick="return toggle('UnicodeTestCase.test_unicode_repr2');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.test_unicode.UnicodeTestCase-class.html#test_unicode_repr2">test_unicode_repr2</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="UnicodeTestCase.test_unicode_repr2-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="UnicodeTestCase.test_unicode_repr2-expanded"><a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line">        <tt class="py-name">x</tt> <tt class="py-op">=</tt> <tt id="link-103" class="py-name"><a title="lxml.etree
+lxml.sax.ElementTreeContentHandler.etree
+lxml.tests.test_elementtree.CElementTreeTestCase.etree
+lxml.tests.test_elementtree._ETreeTestCaseBase.etree
+lxml.tests.test_elementtree._XMLPullParserTest.etree
+lxml.tests.test_io._IOTestCaseBase.etree" class="py-name" href="#" onclick="return doclink('link-103', 'etree', 'link-9');">etree</a></tt><tt class="py-op">.</tt><tt id="link-104" class="py-name"><a title="lxml.etree.Comment" class="py-name" href="#" onclick="return doclink('link-104', 'Comment', 'link-96');">Comment</a></tt><tt class="py-op">(</tt><tt id="link-105" class="py-name"><a title="lxml.tests.common_imports._str" class="py-name" href="#" onclick="return doclink('link-105', '_str', 'link-13');">_str</a></tt><tt class="py-op">(</tt><tt class="py-string">'&#246;'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line">        <tt class="py-name">repr</tt><tt class="py-op">(</tt><tt class="py-name">x</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line"> </tt>
+<a name="UnicodeTestCase.test_unicode_repr3"></a><div id="UnicodeTestCase.test_unicode_repr3-def"><a name="L103"></a><tt class="py-lineno">103</tt> <a class="py-toggle" href="#" id="UnicodeTestCase.test_unicode_repr3-toggle" onclick="return toggle('UnicodeTestCase.test_unicode_repr3');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.test_unicode.UnicodeTestCase-class.html#test_unicode_repr3">test_unicode_repr3</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="UnicodeTestCase.test_unicode_repr3-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="UnicodeTestCase.test_unicode_repr3-expanded"><a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">        <tt class="py-name">x</tt> <tt class="py-op">=</tt> <tt id="link-106" class="py-name"><a title="lxml.etree
+lxml.sax.ElementTreeContentHandler.etree
+lxml.tests.test_elementtree.CElementTreeTestCase.etree
+lxml.tests.test_elementtree._ETreeTestCaseBase.etree
+lxml.tests.test_elementtree._XMLPullParserTest.etree
+lxml.tests.test_io._IOTestCaseBase.etree" class="py-name" href="#" onclick="return doclink('link-106', 'etree', 'link-9');">etree</a></tt><tt class="py-op">.</tt><tt class="py-name">ProcessingInstruction</tt><tt class="py-op">(</tt><tt id="link-107" class="py-name"><a title="lxml.tests.common_imports._str" class="py-name" href="#" onclick="return doclink('link-107', '_str', 'link-13');">_str</a></tt><tt class="py-op">(</tt><tt class="py-string">'&#197;'</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt id="link-108" class="py-name"><a title="lxml.tests.common_imports._str" class="py-name" href="#" onclick="return doclink('link-108', '_str', 'link-13');">_str</a></tt><tt class="py-op">(</tt><tt class="py-string">'\u0131'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line">        <tt class="py-name">repr</tt><tt class="py-op">(</tt><tt class="py-name">x</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line"> </tt>
+<a name="UnicodeTestCase.test_unicode_repr4"></a><div id="UnicodeTestCase.test_unicode_repr4-def"><a name="L107"></a><tt class="py-lineno">107</tt> <a class="py-toggle" href="#" id="UnicodeTestCase.test_unicode_repr4-toggle" onclick="return toggle('UnicodeTestCase.test_unicode_repr4');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.test_unicode.UnicodeTestCase-class.html#test_unicode_repr4">test_unicode_repr4</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="UnicodeTestCase.test_unicode_repr4-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="UnicodeTestCase.test_unicode_repr4-expanded"><a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line">        <tt class="py-name">x</tt> <tt class="py-op">=</tt> <tt id="link-109" class="py-name"><a title="lxml.etree
+lxml.sax.ElementTreeContentHandler.etree
+lxml.tests.test_elementtree.CElementTreeTestCase.etree
+lxml.tests.test_elementtree._ETreeTestCaseBase.etree
+lxml.tests.test_elementtree._XMLPullParserTest.etree
+lxml.tests.test_io._IOTestCaseBase.etree" class="py-name" href="#" onclick="return doclink('link-109', 'etree', 'link-9');">etree</a></tt><tt class="py-op">.</tt><tt id="link-110" class="py-name" targets="Function lxml.etree.Entity()=lxml.etree-module.html#Entity"><a title="lxml.etree.Entity" class="py-name" href="#" onclick="return doclink('link-110', 'Entity', 'link-110');">Entity</a></tt><tt class="py-op">(</tt><tt id="link-111" class="py-name"><a title="lxml.tests.common_imports._str" class="py-name" href="#" onclick="return doclink('link-111', '_str', 'link-13');">_str</a></tt><tt class="py-op">(</tt><tt class="py-string">'&#228;'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line">        <tt class="py-name">repr</tt><tt class="py-op">(</tt><tt class="py-name">x</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line"> </tt>
+<a name="UnicodeTestCase.test_unicode_text"></a><div id="UnicodeTestCase.test_unicode_text-def"><a name="L111"></a><tt class="py-lineno">111</tt> <a class="py-toggle" href="#" id="UnicodeTestCase.test_unicode_text-toggle" onclick="return toggle('UnicodeTestCase.test_unicode_text');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.test_unicode.UnicodeTestCase-class.html#test_unicode_text">test_unicode_text</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="UnicodeTestCase.test_unicode_text-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="UnicodeTestCase.test_unicode_text-expanded"><a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line">        <tt class="py-name">e</tt> <tt class="py-op">=</tt> <tt id="link-112" class="py-name"><a title="lxml.etree
+lxml.sax.ElementTreeContentHandler.etree
+lxml.tests.test_elementtree.CElementTreeTestCase.etree
+lxml.tests.test_elementtree._ETreeTestCaseBase.etree
+lxml.tests.test_elementtree._XMLPullParserTest.etree
+lxml.tests.test_io._IOTestCaseBase.etree" class="py-name" href="#" onclick="return doclink('link-112', 'etree', 'link-9');">etree</a></tt><tt class="py-op">.</tt><tt id="link-113" class="py-name"><a title="lxml.etree.Element
+lxml.objectify.Element
+lxml.tests.test_pyclasslookup.PyClassLookupTestCase.Element
+xml.etree.ElementTree.Element" class="py-name" href="#" onclick="return doclink('link-113', 'Element', 'link-50');">Element</a></tt><tt class="py-op">(</tt><tt class="py-string">'e'</tt><tt class="py-op">)</tt> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line"> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line">        <tt class="py-keyword">def</tt> <tt class="py-def-name">settext</tt><tt class="py-op">(</tt><tt class="py-param">text</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line">            <tt class="py-name">e</tt><tt class="py-op">.</tt><tt id="link-114" class="py-name"><a title="lxml.etree.QName.text
+lxml.etree._Element.text
+lxml.etree._Entity.text
+lxml.objectify.ObjectifiedElement.text
+xml.etree.ElementTree.Element.text" class="py-name" href="#" onclick="return doclink('link-114', 'text', 'link-37');">text</a></tt> <tt class="py-op">=</tt> <tt id="link-115" class="py-name"><a title="lxml.etree.QName.text
+lxml.etree._Element.text
+lxml.etree._Entity.text
+lxml.objectify.ObjectifiedElement.text
+xml.etree.ElementTree.Element.text" class="py-name" href="#" onclick="return doclink('link-115', 'text', 'link-37');">text</a></tt> </tt>
+</div><a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line"> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertRaises</tt><tt class="py-op">(</tt><tt class="py-name">ValueError</tt><tt class="py-op">,</tt> <tt class="py-name">settext</tt><tt class="py-op">,</tt> <tt id="link-116" class="py-name"><a title="lxml.tests.common_imports._str" class="py-name" href="#" onclick="return doclink('link-116', '_str', 'link-13');">_str</a></tt><tt class="py-op">(</tt><tt class="py-string">'ab\ufffe'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertRaises</tt><tt class="py-op">(</tt><tt class="py-name">ValueError</tt><tt class="py-op">,</tt> <tt class="py-name">settext</tt><tt class="py-op">,</tt> <tt id="link-117" class="py-name"><a title="lxml.tests.common_imports._str" class="py-name" href="#" onclick="return doclink('link-117', '_str', 'link-13');">_str</a></tt><tt class="py-op">(</tt><tt class="py-string">'&#246;\ffff'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertRaises</tt><tt class="py-op">(</tt><tt class="py-name">ValueError</tt><tt class="py-op">,</tt> <tt class="py-name">settext</tt><tt class="py-op">,</tt> <tt id="link-118" class="py-name"><a title="lxml.tests.common_imports._str" class="py-name" href="#" onclick="return doclink('link-118', '_str', 'link-13');">_str</a></tt><tt class="py-op">(</tt><tt class="py-string">'\u0123\ud800'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertRaises</tt><tt class="py-op">(</tt><tt class="py-name">ValueError</tt><tt class="py-op">,</tt> <tt class="py-name">settext</tt><tt class="py-op">,</tt> <tt id="link-119" class="py-name"><a title="lxml.tests.common_imports._str" class="py-name" href="#" onclick="return doclink('link-119', '_str', 'link-13');">_str</a></tt><tt class="py-op">(</tt><tt class="py-string">'x\ud8ff'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertRaises</tt><tt class="py-op">(</tt><tt class="py-name">ValueError</tt><tt class="py-op">,</tt> <tt class="py-name">settext</tt><tt class="py-op">,</tt> <tt id="link-120" class="py-name"><a title="lxml.tests.common_imports._str" class="py-name" href="#" onclick="return doclink('link-120', '_str', 'link-13');">_str</a></tt><tt class="py-op">(</tt><tt class="py-string">'\U00010000\udfff'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertRaises</tt><tt class="py-op">(</tt><tt class="py-name">ValueError</tt><tt class="py-op">,</tt> <tt class="py-name">settext</tt><tt class="py-op">,</tt> <tt id="link-121" class="py-name"><a title="lxml.tests.common_imports._str" class="py-name" href="#" onclick="return doclink('link-121', '_str', 'link-13');">_str</a></tt><tt class="py-op">(</tt><tt class="py-string">'abd\x00def'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line">        <tt class="py-comment"># should not Raise</tt> </tt>
+<a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line">        <tt class="py-name">settext</tt><tt class="py-op">(</tt><tt id="link-122" class="py-name"><a title="lxml.tests.common_imports._str" class="py-name" href="#" onclick="return doclink('link-122', '_str', 'link-13');">_str</a></tt><tt class="py-op">(</tt><tt class="py-string">'\ud7ff\ue000\U00010000\U0010FFFF&#228;&#246;as'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line"> </tt>
+<a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">char_val</tt> <tt class="py-keyword">in</tt> <tt class="py-name">range</tt><tt class="py-op">(</tt><tt class="py-number">0xD800</tt><tt class="py-op">,</tt> <tt class="py-number">0xDFFF</tt><tt class="py-op">+</tt><tt class="py-number">1</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertRaises</tt><tt class="py-op">(</tt><tt class="py-name">ValueError</tt><tt class="py-op">,</tt> <tt class="py-name">settext</tt><tt class="py-op">,</tt> <tt class="py-string">'abc'</tt> <tt class="py-op">+</tt> <tt class="py-name">_chr</tt><tt class="py-op">(</tt><tt class="py-name">char_val</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertRaises</tt><tt class="py-op">(</tt><tt class="py-name">ValueError</tt><tt class="py-op">,</tt> <tt class="py-name">settext</tt><tt class="py-op">,</tt> <tt class="py-name">_chr</tt><tt class="py-op">(</tt><tt class="py-name">char_val</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertRaises</tt><tt class="py-op">(</tt><tt class="py-name">ValueError</tt><tt class="py-op">,</tt> <tt class="py-name">settext</tt><tt class="py-op">,</tt> <tt class="py-name">_chr</tt><tt class="py-op">(</tt><tt class="py-name">char_val</tt><tt class="py-op">)</tt> <tt class="py-op">+</tt> <tt class="py-string">'abc'</tt><tt class="py-op">)</tt> </tt>
+<a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line"> </tt>
+<a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertRaises</tt><tt class="py-op">(</tt><tt class="py-name">ValueError</tt><tt class="py-op">,</tt> <tt class="py-name">settext</tt><tt class="py-op">,</tt> <tt id="link-123" class="py-name"><a title="lxml.tests.common_imports._bytes" class="py-name" href="#" onclick="return doclink('link-123', '_bytes', 'link-14');">_bytes</a></tt><tt class="py-op">(</tt><tt class="py-string">'\xe4'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertRaises</tt><tt class="py-op">(</tt><tt class="py-name">ValueError</tt><tt class="py-op">,</tt> <tt class="py-name">settext</tt><tt class="py-op">,</tt> <tt id="link-124" class="py-name"><a title="lxml.tests.common_imports._bytes" class="py-name" href="#" onclick="return doclink('link-124', '_bytes', 'link-14');">_bytes</a></tt><tt class="py-op">(</tt><tt class="py-string">'\x80'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertRaises</tt><tt class="py-op">(</tt><tt class="py-name">ValueError</tt><tt class="py-op">,</tt> <tt class="py-name">settext</tt><tt class="py-op">,</tt> <tt id="link-125" class="py-name"><a title="lxml.tests.common_imports._bytes" class="py-name" href="#" onclick="return doclink('link-125', '_bytes', 'link-14');">_bytes</a></tt><tt class="py-op">(</tt><tt class="py-string">'\xff'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertRaises</tt><tt class="py-op">(</tt><tt class="py-name">ValueError</tt><tt class="py-op">,</tt> <tt class="py-name">settext</tt><tt class="py-op">,</tt> <tt id="link-126" class="py-name"><a title="lxml.tests.common_imports._bytes" class="py-name" href="#" onclick="return doclink('link-126', '_bytes', 'link-14');">_bytes</a></tt><tt class="py-op">(</tt><tt class="py-string">'\x08'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertRaises</tt><tt class="py-op">(</tt><tt class="py-name">ValueError</tt><tt class="py-op">,</tt> <tt class="py-name">settext</tt><tt class="py-op">,</tt> <tt id="link-127" class="py-name"><a title="lxml.tests.common_imports._bytes" class="py-name" href="#" onclick="return doclink('link-127', '_bytes', 'link-14');">_bytes</a></tt><tt class="py-op">(</tt><tt class="py-string">'\x19'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L136"></a><tt class="py-lineno">136</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertRaises</tt><tt class="py-op">(</tt><tt class="py-name">ValueError</tt><tt class="py-op">,</tt> <tt class="py-name">settext</tt><tt class="py-op">,</tt> <tt id="link-128" class="py-name"><a title="lxml.tests.common_imports._bytes" class="py-name" href="#" onclick="return doclink('link-128', '_bytes', 'link-14');">_bytes</a></tt><tt class="py-op">(</tt><tt class="py-string">'\x20\x00'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line">        <tt class="py-comment"># should not Raise</tt> </tt>
+<a name="L138"></a><tt class="py-lineno">138</tt>  <tt class="py-line">        <tt class="py-name">settext</tt><tt class="py-op">(</tt><tt id="link-129" class="py-name"><a title="lxml.tests.common_imports._bytes" class="py-name" href="#" onclick="return doclink('link-129', '_bytes', 'link-14');">_bytes</a></tt><tt class="py-op">(</tt><tt class="py-string">'\x09\x0A\x0D\x20\x60\x7f'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L139"></a><tt class="py-lineno">139</tt>  <tt class="py-line"> </tt>
+<a name="UnicodeTestCase.test_uniname"></a><div id="UnicodeTestCase.test_uniname-def"><a name="L140"></a><tt class="py-lineno">140</tt> <a class="py-toggle" href="#" id="UnicodeTestCase.test_uniname-toggle" onclick="return toggle('UnicodeTestCase.test_uniname');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.test_unicode.UnicodeTestCase-class.html#test_uniname">test_uniname</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="UnicodeTestCase.test_uniname-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="UnicodeTestCase.test_uniname-expanded"><a name="L141"></a><tt class="py-lineno">141</tt>  <tt class="py-line">        <tt id="link-130" class="py-name"><a title="lxml.etree.Element
+lxml.objectify.Element
+lxml.tests.test_pyclasslookup.PyClassLookupTestCase.Element
+xml.etree.ElementTree.Element" class="py-name" href="#" onclick="return doclink('link-130', 'Element', 'link-50');">Element</a></tt> <tt class="py-op">=</tt> <tt id="link-131" class="py-name"><a title="lxml.etree
+lxml.sax.ElementTreeContentHandler.etree
+lxml.tests.test_elementtree.CElementTreeTestCase.etree
+lxml.tests.test_elementtree._ETreeTestCaseBase.etree
+lxml.tests.test_elementtree._XMLPullParserTest.etree
+lxml.tests.test_io._IOTestCaseBase.etree" class="py-name" href="#" onclick="return doclink('link-131', 'etree', 'link-9');">etree</a></tt><tt class="py-op">.</tt><tt id="link-132" class="py-name"><a title="lxml.etree.Element
+lxml.objectify.Element
+lxml.tests.test_pyclasslookup.PyClassLookupTestCase.Element
+xml.etree.ElementTree.Element" class="py-name" href="#" onclick="return doclink('link-132', 'Element', 'link-50');">Element</a></tt> </tt>
+<a name="L142"></a><tt class="py-lineno">142</tt>  <tt class="py-line">        <tt class="py-keyword">def</tt> <tt class="py-def-name">el</tt><tt class="py-op">(</tt><tt class="py-param">name</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L143"></a><tt class="py-lineno">143</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt id="link-133" class="py-name"><a title="lxml.etree.Element
+lxml.objectify.Element
+lxml.tests.test_pyclasslookup.PyClassLookupTestCase.Element
+xml.etree.ElementTree.Element" class="py-name" href="#" onclick="return doclink('link-133', 'Element', 'link-50');">Element</a></tt><tt class="py-op">(</tt><tt id="link-134" class="py-name" targets="Variable lxml.etree.DTD.name=lxml.etree.DTD-class.html#name,Variable lxml.etree._Entity.name=lxml.etree._Entity-class.html#name,Variable lxml.html.InputMixin.name=lxml.html.InputMixin-class.html#name,Variable lxml.objectify.PyType.name=lxml.objectify.PyType-class.html#name"><a title="lxml.etree.DTD.name
+lxml.etree._Entity.name
+lxml.html.InputMixin.name
+lxml.objectify.PyType.name" class="py-name" href="#" onclick="return doclink('link-134', 'name', 'link-134');">name</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L144"></a><tt class="py-lineno">144</tt>  <tt class="py-line"> </tt>
+<a name="L145"></a><tt class="py-lineno">145</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertRaises</tt><tt class="py-op">(</tt><tt class="py-name">ValueError</tt><tt class="py-op">,</tt> <tt class="py-name">el</tt><tt class="py-op">,</tt> <tt class="py-string">':'</tt><tt class="py-op">)</tt> </tt>
+<a name="L146"></a><tt class="py-lineno">146</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertRaises</tt><tt class="py-op">(</tt><tt class="py-name">ValueError</tt><tt class="py-op">,</tt> <tt class="py-name">el</tt><tt class="py-op">,</tt> <tt class="py-string">'0a'</tt><tt class="py-op">)</tt> </tt>
+<a name="L147"></a><tt class="py-lineno">147</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertRaises</tt><tt class="py-op">(</tt><tt class="py-name">ValueError</tt><tt class="py-op">,</tt> <tt class="py-name">el</tt><tt class="py-op">,</tt> <tt id="link-135" class="py-name"><a title="lxml.tests.common_imports._str" class="py-name" href="#" onclick="return doclink('link-135', '_str', 'link-13');">_str</a></tt><tt class="py-op">(</tt><tt class="py-string">'\u203f'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L148"></a><tt class="py-lineno">148</tt>  <tt class="py-line">        <tt class="py-comment"># should not Raise</tt> </tt>
+<a name="L149"></a><tt class="py-lineno">149</tt>  <tt class="py-line">        <tt class="py-name">el</tt><tt class="py-op">(</tt><tt id="link-136" class="py-name"><a title="lxml.tests.common_imports._str" class="py-name" href="#" onclick="return doclink('link-136', '_str', 'link-13');">_str</a></tt><tt class="py-op">(</tt><tt class="py-string">'\u0132'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L150"></a><tt class="py-lineno">150</tt>  <tt class="py-line"> </tt>
+<a name="L151"></a><tt class="py-lineno">151</tt>  <tt class="py-line"> </tt>
+<a name="L152"></a><tt class="py-lineno">152</tt>  <tt class="py-line"> </tt>
+<a name="UnicodeTestCase.test_unicode_parse_stringio"></a><div id="UnicodeTestCase.test_unicode_parse_stringio-def"><a name="L153"></a><tt class="py-lineno">153</tt> <a class="py-toggle" href="#" id="UnicodeTestCase.test_unicode_parse_stringio-toggle" onclick="return toggle('UnicodeTestCase.test_unicode_parse_stringio');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.test_unicode.UnicodeTestCase-class.html#test_unicode_parse_stringio">test_unicode_parse_stringio</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="UnicodeTestCase.test_unicode_parse_stringio-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="UnicodeTestCase.test_unicode_parse_stringio-expanded"><a name="L154"></a><tt class="py-lineno">154</tt>  <tt class="py-line">        <tt class="py-name">el</tt> <tt class="py-op">=</tt> <tt id="link-137" class="py-name"><a title="lxml.etree
+lxml.sax.ElementTreeContentHandler.etree
+lxml.tests.test_elementtree.CElementTreeTestCase.etree
+lxml.tests.test_elementtree._ETreeTestCaseBase.etree
+lxml.tests.test_elementtree._XMLPullParserTest.etree
+lxml.tests.test_io._IOTestCaseBase.etree" class="py-name" href="#" onclick="return doclink('link-137', 'etree', 'link-9');">etree</a></tt><tt class="py-op">.</tt><tt id="link-138" class="py-name" targets="Method lxml.etree._ElementTree.parse()=lxml.etree._ElementTree-class.html#parse,Function lxml.etree.parse()=lxml.etree-module.html#parse,Function lxml.html.ElementSoup.parse()=lxml.html.ElementSoup-module.html#parse,Function lxml.html.html5parser.parse()=lxml.html.html5parser-module.html#parse,Function lxml.html.soupparser.parse()=lxml.html.soupparser-module.html#parse,Function lxml.objectify.parse()=lxml.objectify-module.html#parse,Method lxml.tests.common_imports.HelperTestCase.parse()=lxml.tests.common_imports.HelperTestCase-class.html#parse"><a title="lxml.etree._ElementTree.parse
+lxml.etree.parse
+lxml.html.ElementSoup.parse
+lxml.html.html5parser.parse
+lxml.html.soupparser.parse
+lxml.objectify.parse
+lxml.tests.common_imports.HelperTestCase.parse" class="py-name" href="#" onclick="return doclink('link-138', 'parse', 'link-138');">parse</a></tt><tt class="py-op">(</tt><tt class="py-name">StringIO</tt><tt class="py-op">(</tt><tt class="py-string">'&lt;p&gt;%s&lt;/p&gt;'</tt> <tt class="py-op">%</tt> <tt id="link-139" class="py-name"><a title="lxml.tests.test_unicode.uni" class="py-name" href="#" onclick="return doclink('link-139', 'uni', 'link-23');">uni</a></tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-140" class="py-name" targets="Method lxml.etree._ElementTree.getroot()=lxml.etree._ElementTree-class.html#getroot"><a title="lxml.etree._ElementTree.getroot" class="py-name" href="#" onclick="return doclink('link-140', 'getroot', 'link-140');">getroot</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L155"></a><tt class="py-lineno">155</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertEqual</tt><tt class="py-op">(</tt><tt id="link-141" class="py-name"><a title="lxml.tests.test_unicode.uni" class="py-name" href="#" onclick="return doclink('link-141', 'uni', 'link-23');">uni</a></tt><tt class="py-op">,</tt> <tt class="py-name">el</tt><tt class="py-op">.</tt><tt id="link-142" class="py-name"><a title="lxml.etree.QName.text
+lxml.etree._Element.text
+lxml.etree._Entity.text
+lxml.objectify.ObjectifiedElement.text
+xml.etree.ElementTree.Element.text" class="py-name" href="#" onclick="return doclink('link-142', 'text', 'link-37');">text</a></tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L156"></a><tt class="py-lineno">156</tt>  <tt class="py-line"> </tt>
+<a name="L157"></a><tt class="py-lineno">157</tt>  <tt class="py-line"><tt class="py-comment">##     def test_parse_fileobject_unicode(self):</tt> </tt>
+<a name="L158"></a><tt class="py-lineno">158</tt>  <tt class="py-line"><tt class="py-comment">##         # parse unicode from unamed file object (not support by ElementTree)</tt> </tt>
+<a name="L159"></a><tt class="py-lineno">159</tt>  <tt class="py-line"><tt class="py-comment">##         f = SillyFileLike(uxml)</tt> </tt>
+<a name="L160"></a><tt class="py-lineno">160</tt>  <tt class="py-line"><tt class="py-comment">##         root = etree.parse(f).getroot()</tt> </tt>
+<a name="L161"></a><tt class="py-lineno">161</tt>  <tt class="py-line"><tt class="py-comment">##         self.assertEqual(unicode(etree.tostring(root, 'UTF-8'), 'UTF-8'),</tt> </tt>
+<a name="L162"></a><tt class="py-lineno">162</tt>  <tt class="py-line"><tt class="py-comment">##                           uxml)</tt> </tt>
+<a name="L163"></a><tt class="py-lineno">163</tt>  <tt class="py-line"> </tt>
+<a name="L164"></a><tt class="py-lineno">164</tt>  <tt class="py-line"> </tt>
+<a name="EncodingsTestCase"></a><div id="EncodingsTestCase-def"><a name="L165"></a><tt class="py-lineno">165</tt> <a class="py-toggle" href="#" id="EncodingsTestCase-toggle" onclick="return toggle('EncodingsTestCase');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lxml.tests.test_unicode.EncodingsTestCase-class.html">EncodingsTestCase</a><tt class="py-op">(</tt><tt class="py-base-class">HelperTestCase</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="EncodingsTestCase-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="EncodingsTestCase-expanded"><a name="EncodingsTestCase.test_illegal_utf8"></a><div id="EncodingsTestCase.test_illegal_utf8-def"><a name="L166"></a><tt class="py-lineno">166</tt> <a class="py-toggle" href="#" id="EncodingsTestCase.test_illegal_utf8-toggle" onclick="return toggle('EncodingsTestCase.test_illegal_utf8');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.test_unicode.EncodingsTestCase-class.html#test_illegal_utf8">test_illegal_utf8</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="EncodingsTestCase.test_illegal_utf8-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="EncodingsTestCase.test_illegal_utf8-expanded"><a name="L167"></a><tt class="py-lineno">167</tt>  <tt class="py-line">        <tt id="link-143" class="py-name" targets="Method lxml.etree.TreeBuilder.data()=lxml.etree.TreeBuilder-class.html#data"><a title="lxml.etree.TreeBuilder.data" class="py-name" href="#" onclick="return doclink('link-143', 'data', 'link-143');">data</a></tt> <tt class="py-op">=</tt> <tt id="link-144" class="py-name"><a title="lxml.tests.common_imports._bytes" class="py-name" href="#" onclick="return doclink('link-144', '_bytes', 'link-14');">_bytes</a></tt><tt class="py-op">(</tt><tt class="py-string">'&lt;test&gt;\x80\x80\x80&lt;/test&gt;'</tt><tt class="py-op">,</tt> <tt id="link-145" class="py-name" targets="Variable lxml.etree.DocInfo.encoding=lxml.etree.DocInfo-class.html#encoding,Function lxml.tests.selftest.encoding()=lxml.tests.selftest-module.html#encoding,Function lxml.tests.selftest2.encoding()=lxml.tests.selftest2-module.html#encoding"><a title="lxml.etree.DocInfo.encoding
+lxml.tests.selftest.encoding
+lxml.tests.selftest2.encoding" class="py-name" href="#" onclick="return doclink('link-145', 'encoding', 'link-145');">encoding</a></tt><tt class="py-op">=</tt><tt class="py-string">'iso8859-1'</tt><tt class="py-op">)</tt> </tt>
+<a name="L168"></a><tt class="py-lineno">168</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertRaises</tt><tt class="py-op">(</tt><tt id="link-146" class="py-name"><a title="lxml.etree
+lxml.sax.ElementTreeContentHandler.etree
+lxml.tests.test_elementtree.CElementTreeTestCase.etree
+lxml.tests.test_elementtree._ETreeTestCaseBase.etree
+lxml.tests.test_elementtree._XMLPullParserTest.etree
+lxml.tests.test_io._IOTestCaseBase.etree" class="py-name" href="#" onclick="return doclink('link-146', 'etree', 'link-9');">etree</a></tt><tt class="py-op">.</tt><tt id="link-147" class="py-name" targets="Class lxml.etree.XMLSyntaxError=lxml.etree.XMLSyntaxError-class.html"><a title="lxml.etree.XMLSyntaxError" class="py-name" href="#" onclick="return doclink('link-147', 'XMLSyntaxError', 'link-147');">XMLSyntaxError</a></tt><tt class="py-op">,</tt> <tt id="link-148" class="py-name"><a title="lxml.etree
+lxml.sax.ElementTreeContentHandler.etree
+lxml.tests.test_elementtree.CElementTreeTestCase.etree
+lxml.tests.test_elementtree._ETreeTestCaseBase.etree
+lxml.tests.test_elementtree._XMLPullParserTest.etree
+lxml.tests.test_io._IOTestCaseBase.etree" class="py-name" href="#" onclick="return doclink('link-148', 'etree', 'link-9');">etree</a></tt><tt class="py-op">.</tt><tt id="link-149" class="py-name" targets="Function lxml.etree.fromstring()=lxml.etree-module.html#fromstring,Function lxml.html.html5parser.fromstring()=lxml.html.html5parser-module.html#fromstring,Function lxml.html.soupparser.fromstring()=lxml.html.soupparser-module.html#fromstring,Function lxml.objectify.fromstring()=lxml.objectify-module.html#fromstring"><a title="lxml.etree.fromstring
+lxml.html.html5parser.fromstring
+lxml.html.soupparser.fromstring
+lxml.objectify.fromstring" class="py-name" href="#" onclick="return doclink('link-149', 'fromstring', 'link-149');">fromstring</a></tt><tt class="py-op">,</tt> <tt id="link-150" class="py-name"><a title="lxml.etree.TreeBuilder.data" class="py-name" href="#" onclick="return doclink('link-150', 'data', 'link-143');">data</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L169"></a><tt class="py-lineno">169</tt>  <tt class="py-line"> </tt>
+<a name="EncodingsTestCase.test_illegal_utf8_recover"></a><div id="EncodingsTestCase.test_illegal_utf8_recover-def"><a name="L170"></a><tt class="py-lineno">170</tt> <a class="py-toggle" href="#" id="EncodingsTestCase.test_illegal_utf8_recover-toggle" onclick="return toggle('EncodingsTestCase.test_illegal_utf8_recover');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.test_unicode.EncodingsTestCase-class.html#test_illegal_utf8_recover">test_illegal_utf8_recover</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="EncodingsTestCase.test_illegal_utf8_recover-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="EncodingsTestCase.test_illegal_utf8_recover-expanded"><a name="L171"></a><tt class="py-lineno">171</tt>  <tt class="py-line">        <tt id="link-151" class="py-name"><a title="lxml.etree.TreeBuilder.data" class="py-name" href="#" onclick="return doclink('link-151', 'data', 'link-143');">data</a></tt> <tt class="py-op">=</tt> <tt id="link-152" class="py-name"><a title="lxml.tests.common_imports._bytes" class="py-name" href="#" onclick="return doclink('link-152', '_bytes', 'link-14');">_bytes</a></tt><tt class="py-op">(</tt><tt class="py-string">'&lt;test&gt;\x80\x80\x80&lt;/test&gt;'</tt><tt class="py-op">,</tt> <tt id="link-153" class="py-name"><a title="lxml.etree.DocInfo.encoding
+lxml.tests.selftest.encoding
+lxml.tests.selftest2.encoding" class="py-name" href="#" onclick="return doclink('link-153', 'encoding', 'link-145');">encoding</a></tt><tt class="py-op">=</tt><tt class="py-string">'iso8859-1'</tt><tt class="py-op">)</tt> </tt>
+<a name="L172"></a><tt class="py-lineno">172</tt>  <tt class="py-line">        <tt id="link-154" class="py-name" targets="Variable lxml.etree._ElementTree.parser=lxml.etree._ElementTree-class.html#parser,Variable lxml.tests.test_pyclasslookup.PyClassLookupTestCase.parser=lxml.tests.test_pyclasslookup.PyClassLookupTestCase-class.html#parser"><a title="lxml.etree._ElementTree.parser
+lxml.tests.test_pyclasslookup.PyClassLookupTestCase.parser" class="py-name" href="#" onclick="return doclink('link-154', 'parser', 'link-154');">parser</a></tt> <tt class="py-op">=</tt> <tt id="link-155" class="py-name"><a title="lxml.etree
+lxml.sax.ElementTreeContentHandler.etree
+lxml.tests.test_elementtree.CElementTreeTestCase.etree
+lxml.tests.test_elementtree._ETreeTestCaseBase.etree
+lxml.tests.test_elementtree._XMLPullParserTest.etree
+lxml.tests.test_io._IOTestCaseBase.etree" class="py-name" href="#" onclick="return doclink('link-155', 'etree', 'link-9');">etree</a></tt><tt class="py-op">.</tt><tt id="link-156" class="py-name" targets="Class lxml.etree.XMLParser=lxml.etree.XMLParser-class.html,Method lxml.tests.test_elementtree._ETreeTestCaseBase.XMLParser()=lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#XMLParser,Class xml.etree.ElementTree.XMLParser=xml.etree.ElementTree.XMLParser-class.html"><a title="lxml.etree.XMLParser
+lxml.tests.test_elementtree._ETreeTestCaseBase.XMLParser
+xml.etree.ElementTree.XMLParser" class="py-name" href="#" onclick="return doclink('link-156', 'XMLParser', 'link-156');">XMLParser</a></tt><tt class="py-op">(</tt><tt class="py-name">recover</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">)</tt> </tt>
+<a name="L173"></a><tt class="py-lineno">173</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertRaises</tt><tt class="py-op">(</tt><tt id="link-157" class="py-name"><a title="lxml.etree
+lxml.sax.ElementTreeContentHandler.etree
+lxml.tests.test_elementtree.CElementTreeTestCase.etree
+lxml.tests.test_elementtree._ETreeTestCaseBase.etree
+lxml.tests.test_elementtree._XMLPullParserTest.etree
+lxml.tests.test_io._IOTestCaseBase.etree" class="py-name" href="#" onclick="return doclink('link-157', 'etree', 'link-9');">etree</a></tt><tt class="py-op">.</tt><tt id="link-158" class="py-name"><a title="lxml.etree.XMLSyntaxError" class="py-name" href="#" onclick="return doclink('link-158', 'XMLSyntaxError', 'link-147');">XMLSyntaxError</a></tt><tt class="py-op">,</tt> <tt id="link-159" class="py-name"><a title="lxml.etree
+lxml.sax.ElementTreeContentHandler.etree
+lxml.tests.test_elementtree.CElementTreeTestCase.etree
+lxml.tests.test_elementtree._ETreeTestCaseBase.etree
+lxml.tests.test_elementtree._XMLPullParserTest.etree
+lxml.tests.test_io._IOTestCaseBase.etree" class="py-name" href="#" onclick="return doclink('link-159', 'etree', 'link-9');">etree</a></tt><tt class="py-op">.</tt><tt id="link-160" class="py-name"><a title="lxml.etree.fromstring
+lxml.html.html5parser.fromstring
+lxml.html.soupparser.fromstring
+lxml.objectify.fromstring" class="py-name" href="#" onclick="return doclink('link-160', 'fromstring', 'link-149');">fromstring</a></tt><tt class="py-op">,</tt> <tt id="link-161" class="py-name"><a title="lxml.etree.TreeBuilder.data" class="py-name" href="#" onclick="return doclink('link-161', 'data', 'link-143');">data</a></tt><tt class="py-op">,</tt> <tt id="link-162" class="py-name"><a title="lxml.etree._ElementTree.parser
+lxml.tests.test_pyclasslookup.PyClassLookupTestCase.parser" class="py-name" href="#" onclick="return doclink('link-162', 'parser', 'link-154');">parser</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L174"></a><tt class="py-lineno">174</tt>  <tt class="py-line"> </tt>
+<a name="EncodingsTestCase._test_encoding"></a><div id="EncodingsTestCase._test_encoding-def"><a name="L175"></a><tt class="py-lineno">175</tt> <a class="py-toggle" href="#" id="EncodingsTestCase._test_encoding-toggle" onclick="return toggle('EncodingsTestCase._test_encoding');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.test_unicode.EncodingsTestCase-class.html#_test_encoding">_test_encoding</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">encoding</tt><tt class="py-op">,</tt> <tt class="py-param">xml_encoding_name</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="EncodingsTestCase._test_encoding-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="EncodingsTestCase._test_encoding-expanded"><a name="L176"></a><tt class="py-lineno">176</tt>  <tt class="py-line">        <tt class="py-name">foo</tt> <tt class="py-op">=</tt> <tt class="py-string">"""&lt;?xml version='1.0' encoding='%s'?&gt;\n&lt;tag attrib='123'&gt;&lt;/tag&gt;"""</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt> </tt>
+<a name="L177"></a><tt class="py-lineno">177</tt>  <tt class="py-line">            <tt class="py-name">xml_encoding_name</tt> <tt class="py-keyword">or</tt> <tt id="link-163" class="py-name"><a title="lxml.etree.DocInfo.encoding
+lxml.tests.selftest.encoding
+lxml.tests.selftest2.encoding" class="py-name" href="#" onclick="return doclink('link-163', 'encoding', 'link-145');">encoding</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L178"></a><tt class="py-lineno">178</tt>  <tt class="py-line">        <tt id="link-164" class="py-name" targets="Variable lxml.etree.iterparse.root=lxml.etree.iterparse-class.html#root"><a title="lxml.etree.iterparse.root" class="py-name" href="#" onclick="return doclink('link-164', 'root', 'link-164');">root</a></tt> <tt class="py-op">=</tt> <tt id="link-165" class="py-name"><a title="lxml.etree
+lxml.sax.ElementTreeContentHandler.etree
+lxml.tests.test_elementtree.CElementTreeTestCase.etree
+lxml.tests.test_elementtree._ETreeTestCaseBase.etree
+lxml.tests.test_elementtree._XMLPullParserTest.etree
+lxml.tests.test_io._IOTestCaseBase.etree" class="py-name" href="#" onclick="return doclink('link-165', 'etree', 'link-9');">etree</a></tt><tt class="py-op">.</tt><tt id="link-166" class="py-name"><a title="lxml.etree.fromstring
+lxml.html.html5parser.fromstring
+lxml.html.soupparser.fromstring
+lxml.objectify.fromstring" class="py-name" href="#" onclick="return doclink('link-166', 'fromstring', 'link-149');">fromstring</a></tt><tt class="py-op">(</tt><tt class="py-name">foo</tt><tt class="py-op">.</tt><tt class="py-name">encode</tt><tt class="py-op">(</tt><tt id="link-167" class="py-name"><a title="lxml.etree.DocInfo.encoding
+lxml.tests.selftest.encoding
+lxml.tests.selftest2.encoding" class="py-name" href="#" onclick="return doclink('link-167', 'encoding', 'link-145');">encoding</a></tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L179"></a><tt class="py-lineno">179</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertEqual</tt><tt class="py-op">(</tt><tt class="py-string">'tag'</tt><tt class="py-op">,</tt> <tt id="link-168" class="py-name"><a title="lxml.etree.iterparse.root" class="py-name" href="#" onclick="return doclink('link-168', 'root', 'link-164');">root</a></tt><tt class="py-op">.</tt><tt id="link-169" class="py-name"><a title="lxml.etree._Comment.tag
+lxml.etree._Element.tag
+lxml.etree._Entity.tag
+lxml.etree._ProcessingInstruction.tag
+lxml.tests.test_xpathevaluator.tag
+xml.etree.ElementTree.Element.tag" class="py-name" href="#" onclick="return doclink('link-169', 'tag', 'link-53');">tag</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L180"></a><tt class="py-lineno">180</tt>  <tt class="py-line"> </tt>
+<a name="L181"></a><tt class="py-lineno">181</tt>  <tt class="py-line">        <tt class="py-name">doc_encoding</tt> <tt class="py-op">=</tt> <tt id="link-170" class="py-name"><a title="lxml.etree.iterparse.root" class="py-name" href="#" onclick="return doclink('link-170', 'root', 'link-164');">root</a></tt><tt class="py-op">.</tt><tt id="link-171" class="py-name" targets="Method lxml.etree._Element.getroottree()=lxml.etree._Element-class.html#getroottree"><a title="lxml.etree._Element.getroottree" class="py-name" href="#" onclick="return doclink('link-171', 'getroottree', 'link-171');">getroottree</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-172" class="py-name" targets="Variable lxml.etree._ElementTree.docinfo=lxml.etree._ElementTree-class.html#docinfo"><a title="lxml.etree._ElementTree.docinfo" class="py-name" href="#" onclick="return doclink('link-172', 'docinfo', 'link-172');">docinfo</a></tt><tt class="py-op">.</tt><tt id="link-173" class="py-name"><a title="lxml.etree.DocInfo.encoding
+lxml.tests.selftest.encoding
+lxml.tests.selftest2.encoding" class="py-name" href="#" onclick="return doclink('link-173', 'encoding', 'link-145');">encoding</a></tt> </tt>
+<a name="L182"></a><tt class="py-lineno">182</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertTrue</tt><tt class="py-op">(</tt> </tt>
+<a name="L183"></a><tt class="py-lineno">183</tt>  <tt class="py-line">            <tt class="py-name">doc_encoding</tt><tt class="py-op">.</tt><tt class="py-name">lower</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">rstrip</tt><tt class="py-op">(</tt><tt class="py-string">'lbe'</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L184"></a><tt class="py-lineno">184</tt>  <tt class="py-line">            <tt class="py-op">(</tt><tt class="py-name">xml_encoding_name</tt> <tt class="py-keyword">or</tt> <tt id="link-174" class="py-name"><a title="lxml.etree.DocInfo.encoding
+lxml.tests.selftest.encoding
+lxml.tests.selftest2.encoding" class="py-name" href="#" onclick="return doclink('link-174', 'encoding', 'link-145');">encoding</a></tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">lower</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">rstrip</tt><tt class="py-op">(</tt><tt class="py-string">'lbe'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L185"></a><tt class="py-lineno">185</tt>  <tt class="py-line"> </tt>
+<a name="EncodingsTestCase.test_utf8_fromstring"></a><div id="EncodingsTestCase.test_utf8_fromstring-def"><a name="L186"></a><tt class="py-lineno">186</tt> <a class="py-toggle" href="#" id="EncodingsTestCase.test_utf8_fromstring-toggle" onclick="return toggle('EncodingsTestCase.test_utf8_fromstring');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.test_unicode.EncodingsTestCase-class.html#test_utf8_fromstring">test_utf8_fromstring</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="EncodingsTestCase.test_utf8_fromstring-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="EncodingsTestCase.test_utf8_fromstring-expanded"><a name="L187"></a><tt class="py-lineno">187</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-175" class="py-name" targets="Method lxml.tests.test_unicode.EncodingsTestCase._test_encoding()=lxml.tests.test_unicode.EncodingsTestCase-class.html#_test_encoding"><a title="lxml.tests.test_unicode.EncodingsTestCase._test_encoding" class="py-name" href="#" onclick="return doclink('link-175', '_test_encoding', 'link-175');">_test_encoding</a></tt><tt class="py-op">(</tt><tt class="py-string">'utf-8'</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L188"></a><tt class="py-lineno">188</tt>  <tt class="py-line"> </tt>
+<a name="EncodingsTestCase.test_utf8sig_fromstring"></a><div id="EncodingsTestCase.test_utf8sig_fromstring-def"><a name="L189"></a><tt class="py-lineno">189</tt> <a class="py-toggle" href="#" id="EncodingsTestCase.test_utf8sig_fromstring-toggle" onclick="return toggle('EncodingsTestCase.test_utf8sig_fromstring');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.test_unicode.EncodingsTestCase-class.html#test_utf8sig_fromstring">test_utf8sig_fromstring</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="EncodingsTestCase.test_utf8sig_fromstring-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="EncodingsTestCase.test_utf8sig_fromstring-expanded"><a name="L190"></a><tt class="py-lineno">190</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-176" class="py-name"><a title="lxml.tests.test_unicode.EncodingsTestCase._test_encoding" class="py-name" href="#" onclick="return doclink('link-176', '_test_encoding', 'link-175');">_test_encoding</a></tt><tt class="py-op">(</tt><tt class="py-string">'utf_8_sig'</tt><tt class="py-op">,</tt> <tt class="py-string">'utf-8'</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L191"></a><tt class="py-lineno">191</tt>  <tt class="py-line"> </tt>
+<a name="EncodingsTestCase.test_utf16_fromstring"></a><div id="EncodingsTestCase.test_utf16_fromstring-def"><a name="L192"></a><tt class="py-lineno">192</tt> <a class="py-toggle" href="#" id="EncodingsTestCase.test_utf16_fromstring-toggle" onclick="return toggle('EncodingsTestCase.test_utf16_fromstring');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.test_unicode.EncodingsTestCase-class.html#test_utf16_fromstring">test_utf16_fromstring</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="EncodingsTestCase.test_utf16_fromstring-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="EncodingsTestCase.test_utf16_fromstring-expanded"><a name="L193"></a><tt class="py-lineno">193</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-177" class="py-name"><a title="lxml.tests.test_unicode.EncodingsTestCase._test_encoding" class="py-name" href="#" onclick="return doclink('link-177', '_test_encoding', 'link-175');">_test_encoding</a></tt><tt class="py-op">(</tt><tt class="py-string">'utf-16'</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L194"></a><tt class="py-lineno">194</tt>  <tt class="py-line"> </tt>
+<a name="EncodingsTestCase.test_utf16LE_fromstring"></a><div id="EncodingsTestCase.test_utf16LE_fromstring-def"><a name="L195"></a><tt class="py-lineno">195</tt> <a class="py-toggle" href="#" id="EncodingsTestCase.test_utf16LE_fromstring-toggle" onclick="return toggle('EncodingsTestCase.test_utf16LE_fromstring');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.test_unicode.EncodingsTestCase-class.html#test_utf16LE_fromstring">test_utf16LE_fromstring</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="EncodingsTestCase.test_utf16LE_fromstring-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="EncodingsTestCase.test_utf16LE_fromstring-expanded"><a name="L196"></a><tt class="py-lineno">196</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-178" class="py-name"><a title="lxml.tests.test_unicode.EncodingsTestCase._test_encoding" class="py-name" href="#" onclick="return doclink('link-178', '_test_encoding', 'link-175');">_test_encoding</a></tt><tt class="py-op">(</tt><tt class="py-string">'utf-16le'</tt><tt class="py-op">,</tt> <tt class="py-string">'utf-16'</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L197"></a><tt class="py-lineno">197</tt>  <tt class="py-line"> </tt>
+<a name="EncodingsTestCase.test_utf16BE_fromstring"></a><div id="EncodingsTestCase.test_utf16BE_fromstring-def"><a name="L198"></a><tt class="py-lineno">198</tt> <a class="py-toggle" href="#" id="EncodingsTestCase.test_utf16BE_fromstring-toggle" onclick="return toggle('EncodingsTestCase.test_utf16BE_fromstring');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.test_unicode.EncodingsTestCase-class.html#test_utf16BE_fromstring">test_utf16BE_fromstring</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="EncodingsTestCase.test_utf16BE_fromstring-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="EncodingsTestCase.test_utf16BE_fromstring-expanded"><a name="L199"></a><tt class="py-lineno">199</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-179" class="py-name"><a title="lxml.tests.test_unicode.EncodingsTestCase._test_encoding" class="py-name" href="#" onclick="return doclink('link-179', '_test_encoding', 'link-175');">_test_encoding</a></tt><tt class="py-op">(</tt><tt class="py-string">'utf-16be'</tt><tt class="py-op">,</tt> <tt class="py-string">'utf-16'</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L200"></a><tt class="py-lineno">200</tt>  <tt class="py-line"> </tt>
+<a name="EncodingsTestCase.test_utf32_fromstring"></a><div id="EncodingsTestCase.test_utf32_fromstring-def"><a name="L201"></a><tt class="py-lineno">201</tt> <a class="py-toggle" href="#" id="EncodingsTestCase.test_utf32_fromstring-toggle" onclick="return toggle('EncodingsTestCase.test_utf32_fromstring');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.test_unicode.EncodingsTestCase-class.html#test_utf32_fromstring">test_utf32_fromstring</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="EncodingsTestCase.test_utf32_fromstring-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="EncodingsTestCase.test_utf32_fromstring-expanded"><a name="L202"></a><tt class="py-lineno">202</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-180" class="py-name"><a title="lxml.tests.test_unicode.EncodingsTestCase._test_encoding" class="py-name" href="#" onclick="return doclink('link-180', '_test_encoding', 'link-175');">_test_encoding</a></tt><tt class="py-op">(</tt><tt class="py-string">'utf-32'</tt><tt class="py-op">,</tt> <tt class="py-string">'utf-32'</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L203"></a><tt class="py-lineno">203</tt>  <tt class="py-line"> </tt>
+<a name="EncodingsTestCase.test_utf32LE_fromstring"></a><div id="EncodingsTestCase.test_utf32LE_fromstring-def"><a name="L204"></a><tt class="py-lineno">204</tt> <a class="py-toggle" href="#" id="EncodingsTestCase.test_utf32LE_fromstring-toggle" onclick="return toggle('EncodingsTestCase.test_utf32LE_fromstring');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.test_unicode.EncodingsTestCase-class.html#test_utf32LE_fromstring">test_utf32LE_fromstring</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="EncodingsTestCase.test_utf32LE_fromstring-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="EncodingsTestCase.test_utf32LE_fromstring-expanded"><a name="L205"></a><tt class="py-lineno">205</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-181" class="py-name"><a title="lxml.tests.test_unicode.EncodingsTestCase._test_encoding" class="py-name" href="#" onclick="return doclink('link-181', '_test_encoding', 'link-175');">_test_encoding</a></tt><tt class="py-op">(</tt><tt class="py-string">'utf-32le'</tt><tt class="py-op">,</tt> <tt class="py-string">'utf-32'</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L206"></a><tt class="py-lineno">206</tt>  <tt class="py-line"> </tt>
+<a name="EncodingsTestCase.test_utf32BE_fromstring"></a><div id="EncodingsTestCase.test_utf32BE_fromstring-def"><a name="L207"></a><tt class="py-lineno">207</tt> <a class="py-toggle" href="#" id="EncodingsTestCase.test_utf32BE_fromstring-toggle" onclick="return toggle('EncodingsTestCase.test_utf32BE_fromstring');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.test_unicode.EncodingsTestCase-class.html#test_utf32BE_fromstring">test_utf32BE_fromstring</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="EncodingsTestCase.test_utf32BE_fromstring-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="EncodingsTestCase.test_utf32BE_fromstring-expanded"><a name="L208"></a><tt class="py-lineno">208</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-182" class="py-name"><a title="lxml.tests.test_unicode.EncodingsTestCase._test_encoding" class="py-name" href="#" onclick="return doclink('link-182', '_test_encoding', 'link-175');">_test_encoding</a></tt><tt class="py-op">(</tt><tt class="py-string">'utf-32be'</tt><tt class="py-op">,</tt> <tt class="py-string">'utf-32'</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L209"></a><tt class="py-lineno">209</tt>  <tt class="py-line"> </tt>
+<a name="L210"></a><tt class="py-lineno">210</tt>  <tt class="py-line"> </tt>
+<a name="test_suite"></a><div id="test_suite-def"><a name="L211"></a><tt class="py-lineno">211</tt> <a class="py-toggle" href="#" id="test_suite-toggle" onclick="return toggle('test_suite');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.test_unicode-module.html#test_suite">test_suite</a><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="test_suite-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="test_suite-expanded"><a name="L212"></a><tt class="py-lineno">212</tt>  <tt class="py-line">    <tt class="py-name">suite</tt> <tt class="py-op">=</tt> <tt class="py-name">unittest</tt><tt class="py-op">.</tt><tt class="py-name">TestSuite</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L213"></a><tt class="py-lineno">213</tt>  <tt class="py-line">    <tt class="py-name">suite</tt><tt class="py-op">.</tt><tt class="py-name">addTests</tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt class="py-name">unittest</tt><tt class="py-op">.</tt><tt class="py-name">makeSuite</tt><tt class="py-op">(</tt><tt id="link-183" class="py-name" targets="Class lxml.tests.test_unicode.UnicodeTestCase=lxml.tests.test_unicode.UnicodeTestCase-class.html"><a title="lxml.tests.test_unicode.UnicodeTestCase" class="py-name" href="#" onclick="return doclink('link-183', 'UnicodeTestCase', 'link-183');">UnicodeTestCase</a></tt><tt class="py-op">)</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L214"></a><tt class="py-lineno">214</tt>  <tt class="py-line">    <tt class="py-name">suite</tt><tt class="py-op">.</tt><tt class="py-name">addTests</tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt class="py-name">unittest</tt><tt class="py-op">.</tt><tt class="py-name">makeSuite</tt><tt class="py-op">(</tt><tt id="link-184" class="py-name" targets="Class lxml.tests.test_unicode.EncodingsTestCase=lxml.tests.test_unicode.EncodingsTestCase-class.html"><a title="lxml.tests.test_unicode.EncodingsTestCase" class="py-name" href="#" onclick="return doclink('link-184', 'EncodingsTestCase', 'link-184');">EncodingsTestCase</a></tt><tt class="py-op">)</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L215"></a><tt class="py-lineno">215</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">suite</tt> </tt>
+</div><a name="L216"></a><tt class="py-lineno">216</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lxml-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="/">lxml API</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Fri Jun 22 18:59:52 2018
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

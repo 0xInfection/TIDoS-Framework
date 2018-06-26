@@ -1,0 +1,1172 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.12: http://docutils.sourceforge.net/" />
+<title>lxml.objectify</title>
+<meta name="authors" content="Stefan Behnel  Holger Joukl" />
+<link rel="stylesheet" href="style.css" type="text/css" />
+<script type="text/javascript">
+function trigger_menu(event) {
+    var sidemenu = document.getElementById("sidemenu");
+    var classes = sidemenu.getAttribute("class");
+    classes = (classes.indexOf(" visible") === -1) ? classes + " visible" : classes.replace(" visible", "");
+    sidemenu.setAttribute("class", classes);
+    event.preventDefault();
+    event.stopPropagation();
+}
+function hide_menu() {
+    var sidemenu = document.getElementById("sidemenu");
+    var classes = sidemenu.getAttribute("class");
+    if (classes.indexOf(" visible") !== -1) {
+        sidemenu.setAttribute("class", classes.replace(" visible", ""));
+    }
+}
+</script><meta content="width=device-width, initial-scale=1" name="viewport" /></head>
+<body onclick="hide_menu()">
+<div class="document" id="lxml-objectify">
+<div class="sidemenu" id="sidemenu"><div class="menutrigger" onclick="trigger_menu(event)">Menu</div><div class="menu"><ul id="lxml-section"><li><span class="section title">lxml</span><ul class="menu foreign" id="index-menu"><li class="menu title"><a href="index.html">lxml</a><ul class="submenu"><li class="menu item"><a href="index.html#introduction">Introduction</a></li><li class="menu item"><a href="index.html#support-the-project">Support the project</a></li><li class="menu item"><a href="index.html#documentation">Documentation</a></li><li class="menu item"><a href="index.html#download">Download</a></li><li class="menu item"><a href="index.html#mailing-list">Mailing list</a></li><li class="menu item"><a href="index.html#bug-tracker">Bug tracker</a></li><li class="menu item"><a href="index.html#license">License</a></li><li class="menu item"><a href="index.html#old-versions">Old Versions</a></li><li class="menu item"><a href="index.html#docutils-system-messages">Docutils System Messages</a></li><li class="menu item"><a href="index.html#legal-notice-for-donations">Legal Notice for Donations</a></li></ul></li></ul><ul class="menu foreign" id="intro-menu"><li class="menu title"><a href="intro.html">Why lxml?</a><ul class="submenu"><li class="menu item"><a href="intro.html#motto">Motto</a></li><li class="menu item"><a href="intro.html#aims">Aims</a></li></ul></li></ul><ul class="menu foreign" id="installation-menu"><li class="menu title"><a href="installation.html">Installing lxml</a><ul class="submenu"><li class="menu item"><a href="installation.html#where-to-get-it">Where to get it</a></li><li class="menu item"><a href="installation.html#requirements">Requirements</a></li><li class="menu item"><a href="installation.html#installation">Installation</a></li><li class="menu item"><a href="installation.html#building-lxml-from-dev-sources">Building lxml from dev sources</a></li><li class="menu item"><a href="installation.html#using-lxml-with-python-libxml2">Using lxml with python-libxml2</a></li><li class="menu item"><a href="installation.html#source-builds-on-ms-windows">Source builds on MS Windows</a></li><li class="menu item"><a href="installation.html#source-builds-on-macos-x">Source builds on MacOS-X</a></li></ul></li></ul><ul class="menu foreign" id="performance-menu"><li class="menu title"><a href="performance.html">Benchmarks and Speed</a><ul class="submenu"><li class="menu item"><a href="performance.html#general-notes">General notes</a></li><li class="menu item"><a href="performance.html#how-to-read-the-timings">How to read the timings</a></li><li class="menu item"><a href="performance.html#parsing-and-serialising">Parsing and Serialising</a></li><li class="menu item"><a href="performance.html#the-elementtree-api">The ElementTree API</a></li><li class="menu item"><a href="performance.html#xpath">XPath</a></li><li class="menu item"><a href="performance.html#a-longer-example">A longer example</a></li><li class="menu item"><a href="performance.html#lxml-objectify">lxml.objectify</a></li></ul></li></ul><ul class="menu foreign" id="compatibility-menu"><li class="menu title"><a href="compatibility.html">ElementTree compatibility of lxml.etree</a></li></ul><ul class="menu foreign" id="FAQ-menu"><li class="menu title"><a href="FAQ.html">lxml FAQ - Frequently Asked Questions</a><ul class="submenu"><li class="menu item"><a href="FAQ.html#general-questions">General Questions</a></li><li class="menu item"><a href="FAQ.html#installation">Installation</a></li><li class="menu item"><a href="FAQ.html#contributing">Contributing</a></li><li class="menu item"><a href="FAQ.html#bugs">Bugs</a></li><li class="menu item"><a href="FAQ.html#id1">Threading</a></li><li class="menu item"><a href="FAQ.html#parsing-and-serialisation">Parsing and Serialisation</a></li><li class="menu item"><a href="FAQ.html#xpath-and-document-traversal">XPath and Document Traversal</a></li></ul></li></ul></li></ul><ul id="Developing with lxml-section"><li><span class="section title">Developing with lxml</span><ul class="menu foreign" id="tutorial-menu"><li class="menu title"><a href="tutorial.html">The lxml.etree Tutorial</a><ul class="submenu"><li class="menu item"><a href="tutorial.html#the-element-class">The Element class</a></li><li class="menu item"><a href="tutorial.html#the-elementtree-class">The ElementTree class</a></li><li class="menu item"><a href="tutorial.html#parsing-from-strings-and-files">Parsing from strings and files</a></li><li class="menu item"><a href="tutorial.html#namespaces">Namespaces</a></li><li class="menu item"><a href="tutorial.html#the-e-factory">The E-factory</a></li><li class="menu item"><a href="tutorial.html#elementpath">ElementPath</a></li></ul></li></ul><ul class="menu foreign" id="api index-menu"><li class="menu title"><a href="api/index.html">API reference</a></li></ul><ul class="menu foreign" id="api-menu"><li class="menu title"><a href="api.html">APIs specific to lxml.etree</a><ul class="submenu"><li class="menu item"><a href="api.html#lxml-etree">lxml.etree</a></li><li class="menu item"><a href="api.html#other-element-apis">Other Element APIs</a></li><li class="menu item"><a href="api.html#trees-and-documents">Trees and Documents</a></li><li class="menu item"><a href="api.html#iteration">Iteration</a></li><li class="menu item"><a href="api.html#error-handling-on-exceptions">Error handling on exceptions</a></li><li class="menu item"><a href="api.html#error-logging">Error logging</a></li><li class="menu item"><a href="api.html#serialisation">Serialisation</a></li><li class="menu item"><a href="api.html#incremental-xml-generation">Incremental XML generation</a></li><li class="menu item"><a href="api.html#cdata">CDATA</a></li><li class="menu item"><a href="api.html#xinclude-and-elementinclude">XInclude and ElementInclude</a></li><li class="menu item"><a href="api.html#write-c14n-on-elementtree">write_c14n on ElementTree</a></li></ul></li></ul><ul class="menu foreign" id="parsing-menu"><li class="menu title"><a href="parsing.html">Parsing XML and HTML with lxml</a><ul class="submenu"><li class="menu item"><a href="parsing.html#parsers">Parsers</a></li><li class="menu item"><a href="parsing.html#the-target-parser-interface">The target parser interface</a></li><li class="menu item"><a href="parsing.html#the-feed-parser-interface">The feed parser interface</a></li><li class="menu item"><a href="parsing.html#incremental-event-parsing">Incremental event parsing</a></li><li class="menu item"><a href="parsing.html#iterparse-and-iterwalk">iterparse and iterwalk</a></li><li class="menu item"><a href="parsing.html#python-unicode-strings">Python unicode strings</a></li></ul></li></ul><ul class="menu foreign" id="validation-menu"><li class="menu title"><a href="validation.html">Validation with lxml</a><ul class="submenu"><li class="menu item"><a href="validation.html#validation-at-parse-time">Validation at parse time</a></li><li class="menu item"><a href="validation.html#id1">DTD</a></li><li class="menu item"><a href="validation.html#relaxng">RelaxNG</a></li><li class="menu item"><a href="validation.html#xmlschema">XMLSchema</a></li><li class="menu item"><a href="validation.html#id2">Schematron</a></li><li class="menu item"><a href="validation.html#id3">(Pre-ISO-Schematron)</a></li></ul></li></ul><ul class="menu foreign" id="xpathxslt-menu"><li class="menu title"><a href="xpathxslt.html">XPath and XSLT with lxml</a><ul class="submenu"><li class="menu item"><a href="xpathxslt.html#xpath">XPath</a></li><li class="menu item"><a href="xpathxslt.html#xslt">XSLT</a></li></ul></li></ul><ul class="menu current" id="objectify-menu"><li class="menu title"><a href="objectify.html">lxml.objectify</a><ul class="submenu"><li class="menu item"><a href="objectify.html#the-lxml-objectify-api">The lxml.objectify API</a></li><li class="menu item"><a href="objectify.html#asserting-a-schema">Asserting a Schema</a></li><li class="menu item"><a href="objectify.html#objectpath">ObjectPath</a></li><li class="menu item"><a href="objectify.html#python-data-types">Python data types</a></li><li class="menu item"><a href="objectify.html#how-data-types-are-matched">How data types are matched</a></li><li class="menu item"><a href="objectify.html#what-is-different-from-lxml-etree">What is different from lxml.etree?</a></li></ul></li></ul><ul class="menu foreign" id="lxmlhtml-menu"><li class="menu title"><a href="lxmlhtml.html">lxml.html</a><ul class="submenu"><li class="menu item"><a href="lxmlhtml.html#parsing-html">Parsing HTML</a></li><li class="menu item"><a href="lxmlhtml.html#html-element-methods">HTML Element Methods</a></li><li class="menu item"><a href="lxmlhtml.html#running-html-doctests">Running HTML doctests</a></li><li class="menu item"><a href="lxmlhtml.html#creating-html-with-the-e-factory">Creating HTML with the E-factory</a></li><li class="menu item"><a href="lxmlhtml.html#working-with-links">Working with links</a></li><li class="menu item"><a href="lxmlhtml.html#forms">Forms</a></li><li class="menu item"><a href="lxmlhtml.html#cleaning-up-html">Cleaning up HTML</a></li><li class="menu item"><a href="lxmlhtml.html#html-diff">HTML Diff</a></li><li class="menu item"><a href="lxmlhtml.html#examples">Examples</a></li></ul></li></ul><ul class="menu foreign" id="cssselect-menu"><li class="menu title"><a href="cssselect.html">lxml.cssselect</a><ul class="submenu"><li class="menu item"><a href="cssselect.html#the-cssselector-class">The CSSSelector class</a></li><li class="menu item"><a href="cssselect.html#the-cssselect-method">The cssselect method</a></li><li class="menu item"><a href="cssselect.html#supported-selectors">Supported Selectors</a></li><li class="menu item"><a href="cssselect.html#namespaces">Namespaces</a></li></ul></li></ul><ul class="menu foreign" id="elementsoup-menu"><li class="menu title"><a href="elementsoup.html">BeautifulSoup Parser</a><ul class="submenu"><li class="menu item"><a href="elementsoup.html#parsing-with-the-soupparser">Parsing with the soupparser</a></li><li class="menu item"><a href="elementsoup.html#entity-handling">Entity handling</a></li><li class="menu item"><a href="elementsoup.html#using-soupparser-as-a-fallback">Using soupparser as a fallback</a></li><li class="menu item"><a href="elementsoup.html#using-only-the-encoding-detection">Using only the encoding detection</a></li></ul></li></ul><ul class="menu foreign" id="html5parser-menu"><li class="menu title"><a href="html5parser.html">html5lib Parser</a><ul class="submenu"><li class="menu item"><a href="html5parser.html#differences-to-regular-html-parsing">Differences to regular HTML parsing</a></li><li class="menu item"><a href="html5parser.html#function-reference">Function Reference</a></li></ul></li></ul></li></ul><ul id="Extending lxml-section"><li><span class="section title">Extending lxml</span><ul class="menu foreign" id="resolvers-menu"><li class="menu title"><a href="resolvers.html">Document loading and URL resolving</a><ul class="submenu"><li class="menu item"><a href="resolvers.html#xml-catalogs">XML Catalogs</a></li><li class="menu item"><a href="resolvers.html#uri-resolvers">URI Resolvers</a></li><li class="menu item"><a href="resolvers.html#document-loading-in-context">Document loading in context</a></li><li class="menu item"><a href="resolvers.html#i-o-access-control-in-xslt">I/O access control in XSLT</a></li></ul></li></ul><ul class="menu foreign" id="extensions-menu"><li class="menu title"><a href="extensions.html">Python extensions for XPath and XSLT</a><ul class="submenu"><li class="menu item"><a href="extensions.html#xpath-extension-functions">XPath Extension functions</a></li><li class="menu item"><a href="extensions.html#xslt-extension-elements">XSLT extension elements</a></li></ul></li></ul><ul class="menu foreign" id="element classes-menu"><li class="menu title"><a href="element_classes.html">Using custom Element classes in lxml</a><ul class="submenu"><li class="menu item"><a href="element_classes.html#background-on-element-proxies">Background on Element proxies</a></li><li class="menu item"><a href="element_classes.html#element-initialization">Element initialization</a></li><li class="menu item"><a href="element_classes.html#setting-up-a-class-lookup-scheme">Setting up a class lookup scheme</a></li><li class="menu item"><a href="element_classes.html#generating-xml-with-custom-classes">Generating XML with custom classes</a></li><li class="menu item"><a href="element_classes.html#id1">Implementing namespaces</a></li></ul></li></ul><ul class="menu foreign" id="sax-menu"><li class="menu title"><a href="sax.html">Sax support</a><ul class="submenu"><li class="menu item"><a href="sax.html#building-a-tree-from-sax-events">Building a tree from SAX events</a></li><li class="menu item"><a href="sax.html#producing-sax-events-from-an-elementtree-or-element">Producing SAX events from an ElementTree or Element</a></li><li class="menu item"><a href="sax.html#interfacing-with-pulldom-minidom">Interfacing with pulldom/minidom</a></li></ul></li></ul><ul class="menu foreign" id="capi-menu"><li class="menu title"><a href="capi.html">The public C-API of lxml.etree</a><ul class="submenu"><li class="menu item"><a href="capi.html#passing-generated-trees-through-python">Passing generated trees through Python</a></li><li class="menu item"><a href="capi.html#writing-external-modules-in-cython">Writing external modules in Cython</a></li><li class="menu item"><a href="capi.html#writing-external-modules-in-c">Writing external modules in C</a></li></ul></li></ul></li></ul><ul id="Developing lxml-section"><li><span class="section title">Developing lxml</span><ul class="menu foreign" id="build-menu"><li class="menu title"><a href="build.html">How to build lxml from source</a><ul class="submenu"><li class="menu item"><a href="build.html#cython">Cython</a></li><li class="menu item"><a href="build.html#github-git-and-hg">Github, git and hg</a></li><li class="menu item"><a href="build.html#building-the-sources">Building the sources</a></li><li class="menu item"><a href="build.html#running-the-tests-and-reporting-errors">Running the tests and reporting errors</a></li><li class="menu item"><a href="build.html#building-an-egg-or-wheel">Building an egg or wheel</a></li><li class="menu item"><a href="build.html#building-lxml-on-macos-x">Building lxml on MacOS-X</a></li><li class="menu item"><a href="build.html#static-linking-on-windows">Static linking on Windows</a></li><li class="menu item"><a href="build.html#building-debian-packages-from-svn-sources">Building Debian packages from SVN sources</a></li></ul></li></ul><ul class="menu foreign" id="lxml source howto-menu"><li class="menu title"><a href="lxml-source-howto.html">How to read the source of lxml</a><ul class="submenu"><li class="menu item"><a href="lxml-source-howto.html#what-is-cython">What is Cython?</a></li><li class="menu item"><a href="lxml-source-howto.html#where-to-start">Where to start?</a></li><li class="menu item"><a href="lxml-source-howto.html#lxml-etree">lxml.etree</a></li><li class="menu item"><a href="lxml-source-howto.html#python-modules">Python modules</a></li><li class="menu item"><a href="lxml-source-howto.html#lxml-objectify">lxml.objectify</a></li><li class="menu item"><a href="lxml-source-howto.html#lxml-html">lxml.html</a></li></ul></li></ul><ul class="menu foreign" id="changes 4 2 2-menu"><li class="menu title"><a href="changes-4.2.2.html">Release Changelog</a></li></ul><ul class="menu foreign" id="credits-menu"><li class="menu title"><a href="credits.html">Credits</a><ul class="submenu"><li class="menu item"><a href="credits.html#main-contributors">Main contributors</a></li><li class="menu item"><a href="credits.html#special-thanks-goes-to">Special thanks goes to:</a></li></ul></li></ul></li><li><a href="/sitemap.html">Sitemap</a></li></ul></div></div><h1 class="title">lxml.objectify</h1>
+<table class="docinfo" frame="void" rules="none">
+<col class="docinfo-name" />
+<col class="docinfo-content" />
+<tbody valign="top">
+<tr><th class="docinfo-name">Authors:</th>
+<td>Stefan Behnel
+<br />Holger Joukl</td></tr>
+</tbody>
+</table>
+<p>lxml supports an alternative API similar to the <a class="reference external" href="http://uche.ogbuji.net/tech/4suite/amara/">Amara</a> bindery or
+<a class="reference external" href="http://gnosis.cx/download/">gnosis.xml.objectify</a> through a <a class="reference external" href="element_classes.html">custom Element implementation</a>.  The main idea
+is to hide the usage of XML behind normal Python objects, sometimes referred
+to as data-binding.  It allows you to use XML as if you were dealing with a
+normal Python object hierarchy.</p>
+<p>Accessing the children of an XML element deploys object attribute access.  If
+there are multiple children with the same name, slicing and indexing can be
+used.  Python data types are extracted from XML content automatically and made
+available to the normal Python operators.</p>
+<div class="contents topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#the-lxml-objectify-api" id="id1">The lxml.objectify API</a><ul>
+<li><a class="reference internal" href="#element-access-through-object-attributes" id="id2">Element access through object attributes</a></li>
+<li><a class="reference internal" href="#creating-objectify-trees" id="id3">Creating objectify trees</a></li>
+<li><a class="reference internal" href="#tree-generation-with-the-e-factory" id="id4">Tree generation with the E-factory</a></li>
+<li><a class="reference internal" href="#namespace-handling" id="id5">Namespace handling</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#asserting-a-schema" id="id6">Asserting a Schema</a></li>
+<li><a class="reference internal" href="#objectpath" id="id7">ObjectPath</a></li>
+<li><a class="reference internal" href="#python-data-types" id="id8">Python data types</a><ul>
+<li><a class="reference internal" href="#recursive-tree-dump" id="id9">Recursive tree dump</a></li>
+<li><a class="reference internal" href="#recursive-string-representation-of-elements" id="id10">Recursive string representation of elements</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#how-data-types-are-matched" id="id11">How data types are matched</a><ul>
+<li><a class="reference internal" href="#type-annotations" id="id12">Type annotations</a></li>
+<li><a class="reference internal" href="#xml-schema-datatype-annotation" id="id13">XML Schema datatype annotation</a></li>
+<li><a class="reference internal" href="#the-dataelement-factory" id="id14">The DataElement factory</a></li>
+<li><a class="reference internal" href="#defining-additional-data-classes" id="id15">Defining additional data classes</a></li>
+<li><a class="reference internal" href="#advanced-element-class-lookup" id="id16">Advanced element class lookup</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#what-is-different-from-lxml-etree" id="id17">What is different from lxml.etree?</a></li>
+</ul>
+</div>
+<p>To set up and use <tt class="docutils literal">objectify</tt>, you need both the <tt class="docutils literal">lxml.etree</tt>
+module and <tt class="docutils literal">lxml.objectify</tt>:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">lxml</span> <span class="kn">import</span> <span class="n">etree</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">lxml</span> <span class="kn">import</span> <span class="n">objectify</span>
+</pre></div>
+<p>The objectify API is very different from the ElementTree API.  If it
+is used, it should not be mixed with other element implementations
+(such as trees parsed with <tt class="docutils literal">lxml.etree</tt>), to avoid non-obvious
+behaviour.</p>
+<p>The <a class="reference external" href="performance.html#lxml-objectify">benchmark page</a> has some hints on performance optimisation of
+code using lxml.objectify.</p>
+<p>To make the doctests in this document look a little nicer, we also use
+this:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">lxml.usedoctest</span>
+</pre></div>
+<p>Imported from within a doctest, this relieves us from caring about the exact
+formatting of XML output.</p>
+<div class="section" id="the-lxml-objectify-api">
+<h1>The lxml.objectify API</h1>
+<p>In <tt class="docutils literal">lxml.objectify</tt>, element trees provide an API that models the behaviour
+of normal Python object trees as closely as possible.</p>
+<div class="section" id="element-access-through-object-attributes">
+<h2>Element access through object attributes</h2>
+<p>The main idea behind the <tt class="docutils literal">objectify</tt> API is to hide XML element access
+behind the usual object attribute access pattern.  Asking an element for an
+attribute will return the sequence of children with corresponding tag names:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">root</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">Element</span><span class="p">(</span><span class="s2">"root"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="s2">"b"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">tag</span><span class="p">)</span>
+<span class="go">b</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">root</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="s2">"b"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">tag</span><span class="p">)</span>
+<span class="go">b</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">b</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">tag</span><span class="p">)</span>
+<span class="go">b</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">root</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">b</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="go">1</span>
+</pre></div>
+<p>For convenience, you can omit the index '0' to access the first child:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">b</span><span class="o">.</span><span class="n">tag</span><span class="p">)</span>
+<span class="go">b</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">root</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">b</span><span class="p">)</span>
+<span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">del</span> <span class="n">root</span><span class="o">.</span><span class="n">b</span>
+</pre></div>
+<p>Iteration and slicing also obey the requested tag:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">x1</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="s2">"x"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x2</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="s2">"x"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x3</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="s2">"x"</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span> <span class="n">el</span><span class="o">.</span><span class="n">tag</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">root</span><span class="o">.</span><span class="n">x</span> <span class="p">]</span>
+<span class="go">['x', 'x', 'x']</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span> <span class="n">el</span><span class="o">.</span><span class="n">tag</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">root</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="p">]</span>
+<span class="go">['x', 'x']</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span> <span class="n">el</span><span class="o">.</span><span class="n">tag</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">root</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">:]</span> <span class="p">]</span>
+<span class="go">['x']</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">del</span> <span class="n">root</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span> <span class="n">el</span><span class="o">.</span><span class="n">tag</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">root</span><span class="o">.</span><span class="n">x</span> <span class="p">]</span>
+<span class="go">['x', 'x']</span>
+</pre></div>
+<p>If you want to iterate over all children or need to provide a specific
+namespace for the tag, use the <tt class="docutils literal">iterchildren()</tt> method.  Like the other
+methods for iteration, it supports an optional tag keyword argument:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span> <span class="n">el</span><span class="o">.</span><span class="n">tag</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">root</span><span class="o">.</span><span class="n">iterchildren</span><span class="p">()</span> <span class="p">]</span>
+<span class="go">['b', 'x', 'x']</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span> <span class="n">el</span><span class="o">.</span><span class="n">tag</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">root</span><span class="o">.</span><span class="n">iterchildren</span><span class="p">(</span><span class="n">tag</span><span class="o">=</span><span class="s1">'b'</span><span class="p">)</span> <span class="p">]</span>
+<span class="go">['b']</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span> <span class="n">el</span><span class="o">.</span><span class="n">tag</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">root</span><span class="o">.</span><span class="n">b</span> <span class="p">]</span>
+<span class="go">['b']</span>
+</pre></div>
+<p>XML attributes are accessed as in the normal ElementTree API:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="s2">"c"</span><span class="p">,</span> <span class="n">myattr</span><span class="o">=</span><span class="s2">"someval"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">c</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"myattr"</span><span class="p">))</span>
+<span class="go">someval</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">root</span><span class="o">.</span><span class="n">c</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">"c"</span><span class="p">,</span> <span class="s2">"oh-oh"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">c</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"c"</span><span class="p">))</span>
+<span class="go">oh-oh</span>
+</pre></div>
+<p>In addition to the normal ElementTree API for appending elements to trees,
+subtrees can also be added by assigning them to object attributes.  In this
+case, the subtree is automatically deep copied and the tag name of its root is
+updated to match the attribute name:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">el</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">Element</span><span class="p">(</span><span class="s2">"yet_another_child"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">root</span><span class="o">.</span><span class="n">new_child</span> <span class="o">=</span> <span class="n">el</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">new_child</span><span class="o">.</span><span class="n">tag</span><span class="p">)</span>
+<span class="go">new_child</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">el</span><span class="o">.</span><span class="n">tag</span><span class="p">)</span>
+<span class="go">yet_another_child</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">root</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="p">[</span> <span class="n">objectify</span><span class="o">.</span><span class="n">Element</span><span class="p">(</span><span class="s2">"y"</span><span class="p">),</span> <span class="n">objectify</span><span class="o">.</span><span class="n">Element</span><span class="p">(</span><span class="s2">"y"</span><span class="p">)</span> <span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span> <span class="n">el</span><span class="o">.</span><span class="n">tag</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">root</span><span class="o">.</span><span class="n">y</span> <span class="p">]</span>
+<span class="go">['y', 'y']</span>
+</pre></div>
+<p>The latter is a short form for operations on the full slice:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">root</span><span class="o">.</span><span class="n">y</span><span class="p">[:]</span> <span class="o">=</span> <span class="p">[</span> <span class="n">objectify</span><span class="o">.</span><span class="n">Element</span><span class="p">(</span><span class="s2">"y"</span><span class="p">)</span> <span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span> <span class="n">el</span><span class="o">.</span><span class="n">tag</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">root</span><span class="o">.</span><span class="n">y</span> <span class="p">]</span>
+<span class="go">['y']</span>
+</pre></div>
+<p>You can also replace children that way:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">child1</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="s2">"child"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">child2</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="s2">"child"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">child3</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="s2">"child"</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">el</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">Element</span><span class="p">(</span><span class="s2">"new_child"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">subel</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">el</span><span class="p">,</span> <span class="s2">"sub"</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">root</span><span class="o">.</span><span class="n">child</span> <span class="o">=</span> <span class="n">el</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">child</span><span class="o">.</span><span class="n">sub</span><span class="o">.</span><span class="n">tag</span><span class="p">)</span>
+<span class="go">sub</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">root</span><span class="o">.</span><span class="n">child</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">el</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">child</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">sub</span><span class="o">.</span><span class="n">tag</span><span class="p">)</span>
+<span class="go">sub</span>
+</pre></div>
+<p>Note that special care must be taken when changing the tag name of an element:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">b</span><span class="o">.</span><span class="n">tag</span><span class="p">)</span>
+<span class="go">b</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">root</span><span class="o">.</span><span class="n">b</span><span class="o">.</span><span class="n">tag</span> <span class="o">=</span> <span class="s2">"notB"</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">root</span><span class="o">.</span><span class="n">b</span>
+<span class="gt">Traceback (most recent call last):</span>
+  <span class="c">...</span>
+<span class="gr">AttributeError</span>: <span class="n">no such child: b</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">notB</span><span class="o">.</span><span class="n">tag</span><span class="p">)</span>
+<span class="go">notB</span>
+</pre></div>
+</div>
+<div class="section" id="creating-objectify-trees">
+<h2>Creating objectify trees</h2>
+<p>As with <tt class="docutils literal">lxml.etree</tt>, you can either create an <tt class="docutils literal">objectify</tt> tree by
+parsing an XML document or by building one from scratch.  To parse a
+document, just use the <tt class="docutils literal">parse()</tt> or <tt class="docutils literal">fromstring()</tt> functions of
+the module:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">fileobject</span> <span class="o">=</span> <span class="n">StringIO</span><span class="p">(</span><span class="s1">'&lt;test/&gt;'</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">fileobject</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">getroot</span><span class="p">(),</span> <span class="n">objectify</span><span class="o">.</span><span class="n">ObjectifiedElement</span><span class="p">))</span>
+<span class="go">True</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">root</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="s1">'&lt;test/&gt;'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">objectify</span><span class="o">.</span><span class="n">ObjectifiedElement</span><span class="p">))</span>
+<span class="go">True</span>
+</pre></div>
+<p>To build a new tree in memory, <tt class="docutils literal">objectify</tt> replicates the standard
+factory function <tt class="docutils literal">Element()</tt> from <tt class="docutils literal">lxml.etree</tt>:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">obj_el</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">Element</span><span class="p">(</span><span class="s2">"new"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">obj_el</span><span class="p">,</span> <span class="n">objectify</span><span class="o">.</span><span class="n">ObjectifiedElement</span><span class="p">))</span>
+<span class="go">True</span>
+</pre></div>
+<p>After creating such an Element, you can use the <a class="reference external" href="tutorial.html#the-element-class">usual API</a> of
+lxml.etree to add SubElements to the tree:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">child</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">obj_el</span><span class="p">,</span> <span class="s2">"newchild"</span><span class="p">,</span> <span class="n">attr</span><span class="o">=</span><span class="s2">"value"</span><span class="p">)</span>
+</pre></div>
+<p>New subelements will automatically inherit the objectify behaviour
+from their tree.  However, all independent elements that you create
+through the <tt class="docutils literal">Element()</tt> factory of lxml.etree (instead of objectify)
+will not support the <tt class="docutils literal">objectify</tt> API by themselves:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">subel</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">obj_el</span><span class="p">,</span> <span class="s2">"sub"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">subel</span><span class="p">,</span> <span class="n">objectify</span><span class="o">.</span><span class="n">ObjectifiedElement</span><span class="p">))</span>
+<span class="go">True</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">independent_el</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">Element</span><span class="p">(</span><span class="s2">"new"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">independent_el</span><span class="p">,</span> <span class="n">objectify</span><span class="o">.</span><span class="n">ObjectifiedElement</span><span class="p">))</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+<div class="section" id="tree-generation-with-the-e-factory">
+<h2>Tree generation with the E-factory</h2>
+<p>To simplify the generation of trees even further, you can use the E-factory:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">E</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">E</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">root</span> <span class="o">=</span> <span class="n">E</span><span class="o">.</span><span class="n">root</span><span class="p">(</span>
+<span class="gp">... </span>  <span class="n">E</span><span class="o">.</span><span class="n">a</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span>
+<span class="gp">... </span>  <span class="n">E</span><span class="o">.</span><span class="n">b</span><span class="p">(</span><span class="mf">6.21</span><span class="p">),</span>
+<span class="gp">... </span>  <span class="n">E</span><span class="o">.</span><span class="n">c</span><span class="p">(</span><span class="bp">True</span><span class="p">),</span>
+<span class="gp">... </span>  <span class="n">E</span><span class="o">.</span><span class="n">d</span><span class="p">(</span><span class="s2">"how"</span><span class="p">,</span> <span class="n">tell</span><span class="o">=</span><span class="s2">"me"</span><span class="p">)</span>
+<span class="gp">... </span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">etree</span><span class="o">.</span><span class="n">tostring</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">pretty_print</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span>
+<span class="go">&lt;root xmlns:py="http://codespeak.net/lxml/objectify/pytype"&gt;</span>
+<span class="go">  &lt;a py:pytype="int"&gt;5&lt;/a&gt;</span>
+<span class="go">  &lt;b py:pytype="float"&gt;6.21&lt;/b&gt;</span>
+<span class="go">  &lt;c py:pytype="bool"&gt;true&lt;/c&gt;</span>
+<span class="go">  &lt;d py:pytype="str" tell="me"&gt;how&lt;/d&gt;</span>
+<span class="go">&lt;/root&gt;</span>
+</pre></div>
+<p>This allows you to write up a specific language in tags:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">ROOT</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">E</span><span class="o">.</span><span class="n">root</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TITLE</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">E</span><span class="o">.</span><span class="n">title</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">HOWMANY</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">objectify</span><span class="o">.</span><span class="n">E</span><span class="p">,</span> <span class="s2">"how-many"</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">root</span> <span class="o">=</span> <span class="n">ROOT</span><span class="p">(</span>
+<span class="gp">... </span>  <span class="n">TITLE</span><span class="p">(</span><span class="s2">"The title"</span><span class="p">),</span>
+<span class="gp">... </span>  <span class="n">HOWMANY</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="gp">... </span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">etree</span><span class="o">.</span><span class="n">tostring</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">pretty_print</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span>
+<span class="go">&lt;root xmlns:py="http://codespeak.net/lxml/objectify/pytype"&gt;</span>
+<span class="go">  &lt;title py:pytype="str"&gt;The title&lt;/title&gt;</span>
+<span class="go">  &lt;how-many py:pytype="int"&gt;5&lt;/how-many&gt;</span>
+<span class="go">&lt;/root&gt;</span>
+</pre></div>
+<p><tt class="docutils literal">objectify.E</tt> is an instance of <tt class="docutils literal">objectify.ElementMaker</tt>.  By default, it
+creates pytype annotated Elements without a namespace.  You can switch off the
+pytype annotation by passing False to the <tt class="docutils literal">annotate</tt> keyword argument of the
+constructor.  You can also pass a default namespace and an <tt class="docutils literal">nsmap</tt>:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">myE</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">ElementMaker</span><span class="p">(</span><span class="n">annotate</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+<span class="gp">... </span>          <span class="n">namespace</span><span class="o">=</span><span class="s2">"http://my/ns"</span><span class="p">,</span> <span class="n">nsmap</span><span class="o">=</span><span class="p">{</span><span class="bp">None</span> <span class="p">:</span> <span class="s2">"http://my/ns"</span><span class="p">})</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">root</span> <span class="o">=</span> <span class="n">myE</span><span class="o">.</span><span class="n">root</span><span class="p">(</span> <span class="n">myE</span><span class="o">.</span><span class="n">someint</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">etree</span><span class="o">.</span><span class="n">tostring</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">pretty_print</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span>
+<span class="go">&lt;root xmlns="http://my/ns"&gt;</span>
+<span class="go">  &lt;someint&gt;2&lt;/someint&gt;</span>
+<span class="go">&lt;/root&gt;</span>
+</pre></div>
+</div>
+<div class="section" id="namespace-handling">
+<h2>Namespace handling</h2>
+<p>During tag lookups, namespaces are handled mostly behind the scenes.
+If you access a child of an Element without specifying a namespace,
+the lookup will use the namespace of the parent:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">root</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">Element</span><span class="p">(</span><span class="s2">"{http://ns/}root"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="s2">"{http://ns/}b"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="s2">"{http://other/}c"</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">b</span><span class="o">.</span><span class="n">tag</span><span class="p">)</span>
+<span class="go">{http://ns/}b</span>
+</pre></div>
+<p>Note that the <tt class="docutils literal">SubElement()</tt> factory of <tt class="docutils literal">lxml.etree</tt> does not
+inherit any namespaces when creating a new subelement.  Element
+creation must be explicit about the namespace, and is simplified
+through the E-factory as described above.</p>
+<p>Lookups, however, inherit namespaces implicitly:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">b</span><span class="o">.</span><span class="n">tag</span><span class="p">)</span>
+<span class="go">{http://ns/}b</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">c</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+    <span class="o">...</span>
+<span class="gr">AttributeError</span>: <span class="n">no such child: {http://ns/}c</span>
+</pre></div>
+<p>To access an element in a different namespace than its parent, you can
+use <tt class="docutils literal">getattr()</tt>:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="s2">"{http://other/}c"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">tag</span><span class="p">)</span>
+<span class="go">{http://other/}c</span>
+</pre></div>
+<p>For convenience, there is also a quick way through item access:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">root</span><span class="p">[</span><span class="s2">"{http://other/}c"</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">tag</span><span class="p">)</span>
+<span class="go">{http://other/}c</span>
+</pre></div>
+<p>The same approach must be used to access children with tag names that are not
+valid Python identifiers:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">el</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="s2">"{http://ns/}tag-name"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">root</span><span class="p">[</span><span class="s2">"tag-name"</span><span class="p">]</span><span class="o">.</span><span class="n">tag</span><span class="p">)</span>
+<span class="go">{http://ns/}tag-name</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">new_el</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">Element</span><span class="p">(</span><span class="s2">"{http://ns/}new-element"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">el</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">new_el</span><span class="p">,</span> <span class="s2">"{http://ns/}child"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">el</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">new_el</span><span class="p">,</span> <span class="s2">"{http://ns/}child"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">el</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">new_el</span><span class="p">,</span> <span class="s2">"{http://ns/}child"</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">root</span><span class="p">[</span><span class="s2">"tag-name"</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span> <span class="n">new_el</span><span class="p">,</span> <span class="n">new_el</span> <span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">root</span><span class="p">[</span><span class="s2">"tag-name"</span><span class="p">]))</span>
+<span class="go">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">root</span><span class="p">[</span><span class="s2">"tag-name"</span><span class="p">]</span><span class="o">.</span><span class="n">tag</span><span class="p">)</span>
+<span class="go">{http://ns/}tag-name</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">root</span><span class="p">[</span><span class="s2">"tag-name"</span><span class="p">]</span><span class="o">.</span><span class="n">child</span><span class="p">))</span>
+<span class="go">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">root</span><span class="p">[</span><span class="s2">"tag-name"</span><span class="p">]</span><span class="o">.</span><span class="n">child</span><span class="o">.</span><span class="n">tag</span><span class="p">)</span>
+<span class="go">{http://ns/}child</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">root</span><span class="p">[</span><span class="s2">"tag-name"</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">child</span><span class="o">.</span><span class="n">tag</span><span class="p">)</span>
+<span class="go">{http://ns/}child</span>
+</pre></div>
+<p>or for names that have a special meaning in lxml.objectify:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">root</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">XML</span><span class="p">(</span><span class="s2">"&lt;root&gt;&lt;text&gt;TEXT&lt;/text&gt;&lt;/root&gt;"</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+  <span class="c">...</span>
+<span class="gr">AttributeError</span>: <span class="n">'NoneType' object has no attribute 'text'</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">root</span><span class="p">[</span><span class="s2">"text"</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+<span class="go">TEXT</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="asserting-a-schema">
+<h1>Asserting a Schema</h1>
+<p>When dealing with XML documents from different sources, you will often
+require them to follow a common schema.  In lxml.objectify, this
+directly translates to enforcing a specific object tree, i.e. expected
+object attributes are ensured to be there and to have the expected
+type.  This can easily be achieved through XML Schema validation at
+parse time.  Also see the <a class="reference external" href="validation.html">documentation on validation</a> on this
+topic.</p>
+<p>First of all, we need a parser that knows our schema, so let's say we
+parse the schema from a file-like object (or file or filename):</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">StringIO</span><span class="p">(</span><span class="s1">'''</span><span class="se">\</span>
+<span class="gp">... </span><span class="s1">  &lt;xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;</span>
+<span class="gp">... </span><span class="s1">    &lt;xsd:element name="a" type="AType"/&gt;</span>
+<span class="gp">... </span><span class="s1">    &lt;xsd:complexType name="AType"&gt;</span>
+<span class="gp">... </span><span class="s1">      &lt;xsd:sequence&gt;</span>
+<span class="gp">... </span><span class="s1">        &lt;xsd:element name="b" type="xsd:string" /&gt;</span>
+<span class="gp">... </span><span class="s1">      &lt;/xsd:sequence&gt;</span>
+<span class="gp">... </span><span class="s1">    &lt;/xsd:complexType&gt;</span>
+<span class="gp">... </span><span class="s1">  &lt;/xsd:schema&gt;</span>
+<span class="gp">... </span><span class="s1">'''</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">schema</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">XMLSchema</span><span class="p">(</span><span class="nb">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+</pre></div>
+<p>When creating the validating parser, we must make sure it <a class="reference external" href="#advance-element-class-lookup">returns
+objectify trees</a>.  This is best done with the <tt class="docutils literal">makeparser()</tt>
+function:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">makeparser</span><span class="p">(</span><span class="n">schema</span> <span class="o">=</span> <span class="n">schema</span><span class="p">)</span>
+</pre></div>
+<p>Now we can use it to parse a valid document:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">xml</span> <span class="o">=</span> <span class="s2">"&lt;a&gt;&lt;b&gt;test&lt;/b&gt;&lt;/a&gt;"</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="n">xml</span><span class="p">,</span> <span class="n">parser</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">b</span><span class="p">)</span>
+<span class="go">test</span>
+</pre></div>
+<p>Or an invalid document:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">xml</span> <span class="o">=</span> <span class="n">b</span><span class="s2">"&lt;a&gt;&lt;b&gt;test&lt;/b&gt;&lt;c/&gt;&lt;/a&gt;"</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="n">xml</span><span class="p">,</span> <span class="n">parser</span><span class="p">)</span>  <span class="c1"># doctest: +ELLIPSIS</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="gr">lxml.etree.XMLSyntaxError</span>: <span class="n">Element 'c': This element is not expected...</span>
+</pre></div>
+<p>Note that the same works for parse-time DTD validation, except that
+DTDs do not support any data types by design.</p>
+</div>
+<div class="section" id="objectpath">
+<h1>ObjectPath</h1>
+<p>For both convenience and speed, objectify supports its own path language,
+represented by the <tt class="docutils literal">ObjectPath</tt> class:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">root</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">Element</span><span class="p">(</span><span class="s2">"{http://ns/}root"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b1</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="s2">"{http://ns/}b"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span>  <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">b1</span><span class="p">,</span>   <span class="s2">"{http://ns/}c"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b2</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="s2">"{http://ns/}b"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span>  <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="s2">"{http://other/}d"</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">path</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">ObjectPath</span><span class="p">(</span><span class="s2">"root.b.c"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+<span class="go">root.b.c</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">path</span><span class="o">.</span><span class="n">hasattr</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">root</span><span class="p">)</span><span class="o">.</span><span class="n">tag</span><span class="p">)</span>
+<span class="go">{http://ns/}c</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">find</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">ObjectPath</span><span class="p">(</span><span class="s2">"root.b.c"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">find</span><span class="p">(</span><span class="n">root</span><span class="p">)</span><span class="o">.</span><span class="n">tag</span><span class="p">)</span>
+<span class="go">{http://ns/}c</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">find</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">ObjectPath</span><span class="p">(</span><span class="s2">"root.{http://other/}d"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">find</span><span class="p">(</span><span class="n">root</span><span class="p">)</span><span class="o">.</span><span class="n">tag</span><span class="p">)</span>
+<span class="go">{http://other/}d</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">find</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">ObjectPath</span><span class="p">(</span><span class="s2">"root.{not}there"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">find</span><span class="p">(</span><span class="n">root</span><span class="p">)</span><span class="o">.</span><span class="n">tag</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+  <span class="c">...</span>
+<span class="gr">AttributeError</span>: <span class="n">no such child: {not}there</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">find</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">ObjectPath</span><span class="p">(</span><span class="s2">"{not}there"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">find</span><span class="p">(</span><span class="n">root</span><span class="p">)</span><span class="o">.</span><span class="n">tag</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+  <span class="c">...</span>
+<span class="gr">ValueError</span>: <span class="n">root element does not match: need {not}there, got {http://ns/}root</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">find</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">ObjectPath</span><span class="p">(</span><span class="s2">"root.b[1]"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">find</span><span class="p">(</span><span class="n">root</span><span class="p">)</span><span class="o">.</span><span class="n">tag</span><span class="p">)</span>
+<span class="go">{http://ns/}b</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">find</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">ObjectPath</span><span class="p">(</span><span class="s2">"root.{http://ns/}b[1]"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">find</span><span class="p">(</span><span class="n">root</span><span class="p">)</span><span class="o">.</span><span class="n">tag</span><span class="p">)</span>
+<span class="go">{http://ns/}b</span>
+</pre></div>
+<p>Apart from strings, ObjectPath also accepts lists of path segments:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">find</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">ObjectPath</span><span class="p">([</span><span class="s1">'root'</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">,</span> <span class="s1">'c'</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">find</span><span class="p">(</span><span class="n">root</span><span class="p">)</span><span class="o">.</span><span class="n">tag</span><span class="p">)</span>
+<span class="go">{http://ns/}c</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">find</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">ObjectPath</span><span class="p">([</span><span class="s1">'root'</span><span class="p">,</span> <span class="s1">'{http://ns/}b[1]'</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">find</span><span class="p">(</span><span class="n">root</span><span class="p">)</span><span class="o">.</span><span class="n">tag</span><span class="p">)</span>
+<span class="go">{http://ns/}b</span>
+</pre></div>
+<p>You can also use relative paths starting with a '.' to ignore the actual root
+element and only inherit its namespace:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">find</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">ObjectPath</span><span class="p">(</span><span class="s2">".b[1]"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">find</span><span class="p">(</span><span class="n">root</span><span class="p">)</span><span class="o">.</span><span class="n">tag</span><span class="p">)</span>
+<span class="go">{http://ns/}b</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">find</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">ObjectPath</span><span class="p">([</span><span class="s1">''</span><span class="p">,</span> <span class="s1">'b[1]'</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">find</span><span class="p">(</span><span class="n">root</span><span class="p">)</span><span class="o">.</span><span class="n">tag</span><span class="p">)</span>
+<span class="go">{http://ns/}b</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">find</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">ObjectPath</span><span class="p">(</span><span class="s2">".unknown[1]"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">find</span><span class="p">(</span><span class="n">root</span><span class="p">)</span><span class="o">.</span><span class="n">tag</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+  <span class="c">...</span>
+<span class="gr">AttributeError</span>: <span class="n">no such child: {http://ns/}unknown</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">find</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">ObjectPath</span><span class="p">(</span><span class="s2">".{http://other/}unknown[1]"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">find</span><span class="p">(</span><span class="n">root</span><span class="p">)</span><span class="o">.</span><span class="n">tag</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+  <span class="c">...</span>
+<span class="gr">AttributeError</span>: <span class="n">no such child: {http://other/}unknown</span>
+</pre></div>
+<p>For convenience, a single dot represents the empty ObjectPath (identity):</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">find</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">ObjectPath</span><span class="p">(</span><span class="s2">"."</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">find</span><span class="p">(</span><span class="n">root</span><span class="p">)</span><span class="o">.</span><span class="n">tag</span><span class="p">)</span>
+<span class="go">{http://ns/}root</span>
+</pre></div>
+<p>ObjectPath objects can be used to manipulate trees:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">root</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">Element</span><span class="p">(</span><span class="s2">"{http://ns/}root"</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">path</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">ObjectPath</span><span class="p">(</span><span class="s2">".some.child.{http://other/}unknown"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">path</span><span class="o">.</span><span class="n">hasattr</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">path</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+  <span class="c">...</span>
+<span class="gr">AttributeError</span>: <span class="n">no such child: {http://ns/}some</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">path</span><span class="o">.</span><span class="n">setattr</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="s2">"my value"</span><span class="p">)</span> <span class="c1"># creates children as necessary</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">path</span><span class="o">.</span><span class="n">hasattr</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">root</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+<span class="go">my value</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">some</span><span class="o">.</span><span class="n">child</span><span class="p">[</span><span class="s2">"{http://other/}unknown"</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+<span class="go">my value</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span> <span class="n">path</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">root</span><span class="p">)</span> <span class="p">))</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">path</span><span class="o">.</span><span class="n">addattr</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="s2">"my new value"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span> <span class="n">path</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">root</span><span class="p">)</span> <span class="p">))</span>
+<span class="go">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span> <span class="n">el</span><span class="o">.</span><span class="n">text</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">path</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">root</span><span class="p">)</span> <span class="p">]</span>
+<span class="go">['my value', 'my new value']</span>
+</pre></div>
+<p>As with attribute assignment, <tt class="docutils literal">setattr()</tt> accepts lists:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">path</span><span class="o">.</span><span class="n">setattr</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="p">[</span><span class="s2">"v1"</span><span class="p">,</span> <span class="s2">"v2"</span><span class="p">,</span> <span class="s2">"v3"</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span> <span class="n">el</span><span class="o">.</span><span class="n">text</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">path</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">root</span><span class="p">)</span> <span class="p">]</span>
+<span class="go">['v1', 'v2', 'v3']</span>
+</pre></div>
+<p>Note, however, that indexing is only supported in this context if the children
+exist.  Indexing of non existing children will not extend or create a list of
+such children but raise an exception:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">path</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">ObjectPath</span><span class="p">(</span><span class="s2">".{non}existing[1]"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">path</span><span class="o">.</span><span class="n">setattr</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="s2">"my value"</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+  <span class="c">...</span>
+<span class="gr">TypeError</span>: <span class="n">creating indexed path attributes is not supported</span>
+</pre></div>
+<p>It is worth noting that ObjectPath does not depend on the <tt class="docutils literal">objectify</tt> module
+or the ObjectifiedElement implementation.  It can also be used in combination
+with Elements from the normal lxml.etree API.</p>
+</div>
+<div class="section" id="python-data-types">
+<h1>Python data types</h1>
+<p>The objectify module knows about Python data types and tries its best to let
+element content behave like them.  For example, they support the normal math
+operators:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">root</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span>
+<span class="gp">... </span>            <span class="s2">"&lt;root&gt;&lt;a&gt;5&lt;/a&gt;&lt;b&gt;11&lt;/b&gt;&lt;c&gt;true&lt;/c&gt;&lt;d&gt;hoi&lt;/d&gt;&lt;/root&gt;"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">root</span><span class="o">.</span><span class="n">a</span> <span class="o">+</span> <span class="n">root</span><span class="o">.</span><span class="n">b</span>
+<span class="go">16</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">root</span><span class="o">.</span><span class="n">a</span> <span class="o">+=</span> <span class="n">root</span><span class="o">.</span><span class="n">b</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">a</span><span class="p">)</span>
+<span class="go">16</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">root</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">a</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">root</span><span class="o">.</span><span class="n">a</span><span class="p">)</span>
+<span class="go">3</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">c</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">root</span><span class="o">.</span><span class="n">c</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="ow">not</span> <span class="n">root</span><span class="o">.</span><span class="n">c</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="k">print</span><span class="p">(</span><span class="s2">"false!"</span><span class="p">)</span>
+<span class="go">false!</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">d</span> <span class="o">+</span> <span class="s2">" test !"</span><span class="p">)</span>
+<span class="go">hoi test !</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">root</span><span class="o">.</span><span class="n">d</span> <span class="o">=</span> <span class="s2">"</span><span class="si">%s</span><span class="s2"> - </span><span class="si">%s</span><span class="s2">"</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">d</span> <span class="o">%</span> <span class="p">(</span><span class="mi">1234</span><span class="p">,</span> <span class="mi">12345</span><span class="p">))</span>
+<span class="go">1234 - 12345</span>
+</pre></div>
+<p>However, data elements continue to provide the objectify API.  This means that
+sequence operations such as <tt class="docutils literal">len()</tt>, slicing and indexing (e.g. of strings)
+cannot behave as the Python types.  Like all other tree elements, they show
+the normal slicing behaviour of objectify elements:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">root</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="s2">"&lt;root&gt;&lt;a&gt;test&lt;/a&gt;&lt;b&gt;toast&lt;/b&gt;&lt;/root&gt;"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">a</span> <span class="o">+</span> <span class="s1">' me'</span><span class="p">)</span> <span class="c1"># behaves like a string, right?</span>
+<span class="go">test me</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">a</span><span class="p">)</span> <span class="c1"># but there's only one 'a' element!</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span> <span class="n">a</span><span class="o">.</span><span class="n">tag</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">root</span><span class="o">.</span><span class="n">a</span> <span class="p">]</span>
+<span class="go">['a']</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">tag</span><span class="p">)</span>
+<span class="go">a</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">a</span><span class="p">)</span>
+<span class="go">test</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span> <span class="nb">str</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">root</span><span class="o">.</span><span class="n">a</span><span class="p">[:</span><span class="mi">1</span><span class="p">]</span> <span class="p">]</span>
+<span class="go">['test']</span>
+</pre></div>
+<p>If you need to run sequence operations on data types, you must ask the API for
+the <em>real</em> Python value.  The string value is always available through the
+normal ElementTree <tt class="docutils literal">.text</tt> attribute.  Additionally, all data classes
+provide a <tt class="docutils literal">.pyval</tt> attribute that returns the value as plain Python type:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">root</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="s2">"&lt;root&gt;&lt;a&gt;test&lt;/a&gt;&lt;b&gt;5&lt;/b&gt;&lt;/root&gt;"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">root</span><span class="o">.</span><span class="n">a</span><span class="o">.</span><span class="n">text</span>
+<span class="go">'test'</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">root</span><span class="o">.</span><span class="n">a</span><span class="o">.</span><span class="n">pyval</span>
+<span class="go">'test'</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">root</span><span class="o">.</span><span class="n">b</span><span class="o">.</span><span class="n">text</span>
+<span class="go">'5'</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">root</span><span class="o">.</span><span class="n">b</span><span class="o">.</span><span class="n">pyval</span>
+<span class="go">5</span>
+</pre></div>
+<p>Note, however, that both attributes are read-only in objectify.  If you want
+to change values, just assign them directly to the attribute:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">root</span><span class="o">.</span><span class="n">a</span><span class="o">.</span><span class="n">text</span>  <span class="o">=</span> <span class="s2">"25"</span>
+<span class="gt">Traceback (most recent call last):</span>
+  <span class="c">...</span>
+<span class="gr">TypeError</span>: <span class="n">attribute 'text' of 'StringElement' objects is not writable</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">root</span><span class="o">.</span><span class="n">a</span><span class="o">.</span><span class="n">pyval</span> <span class="o">=</span> <span class="mi">25</span>
+<span class="gt">Traceback (most recent call last):</span>
+  <span class="c">...</span>
+<span class="gr">TypeError</span>: <span class="n">attribute 'pyval' of 'StringElement' objects is not writable</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">root</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="mi">25</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">a</span><span class="p">)</span>
+<span class="go">25</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">a</span><span class="o">.</span><span class="n">pyval</span><span class="p">)</span>
+<span class="go">25</span>
+</pre></div>
+<p>In other words, <tt class="docutils literal">objectify</tt> data elements behave like immutable Python
+types.  You can replace them, but not modify them.</p>
+<div class="section" id="recursive-tree-dump">
+<h2>Recursive tree dump</h2>
+<p>To see the data types that are currently used, you can call the module level
+<tt class="docutils literal">dump()</tt> function that returns a recursive string representation for
+elements:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">root</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="s2">"""</span>
+<span class="gp">... </span><span class="s2">&lt;root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;</span>
+<span class="gp">... </span><span class="s2">  &lt;a attr1="foo" attr2="bar"&gt;1&lt;/a&gt;</span>
+<span class="gp">... </span><span class="s2">  &lt;a&gt;1.2&lt;/a&gt;</span>
+<span class="gp">... </span><span class="s2">  &lt;b&gt;1&lt;/b&gt;</span>
+<span class="gp">... </span><span class="s2">  &lt;b&gt;true&lt;/b&gt;</span>
+<span class="gp">... </span><span class="s2">  &lt;c&gt;what?&lt;/c&gt;</span>
+<span class="gp">... </span><span class="s2">  &lt;d xsi:nil="true"/&gt;</span>
+<span class="gp">... </span><span class="s2">&lt;/root&gt;</span>
+<span class="gp">... </span><span class="s2">"""</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">objectify</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">root</span><span class="p">))</span>
+<span class="go">root = None [ObjectifiedElement]</span>
+<span class="go">    a = 1 [IntElement]</span>
+<span class="go">      * attr1 = 'foo'</span>
+<span class="go">      * attr2 = 'bar'</span>
+<span class="go">    a = 1.2 [FloatElement]</span>
+<span class="go">    b = 1 [IntElement]</span>
+<span class="go">    b = True [BoolElement]</span>
+<span class="go">    c = 'what?' [StringElement]</span>
+<span class="go">    d = None [NoneElement]</span>
+<span class="go">      * xsi:nil = 'true'</span>
+</pre></div>
+<p>You can freely switch between different types for the same child:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">root</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="s2">"&lt;root&gt;&lt;a&gt;5&lt;/a&gt;&lt;/root&gt;"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">objectify</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">root</span><span class="p">))</span>
+<span class="go">root = None [ObjectifiedElement]</span>
+<span class="go">    a = 5 [IntElement]</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">root</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="s1">'nice string!'</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">objectify</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">root</span><span class="p">))</span>
+<span class="go">root = None [ObjectifiedElement]</span>
+<span class="go">    a = 'nice string!' [StringElement]</span>
+<span class="go">      * py:pytype = 'str'</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">root</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">objectify</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">root</span><span class="p">))</span>
+<span class="go">root = None [ObjectifiedElement]</span>
+<span class="go">    a = True [BoolElement]</span>
+<span class="go">      * py:pytype = 'bool'</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">root</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">objectify</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">root</span><span class="p">))</span>
+<span class="go">root = None [ObjectifiedElement]</span>
+<span class="go">    a = 1 [IntElement]</span>
+<span class="go">      * py:pytype = 'int'</span>
+<span class="go">    a = 2 [IntElement]</span>
+<span class="go">      * py:pytype = 'int'</span>
+<span class="go">    a = 3 [IntElement]</span>
+<span class="go">      * py:pytype = 'int'</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">root</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">objectify</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">root</span><span class="p">))</span>
+<span class="go">root = None [ObjectifiedElement]</span>
+<span class="go">    a = 1 [IntElement]</span>
+<span class="go">      * py:pytype = 'int'</span>
+<span class="go">    a = 2 [IntElement]</span>
+<span class="go">      * py:pytype = 'int'</span>
+<span class="go">    a = 3 [IntElement]</span>
+<span class="go">      * py:pytype = 'int'</span>
+</pre></div>
+</div>
+<div class="section" id="recursive-string-representation-of-elements">
+<h2>Recursive string representation of elements</h2>
+<p>Normally, elements use the standard string representation for str() that is
+provided by lxml.etree.  You can enable a pretty-print representation for
+objectify elements like this:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">objectify</span><span class="o">.</span><span class="n">enable_recursive_str</span><span class="p">()</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">root</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="s2">"""</span>
+<span class="gp">... </span><span class="s2">&lt;root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;</span>
+<span class="gp">... </span><span class="s2">  &lt;a attr1="foo" attr2="bar"&gt;1&lt;/a&gt;</span>
+<span class="gp">... </span><span class="s2">  &lt;a&gt;1.2&lt;/a&gt;</span>
+<span class="gp">... </span><span class="s2">  &lt;b&gt;1&lt;/b&gt;</span>
+<span class="gp">... </span><span class="s2">  &lt;b&gt;true&lt;/b&gt;</span>
+<span class="gp">... </span><span class="s2">  &lt;c&gt;what?&lt;/c&gt;</span>
+<span class="gp">... </span><span class="s2">  &lt;d xsi:nil="true"/&gt;</span>
+<span class="gp">... </span><span class="s2">&lt;/root&gt;</span>
+<span class="gp">... </span><span class="s2">"""</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">root</span><span class="p">))</span>
+<span class="go">root = None [ObjectifiedElement]</span>
+<span class="go">    a = 1 [IntElement]</span>
+<span class="go">      * attr1 = 'foo'</span>
+<span class="go">      * attr2 = 'bar'</span>
+<span class="go">    a = 1.2 [FloatElement]</span>
+<span class="go">    b = 1 [IntElement]</span>
+<span class="go">    b = True [BoolElement]</span>
+<span class="go">    c = 'what?' [StringElement]</span>
+<span class="go">    d = None [NoneElement]</span>
+<span class="go">      * xsi:nil = 'true'</span>
+</pre></div>
+<p>This behaviour can be switched off in the same way:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">objectify</span><span class="o">.</span><span class="n">enable_recursive_str</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="how-data-types-are-matched">
+<h1>How data types are matched</h1>
+<p>Objectify uses two different types of Elements.  Structural Elements (or tree
+Elements) represent the object tree structure.  Data Elements represent the
+data containers at the leafs.  You can explicitly create tree Elements with
+the <tt class="docutils literal">objectify.Element()</tt> factory and data Elements with the
+<tt class="docutils literal">objectify.DataElement()</tt> factory.</p>
+<p>When Element objects are created, lxml.objectify must determine which
+implementation class to use for them.  This is relatively easy for tree
+Elements and less so for data Elements.  The algorithm is as follows:</p>
+<ol class="arabic simple">
+<li>If an element has children, use the default tree class.</li>
+<li>If an element is defined as xsi:nil, use the NoneElement class.</li>
+<li>If a "Python type hint" attribute is given, use this to determine the element
+class, see below.</li>
+<li>If an XML Schema xsi:type hint is given, use this to determine the element
+class, see below.</li>
+<li>Try to determine the element class from the text content type by trial and
+error.</li>
+<li>If the element is a root node then use the default tree class.</li>
+<li>Otherwise, use the default class for empty data classes.</li>
+</ol>
+<p>You can change the default classes for tree Elements and empty data Elements
+at setup time.  The <tt class="docutils literal">ObjectifyElementClassLookup()</tt> call accepts two keyword
+arguments, <tt class="docutils literal">tree_class</tt> and <tt class="docutils literal">empty_data_class</tt>, that determine the Element
+classes used in these cases.  By default, <tt class="docutils literal">tree_class</tt> is a class called
+<tt class="docutils literal">ObjectifiedElement</tt> and <tt class="docutils literal">empty_data_class</tt> is a <tt class="docutils literal">StringElement</tt>.</p>
+<div class="section" id="type-annotations">
+<h2>Type annotations</h2>
+<p>The "type hint" mechanism deploys an XML attribute defined as
+<tt class="docutils literal">lxml.objectify.PYTYPE_ATTRIBUTE</tt>.  It may contain any of the following
+string values: int, long, float, str, unicode, NoneType:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">objectify</span><span class="o">.</span><span class="n">PYTYPE_ATTRIBUTE</span><span class="p">)</span>
+<span class="go">{http://codespeak.net/lxml/objectify/pytype}pytype</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ns</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">PYTYPE_ATTRIBUTE</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">'}'</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">root</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="s2">"""</span><span class="se">\</span>
+<span class="gp">... </span><span class="s2">&lt;root xmlns:py='</span><span class="si">%s</span><span class="s2">'&gt;</span>
+<span class="gp">... </span><span class="s2">  &lt;a py:pytype='str'&gt;5&lt;/a&gt;</span>
+<span class="gp">... </span><span class="s2">  &lt;b py:pytype='int'&gt;5&lt;/b&gt;</span>
+<span class="gp">... </span><span class="s2">  &lt;c py:pytype='NoneType' /&gt;</span>
+<span class="gp">... </span><span class="s2">&lt;/root&gt;</span>
+<span class="gp">... </span><span class="s2">"""</span> <span class="o">%</span> <span class="n">ns</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">a</span> <span class="o">+</span> <span class="mi">10</span><span class="p">)</span>
+<span class="go">510</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">b</span> <span class="o">+</span> <span class="mi">10</span><span class="p">)</span>
+<span class="go">15</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">c</span><span class="p">)</span>
+<span class="go">None</span>
+</pre></div>
+<p>Note that you can change the name and namespace used for this
+attribute through the <tt class="docutils literal">set_pytype_attribute_tag(tag)</tt> module
+function, in case your application ever needs to.  There is also a
+utility function <tt class="docutils literal">annotate()</tt> that recursively generates this
+attribute for the elements of a tree:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">root</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="s2">"&lt;root&gt;&lt;a&gt;test&lt;/a&gt;&lt;b&gt;5&lt;/b&gt;&lt;/root&gt;"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">objectify</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">root</span><span class="p">))</span>
+<span class="go">root = None [ObjectifiedElement]</span>
+<span class="go">    a = 'test' [StringElement]</span>
+<span class="go">    b = 5 [IntElement]</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">objectify</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">objectify</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">root</span><span class="p">))</span>
+<span class="go">root = None [ObjectifiedElement]</span>
+<span class="go">    a = 'test' [StringElement]</span>
+<span class="go">      * py:pytype = 'str'</span>
+<span class="go">    b = 5 [IntElement]</span>
+<span class="go">      * py:pytype = 'int'</span>
+</pre></div>
+</div>
+<div class="section" id="xml-schema-datatype-annotation">
+<h2>XML Schema datatype annotation</h2>
+<p>A second way of specifying data type information uses XML Schema types as
+element annotations.  Objectify knows those that can be mapped to normal
+Python types:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">root</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="s1">'''</span><span class="se">\</span>
+<span class="gp">... </span><span class="s1">   &lt;root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"</span>
+<span class="gp">... </span><span class="s1">         xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;</span>
+<span class="gp">... </span><span class="s1">     &lt;d xsi:type="xsd:double"&gt;5&lt;/d&gt;</span>
+<span class="gp">... </span><span class="s1">     &lt;i xsi:type="xsd:int"   &gt;5&lt;/i&gt;</span>
+<span class="gp">... </span><span class="s1">     &lt;s xsi:type="xsd:string"&gt;5&lt;/s&gt;</span>
+<span class="gp">... </span><span class="s1">   &lt;/root&gt;</span>
+<span class="gp">... </span><span class="s1">   '''</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">objectify</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">root</span><span class="p">))</span>
+<span class="go">root = None [ObjectifiedElement]</span>
+<span class="go">    d = 5.0 [FloatElement]</span>
+<span class="go">      * xsi:type = 'xsd:double'</span>
+<span class="go">    i = 5 [IntElement]</span>
+<span class="go">      * xsi:type = 'xsd:int'</span>
+<span class="go">    s = '5' [StringElement]</span>
+<span class="go">      * xsi:type = 'xsd:string'</span>
+</pre></div>
+<p>Again, there is a utility function <tt class="docutils literal">xsiannotate()</tt> that recursively
+generates the "xsi:type" attribute for the elements of a tree:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">root</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="s1">'''</span><span class="se">\</span>
+<span class="gp">... </span><span class="s1">   &lt;root&gt;&lt;a&gt;test&lt;/a&gt;&lt;b&gt;5&lt;/b&gt;&lt;c&gt;true&lt;/c&gt;&lt;/root&gt;</span>
+<span class="gp">... </span><span class="s1">   '''</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">objectify</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">root</span><span class="p">))</span>
+<span class="go">root = None [ObjectifiedElement]</span>
+<span class="go">    a = 'test' [StringElement]</span>
+<span class="go">    b = 5 [IntElement]</span>
+<span class="go">    c = True [BoolElement]</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">objectify</span><span class="o">.</span><span class="n">xsiannotate</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">objectify</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">root</span><span class="p">))</span>
+<span class="go">root = None [ObjectifiedElement]</span>
+<span class="go">    a = 'test' [StringElement]</span>
+<span class="go">      * xsi:type = 'xsd:string'</span>
+<span class="go">    b = 5 [IntElement]</span>
+<span class="go">      * xsi:type = 'xsd:integer'</span>
+<span class="go">    c = True [BoolElement]</span>
+<span class="go">      * xsi:type = 'xsd:boolean'</span>
+</pre></div>
+<p>Note, however, that <tt class="docutils literal">xsiannotate()</tt> will always use the first XML Schema
+datatype that is defined for any given Python type, see also
+<a class="reference internal" href="#defining-additional-data-classes">Defining additional data classes</a>.</p>
+<p>The utility function <tt class="docutils literal">deannotate()</tt> can be used to get rid of 'py:pytype'
+and/or 'xsi:type' information:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">root</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="s1">'''</span><span class="se">\</span>
+<span class="gp">... </span><span class="s1">&lt;root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"</span>
+<span class="gp">... </span><span class="s1">      xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;</span>
+<span class="gp">... </span><span class="s1">  &lt;d xsi:type="xsd:double"&gt;5&lt;/d&gt;</span>
+<span class="gp">... </span><span class="s1">  &lt;i xsi:type="xsd:int"   &gt;5&lt;/i&gt;</span>
+<span class="gp">... </span><span class="s1">  &lt;s xsi:type="xsd:string"&gt;5&lt;/s&gt;</span>
+<span class="gp">... </span><span class="s1">&lt;/root&gt;'''</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">objectify</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">objectify</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">root</span><span class="p">))</span>
+<span class="go">root = None [ObjectifiedElement]</span>
+<span class="go">    d = 5.0 [FloatElement]</span>
+<span class="go">      * xsi:type = 'xsd:double'</span>
+<span class="go">      * py:pytype = 'float'</span>
+<span class="go">    i = 5 [IntElement]</span>
+<span class="go">      * xsi:type = 'xsd:int'</span>
+<span class="go">      * py:pytype = 'int'</span>
+<span class="go">    s = '5' [StringElement]</span>
+<span class="go">      * xsi:type = 'xsd:string'</span>
+<span class="go">      * py:pytype = 'str'</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">objectify</span><span class="o">.</span><span class="n">deannotate</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">objectify</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">root</span><span class="p">))</span>
+<span class="go">root = None [ObjectifiedElement]</span>
+<span class="go">    d = 5 [IntElement]</span>
+<span class="go">    i = 5 [IntElement]</span>
+<span class="go">    s = 5 [IntElement]</span>
+</pre></div>
+<p>You can control which type attributes should be de-annotated with the keyword
+arguments 'pytype' (default: True) and 'xsi' (default: True).
+<tt class="docutils literal">deannotate()</tt> can also remove 'xsi:nil' attributes by setting 'xsi_nil=True'
+(default: False):</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">root</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="s1">'''</span><span class="se">\</span>
+<span class="gp">... </span><span class="s1">&lt;root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"</span>
+<span class="gp">... </span><span class="s1">      xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;</span>
+<span class="gp">... </span><span class="s1">  &lt;d xsi:type="xsd:double"&gt;5&lt;/d&gt;</span>
+<span class="gp">... </span><span class="s1">  &lt;i xsi:type="xsd:int"   &gt;5&lt;/i&gt;</span>
+<span class="gp">... </span><span class="s1">  &lt;s xsi:type="xsd:string"&gt;5&lt;/s&gt;</span>
+<span class="gp">... </span><span class="s1">  &lt;n xsi:nil="true"/&gt;</span>
+<span class="gp">... </span><span class="s1">&lt;/root&gt;'''</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">objectify</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">objectify</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">root</span><span class="p">))</span>
+<span class="go">root = None [ObjectifiedElement]</span>
+<span class="go">    d = 5.0 [FloatElement]</span>
+<span class="go">      * xsi:type = 'xsd:double'</span>
+<span class="go">      * py:pytype = 'float'</span>
+<span class="go">    i = 5 [IntElement]</span>
+<span class="go">      * xsi:type = 'xsd:int'</span>
+<span class="go">      * py:pytype = 'int'</span>
+<span class="go">    s = '5' [StringElement]</span>
+<span class="go">      * xsi:type = 'xsd:string'</span>
+<span class="go">      * py:pytype = 'str'</span>
+<span class="go">    n = None [NoneElement]</span>
+<span class="go">      * xsi:nil = 'true'</span>
+<span class="go">      * py:pytype = 'NoneType'</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">objectify</span><span class="o">.</span><span class="n">deannotate</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">xsi_nil</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">objectify</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">root</span><span class="p">))</span>
+<span class="go">root = None [ObjectifiedElement]</span>
+<span class="go">    d = 5 [IntElement]</span>
+<span class="go">    i = 5 [IntElement]</span>
+<span class="go">    s = 5 [IntElement]</span>
+<span class="go">    n = u'' [StringElement]</span>
+</pre></div>
+<p>Note that <tt class="docutils literal">deannotate()</tt> does not remove the namespace declarations
+of the <tt class="docutils literal">pytype</tt> namespace by default.  To remove them as well, and
+to generally clean up the namespace declarations in the document
+(usually when done with the whole processing), pass the option
+<tt class="docutils literal">cleanup_namespaces=True</tt>.  This option is new in lxml 2.3.2.  In
+older versions, use the function <tt class="docutils literal">lxml.etree.cleanup_namespaces()</tt>
+instead.</p>
+</div>
+<div class="section" id="the-dataelement-factory">
+<h2>The DataElement factory</h2>
+<p>For convenience, the <tt class="docutils literal">DataElement()</tt> factory creates an Element with a
+Python value in one step.  You can pass the required Python type name or the
+XSI type name:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">root</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">Element</span><span class="p">(</span><span class="s2">"root"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">root</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">DataElement</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">_pytype</span><span class="o">=</span><span class="s2">"int"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">objectify</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">root</span><span class="p">))</span>
+<span class="go">root = None [ObjectifiedElement]</span>
+<span class="go">    x = 5 [IntElement]</span>
+<span class="go">      * py:pytype = 'int'</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">root</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">DataElement</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">_pytype</span><span class="o">=</span><span class="s2">"str"</span><span class="p">,</span> <span class="n">myattr</span><span class="o">=</span><span class="s2">"someval"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">objectify</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">root</span><span class="p">))</span>
+<span class="go">root = None [ObjectifiedElement]</span>
+<span class="go">    x = '5' [StringElement]</span>
+<span class="go">      * myattr = 'someval'</span>
+<span class="go">      * py:pytype = 'str'</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">root</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">DataElement</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">_xsi</span><span class="o">=</span><span class="s2">"integer"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">objectify</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">root</span><span class="p">))</span>
+<span class="go">root = None [ObjectifiedElement]</span>
+<span class="go">    x = 5 [IntElement]</span>
+<span class="go">      * py:pytype = 'int'</span>
+<span class="go">      * xsi:type = 'xsd:integer'</span>
+</pre></div>
+<p>XML Schema types reside in the XML schema namespace thus <tt class="docutils literal">DataElement()</tt>
+tries to correctly prefix the xsi:type attribute value for you:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">root</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">Element</span><span class="p">(</span><span class="s2">"root"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">root</span><span class="o">.</span><span class="n">s</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">DataElement</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">_xsi</span><span class="o">=</span><span class="s2">"string"</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">objectify</span><span class="o">.</span><span class="n">deannotate</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">xsi</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">etree</span><span class="o">.</span><span class="n">tostring</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">pretty_print</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span>
+<span class="go">&lt;root xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;</span>
+<span class="go">  &lt;s xsi:type="xsd:string"&gt;5&lt;/s&gt;</span>
+<span class="go">&lt;/root&gt;</span>
+</pre></div>
+<p><tt class="docutils literal">DataElement()</tt> uses a default nsmap to set these prefixes:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">el</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">DataElement</span><span class="p">(</span><span class="s1">'5'</span><span class="p">,</span> <span class="n">_xsi</span><span class="o">=</span><span class="s1">'string'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">namespaces</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">el</span><span class="o">.</span><span class="n">nsmap</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">namespaces</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">prefix</span><span class="p">,</span> <span class="n">namespace</span> <span class="ow">in</span> <span class="n">namespaces</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="k">print</span><span class="p">(</span><span class="s2">"</span><span class="si">%s</span><span class="s2"> - </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="n">prefix</span><span class="p">,</span> <span class="n">namespace</span><span class="p">))</span>
+<span class="go">py - http://codespeak.net/lxml/objectify/pytype</span>
+<span class="go">xsd - http://www.w3.org/2001/XMLSchema</span>
+<span class="go">xsi - http://www.w3.org/2001/XMLSchema-instance</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">el</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"{http://www.w3.org/2001/XMLSchema-instance}type"</span><span class="p">))</span>
+<span class="go">xsd:string</span>
+</pre></div>
+<p>While you can set custom namespace prefixes, it is necessary to provide valid
+namespace information if you choose to do so:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">el</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">DataElement</span><span class="p">(</span><span class="s1">'5'</span><span class="p">,</span> <span class="n">_xsi</span><span class="o">=</span><span class="s1">'foo:string'</span><span class="p">,</span>
+<span class="gp">... </span>         <span class="n">nsmap</span><span class="o">=</span><span class="p">{</span><span class="s1">'foo'</span><span class="p">:</span> <span class="s1">'http://www.w3.org/2001/XMLSchema'</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">namespaces</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">el</span><span class="o">.</span><span class="n">nsmap</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">namespaces</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">prefix</span><span class="p">,</span> <span class="n">namespace</span> <span class="ow">in</span> <span class="n">namespaces</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="k">print</span><span class="p">(</span><span class="s2">"</span><span class="si">%s</span><span class="s2"> - </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="n">prefix</span><span class="p">,</span> <span class="n">namespace</span><span class="p">))</span>
+<span class="go">foo - http://www.w3.org/2001/XMLSchema</span>
+<span class="go">py - http://codespeak.net/lxml/objectify/pytype</span>
+<span class="go">xsi - http://www.w3.org/2001/XMLSchema-instance</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">el</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"{http://www.w3.org/2001/XMLSchema-instance}type"</span><span class="p">))</span>
+<span class="go">foo:string</span>
+</pre></div>
+<p>Note how lxml chose a default prefix for the XML Schema Instance
+namespace.  We can override it as in the following example:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">el</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">DataElement</span><span class="p">(</span><span class="s1">'5'</span><span class="p">,</span> <span class="n">_xsi</span><span class="o">=</span><span class="s1">'foo:string'</span><span class="p">,</span>
+<span class="gp">... </span>         <span class="n">nsmap</span><span class="o">=</span><span class="p">{</span><span class="s1">'foo'</span><span class="p">:</span> <span class="s1">'http://www.w3.org/2001/XMLSchema'</span><span class="p">,</span>
+<span class="gp">... </span>                <span class="s1">'myxsi'</span><span class="p">:</span> <span class="s1">'http://www.w3.org/2001/XMLSchema-instance'</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">namespaces</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">el</span><span class="o">.</span><span class="n">nsmap</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">namespaces</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">prefix</span><span class="p">,</span> <span class="n">namespace</span> <span class="ow">in</span> <span class="n">namespaces</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="k">print</span><span class="p">(</span><span class="s2">"</span><span class="si">%s</span><span class="s2"> - </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="n">prefix</span><span class="p">,</span> <span class="n">namespace</span><span class="p">))</span>
+<span class="go">foo - http://www.w3.org/2001/XMLSchema</span>
+<span class="go">myxsi - http://www.w3.org/2001/XMLSchema-instance</span>
+<span class="go">py - http://codespeak.net/lxml/objectify/pytype</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">el</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"{http://www.w3.org/2001/XMLSchema-instance}type"</span><span class="p">))</span>
+<span class="go">foo:string</span>
+</pre></div>
+<p>Care must be taken if different namespace prefixes have been used for the same
+namespace.  Namespace information gets merged to avoid duplicate definitions
+when adding a new sub-element to a tree, but this mechanism does not adapt the
+prefixes of attribute values:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">root</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="s2">"""&lt;root xmlns:schema="http://www.w3.org/2001/XMLSchema"/&gt;"""</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">etree</span><span class="o">.</span><span class="n">tostring</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">pretty_print</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span>
+<span class="go">&lt;root xmlns:schema="http://www.w3.org/2001/XMLSchema"/&gt;</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">DataElement</span><span class="p">(</span><span class="s2">"17"</span><span class="p">,</span> <span class="n">_xsi</span><span class="o">=</span><span class="s2">"string"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">etree</span><span class="o">.</span><span class="n">tostring</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">pretty_print</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span>
+<span class="go">&lt;value xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" py:pytype="str" xsi:type="xsd:string"&gt;17&lt;/value&gt;</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">root</span><span class="o">.</span><span class="n">s</span> <span class="o">=</span> <span class="n">s</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">etree</span><span class="o">.</span><span class="n">tostring</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">pretty_print</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span>
+<span class="go">&lt;root xmlns:schema="http://www.w3.org/2001/XMLSchema"&gt;</span>
+<span class="go">  &lt;s xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" py:pytype="str" xsi:type="xsd:string"&gt;17&lt;/s&gt;</span>
+<span class="go">&lt;/root&gt;</span>
+</pre></div>
+<p>It is your responsibility to fix the prefixes of attribute values if you
+choose to deviate from the standard prefixes.  A convenient way to do this for
+xsi:type attributes is to use the <tt class="docutils literal">xsiannotate()</tt> utility:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">objectify</span><span class="o">.</span><span class="n">xsiannotate</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">etree</span><span class="o">.</span><span class="n">tostring</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">pretty_print</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span>
+<span class="go">&lt;root xmlns:schema="http://www.w3.org/2001/XMLSchema"&gt;</span>
+<span class="go">  &lt;s xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" py:pytype="str" xsi:type="schema:string"&gt;17&lt;/s&gt;</span>
+<span class="go">&lt;/root&gt;</span>
+</pre></div>
+<p>Of course, it is discouraged to use different prefixes for one and the same
+namespace when building up an objectify tree.</p>
+</div>
+<div class="section" id="defining-additional-data-classes">
+<h2>Defining additional data classes</h2>
+<p>You can plug additional data classes into objectify that will be used in
+exactly the same way as the predefined types.  Data classes can either inherit
+from <tt class="docutils literal">ObjectifiedDataElement</tt> directly or from one of the specialised
+classes like <tt class="docutils literal">NumberElement</tt> or <tt class="docutils literal">BoolElement</tt>.  The numeric types require
+an initial call to the NumberElement method <tt class="docutils literal">self._setValueParser(function)</tt>
+to set their type conversion function (string -&gt; numeric Python type).  This
+call should be placed into the element <tt class="docutils literal">_init()</tt> method.</p>
+<p>The registration of data classes uses the <tt class="docutils literal">PyType</tt> class:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">ChristmasDate</span><span class="p">(</span><span class="n">objectify</span><span class="o">.</span><span class="n">ObjectifiedDataElement</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="nf">call_santa</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="k">print</span><span class="p">(</span><span class="s2">"Ho ho ho!"</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">checkChristmasDate</span><span class="p">(</span><span class="n">date_string</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">if</span> <span class="ow">not</span> <span class="n">date_string</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">'24.12.'</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="k">raise</span> <span class="ne">ValueError</span> <span class="c1"># or TypeError</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xmas_type</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">PyType</span><span class="p">(</span><span class="s1">'date'</span><span class="p">,</span> <span class="n">checkChristmasDate</span><span class="p">,</span> <span class="n">ChristmasDate</span><span class="p">)</span>
+</pre></div>
+<p>The PyType constructor takes a string type name, an (optional) callable type
+check and the custom data class.  If a type check is provided it must accept a
+string as argument and raise ValueError or TypeError if it cannot handle the
+string value.</p>
+<p>PyTypes are used if an element carries a <tt class="docutils literal">py:pytype</tt> attribute denoting its
+data type or, in absence of such an attribute, if the given type check callable
+does not raise a ValueError/TypeError exception when applied to the element
+text.</p>
+<p>If you want, you can also register this type under an XML Schema type name:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">xmas_type</span><span class="o">.</span><span class="n">xmlSchemaTypes</span> <span class="o">=</span> <span class="p">(</span><span class="s2">"date"</span><span class="p">,)</span>
+</pre></div>
+<p>XML Schema types will be considered if the element has an <tt class="docutils literal">xsi:type</tt>
+attribute that specifies its data type.  The line above binds the XSD type
+<tt class="docutils literal">date</tt> to the newly defined Python type.  Note that this must be done before
+the next step, which is to register the type.  Then you can use it:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">xmas_type</span><span class="o">.</span><span class="n">register</span><span class="p">()</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">root</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span>
+<span class="gp">... </span>            <span class="s2">"&lt;root&gt;&lt;a&gt;24.12.2000&lt;/a&gt;&lt;b&gt;12.24.2000&lt;/b&gt;&lt;/root&gt;"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">root</span><span class="o">.</span><span class="n">a</span><span class="o">.</span><span class="n">call_santa</span><span class="p">()</span>
+<span class="go">Ho ho ho!</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">root</span><span class="o">.</span><span class="n">b</span><span class="o">.</span><span class="n">call_santa</span><span class="p">()</span>
+<span class="gt">Traceback (most recent call last):</span>
+  <span class="c">...</span>
+<span class="gr">AttributeError</span>: <span class="n">no such child: call_santa</span>
+</pre></div>
+<p>If you need to specify dependencies between the type check functions, you can
+pass a sequence of type names through the <tt class="docutils literal">before</tt> and <tt class="docutils literal">after</tt> keyword
+arguments of the <tt class="docutils literal">register()</tt> method.  The PyType will then try to register
+itself before or after the respective types, as long as they are currently
+registered.  Note that this only impacts the currently registered types at the
+time of registration.  Types that are registered later on will not care about
+the dependencies of already registered types.</p>
+<p>If you provide XML Schema type information, this will override the type check
+function defined above:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">root</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="s1">'''</span><span class="se">\</span>
+<span class="gp">... </span><span class="s1">   &lt;root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;</span>
+<span class="gp">... </span><span class="s1">     &lt;a xsi:type="date"&gt;12.24.2000&lt;/a&gt;</span>
+<span class="gp">... </span><span class="s1">   &lt;/root&gt;</span>
+<span class="gp">... </span><span class="s1">   '''</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">a</span><span class="p">)</span>
+<span class="go">12.24.2000</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">root</span><span class="o">.</span><span class="n">a</span><span class="o">.</span><span class="n">call_santa</span><span class="p">()</span>
+<span class="go">Ho ho ho!</span>
+</pre></div>
+<p>To unregister a type, call its <tt class="docutils literal">unregister()</tt> method:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">root</span><span class="o">.</span><span class="n">a</span><span class="o">.</span><span class="n">call_santa</span><span class="p">()</span>
+<span class="go">Ho ho ho!</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xmas_type</span><span class="o">.</span><span class="n">unregister</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">root</span><span class="o">.</span><span class="n">a</span><span class="o">.</span><span class="n">call_santa</span><span class="p">()</span>
+<span class="gt">Traceback (most recent call last):</span>
+  <span class="c">...</span>
+<span class="gr">AttributeError</span>: <span class="n">no such child: call_santa</span>
+</pre></div>
+<p>Be aware, though, that this does not immediately apply to elements to which
+there already is a Python reference.  Their Python class will only be changed
+after all references are gone and the Python object is garbage collected.</p>
+</div>
+<div class="section" id="advanced-element-class-lookup">
+<h2>Advanced element class lookup</h2>
+<p>In some cases, the normal data class setup is not enough.  Being based
+on <tt class="docutils literal">lxml.etree</tt>, however, <tt class="docutils literal">lxml.objectify</tt> supports very
+fine-grained control over the Element classes used in a tree.  All you
+have to do is configure a different <a class="reference external" href="element_classes.html">class lookup</a> mechanism (or
+write one yourself).</p>
+<p>The first step for the setup is to create a new parser that builds
+objectify documents.  The objectify API is meant for data-centric XML
+(as opposed to document XML with mixed content).  Therefore, we
+configure the parser to let it remove whitespace-only text from the
+parsed document if it is not enclosed by an XML element.  Note that
+this alters the document infoset, so if you consider the removed
+spaces as data in your specific use case, you should go with a normal
+parser and just set the element class lookup.  Most applications,
+however, will work fine with the following setup:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">makeparser</span><span class="p">(</span><span class="n">remove_blank_text</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+<p>What this does internally, is:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">XMLParser</span><span class="p">(</span><span class="n">remove_blank_text</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lookup</span> <span class="o">=</span> <span class="n">objectify</span><span class="o">.</span><span class="n">ObjectifyElementClassLookup</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span><span class="o">.</span><span class="n">set_element_class_lookup</span><span class="p">(</span><span class="n">lookup</span><span class="p">)</span>
+</pre></div>
+<p>If you want to change the lookup scheme, say, to get additional
+support for <a class="reference external" href="element_classes.html#namespace-class-lookup">namespace specific classes</a>, you can register the
+objectify lookup as a fallback of the namespace lookup.  In this case,
+however, you have to take care that the namespace classes inherit from
+<tt class="docutils literal">objectify.ObjectifiedElement</tt>, not only from the normal
+<tt class="docutils literal">lxml.etree.ElementBase</tt>, so that they support the <tt class="docutils literal">objectify</tt>
+API.  The above setup code then becomes:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">lookup</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">ElementNamespaceClassLookup</span><span class="p">(</span>
+<span class="gp">... </span>                  <span class="n">objectify</span><span class="o">.</span><span class="n">ObjectifyElementClassLookup</span><span class="p">()</span> <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span><span class="o">.</span><span class="n">set_element_class_lookup</span><span class="p">(</span><span class="n">lookup</span><span class="p">)</span>
+</pre></div>
+<p>See the documentation on <a class="reference external" href="element_classes.html">class lookup</a> schemes for more information.</p>
+</div>
+</div>
+<div class="section" id="what-is-different-from-lxml-etree">
+<h1>What is different from lxml.etree?</h1>
+<p>Such a different Element API obviously implies some side effects to the normal
+behaviour of the rest of the API.</p>
+<ul class="simple">
+<li>len(&lt;element&gt;) returns the sibling count, not the number of children of
+&lt;element&gt;. You can retrieve the number of children with the
+<tt class="docutils literal">countchildren()</tt> method.</li>
+<li>Iteration over elements does not yield the children, but the siblings.  You
+can access all children with the <tt class="docutils literal">iterchildren()</tt> method on elements or
+retrieve a list by calling the <tt class="docutils literal">getchildren()</tt> method.</li>
+<li>The find, findall and findtext methods require a different implementation
+based on ETXPath.  In <tt class="docutils literal">lxml.etree</tt>, they use a Python implementation based
+on the original iteration scheme.  This has the disadvantage that they may
+not be 100% backwards compatible, and the additional advantage that they now
+support any XPath expression.</li>
+</ul>
+</div>
+</div>
+<div class="footer">
+<hr class="footer" />
+Generated on: 2018-06-22.
+
+</div>
+</body>
+</html>

@@ -1,0 +1,778 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>lxml.html.clean</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lxml-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="/">lxml API</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="lxml-module.html">Package&nbsp;lxml</a> ::
+        <a href="lxml.html-module.html">Package&nbsp;html</a> ::
+        Module&nbsp;clean
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="lxml.html.clean-module.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== MODULE DESCRIPTION ==================== -->
+<h1 class="epydoc">Module clean</h1><p class="nomargin-top"><span class="codelink"><a href="lxml.html.clean-pysrc.html">source&nbsp;code</a></span></p>
+<p>A cleanup tool for HTML.</p>
+<p>Removes unwanted tags and content.  See the <a href="lxml.html.clean.Cleaner-class.html" class="link">Cleaner</a> class for
+details.</p>
+
+<!-- ==================== CLASSES ==================== -->
+<a name="section-Classes"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Classes</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Classes"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="str-class.html" class="summary-name" onclick="show_private();">unicode</a><br />
+      str(object='') -&gt; string
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="str-class.html" class="summary-name" onclick="show_private();">bytes</a><br />
+      str(object='') -&gt; string
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.html.clean.Cleaner-class.html" class="summary-name">Cleaner</a><br />
+      Instances cleans the document of each of the possible offending
+elements.  The cleaning is controlled by attributes; you can
+override attributes in a subclass, or set them in the constructor.
+    </td>
+  </tr>
+</table>
+<!-- ==================== FUNCTIONS ==================== -->
+<a name="section-Functions"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Functions</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Functions"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">character</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="unichr"></a><span class="summary-sig-name">unichr</span>(<span class="summary-sig-arg">i</span>)</span><br />
+      Return a string of one character with ordinal i; 0 &lt;= i &lt; 256.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_is_image_dataurl"></a><span class="summary-sig-name">_is_image_dataurl</span>(<span class="summary-sig-arg">...</span>)</span><br />
+      search(string[, pos[, endpos]]) --&gt; match object or None.
+Scan through string looking for a match, and return a corresponding
+match object instance. Return None if no position in the string matches.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.html.clean-pysrc.html#_is_image_dataurl">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_is_possibly_malicious_scheme"></a><span class="summary-sig-name">_is_possibly_malicious_scheme</span>(<span class="summary-sig-arg">...</span>)</span><br />
+      search(string[, pos[, endpos]]) --&gt; match object or None.
+Scan through string looking for a match, and return a corresponding
+match object instance. Return None if no position in the string matches.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.html.clean-pysrc.html#_is_possibly_malicious_scheme">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_is_javascript_scheme"></a><span class="summary-sig-name">_is_javascript_scheme</span>(<span class="summary-sig-arg">s</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.html.clean-pysrc.html#_is_javascript_scheme">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_substitute_whitespace"></a><span class="summary-sig-name">_substitute_whitespace</span>(<span class="summary-sig-arg">...</span>)</span><br />
+      sub(repl, string[, count = 0]) --&gt; newstring
+Return the string obtained by replacing the leftmost non-overlapping
+occurrences of pattern in string by the replacement repl.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.html.clean-pysrc.html#_substitute_whitespace">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="clean_html"></a><span class="summary-sig-name">clean_html</span>(<span class="summary-sig-arg">...</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.html.clean-pysrc.html#clean_html">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lxml.html.clean-module.html#autolink" class="summary-sig-name">autolink</a>(<span class="summary-sig-arg">el</span>,
+        <span class="summary-sig-arg">link_regexes</span>=<span class="summary-sig-default">_link_regexes</span>,
+        <span class="summary-sig-arg">avoid_elements</span>=<span class="summary-sig-default">_avoid_elements</span>,
+        <span class="summary-sig-arg">avoid_hosts</span>=<span class="summary-sig-default">_avoid_hosts</span>,
+        <span class="summary-sig-arg">avoid_classes</span>=<span class="summary-sig-default">_avoid_classes</span>)</span><br />
+      Turn any URLs into links.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.html.clean-pysrc.html#autolink">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_link_text"></a><span class="summary-sig-name">_link_text</span>(<span class="summary-sig-arg">text</span>,
+        <span class="summary-sig-arg">link_regexes</span>,
+        <span class="summary-sig-arg">avoid_hosts</span>,
+        <span class="summary-sig-arg">factory</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.html.clean-pysrc.html#_link_text">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lxml.html.clean-module.html#autolink_html" class="summary-sig-name">autolink_html</a>(<span class="summary-sig-arg">html</span>)</span><br />
+      Turn any URLs into links.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.html.clean-pysrc.html#autolink_html">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lxml.html.clean-module.html#word_break" class="summary-sig-name">word_break</a>(<span class="summary-sig-arg">el</span>,
+        <span class="summary-sig-arg">max_width</span>=<span class="summary-sig-default">40</span>,
+        <span class="summary-sig-arg">avoid_elements</span>=<span class="summary-sig-default">_avoid_word_break_elements</span>,
+        <span class="summary-sig-arg">avoid_classes</span>=<span class="summary-sig-default">_avoid_word_break_classes</span>,
+        <span class="summary-sig-arg">break_character</span>=<span class="summary-sig-default">unichr(0x200b)</span>)</span><br />
+      Breaks any long words found in the body of the text (not attributes).</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.html.clean-pysrc.html#word_break">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="word_break_html"></a><span class="summary-sig-name">word_break_html</span>(<span class="summary-sig-arg">html</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.html.clean-pysrc.html#word_break_html">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_break_text"></a><span class="summary-sig-name">_break_text</span>(<span class="summary-sig-arg">text</span>,
+        <span class="summary-sig-arg">max_width</span>,
+        <span class="summary-sig-arg">break_character</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.html.clean-pysrc.html#_break_text">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_insert_break"></a><span class="summary-sig-name">_insert_break</span>(<span class="summary-sig-arg">word</span>,
+        <span class="summary-sig-arg">width</span>,
+        <span class="summary-sig-arg">break_character</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.html.clean-pysrc.html#_insert_break">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== VARIABLES ==================== -->
+<a name="section-Variables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Variables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="basestring"></a><span class="summary-name">basestring</span> = <code title="str, bytes">str, bytes</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="_css_javascript_re"></a><span class="summary-name">_css_javascript_re</span> = <code title="re.compile(r'(?is)expression\s*\(.*?\)')">re.compile(r'<code class="re-flags">(?is)</code>expression\s<code class="re-op">*</code>\(.<code class="re-op">*?</code>\)')</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="_css_import_re"></a><span class="summary-name">_css_import_re</span> = <code title="re.compile(r'(?i)@\s*import')">re.compile(r'<code class="re-flags">(?i)</code>@\s<code class="re-op">*</code>import')</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.html.clean-module.html#_conditional_comment_re" class="summary-name" onclick="show_private();">_conditional_comment_re</a> = <code title="re.compile(r'(?is)\[if[\s\n\r]+.*?\][\s\n\r]*&gt;')">re.compile(r'<code class="re-flags">(?is)</code>\[if<code class="re-group">[</code>\s\n\r<code class="re-group">]</code><code class="re-op">+</code>.<code class="re-op">*?</code>\]<code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="_find_styled_elements"></a><span class="summary-name">_find_styled_elements</span> = <code title="descendant-or-self::*[@style]">descendant-or-self::*[@style]</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.html.clean-module.html#_find_external_links" class="summary-name" onclick="show_private();">_find_external_links</a> = <code title="descendant-or-self::a  [normalize-space(@href) and substring(normalize\
+-space(@href),1,1) != '#'] |descendant-or-self::x:a[normalize-space(@h\
+ref) and substring(normalize-space(@href),1,1) != '#']">descendant-or-self::a  [normalize-space<code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="clean"></a><span class="summary-name">clean</span> = <code title="&lt;lxml.html.clean.Cleaner object&gt;">&lt;lxml.html.clean.Cleaner object&gt;</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.html.clean-module.html#_link_regexes" class="summary-name" onclick="show_private();">_link_regexes</a> = <code title="[re.compile(r'(?i)(?P&lt;body&gt;https?://(?P&lt;host&gt;[a-z0-9\._-]+)(?:/[/-_\.,\
+a-z0-9%&amp;\?;=~]*)?(?:\([/-_\.,a-z0-9%&amp;\?;=~]*\))?)'),
+ re.compile(r'(?i)mailto:(?P&lt;body&gt;[a-z0-9\._-]+@(?P&lt;host&gt;[a-z0-9_\.-]+\
+[a-z]))')]"><code class="variable-group">[</code>re.compile(r'<code class="re-flags">(?i)</code><code class="re-group">(?P&lt;</code><code class="re-ref">body</code><code class="re-group">&gt;</code>https<code class="re-op">?</code>://<code class="re-group">(?P&lt;</code><code class="re-ref">host</code><code class="re-group">&gt;</code><code class="re-group">[</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.html.clean-module.html#_avoid_elements" class="summary-name" onclick="show_private();">_avoid_elements</a> = <code title="['textarea', 'pre', 'code', 'head', 'select', 'a']"><code class="variable-group">[</code><code class="variable-quote">'</code><code class="variable-string">textarea</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">pre</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">code</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">head</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">select</code><code class="variable-quote">'</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.html.clean-module.html#_avoid_hosts" class="summary-name" onclick="show_private();">_avoid_hosts</a> = <code title="[re.compile(r'(?i)^localhost'),
+ re.compile(r'(?i)\bexample\.(?:com|org|net)$'),
+ re.compile(r'^127\.0\.0\.1$')]"><code class="variable-group">[</code>re.compile(r'<code class="re-flags">(?i)</code>^localhost')<code class="variable-op">, </code>re.compile(r'<code class="re-flags">(?</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="_avoid_classes"></a><span class="summary-name">_avoid_classes</span> = <code title="['nolink']"><code class="variable-group">[</code><code class="variable-quote">'</code><code class="variable-string">nolink</code><code class="variable-quote">'</code><code class="variable-group">]</code></code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="_avoid_word_break_elements"></a><span class="summary-name">_avoid_word_break_elements</span> = <code title="['pre', 'textarea', 'code']"><code class="variable-group">[</code><code class="variable-quote">'</code><code class="variable-string">pre</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">textarea</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">code</code><code class="variable-quote">'</code><code class="variable-group">]</code></code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="_avoid_word_break_classes"></a><span class="summary-name">_avoid_word_break_classes</span> = <code title="['nobreak']"><code class="variable-group">[</code><code class="variable-quote">'</code><code class="variable-string">nobreak</code><code class="variable-quote">'</code><code class="variable-group">]</code></code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="_break_prefer_re"></a><span class="summary-name">_break_prefer_re</span> = <code title="re.compile(r'(?i)[^a-z]')">re.compile(r'<code class="re-flags">(?i)</code><code class="re-group">[</code><code class="re-op">^</code>a<code class="re-op">-</code>z<code class="re-group">]</code>')</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="__package__"></a><span class="summary-name">__package__</span> = <code title="'lxml.html'"><code class="variable-quote">'</code><code class="variable-string">lxml.html</code><code class="variable-quote">'</code></code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="__test__"></a><span class="summary-name">__test__</span> = <code title="{}"><code class="variable-group">{</code><code class="variable-group">}</code></code>
+    </td>
+  </tr>
+</table>
+<!-- ==================== FUNCTION DETAILS ==================== -->
+<a name="section-FunctionDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Function Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-FunctionDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="autolink"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">autolink</span>(<span class="sig-arg">el</span>,
+        <span class="sig-arg">link_regexes</span>=<span class="sig-default">_link_regexes</span>,
+        <span class="sig-arg">avoid_elements</span>=<span class="sig-default">_avoid_elements</span>,
+        <span class="sig-arg">avoid_hosts</span>=<span class="sig-default">_avoid_hosts</span>,
+        <span class="sig-arg">avoid_classes</span>=<span class="sig-default">_avoid_classes</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lxml.html.clean-pysrc.html#autolink">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Turn any URLs into links.</p>
+<p>It will search for links identified by the given regular
+expressions (by default mailto and http(s) links).</p>
+<p>It won't link text in an element in avoid_elements, or an element
+with a class in avoid_classes.  It won't link to anything with a
+host that matches one of the regular expressions in avoid_hosts
+(default localhost and 127.0.0.1).</p>
+<p>If you pass in an element, the element's tail will not be
+substituted, only the contents of the element.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="autolink_html"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">autolink_html</span>(<span class="sig-arg">html</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lxml.html.clean-pysrc.html#autolink_html">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Turn any URLs into links.</p>
+<p>It will search for links identified by the given regular
+expressions (by default mailto and http(s) links).</p>
+<p>It won't link text in an element in avoid_elements, or an element
+with a class in avoid_classes.  It won't link to anything with a
+host that matches one of the regular expressions in avoid_hosts
+(default localhost and 127.0.0.1).</p>
+<p>If you pass in an element, the element's tail will not be
+substituted, only the contents of the element.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="word_break"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">word_break</span>(<span class="sig-arg">el</span>,
+        <span class="sig-arg">max_width</span>=<span class="sig-default">40</span>,
+        <span class="sig-arg">avoid_elements</span>=<span class="sig-default">_avoid_word_break_elements</span>,
+        <span class="sig-arg">avoid_classes</span>=<span class="sig-default">_avoid_word_break_classes</span>,
+        <span class="sig-arg">break_character</span>=<span class="sig-default">unichr(0x200b)</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lxml.html.clean-pysrc.html#word_break">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Breaks any long words found in the body of the text (not attributes).</p>
+<p>Doesn't effect any of the tags in avoid_elements, by default
+<tt class="rst-docutils literal">&lt;textarea&gt;</tt> and <tt class="rst-docutils literal">&lt;pre&gt;</tt></p>
+<p>Breaks words by inserting &amp;#8203;, which is a unicode character
+for Zero Width Space character.  This generally takes up no space
+in rendering, but does copy as a space, and in monospace contexts
+usually takes up space.</p>
+<p>See <a class="rst-reference external" href="http://www.cs.tut.fi/~jkorpela/html/nobr.html" target="_top">http://www.cs.tut.fi/~jkorpela/html/nobr.html</a> for a discussion</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== VARIABLES DETAILS ==================== -->
+<a name="section-VariablesDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Variables Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-VariablesDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="_conditional_comment_re"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">_conditional_comment_re</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+re.compile(r'<code class="re-flags">(?is)</code>\[if<code class="re-group">[</code>\s\n\r<code class="re-group">]</code><code class="re-op">+</code>.<code class="re-op">*?</code>\]<code class="re-group">[</code>\s\n\r<code class="re-group">]</code><code class="re-op">*</code>&gt;')
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="_find_external_links"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">_find_external_links</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+descendant-or-self::a  [normalize-space(@href) and substring(normalize<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+-space(@href),1,1) != '#'] |descendant-or-self::x:a[normalize-space(@h<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+ref) and substring(normalize-space(@href),1,1) != '#']
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="_link_regexes"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">_link_regexes</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">[</code>re.compile(r'<code class="re-flags">(?i)</code><code class="re-group">(?P&lt;</code><code class="re-ref">body</code><code class="re-group">&gt;</code>https<code class="re-op">?</code>://<code class="re-group">(?P&lt;</code><code class="re-ref">host</code><code class="re-group">&gt;</code><code class="re-group">[</code>a<code class="re-op">-</code>z0<code class="re-op">-</code>9\._-<code class="re-group">]</code><code class="re-op">+</code><code class="re-group">)</code><code class="re-group">(?:</code>/<code class="re-group">[</code>/-_\.,<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+a<code class="re-op">-</code>z0<code class="re-op">-</code>9%&amp;\?;=~<code class="re-group">]</code><code class="re-op">*</code><code class="re-group">)</code><code class="re-op">?</code><code class="re-group">(?:</code>\(<code class="re-group">[</code>/-_\.,a<code class="re-op">-</code>z0<code class="re-op">-</code>9%&amp;\?;=~<code class="re-group">]</code><code class="re-op">*</code>\)<code class="re-group">)</code><code class="re-op">?</code><code class="re-group">)</code>')<code class="variable-op">,</code>
+ re.compile(r'<code class="re-flags">(?i)</code>mailto:<code class="re-group">(?P&lt;</code><code class="re-ref">body</code><code class="re-group">&gt;</code><code class="re-group">[</code>a<code class="re-op">-</code>z0<code class="re-op">-</code>9\._-<code class="re-group">]</code><code class="re-op">+</code>@<code class="re-group">(?P&lt;</code><code class="re-ref">host</code><code class="re-group">&gt;</code><code class="re-group">[</code>a<code class="re-op">-</code>z0<code class="re-op">-</code>9_\.-<code class="re-group">]</code><code class="re-op">+</code><code class="re-group"></code><span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+<code class="re-group">[</code>a<code class="re-op">-</code>z<code class="re-group">]</code><code class="re-group">)</code><code class="re-group">)</code>')<code class="variable-group">]</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="_avoid_elements"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">_avoid_elements</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">[</code><code class="variable-quote">'</code><code class="variable-string">textarea</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">pre</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">code</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">head</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">select</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">a</code><code class="variable-quote">'</code><code class="variable-group">]</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="_avoid_hosts"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">_avoid_hosts</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">[</code>re.compile(r'<code class="re-flags">(?i)</code>^localhost')<code class="variable-op">,</code>
+ re.compile(r'<code class="re-flags">(?i)</code>\bexample\.<code class="re-group">(?:</code>com<code class="re-op">|</code>org<code class="re-op">|</code>net<code class="re-group">)</code>$')<code class="variable-op">,</code>
+ re.compile(r'^127\.0\.0\.1$')<code class="variable-group">]</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lxml-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="/">lxml API</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Fri Jun 22 18:59:52 2018
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

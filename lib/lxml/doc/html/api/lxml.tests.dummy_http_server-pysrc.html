@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>lxml.tests.dummy_http_server</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lxml-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="/">lxml API</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="lxml-module.html">Package&nbsp;lxml</a> ::
+        <a href="lxml.tests-module.html">Package&nbsp;tests</a> ::
+        Module&nbsp;dummy_http_server
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="lxml.tests.dummy_http_server-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="lxml.tests.dummy_http_server-module.html">Module lxml.tests.dummy_http_server</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-docstring">Simple HTTP request dumper for tests in Python 2.5+.</tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">sys</tt> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">contextlib</tt> <tt class="py-keyword">import</tt> <tt class="py-name">contextmanager</tt> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"><tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line">    <tt class="py-keyword">import</tt> <tt class="py-name">urlparse</tt> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"><tt class="py-keyword">except</tt> <tt class="py-name">ImportError</tt><tt class="py-op">:</tt> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line">    <tt class="py-comment"># Python 3</tt> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line">    <tt class="py-keyword">import</tt> <tt class="py-name">urllib</tt><tt class="py-op">.</tt><tt id="link-0" class="py-name" targets="Method lxml.etree._ElementTree.parse()=lxml.etree._ElementTree-class.html#parse,Function lxml.etree.parse()=lxml.etree-module.html#parse,Function lxml.html.ElementSoup.parse()=lxml.html.ElementSoup-module.html#parse,Function lxml.html.html5parser.parse()=lxml.html.html5parser-module.html#parse,Function lxml.html.soupparser.parse()=lxml.html.soupparser-module.html#parse,Function lxml.objectify.parse()=lxml.objectify-module.html#parse,Method lxml.tests.common_imports.HelperTestCase.parse()=lxml.tests.common_imports.HelperTestCase-class.html#parse"><a title="lxml.etree._ElementTree.parse
+lxml.etree.parse
+lxml.html.ElementSoup.parse
+lxml.html.html5parser.parse
+lxml.html.soupparser.parse
+lxml.objectify.parse
+lxml.tests.common_imports.HelperTestCase.parse" class="py-name" href="#" onclick="return doclink('link-0', 'parse', 'link-0');">parse</a></tt> <tt class="py-keyword">as</tt> <tt class="py-name">urlparse</tt> </tt>
+<a name="webserver"></a><div id="webserver-def"><a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line"> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line"> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line"><tt class="py-decorator">@</tt><tt class="py-decorator">contextmanager</tt> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt> <a class="py-toggle" href="#" id="webserver-toggle" onclick="return toggle('webserver');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.dummy_http_server-module.html#webserver">webserver</a><tt class="py-op">(</tt><tt class="py-param">app</tt><tt class="py-op">,</tt> <tt class="py-param">port</tt><tt class="py-op">=</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-param">host</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="webserver-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="webserver-expanded"><a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line">    <tt class="py-docstring">"""Context manager entry point for the 'with' statement.</tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line"><tt class="py-docstring">    Pass 0 as port number to dynamically allocate a free port.</tt> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line"><tt class="py-docstring">    Usage:</tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line"><tt class="py-docstring">    with webserver(wsgi_app_function, 8080) as host_url:</tt> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line"><tt class="py-docstring">        do_ws_calls(host_url)</tt> </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line">    <tt class="py-name">server</tt> <tt class="py-op">=</tt> <tt id="link-1" class="py-name" targets="Function lxml.tests.dummy_http_server.build_web_server()=lxml.tests.dummy_http_server-module.html#build_web_server"><a title="lxml.tests.dummy_http_server.build_web_server" class="py-name" href="#" onclick="return doclink('link-1', 'build_web_server', 'link-1');">build_web_server</a></tt><tt class="py-op">(</tt><tt class="py-name">app</tt><tt class="py-op">,</tt> <tt class="py-name">port</tt><tt class="py-op">,</tt> <tt class="py-name">host</tt> <tt class="py-keyword">or</tt> <tt class="py-string">'127.0.0.1'</tt><tt class="py-op">)</tt> </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line">    <tt class="py-name">host</tt><tt class="py-op">,</tt> <tt class="py-name">port</tt> <tt class="py-op">=</tt> <tt class="py-name">server</tt><tt class="py-op">.</tt><tt class="py-name">socket</tt><tt class="py-op">.</tt><tt class="py-name">getsockname</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line"> </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line">    <tt class="py-keyword">import</tt> <tt class="py-name">threading</tt> </tt>
+<a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line">    <tt class="py-name">thread</tt> <tt class="py-op">=</tt> <tt class="py-name">threading</tt><tt class="py-op">.</tt><tt class="py-name">Thread</tt><tt class="py-op">(</tt><tt id="link-2" class="py-name" targets="Variable lxml.etree._ProcessingInstruction.target=lxml.etree._ProcessingInstruction-class.html#target"><a title="lxml.etree._ProcessingInstruction.target" class="py-name" href="#" onclick="return doclink('link-2', 'target', 'link-2');">target</a></tt><tt class="py-op">=</tt><tt class="py-name">server</tt><tt class="py-op">.</tt><tt class="py-name">serve_forever</tt><tt class="py-op">,</tt> </tt>
+<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line">                              <tt class="py-name">kwargs</tt><tt class="py-op">=</tt><tt class="py-op">{</tt><tt class="py-string">'poll_interval'</tt><tt class="py-op">:</tt> <tt class="py-number">0.5</tt><tt class="py-op">}</tt><tt class="py-op">)</tt> </tt>
+<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line">    <tt class="py-name">thread</tt><tt class="py-op">.</tt><tt class="py-name">setDaemon</tt><tt class="py-op">(</tt><tt class="py-name">True</tt><tt class="py-op">)</tt> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line">    <tt class="py-name">thread</tt><tt class="py-op">.</tt><tt id="link-3" class="py-name" targets="Method lxml.etree.TreeBuilder.start()=lxml.etree.TreeBuilder-class.html#start"><a title="lxml.etree.TreeBuilder.start" class="py-name" href="#" onclick="return doclink('link-3', 'start', 'link-3');">start</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line">    <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line">        <tt class="py-keyword">yield</tt> <tt class="py-string">'http://%s:%s/'</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">host</tt><tt class="py-op">,</tt> <tt class="py-name">port</tt><tt class="py-op">)</tt>  <tt class="py-comment"># yield control to 'with' body</tt> </tt>
+<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line">    <tt class="py-keyword">finally</tt><tt class="py-op">:</tt> </tt>
+<a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line">        <tt class="py-name">server</tt><tt class="py-op">.</tt><tt class="py-name">shutdown</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line">        <tt class="py-name">server</tt><tt class="py-op">.</tt><tt class="py-name">server_close</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line">    <tt class="py-name">thread</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-name">timeout</tt><tt class="py-op">=</tt><tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line"> </tt>
+<a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line"> </tt>
+<a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line"><tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line">    <tt class="py-keyword">from</tt> <tt class="py-name">SocketServer</tt> <tt class="py-keyword">import</tt> <tt class="py-name">ThreadingMixIn</tt> </tt>
+<a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line"><tt class="py-keyword">except</tt> <tt class="py-name">ImportError</tt><tt class="py-op">:</tt> </tt>
+<a name="L45"></a><tt class="py-lineno">45</tt>  <tt class="py-line">    <tt class="py-comment"># Python 3</tt> </tt>
+<a name="L46"></a><tt class="py-lineno">46</tt>  <tt class="py-line">    <tt class="py-keyword">from</tt> <tt class="py-name">socketserver</tt> <tt class="py-keyword">import</tt> <tt class="py-name">ThreadingMixIn</tt> </tt>
+<a name="L47"></a><tt class="py-lineno">47</tt>  <tt class="py-line"> </tt>
+<a name="L48"></a><tt class="py-lineno">48</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">wsgiref</tt><tt class="py-op">.</tt><tt class="py-name">simple_server</tt> <tt class="py-keyword">as</tt> <tt class="py-name">wsgiserver</tt> </tt>
+<a name="WebServer"></a><div id="WebServer-def"><a name="L49"></a><tt class="py-lineno">49</tt> <a class="py-toggle" href="#" id="WebServer-toggle" onclick="return toggle('WebServer');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lxml.tests.dummy_http_server.WebServer-class.html">WebServer</a><tt class="py-op">(</tt><tt class="py-base-class">wsgiserver</tt><tt class="py-op">.</tt><tt class="py-base-class">WSGIServer</tt><tt class="py-op">,</tt> <tt class="py-base-class">ThreadingMixIn</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="WebServer-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="WebServer-expanded"><a name="L50"></a><tt class="py-lineno">50</tt>  <tt class="py-line">    <tt class="py-docstring">"""A web server that starts a new thread for each request.</tt> </tt>
+<a name="L51"></a><tt class="py-lineno">51</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+</div><a name="L52"></a><tt class="py-lineno">52</tt>  <tt class="py-line"> </tt>
+<a name="_RequestHandler"></a><div id="_RequestHandler-def"><a name="L53"></a><tt class="py-lineno">53</tt>  <tt class="py-line"> </tt>
+<a name="L54"></a><tt class="py-lineno">54</tt> <a class="py-toggle" href="#" id="_RequestHandler-toggle" onclick="return toggle('_RequestHandler');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lxml.tests.dummy_http_server._RequestHandler-class.html">_RequestHandler</a><tt class="py-op">(</tt><tt class="py-base-class">wsgiserver</tt><tt class="py-op">.</tt><tt class="py-base-class">WSGIRequestHandler</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="_RequestHandler-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="_RequestHandler-expanded"><a name="_RequestHandler.get_stderr"></a><div id="_RequestHandler.get_stderr-def"><a name="L55"></a><tt class="py-lineno">55</tt> <a class="py-toggle" href="#" id="_RequestHandler.get_stderr-toggle" onclick="return toggle('_RequestHandler.get_stderr');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.dummy_http_server._RequestHandler-class.html#get_stderr">get_stderr</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="_RequestHandler.get_stderr-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="_RequestHandler.get_stderr-expanded"><a name="L56"></a><tt class="py-lineno">56</tt>  <tt class="py-line">        <tt class="py-comment"># don't write to stderr</tt> </tt>
+<a name="L57"></a><tt class="py-lineno">57</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">sys</tt><tt class="py-op">.</tt><tt id="link-4" class="py-name" targets="Function lxml.tests.selftest.stdout()=lxml.tests.selftest-module.html#stdout,Function lxml.tests.selftest2.stdout()=lxml.tests.selftest2-module.html#stdout"><a title="lxml.tests.selftest.stdout
+lxml.tests.selftest2.stdout" class="py-name" href="#" onclick="return doclink('link-4', 'stdout', 'link-4');">stdout</a></tt> </tt>
+</div><a name="L58"></a><tt class="py-lineno">58</tt>  <tt class="py-line"> </tt>
+<a name="_RequestHandler.log_message"></a><div id="_RequestHandler.log_message-def"><a name="L59"></a><tt class="py-lineno">59</tt> <a class="py-toggle" href="#" id="_RequestHandler.log_message-toggle" onclick="return toggle('_RequestHandler.log_message');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.dummy_http_server._RequestHandler-class.html#log_message">log_message</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">format</tt><tt class="py-op">,</tt> <tt class="py-op">*</tt><tt class="py-param">args</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="_RequestHandler.log_message-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="_RequestHandler.log_message-expanded"><a name="L60"></a><tt class="py-lineno">60</tt>  <tt class="py-line">        <tt class="py-comment"># message = "wsmock(%s) %s" % (self.address_string(), format % args)</tt> </tt>
+<a name="L61"></a><tt class="py-lineno">61</tt>  <tt class="py-line">        <tt class="py-keyword">pass</tt>  <tt class="py-comment"># don't log messages</tt> </tt>
+</div></div><a name="L62"></a><tt class="py-lineno">62</tt>  <tt class="py-line"> </tt>
+<a name="build_web_server"></a><div id="build_web_server-def"><a name="L63"></a><tt class="py-lineno">63</tt>  <tt class="py-line"> </tt>
+<a name="L64"></a><tt class="py-lineno">64</tt> <a class="py-toggle" href="#" id="build_web_server-toggle" onclick="return toggle('build_web_server');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.dummy_http_server-module.html#build_web_server">build_web_server</a><tt class="py-op">(</tt><tt class="py-param">app</tt><tt class="py-op">,</tt> <tt class="py-param">port</tt><tt class="py-op">,</tt> <tt class="py-param">host</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="build_web_server-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="build_web_server-expanded"><a name="L65"></a><tt class="py-lineno">65</tt>  <tt class="py-line">    <tt class="py-name">server</tt> <tt class="py-op">=</tt> <tt class="py-name">wsgiserver</tt><tt class="py-op">.</tt><tt class="py-name">make_server</tt><tt class="py-op">(</tt> </tt>
+<a name="L66"></a><tt class="py-lineno">66</tt>  <tt class="py-line">        <tt class="py-name">host</tt> <tt class="py-keyword">or</tt> <tt class="py-string">''</tt><tt class="py-op">,</tt> <tt class="py-name">port</tt><tt class="py-op">,</tt> <tt class="py-name">app</tt><tt class="py-op">,</tt> </tt>
+<a name="L67"></a><tt class="py-lineno">67</tt>  <tt class="py-line">        <tt class="py-name">server_class</tt><tt class="py-op">=</tt><tt id="link-5" class="py-name" targets="Class lxml.tests.dummy_http_server.WebServer=lxml.tests.dummy_http_server.WebServer-class.html"><a title="lxml.tests.dummy_http_server.WebServer" class="py-name" href="#" onclick="return doclink('link-5', 'WebServer', 'link-5');">WebServer</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L68"></a><tt class="py-lineno">68</tt>  <tt class="py-line">        <tt class="py-name">handler_class</tt><tt class="py-op">=</tt><tt id="link-6" class="py-name" targets="Class lxml.tests.dummy_http_server._RequestHandler=lxml.tests.dummy_http_server._RequestHandler-class.html"><a title="lxml.tests.dummy_http_server._RequestHandler" class="py-name" href="#" onclick="return doclink('link-6', '_RequestHandler', 'link-6');">_RequestHandler</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L69"></a><tt class="py-lineno">69</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">server</tt> </tt>
+</div><a name="L70"></a><tt class="py-lineno">70</tt>  <tt class="py-line"> </tt>
+<a name="HTTPRequestCollector"></a><div id="HTTPRequestCollector-def"><a name="L71"></a><tt class="py-lineno">71</tt>  <tt class="py-line"> </tt>
+<a name="L72"></a><tt class="py-lineno">72</tt> <a class="py-toggle" href="#" id="HTTPRequestCollector-toggle" onclick="return toggle('HTTPRequestCollector');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lxml.tests.dummy_http_server.HTTPRequestCollector-class.html">HTTPRequestCollector</a><tt class="py-op">(</tt><tt class="py-base-class">object</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="HTTPRequestCollector-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="HTTPRequestCollector-expanded"><a name="HTTPRequestCollector.__init__"></a><div id="HTTPRequestCollector.__init__-def"><a name="L73"></a><tt class="py-lineno">73</tt> <a class="py-toggle" href="#" id="HTTPRequestCollector.__init__-toggle" onclick="return toggle('HTTPRequestCollector.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.dummy_http_server.HTTPRequestCollector-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">response_data</tt><tt class="py-op">,</tt> <tt class="py-param">response_code</tt><tt class="py-op">=</tt><tt class="py-number">200</tt><tt class="py-op">,</tt> <tt class="py-param">headers</tt><tt class="py-op">=</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="HTTPRequestCollector.__init__-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="HTTPRequestCollector.__init__-expanded"><a name="L74"></a><tt class="py-lineno">74</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">requests</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L75"></a><tt class="py-lineno">75</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">response_code</tt> <tt class="py-op">=</tt> <tt class="py-name">response_code</tt> </tt>
+<a name="L76"></a><tt class="py-lineno">76</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">response_data</tt> <tt class="py-op">=</tt> <tt class="py-name">response_data</tt> </tt>
+<a name="L77"></a><tt class="py-lineno">77</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">headers</tt> <tt class="py-op">=</tt> <tt class="py-name">list</tt><tt class="py-op">(</tt><tt class="py-name">headers</tt> <tt class="py-keyword">or</tt> <tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L78"></a><tt class="py-lineno">78</tt>  <tt class="py-line"> </tt>
+<a name="HTTPRequestCollector.__call__"></a><div id="HTTPRequestCollector.__call__-def"><a name="L79"></a><tt class="py-lineno">79</tt> <a class="py-toggle" href="#" id="HTTPRequestCollector.__call__-toggle" onclick="return toggle('HTTPRequestCollector.__call__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.dummy_http_server.HTTPRequestCollector-class.html#__call__">__call__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">environ</tt><tt class="py-op">,</tt> <tt class="py-param">start_response</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="HTTPRequestCollector.__call__-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="HTTPRequestCollector.__call__-expanded"><a name="L80"></a><tt class="py-lineno">80</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">requests</tt><tt class="py-op">.</tt><tt id="link-7" class="py-name" targets="Method lxml.etree._Element.append()=lxml.etree._Element-class.html#append"><a title="lxml.etree._Element.append" class="py-name" href="#" onclick="return doclink('link-7', 'append', 'link-7');">append</a></tt><tt class="py-op">(</tt><tt class="py-op">(</tt> </tt>
+<a name="L81"></a><tt class="py-lineno">81</tt>  <tt class="py-line">            <tt class="py-name">environ</tt><tt class="py-op">.</tt><tt id="link-8" class="py-name" targets="Method lxml.etree._Attrib.get()=lxml.etree._Attrib-class.html#get,Method lxml.etree._Element.get()=lxml.etree._Element-class.html#get,Method lxml.etree._IDDict.get()=lxml.etree._IDDict-class.html#get,Method lxml.etree._ProcessingInstruction.get()=lxml.etree._ProcessingInstruction-class.html#get"><a title="lxml.etree._Attrib.get
+lxml.etree._Element.get
+lxml.etree._IDDict.get
+lxml.etree._ProcessingInstruction.get" class="py-name" href="#" onclick="return doclink('link-8', 'get', 'link-8');">get</a></tt><tt class="py-op">(</tt><tt class="py-string">'PATH_INFO'</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L82"></a><tt class="py-lineno">82</tt>  <tt class="py-line">            <tt class="py-name">urlparse</tt><tt class="py-op">.</tt><tt class="py-name">parse_qsl</tt><tt class="py-op">(</tt><tt class="py-name">environ</tt><tt class="py-op">.</tt><tt id="link-9" class="py-name"><a title="lxml.etree._Attrib.get
+lxml.etree._Element.get
+lxml.etree._IDDict.get
+lxml.etree._ProcessingInstruction.get" class="py-name" href="#" onclick="return doclink('link-9', 'get', 'link-8');">get</a></tt><tt class="py-op">(</tt><tt class="py-string">'QUERY_STRING'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L83"></a><tt class="py-lineno">83</tt>  <tt class="py-line">        <tt class="py-name">start_response</tt><tt class="py-op">(</tt><tt class="py-string">'%s OK'</tt> <tt class="py-op">%</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">response_code</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">headers</tt><tt class="py-op">)</tt> </tt>
+<a name="L84"></a><tt class="py-lineno">84</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-op">[</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">response_data</tt><tt class="py-op">]</tt> </tt>
+</div></div><a name="L85"></a><tt class="py-lineno">85</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lxml-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="/">lxml API</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Fri Jun 22 18:59:52 2018
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

@@ -1,0 +1,633 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>lxml.doctestcompare.LXMLOutputChecker</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lxml-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="/">lxml API</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="lxml-module.html">Package&nbsp;lxml</a> ::
+        <a href="lxml.doctestcompare-module.html">Module&nbsp;doctestcompare</a> ::
+        Class&nbsp;LXMLOutputChecker
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="lxml.doctestcompare.LXMLOutputChecker-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class LXMLOutputChecker</h1><p class="nomargin-top"><span class="codelink"><a href="lxml.doctestcompare-pysrc.html#LXMLOutputChecker">source&nbsp;code</a></span></p>
+<pre class="base-tree">
+doctest.OutputChecker --+
+                        |
+                       <strong class="uidshort">LXMLOutputChecker</strong>
+</pre>
+
+<dl><dt>Known Subclasses:</dt>
+<dd>
+      <ul class="subclass-list">
+<li><a href="lxml.doctestcompare.LHTMLOutputChecker-class.html">LHTMLOutputChecker</a></li>  </ul>
+</dd></dl>
+
+<hr />
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="get_default_parser"></a><span class="summary-sig-name">get_default_parser</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.doctestcompare-pysrc.html#LXMLOutputChecker.get_default_parser">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lxml.doctestcompare.LXMLOutputChecker-class.html#check_output" class="summary-sig-name">check_output</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">want</span>,
+        <span class="summary-sig-arg">got</span>,
+        <span class="summary-sig-arg">optionflags</span>)</span><br />
+      Return True iff the actual output from an example (<code class="link">got</code>)
+matches the expected output (<code class="link">want</code>).  These strings are
+always considered to match if they are identical; but
+depending on what option flags the test runner is using,
+several non-exact match types are also possible.  See the
+documentation for <code class="link">TestRunner</code> for more information about
+option flags.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.doctestcompare-pysrc.html#LXMLOutputChecker.check_output">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="get_parser"></a><span class="summary-sig-name">get_parser</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">want</span>,
+        <span class="summary-sig-arg">got</span>,
+        <span class="summary-sig-arg">optionflags</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.doctestcompare-pysrc.html#LXMLOutputChecker.get_parser">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_looks_like_markup"></a><span class="summary-sig-name">_looks_like_markup</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">s</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.doctestcompare-pysrc.html#LXMLOutputChecker._looks_like_markup">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="compare_docs"></a><span class="summary-sig-name">compare_docs</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">want</span>,
+        <span class="summary-sig-arg">got</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.doctestcompare-pysrc.html#LXMLOutputChecker.compare_docs">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="text_compare"></a><span class="summary-sig-name">text_compare</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">want</span>,
+        <span class="summary-sig-arg">got</span>,
+        <span class="summary-sig-arg">strip</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.doctestcompare-pysrc.html#LXMLOutputChecker.text_compare">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="tag_compare"></a><span class="summary-sig-name">tag_compare</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">want</span>,
+        <span class="summary-sig-arg">got</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.doctestcompare-pysrc.html#LXMLOutputChecker.tag_compare">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lxml.doctestcompare.LXMLOutputChecker-class.html#output_difference" class="summary-sig-name">output_difference</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">example</span>,
+        <span class="summary-sig-arg">got</span>,
+        <span class="summary-sig-arg">optionflags</span>)</span><br />
+      Return a string describing the differences between the
+expected output for a given example (<code class="link">example</code>) and the actual
+output (<code class="link">got</code>).  <code class="link">optionflags</code> is the set of option flags used
+to compare <code class="link">want</code> and <code class="link">got</code>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.doctestcompare-pysrc.html#LXMLOutputChecker.output_difference">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="html_empty_tag"></a><span class="summary-sig-name">html_empty_tag</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">el</span>,
+        <span class="summary-sig-arg">html</span>=<span class="summary-sig-default">True</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.doctestcompare-pysrc.html#LXMLOutputChecker.html_empty_tag">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="format_doc"></a><span class="summary-sig-name">format_doc</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">doc</span>,
+        <span class="summary-sig-arg">html</span>,
+        <span class="summary-sig-arg">indent</span>,
+        <span class="summary-sig-arg">prefix</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string"></code><code class="variable-quote">'</code></span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.doctestcompare-pysrc.html#LXMLOutputChecker.format_doc">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="format_text"></a><span class="summary-sig-name">format_text</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">text</span>,
+        <span class="summary-sig-arg">strip</span>=<span class="summary-sig-default">True</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.doctestcompare-pysrc.html#LXMLOutputChecker.format_text">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="format_tag"></a><span class="summary-sig-name">format_tag</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">el</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.doctestcompare-pysrc.html#LXMLOutputChecker.format_tag">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="format_end_tag"></a><span class="summary-sig-name">format_end_tag</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">el</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.doctestcompare-pysrc.html#LXMLOutputChecker.format_end_tag">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="collect_diff"></a><span class="summary-sig-name">collect_diff</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">want</span>,
+        <span class="summary-sig-arg">got</span>,
+        <span class="summary-sig-arg">html</span>,
+        <span class="summary-sig-arg">indent</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.doctestcompare-pysrc.html#LXMLOutputChecker.collect_diff">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="collect_diff_tag"></a><span class="summary-sig-name">collect_diff_tag</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">want</span>,
+        <span class="summary-sig-arg">got</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.doctestcompare-pysrc.html#LXMLOutputChecker.collect_diff_tag">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="collect_diff_end_tag"></a><span class="summary-sig-name">collect_diff_end_tag</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">want</span>,
+        <span class="summary-sig-arg">got</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.doctestcompare-pysrc.html#LXMLOutputChecker.collect_diff_end_tag">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="collect_diff_text"></a><span class="summary-sig-name">collect_diff_text</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">want</span>,
+        <span class="summary-sig-arg">got</span>,
+        <span class="summary-sig-arg">strip</span>=<span class="summary-sig-default">True</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.doctestcompare-pysrc.html#LXMLOutputChecker.collect_diff_text">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <div class="private">    <p class="indent-wrapped-lines"><b>Inherited from <code>doctest.OutputChecker</code></b> (private):
+      <code>_do_a_fancy_diff</code>
+      </p></div>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS VARIABLES ==================== -->
+<a name="section-ClassVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassVariables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.doctestcompare.LXMLOutputChecker-class.html#empty_tags" class="summary-name">empty_tags</a> = <code title="('param',
+ 'img',
+ 'area',
+ 'br',
+ 'basefont',
+ 'input',
+ 'base',
+ 'meta',
+..."><code class="variable-group">(</code><code class="variable-quote">'</code><code class="variable-string">param</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">img</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">area</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">br</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">basefont</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">input</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="check_output"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">check_output</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">want</span>,
+        <span class="sig-arg">got</span>,
+        <span class="sig-arg">optionflags</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lxml.doctestcompare-pysrc.html#LXMLOutputChecker.check_output">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Return True iff the actual output from an example (<code class="link">got</code>)
+matches the expected output (<code class="link">want</code>).  These strings are
+always considered to match if they are identical; but
+depending on what option flags the test runner is using,
+several non-exact match types are also possible.  See the
+documentation for <code class="link">TestRunner</code> for more information about
+option flags.
+  <dl class="fields">
+    <dt>Overrides:
+        doctest.OutputChecker.check_output
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="output_difference"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">output_difference</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">example</span>,
+        <span class="sig-arg">got</span>,
+        <span class="sig-arg">optionflags</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lxml.doctestcompare-pysrc.html#LXMLOutputChecker.output_difference">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Return a string describing the differences between the
+expected output for a given example (<code class="link">example</code>) and the actual
+output (<code class="link">got</code>).  <code class="link">optionflags</code> is the set of option flags used
+to compare <code class="link">want</code> and <code class="link">got</code>.
+  <dl class="fields">
+    <dt>Overrides:
+        doctest.OutputChecker.output_difference
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== CLASS VARIABLE DETAILS ==================== -->
+<a name="section-ClassVariableDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Variable Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassVariableDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="empty_tags"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">empty_tags</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">(</code><code class="variable-quote">'</code><code class="variable-string">param</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">img</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">area</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">br</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">basefont</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">input</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">base</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">meta</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lxml-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="/">lxml API</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Fri Jun 22 18:59:52 2018
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

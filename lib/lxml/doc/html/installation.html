@@ -1,0 +1,222 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.12: http://docutils.sourceforge.net/" />
+<title>Installing lxml</title>
+<link rel="stylesheet" href="style.css" type="text/css" />
+<script type="text/javascript">
+function trigger_menu(event) {
+    var sidemenu = document.getElementById("sidemenu");
+    var classes = sidemenu.getAttribute("class");
+    classes = (classes.indexOf(" visible") === -1) ? classes + " visible" : classes.replace(" visible", "");
+    sidemenu.setAttribute("class", classes);
+    event.preventDefault();
+    event.stopPropagation();
+}
+function hide_menu() {
+    var sidemenu = document.getElementById("sidemenu");
+    var classes = sidemenu.getAttribute("class");
+    if (classes.indexOf(" visible") !== -1) {
+        sidemenu.setAttribute("class", classes.replace(" visible", ""));
+    }
+}
+</script><meta content="width=device-width, initial-scale=1" name="viewport" /></head>
+<body onclick="hide_menu()">
+<div class="document" id="installing-lxml">
+<div class="sidemenu" id="sidemenu"><div class="menutrigger" onclick="trigger_menu(event)">Menu</div><div class="menu"><ul id="lxml-section"><li><span class="section title">lxml</span><ul class="menu foreign" id="index-menu"><li class="menu title"><a href="index.html">lxml</a><ul class="submenu"><li class="menu item"><a href="index.html#introduction">Introduction</a></li><li class="menu item"><a href="index.html#support-the-project">Support the project</a></li><li class="menu item"><a href="index.html#documentation">Documentation</a></li><li class="menu item"><a href="index.html#download">Download</a></li><li class="menu item"><a href="index.html#mailing-list">Mailing list</a></li><li class="menu item"><a href="index.html#bug-tracker">Bug tracker</a></li><li class="menu item"><a href="index.html#license">License</a></li><li class="menu item"><a href="index.html#old-versions">Old Versions</a></li><li class="menu item"><a href="index.html#docutils-system-messages">Docutils System Messages</a></li><li class="menu item"><a href="index.html#legal-notice-for-donations">Legal Notice for Donations</a></li></ul></li></ul><ul class="menu foreign" id="intro-menu"><li class="menu title"><a href="intro.html">Why lxml?</a><ul class="submenu"><li class="menu item"><a href="intro.html#motto">Motto</a></li><li class="menu item"><a href="intro.html#aims">Aims</a></li></ul></li></ul><ul class="menu current" id="installation-menu"><li class="menu title"><a href="installation.html">Installing lxml</a><ul class="submenu"><li class="menu item"><a href="installation.html#where-to-get-it">Where to get it</a></li><li class="menu item"><a href="installation.html#requirements">Requirements</a></li><li class="menu item"><a href="installation.html#installation">Installation</a></li><li class="menu item"><a href="installation.html#building-lxml-from-dev-sources">Building lxml from dev sources</a></li><li class="menu item"><a href="installation.html#using-lxml-with-python-libxml2">Using lxml with python-libxml2</a></li><li class="menu item"><a href="installation.html#source-builds-on-ms-windows">Source builds on MS Windows</a></li><li class="menu item"><a href="installation.html#source-builds-on-macos-x">Source builds on MacOS-X</a></li></ul></li></ul><ul class="menu foreign" id="performance-menu"><li class="menu title"><a href="performance.html">Benchmarks and Speed</a><ul class="submenu"><li class="menu item"><a href="performance.html#general-notes">General notes</a></li><li class="menu item"><a href="performance.html#how-to-read-the-timings">How to read the timings</a></li><li class="menu item"><a href="performance.html#parsing-and-serialising">Parsing and Serialising</a></li><li class="menu item"><a href="performance.html#the-elementtree-api">The ElementTree API</a></li><li class="menu item"><a href="performance.html#xpath">XPath</a></li><li class="menu item"><a href="performance.html#a-longer-example">A longer example</a></li><li class="menu item"><a href="performance.html#lxml-objectify">lxml.objectify</a></li></ul></li></ul><ul class="menu foreign" id="compatibility-menu"><li class="menu title"><a href="compatibility.html">ElementTree compatibility of lxml.etree</a></li></ul><ul class="menu foreign" id="FAQ-menu"><li class="menu title"><a href="FAQ.html">lxml FAQ - Frequently Asked Questions</a><ul class="submenu"><li class="menu item"><a href="FAQ.html#general-questions">General Questions</a></li><li class="menu item"><a href="FAQ.html#installation">Installation</a></li><li class="menu item"><a href="FAQ.html#contributing">Contributing</a></li><li class="menu item"><a href="FAQ.html#bugs">Bugs</a></li><li class="menu item"><a href="FAQ.html#id1">Threading</a></li><li class="menu item"><a href="FAQ.html#parsing-and-serialisation">Parsing and Serialisation</a></li><li class="menu item"><a href="FAQ.html#xpath-and-document-traversal">XPath and Document Traversal</a></li></ul></li></ul></li></ul><ul id="Developing with lxml-section"><li><span class="section title">Developing with lxml</span><ul class="menu foreign" id="tutorial-menu"><li class="menu title"><a href="tutorial.html">The lxml.etree Tutorial</a><ul class="submenu"><li class="menu item"><a href="tutorial.html#the-element-class">The Element class</a></li><li class="menu item"><a href="tutorial.html#the-elementtree-class">The ElementTree class</a></li><li class="menu item"><a href="tutorial.html#parsing-from-strings-and-files">Parsing from strings and files</a></li><li class="menu item"><a href="tutorial.html#namespaces">Namespaces</a></li><li class="menu item"><a href="tutorial.html#the-e-factory">The E-factory</a></li><li class="menu item"><a href="tutorial.html#elementpath">ElementPath</a></li></ul></li></ul><ul class="menu foreign" id="api index-menu"><li class="menu title"><a href="api/index.html">API reference</a></li></ul><ul class="menu foreign" id="api-menu"><li class="menu title"><a href="api.html">APIs specific to lxml.etree</a><ul class="submenu"><li class="menu item"><a href="api.html#lxml-etree">lxml.etree</a></li><li class="menu item"><a href="api.html#other-element-apis">Other Element APIs</a></li><li class="menu item"><a href="api.html#trees-and-documents">Trees and Documents</a></li><li class="menu item"><a href="api.html#iteration">Iteration</a></li><li class="menu item"><a href="api.html#error-handling-on-exceptions">Error handling on exceptions</a></li><li class="menu item"><a href="api.html#error-logging">Error logging</a></li><li class="menu item"><a href="api.html#serialisation">Serialisation</a></li><li class="menu item"><a href="api.html#incremental-xml-generation">Incremental XML generation</a></li><li class="menu item"><a href="api.html#cdata">CDATA</a></li><li class="menu item"><a href="api.html#xinclude-and-elementinclude">XInclude and ElementInclude</a></li><li class="menu item"><a href="api.html#write-c14n-on-elementtree">write_c14n on ElementTree</a></li></ul></li></ul><ul class="menu foreign" id="parsing-menu"><li class="menu title"><a href="parsing.html">Parsing XML and HTML with lxml</a><ul class="submenu"><li class="menu item"><a href="parsing.html#parsers">Parsers</a></li><li class="menu item"><a href="parsing.html#the-target-parser-interface">The target parser interface</a></li><li class="menu item"><a href="parsing.html#the-feed-parser-interface">The feed parser interface</a></li><li class="menu item"><a href="parsing.html#incremental-event-parsing">Incremental event parsing</a></li><li class="menu item"><a href="parsing.html#iterparse-and-iterwalk">iterparse and iterwalk</a></li><li class="menu item"><a href="parsing.html#python-unicode-strings">Python unicode strings</a></li></ul></li></ul><ul class="menu foreign" id="validation-menu"><li class="menu title"><a href="validation.html">Validation with lxml</a><ul class="submenu"><li class="menu item"><a href="validation.html#validation-at-parse-time">Validation at parse time</a></li><li class="menu item"><a href="validation.html#id1">DTD</a></li><li class="menu item"><a href="validation.html#relaxng">RelaxNG</a></li><li class="menu item"><a href="validation.html#xmlschema">XMLSchema</a></li><li class="menu item"><a href="validation.html#id2">Schematron</a></li><li class="menu item"><a href="validation.html#id3">(Pre-ISO-Schematron)</a></li></ul></li></ul><ul class="menu foreign" id="xpathxslt-menu"><li class="menu title"><a href="xpathxslt.html">XPath and XSLT with lxml</a><ul class="submenu"><li class="menu item"><a href="xpathxslt.html#xpath">XPath</a></li><li class="menu item"><a href="xpathxslt.html#xslt">XSLT</a></li></ul></li></ul><ul class="menu foreign" id="objectify-menu"><li class="menu title"><a href="objectify.html">lxml.objectify</a><ul class="submenu"><li class="menu item"><a href="objectify.html#the-lxml-objectify-api">The lxml.objectify API</a></li><li class="menu item"><a href="objectify.html#asserting-a-schema">Asserting a Schema</a></li><li class="menu item"><a href="objectify.html#objectpath">ObjectPath</a></li><li class="menu item"><a href="objectify.html#python-data-types">Python data types</a></li><li class="menu item"><a href="objectify.html#how-data-types-are-matched">How data types are matched</a></li><li class="menu item"><a href="objectify.html#what-is-different-from-lxml-etree">What is different from lxml.etree?</a></li></ul></li></ul><ul class="menu foreign" id="lxmlhtml-menu"><li class="menu title"><a href="lxmlhtml.html">lxml.html</a><ul class="submenu"><li class="menu item"><a href="lxmlhtml.html#parsing-html">Parsing HTML</a></li><li class="menu item"><a href="lxmlhtml.html#html-element-methods">HTML Element Methods</a></li><li class="menu item"><a href="lxmlhtml.html#running-html-doctests">Running HTML doctests</a></li><li class="menu item"><a href="lxmlhtml.html#creating-html-with-the-e-factory">Creating HTML with the E-factory</a></li><li class="menu item"><a href="lxmlhtml.html#working-with-links">Working with links</a></li><li class="menu item"><a href="lxmlhtml.html#forms">Forms</a></li><li class="menu item"><a href="lxmlhtml.html#cleaning-up-html">Cleaning up HTML</a></li><li class="menu item"><a href="lxmlhtml.html#html-diff">HTML Diff</a></li><li class="menu item"><a href="lxmlhtml.html#examples">Examples</a></li></ul></li></ul><ul class="menu foreign" id="cssselect-menu"><li class="menu title"><a href="cssselect.html">lxml.cssselect</a><ul class="submenu"><li class="menu item"><a href="cssselect.html#the-cssselector-class">The CSSSelector class</a></li><li class="menu item"><a href="cssselect.html#the-cssselect-method">The cssselect method</a></li><li class="menu item"><a href="cssselect.html#supported-selectors">Supported Selectors</a></li><li class="menu item"><a href="cssselect.html#namespaces">Namespaces</a></li></ul></li></ul><ul class="menu foreign" id="elementsoup-menu"><li class="menu title"><a href="elementsoup.html">BeautifulSoup Parser</a><ul class="submenu"><li class="menu item"><a href="elementsoup.html#parsing-with-the-soupparser">Parsing with the soupparser</a></li><li class="menu item"><a href="elementsoup.html#entity-handling">Entity handling</a></li><li class="menu item"><a href="elementsoup.html#using-soupparser-as-a-fallback">Using soupparser as a fallback</a></li><li class="menu item"><a href="elementsoup.html#using-only-the-encoding-detection">Using only the encoding detection</a></li></ul></li></ul><ul class="menu foreign" id="html5parser-menu"><li class="menu title"><a href="html5parser.html">html5lib Parser</a><ul class="submenu"><li class="menu item"><a href="html5parser.html#differences-to-regular-html-parsing">Differences to regular HTML parsing</a></li><li class="menu item"><a href="html5parser.html#function-reference">Function Reference</a></li></ul></li></ul></li></ul><ul id="Extending lxml-section"><li><span class="section title">Extending lxml</span><ul class="menu foreign" id="resolvers-menu"><li class="menu title"><a href="resolvers.html">Document loading and URL resolving</a><ul class="submenu"><li class="menu item"><a href="resolvers.html#xml-catalogs">XML Catalogs</a></li><li class="menu item"><a href="resolvers.html#uri-resolvers">URI Resolvers</a></li><li class="menu item"><a href="resolvers.html#document-loading-in-context">Document loading in context</a></li><li class="menu item"><a href="resolvers.html#i-o-access-control-in-xslt">I/O access control in XSLT</a></li></ul></li></ul><ul class="menu foreign" id="extensions-menu"><li class="menu title"><a href="extensions.html">Python extensions for XPath and XSLT</a><ul class="submenu"><li class="menu item"><a href="extensions.html#xpath-extension-functions">XPath Extension functions</a></li><li class="menu item"><a href="extensions.html#xslt-extension-elements">XSLT extension elements</a></li></ul></li></ul><ul class="menu foreign" id="element classes-menu"><li class="menu title"><a href="element_classes.html">Using custom Element classes in lxml</a><ul class="submenu"><li class="menu item"><a href="element_classes.html#background-on-element-proxies">Background on Element proxies</a></li><li class="menu item"><a href="element_classes.html#element-initialization">Element initialization</a></li><li class="menu item"><a href="element_classes.html#setting-up-a-class-lookup-scheme">Setting up a class lookup scheme</a></li><li class="menu item"><a href="element_classes.html#generating-xml-with-custom-classes">Generating XML with custom classes</a></li><li class="menu item"><a href="element_classes.html#id1">Implementing namespaces</a></li></ul></li></ul><ul class="menu foreign" id="sax-menu"><li class="menu title"><a href="sax.html">Sax support</a><ul class="submenu"><li class="menu item"><a href="sax.html#building-a-tree-from-sax-events">Building a tree from SAX events</a></li><li class="menu item"><a href="sax.html#producing-sax-events-from-an-elementtree-or-element">Producing SAX events from an ElementTree or Element</a></li><li class="menu item"><a href="sax.html#interfacing-with-pulldom-minidom">Interfacing with pulldom/minidom</a></li></ul></li></ul><ul class="menu foreign" id="capi-menu"><li class="menu title"><a href="capi.html">The public C-API of lxml.etree</a><ul class="submenu"><li class="menu item"><a href="capi.html#passing-generated-trees-through-python">Passing generated trees through Python</a></li><li class="menu item"><a href="capi.html#writing-external-modules-in-cython">Writing external modules in Cython</a></li><li class="menu item"><a href="capi.html#writing-external-modules-in-c">Writing external modules in C</a></li></ul></li></ul></li></ul><ul id="Developing lxml-section"><li><span class="section title">Developing lxml</span><ul class="menu foreign" id="build-menu"><li class="menu title"><a href="build.html">How to build lxml from source</a><ul class="submenu"><li class="menu item"><a href="build.html#cython">Cython</a></li><li class="menu item"><a href="build.html#github-git-and-hg">Github, git and hg</a></li><li class="menu item"><a href="build.html#building-the-sources">Building the sources</a></li><li class="menu item"><a href="build.html#running-the-tests-and-reporting-errors">Running the tests and reporting errors</a></li><li class="menu item"><a href="build.html#building-an-egg-or-wheel">Building an egg or wheel</a></li><li class="menu item"><a href="build.html#building-lxml-on-macos-x">Building lxml on MacOS-X</a></li><li class="menu item"><a href="build.html#static-linking-on-windows">Static linking on Windows</a></li><li class="menu item"><a href="build.html#building-debian-packages-from-svn-sources">Building Debian packages from SVN sources</a></li></ul></li></ul><ul class="menu foreign" id="lxml source howto-menu"><li class="menu title"><a href="lxml-source-howto.html">How to read the source of lxml</a><ul class="submenu"><li class="menu item"><a href="lxml-source-howto.html#what-is-cython">What is Cython?</a></li><li class="menu item"><a href="lxml-source-howto.html#where-to-start">Where to start?</a></li><li class="menu item"><a href="lxml-source-howto.html#lxml-etree">lxml.etree</a></li><li class="menu item"><a href="lxml-source-howto.html#python-modules">Python modules</a></li><li class="menu item"><a href="lxml-source-howto.html#lxml-objectify">lxml.objectify</a></li><li class="menu item"><a href="lxml-source-howto.html#lxml-html">lxml.html</a></li></ul></li></ul><ul class="menu foreign" id="changes 4 2 2-menu"><li class="menu title"><a href="changes-4.2.2.html">Release Changelog</a></li></ul><ul class="menu foreign" id="credits-menu"><li class="menu title"><a href="credits.html">Credits</a><ul class="submenu"><li class="menu item"><a href="credits.html#main-contributors">Main contributors</a></li><li class="menu item"><a href="credits.html#special-thanks-goes-to">Special thanks goes to:</a></li></ul></li></ul></li><li><a href="/sitemap.html">Sitemap</a></li></ul></div></div><h1 class="title">Installing lxml</h1>
+
+<div class="contents topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#where-to-get-it" id="id1">Where to get it</a></li>
+<li><a class="reference internal" href="#requirements" id="id2">Requirements</a></li>
+<li><a class="reference internal" href="#installation" id="id3">Installation</a></li>
+<li><a class="reference internal" href="#building-lxml-from-dev-sources" id="id4">Building lxml from dev sources</a></li>
+<li><a class="reference internal" href="#using-lxml-with-python-libxml2" id="id5">Using lxml with python-libxml2</a></li>
+<li><a class="reference internal" href="#source-builds-on-ms-windows" id="id6">Source builds on MS Windows</a></li>
+<li><a class="reference internal" href="#source-builds-on-macos-x" id="id7">Source builds on MacOS-X</a></li>
+</ul>
+</div>
+<div class="section" id="where-to-get-it">
+<h1>Where to get it</h1>
+<p>lxml is generally distributed through <a class="reference external" href="http://pypi.python.org/pypi/lxml">PyPI</a>.</p>
+<p>Most <strong>Linux</strong> platforms come with some version of lxml readily
+packaged, usually named <tt class="docutils literal"><span class="pre">python-lxml</span></tt> for the Python 2.x version
+and <tt class="docutils literal"><span class="pre">python3-lxml</span></tt> for Python 3.x.  If you can use that version,
+the quickest way to install lxml is to use the system package
+manager, e.g. <tt class="docutils literal"><span class="pre">apt-get</span></tt> on Debian/Ubuntu:</p>
+<pre class="literal-block">
+sudo apt-get install python3-lxml
+</pre>
+<p>For <strong>MacOS-X</strong>, a <a class="reference external" href="http://macports.org/">macport</a> of lxml is available.
+Try something like</p>
+<pre class="literal-block">
+sudo port install py27-lxml
+</pre>
+<p>To install a newer version or to install lxml on other systems,
+see below.</p>
+</div>
+<div class="section" id="requirements">
+<h1>Requirements</h1>
+<p>You need Python 2.6 or later.</p>
+<p>Unless you are using a static binary distribution (e.g. from a
+Windows binary installer), lxml requires libxml2 and libxslt to
+be installed, in particular:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://xmlsoft.org/">libxml2</a> version 2.7.0 or later.<ul>
+<li>We recommend libxml2 2.9.2 or a later version.</li>
+<li>If you want to use the feed parser interface, especially when
+parsing from unicode strings, do not use libxml2 2.7.4 through
+2.7.6.</li>
+</ul>
+</li>
+<li><a class="reference external" href="http://xmlsoft.org/XSLT/">libxslt</a> version 1.1.23 or later.<ul>
+<li>We recommend libxslt 1.1.28 or later. Version 1.1.25 will not
+work due to a missing library symbol.</li>
+</ul>
+</li>
+</ul>
+<p>Newer versions generally contain fewer bugs and are therefore
+recommended.  XML Schema support is also still worked on in libxml2,
+so newer versions will give you better compliance with the W3C spec.</p>
+<p>To install the required development packages of these dependencies
+on Linux systems, use your distribution specific installation tool,
+e.g. apt-get on Debian/Ubuntu:</p>
+<pre class="literal-block">
+sudo apt-get install libxml2-dev libxslt-dev python-dev
+</pre>
+<p>For Debian based systems, it should be enough to install the known
+build dependencies of the provided lxml package, e.g.</p>
+<pre class="literal-block">
+sudo apt-get build-dep python3-lxml
+</pre>
+</div>
+<div class="section" id="installation">
+<h1>Installation</h1>
+<p>If your system does not provide binary packages or you want to install
+a newer version, the best way is to get the <a class="reference external" href="http://pypi.python.org/pypi/pip">pip</a> package management tool
+(or use a <a class="reference external" href="https://pypi.python.org/pypi/virtualenv">virtualenv</a>) and
+run the following:</p>
+<pre class="literal-block">
+pip install lxml
+</pre>
+<p>If you are not using pip in a virtualenv and want to install lxml globally
+instead, you have to run the above command as admin, e.g. on Linux:</p>
+<pre class="literal-block">
+sudo pip install lxml
+</pre>
+<p>To install a specific version, either download the distribution
+manually and let pip install that, or pass the desired version
+to pip:</p>
+<pre class="literal-block">
+pip install lxml==3.4.2
+</pre>
+<p>To speed up the build in test environments, e.g. on a continuous
+integration server, disable the C compiler optimisations by setting
+the <tt class="docutils literal">CFLAGS</tt> environment variable:</p>
+<pre class="literal-block">
+CFLAGS="-O0"  pip install lxml
+</pre>
+<p>(The option reads "minus Oh Zero", i.e. zero optimisations.)</p>
+<div class="section" id="ms-windows">
+<h2>MS Windows</h2>
+<p>For MS Windows, recent lxml releases feature community donated
+binary distributions, although you might still want to take a look
+at the related <a class="reference external" href="FAQ.html#where-are-the-binary-builds">FAQ entry</a>.
+If you fail to build lxml on your MS Windows system from the signed
+and tested sources that we release, consider using the binary builds
+from PyPI or the <a class="reference external" href="http://www.lfd.uci.edu/~gohlke/pythonlibs/#lxml">unofficial Windows binaries</a>
+that Christoph Gohlke generously provides.</p>
+</div>
+<div class="section" id="linux">
+<h2>Linux</h2>
+<p>On Linux (and most other well-behaved operating systems), <tt class="docutils literal">pip</tt> will
+manage to build the source distribution as long as libxml2 and libxslt
+are properly installed, including development packages, i.e. header files,
+etc.  See the requirements section above and use your system package
+management tool to look for packages like <tt class="docutils literal"><span class="pre">libxml2-dev</span></tt> or
+<tt class="docutils literal"><span class="pre">libxslt-devel</span></tt>.  If the build fails, make sure they are installed.</p>
+<p>Alternatively, setting <tt class="docutils literal">STATIC_DEPS=true</tt> will download and build
+both libraries automatically in their latest version, e.g.
+<tt class="docutils literal">STATIC_DEPS=true pip install lxml</tt>.</p>
+</div>
+<div class="section" id="macos-x">
+<h2>MacOS-X</h2>
+<p>On MacOS-X, use the following to build the source distribution,
+and make sure you have a working Internet connection, as this will
+download libxml2 and libxslt in order to build them:</p>
+<pre class="literal-block">
+STATIC_DEPS=true sudo pip install lxml
+</pre>
+</div>
+</div>
+<div class="section" id="building-lxml-from-dev-sources">
+<h1>Building lxml from dev sources</h1>
+<p>If you want to build lxml from the GitHub repository, you should read
+<a class="reference external" href="build.html">how to build lxml from source</a> (or the file <tt class="docutils literal">doc/build.txt</tt> in the
+source tree).  Building from developer sources or from modified
+distribution sources requires <a class="reference external" href="http://www.cython.org">Cython</a> to translate the lxml sources
+into C code.  The source distribution ships with pre-generated C
+source files, so you do not need Cython installed to build from
+release sources.</p>
+<p>If you have read these instructions and still cannot manage to install lxml,
+you can check the archives of the <a class="reference external" href="http://lxml.de/mailinglist/">mailing list</a> to see if your problem is
+known or otherwise send a mail to the list.</p>
+</div>
+<div class="section" id="using-lxml-with-python-libxml2">
+<h1>Using lxml with python-libxml2</h1>
+<p>If you want to use lxml together with the official libxml2 Python
+bindings (maybe because one of your dependencies uses it), you must
+build lxml statically.  Otherwise, the two packages will interfere in
+places where the libxml2 library requires global configuration, which
+can have any kind of effect from disappearing functionality to crashes
+in either of the two.</p>
+<p>To get a static build, either pass the <tt class="docutils literal"><span class="pre">--static-deps</span></tt> option to the
+setup.py script, or run <tt class="docutils literal">pip</tt> with the <tt class="docutils literal">STATIC_DEPS</tt> or
+<tt class="docutils literal">STATICBUILD</tt> environment variable set to true, i.e.</p>
+<pre class="literal-block">
+STATIC_DEPS=true pip install lxml
+</pre>
+<p>The <tt class="docutils literal">STATICBUILD</tt> environment variable is handled equivalently to
+the <tt class="docutils literal">STATIC_DEPS</tt> variable, but is used by some other extension
+packages, too.</p>
+</div>
+<div class="section" id="source-builds-on-ms-windows">
+<h1>Source builds on MS Windows</h1>
+<p>Most MS Windows systems lack the necessarily tools to build software,
+starting with a C compiler already.  Microsoft leaves it to users to
+install and configure them, which is usually not trivial and means
+that distributors cannot rely on these dependencies being available
+on a given system.  In a way, you get what you've paid for and make
+others pay for it.</p>
+<p>Due to the additional lack of package management of this platform,
+it is best to link the library dependencies statically if you decide
+to build from sources, rather than using a binary installer.  For
+that, lxml can use the <a class="reference external" href="http://www.zlatkovic.com/libxml.en.html">binary distribution of libxml2 and libxslt</a>, which it downloads
+automatically during the static build.  It needs both libxml2 and
+libxslt, as well as iconv and zlib, which are available from the
+same download site.  Further build instructions are in the
+<a class="reference external" href="build.html">source build documentation</a>.</p>
+</div>
+<div class="section" id="source-builds-on-macos-x">
+<h1>Source builds on MacOS-X</h1>
+<p>If you are not using macports or want to use a more recent lxml
+release, you have to build it yourself.  While the pre-installed system
+libraries of libxml2 and libxslt are less outdated in recent MacOS-X
+versions than they used to be, so lxml should work with them out of the
+box, it is still recommended to use a static build with the most recent
+library versions.</p>
+<p>Luckily, lxml's <tt class="docutils literal">setup.py</tt> script has built-in support for building
+and integrating these libraries statically during the build.  Please
+read the
+<a class="reference external" href="build.html#building-lxml-on-macos-x">MacOS-X build instructions</a>.</p>
+</div>
+</div>
+<div class="footer">
+<hr class="footer" />
+Generated on: 2018-06-22.
+
+</div>
+</body>
+</html>

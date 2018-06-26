@@ -1,0 +1,1000 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.12: http://docutils.sourceforge.net/" />
+<title>lxml FAQ - Frequently Asked Questions</title>
+<meta content="Frequently Asked Questions about lxml (FAQ)" name="description" />
+<meta content="lxml, lxml.etree, FAQ, frequently asked questions" name="keywords" />
+<link rel="stylesheet" href="style.css" type="text/css" />
+<script type="text/javascript">
+function trigger_menu(event) {
+    var sidemenu = document.getElementById("sidemenu");
+    var classes = sidemenu.getAttribute("class");
+    classes = (classes.indexOf(" visible") === -1) ? classes + " visible" : classes.replace(" visible", "");
+    sidemenu.setAttribute("class", classes);
+    event.preventDefault();
+    event.stopPropagation();
+}
+function hide_menu() {
+    var sidemenu = document.getElementById("sidemenu");
+    var classes = sidemenu.getAttribute("class");
+    if (classes.indexOf(" visible") !== -1) {
+        sidemenu.setAttribute("class", classes.replace(" visible", ""));
+    }
+}
+</script><meta content="width=device-width, initial-scale=1" name="viewport" /></head>
+<body onclick="hide_menu()">
+<div class="document" id="lxml-faq-frequently-asked-questions">
+<div class="sidemenu" id="sidemenu"><div class="menutrigger" onclick="trigger_menu(event)">Menu</div><div class="menu"><ul id="lxml-section"><li><span class="section title">lxml</span><ul class="menu foreign" id="index-menu"><li class="menu title"><a href="index.html">lxml</a><ul class="submenu"><li class="menu item"><a href="index.html#introduction">Introduction</a></li><li class="menu item"><a href="index.html#support-the-project">Support the project</a></li><li class="menu item"><a href="index.html#documentation">Documentation</a></li><li class="menu item"><a href="index.html#download">Download</a></li><li class="menu item"><a href="index.html#mailing-list">Mailing list</a></li><li class="menu item"><a href="index.html#bug-tracker">Bug tracker</a></li><li class="menu item"><a href="index.html#license">License</a></li><li class="menu item"><a href="index.html#old-versions">Old Versions</a></li><li class="menu item"><a href="index.html#docutils-system-messages">Docutils System Messages</a></li><li class="menu item"><a href="index.html#legal-notice-for-donations">Legal Notice for Donations</a></li></ul></li></ul><ul class="menu foreign" id="intro-menu"><li class="menu title"><a href="intro.html">Why lxml?</a><ul class="submenu"><li class="menu item"><a href="intro.html#motto">Motto</a></li><li class="menu item"><a href="intro.html#aims">Aims</a></li></ul></li></ul><ul class="menu foreign" id="installation-menu"><li class="menu title"><a href="installation.html">Installing lxml</a><ul class="submenu"><li class="menu item"><a href="installation.html#where-to-get-it">Where to get it</a></li><li class="menu item"><a href="installation.html#requirements">Requirements</a></li><li class="menu item"><a href="installation.html#installation">Installation</a></li><li class="menu item"><a href="installation.html#building-lxml-from-dev-sources">Building lxml from dev sources</a></li><li class="menu item"><a href="installation.html#using-lxml-with-python-libxml2">Using lxml with python-libxml2</a></li><li class="menu item"><a href="installation.html#source-builds-on-ms-windows">Source builds on MS Windows</a></li><li class="menu item"><a href="installation.html#source-builds-on-macos-x">Source builds on MacOS-X</a></li></ul></li></ul><ul class="menu foreign" id="performance-menu"><li class="menu title"><a href="performance.html">Benchmarks and Speed</a><ul class="submenu"><li class="menu item"><a href="performance.html#general-notes">General notes</a></li><li class="menu item"><a href="performance.html#how-to-read-the-timings">How to read the timings</a></li><li class="menu item"><a href="performance.html#parsing-and-serialising">Parsing and Serialising</a></li><li class="menu item"><a href="performance.html#the-elementtree-api">The ElementTree API</a></li><li class="menu item"><a href="performance.html#xpath">XPath</a></li><li class="menu item"><a href="performance.html#a-longer-example">A longer example</a></li><li class="menu item"><a href="performance.html#lxml-objectify">lxml.objectify</a></li></ul></li></ul><ul class="menu foreign" id="compatibility-menu"><li class="menu title"><a href="compatibility.html">ElementTree compatibility of lxml.etree</a></li></ul><ul class="menu current" id="FAQ-menu"><li class="menu title"><a href="FAQ.html">lxml FAQ - Frequently Asked Questions</a><ul class="submenu"><li class="menu item"><a href="FAQ.html#general-questions">General Questions</a></li><li class="menu item"><a href="FAQ.html#installation">Installation</a></li><li class="menu item"><a href="FAQ.html#contributing">Contributing</a></li><li class="menu item"><a href="FAQ.html#bugs">Bugs</a></li><li class="menu item"><a href="FAQ.html#id1">Threading</a></li><li class="menu item"><a href="FAQ.html#parsing-and-serialisation">Parsing and Serialisation</a></li><li class="menu item"><a href="FAQ.html#xpath-and-document-traversal">XPath and Document Traversal</a></li></ul></li></ul></li></ul><ul id="Developing with lxml-section"><li><span class="section title">Developing with lxml</span><ul class="menu foreign" id="tutorial-menu"><li class="menu title"><a href="tutorial.html">The lxml.etree Tutorial</a><ul class="submenu"><li class="menu item"><a href="tutorial.html#the-element-class">The Element class</a></li><li class="menu item"><a href="tutorial.html#the-elementtree-class">The ElementTree class</a></li><li class="menu item"><a href="tutorial.html#parsing-from-strings-and-files">Parsing from strings and files</a></li><li class="menu item"><a href="tutorial.html#namespaces">Namespaces</a></li><li class="menu item"><a href="tutorial.html#the-e-factory">The E-factory</a></li><li class="menu item"><a href="tutorial.html#elementpath">ElementPath</a></li></ul></li></ul><ul class="menu foreign" id="api index-menu"><li class="menu title"><a href="api/index.html">API reference</a></li></ul><ul class="menu foreign" id="api-menu"><li class="menu title"><a href="api.html">APIs specific to lxml.etree</a><ul class="submenu"><li class="menu item"><a href="api.html#lxml-etree">lxml.etree</a></li><li class="menu item"><a href="api.html#other-element-apis">Other Element APIs</a></li><li class="menu item"><a href="api.html#trees-and-documents">Trees and Documents</a></li><li class="menu item"><a href="api.html#iteration">Iteration</a></li><li class="menu item"><a href="api.html#error-handling-on-exceptions">Error handling on exceptions</a></li><li class="menu item"><a href="api.html#error-logging">Error logging</a></li><li class="menu item"><a href="api.html#serialisation">Serialisation</a></li><li class="menu item"><a href="api.html#incremental-xml-generation">Incremental XML generation</a></li><li class="menu item"><a href="api.html#cdata">CDATA</a></li><li class="menu item"><a href="api.html#xinclude-and-elementinclude">XInclude and ElementInclude</a></li><li class="menu item"><a href="api.html#write-c14n-on-elementtree">write_c14n on ElementTree</a></li></ul></li></ul><ul class="menu foreign" id="parsing-menu"><li class="menu title"><a href="parsing.html">Parsing XML and HTML with lxml</a><ul class="submenu"><li class="menu item"><a href="parsing.html#parsers">Parsers</a></li><li class="menu item"><a href="parsing.html#the-target-parser-interface">The target parser interface</a></li><li class="menu item"><a href="parsing.html#the-feed-parser-interface">The feed parser interface</a></li><li class="menu item"><a href="parsing.html#incremental-event-parsing">Incremental event parsing</a></li><li class="menu item"><a href="parsing.html#iterparse-and-iterwalk">iterparse and iterwalk</a></li><li class="menu item"><a href="parsing.html#python-unicode-strings">Python unicode strings</a></li></ul></li></ul><ul class="menu foreign" id="validation-menu"><li class="menu title"><a href="validation.html">Validation with lxml</a><ul class="submenu"><li class="menu item"><a href="validation.html#validation-at-parse-time">Validation at parse time</a></li><li class="menu item"><a href="validation.html#id1">DTD</a></li><li class="menu item"><a href="validation.html#relaxng">RelaxNG</a></li><li class="menu item"><a href="validation.html#xmlschema">XMLSchema</a></li><li class="menu item"><a href="validation.html#id2">Schematron</a></li><li class="menu item"><a href="validation.html#id3">(Pre-ISO-Schematron)</a></li></ul></li></ul><ul class="menu foreign" id="xpathxslt-menu"><li class="menu title"><a href="xpathxslt.html">XPath and XSLT with lxml</a><ul class="submenu"><li class="menu item"><a href="xpathxslt.html#xpath">XPath</a></li><li class="menu item"><a href="xpathxslt.html#xslt">XSLT</a></li></ul></li></ul><ul class="menu foreign" id="objectify-menu"><li class="menu title"><a href="objectify.html">lxml.objectify</a><ul class="submenu"><li class="menu item"><a href="objectify.html#the-lxml-objectify-api">The lxml.objectify API</a></li><li class="menu item"><a href="objectify.html#asserting-a-schema">Asserting a Schema</a></li><li class="menu item"><a href="objectify.html#objectpath">ObjectPath</a></li><li class="menu item"><a href="objectify.html#python-data-types">Python data types</a></li><li class="menu item"><a href="objectify.html#how-data-types-are-matched">How data types are matched</a></li><li class="menu item"><a href="objectify.html#what-is-different-from-lxml-etree">What is different from lxml.etree?</a></li></ul></li></ul><ul class="menu foreign" id="lxmlhtml-menu"><li class="menu title"><a href="lxmlhtml.html">lxml.html</a><ul class="submenu"><li class="menu item"><a href="lxmlhtml.html#parsing-html">Parsing HTML</a></li><li class="menu item"><a href="lxmlhtml.html#html-element-methods">HTML Element Methods</a></li><li class="menu item"><a href="lxmlhtml.html#running-html-doctests">Running HTML doctests</a></li><li class="menu item"><a href="lxmlhtml.html#creating-html-with-the-e-factory">Creating HTML with the E-factory</a></li><li class="menu item"><a href="lxmlhtml.html#working-with-links">Working with links</a></li><li class="menu item"><a href="lxmlhtml.html#forms">Forms</a></li><li class="menu item"><a href="lxmlhtml.html#cleaning-up-html">Cleaning up HTML</a></li><li class="menu item"><a href="lxmlhtml.html#html-diff">HTML Diff</a></li><li class="menu item"><a href="lxmlhtml.html#examples">Examples</a></li></ul></li></ul><ul class="menu foreign" id="cssselect-menu"><li class="menu title"><a href="cssselect.html">lxml.cssselect</a><ul class="submenu"><li class="menu item"><a href="cssselect.html#the-cssselector-class">The CSSSelector class</a></li><li class="menu item"><a href="cssselect.html#the-cssselect-method">The cssselect method</a></li><li class="menu item"><a href="cssselect.html#supported-selectors">Supported Selectors</a></li><li class="menu item"><a href="cssselect.html#namespaces">Namespaces</a></li></ul></li></ul><ul class="menu foreign" id="elementsoup-menu"><li class="menu title"><a href="elementsoup.html">BeautifulSoup Parser</a><ul class="submenu"><li class="menu item"><a href="elementsoup.html#parsing-with-the-soupparser">Parsing with the soupparser</a></li><li class="menu item"><a href="elementsoup.html#entity-handling">Entity handling</a></li><li class="menu item"><a href="elementsoup.html#using-soupparser-as-a-fallback">Using soupparser as a fallback</a></li><li class="menu item"><a href="elementsoup.html#using-only-the-encoding-detection">Using only the encoding detection</a></li></ul></li></ul><ul class="menu foreign" id="html5parser-menu"><li class="menu title"><a href="html5parser.html">html5lib Parser</a><ul class="submenu"><li class="menu item"><a href="html5parser.html#differences-to-regular-html-parsing">Differences to regular HTML parsing</a></li><li class="menu item"><a href="html5parser.html#function-reference">Function Reference</a></li></ul></li></ul></li></ul><ul id="Extending lxml-section"><li><span class="section title">Extending lxml</span><ul class="menu foreign" id="resolvers-menu"><li class="menu title"><a href="resolvers.html">Document loading and URL resolving</a><ul class="submenu"><li class="menu item"><a href="resolvers.html#xml-catalogs">XML Catalogs</a></li><li class="menu item"><a href="resolvers.html#uri-resolvers">URI Resolvers</a></li><li class="menu item"><a href="resolvers.html#document-loading-in-context">Document loading in context</a></li><li class="menu item"><a href="resolvers.html#i-o-access-control-in-xslt">I/O access control in XSLT</a></li></ul></li></ul><ul class="menu foreign" id="extensions-menu"><li class="menu title"><a href="extensions.html">Python extensions for XPath and XSLT</a><ul class="submenu"><li class="menu item"><a href="extensions.html#xpath-extension-functions">XPath Extension functions</a></li><li class="menu item"><a href="extensions.html#xslt-extension-elements">XSLT extension elements</a></li></ul></li></ul><ul class="menu foreign" id="element classes-menu"><li class="menu title"><a href="element_classes.html">Using custom Element classes in lxml</a><ul class="submenu"><li class="menu item"><a href="element_classes.html#background-on-element-proxies">Background on Element proxies</a></li><li class="menu item"><a href="element_classes.html#element-initialization">Element initialization</a></li><li class="menu item"><a href="element_classes.html#setting-up-a-class-lookup-scheme">Setting up a class lookup scheme</a></li><li class="menu item"><a href="element_classes.html#generating-xml-with-custom-classes">Generating XML with custom classes</a></li><li class="menu item"><a href="element_classes.html#id1">Implementing namespaces</a></li></ul></li></ul><ul class="menu foreign" id="sax-menu"><li class="menu title"><a href="sax.html">Sax support</a><ul class="submenu"><li class="menu item"><a href="sax.html#building-a-tree-from-sax-events">Building a tree from SAX events</a></li><li class="menu item"><a href="sax.html#producing-sax-events-from-an-elementtree-or-element">Producing SAX events from an ElementTree or Element</a></li><li class="menu item"><a href="sax.html#interfacing-with-pulldom-minidom">Interfacing with pulldom/minidom</a></li></ul></li></ul><ul class="menu foreign" id="capi-menu"><li class="menu title"><a href="capi.html">The public C-API of lxml.etree</a><ul class="submenu"><li class="menu item"><a href="capi.html#passing-generated-trees-through-python">Passing generated trees through Python</a></li><li class="menu item"><a href="capi.html#writing-external-modules-in-cython">Writing external modules in Cython</a></li><li class="menu item"><a href="capi.html#writing-external-modules-in-c">Writing external modules in C</a></li></ul></li></ul></li></ul><ul id="Developing lxml-section"><li><span class="section title">Developing lxml</span><ul class="menu foreign" id="build-menu"><li class="menu title"><a href="build.html">How to build lxml from source</a><ul class="submenu"><li class="menu item"><a href="build.html#cython">Cython</a></li><li class="menu item"><a href="build.html#github-git-and-hg">Github, git and hg</a></li><li class="menu item"><a href="build.html#building-the-sources">Building the sources</a></li><li class="menu item"><a href="build.html#running-the-tests-and-reporting-errors">Running the tests and reporting errors</a></li><li class="menu item"><a href="build.html#building-an-egg-or-wheel">Building an egg or wheel</a></li><li class="menu item"><a href="build.html#building-lxml-on-macos-x">Building lxml on MacOS-X</a></li><li class="menu item"><a href="build.html#static-linking-on-windows">Static linking on Windows</a></li><li class="menu item"><a href="build.html#building-debian-packages-from-svn-sources">Building Debian packages from SVN sources</a></li></ul></li></ul><ul class="menu foreign" id="lxml source howto-menu"><li class="menu title"><a href="lxml-source-howto.html">How to read the source of lxml</a><ul class="submenu"><li class="menu item"><a href="lxml-source-howto.html#what-is-cython">What is Cython?</a></li><li class="menu item"><a href="lxml-source-howto.html#where-to-start">Where to start?</a></li><li class="menu item"><a href="lxml-source-howto.html#lxml-etree">lxml.etree</a></li><li class="menu item"><a href="lxml-source-howto.html#python-modules">Python modules</a></li><li class="menu item"><a href="lxml-source-howto.html#lxml-objectify">lxml.objectify</a></li><li class="menu item"><a href="lxml-source-howto.html#lxml-html">lxml.html</a></li></ul></li></ul><ul class="menu foreign" id="changes 4 2 2-menu"><li class="menu title"><a href="changes-4.2.2.html">Release Changelog</a></li></ul><ul class="menu foreign" id="credits-menu"><li class="menu title"><a href="credits.html">Credits</a><ul class="submenu"><li class="menu item"><a href="credits.html#main-contributors">Main contributors</a></li><li class="menu item"><a href="credits.html#special-thanks-goes-to">Special thanks goes to:</a></li></ul></li></ul></li><li><a href="/sitemap.html">Sitemap</a></li></ul></div></div><h1 class="title">lxml FAQ - Frequently Asked Questions</h1>
+
+<p>Frequently asked questions on lxml.  See also the notes on <a class="reference external" href="compatibility.html">compatibility</a> to
+<a class="reference external" href="http://effbot.org/zone/element-index.htm">ElementTree</a>.</p>
+<div class="contents topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#general-questions" id="id2">General Questions</a><ul>
+<li><a class="reference internal" href="#is-there-a-tutorial" id="id3">Is there a tutorial?</a></li>
+<li><a class="reference internal" href="#where-can-i-find-more-documentation-about-lxml" id="id4">Where can I find more documentation about lxml?</a></li>
+<li><a class="reference internal" href="#what-standards-does-lxml-implement" id="id5">What standards does lxml implement?</a></li>
+<li><a class="reference internal" href="#who-uses-lxml" id="id6">Who uses lxml?</a></li>
+<li><a class="reference internal" href="#what-is-the-difference-between-lxml-etree-and-lxml-objectify" id="id7">What is the difference between lxml.etree and lxml.objectify?</a></li>
+<li><a class="reference internal" href="#how-can-i-make-my-application-run-faster" id="id8">How can I make my application run faster?</a></li>
+<li><a class="reference internal" href="#what-about-that-trailing-text-on-serialised-elements" id="id9">What about that trailing text on serialised Elements?</a></li>
+<li><a class="reference internal" href="#how-can-i-find-out-if-an-element-is-a-comment-or-pi" id="id10">How can I find out if an Element is a comment or PI?</a></li>
+<li><a class="reference internal" href="#how-can-i-map-an-xml-tree-into-a-dict-of-dicts" id="id11">How can I map an XML tree into a dict of dicts?</a></li>
+<li><a class="reference internal" href="#why-does-lxml-sometimes-return-str-values-for-text-in-python-2" id="id12">Why does lxml sometimes return 'str' values for text in Python 2?</a></li>
+<li><a class="reference internal" href="#why-do-i-get-xinclude-or-dtd-lookup-failures-on-some-systems-but-not-on-others" id="id13">Why do I get XInclude or DTD lookup failures on some systems but not on others?</a></li>
+<li><a class="reference internal" href="#how-do-namespaces-work-in-lxml" id="id14">How do namespaces work in lxml?</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#installation" id="id15">Installation</a><ul>
+<li><a class="reference internal" href="#which-version-of-libxml2-and-libxslt-should-i-use-or-require" id="id16">Which version of libxml2 and libxslt should I use or require?</a></li>
+<li><a class="reference internal" href="#where-are-the-binary-builds" id="id17">Where are the binary builds?</a></li>
+<li><a class="reference internal" href="#why-do-i-get-errors-about-missing-ucs4-symbols-when-installing-lxml" id="id18">Why do I get errors about missing UCS4 symbols when installing lxml?</a></li>
+<li><a class="reference internal" href="#my-c-compiler-crashes-on-installation" id="id19">My C compiler crashes on installation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#contributing" id="id20">Contributing</a><ul>
+<li><a class="reference internal" href="#why-is-lxml-not-written-in-python" id="id21">Why is lxml not written in Python?</a></li>
+<li><a class="reference internal" href="#how-can-i-contribute" id="id22">How can I contribute?</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#bugs" id="id23">Bugs</a><ul>
+<li><a class="reference internal" href="#my-application-crashes" id="id24">My application crashes!</a></li>
+<li><a class="reference internal" href="#my-application-crashes-on-macos-x" id="id25">My application crashes on MacOS-X!</a></li>
+<li><a class="reference internal" href="#i-think-i-have-found-a-bug-in-lxml-what-should-i-do" id="id26">I think I have found a bug in lxml. What should I do?</a></li>
+<li><a class="reference internal" href="#how-do-i-know-a-bug-is-really-in-lxml-and-not-in-libxml2" id="id27">How do I know a bug is really in lxml and not in libxml2?</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id1" id="id28">Threading</a><ul>
+<li><a class="reference internal" href="#can-i-use-threads-to-concurrently-access-the-lxml-api" id="id29">Can I use threads to concurrently access the lxml API?</a></li>
+<li><a class="reference internal" href="#does-my-program-run-faster-if-i-use-threads" id="id30">Does my program run faster if I use threads?</a></li>
+<li><a class="reference internal" href="#would-my-single-threaded-program-run-faster-if-i-turned-off-threading" id="id31">Would my single-threaded program run faster if I turned off threading?</a></li>
+<li><a class="reference internal" href="#why-can-t-i-reuse-xslt-stylesheets-in-other-threads" id="id32">Why can't I reuse XSLT stylesheets in other threads?</a></li>
+<li><a class="reference internal" href="#my-program-crashes-when-run-with-mod-python-pyro-zope-plone" id="id33">My program crashes when run with mod_python/Pyro/Zope/Plone/...</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#parsing-and-serialisation" id="id34">Parsing and Serialisation</a><ul>
+<li><a class="reference internal" href="#why-doesn-t-the-pretty-print-option-reformat-my-xml-output" id="id35">Why doesn't the <tt class="docutils literal">pretty_print</tt> option reformat my XML output?</a></li>
+<li><a class="reference internal" href="#why-can-t-lxml-parse-my-xml-from-unicode-strings" id="id36">Why can't lxml parse my XML from unicode strings?</a></li>
+<li><a class="reference internal" href="#can-lxml-parse-from-file-objects-opened-in-unicode-text-mode" id="id37">Can lxml parse from file objects opened in unicode/text mode?</a></li>
+<li><a class="reference internal" href="#what-is-the-difference-between-str-xslt-doc-and-xslt-doc-write" id="id38">What is the difference between str(xslt(doc)) and xslt(doc).write() ?</a></li>
+<li><a class="reference internal" href="#why-can-t-i-just-delete-parents-or-clear-the-root-node-in-iterparse" id="id39">Why can't I just delete parents or clear the root node in iterparse()?</a></li>
+<li><a class="reference internal" href="#how-do-i-output-null-characters-in-xml-text" id="id40">How do I output null characters in XML text?</a></li>
+<li><a class="reference internal" href="#is-lxml-vulnerable-to-xml-bombs" id="id41">Is lxml vulnerable to XML bombs?</a></li>
+<li><a class="reference internal" href="#how-do-i-use-lxml-safely-as-a-web-service-endpoint" id="id42">How do I use lxml safely as a web-service endpoint?</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#xpath-and-document-traversal" id="id43">XPath and Document Traversal</a><ul>
+<li><a class="reference internal" href="#what-are-the-findall-and-xpath-methods-on-element-tree" id="id44">What are the <tt class="docutils literal">findall()</tt> and <tt class="docutils literal">xpath()</tt> methods on Element(Tree)?</a></li>
+<li><a class="reference internal" href="#why-doesn-t-findall-support-full-xpath-expressions" id="id45">Why doesn't <tt class="docutils literal">findall()</tt> support full XPath expressions?</a></li>
+<li><a class="reference internal" href="#how-can-i-find-out-which-namespace-prefixes-are-used-in-a-document" id="id46">How can I find out which namespace prefixes are used in a document?</a></li>
+<li><a class="reference internal" href="#how-can-i-specify-a-default-namespace-for-xpath-expressions" id="id47">How can I specify a default namespace for XPath expressions?</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="general-questions">
+<h1>General Questions</h1>
+<div class="section" id="is-there-a-tutorial">
+<h2>Is there a tutorial?</h2>
+<p>Read the <a class="reference external" href="tutorial.html">lxml.etree Tutorial</a>.  While this is still work in progress
+(just as any good documentation), it provides an overview of the most
+important concepts in <tt class="docutils literal">lxml.etree</tt>.  If you want to help out,
+improving the tutorial is a very good place to start.</p>
+<p>There is also a <a class="reference external" href="http://effbot.org/zone/element.htm">tutorial for ElementTree</a> which works for
+<tt class="docutils literal">lxml.etree</tt>.  The documentation of the <a class="reference external" href="api.html">extended etree API</a> also
+contains many examples for <tt class="docutils literal">lxml.etree</tt>.  Fredrik Lundh's <a class="reference external" href="http://effbot.org/zone/element-lib.htm">element
+library</a> contains a lot of nice recipes that show how to solve common
+tasks in ElementTree and lxml.etree.  To learn using
+<tt class="docutils literal">lxml.objectify</tt>, read the <a class="reference external" href="objectify.html">objectify documentation</a>.</p>
+<p>John Shipman has written another tutorial called <a class="reference external" href="http://www.nmt.edu/tcc/help/pubs/pylxml/">Python XML
+processing with lxml</a> that contains lots of examples.  Liza Daly
+wrote a nice article about high-performance aspects when <a class="reference external" href="http://www.ibm.com/developerworks/xml/library/x-hiperfparse/">parsing
+large files with lxml</a>.</p>
+</div>
+<div class="section" id="where-can-i-find-more-documentation-about-lxml">
+<h2>Where can I find more documentation about lxml?</h2>
+<p>There is a lot of documentation on the web and also in the Python
+standard library documentation, as lxml implements the well-known
+<a class="reference external" href="http://effbot.org/zone/element-index.htm">ElementTree API</a> and tries to follow its documentation as closely as
+possible.  The recipes in Fredrik Lundh's <a class="reference external" href="http://effbot.org/zone/element-lib.htm">element library</a> are
+generally worth taking a look at.  There are a couple of issues where
+lxml cannot keep up compatibility.  They are described in the
+<a class="reference external" href="compatibility.html">compatibility</a> documentation.</p>
+<p>The lxml specific extensions to the API are described by individual
+files in the <tt class="docutils literal">doc</tt> directory of the source distribution and on <a class="reference external" href="http://lxml.de/#documentation">the
+web page</a>.</p>
+<p>The <a class="reference external" href="api/index.html">generated API documentation</a> is a comprehensive API reference
+for the lxml package.</p>
+</div>
+<div class="section" id="what-standards-does-lxml-implement">
+<h2>What standards does lxml implement?</h2>
+<p>The compliance to XML Standards depends on the support in libxml2 and libxslt.
+Here is a quote from <a class="reference external" href="http://xmlsoft.org/">http://xmlsoft.org/</a>:</p>
+<blockquote>
+In most cases libxml2 tries to implement the specifications in a relatively
+strictly compliant way. As of release 2.4.16, libxml2 passed all 1800+ tests
+from the OASIS XML Tests Suite.</blockquote>
+<p>lxml currently supports libxml2 2.6.20 or later, which has even better
+support for various XML standards.  The important ones are:</p>
+<ul class="simple">
+<li>XML 1.0</li>
+<li>HTML 4</li>
+<li>XML namespaces</li>
+<li>XML Schema 1.0</li>
+<li>XPath 1.0</li>
+<li>XInclude 1.0</li>
+<li>XSLT 1.0</li>
+<li>EXSLT</li>
+<li>XML catalogs</li>
+<li>canonical XML</li>
+<li>RelaxNG</li>
+<li>xml:id</li>
+<li>xml:base</li>
+</ul>
+<p>Support for XML Schema is currently not 100% complete in libxml2, but
+is definitely very close to compliance.  Schematron is supported in
+two ways, the best being the original ISO Schematron reference
+implementation via XSLT.  libxml2 also supports loading documents
+through HTTP and FTP.</p>
+<p>For <a class="reference external" href="http://relaxng.org/compact-tutorial-20030326.html">RelaxNG Compact Syntax</a>
+support, there is a tool called <a class="reference external" href="http://www.gnosis.cx/download/relax/">rnc2rng</a>,
+written by David Mertz, which you might be able to use from Python.  Failing
+that, <a class="reference external" href="http://code.google.com/p/jing-trang/">trang</a> is the 'official'
+command line tool (written in Java) to do the conversion.</p>
+</div>
+<div class="section" id="who-uses-lxml">
+<h2>Who uses lxml?</h2>
+<p>As an XML library, lxml is often used under the hood of in-house
+server applications, such as web servers or applications that
+facilitate some kind of content management.  Many people who deploy
+<a class="reference external" href="http://www.zope.org/">Zope</a>, <a class="reference external" href="http://www.plone.org/">Plone</a> or <a class="reference external" href="https://www.djangoproject.com/">Django</a> use it together with lxml in the background,
+without speaking publicly about it.  Therefore, it is hard to get an
+idea of who uses it, and the following list of 'users and projects we
+know of' is very far from a complete list of lxml's users.</p>
+<p>Also note that the compatibility to the ElementTree library does not
+require projects to set a hard dependency on lxml - as long as they do
+not take advantage of lxml's enhanced feature set.</p>
+<ul class="simple">
+<li><a class="reference external" href="http://code.google.com/p/cssutils/source/browse/trunk/examples/style.py?r=917">cssutils</a>,
+a CSS parser and toolkit, can be used with <tt class="docutils literal">lxml.cssselect</tt></li>
+<li><a class="reference external" href="http://www.openplans.org/projects/deliverance/project-home">Deliverance</a>,
+a content theming tool</li>
+<li><a class="reference external" href="http://www.enfoldsystems.com/Products/Proxy/4">Enfold Proxy 4</a>,
+a web server accelerator with on-the-fly XSLT processing</li>
+<li><a class="reference external" href="http://lists.wald.intevation.org/pipermail/inteproxy-devel/2007-February/000000.html">Inteproxy</a>,
+a secure HTTP proxy</li>
+<li><a class="reference external" href="http://pypi.python.org/pypi/lwebstring">lwebstring</a>,
+an XML template engine</li>
+<li><a class="reference external" href="https://openpyxl.readthedocs.io/">openpyxl</a>,
+a library to read/write MS Excel 2007 files</li>
+<li><a class="reference external" href="http://permalink.gmane.org/gmane.comp.python.lxml.devel/3250">OpenXMLlib</a>,
+a library for handling OpenXML document meta data</li>
+<li><a class="reference external" href="http://www.psychopy.org/">PsychoPy</a>,
+psychology software in Python</li>
+<li><a class="reference external" href="http://pypi.python.org/pypi/pycoon">Pycoon</a>,
+a WSGI web development framework based on XML pipelines</li>
+<li><a class="reference external" href="http://pycsw.org">pycsw</a>,
+an <a class="reference external" href="http://opengeospatial.org/standards/cat">OGC CSW</a> server implementation written in Python</li>
+<li><a class="reference external" href="http://pypi.python.org/pypi/pyquery">PyQuery</a>,
+a query framework for XML/HTML, similar to jQuery for JavaScript</li>
+<li><a class="reference external" href="http://github.com/mikemaccana/python-docx">python-docx</a>,
+a package for handling Microsoft's Word OpenXML format</li>
+<li><a class="reference external" href="http://beta.rambler.ru/srch?query=python+lxml&amp;searchtype=web">Rambler</a>,
+a meta search engine that aggregates different data sources</li>
+<li><a class="reference external" href="http://pypi.python.org/pypi/rdfadict">rdfadict</a>,
+an RDFa parser with a simple dictionary-like interface.</li>
+<li><a class="reference external" href="http://pypi.python.org/pypi/xupdate-processor">xupdate-processor</a>,
+an XUpdate implementation for lxml.etree</li>
+<li><a class="reference external" href="http://docs.diazo.org/">Diazo</a>,
+an XSLT-under-the-hood web site theming engine</li>
+</ul>
+<p>Zope3 and some of its extensions have good support for lxml:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://pypi.python.org/pypi/gocept.lxml">gocept.lxml</a>,
+Zope3 interface bindings for lxml</li>
+<li><a class="reference external" href="http://pypi.python.org/pypi/z3c.rml">z3c.rml</a>,
+an implementation of ReportLab's RML format</li>
+<li><a class="reference external" href="http://pypi.python.org/pypi/zif.sedna">zif.sedna</a>,
+an XQuery based interface to the Sedna OpenSource XML database</li>
+</ul>
+<p>And don't miss the quotes by our generally <a class="reference external" href="http://thread.gmane.org/gmane.comp.python.lxml.devel/3244/focus=3244">happy</a> <a class="reference external" href="http://article.gmane.org/gmane.comp.python.lxml.devel/3246">users</a>, and other
+<a class="reference external" href="http://www.google.com/search?as_lq=http:%2F%2Flxml.de%2F">sites that link to lxml</a>.   As <a class="reference external" href="http://www.ibm.com/developerworks/xml/library/x-hiperfparse/">Liza Daly</a> puts it: "Many software
+products come with the pick-two caveat, meaning that you must choose
+only two: speed, flexibility, or readability.  When used carefully,
+lxml can provide all three."</p>
+</div>
+<div class="section" id="what-is-the-difference-between-lxml-etree-and-lxml-objectify">
+<h2>What is the difference between lxml.etree and lxml.objectify?</h2>
+<p>The two modules provide different ways of handling XML.  However, objectify
+builds on top of lxml.etree and therefore inherits most of its capabilities
+and a large portion of its API.</p>
+<ul>
+<li><p class="first">lxml.etree is a generic API for XML and HTML handling.  It aims for
+ElementTree <a class="reference external" href="compatibility.html">compatibility</a> and supports the entire XML infoset.  It is well
+suited for both mixed content and data centric XML.  Its generality makes it
+the best choice for most applications.</p>
+</li>
+<li><p class="first">lxml.objectify is a specialized API for XML data handling in a Python object
+syntax.  It provides a very natural way to deal with data fields stored in a
+structurally well defined XML format.  Data is automatically converted to
+Python data types and can be manipulated with normal Python operators.  Look
+at the examples in the <a class="reference external" href="objectify.html">objectify documentation</a> to see what it feels like
+to use it.</p>
+<p>Objectify is not well suited for mixed contents or HTML documents.  As it is
+built on top of lxml.etree, however, it inherits the normal support for
+XPath, XSLT or validation.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="how-can-i-make-my-application-run-faster">
+<h2>How can I make my application run faster?</h2>
+<p>lxml.etree is a very fast library for processing XML.  There are, however, <a class="reference external" href="performance.html#the-elementtree-api">a
+few caveats</a> involved in the mapping of the powerful libxml2 library to the
+simple and convenient ElementTree API.  Not all operations are as fast as the
+simplicity of the API might suggest, while some use cases can heavily benefit
+from finding the right way of doing them.  The <a class="reference external" href="performance.html">benchmark page</a> has a
+comparison to other ElementTree implementations and a number of tips for
+performance tweaking.  As with any Python application, the rule of thumb is:
+the more of your processing runs in C, the faster your application gets.  See
+also the section on <a class="reference external" href="#threading">threading</a>.</p>
+</div>
+<div class="section" id="what-about-that-trailing-text-on-serialised-elements">
+<h2>What about that trailing text on serialised Elements?</h2>
+<p>The ElementTree tree model defines an Element as a container with a tag name,
+contained text, child Elements and a tail text.  This means that whenever you
+serialise an Element, you will get all parts of that Element:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">root</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">XML</span><span class="p">(</span><span class="s2">"&lt;root&gt;&lt;tag&gt;text&lt;child/&gt;&lt;/tag&gt;tail&lt;/root&gt;"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">etree</span><span class="o">.</span><span class="n">tostring</span><span class="p">(</span><span class="n">root</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+<span class="go">&lt;tag&gt;text&lt;child/&gt;&lt;/tag&gt;tail</span>
+</pre></div>
+<p>Here is an example that shows why not serialising the tail would be
+even more surprising from an object point of view:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">root</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">Element</span><span class="p">(</span><span class="s2">"test"</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">root</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="s2">"TEXT"</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">etree</span><span class="o">.</span><span class="n">tostring</span><span class="p">(</span><span class="n">root</span><span class="p">))</span>
+<span class="go">&lt;test&gt;TEXT&lt;/test&gt;</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">root</span><span class="o">.</span><span class="n">tail</span> <span class="o">=</span> <span class="s2">"TAIL"</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">etree</span><span class="o">.</span><span class="n">tostring</span><span class="p">(</span><span class="n">root</span><span class="p">))</span>
+<span class="go">&lt;test&gt;TEXT&lt;/test&gt;TAIL</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">root</span><span class="o">.</span><span class="n">tail</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">etree</span><span class="o">.</span><span class="n">tostring</span><span class="p">(</span><span class="n">root</span><span class="p">))</span>
+<span class="go">&lt;test&gt;TEXT&lt;/test&gt;</span>
+</pre></div>
+<p>Just imagine a Python list where you append an item and it doesn't
+show up when you look at the list.</p>
+<p>The <tt class="docutils literal">.tail</tt> property is a huge simplification for the tree model as
+it avoids text nodes to appear in the list of children and makes
+access to them quick and simple.  So this is a benefit in most
+applications and simplifies many, many XML tree algorithms.</p>
+<p>However, in document-like XML (and especially HTML), the above result can be
+unexpected to new users and can sometimes require a bit more overhead.  A good
+way to deal with this is to use helper functions that copy the Element without
+its tail.  The <tt class="docutils literal">lxml.html</tt> package also deals with this in a couple of
+places, as most HTML algorithms benefit from a tail-free behaviour.</p>
+</div>
+<div class="section" id="how-can-i-find-out-if-an-element-is-a-comment-or-pi">
+<h2>How can I find out if an Element is a comment or PI?</h2>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">root</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">XML</span><span class="p">(</span><span class="s2">"&lt;?my PI?&gt;&lt;root&gt;&lt;!-- empty --&gt;&lt;/root&gt;"</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">root</span><span class="o">.</span><span class="n">tag</span>
+<span class="go">'root'</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">root</span><span class="o">.</span><span class="n">getprevious</span><span class="p">()</span><span class="o">.</span><span class="n">tag</span> <span class="ow">is</span> <span class="n">etree</span><span class="o">.</span><span class="n">PI</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">root</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">tag</span> <span class="ow">is</span> <span class="n">etree</span><span class="o">.</span><span class="n">Comment</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<div class="section" id="how-can-i-map-an-xml-tree-into-a-dict-of-dicts">
+<h2>How can I map an XML tree into a dict of dicts?</h2>
+<p>I'm glad you asked.</p>
+<div class="syntax"><pre><span class="k">def</span> <span class="nf">recursive_dict</span><span class="p">(</span><span class="n">element</span><span class="p">):</span>
+     <span class="k">return</span> <span class="n">element</span><span class="o">.</span><span class="n">tag</span><span class="p">,</span> \
+            <span class="nb">dict</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">recursive_dict</span><span class="p">,</span> <span class="n">element</span><span class="p">))</span> <span class="ow">or</span> <span class="n">element</span><span class="o">.</span><span class="n">text</span>
+</pre></div>
+<p>Note that this beautiful quick-and-dirty converter expects children
+to have unique tag names and will silently overwrite any data that
+was contained in preceding siblings with the same name.  For any
+real-world application of xml-to-dict conversion, you would better
+write your own, longer version of this.</p>
+</div>
+<div class="section" id="why-does-lxml-sometimes-return-str-values-for-text-in-python-2">
+<h2>Why does lxml sometimes return 'str' values for text in Python 2?</h2>
+<p>In Python 2, lxml's API returns byte strings for plain ASCII text
+values, be it for tag names or text in Element content.  This is the
+same behaviour as known from ElementTree.  The reasoning is that ASCII
+encoded byte strings are compatible with Unicode strings in Python 2,
+but consume less memory (usually by a factor of 2 or 4) and are faster
+to create because they do not require decoding.  Plain ASCII string
+values are very common in XML, so this optimisation is generally worth
+it.</p>
+<p>In Python 3, lxml always returns Unicode strings for text and names,
+as does ElementTree.  Since Python 3.3, Unicode strings containing
+only characters that can be encoded in ASCII or Latin-1 are generally
+as efficient as byte strings.  In older versions of Python 3, the
+above mentioned drawbacks apply.</p>
+</div>
+<div class="section" id="why-do-i-get-xinclude-or-dtd-lookup-failures-on-some-systems-but-not-on-others">
+<h2>Why do I get XInclude or DTD lookup failures on some systems but not on others?</h2>
+<p>To avoid network access, external resources are first looked up in
+<a class="reference external" href="https://www.oasis-open.org/committees/entity/spec.html">XML catalogues</a>.
+Many systems have them installed by default, but some don't.
+On Linux systems, the default place to look is the index file
+<tt class="docutils literal">/etc/xml/catalog</tt>, which most importantly provides a mapping from
+doctype IDs to locally installed DTD files.</p>
+<p>See the <a class="reference external" href="http://xmlsoft.org/catalog.html">libxml2 catalogue documentation</a>
+for further information.</p>
+</div>
+<div class="section" id="how-do-namespaces-work-in-lxml">
+<h2>How do namespaces work in lxml?</h2>
+<p>The same as in ElementTree.  See the <a class="reference external" href="tutorial.html#namespaces">tutorial</a>.</p>
+</div>
+</div>
+<div class="section" id="installation">
+<h1>Installation</h1>
+<div class="section" id="which-version-of-libxml2-and-libxslt-should-i-use-or-require">
+<h2>Which version of libxml2 and libxslt should I use or require?</h2>
+<p>It really depends on your application, but the rule of thumb is: more recent
+versions contain less bugs and provide more features.</p>
+<ul class="simple">
+<li>Do not use libxml2 2.6.27 if you want to use XPath (including XSLT).  You
+will get crashes when XPath errors occur during the evaluation (e.g. for
+unknown functions).  This happens inside the evaluation call to libxml2, so
+there is nothing that lxml can do about it.</li>
+<li>Try to use versions of both libraries that were released together.  At least
+the libxml2 version should not be older than the libxslt version.</li>
+<li>If you use XML Schema or Schematron which are still under development, the
+most recent version of libxml2 is usually a good bet.</li>
+<li>The same applies to XPath, where a substantial number of bugs and memory
+leaks were fixed over time.  If you encounter crashes or memory leaks in
+XPath applications, try a more recent version of libxml2.</li>
+<li>For parsing and fixing broken HTML, lxml requires at least libxml2 2.6.21.</li>
+<li>For the normal tree handling, however, any libxml2 version starting with
+2.6.20 should do.</li>
+</ul>
+<p>Read the <a class="reference external" href="http://xmlsoft.org/news.html">release notes of libxml2</a> and the <a class="reference external" href="http://xmlsoft.org/XSLT/news.html">release notes of libxslt</a> to
+see when (or if) a specific bug has been fixed.</p>
+</div>
+<div class="section" id="where-are-the-binary-builds">
+<h2>Where are the binary builds?</h2>
+<p>Thanks to the help by Joar Wandborg, we try to make "<a class="reference external" href="https://www.python.org/dev/peps/pep-0513">manylinux</a>" binary
+builds for Linux available shortly after each source release, as they
+are very frequently used by continuous integration and/or build servers.</p>
+<p>Thanks to the help by Maximilian Hils and the Appveyor build service,
+we also try to serve the frequent requests for binary builds available
+for Microsoft Windows in a timely fashion, since users of that platform
+usually fail to build lxml themselves.  Two of the major design issues
+of this operating system make this non-trivial for its users: the lack
+of a pre-installed standard compiler and the missing package management.</p>
+<p>Besides that, Christoph Gohlke generously provides <a class="reference external" href="http://www.lfd.uci.edu/~gohlke/pythonlibs/#lxml">unofficial lxml binary
+builds for Windows</a>
+that are usually very up to date.  Consider using them if you prefer a
+binary build over a signed official source release.</p>
+</div>
+<div class="section" id="why-do-i-get-errors-about-missing-ucs4-symbols-when-installing-lxml">
+<h2>Why do I get errors about missing UCS4 symbols when installing lxml?</h2>
+<p>You are using a Python installation that was configured for a different
+internal Unicode representation than the lxml package you are trying to
+install.  CPython versions before 3.3 allowed to switch between two types
+at build time: the 32 bit encoding UCS4 and the 16 bit encoding UCS2.
+Sadly, both are not compatible, so eggs and other binary distributions
+can only support the one they were compiled with.</p>
+<p>This means that you have to compile lxml from sources for your system.  Note
+that you do not need Cython for this, the lxml source distribution is directly
+compilable on both platform types.  See the <a class="reference external" href="build.html">build instructions</a> on how to do
+this.</p>
+</div>
+<div class="section" id="my-c-compiler-crashes-on-installation">
+<h2>My C compiler crashes on installation</h2>
+<p>lxml consists of a relatively large amount of (Cython) generated C code
+in a single source module.  Compiling this module requires a lot of free
+memory, usually more than half a GB, which can pose problems especially on
+shared/cloud build systems.</p>
+<p>If your C compiler crashes while building lxml from sources, consider
+using one of the binary wheels that we provide.  The "<a class="reference external" href="https://www.python.org/dev/peps/pep-0513">manylinux</a>" binaries
+should generally work well on most build systems and install substantially
+faster than a source build.</p>
+</div>
+</div>
+<div class="section" id="contributing">
+<h1>Contributing</h1>
+<div class="section" id="why-is-lxml-not-written-in-python">
+<h2>Why is lxml not written in Python?</h2>
+<p>It <em>almost</em> is.</p>
+<p>lxml is not written in plain Python, because it interfaces with two C
+libraries: libxml2 and libxslt.  Accessing them at the C-level is
+required for performance reasons.</p>
+<p>However, to avoid writing plain C-code and caring too much about the
+details of built-in types and reference counting, lxml is written in
+<a class="reference external" href="http://cython.org/">Cython</a>, a superset of the Python language that translates to C-code.
+Chances are that if you know Python, you can write <a class="reference external" href="http://docs.cython.org/docs/tutorial.html">code that Cython
+accepts</a>.  Again, the C-ish style used in the lxml code is just for
+performance optimisations.  If you want to contribute, don't bother
+with the details, a Python implementation of your contribution is
+better than none.  And keep in mind that lxml's flexible API often
+favours an implementation of features in pure Python, without
+bothering with C-code at all.  For example, the <tt class="docutils literal">lxml.html</tt> package
+is written entirely in Python.</p>
+<p>Please contact the <a class="reference external" href="http://lxml.de/mailinglist/">mailing list</a> if you need any help.</p>
+</div>
+<div class="section" id="how-can-i-contribute">
+<h2>How can I contribute?</h2>
+<p>If you find something that you would like lxml to do (or do better),
+then please tell us about it on the <a class="reference external" href="http://lxml.de/mailinglist/">mailing list</a>.  Pull requests
+on github are always appreciated, especially when accompanied by unit
+tests and documentation (doctests would be great).  See the <tt class="docutils literal">tests</tt>
+subdirectories in the lxml source tree (below the <tt class="docutils literal">src</tt> directory)
+and the <a class="reference external" href="http://docutils.sourceforge.net/rst.html">ReST</a> <a class="reference external" href="https://github.com/lxml/lxml/tree/master/doc">text files</a> in the <tt class="docutils literal">doc</tt> directory.</p>
+<p>We also have a <a class="reference external" href="https://github.com/lxml/lxml/blob/master/IDEAS.txt">list of missing features</a> that we would like to
+implement but didn't due to lack if time.  If <em>you</em> find the time,
+patches are very welcome.</p>
+<p>Besides enhancing the code, there are a lot of places where you can help the
+project and its user base.  You can</p>
+<ul class="simple">
+<li>spread the word and write about lxml.  Many users (especially new Python
+users) have not yet heard about lxml, although our user base is constantly
+growing.  If you write your own blog and feel like saying something about
+lxml, go ahead and do so.  If we think your contribution or criticism is
+valuable to other users, we may even put a link or a quote on the project
+page.</li>
+<li>provide code examples for the general usage of lxml or specific problems
+solved with lxml.  Readable code is a very good way of showing how a library
+can be used and what great things you can do with it.  Again, if we hear
+about it, we can set a link on the project page.</li>
+<li>work on the documentation.  The web page is generated from a set of <a class="reference external" href="http://docutils.sourceforge.net/rst.html">ReST</a>
+<a class="reference external" href="https://github.com/lxml/lxml/tree/master/doc">text files</a>.  It is meant both as a representative project page for lxml
+and as a site for documenting lxml's API and usage.  If you have questions
+or an idea how to make it more readable and accessible while you are reading
+it, please send a comment to the <a class="reference external" href="http://lxml.de/mailinglist/">mailing list</a>.</li>
+<li>enhance the web site. We put some work into making the web site
+usable, understandable and also easy to find, but there's always
+things that can be done better.  You may notice that we are not
+top-ranked when searching the web for "Python and XML", so maybe you
+have an idea how to improve that.</li>
+<li>help with the tutorial.  A tutorial is the most important starting point for
+new users, so it is important for us to provide an easy to understand guide
+into lxml.  As all documentation, the tutorial is work in progress, so we
+appreciate every helping hand.</li>
+<li>improve the docstrings.  lxml uses docstrings to support Python's integrated
+online <tt class="docutils literal">help()</tt> function.  However, sometimes these are not sufficient to
+grasp the details of the function in question.  If you find such a place,
+you can try to write up a better description and send it to the <a class="reference external" href="http://lxml.de/mailinglist/">mailing
+list</a>.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="bugs">
+<h1>Bugs</h1>
+<div class="section" id="my-application-crashes">
+<h2>My application crashes!</h2>
+<p>One of the goals of lxml is "no segfaults", so if there is no clear
+warning in the documentation that you were doing something potentially
+harmful, you have found a bug and we would like to hear about it.
+Please report this bug to the <a class="reference external" href="http://lxml.de/mailinglist/">mailing list</a>.  See the section on bug
+reporting to learn how to do that.</p>
+<p>If your application (or e.g. your web container) uses threads, please
+see the FAQ section on <a class="reference external" href="#threading">threading</a> to check if you touch on one of the
+potential pitfalls.</p>
+<p>In any case, try to reproduce the problem with the latest versions of
+libxml2 and libxslt.  From time to time, bugs and race conditions are found
+in these libraries, so a more recent version might already contain a fix for
+your problem.</p>
+<p>Remember: even if you see lxml appear in a crash stack trace, it is
+not necessarily lxml that <em>caused</em> the crash.</p>
+</div>
+<div class="section" id="my-application-crashes-on-macos-x">
+<h2>My application crashes on MacOS-X!</h2>
+<p>This was a common problem up to lxml 2.1.x.  Since lxml 2.2, the only
+officially supported way to use it on this platform is through a
+static build against freshly downloaded versions of libxml2 and
+libxslt.  See the build instructions for <a class="reference external" href="build.html#building-lxml-on-macos-x">MacOS-X</a>.</p>
+</div>
+<div class="section" id="i-think-i-have-found-a-bug-in-lxml-what-should-i-do">
+<h2>I think I have found a bug in lxml. What should I do?</h2>
+<p>First, you should look at the <a class="reference external" href="https://github.com/lxml/lxml/blob/master/CHANGES.txt">current developer changelog</a> to see if this
+is a known problem that has already been fixed in the master branch since the
+release you are using.</p>
+<p>Also, the 'crash' section above has a few good advices what to try to see if
+the problem is really in lxml - and not in your setup.  Believe it or not,
+that happens more often than you might think, especially when old libraries
+or even multiple library versions are installed.</p>
+<p>You should always try to reproduce the problem with the latest
+versions of libxml2 and libxslt - and make sure they are used.
+<tt class="docutils literal">lxml.etree</tt> can tell you what it runs with:</p>
+<div class="syntax"><pre><span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">lxml</span> <span class="kn">import</span> <span class="n">etree</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s2">"</span><span class="si">%-20s</span><span class="s2">: </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="s1">'Python'</span><span class="p">,</span>           <span class="n">sys</span><span class="o">.</span><span class="n">version_info</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">"</span><span class="si">%-20s</span><span class="s2">: </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="s1">'lxml.etree'</span><span class="p">,</span>       <span class="n">etree</span><span class="o">.</span><span class="n">LXML_VERSION</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">"</span><span class="si">%-20s</span><span class="s2">: </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="s1">'libxml used'</span><span class="p">,</span>      <span class="n">etree</span><span class="o">.</span><span class="n">LIBXML_VERSION</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">"</span><span class="si">%-20s</span><span class="s2">: </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="s1">'libxml compiled'</span><span class="p">,</span>  <span class="n">etree</span><span class="o">.</span><span class="n">LIBXML_COMPILED_VERSION</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">"</span><span class="si">%-20s</span><span class="s2">: </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="s1">'libxslt used'</span><span class="p">,</span>     <span class="n">etree</span><span class="o">.</span><span class="n">LIBXSLT_VERSION</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">"</span><span class="si">%-20s</span><span class="s2">: </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="s1">'libxslt compiled'</span><span class="p">,</span> <span class="n">etree</span><span class="o">.</span><span class="n">LIBXSLT_COMPILED_VERSION</span><span class="p">))</span>
+</pre></div>
+<p>If you can figure that the problem is not in lxml but in the
+underlying libxml2 or libxslt, you can ask right on the respective
+mailing lists, which may considerably reduce the time to find a fix or
+work-around.  See the next question for some hints on how to do that.</p>
+<p>Otherwise, we would really like to hear about it.  Please report it to
+the <a class="reference external" href="https://bugs.launchpad.net/lxml/">bug tracker</a> or to the <a class="reference external" href="http://lxml.de/mailinglist/">mailing list</a> so that we can fix it.
+It is very helpful in this case if you can come up with a short code
+snippet that demonstrates your problem.  If others can reproduce and
+see the problem, it is much easier for them to fix it - and maybe even
+easier for you to describe it and get people convinced that it really
+is a problem to fix.</p>
+<p>It is important that you always report the version of lxml, libxml2
+and libxslt that you get from the code snippet above.  If we do not
+know the library versions you are using, we will ask back, so it will
+take longer for you to get a helpful answer.</p>
+<p>Since as a user of lxml you are likely a programmer, you might find
+<a class="reference external" href="http://www.chiark.greenend.org.uk/~sgtatham/bugs.html">this article on bug reports</a> an interesting read.</p>
+</div>
+<div class="section" id="how-do-i-know-a-bug-is-really-in-lxml-and-not-in-libxml2">
+<h2>How do I know a bug is really in lxml and not in libxml2?</h2>
+<p>A large part of lxml's functionality is implemented by libxml2 and
+libxslt, so problems that you encounter may be in one or the other.
+Knowing the right place to ask will reduce the time it takes to fix
+the problem, or to find a work-around.</p>
+<p>Both libxml2 and libxslt come with their own command line frontends,
+namely <tt class="docutils literal">xmllint</tt> and <tt class="docutils literal">xsltproc</tt>.  If you encounter problems with
+XSLT processing for specific stylesheets or with validation for
+specific schemas, try to run the XSLT with <tt class="docutils literal">xsltproc</tt> or the
+validation with <tt class="docutils literal">xmllint</tt> respectively to find out if it fails there
+as well.  If it does, please report directly to the mailing lists of
+the respective project, namely:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://mail.gnome.org/mailman/listinfo/xml">libxml2 mailing list</a></li>
+<li><a class="reference external" href="http://mail.gnome.org/mailman/listinfo/xslt">libxslt mailing list</a></li>
+</ul>
+<p>On the other hand, everything that seems to be related to Python code,
+including custom resolvers, custom XPath functions, etc. is likely
+outside of the scope of libxml2/libxslt.  If you encounter problems
+here or you are not sure where there the problem may come from, please
+ask on the lxml mailing list first.</p>
+<p>In any case, a good explanation of the problem including some simple
+test code and some input data will help us (or the libxml2 developers)
+see and understand the problem, which largely increases your chance of
+getting help.  See the question above for a few hints on what is
+helpful here.</p>
+</div>
+</div>
+<div class="section" id="id1">
+<h1>Threading</h1>
+<div class="section" id="can-i-use-threads-to-concurrently-access-the-lxml-api">
+<h2>Can I use threads to concurrently access the lxml API?</h2>
+<p>Short answer: yes, if you use lxml 2.2 and later.</p>
+<p>Since version 1.1, lxml frees the GIL (Python's global interpreter
+lock) internally when parsing from disk and memory, as long as you use
+either the default parser (which is replicated for each thread) or
+create a parser for each thread yourself.  lxml also allows
+concurrency during validation (RelaxNG and XMLSchema) and XSL
+transformation.  You can share RelaxNG, XMLSchema and XSLT objects
+between threads.</p>
+<p>While you can also share parsers between threads, this will serialize
+the access to each of them, so it is better to <tt class="docutils literal">.copy()</tt> parsers or
+to just use the default parser if you do not need any special
+configuration.  The same applies to the XPath evaluators, which use an
+internal lock to protect their prepared evaluation contexts.  It is
+therefore best to use separate evaluator instances in threads.</p>
+<p>Warning: Before lxml 2.2, and especially before 2.1, there were
+various issues when moving subtrees between different threads, or when
+applying XSLT objects from one thread to trees parsed or modified in
+another.  If you need code to run with older versions, you should
+generally avoid modifying trees in other threads than the one it was
+generated in.  Although this should work in many cases, there are
+certain scenarios where the termination of a thread that parsed a tree
+can crash the application if subtrees of this tree were moved to other
+documents.  You should be on the safe side when passing trees between
+threads if you either</p>
+<ul class="simple">
+<li>do not modify these trees and do not move their elements to other
+trees, or</li>
+<li>do not terminate threads while the trees they parsed are still in
+use (e.g. by using a fixed size thread-pool or long-running threads
+in processing chains)</li>
+</ul>
+<p>Since lxml 2.2, even multi-thread pipelines are supported. However,
+note that it is more efficient to do all tree work inside one thread,
+than to let multiple threads work on a tree one after the other. This
+is because trees inherit state from the thread that created them,
+which must be maintained when the tree is modified inside another
+thread.</p>
+</div>
+<div class="section" id="does-my-program-run-faster-if-i-use-threads">
+<h2>Does my program run faster if I use threads?</h2>
+<p>Depends.  The best way to answer this is timing and profiling.</p>
+<p>The global interpreter lock (GIL) in Python serializes access to the
+interpreter, so if the majority of your processing is done in Python
+code (walking trees, modifying elements, etc.), your gain will be
+close to zero.  The more of your XML processing moves into lxml,
+however, the higher your gain.  If your application is bound by XML
+parsing and serialisation, or by very selective XPath expressions and
+complex XSLTs, your speedup on multi-processor machines can be
+substantial.</p>
+<p>See the question above to learn which operations free the GIL to support
+multi-threading.</p>
+</div>
+<div class="section" id="would-my-single-threaded-program-run-faster-if-i-turned-off-threading">
+<h2>Would my single-threaded program run faster if I turned off threading?</h2>
+<p>Possibly, yes.  You can see for yourself by compiling lxml entirely
+without threading support.  Pass the <tt class="docutils literal"><span class="pre">--without-threading</span></tt> option to
+setup.py when building lxml from source.  You can also build libxml2
+without pthread support (<tt class="docutils literal"><span class="pre">--without-pthreads</span></tt> option), which may add
+another bit of performance.  Note that this will leave internal data
+structures entirely without thread protection, so make sure you really
+do not use lxml outside of the main application thread in this case.</p>
+</div>
+<div class="section" id="why-can-t-i-reuse-xslt-stylesheets-in-other-threads">
+<h2>Why can't I reuse XSLT stylesheets in other threads?</h2>
+<p>Since later lxml 2.0 versions, you can do this.  There is some
+overhead involved as the result document needs an additional cleanup
+traversal when the input document and/or the stylesheet were created
+in other threads.  However, on a multi-processor machine, the gain of
+freeing the GIL easily covers this drawback.</p>
+<p>If you need even the last bit of performance, consider keeping (a copy
+of) the stylesheet in thread-local storage, and try creating the input
+document(s) in the same thread.  And do not forget to benchmark your
+code to see if the increased code complexity is really worth it.</p>
+</div>
+<div class="section" id="my-program-crashes-when-run-with-mod-python-pyro-zope-plone">
+<h2>My program crashes when run with mod_python/Pyro/Zope/Plone/...</h2>
+<p>These environments can use threads in a way that may not make it obvious when
+threads are created and what happens in which thread.  This makes it hard to
+ensure lxml's threading support is used in a reliable way.  Sadly, if problems
+arise, they are as diverse as the applications, so it is difficult to provide
+any generally applicable solution.  Also, these environments are so complex
+that problems become hard to debug and even harder to reproduce in a
+predictable way.  If you encounter crashes in one of these systems, but your
+code runs perfectly when started by hand, the following gives you a few hints
+for possible approaches to solve your specific problem:</p>
+<ul>
+<li><p class="first">make sure you use recent versions of libxml2, libxslt and lxml.  The
+libxml2 developers keep fixing bugs in each release, and lxml also
+tries to become more robust against possible pitfalls.  So newer
+versions might already fix your problem in a reliable way.  Version
+2.2 of lxml contains many improvements.</p>
+</li>
+<li><p class="first">make sure the library versions you installed are really used.  Do
+not rely on what your operating system tells you!  Print the version
+constants in <tt class="docutils literal">lxml.etree</tt> from within your runtime environment to
+make sure it is the case.  This is especially a problem under
+MacOS-X when newer library versions were installed in addition to
+the outdated system libraries.  Please read the bugs section
+regarding MacOS-X in this FAQ.</p>
+</li>
+<li><p class="first">if you use <tt class="docutils literal">mod_python</tt>, try setting this option:</p>
+<blockquote>
+<p>PythonInterpreter main_interpreter</p>
+</blockquote>
+<p>There was a discussion on the mailing list about this problem:</p>
+<blockquote>
+<p><a class="reference external" href="http://comments.gmane.org/gmane.comp.python.lxml.devel/2942">http://comments.gmane.org/gmane.comp.python.lxml.devel/2942</a></p>
+</blockquote>
+</li>
+<li><p class="first">in a threaded environment, try to initially import <tt class="docutils literal">lxml.etree</tt>
+from the main application thread instead of doing first-time imports
+separately in each spawned worker thread.  If you cannot control the
+thread spawning of your web/application server, an import of
+<tt class="docutils literal">lxml.etree</tt> in sitecustomize.py or usercustomize.py may still do
+the trick.</p>
+</li>
+<li><p class="first">compile lxml without threading support by running <tt class="docutils literal">setup.py</tt> with the
+<tt class="docutils literal"><span class="pre">--without-threading</span></tt> option.  While this might be slower in certain
+scenarios on multi-processor systems, it <em>might</em> also keep your application
+from crashing, which should be worth more to you than peek performance.
+Remember that lxml is fast anyway, so concurrency may not even be worth it.</p>
+</li>
+<li><p class="first">look out for fancy XSLT stuff like foreign document access or
+passing in subtrees trough XSLT variables.  This might or might not
+work, depending on your specific usage.  Again, later versions of
+lxml and libxslt provide safer support here.</p>
+</li>
+<li><p class="first">try copying trees at suspicious places in your code and working with
+those instead of a tree shared between threads.  Note that the
+copying must happen inside the target thread to be effective, not in
+the thread that created the tree.  Serialising in one thread and
+parsing in another is also a simple (and fast) way of separating
+thread contexts.</p>
+</li>
+<li><p class="first">try keeping thread-local copies of XSLT stylesheets, i.e. one per thread,
+instead of sharing one.  Also see the question above.</p>
+</li>
+<li><p class="first">you can try to serialise suspicious parts of your code with explicit thread
+locks, thus disabling the concurrency of the runtime system.</p>
+</li>
+<li><p class="first">report back on the mailing list to see if there are other ways to work
+around your specific problems.  Do not forget to report the version numbers
+of lxml, libxml2 and libxslt you are using (see the question on reporting
+a bug).</p>
+</li>
+</ul>
+<p>Note that most of these options will degrade performance and/or your
+code quality.  If you are unsure what to do, please ask on the mailing
+list.</p>
+</div>
+</div>
+<div class="section" id="parsing-and-serialisation">
+<h1>Parsing and Serialisation</h1>
+<div class="section" id="why-doesn-t-the-pretty-print-option-reformat-my-xml-output">
+<h2>Why doesn't the <tt class="docutils literal">pretty_print</tt> option reformat my XML output?</h2>
+<p>Pretty printing (or formatting) an XML document means adding white space to
+the content.  These modifications are harmless if they only impact elements in
+the document that do not carry (text) data.  They corrupt your data if they
+impact elements that contain data.  If lxml cannot distinguish between
+whitespace and data, it will not alter your data.  Whitespace is therefore
+only added between nodes that do not contain data.  This is always the case
+for trees constructed element-by-element, so no problems should be expected
+here.  For parsed trees, a good way to assure that no conflicting whitespace
+is left in the tree is the <tt class="docutils literal">remove_blank_text</tt> option:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">XMLParser</span><span class="p">(</span><span class="n">remove_blank_text</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">parser</span><span class="p">)</span>
+</pre></div>
+<p>This will allow the parser to drop blank text nodes when constructing the
+tree.  If you now call a serialization function to pretty print this tree,
+lxml can add fresh whitespace to the XML tree to indent it.</p>
+<p>Note that the <tt class="docutils literal">remove_blank_text</tt> option also uses a heuristic if it
+has no definite knowledge about the document's ignorable whitespace.
+It will keep blank text nodes that appear after non-blank text nodes
+at the same level.  This is to prevent document-style XML from losing
+content.</p>
+<p>The HTMLParser has this structural knowledge built-in, which means that
+most whitespace that appears between tags in HTML documents will <em>not</em>
+be removed by this option, except in places where it is truly ignorable,
+e.g. in the page header, between table structure tags, etc.  Therefore,
+it is also safe to use this option with the HTMLParser, as it will keep
+content like the following intact (i.e. it will not remove the space
+that separates the two words):</p>
+<div class="syntax"><pre><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;&lt;</span><span class="nt">b</span><span class="p">&gt;</span>some<span class="p">&lt;/</span><span class="nt">b</span><span class="p">&gt;</span> <span class="p">&lt;</span><span class="nt">em</span><span class="p">&gt;</span>text<span class="p">&lt;/</span><span class="nt">em</span><span class="p">&gt;&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</pre></div>
+<p>If you want to be sure all blank text is removed from an XML document
+(or just more blank text than the parser does by itself), you have to
+use either a DTD to tell the parser which whitespace it can safely
+ignore, or remove the ignorable whitespace manually after parsing,
+e.g. by setting all tail text to None:</p>
+<div class="syntax"><pre><span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">root</span><span class="o">.</span><span class="n">iter</span><span class="p">():</span>
+    <span class="n">element</span><span class="o">.</span><span class="n">tail</span> <span class="o">=</span> <span class="bp">None</span>
+</pre></div>
+<p>Fredrik Lundh also has a Python-level function for indenting XML by
+appending whitespace to tags.  It can be found on his <a class="reference external" href="http://effbot.org/zone/element-lib.htm">element
+library</a> recipe page.</p>
+</div>
+<div class="section" id="why-can-t-lxml-parse-my-xml-from-unicode-strings">
+<h2>Why can't lxml parse my XML from unicode strings?</h2>
+<p>First of all, XML is explicitly defined as a stream of bytes.  It's not
+Unicode text.  Take a look at the <a class="reference external" href="http://www.w3.org/TR/REC-xml/">XML specification</a>, it's all about byte
+sequences and how to map them to text and structure.  That leads to rule
+number one: do not decode your XML data yourself.  That's a part of the
+work of an XML parser, and it does it very well.  Just pass it your data as
+a plain byte stream, it will always do the right thing, by specification.</p>
+<p>This also includes not opening XML files in text mode.  Make sure you always
+use binary mode, or, even better, pass the file path into lxml's <tt class="docutils literal">parse()</tt>
+function to let it do the file opening, reading and closing itself.  This
+is the most simple and most efficient way to do it.</p>
+<p>That being said, lxml can read Python unicode strings and even tries to
+support them if libxml2 does not.  This is because there is one valid use
+case for parsing XML from text strings: literal XML fragments in source
+code.</p>
+<p>However, if the unicode string declares an XML encoding internally
+(<tt class="docutils literal"><span class="pre">&lt;?xml</span> <span class="pre">encoding="..."?&gt;</span></tt>), parsing is bound to fail, as this encoding is
+almost certainly not the real encoding used in Python unicode.  The same is
+true for HTML unicode strings that contain charset meta tags, although the
+problems may be more subtle here.  The libxml2 HTML parser may not be able
+to parse the meta tags in broken HTML and may end up ignoring them, so even
+if parsing succeeds, later handling may still fail with character encoding
+errors.  Therefore, parsing HTML from unicode strings is a much saner thing
+to do than parsing XML from unicode strings.</p>
+<p>Note that Python uses different encodings for unicode on different platforms,
+so even specifying the real internal unicode encoding is not portable between
+Python interpreters.  Don't do it.</p>
+<p>Python unicode strings with XML data that carry encoding information are
+broken.  lxml will not parse them.  You must provide parsable data in a
+valid encoding.</p>
+</div>
+<div class="section" id="can-lxml-parse-from-file-objects-opened-in-unicode-text-mode">
+<h2>Can lxml parse from file objects opened in unicode/text mode?</h2>
+<p>Technically, yes. However, you likely do not want to do that, because
+it is extremely inefficient. The text encoding that libxml2 uses
+internally is UTF-8, so parsing from a Unicode file means that Python
+first reads a chunk of data from the file, then decodes it into a new
+buffer, and then copies it into a new unicode string object, just to
+let libxml2 make yet another copy while encoding it down into UTF-8
+in order to parse it. It's clear that this involves a lot more
+recoding and copying than when parsing straight from the bytes that
+the file contains.</p>
+<p>If you really know the encoding better than the parser (e.g. when
+parsing HTML that lacks a content declaration), then instead of passing
+an encoding parameter into the file object when opening it, create a
+new instance of an XMLParser or HTMLParser and pass the encoding into
+its constructor.  Afterwards, use that parser for parsing, e.g. by
+passing it into the <tt class="docutils literal">etree.parse(file, parser)</tt> function.  Remember
+to open the file in binary mode (mode="rb"), or, if possible, prefer
+passing the file path directly into <tt class="docutils literal">parse()</tt> instead of an opened
+Python file object.</p>
+</div>
+<div class="section" id="what-is-the-difference-between-str-xslt-doc-and-xslt-doc-write">
+<h2>What is the difference between str(xslt(doc)) and xslt(doc).write() ?</h2>
+<p>The str() implementation of the XSLTResultTree class (a subclass of the
+ElementTree class) knows about the output method chosen in the stylesheet
+(xsl:output), write() doesn't.  If you call write(), the result will be a
+normal XML tree serialization in the requested encoding.  Calling this method
+may also fail for XSLT results that are not XML trees (e.g. string results).</p>
+<p>If you call str(), it will return the serialized result as specified by the
+XSL transform.  This correctly serializes string results to encoded Python
+strings and honours <tt class="docutils literal">xsl:output</tt> options like <tt class="docutils literal">indent</tt>.  This almost
+certainly does what you want, so you should only use <tt class="docutils literal">write()</tt> if you are
+sure that the XSLT result is an XML tree and you want to override the encoding
+and indentation options requested by the stylesheet.</p>
+</div>
+<div class="section" id="why-can-t-i-just-delete-parents-or-clear-the-root-node-in-iterparse">
+<h2>Why can't I just delete parents or clear the root node in iterparse()?</h2>
+<p>The <tt class="docutils literal">iterparse()</tt> implementation is based on the libxml2 parser.  It
+requires the tree to be intact to finish parsing.  If you delete or modify
+parents of the current node, chances are you modify the structure in a way
+that breaks the parser.  Normally, this will result in a segfault.  Please
+refer to the <a class="reference external" href="parsing.html#iterparse-and-iterwalk">iterparse section</a> of the lxml API documentation to find out
+what you can do and what you can't do.</p>
+</div>
+<div class="section" id="how-do-i-output-null-characters-in-xml-text">
+<h2>How do I output null characters in XML text?</h2>
+<p>Don't.  What you would produce is not well-formed XML.  XML parsers
+will refuse to parse a document that contains null characters.  The
+right way to embed binary data in XML is using a text encoding such as
+uuencode or base64.</p>
+</div>
+<div class="section" id="is-lxml-vulnerable-to-xml-bombs">
+<h2>Is lxml vulnerable to XML bombs?</h2>
+<p>This has nothing to do with lxml itself, only with the parser of
+libxml2.  Since libxml2 version 2.7, the parser imposes hard security
+limits on input documents to prevent DoS attacks with forged input
+data.  Since lxml 2.2.1, you can disable these limits with the
+<tt class="docutils literal">huge_tree</tt> parser option if you need to parse <em>really</em> large,
+trusted documents.  All lxml versions will leave these restrictions
+enabled by default.</p>
+<p>Note that libxml2 versions of the 2.6 series do not restrict their
+parser and are therefore vulnerable to DoS attacks.</p>
+<p>Note also that these "hard limits" may still be high enough to
+allow for excessive resource usage in a given use case.  They are
+compile time modifiable, so building your own library versions will
+allow you to change the limits to your own needs. Also see the next
+question.</p>
+</div>
+<div class="section" id="how-do-i-use-lxml-safely-as-a-web-service-endpoint">
+<h2>How do I use lxml safely as a web-service endpoint?</h2>
+<p>XML based web-service endpoints are generally subject to several
+types of attacks if they allow some kind of untrusted input.
+From the point of view of the underlying XML tool, the most
+obvious attacks try to send a relatively small amount of data
+that induces a comparatively large resource consumption on the
+receiver side.</p>
+<p>First of all, make sure network access is not enabled for the XML
+parser that you use for parsing untrusted content and that it is
+not configured to load external DTDs.  Otherwise, attackers can
+try to trick the parser into an attempt to load external resources
+that are overly slow or impossible to retrieve, thus wasting time
+and other valuable resources on your server such as socket
+connections.  Note that you can register your own document loader
+in lxml, which allows for fine-grained control over any read access
+to resources.</p>
+<p>Some of the most famous excessive content expansion attacks
+use XML entity references.  Luckily, entity expansion is mostly
+useless for the data commonly sent through web services and
+can simply be disabled, which rules out several types of
+denial of service attacks at once.  This also involves an attack
+that reads local files from the server, as XML entities can be
+defined to expand into their content.   Consequently, version
+1.2 of the SOAP standard explicitly disallows entity references
+in the XML stream.</p>
+<p>To disable entity expansion, use an XML parser that is configured
+with the option <tt class="docutils literal">resolve_entities=False</tt>.  Then, after (or
+while) parsing the document, use <tt class="docutils literal">root.iter(etree.Entity)</tt> to
+recursively search for entity references.  If it contains any,
+reject the entire input document with a suitable error response.
+In lxml 3.x, you can also use the new DTD introspection API to
+apply your own restrictions on input documents.</p>
+<p>Another attack to consider is compression bombs.  If you allow
+compressed input into your web service, attackers can try to send
+well forged highly repetitive and thus very well compressing input
+that unpacks into a very large XML document in your server's main
+memory, potentially a thousand times larger than the compressed
+input data.</p>
+<p>As a counter measure, either disable compressed input for your
+web server, at least for untrusted sources, or use incremental
+parsing with <tt class="docutils literal">iterparse()</tt> instead of parsing the whole input
+document into memory in one shot.  That allows you to enforce
+suitable limits on the input by applying semantic checks that
+detect and prevent an illegitimate use of your service.  If
+possible, you can also use this to reduce the amount of data
+that you need to keep in memory while parsing the document,
+thus further reducing the possibility of an attacker to trick
+your system into excessive resource usage.</p>
+<p>Finally, please be aware that XPath suffers from the same
+vulnerability as SQL when it comes to content injection.  The
+obvious fix is to not build any XPath expressions via string
+formatting or concatenation when the parameters may come from
+untrusted sources, and instead use XPath variables, which
+safely expose their values to the evaluation engine.</p>
+<p>The <a class="reference external" href="https://bitbucket.org/tiran/defusedxml">defusedxml</a> package comes with an example setup and a wrapper
+API for lxml that applies certain counter measures internally.</p>
+</div>
+</div>
+<div class="section" id="xpath-and-document-traversal">
+<h1>XPath and Document Traversal</h1>
+<div class="section" id="what-are-the-findall-and-xpath-methods-on-element-tree">
+<h2>What are the <tt class="docutils literal">findall()</tt> and <tt class="docutils literal">xpath()</tt> methods on Element(Tree)?</h2>
+<p><tt class="docutils literal">findall()</tt> is part of the original <a class="reference external" href="http://effbot.org/zone/element-index.htm">ElementTree API</a>.  It supports a
+<a class="reference external" href="http://effbot.org/zone/element-xpath.htm">simple subset of the XPath language</a>, without predicates, conditions and
+other advanced features.  It is very handy for finding specific tags in a
+tree.  Another important difference is namespace handling, which uses the
+<tt class="docutils literal">{namespace}tagname</tt> notation.  This is not supported by XPath.  The
+findall, find and findtext methods are compatible with other ElementTree
+implementations and allow writing portable code that runs on ElementTree,
+cElementTree and lxml.etree.</p>
+<p><tt class="docutils literal">xpath()</tt>, on the other hand, supports the complete power of the XPath
+language, including predicates, XPath functions and Python extension
+functions.  The syntax is defined by the <a class="reference external" href="http://www.w3.org/TR/xpath">XPath specification</a>.  If you need
+the expressiveness and selectivity of XPath, the <tt class="docutils literal">xpath()</tt> method, the
+<tt class="docutils literal">XPath</tt> class and the <tt class="docutils literal">XPathEvaluator</tt> are the best <a class="reference external" href="performance.html#xpath">choice</a>.</p>
+</div>
+<div class="section" id="why-doesn-t-findall-support-full-xpath-expressions">
+<h2>Why doesn't <tt class="docutils literal">findall()</tt> support full XPath expressions?</h2>
+<p>It was decided that it is more important to keep compatibility with
+<a class="reference external" href="http://effbot.org/zone/element-index.htm">ElementTree</a> to simplify code migration between the libraries.  The main
+difference compared to XPath is the <tt class="docutils literal">{namespace}tagname</tt> notation used in
+<tt class="docutils literal">findall()</tt>, which is not valid XPath.</p>
+<p>ElementTree and lxml.etree use the same implementation, which assures 100%
+compatibility.  Note that <tt class="docutils literal">findall()</tt> is <a class="reference external" href="performance.html#tree-traversal">so fast</a> in lxml that a native
+implementation would not bring any performance benefits.</p>
+</div>
+<div class="section" id="how-can-i-find-out-which-namespace-prefixes-are-used-in-a-document">
+<h2>How can I find out which namespace prefixes are used in a document?</h2>
+<p>You can traverse the document (<tt class="docutils literal">root.iter()</tt>) and collect the prefix
+attributes from all Elements into a set.  However, it is unlikely that you
+really want to do that.  You do not need these prefixes, honestly.  You only
+need the namespace URIs.  All namespace comparisons use these, so feel free to
+make up your own prefixes when you use XPath expressions or extension
+functions.</p>
+<p>The only place where you might consider specifying prefixes is the
+serialization of Elements that were created through the API.  Here, you can
+specify a prefix mapping through the <tt class="docutils literal">nsmap</tt> argument when creating the root
+Element.  Its children will then inherit this prefix for serialization.</p>
+</div>
+<div class="section" id="how-can-i-specify-a-default-namespace-for-xpath-expressions">
+<h2>How can I specify a default namespace for XPath expressions?</h2>
+<p>You can't.  In XPath, there is no such thing as a default namespace.  Just use
+an arbitrary prefix and let the namespace dictionary of the XPath evaluators
+map it to your namespace.  See also the question above.</p>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr class="footer" />
+Generated on: 2018-06-22.
+
+</div>
+</body>
+</html>

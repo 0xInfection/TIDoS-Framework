@@ -65,9 +65,9 @@ def serverdetect(web):
 		print(O+' [+] Use the "Cloudflare" VulnLysis module to try bypassing Clouflare...')
 
 	    else:
-		print G+' [+] Server : ' + header
+		print B+' [+] Server : ' +C+header
 	    try:
-		print O+' [+] Powered By : ' + r.headers['X-Powered-By']
+		print O+' [+] Powered By : ' +G+ r.headers['X-Powered-By']
 	    except:
 		pass
 	except:

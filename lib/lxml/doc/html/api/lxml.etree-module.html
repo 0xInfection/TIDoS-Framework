@@ -1,0 +1,2599 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>lxml.etree</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lxml-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="/">lxml API</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="lxml-module.html">Package&nbsp;lxml</a> ::
+        Module&nbsp;etree
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="lxml.etree-module.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== MODULE DESCRIPTION ==================== -->
+<h1 class="epydoc">Module etree</h1><p class="nomargin-top"></p>
+The <tt class="rst-docutils literal">lxml.etree</tt> module implements the extended ElementTree API for XML.
+
+<hr />
+<div class="fields">      <p><strong>Version:</strong>
+        4.2.2
+      </p>
+</div><!-- ==================== CLASSES ==================== -->
+<a name="section-Classes"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Classes</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Classes"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.AncestorsIterator-class.html" class="summary-name" onclick="show_private();">AncestorsIterator</a><br />
+      AncestorsIterator(self, node, tag=None)
+Iterates over the ancestors of an element (from parent to parent).
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.AttributeBasedElementClassLookup-class.html" class="summary-name">AttributeBasedElementClassLookup</a><br />
+      AttributeBasedElementClassLookup(self, attribute_name, class_mapping, fallback=None)
+Checks an attribute of an Element and looks up the value in a
+class dictionary.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.C14NError-class.html" class="summary-name">C14NError</a><br />
+      Error during C14N serialisation.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.CDATA-class.html" class="summary-name">CDATA</a><br />
+      CDATA(data)
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.CommentBase-class.html" class="summary-name">CommentBase</a><br />
+      All custom Comment classes must inherit from this one.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.CustomElementClassLookup-class.html" class="summary-name">CustomElementClassLookup</a><br />
+      CustomElementClassLookup(self, fallback=None)
+Element class lookup based on a subclass method.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.DTD-class.html" class="summary-name">DTD</a><br />
+      DTD(self, file=None, external_id=None)
+A DTD validator.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.DTDError-class.html" class="summary-name">DTDError</a><br />
+      Base class for DTD errors.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.DTDParseError-class.html" class="summary-name">DTDParseError</a><br />
+      Error while parsing a DTD.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.DTDValidateError-class.html" class="summary-name">DTDValidateError</a><br />
+      Error while validating an XML document with a DTD.
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.DocInfo-class.html" class="summary-name" onclick="show_private();">DocInfo</a><br />
+      Document information provided by parser and DTD.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.DocumentInvalid-class.html" class="summary-name">DocumentInvalid</a><br />
+      Validation error.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.ETCompatXMLParser-class.html" class="summary-name">ETCompatXMLParser</a><br />
+      ETCompatXMLParser(self, encoding=None, attribute_defaults=False,                  dtd_validation=False, load_dtd=False, no_network=True,                  ns_clean=False, recover=False, schema=None,                  huge_tree=False, remove_blank_text=False, resolve_entities=True,                  remove_comments=True, remove_pis=True, strip_cdata=True,                  target=None, compact=True)
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.ETXPath-class.html" class="summary-name">ETXPath</a><br />
+      ETXPath(self, path, extensions=None, regexp=True, smart_strings=True)
+Special XPath class that supports the ElementTree {uri} notation for namespaces.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.ElementBase-class.html" class="summary-name">ElementBase</a><br />
+      ElementBase(<a href="#id1"><span class="rst-problematic" id="rst-rst-id2">*</span></a>children, attrib=None, nsmap=None, <a href="#id3"><span class="rst-problematic" id="rst-rst-id4">**</span></a>_extra)
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.ElementChildIterator-class.html" class="summary-name" onclick="show_private();">ElementChildIterator</a><br />
+      ElementChildIterator(self, node, tag=None, reversed=False)
+Iterates over the children of an element.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.ElementClassLookup-class.html" class="summary-name">ElementClassLookup</a><br />
+      ElementClassLookup(self)
+Superclass of Element class lookups.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.ElementDefaultClassLookup-class.html" class="summary-name">ElementDefaultClassLookup</a><br />
+      ElementDefaultClassLookup(self, element=None, comment=None, pi=None, entity=None)
+Element class lookup scheme that always returns the default Element
+class.
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.ElementDepthFirstIterator-class.html" class="summary-name" onclick="show_private();">ElementDepthFirstIterator</a><br />
+      ElementDepthFirstIterator(self, node, tag=None, inclusive=True)
+Iterates over an element and its sub-elements in document order (depth
+first pre-order).
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.ElementNamespaceClassLookup-class.html" class="summary-name">ElementNamespaceClassLookup</a><br />
+      ElementNamespaceClassLookup(self, fallback=None)
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.ElementTextIterator-class.html" class="summary-name" onclick="show_private();">ElementTextIterator</a><br />
+      ElementTextIterator(self, element, tag=None, with_tail=True)
+Iterates over the text content of a subtree.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.EntityBase-class.html" class="summary-name">EntityBase</a><br />
+      All custom Entity classes must inherit from this one.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.Error-class.html" class="summary-name">Error</a>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.ErrorDomains-class.html" class="summary-name">ErrorDomains</a><br />
+      Libxml2 error domains
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.ErrorLevels-class.html" class="summary-name">ErrorLevels</a><br />
+      Libxml2 error levels
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.ErrorTypes-class.html" class="summary-name">ErrorTypes</a><br />
+      Libxml2 error types
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.FallbackElementClassLookup-class.html" class="summary-name">FallbackElementClassLookup</a><br />
+      FallbackElementClassLookup(self, fallback=None)
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.HTMLParser-class.html" class="summary-name">HTMLParser</a><br />
+      HTMLParser(self, encoding=None, remove_blank_text=False,                    remove_comments=False, remove_pis=False, strip_cdata=True,                    no_network=True, target=None, schema: XMLSchema =None,                    recover=True, compact=True, collect_ids=True, huge_tree=False)
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.HTMLPullParser-class.html" class="summary-name" onclick="show_private();">HTMLPullParser</a><br />
+      HTMLPullParser(self, events=None, <a href="#id1"><span class="rst-problematic" id="rst-rst-id2">*</span></a>, tag=None, base_url=None, <a href="#id3"><span class="rst-problematic" id="rst-rst-id4">**</span></a>kwargs)
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.LxmlError-class.html" class="summary-name">LxmlError</a><br />
+      Main exception base class for lxml.  All other exceptions inherit from
+this one.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.LxmlRegistryError-class.html" class="summary-name">LxmlRegistryError</a><br />
+      Base class of lxml registry errors.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.LxmlSyntaxError-class.html" class="summary-name">LxmlSyntaxError</a><br />
+      Base class for all syntax errors.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.NamespaceRegistryError-class.html" class="summary-name">NamespaceRegistryError</a><br />
+      Error registering a namespace extension.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.PIBase-class.html" class="summary-name">PIBase</a><br />
+      All custom Processing Instruction classes must inherit from this one.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.ParseError-class.html" class="summary-name">ParseError</a><br />
+      Syntax error while parsing an XML document.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.ParserBasedElementClassLookup-class.html" class="summary-name">ParserBasedElementClassLookup</a><br />
+      ParserBasedElementClassLookup(self, fallback=None)
+Element class lookup based on the XML parser.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.ParserError-class.html" class="summary-name">ParserError</a><br />
+      Internal lxml parser error.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.PyErrorLog-class.html" class="summary-name">PyErrorLog</a><br />
+      PyErrorLog(self, logger_name=None, logger=None)
+A global error log that connects to the Python stdlib logging package.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.PythonElementClassLookup-class.html" class="summary-name">PythonElementClassLookup</a><br />
+      PythonElementClassLookup(self, fallback=None)
+Element class lookup based on a subclass method.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.QName-class.html" class="summary-name">QName</a><br />
+      QName(text_or_uri_or_element, tag=None)
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.RelaxNG-class.html" class="summary-name">RelaxNG</a><br />
+      RelaxNG(self, etree=None, file=None)
+Turn a document into a Relax NG validator.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.RelaxNGError-class.html" class="summary-name">RelaxNGError</a><br />
+      Base class for RelaxNG errors.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.RelaxNGErrorTypes-class.html" class="summary-name">RelaxNGErrorTypes</a><br />
+      Libxml2 RelaxNG error types
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.RelaxNGParseError-class.html" class="summary-name">RelaxNGParseError</a><br />
+      Error while parsing an XML document as RelaxNG.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.RelaxNGValidateError-class.html" class="summary-name">RelaxNGValidateError</a><br />
+      Error while validating an XML document with a RelaxNG schema.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.Resolver-class.html" class="summary-name">Resolver</a><br />
+      This is the base class of all resolvers.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.Schematron-class.html" class="summary-name">Schematron</a><br />
+      Schematron(self, etree=None, file=None)
+A Schematron validator.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.SchematronError-class.html" class="summary-name">SchematronError</a><br />
+      Base class of all Schematron errors.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.SchematronParseError-class.html" class="summary-name">SchematronParseError</a><br />
+      Error while parsing an XML document as Schematron schema.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.SchematronValidateError-class.html" class="summary-name">SchematronValidateError</a><br />
+      Error while validating an XML document with a Schematron schema.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.SerialisationError-class.html" class="summary-name">SerialisationError</a><br />
+      A libxml2 error that occurred during serialisation.
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.SiblingsIterator-class.html" class="summary-name" onclick="show_private();">SiblingsIterator</a><br />
+      SiblingsIterator(self, node, tag=None, preceding=False)
+Iterates over the siblings of an element.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.TreeBuilder-class.html" class="summary-name">TreeBuilder</a><br />
+      TreeBuilder(self, element_factory=None, parser=None)
+Parser target that builds a tree.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.XInclude-class.html" class="summary-name">XInclude</a><br />
+      XInclude(self)
+XInclude processor.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.XIncludeError-class.html" class="summary-name">XIncludeError</a><br />
+      Error during XInclude processing.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.XMLParser-class.html" class="summary-name">XMLParser</a><br />
+      XMLParser(self, encoding=None, attribute_defaults=False, dtd_validation=False, load_dtd=False, no_network=True, ns_clean=False, recover=False, schema: XMLSchema =None, huge_tree=False, remove_blank_text=False, resolve_entities=True, remove_comments=False, remove_pis=False, strip_cdata=True, collect_ids=True, target=None, compact=True)
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.XMLPullParser-class.html" class="summary-name" onclick="show_private();">XMLPullParser</a><br />
+      XMLPullParser(self, events=None, <a href="#id1"><span class="rst-problematic" id="rst-rst-id2">*</span></a>, tag=None, <a href="#id3"><span class="rst-problematic" id="rst-rst-id4">**</span></a>kwargs)
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.XMLSchema-class.html" class="summary-name">XMLSchema</a><br />
+      XMLSchema(self, etree=None, file=None)
+Turn a document into an XML Schema validator.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.XMLSchemaError-class.html" class="summary-name">XMLSchemaError</a><br />
+      Base class of all XML Schema errors
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.XMLSchemaParseError-class.html" class="summary-name">XMLSchemaParseError</a><br />
+      Error while parsing an XML document as XML Schema.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.XMLSchemaValidateError-class.html" class="summary-name">XMLSchemaValidateError</a><br />
+      Error while validating an XML document with an XML Schema.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.XMLSyntaxError-class.html" class="summary-name">XMLSyntaxError</a><br />
+      Syntax error while parsing an XML document.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.ETCompatXMLParser-class.html" class="summary-name">XMLTreeBuilder</a><br />
+      ETCompatXMLParser(self, encoding=None, attribute_defaults=False,                  dtd_validation=False, load_dtd=False, no_network=True,                  ns_clean=False, recover=False, schema=None,                  huge_tree=False, remove_blank_text=False, resolve_entities=True,                  remove_comments=True, remove_pis=True, strip_cdata=True,                  target=None, compact=True)
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.XPath-class.html" class="summary-name">XPath</a><br />
+      XPath(self, path, namespaces=None, extensions=None, regexp=True, smart_strings=True)
+A compiled XPath expression that can be called on Elements and ElementTrees.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.XPathDocumentEvaluator-class.html" class="summary-name">XPathDocumentEvaluator</a><br />
+      XPathDocumentEvaluator(self, etree, namespaces=None, extensions=None, regexp=True, smart_strings=True)
+Create an XPath evaluator for an ElementTree.
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.XPathElementEvaluator-class.html" class="summary-name" onclick="show_private();">XPathElementEvaluator</a><br />
+      XPathElementEvaluator(self, element, namespaces=None, extensions=None, regexp=True, smart_strings=True)
+Create an XPath evaluator for an element.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.XPathError-class.html" class="summary-name">XPathError</a><br />
+      Base class of all XPath errors.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.XPathEvalError-class.html" class="summary-name">XPathEvalError</a><br />
+      Error during XPath evaluation.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.XPathFunctionError-class.html" class="summary-name">XPathFunctionError</a><br />
+      Internal error looking up an XPath extension function.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.XPathResultError-class.html" class="summary-name">XPathResultError</a><br />
+      Error handling an XPath result.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.XPathSyntaxError-class.html" class="summary-name">XPathSyntaxError</a>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.XSLT-class.html" class="summary-name">XSLT</a><br />
+      XSLT(self, xslt_input, extensions=None, regexp=True, access_control=None)
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.XSLTAccessControl-class.html" class="summary-name">XSLTAccessControl</a><br />
+      XSLTAccessControl(self, read_file=True, write_file=True, create_dir=True, read_network=True, write_network=True)
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.XSLTApplyError-class.html" class="summary-name">XSLTApplyError</a><br />
+      Error running an XSL transformation.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.XSLTError-class.html" class="summary-name">XSLTError</a><br />
+      Base class of all XSLT errors.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.XSLTExtension-class.html" class="summary-name">XSLTExtension</a><br />
+      Base class of an XSLT extension element.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.XSLTExtensionError-class.html" class="summary-name">XSLTExtensionError</a><br />
+      Error registering an XSLT extension.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.XSLTParseError-class.html" class="summary-name">XSLTParseError</a><br />
+      Error parsing a stylesheet document.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.XSLTSaveError-class.html" class="summary-name">XSLTSaveError</a><br />
+      Error serialising an XSLT result.
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree._Attrib-class.html" class="summary-name" onclick="show_private();">_Attrib</a><br />
+      A dict-like proxy for the <tt class="rst-docutils literal">Element.attrib</tt> property.
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree._BaseErrorLog-class.html" class="summary-name" onclick="show_private();">_BaseErrorLog</a>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree._Comment-class.html" class="summary-name" onclick="show_private();">_Comment</a>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree._Document-class.html" class="summary-name" onclick="show_private();">_Document</a><br />
+      Internal base class to reference a libxml document.
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree._DomainErrorLog-class.html" class="summary-name" onclick="show_private();">_DomainErrorLog</a>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree._Element-class.html" class="summary-name" onclick="show_private();">_Element</a><br />
+      Element class.
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree._ElementIterator-class.html" class="summary-name" onclick="show_private();">_ElementIterator</a><br />
+      Dead but public. :)
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree._ElementMatchIterator-class.html" class="summary-name" onclick="show_private();">_ElementMatchIterator</a>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree._ElementStringResult-class.html" class="summary-name" onclick="show_private();">_ElementStringResult</a>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree._ElementTagMatcher-class.html" class="summary-name" onclick="show_private();">_ElementTagMatcher</a><br />
+      Dead but public. :)
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree._ElementTree-class.html" class="summary-name" onclick="show_private();">_ElementTree</a>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree._ElementUnicodeResult-class.html" class="summary-name" onclick="show_private();">_ElementUnicodeResult</a>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree._Entity-class.html" class="summary-name" onclick="show_private();">_Entity</a>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree._ErrorLog-class.html" class="summary-name" onclick="show_private();">_ErrorLog</a>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree._FeedParser-class.html" class="summary-name" onclick="show_private();">_FeedParser</a>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree._IDDict-class.html" class="summary-name" onclick="show_private();">_IDDict</a><br />
+      IDDict(self, etree)
+A dictionary-like proxy class that mapps ID attributes to elements.
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree._ListErrorLog-class.html" class="summary-name" onclick="show_private();">_ListErrorLog</a><br />
+      Immutable base version of a list based error log.
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree._LogEntry-class.html" class="summary-name" onclick="show_private();">_LogEntry</a><br />
+      A log message entry from an error log.
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree._ProcessingInstruction-class.html" class="summary-name" onclick="show_private();">_ProcessingInstruction</a>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree._RotatingErrorLog-class.html" class="summary-name" onclick="show_private();">_RotatingErrorLog</a>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree._SaxParserTarget-class.html" class="summary-name" onclick="show_private();">_SaxParserTarget</a>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree._TargetParserResult-class.html" class="summary-name" onclick="show_private();">_TargetParserResult</a>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree._Validator-class.html" class="summary-name" onclick="show_private();">_Validator</a><br />
+      Base class for XML validators.
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree._XPathEvaluatorBase-class.html" class="summary-name" onclick="show_private();">_XPathEvaluatorBase</a>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree._XSLTProcessingInstruction-class.html" class="summary-name" onclick="show_private();">_XSLTProcessingInstruction</a>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree._XSLTResultTree-class.html" class="summary-name" onclick="show_private();">_XSLTResultTree</a><br />
+      The result of an XSLT evaluation.
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.htmlfile-class.html" class="summary-name" onclick="show_private();">htmlfile</a><br />
+      htmlfile(self, output_file, encoding=None, compression=None, close=False, buffered=True)
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.iterparse-class.html" class="summary-name">iterparse</a><br />
+      iterparse(self, source, events=(&quot;end&quot;,), tag=None,                   attribute_defaults=False, dtd_validation=False,                   load_dtd=False, no_network=True, remove_blank_text=False,                   remove_comments=False, remove_pis=False, encoding=None,                   html=False, recover=None, huge_tree=False, schema=None)
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.iterwalk-class.html" class="summary-name">iterwalk</a><br />
+      iterwalk(self, element_or_tree, events=(&quot;end&quot;,), tag=None)
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree.xmlfile-class.html" class="summary-name" onclick="show_private();">xmlfile</a><br />
+      xmlfile(self, output_file, encoding=None, compression=None, close=False, buffered=True)
+    </td>
+  </tr>
+</table>
+<!-- ==================== FUNCTIONS ==================== -->
+<a name="section-Functions"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Functions</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Functions"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="Comment"></a><span class="summary-sig-name">Comment</span>(<span class="summary-sig-arg">text</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Comment element factory. This factory function creates a special element that will
+be serialized as an XML comment.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lxml.etree-module.html#Element" class="summary-sig-name">Element</a>(<span class="summary-sig-arg">_tag</span>,
+        <span class="summary-sig-arg">attrib</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">nsmap</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">**_extra</span>)</span><br />
+      Element factory.  This function returns an object implementing the
+Element interface.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="ElementTree"></a><span class="summary-sig-name">ElementTree</span>(<span class="summary-sig-arg">element</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">file</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">parser</span>=<span class="summary-sig-default">None</span>)</span><br />
+      ElementTree wrapper class.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="Entity"></a><span class="summary-sig-name">Entity</span>(<span class="summary-sig-arg">name</span>)</span><br />
+      Entity factory.  This factory function creates a special element
+that will be serialized as an XML entity reference or character
+reference.  Note, however, that entities will not be automatically
+declared in the document.  A document that uses entity references
+requires a DTD to define the entities.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lxml.etree-module.html#Extension" class="summary-sig-name">Extension</a>(<span class="summary-sig-arg">module</span>,
+        <span class="summary-sig-arg">function_mapping</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">ns</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Build a dictionary of extension functions from the functions
+defined in a module or the methods of an object.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lxml.etree-module.html#FunctionNamespace" class="summary-sig-name">FunctionNamespace</a>(<span class="summary-sig-arg">ns_uri</span>)</span><br />
+      Retrieve the function namespace object associated with the given
+URI.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lxml.etree-module.html#HTML" class="summary-sig-name">HTML</a>(<span class="summary-sig-arg">text</span>,
+        <span class="summary-sig-arg">parser</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">base_url</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Parses an HTML document from a string constant.  Returns the root
+node (or the result returned by a parser target).  This function
+can be used to embed &quot;HTML literals&quot; in Python code.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="PI"></a><span class="summary-sig-name">PI</span>(<span class="summary-sig-arg">target</span>,
+        <span class="summary-sig-arg">text</span>=<span class="summary-sig-default">None</span>)</span><br />
+      ProcessingInstruction element factory. This factory function creates a
+special element that will be serialized as an XML processing instruction.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="ProcessingInstruction"></a><span class="summary-sig-name">ProcessingInstruction</span>(<span class="summary-sig-arg">target</span>,
+        <span class="summary-sig-arg">text</span>=<span class="summary-sig-default">None</span>)</span><br />
+      ProcessingInstruction element factory. This factory function creates a
+special element that will be serialized as an XML processing instruction.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="SubElement"></a><span class="summary-sig-name">SubElement</span>(<span class="summary-sig-arg">_parent</span>,
+        <span class="summary-sig-arg">_tag</span>,
+        <span class="summary-sig-arg">attrib</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">nsmap</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">**_extra</span>)</span><br />
+      Subelement factory.  This function creates an element instance, and
+appends it to an existing element.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lxml.etree-module.html#XML" class="summary-sig-name">XML</a>(<span class="summary-sig-arg">text</span>,
+        <span class="summary-sig-arg">parser</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">base_url</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Parses an XML document or fragment from a string constant.
+Returns the root node (or the result returned by a parser target).
+This function can be used to embed &quot;XML literals&quot; in Python code,
+like in</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lxml.etree-module.html#XMLDTDID" class="summary-sig-name">XMLDTDID</a>(<span class="summary-sig-arg">text</span>,
+        <span class="summary-sig-arg">parser</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">base_url</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Parse the text and return a tuple (root node, ID dictionary).  The root
+node is the same as returned by the XML() function.  The dictionary
+contains string-element pairs.  The dictionary keys are the values of ID
+attributes as defined by the DTD.  The elements referenced by the ID are
+stored as dictionary values.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="XMLID"></a><span class="summary-sig-name">XMLID</span>(<span class="summary-sig-arg">text</span>,
+        <span class="summary-sig-arg">parser</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">base_url</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Parse the text and return a tuple (root node, ID dictionary).  The root
+node is the same as returned by the XML() function.  The dictionary
+contains string-element pairs.  The dictionary keys are the values of 'id'
+attributes.  The elements referenced by the ID are stored as dictionary
+values.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lxml.etree-module.html#XPathEvaluator" class="summary-sig-name">XPathEvaluator</a>(<span class="summary-sig-arg">etree_or_element</span>,
+        <span class="summary-sig-arg">namespaces</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">extensions</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">regexp</span>=<span class="summary-sig-default">True</span>,
+        <span class="summary-sig-arg">smart_strings</span>=<span class="summary-sig-default">True</span>)</span><br />
+      Creates an XPath evaluator for an ElementTree or an Element.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lxml.etree-module.html#adopt_external_document" class="summary-sig-name" onclick="show_private();">adopt_external_document</a>(<span class="summary-sig-arg">capsule</span>,
+        <span class="summary-sig-arg">parser</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Unpack a libxml2 document pointer from a PyCapsule and wrap it in an
+lxml ElementTree object.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lxml.etree-module.html#cleanup_namespaces" class="summary-sig-name">cleanup_namespaces</a>(<span class="summary-sig-arg">tree_or_element</span>,
+        <span class="summary-sig-arg">top_nsmap</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">keep_ns_prefixes</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Remove all namespace declarations from a subtree that are not used
+by any of the elements or attributes in that tree.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lxml.etree-module.html#clear_error_log" class="summary-sig-name">clear_error_log</a>()</span><br />
+      Clear the global error log.  Note that this log is already bound to a
+fixed size.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="dump"></a><span class="summary-sig-name">dump</span>(<span class="summary-sig-arg">elem</span>,
+        <span class="summary-sig-arg">pretty_print</span>=<span class="summary-sig-default">True</span>,
+        <span class="summary-sig-arg">with_tail</span>=<span class="summary-sig-default">True</span>)</span><br />
+      Writes an element tree or element structure to sys.stdout. This function
+should be used for debugging only.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lxml.etree-module.html#fromstring" class="summary-sig-name">fromstring</a>(<span class="summary-sig-arg">text</span>,
+        <span class="summary-sig-arg">parser</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">base_url</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Parses an XML document or fragment from a string.  Returns the
+root node (or the result returned by a parser target).</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lxml.etree-module.html#fromstringlist" class="summary-sig-name">fromstringlist</a>(<span class="summary-sig-arg">strings</span>,
+        <span class="summary-sig-arg">parser</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Parses an XML document from a sequence of strings.  Returns the
+root node (or the result returned by a parser target).</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="get_default_parser"></a><span class="summary-sig-name">get_default_parser</span>()</span></td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="iselement"></a><span class="summary-sig-name">iselement</span>(<span class="summary-sig-arg">element</span>)</span><br />
+      Checks if an object appears to be a valid element object.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lxml.etree-module.html#parse" class="summary-sig-name">parse</a>(<span class="summary-sig-arg">source</span>,
+        <span class="summary-sig-arg">parser</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">base_url</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Return an ElementTree object loaded with source elements.  If no parser
+is provided as second argument, the default parser is used.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lxml.etree-module.html#parseid" class="summary-sig-name">parseid</a>(<span class="summary-sig-arg">source</span>,
+        <span class="summary-sig-arg">parser</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Parses the source into a tuple containing an ElementTree object and an
+ID dictionary.  If no parser is provided as second argument, the default
+parser is used.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="register_namespace"></a><span class="summary-sig-name">register_namespace</span>(<span class="summary-sig-arg">...</span>)</span><br />
+      Registers a namespace prefix that newly created Elements in that
+namespace will use.  The registry is global, and any existing
+mapping for either the given prefix or the namespace URI will be
+removed.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lxml.etree-module.html#set_default_parser" class="summary-sig-name">set_default_parser</a>(<span class="summary-sig-arg">parser</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Set a default parser for the current thread.  This parser is used
+globally whenever no parser is supplied to the various parse functions of
+the lxml API.  If this function is called without a parser (or if it is
+None), the default parser is reset to the original configuration.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="set_element_class_lookup"></a><span class="summary-sig-name">set_element_class_lookup</span>(<span class="summary-sig-arg">lookup</span>=<span class="summary-sig-default"> None</span>)</span><br />
+      Set the global default element class lookup method.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lxml.etree-module.html#strip_attributes" class="summary-sig-name">strip_attributes</a>(<span class="summary-sig-arg">tree_or_element</span>,
+        <span class="summary-sig-arg">*attribute_names</span>)</span><br />
+      Delete all attributes with the provided attribute names from an
+Element (or ElementTree) and its descendants.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lxml.etree-module.html#strip_elements" class="summary-sig-name">strip_elements</a>(<span class="summary-sig-arg">tree_or_element</span>,
+        <span class="summary-sig-arg">with_tail</span>=<span class="summary-sig-default">True</span>,
+        <span class="summary-sig-arg">*tag_names</span>)</span><br />
+      Delete all elements with the provided tag names from a tree or
+subtree.  This will remove the elements and their entire subtree,
+including all their attributes, text content and descendants.  It
+will also remove the tail text of the element unless you
+explicitly set the <tt class="rst-docutils literal">with_tail</tt> keyword argument option to False.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lxml.etree-module.html#strip_tags" class="summary-sig-name">strip_tags</a>(<span class="summary-sig-arg">tree_or_element</span>,
+        <span class="summary-sig-arg">*tag_names</span>)</span><br />
+      Delete all elements with the provided tag names from a tree or
+subtree.  This will remove the elements and their attributes, but
+<em>not</em> their text/tail content or descendants.  Instead, it will
+merge the text content and children of the element into its
+parent.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lxml.etree-module.html#tostring" class="summary-sig-name">tostring</a>(<span class="summary-sig-arg">element_or_tree</span>,
+        <span class="summary-sig-arg">encoding</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">method</span>=<span class="summary-sig-default">&quot;xml&quot;</span>,
+        <span class="summary-sig-arg">xml_declaration</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">pretty_print</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">with_tail</span>=<span class="summary-sig-default">True</span>,
+        <span class="summary-sig-arg">standalone</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">doctype</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">exclusive</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">with_comments</span>=<span class="summary-sig-default">True</span>,
+        <span class="summary-sig-arg">inclusive_ns_prefixes</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Serialize an element to an encoded string representation of its XML
+tree.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lxml.etree-module.html#tostringlist" class="summary-sig-name">tostringlist</a>(<span class="summary-sig-arg">element_or_tree</span>,
+        <span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Serialize an element to an encoded string representation of its XML
+tree, stored in a list of partial strings.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lxml.etree-module.html#tounicode" class="summary-sig-name">tounicode</a>(<span class="summary-sig-arg">element_or_tree</span>,
+        <span class="summary-sig-arg">method</span>=<span class="summary-sig-default">&quot;xml&quot;</span>,
+        <span class="summary-sig-arg">pretty_print</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">with_tail</span>=<span class="summary-sig-default">True</span>,
+        <span class="summary-sig-arg">doctype</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Serialize an element to the Python unicode representation of its XML
+tree.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lxml.etree-module.html#use_global_python_log" class="summary-sig-name">use_global_python_log</a>(<span class="summary-sig-arg">log</span>)</span><br />
+      Replace the global error log by an etree.PyErrorLog that uses the
+standard Python logging package.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== VARIABLES ==================== -->
+<a name="section-Variables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Variables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="DEBUG"></a><span class="summary-name">DEBUG</span> = <code title="1">1</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="LIBXML_COMPILED_VERSION"></a><span class="summary-name">LIBXML_COMPILED_VERSION</span> = <code title="(2, 9, 3)"><code class="variable-group">(</code>2<code class="variable-op">, </code>9<code class="variable-op">, </code>3<code class="variable-group">)</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="LIBXML_VERSION"></a><span class="summary-name">LIBXML_VERSION</span> = <code title="(2, 9, 3)"><code class="variable-group">(</code>2<code class="variable-op">, </code>9<code class="variable-op">, </code>3<code class="variable-group">)</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="LIBXSLT_COMPILED_VERSION"></a><span class="summary-name">LIBXSLT_COMPILED_VERSION</span> = <code title="(1, 1, 28)"><code class="variable-group">(</code>1<code class="variable-op">, </code>1<code class="variable-op">, </code>28<code class="variable-group">)</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="LIBXSLT_VERSION"></a><span class="summary-name">LIBXSLT_VERSION</span> = <code title="(1, 1, 28)"><code class="variable-group">(</code>1<code class="variable-op">, </code>1<code class="variable-op">, </code>28<code class="variable-group">)</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="LXML_VERSION"></a><span class="summary-name">LXML_VERSION</span> = <code title="(4, 2, 2, 0)"><code class="variable-group">(</code>4<code class="variable-op">, </code>2<code class="variable-op">, </code>2<code class="variable-op">, </code>0<code class="variable-group">)</code></code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="__package__"></a><span class="summary-name">__package__</span> = <code title="None">None</code><br />
+      hash(x)
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree-module.html#__pyx_capi__" class="summary-name" onclick="show_private();">__pyx_capi__</a> = <code title="{'adoptExternalDocument': &lt;capsule object &quot;struct LxmlElementTree *(xm\
+lDoc *, PyObject *, int)&quot; at 0x7f867ee924e0&gt;,
+ 'appendChild': &lt;capsule object &quot;void (struct LxmlElement *, struct Lx\
+mlElement *)&quot; at 0x7f867ee92cc0&gt;,
+ 'appendChildToElement': &lt;capsule object &quot;int (struct LxmlElement *, s\
+truct LxmlElement *)&quot; at 0x7f867ee92cf0&gt;,
+ 'attributeValue': &lt;capsule object &quot;PyObject *(xmlNode *, xmlAttr *)&quot; \
+at 0x7f867ee92990&gt;,
+..."><code class="variable-group">{</code><code class="variable-quote">'</code><code class="variable-string">adoptExternalDocument</code><code class="variable-quote">'</code><code class="variable-op">: </code>&lt;capsule object &quot;stru<code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.etree-module.html#__test__" class="summary-name" onclick="show_private();">__test__</a> = <code title="{u'FunctionNamespace (line 207)': u'''FunctionNamespace(ns_uri)
+
+    Retrieve the function namespace object associated with the given
+    URI.
+
+    Creates a new one if it does not yet exist. A function namespace
+    can only be used to register extension functions.
+
+..."><code class="variable-group">{</code><code class="variable-quote">u'</code><code class="variable-string">FunctionNamespace (line 207)</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-quote">u'</code><code class="variable-string">FunctionNamespa</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="memory_debugger"></a><span class="summary-name">memory_debugger</span> = <code title="&lt;lxml.etree._MemDebug object&gt;">&lt;lxml.etree._MemDebug object&gt;</code>
+    </td>
+  </tr>
+</table>
+<!-- ==================== FUNCTION DETAILS ==================== -->
+<a name="section-FunctionDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Function Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-FunctionDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="Element"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">Element</span>(<span class="sig-arg">_tag</span>,
+        <span class="sig-arg">attrib</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">nsmap</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">**_extra</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Element factory.  This function returns an object implementing the
+Element interface.</p>
+<p>Also look at the <a href="lxml.etree._Element-class.html#makeelement" class="link">_Element.makeelement()</a> and
+<code class="link">_BaseParser.makeelement()</code> methods, which provide a faster way to
+create an Element within a specific document or parser context.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="Extension"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">Extension</span>(<span class="sig-arg">module</span>,
+        <span class="sig-arg">function_mapping</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">ns</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Build a dictionary of extension functions from the functions
+defined in a module or the methods of an object.</p>
+<p>As second argument, you can pass an additional mapping of
+attribute names to XPath function names, or a list of function
+names that should be taken.</p>
+<p>The <tt class="rst-docutils literal">ns</tt> keyword argument accepts a namespace URI for the XPath
+functions.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="FunctionNamespace"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">FunctionNamespace</span>(<span class="sig-arg">ns_uri</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Retrieve the function namespace object associated with the given
+URI.</p>
+<p>Creates a new one if it does not yet exist. A function namespace
+can only be used to register extension functions.</p>
+<p>Usage:</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>ns_functions = FunctionNamespace(<span class="py-string">&quot;http://schema.org/Movie&quot;</span>)</pre>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>@ns_functions  <span class="py-comment"># uses function name</span>
+<span class="py-more">... </span><span class="py-keyword">def</span> <span class="py-defname">add2</span>(x):
+<span class="py-more">... </span>    return x + 2</pre>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>@ns_functions(<span class="py-string">&quot;add3&quot;</span>)  <span class="py-comment"># uses explicit name</span>
+<span class="py-more">... </span><span class="py-keyword">def</span> <span class="py-defname">add_three</span>(x):
+<span class="py-more">... </span>    return x + 3</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="HTML"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">HTML</span>(<span class="sig-arg">text</span>,
+        <span class="sig-arg">parser</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">base_url</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Parses an HTML document from a string constant.  Returns the root
+node (or the result returned by a parser target).  This function
+can be used to embed &quot;HTML literals&quot; in Python code.</p>
+<p>To override the parser with a different <tt class="rst-docutils literal">HTMLParser</tt> you can pass it to
+the <tt class="rst-docutils literal">parser</tt> keyword argument.</p>
+<p>The <tt class="rst-docutils literal">base_url</tt> keyword argument allows to set the original base URL of
+the document to support relative Paths when looking up external entities
+(DTD, XInclude, ...).</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="XML"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">XML</span>(<span class="sig-arg">text</span>,
+        <span class="sig-arg">parser</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">base_url</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Parses an XML document or fragment from a string constant.
+Returns the root node (or the result returned by a parser target).
+This function can be used to embed &quot;XML literals&quot; in Python code,
+like in</p>
+<blockquote>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>root = XML(<span class="py-string">&quot;&lt;root&gt;&lt;test/&gt;&lt;/root&gt;&quot;</span>)
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">print</span>(root.tag)
+<span class="py-output">root</span></pre>
+</blockquote>
+<p>To override the parser with a different <tt class="rst-docutils literal">XMLParser</tt> you can pass it to
+the <tt class="rst-docutils literal">parser</tt> keyword argument.</p>
+<p>The <tt class="rst-docutils literal">base_url</tt> keyword argument allows to set the original base URL of
+the document to support relative Paths when looking up external entities
+(DTD, XInclude, ...).</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="XMLDTDID"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">XMLDTDID</span>(<span class="sig-arg">text</span>,
+        <span class="sig-arg">parser</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">base_url</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Parse the text and return a tuple (root node, ID dictionary).  The root
+node is the same as returned by the XML() function.  The dictionary
+contains string-element pairs.  The dictionary keys are the values of ID
+attributes as defined by the DTD.  The elements referenced by the ID are
+stored as dictionary values.</p>
+<p>Note that you must not modify the XML tree if you use the ID dictionary.
+The results are undefined.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="XPathEvaluator"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">XPathEvaluator</span>(<span class="sig-arg">etree_or_element</span>,
+        <span class="sig-arg">namespaces</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">extensions</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">regexp</span>=<span class="sig-default">True</span>,
+        <span class="sig-arg">smart_strings</span>=<span class="sig-default">True</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Creates an XPath evaluator for an ElementTree or an Element.</p>
+<p>The resulting object can be called with an XPath expression as argument
+and XPath variables provided as keyword arguments.</p>
+<p>Additional namespace declarations can be passed with the
+'namespace' keyword argument.  EXSLT regular expression support
+can be disabled with the 'regexp' boolean keyword (defaults to
+True).  Smart strings will be returned for string results unless
+you pass <tt class="rst-docutils literal">smart_strings=False</tt>.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="adopt_external_document"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">adopt_external_document</span>(<span class="sig-arg">capsule</span>,
+        <span class="sig-arg">parser</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Unpack a libxml2 document pointer from a PyCapsule and wrap it in an
+lxml ElementTree object.</p>
+<p>This allows external libraries to build XML/HTML trees using libxml2
+and then pass them efficiently into lxml for further processing.
+Requires Python 2.7 or later.</p>
+<p>If a <tt class="rst-docutils literal">parser</tt> is provided, it will be used for configuring the
+lxml document.  No parsing will be done.</p>
+<p>The capsule must have the name <tt class="rst-docutils literal">&quot;libxml2:xmlDoc&quot;</tt> and its pointer
+value must reference a correct libxml2 document of type <tt class="rst-docutils literal">xmlDoc*</tt>.
+The creator of the capsule must take care to correctly clean up the
+document using an appropriate capsule destructor.  By default, the
+libxml2 document will be copied to let lxml safely own the memory
+of the internal tree that it uses.</p>
+<p>If the capsule context is non-NULL, it must point to a C string that
+can be compared using <tt class="rst-docutils literal">strcmp()</tt>.  If the context string equals
+<tt class="rst-docutils literal">&quot;destructor:xmlFreeDoc&quot;</tt>, the libxml2 document will not be copied
+but the capsule invalidated instead by clearing its destructor and
+name.  That way, lxml takes ownership of the libxml2 document in memory
+without creating a copy first, and the capsule destructor will not be
+called.  The document will then eventually be cleaned up by lxml using
+the libxml2 API function <tt class="rst-docutils literal">xmlFreeDoc()</tt> once it is no longer used.</p>
+<p>If no copy is made, later modifications of the tree outside of lxml
+should not be attempted after transferring the ownership.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="cleanup_namespaces"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">cleanup_namespaces</span>(<span class="sig-arg">tree_or_element</span>,
+        <span class="sig-arg">top_nsmap</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">keep_ns_prefixes</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Remove all namespace declarations from a subtree that are not used
+by any of the elements or attributes in that tree.</p>
+<p>If a 'top_nsmap' is provided, it must be a mapping from prefixes
+to namespace URIs.  These namespaces will be declared on the top
+element of the subtree before running the cleanup, which allows
+moving namespace declarations to the top of the tree.</p>
+<p>If a 'keep_ns_prefixes' is provided, it must be a list of prefixes.
+These prefixes will not be removed as part of the cleanup.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="clear_error_log"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">clear_error_log</span>()</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Clear the global error log.  Note that this log is already bound to a
+fixed size.</p>
+<p>Note: since lxml 2.2, the global error log is local to a thread
+and this function will only clear the global error log of the
+current thread.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="fromstring"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">fromstring</span>(<span class="sig-arg">text</span>,
+        <span class="sig-arg">parser</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">base_url</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Parses an XML document or fragment from a string.  Returns the
+root node (or the result returned by a parser target).</p>
+<p>To override the default parser with a different parser you can pass it to
+the <tt class="rst-docutils literal">parser</tt> keyword argument.</p>
+<p>The <tt class="rst-docutils literal">base_url</tt> keyword argument allows to set the original base URL of
+the document to support relative Paths when looking up external entities
+(DTD, XInclude, ...).</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="fromstringlist"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">fromstringlist</span>(<span class="sig-arg">strings</span>,
+        <span class="sig-arg">parser</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Parses an XML document from a sequence of strings.  Returns the
+root node (or the result returned by a parser target).</p>
+<p>To override the default parser with a different parser you can pass it to
+the <tt class="rst-docutils literal">parser</tt> keyword argument.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="parse"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">parse</span>(<span class="sig-arg">source</span>,
+        <span class="sig-arg">parser</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">base_url</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Return an ElementTree object loaded with source elements.  If no parser
+is provided as second argument, the default parser is used.</p>
+<p>The <tt class="rst-docutils literal">source</tt> can be any of the following:</p>
+<ul class="rst-simple">
+<li>a file name/path</li>
+<li>a file object</li>
+<li>a file-like object</li>
+<li>a URL using the HTTP or FTP protocol</li>
+</ul>
+<p>To parse from a string, use the <tt class="rst-docutils literal">fromstring()</tt> function instead.</p>
+<p>Note that it is generally faster to parse from a file path or URL
+than from an open file object or file-like object.  Transparent
+decompression from gzip compressed sources is supported (unless
+explicitly disabled in libxml2).</p>
+<p>The <tt class="rst-docutils literal">base_url</tt> keyword allows setting a URL for the document
+when parsing from a file-like object.  This is needed when looking
+up external entities (DTD, XInclude, ...) with relative paths.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="parseid"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">parseid</span>(<span class="sig-arg">source</span>,
+        <span class="sig-arg">parser</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Parses the source into a tuple containing an ElementTree object and an
+ID dictionary.  If no parser is provided as second argument, the default
+parser is used.</p>
+<p>Note that you must not modify the XML tree if you use the ID dictionary.
+The results are undefined.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="set_default_parser"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">set_default_parser</span>(<span class="sig-arg">parser</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Set a default parser for the current thread.  This parser is used
+globally whenever no parser is supplied to the various parse functions of
+the lxml API.  If this function is called without a parser (or if it is
+None), the default parser is reset to the original configuration.</p>
+<p>Note that the pre-installed default parser is not thread-safe.  Avoid the
+default parser in multi-threaded environments.  You can create a separate
+parser for each thread explicitly or use a parser pool.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="strip_attributes"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">strip_attributes</span>(<span class="sig-arg">tree_or_element</span>,
+        <span class="sig-arg">*attribute_names</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Delete all attributes with the provided attribute names from an
+Element (or ElementTree) and its descendants.</p>
+<p>Attribute names can contain wildcards as in <a href="lxml.etree._Element-class.html#iter" class="link">_Element.iter</a>.</p>
+<p>Example usage:</p>
+<pre class="rst-literal-block">
+strip_attributes(root_element,
+                 'simpleattr',
+                 '{http://some/ns}attrname',
+                 '{http://other/ns}*')
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="strip_elements"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">strip_elements</span>(<span class="sig-arg">tree_or_element</span>,
+        <span class="sig-arg">with_tail</span>=<span class="sig-default">True</span>,
+        <span class="sig-arg">*tag_names</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Delete all elements with the provided tag names from a tree or
+subtree.  This will remove the elements and their entire subtree,
+including all their attributes, text content and descendants.  It
+will also remove the tail text of the element unless you
+explicitly set the <tt class="rst-docutils literal">with_tail</tt> keyword argument option to False.</p>
+<p>Tag names can contain wildcards as in <a href="lxml.etree._Element-class.html#iter" class="link">_Element.iter</a>.</p>
+<p>Note that this will not delete the element (or ElementTree root
+element) that you passed even if it matches.  It will only treat
+its descendants.  If you want to include the root element, check
+its tag name directly before even calling this function.</p>
+<p>Example usage:</p>
+<pre class="rst-literal-block">
+strip_elements(some_element,
+    'simpletagname',             # non-namespaced tag
+    '{http://some/ns}tagname',   # namespaced tag
+    '{http://some/other/ns}*'    # any tag from a namespace
+    lxml.etree.Comment           # comments
+    )
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="strip_tags"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">strip_tags</span>(<span class="sig-arg">tree_or_element</span>,
+        <span class="sig-arg">*tag_names</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Delete all elements with the provided tag names from a tree or
+subtree.  This will remove the elements and their attributes, but
+<em>not</em> their text/tail content or descendants.  Instead, it will
+merge the text content and children of the element into its
+parent.</p>
+<p>Tag names can contain wildcards as in <a href="lxml.etree._Element-class.html#iter" class="link">_Element.iter</a>.</p>
+<p>Note that this will not delete the element (or ElementTree root
+element) that you passed even if it matches.  It will only treat
+its descendants.</p>
+<p>Example usage:</p>
+<pre class="rst-literal-block">
+strip_tags(some_element,
+    'simpletagname',             # non-namespaced tag
+    '{http://some/ns}tagname',   # namespaced tag
+    '{http://some/other/ns}*'    # any tag from a namespace
+    Comment                      # comments (including their text!)
+    )
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="tostring"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">tostring</span>(<span class="sig-arg">element_or_tree</span>,
+        <span class="sig-arg">encoding</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">method</span>=<span class="sig-default">&quot;xml&quot;</span>,
+        <span class="sig-arg">xml_declaration</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">pretty_print</span>=<span class="sig-default">False</span>,
+        <span class="sig-arg">with_tail</span>=<span class="sig-default">True</span>,
+        <span class="sig-arg">standalone</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">doctype</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">exclusive</span>=<span class="sig-default">False</span>,
+        <span class="sig-arg">with_comments</span>=<span class="sig-default">True</span>,
+        <span class="sig-arg">inclusive_ns_prefixes</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Serialize an element to an encoded string representation of its XML
+tree.</p>
+<p>Defaults to ASCII encoding without XML declaration.  This
+behaviour can be configured with the keyword arguments 'encoding'
+(string) and 'xml_declaration' (bool).  Note that changing the
+encoding to a non UTF-8 compatible encoding will enable a
+declaration by default.</p>
+<p>You can also serialise to a Unicode string without declaration by
+passing the <tt class="rst-docutils literal">unicode</tt> function as encoding (or <tt class="rst-docutils literal">str</tt> in Py3),
+or the name 'unicode'.  This changes the return value from a byte
+string to an unencoded unicode string.</p>
+<p>The keyword argument 'pretty_print' (bool) enables formatted XML.</p>
+<p>The keyword argument 'method' selects the output method: 'xml',
+'html', plain 'text' (text content without tags) or 'c14n'.
+Default is 'xml'.</p>
+<p>The <tt class="rst-docutils literal">exclusive</tt> and <tt class="rst-docutils literal">with_comments</tt> arguments are only used
+with C14N output, where they request exclusive and uncommented
+C14N serialisation respectively.</p>
+<p>Passing a boolean value to the <tt class="rst-docutils literal">standalone</tt> option will output
+an XML declaration with the corresponding <tt class="rst-docutils literal">standalone</tt> flag.</p>
+<p>The <tt class="rst-docutils literal">doctype</tt> option allows passing in a plain string that will
+be serialised before the XML tree.  Note that passing in non
+well-formed content here will make the XML output non well-formed.
+Also, an existing doctype in the document tree will not be removed
+when serialising an ElementTree instance.</p>
+<p>You can prevent the tail text of the element from being serialised
+by passing the boolean <tt class="rst-docutils literal">with_tail</tt> option.  This has no impact
+on the tail text of children, which will always be serialised.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="tostringlist"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">tostringlist</span>(<span class="sig-arg">element_or_tree</span>,
+        <span class="sig-arg">*args</span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Serialize an element to an encoded string representation of its XML
+tree, stored in a list of partial strings.</p>
+<p>This is purely for ElementTree 1.3 compatibility.  The result is a
+single string wrapped in a list.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="tounicode"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">tounicode</span>(<span class="sig-arg">element_or_tree</span>,
+        <span class="sig-arg">method</span>=<span class="sig-default">&quot;xml&quot;</span>,
+        <span class="sig-arg">pretty_print</span>=<span class="sig-default">False</span>,
+        <span class="sig-arg">with_tail</span>=<span class="sig-default">True</span>,
+        <span class="sig-arg">doctype</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Serialize an element to the Python unicode representation of its XML
+tree.</p>
+<p>Note that the result does not carry an XML encoding declaration and is
+therefore not necessarily suited for serialization to byte streams without
+further treatment.</p>
+<p>The boolean keyword argument 'pretty_print' enables formatted XML.</p>
+<p>The keyword argument 'method' selects the output method: 'xml',
+'html' or plain 'text'.</p>
+<p>You can prevent the tail text of the element from being serialised
+by passing the boolean <tt class="rst-docutils literal">with_tail</tt> option.  This has no impact
+on the tail text of children, which will always be serialised.</p>
+  <dl class="fields">
+  </dl>
+<div class="fields">      <p><strong>Deprecated:</strong>
+        use <tt class="rst-docutils literal">tostring(el, <span class="pre">encoding='unicode')</span></tt> instead.
+      </p>
+</div></td></tr></table>
+</div>
+<a name="use_global_python_log"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">use_global_python_log</span>(<span class="sig-arg">log</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Replace the global error log by an etree.PyErrorLog that uses the
+standard Python logging package.</p>
+<p>Note that this disables access to the global error log from exceptions.
+Parsers, XSLT etc. will continue to provide their normal local error log.</p>
+<p>Note: prior to lxml 2.2, this changed the error log globally.
+Since lxml 2.2, the global error log is local to a thread and this
+function will only set the global error log of the current thread.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== VARIABLES DETAILS ==================== -->
+<a name="section-VariablesDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Variables Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-VariablesDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="__pyx_capi__"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">__pyx_capi__</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code><code class="variable-quote">'</code><code class="variable-string">adoptExternalDocument</code><code class="variable-quote">'</code><code class="variable-op">: </code>&lt;capsule object &quot;struct LxmlElementTree *(xm<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+lDoc *, PyObject *, int)&quot; at 0x7f867ee924e0&gt;<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">appendChild</code><code class="variable-quote">'</code><code class="variable-op">: </code>&lt;capsule object &quot;void (struct LxmlElement *, struct Lx<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+mlElement *)&quot; at 0x7f867ee92cc0&gt;<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">appendChildToElement</code><code class="variable-quote">'</code><code class="variable-op">: </code>&lt;capsule object &quot;int (struct LxmlElement *, s<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+truct LxmlElement *)&quot; at 0x7f867ee92cf0&gt;<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">attributeValue</code><code class="variable-quote">'</code><code class="variable-op">: </code>&lt;capsule object &quot;PyObject *(xmlNode *, xmlAttr *)&quot; <span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+at 0x7f867ee92990&gt;<code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="__test__"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">__test__</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code><code class="variable-quote">u'</code><code class="variable-string">FunctionNamespace (line 207)</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-quote">u'''</code><code class="variable-string">FunctionNamespace(ns_uri)</code>
+<code class="variable-string"></code>
+<code class="variable-string">    Retrieve the function namespace object associated with the given</code>
+<code class="variable-string">    URI.</code>
+<code class="variable-string"></code>
+<code class="variable-string">    Creates a new one if it does not yet exist. A function namespace</code>
+<code class="variable-string">    can only be used to register extension functions.</code>
+<code class="variable-string"></code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lxml-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="/">lxml API</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Fri Jun 22 18:59:52 2018
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

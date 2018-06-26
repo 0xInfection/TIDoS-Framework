@@ -1,0 +1,206 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.12: http://docutils.sourceforge.net/" />
+<title>ElementTree compatibility of lxml.etree</title>
+<link rel="stylesheet" href="style.css" type="text/css" />
+<script type="text/javascript">
+function trigger_menu(event) {
+    var sidemenu = document.getElementById("sidemenu");
+    var classes = sidemenu.getAttribute("class");
+    classes = (classes.indexOf(" visible") === -1) ? classes + " visible" : classes.replace(" visible", "");
+    sidemenu.setAttribute("class", classes);
+    event.preventDefault();
+    event.stopPropagation();
+}
+function hide_menu() {
+    var sidemenu = document.getElementById("sidemenu");
+    var classes = sidemenu.getAttribute("class");
+    if (classes.indexOf(" visible") !== -1) {
+        sidemenu.setAttribute("class", classes.replace(" visible", ""));
+    }
+}
+</script><meta content="width=device-width, initial-scale=1" name="viewport" /></head>
+<body onclick="hide_menu()">
+<div class="document" id="elementtree-compatibility-of-lxml-etree">
+<div class="sidemenu" id="sidemenu"><div class="menutrigger" onclick="trigger_menu(event)">Menu</div><div class="menu"><ul id="lxml-section"><li><span class="section title">lxml</span><ul class="menu foreign" id="index-menu"><li class="menu title"><a href="index.html">lxml</a><ul class="submenu"><li class="menu item"><a href="index.html#introduction">Introduction</a></li><li class="menu item"><a href="index.html#support-the-project">Support the project</a></li><li class="menu item"><a href="index.html#documentation">Documentation</a></li><li class="menu item"><a href="index.html#download">Download</a></li><li class="menu item"><a href="index.html#mailing-list">Mailing list</a></li><li class="menu item"><a href="index.html#bug-tracker">Bug tracker</a></li><li class="menu item"><a href="index.html#license">License</a></li><li class="menu item"><a href="index.html#old-versions">Old Versions</a></li><li class="menu item"><a href="index.html#docutils-system-messages">Docutils System Messages</a></li><li class="menu item"><a href="index.html#legal-notice-for-donations">Legal Notice for Donations</a></li></ul></li></ul><ul class="menu foreign" id="intro-menu"><li class="menu title"><a href="intro.html">Why lxml?</a><ul class="submenu"><li class="menu item"><a href="intro.html#motto">Motto</a></li><li class="menu item"><a href="intro.html#aims">Aims</a></li></ul></li></ul><ul class="menu foreign" id="installation-menu"><li class="menu title"><a href="installation.html">Installing lxml</a><ul class="submenu"><li class="menu item"><a href="installation.html#where-to-get-it">Where to get it</a></li><li class="menu item"><a href="installation.html#requirements">Requirements</a></li><li class="menu item"><a href="installation.html#installation">Installation</a></li><li class="menu item"><a href="installation.html#building-lxml-from-dev-sources">Building lxml from dev sources</a></li><li class="menu item"><a href="installation.html#using-lxml-with-python-libxml2">Using lxml with python-libxml2</a></li><li class="menu item"><a href="installation.html#source-builds-on-ms-windows">Source builds on MS Windows</a></li><li class="menu item"><a href="installation.html#source-builds-on-macos-x">Source builds on MacOS-X</a></li></ul></li></ul><ul class="menu foreign" id="performance-menu"><li class="menu title"><a href="performance.html">Benchmarks and Speed</a><ul class="submenu"><li class="menu item"><a href="performance.html#general-notes">General notes</a></li><li class="menu item"><a href="performance.html#how-to-read-the-timings">How to read the timings</a></li><li class="menu item"><a href="performance.html#parsing-and-serialising">Parsing and Serialising</a></li><li class="menu item"><a href="performance.html#the-elementtree-api">The ElementTree API</a></li><li class="menu item"><a href="performance.html#xpath">XPath</a></li><li class="menu item"><a href="performance.html#a-longer-example">A longer example</a></li><li class="menu item"><a href="performance.html#lxml-objectify">lxml.objectify</a></li></ul></li></ul><ul class="menu current" id="compatibility-menu"><li class="menu title"><a href="compatibility.html">ElementTree compatibility of lxml.etree</a></li></ul><ul class="menu foreign" id="FAQ-menu"><li class="menu title"><a href="FAQ.html">lxml FAQ - Frequently Asked Questions</a><ul class="submenu"><li class="menu item"><a href="FAQ.html#general-questions">General Questions</a></li><li class="menu item"><a href="FAQ.html#installation">Installation</a></li><li class="menu item"><a href="FAQ.html#contributing">Contributing</a></li><li class="menu item"><a href="FAQ.html#bugs">Bugs</a></li><li class="menu item"><a href="FAQ.html#id1">Threading</a></li><li class="menu item"><a href="FAQ.html#parsing-and-serialisation">Parsing and Serialisation</a></li><li class="menu item"><a href="FAQ.html#xpath-and-document-traversal">XPath and Document Traversal</a></li></ul></li></ul></li></ul><ul id="Developing with lxml-section"><li><span class="section title">Developing with lxml</span><ul class="menu foreign" id="tutorial-menu"><li class="menu title"><a href="tutorial.html">The lxml.etree Tutorial</a><ul class="submenu"><li class="menu item"><a href="tutorial.html#the-element-class">The Element class</a></li><li class="menu item"><a href="tutorial.html#the-elementtree-class">The ElementTree class</a></li><li class="menu item"><a href="tutorial.html#parsing-from-strings-and-files">Parsing from strings and files</a></li><li class="menu item"><a href="tutorial.html#namespaces">Namespaces</a></li><li class="menu item"><a href="tutorial.html#the-e-factory">The E-factory</a></li><li class="menu item"><a href="tutorial.html#elementpath">ElementPath</a></li></ul></li></ul><ul class="menu foreign" id="api index-menu"><li class="menu title"><a href="api/index.html">API reference</a></li></ul><ul class="menu foreign" id="api-menu"><li class="menu title"><a href="api.html">APIs specific to lxml.etree</a><ul class="submenu"><li class="menu item"><a href="api.html#lxml-etree">lxml.etree</a></li><li class="menu item"><a href="api.html#other-element-apis">Other Element APIs</a></li><li class="menu item"><a href="api.html#trees-and-documents">Trees and Documents</a></li><li class="menu item"><a href="api.html#iteration">Iteration</a></li><li class="menu item"><a href="api.html#error-handling-on-exceptions">Error handling on exceptions</a></li><li class="menu item"><a href="api.html#error-logging">Error logging</a></li><li class="menu item"><a href="api.html#serialisation">Serialisation</a></li><li class="menu item"><a href="api.html#incremental-xml-generation">Incremental XML generation</a></li><li class="menu item"><a href="api.html#cdata">CDATA</a></li><li class="menu item"><a href="api.html#xinclude-and-elementinclude">XInclude and ElementInclude</a></li><li class="menu item"><a href="api.html#write-c14n-on-elementtree">write_c14n on ElementTree</a></li></ul></li></ul><ul class="menu foreign" id="parsing-menu"><li class="menu title"><a href="parsing.html">Parsing XML and HTML with lxml</a><ul class="submenu"><li class="menu item"><a href="parsing.html#parsers">Parsers</a></li><li class="menu item"><a href="parsing.html#the-target-parser-interface">The target parser interface</a></li><li class="menu item"><a href="parsing.html#the-feed-parser-interface">The feed parser interface</a></li><li class="menu item"><a href="parsing.html#incremental-event-parsing">Incremental event parsing</a></li><li class="menu item"><a href="parsing.html#iterparse-and-iterwalk">iterparse and iterwalk</a></li><li class="menu item"><a href="parsing.html#python-unicode-strings">Python unicode strings</a></li></ul></li></ul><ul class="menu foreign" id="validation-menu"><li class="menu title"><a href="validation.html">Validation with lxml</a><ul class="submenu"><li class="menu item"><a href="validation.html#validation-at-parse-time">Validation at parse time</a></li><li class="menu item"><a href="validation.html#id1">DTD</a></li><li class="menu item"><a href="validation.html#relaxng">RelaxNG</a></li><li class="menu item"><a href="validation.html#xmlschema">XMLSchema</a></li><li class="menu item"><a href="validation.html#id2">Schematron</a></li><li class="menu item"><a href="validation.html#id3">(Pre-ISO-Schematron)</a></li></ul></li></ul><ul class="menu foreign" id="xpathxslt-menu"><li class="menu title"><a href="xpathxslt.html">XPath and XSLT with lxml</a><ul class="submenu"><li class="menu item"><a href="xpathxslt.html#xpath">XPath</a></li><li class="menu item"><a href="xpathxslt.html#xslt">XSLT</a></li></ul></li></ul><ul class="menu foreign" id="objectify-menu"><li class="menu title"><a href="objectify.html">lxml.objectify</a><ul class="submenu"><li class="menu item"><a href="objectify.html#the-lxml-objectify-api">The lxml.objectify API</a></li><li class="menu item"><a href="objectify.html#asserting-a-schema">Asserting a Schema</a></li><li class="menu item"><a href="objectify.html#objectpath">ObjectPath</a></li><li class="menu item"><a href="objectify.html#python-data-types">Python data types</a></li><li class="menu item"><a href="objectify.html#how-data-types-are-matched">How data types are matched</a></li><li class="menu item"><a href="objectify.html#what-is-different-from-lxml-etree">What is different from lxml.etree?</a></li></ul></li></ul><ul class="menu foreign" id="lxmlhtml-menu"><li class="menu title"><a href="lxmlhtml.html">lxml.html</a><ul class="submenu"><li class="menu item"><a href="lxmlhtml.html#parsing-html">Parsing HTML</a></li><li class="menu item"><a href="lxmlhtml.html#html-element-methods">HTML Element Methods</a></li><li class="menu item"><a href="lxmlhtml.html#running-html-doctests">Running HTML doctests</a></li><li class="menu item"><a href="lxmlhtml.html#creating-html-with-the-e-factory">Creating HTML with the E-factory</a></li><li class="menu item"><a href="lxmlhtml.html#working-with-links">Working with links</a></li><li class="menu item"><a href="lxmlhtml.html#forms">Forms</a></li><li class="menu item"><a href="lxmlhtml.html#cleaning-up-html">Cleaning up HTML</a></li><li class="menu item"><a href="lxmlhtml.html#html-diff">HTML Diff</a></li><li class="menu item"><a href="lxmlhtml.html#examples">Examples</a></li></ul></li></ul><ul class="menu foreign" id="cssselect-menu"><li class="menu title"><a href="cssselect.html">lxml.cssselect</a><ul class="submenu"><li class="menu item"><a href="cssselect.html#the-cssselector-class">The CSSSelector class</a></li><li class="menu item"><a href="cssselect.html#the-cssselect-method">The cssselect method</a></li><li class="menu item"><a href="cssselect.html#supported-selectors">Supported Selectors</a></li><li class="menu item"><a href="cssselect.html#namespaces">Namespaces</a></li></ul></li></ul><ul class="menu foreign" id="elementsoup-menu"><li class="menu title"><a href="elementsoup.html">BeautifulSoup Parser</a><ul class="submenu"><li class="menu item"><a href="elementsoup.html#parsing-with-the-soupparser">Parsing with the soupparser</a></li><li class="menu item"><a href="elementsoup.html#entity-handling">Entity handling</a></li><li class="menu item"><a href="elementsoup.html#using-soupparser-as-a-fallback">Using soupparser as a fallback</a></li><li class="menu item"><a href="elementsoup.html#using-only-the-encoding-detection">Using only the encoding detection</a></li></ul></li></ul><ul class="menu foreign" id="html5parser-menu"><li class="menu title"><a href="html5parser.html">html5lib Parser</a><ul class="submenu"><li class="menu item"><a href="html5parser.html#differences-to-regular-html-parsing">Differences to regular HTML parsing</a></li><li class="menu item"><a href="html5parser.html#function-reference">Function Reference</a></li></ul></li></ul></li></ul><ul id="Extending lxml-section"><li><span class="section title">Extending lxml</span><ul class="menu foreign" id="resolvers-menu"><li class="menu title"><a href="resolvers.html">Document loading and URL resolving</a><ul class="submenu"><li class="menu item"><a href="resolvers.html#xml-catalogs">XML Catalogs</a></li><li class="menu item"><a href="resolvers.html#uri-resolvers">URI Resolvers</a></li><li class="menu item"><a href="resolvers.html#document-loading-in-context">Document loading in context</a></li><li class="menu item"><a href="resolvers.html#i-o-access-control-in-xslt">I/O access control in XSLT</a></li></ul></li></ul><ul class="menu foreign" id="extensions-menu"><li class="menu title"><a href="extensions.html">Python extensions for XPath and XSLT</a><ul class="submenu"><li class="menu item"><a href="extensions.html#xpath-extension-functions">XPath Extension functions</a></li><li class="menu item"><a href="extensions.html#xslt-extension-elements">XSLT extension elements</a></li></ul></li></ul><ul class="menu foreign" id="element classes-menu"><li class="menu title"><a href="element_classes.html">Using custom Element classes in lxml</a><ul class="submenu"><li class="menu item"><a href="element_classes.html#background-on-element-proxies">Background on Element proxies</a></li><li class="menu item"><a href="element_classes.html#element-initialization">Element initialization</a></li><li class="menu item"><a href="element_classes.html#setting-up-a-class-lookup-scheme">Setting up a class lookup scheme</a></li><li class="menu item"><a href="element_classes.html#generating-xml-with-custom-classes">Generating XML with custom classes</a></li><li class="menu item"><a href="element_classes.html#id1">Implementing namespaces</a></li></ul></li></ul><ul class="menu foreign" id="sax-menu"><li class="menu title"><a href="sax.html">Sax support</a><ul class="submenu"><li class="menu item"><a href="sax.html#building-a-tree-from-sax-events">Building a tree from SAX events</a></li><li class="menu item"><a href="sax.html#producing-sax-events-from-an-elementtree-or-element">Producing SAX events from an ElementTree or Element</a></li><li class="menu item"><a href="sax.html#interfacing-with-pulldom-minidom">Interfacing with pulldom/minidom</a></li></ul></li></ul><ul class="menu foreign" id="capi-menu"><li class="menu title"><a href="capi.html">The public C-API of lxml.etree</a><ul class="submenu"><li class="menu item"><a href="capi.html#passing-generated-trees-through-python">Passing generated trees through Python</a></li><li class="menu item"><a href="capi.html#writing-external-modules-in-cython">Writing external modules in Cython</a></li><li class="menu item"><a href="capi.html#writing-external-modules-in-c">Writing external modules in C</a></li></ul></li></ul></li></ul><ul id="Developing lxml-section"><li><span class="section title">Developing lxml</span><ul class="menu foreign" id="build-menu"><li class="menu title"><a href="build.html">How to build lxml from source</a><ul class="submenu"><li class="menu item"><a href="build.html#cython">Cython</a></li><li class="menu item"><a href="build.html#github-git-and-hg">Github, git and hg</a></li><li class="menu item"><a href="build.html#building-the-sources">Building the sources</a></li><li class="menu item"><a href="build.html#running-the-tests-and-reporting-errors">Running the tests and reporting errors</a></li><li class="menu item"><a href="build.html#building-an-egg-or-wheel">Building an egg or wheel</a></li><li class="menu item"><a href="build.html#building-lxml-on-macos-x">Building lxml on MacOS-X</a></li><li class="menu item"><a href="build.html#static-linking-on-windows">Static linking on Windows</a></li><li class="menu item"><a href="build.html#building-debian-packages-from-svn-sources">Building Debian packages from SVN sources</a></li></ul></li></ul><ul class="menu foreign" id="lxml source howto-menu"><li class="menu title"><a href="lxml-source-howto.html">How to read the source of lxml</a><ul class="submenu"><li class="menu item"><a href="lxml-source-howto.html#what-is-cython">What is Cython?</a></li><li class="menu item"><a href="lxml-source-howto.html#where-to-start">Where to start?</a></li><li class="menu item"><a href="lxml-source-howto.html#lxml-etree">lxml.etree</a></li><li class="menu item"><a href="lxml-source-howto.html#python-modules">Python modules</a></li><li class="menu item"><a href="lxml-source-howto.html#lxml-objectify">lxml.objectify</a></li><li class="menu item"><a href="lxml-source-howto.html#lxml-html">lxml.html</a></li></ul></li></ul><ul class="menu foreign" id="changes 4 2 2-menu"><li class="menu title"><a href="changes-4.2.2.html">Release Changelog</a></li></ul><ul class="menu foreign" id="credits-menu"><li class="menu title"><a href="credits.html">Credits</a><ul class="submenu"><li class="menu item"><a href="credits.html#main-contributors">Main contributors</a></li><li class="menu item"><a href="credits.html#special-thanks-goes-to">Special thanks goes to:</a></li></ul></li></ul></li><li><a href="/sitemap.html">Sitemap</a></li></ul></div></div><h1 class="title">ElementTree compatibility of lxml.etree</h1>
+
+<p>A lot of care has been taken to ensure compatibility between etree and
+ElementTree.  Nonetheless, some differences and incompatibilities exist:</p>
+<ul>
+<li><p class="first">Importing etree is obviously different; etree uses a lower-case
+package name, while ElementTree uses a combination of upper-case and
+lower case in imports:</p>
+<div class="syntax"><pre><span class="c1"># etree</span>
+<span class="kn">from</span> <span class="nn">lxml.etree</span> <span class="kn">import</span> <span class="n">Element</span>
+
+<span class="c1"># ElementTree</span>
+<span class="kn">from</span> <span class="nn">elementtree.ElementTree</span> <span class="kn">import</span> <span class="n">Element</span>
+
+<span class="c1"># ElementTree in the Python 2.5 standard library</span>
+<span class="kn">from</span> <span class="nn">xml.etree.ElementTree</span> <span class="kn">import</span> <span class="n">Element</span>
+</pre></div>
+<p>When switching over code from ElementTree to lxml.etree, and you're using
+the package name prefix 'ElementTree', you can do the following:</p>
+<div class="syntax"><pre><span class="c1"># instead of</span>
+<span class="kn">from</span> <span class="nn">elementtree</span> <span class="kn">import</span> <span class="n">ElementTree</span>
+<span class="c1"># use</span>
+<span class="kn">from</span> <span class="nn">lxml</span> <span class="kn">import</span> <span class="n">etree</span> <span class="k">as</span> <span class="n">ElementTree</span>
+</pre></div>
+</li>
+<li><p class="first">lxml.etree offers a lot more functionality, such as XPath, XSLT, Relax NG,
+and XML Schema support, which (c)ElementTree does not offer.</p>
+</li>
+<li><p class="first">etree has a different idea about Python unicode strings than ElementTree.
+In most parts of the API, ElementTree uses plain strings and unicode strings
+as what they are.  This includes Element.text, Element.tail and many other
+places.  However, the ElementTree parsers assume by default that any string
+(<cite>str</cite> or <cite>unicode</cite>) contains ASCII data.  They raise an exception if
+strings do not match the expected encoding.</p>
+<p>etree has the same idea about plain strings (<cite>str</cite>) as ElementTree.  For
+unicode strings, however, etree assumes throughout the API that they are
+Python unicode encoded strings rather than byte data.  This includes the
+parsers.  It is therefore perfectly correct to pass XML unicode data into
+the etree parsers in form of Python unicode strings.  It is an error, on the
+other hand, if unicode strings specify an encoding in their XML declaration,
+as this conflicts with the characteristic encoding of Python unicode
+strings.</p>
+</li>
+<li><p class="first">ElementTree allows you to place an Element in two different trees at the
+same time.  Thus, this:</p>
+<div class="syntax"><pre><span class="n">a</span> <span class="o">=</span> <span class="n">Element</span><span class="p">(</span><span class="s1">'a'</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">SubElement</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">)</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">Element</span><span class="p">(</span><span class="s1">'c'</span><span class="p">)</span>
+<span class="n">c</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+</pre></div>
+<p>will result in the following tree a:</p>
+<div class="syntax"><pre><span class="nt">&lt;a&gt;&lt;b</span> <span class="nt">/&gt;&lt;/a&gt;</span>
+</pre></div>
+<p>and the following tree c:</p>
+<div class="syntax"><pre><span class="nt">&lt;c&gt;&lt;b</span> <span class="nt">/&gt;&lt;/c&gt;</span>
+</pre></div>
+<p>In lxml, this behavior is different, because lxml is built on top of a tree
+that maintains parent relationships for elements (like W3C DOM).  This means
+an element can only exist in a single tree at the same time.  Adding an
+element in some tree to another tree will cause this element to be moved.</p>
+<p>So, for tree a we will get:</p>
+<div class="syntax"><pre><span class="nt">&lt;a&gt;&lt;/a&gt;</span>
+</pre></div>
+<p>and for tree c we will get:</p>
+<div class="syntax"><pre><span class="nt">&lt;c&gt;&lt;b/&gt;&lt;/c&gt;</span>
+</pre></div>
+<p>Unfortunately this is a rather fundamental difference in behavior, which is
+hard to change.  It won't affect some applications, but if you want to port
+code you must unfortunately make sure that it doesn't affect yours.</p>
+</li>
+<li><p class="first">etree allows navigation to the parent of a node by the <tt class="docutils literal">getparent()</tt>
+method and to the siblings by calling <tt class="docutils literal">getnext()</tt> and <tt class="docutils literal">getprevious()</tt>.
+This is not possible in ElementTree as the underlying tree model does not
+have this information.</p>
+</li>
+<li><p class="first">When trying to set a subelement using __setitem__ that is in fact not an
+Element but some other object, etree raises a TypeError, and ElementTree
+raises an AssertionError.  This also applies to some other places of the
+API.  In general, etree tries to avoid AssertionErrors in favour of being
+more specific about the reason for the exception.</p>
+</li>
+<li><p class="first">When parsing fails in <tt class="docutils literal">iterparse()</tt>, ElementTree up to version
+1.2.x raises a low-level <tt class="docutils literal">ExpatError</tt> instead of a <tt class="docutils literal">SyntaxError</tt>
+as the other parsers.  Both lxml and ElementTree 1.3 raise a
+<tt class="docutils literal">ParseError</tt> for parser errors.</p>
+</li>
+<li><p class="first">The <tt class="docutils literal">iterparse()</tt> function in lxml is implemented based on the libxml2
+parser and tree generator.  This means that modifications of the document
+root or the ancestors of the current element during parsing can irritate the
+parser and even segfault.  While this is not a problem in the Python object
+structure used by ElementTree, the C tree underlying lxml suffers from it.
+The golden rule for <tt class="docutils literal">iterparse()</tt> on lxml therefore is: do not touch
+anything that will have to be touched again by the parser later on.  See the
+lxml parser documentation on this.</p>
+</li>
+<li><p class="first">ElementTree ignores comments and processing instructions when parsing XML,
+while etree will read them in and treat them as Comment or
+ProcessingInstruction elements respectively.  This is especially visible
+where comments are found inside text content, which is then split by the
+Comment element.</p>
+<p>You can disable this behaviour by passing the boolean <tt class="docutils literal">remove_comments</tt>
+and/or <tt class="docutils literal">remove_pis</tt> keyword arguments to the parser you use.  For
+convenience and to support portable code, you can also use the
+<tt class="docutils literal">etree.ETCompatXMLParser</tt> instead of the default <tt class="docutils literal">etree.XMLParser</tt>.  It
+tries to provide a default setup that is as close to the ElementTree parser
+as possible.</p>
+</li>
+<li><p class="first">The <tt class="docutils literal">TreeBuilder</tt> class of <tt class="docutils literal">lxml.etree</tt> uses a different
+signature for the <tt class="docutils literal">start()</tt> method.  It accepts an additional
+argument <tt class="docutils literal">nsmap</tt> to propagate the namespace declarations of an
+element in addition to its own namespace.  To assure compatibility
+with ElementTree (which does not support this argument), lxml checks
+if the method accepts 3 arguments before calling it, and otherwise
+drops the namespace mapping.  This should work with most existing
+ElementTree code, although there may still be conflicting cases.</p>
+</li>
+<li><p class="first">ElementTree 1.2 has a bug when serializing an empty Comment (no text
+argument given) to XML, etree serializes this successfully.</p>
+</li>
+<li><p class="first">ElementTree adds whitespace around comments on serialization, lxml does
+not.  This means that a comment text "text" that ElementTree serializes as
+"&lt;!-- text --&gt;" will become "&lt;!--text--&gt;" in lxml.</p>
+</li>
+<li><p class="first">When the string '*' is used as tag filter in the <tt class="docutils literal">Element.getiterator()</tt>
+method, ElementTree returns all elements in the tree, including comments and
+processing instructions. lxml.etree only returns real Elements, i.e. tree
+nodes that have a string tag name.  Without a filter, both libraries iterate
+over all nodes.</p>
+<p>Note that currently only lxml.etree supports passing the <tt class="docutils literal">Element</tt> factory
+function as filter to select only Elements.  Both libraries support passing
+the <tt class="docutils literal">Comment</tt> and <tt class="docutils literal">ProcessingInstruction</tt> factories to select the
+respective tree nodes.</p>
+</li>
+<li><p class="first">ElementTree merges the target of a processing instruction into <tt class="docutils literal">PI.text</tt>,
+while lxml.etree puts it into the <tt class="docutils literal">.target</tt> property and leaves it out of
+the <tt class="docutils literal">.text</tt> property.  The <tt class="docutils literal">pi.text</tt> in ElementTree therefore
+correspondents to <tt class="docutils literal">pi.target + " " + pi.text</tt> in lxml.etree.</p>
+</li>
+<li><p class="first">Because etree is built on top of libxml2, which is namespace prefix aware,
+etree preserves namespaces declarations and prefixes while ElementTree tends
+to come up with its own prefixes (ns0, ns1, etc).  When no namespace prefix
+is given, however, etree creates ElementTree style prefixes as well.</p>
+</li>
+<li><p class="first">etree has a 'prefix' attribute (read-only) on elements giving the Element's
+prefix, if this is known, and None otherwise (in case of no namespace at
+all, or default namespace).</p>
+</li>
+<li><p class="first">etree further allows passing an 'nsmap' dictionary to the Element and
+SubElement element factories to explicitly map namespace prefixes to
+namespace URIs.  These will be translated into namespace declarations on
+that element.  This means that in the probably rare case that you need to
+construct an attribute called 'nsmap', you need to be aware that unlike in
+ElementTree, you cannot pass it as a keyword argument to the Element and
+SubElement factories directly.</p>
+</li>
+<li><p class="first">ElementTree allows QName objects as attribute values and resolves their
+prefix on serialisation (e.g. an attribute value <tt class="docutils literal"><span class="pre">QName("{myns}myname")</span></tt>
+becomes "p:myname" if "p" is the namespace prefix of "myns").  lxml.etree
+also allows you to set attribute values from QName instances (and also .text
+values), but it resolves their prefix immediately and stores the plain text
+value.  So, if prefixes are modified later on, e.g. by moving a subtree to a
+different tree (which reassigns the prefix mappings), the text values will
+not be updated and you might end up with an undefined prefix.</p>
+</li>
+<li><p class="first">etree elements can be copied using <tt class="docutils literal">copy.deepcopy()</tt> and <tt class="docutils literal">copy.copy()</tt>,
+just like ElementTree's.  However, <tt class="docutils literal">copy.copy()</tt> does <em>not</em> create a
+shallow copy where elements are shared between trees, as this makes no sense
+in the context of libxml2 trees.  Note that lxml can deep-copy trees
+considerably faster than ElementTree, so a deep copy might still be fast
+enough to replace a shallow copy in your case.</p>
+</li>
+</ul>
+</div>
+<div class="footer">
+<hr class="footer" />
+Generated on: 2018-06-22.
+
+</div>
+</body>
+</html>

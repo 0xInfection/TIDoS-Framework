@@ -1,0 +1,925 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>lxml.tests.test_pyclasslookup</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lxml-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="/">lxml API</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="lxml-module.html">Package&nbsp;lxml</a> ::
+        <a href="lxml.tests-module.html">Package&nbsp;tests</a> ::
+        Module&nbsp;test_pyclasslookup
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="lxml.tests.test_pyclasslookup-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="lxml.tests.test_pyclasslookup-module.html">Module lxml.tests.test_pyclasslookup</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-comment"># -*- coding: utf-8 -*-</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-docstring">Tests specific to the Python based class lookup.</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">unittest</tt><tt class="py-op">,</tt> <tt class="py-name">operator</tt><tt class="py-op">,</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt id="link-0" class="py-name" targets="Variable lxml.etree.XPath.path=lxml.etree.XPath-class.html#path,Variable lxml.etree._LogEntry.path=lxml.etree._LogEntry-class.html#path"><a title="lxml.etree.XPath.path
+lxml.etree._LogEntry.path" class="py-name" href="#" onclick="return doclink('link-0', 'path', 'link-0');">path</a></tt><tt class="py-op">,</tt> <tt class="py-name">sys</tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt id="link-1" class="py-name" targets="Variable lxml.tests.test_builder.this_dir=lxml.tests.test_builder-module.html#this_dir,Variable lxml.tests.test_classlookup.this_dir=lxml.tests.test_classlookup-module.html#this_dir,Variable lxml.tests.test_dtd.this_dir=lxml.tests.test_dtd-module.html#this_dir,Variable lxml.tests.test_elementtree.this_dir=lxml.tests.test_elementtree-module.html#this_dir,Variable lxml.tests.test_errors.this_dir=lxml.tests.test_errors-module.html#this_dir,Variable lxml.tests.test_htmlparser.this_dir=lxml.tests.test_htmlparser-module.html#this_dir,Variable lxml.tests.test_http_io.this_dir=lxml.tests.test_http_io-module.html#this_dir,Variable lxml.tests.test_incremental_xmlfile.this_dir=lxml.tests.test_incremental_xmlfile-module.html#this_dir,Variable lxml.tests.test_io.this_dir=lxml.tests.test_io-module.html#this_dir,Variable lxml.tests.test_isoschematron.this_dir=lxml.tests.test_isoschematron-module.html#this_dir,Variable lxml.tests.test_nsclasses.this_dir=lxml.tests.test_nsclasses-module.html#this_dir,Variable lxml.tests.test_objectify.this_dir=lxml.tests.test_objectify-module.html#this_dir,Variable lxml.tests.test_pyclasslookup.this_dir=lxml.tests.test_pyclasslookup-module.html#this_dir,Variable lxml.tests.test_relaxng.this_dir=lxml.tests.test_relaxng-module.html#this_dir,Variable lxml.tests.test_sax.this_dir=lxml.tests.test_sax-module.html#this_dir,Variable lxml.tests.test_schematron.this_dir=lxml.tests.test_schematron-module.html#this_dir,Variable lxml.tests.test_threading.this_dir=lxml.tests.test_threading-module.html#this_dir,Variable lxml.tests.test_unicode.this_dir=lxml.tests.test_unicode-module.html#this_dir,Variable lxml.tests.test_xmlschema.this_dir=lxml.tests.test_xmlschema-module.html#this_dir,Variable lxml.tests.test_xpathevaluator.this_dir=lxml.tests.test_xpathevaluator-module.html#this_dir,Variable lxml.tests.test_xslt.this_dir=lxml.tests.test_xslt-module.html#this_dir"><a title="lxml.tests.test_builder.this_dir
+lxml.tests.test_classlookup.this_dir
+lxml.tests.test_dtd.this_dir
+lxml.tests.test_elementtree.this_dir
+lxml.tests.test_errors.this_dir
+lxml.tests.test_htmlparser.this_dir
+lxml.tests.test_http_io.this_dir
+lxml.tests.test_incremental_xmlfile.this_dir
+lxml.tests.test_io.this_dir
+lxml.tests.test_isoschematron.this_dir
+lxml.tests.test_nsclasses.this_dir
+lxml.tests.test_objectify.this_dir
+lxml.tests.test_pyclasslookup.this_dir
+lxml.tests.test_relaxng.this_dir
+lxml.tests.test_sax.this_dir
+lxml.tests.test_schematron.this_dir
+lxml.tests.test_threading.this_dir
+lxml.tests.test_unicode.this_dir
+lxml.tests.test_xmlschema.this_dir
+lxml.tests.test_xpathevaluator.this_dir
+lxml.tests.test_xslt.this_dir" class="py-name" href="#" onclick="return doclink('link-1', 'this_dir', 'link-1');">this_dir</a></tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt id="link-2" class="py-name"><a title="lxml.etree.XPath.path
+lxml.etree._LogEntry.path" class="py-name" href="#" onclick="return doclink('link-2', 'path', 'link-0');">path</a></tt><tt class="py-op">.</tt><tt class="py-name">dirname</tt><tt class="py-op">(</tt><tt class="py-name">__file__</tt><tt class="py-op">)</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-keyword">if</tt> <tt id="link-3" class="py-name"><a title="lxml.tests.test_builder.this_dir
+lxml.tests.test_classlookup.this_dir
+lxml.tests.test_dtd.this_dir
+lxml.tests.test_elementtree.this_dir
+lxml.tests.test_errors.this_dir
+lxml.tests.test_htmlparser.this_dir
+lxml.tests.test_http_io.this_dir
+lxml.tests.test_incremental_xmlfile.this_dir
+lxml.tests.test_io.this_dir
+lxml.tests.test_isoschematron.this_dir
+lxml.tests.test_nsclasses.this_dir
+lxml.tests.test_objectify.this_dir
+lxml.tests.test_pyclasslookup.this_dir
+lxml.tests.test_relaxng.this_dir
+lxml.tests.test_sax.this_dir
+lxml.tests.test_schematron.this_dir
+lxml.tests.test_threading.this_dir
+lxml.tests.test_unicode.this_dir
+lxml.tests.test_xmlschema.this_dir
+lxml.tests.test_xpathevaluator.this_dir
+lxml.tests.test_xslt.this_dir" class="py-name" href="#" onclick="return doclink('link-3', 'this_dir', 'link-1');">this_dir</a></tt> <tt class="py-keyword">not</tt> <tt class="py-keyword">in</tt> <tt class="py-name">sys</tt><tt class="py-op">.</tt><tt id="link-4" class="py-name"><a title="lxml.etree.XPath.path
+lxml.etree._LogEntry.path" class="py-name" href="#" onclick="return doclink('link-4', 'path', 'link-0');">path</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line">    <tt class="py-name">sys</tt><tt class="py-op">.</tt><tt id="link-5" class="py-name"><a title="lxml.etree.XPath.path
+lxml.etree._LogEntry.path" class="py-name" href="#" onclick="return doclink('link-5', 'path', 'link-0');">path</a></tt><tt class="py-op">.</tt><tt id="link-6" class="py-name" targets="Method lxml.etree._Element.insert()=lxml.etree._Element-class.html#insert"><a title="lxml.etree._Element.insert" class="py-name" href="#" onclick="return doclink('link-6', 'insert', 'link-6');">insert</a></tt><tt class="py-op">(</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> <tt id="link-7" class="py-name"><a title="lxml.tests.test_builder.this_dir
+lxml.tests.test_classlookup.this_dir
+lxml.tests.test_dtd.this_dir
+lxml.tests.test_elementtree.this_dir
+lxml.tests.test_errors.this_dir
+lxml.tests.test_htmlparser.this_dir
+lxml.tests.test_http_io.this_dir
+lxml.tests.test_incremental_xmlfile.this_dir
+lxml.tests.test_io.this_dir
+lxml.tests.test_isoschematron.this_dir
+lxml.tests.test_nsclasses.this_dir
+lxml.tests.test_objectify.this_dir
+lxml.tests.test_pyclasslookup.this_dir
+lxml.tests.test_relaxng.this_dir
+lxml.tests.test_sax.this_dir
+lxml.tests.test_schematron.this_dir
+lxml.tests.test_threading.this_dir
+lxml.tests.test_unicode.this_dir
+lxml.tests.test_xmlschema.this_dir
+lxml.tests.test_xpathevaluator.this_dir
+lxml.tests.test_xslt.this_dir" class="py-name" href="#" onclick="return doclink('link-7', 'this_dir', 'link-1');">this_dir</a></tt><tt class="py-op">)</tt> <tt class="py-comment"># needed for Py3</tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-8" class="py-name" targets="Module lxml.tests.common_imports=lxml.tests.common_imports-module.html"><a title="lxml.tests.common_imports" class="py-name" href="#" onclick="return doclink('link-8', 'common_imports', 'link-8');">common_imports</a></tt> <tt class="py-keyword">import</tt> <tt id="link-9" class="py-name" targets="Module lxml.etree=lxml.etree-module.html,Variable lxml.sax.ElementTreeContentHandler.etree=lxml.sax.ElementTreeContentHandler-class.html#etree,Variable lxml.tests.test_elementtree.CElementTreeTestCase.etree=lxml.tests.test_elementtree.CElementTreeTestCase-class.html#etree,Variable lxml.tests.test_elementtree._ETreeTestCaseBase.etree=lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#etree,Variable lxml.tests.test_elementtree._XMLPullParserTest.etree=lxml.tests.test_elementtree._XMLPullParserTest-class.html#etree,Variable lxml.tests.test_io._IOTestCaseBase.etree=lxml.tests.test_io._IOTestCaseBase-class.html#etree"><a title="lxml.etree
+lxml.sax.ElementTreeContentHandler.etree
+lxml.tests.test_elementtree.CElementTreeTestCase.etree
+lxml.tests.test_elementtree._ETreeTestCaseBase.etree
+lxml.tests.test_elementtree._XMLPullParserTest.etree
+lxml.tests.test_io._IOTestCaseBase.etree" class="py-name" href="#" onclick="return doclink('link-9', 'etree', 'link-9');">etree</a></tt><tt class="py-op">,</tt> <tt class="py-name">StringIO</tt><tt class="py-op">,</tt> <tt id="link-10" class="py-name" targets="Class lxml.tests.common_imports.HelperTestCase=lxml.tests.common_imports.HelperTestCase-class.html"><a title="lxml.tests.common_imports.HelperTestCase" class="py-name" href="#" onclick="return doclink('link-10', 'HelperTestCase', 'link-10');">HelperTestCase</a></tt><tt class="py-op">,</tt> <tt id="link-11" class="py-name" targets="Function lxml.tests.common_imports.fileInTestDir()=lxml.tests.common_imports-module.html#fileInTestDir"><a title="lxml.tests.common_imports.fileInTestDir" class="py-name" href="#" onclick="return doclink('link-11', 'fileInTestDir', 'link-11');">fileInTestDir</a></tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-12" class="py-name"><a title="lxml.tests.common_imports" class="py-name" href="#" onclick="return doclink('link-12', 'common_imports', 'link-8');">common_imports</a></tt> <tt class="py-keyword">import</tt> <tt id="link-13" class="py-name" targets="Class lxml.tests.common_imports.SillyFileLike=lxml.tests.common_imports.SillyFileLike-class.html"><a title="lxml.tests.common_imports.SillyFileLike" class="py-name" href="#" onclick="return doclink('link-13', 'SillyFileLike', 'link-13');">SillyFileLike</a></tt><tt class="py-op">,</tt> <tt id="link-14" class="py-name" targets="Function lxml.tests.common_imports.canonicalize()=lxml.tests.common_imports-module.html#canonicalize"><a title="lxml.tests.common_imports.canonicalize" class="py-name" href="#" onclick="return doclink('link-14', 'canonicalize', 'link-14');">canonicalize</a></tt><tt class="py-op">,</tt> <tt class="py-name">doctest</tt><tt class="py-op">,</tt> <tt id="link-15" class="py-name" targets="Function lxml.tests.common_imports._bytes()=lxml.tests.common_imports-module.html#_bytes"><a title="lxml.tests.common_imports._bytes" class="py-name" href="#" onclick="return doclink('link-15', '_bytes', 'link-15');">_bytes</a></tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-16" class="py-name" targets="Package lxml=lxml-module.html"><a title="lxml" class="py-name" href="#" onclick="return doclink('link-16', 'lxml', 'link-16');">lxml</a></tt><tt class="py-op">.</tt><tt id="link-17" class="py-name"><a title="lxml.etree
+lxml.sax.ElementTreeContentHandler.etree
+lxml.tests.test_elementtree.CElementTreeTestCase.etree
+lxml.tests.test_elementtree._ETreeTestCaseBase.etree
+lxml.tests.test_elementtree._XMLPullParserTest.etree
+lxml.tests.test_io._IOTestCaseBase.etree" class="py-name" href="#" onclick="return doclink('link-17', 'etree', 'link-9');">etree</a></tt> <tt class="py-keyword">import</tt> <tt id="link-18" class="py-name" targets="Class lxml.etree.PythonElementClassLookup=lxml.etree.PythonElementClassLookup-class.html"><a title="lxml.etree.PythonElementClassLookup" class="py-name" href="#" onclick="return doclink('link-18', 'PythonElementClassLookup', 'link-18');">PythonElementClassLookup</a></tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"><tt id="link-19" class="py-name" targets="Variable lxml.tests.test_classlookup.xml_str=lxml.tests.test_classlookup-module.html#xml_str,Variable lxml.tests.test_objectify.xml_str=lxml.tests.test_objectify-module.html#xml_str,Variable lxml.tests.test_pyclasslookup.xml_str=lxml.tests.test_pyclasslookup-module.html#xml_str"><a title="lxml.tests.test_classlookup.xml_str
+lxml.tests.test_objectify.xml_str
+lxml.tests.test_pyclasslookup.xml_str" class="py-name" href="#" onclick="return doclink('link-19', 'xml_str', 'link-19');">xml_str</a></tt> <tt class="py-op">=</tt> <tt id="link-20" class="py-name"><a title="lxml.tests.common_imports._bytes" class="py-name" href="#" onclick="return doclink('link-20', '_bytes', 'link-15');">_bytes</a></tt><tt class="py-op">(</tt><tt class="py-string">'''\</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"><tt class="py-string">&lt;obj:root xmlns:obj="objectified" xmlns:other="otherNS"&gt;</tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"><tt class="py-string">  &lt;obj:c1 a1="A1" a2="A2" other:a3="A3"&gt;</tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line"><tt class="py-string">    &lt;obj:c2&gt;0&lt;/obj:c2&gt;</tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line"><tt class="py-string">    &lt;obj:c2&gt;1&lt;/obj:c2&gt;</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line"><tt class="py-string">    &lt;obj:c2&gt;2&lt;/obj:c2&gt;</tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line"><tt class="py-string">    &lt;other:c2&gt;3&lt;/other:c2&gt;</tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line"><tt class="py-string">    &lt;c2&gt;3&lt;/c2&gt;</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line"><tt class="py-string">  &lt;/obj:c1&gt;</tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line"><tt class="py-string">&lt;/obj:root&gt;'''</tt><tt class="py-op">)</tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line"> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line"> </tt>
+<a name="PyClassLookupTestCase"></a><div id="PyClassLookupTestCase-def"><a name="L31"></a><tt class="py-lineno"> 31</tt> <a class="py-toggle" href="#" id="PyClassLookupTestCase-toggle" onclick="return toggle('PyClassLookupTestCase');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lxml.tests.test_pyclasslookup.PyClassLookupTestCase-class.html">PyClassLookupTestCase</a><tt class="py-op">(</tt><tt class="py-base-class">HelperTestCase</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PyClassLookupTestCase-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="PyClassLookupTestCase-expanded"><a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line">    <tt class="py-docstring">"""Test cases for the lxml.pyclasslookup class lookup mechanism.</tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line">    <tt id="link-21" class="py-name"><a title="lxml.etree
+lxml.sax.ElementTreeContentHandler.etree
+lxml.tests.test_elementtree.CElementTreeTestCase.etree
+lxml.tests.test_elementtree._ETreeTestCaseBase.etree
+lxml.tests.test_elementtree._XMLPullParserTest.etree
+lxml.tests.test_io._IOTestCaseBase.etree" class="py-name" href="#" onclick="return doclink('link-21', 'etree', 'link-9');">etree</a></tt> <tt class="py-op">=</tt> <tt id="link-22" class="py-name"><a title="lxml.etree
+lxml.sax.ElementTreeContentHandler.etree
+lxml.tests.test_elementtree.CElementTreeTestCase.etree
+lxml.tests.test_elementtree._ETreeTestCaseBase.etree
+lxml.tests.test_elementtree._XMLPullParserTest.etree
+lxml.tests.test_io._IOTestCaseBase.etree" class="py-name" href="#" onclick="return doclink('link-22', 'etree', 'link-9');">etree</a></tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line">    <tt id="link-23" class="py-name" targets="Variable lxml.etree._ElementTree.parser=lxml.etree._ElementTree-class.html#parser,Variable lxml.tests.test_pyclasslookup.PyClassLookupTestCase.parser=lxml.tests.test_pyclasslookup.PyClassLookupTestCase-class.html#parser"><a title="lxml.etree._ElementTree.parser
+lxml.tests.test_pyclasslookup.PyClassLookupTestCase.parser" class="py-name" href="#" onclick="return doclink('link-23', 'parser', 'link-23');">parser</a></tt> <tt class="py-op">=</tt> <tt id="link-24" class="py-name"><a title="lxml.etree
+lxml.sax.ElementTreeContentHandler.etree
+lxml.tests.test_elementtree.CElementTreeTestCase.etree
+lxml.tests.test_elementtree._ETreeTestCaseBase.etree
+lxml.tests.test_elementtree._XMLPullParserTest.etree
+lxml.tests.test_io._IOTestCaseBase.etree" class="py-name" href="#" onclick="return doclink('link-24', 'etree', 'link-9');">etree</a></tt><tt class="py-op">.</tt><tt id="link-25" class="py-name" targets="Class lxml.etree.XMLParser=lxml.etree.XMLParser-class.html,Method lxml.tests.test_elementtree._ETreeTestCaseBase.XMLParser()=lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#XMLParser,Class xml.etree.ElementTree.XMLParser=xml.etree.ElementTree.XMLParser-class.html"><a title="lxml.etree.XMLParser
+lxml.tests.test_elementtree._ETreeTestCaseBase.XMLParser
+xml.etree.ElementTree.XMLParser" class="py-name" href="#" onclick="return doclink('link-25', 'XMLParser', 'link-25');">XMLParser</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line">    <tt id="link-26" class="py-name" targets="Function lxml.etree.Element()=lxml.etree-module.html#Element,Function lxml.objectify.Element()=lxml.objectify-module.html#Element,Method lxml.tests.test_pyclasslookup.PyClassLookupTestCase.Element()=lxml.tests.test_pyclasslookup.PyClassLookupTestCase-class.html#Element,Class xml.etree.ElementTree.Element=xml.etree.ElementTree.Element-class.html"><a title="lxml.etree.Element
+lxml.objectify.Element
+lxml.tests.test_pyclasslookup.PyClassLookupTestCase.Element
+xml.etree.ElementTree.Element" class="py-name" href="#" onclick="return doclink('link-26', 'Element', 'link-26');">Element</a></tt> <tt class="py-op">=</tt> <tt id="link-27" class="py-name"><a title="lxml.etree._ElementTree.parser
+lxml.tests.test_pyclasslookup.PyClassLookupTestCase.parser" class="py-name" href="#" onclick="return doclink('link-27', 'parser', 'link-23');">parser</a></tt><tt class="py-op">.</tt><tt id="link-28" class="py-name" targets="Method lxml.etree._Element.makeelement()=lxml.etree._Element-class.html#makeelement,Method lxml.etree.iterparse.makeelement()=lxml.etree.iterparse-class.html#makeelement,Function lxml.tests.selftest2.makeelement()=lxml.tests.selftest2-module.html#makeelement"><a title="lxml.etree._Element.makeelement
+lxml.etree.iterparse.makeelement
+lxml.tests.selftest2.makeelement" class="py-name" href="#" onclick="return doclink('link-28', 'makeelement', 'link-28');">makeelement</a></tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line"> </tt>
+<a name="PyClassLookupTestCase.tearDown"></a><div id="PyClassLookupTestCase.tearDown-def"><a name="L38"></a><tt class="py-lineno"> 38</tt> <a class="py-toggle" href="#" id="PyClassLookupTestCase.tearDown-toggle" onclick="return toggle('PyClassLookupTestCase.tearDown');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.test_pyclasslookup.PyClassLookupTestCase-class.html#tearDown">tearDown</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PyClassLookupTestCase.tearDown-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="PyClassLookupTestCase.tearDown-expanded"><a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-29" class="py-name"><a title="lxml.etree._ElementTree.parser
+lxml.tests.test_pyclasslookup.PyClassLookupTestCase.parser" class="py-name" href="#" onclick="return doclink('link-29', 'parser', 'link-23');">parser</a></tt><tt class="py-op">.</tt><tt id="link-30" class="py-name" targets="Method lxml.etree.iterparse.set_element_class_lookup()=lxml.etree.iterparse-class.html#set_element_class_lookup,Function lxml.etree.set_element_class_lookup()=lxml.etree-module.html#set_element_class_lookup"><a title="lxml.etree.iterparse.set_element_class_lookup
+lxml.etree.set_element_class_lookup" class="py-name" href="#" onclick="return doclink('link-30', 'set_element_class_lookup', 'link-30');">set_element_class_lookup</a></tt><tt class="py-op">(</tt><tt class="py-name">None</tt><tt class="py-op">)</tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line">        <tt class="py-name">super</tt><tt class="py-op">(</tt><tt id="link-31" class="py-name" targets="Class lxml.tests.test_pyclasslookup.PyClassLookupTestCase=lxml.tests.test_pyclasslookup.PyClassLookupTestCase-class.html"><a title="lxml.tests.test_pyclasslookup.PyClassLookupTestCase" class="py-name" href="#" onclick="return doclink('link-31', 'PyClassLookupTestCase', 'link-31');">PyClassLookupTestCase</a></tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-32" class="py-name" targets="Method lxml.tests.common_imports.HelperTestCase.tearDown()=lxml.tests.common_imports.HelperTestCase-class.html#tearDown,Method lxml.tests.test_classlookup.ClassLookupTestCase.tearDown()=lxml.tests.test_classlookup.ClassLookupTestCase-class.html#tearDown,Method lxml.tests.test_htmlparser.HtmlParserTestCase.tearDown()=lxml.tests.test_htmlparser.HtmlParserTestCase-class.html#tearDown,Method lxml.tests.test_incremental_xmlfile.TempPathXmlFileTestCase.tearDown()=lxml.tests.test_incremental_xmlfile.TempPathXmlFileTestCase-class.html#tearDown,Method lxml.tests.test_incremental_xmlfile._XmlFileTestCaseBase.tearDown()=lxml.tests.test_incremental_xmlfile._XmlFileTestCaseBase-class.html#tearDown,Method lxml.tests.test_io._IOTestCaseBase.tearDown()=lxml.tests.test_io._IOTestCaseBase-class.html#tearDown,Method lxml.tests.test_nsclasses.ETreeNamespaceClassesTestCase.tearDown()=lxml.tests.test_nsclasses.ETreeNamespaceClassesTestCase-class.html#tearDown,Method lxml.tests.test_objectify.ObjectifyTestCase.tearDown()=lxml.tests.test_objectify.ObjectifyTestCase-class.html#tearDown,Method lxml.tests.test_pyclasslookup.PyClassLookupTestCase.tearDown()=lxml.tests.test_pyclasslookup.PyClassLookupTestCase-class.html#tearDown"><a title="lxml.tests.common_imports.HelperTestCase.tearDown
+lxml.tests.test_classlookup.ClassLookupTestCase.tearDown
+lxml.tests.test_htmlparser.HtmlParserTestCase.tearDown
+lxml.tests.test_incremental_xmlfile.TempPathXmlFileTestCase.tearDown
+lxml.tests.test_incremental_xmlfile._XmlFileTestCaseBase.tearDown
+lxml.tests.test_io._IOTestCaseBase.tearDown
+lxml.tests.test_nsclasses.ETreeNamespaceClassesTestCase.tearDown
+lxml.tests.test_objectify.ObjectifyTestCase.tearDown
+lxml.tests.test_pyclasslookup.PyClassLookupTestCase.tearDown" class="py-name" href="#" onclick="return doclink('link-32', 'tearDown', 'link-32');">tearDown</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line"> </tt>
+<a name="PyClassLookupTestCase._setClassLookup"></a><div id="PyClassLookupTestCase._setClassLookup-def"><a name="L42"></a><tt class="py-lineno"> 42</tt> <a class="py-toggle" href="#" id="PyClassLookupTestCase._setClassLookup-toggle" onclick="return toggle('PyClassLookupTestCase._setClassLookup');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.test_pyclasslookup.PyClassLookupTestCase-class.html#_setClassLookup">_setClassLookup</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">lookup_function</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PyClassLookupTestCase._setClassLookup-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="PyClassLookupTestCase._setClassLookup-expanded"><a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line">        <tt class="py-keyword">class</tt> <tt class="py-def-name">Lookup</tt><tt class="py-op">(</tt><tt class="py-base-class">PythonElementClassLookup</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line">            <tt class="py-keyword">def</tt> <tt class="py-def-name">lookup</tt><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-op">*</tt><tt class="py-param">args</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt class="py-name">lookup_function</tt><tt class="py-op">(</tt><tt class="py-op">*</tt><tt class="py-name">args</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-33" class="py-name"><a title="lxml.etree._ElementTree.parser
+lxml.tests.test_pyclasslookup.PyClassLookupTestCase.parser" class="py-name" href="#" onclick="return doclink('link-33', 'parser', 'link-23');">parser</a></tt><tt class="py-op">.</tt><tt id="link-34" class="py-name"><a title="lxml.etree.iterparse.set_element_class_lookup
+lxml.etree.set_element_class_lookup" class="py-name" href="#" onclick="return doclink('link-34', 'set_element_class_lookup', 'link-30');">set_element_class_lookup</a></tt><tt class="py-op">(</tt> <tt class="py-name">Lookup</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">)</tt> </tt>
+</div><a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line"> </tt>
+<a name="PyClassLookupTestCase._buildElementClass"></a><div id="PyClassLookupTestCase._buildElementClass-def"><a name="L48"></a><tt class="py-lineno"> 48</tt> <a class="py-toggle" href="#" id="PyClassLookupTestCase._buildElementClass-toggle" onclick="return toggle('PyClassLookupTestCase._buildElementClass');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.test_pyclasslookup.PyClassLookupTestCase-class.html#_buildElementClass">_buildElementClass</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PyClassLookupTestCase._buildElementClass-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="PyClassLookupTestCase._buildElementClass-expanded"><a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line">        <tt class="py-keyword">class</tt> <tt class="py-def-name">LocalElement</tt><tt class="py-op">(</tt><tt class="py-base-class">etree</tt><tt class="py-op">.</tt><tt class="py-base-class">ElementBase</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line">            <tt class="py-keyword">pass</tt> </tt>
+</div><a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">LocalElement</tt> </tt>
+</div><a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line"> </tt>
+<a name="PyClassLookupTestCase.XML"></a><div id="PyClassLookupTestCase.XML-def"><a name="L53"></a><tt class="py-lineno"> 53</tt> <a class="py-toggle" href="#" id="PyClassLookupTestCase.XML-toggle" onclick="return toggle('PyClassLookupTestCase.XML');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.test_pyclasslookup.PyClassLookupTestCase-class.html#XML">XML</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">xml</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PyClassLookupTestCase.XML-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="PyClassLookupTestCase.XML-expanded"><a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-35" class="py-name"><a title="lxml.etree
+lxml.sax.ElementTreeContentHandler.etree
+lxml.tests.test_elementtree.CElementTreeTestCase.etree
+lxml.tests.test_elementtree._ETreeTestCaseBase.etree
+lxml.tests.test_elementtree._XMLPullParserTest.etree
+lxml.tests.test_io._IOTestCaseBase.etree" class="py-name" href="#" onclick="return doclink('link-35', 'etree', 'link-9');">etree</a></tt><tt class="py-op">.</tt><tt id="link-36" class="py-name" targets="Function lxml.etree.XML()=lxml.etree-module.html#XML,Function lxml.objectify.XML()=lxml.objectify-module.html#XML,Method lxml.tests.test_objectify.ObjectifyTestCase.XML()=lxml.tests.test_objectify.ObjectifyTestCase-class.html#XML,Method lxml.tests.test_pyclasslookup.PyClassLookupTestCase.XML()=lxml.tests.test_pyclasslookup.PyClassLookupTestCase-class.html#XML"><a title="lxml.etree.XML
+lxml.objectify.XML
+lxml.tests.test_objectify.ObjectifyTestCase.XML
+lxml.tests.test_pyclasslookup.PyClassLookupTestCase.XML" class="py-name" href="#" onclick="return doclink('link-36', 'XML', 'link-36');">XML</a></tt><tt class="py-op">(</tt><tt id="link-37" class="py-name" targets="Variable lxml.tests.test_threading.ThreadPipelineTestCase.xml=lxml.tests.test_threading.ThreadPipelineTestCase-class.html#xml"><a title="lxml.tests.test_threading.ThreadPipelineTestCase.xml" class="py-name" href="#" onclick="return doclink('link-37', 'xml', 'link-37');">xml</a></tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-38" class="py-name"><a title="lxml.etree._ElementTree.parser
+lxml.tests.test_pyclasslookup.PyClassLookupTestCase.parser" class="py-name" href="#" onclick="return doclink('link-38', 'parser', 'link-23');">parser</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line"> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line">    <tt class="py-comment"># --- Test cases</tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line"> </tt>
+<a name="PyClassLookupTestCase.test_lookup"></a><div id="PyClassLookupTestCase.test_lookup-def"><a name="L58"></a><tt class="py-lineno"> 58</tt> <a class="py-toggle" href="#" id="PyClassLookupTestCase.test_lookup-toggle" onclick="return toggle('PyClassLookupTestCase.test_lookup');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.test_pyclasslookup.PyClassLookupTestCase-class.html#test_lookup">test_lookup</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PyClassLookupTestCase.test_lookup-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="PyClassLookupTestCase.test_lookup-expanded"><a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line">        <tt class="py-name">el_class</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-39" class="py-name" targets="Method lxml.tests.test_pyclasslookup.PyClassLookupTestCase._buildElementClass()=lxml.tests.test_pyclasslookup.PyClassLookupTestCase-class.html#_buildElementClass"><a title="lxml.tests.test_pyclasslookup.PyClassLookupTestCase._buildElementClass" class="py-name" href="#" onclick="return doclink('link-39', '_buildElementClass', 'link-39');">_buildElementClass</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line">        <tt class="py-name">el_class</tt><tt class="py-op">.</tt><tt class="py-name">i</tt> <tt class="py-op">=</tt> <tt class="py-number">1</tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line">        <tt class="py-keyword">def</tt> <tt class="py-def-name">lookup</tt><tt class="py-op">(</tt><tt class="py-op">*</tt><tt class="py-param">args</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">el_class</tt><tt class="py-op">.</tt><tt class="py-name">i</tt> <tt class="py-op">==</tt> <tt class="py-number">1</tt><tt class="py-op">:</tt> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line">                <tt class="py-name">el_class</tt><tt class="py-op">.</tt><tt class="py-name">i</tt> <tt class="py-op">=</tt> <tt class="py-number">2</tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">el_class</tt> </tt>
+</div><a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-40" class="py-name" targets="Method lxml.tests.test_pyclasslookup.PyClassLookupTestCase._setClassLookup()=lxml.tests.test_pyclasslookup.PyClassLookupTestCase-class.html#_setClassLookup"><a title="lxml.tests.test_pyclasslookup.PyClassLookupTestCase._setClassLookup" class="py-name" href="#" onclick="return doclink('link-40', '_setClassLookup', 'link-40');">_setClassLookup</a></tt><tt class="py-op">(</tt><tt id="link-41" class="py-name" targets="Method lxml.etree.CustomElementClassLookup.lookup()=lxml.etree.CustomElementClassLookup-class.html#lookup,Method lxml.etree.PythonElementClassLookup.lookup()=lxml.etree.PythonElementClassLookup-class.html#lookup,Method lxml.html.HtmlElementClassLookup.lookup()=lxml.html.HtmlElementClassLookup-class.html#lookup"><a title="lxml.etree.CustomElementClassLookup.lookup
+lxml.etree.PythonElementClassLookup.lookup
+lxml.html.HtmlElementClassLookup.lookup" class="py-name" href="#" onclick="return doclink('link-41', 'lookup', 'link-41');">lookup</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line">        <tt id="link-42" class="py-name" targets="Variable lxml.etree.iterparse.root=lxml.etree.iterparse-class.html#root"><a title="lxml.etree.iterparse.root" class="py-name" href="#" onclick="return doclink('link-42', 'root', 'link-42');">root</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-43" class="py-name"><a title="lxml.etree.XML
+lxml.objectify.XML
+lxml.tests.test_objectify.ObjectifyTestCase.XML
+lxml.tests.test_pyclasslookup.PyClassLookupTestCase.XML" class="py-name" href="#" onclick="return doclink('link-43', 'XML', 'link-36');">XML</a></tt><tt class="py-op">(</tt><tt id="link-44" class="py-name"><a title="lxml.tests.test_classlookup.xml_str
+lxml.tests.test_objectify.xml_str
+lxml.tests.test_pyclasslookup.xml_str" class="py-name" href="#" onclick="return doclink('link-44', 'xml_str', 'link-19');">xml_str</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertEqual</tt><tt class="py-op">(</tt><tt class="py-number">2</tt><tt class="py-op">,</tt> <tt class="py-name">el_class</tt><tt class="py-op">.</tt><tt class="py-name">i</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line"> </tt>
+<a name="PyClassLookupTestCase.test_lookup_keep_ref_assertion"></a><div id="PyClassLookupTestCase.test_lookup_keep_ref_assertion-def"><a name="L69"></a><tt class="py-lineno"> 69</tt> <a class="py-toggle" href="#" id="PyClassLookupTestCase.test_lookup_keep_ref_assertion-toggle" onclick="return toggle('PyClassLookupTestCase.test_lookup_keep_ref_assertion');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.test_pyclasslookup.PyClassLookupTestCase-class.html#test_lookup_keep_ref_assertion">test_lookup_keep_ref_assertion</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PyClassLookupTestCase.test_lookup_keep_ref_assertion-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="PyClassLookupTestCase.test_lookup_keep_ref_assertion-expanded"><a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line">        <tt class="py-name">el_class</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-45" class="py-name"><a title="lxml.tests.test_pyclasslookup.PyClassLookupTestCase._buildElementClass" class="py-name" href="#" onclick="return doclink('link-45', '_buildElementClass', 'link-39');">_buildElementClass</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line">        <tt class="py-name">el_class</tt><tt class="py-op">.</tt><tt class="py-name">EL</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line">        <tt class="py-keyword">def</tt> <tt class="py-def-name">lookup</tt><tt class="py-op">(</tt><tt class="py-param">doc</tt><tt class="py-op">,</tt> <tt class="py-param">el</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">el_class</tt><tt class="py-op">.</tt><tt class="py-name">EL</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line">                <tt class="py-name">el_class</tt><tt class="py-op">.</tt><tt class="py-name">EL</tt> <tt class="py-op">=</tt> <tt class="py-name">el</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">el_class</tt> </tt>
+</div><a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-46" class="py-name"><a title="lxml.tests.test_pyclasslookup.PyClassLookupTestCase._setClassLookup" class="py-name" href="#" onclick="return doclink('link-46', '_setClassLookup', 'link-40');">_setClassLookup</a></tt><tt class="py-op">(</tt><tt id="link-47" class="py-name"><a title="lxml.etree.CustomElementClassLookup.lookup
+lxml.etree.PythonElementClassLookup.lookup
+lxml.html.HtmlElementClassLookup.lookup" class="py-name" href="#" onclick="return doclink('link-47', 'lookup', 'link-41');">lookup</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line">        <tt id="link-48" class="py-name"><a title="lxml.etree.iterparse.root" class="py-name" href="#" onclick="return doclink('link-48', 'root', 'link-42');">root</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-49" class="py-name"><a title="lxml.etree.XML
+lxml.objectify.XML
+lxml.tests.test_objectify.ObjectifyTestCase.XML
+lxml.tests.test_pyclasslookup.PyClassLookupTestCase.XML" class="py-name" href="#" onclick="return doclink('link-49', 'XML', 'link-36');">XML</a></tt><tt class="py-op">(</tt><tt id="link-50" class="py-name"><a title="lxml.tests.test_classlookup.xml_str
+lxml.tests.test_objectify.xml_str
+lxml.tests.test_pyclasslookup.xml_str" class="py-name" href="#" onclick="return doclink('link-50', 'xml_str', 'link-19');">xml_str</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertNotEqual</tt><tt class="py-op">(</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-name">el_class</tt><tt class="py-op">.</tt><tt class="py-name">EL</tt><tt class="py-op">)</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertRaises</tt><tt class="py-op">(</tt><tt class="py-name">ReferenceError</tt><tt class="py-op">,</tt> <tt class="py-name">el_class</tt><tt class="py-op">.</tt><tt class="py-name">EL</tt><tt class="py-op">.</tt><tt id="link-51" class="py-name" targets="Method lxml.etree._Element.getchildren()=lxml.etree._Element-class.html#getchildren,Method lxml.objectify.ObjectifiedElement.getchildren()=lxml.objectify.ObjectifiedElement-class.html#getchildren"><a title="lxml.etree._Element.getchildren
+lxml.objectify.ObjectifiedElement.getchildren" class="py-name" href="#" onclick="return doclink('link-51', 'getchildren', 'link-51');">getchildren</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line"> </tt>
+<a name="PyClassLookupTestCase.test_lookup_tag"></a><div id="PyClassLookupTestCase.test_lookup_tag-def"><a name="L81"></a><tt class="py-lineno"> 81</tt> <a class="py-toggle" href="#" id="PyClassLookupTestCase.test_lookup_tag-toggle" onclick="return toggle('PyClassLookupTestCase.test_lookup_tag');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.test_pyclasslookup.PyClassLookupTestCase-class.html#test_lookup_tag">test_lookup_tag</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PyClassLookupTestCase.test_lookup_tag-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="PyClassLookupTestCase.test_lookup_tag-expanded"><a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line">        <tt class="py-name">el_class</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-52" class="py-name"><a title="lxml.tests.test_pyclasslookup.PyClassLookupTestCase._buildElementClass" class="py-name" href="#" onclick="return doclink('link-52', '_buildElementClass', 'link-39');">_buildElementClass</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line">        <tt class="py-name">el_class</tt><tt class="py-op">.</tt><tt class="py-name">TAG</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line">        <tt class="py-keyword">def</tt> <tt class="py-def-name">lookup</tt><tt class="py-op">(</tt><tt class="py-param">doc</tt><tt class="py-op">,</tt> <tt class="py-param">el</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">el_class</tt><tt class="py-op">.</tt><tt class="py-name">TAG</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">                <tt class="py-name">el_class</tt><tt class="py-op">.</tt><tt class="py-name">TAG</tt> <tt class="py-op">=</tt> <tt class="py-name">el</tt><tt class="py-op">.</tt><tt id="link-53" class="py-name" targets="Variable lxml.etree._Comment.tag=lxml.etree._Comment-class.html#tag,Variable lxml.etree._Element.tag=lxml.etree._Element-class.html#tag,Variable lxml.etree._Entity.tag=lxml.etree._Entity-class.html#tag,Variable lxml.etree._ProcessingInstruction.tag=lxml.etree._ProcessingInstruction-class.html#tag,Function lxml.tests.test_xpathevaluator.tag()=lxml.tests.test_xpathevaluator-module.html#tag,Variable xml.etree.ElementTree.Element.tag=xml.etree.ElementTree.Element-class.html#tag"><a title="lxml.etree._Comment.tag
+lxml.etree._Element.tag
+lxml.etree._Entity.tag
+lxml.etree._ProcessingInstruction.tag
+lxml.tests.test_xpathevaluator.tag
+xml.etree.ElementTree.Element.tag" class="py-name" href="#" onclick="return doclink('link-53', 'tag', 'link-53');">tag</a></tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">el_class</tt> </tt>
+</div><a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-54" class="py-name"><a title="lxml.tests.test_pyclasslookup.PyClassLookupTestCase._setClassLookup" class="py-name" href="#" onclick="return doclink('link-54', '_setClassLookup', 'link-40');">_setClassLookup</a></tt><tt class="py-op">(</tt><tt id="link-55" class="py-name"><a title="lxml.etree.CustomElementClassLookup.lookup
+lxml.etree.PythonElementClassLookup.lookup
+lxml.html.HtmlElementClassLookup.lookup" class="py-name" href="#" onclick="return doclink('link-55', 'lookup', 'link-41');">lookup</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">        <tt id="link-56" class="py-name"><a title="lxml.etree.iterparse.root" class="py-name" href="#" onclick="return doclink('link-56', 'root', 'link-42');">root</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-57" class="py-name"><a title="lxml.etree.XML
+lxml.objectify.XML
+lxml.tests.test_objectify.ObjectifyTestCase.XML
+lxml.tests.test_pyclasslookup.PyClassLookupTestCase.XML" class="py-name" href="#" onclick="return doclink('link-57', 'XML', 'link-36');">XML</a></tt><tt class="py-op">(</tt><tt id="link-58" class="py-name"><a title="lxml.tests.test_classlookup.xml_str
+lxml.tests.test_objectify.xml_str
+lxml.tests.test_pyclasslookup.xml_str" class="py-name" href="#" onclick="return doclink('link-58', 'xml_str', 'link-19');">xml_str</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertNotEqual</tt><tt class="py-op">(</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> <tt id="link-59" class="py-name"><a title="lxml.etree.iterparse.root" class="py-name" href="#" onclick="return doclink('link-59', 'root', 'link-42');">root</a></tt><tt class="py-op">.</tt><tt class="py-name">TAG</tt><tt class="py-op">)</tt> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertEqual</tt><tt class="py-op">(</tt><tt id="link-60" class="py-name"><a title="lxml.etree.iterparse.root" class="py-name" href="#" onclick="return doclink('link-60', 'root', 'link-42');">root</a></tt><tt class="py-op">.</tt><tt id="link-61" class="py-name"><a title="lxml.etree._Comment.tag
+lxml.etree._Element.tag
+lxml.etree._Entity.tag
+lxml.etree._ProcessingInstruction.tag
+lxml.tests.test_xpathevaluator.tag
+xml.etree.ElementTree.Element.tag" class="py-name" href="#" onclick="return doclink('link-61', 'tag', 'link-53');">tag</a></tt><tt class="py-op">,</tt> <tt id="link-62" class="py-name"><a title="lxml.etree.iterparse.root" class="py-name" href="#" onclick="return doclink('link-62', 'root', 'link-42');">root</a></tt><tt class="py-op">.</tt><tt class="py-name">TAG</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line"> </tt>
+<a name="PyClassLookupTestCase.test_lookup_text"></a><div id="PyClassLookupTestCase.test_lookup_text-def"><a name="L93"></a><tt class="py-lineno"> 93</tt> <a class="py-toggle" href="#" id="PyClassLookupTestCase.test_lookup_text-toggle" onclick="return toggle('PyClassLookupTestCase.test_lookup_text');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.test_pyclasslookup.PyClassLookupTestCase-class.html#test_lookup_text">test_lookup_text</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PyClassLookupTestCase.test_lookup_text-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="PyClassLookupTestCase.test_lookup_text-expanded"><a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line">        <tt class="py-name">el_class</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-63" class="py-name"><a title="lxml.tests.test_pyclasslookup.PyClassLookupTestCase._buildElementClass" class="py-name" href="#" onclick="return doclink('link-63', '_buildElementClass', 'link-39');">_buildElementClass</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line">        <tt class="py-name">el_class</tt><tt class="py-op">.</tt><tt class="py-name">TEXT</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">        <tt class="py-keyword">def</tt> <tt class="py-def-name">lookup</tt><tt class="py-op">(</tt><tt class="py-param">doc</tt><tt class="py-op">,</tt> <tt class="py-param">el</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">el_class</tt><tt class="py-op">.</tt><tt class="py-name">TEXT</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line">                <tt class="py-name">el_class</tt><tt class="py-op">.</tt><tt class="py-name">TEXT</tt> <tt class="py-op">=</tt> <tt class="py-name">el</tt><tt class="py-op">.</tt><tt id="link-64" class="py-name" targets="Variable lxml.etree.QName.text=lxml.etree.QName-class.html#text,Variable lxml.etree._Element.text=lxml.etree._Element-class.html#text,Variable lxml.etree._Entity.text=lxml.etree._Entity-class.html#text,Variable lxml.objectify.ObjectifiedElement.text=lxml.objectify.ObjectifiedElement-class.html#text,Variable xml.etree.ElementTree.Element.text=xml.etree.ElementTree.Element-class.html#text"><a title="lxml.etree.QName.text
+lxml.etree._Element.text
+lxml.etree._Entity.text
+lxml.objectify.ObjectifiedElement.text
+xml.etree.ElementTree.Element.text" class="py-name" href="#" onclick="return doclink('link-64', 'text', 'link-64');">text</a></tt> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">el_class</tt> </tt>
+</div><a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-65" class="py-name"><a title="lxml.tests.test_pyclasslookup.PyClassLookupTestCase._setClassLookup" class="py-name" href="#" onclick="return doclink('link-65', '_setClassLookup', 'link-40');">_setClassLookup</a></tt><tt class="py-op">(</tt><tt id="link-66" class="py-name"><a title="lxml.etree.CustomElementClassLookup.lookup
+lxml.etree.PythonElementClassLookup.lookup
+lxml.html.HtmlElementClassLookup.lookup" class="py-name" href="#" onclick="return doclink('link-66', 'lookup', 'link-41');">lookup</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line">        <tt id="link-67" class="py-name"><a title="lxml.etree.iterparse.root" class="py-name" href="#" onclick="return doclink('link-67', 'root', 'link-42');">root</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-68" class="py-name"><a title="lxml.etree.XML
+lxml.objectify.XML
+lxml.tests.test_objectify.ObjectifyTestCase.XML
+lxml.tests.test_pyclasslookup.PyClassLookupTestCase.XML" class="py-name" href="#" onclick="return doclink('link-68', 'XML', 'link-36');">XML</a></tt><tt class="py-op">(</tt><tt id="link-69" class="py-name"><a title="lxml.tests.test_classlookup.xml_str
+lxml.tests.test_objectify.xml_str
+lxml.tests.test_pyclasslookup.xml_str" class="py-name" href="#" onclick="return doclink('link-69', 'xml_str', 'link-19');">xml_str</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertNotEqual</tt><tt class="py-op">(</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> <tt id="link-70" class="py-name"><a title="lxml.etree.iterparse.root" class="py-name" href="#" onclick="return doclink('link-70', 'root', 'link-42');">root</a></tt><tt class="py-op">.</tt><tt class="py-name">TEXT</tt><tt class="py-op">)</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertEqual</tt><tt class="py-op">(</tt><tt id="link-71" class="py-name"><a title="lxml.etree.iterparse.root" class="py-name" href="#" onclick="return doclink('link-71', 'root', 'link-42');">root</a></tt><tt class="py-op">.</tt><tt id="link-72" class="py-name"><a title="lxml.etree.QName.text
+lxml.etree._Element.text
+lxml.etree._Entity.text
+lxml.objectify.ObjectifiedElement.text
+xml.etree.ElementTree.Element.text" class="py-name" href="#" onclick="return doclink('link-72', 'text', 'link-64');">text</a></tt><tt class="py-op">,</tt> <tt id="link-73" class="py-name"><a title="lxml.etree.iterparse.root" class="py-name" href="#" onclick="return doclink('link-73', 'root', 'link-42');">root</a></tt><tt class="py-op">.</tt><tt class="py-name">TEXT</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line"> </tt>
+<a name="PyClassLookupTestCase.test_lookup_tail"></a><div id="PyClassLookupTestCase.test_lookup_tail-def"><a name="L105"></a><tt class="py-lineno">105</tt> <a class="py-toggle" href="#" id="PyClassLookupTestCase.test_lookup_tail-toggle" onclick="return toggle('PyClassLookupTestCase.test_lookup_tail');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.test_pyclasslookup.PyClassLookupTestCase-class.html#test_lookup_tail">test_lookup_tail</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PyClassLookupTestCase.test_lookup_tail-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="PyClassLookupTestCase.test_lookup_tail-expanded"><a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line">        <tt class="py-name">el_class</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-74" class="py-name"><a title="lxml.tests.test_pyclasslookup.PyClassLookupTestCase._buildElementClass" class="py-name" href="#" onclick="return doclink('link-74', '_buildElementClass', 'link-39');">_buildElementClass</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line">        <tt class="py-name">el_class</tt><tt class="py-op">.</tt><tt class="py-name">TAIL</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line">        <tt class="py-keyword">def</tt> <tt class="py-def-name">lookup</tt><tt class="py-op">(</tt><tt class="py-param">doc</tt><tt class="py-op">,</tt> <tt class="py-param">el</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">el_class</tt><tt class="py-op">.</tt><tt class="py-name">TAIL</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line">                <tt class="py-name">el_class</tt><tt class="py-op">.</tt><tt class="py-name">TAIL</tt> <tt class="py-op">=</tt> <tt class="py-name">el</tt><tt class="py-op">.</tt><tt id="link-75" class="py-name" targets="Variable lxml.etree._Element.tail=lxml.etree._Element-class.html#tail,Variable xml.etree.ElementTree.Element.tail=xml.etree.ElementTree.Element-class.html#tail"><a title="lxml.etree._Element.tail
+xml.etree.ElementTree.Element.tail" class="py-name" href="#" onclick="return doclink('link-75', 'tail', 'link-75');">tail</a></tt> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">el_class</tt> </tt>
+</div><a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-76" class="py-name"><a title="lxml.tests.test_pyclasslookup.PyClassLookupTestCase._setClassLookup" class="py-name" href="#" onclick="return doclink('link-76', '_setClassLookup', 'link-40');">_setClassLookup</a></tt><tt class="py-op">(</tt><tt id="link-77" class="py-name"><a title="lxml.etree.CustomElementClassLookup.lookup
+lxml.etree.PythonElementClassLookup.lookup
+lxml.html.HtmlElementClassLookup.lookup" class="py-name" href="#" onclick="return doclink('link-77', 'lookup', 'link-41');">lookup</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line">        <tt id="link-78" class="py-name"><a title="lxml.etree.iterparse.root" class="py-name" href="#" onclick="return doclink('link-78', 'root', 'link-42');">root</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-79" class="py-name"><a title="lxml.etree.XML
+lxml.objectify.XML
+lxml.tests.test_objectify.ObjectifyTestCase.XML
+lxml.tests.test_pyclasslookup.PyClassLookupTestCase.XML" class="py-name" href="#" onclick="return doclink('link-79', 'XML', 'link-36');">XML</a></tt><tt class="py-op">(</tt><tt id="link-80" class="py-name"><a title="lxml.tests.test_classlookup.xml_str
+lxml.tests.test_objectify.xml_str
+lxml.tests.test_pyclasslookup.xml_str" class="py-name" href="#" onclick="return doclink('link-80', 'xml_str', 'link-19');">xml_str</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertEqual</tt><tt class="py-op">(</tt><tt id="link-81" class="py-name"><a title="lxml.etree.iterparse.root" class="py-name" href="#" onclick="return doclink('link-81', 'root', 'link-42');">root</a></tt><tt class="py-op">.</tt><tt id="link-82" class="py-name"><a title="lxml.etree._Element.tail
+xml.etree.ElementTree.Element.tail" class="py-name" href="#" onclick="return doclink('link-82', 'tail', 'link-75');">tail</a></tt><tt class="py-op">,</tt> <tt id="link-83" class="py-name"><a title="lxml.etree.iterparse.root" class="py-name" href="#" onclick="return doclink('link-83', 'root', 'link-42');">root</a></tt><tt class="py-op">.</tt><tt class="py-name">TAIL</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line"> </tt>
+<a name="PyClassLookupTestCase.test_lookup_attrib"></a><div id="PyClassLookupTestCase.test_lookup_attrib-def"><a name="L116"></a><tt class="py-lineno">116</tt> <a class="py-toggle" href="#" id="PyClassLookupTestCase.test_lookup_attrib-toggle" onclick="return toggle('PyClassLookupTestCase.test_lookup_attrib');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.test_pyclasslookup.PyClassLookupTestCase-class.html#test_lookup_attrib">test_lookup_attrib</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PyClassLookupTestCase.test_lookup_attrib-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="PyClassLookupTestCase.test_lookup_attrib-expanded"><a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line">        <tt class="py-name">el_class</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-84" class="py-name"><a title="lxml.tests.test_pyclasslookup.PyClassLookupTestCase._buildElementClass" class="py-name" href="#" onclick="return doclink('link-84', '_buildElementClass', 'link-39');">_buildElementClass</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line">        <tt class="py-name">el_class</tt><tt class="py-op">.</tt><tt class="py-name">ATTRIB</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line">        <tt class="py-keyword">def</tt> <tt class="py-def-name">lookup</tt><tt class="py-op">(</tt><tt class="py-param">doc</tt><tt class="py-op">,</tt> <tt class="py-param">el</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">el_class</tt><tt class="py-op">.</tt><tt class="py-name">ATTRIB</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line">                <tt class="py-name">el_class</tt><tt class="py-op">.</tt><tt class="py-name">ATTRIB</tt> <tt class="py-op">=</tt> <tt class="py-name">el</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt id="link-85" class="py-name" targets="Variable lxml.etree._Element.attrib=lxml.etree._Element-class.html#attrib,Variable lxml.etree._ProcessingInstruction.attrib=lxml.etree._ProcessingInstruction-class.html#attrib,Function lxml.tests.selftest2.attrib()=lxml.tests.selftest2-module.html#attrib,Variable xml.etree.ElementTree.Element.attrib=xml.etree.ElementTree.Element-class.html#attrib"><a title="lxml.etree._Element.attrib
+lxml.etree._ProcessingInstruction.attrib
+lxml.tests.selftest2.attrib
+xml.etree.ElementTree.Element.attrib" class="py-name" href="#" onclick="return doclink('link-85', 'attrib', 'link-85');">attrib</a></tt> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">el_class</tt> </tt>
+</div><a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-86" class="py-name"><a title="lxml.tests.test_pyclasslookup.PyClassLookupTestCase._setClassLookup" class="py-name" href="#" onclick="return doclink('link-86', '_setClassLookup', 'link-40');">_setClassLookup</a></tt><tt class="py-op">(</tt><tt id="link-87" class="py-name"><a title="lxml.etree.CustomElementClassLookup.lookup
+lxml.etree.PythonElementClassLookup.lookup
+lxml.html.HtmlElementClassLookup.lookup" class="py-name" href="#" onclick="return doclink('link-87', 'lookup', 'link-41');">lookup</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line">        <tt id="link-88" class="py-name"><a title="lxml.etree.iterparse.root" class="py-name" href="#" onclick="return doclink('link-88', 'root', 'link-42');">root</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-89" class="py-name"><a title="lxml.etree.XML
+lxml.objectify.XML
+lxml.tests.test_objectify.ObjectifyTestCase.XML
+lxml.tests.test_pyclasslookup.PyClassLookupTestCase.XML" class="py-name" href="#" onclick="return doclink('link-89', 'XML', 'link-36');">XML</a></tt><tt class="py-op">(</tt><tt id="link-90" class="py-name"><a title="lxml.tests.test_classlookup.xml_str
+lxml.tests.test_objectify.xml_str
+lxml.tests.test_pyclasslookup.xml_str" class="py-name" href="#" onclick="return doclink('link-90', 'xml_str', 'link-19');">xml_str</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line">        <tt class="py-name">items1</tt> <tt class="py-op">=</tt> <tt class="py-name">list</tt><tt class="py-op">(</tt><tt id="link-91" class="py-name"><a title="lxml.etree.iterparse.root" class="py-name" href="#" onclick="return doclink('link-91', 'root', 'link-42');">root</a></tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt id="link-92" class="py-name"><a title="lxml.etree._Element.attrib
+lxml.etree._ProcessingInstruction.attrib
+lxml.tests.selftest2.attrib
+xml.etree.ElementTree.Element.attrib" class="py-name" href="#" onclick="return doclink('link-92', 'attrib', 'link-85');">attrib</a></tt><tt class="py-op">.</tt><tt id="link-93" class="py-name" targets="Method lxml.etree._Attrib.items()=lxml.etree._Attrib-class.html#items,Method lxml.etree._Element.items()=lxml.etree._Element-class.html#items,Method lxml.etree._IDDict.items()=lxml.etree._IDDict-class.html#items"><a title="lxml.etree._Attrib.items
+lxml.etree._Element.items
+lxml.etree._IDDict.items" class="py-name" href="#" onclick="return doclink('link-93', 'items', 'link-93');">items</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line">        <tt class="py-name">items1</tt><tt class="py-op">.</tt><tt class="py-name">sort</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line">        <tt class="py-name">items2</tt> <tt class="py-op">=</tt> <tt class="py-name">list</tt><tt class="py-op">(</tt><tt id="link-94" class="py-name"><a title="lxml.etree.iterparse.root" class="py-name" href="#" onclick="return doclink('link-94', 'root', 'link-42');">root</a></tt><tt class="py-op">.</tt><tt class="py-name">ATTRIB</tt><tt class="py-op">.</tt><tt id="link-95" class="py-name"><a title="lxml.etree._Attrib.items
+lxml.etree._Element.items
+lxml.etree._IDDict.items" class="py-name" href="#" onclick="return doclink('link-95', 'items', 'link-93');">items</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line">        <tt class="py-name">items2</tt><tt class="py-op">.</tt><tt class="py-name">sort</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertEqual</tt><tt class="py-op">(</tt><tt class="py-name">items1</tt><tt class="py-op">,</tt> <tt class="py-name">items2</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line"> </tt>
+<a name="PyClassLookupTestCase.test_lookup_prefix"></a><div id="PyClassLookupTestCase.test_lookup_prefix-def"><a name="L131"></a><tt class="py-lineno">131</tt> <a class="py-toggle" href="#" id="PyClassLookupTestCase.test_lookup_prefix-toggle" onclick="return toggle('PyClassLookupTestCase.test_lookup_prefix');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.test_pyclasslookup.PyClassLookupTestCase-class.html#test_lookup_prefix">test_lookup_prefix</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PyClassLookupTestCase.test_lookup_prefix-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="PyClassLookupTestCase.test_lookup_prefix-expanded"><a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line">        <tt class="py-name">el_class</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-96" class="py-name"><a title="lxml.tests.test_pyclasslookup.PyClassLookupTestCase._buildElementClass" class="py-name" href="#" onclick="return doclink('link-96', '_buildElementClass', 'link-39');">_buildElementClass</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line">        <tt class="py-name">el_class</tt><tt class="py-op">.</tt><tt class="py-name">PREFIX</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line">        <tt class="py-keyword">def</tt> <tt class="py-def-name">lookup</tt><tt class="py-op">(</tt><tt class="py-param">doc</tt><tt class="py-op">,</tt> <tt class="py-param">el</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">el_class</tt><tt class="py-op">.</tt><tt class="py-name">PREFIX</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L136"></a><tt class="py-lineno">136</tt>  <tt class="py-line">                <tt class="py-name">el_class</tt><tt class="py-op">.</tt><tt class="py-name">PREFIX</tt> <tt class="py-op">=</tt> <tt class="py-name">el</tt><tt class="py-op">.</tt><tt id="link-97" class="py-name" targets="Variable lxml.etree._Element.prefix=lxml.etree._Element-class.html#prefix"><a title="lxml.etree._Element.prefix" class="py-name" href="#" onclick="return doclink('link-97', 'prefix', 'link-97');">prefix</a></tt> </tt>
+<a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">el_class</tt> </tt>
+</div><a name="L138"></a><tt class="py-lineno">138</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-98" class="py-name"><a title="lxml.tests.test_pyclasslookup.PyClassLookupTestCase._setClassLookup" class="py-name" href="#" onclick="return doclink('link-98', '_setClassLookup', 'link-40');">_setClassLookup</a></tt><tt class="py-op">(</tt><tt id="link-99" class="py-name"><a title="lxml.etree.CustomElementClassLookup.lookup
+lxml.etree.PythonElementClassLookup.lookup
+lxml.html.HtmlElementClassLookup.lookup" class="py-name" href="#" onclick="return doclink('link-99', 'lookup', 'link-41');">lookup</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L139"></a><tt class="py-lineno">139</tt>  <tt class="py-line">        <tt id="link-100" class="py-name"><a title="lxml.etree.iterparse.root" class="py-name" href="#" onclick="return doclink('link-100', 'root', 'link-42');">root</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-101" class="py-name"><a title="lxml.etree.XML
+lxml.objectify.XML
+lxml.tests.test_objectify.ObjectifyTestCase.XML
+lxml.tests.test_pyclasslookup.PyClassLookupTestCase.XML" class="py-name" href="#" onclick="return doclink('link-101', 'XML', 'link-36');">XML</a></tt><tt class="py-op">(</tt><tt id="link-102" class="py-name"><a title="lxml.tests.test_classlookup.xml_str
+lxml.tests.test_objectify.xml_str
+lxml.tests.test_pyclasslookup.xml_str" class="py-name" href="#" onclick="return doclink('link-102', 'xml_str', 'link-19');">xml_str</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L140"></a><tt class="py-lineno">140</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertEqual</tt><tt class="py-op">(</tt><tt id="link-103" class="py-name"><a title="lxml.etree.iterparse.root" class="py-name" href="#" onclick="return doclink('link-103', 'root', 'link-42');">root</a></tt><tt class="py-op">.</tt><tt id="link-104" class="py-name"><a title="lxml.etree._Element.prefix" class="py-name" href="#" onclick="return doclink('link-104', 'prefix', 'link-97');">prefix</a></tt><tt class="py-op">,</tt> <tt id="link-105" class="py-name"><a title="lxml.etree.iterparse.root" class="py-name" href="#" onclick="return doclink('link-105', 'root', 'link-42');">root</a></tt><tt class="py-op">.</tt><tt class="py-name">PREFIX</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L141"></a><tt class="py-lineno">141</tt>  <tt class="py-line"> </tt>
+<a name="PyClassLookupTestCase.test_lookup_sourceline"></a><div id="PyClassLookupTestCase.test_lookup_sourceline-def"><a name="L142"></a><tt class="py-lineno">142</tt> <a class="py-toggle" href="#" id="PyClassLookupTestCase.test_lookup_sourceline-toggle" onclick="return toggle('PyClassLookupTestCase.test_lookup_sourceline');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.test_pyclasslookup.PyClassLookupTestCase-class.html#test_lookup_sourceline">test_lookup_sourceline</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PyClassLookupTestCase.test_lookup_sourceline-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="PyClassLookupTestCase.test_lookup_sourceline-expanded"><a name="L143"></a><tt class="py-lineno">143</tt>  <tt class="py-line">        <tt class="py-name">el_class</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-106" class="py-name"><a title="lxml.tests.test_pyclasslookup.PyClassLookupTestCase._buildElementClass" class="py-name" href="#" onclick="return doclink('link-106', '_buildElementClass', 'link-39');">_buildElementClass</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L144"></a><tt class="py-lineno">144</tt>  <tt class="py-line">        <tt class="py-name">el_class</tt><tt class="py-op">.</tt><tt class="py-name">LINE</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L145"></a><tt class="py-lineno">145</tt>  <tt class="py-line">        <tt class="py-keyword">def</tt> <tt class="py-def-name">lookup</tt><tt class="py-op">(</tt><tt class="py-param">doc</tt><tt class="py-op">,</tt> <tt class="py-param">el</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L146"></a><tt class="py-lineno">146</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">el_class</tt><tt class="py-op">.</tt><tt class="py-name">LINE</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L147"></a><tt class="py-lineno">147</tt>  <tt class="py-line">                <tt class="py-name">el_class</tt><tt class="py-op">.</tt><tt class="py-name">LINE</tt> <tt class="py-op">=</tt> <tt class="py-name">el</tt><tt class="py-op">.</tt><tt id="link-107" class="py-name" targets="Variable lxml.etree._Element.sourceline=lxml.etree._Element-class.html#sourceline"><a title="lxml.etree._Element.sourceline" class="py-name" href="#" onclick="return doclink('link-107', 'sourceline', 'link-107');">sourceline</a></tt> </tt>
+<a name="L148"></a><tt class="py-lineno">148</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">el_class</tt> </tt>
+</div><a name="L149"></a><tt class="py-lineno">149</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-108" class="py-name"><a title="lxml.tests.test_pyclasslookup.PyClassLookupTestCase._setClassLookup" class="py-name" href="#" onclick="return doclink('link-108', '_setClassLookup', 'link-40');">_setClassLookup</a></tt><tt class="py-op">(</tt><tt id="link-109" class="py-name"><a title="lxml.etree.CustomElementClassLookup.lookup
+lxml.etree.PythonElementClassLookup.lookup
+lxml.html.HtmlElementClassLookup.lookup" class="py-name" href="#" onclick="return doclink('link-109', 'lookup', 'link-41');">lookup</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L150"></a><tt class="py-lineno">150</tt>  <tt class="py-line">        <tt id="link-110" class="py-name"><a title="lxml.etree.iterparse.root" class="py-name" href="#" onclick="return doclink('link-110', 'root', 'link-42');">root</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-111" class="py-name"><a title="lxml.etree.XML
+lxml.objectify.XML
+lxml.tests.test_objectify.ObjectifyTestCase.XML
+lxml.tests.test_pyclasslookup.PyClassLookupTestCase.XML" class="py-name" href="#" onclick="return doclink('link-111', 'XML', 'link-36');">XML</a></tt><tt class="py-op">(</tt><tt id="link-112" class="py-name"><a title="lxml.tests.test_classlookup.xml_str
+lxml.tests.test_objectify.xml_str
+lxml.tests.test_pyclasslookup.xml_str" class="py-name" href="#" onclick="return doclink('link-112', 'xml_str', 'link-19');">xml_str</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L151"></a><tt class="py-lineno">151</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertEqual</tt><tt class="py-op">(</tt><tt id="link-113" class="py-name"><a title="lxml.etree.iterparse.root" class="py-name" href="#" onclick="return doclink('link-113', 'root', 'link-42');">root</a></tt><tt class="py-op">.</tt><tt id="link-114" class="py-name"><a title="lxml.etree._Element.sourceline" class="py-name" href="#" onclick="return doclink('link-114', 'sourceline', 'link-107');">sourceline</a></tt><tt class="py-op">,</tt> <tt id="link-115" class="py-name"><a title="lxml.etree.iterparse.root" class="py-name" href="#" onclick="return doclink('link-115', 'root', 'link-42');">root</a></tt><tt class="py-op">.</tt><tt class="py-name">LINE</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L152"></a><tt class="py-lineno">152</tt>  <tt class="py-line"> </tt>
+<a name="PyClassLookupTestCase.test_lookup_getitem"></a><div id="PyClassLookupTestCase.test_lookup_getitem-def"><a name="L153"></a><tt class="py-lineno">153</tt> <a class="py-toggle" href="#" id="PyClassLookupTestCase.test_lookup_getitem-toggle" onclick="return toggle('PyClassLookupTestCase.test_lookup_getitem');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.test_pyclasslookup.PyClassLookupTestCase-class.html#test_lookup_getitem">test_lookup_getitem</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PyClassLookupTestCase.test_lookup_getitem-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="PyClassLookupTestCase.test_lookup_getitem-expanded"><a name="L154"></a><tt class="py-lineno">154</tt>  <tt class="py-line">        <tt class="py-name">el_class</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-116" class="py-name"><a title="lxml.tests.test_pyclasslookup.PyClassLookupTestCase._buildElementClass" class="py-name" href="#" onclick="return doclink('link-116', '_buildElementClass', 'link-39');">_buildElementClass</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L155"></a><tt class="py-lineno">155</tt>  <tt class="py-line">        <tt class="py-name">el_class</tt><tt class="py-op">.</tt><tt class="py-name">CHILD_TAG</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L156"></a><tt class="py-lineno">156</tt>  <tt class="py-line">        <tt class="py-keyword">def</tt> <tt class="py-def-name">lookup</tt><tt class="py-op">(</tt><tt class="py-param">doc</tt><tt class="py-op">,</tt> <tt class="py-param">el</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L157"></a><tt class="py-lineno">157</tt>  <tt class="py-line">            <tt class="py-name">el_class</tt><tt class="py-op">.</tt><tt class="py-name">CHILD_TAG</tt> <tt class="py-op">=</tt> <tt class="py-name">el</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt id="link-117" class="py-name"><a title="lxml.etree._Comment.tag
+lxml.etree._Element.tag
+lxml.etree._Entity.tag
+lxml.etree._ProcessingInstruction.tag
+lxml.tests.test_xpathevaluator.tag
+xml.etree.ElementTree.Element.tag" class="py-name" href="#" onclick="return doclink('link-117', 'tag', 'link-53');">tag</a></tt> </tt>
+<a name="L158"></a><tt class="py-lineno">158</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">el_class</tt> </tt>
+</div><a name="L159"></a><tt class="py-lineno">159</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-118" class="py-name"><a title="lxml.tests.test_pyclasslookup.PyClassLookupTestCase._setClassLookup" class="py-name" href="#" onclick="return doclink('link-118', '_setClassLookup', 'link-40');">_setClassLookup</a></tt><tt class="py-op">(</tt><tt id="link-119" class="py-name"><a title="lxml.etree.CustomElementClassLookup.lookup
+lxml.etree.PythonElementClassLookup.lookup
+lxml.html.HtmlElementClassLookup.lookup" class="py-name" href="#" onclick="return doclink('link-119', 'lookup', 'link-41');">lookup</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L160"></a><tt class="py-lineno">160</tt>  <tt class="py-line">        <tt id="link-120" class="py-name"><a title="lxml.etree.iterparse.root" class="py-name" href="#" onclick="return doclink('link-120', 'root', 'link-42');">root</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-121" class="py-name"><a title="lxml.etree.XML
+lxml.objectify.XML
+lxml.tests.test_objectify.ObjectifyTestCase.XML
+lxml.tests.test_pyclasslookup.PyClassLookupTestCase.XML" class="py-name" href="#" onclick="return doclink('link-121', 'XML', 'link-36');">XML</a></tt><tt class="py-op">(</tt><tt id="link-122" class="py-name"><a title="lxml.tests.test_classlookup.xml_str
+lxml.tests.test_objectify.xml_str
+lxml.tests.test_pyclasslookup.xml_str" class="py-name" href="#" onclick="return doclink('link-122', 'xml_str', 'link-19');">xml_str</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L161"></a><tt class="py-lineno">161</tt>  <tt class="py-line">        <tt class="py-name">child_tag</tt> <tt class="py-op">=</tt> <tt id="link-123" class="py-name"><a title="lxml.etree.iterparse.root" class="py-name" href="#" onclick="return doclink('link-123', 'root', 'link-42');">root</a></tt><tt class="py-op">.</tt><tt class="py-name">CHILD_TAG</tt> </tt>
+<a name="L162"></a><tt class="py-lineno">162</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertNotEqual</tt><tt class="py-op">(</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-name">child_tag</tt><tt class="py-op">)</tt> </tt>
+<a name="L163"></a><tt class="py-lineno">163</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertEqual</tt><tt class="py-op">(</tt><tt id="link-124" class="py-name"><a title="lxml.etree.iterparse.root" class="py-name" href="#" onclick="return doclink('link-124', 'root', 'link-42');">root</a></tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt id="link-125" class="py-name"><a title="lxml.etree._Comment.tag
+lxml.etree._Element.tag
+lxml.etree._Entity.tag
+lxml.etree._ProcessingInstruction.tag
+lxml.tests.test_xpathevaluator.tag
+xml.etree.ElementTree.Element.tag" class="py-name" href="#" onclick="return doclink('link-125', 'tag', 'link-53');">tag</a></tt><tt class="py-op">,</tt> <tt class="py-name">child_tag</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L164"></a><tt class="py-lineno">164</tt>  <tt class="py-line"> </tt>
+<a name="PyClassLookupTestCase.test_lookup_getitem_neg"></a><div id="PyClassLookupTestCase.test_lookup_getitem_neg-def"><a name="L165"></a><tt class="py-lineno">165</tt> <a class="py-toggle" href="#" id="PyClassLookupTestCase.test_lookup_getitem_neg-toggle" onclick="return toggle('PyClassLookupTestCase.test_lookup_getitem_neg');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.test_pyclasslookup.PyClassLookupTestCase-class.html#test_lookup_getitem_neg">test_lookup_getitem_neg</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PyClassLookupTestCase.test_lookup_getitem_neg-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="PyClassLookupTestCase.test_lookup_getitem_neg-expanded"><a name="L166"></a><tt class="py-lineno">166</tt>  <tt class="py-line">        <tt class="py-name">el_class</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-126" class="py-name"><a title="lxml.tests.test_pyclasslookup.PyClassLookupTestCase._buildElementClass" class="py-name" href="#" onclick="return doclink('link-126', '_buildElementClass', 'link-39');">_buildElementClass</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L167"></a><tt class="py-lineno">167</tt>  <tt class="py-line">        <tt class="py-name">el_class</tt><tt class="py-op">.</tt><tt class="py-name">CHILD_TAG</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L168"></a><tt class="py-lineno">168</tt>  <tt class="py-line">        <tt class="py-keyword">def</tt> <tt class="py-def-name">lookup</tt><tt class="py-op">(</tt><tt class="py-param">doc</tt><tt class="py-op">,</tt> <tt class="py-param">el</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L169"></a><tt class="py-lineno">169</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">el_class</tt><tt class="py-op">.</tt><tt class="py-name">CHILD_TAG</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L170"></a><tt class="py-lineno">170</tt>  <tt class="py-line">                <tt class="py-name">el_class</tt><tt class="py-op">.</tt><tt class="py-name">CHILD_TAG</tt> <tt class="py-op">=</tt> <tt class="py-name">el</tt><tt class="py-op">[</tt><tt class="py-op">-</tt><tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt id="link-127" class="py-name"><a title="lxml.etree._Comment.tag
+lxml.etree._Element.tag
+lxml.etree._Entity.tag
+lxml.etree._ProcessingInstruction.tag
+lxml.tests.test_xpathevaluator.tag
+xml.etree.ElementTree.Element.tag" class="py-name" href="#" onclick="return doclink('link-127', 'tag', 'link-53');">tag</a></tt> </tt>
+<a name="L171"></a><tt class="py-lineno">171</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">el_class</tt> </tt>
+</div><a name="L172"></a><tt class="py-lineno">172</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-128" class="py-name"><a title="lxml.tests.test_pyclasslookup.PyClassLookupTestCase._setClassLookup" class="py-name" href="#" onclick="return doclink('link-128', '_setClassLookup', 'link-40');">_setClassLookup</a></tt><tt class="py-op">(</tt><tt id="link-129" class="py-name"><a title="lxml.etree.CustomElementClassLookup.lookup
+lxml.etree.PythonElementClassLookup.lookup
+lxml.html.HtmlElementClassLookup.lookup" class="py-name" href="#" onclick="return doclink('link-129', 'lookup', 'link-41');">lookup</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L173"></a><tt class="py-lineno">173</tt>  <tt class="py-line">        <tt id="link-130" class="py-name"><a title="lxml.etree.iterparse.root" class="py-name" href="#" onclick="return doclink('link-130', 'root', 'link-42');">root</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-131" class="py-name"><a title="lxml.etree.XML
+lxml.objectify.XML
+lxml.tests.test_objectify.ObjectifyTestCase.XML
+lxml.tests.test_pyclasslookup.PyClassLookupTestCase.XML" class="py-name" href="#" onclick="return doclink('link-131', 'XML', 'link-36');">XML</a></tt><tt class="py-op">(</tt><tt id="link-132" class="py-name"><a title="lxml.tests.test_classlookup.xml_str
+lxml.tests.test_objectify.xml_str
+lxml.tests.test_pyclasslookup.xml_str" class="py-name" href="#" onclick="return doclink('link-132', 'xml_str', 'link-19');">xml_str</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L174"></a><tt class="py-lineno">174</tt>  <tt class="py-line">        <tt class="py-name">child_tag</tt> <tt class="py-op">=</tt> <tt id="link-133" class="py-name"><a title="lxml.etree.iterparse.root" class="py-name" href="#" onclick="return doclink('link-133', 'root', 'link-42');">root</a></tt><tt class="py-op">.</tt><tt class="py-name">CHILD_TAG</tt> </tt>
+<a name="L175"></a><tt class="py-lineno">175</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertNotEqual</tt><tt class="py-op">(</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-name">child_tag</tt><tt class="py-op">)</tt> </tt>
+<a name="L176"></a><tt class="py-lineno">176</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertEqual</tt><tt class="py-op">(</tt><tt id="link-134" class="py-name"><a title="lxml.etree.iterparse.root" class="py-name" href="#" onclick="return doclink('link-134', 'root', 'link-42');">root</a></tt><tt class="py-op">[</tt><tt class="py-op">-</tt><tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt id="link-135" class="py-name"><a title="lxml.etree._Comment.tag
+lxml.etree._Element.tag
+lxml.etree._Entity.tag
+lxml.etree._ProcessingInstruction.tag
+lxml.tests.test_xpathevaluator.tag
+xml.etree.ElementTree.Element.tag" class="py-name" href="#" onclick="return doclink('link-135', 'tag', 'link-53');">tag</a></tt><tt class="py-op">,</tt> <tt class="py-name">child_tag</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L177"></a><tt class="py-lineno">177</tt>  <tt class="py-line"> </tt>
+<a name="PyClassLookupTestCase.test_lookup_getslice"></a><div id="PyClassLookupTestCase.test_lookup_getslice-def"><a name="L178"></a><tt class="py-lineno">178</tt> <a class="py-toggle" href="#" id="PyClassLookupTestCase.test_lookup_getslice-toggle" onclick="return toggle('PyClassLookupTestCase.test_lookup_getslice');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.test_pyclasslookup.PyClassLookupTestCase-class.html#test_lookup_getslice">test_lookup_getslice</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PyClassLookupTestCase.test_lookup_getslice-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="PyClassLookupTestCase.test_lookup_getslice-expanded"><a name="L179"></a><tt class="py-lineno">179</tt>  <tt class="py-line">        <tt class="py-name">el_class</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-136" class="py-name"><a title="lxml.tests.test_pyclasslookup.PyClassLookupTestCase._buildElementClass" class="py-name" href="#" onclick="return doclink('link-136', '_buildElementClass', 'link-39');">_buildElementClass</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L180"></a><tt class="py-lineno">180</tt>  <tt class="py-line">        <tt class="py-name">el_class</tt><tt class="py-op">.</tt><tt class="py-name">CHILD_TAGS</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L181"></a><tt class="py-lineno">181</tt>  <tt class="py-line">        <tt class="py-keyword">def</tt> <tt class="py-def-name">lookup</tt><tt class="py-op">(</tt><tt class="py-param">doc</tt><tt class="py-op">,</tt> <tt class="py-param">el</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L182"></a><tt class="py-lineno">182</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">el_class</tt><tt class="py-op">.</tt><tt class="py-name">CHILD_TAGS</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L183"></a><tt class="py-lineno">183</tt>  <tt class="py-line">                <tt class="py-name">el_class</tt><tt class="py-op">.</tt><tt class="py-name">CHILD_TAGS</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt> <tt class="py-name">c</tt><tt class="py-op">.</tt><tt id="link-137" class="py-name"><a title="lxml.etree._Comment.tag
+lxml.etree._Element.tag
+lxml.etree._Entity.tag
+lxml.etree._ProcessingInstruction.tag
+lxml.tests.test_xpathevaluator.tag
+xml.etree.ElementTree.Element.tag" class="py-name" href="#" onclick="return doclink('link-137', 'tag', 'link-53');">tag</a></tt> <tt class="py-keyword">for</tt> <tt class="py-name">c</tt> <tt class="py-keyword">in</tt> <tt class="py-name">el</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">:</tt><tt class="py-op">-</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> <tt class="py-op">]</tt> </tt>
+<a name="L184"></a><tt class="py-lineno">184</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">el_class</tt> </tt>
+</div><a name="L185"></a><tt class="py-lineno">185</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-138" class="py-name"><a title="lxml.tests.test_pyclasslookup.PyClassLookupTestCase._setClassLookup" class="py-name" href="#" onclick="return doclink('link-138', '_setClassLookup', 'link-40');">_setClassLookup</a></tt><tt class="py-op">(</tt><tt id="link-139" class="py-name"><a title="lxml.etree.CustomElementClassLookup.lookup
+lxml.etree.PythonElementClassLookup.lookup
+lxml.html.HtmlElementClassLookup.lookup" class="py-name" href="#" onclick="return doclink('link-139', 'lookup', 'link-41');">lookup</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L186"></a><tt class="py-lineno">186</tt>  <tt class="py-line">        <tt id="link-140" class="py-name"><a title="lxml.etree.iterparse.root" class="py-name" href="#" onclick="return doclink('link-140', 'root', 'link-42');">root</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-141" class="py-name"><a title="lxml.etree.XML
+lxml.objectify.XML
+lxml.tests.test_objectify.ObjectifyTestCase.XML
+lxml.tests.test_pyclasslookup.PyClassLookupTestCase.XML" class="py-name" href="#" onclick="return doclink('link-141', 'XML', 'link-36');">XML</a></tt><tt class="py-op">(</tt><tt id="link-142" class="py-name"><a title="lxml.tests.test_classlookup.xml_str
+lxml.tests.test_objectify.xml_str
+lxml.tests.test_pyclasslookup.xml_str" class="py-name" href="#" onclick="return doclink('link-142', 'xml_str', 'link-19');">xml_str</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L187"></a><tt class="py-lineno">187</tt>  <tt class="py-line">        <tt class="py-name">child_tags</tt> <tt class="py-op">=</tt> <tt id="link-143" class="py-name"><a title="lxml.etree.iterparse.root" class="py-name" href="#" onclick="return doclink('link-143', 'root', 'link-42');">root</a></tt><tt class="py-op">.</tt><tt class="py-name">CHILD_TAGS</tt> </tt>
+<a name="L188"></a><tt class="py-lineno">188</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertNotEqual</tt><tt class="py-op">(</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-name">child_tags</tt><tt class="py-op">)</tt> </tt>
+<a name="L189"></a><tt class="py-lineno">189</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertEqual</tt><tt class="py-op">(</tt><tt class="py-op">[</tt> <tt class="py-name">c</tt><tt class="py-op">.</tt><tt id="link-144" class="py-name"><a title="lxml.etree._Comment.tag
+lxml.etree._Element.tag
+lxml.etree._Entity.tag
+lxml.etree._ProcessingInstruction.tag
+lxml.tests.test_xpathevaluator.tag
+xml.etree.ElementTree.Element.tag" class="py-name" href="#" onclick="return doclink('link-144', 'tag', 'link-53');">tag</a></tt> <tt class="py-keyword">for</tt> <tt class="py-name">c</tt> <tt class="py-keyword">in</tt> <tt id="link-145" class="py-name"><a title="lxml.etree.iterparse.root" class="py-name" href="#" onclick="return doclink('link-145', 'root', 'link-42');">root</a></tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">:</tt><tt class="py-op">-</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> <tt class="py-op">]</tt><tt class="py-op">,</tt> </tt>
+<a name="L190"></a><tt class="py-lineno">190</tt>  <tt class="py-line">                          <tt class="py-name">child_tags</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L191"></a><tt class="py-lineno">191</tt>  <tt class="py-line"> </tt>
+<a name="PyClassLookupTestCase.test_lookup_len"></a><div id="PyClassLookupTestCase.test_lookup_len-def"><a name="L192"></a><tt class="py-lineno">192</tt> <a class="py-toggle" href="#" id="PyClassLookupTestCase.test_lookup_len-toggle" onclick="return toggle('PyClassLookupTestCase.test_lookup_len');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.test_pyclasslookup.PyClassLookupTestCase-class.html#test_lookup_len">test_lookup_len</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PyClassLookupTestCase.test_lookup_len-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="PyClassLookupTestCase.test_lookup_len-expanded"><a name="L193"></a><tt class="py-lineno">193</tt>  <tt class="py-line">        <tt class="py-name">el_class</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-146" class="py-name"><a title="lxml.tests.test_pyclasslookup.PyClassLookupTestCase._buildElementClass" class="py-name" href="#" onclick="return doclink('link-146', '_buildElementClass', 'link-39');">_buildElementClass</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L194"></a><tt class="py-lineno">194</tt>  <tt class="py-line">        <tt class="py-name">el_class</tt><tt class="py-op">.</tt><tt class="py-name">LEN</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L195"></a><tt class="py-lineno">195</tt>  <tt class="py-line">        <tt class="py-keyword">def</tt> <tt class="py-def-name">lookup</tt><tt class="py-op">(</tt><tt class="py-param">doc</tt><tt class="py-op">,</tt> <tt class="py-param">el</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L196"></a><tt class="py-lineno">196</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">el_class</tt><tt class="py-op">.</tt><tt class="py-name">LEN</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L197"></a><tt class="py-lineno">197</tt>  <tt class="py-line">                <tt class="py-name">el_class</tt><tt class="py-op">.</tt><tt class="py-name">LEN</tt> <tt class="py-op">=</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">el</tt><tt class="py-op">)</tt> </tt>
+<a name="L198"></a><tt class="py-lineno">198</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">el_class</tt> </tt>
+</div><a name="L199"></a><tt class="py-lineno">199</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-147" class="py-name"><a title="lxml.tests.test_pyclasslookup.PyClassLookupTestCase._setClassLookup" class="py-name" href="#" onclick="return doclink('link-147', '_setClassLookup', 'link-40');">_setClassLookup</a></tt><tt class="py-op">(</tt><tt id="link-148" class="py-name"><a title="lxml.etree.CustomElementClassLookup.lookup
+lxml.etree.PythonElementClassLookup.lookup
+lxml.html.HtmlElementClassLookup.lookup" class="py-name" href="#" onclick="return doclink('link-148', 'lookup', 'link-41');">lookup</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L200"></a><tt class="py-lineno">200</tt>  <tt class="py-line">        <tt id="link-149" class="py-name"><a title="lxml.etree.iterparse.root" class="py-name" href="#" onclick="return doclink('link-149', 'root', 'link-42');">root</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-150" class="py-name"><a title="lxml.etree.XML
+lxml.objectify.XML
+lxml.tests.test_objectify.ObjectifyTestCase.XML
+lxml.tests.test_pyclasslookup.PyClassLookupTestCase.XML" class="py-name" href="#" onclick="return doclink('link-150', 'XML', 'link-36');">XML</a></tt><tt class="py-op">(</tt><tt id="link-151" class="py-name"><a title="lxml.tests.test_classlookup.xml_str
+lxml.tests.test_objectify.xml_str
+lxml.tests.test_pyclasslookup.xml_str" class="py-name" href="#" onclick="return doclink('link-151', 'xml_str', 'link-19');">xml_str</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L201"></a><tt class="py-lineno">201</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertEqual</tt><tt class="py-op">(</tt><tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-name">el_class</tt><tt class="py-op">.</tt><tt class="py-name">LEN</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L202"></a><tt class="py-lineno">202</tt>  <tt class="py-line"> </tt>
+<a name="PyClassLookupTestCase.test_lookup_bool"></a><div id="PyClassLookupTestCase.test_lookup_bool-def"><a name="L203"></a><tt class="py-lineno">203</tt> <a class="py-toggle" href="#" id="PyClassLookupTestCase.test_lookup_bool-toggle" onclick="return toggle('PyClassLookupTestCase.test_lookup_bool');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.test_pyclasslookup.PyClassLookupTestCase-class.html#test_lookup_bool">test_lookup_bool</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PyClassLookupTestCase.test_lookup_bool-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="PyClassLookupTestCase.test_lookup_bool-expanded"><a name="L204"></a><tt class="py-lineno">204</tt>  <tt class="py-line">        <tt class="py-name">el_class</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-152" class="py-name"><a title="lxml.tests.test_pyclasslookup.PyClassLookupTestCase._buildElementClass" class="py-name" href="#" onclick="return doclink('link-152', '_buildElementClass', 'link-39');">_buildElementClass</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L205"></a><tt class="py-lineno">205</tt>  <tt class="py-line">        <tt class="py-name">el_class</tt><tt class="py-op">.</tt><tt class="py-name">TRUE</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L206"></a><tt class="py-lineno">206</tt>  <tt class="py-line">        <tt class="py-keyword">def</tt> <tt class="py-def-name">lookup</tt><tt class="py-op">(</tt><tt class="py-param">doc</tt><tt class="py-op">,</tt> <tt class="py-param">el</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L207"></a><tt class="py-lineno">207</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">el_class</tt><tt class="py-op">.</tt><tt class="py-name">TRUE</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L208"></a><tt class="py-lineno">208</tt>  <tt class="py-line">                <tt class="py-name">el_class</tt><tt class="py-op">.</tt><tt class="py-name">TRUE</tt> <tt class="py-op">=</tt> <tt class="py-name">bool</tt><tt class="py-op">(</tt><tt class="py-name">el</tt><tt class="py-op">)</tt> </tt>
+<a name="L209"></a><tt class="py-lineno">209</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">el_class</tt> </tt>
+</div><a name="L210"></a><tt class="py-lineno">210</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-153" class="py-name"><a title="lxml.tests.test_pyclasslookup.PyClassLookupTestCase._setClassLookup" class="py-name" href="#" onclick="return doclink('link-153', '_setClassLookup', 'link-40');">_setClassLookup</a></tt><tt class="py-op">(</tt><tt id="link-154" class="py-name"><a title="lxml.etree.CustomElementClassLookup.lookup
+lxml.etree.PythonElementClassLookup.lookup
+lxml.html.HtmlElementClassLookup.lookup" class="py-name" href="#" onclick="return doclink('link-154', 'lookup', 'link-41');">lookup</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L211"></a><tt class="py-lineno">211</tt>  <tt class="py-line">        <tt id="link-155" class="py-name"><a title="lxml.etree.iterparse.root" class="py-name" href="#" onclick="return doclink('link-155', 'root', 'link-42');">root</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-156" class="py-name"><a title="lxml.etree.XML
+lxml.objectify.XML
+lxml.tests.test_objectify.ObjectifyTestCase.XML
+lxml.tests.test_pyclasslookup.PyClassLookupTestCase.XML" class="py-name" href="#" onclick="return doclink('link-156', 'XML', 'link-36');">XML</a></tt><tt class="py-op">(</tt><tt id="link-157" class="py-name"><a title="lxml.tests.test_classlookup.xml_str
+lxml.tests.test_objectify.xml_str
+lxml.tests.test_pyclasslookup.xml_str" class="py-name" href="#" onclick="return doclink('link-157', 'xml_str', 'link-19');">xml_str</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L212"></a><tt class="py-lineno">212</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertTrue</tt><tt class="py-op">(</tt><tt class="py-name">el_class</tt><tt class="py-op">.</tt><tt class="py-name">TRUE</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L213"></a><tt class="py-lineno">213</tt>  <tt class="py-line"> </tt>
+<a name="PyClassLookupTestCase.test_lookup_get"></a><div id="PyClassLookupTestCase.test_lookup_get-def"><a name="L214"></a><tt class="py-lineno">214</tt> <a class="py-toggle" href="#" id="PyClassLookupTestCase.test_lookup_get-toggle" onclick="return toggle('PyClassLookupTestCase.test_lookup_get');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.test_pyclasslookup.PyClassLookupTestCase-class.html#test_lookup_get">test_lookup_get</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PyClassLookupTestCase.test_lookup_get-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="PyClassLookupTestCase.test_lookup_get-expanded"><a name="L215"></a><tt class="py-lineno">215</tt>  <tt class="py-line">        <tt class="py-name">el_class</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-158" class="py-name"><a title="lxml.tests.test_pyclasslookup.PyClassLookupTestCase._buildElementClass" class="py-name" href="#" onclick="return doclink('link-158', '_buildElementClass', 'link-39');">_buildElementClass</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L216"></a><tt class="py-lineno">216</tt>  <tt class="py-line">        <tt class="py-name">el_class</tt><tt class="py-op">.</tt><tt class="py-name">VAL</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L217"></a><tt class="py-lineno">217</tt>  <tt class="py-line">        <tt class="py-keyword">def</tt> <tt class="py-def-name">lookup</tt><tt class="py-op">(</tt><tt class="py-param">doc</tt><tt class="py-op">,</tt> <tt class="py-param">el</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L218"></a><tt class="py-lineno">218</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">el_class</tt><tt class="py-op">.</tt><tt class="py-name">VAL</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L219"></a><tt class="py-lineno">219</tt>  <tt class="py-line">                <tt class="py-name">el_class</tt><tt class="py-op">.</tt><tt class="py-name">VAL</tt> <tt class="py-op">=</tt> <tt class="py-name">el</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt id="link-159" class="py-name" targets="Method lxml.etree._Attrib.get()=lxml.etree._Attrib-class.html#get,Method lxml.etree._Element.get()=lxml.etree._Element-class.html#get,Method lxml.etree._IDDict.get()=lxml.etree._IDDict-class.html#get,Method lxml.etree._ProcessingInstruction.get()=lxml.etree._ProcessingInstruction-class.html#get"><a title="lxml.etree._Attrib.get
+lxml.etree._Element.get
+lxml.etree._IDDict.get
+lxml.etree._ProcessingInstruction.get" class="py-name" href="#" onclick="return doclink('link-159', 'get', 'link-159');">get</a></tt><tt class="py-op">(</tt><tt class="py-string">'a1'</tt><tt class="py-op">)</tt> </tt>
+<a name="L220"></a><tt class="py-lineno">220</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">el_class</tt> </tt>
+</div><a name="L221"></a><tt class="py-lineno">221</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-160" class="py-name"><a title="lxml.tests.test_pyclasslookup.PyClassLookupTestCase._setClassLookup" class="py-name" href="#" onclick="return doclink('link-160', '_setClassLookup', 'link-40');">_setClassLookup</a></tt><tt class="py-op">(</tt><tt id="link-161" class="py-name"><a title="lxml.etree.CustomElementClassLookup.lookup
+lxml.etree.PythonElementClassLookup.lookup
+lxml.html.HtmlElementClassLookup.lookup" class="py-name" href="#" onclick="return doclink('link-161', 'lookup', 'link-41');">lookup</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L222"></a><tt class="py-lineno">222</tt>  <tt class="py-line">        <tt id="link-162" class="py-name"><a title="lxml.etree.iterparse.root" class="py-name" href="#" onclick="return doclink('link-162', 'root', 'link-42');">root</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-163" class="py-name"><a title="lxml.etree.XML
+lxml.objectify.XML
+lxml.tests.test_objectify.ObjectifyTestCase.XML
+lxml.tests.test_pyclasslookup.PyClassLookupTestCase.XML" class="py-name" href="#" onclick="return doclink('link-163', 'XML', 'link-36');">XML</a></tt><tt class="py-op">(</tt><tt id="link-164" class="py-name"><a title="lxml.tests.test_classlookup.xml_str
+lxml.tests.test_objectify.xml_str
+lxml.tests.test_pyclasslookup.xml_str" class="py-name" href="#" onclick="return doclink('link-164', 'xml_str', 'link-19');">xml_str</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L223"></a><tt class="py-lineno">223</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertNotEqual</tt><tt class="py-op">(</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-name">el_class</tt><tt class="py-op">.</tt><tt class="py-name">VAL</tt><tt class="py-op">)</tt> </tt>
+<a name="L224"></a><tt class="py-lineno">224</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertEqual</tt><tt class="py-op">(</tt><tt id="link-165" class="py-name"><a title="lxml.etree.iterparse.root" class="py-name" href="#" onclick="return doclink('link-165', 'root', 'link-42');">root</a></tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt id="link-166" class="py-name"><a title="lxml.etree._Attrib.get
+lxml.etree._Element.get
+lxml.etree._IDDict.get
+lxml.etree._ProcessingInstruction.get" class="py-name" href="#" onclick="return doclink('link-166', 'get', 'link-159');">get</a></tt><tt class="py-op">(</tt><tt class="py-string">'a1'</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">el_class</tt><tt class="py-op">.</tt><tt class="py-name">VAL</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L225"></a><tt class="py-lineno">225</tt>  <tt class="py-line"> </tt>
+<a name="PyClassLookupTestCase.test_lookup_get_default"></a><div id="PyClassLookupTestCase.test_lookup_get_default-def"><a name="L226"></a><tt class="py-lineno">226</tt> <a class="py-toggle" href="#" id="PyClassLookupTestCase.test_lookup_get_default-toggle" onclick="return toggle('PyClassLookupTestCase.test_lookup_get_default');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.test_pyclasslookup.PyClassLookupTestCase-class.html#test_lookup_get_default">test_lookup_get_default</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PyClassLookupTestCase.test_lookup_get_default-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="PyClassLookupTestCase.test_lookup_get_default-expanded"><a name="L227"></a><tt class="py-lineno">227</tt>  <tt class="py-line">        <tt class="py-name">el_class</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-167" class="py-name"><a title="lxml.tests.test_pyclasslookup.PyClassLookupTestCase._buildElementClass" class="py-name" href="#" onclick="return doclink('link-167', '_buildElementClass', 'link-39');">_buildElementClass</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L228"></a><tt class="py-lineno">228</tt>  <tt class="py-line">        <tt class="py-name">default</tt> <tt class="py-op">=</tt> <tt id="link-168" class="py-name" targets="Class str=str-class.html"><a title="str" class="py-name" href="#" onclick="return doclink('link-168', 'str', 'link-168');">str</a></tt><tt class="py-op">(</tt><tt class="py-name">id</tt><tt class="py-op">(</tt><tt class="py-name">el_class</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L229"></a><tt class="py-lineno">229</tt>  <tt class="py-line">        <tt class="py-name">el_class</tt><tt class="py-op">.</tt><tt class="py-name">VAL</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L230"></a><tt class="py-lineno">230</tt>  <tt class="py-line">        <tt class="py-keyword">def</tt> <tt class="py-def-name">lookup</tt><tt class="py-op">(</tt><tt class="py-param">doc</tt><tt class="py-op">,</tt> <tt class="py-param">el</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L231"></a><tt class="py-lineno">231</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">el_class</tt><tt class="py-op">.</tt><tt class="py-name">VAL</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L232"></a><tt class="py-lineno">232</tt>  <tt class="py-line">                <tt class="py-name">el_class</tt><tt class="py-op">.</tt><tt class="py-name">VAL</tt> <tt class="py-op">=</tt> <tt class="py-name">el</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt id="link-169" class="py-name"><a title="lxml.etree._Attrib.get
+lxml.etree._Element.get
+lxml.etree._IDDict.get
+lxml.etree._ProcessingInstruction.get" class="py-name" href="#" onclick="return doclink('link-169', 'get', 'link-159');">get</a></tt><tt class="py-op">(</tt><tt class="py-string">'unknownattribute'</tt><tt class="py-op">,</tt> <tt class="py-name">default</tt><tt class="py-op">)</tt> </tt>
+<a name="L233"></a><tt class="py-lineno">233</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">el_class</tt> </tt>
+</div><a name="L234"></a><tt class="py-lineno">234</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-170" class="py-name"><a title="lxml.tests.test_pyclasslookup.PyClassLookupTestCase._setClassLookup" class="py-name" href="#" onclick="return doclink('link-170', '_setClassLookup', 'link-40');">_setClassLookup</a></tt><tt class="py-op">(</tt><tt id="link-171" class="py-name"><a title="lxml.etree.CustomElementClassLookup.lookup
+lxml.etree.PythonElementClassLookup.lookup
+lxml.html.HtmlElementClassLookup.lookup" class="py-name" href="#" onclick="return doclink('link-171', 'lookup', 'link-41');">lookup</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L235"></a><tt class="py-lineno">235</tt>  <tt class="py-line">        <tt id="link-172" class="py-name"><a title="lxml.etree.iterparse.root" class="py-name" href="#" onclick="return doclink('link-172', 'root', 'link-42');">root</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-173" class="py-name"><a title="lxml.etree.XML
+lxml.objectify.XML
+lxml.tests.test_objectify.ObjectifyTestCase.XML
+lxml.tests.test_pyclasslookup.PyClassLookupTestCase.XML" class="py-name" href="#" onclick="return doclink('link-173', 'XML', 'link-36');">XML</a></tt><tt class="py-op">(</tt><tt id="link-174" class="py-name"><a title="lxml.tests.test_classlookup.xml_str
+lxml.tests.test_objectify.xml_str
+lxml.tests.test_pyclasslookup.xml_str" class="py-name" href="#" onclick="return doclink('link-174', 'xml_str', 'link-19');">xml_str</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L236"></a><tt class="py-lineno">236</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertEqual</tt><tt class="py-op">(</tt><tt class="py-name">default</tt><tt class="py-op">,</tt> <tt class="py-name">el_class</tt><tt class="py-op">.</tt><tt class="py-name">VAL</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L237"></a><tt class="py-lineno">237</tt>  <tt class="py-line"> </tt>
+<a name="PyClassLookupTestCase.test_lookup_getchildren"></a><div id="PyClassLookupTestCase.test_lookup_getchildren-def"><a name="L238"></a><tt class="py-lineno">238</tt> <a class="py-toggle" href="#" id="PyClassLookupTestCase.test_lookup_getchildren-toggle" onclick="return toggle('PyClassLookupTestCase.test_lookup_getchildren');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.test_pyclasslookup.PyClassLookupTestCase-class.html#test_lookup_getchildren">test_lookup_getchildren</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PyClassLookupTestCase.test_lookup_getchildren-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="PyClassLookupTestCase.test_lookup_getchildren-expanded"><a name="L239"></a><tt class="py-lineno">239</tt>  <tt class="py-line">        <tt class="py-name">el_class</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-175" class="py-name"><a title="lxml.tests.test_pyclasslookup.PyClassLookupTestCase._buildElementClass" class="py-name" href="#" onclick="return doclink('link-175', '_buildElementClass', 'link-39');">_buildElementClass</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L240"></a><tt class="py-lineno">240</tt>  <tt class="py-line">        <tt class="py-name">el_class</tt><tt class="py-op">.</tt><tt class="py-name">CHILD_TAGS</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L241"></a><tt class="py-lineno">241</tt>  <tt class="py-line">        <tt class="py-keyword">def</tt> <tt class="py-def-name">lookup</tt><tt class="py-op">(</tt><tt class="py-param">doc</tt><tt class="py-op">,</tt> <tt class="py-param">el</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L242"></a><tt class="py-lineno">242</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">el_class</tt><tt class="py-op">.</tt><tt class="py-name">CHILD_TAGS</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L243"></a><tt class="py-lineno">243</tt>  <tt class="py-line">                <tt class="py-name">el_class</tt><tt class="py-op">.</tt><tt class="py-name">CHILD_TAGS</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt> <tt class="py-name">c</tt><tt class="py-op">.</tt><tt id="link-176" class="py-name"><a title="lxml.etree._Comment.tag
+lxml.etree._Element.tag
+lxml.etree._Entity.tag
+lxml.etree._ProcessingInstruction.tag
+lxml.tests.test_xpathevaluator.tag
+xml.etree.ElementTree.Element.tag" class="py-name" href="#" onclick="return doclink('link-176', 'tag', 'link-53');">tag</a></tt> <tt class="py-keyword">for</tt> <tt class="py-name">c</tt> <tt class="py-keyword">in</tt> <tt class="py-name">el</tt><tt class="py-op">.</tt><tt id="link-177" class="py-name"><a title="lxml.etree._Element.getchildren
+lxml.objectify.ObjectifiedElement.getchildren" class="py-name" href="#" onclick="return doclink('link-177', 'getchildren', 'link-51');">getchildren</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">]</tt> </tt>
+<a name="L244"></a><tt class="py-lineno">244</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">el_class</tt> </tt>
+</div><a name="L245"></a><tt class="py-lineno">245</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-178" class="py-name"><a title="lxml.tests.test_pyclasslookup.PyClassLookupTestCase._setClassLookup" class="py-name" href="#" onclick="return doclink('link-178', '_setClassLookup', 'link-40');">_setClassLookup</a></tt><tt class="py-op">(</tt><tt id="link-179" class="py-name"><a title="lxml.etree.CustomElementClassLookup.lookup
+lxml.etree.PythonElementClassLookup.lookup
+lxml.html.HtmlElementClassLookup.lookup" class="py-name" href="#" onclick="return doclink('link-179', 'lookup', 'link-41');">lookup</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L246"></a><tt class="py-lineno">246</tt>  <tt class="py-line">        <tt id="link-180" class="py-name"><a title="lxml.etree.iterparse.root" class="py-name" href="#" onclick="return doclink('link-180', 'root', 'link-42');">root</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-181" class="py-name"><a title="lxml.etree.XML
+lxml.objectify.XML
+lxml.tests.test_objectify.ObjectifyTestCase.XML
+lxml.tests.test_pyclasslookup.PyClassLookupTestCase.XML" class="py-name" href="#" onclick="return doclink('link-181', 'XML', 'link-36');">XML</a></tt><tt class="py-op">(</tt><tt id="link-182" class="py-name"><a title="lxml.tests.test_classlookup.xml_str
+lxml.tests.test_objectify.xml_str
+lxml.tests.test_pyclasslookup.xml_str" class="py-name" href="#" onclick="return doclink('link-182', 'xml_str', 'link-19');">xml_str</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L247"></a><tt class="py-lineno">247</tt>  <tt class="py-line">        <tt class="py-name">child_tags</tt> <tt class="py-op">=</tt> <tt id="link-183" class="py-name"><a title="lxml.etree.iterparse.root" class="py-name" href="#" onclick="return doclink('link-183', 'root', 'link-42');">root</a></tt><tt class="py-op">.</tt><tt class="py-name">CHILD_TAGS</tt> </tt>
+<a name="L248"></a><tt class="py-lineno">248</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertNotEqual</tt><tt class="py-op">(</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-name">child_tags</tt><tt class="py-op">)</tt> </tt>
+<a name="L249"></a><tt class="py-lineno">249</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertEqual</tt><tt class="py-op">(</tt><tt class="py-op">[</tt> <tt class="py-name">c</tt><tt class="py-op">.</tt><tt id="link-184" class="py-name"><a title="lxml.etree._Comment.tag
+lxml.etree._Element.tag
+lxml.etree._Entity.tag
+lxml.etree._ProcessingInstruction.tag
+lxml.tests.test_xpathevaluator.tag
+xml.etree.ElementTree.Element.tag" class="py-name" href="#" onclick="return doclink('link-184', 'tag', 'link-53');">tag</a></tt> <tt class="py-keyword">for</tt> <tt class="py-name">c</tt> <tt class="py-keyword">in</tt> <tt id="link-185" class="py-name"><a title="lxml.etree.iterparse.root" class="py-name" href="#" onclick="return doclink('link-185', 'root', 'link-42');">root</a></tt><tt class="py-op">.</tt><tt id="link-186" class="py-name"><a title="lxml.etree._Element.getchildren
+lxml.objectify.ObjectifiedElement.getchildren" class="py-name" href="#" onclick="return doclink('link-186', 'getchildren', 'link-51');">getchildren</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">]</tt><tt class="py-op">,</tt> </tt>
+<a name="L250"></a><tt class="py-lineno">250</tt>  <tt class="py-line">                          <tt class="py-name">child_tags</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L251"></a><tt class="py-lineno">251</tt>  <tt class="py-line"> </tt>
+<a name="PyClassLookupTestCase.test_lookup_iter_children"></a><div id="PyClassLookupTestCase.test_lookup_iter_children-def"><a name="L252"></a><tt class="py-lineno">252</tt> <a class="py-toggle" href="#" id="PyClassLookupTestCase.test_lookup_iter_children-toggle" onclick="return toggle('PyClassLookupTestCase.test_lookup_iter_children');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.test_pyclasslookup.PyClassLookupTestCase-class.html#test_lookup_iter_children">test_lookup_iter_children</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PyClassLookupTestCase.test_lookup_iter_children-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="PyClassLookupTestCase.test_lookup_iter_children-expanded"><a name="L253"></a><tt class="py-lineno">253</tt>  <tt class="py-line">        <tt class="py-name">el_class</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-187" class="py-name"><a title="lxml.tests.test_pyclasslookup.PyClassLookupTestCase._buildElementClass" class="py-name" href="#" onclick="return doclink('link-187', '_buildElementClass', 'link-39');">_buildElementClass</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L254"></a><tt class="py-lineno">254</tt>  <tt class="py-line">        <tt class="py-name">el_class</tt><tt class="py-op">.</tt><tt class="py-name">CHILD_TAGS</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L255"></a><tt class="py-lineno">255</tt>  <tt class="py-line">        <tt class="py-keyword">def</tt> <tt class="py-def-name">lookup</tt><tt class="py-op">(</tt><tt class="py-param">doc</tt><tt class="py-op">,</tt> <tt class="py-param">el</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L256"></a><tt class="py-lineno">256</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">el_class</tt><tt class="py-op">.</tt><tt class="py-name">CHILD_TAGS</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L257"></a><tt class="py-lineno">257</tt>  <tt class="py-line">                <tt class="py-name">el_class</tt><tt class="py-op">.</tt><tt class="py-name">CHILD_TAGS</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt> <tt class="py-name">c</tt><tt class="py-op">.</tt><tt id="link-188" class="py-name"><a title="lxml.etree._Comment.tag
+lxml.etree._Element.tag
+lxml.etree._Entity.tag
+lxml.etree._ProcessingInstruction.tag
+lxml.tests.test_xpathevaluator.tag
+xml.etree.ElementTree.Element.tag" class="py-name" href="#" onclick="return doclink('link-188', 'tag', 'link-53');">tag</a></tt> <tt class="py-keyword">for</tt> <tt class="py-name">c</tt> <tt class="py-keyword">in</tt> <tt class="py-name">el</tt> <tt class="py-op">]</tt> </tt>
+<a name="L258"></a><tt class="py-lineno">258</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">el_class</tt> </tt>
+</div><a name="L259"></a><tt class="py-lineno">259</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-189" class="py-name"><a title="lxml.tests.test_pyclasslookup.PyClassLookupTestCase._setClassLookup" class="py-name" href="#" onclick="return doclink('link-189', '_setClassLookup', 'link-40');">_setClassLookup</a></tt><tt class="py-op">(</tt><tt id="link-190" class="py-name"><a title="lxml.etree.CustomElementClassLookup.lookup
+lxml.etree.PythonElementClassLookup.lookup
+lxml.html.HtmlElementClassLookup.lookup" class="py-name" href="#" onclick="return doclink('link-190', 'lookup', 'link-41');">lookup</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L260"></a><tt class="py-lineno">260</tt>  <tt class="py-line">        <tt id="link-191" class="py-name"><a title="lxml.etree.iterparse.root" class="py-name" href="#" onclick="return doclink('link-191', 'root', 'link-42');">root</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-192" class="py-name"><a title="lxml.etree.XML
+lxml.objectify.XML
+lxml.tests.test_objectify.ObjectifyTestCase.XML
+lxml.tests.test_pyclasslookup.PyClassLookupTestCase.XML" class="py-name" href="#" onclick="return doclink('link-192', 'XML', 'link-36');">XML</a></tt><tt class="py-op">(</tt><tt id="link-193" class="py-name"><a title="lxml.tests.test_classlookup.xml_str
+lxml.tests.test_objectify.xml_str
+lxml.tests.test_pyclasslookup.xml_str" class="py-name" href="#" onclick="return doclink('link-193', 'xml_str', 'link-19');">xml_str</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L261"></a><tt class="py-lineno">261</tt>  <tt class="py-line">        <tt class="py-name">child_tags</tt> <tt class="py-op">=</tt> <tt id="link-194" class="py-name"><a title="lxml.etree.iterparse.root" class="py-name" href="#" onclick="return doclink('link-194', 'root', 'link-42');">root</a></tt><tt class="py-op">.</tt><tt class="py-name">CHILD_TAGS</tt> </tt>
+<a name="L262"></a><tt class="py-lineno">262</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertNotEqual</tt><tt class="py-op">(</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-name">child_tags</tt><tt class="py-op">)</tt> </tt>
+<a name="L263"></a><tt class="py-lineno">263</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertEqual</tt><tt class="py-op">(</tt><tt class="py-op">[</tt> <tt class="py-name">c</tt><tt class="py-op">.</tt><tt id="link-195" class="py-name"><a title="lxml.etree._Comment.tag
+lxml.etree._Element.tag
+lxml.etree._Entity.tag
+lxml.etree._ProcessingInstruction.tag
+lxml.tests.test_xpathevaluator.tag
+xml.etree.ElementTree.Element.tag" class="py-name" href="#" onclick="return doclink('link-195', 'tag', 'link-53');">tag</a></tt> <tt class="py-keyword">for</tt> <tt class="py-name">c</tt> <tt class="py-keyword">in</tt> <tt id="link-196" class="py-name"><a title="lxml.etree.iterparse.root" class="py-name" href="#" onclick="return doclink('link-196', 'root', 'link-42');">root</a></tt><tt class="py-op">.</tt><tt id="link-197" class="py-name"><a title="lxml.etree._Element.getchildren
+lxml.objectify.ObjectifiedElement.getchildren" class="py-name" href="#" onclick="return doclink('link-197', 'getchildren', 'link-51');">getchildren</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">]</tt><tt class="py-op">,</tt> </tt>
+<a name="L264"></a><tt class="py-lineno">264</tt>  <tt class="py-line">                          <tt class="py-name">child_tags</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L265"></a><tt class="py-lineno">265</tt>  <tt class="py-line"> </tt>
+<a name="PyClassLookupTestCase.test_lookup_iterchildren"></a><div id="PyClassLookupTestCase.test_lookup_iterchildren-def"><a name="L266"></a><tt class="py-lineno">266</tt> <a class="py-toggle" href="#" id="PyClassLookupTestCase.test_lookup_iterchildren-toggle" onclick="return toggle('PyClassLookupTestCase.test_lookup_iterchildren');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.test_pyclasslookup.PyClassLookupTestCase-class.html#test_lookup_iterchildren">test_lookup_iterchildren</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PyClassLookupTestCase.test_lookup_iterchildren-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="PyClassLookupTestCase.test_lookup_iterchildren-expanded"><a name="L267"></a><tt class="py-lineno">267</tt>  <tt class="py-line">        <tt class="py-name">el_class</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-198" class="py-name"><a title="lxml.tests.test_pyclasslookup.PyClassLookupTestCase._buildElementClass" class="py-name" href="#" onclick="return doclink('link-198', '_buildElementClass', 'link-39');">_buildElementClass</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L268"></a><tt class="py-lineno">268</tt>  <tt class="py-line">        <tt class="py-name">el_class</tt><tt class="py-op">.</tt><tt class="py-name">CHILD_TAGS</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L269"></a><tt class="py-lineno">269</tt>  <tt class="py-line">        <tt class="py-keyword">def</tt> <tt class="py-def-name">lookup</tt><tt class="py-op">(</tt><tt class="py-param">doc</tt><tt class="py-op">,</tt> <tt class="py-param">el</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L270"></a><tt class="py-lineno">270</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">el_class</tt><tt class="py-op">.</tt><tt class="py-name">CHILD_TAGS</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L271"></a><tt class="py-lineno">271</tt>  <tt class="py-line">                <tt class="py-name">el_class</tt><tt class="py-op">.</tt><tt class="py-name">CHILD_TAGS</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt> <tt class="py-name">c</tt><tt class="py-op">.</tt><tt id="link-199" class="py-name"><a title="lxml.etree._Comment.tag
+lxml.etree._Element.tag
+lxml.etree._Entity.tag
+lxml.etree._ProcessingInstruction.tag
+lxml.tests.test_xpathevaluator.tag
+xml.etree.ElementTree.Element.tag" class="py-name" href="#" onclick="return doclink('link-199', 'tag', 'link-53');">tag</a></tt> <tt class="py-keyword">for</tt> <tt class="py-name">c</tt> <tt class="py-keyword">in</tt> <tt class="py-name">el</tt><tt class="py-op">.</tt><tt id="link-200" class="py-name" targets="Method lxml.etree._Element.iterchildren()=lxml.etree._Element-class.html#iterchildren"><a title="lxml.etree._Element.iterchildren" class="py-name" href="#" onclick="return doclink('link-200', 'iterchildren', 'link-200');">iterchildren</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">]</tt> </tt>
+<a name="L272"></a><tt class="py-lineno">272</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">el_class</tt> </tt>
+</div><a name="L273"></a><tt class="py-lineno">273</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-201" class="py-name"><a title="lxml.tests.test_pyclasslookup.PyClassLookupTestCase._setClassLookup" class="py-name" href="#" onclick="return doclink('link-201', '_setClassLookup', 'link-40');">_setClassLookup</a></tt><tt class="py-op">(</tt><tt id="link-202" class="py-name"><a title="lxml.etree.CustomElementClassLookup.lookup
+lxml.etree.PythonElementClassLookup.lookup
+lxml.html.HtmlElementClassLookup.lookup" class="py-name" href="#" onclick="return doclink('link-202', 'lookup', 'link-41');">lookup</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L274"></a><tt class="py-lineno">274</tt>  <tt class="py-line">        <tt id="link-203" class="py-name"><a title="lxml.etree.iterparse.root" class="py-name" href="#" onclick="return doclink('link-203', 'root', 'link-42');">root</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-204" class="py-name"><a title="lxml.etree.XML
+lxml.objectify.XML
+lxml.tests.test_objectify.ObjectifyTestCase.XML
+lxml.tests.test_pyclasslookup.PyClassLookupTestCase.XML" class="py-name" href="#" onclick="return doclink('link-204', 'XML', 'link-36');">XML</a></tt><tt class="py-op">(</tt><tt id="link-205" class="py-name"><a title="lxml.tests.test_classlookup.xml_str
+lxml.tests.test_objectify.xml_str
+lxml.tests.test_pyclasslookup.xml_str" class="py-name" href="#" onclick="return doclink('link-205', 'xml_str', 'link-19');">xml_str</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L275"></a><tt class="py-lineno">275</tt>  <tt class="py-line">        <tt class="py-name">child_tags</tt> <tt class="py-op">=</tt> <tt id="link-206" class="py-name"><a title="lxml.etree.iterparse.root" class="py-name" href="#" onclick="return doclink('link-206', 'root', 'link-42');">root</a></tt><tt class="py-op">.</tt><tt class="py-name">CHILD_TAGS</tt> </tt>
+<a name="L276"></a><tt class="py-lineno">276</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertNotEqual</tt><tt class="py-op">(</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-name">child_tags</tt><tt class="py-op">)</tt> </tt>
+<a name="L277"></a><tt class="py-lineno">277</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertEqual</tt><tt class="py-op">(</tt><tt class="py-op">[</tt> <tt class="py-name">c</tt><tt class="py-op">.</tt><tt id="link-207" class="py-name"><a title="lxml.etree._Comment.tag
+lxml.etree._Element.tag
+lxml.etree._Entity.tag
+lxml.etree._ProcessingInstruction.tag
+lxml.tests.test_xpathevaluator.tag
+xml.etree.ElementTree.Element.tag" class="py-name" href="#" onclick="return doclink('link-207', 'tag', 'link-53');">tag</a></tt> <tt class="py-keyword">for</tt> <tt class="py-name">c</tt> <tt class="py-keyword">in</tt> <tt id="link-208" class="py-name"><a title="lxml.etree.iterparse.root" class="py-name" href="#" onclick="return doclink('link-208', 'root', 'link-42');">root</a></tt><tt class="py-op">.</tt><tt id="link-209" class="py-name"><a title="lxml.etree._Element.getchildren
+lxml.objectify.ObjectifiedElement.getchildren" class="py-name" href="#" onclick="return doclink('link-209', 'getchildren', 'link-51');">getchildren</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">]</tt><tt class="py-op">,</tt> </tt>
+<a name="L278"></a><tt class="py-lineno">278</tt>  <tt class="py-line">                          <tt class="py-name">child_tags</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L279"></a><tt class="py-lineno">279</tt>  <tt class="py-line"> </tt>
+<a name="PyClassLookupTestCase.test_lookup_iterchildren_tag"></a><div id="PyClassLookupTestCase.test_lookup_iterchildren_tag-def"><a name="L280"></a><tt class="py-lineno">280</tt> <a class="py-toggle" href="#" id="PyClassLookupTestCase.test_lookup_iterchildren_tag-toggle" onclick="return toggle('PyClassLookupTestCase.test_lookup_iterchildren_tag');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.test_pyclasslookup.PyClassLookupTestCase-class.html#test_lookup_iterchildren_tag">test_lookup_iterchildren_tag</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PyClassLookupTestCase.test_lookup_iterchildren_tag-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="PyClassLookupTestCase.test_lookup_iterchildren_tag-expanded"><a name="L281"></a><tt class="py-lineno">281</tt>  <tt class="py-line">        <tt class="py-name">el_class</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-210" class="py-name"><a title="lxml.tests.test_pyclasslookup.PyClassLookupTestCase._buildElementClass" class="py-name" href="#" onclick="return doclink('link-210', '_buildElementClass', 'link-39');">_buildElementClass</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L282"></a><tt class="py-lineno">282</tt>  <tt class="py-line">        <tt class="py-name">el_class</tt><tt class="py-op">.</tt><tt class="py-name">CHILD_TAGS</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L283"></a><tt class="py-lineno">283</tt>  <tt class="py-line">        <tt class="py-keyword">def</tt> <tt class="py-def-name">lookup</tt><tt class="py-op">(</tt><tt class="py-param">doc</tt><tt class="py-op">,</tt> <tt class="py-param">el</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L284"></a><tt class="py-lineno">284</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">el_class</tt><tt class="py-op">.</tt><tt class="py-name">CHILD_TAGS</tt><tt class="py-op">:</tt> </tt>
+<a name="L285"></a><tt class="py-lineno">285</tt>  <tt class="py-line">                <tt class="py-name">el_class</tt><tt class="py-op">.</tt><tt class="py-name">CHILD_TAGS</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt> </tt>
+<a name="L286"></a><tt class="py-lineno">286</tt>  <tt class="py-line">                    <tt class="py-name">c</tt><tt class="py-op">.</tt><tt id="link-211" class="py-name"><a title="lxml.etree._Comment.tag
+lxml.etree._Element.tag
+lxml.etree._Entity.tag
+lxml.etree._ProcessingInstruction.tag
+lxml.tests.test_xpathevaluator.tag
+xml.etree.ElementTree.Element.tag" class="py-name" href="#" onclick="return doclink('link-211', 'tag', 'link-53');">tag</a></tt> <tt class="py-keyword">for</tt> <tt class="py-name">c</tt> <tt class="py-keyword">in</tt> <tt class="py-name">el</tt><tt class="py-op">.</tt><tt id="link-212" class="py-name"><a title="lxml.etree._Element.iterchildren" class="py-name" href="#" onclick="return doclink('link-212', 'iterchildren', 'link-200');">iterchildren</a></tt><tt class="py-op">(</tt><tt id="link-213" class="py-name"><a title="lxml.etree._Comment.tag
+lxml.etree._Element.tag
+lxml.etree._Entity.tag
+lxml.etree._ProcessingInstruction.tag
+lxml.tests.test_xpathevaluator.tag
+xml.etree.ElementTree.Element.tag" class="py-name" href="#" onclick="return doclink('link-213', 'tag', 'link-53');">tag</a></tt><tt class="py-op">=</tt><tt class="py-string">'{objectified}c2'</tt><tt class="py-op">)</tt> <tt class="py-op">]</tt> </tt>
+<a name="L287"></a><tt class="py-lineno">287</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">el_class</tt> </tt>
+</div><a name="L288"></a><tt class="py-lineno">288</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-214" class="py-name"><a title="lxml.tests.test_pyclasslookup.PyClassLookupTestCase._setClassLookup" class="py-name" href="#" onclick="return doclink('link-214', '_setClassLookup', 'link-40');">_setClassLookup</a></tt><tt class="py-op">(</tt><tt id="link-215" class="py-name"><a title="lxml.etree.CustomElementClassLookup.lookup
+lxml.etree.PythonElementClassLookup.lookup
+lxml.html.HtmlElementClassLookup.lookup" class="py-name" href="#" onclick="return doclink('link-215', 'lookup', 'link-41');">lookup</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L289"></a><tt class="py-lineno">289</tt>  <tt class="py-line"> </tt>
+<a name="L290"></a><tt class="py-lineno">290</tt>  <tt class="py-line">        <tt id="link-216" class="py-name"><a title="lxml.etree.iterparse.root" class="py-name" href="#" onclick="return doclink('link-216', 'root', 'link-42');">root</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-217" class="py-name"><a title="lxml.etree.XML
+lxml.objectify.XML
+lxml.tests.test_objectify.ObjectifyTestCase.XML
+lxml.tests.test_pyclasslookup.PyClassLookupTestCase.XML" class="py-name" href="#" onclick="return doclink('link-217', 'XML', 'link-36');">XML</a></tt><tt class="py-op">(</tt><tt id="link-218" class="py-name"><a title="lxml.tests.test_classlookup.xml_str
+lxml.tests.test_objectify.xml_str
+lxml.tests.test_pyclasslookup.xml_str" class="py-name" href="#" onclick="return doclink('link-218', 'xml_str', 'link-19');">xml_str</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L291"></a><tt class="py-lineno">291</tt>  <tt class="py-line">        <tt class="py-name">child_tags</tt> <tt class="py-op">=</tt> <tt id="link-219" class="py-name"><a title="lxml.etree.iterparse.root" class="py-name" href="#" onclick="return doclink('link-219', 'root', 'link-42');">root</a></tt><tt class="py-op">.</tt><tt class="py-name">CHILD_TAGS</tt> </tt>
+<a name="L292"></a><tt class="py-lineno">292</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertNotEqual</tt><tt class="py-op">(</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-name">child_tags</tt><tt class="py-op">)</tt> </tt>
+<a name="L293"></a><tt class="py-lineno">293</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertEqual</tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">child_tags</tt><tt class="py-op">)</tt> </tt>
+<a name="L294"></a><tt class="py-lineno">294</tt>  <tt class="py-line"> </tt>
+<a name="L295"></a><tt class="py-lineno">295</tt>  <tt class="py-line">        <tt class="py-name">c1</tt> <tt class="py-op">=</tt> <tt id="link-220" class="py-name"><a title="lxml.etree.iterparse.root" class="py-name" href="#" onclick="return doclink('link-220', 'root', 'link-42');">root</a></tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> </tt>
+<a name="L296"></a><tt class="py-lineno">296</tt>  <tt class="py-line">        <tt class="py-name">child_tags</tt> <tt class="py-op">=</tt> <tt id="link-221" class="py-name"><a title="lxml.etree.iterparse.root" class="py-name" href="#" onclick="return doclink('link-221', 'root', 'link-42');">root</a></tt><tt class="py-op">.</tt><tt class="py-name">CHILD_TAGS</tt> </tt>
+<a name="L297"></a><tt class="py-lineno">297</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertNotEqual</tt><tt class="py-op">(</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-name">child_tags</tt><tt class="py-op">)</tt> </tt>
+<a name="L298"></a><tt class="py-lineno">298</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertNotEqual</tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">child_tags</tt><tt class="py-op">)</tt> </tt>
+<a name="L299"></a><tt class="py-lineno">299</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertEqual</tt><tt class="py-op">(</tt> </tt>
+<a name="L300"></a><tt class="py-lineno">300</tt>  <tt class="py-line">            <tt class="py-op">[</tt> <tt class="py-name">c</tt><tt class="py-op">.</tt><tt id="link-222" class="py-name"><a title="lxml.etree._Comment.tag
+lxml.etree._Element.tag
+lxml.etree._Entity.tag
+lxml.etree._ProcessingInstruction.tag
+lxml.tests.test_xpathevaluator.tag
+xml.etree.ElementTree.Element.tag" class="py-name" href="#" onclick="return doclink('link-222', 'tag', 'link-53');">tag</a></tt> <tt class="py-keyword">for</tt> <tt class="py-name">c</tt> <tt class="py-keyword">in</tt> <tt id="link-223" class="py-name"><a title="lxml.etree.iterparse.root" class="py-name" href="#" onclick="return doclink('link-223', 'root', 'link-42');">root</a></tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt id="link-224" class="py-name"><a title="lxml.etree._Element.iterchildren" class="py-name" href="#" onclick="return doclink('link-224', 'iterchildren', 'link-200');">iterchildren</a></tt><tt class="py-op">(</tt><tt id="link-225" class="py-name"><a title="lxml.etree._Comment.tag
+lxml.etree._Element.tag
+lxml.etree._Entity.tag
+lxml.etree._ProcessingInstruction.tag
+lxml.tests.test_xpathevaluator.tag
+xml.etree.ElementTree.Element.tag" class="py-name" href="#" onclick="return doclink('link-225', 'tag', 'link-53');">tag</a></tt><tt class="py-op">=</tt><tt class="py-string">'{objectified}c2'</tt><tt class="py-op">)</tt> <tt class="py-op">]</tt><tt class="py-op">,</tt> </tt>
+<a name="L301"></a><tt class="py-lineno">301</tt>  <tt class="py-line">            <tt class="py-name">child_tags</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L302"></a><tt class="py-lineno">302</tt>  <tt class="py-line"> </tt>
+<a name="PyClassLookupTestCase.test_lookup_getparent"></a><div id="PyClassLookupTestCase.test_lookup_getparent-def"><a name="L303"></a><tt class="py-lineno">303</tt> <a class="py-toggle" href="#" id="PyClassLookupTestCase.test_lookup_getparent-toggle" onclick="return toggle('PyClassLookupTestCase.test_lookup_getparent');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.test_pyclasslookup.PyClassLookupTestCase-class.html#test_lookup_getparent">test_lookup_getparent</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PyClassLookupTestCase.test_lookup_getparent-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="PyClassLookupTestCase.test_lookup_getparent-expanded"><a name="L304"></a><tt class="py-lineno">304</tt>  <tt class="py-line">        <tt class="py-name">el_class</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-226" class="py-name"><a title="lxml.tests.test_pyclasslookup.PyClassLookupTestCase._buildElementClass" class="py-name" href="#" onclick="return doclink('link-226', '_buildElementClass', 'link-39');">_buildElementClass</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L305"></a><tt class="py-lineno">305</tt>  <tt class="py-line">        <tt class="py-name">el_class</tt><tt class="py-op">.</tt><tt class="py-name">PARENT</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L306"></a><tt class="py-lineno">306</tt>  <tt class="py-line">        <tt class="py-keyword">def</tt> <tt class="py-def-name">lookup</tt><tt class="py-op">(</tt><tt class="py-param">doc</tt><tt class="py-op">,</tt> <tt class="py-param">el</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L307"></a><tt class="py-lineno">307</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">el_class</tt><tt class="py-op">.</tt><tt class="py-name">PARENT</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L308"></a><tt class="py-lineno">308</tt>  <tt class="py-line">                <tt class="py-name">el_class</tt><tt class="py-op">.</tt><tt class="py-name">PARENT</tt> <tt class="py-op">=</tt> <tt class="py-name">el</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt id="link-227" class="py-name" targets="Method lxml.etree._Element.getparent()=lxml.etree._Element-class.html#getparent,Method lxml.etree._ElementStringResult.getparent()=lxml.etree._ElementStringResult-class.html#getparent,Method lxml.etree._ElementUnicodeResult.getparent()=lxml.etree._ElementUnicodeResult-class.html#getparent"><a title="lxml.etree._Element.getparent
+lxml.etree._ElementStringResult.getparent
+lxml.etree._ElementUnicodeResult.getparent" class="py-name" href="#" onclick="return doclink('link-227', 'getparent', 'link-227');">getparent</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-228" class="py-name"><a title="lxml.etree._Comment.tag
+lxml.etree._Element.tag
+lxml.etree._Entity.tag
+lxml.etree._ProcessingInstruction.tag
+lxml.tests.test_xpathevaluator.tag
+xml.etree.ElementTree.Element.tag" class="py-name" href="#" onclick="return doclink('link-228', 'tag', 'link-53');">tag</a></tt> </tt>
+<a name="L309"></a><tt class="py-lineno">309</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">el_class</tt> </tt>
+</div><a name="L310"></a><tt class="py-lineno">310</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-229" class="py-name"><a title="lxml.tests.test_pyclasslookup.PyClassLookupTestCase._setClassLookup" class="py-name" href="#" onclick="return doclink('link-229', '_setClassLookup', 'link-40');">_setClassLookup</a></tt><tt class="py-op">(</tt><tt id="link-230" class="py-name"><a title="lxml.etree.CustomElementClassLookup.lookup
+lxml.etree.PythonElementClassLookup.lookup
+lxml.html.HtmlElementClassLookup.lookup" class="py-name" href="#" onclick="return doclink('link-230', 'lookup', 'link-41');">lookup</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L311"></a><tt class="py-lineno">311</tt>  <tt class="py-line">        <tt id="link-231" class="py-name"><a title="lxml.etree.iterparse.root" class="py-name" href="#" onclick="return doclink('link-231', 'root', 'link-42');">root</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-232" class="py-name"><a title="lxml.etree.XML
+lxml.objectify.XML
+lxml.tests.test_objectify.ObjectifyTestCase.XML
+lxml.tests.test_pyclasslookup.PyClassLookupTestCase.XML" class="py-name" href="#" onclick="return doclink('link-232', 'XML', 'link-36');">XML</a></tt><tt class="py-op">(</tt><tt id="link-233" class="py-name"><a title="lxml.tests.test_classlookup.xml_str
+lxml.tests.test_objectify.xml_str
+lxml.tests.test_pyclasslookup.xml_str" class="py-name" href="#" onclick="return doclink('link-233', 'xml_str', 'link-19');">xml_str</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L312"></a><tt class="py-lineno">312</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertEqual</tt><tt class="py-op">(</tt><tt id="link-234" class="py-name"><a title="lxml.etree.iterparse.root" class="py-name" href="#" onclick="return doclink('link-234', 'root', 'link-42');">root</a></tt><tt class="py-op">.</tt><tt id="link-235" class="py-name"><a title="lxml.etree._Comment.tag
+lxml.etree._Element.tag
+lxml.etree._Entity.tag
+lxml.etree._ProcessingInstruction.tag
+lxml.tests.test_xpathevaluator.tag
+xml.etree.ElementTree.Element.tag" class="py-name" href="#" onclick="return doclink('link-235', 'tag', 'link-53');">tag</a></tt><tt class="py-op">,</tt> <tt id="link-236" class="py-name"><a title="lxml.etree.iterparse.root" class="py-name" href="#" onclick="return doclink('link-236', 'root', 'link-42');">root</a></tt><tt class="py-op">.</tt><tt class="py-name">PARENT</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L313"></a><tt class="py-lineno">313</tt>  <tt class="py-line"> </tt>
+<a name="PyClassLookupTestCase.test_lookup_getnext"></a><div id="PyClassLookupTestCase.test_lookup_getnext-def"><a name="L314"></a><tt class="py-lineno">314</tt> <a class="py-toggle" href="#" id="PyClassLookupTestCase.test_lookup_getnext-toggle" onclick="return toggle('PyClassLookupTestCase.test_lookup_getnext');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.test_pyclasslookup.PyClassLookupTestCase-class.html#test_lookup_getnext">test_lookup_getnext</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PyClassLookupTestCase.test_lookup_getnext-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="PyClassLookupTestCase.test_lookup_getnext-expanded"><a name="L315"></a><tt class="py-lineno">315</tt>  <tt class="py-line">        <tt class="py-name">el_class</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-237" class="py-name"><a title="lxml.tests.test_pyclasslookup.PyClassLookupTestCase._buildElementClass" class="py-name" href="#" onclick="return doclink('link-237', '_buildElementClass', 'link-39');">_buildElementClass</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L316"></a><tt class="py-lineno">316</tt>  <tt class="py-line">        <tt class="py-name">el_class</tt><tt class="py-op">.</tt><tt class="py-name">NEXT</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L317"></a><tt class="py-lineno">317</tt>  <tt class="py-line">        <tt class="py-keyword">def</tt> <tt class="py-def-name">lookup</tt><tt class="py-op">(</tt><tt class="py-param">doc</tt><tt class="py-op">,</tt> <tt class="py-param">el</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L318"></a><tt class="py-lineno">318</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">el_class</tt><tt class="py-op">.</tt><tt class="py-name">NEXT</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L319"></a><tt class="py-lineno">319</tt>  <tt class="py-line">                <tt class="py-name">el_class</tt><tt class="py-op">.</tt><tt class="py-name">NEXT</tt> <tt class="py-op">=</tt> <tt class="py-name">el</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt id="link-238" class="py-name" targets="Method lxml.etree._Element.getnext()=lxml.etree._Element-class.html#getnext"><a title="lxml.etree._Element.getnext" class="py-name" href="#" onclick="return doclink('link-238', 'getnext', 'link-238');">getnext</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-239" class="py-name"><a title="lxml.etree._Comment.tag
+lxml.etree._Element.tag
+lxml.etree._Entity.tag
+lxml.etree._ProcessingInstruction.tag
+lxml.tests.test_xpathevaluator.tag
+xml.etree.ElementTree.Element.tag" class="py-name" href="#" onclick="return doclink('link-239', 'tag', 'link-53');">tag</a></tt> </tt>
+<a name="L320"></a><tt class="py-lineno">320</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">el_class</tt> </tt>
+</div><a name="L321"></a><tt class="py-lineno">321</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-240" class="py-name"><a title="lxml.tests.test_pyclasslookup.PyClassLookupTestCase._setClassLookup" class="py-name" href="#" onclick="return doclink('link-240', '_setClassLookup', 'link-40');">_setClassLookup</a></tt><tt class="py-op">(</tt><tt id="link-241" class="py-name"><a title="lxml.etree.CustomElementClassLookup.lookup
+lxml.etree.PythonElementClassLookup.lookup
+lxml.html.HtmlElementClassLookup.lookup" class="py-name" href="#" onclick="return doclink('link-241', 'lookup', 'link-41');">lookup</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L322"></a><tt class="py-lineno">322</tt>  <tt class="py-line">        <tt id="link-242" class="py-name"><a title="lxml.etree.iterparse.root" class="py-name" href="#" onclick="return doclink('link-242', 'root', 'link-42');">root</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-243" class="py-name"><a title="lxml.etree.XML
+lxml.objectify.XML
+lxml.tests.test_objectify.ObjectifyTestCase.XML
+lxml.tests.test_pyclasslookup.PyClassLookupTestCase.XML" class="py-name" href="#" onclick="return doclink('link-243', 'XML', 'link-36');">XML</a></tt><tt class="py-op">(</tt><tt id="link-244" class="py-name"><a title="lxml.tests.test_classlookup.xml_str
+lxml.tests.test_objectify.xml_str
+lxml.tests.test_pyclasslookup.xml_str" class="py-name" href="#" onclick="return doclink('link-244', 'xml_str', 'link-19');">xml_str</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L323"></a><tt class="py-lineno">323</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertNotEqual</tt><tt class="py-op">(</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-name">el_class</tt><tt class="py-op">.</tt><tt class="py-name">NEXT</tt><tt class="py-op">)</tt> </tt>
+<a name="L324"></a><tt class="py-lineno">324</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertEqual</tt><tt class="py-op">(</tt><tt id="link-245" class="py-name"><a title="lxml.etree.iterparse.root" class="py-name" href="#" onclick="return doclink('link-245', 'root', 'link-42');">root</a></tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt id="link-246" class="py-name"><a title="lxml.etree._Element.getnext" class="py-name" href="#" onclick="return doclink('link-246', 'getnext', 'link-238');">getnext</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-247" class="py-name"><a title="lxml.etree._Comment.tag
+lxml.etree._Element.tag
+lxml.etree._Entity.tag
+lxml.etree._ProcessingInstruction.tag
+lxml.tests.test_xpathevaluator.tag
+xml.etree.ElementTree.Element.tag" class="py-name" href="#" onclick="return doclink('link-247', 'tag', 'link-53');">tag</a></tt><tt class="py-op">,</tt> <tt class="py-name">el_class</tt><tt class="py-op">.</tt><tt class="py-name">NEXT</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L325"></a><tt class="py-lineno">325</tt>  <tt class="py-line"> </tt>
+<a name="PyClassLookupTestCase.test_lookup_getprevious"></a><div id="PyClassLookupTestCase.test_lookup_getprevious-def"><a name="L326"></a><tt class="py-lineno">326</tt> <a class="py-toggle" href="#" id="PyClassLookupTestCase.test_lookup_getprevious-toggle" onclick="return toggle('PyClassLookupTestCase.test_lookup_getprevious');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.test_pyclasslookup.PyClassLookupTestCase-class.html#test_lookup_getprevious">test_lookup_getprevious</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PyClassLookupTestCase.test_lookup_getprevious-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="PyClassLookupTestCase.test_lookup_getprevious-expanded"><a name="L327"></a><tt class="py-lineno">327</tt>  <tt class="py-line">        <tt class="py-name">el_class</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-248" class="py-name"><a title="lxml.tests.test_pyclasslookup.PyClassLookupTestCase._buildElementClass" class="py-name" href="#" onclick="return doclink('link-248', '_buildElementClass', 'link-39');">_buildElementClass</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L328"></a><tt class="py-lineno">328</tt>  <tt class="py-line">        <tt class="py-name">el_class</tt><tt class="py-op">.</tt><tt class="py-name">PREV</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L329"></a><tt class="py-lineno">329</tt>  <tt class="py-line">        <tt class="py-keyword">def</tt> <tt class="py-def-name">lookup</tt><tt class="py-op">(</tt><tt class="py-param">doc</tt><tt class="py-op">,</tt> <tt class="py-param">el</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L330"></a><tt class="py-lineno">330</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">el_class</tt><tt class="py-op">.</tt><tt class="py-name">PREV</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L331"></a><tt class="py-lineno">331</tt>  <tt class="py-line">                <tt class="py-name">el_class</tt><tt class="py-op">.</tt><tt class="py-name">PREV</tt> <tt class="py-op">=</tt> <tt class="py-name">el</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt id="link-249" class="py-name" targets="Method lxml.etree._Element.getprevious()=lxml.etree._Element-class.html#getprevious"><a title="lxml.etree._Element.getprevious" class="py-name" href="#" onclick="return doclink('link-249', 'getprevious', 'link-249');">getprevious</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-250" class="py-name"><a title="lxml.etree._Comment.tag
+lxml.etree._Element.tag
+lxml.etree._Entity.tag
+lxml.etree._ProcessingInstruction.tag
+lxml.tests.test_xpathevaluator.tag
+xml.etree.ElementTree.Element.tag" class="py-name" href="#" onclick="return doclink('link-250', 'tag', 'link-53');">tag</a></tt> </tt>
+<a name="L332"></a><tt class="py-lineno">332</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">el_class</tt> </tt>
+</div><a name="L333"></a><tt class="py-lineno">333</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-251" class="py-name"><a title="lxml.tests.test_pyclasslookup.PyClassLookupTestCase._setClassLookup" class="py-name" href="#" onclick="return doclink('link-251', '_setClassLookup', 'link-40');">_setClassLookup</a></tt><tt class="py-op">(</tt><tt id="link-252" class="py-name"><a title="lxml.etree.CustomElementClassLookup.lookup
+lxml.etree.PythonElementClassLookup.lookup
+lxml.html.HtmlElementClassLookup.lookup" class="py-name" href="#" onclick="return doclink('link-252', 'lookup', 'link-41');">lookup</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L334"></a><tt class="py-lineno">334</tt>  <tt class="py-line">        <tt id="link-253" class="py-name"><a title="lxml.etree.iterparse.root" class="py-name" href="#" onclick="return doclink('link-253', 'root', 'link-42');">root</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-254" class="py-name"><a title="lxml.etree.XML
+lxml.objectify.XML
+lxml.tests.test_objectify.ObjectifyTestCase.XML
+lxml.tests.test_pyclasslookup.PyClassLookupTestCase.XML" class="py-name" href="#" onclick="return doclink('link-254', 'XML', 'link-36');">XML</a></tt><tt class="py-op">(</tt><tt id="link-255" class="py-name"><a title="lxml.tests.test_classlookup.xml_str
+lxml.tests.test_objectify.xml_str
+lxml.tests.test_pyclasslookup.xml_str" class="py-name" href="#" onclick="return doclink('link-255', 'xml_str', 'link-19');">xml_str</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L335"></a><tt class="py-lineno">335</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertNotEqual</tt><tt class="py-op">(</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-name">el_class</tt><tt class="py-op">.</tt><tt class="py-name">PREV</tt><tt class="py-op">)</tt> </tt>
+<a name="L336"></a><tt class="py-lineno">336</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertEqual</tt><tt class="py-op">(</tt><tt id="link-256" class="py-name"><a title="lxml.etree.iterparse.root" class="py-name" href="#" onclick="return doclink('link-256', 'root', 'link-42');">root</a></tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt id="link-257" class="py-name"><a title="lxml.etree._Element.getprevious" class="py-name" href="#" onclick="return doclink('link-257', 'getprevious', 'link-249');">getprevious</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-258" class="py-name"><a title="lxml.etree._Comment.tag
+lxml.etree._Element.tag
+lxml.etree._Entity.tag
+lxml.etree._ProcessingInstruction.tag
+lxml.tests.test_xpathevaluator.tag
+xml.etree.ElementTree.Element.tag" class="py-name" href="#" onclick="return doclink('link-258', 'tag', 'link-53');">tag</a></tt><tt class="py-op">,</tt> <tt class="py-name">el_class</tt><tt class="py-op">.</tt><tt class="py-name">PREV</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L337"></a><tt class="py-lineno">337</tt>  <tt class="py-line"> </tt>
+<a name="PyClassLookupTestCase.test_comments_fallback"></a><div id="PyClassLookupTestCase.test_comments_fallback-def"><a name="L338"></a><tt class="py-lineno">338</tt> <a class="py-toggle" href="#" id="PyClassLookupTestCase.test_comments_fallback-toggle" onclick="return toggle('PyClassLookupTestCase.test_comments_fallback');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.test_pyclasslookup.PyClassLookupTestCase-class.html#test_comments_fallback">test_comments_fallback</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PyClassLookupTestCase.test_comments_fallback-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="PyClassLookupTestCase.test_comments_fallback-expanded"><a name="L339"></a><tt class="py-lineno">339</tt>  <tt class="py-line">        <tt class="py-keyword">def</tt> <tt class="py-def-name">return_none</tt><tt class="py-op">(</tt><tt class="py-op">*</tt><tt class="py-param">args</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L340"></a><tt class="py-lineno">340</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">None</tt> </tt>
+</div><a name="L341"></a><tt class="py-lineno">341</tt>  <tt class="py-line"> </tt>
+<a name="L342"></a><tt class="py-lineno">342</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-259" class="py-name"><a title="lxml.tests.test_pyclasslookup.PyClassLookupTestCase._setClassLookup" class="py-name" href="#" onclick="return doclink('link-259', '_setClassLookup', 'link-40');">_setClassLookup</a></tt><tt class="py-op">(</tt><tt class="py-name">return_none</tt><tt class="py-op">)</tt> </tt>
+<a name="L343"></a><tt class="py-lineno">343</tt>  <tt class="py-line">        <tt class="py-name">el</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-260" class="py-name"><a title="lxml.etree.XML
+lxml.objectify.XML
+lxml.tests.test_objectify.ObjectifyTestCase.XML
+lxml.tests.test_pyclasslookup.PyClassLookupTestCase.XML" class="py-name" href="#" onclick="return doclink('link-260', 'XML', 'link-36');">XML</a></tt><tt class="py-op">(</tt><tt class="py-string">'&lt;a&gt;&lt;!-- hello world --&gt;&lt;/a&gt;'</tt><tt class="py-op">)</tt> </tt>
+<a name="L344"></a><tt class="py-lineno">344</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertEqual</tt><tt class="py-op">(</tt><tt class="py-name">el</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt id="link-261" class="py-name"><a title="lxml.etree._Comment.tag
+lxml.etree._Element.tag
+lxml.etree._Entity.tag
+lxml.etree._ProcessingInstruction.tag
+lxml.tests.test_xpathevaluator.tag
+xml.etree.ElementTree.Element.tag" class="py-name" href="#" onclick="return doclink('link-261', 'tag', 'link-53');">tag</a></tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-262" class="py-name"><a title="lxml.etree
+lxml.sax.ElementTreeContentHandler.etree
+lxml.tests.test_elementtree.CElementTreeTestCase.etree
+lxml.tests.test_elementtree._ETreeTestCaseBase.etree
+lxml.tests.test_elementtree._XMLPullParserTest.etree
+lxml.tests.test_io._IOTestCaseBase.etree" class="py-name" href="#" onclick="return doclink('link-262', 'etree', 'link-9');">etree</a></tt><tt class="py-op">.</tt><tt id="link-263" class="py-name" targets="Function lxml.etree.Comment()=lxml.etree-module.html#Comment"><a title="lxml.etree.Comment" class="py-name" href="#" onclick="return doclink('link-263', 'Comment', 'link-263');">Comment</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L345"></a><tt class="py-lineno">345</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertEqual</tt><tt class="py-op">(</tt><tt class="py-name">el</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt id="link-264" class="py-name"><a title="lxml.etree.QName.text
+lxml.etree._Element.text
+lxml.etree._Entity.text
+lxml.objectify.ObjectifiedElement.text
+xml.etree.ElementTree.Element.text" class="py-name" href="#" onclick="return doclink('link-264', 'text', 'link-64');">text</a></tt><tt class="py-op">,</tt> <tt class="py-string">" hello world "</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L346"></a><tt class="py-lineno">346</tt>  <tt class="py-line"> </tt>
+<a name="L347"></a><tt class="py-lineno">347</tt>  <tt class="py-line"> </tt>
+<a name="test_suite"></a><div id="test_suite-def"><a name="L348"></a><tt class="py-lineno">348</tt> <a class="py-toggle" href="#" id="test_suite-toggle" onclick="return toggle('test_suite');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.test_pyclasslookup-module.html#test_suite">test_suite</a><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="test_suite-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="test_suite-expanded"><a name="L349"></a><tt class="py-lineno">349</tt>  <tt class="py-line">    <tt class="py-name">suite</tt> <tt class="py-op">=</tt> <tt class="py-name">unittest</tt><tt class="py-op">.</tt><tt class="py-name">TestSuite</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L350"></a><tt class="py-lineno">350</tt>  <tt class="py-line">    <tt class="py-name">suite</tt><tt class="py-op">.</tt><tt class="py-name">addTests</tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt class="py-name">unittest</tt><tt class="py-op">.</tt><tt class="py-name">makeSuite</tt><tt class="py-op">(</tt><tt id="link-265" class="py-name"><a title="lxml.tests.test_pyclasslookup.PyClassLookupTestCase" class="py-name" href="#" onclick="return doclink('link-265', 'PyClassLookupTestCase', 'link-31');">PyClassLookupTestCase</a></tt><tt class="py-op">)</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L351"></a><tt class="py-lineno">351</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">suite</tt> </tt>
+</div><a name="L352"></a><tt class="py-lineno">352</tt>  <tt class="py-line"> </tt>
+<a name="L353"></a><tt class="py-lineno">353</tt>  <tt class="py-line"><tt class="py-keyword">if</tt> <tt class="py-name">__name__</tt> <tt class="py-op">==</tt> <tt class="py-string">'__main__'</tt><tt class="py-op">:</tt> </tt>
+<a name="L354"></a><tt class="py-lineno">354</tt>  <tt class="py-line">    <tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-string">'to test use test.py %s'</tt> <tt class="py-op">%</tt> <tt class="py-name">__file__</tt><tt class="py-op">)</tt> </tt>
+<a name="L355"></a><tt class="py-lineno">355</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lxml-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="/">lxml API</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Fri Jun 22 18:59:52 2018
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

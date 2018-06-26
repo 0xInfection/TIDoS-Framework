@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>lxml.builder</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lxml-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="/">lxml API</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="lxml-module.html">Package&nbsp;lxml</a> ::
+        Module&nbsp;builder
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="lxml.builder-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="lxml.builder-module.html">Module lxml.builder</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-comment"># Element generator factory by Fredrik Lundh.</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-comment"># Source:</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-comment">#    http://online.effbot.org/2006_11_01_archive.htm#et-builder</tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-comment">#    http://effbot.python-hosting.com/file/stuff/sandbox/elementlib/builder.py</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-comment"># --------------------------------------------------------------------</tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-comment"># The ElementTree toolkit is</tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-comment"># Copyright (c) 1999-2004 by Fredrik Lundh</tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-comment"># By obtaining, using, and/or copying this software and/or its</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt class="py-comment"># associated documentation, you agree that you have read, understood,</tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt class="py-comment"># and will comply with the following terms and conditions:</tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"><tt class="py-comment"># Permission to use, copy, modify, and distribute this software and</tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"><tt class="py-comment"># its associated documentation for any purpose and without fee is</tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"><tt class="py-comment"># hereby granted, provided that the above copyright notice appears in</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"><tt class="py-comment"># all copies, and that both that copyright notice and this permission</tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"><tt class="py-comment"># notice appear in supporting documentation, and that the name of</tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line"><tt class="py-comment"># Secret Labs AB or the author not be used in advertising or publicity</tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line"><tt class="py-comment"># pertaining to distribution of the software without specific, written</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line"><tt class="py-comment"># prior permission.</tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line"><tt class="py-comment"># SECRET LABS AB AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line"><tt class="py-comment"># TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF MERCHANT-</tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line"><tt class="py-comment"># ABILITY AND FITNESS.  IN NO EVENT SHALL SECRET LABS AB OR THE AUTHOR</tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line"><tt class="py-comment"># BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL DAMAGES OR ANY</tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line"><tt class="py-comment"># DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS,</tt> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line"><tt class="py-comment"># WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS</tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line"><tt class="py-comment"># ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE</tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line"><tt class="py-comment"># OF THIS SOFTWARE.</tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line"><tt class="py-comment"># --------------------------------------------------------------------</tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line"> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line"><tt class="py-docstring">The ``E`` Element factory for generating XML documents.</tt> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line"> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-0" class="py-name" targets="Package lxml=lxml-module.html"><a title="lxml" class="py-name" href="#" onclick="return doclink('link-0', 'lxml', 'link-0');">lxml</a></tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Module lxml.etree=lxml.etree-module.html,Variable lxml.sax.ElementTreeContentHandler.etree=lxml.sax.ElementTreeContentHandler-class.html#etree,Variable lxml.tests.test_elementtree.CElementTreeTestCase.etree=lxml.tests.test_elementtree.CElementTreeTestCase-class.html#etree,Variable lxml.tests.test_elementtree._ETreeTestCaseBase.etree=lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#etree,Variable lxml.tests.test_elementtree._XMLPullParserTest.etree=lxml.tests.test_elementtree._XMLPullParserTest-class.html#etree,Variable lxml.tests.test_io._IOTestCaseBase.etree=lxml.tests.test_io._IOTestCaseBase-class.html#etree"><a title="lxml.etree
+lxml.sax.ElementTreeContentHandler.etree
+lxml.tests.test_elementtree.CElementTreeTestCase.etree
+lxml.tests.test_elementtree._ETreeTestCaseBase.etree
+lxml.tests.test_elementtree._XMLPullParserTest.etree
+lxml.tests.test_io._IOTestCaseBase.etree" class="py-name" href="#" onclick="return doclink('link-1', 'etree', 'link-1');">etree</a></tt> <tt class="py-keyword">as</tt> <tt class="py-name">ET</tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line"> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">functools</tt> <tt class="py-keyword">import</tt> <tt class="py-name">partial</tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line"> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line"><tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line">    <tt id="link-2" class="py-name" targets="Variable lxml.html.clean.basestring=lxml.html.clean-module.html#basestring"><a title="lxml.html.clean.basestring" class="py-name" href="#" onclick="return doclink('link-2', 'basestring', 'link-2');">basestring</a></tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line"><tt class="py-keyword">except</tt> <tt class="py-name">NameError</tt><tt class="py-op">:</tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line">    <tt id="link-3" class="py-name"><a title="lxml.html.clean.basestring" class="py-name" href="#" onclick="return doclink('link-3', 'basestring', 'link-2');">basestring</a></tt> <tt class="py-op">=</tt> <tt id="link-4" class="py-name" targets="Class str=str-class.html"><a title="str" class="py-name" href="#" onclick="return doclink('link-4', 'str', 'link-4');">str</a></tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line"> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line"><tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line">    <tt class="py-name">unicode</tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line"><tt class="py-keyword">except</tt> <tt class="py-name">NameError</tt><tt class="py-op">:</tt> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line">    <tt class="py-name">unicode</tt> <tt class="py-op">=</tt> <tt id="link-5" class="py-name"><a title="str" class="py-name" href="#" onclick="return doclink('link-5', 'str', 'link-4');">str</a></tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line"> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line"> </tt>
+<a name="ElementMaker"></a><div id="ElementMaker-def"><a name="L55"></a><tt class="py-lineno"> 55</tt> <a class="py-toggle" href="#" id="ElementMaker-toggle" onclick="return toggle('ElementMaker');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lxml.builder.ElementMaker-class.html">ElementMaker</a><tt class="py-op">(</tt><tt class="py-base-class">object</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ElementMaker-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="ElementMaker-expanded"><a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line">    <tt class="py-docstring">"""Element generator factory.</tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line"><tt class="py-docstring">    Unlike the ordinary Element factory, the E factory allows you to pass in</tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line"><tt class="py-docstring">    more than just a tag and some optional attributes; you can also pass in</tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line"><tt class="py-docstring">    text and other elements.  The text is added as either text or tail</tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line"><tt class="py-docstring">    attributes, and elements are inserted at the right spot.  Some small</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line"><tt class="py-docstring">    examples::</tt> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line"><tt class="py-docstring">        &gt;&gt;&gt; from lxml import etree as ET</tt> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line"><tt class="py-docstring">        &gt;&gt;&gt; from lxml.builder import E</tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line"><tt class="py-docstring">        &gt;&gt;&gt; ET.tostring(E("tag"))</tt> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line"><tt class="py-docstring">        '&lt;tag/&gt;'</tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line"><tt class="py-docstring">        &gt;&gt;&gt; ET.tostring(E("tag", "text"))</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line"><tt class="py-docstring">        '&lt;tag&gt;text&lt;/tag&gt;'</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line"><tt class="py-docstring">        &gt;&gt;&gt; ET.tostring(E("tag", "text", key="value"))</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line"><tt class="py-docstring">        '&lt;tag key="value"&gt;text&lt;/tag&gt;'</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line"><tt class="py-docstring">        &gt;&gt;&gt; ET.tostring(E("tag", E("subtag", "text"), "tail"))</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line"><tt class="py-docstring">        '&lt;tag&gt;&lt;subtag&gt;text&lt;/subtag&gt;tail&lt;/tag&gt;'</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line"><tt class="py-docstring">    For simple tags, the factory also allows you to write ``E.tag(...)`` instead</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line"><tt class="py-docstring">    of ``E('tag', ...)``::</tt> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line"><tt class="py-docstring">        &gt;&gt;&gt; ET.tostring(E.tag())</tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line"><tt class="py-docstring">        '&lt;tag/&gt;'</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line"><tt class="py-docstring">        &gt;&gt;&gt; ET.tostring(E.tag("text"))</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line"><tt class="py-docstring">        '&lt;tag&gt;text&lt;/tag&gt;'</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line"><tt class="py-docstring">        &gt;&gt;&gt; ET.tostring(E.tag(E.subtag("text"), "tail"))</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line"><tt class="py-docstring">        '&lt;tag&gt;&lt;subtag&gt;text&lt;/subtag&gt;tail&lt;/tag&gt;'</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line"><tt class="py-docstring">    Here's a somewhat larger example; this shows how to generate HTML</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line"><tt class="py-docstring">    documents, using a mix of prepared factory functions for inline elements,</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line"><tt class="py-docstring">    nested ``E.tag`` calls, and embedded XHTML fragments::</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line"><tt class="py-docstring">        # some common inline elements</tt> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line"><tt class="py-docstring">        A = E.a</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line"><tt class="py-docstring">        I = E.i</tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line"><tt class="py-docstring">        B = E.b</tt> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line"><tt class="py-docstring">        def CLASS(v):</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line"><tt class="py-docstring">            # helper function, 'class' is a reserved word</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line"><tt class="py-docstring">            return {'class': v}</tt> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line"><tt class="py-docstring">        page = (</tt> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line"><tt class="py-docstring">            E.html(</tt> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line"><tt class="py-docstring">                E.head(</tt> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line"><tt class="py-docstring">                    E.title("This is a sample document")</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line"><tt class="py-docstring">                ),</tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line"><tt class="py-docstring">                E.body(</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line"><tt class="py-docstring">                    E.h1("Hello!", CLASS("title")),</tt> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line"><tt class="py-docstring">                    E.p("This is a paragraph with ", B("bold"), " text in it!"),</tt> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line"><tt class="py-docstring">                    E.p("This is another paragraph, with a ",</tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line"><tt class="py-docstring">                        A("link", href="http://www.python.org"), "."),</tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line"><tt class="py-docstring">                    E.p("Here are some reserved characters: &lt;spam&amp;egg&gt;."),</tt> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line"><tt class="py-docstring">                    ET.XML("&lt;p&gt;And finally, here is an embedded XHTML fragment.&lt;/p&gt;"),</tt> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line"><tt class="py-docstring">                )</tt> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line"><tt class="py-docstring">            )</tt> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line"><tt class="py-docstring">        )</tt> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line"><tt class="py-docstring">        print ET.tostring(page)</tt> </tt>
+<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line"><tt class="py-docstring">    Here's a prettyprinted version of the output from the above script::</tt> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line"><tt class="py-docstring">        &lt;html&gt;</tt> </tt>
+<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line"><tt class="py-docstring">          &lt;head&gt;</tt> </tt>
+<a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line"><tt class="py-docstring">            &lt;title&gt;This is a sample document&lt;/title&gt;</tt> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line"><tt class="py-docstring">          &lt;/head&gt;</tt> </tt>
+<a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line"><tt class="py-docstring">          &lt;body&gt;</tt> </tt>
+<a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line"><tt class="py-docstring">            &lt;h1 class="title"&gt;Hello!&lt;/h1&gt;</tt> </tt>
+<a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line"><tt class="py-docstring">            &lt;p&gt;This is a paragraph with &lt;b&gt;bold&lt;/b&gt; text in it!&lt;/p&gt;</tt> </tt>
+<a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line"><tt class="py-docstring">            &lt;p&gt;This is another paragraph, with &lt;a href="http://www.python.org"&gt;link&lt;/a&gt;.&lt;/p&gt;</tt> </tt>
+<a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line"><tt class="py-docstring">            &lt;p&gt;Here are some reserved characters: &amp;lt;spam&amp;amp;egg&amp;gt;.&lt;/p&gt;</tt> </tt>
+<a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line"><tt class="py-docstring">            &lt;p&gt;And finally, here is an embedded XHTML fragment.&lt;/p&gt;</tt> </tt>
+<a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line"><tt class="py-docstring">          &lt;/body&gt;</tt> </tt>
+<a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line"><tt class="py-docstring">        &lt;/html&gt;</tt> </tt>
+<a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line"><tt class="py-docstring">    For namespace support, you can pass a namespace map (``nsmap``)</tt> </tt>
+<a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line"><tt class="py-docstring">    and/or a specific target ``namespace`` to the ElementMaker class::</tt> </tt>
+<a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line"><tt class="py-docstring">        &gt;&gt;&gt; E = ElementMaker(namespace="http://my.ns/")</tt> </tt>
+<a name="L136"></a><tt class="py-lineno">136</tt>  <tt class="py-line"><tt class="py-docstring">        &gt;&gt;&gt; print(ET.tostring( E.test ))</tt> </tt>
+<a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line"><tt class="py-docstring">        &lt;test xmlns="http://my.ns/"/&gt;</tt> </tt>
+<a name="L138"></a><tt class="py-lineno">138</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L139"></a><tt class="py-lineno">139</tt>  <tt class="py-line"><tt class="py-docstring">        &gt;&gt;&gt; E = ElementMaker(namespace="http://my.ns/", nsmap={'p':'http://my.ns/'})</tt> </tt>
+<a name="L140"></a><tt class="py-lineno">140</tt>  <tt class="py-line"><tt class="py-docstring">        &gt;&gt;&gt; print(ET.tostring( E.test ))</tt> </tt>
+<a name="L141"></a><tt class="py-lineno">141</tt>  <tt class="py-line"><tt class="py-docstring">        &lt;p:test xmlns:p="http://my.ns/"/&gt;</tt> </tt>
+<a name="L142"></a><tt class="py-lineno">142</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L143"></a><tt class="py-lineno">143</tt>  <tt class="py-line"> </tt>
+<a name="ElementMaker.__init__"></a><div id="ElementMaker.__init__-def"><a name="L144"></a><tt class="py-lineno">144</tt> <a class="py-toggle" href="#" id="ElementMaker.__init__-toggle" onclick="return toggle('ElementMaker.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.builder.ElementMaker-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">typemap</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> </tt>
+<a name="L145"></a><tt class="py-lineno">145</tt>  <tt class="py-line">                 <tt class="py-param">namespace</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-param">nsmap</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-param">makeelement</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ElementMaker.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="ElementMaker.__init__-expanded"><a name="L146"></a><tt class="py-lineno">146</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt id="link-6" class="py-name" targets="Variable lxml.etree.QName.namespace=lxml.etree.QName-class.html#namespace,Function lxml.tests.selftest.namespace()=lxml.tests.selftest-module.html#namespace"><a title="lxml.etree.QName.namespace
+lxml.tests.selftest.namespace" class="py-name" href="#" onclick="return doclink('link-6', 'namespace', 'link-6');">namespace</a></tt> <tt class="py-keyword">is</tt> <tt class="py-keyword">not</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L147"></a><tt class="py-lineno">147</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-7" class="py-name" targets="Variable lxml.builder.ElementMaker._namespace=lxml.builder.ElementMaker-class.html#_namespace"><a title="lxml.builder.ElementMaker._namespace" class="py-name" href="#" onclick="return doclink('link-7', '_namespace', 'link-7');">_namespace</a></tt> <tt class="py-op">=</tt> <tt class="py-string">'{'</tt> <tt class="py-op">+</tt> <tt id="link-8" class="py-name"><a title="lxml.etree.QName.namespace
+lxml.tests.selftest.namespace" class="py-name" href="#" onclick="return doclink('link-8', 'namespace', 'link-6');">namespace</a></tt> <tt class="py-op">+</tt> <tt class="py-string">'}'</tt> </tt>
+<a name="L148"></a><tt class="py-lineno">148</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L149"></a><tt class="py-lineno">149</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-9" class="py-name"><a title="lxml.builder.ElementMaker._namespace" class="py-name" href="#" onclick="return doclink('link-9', '_namespace', 'link-7');">_namespace</a></tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L150"></a><tt class="py-lineno">150</tt>  <tt class="py-line"> </tt>
+<a name="L151"></a><tt class="py-lineno">151</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt id="link-10" class="py-name" targets="Variable lxml.etree._Element.nsmap=lxml.etree._Element-class.html#nsmap"><a title="lxml.etree._Element.nsmap" class="py-name" href="#" onclick="return doclink('link-10', 'nsmap', 'link-10');">nsmap</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L152"></a><tt class="py-lineno">152</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-11" class="py-name" targets="Variable lxml.builder.ElementMaker._nsmap=lxml.builder.ElementMaker-class.html#_nsmap"><a title="lxml.builder.ElementMaker._nsmap" class="py-name" href="#" onclick="return doclink('link-11', '_nsmap', 'link-11');">_nsmap</a></tt> <tt class="py-op">=</tt> <tt class="py-name">dict</tt><tt class="py-op">(</tt><tt id="link-12" class="py-name"><a title="lxml.etree._Element.nsmap" class="py-name" href="#" onclick="return doclink('link-12', 'nsmap', 'link-10');">nsmap</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L153"></a><tt class="py-lineno">153</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L154"></a><tt class="py-lineno">154</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-13" class="py-name"><a title="lxml.builder.ElementMaker._nsmap" class="py-name" href="#" onclick="return doclink('link-13', '_nsmap', 'link-11');">_nsmap</a></tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L155"></a><tt class="py-lineno">155</tt>  <tt class="py-line"> </tt>
+<a name="L156"></a><tt class="py-lineno">156</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt id="link-14" class="py-name" targets="Method lxml.etree._Element.makeelement()=lxml.etree._Element-class.html#makeelement,Method lxml.etree.iterparse.makeelement()=lxml.etree.iterparse-class.html#makeelement,Function lxml.tests.selftest2.makeelement()=lxml.tests.selftest2-module.html#makeelement"><a title="lxml.etree._Element.makeelement
+lxml.etree.iterparse.makeelement
+lxml.tests.selftest2.makeelement" class="py-name" href="#" onclick="return doclink('link-14', 'makeelement', 'link-14');">makeelement</a></tt> <tt class="py-keyword">is</tt> <tt class="py-keyword">not</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L157"></a><tt class="py-lineno">157</tt>  <tt class="py-line">            <tt class="py-keyword">assert</tt> <tt class="py-name">callable</tt><tt class="py-op">(</tt><tt id="link-15" class="py-name"><a title="lxml.etree._Element.makeelement
+lxml.etree.iterparse.makeelement
+lxml.tests.selftest2.makeelement" class="py-name" href="#" onclick="return doclink('link-15', 'makeelement', 'link-14');">makeelement</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L158"></a><tt class="py-lineno">158</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-16" class="py-name" targets="Variable lxml.builder.ElementMaker._makeelement=lxml.builder.ElementMaker-class.html#_makeelement"><a title="lxml.builder.ElementMaker._makeelement" class="py-name" href="#" onclick="return doclink('link-16', '_makeelement', 'link-16');">_makeelement</a></tt> <tt class="py-op">=</tt> <tt id="link-17" class="py-name"><a title="lxml.etree._Element.makeelement
+lxml.etree.iterparse.makeelement
+lxml.tests.selftest2.makeelement" class="py-name" href="#" onclick="return doclink('link-17', 'makeelement', 'link-14');">makeelement</a></tt> </tt>
+<a name="L159"></a><tt class="py-lineno">159</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L160"></a><tt class="py-lineno">160</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-18" class="py-name"><a title="lxml.builder.ElementMaker._makeelement" class="py-name" href="#" onclick="return doclink('link-18', '_makeelement', 'link-16');">_makeelement</a></tt> <tt class="py-op">=</tt> <tt class="py-name">ET</tt><tt class="py-op">.</tt><tt id="link-19" class="py-name" targets="Function lxml.etree.Element()=lxml.etree-module.html#Element,Function lxml.objectify.Element()=lxml.objectify-module.html#Element,Method lxml.tests.test_pyclasslookup.PyClassLookupTestCase.Element()=lxml.tests.test_pyclasslookup.PyClassLookupTestCase-class.html#Element,Class xml.etree.ElementTree.Element=xml.etree.ElementTree.Element-class.html"><a title="lxml.etree.Element
+lxml.objectify.Element
+lxml.tests.test_pyclasslookup.PyClassLookupTestCase.Element
+xml.etree.ElementTree.Element" class="py-name" href="#" onclick="return doclink('link-19', 'Element', 'link-19');">Element</a></tt> </tt>
+<a name="L161"></a><tt class="py-lineno">161</tt>  <tt class="py-line"> </tt>
+<a name="L162"></a><tt class="py-lineno">162</tt>  <tt class="py-line">        <tt class="py-comment"># initialize type map for this element factory</tt> </tt>
+<a name="L163"></a><tt class="py-lineno">163</tt>  <tt class="py-line"> </tt>
+<a name="L164"></a><tt class="py-lineno">164</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">typemap</tt><tt class="py-op">:</tt> </tt>
+<a name="L165"></a><tt class="py-lineno">165</tt>  <tt class="py-line">            <tt class="py-name">typemap</tt> <tt class="py-op">=</tt> <tt class="py-name">dict</tt><tt class="py-op">(</tt><tt class="py-name">typemap</tt><tt class="py-op">)</tt> </tt>
+<a name="L166"></a><tt class="py-lineno">166</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L167"></a><tt class="py-lineno">167</tt>  <tt class="py-line">            <tt class="py-name">typemap</tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt> </tt>
+<a name="L168"></a><tt class="py-lineno">168</tt>  <tt class="py-line"> </tt>
+<a name="L169"></a><tt class="py-lineno">169</tt>  <tt class="py-line">        <tt class="py-keyword">def</tt> <tt class="py-def-name">add_text</tt><tt class="py-op">(</tt><tt class="py-param">elem</tt><tt class="py-op">,</tt> <tt class="py-param">item</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L170"></a><tt class="py-lineno">170</tt>  <tt class="py-line">            <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L171"></a><tt class="py-lineno">171</tt>  <tt class="py-line">                <tt class="py-name">elem</tt><tt class="py-op">[</tt><tt class="py-op">-</tt><tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt id="link-20" class="py-name" targets="Variable lxml.etree._Element.tail=lxml.etree._Element-class.html#tail,Variable xml.etree.ElementTree.Element.tail=xml.etree.ElementTree.Element-class.html#tail"><a title="lxml.etree._Element.tail
+xml.etree.ElementTree.Element.tail" class="py-name" href="#" onclick="return doclink('link-20', 'tail', 'link-20');">tail</a></tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-name">elem</tt><tt class="py-op">[</tt><tt class="py-op">-</tt><tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt id="link-21" class="py-name"><a title="lxml.etree._Element.tail
+xml.etree.ElementTree.Element.tail" class="py-name" href="#" onclick="return doclink('link-21', 'tail', 'link-20');">tail</a></tt> <tt class="py-keyword">or</tt> <tt class="py-string">""</tt><tt class="py-op">)</tt> <tt class="py-op">+</tt> <tt class="py-name">item</tt> </tt>
+<a name="L172"></a><tt class="py-lineno">172</tt>  <tt class="py-line">            <tt class="py-keyword">except</tt> <tt class="py-name">IndexError</tt><tt class="py-op">:</tt> </tt>
+<a name="L173"></a><tt class="py-lineno">173</tt>  <tt class="py-line">                <tt class="py-name">elem</tt><tt class="py-op">.</tt><tt id="link-22" class="py-name" targets="Variable lxml.etree.QName.text=lxml.etree.QName-class.html#text,Variable lxml.etree._Element.text=lxml.etree._Element-class.html#text,Variable lxml.etree._Entity.text=lxml.etree._Entity-class.html#text,Variable lxml.objectify.ObjectifiedElement.text=lxml.objectify.ObjectifiedElement-class.html#text,Variable xml.etree.ElementTree.Element.text=xml.etree.ElementTree.Element-class.html#text"><a title="lxml.etree.QName.text
+lxml.etree._Element.text
+lxml.etree._Entity.text
+lxml.objectify.ObjectifiedElement.text
+xml.etree.ElementTree.Element.text" class="py-name" href="#" onclick="return doclink('link-22', 'text', 'link-22');">text</a></tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-name">elem</tt><tt class="py-op">.</tt><tt id="link-23" class="py-name"><a title="lxml.etree.QName.text
+lxml.etree._Element.text
+lxml.etree._Entity.text
+lxml.objectify.ObjectifiedElement.text
+xml.etree.ElementTree.Element.text" class="py-name" href="#" onclick="return doclink('link-23', 'text', 'link-22');">text</a></tt> <tt class="py-keyword">or</tt> <tt class="py-string">""</tt><tt class="py-op">)</tt> <tt class="py-op">+</tt> <tt class="py-name">item</tt> </tt>
+</div><a name="L174"></a><tt class="py-lineno">174</tt>  <tt class="py-line"> </tt>
+<a name="L175"></a><tt class="py-lineno">175</tt>  <tt class="py-line">        <tt class="py-keyword">def</tt> <tt class="py-def-name">add_cdata</tt><tt class="py-op">(</tt><tt class="py-param">elem</tt><tt class="py-op">,</tt> <tt class="py-param">cdata</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L176"></a><tt class="py-lineno">176</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">elem</tt><tt class="py-op">.</tt><tt id="link-24" class="py-name"><a title="lxml.etree.QName.text
+lxml.etree._Element.text
+lxml.etree._Entity.text
+lxml.objectify.ObjectifiedElement.text
+xml.etree.ElementTree.Element.text" class="py-name" href="#" onclick="return doclink('link-24', 'text', 'link-22');">text</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L177"></a><tt class="py-lineno">177</tt>  <tt class="py-line">                <tt class="py-keyword">raise</tt> <tt class="py-name">ValueError</tt><tt class="py-op">(</tt><tt class="py-string">"Can't add a CDATA section. Element already has some text: %r"</tt> <tt class="py-op">%</tt> <tt class="py-name">elem</tt><tt class="py-op">.</tt><tt id="link-25" class="py-name"><a title="lxml.etree.QName.text
+lxml.etree._Element.text
+lxml.etree._Entity.text
+lxml.objectify.ObjectifiedElement.text
+xml.etree.ElementTree.Element.text" class="py-name" href="#" onclick="return doclink('link-25', 'text', 'link-22');">text</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L178"></a><tt class="py-lineno">178</tt>  <tt class="py-line">            <tt class="py-name">elem</tt><tt class="py-op">.</tt><tt id="link-26" class="py-name"><a title="lxml.etree.QName.text
+lxml.etree._Element.text
+lxml.etree._Entity.text
+lxml.objectify.ObjectifiedElement.text
+xml.etree.ElementTree.Element.text" class="py-name" href="#" onclick="return doclink('link-26', 'text', 'link-22');">text</a></tt> <tt class="py-op">=</tt> <tt id="link-27" class="py-name" targets="Function lxml.tests.selftest2.cdata()=lxml.tests.selftest2-module.html#cdata"><a title="lxml.tests.selftest2.cdata" class="py-name" href="#" onclick="return doclink('link-27', 'cdata', 'link-27');">cdata</a></tt> </tt>
+</div><a name="L179"></a><tt class="py-lineno">179</tt>  <tt class="py-line"> </tt>
+<a name="L180"></a><tt class="py-lineno">180</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt id="link-28" class="py-name"><a title="str" class="py-name" href="#" onclick="return doclink('link-28', 'str', 'link-4');">str</a></tt> <tt class="py-keyword">not</tt> <tt class="py-keyword">in</tt> <tt class="py-name">typemap</tt><tt class="py-op">:</tt> </tt>
+<a name="L181"></a><tt class="py-lineno">181</tt>  <tt class="py-line">            <tt class="py-name">typemap</tt><tt class="py-op">[</tt><tt id="link-29" class="py-name"><a title="str" class="py-name" href="#" onclick="return doclink('link-29', 'str', 'link-4');">str</a></tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">add_text</tt> </tt>
+<a name="L182"></a><tt class="py-lineno">182</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">unicode</tt> <tt class="py-keyword">not</tt> <tt class="py-keyword">in</tt> <tt class="py-name">typemap</tt><tt class="py-op">:</tt> </tt>
+<a name="L183"></a><tt class="py-lineno">183</tt>  <tt class="py-line">            <tt class="py-name">typemap</tt><tt class="py-op">[</tt><tt class="py-name">unicode</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">add_text</tt> </tt>
+<a name="L184"></a><tt class="py-lineno">184</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">ET</tt><tt class="py-op">.</tt><tt id="link-30" class="py-name" targets="Class lxml.etree.CDATA=lxml.etree.CDATA-class.html"><a title="lxml.etree.CDATA" class="py-name" href="#" onclick="return doclink('link-30', 'CDATA', 'link-30');">CDATA</a></tt> <tt class="py-keyword">not</tt> <tt class="py-keyword">in</tt> <tt class="py-name">typemap</tt><tt class="py-op">:</tt> </tt>
+<a name="L185"></a><tt class="py-lineno">185</tt>  <tt class="py-line">            <tt class="py-name">typemap</tt><tt class="py-op">[</tt><tt class="py-name">ET</tt><tt class="py-op">.</tt><tt id="link-31" class="py-name"><a title="lxml.etree.CDATA" class="py-name" href="#" onclick="return doclink('link-31', 'CDATA', 'link-30');">CDATA</a></tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">add_cdata</tt> </tt>
+<a name="L186"></a><tt class="py-lineno">186</tt>  <tt class="py-line"> </tt>
+<a name="L187"></a><tt class="py-lineno">187</tt>  <tt class="py-line">        <tt class="py-keyword">def</tt> <tt class="py-def-name">add_dict</tt><tt class="py-op">(</tt><tt class="py-param">elem</tt><tt class="py-op">,</tt> <tt class="py-param">item</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L188"></a><tt class="py-lineno">188</tt>  <tt class="py-line">            <tt id="link-32" class="py-name" targets="Variable lxml.etree._Element.attrib=lxml.etree._Element-class.html#attrib,Variable lxml.etree._ProcessingInstruction.attrib=lxml.etree._ProcessingInstruction-class.html#attrib,Function lxml.tests.selftest2.attrib()=lxml.tests.selftest2-module.html#attrib,Variable xml.etree.ElementTree.Element.attrib=xml.etree.ElementTree.Element-class.html#attrib"><a title="lxml.etree._Element.attrib
+lxml.etree._ProcessingInstruction.attrib
+lxml.tests.selftest2.attrib
+xml.etree.ElementTree.Element.attrib" class="py-name" href="#" onclick="return doclink('link-32', 'attrib', 'link-32');">attrib</a></tt> <tt class="py-op">=</tt> <tt class="py-name">elem</tt><tt class="py-op">.</tt><tt id="link-33" class="py-name"><a title="lxml.etree._Element.attrib
+lxml.etree._ProcessingInstruction.attrib
+lxml.tests.selftest2.attrib
+xml.etree.ElementTree.Element.attrib" class="py-name" href="#" onclick="return doclink('link-33', 'attrib', 'link-32');">attrib</a></tt> </tt>
+<a name="L189"></a><tt class="py-lineno">189</tt>  <tt class="py-line">            <tt class="py-keyword">for</tt> <tt class="py-name">k</tt><tt class="py-op">,</tt> <tt id="link-34" class="py-name" targets="Variable lxml.tests.test_objectify.v=lxml.tests.test_objectify-module.html#v"><a title="lxml.tests.test_objectify.v" class="py-name" href="#" onclick="return doclink('link-34', 'v', 'link-34');">v</a></tt> <tt class="py-keyword">in</tt> <tt class="py-name">item</tt><tt class="py-op">.</tt><tt id="link-35" class="py-name" targets="Method lxml.etree._Attrib.items()=lxml.etree._Attrib-class.html#items,Method lxml.etree._Element.items()=lxml.etree._Element-class.html#items,Method lxml.etree._IDDict.items()=lxml.etree._IDDict-class.html#items"><a title="lxml.etree._Attrib.items
+lxml.etree._Element.items
+lxml.etree._IDDict.items" class="py-name" href="#" onclick="return doclink('link-35', 'items', 'link-35');">items</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L190"></a><tt class="py-lineno">190</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt id="link-36" class="py-name"><a title="lxml.tests.test_objectify.v" class="py-name" href="#" onclick="return doclink('link-36', 'v', 'link-34');">v</a></tt><tt class="py-op">,</tt> <tt id="link-37" class="py-name"><a title="lxml.html.clean.basestring" class="py-name" href="#" onclick="return doclink('link-37', 'basestring', 'link-2');">basestring</a></tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L191"></a><tt class="py-lineno">191</tt>  <tt class="py-line">                    <tt id="link-38" class="py-name"><a title="lxml.etree._Element.attrib
+lxml.etree._ProcessingInstruction.attrib
+lxml.tests.selftest2.attrib
+xml.etree.ElementTree.Element.attrib" class="py-name" href="#" onclick="return doclink('link-38', 'attrib', 'link-32');">attrib</a></tt><tt class="py-op">[</tt><tt class="py-name">k</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt id="link-39" class="py-name"><a title="lxml.tests.test_objectify.v" class="py-name" href="#" onclick="return doclink('link-39', 'v', 'link-34');">v</a></tt> </tt>
+<a name="L192"></a><tt class="py-lineno">192</tt>  <tt class="py-line">                <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L193"></a><tt class="py-lineno">193</tt>  <tt class="py-line">                    <tt id="link-40" class="py-name"><a title="lxml.etree._Element.attrib
+lxml.etree._ProcessingInstruction.attrib
+lxml.tests.selftest2.attrib
+xml.etree.ElementTree.Element.attrib" class="py-name" href="#" onclick="return doclink('link-40', 'attrib', 'link-32');">attrib</a></tt><tt class="py-op">[</tt><tt class="py-name">k</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">typemap</tt><tt class="py-op">[</tt><tt id="link-41" class="py-name" targets="Variable lxml.etree._LogEntry.type=lxml.etree._LogEntry-class.html#type,Variable lxml.html.InputElement.type=lxml.html.InputElement-class.html#type"><a title="lxml.etree._LogEntry.type
+lxml.html.InputElement.type" class="py-name" href="#" onclick="return doclink('link-41', 'type', 'link-41');">type</a></tt><tt class="py-op">(</tt><tt id="link-42" class="py-name"><a title="lxml.tests.test_objectify.v" class="py-name" href="#" onclick="return doclink('link-42', 'v', 'link-34');">v</a></tt><tt class="py-op">)</tt><tt class="py-op">]</tt><tt class="py-op">(</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> <tt id="link-43" class="py-name"><a title="lxml.tests.test_objectify.v" class="py-name" href="#" onclick="return doclink('link-43', 'v', 'link-34');">v</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L194"></a><tt class="py-lineno">194</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">dict</tt> <tt class="py-keyword">not</tt> <tt class="py-keyword">in</tt> <tt class="py-name">typemap</tt><tt class="py-op">:</tt> </tt>
+<a name="L195"></a><tt class="py-lineno">195</tt>  <tt class="py-line">            <tt class="py-name">typemap</tt><tt class="py-op">[</tt><tt class="py-name">dict</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">add_dict</tt> </tt>
+<a name="L196"></a><tt class="py-lineno">196</tt>  <tt class="py-line"> </tt>
+<a name="L197"></a><tt class="py-lineno">197</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-44" class="py-name" targets="Variable lxml.builder.ElementMaker._typemap=lxml.builder.ElementMaker-class.html#_typemap"><a title="lxml.builder.ElementMaker._typemap" class="py-name" href="#" onclick="return doclink('link-44', '_typemap', 'link-44');">_typemap</a></tt> <tt class="py-op">=</tt> <tt class="py-name">typemap</tt> </tt>
+</div><a name="L198"></a><tt class="py-lineno">198</tt>  <tt class="py-line"> </tt>
+<a name="ElementMaker.__call__"></a><div id="ElementMaker.__call__-def"><a name="L199"></a><tt class="py-lineno">199</tt> <a class="py-toggle" href="#" id="ElementMaker.__call__-toggle" onclick="return toggle('ElementMaker.__call__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.builder.ElementMaker-class.html#__call__">__call__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">tag</tt><tt class="py-op">,</tt> <tt class="py-op">*</tt><tt class="py-param">children</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-param">attrib</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ElementMaker.__call__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="ElementMaker.__call__-expanded"><a name="L200"></a><tt class="py-lineno">200</tt>  <tt class="py-line">        <tt class="py-name">typemap</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-45" class="py-name"><a title="lxml.builder.ElementMaker._typemap" class="py-name" href="#" onclick="return doclink('link-45', '_typemap', 'link-44');">_typemap</a></tt> </tt>
+<a name="L201"></a><tt class="py-lineno">201</tt>  <tt class="py-line"> </tt>
+<a name="L202"></a><tt class="py-lineno">202</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-46" class="py-name"><a title="lxml.builder.ElementMaker._namespace" class="py-name" href="#" onclick="return doclink('link-46', '_namespace', 'link-7');">_namespace</a></tt> <tt class="py-keyword">is</tt> <tt class="py-keyword">not</tt> <tt class="py-name">None</tt> <tt class="py-keyword">and</tt> <tt id="link-47" class="py-name" targets="Variable lxml.etree._Comment.tag=lxml.etree._Comment-class.html#tag,Variable lxml.etree._Element.tag=lxml.etree._Element-class.html#tag,Variable lxml.etree._Entity.tag=lxml.etree._Entity-class.html#tag,Variable lxml.etree._ProcessingInstruction.tag=lxml.etree._ProcessingInstruction-class.html#tag,Function lxml.tests.test_xpathevaluator.tag()=lxml.tests.test_xpathevaluator-module.html#tag,Variable xml.etree.ElementTree.Element.tag=xml.etree.ElementTree.Element-class.html#tag"><a title="lxml.etree._Comment.tag
+lxml.etree._Element.tag
+lxml.etree._Entity.tag
+lxml.etree._ProcessingInstruction.tag
+lxml.tests.test_xpathevaluator.tag
+xml.etree.ElementTree.Element.tag" class="py-name" href="#" onclick="return doclink('link-47', 'tag', 'link-47');">tag</a></tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> <tt class="py-op">!=</tt> <tt class="py-string">'{'</tt><tt class="py-op">:</tt> </tt>
+<a name="L203"></a><tt class="py-lineno">203</tt>  <tt class="py-line">            <tt id="link-48" class="py-name"><a title="lxml.etree._Comment.tag
+lxml.etree._Element.tag
+lxml.etree._Entity.tag
+lxml.etree._ProcessingInstruction.tag
+lxml.tests.test_xpathevaluator.tag
+xml.etree.ElementTree.Element.tag" class="py-name" href="#" onclick="return doclink('link-48', 'tag', 'link-47');">tag</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-49" class="py-name"><a title="lxml.builder.ElementMaker._namespace" class="py-name" href="#" onclick="return doclink('link-49', '_namespace', 'link-7');">_namespace</a></tt> <tt class="py-op">+</tt> <tt id="link-50" class="py-name"><a title="lxml.etree._Comment.tag
+lxml.etree._Element.tag
+lxml.etree._Entity.tag
+lxml.etree._ProcessingInstruction.tag
+lxml.tests.test_xpathevaluator.tag
+xml.etree.ElementTree.Element.tag" class="py-name" href="#" onclick="return doclink('link-50', 'tag', 'link-47');">tag</a></tt> </tt>
+<a name="L204"></a><tt class="py-lineno">204</tt>  <tt class="py-line">        <tt class="py-name">elem</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-51" class="py-name"><a title="lxml.builder.ElementMaker._makeelement" class="py-name" href="#" onclick="return doclink('link-51', '_makeelement', 'link-16');">_makeelement</a></tt><tt class="py-op">(</tt><tt id="link-52" class="py-name"><a title="lxml.etree._Comment.tag
+lxml.etree._Element.tag
+lxml.etree._Entity.tag
+lxml.etree._ProcessingInstruction.tag
+lxml.tests.test_xpathevaluator.tag
+xml.etree.ElementTree.Element.tag" class="py-name" href="#" onclick="return doclink('link-52', 'tag', 'link-47');">tag</a></tt><tt class="py-op">,</tt> <tt id="link-53" class="py-name"><a title="lxml.etree._Element.nsmap" class="py-name" href="#" onclick="return doclink('link-53', 'nsmap', 'link-10');">nsmap</a></tt><tt class="py-op">=</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-54" class="py-name"><a title="lxml.builder.ElementMaker._nsmap" class="py-name" href="#" onclick="return doclink('link-54', '_nsmap', 'link-11');">_nsmap</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L205"></a><tt class="py-lineno">205</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt id="link-55" class="py-name"><a title="lxml.etree._Element.attrib
+lxml.etree._ProcessingInstruction.attrib
+lxml.tests.selftest2.attrib
+xml.etree.ElementTree.Element.attrib" class="py-name" href="#" onclick="return doclink('link-55', 'attrib', 'link-32');">attrib</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L206"></a><tt class="py-lineno">206</tt>  <tt class="py-line">            <tt class="py-name">typemap</tt><tt class="py-op">[</tt><tt class="py-name">dict</tt><tt class="py-op">]</tt><tt class="py-op">(</tt><tt class="py-name">elem</tt><tt class="py-op">,</tt> <tt id="link-56" class="py-name"><a title="lxml.etree._Element.attrib
+lxml.etree._ProcessingInstruction.attrib
+lxml.tests.selftest2.attrib
+xml.etree.ElementTree.Element.attrib" class="py-name" href="#" onclick="return doclink('link-56', 'attrib', 'link-32');">attrib</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L207"></a><tt class="py-lineno">207</tt>  <tt class="py-line"> </tt>
+<a name="L208"></a><tt class="py-lineno">208</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">item</tt> <tt class="py-keyword">in</tt> <tt class="py-name">children</tt><tt class="py-op">:</tt> </tt>
+<a name="L209"></a><tt class="py-lineno">209</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">callable</tt><tt class="py-op">(</tt><tt class="py-name">item</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L210"></a><tt class="py-lineno">210</tt>  <tt class="py-line">                <tt class="py-name">item</tt> <tt class="py-op">=</tt> <tt class="py-name">item</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L211"></a><tt class="py-lineno">211</tt>  <tt class="py-line">            <tt class="py-name">t</tt> <tt class="py-op">=</tt> <tt class="py-name">typemap</tt><tt class="py-op">.</tt><tt id="link-57" class="py-name" targets="Method lxml.etree._Attrib.get()=lxml.etree._Attrib-class.html#get,Method lxml.etree._Element.get()=lxml.etree._Element-class.html#get,Method lxml.etree._IDDict.get()=lxml.etree._IDDict-class.html#get,Method lxml.etree._ProcessingInstruction.get()=lxml.etree._ProcessingInstruction-class.html#get"><a title="lxml.etree._Attrib.get
+lxml.etree._Element.get
+lxml.etree._IDDict.get
+lxml.etree._ProcessingInstruction.get" class="py-name" href="#" onclick="return doclink('link-57', 'get', 'link-57');">get</a></tt><tt class="py-op">(</tt><tt id="link-58" class="py-name"><a title="lxml.etree._LogEntry.type
+lxml.html.InputElement.type" class="py-name" href="#" onclick="return doclink('link-58', 'type', 'link-41');">type</a></tt><tt class="py-op">(</tt><tt class="py-name">item</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L212"></a><tt class="py-lineno">212</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">t</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L213"></a><tt class="py-lineno">213</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">ET</tt><tt class="py-op">.</tt><tt id="link-59" class="py-name" targets="Function lxml.etree.iselement()=lxml.etree-module.html#iselement"><a title="lxml.etree.iselement" class="py-name" href="#" onclick="return doclink('link-59', 'iselement', 'link-59');">iselement</a></tt><tt class="py-op">(</tt><tt class="py-name">item</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L214"></a><tt class="py-lineno">214</tt>  <tt class="py-line">                    <tt class="py-name">elem</tt><tt class="py-op">.</tt><tt id="link-60" class="py-name" targets="Method lxml.etree._Element.append()=lxml.etree._Element-class.html#append"><a title="lxml.etree._Element.append" class="py-name" href="#" onclick="return doclink('link-60', 'append', 'link-60');">append</a></tt><tt class="py-op">(</tt><tt class="py-name">item</tt><tt class="py-op">)</tt> </tt>
+<a name="L215"></a><tt class="py-lineno">215</tt>  <tt class="py-line">                    <tt class="py-keyword">continue</tt> </tt>
+<a name="L216"></a><tt class="py-lineno">216</tt>  <tt class="py-line">                <tt class="py-keyword">for</tt> <tt class="py-name">basetype</tt> <tt class="py-keyword">in</tt> <tt id="link-61" class="py-name"><a title="lxml.etree._LogEntry.type
+lxml.html.InputElement.type" class="py-name" href="#" onclick="return doclink('link-61', 'type', 'link-41');">type</a></tt><tt class="py-op">(</tt><tt class="py-name">item</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">__mro__</tt><tt class="py-op">:</tt> </tt>
+<a name="L217"></a><tt class="py-lineno">217</tt>  <tt class="py-line">                    <tt class="py-comment"># See if the typemap knows of any of this type's bases.</tt> </tt>
+<a name="L218"></a><tt class="py-lineno">218</tt>  <tt class="py-line">                    <tt class="py-name">t</tt> <tt class="py-op">=</tt> <tt class="py-name">typemap</tt><tt class="py-op">.</tt><tt id="link-62" class="py-name"><a title="lxml.etree._Attrib.get
+lxml.etree._Element.get
+lxml.etree._IDDict.get
+lxml.etree._ProcessingInstruction.get" class="py-name" href="#" onclick="return doclink('link-62', 'get', 'link-57');">get</a></tt><tt class="py-op">(</tt><tt class="py-name">basetype</tt><tt class="py-op">)</tt> </tt>
+<a name="L219"></a><tt class="py-lineno">219</tt>  <tt class="py-line">                    <tt class="py-keyword">if</tt> <tt class="py-name">t</tt> <tt class="py-keyword">is</tt> <tt class="py-keyword">not</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L220"></a><tt class="py-lineno">220</tt>  <tt class="py-line">                        <tt class="py-keyword">break</tt> </tt>
+<a name="L221"></a><tt class="py-lineno">221</tt>  <tt class="py-line">                <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L222"></a><tt class="py-lineno">222</tt>  <tt class="py-line">                    <tt class="py-keyword">raise</tt> <tt class="py-name">TypeError</tt><tt class="py-op">(</tt><tt class="py-string">"bad argument type: %s(%r)"</tt> <tt class="py-op">%</tt> </tt>
+<a name="L223"></a><tt class="py-lineno">223</tt>  <tt class="py-line">                                    <tt class="py-op">(</tt><tt id="link-63" class="py-name"><a title="lxml.etree._LogEntry.type
+lxml.html.InputElement.type" class="py-name" href="#" onclick="return doclink('link-63', 'type', 'link-41');">type</a></tt><tt class="py-op">(</tt><tt class="py-name">item</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">__name__</tt><tt class="py-op">,</tt> <tt class="py-name">item</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L224"></a><tt class="py-lineno">224</tt>  <tt class="py-line">            <tt id="link-64" class="py-name"><a title="lxml.tests.test_objectify.v" class="py-name" href="#" onclick="return doclink('link-64', 'v', 'link-34');">v</a></tt> <tt class="py-op">=</tt> <tt class="py-name">t</tt><tt class="py-op">(</tt><tt class="py-name">elem</tt><tt class="py-op">,</tt> <tt class="py-name">item</tt><tt class="py-op">)</tt> </tt>
+<a name="L225"></a><tt class="py-lineno">225</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt id="link-65" class="py-name"><a title="lxml.tests.test_objectify.v" class="py-name" href="#" onclick="return doclink('link-65', 'v', 'link-34');">v</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L226"></a><tt class="py-lineno">226</tt>  <tt class="py-line">                <tt class="py-name">typemap</tt><tt class="py-op">.</tt><tt id="link-66" class="py-name"><a title="lxml.etree._Attrib.get
+lxml.etree._Element.get
+lxml.etree._IDDict.get
+lxml.etree._ProcessingInstruction.get" class="py-name" href="#" onclick="return doclink('link-66', 'get', 'link-57');">get</a></tt><tt class="py-op">(</tt><tt id="link-67" class="py-name"><a title="lxml.etree._LogEntry.type
+lxml.html.InputElement.type" class="py-name" href="#" onclick="return doclink('link-67', 'type', 'link-41');">type</a></tt><tt class="py-op">(</tt><tt id="link-68" class="py-name"><a title="lxml.tests.test_objectify.v" class="py-name" href="#" onclick="return doclink('link-68', 'v', 'link-34');">v</a></tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">(</tt><tt class="py-name">elem</tt><tt class="py-op">,</tt> <tt id="link-69" class="py-name"><a title="lxml.tests.test_objectify.v" class="py-name" href="#" onclick="return doclink('link-69', 'v', 'link-34');">v</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L227"></a><tt class="py-lineno">227</tt>  <tt class="py-line"> </tt>
+<a name="L228"></a><tt class="py-lineno">228</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">elem</tt> </tt>
+</div><a name="L229"></a><tt class="py-lineno">229</tt>  <tt class="py-line"> </tt>
+<a name="ElementMaker.__getattr__"></a><div id="ElementMaker.__getattr__-def"><a name="L230"></a><tt class="py-lineno">230</tt> <a class="py-toggle" href="#" id="ElementMaker.__getattr__-toggle" onclick="return toggle('ElementMaker.__getattr__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.builder.ElementMaker-class.html#__getattr__">__getattr__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">tag</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ElementMaker.__getattr__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="ElementMaker.__getattr__-expanded"><a name="L231"></a><tt class="py-lineno">231</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">partial</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt id="link-70" class="py-name"><a title="lxml.etree._Comment.tag
+lxml.etree._Element.tag
+lxml.etree._Entity.tag
+lxml.etree._ProcessingInstruction.tag
+lxml.tests.test_xpathevaluator.tag
+xml.etree.ElementTree.Element.tag" class="py-name" href="#" onclick="return doclink('link-70', 'tag', 'link-47');">tag</a></tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L232"></a><tt class="py-lineno">232</tt>  <tt class="py-line"> </tt>
+<a name="L233"></a><tt class="py-lineno">233</tt>  <tt class="py-line"> </tt>
+<a name="L234"></a><tt class="py-lineno">234</tt>  <tt class="py-line"><tt class="py-comment"># create factory object</tt> </tt>
+<a name="L235"></a><tt class="py-lineno">235</tt>  <tt class="py-line"><tt id="link-71" class="py-name" targets="Variable lxml.builder.E=lxml.builder-module.html#E,Variable lxml.html.builder.E=lxml.html.builder-module.html#E,Variable lxml.objectify.E=lxml.objectify-module.html#E"><a title="lxml.builder.E
+lxml.html.builder.E
+lxml.objectify.E" class="py-name" href="#" onclick="return doclink('link-71', 'E', 'link-71');">E</a></tt> <tt class="py-op">=</tt> <tt id="link-72" class="py-name" targets="Class lxml.builder.ElementMaker=lxml.builder.ElementMaker-class.html,Class lxml.objectify.ElementMaker=lxml.objectify.ElementMaker-class.html"><a title="lxml.builder.ElementMaker
+lxml.objectify.ElementMaker" class="py-name" href="#" onclick="return doclink('link-72', 'ElementMaker', 'link-72');">ElementMaker</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L236"></a><tt class="py-lineno">236</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lxml-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="/">lxml API</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Fri Jun 22 18:59:52 2018
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

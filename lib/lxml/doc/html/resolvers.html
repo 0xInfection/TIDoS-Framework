@@ -1,0 +1,257 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.12: http://docutils.sourceforge.net/" />
+<title>Document loading and URL resolving</title>
+<link rel="stylesheet" href="style.css" type="text/css" />
+<script type="text/javascript">
+function trigger_menu(event) {
+    var sidemenu = document.getElementById("sidemenu");
+    var classes = sidemenu.getAttribute("class");
+    classes = (classes.indexOf(" visible") === -1) ? classes + " visible" : classes.replace(" visible", "");
+    sidemenu.setAttribute("class", classes);
+    event.preventDefault();
+    event.stopPropagation();
+}
+function hide_menu() {
+    var sidemenu = document.getElementById("sidemenu");
+    var classes = sidemenu.getAttribute("class");
+    if (classes.indexOf(" visible") !== -1) {
+        sidemenu.setAttribute("class", classes.replace(" visible", ""));
+    }
+}
+</script><meta content="width=device-width, initial-scale=1" name="viewport" /></head>
+<body onclick="hide_menu()">
+<div class="document" id="document-loading-and-url-resolving">
+<div class="sidemenu" id="sidemenu"><div class="menutrigger" onclick="trigger_menu(event)">Menu</div><div class="menu"><ul id="lxml-section"><li><span class="section title">lxml</span><ul class="menu foreign" id="index-menu"><li class="menu title"><a href="index.html">lxml</a><ul class="submenu"><li class="menu item"><a href="index.html#introduction">Introduction</a></li><li class="menu item"><a href="index.html#support-the-project">Support the project</a></li><li class="menu item"><a href="index.html#documentation">Documentation</a></li><li class="menu item"><a href="index.html#download">Download</a></li><li class="menu item"><a href="index.html#mailing-list">Mailing list</a></li><li class="menu item"><a href="index.html#bug-tracker">Bug tracker</a></li><li class="menu item"><a href="index.html#license">License</a></li><li class="menu item"><a href="index.html#old-versions">Old Versions</a></li><li class="menu item"><a href="index.html#docutils-system-messages">Docutils System Messages</a></li><li class="menu item"><a href="index.html#legal-notice-for-donations">Legal Notice for Donations</a></li></ul></li></ul><ul class="menu foreign" id="intro-menu"><li class="menu title"><a href="intro.html">Why lxml?</a><ul class="submenu"><li class="menu item"><a href="intro.html#motto">Motto</a></li><li class="menu item"><a href="intro.html#aims">Aims</a></li></ul></li></ul><ul class="menu foreign" id="installation-menu"><li class="menu title"><a href="installation.html">Installing lxml</a><ul class="submenu"><li class="menu item"><a href="installation.html#where-to-get-it">Where to get it</a></li><li class="menu item"><a href="installation.html#requirements">Requirements</a></li><li class="menu item"><a href="installation.html#installation">Installation</a></li><li class="menu item"><a href="installation.html#building-lxml-from-dev-sources">Building lxml from dev sources</a></li><li class="menu item"><a href="installation.html#using-lxml-with-python-libxml2">Using lxml with python-libxml2</a></li><li class="menu item"><a href="installation.html#source-builds-on-ms-windows">Source builds on MS Windows</a></li><li class="menu item"><a href="installation.html#source-builds-on-macos-x">Source builds on MacOS-X</a></li></ul></li></ul><ul class="menu foreign" id="performance-menu"><li class="menu title"><a href="performance.html">Benchmarks and Speed</a><ul class="submenu"><li class="menu item"><a href="performance.html#general-notes">General notes</a></li><li class="menu item"><a href="performance.html#how-to-read-the-timings">How to read the timings</a></li><li class="menu item"><a href="performance.html#parsing-and-serialising">Parsing and Serialising</a></li><li class="menu item"><a href="performance.html#the-elementtree-api">The ElementTree API</a></li><li class="menu item"><a href="performance.html#xpath">XPath</a></li><li class="menu item"><a href="performance.html#a-longer-example">A longer example</a></li><li class="menu item"><a href="performance.html#lxml-objectify">lxml.objectify</a></li></ul></li></ul><ul class="menu foreign" id="compatibility-menu"><li class="menu title"><a href="compatibility.html">ElementTree compatibility of lxml.etree</a></li></ul><ul class="menu foreign" id="FAQ-menu"><li class="menu title"><a href="FAQ.html">lxml FAQ - Frequently Asked Questions</a><ul class="submenu"><li class="menu item"><a href="FAQ.html#general-questions">General Questions</a></li><li class="menu item"><a href="FAQ.html#installation">Installation</a></li><li class="menu item"><a href="FAQ.html#contributing">Contributing</a></li><li class="menu item"><a href="FAQ.html#bugs">Bugs</a></li><li class="menu item"><a href="FAQ.html#id1">Threading</a></li><li class="menu item"><a href="FAQ.html#parsing-and-serialisation">Parsing and Serialisation</a></li><li class="menu item"><a href="FAQ.html#xpath-and-document-traversal">XPath and Document Traversal</a></li></ul></li></ul></li></ul><ul id="Developing with lxml-section"><li><span class="section title">Developing with lxml</span><ul class="menu foreign" id="tutorial-menu"><li class="menu title"><a href="tutorial.html">The lxml.etree Tutorial</a><ul class="submenu"><li class="menu item"><a href="tutorial.html#the-element-class">The Element class</a></li><li class="menu item"><a href="tutorial.html#the-elementtree-class">The ElementTree class</a></li><li class="menu item"><a href="tutorial.html#parsing-from-strings-and-files">Parsing from strings and files</a></li><li class="menu item"><a href="tutorial.html#namespaces">Namespaces</a></li><li class="menu item"><a href="tutorial.html#the-e-factory">The E-factory</a></li><li class="menu item"><a href="tutorial.html#elementpath">ElementPath</a></li></ul></li></ul><ul class="menu foreign" id="api index-menu"><li class="menu title"><a href="api/index.html">API reference</a></li></ul><ul class="menu foreign" id="api-menu"><li class="menu title"><a href="api.html">APIs specific to lxml.etree</a><ul class="submenu"><li class="menu item"><a href="api.html#lxml-etree">lxml.etree</a></li><li class="menu item"><a href="api.html#other-element-apis">Other Element APIs</a></li><li class="menu item"><a href="api.html#trees-and-documents">Trees and Documents</a></li><li class="menu item"><a href="api.html#iteration">Iteration</a></li><li class="menu item"><a href="api.html#error-handling-on-exceptions">Error handling on exceptions</a></li><li class="menu item"><a href="api.html#error-logging">Error logging</a></li><li class="menu item"><a href="api.html#serialisation">Serialisation</a></li><li class="menu item"><a href="api.html#incremental-xml-generation">Incremental XML generation</a></li><li class="menu item"><a href="api.html#cdata">CDATA</a></li><li class="menu item"><a href="api.html#xinclude-and-elementinclude">XInclude and ElementInclude</a></li><li class="menu item"><a href="api.html#write-c14n-on-elementtree">write_c14n on ElementTree</a></li></ul></li></ul><ul class="menu foreign" id="parsing-menu"><li class="menu title"><a href="parsing.html">Parsing XML and HTML with lxml</a><ul class="submenu"><li class="menu item"><a href="parsing.html#parsers">Parsers</a></li><li class="menu item"><a href="parsing.html#the-target-parser-interface">The target parser interface</a></li><li class="menu item"><a href="parsing.html#the-feed-parser-interface">The feed parser interface</a></li><li class="menu item"><a href="parsing.html#incremental-event-parsing">Incremental event parsing</a></li><li class="menu item"><a href="parsing.html#iterparse-and-iterwalk">iterparse and iterwalk</a></li><li class="menu item"><a href="parsing.html#python-unicode-strings">Python unicode strings</a></li></ul></li></ul><ul class="menu foreign" id="validation-menu"><li class="menu title"><a href="validation.html">Validation with lxml</a><ul class="submenu"><li class="menu item"><a href="validation.html#validation-at-parse-time">Validation at parse time</a></li><li class="menu item"><a href="validation.html#id1">DTD</a></li><li class="menu item"><a href="validation.html#relaxng">RelaxNG</a></li><li class="menu item"><a href="validation.html#xmlschema">XMLSchema</a></li><li class="menu item"><a href="validation.html#id2">Schematron</a></li><li class="menu item"><a href="validation.html#id3">(Pre-ISO-Schematron)</a></li></ul></li></ul><ul class="menu foreign" id="xpathxslt-menu"><li class="menu title"><a href="xpathxslt.html">XPath and XSLT with lxml</a><ul class="submenu"><li class="menu item"><a href="xpathxslt.html#xpath">XPath</a></li><li class="menu item"><a href="xpathxslt.html#xslt">XSLT</a></li></ul></li></ul><ul class="menu foreign" id="objectify-menu"><li class="menu title"><a href="objectify.html">lxml.objectify</a><ul class="submenu"><li class="menu item"><a href="objectify.html#the-lxml-objectify-api">The lxml.objectify API</a></li><li class="menu item"><a href="objectify.html#asserting-a-schema">Asserting a Schema</a></li><li class="menu item"><a href="objectify.html#objectpath">ObjectPath</a></li><li class="menu item"><a href="objectify.html#python-data-types">Python data types</a></li><li class="menu item"><a href="objectify.html#how-data-types-are-matched">How data types are matched</a></li><li class="menu item"><a href="objectify.html#what-is-different-from-lxml-etree">What is different from lxml.etree?</a></li></ul></li></ul><ul class="menu foreign" id="lxmlhtml-menu"><li class="menu title"><a href="lxmlhtml.html">lxml.html</a><ul class="submenu"><li class="menu item"><a href="lxmlhtml.html#parsing-html">Parsing HTML</a></li><li class="menu item"><a href="lxmlhtml.html#html-element-methods">HTML Element Methods</a></li><li class="menu item"><a href="lxmlhtml.html#running-html-doctests">Running HTML doctests</a></li><li class="menu item"><a href="lxmlhtml.html#creating-html-with-the-e-factory">Creating HTML with the E-factory</a></li><li class="menu item"><a href="lxmlhtml.html#working-with-links">Working with links</a></li><li class="menu item"><a href="lxmlhtml.html#forms">Forms</a></li><li class="menu item"><a href="lxmlhtml.html#cleaning-up-html">Cleaning up HTML</a></li><li class="menu item"><a href="lxmlhtml.html#html-diff">HTML Diff</a></li><li class="menu item"><a href="lxmlhtml.html#examples">Examples</a></li></ul></li></ul><ul class="menu foreign" id="cssselect-menu"><li class="menu title"><a href="cssselect.html">lxml.cssselect</a><ul class="submenu"><li class="menu item"><a href="cssselect.html#the-cssselector-class">The CSSSelector class</a></li><li class="menu item"><a href="cssselect.html#the-cssselect-method">The cssselect method</a></li><li class="menu item"><a href="cssselect.html#supported-selectors">Supported Selectors</a></li><li class="menu item"><a href="cssselect.html#namespaces">Namespaces</a></li></ul></li></ul><ul class="menu foreign" id="elementsoup-menu"><li class="menu title"><a href="elementsoup.html">BeautifulSoup Parser</a><ul class="submenu"><li class="menu item"><a href="elementsoup.html#parsing-with-the-soupparser">Parsing with the soupparser</a></li><li class="menu item"><a href="elementsoup.html#entity-handling">Entity handling</a></li><li class="menu item"><a href="elementsoup.html#using-soupparser-as-a-fallback">Using soupparser as a fallback</a></li><li class="menu item"><a href="elementsoup.html#using-only-the-encoding-detection">Using only the encoding detection</a></li></ul></li></ul><ul class="menu foreign" id="html5parser-menu"><li class="menu title"><a href="html5parser.html">html5lib Parser</a><ul class="submenu"><li class="menu item"><a href="html5parser.html#differences-to-regular-html-parsing">Differences to regular HTML parsing</a></li><li class="menu item"><a href="html5parser.html#function-reference">Function Reference</a></li></ul></li></ul></li></ul><ul id="Extending lxml-section"><li><span class="section title">Extending lxml</span><ul class="menu current" id="resolvers-menu"><li class="menu title"><a href="resolvers.html">Document loading and URL resolving</a><ul class="submenu"><li class="menu item"><a href="resolvers.html#xml-catalogs">XML Catalogs</a></li><li class="menu item"><a href="resolvers.html#uri-resolvers">URI Resolvers</a></li><li class="menu item"><a href="resolvers.html#document-loading-in-context">Document loading in context</a></li><li class="menu item"><a href="resolvers.html#i-o-access-control-in-xslt">I/O access control in XSLT</a></li></ul></li></ul><ul class="menu foreign" id="extensions-menu"><li class="menu title"><a href="extensions.html">Python extensions for XPath and XSLT</a><ul class="submenu"><li class="menu item"><a href="extensions.html#xpath-extension-functions">XPath Extension functions</a></li><li class="menu item"><a href="extensions.html#xslt-extension-elements">XSLT extension elements</a></li></ul></li></ul><ul class="menu foreign" id="element classes-menu"><li class="menu title"><a href="element_classes.html">Using custom Element classes in lxml</a><ul class="submenu"><li class="menu item"><a href="element_classes.html#background-on-element-proxies">Background on Element proxies</a></li><li class="menu item"><a href="element_classes.html#element-initialization">Element initialization</a></li><li class="menu item"><a href="element_classes.html#setting-up-a-class-lookup-scheme">Setting up a class lookup scheme</a></li><li class="menu item"><a href="element_classes.html#generating-xml-with-custom-classes">Generating XML with custom classes</a></li><li class="menu item"><a href="element_classes.html#id1">Implementing namespaces</a></li></ul></li></ul><ul class="menu foreign" id="sax-menu"><li class="menu title"><a href="sax.html">Sax support</a><ul class="submenu"><li class="menu item"><a href="sax.html#building-a-tree-from-sax-events">Building a tree from SAX events</a></li><li class="menu item"><a href="sax.html#producing-sax-events-from-an-elementtree-or-element">Producing SAX events from an ElementTree or Element</a></li><li class="menu item"><a href="sax.html#interfacing-with-pulldom-minidom">Interfacing with pulldom/minidom</a></li></ul></li></ul><ul class="menu foreign" id="capi-menu"><li class="menu title"><a href="capi.html">The public C-API of lxml.etree</a><ul class="submenu"><li class="menu item"><a href="capi.html#passing-generated-trees-through-python">Passing generated trees through Python</a></li><li class="menu item"><a href="capi.html#writing-external-modules-in-cython">Writing external modules in Cython</a></li><li class="menu item"><a href="capi.html#writing-external-modules-in-c">Writing external modules in C</a></li></ul></li></ul></li></ul><ul id="Developing lxml-section"><li><span class="section title">Developing lxml</span><ul class="menu foreign" id="build-menu"><li class="menu title"><a href="build.html">How to build lxml from source</a><ul class="submenu"><li class="menu item"><a href="build.html#cython">Cython</a></li><li class="menu item"><a href="build.html#github-git-and-hg">Github, git and hg</a></li><li class="menu item"><a href="build.html#building-the-sources">Building the sources</a></li><li class="menu item"><a href="build.html#running-the-tests-and-reporting-errors">Running the tests and reporting errors</a></li><li class="menu item"><a href="build.html#building-an-egg-or-wheel">Building an egg or wheel</a></li><li class="menu item"><a href="build.html#building-lxml-on-macos-x">Building lxml on MacOS-X</a></li><li class="menu item"><a href="build.html#static-linking-on-windows">Static linking on Windows</a></li><li class="menu item"><a href="build.html#building-debian-packages-from-svn-sources">Building Debian packages from SVN sources</a></li></ul></li></ul><ul class="menu foreign" id="lxml source howto-menu"><li class="menu title"><a href="lxml-source-howto.html">How to read the source of lxml</a><ul class="submenu"><li class="menu item"><a href="lxml-source-howto.html#what-is-cython">What is Cython?</a></li><li class="menu item"><a href="lxml-source-howto.html#where-to-start">Where to start?</a></li><li class="menu item"><a href="lxml-source-howto.html#lxml-etree">lxml.etree</a></li><li class="menu item"><a href="lxml-source-howto.html#python-modules">Python modules</a></li><li class="menu item"><a href="lxml-source-howto.html#lxml-objectify">lxml.objectify</a></li><li class="menu item"><a href="lxml-source-howto.html#lxml-html">lxml.html</a></li></ul></li></ul><ul class="menu foreign" id="changes 4 2 2-menu"><li class="menu title"><a href="changes-4.2.2.html">Release Changelog</a></li></ul><ul class="menu foreign" id="credits-menu"><li class="menu title"><a href="credits.html">Credits</a><ul class="submenu"><li class="menu item"><a href="credits.html#main-contributors">Main contributors</a></li><li class="menu item"><a href="credits.html#special-thanks-goes-to">Special thanks goes to:</a></li></ul></li></ul></li><li><a href="/sitemap.html">Sitemap</a></li></ul></div></div><h1 class="title">Document loading and URL resolving</h1>
+
+<div class="contents topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#xml-catalogs" id="id2">XML Catalogs</a></li>
+<li><a class="reference internal" href="#uri-resolvers" id="id3">URI Resolvers</a></li>
+<li><a class="reference internal" href="#document-loading-in-context" id="id4">Document loading in context</a></li>
+<li><a class="reference internal" href="#i-o-access-control-in-xslt" id="id5">I/O access control in XSLT</a></li>
+</ul>
+</div>
+<p>The normal way to load external entities (such as DTDs) is by using
+XML catalogs.  Lxml also has support for user provided document
+loaders in both the parsers and XSL transformations.  These so-called
+resolvers are subclasses of the etree.Resolver class.</p>
+<div class="section" id="xml-catalogs">
+<h1>XML Catalogs</h1>
+<p>When loading an external entity for a document, e.g. a DTD, the parser
+is normally configured to prevent network access (see the
+<tt class="docutils literal">no_network</tt> parser option).  Instead, it will try to load the
+entity from their local file system path or, in the most common case
+that the entity uses a network URL as reference, from a local XML
+catalog.</p>
+<p><a class="reference external" href="http://www.oasis-open.org/committees/entity/spec.html">XML catalogs</a> are the preferred and agreed-on mechanism to load
+external entities from XML processors.  Most tools will use them, so
+it is worth configuring them properly on a system.  Many Linux
+installations use them by default, but on other systems they may need
+to get enabled manually.  The <a class="reference external" href="http://xmlsoft.org/">libxml2 site</a> has some documentation
+on <a class="reference external" href="http://xmlsoft.org/catalog.html">how to set up XML catalogs</a></p>
+</div>
+<div class="section" id="uri-resolvers">
+<h1>URI Resolvers</h1>
+<p>Here is an example of a custom resolver:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">lxml</span> <span class="kn">import</span> <span class="n">etree</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">DTDResolver</span><span class="p">(</span><span class="n">etree</span><span class="o">.</span><span class="n">Resolver</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="nf">resolve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="k">print</span><span class="p">(</span><span class="s2">"Resolving URL '</span><span class="si">%s</span><span class="s2">'"</span> <span class="o">%</span> <span class="n">url</span><span class="p">)</span>
+<span class="gp">... </span>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">resolve_string</span><span class="p">(</span>
+<span class="gp">... </span>            <span class="s1">'&lt;!ENTITY myentity "[resolved text: </span><span class="si">%s</span><span class="s1">]"&gt;'</span> <span class="o">%</span> <span class="n">url</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
+</pre></div>
+<p>This defines a resolver that always returns a dynamically generated DTD
+fragment defining an entity.  The <tt class="docutils literal">url</tt> argument passes the system URL of
+the requested document, the <tt class="docutils literal">id</tt> argument is the public ID.  Note that any
+of these may be None.  The context object is not normally used by client code.</p>
+<p>Resolving is based on the methods of the Resolver object that build
+internal representations of the result document.  The following
+methods exist:</p>
+<ul class="simple">
+<li><tt class="docutils literal">resolve_string</tt> takes a parsable string as result document</li>
+<li><tt class="docutils literal">resolve_filename</tt> takes a filename</li>
+<li><tt class="docutils literal">resolve_file</tt> takes an open file-like object that has at least a read() method</li>
+<li><tt class="docutils literal">resolve_empty</tt> resolves into an empty document</li>
+</ul>
+<p>The <tt class="docutils literal">resolve()</tt> method may choose to return None, in which case the next
+registered resolver (or the default resolver) is consulted.  Resolving always
+terminates if <tt class="docutils literal">resolve()</tt> returns the result of any of the above
+<tt class="docutils literal"><span class="pre">resolve_*()</span></tt> methods.</p>
+<p>Resolvers are registered local to a parser:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">XMLParser</span><span class="p">(</span><span class="n">load_dtd</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span><span class="o">.</span><span class="n">resolvers</span><span class="o">.</span><span class="n">add</span><span class="p">(</span> <span class="n">DTDResolver</span><span class="p">()</span> <span class="p">)</span>
+</pre></div>
+<p>Note that we instantiate a parser that loads the DTD.  This is not done by the
+default parser, which does no validation.  When we use this parser to parse a
+document that requires resolving a URL, it will call our custom resolver:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">xml</span> <span class="o">=</span> <span class="s1">'&lt;!DOCTYPE doc SYSTEM "MissingDTD.dtd"&gt;&lt;doc&gt;&amp;myentity;&lt;/doc&gt;'</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">StringIO</span><span class="p">(</span><span class="n">xml</span><span class="p">),</span> <span class="n">parser</span><span class="p">)</span>
+<span class="go">Resolving URL 'MissingDTD.dtd'</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">root</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">getroot</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+<span class="go">[resolved text: MissingDTD.dtd]</span>
+</pre></div>
+<p>The entity in the document was correctly resolved by the generated DTD
+fragment.</p>
+</div>
+<div class="section" id="document-loading-in-context">
+<h1>Document loading in context</h1>
+<p>XML documents memorise their initial parser (and its resolvers) during their
+life-time.  This means that a lookup process related to a document will use
+the resolvers of the document's parser.  We can demonstrate this with a
+resolver that only responds to a specific prefix:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">PrefixResolver</span><span class="p">(</span><span class="n">etree</span><span class="o">.</span><span class="n">Resolver</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prefix</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="bp">self</span><span class="o">.</span><span class="n">prefix</span> <span class="o">=</span> <span class="n">prefix</span>
+<span class="gp">... </span>        <span class="bp">self</span><span class="o">.</span><span class="n">result_xml</span> <span class="o">=</span> <span class="s1">'''</span><span class="se">\</span>
+<span class="gp">... </span><span class="s1">             &lt;xsl:stylesheet</span>
+<span class="gp">... </span><span class="s1">                    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"&gt;</span>
+<span class="gp">... </span><span class="s1">               &lt;test xmlns="testNS"&gt;</span><span class="si">%s</span><span class="s1">-TEST&lt;/test&gt;</span>
+<span class="gp">... </span><span class="s1">             &lt;/xsl:stylesheet&gt;</span>
+<span class="gp">... </span><span class="s1">             '''</span> <span class="o">%</span> <span class="n">prefix</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="nf">resolve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">pubid</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="k">if</span> <span class="n">url</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">prefix</span><span class="p">):</span>
+<span class="gp">... </span>            <span class="k">print</span><span class="p">(</span><span class="s2">"Resolved url </span><span class="si">%s</span><span class="s2"> as prefix </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">prefix</span><span class="p">))</span>
+<span class="gp">... </span>            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">resolve_string</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">result_xml</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
+</pre></div>
+<p>We demonstrate this in XSLT and use the following stylesheet as an example:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">xml_text</span> <span class="o">=</span> <span class="s2">"""</span><span class="se">\</span>
+<span class="gp">... </span><span class="s2">&lt;xsl:stylesheet version="1.0"</span>
+<span class="gp">... </span><span class="s2">   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"&gt;</span>
+<span class="gp">... </span><span class="s2">  &lt;xsl:include href="honk:test"/&gt;</span>
+<span class="gp">... </span><span class="s2">  &lt;xsl:template match="/"&gt;</span>
+<span class="gp">... </span><span class="s2">    &lt;test&gt;</span>
+<span class="gp">... </span><span class="s2">      &lt;xsl:value-of select="document('hoi:test')/*/*/text()"/&gt;</span>
+<span class="gp">... </span><span class="s2">    &lt;/test&gt;</span>
+<span class="gp">... </span><span class="s2">  &lt;/xsl:template&gt;</span>
+<span class="gp">... </span><span class="s2">&lt;/xsl:stylesheet&gt;</span>
+<span class="gp">... </span><span class="s2">"""</span>
+</pre></div>
+<p>Note that it needs to resolve two URIs: <tt class="docutils literal">honk:test</tt> when compiling the XSLT
+document (i.e. when resolving <tt class="docutils literal">xsl:import</tt> and <tt class="docutils literal">xsl:include</tt> elements) and
+<tt class="docutils literal">hoi:test</tt> at transformation time, when calls to the <tt class="docutils literal">document</tt> function
+are resolved.  If we now register different resolvers with two different
+parsers, we can parse our document twice in different resolver contexts:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">hoi_parser</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">XMLParser</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">normal_doc</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">StringIO</span><span class="p">(</span><span class="n">xml_text</span><span class="p">),</span> <span class="n">hoi_parser</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hoi_parser</span><span class="o">.</span><span class="n">resolvers</span><span class="o">.</span><span class="n">add</span><span class="p">(</span> <span class="n">PrefixResolver</span><span class="p">(</span><span class="s2">"hoi"</span><span class="p">)</span> <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hoi_doc</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">StringIO</span><span class="p">(</span><span class="n">xml_text</span><span class="p">),</span> <span class="n">hoi_parser</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">honk_parser</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">XMLParser</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">honk_parser</span><span class="o">.</span><span class="n">resolvers</span><span class="o">.</span><span class="n">add</span><span class="p">(</span> <span class="n">PrefixResolver</span><span class="p">(</span><span class="s2">"honk"</span><span class="p">)</span> <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">honk_doc</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">StringIO</span><span class="p">(</span><span class="n">xml_text</span><span class="p">),</span> <span class="n">honk_parser</span><span class="p">)</span>
+</pre></div>
+<p>These contexts are important for the further behaviour of the documents.  They
+memorise their original parser so that the correct set of resolvers is used in
+subsequent lookups.  To compile the stylesheet, XSLT must resolve the
+<tt class="docutils literal">honk:test</tt> URI in the <tt class="docutils literal">xsl:include</tt> element.  The <tt class="docutils literal">hoi</tt> resolver cannot
+do that:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">transform</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">XSLT</span><span class="p">(</span><span class="n">normal_doc</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+  <span class="c">...</span>
+<span class="gr">lxml.etree.XSLTParseError</span>: <span class="n">Cannot resolve URI honk:test</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">transform</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">XSLT</span><span class="p">(</span><span class="n">hoi_doc</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+  <span class="c">...</span>
+<span class="gr">lxml.etree.XSLTParseError</span>: <span class="n">Cannot resolve URI honk:test</span>
+</pre></div>
+<p>However, if we use the <tt class="docutils literal">honk</tt> resolver associated with the respective
+document, everything works fine:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">transform</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">XSLT</span><span class="p">(</span><span class="n">honk_doc</span><span class="p">)</span>
+<span class="go">Resolved url honk:test as prefix honk</span>
+</pre></div>
+<p>Running the transform accesses the same parser context again, but since it now
+needs to resolve the <tt class="docutils literal">hoi</tt> URI in the call to the document function, its
+<tt class="docutils literal">honk</tt> resolver will fail to do so:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">transform</span><span class="p">(</span><span class="n">normal_doc</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+  <span class="c">...</span>
+<span class="gr">lxml.etree.XSLTApplyError</span>: <span class="n">Cannot resolve URI hoi:test</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">transform</span><span class="p">(</span><span class="n">hoi_doc</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+  <span class="c">...</span>
+<span class="gr">lxml.etree.XSLTApplyError</span>: <span class="n">Cannot resolve URI hoi:test</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">transform</span><span class="p">(</span><span class="n">honk_doc</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+  <span class="c">...</span>
+<span class="gr">lxml.etree.XSLTApplyError</span>: <span class="n">Cannot resolve URI hoi:test</span>
+</pre></div>
+<p>This can only be solved by adding a <tt class="docutils literal">hoi</tt> resolver to the original parser:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">honk_parser</span><span class="o">.</span><span class="n">resolvers</span><span class="o">.</span><span class="n">add</span><span class="p">(</span> <span class="n">PrefixResolver</span><span class="p">(</span><span class="s2">"hoi"</span><span class="p">)</span> <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">transform</span><span class="p">(</span><span class="n">honk_doc</span><span class="p">)</span>
+<span class="go">Resolved url hoi:test as prefix hoi</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">result</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="go">&lt;?xml version="1.0"?&gt;</span>
+<span class="go">&lt;test&gt;hoi-TEST&lt;/test&gt;</span>
+</pre></div>
+<p>We can see that the <tt class="docutils literal">hoi</tt> resolver was called to generate a document that
+was then inserted into the result document by the XSLT transformation.  Note
+that this is completely independent of the XML file you transform, as the URI
+is resolved from within the stylesheet context:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">transform</span><span class="p">(</span><span class="n">normal_doc</span><span class="p">)</span>
+<span class="go">Resolved url hoi:test as prefix hoi</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">result</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="go">&lt;?xml version="1.0"?&gt;</span>
+<span class="go">&lt;test&gt;hoi-TEST&lt;/test&gt;</span>
+</pre></div>
+<p>It may be seen as a matter of taste what resolvers the generated document
+inherits.  For XSLT, the output document inherits the resolvers of the input
+document and not those of the stylesheet.  Therefore, the last result does not
+inherit any resolvers at all.</p>
+</div>
+<div class="section" id="i-o-access-control-in-xslt">
+<h1>I/O access control in XSLT</h1>
+<p>By default, XSLT supports all extension functions from libxslt and libexslt as
+well as Python regular expressions through EXSLT.  Some extensions enable
+style sheets to read and write files on the local file system.</p>
+<p>XSLT has a mechanism to control the access to certain I/O operations during
+the transformation process.  This is most interesting where XSL scripts come
+from potentially insecure sources and must be prevented from modifying the
+local file system.  Note, however, that there is no way to keep them from
+eating up your precious CPU time, so this should not stop you from thinking
+about what XSLT you execute.</p>
+<p>Access control is configured using the <tt class="docutils literal">XSLTAccessControl</tt> class.  It can be
+called with a number of keyword arguments that allow or deny specific
+operations:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">transform</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">XSLT</span><span class="p">(</span><span class="n">honk_doc</span><span class="p">)</span>
+<span class="go">Resolved url honk:test as prefix honk</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">transform</span><span class="p">(</span><span class="n">normal_doc</span><span class="p">)</span>
+<span class="go">Resolved url hoi:test as prefix hoi</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ac</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">XSLTAccessControl</span><span class="p">(</span><span class="n">read_network</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">transform</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">XSLT</span><span class="p">(</span><span class="n">honk_doc</span><span class="p">,</span> <span class="n">access_control</span><span class="o">=</span><span class="n">ac</span><span class="p">)</span>
+<span class="go">Resolved url honk:test as prefix honk</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">transform</span><span class="p">(</span><span class="n">normal_doc</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+  <span class="c">...</span>
+<span class="gr">lxml.etree.XSLTApplyError</span>: <span class="n">xsltLoadDocument: read rights for hoi:test denied</span>
+</pre></div>
+<p>There are a few things to keep in mind:</p>
+<ul class="simple">
+<li>XSL parsing (<tt class="docutils literal">xsl:import</tt>, etc.) is not affected by this mechanism</li>
+<li><tt class="docutils literal">read_file=False</tt> does not imply <tt class="docutils literal">write_file=False</tt>, all controls are
+independent.</li>
+<li><tt class="docutils literal">read_file</tt> only applies to files in the file system.  Any other scheme
+for URLs is controlled by the <tt class="docutils literal">*_network</tt> keywords.</li>
+<li>If you need more fine-grained control than switching access on and off, you
+should consider writing a custom document loader that returns empty
+documents or raises exceptions if access is denied.</li>
+</ul>
+</div>
+</div>
+<div class="footer">
+<hr class="footer" />
+Generated on: 2018-06-22.
+
+</div>
+</body>
+</html>

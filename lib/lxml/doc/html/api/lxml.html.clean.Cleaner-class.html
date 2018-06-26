@@ -1,0 +1,797 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>lxml.html.clean.Cleaner</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lxml-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="/">lxml API</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="lxml-module.html">Package&nbsp;lxml</a> ::
+        <a href="lxml.html-module.html">Package&nbsp;html</a> ::
+        <a href="lxml.html.clean-module.html">Module&nbsp;clean</a> ::
+        Class&nbsp;Cleaner
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="lxml.html.clean.Cleaner-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class Cleaner</h1><p class="nomargin-top"><span class="codelink"><a href="lxml.html.clean-pysrc.html#Cleaner">source&nbsp;code</a></span></p>
+<pre class="base-tree">
+object --+
+         |
+        <strong class="uidshort">Cleaner</strong>
+</pre>
+
+<hr />
+<p>Instances cleans the document of each of the possible offending
+elements.  The cleaning is controlled by attributes; you can
+override attributes in a subclass, or set them in the constructor.</p>
+<dl class="rst-docutils">
+<dt><tt class="rst-docutils literal">scripts</tt>:</dt>
+<dd>Removes any <tt class="rst-docutils literal">&lt;script&gt;</tt> tags.</dd>
+<dt><tt class="rst-docutils literal">javascript</tt>:</dt>
+<dd>Removes any Javascript, like an <tt class="rst-docutils literal">onclick</tt> attribute. Also removes stylesheets
+as they could contain Javascript.</dd>
+<dt><tt class="rst-docutils literal">comments</tt>:</dt>
+<dd>Removes any comments.</dd>
+<dt><tt class="rst-docutils literal">style</tt>:</dt>
+<dd>Removes any style tags.</dd>
+<dt><tt class="rst-docutils literal">inline_style</tt></dt>
+<dd>Removes any style attributes.  Defaults to the value of the <tt class="rst-docutils literal">style</tt> option.</dd>
+<dt><tt class="rst-docutils literal">links</tt>:</dt>
+<dd>Removes any <tt class="rst-docutils literal">&lt;link&gt;</tt> tags</dd>
+<dt><tt class="rst-docutils literal">meta</tt>:</dt>
+<dd>Removes any <tt class="rst-docutils literal">&lt;meta&gt;</tt> tags</dd>
+<dt><tt class="rst-docutils literal">page_structure</tt>:</dt>
+<dd>Structural parts of a page: <tt class="rst-docutils literal">&lt;head&gt;</tt>, <tt class="rst-docutils literal">&lt;html&gt;</tt>, <tt class="rst-docutils literal">&lt;title&gt;</tt>.</dd>
+<dt><tt class="rst-docutils literal">processing_instructions</tt>:</dt>
+<dd>Removes any processing instructions.</dd>
+<dt><tt class="rst-docutils literal">embedded</tt>:</dt>
+<dd>Removes any embedded objects (flash, iframes)</dd>
+<dt><tt class="rst-docutils literal">frames</tt>:</dt>
+<dd>Removes any frame-related tags</dd>
+<dt><tt class="rst-docutils literal">forms</tt>:</dt>
+<dd>Removes any form tags</dd>
+<dt><tt class="rst-docutils literal">annoying_tags</tt>:</dt>
+<dd>Tags that aren't <em>wrong</em>, but are annoying.  <tt class="rst-docutils literal">&lt;blink&gt;</tt> and <tt class="rst-docutils literal">&lt;marquee&gt;</tt></dd>
+<dt><tt class="rst-docutils literal">remove_tags</tt>:</dt>
+<dd>A list of tags to remove.  Only the tags will be removed,
+their content will get pulled up into the parent tag.</dd>
+<dt><tt class="rst-docutils literal">kill_tags</tt>:</dt>
+<dd>A list of tags to kill.  Killing also removes the tag's content,
+i.e. the whole subtree, not just the tag itself.</dd>
+<dt><tt class="rst-docutils literal">allow_tags</tt>:</dt>
+<dd>A list of tags to include (default include all).</dd>
+<dt><tt class="rst-docutils literal">remove_unknown_tags</tt>:</dt>
+<dd>Remove any tags that aren't standard parts of HTML.</dd>
+<dt><tt class="rst-docutils literal">safe_attrs_only</tt>:</dt>
+<dd>If true, only include 'safe' attributes (specifically the list
+from the feedparser HTML sanitisation web site).</dd>
+<dt><tt class="rst-docutils literal">safe_attrs</tt>:</dt>
+<dd>A set of attribute names to override the default list of attributes
+considered 'safe' (when safe_attrs_only=True).</dd>
+<dt><tt class="rst-docutils literal">add_nofollow</tt>:</dt>
+<dd>If true, then any &lt;a&gt; tags will have <tt class="rst-docutils literal"><span class="pre">rel=&quot;nofollow&quot;</span></tt> added to them.</dd>
+<dt><tt class="rst-docutils literal">host_whitelist</tt>:</dt>
+<dd><p class="rst-first">A list or set of hosts that you can use for embedded content
+(for content like <tt class="rst-docutils literal">&lt;object&gt;</tt>, <tt class="rst-docutils literal">&lt;link <span class="pre">rel=&quot;stylesheet&quot;&gt;</span></tt>, etc).
+You can also implement/override the method
+<tt class="rst-docutils literal">allow_embedded_url(el, url)</tt> or <tt class="rst-docutils literal">allow_element(el)</tt> to
+implement more complex rules for what can be embedded.
+Anything that passes this test will be shown, regardless of
+the value of (for instance) <tt class="rst-docutils literal">embedded</tt>.</p>
+<p>Note that this parameter might not work as intended if you do not
+make the links absolute before doing the cleaning.</p>
+<p class="rst-last">Note that you may also need to set <tt class="rst-docutils literal">whitelist_tags</tt>.</p>
+</dd>
+<dt><tt class="rst-docutils literal">whitelist_tags</tt>:</dt>
+<dd>A set of tags that can be included with <tt class="rst-docutils literal">host_whitelist</tt>.
+The default is <tt class="rst-docutils literal">iframe</tt> and <tt class="rst-docutils literal">embed</tt>; you may wish to
+include other tags like <tt class="rst-docutils literal">script</tt>, or you may want to
+implement <tt class="rst-docutils literal">allow_embedded_url</tt> for more control.  Set to None to
+include all tags.</dd>
+</dl>
+<p>This modifies the document <em>in place</em>.</p>
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lxml.html.clean.Cleaner-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      x.__init__(...) initializes x; see help(type(x)) for signature</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.html.clean-pysrc.html#Cleaner.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__call__"></a><span class="summary-sig-name">__call__</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">doc</span>)</span><br />
+      Cleans the document.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.html.clean-pysrc.html#Cleaner.__call__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="allow_follow"></a><span class="summary-sig-name">allow_follow</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">anchor</span>)</span><br />
+      Override to suppress rel=&quot;nofollow&quot; on some anchors.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.html.clean-pysrc.html#Cleaner.allow_follow">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="allow_element"></a><span class="summary-sig-name">allow_element</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">el</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.html.clean-pysrc.html#Cleaner.allow_element">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="allow_embedded_url"></a><span class="summary-sig-name">allow_embedded_url</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">el</span>,
+        <span class="summary-sig-arg">url</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.html.clean-pysrc.html#Cleaner.allow_embedded_url">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="kill_conditional_comments"></a><span class="summary-sig-name">kill_conditional_comments</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">doc</span>)</span><br />
+      IE conditional comments basically embed HTML that the parser
+doesn't normally see.  We can't allow anything like that, so
+we'll kill any comments that could be conditional.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.html.clean-pysrc.html#Cleaner.kill_conditional_comments">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_kill_elements"></a><span class="summary-sig-name">_kill_elements</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">doc</span>,
+        <span class="summary-sig-arg">condition</span>,
+        <span class="summary-sig-arg">iterate</span>=<span class="summary-sig-default">None</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.html.clean-pysrc.html#Cleaner._kill_elements">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_remove_javascript_link"></a><span class="summary-sig-name">_remove_javascript_link</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">link</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.html.clean-pysrc.html#Cleaner._remove_javascript_link">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_substitute_comments"></a><span class="summary-sig-name">_substitute_comments</span>(<span class="summary-sig-arg">...</span>)</span><br />
+      sub(repl, string[, count = 0]) --&gt; newstring
+Return the string obtained by replacing the leftmost non-overlapping
+occurrences of pattern in string by the replacement repl.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.html.clean-pysrc.html#Cleaner._substitute_comments">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lxml.html.clean.Cleaner-class.html#_has_sneaky_javascript" class="summary-sig-name" onclick="show_private();">_has_sneaky_javascript</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">style</span>)</span><br />
+      Depending on the browser, stuff like <tt class="rst-docutils literal">e x p r e s s i o <span class="pre">n(...)</span></tt>
+can get interpreted, or <tt class="rst-docutils literal">expre/* stuff <span class="pre">*/ssion(...)</span></tt>.  This
+checks for attempt to do stuff like this.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.html.clean-pysrc.html#Cleaner._has_sneaky_javascript">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="clean_html"></a><span class="summary-sig-name">clean_html</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">html</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.html.clean-pysrc.html#Cleaner.clean_html">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__new__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__repr__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__str__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS VARIABLES ==================== -->
+<a name="section-ClassVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassVariables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="scripts"></a><span class="summary-name">scripts</span> = <code title="True">True</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="javascript"></a><span class="summary-name">javascript</span> = <code title="True">True</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="comments"></a><span class="summary-name">comments</span> = <code title="True">True</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="style"></a><span class="summary-name">style</span> = <code title="False">False</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="inline_style"></a><span class="summary-name">inline_style</span> = <code title="None">None</code><br />
+      hash(x)
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="links"></a><span class="summary-name">links</span> = <code title="True">True</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="meta"></a><span class="summary-name">meta</span> = <code title="True">True</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="page_structure"></a><span class="summary-name">page_structure</span> = <code title="True">True</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="processing_instructions"></a><span class="summary-name">processing_instructions</span> = <code title="True">True</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="embedded"></a><span class="summary-name">embedded</span> = <code title="True">True</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="frames"></a><span class="summary-name">frames</span> = <code title="True">True</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="forms"></a><span class="summary-name">forms</span> = <code title="True">True</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="annoying_tags"></a><span class="summary-name">annoying_tags</span> = <code title="True">True</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="remove_tags"></a><span class="summary-name">remove_tags</span> = <code title="None">None</code><br />
+      hash(x)
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="allow_tags"></a><span class="summary-name">allow_tags</span> = <code title="None">None</code><br />
+      hash(x)
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="kill_tags"></a><span class="summary-name">kill_tags</span> = <code title="None">None</code><br />
+      hash(x)
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="remove_unknown_tags"></a><span class="summary-name">remove_unknown_tags</span> = <code title="True">True</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="safe_attrs_only"></a><span class="summary-name">safe_attrs_only</span> = <code title="True">True</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.html.clean.Cleaner-class.html#safe_attrs" class="summary-name">safe_attrs</a> = <code title="frozenset(['abbr',
+           'accept',
+           'accept-charset',
+           'accesskey',
+           'action',
+           'align',
+           'alt',
+           'axis',
+..."><code class="variable-group">frozenset([</code><code class="variable-quote">'</code><code class="variable-string">abbr</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">accept</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">accept-charset</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">a</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="add_nofollow"></a><span class="summary-name">add_nofollow</span> = <code title="False">False</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="host_whitelist"></a><span class="summary-name">host_whitelist</span> = <code title="()"><code class="variable-group">(</code><code class="variable-group">)</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="whitelist_tags"></a><span class="summary-name">whitelist_tags</span> = <code title="set(['embed', 'iframe'])"><code class="variable-group">set([</code><code class="variable-quote">'</code><code class="variable-string">embed</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">iframe</code><code class="variable-quote">'</code><code class="variable-group">])</code></code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.html.clean.Cleaner-class.html#_tag_link_attrs" class="summary-name" onclick="show_private();">_tag_link_attrs</a> = <code title="{'a': 'href',
+ 'applet': ['code', 'object'],
+ 'embed': 'src',
+ 'iframe': 'src',
+ 'layer': 'src',
+ 'link': 'href',
+ 'script': 'src'}"><code class="variable-group">{</code><code class="variable-quote">'</code><code class="variable-string">a</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">href</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">applet</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-group">[</code><code class="variable-quote">'</code><code class="variable-string">code</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">object</code><code class="variable-quote">'</code><code class="variable-group">]</code><code class="variable-op">, </code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="__qualname__"></a><span class="summary-name">__qualname__</span> = <code title="'Cleaner'"><code class="variable-quote">'</code><code class="variable-string">Cleaner</code><code class="variable-quote">'</code></code>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lxml.html.clean-pysrc.html#Cleaner.__init__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  x.__init__(...) initializes x; see help(type(x)) for signature
+  <dl class="fields">
+    <dt>Overrides:
+        object.__init__
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="_has_sneaky_javascript"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_has_sneaky_javascript</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">style</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lxml.html.clean-pysrc.html#Cleaner._has_sneaky_javascript">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Depending on the browser, stuff like <tt class="rst-docutils literal">e x p r e s s i o <span class="pre">n(...)</span></tt>
+can get interpreted, or <tt class="rst-docutils literal">expre/* stuff <span class="pre">*/ssion(...)</span></tt>.  This
+checks for attempt to do stuff like this.</p>
+<p>Typically the response will be to kill the entire style; if you
+have just a bit of Javascript in the style another rule will catch
+that and remove only the Javascript from the style; this catches
+more sneaky attempts.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== CLASS VARIABLE DETAILS ==================== -->
+<a name="section-ClassVariableDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Variable Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassVariableDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="safe_attrs"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">safe_attrs</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">frozenset([</code><code class="variable-quote">'</code><code class="variable-string">abbr</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+           <code class="variable-quote">'</code><code class="variable-string">accept</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+           <code class="variable-quote">'</code><code class="variable-string">accept-charset</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+           <code class="variable-quote">'</code><code class="variable-string">accesskey</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+           <code class="variable-quote">'</code><code class="variable-string">action</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+           <code class="variable-quote">'</code><code class="variable-string">align</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+           <code class="variable-quote">'</code><code class="variable-string">alt</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+           <code class="variable-quote">'</code><code class="variable-string">axis</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="_tag_link_attrs"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">_tag_link_attrs</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code><code class="variable-quote">'</code><code class="variable-string">a</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">href</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">applet</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-group">[</code><code class="variable-quote">'</code><code class="variable-string">code</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">object</code><code class="variable-quote">'</code><code class="variable-group">]</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">embed</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">src</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">iframe</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">src</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">layer</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">src</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">link</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">href</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">script</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">src</code><code class="variable-quote">'</code><code class="variable-group">}</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lxml-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="/">lxml API</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Fri Jun 22 18:59:52 2018
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

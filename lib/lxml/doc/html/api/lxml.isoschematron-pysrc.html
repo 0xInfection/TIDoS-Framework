@@ -1,0 +1,660 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>lxml.isoschematron</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lxml-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="/">lxml API</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="lxml-module.html">Package&nbsp;lxml</a> ::
+        Package&nbsp;isoschematron
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="lxml.isoschematron-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="lxml.isoschematron-module.html">Package lxml.isoschematron</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-docstring">"""The ``lxml.isoschematron`` package implements ISO Schematron support on top</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-docstring">of the pure-xslt 'skeleton' implementation.</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">sys</tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt id="link-0" class="py-name" targets="Variable lxml.etree.XPath.path=lxml.etree.XPath-class.html#path,Variable lxml.etree._LogEntry.path=lxml.etree._LogEntry-class.html#path"><a title="lxml.etree.XPath.path
+lxml.etree._LogEntry.path" class="py-name" href="#" onclick="return doclink('link-0', 'path', 'link-0');">path</a></tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-1" class="py-name" targets="Package lxml=lxml-module.html"><a title="lxml" class="py-name" href="#" onclick="return doclink('link-1', 'lxml', 'link-1');">lxml</a></tt> <tt class="py-keyword">import</tt> <tt id="link-2" class="py-name" targets="Module lxml.etree=lxml.etree-module.html,Variable lxml.sax.ElementTreeContentHandler.etree=lxml.sax.ElementTreeContentHandler-class.html#etree,Variable lxml.tests.test_elementtree.CElementTreeTestCase.etree=lxml.tests.test_elementtree.CElementTreeTestCase-class.html#etree,Variable lxml.tests.test_elementtree._ETreeTestCaseBase.etree=lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#etree,Variable lxml.tests.test_elementtree._XMLPullParserTest.etree=lxml.tests.test_elementtree._XMLPullParserTest-class.html#etree,Variable lxml.tests.test_io._IOTestCaseBase.etree=lxml.tests.test_io._IOTestCaseBase-class.html#etree"><a title="lxml.etree
+lxml.sax.ElementTreeContentHandler.etree
+lxml.tests.test_elementtree.CElementTreeTestCase.etree
+lxml.tests.test_elementtree._ETreeTestCaseBase.etree
+lxml.tests.test_elementtree._XMLPullParserTest.etree
+lxml.tests.test_io._IOTestCaseBase.etree" class="py-name" href="#" onclick="return doclink('link-2', 'etree', 'link-2');">etree</a></tt> <tt class="py-keyword">as</tt> <tt class="py-name">_etree</tt> <tt class="py-comment"># due to validator __init__ signature</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-comment"># some compat stuff, borrowed from lxml.html</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line">    <tt class="py-name">unicode</tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-keyword">except</tt> <tt class="py-name">NameError</tt><tt class="py-op">:</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line">    <tt class="py-comment"># Python 3</tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line">    <tt class="py-name">unicode</tt> <tt class="py-op">=</tt> <tt id="link-3" class="py-name" targets="Class str=str-class.html"><a title="str" class="py-name" href="#" onclick="return doclink('link-3', 'str', 'link-3');">str</a></tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"><tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line">    <tt id="link-4" class="py-name" targets="Variable lxml.html.clean.basestring=lxml.html.clean-module.html#basestring"><a title="lxml.html.clean.basestring" class="py-name" href="#" onclick="return doclink('link-4', 'basestring', 'link-4');">basestring</a></tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"><tt class="py-keyword">except</tt> <tt class="py-name">NameError</tt><tt class="py-op">:</tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line">    <tt class="py-comment"># Python 3</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line">    <tt id="link-5" class="py-name"><a title="lxml.html.clean.basestring" class="py-name" href="#" onclick="return doclink('link-5', 'basestring', 'link-4');">basestring</a></tt> <tt class="py-op">=</tt> <tt id="link-6" class="py-name"><a title="str" class="py-name" href="#" onclick="return doclink('link-6', 'str', 'link-3');">str</a></tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line"> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line"><tt class="py-name">__all__</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-string">'extract_xsd'</tt><tt class="py-op">,</tt> <tt class="py-string">'extract_rng'</tt><tt class="py-op">,</tt> <tt class="py-string">'iso_dsdl_include'</tt><tt class="py-op">,</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line">           <tt class="py-string">'iso_abstract_expand'</tt><tt class="py-op">,</tt> <tt class="py-string">'iso_svrl_for_xslt1'</tt><tt class="py-op">,</tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line">           <tt class="py-string">'svrl_validation_errors'</tt><tt class="py-op">,</tt> <tt class="py-string">'schematron_schema_valid'</tt><tt class="py-op">,</tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line">           <tt class="py-string">'stylesheet_params'</tt><tt class="py-op">,</tt> <tt class="py-string">'Schematron'</tt><tt class="py-op">]</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line"> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line"> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line"><tt class="py-comment"># some namespaces</tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line"><tt class="py-comment">#FIXME: Maybe lxml should provide a dedicated place for common namespace</tt> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line"><tt class="py-comment">#FIXME: definitions?</tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line"><tt id="link-7" class="py-name" targets="Variable lxml.isoschematron.XML_SCHEMA_NS=lxml.isoschematron-module.html#XML_SCHEMA_NS,Variable lxml.tests.test_objectify.XML_SCHEMA_NS=lxml.tests.test_objectify-module.html#XML_SCHEMA_NS"><a title="lxml.isoschematron.XML_SCHEMA_NS
+lxml.tests.test_objectify.XML_SCHEMA_NS" class="py-name" href="#" onclick="return doclink('link-7', 'XML_SCHEMA_NS', 'link-7');">XML_SCHEMA_NS</a></tt> <tt class="py-op">=</tt> <tt class="py-string">"http://www.w3.org/2001/XMLSchema"</tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line"><tt id="link-8" class="py-name" targets="Variable lxml.isoschematron.RELAXNG_NS=lxml.isoschematron-module.html#RELAXNG_NS"><a title="lxml.isoschematron.RELAXNG_NS" class="py-name" href="#" onclick="return doclink('link-8', 'RELAXNG_NS', 'link-8');">RELAXNG_NS</a></tt> <tt class="py-op">=</tt> <tt class="py-string">"http://relaxng.org/ns/structure/1.0"</tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line"><tt id="link-9" class="py-name" targets="Variable lxml.isoschematron.SCHEMATRON_NS=lxml.isoschematron-module.html#SCHEMATRON_NS"><a title="lxml.isoschematron.SCHEMATRON_NS" class="py-name" href="#" onclick="return doclink('link-9', 'SCHEMATRON_NS', 'link-9');">SCHEMATRON_NS</a></tt> <tt class="py-op">=</tt> <tt class="py-string">"http://purl.oclc.org/dsdl/schematron"</tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line"><tt id="link-10" class="py-name" targets="Variable lxml.isoschematron.SVRL_NS=lxml.isoschematron-module.html#SVRL_NS"><a title="lxml.isoschematron.SVRL_NS" class="py-name" href="#" onclick="return doclink('link-10', 'SVRL_NS', 'link-10');">SVRL_NS</a></tt> <tt class="py-op">=</tt> <tt class="py-string">"http://purl.oclc.org/dsdl/svrl"</tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line"> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line"> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line"><tt class="py-comment"># some helpers</tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line"><tt id="link-11" class="py-name" targets="Variable lxml.isoschematron._schematron_root=lxml.isoschematron-module.html#_schematron_root"><a title="lxml.isoschematron._schematron_root" class="py-name" href="#" onclick="return doclink('link-11', '_schematron_root', 'link-11');">_schematron_root</a></tt> <tt class="py-op">=</tt> <tt class="py-string">'{%s}schema'</tt> <tt class="py-op">%</tt> <tt id="link-12" class="py-name"><a title="lxml.isoschematron.SCHEMATRON_NS" class="py-name" href="#" onclick="return doclink('link-12', 'SCHEMATRON_NS', 'link-9');">SCHEMATRON_NS</a></tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line"><tt id="link-13" class="py-name" targets="Variable lxml.isoschematron._xml_schema_root=lxml.isoschematron-module.html#_xml_schema_root"><a title="lxml.isoschematron._xml_schema_root" class="py-name" href="#" onclick="return doclink('link-13', '_xml_schema_root', 'link-13');">_xml_schema_root</a></tt> <tt class="py-op">=</tt> <tt class="py-string">'{%s}schema'</tt> <tt class="py-op">%</tt> <tt id="link-14" class="py-name"><a title="lxml.isoschematron.XML_SCHEMA_NS
+lxml.tests.test_objectify.XML_SCHEMA_NS" class="py-name" href="#" onclick="return doclink('link-14', 'XML_SCHEMA_NS', 'link-7');">XML_SCHEMA_NS</a></tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line"><tt id="link-15" class="py-name" targets="Variable lxml.isoschematron._resources_dir=lxml.isoschematron-module.html#_resources_dir"><a title="lxml.isoschematron._resources_dir" class="py-name" href="#" onclick="return doclink('link-15', '_resources_dir', 'link-15');">_resources_dir</a></tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt id="link-16" class="py-name"><a title="lxml.etree.XPath.path
+lxml.etree._LogEntry.path" class="py-name" href="#" onclick="return doclink('link-16', 'path', 'link-0');">path</a></tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-name">os</tt><tt class="py-op">.</tt><tt id="link-17" class="py-name"><a title="lxml.etree.XPath.path
+lxml.etree._LogEntry.path" class="py-name" href="#" onclick="return doclink('link-17', 'path', 'link-0');">path</a></tt><tt class="py-op">.</tt><tt class="py-name">dirname</tt><tt class="py-op">(</tt><tt class="py-name">__file__</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-string">'resources'</tt><tt class="py-op">)</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line"> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line"> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line"><tt class="py-comment"># the iso-schematron skeleton implementation steps aka xsl transformations</tt> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line"><tt id="link-18" class="py-name" targets="Variable lxml.isoschematron.extract_xsd=lxml.isoschematron-module.html#extract_xsd"><a title="lxml.isoschematron.extract_xsd" class="py-name" href="#" onclick="return doclink('link-18', 'extract_xsd', 'link-18');">extract_xsd</a></tt> <tt class="py-op">=</tt> <tt class="py-name">_etree</tt><tt class="py-op">.</tt><tt id="link-19" class="py-name" targets="Variable lxml.etree.ErrorDomains.XSLT=lxml.etree.ErrorDomains-class.html#XSLT,Class lxml.etree.XSLT=lxml.etree.XSLT-class.html"><a title="lxml.etree.ErrorDomains.XSLT
+lxml.etree.XSLT" class="py-name" href="#" onclick="return doclink('link-19', 'XSLT', 'link-19');">XSLT</a></tt><tt class="py-op">(</tt><tt class="py-name">_etree</tt><tt class="py-op">.</tt><tt id="link-20" class="py-name" targets="Method lxml.etree._ElementTree.parse()=lxml.etree._ElementTree-class.html#parse,Function lxml.etree.parse()=lxml.etree-module.html#parse,Function lxml.html.ElementSoup.parse()=lxml.html.ElementSoup-module.html#parse,Function lxml.html.html5parser.parse()=lxml.html.html5parser-module.html#parse,Function lxml.html.soupparser.parse()=lxml.html.soupparser-module.html#parse,Function lxml.objectify.parse()=lxml.objectify-module.html#parse,Method lxml.tests.common_imports.HelperTestCase.parse()=lxml.tests.common_imports.HelperTestCase-class.html#parse"><a title="lxml.etree._ElementTree.parse
+lxml.etree.parse
+lxml.html.ElementSoup.parse
+lxml.html.html5parser.parse
+lxml.html.soupparser.parse
+lxml.objectify.parse
+lxml.tests.common_imports.HelperTestCase.parse" class="py-name" href="#" onclick="return doclink('link-20', 'parse', 'link-20');">parse</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line">    <tt class="py-name">os</tt><tt class="py-op">.</tt><tt id="link-21" class="py-name"><a title="lxml.etree.XPath.path
+lxml.etree._LogEntry.path" class="py-name" href="#" onclick="return doclink('link-21', 'path', 'link-0');">path</a></tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt id="link-22" class="py-name"><a title="lxml.isoschematron._resources_dir" class="py-name" href="#" onclick="return doclink('link-22', '_resources_dir', 'link-15');">_resources_dir</a></tt><tt class="py-op">,</tt> <tt class="py-string">'xsl'</tt><tt class="py-op">,</tt> <tt class="py-string">'XSD2Schtrn.xsl'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line"><tt id="link-23" class="py-name" targets="Variable lxml.isoschematron.extract_rng=lxml.isoschematron-module.html#extract_rng"><a title="lxml.isoschematron.extract_rng" class="py-name" href="#" onclick="return doclink('link-23', 'extract_rng', 'link-23');">extract_rng</a></tt> <tt class="py-op">=</tt> <tt class="py-name">_etree</tt><tt class="py-op">.</tt><tt id="link-24" class="py-name"><a title="lxml.etree.ErrorDomains.XSLT
+lxml.etree.XSLT" class="py-name" href="#" onclick="return doclink('link-24', 'XSLT', 'link-19');">XSLT</a></tt><tt class="py-op">(</tt><tt class="py-name">_etree</tt><tt class="py-op">.</tt><tt id="link-25" class="py-name"><a title="lxml.etree._ElementTree.parse
+lxml.etree.parse
+lxml.html.ElementSoup.parse
+lxml.html.html5parser.parse
+lxml.html.soupparser.parse
+lxml.objectify.parse
+lxml.tests.common_imports.HelperTestCase.parse" class="py-name" href="#" onclick="return doclink('link-25', 'parse', 'link-20');">parse</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line">    <tt class="py-name">os</tt><tt class="py-op">.</tt><tt id="link-26" class="py-name"><a title="lxml.etree.XPath.path
+lxml.etree._LogEntry.path" class="py-name" href="#" onclick="return doclink('link-26', 'path', 'link-0');">path</a></tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt id="link-27" class="py-name"><a title="lxml.isoschematron._resources_dir" class="py-name" href="#" onclick="return doclink('link-27', '_resources_dir', 'link-15');">_resources_dir</a></tt><tt class="py-op">,</tt> <tt class="py-string">'xsl'</tt><tt class="py-op">,</tt> <tt class="py-string">'RNG2Schtrn.xsl'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line"><tt id="link-28" class="py-name" targets="Variable lxml.isoschematron.iso_dsdl_include=lxml.isoschematron-module.html#iso_dsdl_include"><a title="lxml.isoschematron.iso_dsdl_include" class="py-name" href="#" onclick="return doclink('link-28', 'iso_dsdl_include', 'link-28');">iso_dsdl_include</a></tt> <tt class="py-op">=</tt> <tt class="py-name">_etree</tt><tt class="py-op">.</tt><tt id="link-29" class="py-name"><a title="lxml.etree.ErrorDomains.XSLT
+lxml.etree.XSLT" class="py-name" href="#" onclick="return doclink('link-29', 'XSLT', 'link-19');">XSLT</a></tt><tt class="py-op">(</tt><tt class="py-name">_etree</tt><tt class="py-op">.</tt><tt id="link-30" class="py-name"><a title="lxml.etree._ElementTree.parse
+lxml.etree.parse
+lxml.html.ElementSoup.parse
+lxml.html.html5parser.parse
+lxml.html.soupparser.parse
+lxml.objectify.parse
+lxml.tests.common_imports.HelperTestCase.parse" class="py-name" href="#" onclick="return doclink('link-30', 'parse', 'link-20');">parse</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line">    <tt class="py-name">os</tt><tt class="py-op">.</tt><tt id="link-31" class="py-name"><a title="lxml.etree.XPath.path
+lxml.etree._LogEntry.path" class="py-name" href="#" onclick="return doclink('link-31', 'path', 'link-0');">path</a></tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt id="link-32" class="py-name"><a title="lxml.isoschematron._resources_dir" class="py-name" href="#" onclick="return doclink('link-32', '_resources_dir', 'link-15');">_resources_dir</a></tt><tt class="py-op">,</tt> <tt class="py-string">'xsl'</tt><tt class="py-op">,</tt> <tt class="py-string">'iso-schematron-xslt1'</tt><tt class="py-op">,</tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line">                 <tt class="py-string">'iso_dsdl_include.xsl'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line"><tt id="link-33" class="py-name" targets="Variable lxml.isoschematron.iso_abstract_expand=lxml.isoschematron-module.html#iso_abstract_expand"><a title="lxml.isoschematron.iso_abstract_expand" class="py-name" href="#" onclick="return doclink('link-33', 'iso_abstract_expand', 'link-33');">iso_abstract_expand</a></tt> <tt class="py-op">=</tt> <tt class="py-name">_etree</tt><tt class="py-op">.</tt><tt id="link-34" class="py-name"><a title="lxml.etree.ErrorDomains.XSLT
+lxml.etree.XSLT" class="py-name" href="#" onclick="return doclink('link-34', 'XSLT', 'link-19');">XSLT</a></tt><tt class="py-op">(</tt><tt class="py-name">_etree</tt><tt class="py-op">.</tt><tt id="link-35" class="py-name"><a title="lxml.etree._ElementTree.parse
+lxml.etree.parse
+lxml.html.ElementSoup.parse
+lxml.html.html5parser.parse
+lxml.html.soupparser.parse
+lxml.objectify.parse
+lxml.tests.common_imports.HelperTestCase.parse" class="py-name" href="#" onclick="return doclink('link-35', 'parse', 'link-20');">parse</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line">    <tt class="py-name">os</tt><tt class="py-op">.</tt><tt id="link-36" class="py-name"><a title="lxml.etree.XPath.path
+lxml.etree._LogEntry.path" class="py-name" href="#" onclick="return doclink('link-36', 'path', 'link-0');">path</a></tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt id="link-37" class="py-name"><a title="lxml.isoschematron._resources_dir" class="py-name" href="#" onclick="return doclink('link-37', '_resources_dir', 'link-15');">_resources_dir</a></tt><tt class="py-op">,</tt> <tt class="py-string">'xsl'</tt><tt class="py-op">,</tt> <tt class="py-string">'iso-schematron-xslt1'</tt><tt class="py-op">,</tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line">                 <tt class="py-string">'iso_abstract_expand.xsl'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line"><tt id="link-38" class="py-name" targets="Variable lxml.isoschematron.iso_svrl_for_xslt1=lxml.isoschematron-module.html#iso_svrl_for_xslt1"><a title="lxml.isoschematron.iso_svrl_for_xslt1" class="py-name" href="#" onclick="return doclink('link-38', 'iso_svrl_for_xslt1', 'link-38');">iso_svrl_for_xslt1</a></tt> <tt class="py-op">=</tt> <tt class="py-name">_etree</tt><tt class="py-op">.</tt><tt id="link-39" class="py-name"><a title="lxml.etree.ErrorDomains.XSLT
+lxml.etree.XSLT" class="py-name" href="#" onclick="return doclink('link-39', 'XSLT', 'link-19');">XSLT</a></tt><tt class="py-op">(</tt><tt class="py-name">_etree</tt><tt class="py-op">.</tt><tt id="link-40" class="py-name"><a title="lxml.etree._ElementTree.parse
+lxml.etree.parse
+lxml.html.ElementSoup.parse
+lxml.html.html5parser.parse
+lxml.html.soupparser.parse
+lxml.objectify.parse
+lxml.tests.common_imports.HelperTestCase.parse" class="py-name" href="#" onclick="return doclink('link-40', 'parse', 'link-20');">parse</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line">    <tt class="py-name">os</tt><tt class="py-op">.</tt><tt id="link-41" class="py-name"><a title="lxml.etree.XPath.path
+lxml.etree._LogEntry.path" class="py-name" href="#" onclick="return doclink('link-41', 'path', 'link-0');">path</a></tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt id="link-42" class="py-name"><a title="lxml.isoschematron._resources_dir" class="py-name" href="#" onclick="return doclink('link-42', '_resources_dir', 'link-15');">_resources_dir</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line">                 <tt class="py-string">'xsl'</tt><tt class="py-op">,</tt> <tt class="py-string">'iso-schematron-xslt1'</tt><tt class="py-op">,</tt> <tt class="py-string">'iso_svrl_for_xslt1.xsl'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line"> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line"> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line"><tt class="py-comment"># svrl result accessors</tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line"><tt id="link-43" class="py-name" targets="Variable lxml.isoschematron.svrl_validation_errors=lxml.isoschematron-module.html#svrl_validation_errors"><a title="lxml.isoschematron.svrl_validation_errors" class="py-name" href="#" onclick="return doclink('link-43', 'svrl_validation_errors', 'link-43');">svrl_validation_errors</a></tt> <tt class="py-op">=</tt> <tt class="py-name">_etree</tt><tt class="py-op">.</tt><tt id="link-44" class="py-name" targets="Class lxml.etree.XPath=lxml.etree.XPath-class.html"><a title="lxml.etree.XPath" class="py-name" href="#" onclick="return doclink('link-44', 'XPath', 'link-44');">XPath</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line">    <tt class="py-string">'//svrl:failed-assert'</tt><tt class="py-op">,</tt> <tt class="py-name">namespaces</tt><tt class="py-op">=</tt><tt class="py-op">{</tt><tt class="py-string">'svrl'</tt><tt class="py-op">:</tt> <tt id="link-45" class="py-name"><a title="lxml.isoschematron.SVRL_NS" class="py-name" href="#" onclick="return doclink('link-45', 'SVRL_NS', 'link-10');">SVRL_NS</a></tt><tt class="py-op">}</tt><tt class="py-op">)</tt> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line"> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line"> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line"><tt class="py-comment"># RelaxNG validator for schematron schemas</tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line"><tt id="link-46" class="py-name" targets="Variable lxml.isoschematron.schematron_schema_valid=lxml.isoschematron-module.html#schematron_schema_valid"><a title="lxml.isoschematron.schematron_schema_valid" class="py-name" href="#" onclick="return doclink('link-46', 'schematron_schema_valid', 'link-46');">schematron_schema_valid</a></tt> <tt class="py-op">=</tt> <tt class="py-name">_etree</tt><tt class="py-op">.</tt><tt id="link-47" class="py-name" targets="Class lxml.etree.RelaxNG=lxml.etree.RelaxNG-class.html"><a title="lxml.etree.RelaxNG" class="py-name" href="#" onclick="return doclink('link-47', 'RelaxNG', 'link-47');">RelaxNG</a></tt><tt class="py-op">(</tt><tt class="py-name">_etree</tt><tt class="py-op">.</tt><tt id="link-48" class="py-name"><a title="lxml.etree._ElementTree.parse
+lxml.etree.parse
+lxml.html.ElementSoup.parse
+lxml.html.html5parser.parse
+lxml.html.soupparser.parse
+lxml.objectify.parse
+lxml.tests.common_imports.HelperTestCase.parse" class="py-name" href="#" onclick="return doclink('link-48', 'parse', 'link-20');">parse</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line">    <tt class="py-name">os</tt><tt class="py-op">.</tt><tt id="link-49" class="py-name"><a title="lxml.etree.XPath.path
+lxml.etree._LogEntry.path" class="py-name" href="#" onclick="return doclink('link-49', 'path', 'link-0');">path</a></tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt id="link-50" class="py-name"><a title="lxml.isoschematron._resources_dir" class="py-name" href="#" onclick="return doclink('link-50', '_resources_dir', 'link-15');">_resources_dir</a></tt><tt class="py-op">,</tt> <tt class="py-string">'rng'</tt><tt class="py-op">,</tt> <tt class="py-string">'iso-schematron.rng'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="stylesheet_params"></a><div id="stylesheet_params-def"><a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line"> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line"> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt> <a class="py-toggle" href="#" id="stylesheet_params-toggle" onclick="return toggle('stylesheet_params');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.isoschematron-module.html#stylesheet_params">stylesheet_params</a><tt class="py-op">(</tt><tt class="py-op">**</tt><tt class="py-param">kwargs</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="stylesheet_params-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="stylesheet_params-expanded"><a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line">    <tt class="py-docstring">"""Convert keyword args to a dictionary of stylesheet parameters.</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line"><tt class="py-docstring">    XSL stylesheet parameters must be XPath expressions, i.e.:</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line"><tt class="py-docstring">    * string expressions, like "'5'"</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line"><tt class="py-docstring">    * simple (number) expressions, like "5"</tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line"><tt class="py-docstring">    * valid XPath expressions, like "/a/b/text()"</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line"><tt class="py-docstring">    This function converts native Python keyword arguments to stylesheet</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line"><tt class="py-docstring">    parameters following these rules:</tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line"><tt class="py-docstring">    If an arg is a string wrap it with XSLT.strparam().</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line"><tt class="py-docstring">    If an arg is an XPath object use its path string.</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line"><tt class="py-docstring">    If arg is None raise TypeError.</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line"><tt class="py-docstring">    Else convert arg to string.</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line">    <tt class="py-name">result</tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">key</tt><tt class="py-op">,</tt> <tt class="py-name">val</tt> <tt class="py-keyword">in</tt> <tt class="py-name">kwargs</tt><tt class="py-op">.</tt><tt id="link-51" class="py-name" targets="Method lxml.etree._Attrib.items()=lxml.etree._Attrib-class.html#items,Method lxml.etree._Element.items()=lxml.etree._Element-class.html#items,Method lxml.etree._IDDict.items()=lxml.etree._IDDict-class.html#items"><a title="lxml.etree._Attrib.items
+lxml.etree._Element.items
+lxml.etree._IDDict.items" class="py-name" href="#" onclick="return doclink('link-51', 'items', 'link-51');">items</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">val</tt><tt class="py-op">,</tt> <tt id="link-52" class="py-name"><a title="lxml.html.clean.basestring" class="py-name" href="#" onclick="return doclink('link-52', 'basestring', 'link-4');">basestring</a></tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">            <tt class="py-name">val</tt> <tt class="py-op">=</tt> <tt class="py-name">_etree</tt><tt class="py-op">.</tt><tt id="link-53" class="py-name"><a title="lxml.etree.ErrorDomains.XSLT
+lxml.etree.XSLT" class="py-name" href="#" onclick="return doclink('link-53', 'XSLT', 'link-19');">XSLT</a></tt><tt class="py-op">.</tt><tt id="link-54" class="py-name" targets="Static Method lxml.etree.XSLT.strparam()=lxml.etree.XSLT-class.html#strparam"><a title="lxml.etree.XSLT.strparam" class="py-name" href="#" onclick="return doclink('link-54', 'strparam', 'link-54');">strparam</a></tt><tt class="py-op">(</tt><tt class="py-name">val</tt><tt class="py-op">)</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">        <tt class="py-keyword">elif</tt> <tt class="py-name">val</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt class="py-name">TypeError</tt><tt class="py-op">(</tt><tt class="py-string">'None not allowed as a stylesheet parameter'</tt><tt class="py-op">)</tt> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">        <tt class="py-keyword">elif</tt> <tt class="py-keyword">not</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">val</tt><tt class="py-op">,</tt> <tt class="py-name">_etree</tt><tt class="py-op">.</tt><tt id="link-55" class="py-name"><a title="lxml.etree.XPath" class="py-name" href="#" onclick="return doclink('link-55', 'XPath', 'link-44');">XPath</a></tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">            <tt class="py-name">val</tt> <tt class="py-op">=</tt> <tt class="py-name">unicode</tt><tt class="py-op">(</tt><tt class="py-name">val</tt><tt class="py-op">)</tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line">        <tt class="py-name">result</tt><tt class="py-op">[</tt><tt class="py-name">key</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">val</tt> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">result</tt> </tt>
+</div><a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line"> </tt>
+<a name="_stylesheet_param_dict"></a><div id="_stylesheet_param_dict-def"><a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line"> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line"><tt class="py-comment"># helper function for use in Schematron __init__</tt> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt> <a class="py-toggle" href="#" id="_stylesheet_param_dict-toggle" onclick="return toggle('_stylesheet_param_dict');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.isoschematron-module.html#_stylesheet_param_dict">_stylesheet_param_dict</a><tt class="py-op">(</tt><tt class="py-param">paramsDict</tt><tt class="py-op">,</tt> <tt class="py-param">kwargsDict</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="_stylesheet_param_dict-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="_stylesheet_param_dict-expanded"><a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line">    <tt class="py-docstring">"""Return a copy of paramsDict, updated with kwargsDict entries, wrapped as</tt> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line"><tt class="py-docstring">    stylesheet arguments.</tt> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line"><tt class="py-docstring">    kwargsDict entries with a value of None are ignored.</tt> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line">    <tt class="py-comment"># beware of changing mutable default arg</tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">    <tt class="py-name">paramsDict</tt> <tt class="py-op">=</tt> <tt class="py-name">dict</tt><tt class="py-op">(</tt><tt class="py-name">paramsDict</tt><tt class="py-op">)</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">k</tt><tt class="py-op">,</tt> <tt id="link-56" class="py-name" targets="Variable lxml.tests.test_objectify.v=lxml.tests.test_objectify-module.html#v"><a title="lxml.tests.test_objectify.v" class="py-name" href="#" onclick="return doclink('link-56', 'v', 'link-56');">v</a></tt> <tt class="py-keyword">in</tt> <tt class="py-name">kwargsDict</tt><tt class="py-op">.</tt><tt id="link-57" class="py-name"><a title="lxml.etree._Attrib.items
+lxml.etree._Element.items
+lxml.etree._IDDict.items" class="py-name" href="#" onclick="return doclink('link-57', 'items', 'link-51');">items</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt id="link-58" class="py-name"><a title="lxml.tests.test_objectify.v" class="py-name" href="#" onclick="return doclink('link-58', 'v', 'link-56');">v</a></tt> <tt class="py-keyword">is</tt> <tt class="py-keyword">not</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> <tt class="py-comment"># None values do not override</tt> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line">            <tt class="py-name">paramsDict</tt><tt class="py-op">[</tt><tt class="py-name">k</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt id="link-59" class="py-name"><a title="lxml.tests.test_objectify.v" class="py-name" href="#" onclick="return doclink('link-59', 'v', 'link-56');">v</a></tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line">    <tt class="py-name">paramsDict</tt> <tt class="py-op">=</tt> <tt id="link-60" class="py-name" targets="Function lxml.isoschematron.stylesheet_params()=lxml.isoschematron-module.html#stylesheet_params"><a title="lxml.isoschematron.stylesheet_params" class="py-name" href="#" onclick="return doclink('link-60', 'stylesheet_params', 'link-60');">stylesheet_params</a></tt><tt class="py-op">(</tt><tt class="py-op">**</tt><tt class="py-name">paramsDict</tt><tt class="py-op">)</tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">paramsDict</tt> </tt>
+</div><a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line"> </tt>
+<a name="Schematron"></a><div id="Schematron-def"><a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line"> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt> <a class="py-toggle" href="#" id="Schematron-toggle" onclick="return toggle('Schematron');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lxml.isoschematron.Schematron-class.html">Schematron</a><tt class="py-op">(</tt><tt class="py-base-class">_etree</tt><tt class="py-op">.</tt><tt class="py-base-class">_Validator</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Schematron-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="Schematron-expanded"><a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line">    <tt class="py-docstring">"""An ISO Schematron validator.</tt> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line"><tt class="py-docstring">    Pass a root Element or an ElementTree to turn it into a validator.</tt> </tt>
+<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line"><tt class="py-docstring">    Alternatively, pass a filename as keyword argument 'file' to parse from</tt> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line"><tt class="py-docstring">    the file system.</tt> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line"><tt class="py-docstring">    Schematron is a less well known, but very powerful schema language.</tt> </tt>
+<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line"><tt class="py-docstring">    The main idea is to use the capabilities of XPath to put restrictions on</tt> </tt>
+<a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line"><tt class="py-docstring">    the structure and the content of XML documents.</tt> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line"><tt class="py-docstring">    The standard behaviour is to fail on ``failed-assert`` findings only</tt> </tt>
+<a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line"><tt class="py-docstring">    (``ASSERTS_ONLY``).  To change this, you can either pass a report filter</tt> </tt>
+<a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line"><tt class="py-docstring">    function to the ``error_finder`` parameter (e.g. ``ASSERTS_AND_REPORTS``</tt> </tt>
+<a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line"><tt class="py-docstring">    or a custom ``XPath`` object), or subclass isoschematron.Schematron for</tt> </tt>
+<a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line"><tt class="py-docstring">    complete control of the validation process.</tt> </tt>
+<a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line"><tt class="py-docstring">    Built on the Schematron language 'reference' skeleton pure-xslt</tt> </tt>
+<a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line"><tt class="py-docstring">    implementation, the validator is created as an XSLT 1.0 stylesheet using</tt> </tt>
+<a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line"><tt class="py-docstring">    these steps:</tt> </tt>
+<a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line"><tt class="py-docstring">     0) (Extract from XML Schema or RelaxNG schema)</tt> </tt>
+<a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line"><tt class="py-docstring">     1) Process inclusions</tt> </tt>
+<a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line"><tt class="py-docstring">     2) Process abstract patterns</tt> </tt>
+<a name="L136"></a><tt class="py-lineno">136</tt>  <tt class="py-line"><tt class="py-docstring">     3) Compile the schematron schema to XSLT</tt> </tt>
+<a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L138"></a><tt class="py-lineno">138</tt>  <tt class="py-line"><tt class="py-docstring">    The ``include`` and ``expand`` keyword arguments can be used to switch off</tt> </tt>
+<a name="L139"></a><tt class="py-lineno">139</tt>  <tt class="py-line"><tt class="py-docstring">    steps 1) and 2).</tt> </tt>
+<a name="L140"></a><tt class="py-lineno">140</tt>  <tt class="py-line"><tt class="py-docstring">    To set parameters for steps 1), 2) and 3) hand parameter dictionaries to the</tt> </tt>
+<a name="L141"></a><tt class="py-lineno">141</tt>  <tt class="py-line"><tt class="py-docstring">    keyword arguments ``include_params``, ``expand_params`` or</tt> </tt>
+<a name="L142"></a><tt class="py-lineno">142</tt>  <tt class="py-line"><tt class="py-docstring">    ``compile_params``.</tt> </tt>
+<a name="L143"></a><tt class="py-lineno">143</tt>  <tt class="py-line"><tt class="py-docstring">    For convenience, the compile-step parameter ``phase`` is also exposed as a</tt> </tt>
+<a name="L144"></a><tt class="py-lineno">144</tt>  <tt class="py-line"><tt class="py-docstring">    keyword argument ``phase``. This takes precedence if the parameter is also</tt> </tt>
+<a name="L145"></a><tt class="py-lineno">145</tt>  <tt class="py-line"><tt class="py-docstring">    given in the parameter dictionary.</tt> </tt>
+<a name="L146"></a><tt class="py-lineno">146</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L147"></a><tt class="py-lineno">147</tt>  <tt class="py-line"><tt class="py-docstring">    If ``store_schematron`` is set to True, the (included-and-expanded)</tt> </tt>
+<a name="L148"></a><tt class="py-lineno">148</tt>  <tt class="py-line"><tt class="py-docstring">    schematron document tree is stored and available through the ``schematron``</tt> </tt>
+<a name="L149"></a><tt class="py-lineno">149</tt>  <tt class="py-line"><tt class="py-docstring">    property.</tt> </tt>
+<a name="L150"></a><tt class="py-lineno">150</tt>  <tt class="py-line"><tt class="py-docstring">    If ``store_xslt`` is set to True, the validation XSLT document tree will be</tt> </tt>
+<a name="L151"></a><tt class="py-lineno">151</tt>  <tt class="py-line"><tt class="py-docstring">    stored and can be retrieved through the ``validator_xslt`` property.</tt> </tt>
+<a name="L152"></a><tt class="py-lineno">152</tt>  <tt class="py-line"><tt class="py-docstring">    With ``store_report`` set to True (default: False), the resulting validation</tt> </tt>
+<a name="L153"></a><tt class="py-lineno">153</tt>  <tt class="py-line"><tt class="py-docstring">    report document gets stored and can be accessed as the ``validation_report``</tt> </tt>
+<a name="L154"></a><tt class="py-lineno">154</tt>  <tt class="py-line"><tt class="py-docstring">    property.</tt> </tt>
+<a name="L155"></a><tt class="py-lineno">155</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L156"></a><tt class="py-lineno">156</tt>  <tt class="py-line"><tt class="py-docstring">    Here is a usage example::</tt> </tt>
+<a name="L157"></a><tt class="py-lineno">157</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L158"></a><tt class="py-lineno">158</tt>  <tt class="py-line"><tt class="py-docstring">      &gt;&gt;&gt; from lxml import etree</tt> </tt>
+<a name="L159"></a><tt class="py-lineno">159</tt>  <tt class="py-line"><tt class="py-docstring">      &gt;&gt;&gt; from lxml.isoschematron import Schematron</tt> </tt>
+<a name="L160"></a><tt class="py-lineno">160</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L161"></a><tt class="py-lineno">161</tt>  <tt class="py-line"><tt class="py-docstring">      &gt;&gt;&gt; schematron = Schematron(etree.XML('''</tt> </tt>
+<a name="L162"></a><tt class="py-lineno">162</tt>  <tt class="py-line"><tt class="py-docstring">      ... &lt;schema xmlns="http://purl.oclc.org/dsdl/schematron" &gt;</tt> </tt>
+<a name="L163"></a><tt class="py-lineno">163</tt>  <tt class="py-line"><tt class="py-docstring">      ...   &lt;pattern id="id_only_attribute"&gt;</tt> </tt>
+<a name="L164"></a><tt class="py-lineno">164</tt>  <tt class="py-line"><tt class="py-docstring">      ...     &lt;title&gt;id is the only permitted attribute name&lt;/title&gt;</tt> </tt>
+<a name="L165"></a><tt class="py-lineno">165</tt>  <tt class="py-line"><tt class="py-docstring">      ...     &lt;rule context="*"&gt;</tt> </tt>
+<a name="L166"></a><tt class="py-lineno">166</tt>  <tt class="py-line"><tt class="py-docstring">      ...       &lt;report test="@*[not(name()='id')]"&gt;Attribute</tt> </tt>
+<a name="L167"></a><tt class="py-lineno">167</tt>  <tt class="py-line"><tt class="py-docstring">      ...         &lt;name path="@*[not(name()='id')]"/&gt; is forbidden&lt;name/&gt;</tt> </tt>
+<a name="L168"></a><tt class="py-lineno">168</tt>  <tt class="py-line"><tt class="py-docstring">      ...       &lt;/report&gt;</tt> </tt>
+<a name="L169"></a><tt class="py-lineno">169</tt>  <tt class="py-line"><tt class="py-docstring">      ...     &lt;/rule&gt;</tt> </tt>
+<a name="L170"></a><tt class="py-lineno">170</tt>  <tt class="py-line"><tt class="py-docstring">      ...   &lt;/pattern&gt;</tt> </tt>
+<a name="L171"></a><tt class="py-lineno">171</tt>  <tt class="py-line"><tt class="py-docstring">      ... &lt;/schema&gt;'''),</tt> </tt>
+<a name="L172"></a><tt class="py-lineno">172</tt>  <tt class="py-line"><tt class="py-docstring">      ... error_finder=Schematron.ASSERTS_AND_REPORTS)</tt> </tt>
+<a name="L173"></a><tt class="py-lineno">173</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L174"></a><tt class="py-lineno">174</tt>  <tt class="py-line"><tt class="py-docstring">      &gt;&gt;&gt; xml = etree.XML('''</tt> </tt>
+<a name="L175"></a><tt class="py-lineno">175</tt>  <tt class="py-line"><tt class="py-docstring">      ... &lt;AAA name="aaa"&gt;</tt> </tt>
+<a name="L176"></a><tt class="py-lineno">176</tt>  <tt class="py-line"><tt class="py-docstring">      ...   &lt;BBB id="bbb"/&gt;</tt> </tt>
+<a name="L177"></a><tt class="py-lineno">177</tt>  <tt class="py-line"><tt class="py-docstring">      ...   &lt;CCC color="ccc"/&gt;</tt> </tt>
+<a name="L178"></a><tt class="py-lineno">178</tt>  <tt class="py-line"><tt class="py-docstring">      ... &lt;/AAA&gt;</tt> </tt>
+<a name="L179"></a><tt class="py-lineno">179</tt>  <tt class="py-line"><tt class="py-docstring">      ... ''')</tt> </tt>
+<a name="L180"></a><tt class="py-lineno">180</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L181"></a><tt class="py-lineno">181</tt>  <tt class="py-line"><tt class="py-docstring">      &gt;&gt;&gt; schematron.validate(xml)</tt> </tt>
+<a name="L182"></a><tt class="py-lineno">182</tt>  <tt class="py-line"><tt class="py-docstring">      False</tt> </tt>
+<a name="L183"></a><tt class="py-lineno">183</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L184"></a><tt class="py-lineno">184</tt>  <tt class="py-line"><tt class="py-docstring">      &gt;&gt;&gt; xml = etree.XML('''</tt> </tt>
+<a name="L185"></a><tt class="py-lineno">185</tt>  <tt class="py-line"><tt class="py-docstring">      ... &lt;AAA id="aaa"&gt;</tt> </tt>
+<a name="L186"></a><tt class="py-lineno">186</tt>  <tt class="py-line"><tt class="py-docstring">      ...   &lt;BBB id="bbb"/&gt;</tt> </tt>
+<a name="L187"></a><tt class="py-lineno">187</tt>  <tt class="py-line"><tt class="py-docstring">      ...   &lt;CCC/&gt;</tt> </tt>
+<a name="L188"></a><tt class="py-lineno">188</tt>  <tt class="py-line"><tt class="py-docstring">      ... &lt;/AAA&gt;</tt> </tt>
+<a name="L189"></a><tt class="py-lineno">189</tt>  <tt class="py-line"><tt class="py-docstring">      ... ''')</tt> </tt>
+<a name="L190"></a><tt class="py-lineno">190</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L191"></a><tt class="py-lineno">191</tt>  <tt class="py-line"><tt class="py-docstring">      &gt;&gt;&gt; schematron.validate(xml)</tt> </tt>
+<a name="L192"></a><tt class="py-lineno">192</tt>  <tt class="py-line"><tt class="py-docstring">      True</tt> </tt>
+<a name="L193"></a><tt class="py-lineno">193</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L194"></a><tt class="py-lineno">194</tt>  <tt class="py-line"> </tt>
+<a name="L195"></a><tt class="py-lineno">195</tt>  <tt class="py-line">    <tt class="py-comment"># libxml2 error categorization for validation errors</tt> </tt>
+<a name="L196"></a><tt class="py-lineno">196</tt>  <tt class="py-line">    <tt id="link-61" class="py-name" targets="Variable lxml.isoschematron.Schematron._domain=lxml.isoschematron.Schematron-class.html#_domain"><a title="lxml.isoschematron.Schematron._domain" class="py-name" href="#" onclick="return doclink('link-61', '_domain', 'link-61');">_domain</a></tt> <tt class="py-op">=</tt> <tt class="py-name">_etree</tt><tt class="py-op">.</tt><tt id="link-62" class="py-name" targets="Class lxml.etree.ErrorDomains=lxml.etree.ErrorDomains-class.html"><a title="lxml.etree.ErrorDomains" class="py-name" href="#" onclick="return doclink('link-62', 'ErrorDomains', 'link-62');">ErrorDomains</a></tt><tt class="py-op">.</tt><tt id="link-63" class="py-name" targets="Variable lxml.etree.ErrorDomains.SCHEMATRONV=lxml.etree.ErrorDomains-class.html#SCHEMATRONV"><a title="lxml.etree.ErrorDomains.SCHEMATRONV" class="py-name" href="#" onclick="return doclink('link-63', 'SCHEMATRONV', 'link-63');">SCHEMATRONV</a></tt> </tt>
+<a name="L197"></a><tt class="py-lineno">197</tt>  <tt class="py-line">    <tt id="link-64" class="py-name" targets="Variable lxml.isoschematron.Schematron._level=lxml.isoschematron.Schematron-class.html#_level"><a title="lxml.isoschematron.Schematron._level" class="py-name" href="#" onclick="return doclink('link-64', '_level', 'link-64');">_level</a></tt> <tt class="py-op">=</tt> <tt class="py-name">_etree</tt><tt class="py-op">.</tt><tt id="link-65" class="py-name" targets="Class lxml.etree.ErrorLevels=lxml.etree.ErrorLevels-class.html"><a title="lxml.etree.ErrorLevels" class="py-name" href="#" onclick="return doclink('link-65', 'ErrorLevels', 'link-65');">ErrorLevels</a></tt><tt class="py-op">.</tt><tt id="link-66" class="py-name" targets="Variable lxml.etree.ErrorLevels.ERROR=lxml.etree.ErrorLevels-class.html#ERROR"><a title="lxml.etree.ErrorLevels.ERROR" class="py-name" href="#" onclick="return doclink('link-66', 'ERROR', 'link-66');">ERROR</a></tt> </tt>
+<a name="L198"></a><tt class="py-lineno">198</tt>  <tt class="py-line">    <tt id="link-67" class="py-name" targets="Variable lxml.isoschematron.Schematron._error_type=lxml.isoschematron.Schematron-class.html#_error_type"><a title="lxml.isoschematron.Schematron._error_type" class="py-name" href="#" onclick="return doclink('link-67', '_error_type', 'link-67');">_error_type</a></tt> <tt class="py-op">=</tt> <tt class="py-name">_etree</tt><tt class="py-op">.</tt><tt id="link-68" class="py-name" targets="Class lxml.etree.ErrorTypes=lxml.etree.ErrorTypes-class.html"><a title="lxml.etree.ErrorTypes" class="py-name" href="#" onclick="return doclink('link-68', 'ErrorTypes', 'link-68');">ErrorTypes</a></tt><tt class="py-op">.</tt><tt id="link-69" class="py-name" targets="Variable lxml.etree.ErrorTypes.SCHEMATRONV_ASSERT=lxml.etree.ErrorTypes-class.html#SCHEMATRONV_ASSERT"><a title="lxml.etree.ErrorTypes.SCHEMATRONV_ASSERT" class="py-name" href="#" onclick="return doclink('link-69', 'SCHEMATRONV_ASSERT', 'link-69');">SCHEMATRONV_ASSERT</a></tt> </tt>
+<a name="L199"></a><tt class="py-lineno">199</tt>  <tt class="py-line"> </tt>
+<a name="L200"></a><tt class="py-lineno">200</tt>  <tt class="py-line">    <tt class="py-comment"># convenience definitions for common behaviours</tt> </tt>
+<a name="L201"></a><tt class="py-lineno">201</tt>  <tt class="py-line">    <tt id="link-70" class="py-name" targets="Variable lxml.isoschematron.Schematron.ASSERTS_ONLY=lxml.isoschematron.Schematron-class.html#ASSERTS_ONLY"><a title="lxml.isoschematron.Schematron.ASSERTS_ONLY" class="py-name" href="#" onclick="return doclink('link-70', 'ASSERTS_ONLY', 'link-70');">ASSERTS_ONLY</a></tt> <tt class="py-op">=</tt> <tt id="link-71" class="py-name"><a title="lxml.isoschematron.svrl_validation_errors" class="py-name" href="#" onclick="return doclink('link-71', 'svrl_validation_errors', 'link-43');">svrl_validation_errors</a></tt>  <tt class="py-comment"># Default</tt> </tt>
+<a name="L202"></a><tt class="py-lineno">202</tt>  <tt class="py-line">    <tt id="link-72" class="py-name" targets="Variable lxml.isoschematron.Schematron.ASSERTS_AND_REPORTS=lxml.isoschematron.Schematron-class.html#ASSERTS_AND_REPORTS"><a title="lxml.isoschematron.Schematron.ASSERTS_AND_REPORTS" class="py-name" href="#" onclick="return doclink('link-72', 'ASSERTS_AND_REPORTS', 'link-72');">ASSERTS_AND_REPORTS</a></tt> <tt class="py-op">=</tt> <tt class="py-name">_etree</tt><tt class="py-op">.</tt><tt id="link-73" class="py-name"><a title="lxml.etree.XPath" class="py-name" href="#" onclick="return doclink('link-73', 'XPath', 'link-44');">XPath</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L203"></a><tt class="py-lineno">203</tt>  <tt class="py-line">        <tt class="py-string">'//svrl:failed-assert | //svrl:successful-report'</tt><tt class="py-op">,</tt> </tt>
+<a name="L204"></a><tt class="py-lineno">204</tt>  <tt class="py-line">        <tt class="py-name">namespaces</tt><tt class="py-op">=</tt><tt class="py-op">{</tt><tt class="py-string">'svrl'</tt><tt class="py-op">:</tt> <tt id="link-74" class="py-name"><a title="lxml.isoschematron.SVRL_NS" class="py-name" href="#" onclick="return doclink('link-74', 'SVRL_NS', 'link-10');">SVRL_NS</a></tt><tt class="py-op">}</tt><tt class="py-op">)</tt> </tt>
+<a name="L205"></a><tt class="py-lineno">205</tt>  <tt class="py-line"> </tt>
+<a name="Schematron._extract"></a><div id="Schematron._extract-def"><a name="L206"></a><tt class="py-lineno">206</tt> <a class="py-toggle" href="#" id="Schematron._extract-toggle" onclick="return toggle('Schematron._extract');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.isoschematron.Schematron-class.html#_extract">_extract</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">element</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Schematron._extract-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Schematron._extract-expanded"><a name="L207"></a><tt class="py-lineno">207</tt>  <tt class="py-line">        <tt class="py-docstring">"""Extract embedded schematron schema from non-schematron host schema.</tt> </tt>
+<a name="L208"></a><tt class="py-lineno">208</tt>  <tt class="py-line"><tt class="py-docstring">        This method will only be called by __init__ if the given schema document</tt> </tt>
+<a name="L209"></a><tt class="py-lineno">209</tt>  <tt class="py-line"><tt class="py-docstring">        is not a schematron schema by itself.</tt> </tt>
+<a name="L210"></a><tt class="py-lineno">210</tt>  <tt class="py-line"><tt class="py-docstring">        Must return a schematron schema document tree or None.</tt> </tt>
+<a name="L211"></a><tt class="py-lineno">211</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L212"></a><tt class="py-lineno">212</tt>  <tt class="py-line">        <tt id="link-75" class="py-name" targets="Variable lxml.isoschematron.Schematron.schematron=lxml.isoschematron.Schematron-class.html#schematron"><a title="lxml.isoschematron.Schematron.schematron" class="py-name" href="#" onclick="return doclink('link-75', 'schematron', 'link-75');">schematron</a></tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L213"></a><tt class="py-lineno">213</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt id="link-76" class="py-name" targets="Function lxml.tests.selftest2.element()=lxml.tests.selftest2-module.html#element"><a title="lxml.tests.selftest2.element" class="py-name" href="#" onclick="return doclink('link-76', 'element', 'link-76');">element</a></tt><tt class="py-op">.</tt><tt id="link-77" class="py-name" targets="Variable lxml.etree._Comment.tag=lxml.etree._Comment-class.html#tag,Variable lxml.etree._Element.tag=lxml.etree._Element-class.html#tag,Variable lxml.etree._Entity.tag=lxml.etree._Entity-class.html#tag,Variable lxml.etree._ProcessingInstruction.tag=lxml.etree._ProcessingInstruction-class.html#tag,Function lxml.tests.test_xpathevaluator.tag()=lxml.tests.test_xpathevaluator-module.html#tag,Variable xml.etree.ElementTree.Element.tag=xml.etree.ElementTree.Element-class.html#tag"><a title="lxml.etree._Comment.tag
+lxml.etree._Element.tag
+lxml.etree._Entity.tag
+lxml.etree._ProcessingInstruction.tag
+lxml.tests.test_xpathevaluator.tag
+xml.etree.ElementTree.Element.tag" class="py-name" href="#" onclick="return doclink('link-77', 'tag', 'link-77');">tag</a></tt> <tt class="py-op">==</tt> <tt id="link-78" class="py-name"><a title="lxml.isoschematron._xml_schema_root" class="py-name" href="#" onclick="return doclink('link-78', '_xml_schema_root', 'link-13');">_xml_schema_root</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L214"></a><tt class="py-lineno">214</tt>  <tt class="py-line">            <tt id="link-79" class="py-name"><a title="lxml.isoschematron.Schematron.schematron" class="py-name" href="#" onclick="return doclink('link-79', 'schematron', 'link-75');">schematron</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-80" class="py-name" targets="Variable lxml.isoschematron.Schematron._extract_xsd=lxml.isoschematron.Schematron-class.html#_extract_xsd"><a title="lxml.isoschematron.Schematron._extract_xsd" class="py-name" href="#" onclick="return doclink('link-80', '_extract_xsd', 'link-80');">_extract_xsd</a></tt><tt class="py-op">(</tt><tt id="link-81" class="py-name"><a title="lxml.tests.selftest2.element" class="py-name" href="#" onclick="return doclink('link-81', 'element', 'link-76');">element</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L215"></a><tt class="py-lineno">215</tt>  <tt class="py-line">        <tt class="py-keyword">elif</tt> <tt id="link-82" class="py-name"><a title="lxml.tests.selftest2.element" class="py-name" href="#" onclick="return doclink('link-82', 'element', 'link-76');">element</a></tt><tt class="py-op">.</tt><tt id="link-83" class="py-name" targets="Variable lxml.etree._Element.nsmap=lxml.etree._Element-class.html#nsmap"><a title="lxml.etree._Element.nsmap" class="py-name" href="#" onclick="return doclink('link-83', 'nsmap', 'link-83');">nsmap</a></tt><tt class="py-op">[</tt><tt id="link-84" class="py-name"><a title="lxml.tests.selftest2.element" class="py-name" href="#" onclick="return doclink('link-84', 'element', 'link-76');">element</a></tt><tt class="py-op">.</tt><tt id="link-85" class="py-name" targets="Variable lxml.etree._Element.prefix=lxml.etree._Element-class.html#prefix"><a title="lxml.etree._Element.prefix" class="py-name" href="#" onclick="return doclink('link-85', 'prefix', 'link-85');">prefix</a></tt><tt class="py-op">]</tt> <tt class="py-op">==</tt> <tt id="link-86" class="py-name"><a title="lxml.isoschematron.RELAXNG_NS" class="py-name" href="#" onclick="return doclink('link-86', 'RELAXNG_NS', 'link-8');">RELAXNG_NS</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L216"></a><tt class="py-lineno">216</tt>  <tt class="py-line">            <tt class="py-comment"># RelaxNG does not have a single unique root element</tt> </tt>
+<a name="L217"></a><tt class="py-lineno">217</tt>  <tt class="py-line">            <tt id="link-87" class="py-name"><a title="lxml.isoschematron.Schematron.schematron" class="py-name" href="#" onclick="return doclink('link-87', 'schematron', 'link-75');">schematron</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-88" class="py-name" targets="Variable lxml.isoschematron.Schematron._extract_rng=lxml.isoschematron.Schematron-class.html#_extract_rng"><a title="lxml.isoschematron.Schematron._extract_rng" class="py-name" href="#" onclick="return doclink('link-88', '_extract_rng', 'link-88');">_extract_rng</a></tt><tt class="py-op">(</tt><tt id="link-89" class="py-name"><a title="lxml.tests.selftest2.element" class="py-name" href="#" onclick="return doclink('link-89', 'element', 'link-76');">element</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L218"></a><tt class="py-lineno">218</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt id="link-90" class="py-name"><a title="lxml.isoschematron.Schematron.schematron" class="py-name" href="#" onclick="return doclink('link-90', 'schematron', 'link-75');">schematron</a></tt> </tt>
+</div><a name="L219"></a><tt class="py-lineno">219</tt>  <tt class="py-line"> </tt>
+<a name="L220"></a><tt class="py-lineno">220</tt>  <tt class="py-line">    <tt class="py-comment"># customization points</tt> </tt>
+<a name="L221"></a><tt class="py-lineno">221</tt>  <tt class="py-line">    <tt class="py-comment"># etree.XSLT objects that provide the extract, include, expand, compile</tt> </tt>
+<a name="L222"></a><tt class="py-lineno">222</tt>  <tt class="py-line">    <tt class="py-comment"># steps</tt> </tt>
+<a name="L223"></a><tt class="py-lineno">223</tt>  <tt class="py-line">    <tt id="link-91" class="py-name"><a title="lxml.isoschematron.Schematron._extract_xsd" class="py-name" href="#" onclick="return doclink('link-91', '_extract_xsd', 'link-80');">_extract_xsd</a></tt> <tt class="py-op">=</tt> <tt id="link-92" class="py-name"><a title="lxml.isoschematron.extract_xsd" class="py-name" href="#" onclick="return doclink('link-92', 'extract_xsd', 'link-18');">extract_xsd</a></tt> </tt>
+<a name="L224"></a><tt class="py-lineno">224</tt>  <tt class="py-line">    <tt id="link-93" class="py-name"><a title="lxml.isoschematron.Schematron._extract_rng" class="py-name" href="#" onclick="return doclink('link-93', '_extract_rng', 'link-88');">_extract_rng</a></tt> <tt class="py-op">=</tt> <tt id="link-94" class="py-name"><a title="lxml.isoschematron.extract_rng" class="py-name" href="#" onclick="return doclink('link-94', 'extract_rng', 'link-23');">extract_rng</a></tt> </tt>
+<a name="L225"></a><tt class="py-lineno">225</tt>  <tt class="py-line">    <tt id="link-95" class="py-name" targets="Function lxml.ElementInclude._include()=lxml.ElementInclude-module.html#_include,Variable lxml.isoschematron.Schematron._include=lxml.isoschematron.Schematron-class.html#_include"><a title="lxml.ElementInclude._include
+lxml.isoschematron.Schematron._include" class="py-name" href="#" onclick="return doclink('link-95', '_include', 'link-95');">_include</a></tt> <tt class="py-op">=</tt> <tt id="link-96" class="py-name"><a title="lxml.isoschematron.iso_dsdl_include" class="py-name" href="#" onclick="return doclink('link-96', 'iso_dsdl_include', 'link-28');">iso_dsdl_include</a></tt> </tt>
+<a name="L226"></a><tt class="py-lineno">226</tt>  <tt class="py-line">    <tt id="link-97" class="py-name" targets="Variable lxml.isoschematron.Schematron._expand=lxml.isoschematron.Schematron-class.html#_expand"><a title="lxml.isoschematron.Schematron._expand" class="py-name" href="#" onclick="return doclink('link-97', '_expand', 'link-97');">_expand</a></tt> <tt class="py-op">=</tt> <tt id="link-98" class="py-name"><a title="lxml.isoschematron.iso_abstract_expand" class="py-name" href="#" onclick="return doclink('link-98', 'iso_abstract_expand', 'link-33');">iso_abstract_expand</a></tt> </tt>
+<a name="L227"></a><tt class="py-lineno">227</tt>  <tt class="py-line">    <tt id="link-99" class="py-name" targets="Variable lxml.isoschematron.Schematron._compile=lxml.isoschematron.Schematron-class.html#_compile"><a title="lxml.isoschematron.Schematron._compile" class="py-name" href="#" onclick="return doclink('link-99', '_compile', 'link-99');">_compile</a></tt> <tt class="py-op">=</tt> <tt id="link-100" class="py-name"><a title="lxml.isoschematron.iso_svrl_for_xslt1" class="py-name" href="#" onclick="return doclink('link-100', 'iso_svrl_for_xslt1', 'link-38');">iso_svrl_for_xslt1</a></tt> </tt>
+<a name="L228"></a><tt class="py-lineno">228</tt>  <tt class="py-line"> </tt>
+<a name="L229"></a><tt class="py-lineno">229</tt>  <tt class="py-line">    <tt class="py-comment"># etree.xpath object that determines input document validity when applied to</tt> </tt>
+<a name="L230"></a><tt class="py-lineno">230</tt>  <tt class="py-line">    <tt class="py-comment"># the svrl result report; must return a list of result elements (empty if</tt> </tt>
+<a name="L231"></a><tt class="py-lineno">231</tt>  <tt class="py-line">    <tt class="py-comment"># valid)</tt> </tt>
+<a name="L232"></a><tt class="py-lineno">232</tt>  <tt class="py-line">    <tt id="link-101" class="py-name" targets="Variable lxml.isoschematron.Schematron._validation_errors=lxml.isoschematron.Schematron-class.html#_validation_errors"><a title="lxml.isoschematron.Schematron._validation_errors" class="py-name" href="#" onclick="return doclink('link-101', '_validation_errors', 'link-101');">_validation_errors</a></tt> <tt class="py-op">=</tt> <tt id="link-102" class="py-name"><a title="lxml.isoschematron.Schematron.ASSERTS_ONLY" class="py-name" href="#" onclick="return doclink('link-102', 'ASSERTS_ONLY', 'link-70');">ASSERTS_ONLY</a></tt> </tt>
+<a name="L233"></a><tt class="py-lineno">233</tt>  <tt class="py-line"> </tt>
+<a name="Schematron.__init__"></a><div id="Schematron.__init__-def"><a name="L234"></a><tt class="py-lineno">234</tt> <a class="py-toggle" href="#" id="Schematron.__init__-toggle" onclick="return toggle('Schematron.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.isoschematron.Schematron-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">etree</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-param">file</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-param">include</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">,</tt> <tt class="py-param">expand</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">,</tt> </tt>
+<a name="L235"></a><tt class="py-lineno">235</tt>  <tt class="py-line">                 <tt class="py-param">include_params</tt><tt class="py-op">=</tt><tt class="py-op">{</tt><tt class="py-op">}</tt><tt class="py-op">,</tt> <tt class="py-param">expand_params</tt><tt class="py-op">=</tt><tt class="py-op">{</tt><tt class="py-op">}</tt><tt class="py-op">,</tt> <tt class="py-param">compile_params</tt><tt class="py-op">=</tt><tt class="py-op">{</tt><tt class="py-op">}</tt><tt class="py-op">,</tt> </tt>
+<a name="L236"></a><tt class="py-lineno">236</tt>  <tt class="py-line">                 <tt class="py-param">store_schematron</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">,</tt> <tt class="py-param">store_xslt</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">,</tt> <tt class="py-param">store_report</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">,</tt> </tt>
+<a name="L237"></a><tt class="py-lineno">237</tt>  <tt class="py-line">                 <tt class="py-param">phase</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-param">error_finder</tt><tt class="py-op">=</tt><tt id="link-103" class="py-name"><a title="lxml.isoschematron.Schematron.ASSERTS_ONLY" class="py-name" href="#" onclick="return doclink('link-103', 'ASSERTS_ONLY', 'link-70');">ASSERTS_ONLY</a></tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Schematron.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Schematron.__init__-expanded"><a name="L238"></a><tt class="py-lineno">238</tt>  <tt class="py-line">        <tt class="py-name">super</tt><tt class="py-op">(</tt><tt id="link-104" class="py-name" targets="Class lxml.etree.Schematron=lxml.etree.Schematron-class.html,Class lxml.isoschematron.Schematron=lxml.isoschematron.Schematron-class.html"><a title="lxml.etree.Schematron
+lxml.isoschematron.Schematron" class="py-name" href="#" onclick="return doclink('link-104', 'Schematron', 'link-104');">Schematron</a></tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-105" class="py-name" targets="Method lxml.builder.ElementMaker.__init__()=lxml.builder.ElementMaker-class.html#__init__,Method lxml.cssselect.CSSSelector.__init__()=lxml.cssselect.CSSSelector-class.html#__init__,Method lxml.doctestcompare._RestoreChecker.__init__()=lxml.doctestcompare._RestoreChecker-class.html#__init__,Method lxml.etree.AttributeBasedElementClassLookup.__init__()=lxml.etree.AttributeBasedElementClassLookup-class.html#__init__,Method lxml.etree.CommentBase.__init__()=lxml.etree.CommentBase-class.html#__init__,Method lxml.etree.DTD.__init__()=lxml.etree.DTD-class.html#__init__,Method lxml.etree.ETCompatXMLParser.__init__()=lxml.etree.ETCompatXMLParser-class.html#__init__,Method lxml.etree.ETXPath.__init__()=lxml.etree.ETXPath-class.html#__init__,Method lxml.etree.ElementBase.__init__()=lxml.etree.ElementBase-class.html#__init__,Method lxml.etree.ElementDefaultClassLookup.__init__()=lxml.etree.ElementDefaultClassLookup-class.html#__init__,Method lxml.etree.ElementNamespaceClassLookup.__init__()=lxml.etree.ElementNamespaceClassLookup-class.html#__init__,Method lxml.etree.EntityBase.__init__()=lxml.etree.EntityBase-class.html#__init__,Method lxml.etree.FallbackElementClassLookup.__init__()=lxml.etree.FallbackElementClassLookup-class.html#__init__,Method lxml.etree.HTMLParser.__init__()=lxml.etree.HTMLParser-class.html#__init__,Method lxml.etree.HTMLPullParser.__init__()=lxml.etree.HTMLPullParser-class.html#__init__,Method lxml.etree.LxmlError.__init__()=lxml.etree.LxmlError-class.html#__init__,Method lxml.etree.PIBase.__init__()=lxml.etree.PIBase-class.html#__init__,Method lxml.etree.ParseError.__init__()=lxml.etree.ParseError-class.html#__init__,Method lxml.etree.PyErrorLog.__init__()=lxml.etree.PyErrorLog-class.html#__init__,Method lxml.etree.QName.__init__()=lxml.etree.QName-class.html#__init__,Method lxml.etree.RelaxNG.__init__()=lxml.etree.RelaxNG-class.html#__init__,Method lxml.etree.Schematron.__init__()=lxml.etree.Schematron-class.html#__init__,Method lxml.etree.TreeBuilder.__init__()=lxml.etree.TreeBuilder-class.html#__init__,Method lxml.etree.XInclude.__init__()=lxml.etree.XInclude-class.html#__init__,Method lxml.etree.XMLParser.__init__()=lxml.etree.XMLParser-class.html#__init__,Method lxml.etree.XMLPullParser.__init__()=lxml.etree.XMLPullParser-class.html#__init__,Method lxml.etree.XMLSchema.__init__()=lxml.etree.XMLSchema-class.html#__init__,Method lxml.etree.XPath.__init__()=lxml.etree.XPath-class.html#__init__,Method lxml.etree.XPathDocumentEvaluator.__init__()=lxml.etree.XPathDocumentEvaluator-class.html#__init__,Method lxml.etree.XPathElementEvaluator.__init__()=lxml.etree.XPathElementEvaluator-class.html#__init__,Method lxml.etree.XSLT.__init__()=lxml.etree.XSLT-class.html#__init__,Method lxml.etree.XSLTAccessControl.__init__()=lxml.etree.XSLTAccessControl-class.html#__init__,Method lxml.etree._BaseErrorLog.__init__()=lxml.etree._BaseErrorLog-class.html#__init__,Method lxml.etree._DomainErrorLog.__init__()=lxml.etree._DomainErrorLog-class.html#__init__,Method lxml.etree._ErrorLog.__init__()=lxml.etree._ErrorLog-class.html#__init__,Method lxml.etree._ListErrorLog.__init__()=lxml.etree._ListErrorLog-class.html#__init__,Method lxml.etree._RotatingErrorLog.__init__()=lxml.etree._RotatingErrorLog-class.html#__init__,Method lxml.etree._TargetParserResult.__init__()=lxml.etree._TargetParserResult-class.html#__init__,Method lxml.etree._XPathEvaluatorBase.__init__()=lxml.etree._XPathEvaluatorBase-class.html#__init__,Method lxml.etree.htmlfile.__init__()=lxml.etree.htmlfile-class.html#__init__,Method lxml.etree.iterparse.__init__()=lxml.etree.iterparse-class.html#__init__,Method lxml.etree.iterwalk.__init__()=lxml.etree.iterwalk-class.html#__init__,Method lxml.etree.xmlfile.__init__()=lxml.etree.xmlfile-class.html#__init__,Method lxml.html.CheckboxValues.__init__()=lxml.html.CheckboxValues-class.html#__init__,Method lxml.html.Classes.__init__()=lxml.html.Classes-class.html#__init__,Method lxml.html.FieldsDict.__init__()=lxml.html.FieldsDict-class.html#__init__,Method lxml.html.HTMLParser.__init__()=lxml.html.HTMLParser-class.html#__init__,Method lxml.html.HtmlElementClassLookup.__init__()=lxml.html.HtmlElementClassLookup-class.html#__init__,Method lxml.html.InputGetter.__init__()=lxml.html.InputGetter-class.html#__init__,Method lxml.html.MultipleSelectOptions.__init__()=lxml.html.MultipleSelectOptions-class.html#__init__,Method lxml.html.XHTMLParser.__init__()=lxml.html.XHTMLParser-class.html#__init__,Method lxml.html._MethodFunc.__init__()=lxml.html._MethodFunc-class.html#__init__,Method lxml.html.clean.Cleaner.__init__()=lxml.html.clean.Cleaner-class.html#__init__,Method lxml.html.formfill.DefaultErrorCreator.__init__()=lxml.html.formfill.DefaultErrorCreator-class.html#__init__,Method lxml.html.html5parser.HTMLParser.__init__()=lxml.html.html5parser.HTMLParser-class.html#__init__,Method lxml.html.html5parser.XHTMLParser.__init__()=lxml.html.html5parser.XHTMLParser-class.html#__init__,Method lxml.html.soupparser._PseudoTag.__init__()=lxml.html.soupparser._PseudoTag-class.html#__init__,Method lxml.isoschematron.Schematron.__init__()=lxml.isoschematron.Schematron-class.html#__init__,Method lxml.objectify.ElementMaker.__init__()=lxml.objectify.ElementMaker-class.html#__init__,Method lxml.objectify.ObjectPath.__init__()=lxml.objectify.ObjectPath-class.html#__init__,Method lxml.objectify.ObjectifyElementClassLookup.__init__()=lxml.objectify.ObjectifyElementClassLookup-class.html#__init__,Method lxml.objectify.PyType.__init__()=lxml.objectify.PyType-class.html#__init__,Method lxml.sax.ElementTreeContentHandler.__init__()=lxml.sax.ElementTreeContentHandler-class.html#__init__,Method lxml.sax.ElementTreeProducer.__init__()=lxml.sax.ElementTreeProducer-class.html#__init__,Method lxml.tests.common_imports.LargeFileLike.__init__()=lxml.tests.common_imports.LargeFileLike-class.html#__init__,Method lxml.tests.common_imports.LargeFileLikeUnicode.__init__()=lxml.tests.common_imports.LargeFileLikeUnicode-class.html#__init__,Method lxml.tests.common_imports.SillyFileLike.__init__()=lxml.tests.common_imports.SillyFileLike-class.html#__init__,Method lxml.tests.common_imports.skipif.__init__()=lxml.tests.common_imports.skipif-class.html#__init__,Method lxml.tests.dummy_http_server.HTTPRequestCollector.__init__()=lxml.tests.dummy_http_server.HTTPRequestCollector-class.html#__init__,Method lxml.tests.test_doctestcompare.DummyInput.__init__()=lxml.tests.test_doctestcompare.DummyInput-class.html#__init__,Method lxml.tests.test_incremental_xmlfile.SimpleFileLikeXmlFileTestCase.SimpleFileLike.__init__()=lxml.tests.test_incremental_xmlfile.SimpleFileLikeXmlFileTestCase.SimpleFileLike-class.html#__init__,Method lxml.tests.test_threading.ThreadPipelineTestCase.Worker.__init__()=lxml.tests.test_threading.ThreadPipelineTestCase.Worker-class.html#__init__,Method lxml.tests.test_xmlschema.ETreeXMLSchemaResolversTestCase.simple_resolver.__init__()=lxml.tests.test_xmlschema.ETreeXMLSchemaResolversTestCase.simple_resolver-class.html#__init__"><a title="lxml.builder.ElementMaker.__init__
+lxml.cssselect.CSSSelector.__init__
+lxml.doctestcompare._RestoreChecker.__init__
+lxml.etree.AttributeBasedElementClassLookup.__init__
+lxml.etree.CommentBase.__init__
+lxml.etree.DTD.__init__
+lxml.etree.ETCompatXMLParser.__init__
+lxml.etree.ETXPath.__init__
+lxml.etree.ElementBase.__init__
+lxml.etree.ElementDefaultClassLookup.__init__
+lxml.etree.ElementNamespaceClassLookup.__init__
+lxml.etree.EntityBase.__init__
+lxml.etree.FallbackElementClassLookup.__init__
+lxml.etree.HTMLParser.__init__
+lxml.etree.HTMLPullParser.__init__
+lxml.etree.LxmlError.__init__
+lxml.etree.PIBase.__init__
+lxml.etree.ParseError.__init__
+lxml.etree.PyErrorLog.__init__
+lxml.etree.QName.__init__
+lxml.etree.RelaxNG.__init__
+lxml.etree.Schematron.__init__
+lxml.etree.TreeBuilder.__init__
+lxml.etree.XInclude.__init__
+lxml.etree.XMLParser.__init__
+lxml.etree.XMLPullParser.__init__
+lxml.etree.XMLSchema.__init__
+lxml.etree.XPath.__init__
+lxml.etree.XPathDocumentEvaluator.__init__
+lxml.etree.XPathElementEvaluator.__init__
+lxml.etree.XSLT.__init__
+lxml.etree.XSLTAccessControl.__init__
+lxml.etree._BaseErrorLog.__init__
+lxml.etree._DomainErrorLog.__init__
+lxml.etree._ErrorLog.__init__
+lxml.etree._ListErrorLog.__init__
+lxml.etree._RotatingErrorLog.__init__
+lxml.etree._TargetParserResult.__init__
+lxml.etree._XPathEvaluatorBase.__init__
+lxml.etree.htmlfile.__init__
+lxml.etree.iterparse.__init__
+lxml.etree.iterwalk.__init__
+lxml.etree.xmlfile.__init__
+lxml.html.CheckboxValues.__init__
+lxml.html.Classes.__init__
+lxml.html.FieldsDict.__init__
+lxml.html.HTMLParser.__init__
+lxml.html.HtmlElementClassLookup.__init__
+lxml.html.InputGetter.__init__
+lxml.html.MultipleSelectOptions.__init__
+lxml.html.XHTMLParser.__init__
+lxml.html._MethodFunc.__init__
+lxml.html.clean.Cleaner.__init__
+lxml.html.formfill.DefaultErrorCreator.__init__
+lxml.html.html5parser.HTMLParser.__init__
+lxml.html.html5parser.XHTMLParser.__init__
+lxml.html.soupparser._PseudoTag.__init__
+lxml.isoschematron.Schematron.__init__
+lxml.objectify.ElementMaker.__init__
+lxml.objectify.ObjectPath.__init__
+lxml.objectify.ObjectifyElementClassLookup.__init__
+lxml.objectify.PyType.__init__
+lxml.sax.ElementTreeContentHandler.__init__
+lxml.sax.ElementTreeProducer.__init__
+lxml.tests.common_imports.LargeFileLike.__init__
+lxml.tests.common_imports.LargeFileLikeUnicode.__init__
+lxml.tests.common_imports.SillyFileLike.__init__
+lxml.tests.common_imports.skipif.__init__
+lxml.tests.dummy_http_server.HTTPRequestCollector.__init__
+lxml.tests.test_doctestcompare.DummyInput.__init__
+lxml.tests.test_incremental_xmlfile.SimpleFileLikeXmlFileTestCase.SimpleFileLike.__init__
+lxml.tests.test_threading.ThreadPipelineTestCase.Worker.__init__
+lxml.tests.test_xmlschema.ETreeXMLSchemaResolversTestCase.simple_resolver.__init__" class="py-name" href="#" onclick="return doclink('link-105', '__init__', 'link-105');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L239"></a><tt class="py-lineno">239</tt>  <tt class="py-line"> </tt>
+<a name="L240"></a><tt class="py-lineno">240</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_store_report</tt> <tt class="py-op">=</tt> <tt class="py-name">store_report</tt> </tt>
+<a name="L241"></a><tt class="py-lineno">241</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_schematron</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L242"></a><tt class="py-lineno">242</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_validator_xslt</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L243"></a><tt class="py-lineno">243</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_validation_report</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L244"></a><tt class="py-lineno">244</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">error_finder</tt> <tt class="py-keyword">is</tt> <tt class="py-keyword">not</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-106" class="py-name"><a title="lxml.isoschematron.Schematron.ASSERTS_ONLY" class="py-name" href="#" onclick="return doclink('link-106', 'ASSERTS_ONLY', 'link-70');">ASSERTS_ONLY</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L245"></a><tt class="py-lineno">245</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-107" class="py-name"><a title="lxml.isoschematron.Schematron._validation_errors" class="py-name" href="#" onclick="return doclink('link-107', '_validation_errors', 'link-101');">_validation_errors</a></tt> <tt class="py-op">=</tt> <tt class="py-name">error_finder</tt> </tt>
+<a name="L246"></a><tt class="py-lineno">246</tt>  <tt class="py-line"> </tt>
+<a name="L247"></a><tt class="py-lineno">247</tt>  <tt class="py-line">        <tt class="py-comment"># parse schema document, may be a schematron schema or an XML Schema or</tt> </tt>
+<a name="L248"></a><tt class="py-lineno">248</tt>  <tt class="py-line">        <tt class="py-comment"># a RelaxNG schema with embedded schematron rules</tt> </tt>
+<a name="L249"></a><tt class="py-lineno">249</tt>  <tt class="py-line">        <tt id="link-108" class="py-name" targets="Variable lxml.etree.iterparse.root=lxml.etree.iterparse-class.html#root"><a title="lxml.etree.iterparse.root" class="py-name" href="#" onclick="return doclink('link-108', 'root', 'link-108');">root</a></tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L250"></a><tt class="py-lineno">250</tt>  <tt class="py-line">        <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L251"></a><tt class="py-lineno">251</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt id="link-109" class="py-name"><a title="lxml.etree
+lxml.sax.ElementTreeContentHandler.etree
+lxml.tests.test_elementtree.CElementTreeTestCase.etree
+lxml.tests.test_elementtree._ETreeTestCaseBase.etree
+lxml.tests.test_elementtree._XMLPullParserTest.etree
+lxml.tests.test_io._IOTestCaseBase.etree" class="py-name" href="#" onclick="return doclink('link-109', 'etree', 'link-2');">etree</a></tt> <tt class="py-keyword">is</tt> <tt class="py-keyword">not</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L252"></a><tt class="py-lineno">252</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">_etree</tt><tt class="py-op">.</tt><tt id="link-110" class="py-name" targets="Function lxml.etree.iselement()=lxml.etree-module.html#iselement"><a title="lxml.etree.iselement" class="py-name" href="#" onclick="return doclink('link-110', 'iselement', 'link-110');">iselement</a></tt><tt class="py-op">(</tt><tt id="link-111" class="py-name"><a title="lxml.etree
+lxml.sax.ElementTreeContentHandler.etree
+lxml.tests.test_elementtree.CElementTreeTestCase.etree
+lxml.tests.test_elementtree._ETreeTestCaseBase.etree
+lxml.tests.test_elementtree._XMLPullParserTest.etree
+lxml.tests.test_io._IOTestCaseBase.etree" class="py-name" href="#" onclick="return doclink('link-111', 'etree', 'link-2');">etree</a></tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L253"></a><tt class="py-lineno">253</tt>  <tt class="py-line">                    <tt id="link-112" class="py-name"><a title="lxml.etree.iterparse.root" class="py-name" href="#" onclick="return doclink('link-112', 'root', 'link-108');">root</a></tt> <tt class="py-op">=</tt> <tt id="link-113" class="py-name"><a title="lxml.etree
+lxml.sax.ElementTreeContentHandler.etree
+lxml.tests.test_elementtree.CElementTreeTestCase.etree
+lxml.tests.test_elementtree._ETreeTestCaseBase.etree
+lxml.tests.test_elementtree._XMLPullParserTest.etree
+lxml.tests.test_io._IOTestCaseBase.etree" class="py-name" href="#" onclick="return doclink('link-113', 'etree', 'link-2');">etree</a></tt> </tt>
+<a name="L254"></a><tt class="py-lineno">254</tt>  <tt class="py-line">                <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L255"></a><tt class="py-lineno">255</tt>  <tt class="py-line">                    <tt id="link-114" class="py-name"><a title="lxml.etree.iterparse.root" class="py-name" href="#" onclick="return doclink('link-114', 'root', 'link-108');">root</a></tt> <tt class="py-op">=</tt> <tt id="link-115" class="py-name"><a title="lxml.etree
+lxml.sax.ElementTreeContentHandler.etree
+lxml.tests.test_elementtree.CElementTreeTestCase.etree
+lxml.tests.test_elementtree._ETreeTestCaseBase.etree
+lxml.tests.test_elementtree._XMLPullParserTest.etree
+lxml.tests.test_io._IOTestCaseBase.etree" class="py-name" href="#" onclick="return doclink('link-115', 'etree', 'link-2');">etree</a></tt><tt class="py-op">.</tt><tt id="link-116" class="py-name" targets="Method lxml.etree._ElementTree.getroot()=lxml.etree._ElementTree-class.html#getroot"><a title="lxml.etree._ElementTree.getroot" class="py-name" href="#" onclick="return doclink('link-116', 'getroot', 'link-116');">getroot</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L256"></a><tt class="py-lineno">256</tt>  <tt class="py-line">            <tt class="py-keyword">elif</tt> <tt class="py-name">file</tt> <tt class="py-keyword">is</tt> <tt class="py-keyword">not</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L257"></a><tt class="py-lineno">257</tt>  <tt class="py-line">                <tt id="link-117" class="py-name"><a title="lxml.etree.iterparse.root" class="py-name" href="#" onclick="return doclink('link-117', 'root', 'link-108');">root</a></tt> <tt class="py-op">=</tt> <tt class="py-name">_etree</tt><tt class="py-op">.</tt><tt id="link-118" class="py-name"><a title="lxml.etree._ElementTree.parse
+lxml.etree.parse
+lxml.html.ElementSoup.parse
+lxml.html.html5parser.parse
+lxml.html.soupparser.parse
+lxml.objectify.parse
+lxml.tests.common_imports.HelperTestCase.parse" class="py-name" href="#" onclick="return doclink('link-118', 'parse', 'link-20');">parse</a></tt><tt class="py-op">(</tt><tt class="py-name">file</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-119" class="py-name"><a title="lxml.etree._ElementTree.getroot" class="py-name" href="#" onclick="return doclink('link-119', 'getroot', 'link-116');">getroot</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L258"></a><tt class="py-lineno">258</tt>  <tt class="py-line">        <tt class="py-keyword">except</tt> <tt class="py-name">Exception</tt><tt class="py-op">:</tt> </tt>
+<a name="L259"></a><tt class="py-lineno">259</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt class="py-name">_etree</tt><tt class="py-op">.</tt><tt id="link-120" class="py-name" targets="Class lxml.etree.SchematronParseError=lxml.etree.SchematronParseError-class.html"><a title="lxml.etree.SchematronParseError" class="py-name" href="#" onclick="return doclink('link-120', 'SchematronParseError', 'link-120');">SchematronParseError</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L260"></a><tt class="py-lineno">260</tt>  <tt class="py-line">                <tt class="py-string">"No tree or file given: %s"</tt> <tt class="py-op">%</tt> <tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">exc_info</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L261"></a><tt class="py-lineno">261</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt id="link-121" class="py-name"><a title="lxml.etree.iterparse.root" class="py-name" href="#" onclick="return doclink('link-121', 'root', 'link-108');">root</a></tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L262"></a><tt class="py-lineno">262</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt class="py-name">ValueError</tt><tt class="py-op">(</tt><tt class="py-string">"Empty tree"</tt><tt class="py-op">)</tt> </tt>
+<a name="L263"></a><tt class="py-lineno">263</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt id="link-122" class="py-name"><a title="lxml.etree.iterparse.root" class="py-name" href="#" onclick="return doclink('link-122', 'root', 'link-108');">root</a></tt><tt class="py-op">.</tt><tt id="link-123" class="py-name"><a title="lxml.etree._Comment.tag
+lxml.etree._Element.tag
+lxml.etree._Entity.tag
+lxml.etree._ProcessingInstruction.tag
+lxml.tests.test_xpathevaluator.tag
+xml.etree.ElementTree.Element.tag" class="py-name" href="#" onclick="return doclink('link-123', 'tag', 'link-77');">tag</a></tt> <tt class="py-op">==</tt> <tt id="link-124" class="py-name"><a title="lxml.isoschematron._schematron_root" class="py-name" href="#" onclick="return doclink('link-124', '_schematron_root', 'link-11');">_schematron_root</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L264"></a><tt class="py-lineno">264</tt>  <tt class="py-line">            <tt id="link-125" class="py-name"><a title="lxml.isoschematron.Schematron.schematron" class="py-name" href="#" onclick="return doclink('link-125', 'schematron', 'link-75');">schematron</a></tt> <tt class="py-op">=</tt> <tt id="link-126" class="py-name"><a title="lxml.etree.iterparse.root" class="py-name" href="#" onclick="return doclink('link-126', 'root', 'link-108');">root</a></tt> </tt>
+<a name="L265"></a><tt class="py-lineno">265</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L266"></a><tt class="py-lineno">266</tt>  <tt class="py-line">            <tt id="link-127" class="py-name"><a title="lxml.isoschematron.Schematron.schematron" class="py-name" href="#" onclick="return doclink('link-127', 'schematron', 'link-75');">schematron</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-128" class="py-name" targets="Method lxml.isoschematron.Schematron._extract()=lxml.isoschematron.Schematron-class.html#_extract"><a title="lxml.isoschematron.Schematron._extract" class="py-name" href="#" onclick="return doclink('link-128', '_extract', 'link-128');">_extract</a></tt><tt class="py-op">(</tt><tt id="link-129" class="py-name"><a title="lxml.etree.iterparse.root" class="py-name" href="#" onclick="return doclink('link-129', 'root', 'link-108');">root</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L267"></a><tt class="py-lineno">267</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt id="link-130" class="py-name"><a title="lxml.isoschematron.Schematron.schematron" class="py-name" href="#" onclick="return doclink('link-130', 'schematron', 'link-75');">schematron</a></tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L268"></a><tt class="py-lineno">268</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt class="py-name">_etree</tt><tt class="py-op">.</tt><tt id="link-131" class="py-name"><a title="lxml.etree.SchematronParseError" class="py-name" href="#" onclick="return doclink('link-131', 'SchematronParseError', 'link-120');">SchematronParseError</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L269"></a><tt class="py-lineno">269</tt>  <tt class="py-line">                <tt class="py-string">"Document is not a schematron schema or schematron-extractable"</tt><tt class="py-op">)</tt> </tt>
+<a name="L270"></a><tt class="py-lineno">270</tt>  <tt class="py-line">        <tt class="py-comment"># perform the iso-schematron skeleton implementation steps to get a</tt> </tt>
+<a name="L271"></a><tt class="py-lineno">271</tt>  <tt class="py-line">        <tt class="py-comment"># validating xslt</tt> </tt>
+<a name="L272"></a><tt class="py-lineno">272</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt id="link-132" class="py-name" targets="Function lxml.ElementInclude.include()=lxml.ElementInclude-module.html#include,Method lxml.tests.test_etree.ETreeXIncludeTestCase.include()=lxml.tests.test_etree.ETreeXIncludeTestCase-class.html#include,Method lxml.tests.test_etree.ElementIncludeTestCase.include()=lxml.tests.test_etree.ElementIncludeTestCase-class.html#include"><a title="lxml.ElementInclude.include
+lxml.tests.test_etree.ETreeXIncludeTestCase.include
+lxml.tests.test_etree.ElementIncludeTestCase.include" class="py-name" href="#" onclick="return doclink('link-132', 'include', 'link-132');">include</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L273"></a><tt class="py-lineno">273</tt>  <tt class="py-line">            <tt id="link-133" class="py-name"><a title="lxml.isoschematron.Schematron.schematron" class="py-name" href="#" onclick="return doclink('link-133', 'schematron', 'link-75');">schematron</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-134" class="py-name"><a title="lxml.ElementInclude._include
+lxml.isoschematron.Schematron._include" class="py-name" href="#" onclick="return doclink('link-134', '_include', 'link-95');">_include</a></tt><tt class="py-op">(</tt><tt id="link-135" class="py-name"><a title="lxml.isoschematron.Schematron.schematron" class="py-name" href="#" onclick="return doclink('link-135', 'schematron', 'link-75');">schematron</a></tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-name">include_params</tt><tt class="py-op">)</tt> </tt>
+<a name="L274"></a><tt class="py-lineno">274</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">expand</tt><tt class="py-op">:</tt> </tt>
+<a name="L275"></a><tt class="py-lineno">275</tt>  <tt class="py-line">            <tt id="link-136" class="py-name"><a title="lxml.isoschematron.Schematron.schematron" class="py-name" href="#" onclick="return doclink('link-136', 'schematron', 'link-75');">schematron</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-137" class="py-name"><a title="lxml.isoschematron.Schematron._expand" class="py-name" href="#" onclick="return doclink('link-137', '_expand', 'link-97');">_expand</a></tt><tt class="py-op">(</tt><tt id="link-138" class="py-name"><a title="lxml.isoschematron.Schematron.schematron" class="py-name" href="#" onclick="return doclink('link-138', 'schematron', 'link-75');">schematron</a></tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-name">expand_params</tt><tt class="py-op">)</tt> </tt>
+<a name="L276"></a><tt class="py-lineno">276</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt id="link-139" class="py-name"><a title="lxml.isoschematron.schematron_schema_valid" class="py-name" href="#" onclick="return doclink('link-139', 'schematron_schema_valid', 'link-46');">schematron_schema_valid</a></tt><tt class="py-op">(</tt><tt id="link-140" class="py-name"><a title="lxml.isoschematron.Schematron.schematron" class="py-name" href="#" onclick="return doclink('link-140', 'schematron', 'link-75');">schematron</a></tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L277"></a><tt class="py-lineno">277</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt class="py-name">_etree</tt><tt class="py-op">.</tt><tt id="link-141" class="py-name"><a title="lxml.etree.SchematronParseError" class="py-name" href="#" onclick="return doclink('link-141', 'SchematronParseError', 'link-120');">SchematronParseError</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L278"></a><tt class="py-lineno">278</tt>  <tt class="py-line">                <tt class="py-string">"invalid schematron schema: %s"</tt> <tt class="py-op">%</tt> </tt>
+<a name="L279"></a><tt class="py-lineno">279</tt>  <tt class="py-line">                <tt id="link-142" class="py-name"><a title="lxml.isoschematron.schematron_schema_valid" class="py-name" href="#" onclick="return doclink('link-142', 'schematron_schema_valid', 'link-46');">schematron_schema_valid</a></tt><tt class="py-op">.</tt><tt id="link-143" class="py-name" targets="Variable lxml.etree.XInclude.error_log=lxml.etree.XInclude-class.html#error_log,Variable lxml.etree.XSLT.error_log=lxml.etree.XSLT-class.html#error_log,Variable lxml.etree._Validator.error_log=lxml.etree._Validator-class.html#error_log,Variable lxml.etree._XPathEvaluatorBase.error_log=lxml.etree._XPathEvaluatorBase-class.html#error_log,Variable lxml.etree.iterparse.error_log=lxml.etree.iterparse-class.html#error_log"><a title="lxml.etree.XInclude.error_log
+lxml.etree.XSLT.error_log
+lxml.etree._Validator.error_log
+lxml.etree._XPathEvaluatorBase.error_log
+lxml.etree.iterparse.error_log" class="py-name" href="#" onclick="return doclink('link-143', 'error_log', 'link-143');">error_log</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L280"></a><tt class="py-lineno">280</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">store_schematron</tt><tt class="py-op">:</tt> </tt>
+<a name="L281"></a><tt class="py-lineno">281</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_schematron</tt> <tt class="py-op">=</tt> <tt id="link-144" class="py-name"><a title="lxml.isoschematron.Schematron.schematron" class="py-name" href="#" onclick="return doclink('link-144', 'schematron', 'link-75');">schematron</a></tt> </tt>
+<a name="L282"></a><tt class="py-lineno">282</tt>  <tt class="py-line">        <tt class="py-comment"># add new compile keyword args here if exposing them</tt> </tt>
+<a name="L283"></a><tt class="py-lineno">283</tt>  <tt class="py-line">        <tt class="py-name">compile_kwargs</tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-string">'phase'</tt><tt class="py-op">:</tt> <tt class="py-name">phase</tt><tt class="py-op">}</tt> </tt>
+<a name="L284"></a><tt class="py-lineno">284</tt>  <tt class="py-line">        <tt class="py-name">compile_params</tt> <tt class="py-op">=</tt> <tt id="link-145" class="py-name" targets="Function lxml.isoschematron._stylesheet_param_dict()=lxml.isoschematron-module.html#_stylesheet_param_dict"><a title="lxml.isoschematron._stylesheet_param_dict" class="py-name" href="#" onclick="return doclink('link-145', '_stylesheet_param_dict', 'link-145');">_stylesheet_param_dict</a></tt><tt class="py-op">(</tt><tt class="py-name">compile_params</tt><tt class="py-op">,</tt> <tt class="py-name">compile_kwargs</tt><tt class="py-op">)</tt> </tt>
+<a name="L285"></a><tt class="py-lineno">285</tt>  <tt class="py-line">        <tt id="link-146" class="py-name" targets="Variable lxml.isoschematron.Schematron.validator_xslt=lxml.isoschematron.Schematron-class.html#validator_xslt"><a title="lxml.isoschematron.Schematron.validator_xslt" class="py-name" href="#" onclick="return doclink('link-146', 'validator_xslt', 'link-146');">validator_xslt</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-147" class="py-name"><a title="lxml.isoschematron.Schematron._compile" class="py-name" href="#" onclick="return doclink('link-147', '_compile', 'link-99');">_compile</a></tt><tt class="py-op">(</tt><tt id="link-148" class="py-name"><a title="lxml.isoschematron.Schematron.schematron" class="py-name" href="#" onclick="return doclink('link-148', 'schematron', 'link-75');">schematron</a></tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-name">compile_params</tt><tt class="py-op">)</tt> </tt>
+<a name="L286"></a><tt class="py-lineno">286</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">store_xslt</tt><tt class="py-op">:</tt> </tt>
+<a name="L287"></a><tt class="py-lineno">287</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_validator_xslt</tt> <tt class="py-op">=</tt> <tt id="link-149" class="py-name"><a title="lxml.isoschematron.Schematron.validator_xslt" class="py-name" href="#" onclick="return doclink('link-149', 'validator_xslt', 'link-146');">validator_xslt</a></tt> </tt>
+<a name="L288"></a><tt class="py-lineno">288</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_validator</tt> <tt class="py-op">=</tt> <tt class="py-name">_etree</tt><tt class="py-op">.</tt><tt id="link-150" class="py-name"><a title="lxml.etree.ErrorDomains.XSLT
+lxml.etree.XSLT" class="py-name" href="#" onclick="return doclink('link-150', 'XSLT', 'link-19');">XSLT</a></tt><tt class="py-op">(</tt><tt id="link-151" class="py-name"><a title="lxml.isoschematron.Schematron.validator_xslt" class="py-name" href="#" onclick="return doclink('link-151', 'validator_xslt', 'link-146');">validator_xslt</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L289"></a><tt class="py-lineno">289</tt>  <tt class="py-line"> </tt>
+<a name="Schematron.__call__"></a><div id="Schematron.__call__-def"><a name="L290"></a><tt class="py-lineno">290</tt> <a class="py-toggle" href="#" id="Schematron.__call__-toggle" onclick="return toggle('Schematron.__call__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.isoschematron.Schematron-class.html#__call__">__call__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">etree</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Schematron.__call__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Schematron.__call__-expanded"><a name="L291"></a><tt class="py-lineno">291</tt>  <tt class="py-line">        <tt class="py-docstring">"""Validate doc using Schematron.</tt> </tt>
+<a name="L292"></a><tt class="py-lineno">292</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L293"></a><tt class="py-lineno">293</tt>  <tt class="py-line"><tt class="py-docstring">        Returns true if document is valid, false if not.</tt> </tt>
+<a name="L294"></a><tt class="py-lineno">294</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L295"></a><tt class="py-lineno">295</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-152" class="py-name" targets="Method lxml.etree._Validator._clear_error_log()=lxml.etree._Validator-class.html#_clear_error_log"><a title="lxml.etree._Validator._clear_error_log" class="py-name" href="#" onclick="return doclink('link-152', '_clear_error_log', 'link-152');">_clear_error_log</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L296"></a><tt class="py-lineno">296</tt>  <tt class="py-line">        <tt class="py-name">result</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_validator</tt><tt class="py-op">(</tt><tt id="link-153" class="py-name"><a title="lxml.etree
+lxml.sax.ElementTreeContentHandler.etree
+lxml.tests.test_elementtree.CElementTreeTestCase.etree
+lxml.tests.test_elementtree._ETreeTestCaseBase.etree
+lxml.tests.test_elementtree._XMLPullParserTest.etree
+lxml.tests.test_io._IOTestCaseBase.etree" class="py-name" href="#" onclick="return doclink('link-153', 'etree', 'link-2');">etree</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L297"></a><tt class="py-lineno">297</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_store_report</tt><tt class="py-op">:</tt> </tt>
+<a name="L298"></a><tt class="py-lineno">298</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_validation_report</tt> <tt class="py-op">=</tt> <tt class="py-name">result</tt> </tt>
+<a name="L299"></a><tt class="py-lineno">299</tt>  <tt class="py-line">        <tt class="py-name">errors</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-154" class="py-name"><a title="lxml.isoschematron.Schematron._validation_errors" class="py-name" href="#" onclick="return doclink('link-154', '_validation_errors', 'link-101');">_validation_errors</a></tt><tt class="py-op">(</tt><tt class="py-name">result</tt><tt class="py-op">)</tt> </tt>
+<a name="L300"></a><tt class="py-lineno">300</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">errors</tt><tt class="py-op">:</tt> </tt>
+<a name="L301"></a><tt class="py-lineno">301</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">_etree</tt><tt class="py-op">.</tt><tt id="link-155" class="py-name"><a title="lxml.etree.iselement" class="py-name" href="#" onclick="return doclink('link-155', 'iselement', 'link-110');">iselement</a></tt><tt class="py-op">(</tt><tt id="link-156" class="py-name"><a title="lxml.etree
+lxml.sax.ElementTreeContentHandler.etree
+lxml.tests.test_elementtree.CElementTreeTestCase.etree
+lxml.tests.test_elementtree._ETreeTestCaseBase.etree
+lxml.tests.test_elementtree._XMLPullParserTest.etree
+lxml.tests.test_io._IOTestCaseBase.etree" class="py-name" href="#" onclick="return doclink('link-156', 'etree', 'link-2');">etree</a></tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L302"></a><tt class="py-lineno">302</tt>  <tt class="py-line">                <tt class="py-name">fname</tt> <tt class="py-op">=</tt> <tt id="link-157" class="py-name"><a title="lxml.etree
+lxml.sax.ElementTreeContentHandler.etree
+lxml.tests.test_elementtree.CElementTreeTestCase.etree
+lxml.tests.test_elementtree._ETreeTestCaseBase.etree
+lxml.tests.test_elementtree._XMLPullParserTest.etree
+lxml.tests.test_io._IOTestCaseBase.etree" class="py-name" href="#" onclick="return doclink('link-157', 'etree', 'link-2');">etree</a></tt><tt class="py-op">.</tt><tt id="link-158" class="py-name" targets="Method lxml.etree._Element.getroottree()=lxml.etree._Element-class.html#getroottree"><a title="lxml.etree._Element.getroottree" class="py-name" href="#" onclick="return doclink('link-158', 'getroottree', 'link-158');">getroottree</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-159" class="py-name" targets="Variable lxml.etree._ElementTree.docinfo=lxml.etree._ElementTree-class.html#docinfo"><a title="lxml.etree._ElementTree.docinfo" class="py-name" href="#" onclick="return doclink('link-159', 'docinfo', 'link-159');">docinfo</a></tt><tt class="py-op">.</tt><tt id="link-160" class="py-name" targets="Variable lxml.etree.DocInfo.URL=lxml.etree.DocInfo-class.html#URL"><a title="lxml.etree.DocInfo.URL" class="py-name" href="#" onclick="return doclink('link-160', 'URL', 'link-160');">URL</a></tt> <tt class="py-keyword">or</tt> <tt class="py-string">'&lt;file&gt;'</tt> </tt>
+<a name="L303"></a><tt class="py-lineno">303</tt>  <tt class="py-line">            <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L304"></a><tt class="py-lineno">304</tt>  <tt class="py-line">                <tt class="py-name">fname</tt> <tt class="py-op">=</tt> <tt id="link-161" class="py-name"><a title="lxml.etree
+lxml.sax.ElementTreeContentHandler.etree
+lxml.tests.test_elementtree.CElementTreeTestCase.etree
+lxml.tests.test_elementtree._ETreeTestCaseBase.etree
+lxml.tests.test_elementtree._XMLPullParserTest.etree
+lxml.tests.test_io._IOTestCaseBase.etree" class="py-name" href="#" onclick="return doclink('link-161', 'etree', 'link-2');">etree</a></tt><tt class="py-op">.</tt><tt id="link-162" class="py-name"><a title="lxml.etree._ElementTree.docinfo" class="py-name" href="#" onclick="return doclink('link-162', 'docinfo', 'link-159');">docinfo</a></tt><tt class="py-op">.</tt><tt id="link-163" class="py-name"><a title="lxml.etree.DocInfo.URL" class="py-name" href="#" onclick="return doclink('link-163', 'URL', 'link-160');">URL</a></tt> <tt class="py-keyword">or</tt> <tt class="py-string">'&lt;file&gt;'</tt> </tt>
+<a name="L305"></a><tt class="py-lineno">305</tt>  <tt class="py-line">            <tt class="py-keyword">for</tt> <tt class="py-name">error</tt> <tt class="py-keyword">in</tt> <tt class="py-name">errors</tt><tt class="py-op">:</tt> </tt>
+<a name="L306"></a><tt class="py-lineno">306</tt>  <tt class="py-line">                <tt class="py-comment"># Does svrl report the line number, anywhere? Don't think so.</tt> </tt>
+<a name="L307"></a><tt class="py-lineno">307</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-164" class="py-name" targets="Method lxml.etree._Validator._append_log_message()=lxml.etree._Validator-class.html#_append_log_message"><a title="lxml.etree._Validator._append_log_message" class="py-name" href="#" onclick="return doclink('link-164', '_append_log_message', 'link-164');">_append_log_message</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L308"></a><tt class="py-lineno">308</tt>  <tt class="py-line">                    <tt id="link-165" class="py-name" targets="Variable lxml.etree._LogEntry.domain=lxml.etree._LogEntry-class.html#domain"><a title="lxml.etree._LogEntry.domain" class="py-name" href="#" onclick="return doclink('link-165', 'domain', 'link-165');">domain</a></tt><tt class="py-op">=</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-166" class="py-name"><a title="lxml.isoschematron.Schematron._domain" class="py-name" href="#" onclick="return doclink('link-166', '_domain', 'link-61');">_domain</a></tt><tt class="py-op">,</tt> <tt id="link-167" class="py-name" targets="Variable lxml.etree._LogEntry.type=lxml.etree._LogEntry-class.html#type,Variable lxml.html.InputElement.type=lxml.html.InputElement-class.html#type"><a title="lxml.etree._LogEntry.type
+lxml.html.InputElement.type" class="py-name" href="#" onclick="return doclink('link-167', 'type', 'link-167');">type</a></tt><tt class="py-op">=</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-168" class="py-name"><a title="lxml.isoschematron.Schematron._error_type" class="py-name" href="#" onclick="return doclink('link-168', '_error_type', 'link-67');">_error_type</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L309"></a><tt class="py-lineno">309</tt>  <tt class="py-line">                    <tt id="link-169" class="py-name" targets="Variable lxml.etree._LogEntry.level=lxml.etree._LogEntry-class.html#level"><a title="lxml.etree._LogEntry.level" class="py-name" href="#" onclick="return doclink('link-169', 'level', 'link-169');">level</a></tt><tt class="py-op">=</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-170" class="py-name"><a title="lxml.isoschematron.Schematron._level" class="py-name" href="#" onclick="return doclink('link-170', '_level', 'link-64');">_level</a></tt><tt class="py-op">,</tt> <tt id="link-171" class="py-name" targets="Variable lxml.etree._LogEntry.line=lxml.etree._LogEntry-class.html#line"><a title="lxml.etree._LogEntry.line" class="py-name" href="#" onclick="return doclink('link-171', 'line', 'link-171');">line</a></tt><tt class="py-op">=</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> </tt>
+<a name="L310"></a><tt class="py-lineno">310</tt>  <tt class="py-line">                    <tt id="link-172" class="py-name" targets="Variable lxml.etree._LogEntry.message=lxml.etree._LogEntry-class.html#message"><a title="lxml.etree._LogEntry.message" class="py-name" href="#" onclick="return doclink('link-172', 'message', 'link-172');">message</a></tt><tt class="py-op">=</tt><tt class="py-name">_etree</tt><tt class="py-op">.</tt><tt id="link-173" class="py-name" targets="Method lxml.etree.XSLT.tostring()=lxml.etree.XSLT-class.html#tostring,Function lxml.etree.tostring()=lxml.etree-module.html#tostring"><a title="lxml.etree.XSLT.tostring
+lxml.etree.tostring" class="py-name" href="#" onclick="return doclink('link-173', 'tostring', 'link-173');">tostring</a></tt><tt class="py-op">(</tt><tt class="py-name">error</tt><tt class="py-op">,</tt> <tt id="link-174" class="py-name" targets="Variable lxml.etree.DocInfo.encoding=lxml.etree.DocInfo-class.html#encoding,Function lxml.tests.selftest.encoding()=lxml.tests.selftest-module.html#encoding,Function lxml.tests.selftest2.encoding()=lxml.tests.selftest2-module.html#encoding"><a title="lxml.etree.DocInfo.encoding
+lxml.tests.selftest.encoding
+lxml.tests.selftest2.encoding" class="py-name" href="#" onclick="return doclink('link-174', 'encoding', 'link-174');">encoding</a></tt><tt class="py-op">=</tt><tt class="py-string">'unicode'</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L311"></a><tt class="py-lineno">311</tt>  <tt class="py-line">                    <tt id="link-175" class="py-name" targets="Variable lxml.etree._LogEntry.filename=lxml.etree._LogEntry-class.html#filename"><a title="lxml.etree._LogEntry.filename" class="py-name" href="#" onclick="return doclink('link-175', 'filename', 'link-175');">filename</a></tt><tt class="py-op">=</tt><tt class="py-name">fname</tt><tt class="py-op">)</tt> </tt>
+<a name="L312"></a><tt class="py-lineno">312</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">False</tt> </tt>
+<a name="L313"></a><tt class="py-lineno">313</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">True</tt> </tt>
+</div><a name="L314"></a><tt class="py-lineno">314</tt>  <tt class="py-line"> </tt>
+<a name="L315"></a><tt class="py-lineno">315</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">property</tt> </tt>
+<a name="Schematron.schematron"></a><div id="Schematron.schematron-def"><a name="L316"></a><tt class="py-lineno">316</tt> <a class="py-toggle" href="#" id="Schematron.schematron-toggle" onclick="return toggle('Schematron.schematron');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.isoschematron.Schematron-class.html#schematron">schematron</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Schematron.schematron-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Schematron.schematron-expanded"><a name="L317"></a><tt class="py-lineno">317</tt>  <tt class="py-line">        <tt class="py-docstring">"""ISO-schematron schema document (None if object has been initialized</tt> </tt>
+<a name="L318"></a><tt class="py-lineno">318</tt>  <tt class="py-line"><tt class="py-docstring">        with store_schematron=False).</tt> </tt>
+<a name="L319"></a><tt class="py-lineno">319</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L320"></a><tt class="py-lineno">320</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_schematron</tt> </tt>
+</div><a name="L321"></a><tt class="py-lineno">321</tt>  <tt class="py-line"> </tt>
+<a name="L322"></a><tt class="py-lineno">322</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">property</tt> </tt>
+<a name="Schematron.validator_xslt"></a><div id="Schematron.validator_xslt-def"><a name="L323"></a><tt class="py-lineno">323</tt> <a class="py-toggle" href="#" id="Schematron.validator_xslt-toggle" onclick="return toggle('Schematron.validator_xslt');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.isoschematron.Schematron-class.html#validator_xslt">validator_xslt</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Schematron.validator_xslt-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Schematron.validator_xslt-expanded"><a name="L324"></a><tt class="py-lineno">324</tt>  <tt class="py-line">        <tt class="py-docstring">"""ISO-schematron skeleton implementation XSLT validator document (None</tt> </tt>
+<a name="L325"></a><tt class="py-lineno">325</tt>  <tt class="py-line"><tt class="py-docstring">        if object has been initialized with store_xslt=False).</tt> </tt>
+<a name="L326"></a><tt class="py-lineno">326</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L327"></a><tt class="py-lineno">327</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_validator_xslt</tt> </tt>
+</div><a name="L328"></a><tt class="py-lineno">328</tt>  <tt class="py-line"> </tt>
+<a name="L329"></a><tt class="py-lineno">329</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">property</tt> </tt>
+<a name="Schematron.validation_report"></a><div id="Schematron.validation_report-def"><a name="L330"></a><tt class="py-lineno">330</tt> <a class="py-toggle" href="#" id="Schematron.validation_report-toggle" onclick="return toggle('Schematron.validation_report');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.isoschematron.Schematron-class.html#validation_report">validation_report</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Schematron.validation_report-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Schematron.validation_report-expanded"><a name="L331"></a><tt class="py-lineno">331</tt>  <tt class="py-line">        <tt class="py-docstring">"""ISO-schematron validation result report (None if result-storing has</tt> </tt>
+<a name="L332"></a><tt class="py-lineno">332</tt>  <tt class="py-line"><tt class="py-docstring">        been turned off).</tt> </tt>
+<a name="L333"></a><tt class="py-lineno">333</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L334"></a><tt class="py-lineno">334</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_validation_report</tt> </tt>
+</div></div><a name="L335"></a><tt class="py-lineno">335</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lxml-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="/">lxml API</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Fri Jun 22 18:59:52 2018
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

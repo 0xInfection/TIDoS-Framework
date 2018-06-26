@@ -1,0 +1,244 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.12: http://docutils.sourceforge.net/" />
+<title>lxml - Processing XML and HTML with Python</title>
+<meta content="lxml - the most feature-rich and easy-to-use library for processing XML and HTML in the Python language" name="description" />
+<meta content="Python XML, XML processing, HTML, lxml, simple XML, ElementTree, etree, lxml.etree, objectify, XML parsing, XML validation, XPath, XSLT" name="keywords" />
+<link rel="stylesheet" href="style.css" type="text/css" />
+<script type="text/javascript">
+function trigger_menu(event) {
+    var sidemenu = document.getElementById("sidemenu");
+    var classes = sidemenu.getAttribute("class");
+    classes = (classes.indexOf(" visible") === -1) ? classes + " visible" : classes.replace(" visible", "");
+    sidemenu.setAttribute("class", classes);
+    event.preventDefault();
+    event.stopPropagation();
+}
+function hide_menu() {
+    var sidemenu = document.getElementById("sidemenu");
+    var classes = sidemenu.getAttribute("class");
+    if (classes.indexOf(" visible") !== -1) {
+        sidemenu.setAttribute("class", classes.replace(" visible", ""));
+    }
+}
+</script><meta content="width=device-width, initial-scale=1" name="viewport" /></head>
+<body onclick="hide_menu()">
+<div class="document" id="lxml">
+<div class="sidemenu" id="sidemenu"><div class="menutrigger" onclick="trigger_menu(event)">Menu</div><div class="menu"><ul id="lxml-section"><li><span class="section title">lxml</span><ul class="menu current" id="index-menu"><li class="menu title"><a href="index.html">lxml</a><ul class="submenu"><li class="menu item"><a href="index.html#introduction">Introduction</a></li><li class="menu item"><a href="index.html#support-the-project">Support the project</a></li><li class="menu item"><a href="index.html#documentation">Documentation</a></li><li class="menu item"><a href="index.html#download">Download</a></li><li class="menu item"><a href="index.html#mailing-list">Mailing list</a></li><li class="menu item"><a href="index.html#bug-tracker">Bug tracker</a></li><li class="menu item"><a href="index.html#license">License</a></li><li class="menu item"><a href="index.html#old-versions">Old Versions</a></li><li class="menu item"><a href="index.html#docutils-system-messages">Docutils System Messages</a></li><li class="menu item"><a href="index.html#legal-notice-for-donations">Legal Notice for Donations</a></li></ul></li></ul><ul class="menu foreign" id="intro-menu"><li class="menu title"><a href="intro.html">Why lxml?</a><ul class="submenu"><li class="menu item"><a href="intro.html#motto">Motto</a></li><li class="menu item"><a href="intro.html#aims">Aims</a></li></ul></li></ul><ul class="menu foreign" id="installation-menu"><li class="menu title"><a href="installation.html">Installing lxml</a><ul class="submenu"><li class="menu item"><a href="installation.html#where-to-get-it">Where to get it</a></li><li class="menu item"><a href="installation.html#requirements">Requirements</a></li><li class="menu item"><a href="installation.html#installation">Installation</a></li><li class="menu item"><a href="installation.html#building-lxml-from-dev-sources">Building lxml from dev sources</a></li><li class="menu item"><a href="installation.html#using-lxml-with-python-libxml2">Using lxml with python-libxml2</a></li><li class="menu item"><a href="installation.html#source-builds-on-ms-windows">Source builds on MS Windows</a></li><li class="menu item"><a href="installation.html#source-builds-on-macos-x">Source builds on MacOS-X</a></li></ul></li></ul><ul class="menu foreign" id="performance-menu"><li class="menu title"><a href="performance.html">Benchmarks and Speed</a><ul class="submenu"><li class="menu item"><a href="performance.html#general-notes">General notes</a></li><li class="menu item"><a href="performance.html#how-to-read-the-timings">How to read the timings</a></li><li class="menu item"><a href="performance.html#parsing-and-serialising">Parsing and Serialising</a></li><li class="menu item"><a href="performance.html#the-elementtree-api">The ElementTree API</a></li><li class="menu item"><a href="performance.html#xpath">XPath</a></li><li class="menu item"><a href="performance.html#a-longer-example">A longer example</a></li><li class="menu item"><a href="performance.html#lxml-objectify">lxml.objectify</a></li></ul></li></ul><ul class="menu foreign" id="compatibility-menu"><li class="menu title"><a href="compatibility.html">ElementTree compatibility of lxml.etree</a></li></ul><ul class="menu foreign" id="FAQ-menu"><li class="menu title"><a href="FAQ.html">lxml FAQ - Frequently Asked Questions</a><ul class="submenu"><li class="menu item"><a href="FAQ.html#general-questions">General Questions</a></li><li class="menu item"><a href="FAQ.html#installation">Installation</a></li><li class="menu item"><a href="FAQ.html#contributing">Contributing</a></li><li class="menu item"><a href="FAQ.html#bugs">Bugs</a></li><li class="menu item"><a href="FAQ.html#id1">Threading</a></li><li class="menu item"><a href="FAQ.html#parsing-and-serialisation">Parsing and Serialisation</a></li><li class="menu item"><a href="FAQ.html#xpath-and-document-traversal">XPath and Document Traversal</a></li></ul></li></ul></li></ul><ul id="Developing with lxml-section"><li><span class="section title">Developing with lxml</span><ul class="menu foreign" id="tutorial-menu"><li class="menu title"><a href="tutorial.html">The lxml.etree Tutorial</a><ul class="submenu"><li class="menu item"><a href="tutorial.html#the-element-class">The Element class</a></li><li class="menu item"><a href="tutorial.html#the-elementtree-class">The ElementTree class</a></li><li class="menu item"><a href="tutorial.html#parsing-from-strings-and-files">Parsing from strings and files</a></li><li class="menu item"><a href="tutorial.html#namespaces">Namespaces</a></li><li class="menu item"><a href="tutorial.html#the-e-factory">The E-factory</a></li><li class="menu item"><a href="tutorial.html#elementpath">ElementPath</a></li></ul></li></ul><ul class="menu foreign" id="api index-menu"><li class="menu title"><a href="api/index.html">API reference</a></li></ul><ul class="menu foreign" id="api-menu"><li class="menu title"><a href="api.html">APIs specific to lxml.etree</a><ul class="submenu"><li class="menu item"><a href="api.html#lxml-etree">lxml.etree</a></li><li class="menu item"><a href="api.html#other-element-apis">Other Element APIs</a></li><li class="menu item"><a href="api.html#trees-and-documents">Trees and Documents</a></li><li class="menu item"><a href="api.html#iteration">Iteration</a></li><li class="menu item"><a href="api.html#error-handling-on-exceptions">Error handling on exceptions</a></li><li class="menu item"><a href="api.html#error-logging">Error logging</a></li><li class="menu item"><a href="api.html#serialisation">Serialisation</a></li><li class="menu item"><a href="api.html#incremental-xml-generation">Incremental XML generation</a></li><li class="menu item"><a href="api.html#cdata">CDATA</a></li><li class="menu item"><a href="api.html#xinclude-and-elementinclude">XInclude and ElementInclude</a></li><li class="menu item"><a href="api.html#write-c14n-on-elementtree">write_c14n on ElementTree</a></li></ul></li></ul><ul class="menu foreign" id="parsing-menu"><li class="menu title"><a href="parsing.html">Parsing XML and HTML with lxml</a><ul class="submenu"><li class="menu item"><a href="parsing.html#parsers">Parsers</a></li><li class="menu item"><a href="parsing.html#the-target-parser-interface">The target parser interface</a></li><li class="menu item"><a href="parsing.html#the-feed-parser-interface">The feed parser interface</a></li><li class="menu item"><a href="parsing.html#incremental-event-parsing">Incremental event parsing</a></li><li class="menu item"><a href="parsing.html#iterparse-and-iterwalk">iterparse and iterwalk</a></li><li class="menu item"><a href="parsing.html#python-unicode-strings">Python unicode strings</a></li></ul></li></ul><ul class="menu foreign" id="validation-menu"><li class="menu title"><a href="validation.html">Validation with lxml</a><ul class="submenu"><li class="menu item"><a href="validation.html#validation-at-parse-time">Validation at parse time</a></li><li class="menu item"><a href="validation.html#id1">DTD</a></li><li class="menu item"><a href="validation.html#relaxng">RelaxNG</a></li><li class="menu item"><a href="validation.html#xmlschema">XMLSchema</a></li><li class="menu item"><a href="validation.html#id2">Schematron</a></li><li class="menu item"><a href="validation.html#id3">(Pre-ISO-Schematron)</a></li></ul></li></ul><ul class="menu foreign" id="xpathxslt-menu"><li class="menu title"><a href="xpathxslt.html">XPath and XSLT with lxml</a><ul class="submenu"><li class="menu item"><a href="xpathxslt.html#xpath">XPath</a></li><li class="menu item"><a href="xpathxslt.html#xslt">XSLT</a></li></ul></li></ul><ul class="menu foreign" id="objectify-menu"><li class="menu title"><a href="objectify.html">lxml.objectify</a><ul class="submenu"><li class="menu item"><a href="objectify.html#the-lxml-objectify-api">The lxml.objectify API</a></li><li class="menu item"><a href="objectify.html#asserting-a-schema">Asserting a Schema</a></li><li class="menu item"><a href="objectify.html#objectpath">ObjectPath</a></li><li class="menu item"><a href="objectify.html#python-data-types">Python data types</a></li><li class="menu item"><a href="objectify.html#how-data-types-are-matched">How data types are matched</a></li><li class="menu item"><a href="objectify.html#what-is-different-from-lxml-etree">What is different from lxml.etree?</a></li></ul></li></ul><ul class="menu foreign" id="lxmlhtml-menu"><li class="menu title"><a href="lxmlhtml.html">lxml.html</a><ul class="submenu"><li class="menu item"><a href="lxmlhtml.html#parsing-html">Parsing HTML</a></li><li class="menu item"><a href="lxmlhtml.html#html-element-methods">HTML Element Methods</a></li><li class="menu item"><a href="lxmlhtml.html#running-html-doctests">Running HTML doctests</a></li><li class="menu item"><a href="lxmlhtml.html#creating-html-with-the-e-factory">Creating HTML with the E-factory</a></li><li class="menu item"><a href="lxmlhtml.html#working-with-links">Working with links</a></li><li class="menu item"><a href="lxmlhtml.html#forms">Forms</a></li><li class="menu item"><a href="lxmlhtml.html#cleaning-up-html">Cleaning up HTML</a></li><li class="menu item"><a href="lxmlhtml.html#html-diff">HTML Diff</a></li><li class="menu item"><a href="lxmlhtml.html#examples">Examples</a></li></ul></li></ul><ul class="menu foreign" id="cssselect-menu"><li class="menu title"><a href="cssselect.html">lxml.cssselect</a><ul class="submenu"><li class="menu item"><a href="cssselect.html#the-cssselector-class">The CSSSelector class</a></li><li class="menu item"><a href="cssselect.html#the-cssselect-method">The cssselect method</a></li><li class="menu item"><a href="cssselect.html#supported-selectors">Supported Selectors</a></li><li class="menu item"><a href="cssselect.html#namespaces">Namespaces</a></li></ul></li></ul><ul class="menu foreign" id="elementsoup-menu"><li class="menu title"><a href="elementsoup.html">BeautifulSoup Parser</a><ul class="submenu"><li class="menu item"><a href="elementsoup.html#parsing-with-the-soupparser">Parsing with the soupparser</a></li><li class="menu item"><a href="elementsoup.html#entity-handling">Entity handling</a></li><li class="menu item"><a href="elementsoup.html#using-soupparser-as-a-fallback">Using soupparser as a fallback</a></li><li class="menu item"><a href="elementsoup.html#using-only-the-encoding-detection">Using only the encoding detection</a></li></ul></li></ul><ul class="menu foreign" id="html5parser-menu"><li class="menu title"><a href="html5parser.html">html5lib Parser</a><ul class="submenu"><li class="menu item"><a href="html5parser.html#differences-to-regular-html-parsing">Differences to regular HTML parsing</a></li><li class="menu item"><a href="html5parser.html#function-reference">Function Reference</a></li></ul></li></ul></li></ul><ul id="Extending lxml-section"><li><span class="section title">Extending lxml</span><ul class="menu foreign" id="resolvers-menu"><li class="menu title"><a href="resolvers.html">Document loading and URL resolving</a><ul class="submenu"><li class="menu item"><a href="resolvers.html#xml-catalogs">XML Catalogs</a></li><li class="menu item"><a href="resolvers.html#uri-resolvers">URI Resolvers</a></li><li class="menu item"><a href="resolvers.html#document-loading-in-context">Document loading in context</a></li><li class="menu item"><a href="resolvers.html#i-o-access-control-in-xslt">I/O access control in XSLT</a></li></ul></li></ul><ul class="menu foreign" id="extensions-menu"><li class="menu title"><a href="extensions.html">Python extensions for XPath and XSLT</a><ul class="submenu"><li class="menu item"><a href="extensions.html#xpath-extension-functions">XPath Extension functions</a></li><li class="menu item"><a href="extensions.html#xslt-extension-elements">XSLT extension elements</a></li></ul></li></ul><ul class="menu foreign" id="element classes-menu"><li class="menu title"><a href="element_classes.html">Using custom Element classes in lxml</a><ul class="submenu"><li class="menu item"><a href="element_classes.html#background-on-element-proxies">Background on Element proxies</a></li><li class="menu item"><a href="element_classes.html#element-initialization">Element initialization</a></li><li class="menu item"><a href="element_classes.html#setting-up-a-class-lookup-scheme">Setting up a class lookup scheme</a></li><li class="menu item"><a href="element_classes.html#generating-xml-with-custom-classes">Generating XML with custom classes</a></li><li class="menu item"><a href="element_classes.html#id1">Implementing namespaces</a></li></ul></li></ul><ul class="menu foreign" id="sax-menu"><li class="menu title"><a href="sax.html">Sax support</a><ul class="submenu"><li class="menu item"><a href="sax.html#building-a-tree-from-sax-events">Building a tree from SAX events</a></li><li class="menu item"><a href="sax.html#producing-sax-events-from-an-elementtree-or-element">Producing SAX events from an ElementTree or Element</a></li><li class="menu item"><a href="sax.html#interfacing-with-pulldom-minidom">Interfacing with pulldom/minidom</a></li></ul></li></ul><ul class="menu foreign" id="capi-menu"><li class="menu title"><a href="capi.html">The public C-API of lxml.etree</a><ul class="submenu"><li class="menu item"><a href="capi.html#passing-generated-trees-through-python">Passing generated trees through Python</a></li><li class="menu item"><a href="capi.html#writing-external-modules-in-cython">Writing external modules in Cython</a></li><li class="menu item"><a href="capi.html#writing-external-modules-in-c">Writing external modules in C</a></li></ul></li></ul></li></ul><ul id="Developing lxml-section"><li><span class="section title">Developing lxml</span><ul class="menu foreign" id="build-menu"><li class="menu title"><a href="build.html">How to build lxml from source</a><ul class="submenu"><li class="menu item"><a href="build.html#cython">Cython</a></li><li class="menu item"><a href="build.html#github-git-and-hg">Github, git and hg</a></li><li class="menu item"><a href="build.html#building-the-sources">Building the sources</a></li><li class="menu item"><a href="build.html#running-the-tests-and-reporting-errors">Running the tests and reporting errors</a></li><li class="menu item"><a href="build.html#building-an-egg-or-wheel">Building an egg or wheel</a></li><li class="menu item"><a href="build.html#building-lxml-on-macos-x">Building lxml on MacOS-X</a></li><li class="menu item"><a href="build.html#static-linking-on-windows">Static linking on Windows</a></li><li class="menu item"><a href="build.html#building-debian-packages-from-svn-sources">Building Debian packages from SVN sources</a></li></ul></li></ul><ul class="menu foreign" id="lxml source howto-menu"><li class="menu title"><a href="lxml-source-howto.html">How to read the source of lxml</a><ul class="submenu"><li class="menu item"><a href="lxml-source-howto.html#what-is-cython">What is Cython?</a></li><li class="menu item"><a href="lxml-source-howto.html#where-to-start">Where to start?</a></li><li class="menu item"><a href="lxml-source-howto.html#lxml-etree">lxml.etree</a></li><li class="menu item"><a href="lxml-source-howto.html#python-modules">Python modules</a></li><li class="menu item"><a href="lxml-source-howto.html#lxml-objectify">lxml.objectify</a></li><li class="menu item"><a href="lxml-source-howto.html#lxml-html">lxml.html</a></li></ul></li></ul><ul class="menu foreign" id="changes 4 2 2-menu"><li class="menu title"><a href="changes-4.2.2.html">Release Changelog</a></li></ul><ul class="menu foreign" id="credits-menu"><li class="menu title"><a href="credits.html">Credits</a><ul class="submenu"><li class="menu item"><a href="credits.html#main-contributors">Main contributors</a></li><li class="menu item"><a href="credits.html#special-thanks-goes-to">Special thanks goes to:</a></li></ul></li></ul></li><li><a href="/sitemap.html">Sitemap</a></li></ul></div></div><h1 class="title">lxml - XML and HTML with Python</h1>
+
+<div class="pagequote line-block">
+<div class="line"><a class="reference external" href="http://thread.gmane.org/gmane.comp.python.lxml.devel/3252/focus=3258">&#187; lxml takes all the pain out of XML. &#171;</a></div>
+<div class="line">Stephan Richter</div>
+</div>
+<p class="eyecatcher">lxml is the most feature-rich
+and easy-to-use library
+for processing XML and HTML
+in the Python language.</p>
+<div class="section" id="introduction">
+<h1>Introduction</h1>
+<p>The lxml XML toolkit is a Pythonic binding for the C libraries
+<a class="reference external" href="http://xmlsoft.org/">libxml2</a> and <a class="reference external" href="http://xmlsoft.org/XSLT/">libxslt</a>.  It is unique in that it combines the speed and
+XML feature completeness of these libraries with the simplicity of a
+native Python API, mostly compatible but superior to the well-known
+<a class="reference external" href="http://effbot.org/zone/element-index.htm">ElementTree</a> API.  The latest release works with all CPython versions
+from 2.6 to 3.6.  See the <a class="reference external" href="intro.html">introduction</a> for more information about
+background and goals of the lxml project.  Some common questions are
+answered in the <a class="reference external" href="FAQ.html">FAQ</a>.</p>
+<div class="section" id="support-the-project">
+<h1>Support the project</h1>
+<p>lxml has been downloaded from the <a class="reference external" href="https://pypi.python.org/pypi/lxml">Python Package Index</a>
+millions of times and is also available directly in many package
+distributions, e.g. for Linux or MacOS-X.</p>
+<p>Most people who use lxml do so because they like using it.
+You can show us that you like it by blogging about your experience
+with it and linking to the project website.</p>
+<p>If you are using lxml for your work and feel like giving a bit of
+your own benefit back to support the project, consider sending us
+money through PayPal that we can use for fixing bugs in the software
+and improving its features and documentation.  Please read the Legal
+Notice below, at the bottom of this page.  Thank you for your support.</p>
+<p class="center"><a class="reference external" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=R56JE3VCPDA9N"><img alt="Donate to the lxml project" src="https://lxml.de/paypal_btn_donateCC_LG.png" style="width: 160px; height: 47px;" /></a></p>
+<p>Please <a class="reference external" href="http://consulting.behnel.de/">contact Stefan Behnel</a>
+for other ways to support the lxml project,
+as well as commercial consulting, customisations and trainings on lxml and
+fast Python XML processing.</p>
+<p><a class="reference external" href="https://travis-ci.org/">Travis-CI</a> and <a class="reference external" href="https://www.appveyor.com/">AppVeyor</a>
+support the lxml project with their build and CI servers.
+Jetbrains supports the lxml project by donating free licenses of their
+<a class="reference external" href="https://www.jetbrains.com/pycharm/">PyCharm IDE</a>.</p>
+</div>
+</div>
+<div class="section" id="documentation">
+<h1>Documentation</h1>
+<p>The complete lxml documentation is available for download as <a class="reference external" href="lxmldoc-4.2.2.pdf">PDF
+documentation</a>.  The HTML documentation from this web site is part of
+the normal <a class="reference external" href="#download">source download</a>.</p>
+<ul class="simple">
+<li>Tutorials:<ul>
+<li>the <a class="reference external" href="tutorial.html">lxml.etree tutorial for XML processing</a></li>
+<li>John Shipman's tutorial on <a class="reference external" href="http://www.nmt.edu/tcc/help/pubs/pylxml/">Python XML processing with lxml</a></li>
+<li>Fredrik Lundh's <a class="reference external" href="http://effbot.org/zone/element.htm">tutorial for ElementTree</a></li>
+</ul>
+</li>
+<li>ElementTree:<ul>
+<li><a class="reference external" href="http://effbot.org/zone/element-index.htm#documentation">ElementTree API</a></li>
+<li><a class="reference external" href="compatibility.html">compatibility</a> and differences of lxml.etree</li>
+<li><a class="reference external" href="performance.html">ElementTree performance</a> characteristics and comparison</li>
+</ul>
+</li>
+<li>lxml.etree:<ul>
+<li><a class="reference external" href="api.html">lxml.etree specific API</a> documentation</li>
+<li>the <a class="reference external" href="api/index.html">generated API documentation</a> as a reference</li>
+<li><a class="reference external" href="parsing.html">parsing</a> and <a class="reference external" href="validation.html">validating</a> XML</li>
+<li><a class="reference external" href="xpathxslt.html">XPath and XSLT</a> support</li>
+<li>Python <a class="reference external" href="extensions.html">XPath extension functions</a> for XPath and XSLT</li>
+<li><a class="reference external" href="element_classes.html">custom XML element classes</a> for custom XML APIs (see <a class="reference external" href="s5/lxml-ep2008.html">EuroPython 2008 talk</a>)</li>
+<li>a <a class="reference external" href="sax.html">SAX compliant API</a> for interfacing with other XML tools</li>
+<li>a <a class="reference external" href="capi.html">C-level API</a> for interfacing with external C/Cython modules</li>
+</ul>
+</li>
+<li>lxml.objectify:<ul>
+<li><a class="reference external" href="objectify.html">lxml.objectify</a> API documentation</li>
+<li>a brief comparison of <a class="reference external" href="FAQ.html#what-is-the-difference-between-lxml-etree-and-lxml-objectify">objectify and etree</a></li>
+</ul>
+</li>
+</ul>
+<p>lxml.etree follows the <a class="reference external" href="http://effbot.org/zone/element-index.htm">ElementTree</a> API as much as possible, building
+it on top of the native libxml2 tree.  If you are new to ElementTree,
+start with the <a class="reference external" href="tutorial.html">lxml.etree tutorial for XML processing</a>.  See also the
+ElementTree <a class="reference external" href="compatibility.html">compatibility</a> overview and the <a class="reference external" href="performance.html">ElementTree performance</a>
+page comparing lxml to the original <a class="reference external" href="http://effbot.org/zone/element-index.htm">ElementTree</a> and <a class="reference external" href="http://effbot.org/zone/celementtree.htm">cElementTree</a>
+implementations.</p>
+<p>Right after the <a class="reference external" href="tutorial.html">lxml.etree tutorial for XML processing</a> and the
+<a class="reference external" href="http://effbot.org/zone/element-index.htm">ElementTree</a> documentation, the next place to look is the <a class="reference external" href="api.html">lxml.etree
+specific API</a> documentation.  It describes how lxml extends the
+ElementTree API to expose libxml2 and libxslt specific XML
+functionality, such as <a class="reference external" href="http://www.w3.org/TR/xpath/">XPath</a>, <a class="reference external" href="http://www.relaxng.org/">Relax NG</a>, <a class="reference external" href="http://www.w3.org/XML/Schema">XML Schema</a>, <a class="reference external" href="http://www.w3.org/TR/xslt">XSLT</a>, and
+<a class="reference external" href="http://www.w3.org/TR/xml-c14n">c14n</a>.  Python code can be called from XPath expressions and XSLT
+stylesheets through the use of <a class="reference external" href="extensions.html">XPath extension functions</a>.  lxml
+also offers a <a class="reference external" href="sax.html">SAX compliant API</a>, that works with the SAX support in
+the standard library.</p>
+<p>There is a separate module <a class="reference external" href="objectify.html">lxml.objectify</a> that implements a data-binding
+API on top of lxml.etree.  See the <a class="reference external" href="FAQ.html#what-is-the-difference-between-lxml-etree-and-lxml-objectify">objectify and etree</a> FAQ entry for a
+comparison.</p>
+<p>In addition to the ElementTree API, lxml also features a sophisticated
+API for <a class="reference external" href="element_classes.html">custom XML element classes</a>.  This is a simple way to write
+arbitrary XML driven APIs on top of lxml.  lxml.etree also has a
+<a class="reference external" href="capi.html">C-level API</a> that can be used to efficiently extend lxml.etree in
+external C modules, including fast custom element class support.</p>
+</div>
+<div class="section" id="download">
+<h1>Download</h1>
+<p>The best way to download lxml is to visit <a class="reference external" href="http://pypi.python.org/pypi/lxml/">lxml at the Python Package
+Index</a> (PyPI).  It has the source
+that compiles on various platforms.  The source distribution is signed
+with <a class="reference external" href="pubkey.asc">this key</a>.</p>
+<p>The latest version is <a class="reference external" href="/files/lxml-4.2.2.tgz">lxml 4.2.2</a>, released 2018-06-22
+(<a class="reference external" href="/changes-4.2.2.html">changes for 4.2.2</a>).  <a class="reference external" href="#old-versions">Older versions</a>
+are listed below.</p>
+<p>Please take a look at the
+<a class="reference external" href="installation.html">installation instructions</a> !</p>
+<p>This complete web site (including the generated API documentation) is
+part of the source distribution, so if you want to download the
+documentation for offline use, take the source archive and copy the
+<tt class="docutils literal">doc/html</tt> directory out of the source tree, or use the
+<a class="reference external" href="lxmldoc-4.2.2.pdf">PDF documentation</a>.</p>
+<p>The latest <a class="reference external" href="https://github.com/lxml/lxml/archive/master.zip">installable developer sources</a>
+are available from Github.  It's also possible to check out
+the latest development version of lxml from Github directly, using a command
+like this (assuming you use hg and have hg-git installed):</p>
+<pre class="literal-block">
+hg clone git+ssh://git@github.com/lxml/lxml.git lxml
+</pre>
+<p>Alternatively, if you use git, this should work as well:</p>
+<pre class="literal-block">
+git clone https://github.com/lxml/lxml.git lxml
+</pre>
+<p>You can browse the <a class="reference external" href="https://github.com/lxml/lxml/">source repository</a> and its history through
+the web.  Please read <a class="reference external" href="build.html">how to build lxml from source</a>
+first.  The <a class="reference external" href="https://github.com/lxml/lxml/blob/master/CHANGES.txt">latest CHANGES</a> of the developer version are also
+accessible.  You can check there if a bug you found has been fixed
+or a feature you want has been implemented in the latest trunk version.</p>
+</div>
+<div class="section" id="mailing-list">
+<h1>Mailing list</h1>
+<p>Questions? Suggestions? Code to contribute? We have a <a class="reference external" href="http://lxml.de/mailinglist/">mailing list</a>.</p>
+<p>You can search the archive with <a class="reference external" href="http://blog.gmane.org/gmane.comp.python.lxml.devel">Gmane</a> or <a class="reference external" href="http://www.google.com/webhp?q=site:comments.gmane.org%2Fgmane.comp.python.lxml.devel+">Google</a>.</p>
+</div>
+<div class="section" id="bug-tracker">
+<h1>Bug tracker</h1>
+<p>lxml uses the <a class="reference external" href="https://launchpad.net/lxml/">launchpad bug tracker</a>.  If you are sure you found a
+bug in lxml, please file a bug report there.  If you are not sure
+whether some unexpected behaviour of lxml is a bug or not, please
+check the documentation and ask on the <a class="reference external" href="http://lxml.de/mailinglist/">mailing list</a> first.  Do not
+forget to search the archive (e.g. with <a class="reference external" href="http://blog.gmane.org/gmane.comp.python.lxml.devel">Gmane</a>)!</p>
+</div>
+<div class="section" id="license">
+<h1>License</h1>
+<p>The lxml library is shipped under a <a class="reference external" href="https://github.com/lxml/lxml/blob/master/doc/licenses/BSD.txt">BSD license</a>. libxml2 and libxslt2
+itself are shipped under the <a class="reference external" href="http://www.opensource.org/licenses/mit-license.html">MIT license</a>. There should therefore be no
+obstacle to using lxml in your codebase.</p>
+</div>
+<div class="section" id="old-versions">
+<h1>Old Versions</h1>
+<p>See the websites of lxml
+<a class="reference external" href="http://lxml.de/1.3/">1.3</a>,
+<a class="reference external" href="http://lxml.de/2.0/">2.0</a>,
+<a class="reference external" href="http://lxml.de/2.1/">2.1</a>,
+<a class="reference external" href="http://lxml.de/2.2/">2.2</a>,
+<a class="reference external" href="http://lxml.de/2.3/">2.3</a>,
+<a class="reference external" href="http://lxml.de/3.0/">3.0</a>,
+<a class="reference external" href="http://lxml.de/3.1/">3.1</a>,
+<a class="reference external" href="http://lxml.de/3.2/">3.2</a>,
+<a class="reference external" href="http://lxml.de/3.3/">3.3</a>,
+<a class="reference external" href="http://lxml.de/3.4/">3.4</a>,
+<a class="reference external" href="http://lxml.de/3.5/">3.5</a>,
+<a class="reference external" href="http://lxml.de/3.6/">3.6</a>,
+<a class="reference external" href="http://lxml.de/3.7/">3.7</a>,
+<a class="reference external" href="http://lxml.de/3.8/">3.8</a>,
+<a class="reference external" href="http://lxml.de/4.0/">4.0</a>
+<a class="reference external" href="http://lxml.de/4.1/">4.1</a></p>
+<ul class="simple">
+<li><a class="reference external" href="/files/lxml-4.2.2.tgz">lxml 4.2.2</a>, released 2018-06-22 (<a class="reference external" href="/changes-4.2.2.html">changes for 4.2.2</a>)</li>
+<li><a class="reference external" href="/files/lxml-4.2.1.tgz">lxml 4.2.1</a>, released 2018-03-21 (<a href="#id19"><span class="problematic" id="id20">`changes for 4.2.1`_</span></a>)</li>
+<li><a class="reference external" href="/files/lxml-4.2.0.tgz">lxml 4.2.0</a>, released 2018-03-13 (<a class="reference external" href="/changes-4.2.0.html">changes for 4.2.0</a>)</li>
+<li><a class="reference external" href="/files/lxml-4.1.1.tgz">lxml 4.1.1</a>, released 2017-11-04 (<a class="reference external" href="/changes-4.1.1.html">changes for 4.1.1</a>)</li>
+<li><a class="reference external" href="/files/lxml-4.1.0.tgz">lxml 4.1.0</a>, released 2017-10-13 (<a class="reference external" href="/changes-4.1.0.html">changes for 4.1.0</a>)</li>
+<li><a class="reference external" href="/files/lxml-4.0.0.tgz">lxml 4.0.0</a>, released 2017-09-17 (<a class="reference external" href="/changes-4.0.0.html">changes for 4.0.0</a>)</li>
+<li><a class="reference external" href="/files/lxml-3.8.0.tgz">lxml 3.8.0</a>, released 2017-06-03 (<a class="reference external" href="/changes-3.8.0.html">changes for 3.8.0</a>)</li>
+<li><a class="reference external" href="http://lxml.de/3.7/#old-versions">older releases</a></li>
+</ul>
+</div>
+<div class="system-messages section">
+<h1>Docutils System Messages</h1>
+<div class="system-message" id="id19">
+<p class="system-message-title">System Message: ERROR/3 (<tt class="docutils">./doc/main.txt</tt>, line 257); <em><a href="#id20">backlink</a></em></p>
+Unknown target name: "changes for 4.2.1".</div><div class="section" id="legal-notice-for-donations">
+<h1>Legal Notice for Donations</h1>
+<p>Any donation that you make to the lxml project is voluntary and
+is not a fee for any services, goods, or advantages.  By making
+a donation to the lxml project, you acknowledge that we have the
+right to use the money you donate in any lawful way and for any
+lawful purpose we see fit and we are not obligated to disclose
+the way and purpose to any party unless required by applicable
+law.  Although lxml is free software, to the best of our knowledge
+the lxml project does not have any tax exempt status.  The lxml
+project is neither a registered non-profit corporation nor a
+registered charity in any country.  Your donation may or may not
+be tax-deductible; please consult your tax advisor in this matter.
+We will not publish or disclose your name and/or e-mail address
+without your consent, unless required by applicable law.  Your
+donation is non-refundable.</p>
+</div>
+
+</div>
+</div>
+<div class="footer">
+<hr class="footer" />
+Generated on: 2018-06-22.
+
+</div>
+</body>
+</html>

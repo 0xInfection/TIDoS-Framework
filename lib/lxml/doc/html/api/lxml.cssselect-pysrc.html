@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>lxml.cssselect</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lxml-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="/">lxml API</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="lxml-module.html">Package&nbsp;lxml</a> ::
+        Module&nbsp;cssselect
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="lxml.cssselect-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="lxml.cssselect-module.html">Module lxml.cssselect</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-docstring">"""CSS Selectors based on XPath.</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-docstring">This module supports selecting XML/HTML tags based on CSS selectors.</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-docstring">See the `CSSSelector` class for details.</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-docstring">This is a thin wrapper around cssselect 0.7 or later.</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">__future__</tt> <tt class="py-keyword">import</tt> <tt class="py-name">absolute_import</tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-op">.</tt> <tt class="py-keyword">import</tt> <tt id="link-0" class="py-name" targets="Module lxml.etree=lxml.etree-module.html,Variable lxml.sax.ElementTreeContentHandler.etree=lxml.sax.ElementTreeContentHandler-class.html#etree,Variable lxml.tests.test_elementtree.CElementTreeTestCase.etree=lxml.tests.test_elementtree.CElementTreeTestCase-class.html#etree,Variable lxml.tests.test_elementtree._ETreeTestCaseBase.etree=lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#etree,Variable lxml.tests.test_elementtree._XMLPullParserTest.etree=lxml.tests.test_elementtree._XMLPullParserTest-class.html#etree,Variable lxml.tests.test_io._IOTestCaseBase.etree=lxml.tests.test_io._IOTestCaseBase-class.html#etree"><a title="lxml.etree
+lxml.sax.ElementTreeContentHandler.etree
+lxml.tests.test_elementtree.CElementTreeTestCase.etree
+lxml.tests.test_elementtree._ETreeTestCaseBase.etree
+lxml.tests.test_elementtree._XMLPullParserTest.etree
+lxml.tests.test_io._IOTestCaseBase.etree" class="py-name" href="#" onclick="return doclink('link-0', 'etree', 'link-0');">etree</a></tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"><tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line">    <tt class="py-keyword">import</tt> <tt id="link-1" class="py-name" targets="Module lxml.cssselect=lxml.cssselect-module.html,Method lxml.etree._Element.cssselect()=lxml.etree._Element-class.html#cssselect,Method lxml.html.HtmlElement.cssselect()=lxml.html.HtmlElement-class.html#cssselect,Method lxml.html.HtmlMixin.cssselect()=lxml.html.HtmlMixin-class.html#cssselect"><a title="lxml.cssselect
+lxml.etree._Element.cssselect
+lxml.html.HtmlElement.cssselect
+lxml.html.HtmlMixin.cssselect" class="py-name" href="#" onclick="return doclink('link-1', 'cssselect', 'link-1');">cssselect</a></tt> <tt class="py-keyword">as</tt> <tt class="py-name">external_cssselect</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt class="py-keyword">except</tt> <tt class="py-name">ImportError</tt><tt class="py-op">:</tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line">    <tt class="py-keyword">raise</tt> <tt class="py-name">ImportError</tt><tt class="py-op">(</tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line">        <tt class="py-string">'cssselect does not seem to be installed. '</tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line">        <tt class="py-string">'See http://packages.python.org/cssselect/'</tt><tt class="py-op">)</tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"><tt id="link-2" class="py-name" targets="Class cssselect.parser.SelectorSyntaxError=cssselect.parser.SelectorSyntaxError-class.html"><a title="cssselect.parser.SelectorSyntaxError" class="py-name" href="#" onclick="return doclink('link-2', 'SelectorSyntaxError', 'link-2');">SelectorSyntaxError</a></tt> <tt class="py-op">=</tt> <tt class="py-name">external_cssselect</tt><tt class="py-op">.</tt><tt id="link-3" class="py-name"><a title="cssselect.parser.SelectorSyntaxError" class="py-name" href="#" onclick="return doclink('link-3', 'SelectorSyntaxError', 'link-2');">SelectorSyntaxError</a></tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"><tt id="link-4" class="py-name" targets="Class cssselect.xpath.ExpressionError=cssselect.xpath.ExpressionError-class.html"><a title="cssselect.xpath.ExpressionError" class="py-name" href="#" onclick="return doclink('link-4', 'ExpressionError', 'link-4');">ExpressionError</a></tt> <tt class="py-op">=</tt> <tt class="py-name">external_cssselect</tt><tt class="py-op">.</tt><tt id="link-5" class="py-name"><a title="cssselect.xpath.ExpressionError" class="py-name" href="#" onclick="return doclink('link-5', 'ExpressionError', 'link-4');">ExpressionError</a></tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line"><tt id="link-6" class="py-name" targets="Class cssselect.parser.SelectorError=cssselect.parser.SelectorError-class.html"><a title="cssselect.parser.SelectorError" class="py-name" href="#" onclick="return doclink('link-6', 'SelectorError', 'link-6');">SelectorError</a></tt> <tt class="py-op">=</tt> <tt class="py-name">external_cssselect</tt><tt class="py-op">.</tt><tt id="link-7" class="py-name"><a title="cssselect.parser.SelectorError" class="py-name" href="#" onclick="return doclink('link-7', 'SelectorError', 'link-6');">SelectorError</a></tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line"> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line"> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line"><tt class="py-name">__all__</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-string">'SelectorSyntaxError'</tt><tt class="py-op">,</tt> <tt class="py-string">'ExpressionError'</tt><tt class="py-op">,</tt> <tt class="py-string">'SelectorError'</tt><tt class="py-op">,</tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line">           <tt class="py-string">'CSSSelector'</tt><tt class="py-op">]</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line"> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line"> </tt>
+<a name="LxmlTranslator"></a><div id="LxmlTranslator-def"><a name="L29"></a><tt class="py-lineno"> 29</tt> <a class="py-toggle" href="#" id="LxmlTranslator-toggle" onclick="return toggle('LxmlTranslator');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lxml.cssselect.LxmlTranslator-class.html">LxmlTranslator</a><tt class="py-op">(</tt><tt class="py-base-class">external_cssselect</tt><tt class="py-op">.</tt><tt class="py-base-class">GenericTranslator</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LxmlTranslator-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="LxmlTranslator-expanded"><a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line"><tt class="py-docstring">    A custom CSS selector to XPath translator with lxml-specific extensions.</tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="LxmlTranslator.xpath_contains_function"></a><div id="LxmlTranslator.xpath_contains_function-def"><a name="L33"></a><tt class="py-lineno"> 33</tt> <a class="py-toggle" href="#" id="LxmlTranslator.xpath_contains_function-toggle" onclick="return toggle('LxmlTranslator.xpath_contains_function');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.cssselect.LxmlTranslator-class.html#xpath_contains_function">xpath_contains_function</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">xpath</tt><tt class="py-op">,</tt> <tt class="py-param">function</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LxmlTranslator.xpath_contains_function-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="LxmlTranslator.xpath_contains_function-expanded"><a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line">        <tt class="py-comment"># Defined there, removed in later drafts:</tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line">        <tt class="py-comment"># http://www.w3.org/TR/2001/CR-css3-selectors-20011113/#content-selectors</tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">function</tt><tt class="py-op">.</tt><tt class="py-name">argument_types</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-keyword">not</tt> <tt class="py-keyword">in</tt> <tt class="py-op">(</tt><tt class="py-op">[</tt><tt class="py-string">'STRING'</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-op">[</tt><tt class="py-string">'IDENT'</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt id="link-8" class="py-name"><a title="cssselect.xpath.ExpressionError" class="py-name" href="#" onclick="return doclink('link-8', 'ExpressionError', 'link-4');">ExpressionError</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line">                <tt class="py-string">"Expected a single string or ident for :contains(), got %r"</tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line">                <tt class="py-op">%</tt> <tt class="py-name">function</tt><tt class="py-op">.</tt><tt class="py-name">arguments</tt><tt class="py-op">)</tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line">        <tt id="link-9" class="py-name" targets="Variable lxml.html.CheckboxGroup.value=lxml.html.CheckboxGroup-class.html#value,Variable lxml.html.InputElement.value=lxml.html.InputElement-class.html#value,Variable lxml.html.RadioGroup.value=lxml.html.RadioGroup-class.html#value,Variable lxml.html.SelectElement.value=lxml.html.SelectElement-class.html#value,Variable lxml.html.TextareaElement.value=lxml.html.TextareaElement-class.html#value"><a title="lxml.html.CheckboxGroup.value
+lxml.html.InputElement.value
+lxml.html.RadioGroup.value
+lxml.html.SelectElement.value
+lxml.html.TextareaElement.value" class="py-name" href="#" onclick="return doclink('link-9', 'value', 'link-9');">value</a></tt> <tt class="py-op">=</tt> <tt class="py-name">function</tt><tt class="py-op">.</tt><tt class="py-name">arguments</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt id="link-10" class="py-name"><a title="lxml.html.CheckboxGroup.value
+lxml.html.InputElement.value
+lxml.html.RadioGroup.value
+lxml.html.SelectElement.value
+lxml.html.TextareaElement.value" class="py-name" href="#" onclick="return doclink('link-10', 'value', 'link-9');">value</a></tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt id="link-11" class="py-name" targets="Method lxml.etree._Element.xpath()=lxml.etree._Element-class.html#xpath,Method lxml.etree._ElementTree.xpath()=lxml.etree._ElementTree-class.html#xpath,Function lxml.tests.test_xpathevaluator.xpath()=lxml.tests.test_xpathevaluator-module.html#xpath"><a title="lxml.etree._Element.xpath
+lxml.etree._ElementTree.xpath
+lxml.tests.test_xpathevaluator.xpath" class="py-name" href="#" onclick="return doclink('link-11', 'xpath', 'link-11');">xpath</a></tt><tt class="py-op">.</tt><tt class="py-name">add_condition</tt><tt class="py-op">(</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line">            <tt class="py-string">'contains(__lxml_internal_css:lower-case(string(.)), %s)'</tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line">            <tt class="py-op">%</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">xpath_literal</tt><tt class="py-op">(</tt><tt id="link-12" class="py-name"><a title="lxml.html.CheckboxGroup.value
+lxml.html.InputElement.value
+lxml.html.RadioGroup.value
+lxml.html.SelectElement.value
+lxml.html.TextareaElement.value" class="py-name" href="#" onclick="return doclink('link-12', 'value', 'link-9');">value</a></tt><tt class="py-op">.</tt><tt class="py-name">lower</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line"> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line"> </tt>
+<a name="LxmlHTMLTranslator"></a><div id="LxmlHTMLTranslator-def"><a name="L46"></a><tt class="py-lineno"> 46</tt> <a class="py-toggle" href="#" id="LxmlHTMLTranslator-toggle" onclick="return toggle('LxmlHTMLTranslator');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lxml.cssselect.LxmlHTMLTranslator-class.html">LxmlHTMLTranslator</a><tt class="py-op">(</tt><tt class="py-base-class">LxmlTranslator</tt><tt class="py-op">,</tt> <tt class="py-base-class">external_cssselect</tt><tt class="py-op">.</tt><tt class="py-base-class">HTMLTranslator</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LxmlHTMLTranslator-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="LxmlHTMLTranslator-expanded"><a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line"><tt class="py-docstring">    lxml extensions + HTML support.</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+</div><a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line"> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line"> </tt>
+<a name="_make_lower_case"></a><div id="_make_lower_case-def"><a name="L52"></a><tt class="py-lineno"> 52</tt> <a class="py-toggle" href="#" id="_make_lower_case-toggle" onclick="return toggle('_make_lower_case');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.cssselect-module.html#_make_lower_case">_make_lower_case</a><tt class="py-op">(</tt><tt class="py-param">context</tt><tt class="py-op">,</tt> <tt class="py-param">s</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="_make_lower_case-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="_make_lower_case-expanded"><a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">s</tt><tt class="py-op">.</tt><tt class="py-name">lower</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line"> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line"><tt id="link-13" class="py-name" targets="Variable lxml.cssselect.ns=lxml.cssselect-module.html#ns"><a title="lxml.cssselect.ns" class="py-name" href="#" onclick="return doclink('link-13', 'ns', 'link-13');">ns</a></tt> <tt class="py-op">=</tt> <tt id="link-14" class="py-name"><a title="lxml.etree
+lxml.sax.ElementTreeContentHandler.etree
+lxml.tests.test_elementtree.CElementTreeTestCase.etree
+lxml.tests.test_elementtree._ETreeTestCaseBase.etree
+lxml.tests.test_elementtree._XMLPullParserTest.etree
+lxml.tests.test_io._IOTestCaseBase.etree" class="py-name" href="#" onclick="return doclink('link-14', 'etree', 'link-0');">etree</a></tt><tt class="py-op">.</tt><tt id="link-15" class="py-name" targets="Function lxml.etree.FunctionNamespace()=lxml.etree-module.html#FunctionNamespace"><a title="lxml.etree.FunctionNamespace" class="py-name" href="#" onclick="return doclink('link-15', 'FunctionNamespace', 'link-15');">FunctionNamespace</a></tt><tt class="py-op">(</tt><tt class="py-string">'http://codespeak.net/lxml/css/'</tt><tt class="py-op">)</tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line"><tt id="link-16" class="py-name"><a title="lxml.cssselect.ns" class="py-name" href="#" onclick="return doclink('link-16', 'ns', 'link-13');">ns</a></tt><tt class="py-op">.</tt><tt id="link-17" class="py-name" targets="Variable lxml.etree._Element.prefix=lxml.etree._Element-class.html#prefix"><a title="lxml.etree._Element.prefix" class="py-name" href="#" onclick="return doclink('link-17', 'prefix', 'link-17');">prefix</a></tt> <tt class="py-op">=</tt> <tt class="py-string">'__lxml_internal_css'</tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line"><tt id="link-18" class="py-name"><a title="lxml.cssselect.ns" class="py-name" href="#" onclick="return doclink('link-18', 'ns', 'link-13');">ns</a></tt><tt class="py-op">[</tt><tt class="py-string">'lower-case'</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt id="link-19" class="py-name" targets="Function lxml.cssselect._make_lower_case()=lxml.cssselect-module.html#_make_lower_case"><a title="lxml.cssselect._make_lower_case" class="py-name" href="#" onclick="return doclink('link-19', '_make_lower_case', 'link-19');">_make_lower_case</a></tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line"> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line"> </tt>
+<a name="CSSSelector"></a><div id="CSSSelector-def"><a name="L60"></a><tt class="py-lineno"> 60</tt> <a class="py-toggle" href="#" id="CSSSelector-toggle" onclick="return toggle('CSSSelector');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lxml.cssselect.CSSSelector-class.html">CSSSelector</a><tt class="py-op">(</tt><tt class="py-base-class">etree</tt><tt class="py-op">.</tt><tt class="py-base-class">XPath</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="CSSSelector-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="CSSSelector-expanded"><a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line">    <tt class="py-docstring">"""A CSS selector.</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line"><tt class="py-docstring">    Usage::</tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line"><tt class="py-docstring">        &gt;&gt;&gt; from lxml import etree, cssselect</tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line"><tt class="py-docstring">        &gt;&gt;&gt; select = cssselect.CSSSelector("a tag &gt; child")</tt> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line"><tt class="py-docstring">        &gt;&gt;&gt; root = etree.XML("&lt;a&gt;&lt;b&gt;&lt;c/&gt;&lt;tag&gt;&lt;child&gt;TEXT&lt;/child&gt;&lt;/tag&gt;&lt;/b&gt;&lt;/a&gt;")</tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line"><tt class="py-docstring">        &gt;&gt;&gt; [ el.tag for el in select(root) ]</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line"><tt class="py-docstring">        ['child']</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line"><tt class="py-docstring">    To use CSS namespaces, you need to pass a prefix-to-namespace</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line"><tt class="py-docstring">    mapping as ``namespaces`` keyword argument::</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line"><tt class="py-docstring">        &gt;&gt;&gt; rdfns = 'http://www.w3.org/1999/02/22-rdf-syntax-ns#'</tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line"><tt class="py-docstring">        &gt;&gt;&gt; select_ns = cssselect.CSSSelector('root &gt; rdf|Description',</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line"><tt class="py-docstring">        ...                                   namespaces={'rdf': rdfns})</tt> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line"><tt class="py-docstring">        &gt;&gt;&gt; rdf = etree.XML((</tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line"><tt class="py-docstring">        ...     '&lt;root xmlns:rdf="%s"&gt;'</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line"><tt class="py-docstring">        ...       '&lt;rdf:Description&gt;blah&lt;/rdf:Description&gt;'</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line"><tt class="py-docstring">        ...     '&lt;/root&gt;') % rdfns)</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line"><tt class="py-docstring">        &gt;&gt;&gt; [(el.tag, el.text) for el in select_ns(rdf)]</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line"><tt class="py-docstring">        [('{http://www.w3.org/1999/02/22-rdf-syntax-ns#}Description', 'blah')]</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="CSSSelector.__init__"></a><div id="CSSSelector.__init__-def"><a name="L87"></a><tt class="py-lineno"> 87</tt> <a class="py-toggle" href="#" id="CSSSelector.__init__-toggle" onclick="return toggle('CSSSelector.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.cssselect.CSSSelector-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">css</tt><tt class="py-op">,</tt> <tt class="py-param">namespaces</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-param">translator</tt><tt class="py-op">=</tt><tt class="py-string">'xml'</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="CSSSelector.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="CSSSelector.__init__-expanded"><a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">translator</tt> <tt class="py-op">==</tt> <tt class="py-string">'xml'</tt><tt class="py-op">:</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">            <tt class="py-name">translator</tt> <tt class="py-op">=</tt> <tt id="link-20" class="py-name" targets="Class lxml.cssselect.LxmlTranslator=lxml.cssselect.LxmlTranslator-class.html"><a title="lxml.cssselect.LxmlTranslator" class="py-name" href="#" onclick="return doclink('link-20', 'LxmlTranslator', 'link-20');">LxmlTranslator</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line">        <tt class="py-keyword">elif</tt> <tt class="py-name">translator</tt> <tt class="py-op">==</tt> <tt class="py-string">'html'</tt><tt class="py-op">:</tt> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">            <tt class="py-name">translator</tt> <tt class="py-op">=</tt> <tt id="link-21" class="py-name" targets="Class lxml.cssselect.LxmlHTMLTranslator=lxml.cssselect.LxmlHTMLTranslator-class.html"><a title="lxml.cssselect.LxmlHTMLTranslator" class="py-name" href="#" onclick="return doclink('link-21', 'LxmlHTMLTranslator', 'link-21');">LxmlHTMLTranslator</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">        <tt class="py-keyword">elif</tt> <tt class="py-name">translator</tt> <tt class="py-op">==</tt> <tt class="py-string">'xhtml'</tt><tt class="py-op">:</tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line">            <tt class="py-name">translator</tt> <tt class="py-op">=</tt> <tt id="link-22" class="py-name"><a title="lxml.cssselect.LxmlHTMLTranslator" class="py-name" href="#" onclick="return doclink('link-22', 'LxmlHTMLTranslator', 'link-21');">LxmlHTMLTranslator</a></tt><tt class="py-op">(</tt><tt class="py-name">xhtml</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">)</tt> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line">        <tt id="link-23" class="py-name" targets="Variable lxml.etree.XPath.path=lxml.etree.XPath-class.html#path,Variable lxml.etree._LogEntry.path=lxml.etree._LogEntry-class.html#path"><a title="lxml.etree.XPath.path
+lxml.etree._LogEntry.path" class="py-name" href="#" onclick="return doclink('link-23', 'path', 'link-23');">path</a></tt> <tt class="py-op">=</tt> <tt class="py-name">translator</tt><tt class="py-op">.</tt><tt class="py-name">css_to_xpath</tt><tt class="py-op">(</tt><tt class="py-name">css</tt><tt class="py-op">)</tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line">        <tt id="link-24" class="py-name"><a title="lxml.etree
+lxml.sax.ElementTreeContentHandler.etree
+lxml.tests.test_elementtree.CElementTreeTestCase.etree
+lxml.tests.test_elementtree._ETreeTestCaseBase.etree
+lxml.tests.test_elementtree._XMLPullParserTest.etree
+lxml.tests.test_io._IOTestCaseBase.etree" class="py-name" href="#" onclick="return doclink('link-24', 'etree', 'link-0');">etree</a></tt><tt class="py-op">.</tt><tt id="link-25" class="py-name" targets="Class lxml.etree.XPath=lxml.etree.XPath-class.html"><a title="lxml.etree.XPath" class="py-name" href="#" onclick="return doclink('link-25', 'XPath', 'link-25');">XPath</a></tt><tt class="py-op">.</tt><tt id="link-26" class="py-name" targets="Method lxml.builder.ElementMaker.__init__()=lxml.builder.ElementMaker-class.html#__init__,Method lxml.cssselect.CSSSelector.__init__()=lxml.cssselect.CSSSelector-class.html#__init__,Method lxml.doctestcompare._RestoreChecker.__init__()=lxml.doctestcompare._RestoreChecker-class.html#__init__,Method lxml.etree.AttributeBasedElementClassLookup.__init__()=lxml.etree.AttributeBasedElementClassLookup-class.html#__init__,Method lxml.etree.CommentBase.__init__()=lxml.etree.CommentBase-class.html#__init__,Method lxml.etree.DTD.__init__()=lxml.etree.DTD-class.html#__init__,Method lxml.etree.ETCompatXMLParser.__init__()=lxml.etree.ETCompatXMLParser-class.html#__init__,Method lxml.etree.ETXPath.__init__()=lxml.etree.ETXPath-class.html#__init__,Method lxml.etree.ElementBase.__init__()=lxml.etree.ElementBase-class.html#__init__,Method lxml.etree.ElementDefaultClassLookup.__init__()=lxml.etree.ElementDefaultClassLookup-class.html#__init__,Method lxml.etree.ElementNamespaceClassLookup.__init__()=lxml.etree.ElementNamespaceClassLookup-class.html#__init__,Method lxml.etree.EntityBase.__init__()=lxml.etree.EntityBase-class.html#__init__,Method lxml.etree.FallbackElementClassLookup.__init__()=lxml.etree.FallbackElementClassLookup-class.html#__init__,Method lxml.etree.HTMLParser.__init__()=lxml.etree.HTMLParser-class.html#__init__,Method lxml.etree.HTMLPullParser.__init__()=lxml.etree.HTMLPullParser-class.html#__init__,Method lxml.etree.LxmlError.__init__()=lxml.etree.LxmlError-class.html#__init__,Method lxml.etree.PIBase.__init__()=lxml.etree.PIBase-class.html#__init__,Method lxml.etree.ParseError.__init__()=lxml.etree.ParseError-class.html#__init__,Method lxml.etree.PyErrorLog.__init__()=lxml.etree.PyErrorLog-class.html#__init__,Method lxml.etree.QName.__init__()=lxml.etree.QName-class.html#__init__,Method lxml.etree.RelaxNG.__init__()=lxml.etree.RelaxNG-class.html#__init__,Method lxml.etree.Schematron.__init__()=lxml.etree.Schematron-class.html#__init__,Method lxml.etree.TreeBuilder.__init__()=lxml.etree.TreeBuilder-class.html#__init__,Method lxml.etree.XInclude.__init__()=lxml.etree.XInclude-class.html#__init__,Method lxml.etree.XMLParser.__init__()=lxml.etree.XMLParser-class.html#__init__,Method lxml.etree.XMLPullParser.__init__()=lxml.etree.XMLPullParser-class.html#__init__,Method lxml.etree.XMLSchema.__init__()=lxml.etree.XMLSchema-class.html#__init__,Method lxml.etree.XPath.__init__()=lxml.etree.XPath-class.html#__init__,Method lxml.etree.XPathDocumentEvaluator.__init__()=lxml.etree.XPathDocumentEvaluator-class.html#__init__,Method lxml.etree.XPathElementEvaluator.__init__()=lxml.etree.XPathElementEvaluator-class.html#__init__,Method lxml.etree.XSLT.__init__()=lxml.etree.XSLT-class.html#__init__,Method lxml.etree.XSLTAccessControl.__init__()=lxml.etree.XSLTAccessControl-class.html#__init__,Method lxml.etree._BaseErrorLog.__init__()=lxml.etree._BaseErrorLog-class.html#__init__,Method lxml.etree._DomainErrorLog.__init__()=lxml.etree._DomainErrorLog-class.html#__init__,Method lxml.etree._ErrorLog.__init__()=lxml.etree._ErrorLog-class.html#__init__,Method lxml.etree._ListErrorLog.__init__()=lxml.etree._ListErrorLog-class.html#__init__,Method lxml.etree._RotatingErrorLog.__init__()=lxml.etree._RotatingErrorLog-class.html#__init__,Method lxml.etree._TargetParserResult.__init__()=lxml.etree._TargetParserResult-class.html#__init__,Method lxml.etree._XPathEvaluatorBase.__init__()=lxml.etree._XPathEvaluatorBase-class.html#__init__,Method lxml.etree.htmlfile.__init__()=lxml.etree.htmlfile-class.html#__init__,Method lxml.etree.iterparse.__init__()=lxml.etree.iterparse-class.html#__init__,Method lxml.etree.iterwalk.__init__()=lxml.etree.iterwalk-class.html#__init__,Method lxml.etree.xmlfile.__init__()=lxml.etree.xmlfile-class.html#__init__,Method lxml.html.CheckboxValues.__init__()=lxml.html.CheckboxValues-class.html#__init__,Method lxml.html.Classes.__init__()=lxml.html.Classes-class.html#__init__,Method lxml.html.FieldsDict.__init__()=lxml.html.FieldsDict-class.html#__init__,Method lxml.html.HTMLParser.__init__()=lxml.html.HTMLParser-class.html#__init__,Method lxml.html.HtmlElementClassLookup.__init__()=lxml.html.HtmlElementClassLookup-class.html#__init__,Method lxml.html.InputGetter.__init__()=lxml.html.InputGetter-class.html#__init__,Method lxml.html.MultipleSelectOptions.__init__()=lxml.html.MultipleSelectOptions-class.html#__init__,Method lxml.html.XHTMLParser.__init__()=lxml.html.XHTMLParser-class.html#__init__,Method lxml.html._MethodFunc.__init__()=lxml.html._MethodFunc-class.html#__init__,Method lxml.html.clean.Cleaner.__init__()=lxml.html.clean.Cleaner-class.html#__init__,Method lxml.html.formfill.DefaultErrorCreator.__init__()=lxml.html.formfill.DefaultErrorCreator-class.html#__init__,Method lxml.html.html5parser.HTMLParser.__init__()=lxml.html.html5parser.HTMLParser-class.html#__init__,Method lxml.html.html5parser.XHTMLParser.__init__()=lxml.html.html5parser.XHTMLParser-class.html#__init__,Method lxml.html.soupparser._PseudoTag.__init__()=lxml.html.soupparser._PseudoTag-class.html#__init__,Method lxml.isoschematron.Schematron.__init__()=lxml.isoschematron.Schematron-class.html#__init__,Method lxml.objectify.ElementMaker.__init__()=lxml.objectify.ElementMaker-class.html#__init__,Method lxml.objectify.ObjectPath.__init__()=lxml.objectify.ObjectPath-class.html#__init__,Method lxml.objectify.ObjectifyElementClassLookup.__init__()=lxml.objectify.ObjectifyElementClassLookup-class.html#__init__,Method lxml.objectify.PyType.__init__()=lxml.objectify.PyType-class.html#__init__,Method lxml.sax.ElementTreeContentHandler.__init__()=lxml.sax.ElementTreeContentHandler-class.html#__init__,Method lxml.sax.ElementTreeProducer.__init__()=lxml.sax.ElementTreeProducer-class.html#__init__,Method lxml.tests.common_imports.LargeFileLike.__init__()=lxml.tests.common_imports.LargeFileLike-class.html#__init__,Method lxml.tests.common_imports.LargeFileLikeUnicode.__init__()=lxml.tests.common_imports.LargeFileLikeUnicode-class.html#__init__,Method lxml.tests.common_imports.SillyFileLike.__init__()=lxml.tests.common_imports.SillyFileLike-class.html#__init__,Method lxml.tests.common_imports.skipif.__init__()=lxml.tests.common_imports.skipif-class.html#__init__,Method lxml.tests.dummy_http_server.HTTPRequestCollector.__init__()=lxml.tests.dummy_http_server.HTTPRequestCollector-class.html#__init__,Method lxml.tests.test_doctestcompare.DummyInput.__init__()=lxml.tests.test_doctestcompare.DummyInput-class.html#__init__,Method lxml.tests.test_incremental_xmlfile.SimpleFileLikeXmlFileTestCase.SimpleFileLike.__init__()=lxml.tests.test_incremental_xmlfile.SimpleFileLikeXmlFileTestCase.SimpleFileLike-class.html#__init__,Method lxml.tests.test_threading.ThreadPipelineTestCase.Worker.__init__()=lxml.tests.test_threading.ThreadPipelineTestCase.Worker-class.html#__init__,Method lxml.tests.test_xmlschema.ETreeXMLSchemaResolversTestCase.simple_resolver.__init__()=lxml.tests.test_xmlschema.ETreeXMLSchemaResolversTestCase.simple_resolver-class.html#__init__"><a title="lxml.builder.ElementMaker.__init__
+lxml.cssselect.CSSSelector.__init__
+lxml.doctestcompare._RestoreChecker.__init__
+lxml.etree.AttributeBasedElementClassLookup.__init__
+lxml.etree.CommentBase.__init__
+lxml.etree.DTD.__init__
+lxml.etree.ETCompatXMLParser.__init__
+lxml.etree.ETXPath.__init__
+lxml.etree.ElementBase.__init__
+lxml.etree.ElementDefaultClassLookup.__init__
+lxml.etree.ElementNamespaceClassLookup.__init__
+lxml.etree.EntityBase.__init__
+lxml.etree.FallbackElementClassLookup.__init__
+lxml.etree.HTMLParser.__init__
+lxml.etree.HTMLPullParser.__init__
+lxml.etree.LxmlError.__init__
+lxml.etree.PIBase.__init__
+lxml.etree.ParseError.__init__
+lxml.etree.PyErrorLog.__init__
+lxml.etree.QName.__init__
+lxml.etree.RelaxNG.__init__
+lxml.etree.Schematron.__init__
+lxml.etree.TreeBuilder.__init__
+lxml.etree.XInclude.__init__
+lxml.etree.XMLParser.__init__
+lxml.etree.XMLPullParser.__init__
+lxml.etree.XMLSchema.__init__
+lxml.etree.XPath.__init__
+lxml.etree.XPathDocumentEvaluator.__init__
+lxml.etree.XPathElementEvaluator.__init__
+lxml.etree.XSLT.__init__
+lxml.etree.XSLTAccessControl.__init__
+lxml.etree._BaseErrorLog.__init__
+lxml.etree._DomainErrorLog.__init__
+lxml.etree._ErrorLog.__init__
+lxml.etree._ListErrorLog.__init__
+lxml.etree._RotatingErrorLog.__init__
+lxml.etree._TargetParserResult.__init__
+lxml.etree._XPathEvaluatorBase.__init__
+lxml.etree.htmlfile.__init__
+lxml.etree.iterparse.__init__
+lxml.etree.iterwalk.__init__
+lxml.etree.xmlfile.__init__
+lxml.html.CheckboxValues.__init__
+lxml.html.Classes.__init__
+lxml.html.FieldsDict.__init__
+lxml.html.HTMLParser.__init__
+lxml.html.HtmlElementClassLookup.__init__
+lxml.html.InputGetter.__init__
+lxml.html.MultipleSelectOptions.__init__
+lxml.html.XHTMLParser.__init__
+lxml.html._MethodFunc.__init__
+lxml.html.clean.Cleaner.__init__
+lxml.html.formfill.DefaultErrorCreator.__init__
+lxml.html.html5parser.HTMLParser.__init__
+lxml.html.html5parser.XHTMLParser.__init__
+lxml.html.soupparser._PseudoTag.__init__
+lxml.isoschematron.Schematron.__init__
+lxml.objectify.ElementMaker.__init__
+lxml.objectify.ObjectPath.__init__
+lxml.objectify.ObjectifyElementClassLookup.__init__
+lxml.objectify.PyType.__init__
+lxml.sax.ElementTreeContentHandler.__init__
+lxml.sax.ElementTreeProducer.__init__
+lxml.tests.common_imports.LargeFileLike.__init__
+lxml.tests.common_imports.LargeFileLikeUnicode.__init__
+lxml.tests.common_imports.SillyFileLike.__init__
+lxml.tests.common_imports.skipif.__init__
+lxml.tests.dummy_http_server.HTTPRequestCollector.__init__
+lxml.tests.test_doctestcompare.DummyInput.__init__
+lxml.tests.test_incremental_xmlfile.SimpleFileLikeXmlFileTestCase.SimpleFileLike.__init__
+lxml.tests.test_threading.ThreadPipelineTestCase.Worker.__init__
+lxml.tests.test_xmlschema.ETreeXMLSchemaResolversTestCase.simple_resolver.__init__" class="py-name" href="#" onclick="return doclink('link-26', '__init__', 'link-26');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt id="link-27" class="py-name"><a title="lxml.etree.XPath.path
+lxml.etree._LogEntry.path" class="py-name" href="#" onclick="return doclink('link-27', 'path', 'link-23');">path</a></tt><tt class="py-op">,</tt> <tt class="py-name">namespaces</tt><tt class="py-op">=</tt><tt class="py-name">namespaces</tt><tt class="py-op">)</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">css</tt> <tt class="py-op">=</tt> <tt class="py-name">css</tt> </tt>
+</div><a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line"> </tt>
+<a name="CSSSelector.__repr__"></a><div id="CSSSelector.__repr__-def"><a name="L98"></a><tt class="py-lineno"> 98</tt> <a class="py-toggle" href="#" id="CSSSelector.__repr__-toggle" onclick="return toggle('CSSSelector.__repr__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.cssselect.CSSSelector-class.html#__repr__">__repr__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="CSSSelector.__repr__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="CSSSelector.__repr__-expanded"><a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-string">'&lt;%s %s for %r&gt;'</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__class__</tt><tt class="py-op">.</tt><tt class="py-name">__name__</tt><tt class="py-op">,</tt> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line">            <tt class="py-name">hex</tt><tt class="py-op">(</tt><tt class="py-name">abs</tt><tt class="py-op">(</tt><tt class="py-name">id</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">[</tt><tt class="py-number">2</tt><tt class="py-op">:</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">css</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lxml-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="/">lxml API</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Fri Jun 22 18:59:52 2018
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

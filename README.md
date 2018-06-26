@@ -13,13 +13,12 @@ The main highlights of this framework is:
 - [x] Reconnaissance Phase has 26 modules of its own (including active reconnaissance, passive reconnaissance and information disclosure modules).
 - [x] Scanning & Enumeration Phase has got 12 modules (including port scans, WAF analysis, etc)
 - [x] Vulnerability Analysis Phase has 32 modules (including most common vulnerabilites in action.
-- [x] Exploits Castle has only 1 exploit. `(thats in alpha phase)`
-- [x] All four phases each have a auto-awesome module which automates every module for you.
+- [x] Exploits Castle has only 1 exploit. `(alpha)`
+- [x] All four phases each have a `auto-awesome` module which automates every module for you.
 - [x] You just need the domain, and leave everything is to this tool.
 - [x] TIDoS has full verbose out support, so you'll know whats going on.
-- [x] User friendly interaction environment. `(no real shits)`
+- [x] User friendly interaction environment. `(no shits)`
 
-`Note:` For more info on various modules please refer to the [wiki](https://github.com/theinfecteddrake/tidos/wiki).
 
 <img src='https://i.imgur.com/ZhBUrDB.png' />
 
@@ -125,7 +124,7 @@ TIDoS Framework presently supports the following:
 	    - Local File Intrusion (LFI)
 	    - Remote File Inclusion (RFI)
 	+ OS Command Execution `Linux & Windows (RCE)`
-	+ Path Traversal (Sensitive Paths) 
+	+ Path Traversal `(Sensitive Paths)`
 	+ Cross-Site Request Forgery 
 	+ SQL Injection
 	    - Cookie Value Based
@@ -137,6 +136,7 @@ TIDoS Framework presently supports the following:
 	    - Cookie Value Based
 	    - Referer Value Based
 	    - User-Agent Value Based
+	+ Unvalidated URL Forwards 
 	+ CRLF Injection and HTTP Response Splitting
 
     __Auxillaries__
@@ -170,7 +170,7 @@ This version of TIDoS is purely developmental `beta`. There are bugs in resolvin
 
 ### Final Words:
 
-This project is one of the best frameworks I have ever built and I would really like your constructive criticism, suggestions and help in converting this project into the best web penetration testing framework ever built `and it will be ;)`.
+This project is one of the best frameworks I have ever built and I would really like your constructive criticism, suggestions and help in converting this project into the best web penetration testing framework ever built `and trust me, it will be ;)`.
 
 > Thank you,
 >

@@ -34,9 +34,13 @@ def sharedns(web):
     for dom in domains:
         text = requests.get('http://api.hackertarget.com/findshareddns/?q=' + dom).text
 	dns = str(text)
-        if 'error' not in dns:
-	    print G+ dns
-        else:
+        if 'error' in dns:
 	    print R+' [-] Outbound Query Exception!\n'
 	    time.sleep(0.8)
+	elif 'No results found' in dns:
+	    print R+' [-] No shared DNS nameserver hosts...'
+        else:
+	    p = dns.splitlines()
+	    for i in p:
+		print O+' [+] Site found :> '+G+i
 

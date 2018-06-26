@@ -1,0 +1,210 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.12: http://docutils.sourceforge.net/" />
+<title>BeautifulSoup Parser</title>
+<link rel="stylesheet" href="style.css" type="text/css" />
+<script type="text/javascript">
+function trigger_menu(event) {
+    var sidemenu = document.getElementById("sidemenu");
+    var classes = sidemenu.getAttribute("class");
+    classes = (classes.indexOf(" visible") === -1) ? classes + " visible" : classes.replace(" visible", "");
+    sidemenu.setAttribute("class", classes);
+    event.preventDefault();
+    event.stopPropagation();
+}
+function hide_menu() {
+    var sidemenu = document.getElementById("sidemenu");
+    var classes = sidemenu.getAttribute("class");
+    if (classes.indexOf(" visible") !== -1) {
+        sidemenu.setAttribute("class", classes.replace(" visible", ""));
+    }
+}
+</script><meta content="width=device-width, initial-scale=1" name="viewport" /></head>
+<body onclick="hide_menu()">
+<div class="document" id="beautifulsoup-parser">
+<div class="sidemenu" id="sidemenu"><div class="menutrigger" onclick="trigger_menu(event)">Menu</div><div class="menu"><ul id="lxml-section"><li><span class="section title">lxml</span><ul class="menu foreign" id="index-menu"><li class="menu title"><a href="index.html">lxml</a><ul class="submenu"><li class="menu item"><a href="index.html#introduction">Introduction</a></li><li class="menu item"><a href="index.html#support-the-project">Support the project</a></li><li class="menu item"><a href="index.html#documentation">Documentation</a></li><li class="menu item"><a href="index.html#download">Download</a></li><li class="menu item"><a href="index.html#mailing-list">Mailing list</a></li><li class="menu item"><a href="index.html#bug-tracker">Bug tracker</a></li><li class="menu item"><a href="index.html#license">License</a></li><li class="menu item"><a href="index.html#old-versions">Old Versions</a></li><li class="menu item"><a href="index.html#docutils-system-messages">Docutils System Messages</a></li><li class="menu item"><a href="index.html#legal-notice-for-donations">Legal Notice for Donations</a></li></ul></li></ul><ul class="menu foreign" id="intro-menu"><li class="menu title"><a href="intro.html">Why lxml?</a><ul class="submenu"><li class="menu item"><a href="intro.html#motto">Motto</a></li><li class="menu item"><a href="intro.html#aims">Aims</a></li></ul></li></ul><ul class="menu foreign" id="installation-menu"><li class="menu title"><a href="installation.html">Installing lxml</a><ul class="submenu"><li class="menu item"><a href="installation.html#where-to-get-it">Where to get it</a></li><li class="menu item"><a href="installation.html#requirements">Requirements</a></li><li class="menu item"><a href="installation.html#installation">Installation</a></li><li class="menu item"><a href="installation.html#building-lxml-from-dev-sources">Building lxml from dev sources</a></li><li class="menu item"><a href="installation.html#using-lxml-with-python-libxml2">Using lxml with python-libxml2</a></li><li class="menu item"><a href="installation.html#source-builds-on-ms-windows">Source builds on MS Windows</a></li><li class="menu item"><a href="installation.html#source-builds-on-macos-x">Source builds on MacOS-X</a></li></ul></li></ul><ul class="menu foreign" id="performance-menu"><li class="menu title"><a href="performance.html">Benchmarks and Speed</a><ul class="submenu"><li class="menu item"><a href="performance.html#general-notes">General notes</a></li><li class="menu item"><a href="performance.html#how-to-read-the-timings">How to read the timings</a></li><li class="menu item"><a href="performance.html#parsing-and-serialising">Parsing and Serialising</a></li><li class="menu item"><a href="performance.html#the-elementtree-api">The ElementTree API</a></li><li class="menu item"><a href="performance.html#xpath">XPath</a></li><li class="menu item"><a href="performance.html#a-longer-example">A longer example</a></li><li class="menu item"><a href="performance.html#lxml-objectify">lxml.objectify</a></li></ul></li></ul><ul class="menu foreign" id="compatibility-menu"><li class="menu title"><a href="compatibility.html">ElementTree compatibility of lxml.etree</a></li></ul><ul class="menu foreign" id="FAQ-menu"><li class="menu title"><a href="FAQ.html">lxml FAQ - Frequently Asked Questions</a><ul class="submenu"><li class="menu item"><a href="FAQ.html#general-questions">General Questions</a></li><li class="menu item"><a href="FAQ.html#installation">Installation</a></li><li class="menu item"><a href="FAQ.html#contributing">Contributing</a></li><li class="menu item"><a href="FAQ.html#bugs">Bugs</a></li><li class="menu item"><a href="FAQ.html#id1">Threading</a></li><li class="menu item"><a href="FAQ.html#parsing-and-serialisation">Parsing and Serialisation</a></li><li class="menu item"><a href="FAQ.html#xpath-and-document-traversal">XPath and Document Traversal</a></li></ul></li></ul></li></ul><ul id="Developing with lxml-section"><li><span class="section title">Developing with lxml</span><ul class="menu foreign" id="tutorial-menu"><li class="menu title"><a href="tutorial.html">The lxml.etree Tutorial</a><ul class="submenu"><li class="menu item"><a href="tutorial.html#the-element-class">The Element class</a></li><li class="menu item"><a href="tutorial.html#the-elementtree-class">The ElementTree class</a></li><li class="menu item"><a href="tutorial.html#parsing-from-strings-and-files">Parsing from strings and files</a></li><li class="menu item"><a href="tutorial.html#namespaces">Namespaces</a></li><li class="menu item"><a href="tutorial.html#the-e-factory">The E-factory</a></li><li class="menu item"><a href="tutorial.html#elementpath">ElementPath</a></li></ul></li></ul><ul class="menu foreign" id="api index-menu"><li class="menu title"><a href="api/index.html">API reference</a></li></ul><ul class="menu foreign" id="api-menu"><li class="menu title"><a href="api.html">APIs specific to lxml.etree</a><ul class="submenu"><li class="menu item"><a href="api.html#lxml-etree">lxml.etree</a></li><li class="menu item"><a href="api.html#other-element-apis">Other Element APIs</a></li><li class="menu item"><a href="api.html#trees-and-documents">Trees and Documents</a></li><li class="menu item"><a href="api.html#iteration">Iteration</a></li><li class="menu item"><a href="api.html#error-handling-on-exceptions">Error handling on exceptions</a></li><li class="menu item"><a href="api.html#error-logging">Error logging</a></li><li class="menu item"><a href="api.html#serialisation">Serialisation</a></li><li class="menu item"><a href="api.html#incremental-xml-generation">Incremental XML generation</a></li><li class="menu item"><a href="api.html#cdata">CDATA</a></li><li class="menu item"><a href="api.html#xinclude-and-elementinclude">XInclude and ElementInclude</a></li><li class="menu item"><a href="api.html#write-c14n-on-elementtree">write_c14n on ElementTree</a></li></ul></li></ul><ul class="menu foreign" id="parsing-menu"><li class="menu title"><a href="parsing.html">Parsing XML and HTML with lxml</a><ul class="submenu"><li class="menu item"><a href="parsing.html#parsers">Parsers</a></li><li class="menu item"><a href="parsing.html#the-target-parser-interface">The target parser interface</a></li><li class="menu item"><a href="parsing.html#the-feed-parser-interface">The feed parser interface</a></li><li class="menu item"><a href="parsing.html#incremental-event-parsing">Incremental event parsing</a></li><li class="menu item"><a href="parsing.html#iterparse-and-iterwalk">iterparse and iterwalk</a></li><li class="menu item"><a href="parsing.html#python-unicode-strings">Python unicode strings</a></li></ul></li></ul><ul class="menu foreign" id="validation-menu"><li class="menu title"><a href="validation.html">Validation with lxml</a><ul class="submenu"><li class="menu item"><a href="validation.html#validation-at-parse-time">Validation at parse time</a></li><li class="menu item"><a href="validation.html#id1">DTD</a></li><li class="menu item"><a href="validation.html#relaxng">RelaxNG</a></li><li class="menu item"><a href="validation.html#xmlschema">XMLSchema</a></li><li class="menu item"><a href="validation.html#id2">Schematron</a></li><li class="menu item"><a href="validation.html#id3">(Pre-ISO-Schematron)</a></li></ul></li></ul><ul class="menu foreign" id="xpathxslt-menu"><li class="menu title"><a href="xpathxslt.html">XPath and XSLT with lxml</a><ul class="submenu"><li class="menu item"><a href="xpathxslt.html#xpath">XPath</a></li><li class="menu item"><a href="xpathxslt.html#xslt">XSLT</a></li></ul></li></ul><ul class="menu foreign" id="objectify-menu"><li class="menu title"><a href="objectify.html">lxml.objectify</a><ul class="submenu"><li class="menu item"><a href="objectify.html#the-lxml-objectify-api">The lxml.objectify API</a></li><li class="menu item"><a href="objectify.html#asserting-a-schema">Asserting a Schema</a></li><li class="menu item"><a href="objectify.html#objectpath">ObjectPath</a></li><li class="menu item"><a href="objectify.html#python-data-types">Python data types</a></li><li class="menu item"><a href="objectify.html#how-data-types-are-matched">How data types are matched</a></li><li class="menu item"><a href="objectify.html#what-is-different-from-lxml-etree">What is different from lxml.etree?</a></li></ul></li></ul><ul class="menu foreign" id="lxmlhtml-menu"><li class="menu title"><a href="lxmlhtml.html">lxml.html</a><ul class="submenu"><li class="menu item"><a href="lxmlhtml.html#parsing-html">Parsing HTML</a></li><li class="menu item"><a href="lxmlhtml.html#html-element-methods">HTML Element Methods</a></li><li class="menu item"><a href="lxmlhtml.html#running-html-doctests">Running HTML doctests</a></li><li class="menu item"><a href="lxmlhtml.html#creating-html-with-the-e-factory">Creating HTML with the E-factory</a></li><li class="menu item"><a href="lxmlhtml.html#working-with-links">Working with links</a></li><li class="menu item"><a href="lxmlhtml.html#forms">Forms</a></li><li class="menu item"><a href="lxmlhtml.html#cleaning-up-html">Cleaning up HTML</a></li><li class="menu item"><a href="lxmlhtml.html#html-diff">HTML Diff</a></li><li class="menu item"><a href="lxmlhtml.html#examples">Examples</a></li></ul></li></ul><ul class="menu foreign" id="cssselect-menu"><li class="menu title"><a href="cssselect.html">lxml.cssselect</a><ul class="submenu"><li class="menu item"><a href="cssselect.html#the-cssselector-class">The CSSSelector class</a></li><li class="menu item"><a href="cssselect.html#the-cssselect-method">The cssselect method</a></li><li class="menu item"><a href="cssselect.html#supported-selectors">Supported Selectors</a></li><li class="menu item"><a href="cssselect.html#namespaces">Namespaces</a></li></ul></li></ul><ul class="menu current" id="elementsoup-menu"><li class="menu title"><a href="elementsoup.html">BeautifulSoup Parser</a><ul class="submenu"><li class="menu item"><a href="elementsoup.html#parsing-with-the-soupparser">Parsing with the soupparser</a></li><li class="menu item"><a href="elementsoup.html#entity-handling">Entity handling</a></li><li class="menu item"><a href="elementsoup.html#using-soupparser-as-a-fallback">Using soupparser as a fallback</a></li><li class="menu item"><a href="elementsoup.html#using-only-the-encoding-detection">Using only the encoding detection</a></li></ul></li></ul><ul class="menu foreign" id="html5parser-menu"><li class="menu title"><a href="html5parser.html">html5lib Parser</a><ul class="submenu"><li class="menu item"><a href="html5parser.html#differences-to-regular-html-parsing">Differences to regular HTML parsing</a></li><li class="menu item"><a href="html5parser.html#function-reference">Function Reference</a></li></ul></li></ul></li></ul><ul id="Extending lxml-section"><li><span class="section title">Extending lxml</span><ul class="menu foreign" id="resolvers-menu"><li class="menu title"><a href="resolvers.html">Document loading and URL resolving</a><ul class="submenu"><li class="menu item"><a href="resolvers.html#xml-catalogs">XML Catalogs</a></li><li class="menu item"><a href="resolvers.html#uri-resolvers">URI Resolvers</a></li><li class="menu item"><a href="resolvers.html#document-loading-in-context">Document loading in context</a></li><li class="menu item"><a href="resolvers.html#i-o-access-control-in-xslt">I/O access control in XSLT</a></li></ul></li></ul><ul class="menu foreign" id="extensions-menu"><li class="menu title"><a href="extensions.html">Python extensions for XPath and XSLT</a><ul class="submenu"><li class="menu item"><a href="extensions.html#xpath-extension-functions">XPath Extension functions</a></li><li class="menu item"><a href="extensions.html#xslt-extension-elements">XSLT extension elements</a></li></ul></li></ul><ul class="menu foreign" id="element classes-menu"><li class="menu title"><a href="element_classes.html">Using custom Element classes in lxml</a><ul class="submenu"><li class="menu item"><a href="element_classes.html#background-on-element-proxies">Background on Element proxies</a></li><li class="menu item"><a href="element_classes.html#element-initialization">Element initialization</a></li><li class="menu item"><a href="element_classes.html#setting-up-a-class-lookup-scheme">Setting up a class lookup scheme</a></li><li class="menu item"><a href="element_classes.html#generating-xml-with-custom-classes">Generating XML with custom classes</a></li><li class="menu item"><a href="element_classes.html#id1">Implementing namespaces</a></li></ul></li></ul><ul class="menu foreign" id="sax-menu"><li class="menu title"><a href="sax.html">Sax support</a><ul class="submenu"><li class="menu item"><a href="sax.html#building-a-tree-from-sax-events">Building a tree from SAX events</a></li><li class="menu item"><a href="sax.html#producing-sax-events-from-an-elementtree-or-element">Producing SAX events from an ElementTree or Element</a></li><li class="menu item"><a href="sax.html#interfacing-with-pulldom-minidom">Interfacing with pulldom/minidom</a></li></ul></li></ul><ul class="menu foreign" id="capi-menu"><li class="menu title"><a href="capi.html">The public C-API of lxml.etree</a><ul class="submenu"><li class="menu item"><a href="capi.html#passing-generated-trees-through-python">Passing generated trees through Python</a></li><li class="menu item"><a href="capi.html#writing-external-modules-in-cython">Writing external modules in Cython</a></li><li class="menu item"><a href="capi.html#writing-external-modules-in-c">Writing external modules in C</a></li></ul></li></ul></li></ul><ul id="Developing lxml-section"><li><span class="section title">Developing lxml</span><ul class="menu foreign" id="build-menu"><li class="menu title"><a href="build.html">How to build lxml from source</a><ul class="submenu"><li class="menu item"><a href="build.html#cython">Cython</a></li><li class="menu item"><a href="build.html#github-git-and-hg">Github, git and hg</a></li><li class="menu item"><a href="build.html#building-the-sources">Building the sources</a></li><li class="menu item"><a href="build.html#running-the-tests-and-reporting-errors">Running the tests and reporting errors</a></li><li class="menu item"><a href="build.html#building-an-egg-or-wheel">Building an egg or wheel</a></li><li class="menu item"><a href="build.html#building-lxml-on-macos-x">Building lxml on MacOS-X</a></li><li class="menu item"><a href="build.html#static-linking-on-windows">Static linking on Windows</a></li><li class="menu item"><a href="build.html#building-debian-packages-from-svn-sources">Building Debian packages from SVN sources</a></li></ul></li></ul><ul class="menu foreign" id="lxml source howto-menu"><li class="menu title"><a href="lxml-source-howto.html">How to read the source of lxml</a><ul class="submenu"><li class="menu item"><a href="lxml-source-howto.html#what-is-cython">What is Cython?</a></li><li class="menu item"><a href="lxml-source-howto.html#where-to-start">Where to start?</a></li><li class="menu item"><a href="lxml-source-howto.html#lxml-etree">lxml.etree</a></li><li class="menu item"><a href="lxml-source-howto.html#python-modules">Python modules</a></li><li class="menu item"><a href="lxml-source-howto.html#lxml-objectify">lxml.objectify</a></li><li class="menu item"><a href="lxml-source-howto.html#lxml-html">lxml.html</a></li></ul></li></ul><ul class="menu foreign" id="changes 4 2 2-menu"><li class="menu title"><a href="changes-4.2.2.html">Release Changelog</a></li></ul><ul class="menu foreign" id="credits-menu"><li class="menu title"><a href="credits.html">Credits</a><ul class="submenu"><li class="menu item"><a href="credits.html#main-contributors">Main contributors</a></li><li class="menu item"><a href="credits.html#special-thanks-goes-to">Special thanks goes to:</a></li></ul></li></ul></li><li><a href="/sitemap.html">Sitemap</a></li></ul></div></div><h1 class="title">BeautifulSoup Parser</h1>
+
+<p><a class="reference external" href="http://www.crummy.com/software/BeautifulSoup/">BeautifulSoup</a> is a Python package for working with real-world and broken HTML,
+just like <a class="reference external" href="lxmlhtml.html">lxml.html</a>.  As of version 4.x, it can use
+<a class="reference external" href="http://www.crummy.com/software/BeautifulSoup/bs4/doc/#installing-a-parser">different HTML parsers</a>,
+each of which has its advantages and disadvantages (see the link).</p>
+<p>lxml can make use of BeautifulSoup as a parser backend, just like BeautifulSoup
+can employ lxml as a parser.  When using BeautifulSoup from lxml, however, the
+default is to use Python's integrated HTML parser in the
+<a class="reference external" href="https://docs.python.org/3/library/html.parser.html">html.parser</a> module.
+In order to make use of the HTML5 parser of
+<a class="reference external" href="https://pypi.python.org/pypi/html5lib">html5lib</a> instead, it is better
+to go directly through the <a class="reference external" href="html5parser.html">html5parser module</a> in
+<tt class="docutils literal">lxml.html</tt>.</p>
+<p>A very nice feature of BeautifulSoup is its excellent <a class="reference external" href="http://www.crummy.com/software/BeautifulSoup/bs4/doc/#unicode-dammit">support for encoding
+detection</a> which can provide better results for real-world HTML pages that
+do not (correctly) declare their encoding.</p>
+<p>lxml interfaces with BeautifulSoup through the <tt class="docutils literal">lxml.html.soupparser</tt>
+module.  It provides three main functions: <tt class="docutils literal">fromstring()</tt> and <tt class="docutils literal">parse()</tt>
+to parse a string or file using BeautifulSoup into an <tt class="docutils literal">lxml.html</tt>
+document, and <tt class="docutils literal">convert_tree()</tt> to convert an existing BeautifulSoup
+tree into a list of top-level Elements.</p>
+<div class="contents topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#parsing-with-the-soupparser" id="id1">Parsing with the soupparser</a></li>
+<li><a class="reference internal" href="#entity-handling" id="id2">Entity handling</a></li>
+<li><a class="reference internal" href="#using-soupparser-as-a-fallback" id="id3">Using soupparser as a fallback</a></li>
+<li><a class="reference internal" href="#using-only-the-encoding-detection" id="id4">Using only the encoding detection</a></li>
+</ul>
+</div>
+<div class="section" id="parsing-with-the-soupparser">
+<h1>Parsing with the soupparser</h1>
+<p>The functions <tt class="docutils literal">fromstring()</tt> and <tt class="docutils literal">parse()</tt> behave as known from
+lxml.  The first returns a root Element, the latter returns an
+ElementTree.</p>
+<p>There is also a legacy module called <tt class="docutils literal">lxml.html.ElementSoup</tt>, which
+mimics the interface provided by Fredrik Lundh's <a class="reference external" href="http://effbot.org/zone/element-soup.htm">ElementSoup</a>
+module.  Note that the <tt class="docutils literal">soupparser</tt> module was added in lxml 2.0.3.
+Previous versions of lxml 2.0.x only have the <tt class="docutils literal">ElementSoup</tt> module.</p>
+<p>Here is a document full of tag soup, similar to, but not quite like, HTML:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">tag_soup</span> <span class="o">=</span> <span class="s1">'''</span>
+<span class="gp">... </span><span class="s1">&lt;meta/&gt;&lt;head&gt;&lt;title&gt;Hello&lt;/head&gt;&lt;body onload=crash()&gt;Hi all&lt;p&gt;'''</span>
+</pre></div>
+<p>All you need to do is pass it to the <tt class="docutils literal">fromstring()</tt> function:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">lxml.html.soupparser</span> <span class="kn">import</span> <span class="n">fromstring</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">root</span> <span class="o">=</span> <span class="n">fromstring</span><span class="p">(</span><span class="n">tag_soup</span><span class="p">)</span>
+</pre></div>
+<p>To see what we have here, you can serialise it:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">lxml.etree</span> <span class="kn">import</span> <span class="n">tostring</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">tostring</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">pretty_print</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+<span class="go">&lt;html&gt;</span>
+<span class="go">  &lt;meta/&gt;</span>
+<span class="go">  &lt;head&gt;</span>
+<span class="go">    &lt;title&gt;Hello&lt;/title&gt;</span>
+<span class="go">  &lt;/head&gt;</span>
+<span class="go">  &lt;body onload="crash()"&gt;Hi all&lt;p/&gt;&lt;/body&gt;</span>
+<span class="go">&lt;/html&gt;</span>
+</pre></div>
+<p>Not quite what you'd expect from an HTML page, but, well, it was broken
+already, right?  The parser did its best, and so now it's a tree.</p>
+<p>To control how Element objects are created during the conversion
+of the tree, you can pass a <tt class="docutils literal">makeelement</tt> factory function to
+<tt class="docutils literal">parse()</tt> and <tt class="docutils literal">fromstring()</tt>.  By default, this is based on the
+HTML parser defined in <tt class="docutils literal">lxml.html</tt>.</p>
+<p>For a quick comparison, libxml2 2.9.1 parses the same tag soup as
+follows.  The only difference is that libxml2 tries harder to adhere
+to the structure of an HTML document and moves misplaced tags where
+they (likely) belong.  Note, however, that the result can vary between
+parser versions.</p>
+<div class="syntax"><pre><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span><span class="p">/&gt;</span>
+    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Hello<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">body</span> <span class="na">onload</span><span class="o">=</span><span class="s">"crash()"</span><span class="p">&gt;</span>Hi all<span class="p">&lt;</span><span class="nt">p</span><span class="p">/&gt;&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<div class="section" id="entity-handling">
+<h1>Entity handling</h1>
+<p>By default, the BeautifulSoup parser also replaces the entities it
+finds by their character equivalent.</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">tag_soup</span> <span class="o">=</span> <span class="s1">'&lt;body&gt;&amp;copy;&amp;euro;&amp;#45;&amp;#245;&amp;#445;&lt;p&gt;'</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">body</span> <span class="o">=</span> <span class="n">fromstring</span><span class="p">(</span><span class="n">tag_soup</span><span class="p">)</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">'.//body'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">body</span><span class="o">.</span><span class="n">text</span>
+<span class="go">u'\xa9\u20ac-\xf5\u01bd'</span>
+</pre></div>
+<p>If you want them back on the way out, you can just serialise with the
+default encoding, which is 'US-ASCII'.</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">tostring</span><span class="p">(</span><span class="n">body</span><span class="p">)</span>
+<span class="go">'&lt;body&gt;&amp;#169;&amp;#8364;-&amp;#245;&amp;#445;&lt;p/&gt;&lt;/body&gt;'</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tostring</span><span class="p">(</span><span class="n">body</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"html"</span><span class="p">)</span>
+<span class="go">'&lt;body&gt;&amp;#169;&amp;#8364;-&amp;#245;&amp;#445;&lt;p&gt;&lt;/p&gt;&lt;/body&gt;'</span>
+</pre></div>
+<p>Any other encoding will output the respective byte sequences.</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">tostring</span><span class="p">(</span><span class="n">body</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span>
+<span class="go">'&lt;body&gt;\xc2\xa9\xe2\x82\xac-\xc3\xb5\xc6\xbd&lt;p/&gt;&lt;/body&gt;'</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tostring</span><span class="p">(</span><span class="n">body</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"html"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span>
+<span class="go">'&lt;body&gt;\xc2\xa9\xe2\x82\xac-\xc3\xb5\xc6\xbd&lt;p&gt;&lt;/p&gt;&lt;/body&gt;'</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tostring</span><span class="p">(</span><span class="n">body</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">'unicode'</span><span class="p">)</span>
+<span class="go">u'&lt;body&gt;\xa9\u20ac-\xf5\u01bd&lt;p/&gt;&lt;/body&gt;'</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tostring</span><span class="p">(</span><span class="n">body</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"html"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">'unicode'</span><span class="p">)</span>
+<span class="go">u'&lt;body&gt;\xa9\u20ac-\xf5\u01bd&lt;p&gt;&lt;/p&gt;&lt;/body&gt;'</span>
+</pre></div>
+</div>
+<div class="section" id="using-soupparser-as-a-fallback">
+<h1>Using soupparser as a fallback</h1>
+<p>The downside of using this parser is that it is <a class="reference external" href="http://blog.ianbicking.org/2008/03/30/python-html-parser-performance/">much slower</a> than
+the C implemented HTML parser of libxml2 that lxml uses.  So if
+performance matters, you might want to consider using <tt class="docutils literal">soupparser</tt>
+only as a fallback for certain cases.</p>
+<p>One common problem of lxml's parser is that it might not get the
+encoding right in cases where the document contains a <tt class="docutils literal">&lt;meta&gt;</tt> tag
+at the wrong place.  In this case, you can exploit the fact that lxml
+serialises much faster than most other HTML libraries for Python.
+Just serialise the document to unicode and if that gives you an
+exception, re-parse it with BeautifulSoup to see if that works
+better.</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">tag_soup</span> <span class="o">=</span> <span class="s1">'''</span><span class="se">\</span>
+<span class="gp">... </span><span class="s1">&lt;meta http-equiv="Content-Type"</span>
+<span class="gp">... </span><span class="s1">      content="text/html;charset=utf-8" /&gt;</span>
+<span class="gp">... </span><span class="s1">&lt;html&gt;</span>
+<span class="gp">... </span><span class="s1">  &lt;head&gt;</span>
+<span class="gp">... </span><span class="s1">    &lt;title&gt;Hello W</span><span class="se">\xc3\xb6</span><span class="s1">rld!&lt;/title&gt;</span>
+<span class="gp">... </span><span class="s1">  &lt;/head&gt;</span>
+<span class="gp">... </span><span class="s1">  &lt;body&gt;Hi all&lt;/body&gt;</span>
+<span class="gp">... </span><span class="s1">&lt;/html&gt;'''</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">lxml.html</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">lxml.html.soupparser</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">root</span> <span class="o">=</span> <span class="n">lxml</span><span class="o">.</span><span class="n">html</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="n">tag_soup</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">try</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">ignore</span> <span class="o">=</span> <span class="n">tostring</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">'unicode'</span><span class="p">)</span>
+<span class="gp">... </span><span class="k">except</span> <span class="ne">UnicodeDecodeError</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">root</span> <span class="o">=</span> <span class="n">lxml</span><span class="o">.</span><span class="n">html</span><span class="o">.</span><span class="n">soupparser</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="n">tag_soup</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="section" id="using-only-the-encoding-detection">
+<h1>Using only the encoding detection</h1>
+<p>Even if you prefer lxml's fast HTML parser, you can still benefit
+from BeautifulSoup's <a class="reference external" href="http://www.crummy.com/software/BeautifulSoup/bs4/doc/#unicode-dammit">support for encoding detection</a> in the
+<tt class="docutils literal">UnicodeDammit</tt> class.  Once it succeeds in decoding the data,
+you can simply pass the resulting Unicode string into lxml's parser.</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">try</span><span class="p">:</span>
+<span class="gp">... </span>   <span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">UnicodeDammit</span>             <span class="c1"># BeautifulSoup 4</span>
+<span class="gp">...</span>
+<span class="gp">... </span>   <span class="k">def</span> <span class="nf">decode_html</span><span class="p">(</span><span class="n">html_string</span><span class="p">):</span>
+<span class="gp">... </span>       <span class="n">converted</span> <span class="o">=</span> <span class="n">UnicodeDammit</span><span class="p">(</span><span class="n">html_string</span><span class="p">)</span>
+<span class="gp">... </span>       <span class="k">if</span> <span class="ow">not</span> <span class="n">converted</span><span class="o">.</span><span class="n">unicode_markup</span><span class="p">:</span>
+<span class="gp">... </span>           <span class="k">raise</span> <span class="ne">UnicodeDecodeError</span><span class="p">(</span>
+<span class="gp">... </span>               <span class="s2">"Failed to detect encoding, tried [</span><span class="si">%s</span><span class="s2">]"</span><span class="p">,</span>
+<span class="gp">... </span>               <span class="s1">', '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">converted</span><span class="o">.</span><span class="n">tried_encodings</span><span class="p">))</span>
+<span class="gp">... </span>       <span class="c1"># print converted.original_encoding</span>
+<span class="gp">... </span>       <span class="k">return</span> <span class="n">converted</span><span class="o">.</span><span class="n">unicode_markup</span>
+<span class="gp">...</span>
+<span class="gp">... </span><span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+<span class="gp">... </span>   <span class="kn">from</span> <span class="nn">BeautifulSoup</span> <span class="kn">import</span> <span class="n">UnicodeDammit</span>   <span class="c1"># BeautifulSoup 3</span>
+<span class="gp">...</span>
+<span class="gp">... </span>   <span class="k">def</span> <span class="nf">decode_html</span><span class="p">(</span><span class="n">html_string</span><span class="p">):</span>
+<span class="gp">... </span>       <span class="n">converted</span> <span class="o">=</span> <span class="n">UnicodeDammit</span><span class="p">(</span><span class="n">html_string</span><span class="p">,</span> <span class="n">isHTML</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gp">... </span>       <span class="k">if</span> <span class="ow">not</span> <span class="n">converted</span><span class="o">.</span><span class="n">unicode</span><span class="p">:</span>
+<span class="gp">... </span>           <span class="k">raise</span> <span class="ne">UnicodeDecodeError</span><span class="p">(</span>
+<span class="gp">... </span>               <span class="s2">"Failed to detect encoding, tried [</span><span class="si">%s</span><span class="s2">]"</span><span class="p">,</span>
+<span class="gp">... </span>               <span class="s1">', '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">converted</span><span class="o">.</span><span class="n">triedEncodings</span><span class="p">))</span>
+<span class="gp">... </span>       <span class="c1"># print converted.originalEncoding</span>
+<span class="gp">... </span>       <span class="k">return</span> <span class="n">converted</span><span class="o">.</span><span class="n">unicode</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">root</span> <span class="o">=</span> <span class="n">lxml</span><span class="o">.</span><span class="n">html</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="n">decode_html</span><span class="p">(</span><span class="n">tag_soup</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="footer">
+<hr class="footer" />
+Generated on: 2018-06-22.
+
+</div>
+</body>
+</html>

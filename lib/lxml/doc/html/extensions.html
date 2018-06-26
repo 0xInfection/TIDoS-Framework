@@ -1,0 +1,537 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.12: http://docutils.sourceforge.net/" />
+<title>Python extensions for XPath and XSLT</title>
+<link rel="stylesheet" href="style.css" type="text/css" />
+<script type="text/javascript">
+function trigger_menu(event) {
+    var sidemenu = document.getElementById("sidemenu");
+    var classes = sidemenu.getAttribute("class");
+    classes = (classes.indexOf(" visible") === -1) ? classes + " visible" : classes.replace(" visible", "");
+    sidemenu.setAttribute("class", classes);
+    event.preventDefault();
+    event.stopPropagation();
+}
+function hide_menu() {
+    var sidemenu = document.getElementById("sidemenu");
+    var classes = sidemenu.getAttribute("class");
+    if (classes.indexOf(" visible") !== -1) {
+        sidemenu.setAttribute("class", classes.replace(" visible", ""));
+    }
+}
+</script><meta content="width=device-width, initial-scale=1" name="viewport" /></head>
+<body onclick="hide_menu()">
+<div class="document" id="python-extensions-for-xpath-and-xslt">
+<div class="sidemenu" id="sidemenu"><div class="menutrigger" onclick="trigger_menu(event)">Menu</div><div class="menu"><ul id="lxml-section"><li><span class="section title">lxml</span><ul class="menu foreign" id="index-menu"><li class="menu title"><a href="index.html">lxml</a><ul class="submenu"><li class="menu item"><a href="index.html#introduction">Introduction</a></li><li class="menu item"><a href="index.html#support-the-project">Support the project</a></li><li class="menu item"><a href="index.html#documentation">Documentation</a></li><li class="menu item"><a href="index.html#download">Download</a></li><li class="menu item"><a href="index.html#mailing-list">Mailing list</a></li><li class="menu item"><a href="index.html#bug-tracker">Bug tracker</a></li><li class="menu item"><a href="index.html#license">License</a></li><li class="menu item"><a href="index.html#old-versions">Old Versions</a></li><li class="menu item"><a href="index.html#docutils-system-messages">Docutils System Messages</a></li><li class="menu item"><a href="index.html#legal-notice-for-donations">Legal Notice for Donations</a></li></ul></li></ul><ul class="menu foreign" id="intro-menu"><li class="menu title"><a href="intro.html">Why lxml?</a><ul class="submenu"><li class="menu item"><a href="intro.html#motto">Motto</a></li><li class="menu item"><a href="intro.html#aims">Aims</a></li></ul></li></ul><ul class="menu foreign" id="installation-menu"><li class="menu title"><a href="installation.html">Installing lxml</a><ul class="submenu"><li class="menu item"><a href="installation.html#where-to-get-it">Where to get it</a></li><li class="menu item"><a href="installation.html#requirements">Requirements</a></li><li class="menu item"><a href="installation.html#installation">Installation</a></li><li class="menu item"><a href="installation.html#building-lxml-from-dev-sources">Building lxml from dev sources</a></li><li class="menu item"><a href="installation.html#using-lxml-with-python-libxml2">Using lxml with python-libxml2</a></li><li class="menu item"><a href="installation.html#source-builds-on-ms-windows">Source builds on MS Windows</a></li><li class="menu item"><a href="installation.html#source-builds-on-macos-x">Source builds on MacOS-X</a></li></ul></li></ul><ul class="menu foreign" id="performance-menu"><li class="menu title"><a href="performance.html">Benchmarks and Speed</a><ul class="submenu"><li class="menu item"><a href="performance.html#general-notes">General notes</a></li><li class="menu item"><a href="performance.html#how-to-read-the-timings">How to read the timings</a></li><li class="menu item"><a href="performance.html#parsing-and-serialising">Parsing and Serialising</a></li><li class="menu item"><a href="performance.html#the-elementtree-api">The ElementTree API</a></li><li class="menu item"><a href="performance.html#xpath">XPath</a></li><li class="menu item"><a href="performance.html#a-longer-example">A longer example</a></li><li class="menu item"><a href="performance.html#lxml-objectify">lxml.objectify</a></li></ul></li></ul><ul class="menu foreign" id="compatibility-menu"><li class="menu title"><a href="compatibility.html">ElementTree compatibility of lxml.etree</a></li></ul><ul class="menu foreign" id="FAQ-menu"><li class="menu title"><a href="FAQ.html">lxml FAQ - Frequently Asked Questions</a><ul class="submenu"><li class="menu item"><a href="FAQ.html#general-questions">General Questions</a></li><li class="menu item"><a href="FAQ.html#installation">Installation</a></li><li class="menu item"><a href="FAQ.html#contributing">Contributing</a></li><li class="menu item"><a href="FAQ.html#bugs">Bugs</a></li><li class="menu item"><a href="FAQ.html#id1">Threading</a></li><li class="menu item"><a href="FAQ.html#parsing-and-serialisation">Parsing and Serialisation</a></li><li class="menu item"><a href="FAQ.html#xpath-and-document-traversal">XPath and Document Traversal</a></li></ul></li></ul></li></ul><ul id="Developing with lxml-section"><li><span class="section title">Developing with lxml</span><ul class="menu foreign" id="tutorial-menu"><li class="menu title"><a href="tutorial.html">The lxml.etree Tutorial</a><ul class="submenu"><li class="menu item"><a href="tutorial.html#the-element-class">The Element class</a></li><li class="menu item"><a href="tutorial.html#the-elementtree-class">The ElementTree class</a></li><li class="menu item"><a href="tutorial.html#parsing-from-strings-and-files">Parsing from strings and files</a></li><li class="menu item"><a href="tutorial.html#namespaces">Namespaces</a></li><li class="menu item"><a href="tutorial.html#the-e-factory">The E-factory</a></li><li class="menu item"><a href="tutorial.html#elementpath">ElementPath</a></li></ul></li></ul><ul class="menu foreign" id="api index-menu"><li class="menu title"><a href="api/index.html">API reference</a></li></ul><ul class="menu foreign" id="api-menu"><li class="menu title"><a href="api.html">APIs specific to lxml.etree</a><ul class="submenu"><li class="menu item"><a href="api.html#lxml-etree">lxml.etree</a></li><li class="menu item"><a href="api.html#other-element-apis">Other Element APIs</a></li><li class="menu item"><a href="api.html#trees-and-documents">Trees and Documents</a></li><li class="menu item"><a href="api.html#iteration">Iteration</a></li><li class="menu item"><a href="api.html#error-handling-on-exceptions">Error handling on exceptions</a></li><li class="menu item"><a href="api.html#error-logging">Error logging</a></li><li class="menu item"><a href="api.html#serialisation">Serialisation</a></li><li class="menu item"><a href="api.html#incremental-xml-generation">Incremental XML generation</a></li><li class="menu item"><a href="api.html#cdata">CDATA</a></li><li class="menu item"><a href="api.html#xinclude-and-elementinclude">XInclude and ElementInclude</a></li><li class="menu item"><a href="api.html#write-c14n-on-elementtree">write_c14n on ElementTree</a></li></ul></li></ul><ul class="menu foreign" id="parsing-menu"><li class="menu title"><a href="parsing.html">Parsing XML and HTML with lxml</a><ul class="submenu"><li class="menu item"><a href="parsing.html#parsers">Parsers</a></li><li class="menu item"><a href="parsing.html#the-target-parser-interface">The target parser interface</a></li><li class="menu item"><a href="parsing.html#the-feed-parser-interface">The feed parser interface</a></li><li class="menu item"><a href="parsing.html#incremental-event-parsing">Incremental event parsing</a></li><li class="menu item"><a href="parsing.html#iterparse-and-iterwalk">iterparse and iterwalk</a></li><li class="menu item"><a href="parsing.html#python-unicode-strings">Python unicode strings</a></li></ul></li></ul><ul class="menu foreign" id="validation-menu"><li class="menu title"><a href="validation.html">Validation with lxml</a><ul class="submenu"><li class="menu item"><a href="validation.html#validation-at-parse-time">Validation at parse time</a></li><li class="menu item"><a href="validation.html#id1">DTD</a></li><li class="menu item"><a href="validation.html#relaxng">RelaxNG</a></li><li class="menu item"><a href="validation.html#xmlschema">XMLSchema</a></li><li class="menu item"><a href="validation.html#id2">Schematron</a></li><li class="menu item"><a href="validation.html#id3">(Pre-ISO-Schematron)</a></li></ul></li></ul><ul class="menu foreign" id="xpathxslt-menu"><li class="menu title"><a href="xpathxslt.html">XPath and XSLT with lxml</a><ul class="submenu"><li class="menu item"><a href="xpathxslt.html#xpath">XPath</a></li><li class="menu item"><a href="xpathxslt.html#xslt">XSLT</a></li></ul></li></ul><ul class="menu foreign" id="objectify-menu"><li class="menu title"><a href="objectify.html">lxml.objectify</a><ul class="submenu"><li class="menu item"><a href="objectify.html#the-lxml-objectify-api">The lxml.objectify API</a></li><li class="menu item"><a href="objectify.html#asserting-a-schema">Asserting a Schema</a></li><li class="menu item"><a href="objectify.html#objectpath">ObjectPath</a></li><li class="menu item"><a href="objectify.html#python-data-types">Python data types</a></li><li class="menu item"><a href="objectify.html#how-data-types-are-matched">How data types are matched</a></li><li class="menu item"><a href="objectify.html#what-is-different-from-lxml-etree">What is different from lxml.etree?</a></li></ul></li></ul><ul class="menu foreign" id="lxmlhtml-menu"><li class="menu title"><a href="lxmlhtml.html">lxml.html</a><ul class="submenu"><li class="menu item"><a href="lxmlhtml.html#parsing-html">Parsing HTML</a></li><li class="menu item"><a href="lxmlhtml.html#html-element-methods">HTML Element Methods</a></li><li class="menu item"><a href="lxmlhtml.html#running-html-doctests">Running HTML doctests</a></li><li class="menu item"><a href="lxmlhtml.html#creating-html-with-the-e-factory">Creating HTML with the E-factory</a></li><li class="menu item"><a href="lxmlhtml.html#working-with-links">Working with links</a></li><li class="menu item"><a href="lxmlhtml.html#forms">Forms</a></li><li class="menu item"><a href="lxmlhtml.html#cleaning-up-html">Cleaning up HTML</a></li><li class="menu item"><a href="lxmlhtml.html#html-diff">HTML Diff</a></li><li class="menu item"><a href="lxmlhtml.html#examples">Examples</a></li></ul></li></ul><ul class="menu foreign" id="cssselect-menu"><li class="menu title"><a href="cssselect.html">lxml.cssselect</a><ul class="submenu"><li class="menu item"><a href="cssselect.html#the-cssselector-class">The CSSSelector class</a></li><li class="menu item"><a href="cssselect.html#the-cssselect-method">The cssselect method</a></li><li class="menu item"><a href="cssselect.html#supported-selectors">Supported Selectors</a></li><li class="menu item"><a href="cssselect.html#namespaces">Namespaces</a></li></ul></li></ul><ul class="menu foreign" id="elementsoup-menu"><li class="menu title"><a href="elementsoup.html">BeautifulSoup Parser</a><ul class="submenu"><li class="menu item"><a href="elementsoup.html#parsing-with-the-soupparser">Parsing with the soupparser</a></li><li class="menu item"><a href="elementsoup.html#entity-handling">Entity handling</a></li><li class="menu item"><a href="elementsoup.html#using-soupparser-as-a-fallback">Using soupparser as a fallback</a></li><li class="menu item"><a href="elementsoup.html#using-only-the-encoding-detection">Using only the encoding detection</a></li></ul></li></ul><ul class="menu foreign" id="html5parser-menu"><li class="menu title"><a href="html5parser.html">html5lib Parser</a><ul class="submenu"><li class="menu item"><a href="html5parser.html#differences-to-regular-html-parsing">Differences to regular HTML parsing</a></li><li class="menu item"><a href="html5parser.html#function-reference">Function Reference</a></li></ul></li></ul></li></ul><ul id="Extending lxml-section"><li><span class="section title">Extending lxml</span><ul class="menu foreign" id="resolvers-menu"><li class="menu title"><a href="resolvers.html">Document loading and URL resolving</a><ul class="submenu"><li class="menu item"><a href="resolvers.html#xml-catalogs">XML Catalogs</a></li><li class="menu item"><a href="resolvers.html#uri-resolvers">URI Resolvers</a></li><li class="menu item"><a href="resolvers.html#document-loading-in-context">Document loading in context</a></li><li class="menu item"><a href="resolvers.html#i-o-access-control-in-xslt">I/O access control in XSLT</a></li></ul></li></ul><ul class="menu current" id="extensions-menu"><li class="menu title"><a href="extensions.html">Python extensions for XPath and XSLT</a><ul class="submenu"><li class="menu item"><a href="extensions.html#xpath-extension-functions">XPath Extension functions</a></li><li class="menu item"><a href="extensions.html#xslt-extension-elements">XSLT extension elements</a></li></ul></li></ul><ul class="menu foreign" id="element classes-menu"><li class="menu title"><a href="element_classes.html">Using custom Element classes in lxml</a><ul class="submenu"><li class="menu item"><a href="element_classes.html#background-on-element-proxies">Background on Element proxies</a></li><li class="menu item"><a href="element_classes.html#element-initialization">Element initialization</a></li><li class="menu item"><a href="element_classes.html#setting-up-a-class-lookup-scheme">Setting up a class lookup scheme</a></li><li class="menu item"><a href="element_classes.html#generating-xml-with-custom-classes">Generating XML with custom classes</a></li><li class="menu item"><a href="element_classes.html#id1">Implementing namespaces</a></li></ul></li></ul><ul class="menu foreign" id="sax-menu"><li class="menu title"><a href="sax.html">Sax support</a><ul class="submenu"><li class="menu item"><a href="sax.html#building-a-tree-from-sax-events">Building a tree from SAX events</a></li><li class="menu item"><a href="sax.html#producing-sax-events-from-an-elementtree-or-element">Producing SAX events from an ElementTree or Element</a></li><li class="menu item"><a href="sax.html#interfacing-with-pulldom-minidom">Interfacing with pulldom/minidom</a></li></ul></li></ul><ul class="menu foreign" id="capi-menu"><li class="menu title"><a href="capi.html">The public C-API of lxml.etree</a><ul class="submenu"><li class="menu item"><a href="capi.html#passing-generated-trees-through-python">Passing generated trees through Python</a></li><li class="menu item"><a href="capi.html#writing-external-modules-in-cython">Writing external modules in Cython</a></li><li class="menu item"><a href="capi.html#writing-external-modules-in-c">Writing external modules in C</a></li></ul></li></ul></li></ul><ul id="Developing lxml-section"><li><span class="section title">Developing lxml</span><ul class="menu foreign" id="build-menu"><li class="menu title"><a href="build.html">How to build lxml from source</a><ul class="submenu"><li class="menu item"><a href="build.html#cython">Cython</a></li><li class="menu item"><a href="build.html#github-git-and-hg">Github, git and hg</a></li><li class="menu item"><a href="build.html#building-the-sources">Building the sources</a></li><li class="menu item"><a href="build.html#running-the-tests-and-reporting-errors">Running the tests and reporting errors</a></li><li class="menu item"><a href="build.html#building-an-egg-or-wheel">Building an egg or wheel</a></li><li class="menu item"><a href="build.html#building-lxml-on-macos-x">Building lxml on MacOS-X</a></li><li class="menu item"><a href="build.html#static-linking-on-windows">Static linking on Windows</a></li><li class="menu item"><a href="build.html#building-debian-packages-from-svn-sources">Building Debian packages from SVN sources</a></li></ul></li></ul><ul class="menu foreign" id="lxml source howto-menu"><li class="menu title"><a href="lxml-source-howto.html">How to read the source of lxml</a><ul class="submenu"><li class="menu item"><a href="lxml-source-howto.html#what-is-cython">What is Cython?</a></li><li class="menu item"><a href="lxml-source-howto.html#where-to-start">Where to start?</a></li><li class="menu item"><a href="lxml-source-howto.html#lxml-etree">lxml.etree</a></li><li class="menu item"><a href="lxml-source-howto.html#python-modules">Python modules</a></li><li class="menu item"><a href="lxml-source-howto.html#lxml-objectify">lxml.objectify</a></li><li class="menu item"><a href="lxml-source-howto.html#lxml-html">lxml.html</a></li></ul></li></ul><ul class="menu foreign" id="changes 4 2 2-menu"><li class="menu title"><a href="changes-4.2.2.html">Release Changelog</a></li></ul><ul class="menu foreign" id="credits-menu"><li class="menu title"><a href="credits.html">Credits</a><ul class="submenu"><li class="menu item"><a href="credits.html#main-contributors">Main contributors</a></li><li class="menu item"><a href="credits.html#special-thanks-goes-to">Special thanks goes to:</a></li></ul></li></ul></li><li><a href="/sitemap.html">Sitemap</a></li></ul></div></div><h1 class="title">Python extensions for XPath and XSLT</h1>
+
+<p>This document describes how to use Python extension functions in XPath
+and XSLT like this:</p>
+<div class="syntax"><pre><span class="nt">&lt;xsl:value-of</span> <span class="na">select=</span><span class="s">"f:myPythonFunction(.//sometag)"</span> <span class="nt">/&gt;</span>
+</pre></div>
+<p>and extension elements in XSLT as in the following example:</p>
+<div class="syntax"><pre><span class="nt">&lt;xsl:template</span> <span class="na">match=</span><span class="s">"*"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;my:python-extension&gt;</span>
+        <span class="nt">&lt;some-content</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/my:python-extension&gt;</span>
+<span class="nt">&lt;/xsl:template&gt;</span>
+</pre></div>
+<div class="contents topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#xpath-extension-functions" id="id1">XPath Extension functions</a><ul>
+<li><a class="reference internal" href="#the-functionnamespace" id="id2">The FunctionNamespace</a></li>
+<li><a class="reference internal" href="#global-prefix-assignment" id="id3">Global prefix assignment</a></li>
+<li><a class="reference internal" href="#the-xpath-context" id="id4">The XPath context</a></li>
+<li><a class="reference internal" href="#evaluators-and-xslt" id="id5">Evaluators and XSLT</a></li>
+<li><a class="reference internal" href="#evaluator-local-extensions" id="id6">Evaluator-local extensions</a></li>
+<li><a class="reference internal" href="#what-to-return-from-a-function" id="id7">What to return from a function</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#xslt-extension-elements" id="id8">XSLT extension elements</a><ul>
+<li><a class="reference internal" href="#declaring-extension-elements" id="id9">Declaring extension elements</a></li>
+<li><a class="reference internal" href="#applying-xsl-templates" id="id10">Applying XSL templates</a></li>
+<li><a class="reference internal" href="#working-with-read-only-elements" id="id11">Working with read-only elements</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="xpath-extension-functions">
+<h1>XPath Extension functions</h1>
+<p>Here is how an extension function looks like.  As the first argument,
+it always receives a context object (see below).  The other arguments
+are provided by the respective call in the XPath expression, one in
+the following examples.  Any number of arguments is allowed:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
+<span class="gp">... </span>   <span class="k">return</span> <span class="s2">"Hello </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="n">a</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">ola</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
+<span class="gp">... </span>   <span class="k">return</span> <span class="s2">"Ola </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="n">a</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">loadsofargs</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+<span class="gp">... </span>   <span class="k">return</span> <span class="s2">"Got </span><span class="si">%d</span><span class="s2"> arguments."</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+</pre></div>
+<div class="section" id="the-functionnamespace">
+<h2>The FunctionNamespace</h2>
+<p>In order to use a function in XPath or XSLT, it needs to have a
+(namespaced) name by which it can be called during evaluation.  This
+is done using the FunctionNamespace class.  For simplicity, we choose
+the empty namespace (None):</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">lxml</span> <span class="kn">import</span> <span class="n">etree</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ns</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">FunctionNamespace</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ns</span><span class="p">[</span><span class="s1">'hello'</span><span class="p">]</span> <span class="o">=</span> <span class="n">hello</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ns</span><span class="p">[</span><span class="s1">'countargs'</span><span class="p">]</span> <span class="o">=</span> <span class="n">loadsofargs</span>
+</pre></div>
+<p>This registers the function <cite>hello</cite> with the name <cite>hello</cite> in the default
+namespace (None), and the function <cite>loadsofargs</cite> with the name <cite>countargs</cite>.</p>
+<p>Since lxml 4.1, it is preferred to use the <tt class="docutils literal">FunctionNamespace</tt> as a decorator.
+Either pass an explicit function name (<tt class="docutils literal"><span class="pre">@ns("countargs")</span></tt>), or just use the
+bare decorator to register the function under its own name:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="nd">@ns</span>
+<span class="gp">... </span><span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
+<span class="gp">... </span>   <span class="k">return</span> <span class="s2">"Hello </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="n">a</span>
+</pre></div>
+<p>Now we're going to create a document that we can run XPath expressions
+against:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">root</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">XML</span><span class="p">(</span><span class="s1">'&lt;a&gt;&lt;b&gt;Haegar&lt;/b&gt;&lt;/a&gt;'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">doc</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">ElementTree</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+</pre></div>
+<p>Done. Now we can have XPath expressions call our new function:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s2">"hello('Dr. Falken')"</span><span class="p">))</span>
+<span class="go">Hello Dr. Falken</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s1">'hello(local-name(*))'</span><span class="p">))</span>
+<span class="go">Hello b</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s1">'hello(string(b))'</span><span class="p">))</span>
+<span class="go">Hello Haegar</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s1">'countargs(., b, ./*)'</span><span class="p">))</span>
+<span class="go">Got 3 arguments.</span>
+</pre></div>
+<p>Note how we call both a Python function (<tt class="docutils literal">hello()</tt>) and an XPath built-in
+function (<tt class="docutils literal">string()</tt>) in exactly the same way.  Normally, however, you would
+want to separate the two in different namespaces.  The FunctionNamespace class
+allows you to do this:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">ns</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">FunctionNamespace</span><span class="p">(</span><span class="s1">'http://mydomain.org/myfunctions'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ns</span><span class="p">[</span><span class="s1">'hello'</span><span class="p">]</span> <span class="o">=</span> <span class="n">hello</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">prefixmap</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'f'</span> <span class="p">:</span> <span class="s1">'http://mydomain.org/myfunctions'</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s1">'f:hello(local-name(*))'</span><span class="p">,</span> <span class="n">namespaces</span><span class="o">=</span><span class="n">prefixmap</span><span class="p">))</span>
+<span class="go">Hello b</span>
+</pre></div>
+</div>
+<div class="section" id="global-prefix-assignment">
+<h2>Global prefix assignment</h2>
+<p>In the last example, you had to specify a prefix for the function namespace.
+If you always use the same prefix for a function namespace, you can also
+register it with the namespace:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">ns</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">FunctionNamespace</span><span class="p">(</span><span class="s1">'http://mydomain.org/myother/functions'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ns</span><span class="o">.</span><span class="n">prefix</span> <span class="o">=</span> <span class="s1">'es'</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ns</span><span class="p">[</span><span class="s1">'hello'</span><span class="p">]</span> <span class="o">=</span> <span class="n">ola</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s1">'es:hello(local-name(*))'</span><span class="p">))</span>
+<span class="go">Ola b</span>
+</pre></div>
+<p>This is a global assignment, so take care not to assign the same prefix to
+more than one namespace.  The resulting behaviour in that case is completely
+undefined.  It is always a good idea to consistently use the same meaningful
+prefix for each namespace throughout your application.</p>
+<p>The prefix assignment only works with functions and FunctionNamespace objects,
+not with the general Namespace object that registers element classes.  The
+reasoning is that elements in lxml do not care about prefixes anyway, so it
+would rather complicate things than be of any help.</p>
+</div>
+<div class="section" id="the-xpath-context">
+<h2>The XPath context</h2>
+<p>Functions get a context object as first parameter.  In lxml 1.x, this value
+was None, but since lxml 2.0 it provides two properties: <tt class="docutils literal">eval_context</tt> and
+<tt class="docutils literal">context_node</tt>.  The context node is the Element where the current function
+is called:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">print_tag</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">nodes</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">print</span><span class="p">(</span><span class="s2">"</span><span class="si">%s</span><span class="s2">: </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">context_node</span><span class="o">.</span><span class="n">tag</span><span class="p">,</span> <span class="p">[</span> <span class="n">n</span><span class="o">.</span><span class="n">tag</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">nodes</span> <span class="p">]))</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ns</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">FunctionNamespace</span><span class="p">(</span><span class="s1">'http://mydomain.org/printtag'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ns</span><span class="o">.</span><span class="n">prefix</span> <span class="o">=</span> <span class="s2">"pt"</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ns</span><span class="p">[</span><span class="s2">"print_tag"</span><span class="p">]</span> <span class="o">=</span> <span class="n">print_tag</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ignore</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s2">"//*[pt:print_tag(.//*)]"</span><span class="p">)</span>
+<span class="go">a: ['b']</span>
+<span class="go">b: []</span>
+</pre></div>
+<p>The <tt class="docutils literal">eval_context</tt> is a dictionary that is local to the evaluation.  It
+allows functions to keep state:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">print_context</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">context</span><span class="o">.</span><span class="n">eval_context</span><span class="p">[</span><span class="n">context</span><span class="o">.</span><span class="n">context_node</span><span class="o">.</span><span class="n">tag</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"done"</span>
+<span class="gp">... </span>    <span class="k">print</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">eval_context</span><span class="o">.</span><span class="n">items</span><span class="p">()))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ns</span><span class="p">[</span><span class="s2">"print_context"</span><span class="p">]</span> <span class="o">=</span> <span class="n">print_context</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ignore</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s2">"//*[pt:print_context()]"</span><span class="p">)</span>
+<span class="go">[('a', 'done')]</span>
+<span class="go">[('a', 'done'), ('b', 'done')]</span>
+</pre></div>
+</div>
+<div class="section" id="evaluators-and-xslt">
+<h2>Evaluators and XSLT</h2>
+<p>Extension functions work for all ways of evaluating XPath expressions and for
+XSL transformations:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">e</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">XPathEvaluator</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">e</span><span class="p">(</span><span class="s1">'es:hello(local-name(/a))'</span><span class="p">))</span>
+<span class="go">Ola a</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">namespaces</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'f'</span> <span class="p">:</span> <span class="s1">'http://mydomain.org/myfunctions'</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">XPathEvaluator</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="n">namespaces</span><span class="o">=</span><span class="n">namespaces</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">e</span><span class="p">(</span><span class="s1">'f:hello(local-name(/a))'</span><span class="p">))</span>
+<span class="go">Hello a</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xslt</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">XSLT</span><span class="p">(</span><span class="n">etree</span><span class="o">.</span><span class="n">XML</span><span class="p">(</span><span class="s1">'''</span>
+<span class="gp">... </span><span class="s1">  &lt;stylesheet version="1.0"</span>
+<span class="gp">... </span><span class="s1">         xmlns="http://www.w3.org/1999/XSL/Transform"</span>
+<span class="gp">... </span><span class="s1">         xmlns:es="http://mydomain.org/myother/functions"&gt;</span>
+<span class="gp">... </span><span class="s1">    &lt;output method="text" encoding="ASCII"/&gt;</span>
+<span class="gp">... </span><span class="s1">    &lt;template match="/"&gt;</span>
+<span class="gp">... </span><span class="s1">      &lt;value-of select="es:hello(string(//b))"/&gt;</span>
+<span class="gp">... </span><span class="s1">    &lt;/template&gt;</span>
+<span class="gp">... </span><span class="s1">  &lt;/stylesheet&gt;</span>
+<span class="gp">... </span><span class="s1">'''</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">xslt</span><span class="p">(</span><span class="n">doc</span><span class="p">))</span>
+<span class="go">Ola Haegar</span>
+</pre></div>
+<p>It is also possible to register namespaces with a single evaluator after its
+creation.  While the following example involves no functions, the idea should
+still be clear:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">StringIO</span><span class="p">(</span><span class="s1">'&lt;a xmlns="http://mydomain.org/myfunctions" /&gt;'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ns_doc</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">XPathEvaluator</span><span class="p">(</span><span class="n">ns_doc</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e</span><span class="p">(</span><span class="s1">'/a'</span><span class="p">)</span>
+<span class="go">[]</span>
+</pre></div>
+<p>This returns nothing, as we did not ask for the right namespace.  When we
+register the namespace with the evaluator, however, we can access it via a
+prefix:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">e</span><span class="o">.</span><span class="n">register_namespace</span><span class="p">(</span><span class="s1">'foo'</span><span class="p">,</span> <span class="s1">'http://mydomain.org/myfunctions'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e</span><span class="p">(</span><span class="s1">'/foo:a'</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">tag</span>
+<span class="go">'{http://mydomain.org/myfunctions}a'</span>
+</pre></div>
+<p>Note that this prefix mapping is only known to this evaluator, as opposed to
+the global mapping of the FunctionNamespace objects:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">e2</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">XPathEvaluator</span><span class="p">(</span><span class="n">ns_doc</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e2</span><span class="p">(</span><span class="s1">'/foo:a'</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="c">...</span>
+<span class="gr">lxml.etree.XPathEvalError</span>: <span class="n">Undefined namespace prefix</span>
+</pre></div>
+</div>
+<div class="section" id="evaluator-local-extensions">
+<h2>Evaluator-local extensions</h2>
+<p>Apart from the global registration of extension functions, there is also a way
+of making extensions known to a single Evaluator or XSLT.  All evaluators and
+the XSLT object accept a keyword argument <tt class="docutils literal">extensions</tt> in their constructor.
+The value is a dictionary mapping (namespace, name) tuples to functions:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">extensions</span> <span class="o">=</span> <span class="p">{(</span><span class="s1">'local-ns'</span><span class="p">,</span> <span class="s1">'local-hello'</span><span class="p">)</span> <span class="p">:</span> <span class="n">hello</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">namespaces</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'l'</span> <span class="p">:</span> <span class="s1">'local-ns'</span><span class="p">}</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">XPathEvaluator</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="n">namespaces</span><span class="o">=</span><span class="n">namespaces</span><span class="p">,</span> <span class="n">extensions</span><span class="o">=</span><span class="n">extensions</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">e</span><span class="p">(</span><span class="s1">'l:local-hello(string(b))'</span><span class="p">))</span>
+<span class="go">Hello Haegar</span>
+</pre></div>
+<p>For larger numbers of extension functions, you can define classes or modules
+and use the <tt class="docutils literal">Extension</tt> helper:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">MyExt</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="nf">function1</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">arg</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="k">return</span> <span class="s1">'1'</span><span class="o">+</span><span class="n">arg</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="nf">function2</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">arg</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="k">return</span> <span class="s1">'2'</span><span class="o">+</span><span class="n">arg</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="nf">function3</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">arg</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="k">return</span> <span class="s1">'3'</span><span class="o">+</span><span class="n">arg</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ext_module</span> <span class="o">=</span> <span class="n">MyExt</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">functions</span> <span class="o">=</span> <span class="p">(</span><span class="s1">'function1'</span><span class="p">,</span> <span class="s1">'function2'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">extensions</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">Extension</span><span class="p">(</span> <span class="n">ext_module</span><span class="p">,</span> <span class="n">functions</span><span class="p">,</span> <span class="n">ns</span><span class="o">=</span><span class="s1">'local-ns'</span> <span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">XPathEvaluator</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="n">namespaces</span><span class="o">=</span><span class="n">namespaces</span><span class="p">,</span> <span class="n">extensions</span><span class="o">=</span><span class="n">extensions</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">e</span><span class="p">(</span><span class="s1">'l:function1(string(b))'</span><span class="p">))</span>
+<span class="go">1Haegar</span>
+</pre></div>
+<p>The optional second argument to <tt class="docutils literal">Extension</tt> can either be a
+sequence of names to select from the module, a dictionary that
+explicitly maps function names to their XPath alter-ego or <tt class="docutils literal">None</tt>
+(explicitly passed) to take all available functions under their
+original name (if their name does not start with '_').</p>
+<p>The additional <tt class="docutils literal">ns</tt> keyword argument takes a namespace URI or
+<tt class="docutils literal">None</tt> (also if left out) for the default namespace.  The following
+examples will therefore all do the same thing:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">functions</span> <span class="o">=</span> <span class="p">(</span><span class="s1">'function1'</span><span class="p">,</span> <span class="s1">'function2'</span><span class="p">,</span> <span class="s1">'function3'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">extensions</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">Extension</span><span class="p">(</span> <span class="n">ext_module</span><span class="p">,</span> <span class="n">functions</span> <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">XPathEvaluator</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="n">extensions</span><span class="o">=</span><span class="n">extensions</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">e</span><span class="p">(</span><span class="s1">'function1(function2(function3(string(b))))'</span><span class="p">))</span>
+<span class="go">123Haegar</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">extensions</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">Extension</span><span class="p">(</span> <span class="n">ext_module</span><span class="p">,</span> <span class="n">functions</span><span class="p">,</span> <span class="n">ns</span><span class="o">=</span><span class="bp">None</span> <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">XPathEvaluator</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="n">extensions</span><span class="o">=</span><span class="n">extensions</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">e</span><span class="p">(</span><span class="s1">'function1(function2(function3(string(b))))'</span><span class="p">))</span>
+<span class="go">123Haegar</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">extensions</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">Extension</span><span class="p">(</span><span class="n">ext_module</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">XPathEvaluator</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="n">extensions</span><span class="o">=</span><span class="n">extensions</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">e</span><span class="p">(</span><span class="s1">'function1(function2(function3(string(b))))'</span><span class="p">))</span>
+<span class="go">123Haegar</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">functions</span> <span class="o">=</span> <span class="p">{</span>
+<span class="gp">... </span>    <span class="s1">'function1'</span> <span class="p">:</span> <span class="s1">'function1'</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">'function2'</span> <span class="p">:</span> <span class="s1">'function2'</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">'function3'</span> <span class="p">:</span> <span class="s1">'function3'</span>
+<span class="gp">... </span>    <span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">extensions</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">Extension</span><span class="p">(</span><span class="n">ext_module</span><span class="p">,</span> <span class="n">functions</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">XPathEvaluator</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="n">extensions</span><span class="o">=</span><span class="n">extensions</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">e</span><span class="p">(</span><span class="s1">'function1(function2(function3(string(b))))'</span><span class="p">))</span>
+<span class="go">123Haegar</span>
+</pre></div>
+<p>For convenience, you can also pass a sequence of extensions:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">extensions1</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">Extension</span><span class="p">(</span><span class="n">ext_module</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">extensions2</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">Extension</span><span class="p">(</span><span class="n">ext_module</span><span class="p">,</span> <span class="n">ns</span><span class="o">=</span><span class="s1">'local-ns'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">XPathEvaluator</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="n">extensions</span><span class="o">=</span><span class="p">[</span><span class="n">extensions1</span><span class="p">,</span> <span class="n">extensions2</span><span class="p">],</span>
+<span class="gp">... </span>                         <span class="n">namespaces</span><span class="o">=</span><span class="n">namespaces</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">e</span><span class="p">(</span><span class="s1">'function1(l:function2(function3(string(b))))'</span><span class="p">))</span>
+<span class="go">123Haegar</span>
+</pre></div>
+</div>
+<div class="section" id="what-to-return-from-a-function">
+<h2>What to return from a function</h2>
+<p>Extension functions can return any data type for which there is an XPath
+equivalent (see the documentation on <cite>XPath return values</cite>).  This includes
+numbers, boolean values, elements and lists of elements.  Note that integers
+will also be returned as floats:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">returnsFloat</span><span class="p">(</span><span class="n">_</span><span class="p">):</span>
+<span class="gp">... </span>   <span class="k">return</span> <span class="mf">1.7</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">returnsInteger</span><span class="p">(</span><span class="n">_</span><span class="p">):</span>
+<span class="gp">... </span>   <span class="k">return</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">returnsBool</span><span class="p">(</span><span class="n">_</span><span class="p">):</span>
+<span class="gp">... </span>   <span class="k">return</span> <span class="bp">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">returnFirstNode</span><span class="p">(</span><span class="n">_</span><span class="p">,</span> <span class="n">nodes</span><span class="p">):</span>
+<span class="gp">... </span>   <span class="k">return</span> <span class="n">nodes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ns</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">FunctionNamespace</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ns</span><span class="p">[</span><span class="s1">'float'</span><span class="p">]</span> <span class="o">=</span> <span class="n">returnsFloat</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ns</span><span class="p">[</span><span class="s1">'int'</span><span class="p">]</span>   <span class="o">=</span> <span class="n">returnsInteger</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ns</span><span class="p">[</span><span class="s1">'bool'</span><span class="p">]</span>  <span class="o">=</span> <span class="n">returnsBool</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ns</span><span class="p">[</span><span class="s1">'first'</span><span class="p">]</span> <span class="o">=</span> <span class="n">returnFirstNode</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">XPathEvaluator</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e</span><span class="p">(</span><span class="s2">"float()"</span><span class="p">)</span>
+<span class="go">1.7</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e</span><span class="p">(</span><span class="s2">"int()"</span><span class="p">)</span>
+<span class="go">1.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">int</span><span class="p">(</span> <span class="n">e</span><span class="p">(</span><span class="s2">"int()"</span><span class="p">)</span> <span class="p">)</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e</span><span class="p">(</span><span class="s2">"bool()"</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e</span><span class="p">(</span><span class="s2">"count(first(//b))"</span><span class="p">)</span>
+<span class="go">1.0</span>
+</pre></div>
+<p>As the last example shows, you can pass the results of functions back into
+the XPath expression.  Elements and sequences of elements are treated as
+XPath node-sets:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">returnsNodeSet</span><span class="p">(</span><span class="n">_</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">results1</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">Element</span><span class="p">(</span><span class="s1">'results1'</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">results1</span><span class="p">,</span> <span class="s1">'result'</span><span class="p">)</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="s2">"Alpha"</span>
+<span class="gp">... </span>    <span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">results1</span><span class="p">,</span> <span class="s1">'result'</span><span class="p">)</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="s2">"Beta"</span>
+<span class="gp">...</span>
+<span class="gp">... </span>    <span class="n">results2</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">Element</span><span class="p">(</span><span class="s1">'results2'</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">results2</span><span class="p">,</span> <span class="s1">'result'</span><span class="p">)</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="s2">"Gamma"</span>
+<span class="gp">... </span>    <span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">results2</span><span class="p">,</span> <span class="s1">'result'</span><span class="p">)</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="s2">"Delta"</span>
+<span class="gp">...</span>
+<span class="gp">... </span>    <span class="n">results3</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">results2</span><span class="p">,</span> <span class="s1">'subresult'</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="p">[</span><span class="n">results1</span><span class="p">,</span> <span class="n">results2</span><span class="p">,</span> <span class="n">results3</span><span class="p">]</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ns</span><span class="p">[</span><span class="s1">'new-node-set'</span><span class="p">]</span> <span class="o">=</span> <span class="n">returnsNodeSet</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">XPathEvaluator</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">e</span><span class="p">(</span><span class="s2">"new-node-set()/result"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">([</span> <span class="n">t</span><span class="o">.</span><span class="n">text</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">r</span> <span class="p">])</span>
+<span class="go">['Alpha', 'Beta', 'Gamma', 'Delta']</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">e</span><span class="p">(</span><span class="s2">"new-node-set()"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">([</span> <span class="n">t</span><span class="o">.</span><span class="n">tag</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">r</span> <span class="p">])</span>
+<span class="go">['results1', 'results2', 'subresult']</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">([</span> <span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">r</span> <span class="p">])</span>
+<span class="go">[2, 3, 0]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span>
+<span class="go">'Alpha'</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">etree</span><span class="o">.</span><span class="n">tostring</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="go">b'&lt;results1&gt;&lt;result&gt;Alpha&lt;/result&gt;&lt;result&gt;Beta&lt;/result&gt;&lt;/results1&gt;'</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">etree</span><span class="o">.</span><span class="n">tostring</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="go">b'&lt;results2&gt;&lt;result&gt;Gamma&lt;/result&gt;&lt;result&gt;Delta&lt;/result&gt;&lt;subresult/&gt;&lt;/results2&gt;'</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">etree</span><span class="o">.</span><span class="n">tostring</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="go">b'&lt;subresult/&gt;'</span>
+</pre></div>
+<p>The current implementation deep-copies newly created elements in node-sets.
+Only the elements and their children are passed on, no outlying parents or
+tail texts will be available in the result.  This also means that in the above
+example, the <cite>subresult</cite> elements in <cite>results2</cite> and <cite>results3</cite> are no longer
+identical within the node-set, they belong to independent trees:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s2">"</span><span class="si">%s</span><span class="s2"> - </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">tag</span><span class="p">,</span> <span class="n">r</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">tag</span><span class="p">))</span>
+<span class="go">subresult - subresult</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">r</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">getparent</span><span class="p">()</span><span class="o">.</span><span class="n">tag</span><span class="p">)</span>
+<span class="go">results2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">getparent</span><span class="p">())</span>
+<span class="go">None</span>
+</pre></div>
+<p>This is an implementation detail that you should be aware of, but you should
+avoid relying on it in your code.  Note that elements taken from the source
+document (the most common case) do not suffer from this restriction.  They
+will always be passed unchanged.</p>
+</div>
+</div>
+<div class="section" id="xslt-extension-elements">
+<h1>XSLT extension elements</h1>
+<p>Just like the XPath extension functions described above, lxml supports
+custom extension <em>elements</em> in XSLT.  This means, you can write XSLT
+code like this:</p>
+<div class="syntax"><pre><span class="nt">&lt;xsl:template</span> <span class="na">match=</span><span class="s">"*"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;my:python-extension&gt;</span>
+        <span class="nt">&lt;some-content</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/my:python-extension&gt;</span>
+<span class="nt">&lt;/xsl:template&gt;</span>
+</pre></div>
+<p>And then you can implement the element in Python like this:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">MyExtElement</span><span class="p">(</span><span class="n">etree</span><span class="o">.</span><span class="n">XSLTExtension</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="p">,</span> <span class="n">self_node</span><span class="p">,</span> <span class="n">input_node</span><span class="p">,</span> <span class="n">output_parent</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="k">print</span><span class="p">(</span><span class="s2">"Hello from XSLT!"</span><span class="p">)</span>
+<span class="gp">... </span>        <span class="n">output_parent</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="s2">"I did it!"</span>
+<span class="gp">... </span>        <span class="c1"># just copy own content input to output</span>
+<span class="gp">... </span>        <span class="n">output_parent</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span> <span class="nb">list</span><span class="p">(</span><span class="n">self_node</span><span class="p">)</span> <span class="p">)</span>
+</pre></div>
+<p>The arguments passed to the <tt class="docutils literal">.execute()</tt> method  are</p>
+<dl class="docutils">
+<dt>context</dt>
+<dd>The opaque evaluation context.  You need this when calling back
+into the XSLT processor.</dd>
+<dt>self_node</dt>
+<dd>A read-only Element object that represents the extension element
+in the stylesheet.</dd>
+<dt>input_node</dt>
+<dd>The current context Element in the input document (also read-only).</dd>
+<dt>output_parent</dt>
+<dd>The current insertion point in the output document.  You can
+append elements or set the text value (not the tail).  Apart from
+that, the Element is read-only.</dd>
+</dl>
+<div class="section" id="declaring-extension-elements">
+<h2>Declaring extension elements</h2>
+<p>In XSLT, extension elements can be used like any other XSLT element,
+except that they must be declared as extensions using the standard
+XSLT <tt class="docutils literal"><span class="pre">extension-element-prefixes</span></tt> option:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">xslt_ext_tree</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">XML</span><span class="p">(</span><span class="s1">'''</span>
+<span class="gp">... </span><span class="s1">&lt;xsl:stylesheet version="1.0"</span>
+<span class="gp">... </span><span class="s1">    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"</span>
+<span class="gp">... </span><span class="s1">    xmlns:my="testns"</span>
+<span class="gp">... </span><span class="s1">    extension-element-prefixes="my"&gt;</span>
+<span class="gp">... </span><span class="s1">    &lt;xsl:template match="/"&gt;</span>
+<span class="gp">... </span><span class="s1">        &lt;foo&gt;&lt;my:ext&gt;&lt;child&gt;XYZ&lt;/child&gt;&lt;/my:ext&gt;&lt;/foo&gt;</span>
+<span class="gp">... </span><span class="s1">    &lt;/xsl:template&gt;</span>
+<span class="gp">... </span><span class="s1">    &lt;xsl:template match="child"&gt;</span>
+<span class="gp">... </span><span class="s1">        &lt;CHILD&gt;--xyz--&lt;/CHILD&gt;</span>
+<span class="gp">... </span><span class="s1">    &lt;/xsl:template&gt;</span>
+<span class="gp">... </span><span class="s1">&lt;/xsl:stylesheet&gt;'''</span><span class="p">)</span>
+</pre></div>
+<p>To register the extension, add its namespace and name to the extension
+mapping of the XSLT object:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">my_extension</span> <span class="o">=</span> <span class="n">MyExtElement</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">extensions</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="s1">'testns'</span><span class="p">,</span> <span class="s1">'ext'</span><span class="p">)</span> <span class="p">:</span> <span class="n">my_extension</span> <span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">transform</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">XSLT</span><span class="p">(</span><span class="n">xslt_ext_tree</span><span class="p">,</span> <span class="n">extensions</span> <span class="o">=</span> <span class="n">extensions</span><span class="p">)</span>
+</pre></div>
+<p>Note how we pass an instance here, not the class of the extension.
+Now we can run the transformation and see how our extension is
+called:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">root</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">XML</span><span class="p">(</span><span class="s1">'&lt;dummy/&gt;'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">transform</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+<span class="go">Hello from XSLT!</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">str</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="go">'&lt;?xml version="1.0"?&gt;\n&lt;foo&gt;I did it!&lt;child&gt;XYZ&lt;/child&gt;&lt;/foo&gt;\n'</span>
+</pre></div>
+</div>
+<div class="section" id="applying-xsl-templates">
+<h2>Applying XSL templates</h2>
+<p>XSLT extensions are a very powerful feature that allows you to
+interact directly with the XSLT processor.  You have full read-only
+access to the input document and the stylesheet, and you can even call
+back into the XSLT processor to process templates.  Here is an example
+that passes an Element into the <tt class="docutils literal">.apply_templates()</tt> method of the
+<tt class="docutils literal">XSLTExtension</tt> instance:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">MyExtElement</span><span class="p">(</span><span class="n">etree</span><span class="o">.</span><span class="n">XSLTExtension</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="p">,</span> <span class="n">self_node</span><span class="p">,</span> <span class="n">input_node</span><span class="p">,</span> <span class="n">output_parent</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="n">child</span> <span class="o">=</span> <span class="n">self_node</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">... </span>        <span class="n">results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">apply_templates</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">child</span><span class="p">)</span>
+<span class="gp">... </span>        <span class="n">output_parent</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">my_extension</span> <span class="o">=</span> <span class="n">MyExtElement</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">extensions</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="s1">'testns'</span><span class="p">,</span> <span class="s1">'ext'</span><span class="p">)</span> <span class="p">:</span> <span class="n">my_extension</span> <span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">transform</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">XSLT</span><span class="p">(</span><span class="n">xslt_ext_tree</span><span class="p">,</span> <span class="n">extensions</span> <span class="o">=</span> <span class="n">extensions</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">root</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">XML</span><span class="p">(</span><span class="s1">'&lt;dummy/&gt;'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">transform</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">str</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="go">'&lt;?xml version="1.0"?&gt;\n&lt;foo&gt;&lt;CHILD&gt;--xyz--&lt;/CHILD&gt;&lt;/foo&gt;\n'</span>
+</pre></div>
+<p>Here, we applied the templates to a child of the extension element
+itself, i.e. to an element inside the stylesheet instead of an element
+of the input document.</p>
+<p>The return value of <tt class="docutils literal">.apply_templates()</tt> is always a list.  It may
+contain a mix of elements and strings, collected from the XSLT processing
+result.  If you want to append these values to the output parent, be aware
+that you cannot use the <tt class="docutils literal">.append()</tt> method to add strings.  In many
+cases, you would only be interested in elements anyway, so you can discard
+strings (e.g. formatting whitespace) and append the rest.</p>
+<p>If you want to include string results in the output, you can either build
+an appropriate tree yourself and append that, or you can manually add the
+string values to the current output tree, e.g. by concatenating them with
+the <tt class="docutils literal">.tail</tt> of the last element that was appended.</p>
+<p>Note that you can also let lxml build the result tree for you by passing
+the <tt class="docutils literal">output_parent</tt> into the <tt class="docutils literal">.apply_templates()</tt> method.  In this
+case, the result will be None and all content found by applying templates
+will be appended to the output parent.</p>
+<p>If you do not care about string results at all, e.g. because you already
+know that they will only contain whitespace, you can pass the option
+<tt class="docutils literal">elements_only=True</tt> to the <tt class="docutils literal">.apply_templates()</tt> method, or pass
+<tt class="docutils literal">remove_blank_text=True</tt> to remove only those strings that consist
+entirely of whitespace.</p>
+</div>
+<div class="section" id="working-with-read-only-elements">
+<h2>Working with read-only elements</h2>
+<p>There is one important thing to keep in mind: all Elements that the
+<tt class="docutils literal">execute()</tt> method gets to deal with are read-only Elements, so you
+cannot modify them.  They also will not easily work in the API.  For
+example, you cannot pass them to the <tt class="docutils literal">tostring()</tt> function or wrap
+them in an <tt class="docutils literal">ElementTree</tt>.</p>
+<p>What you can do, however, is to deepcopy them to make them normal
+Elements, and then modify them using the normal etree API.  So this
+will work:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">MyExtElement</span><span class="p">(</span><span class="n">etree</span><span class="o">.</span><span class="n">XSLTExtension</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="p">,</span> <span class="n">self_node</span><span class="p">,</span> <span class="n">input_node</span><span class="p">,</span> <span class="n">output_parent</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="n">child</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">self_node</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="gp">... </span>        <span class="n">child</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="s2">"NEW TEXT"</span>
+<span class="gp">... </span>        <span class="n">output_parent</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">my_extension</span> <span class="o">=</span> <span class="n">MyExtElement</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">extensions</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="s1">'testns'</span><span class="p">,</span> <span class="s1">'ext'</span><span class="p">)</span> <span class="p">:</span> <span class="n">my_extension</span> <span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">transform</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">XSLT</span><span class="p">(</span><span class="n">xslt_ext_tree</span><span class="p">,</span> <span class="n">extensions</span> <span class="o">=</span> <span class="n">extensions</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">root</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">XML</span><span class="p">(</span><span class="s1">'&lt;dummy/&gt;'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">transform</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">str</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="go">'&lt;?xml version="1.0"?&gt;\n&lt;foo&gt;&lt;child&gt;NEW TEXT&lt;/child&gt;&lt;/foo&gt;\n'</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr class="footer" />
+Generated on: 2018-06-22.
+
+</div>
+</body>
+</html>

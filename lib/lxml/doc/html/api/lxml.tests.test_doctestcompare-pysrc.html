@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>lxml.tests.test_doctestcompare</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lxml-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="/">lxml API</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="lxml-module.html">Package&nbsp;lxml</a> ::
+        <a href="lxml.tests-module.html">Package&nbsp;tests</a> ::
+        Module&nbsp;test_doctestcompare
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="lxml.tests.test_doctestcompare-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="lxml.tests.test_doctestcompare-module.html">Module lxml.tests.test_doctestcompare</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">sys</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">unittest</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Package lxml=lxml-module.html"><a title="lxml" class="py-name" href="#" onclick="return doclink('link-0', 'lxml', 'link-0');">lxml</a></tt> <tt class="py-keyword">import</tt> <tt id="link-1" class="py-name" targets="Module lxml.etree=lxml.etree-module.html,Variable lxml.sax.ElementTreeContentHandler.etree=lxml.sax.ElementTreeContentHandler-class.html#etree,Variable lxml.tests.test_elementtree.CElementTreeTestCase.etree=lxml.tests.test_elementtree.CElementTreeTestCase-class.html#etree,Variable lxml.tests.test_elementtree._ETreeTestCaseBase.etree=lxml.tests.test_elementtree._ETreeTestCaseBase-class.html#etree,Variable lxml.tests.test_elementtree._XMLPullParserTest.etree=lxml.tests.test_elementtree._XMLPullParserTest-class.html#etree,Variable lxml.tests.test_io._IOTestCaseBase.etree=lxml.tests.test_io._IOTestCaseBase-class.html#etree"><a title="lxml.etree
+lxml.sax.ElementTreeContentHandler.etree
+lxml.tests.test_elementtree.CElementTreeTestCase.etree
+lxml.tests.test_elementtree._ETreeTestCaseBase.etree
+lxml.tests.test_elementtree._XMLPullParserTest.etree
+lxml.tests.test_io._IOTestCaseBase.etree" class="py-name" href="#" onclick="return doclink('link-1', 'etree', 'link-1');">etree</a></tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-2" class="py-name"><a title="lxml" class="py-name" href="#" onclick="return doclink('link-2', 'lxml', 'link-0');">lxml</a></tt><tt class="py-op">.</tt><tt id="link-3" class="py-name" targets="Package lxml.tests=lxml.tests-module.html"><a title="lxml.tests" class="py-name" href="#" onclick="return doclink('link-3', 'tests', 'link-3');">tests</a></tt><tt class="py-op">.</tt><tt id="link-4" class="py-name" targets="Module lxml.tests.common_imports=lxml.tests.common_imports-module.html"><a title="lxml.tests.common_imports" class="py-name" href="#" onclick="return doclink('link-4', 'common_imports', 'link-4');">common_imports</a></tt> <tt class="py-keyword">import</tt> <tt id="link-5" class="py-name" targets="Class lxml.tests.common_imports.HelperTestCase=lxml.tests.common_imports.HelperTestCase-class.html"><a title="lxml.tests.common_imports.HelperTestCase" class="py-name" href="#" onclick="return doclink('link-5', 'HelperTestCase', 'link-5');">HelperTestCase</a></tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-6" class="py-name"><a title="lxml" class="py-name" href="#" onclick="return doclink('link-6', 'lxml', 'link-0');">lxml</a></tt><tt class="py-op">.</tt><tt id="link-7" class="py-name" targets="Module lxml.doctestcompare=lxml.doctestcompare-module.html"><a title="lxml.doctestcompare" class="py-name" href="#" onclick="return doclink('link-7', 'doctestcompare', 'link-7');">doctestcompare</a></tt> <tt class="py-keyword">import</tt> <tt id="link-8" class="py-name" targets="Class lxml.doctestcompare.LXMLOutputChecker=lxml.doctestcompare.LXMLOutputChecker-class.html"><a title="lxml.doctestcompare.LXMLOutputChecker" class="py-name" href="#" onclick="return doclink('link-8', 'LXMLOutputChecker', 'link-8');">LXMLOutputChecker</a></tt><tt class="py-op">,</tt> <tt id="link-9" class="py-name" targets="Variable lxml.doctestcompare.PARSE_HTML=lxml.doctestcompare-module.html#PARSE_HTML"><a title="lxml.doctestcompare.PARSE_HTML" class="py-name" href="#" onclick="return doclink('link-9', 'PARSE_HTML', 'link-9');">PARSE_HTML</a></tt><tt class="py-op">,</tt> <tt id="link-10" class="py-name" targets="Variable lxml.doctestcompare.PARSE_XML=lxml.doctestcompare-module.html#PARSE_XML"><a title="lxml.doctestcompare.PARSE_XML" class="py-name" href="#" onclick="return doclink('link-10', 'PARSE_XML', 'link-10');">PARSE_XML</a></tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"> </tt>
+<a name="DummyInput"></a><div id="DummyInput-def"><a name="L9"></a><tt class="py-lineno">  9</tt> <a class="py-toggle" href="#" id="DummyInput-toggle" onclick="return toggle('DummyInput');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lxml.tests.test_doctestcompare.DummyInput-class.html">DummyInput</a><tt class="py-op">:</tt> </tt>
+</div><div id="DummyInput-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="DummyInput-expanded"><a name="DummyInput.__init__"></a><div id="DummyInput.__init__-def"><a name="L10"></a><tt class="py-lineno"> 10</tt> <a class="py-toggle" href="#" id="DummyInput.__init__-toggle" onclick="return toggle('DummyInput.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.test_doctestcompare.DummyInput-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-param">kw</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DummyInput.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="DummyInput.__init__-expanded"><a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt id="link-11" class="py-name" targets="Variable lxml.etree.DTD.name=lxml.etree.DTD-class.html#name,Variable lxml.etree._Entity.name=lxml.etree._Entity-class.html#name,Variable lxml.html.InputMixin.name=lxml.html.InputMixin-class.html#name,Variable lxml.objectify.PyType.name=lxml.objectify.PyType-class.html#name"><a title="lxml.etree.DTD.name
+lxml.etree._Entity.name
+lxml.html.InputMixin.name
+lxml.objectify.PyType.name" class="py-name" href="#" onclick="return doclink('link-11', 'name', 'link-11');">name</a></tt><tt class="py-op">,</tt> <tt id="link-12" class="py-name" targets="Variable lxml.html.CheckboxGroup.value=lxml.html.CheckboxGroup-class.html#value,Variable lxml.html.InputElement.value=lxml.html.InputElement-class.html#value,Variable lxml.html.RadioGroup.value=lxml.html.RadioGroup-class.html#value,Variable lxml.html.SelectElement.value=lxml.html.SelectElement-class.html#value,Variable lxml.html.TextareaElement.value=lxml.html.TextareaElement-class.html#value"><a title="lxml.html.CheckboxGroup.value
+lxml.html.InputElement.value
+lxml.html.RadioGroup.value
+lxml.html.SelectElement.value
+lxml.html.TextareaElement.value" class="py-name" href="#" onclick="return doclink('link-12', 'value', 'link-12');">value</a></tt> <tt class="py-keyword">in</tt> <tt class="py-name">kw</tt><tt class="py-op">.</tt><tt id="link-13" class="py-name" targets="Method lxml.etree._Attrib.items()=lxml.etree._Attrib-class.html#items,Method lxml.etree._Element.items()=lxml.etree._Element-class.html#items,Method lxml.etree._IDDict.items()=lxml.etree._IDDict-class.html#items"><a title="lxml.etree._Attrib.items
+lxml.etree._Element.items
+lxml.etree._IDDict.items" class="py-name" href="#" onclick="return doclink('link-13', 'items', 'link-13');">items</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line">            <tt id="link-14" class="py-name" targets="Method lxml.objectify.ObjectPath.setattr()=lxml.objectify.ObjectPath-class.html#setattr"><a title="lxml.objectify.ObjectPath.setattr" class="py-name" href="#" onclick="return doclink('link-14', 'setattr', 'link-14');">setattr</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt id="link-15" class="py-name"><a title="lxml.etree.DTD.name
+lxml.etree._Entity.name
+lxml.html.InputMixin.name
+lxml.objectify.PyType.name" class="py-name" href="#" onclick="return doclink('link-15', 'name', 'link-11');">name</a></tt><tt class="py-op">,</tt> <tt id="link-16" class="py-name"><a title="lxml.html.CheckboxGroup.value
+lxml.html.InputElement.value
+lxml.html.RadioGroup.value
+lxml.html.SelectElement.value
+lxml.html.TextareaElement.value" class="py-name" href="#" onclick="return doclink('link-16', 'value', 'link-12');">value</a></tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"> </tt>
+<a name="indent"></a><div id="indent-def"><a name="L15"></a><tt class="py-lineno"> 15</tt> <a class="py-toggle" href="#" id="indent-toggle" onclick="return toggle('indent');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.test_doctestcompare-module.html#indent">indent</a><tt class="py-op">(</tt><tt class="py-param">elem</tt><tt class="py-op">,</tt> <tt class="py-param">level</tt><tt class="py-op">=</tt><tt class="py-number">0</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="indent-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="indent-expanded"><a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line">    <tt class="py-name">i</tt> <tt class="py-op">=</tt> <tt class="py-string">"\n"</tt> <tt class="py-op">+</tt> <tt id="link-17" class="py-name" targets="Variable lxml.etree._LogEntry.level=lxml.etree._LogEntry-class.html#level"><a title="lxml.etree._LogEntry.level" class="py-name" href="#" onclick="return doclink('link-17', 'level', 'link-17');">level</a></tt><tt class="py-op">*</tt><tt class="py-string">"  "</tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">elem</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">elem</tt><tt class="py-op">.</tt><tt id="link-18" class="py-name" targets="Variable lxml.etree.QName.text=lxml.etree.QName-class.html#text,Variable lxml.etree._Element.text=lxml.etree._Element-class.html#text,Variable lxml.etree._Entity.text=lxml.etree._Entity-class.html#text,Variable lxml.objectify.ObjectifiedElement.text=lxml.objectify.ObjectifiedElement-class.html#text,Variable xml.etree.ElementTree.Element.text=xml.etree.ElementTree.Element-class.html#text"><a title="lxml.etree.QName.text
+lxml.etree._Element.text
+lxml.etree._Entity.text
+lxml.objectify.ObjectifiedElement.text
+xml.etree.ElementTree.Element.text" class="py-name" href="#" onclick="return doclink('link-18', 'text', 'link-18');">text</a></tt> <tt class="py-keyword">or</tt> <tt class="py-keyword">not</tt> <tt class="py-name">elem</tt><tt class="py-op">.</tt><tt id="link-19" class="py-name"><a title="lxml.etree.QName.text
+lxml.etree._Element.text
+lxml.etree._Entity.text
+lxml.objectify.ObjectifiedElement.text
+xml.etree.ElementTree.Element.text" class="py-name" href="#" onclick="return doclink('link-19', 'text', 'link-18');">text</a></tt><tt class="py-op">.</tt><tt id="link-20" class="py-name" targets="Function lxml.doctestcompare.strip()=lxml.doctestcompare-module.html#strip"><a title="lxml.doctestcompare.strip" class="py-name" href="#" onclick="return doclink('link-20', 'strip', 'link-20');">strip</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line">            <tt class="py-name">elem</tt><tt class="py-op">.</tt><tt id="link-21" class="py-name"><a title="lxml.etree.QName.text
+lxml.etree._Element.text
+lxml.etree._Entity.text
+lxml.objectify.ObjectifiedElement.text
+xml.etree.ElementTree.Element.text" class="py-name" href="#" onclick="return doclink('link-21', 'text', 'link-18');">text</a></tt> <tt class="py-op">=</tt> <tt class="py-name">i</tt> <tt class="py-op">+</tt> <tt class="py-string">"  "</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">elem</tt><tt class="py-op">.</tt><tt id="link-22" class="py-name" targets="Variable lxml.etree._Element.tail=lxml.etree._Element-class.html#tail,Variable xml.etree.ElementTree.Element.tail=xml.etree.ElementTree.Element-class.html#tail"><a title="lxml.etree._Element.tail
+xml.etree.ElementTree.Element.tail" class="py-name" href="#" onclick="return doclink('link-22', 'tail', 'link-22');">tail</a></tt> <tt class="py-keyword">or</tt> <tt class="py-keyword">not</tt> <tt class="py-name">elem</tt><tt class="py-op">.</tt><tt id="link-23" class="py-name"><a title="lxml.etree._Element.tail
+xml.etree.ElementTree.Element.tail" class="py-name" href="#" onclick="return doclink('link-23', 'tail', 'link-22');">tail</a></tt><tt class="py-op">.</tt><tt id="link-24" class="py-name"><a title="lxml.doctestcompare.strip" class="py-name" href="#" onclick="return doclink('link-24', 'strip', 'link-20');">strip</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line">            <tt class="py-name">elem</tt><tt class="py-op">.</tt><tt id="link-25" class="py-name"><a title="lxml.etree._Element.tail
+xml.etree.ElementTree.Element.tail" class="py-name" href="#" onclick="return doclink('link-25', 'tail', 'link-22');">tail</a></tt> <tt class="py-op">=</tt> <tt class="py-name">i</tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">elem</tt> <tt class="py-keyword">in</tt> <tt class="py-name">elem</tt><tt class="py-op">:</tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line">            <tt id="link-26" class="py-name" targets="Function lxml.tests.test_doctestcompare.indent()=lxml.tests.test_doctestcompare-module.html#indent"><a title="lxml.tests.test_doctestcompare.indent" class="py-name" href="#" onclick="return doclink('link-26', 'indent', 'link-26');">indent</a></tt><tt class="py-op">(</tt><tt class="py-name">elem</tt><tt class="py-op">,</tt> <tt id="link-27" class="py-name"><a title="lxml.etree._LogEntry.level" class="py-name" href="#" onclick="return doclink('link-27', 'level', 'link-17');">level</a></tt><tt class="py-op">+</tt><tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">elem</tt><tt class="py-op">.</tt><tt id="link-28" class="py-name"><a title="lxml.etree._Element.tail
+xml.etree.ElementTree.Element.tail" class="py-name" href="#" onclick="return doclink('link-28', 'tail', 'link-22');">tail</a></tt> <tt class="py-keyword">or</tt> <tt class="py-keyword">not</tt> <tt class="py-name">elem</tt><tt class="py-op">.</tt><tt id="link-29" class="py-name"><a title="lxml.etree._Element.tail
+xml.etree.ElementTree.Element.tail" class="py-name" href="#" onclick="return doclink('link-29', 'tail', 'link-22');">tail</a></tt><tt class="py-op">.</tt><tt id="link-30" class="py-name"><a title="lxml.doctestcompare.strip" class="py-name" href="#" onclick="return doclink('link-30', 'strip', 'link-20');">strip</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line">            <tt class="py-name">elem</tt><tt class="py-op">.</tt><tt id="link-31" class="py-name"><a title="lxml.etree._Element.tail
+xml.etree.ElementTree.Element.tail" class="py-name" href="#" onclick="return doclink('link-31', 'tail', 'link-22');">tail</a></tt> <tt class="py-op">=</tt> <tt class="py-name">i</tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt id="link-32" class="py-name"><a title="lxml.etree._LogEntry.level" class="py-name" href="#" onclick="return doclink('link-32', 'level', 'link-17');">level</a></tt> <tt class="py-keyword">and</tt> <tt class="py-op">(</tt><tt class="py-keyword">not</tt> <tt class="py-name">elem</tt><tt class="py-op">.</tt><tt id="link-33" class="py-name"><a title="lxml.etree._Element.tail
+xml.etree.ElementTree.Element.tail" class="py-name" href="#" onclick="return doclink('link-33', 'tail', 'link-22');">tail</a></tt> <tt class="py-keyword">or</tt> <tt class="py-keyword">not</tt> <tt class="py-name">elem</tt><tt class="py-op">.</tt><tt id="link-34" class="py-name"><a title="lxml.etree._Element.tail
+xml.etree.ElementTree.Element.tail" class="py-name" href="#" onclick="return doclink('link-34', 'tail', 'link-22');">tail</a></tt><tt class="py-op">.</tt><tt id="link-35" class="py-name"><a title="lxml.doctestcompare.strip" class="py-name" href="#" onclick="return doclink('link-35', 'strip', 'link-20');">strip</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line">            <tt class="py-name">elem</tt><tt class="py-op">.</tt><tt id="link-36" class="py-name"><a title="lxml.etree._Element.tail
+xml.etree.ElementTree.Element.tail" class="py-name" href="#" onclick="return doclink('link-36', 'tail', 'link-22');">tail</a></tt> <tt class="py-op">=</tt> <tt class="py-name">i</tt> </tt>
+</div><a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line"> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line"> </tt>
+<a name="DoctestCompareTest"></a><div id="DoctestCompareTest-def"><a name="L31"></a><tt class="py-lineno"> 31</tt> <a class="py-toggle" href="#" id="DoctestCompareTest-toggle" onclick="return toggle('DoctestCompareTest');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lxml.tests.test_doctestcompare.DoctestCompareTest-class.html">DoctestCompareTest</a><tt class="py-op">(</tt><tt class="py-base-class">HelperTestCase</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DoctestCompareTest-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="DoctestCompareTest-expanded"><a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line">    <tt id="link-37" class="py-name" targets="Variable lxml.tests.test_doctestcompare.DoctestCompareTest._checker=lxml.tests.test_doctestcompare.DoctestCompareTest-class.html#_checker"><a title="lxml.tests.test_doctestcompare.DoctestCompareTest._checker" class="py-name" href="#" onclick="return doclink('link-37', '_checker', 'link-37');">_checker</a></tt> <tt class="py-op">=</tt> <tt id="link-38" class="py-name"><a title="lxml.doctestcompare.LXMLOutputChecker" class="py-name" href="#" onclick="return doclink('link-38', 'LXMLOutputChecker', 'link-8');">LXMLOutputChecker</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line"> </tt>
+<a name="DoctestCompareTest.compare"></a><div id="DoctestCompareTest.compare-def"><a name="L34"></a><tt class="py-lineno"> 34</tt> <a class="py-toggle" href="#" id="DoctestCompareTest.compare-toggle" onclick="return toggle('DoctestCompareTest.compare');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.test_doctestcompare.DoctestCompareTest-class.html#compare">compare</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">want</tt><tt class="py-op">,</tt> <tt class="py-param">got</tt><tt class="py-op">,</tt> <tt class="py-param">html</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DoctestCompareTest.compare-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="DoctestCompareTest.compare-expanded"><a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt id="link-39" class="py-name" targets="Package lxml.html=lxml.html-module.html,Method lxml.html.diff.href_token.html()=lxml.html.diff.href_token-class.html#html,Method lxml.html.diff.tag_token.html()=lxml.html.diff.tag_token-class.html#html,Method lxml.html.diff.token.html()=lxml.html.diff.token-class.html#html"><a title="lxml.html
+lxml.html.diff.href_token.html
+lxml.html.diff.tag_token.html
+lxml.html.diff.token.html" class="py-name" href="#" onclick="return doclink('link-39', 'html', 'link-39');">html</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line">            <tt id="link-40" class="py-name" targets="Variable lxml.etree.XSLTAccessControl.options=lxml.etree.XSLTAccessControl-class.html#options,Variable lxml.html.MultipleSelectOptions.options=lxml.html.MultipleSelectOptions-class.html#options"><a title="lxml.etree.XSLTAccessControl.options
+lxml.html.MultipleSelectOptions.options" class="py-name" href="#" onclick="return doclink('link-40', 'options', 'link-40');">options</a></tt> <tt class="py-op">=</tt> <tt id="link-41" class="py-name"><a title="lxml.doctestcompare.PARSE_HTML" class="py-name" href="#" onclick="return doclink('link-41', 'PARSE_HTML', 'link-9');">PARSE_HTML</a></tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line">            <tt id="link-42" class="py-name"><a title="lxml.etree.XSLTAccessControl.options
+lxml.html.MultipleSelectOptions.options" class="py-name" href="#" onclick="return doclink('link-42', 'options', 'link-40');">options</a></tt> <tt class="py-op">=</tt> <tt id="link-43" class="py-name"><a title="lxml.doctestcompare.PARSE_XML" class="py-name" href="#" onclick="return doclink('link-43', 'PARSE_XML', 'link-10');">PARSE_XML</a></tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line"> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line">        <tt id="link-44" class="py-name" targets="Method lxml.etree._ElementTree.parse()=lxml.etree._ElementTree-class.html#parse,Function lxml.etree.parse()=lxml.etree-module.html#parse,Function lxml.html.ElementSoup.parse()=lxml.html.ElementSoup-module.html#parse,Function lxml.html.html5parser.parse()=lxml.html.html5parser-module.html#parse,Function lxml.html.soupparser.parse()=lxml.html.soupparser-module.html#parse,Function lxml.objectify.parse()=lxml.objectify-module.html#parse,Method lxml.tests.common_imports.HelperTestCase.parse()=lxml.tests.common_imports.HelperTestCase-class.html#parse"><a title="lxml.etree._ElementTree.parse
+lxml.etree.parse
+lxml.html.ElementSoup.parse
+lxml.html.html5parser.parse
+lxml.html.soupparser.parse
+lxml.objectify.parse
+lxml.tests.common_imports.HelperTestCase.parse" class="py-name" href="#" onclick="return doclink('link-44', 'parse', 'link-44');">parse</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-45" class="py-name"><a title="lxml.tests.test_doctestcompare.DoctestCompareTest._checker" class="py-name" href="#" onclick="return doclink('link-45', '_checker', 'link-37');">_checker</a></tt><tt class="py-op">.</tt><tt id="link-46" class="py-name" targets="Method lxml.doctestcompare.LXMLOutputChecker.get_parser()=lxml.doctestcompare.LXMLOutputChecker-class.html#get_parser"><a title="lxml.doctestcompare.LXMLOutputChecker.get_parser" class="py-name" href="#" onclick="return doclink('link-46', 'get_parser', 'link-46');">get_parser</a></tt><tt class="py-op">(</tt><tt class="py-name">want</tt><tt class="py-op">,</tt> <tt class="py-name">got</tt><tt class="py-op">,</tt> <tt id="link-47" class="py-name"><a title="lxml.etree.XSLTAccessControl.options
+lxml.html.MultipleSelectOptions.options" class="py-name" href="#" onclick="return doclink('link-47', 'options', 'link-40');">options</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line">        <tt class="py-name">want_doc</tt> <tt class="py-op">=</tt> <tt id="link-48" class="py-name"><a title="lxml.etree._ElementTree.parse
+lxml.etree.parse
+lxml.html.ElementSoup.parse
+lxml.html.html5parser.parse
+lxml.html.soupparser.parse
+lxml.objectify.parse
+lxml.tests.common_imports.HelperTestCase.parse" class="py-name" href="#" onclick="return doclink('link-48', 'parse', 'link-44');">parse</a></tt><tt class="py-op">(</tt><tt class="py-name">want</tt><tt class="py-op">)</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line">        <tt class="py-name">got_doc</tt> <tt class="py-op">=</tt> <tt id="link-49" class="py-name"><a title="lxml.etree._ElementTree.parse
+lxml.etree.parse
+lxml.html.ElementSoup.parse
+lxml.html.html5parser.parse
+lxml.html.soupparser.parse
+lxml.objectify.parse
+lxml.tests.common_imports.HelperTestCase.parse" class="py-name" href="#" onclick="return doclink('link-49', 'parse', 'link-44');">parse</a></tt><tt class="py-op">(</tt><tt class="py-name">got</tt><tt class="py-op">)</tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-50" class="py-name"><a title="lxml.tests.test_doctestcompare.DoctestCompareTest._checker" class="py-name" href="#" onclick="return doclink('link-50', '_checker', 'link-37');">_checker</a></tt><tt class="py-op">.</tt><tt id="link-51" class="py-name" targets="Method lxml.doctestcompare.LXMLOutputChecker.collect_diff()=lxml.doctestcompare.LXMLOutputChecker-class.html#collect_diff"><a title="lxml.doctestcompare.LXMLOutputChecker.collect_diff" class="py-name" href="#" onclick="return doclink('link-51', 'collect_diff', 'link-51');">collect_diff</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line">            <tt class="py-name">want_doc</tt><tt class="py-op">,</tt> <tt class="py-name">got_doc</tt><tt class="py-op">,</tt> <tt id="link-52" class="py-name"><a title="lxml.html
+lxml.html.diff.href_token.html
+lxml.html.diff.tag_token.html
+lxml.html.diff.token.html" class="py-name" href="#" onclick="return doclink('link-52', 'html', 'link-39');">html</a></tt><tt class="py-op">,</tt> <tt id="link-53" class="py-name"><a title="lxml.tests.test_doctestcompare.indent" class="py-name" href="#" onclick="return doclink('link-53', 'indent', 'link-26');">indent</a></tt><tt class="py-op">=</tt><tt class="py-number">0</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">lstrip</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line"> </tt>
+<a name="DoctestCompareTest.assert_diff"></a><div id="DoctestCompareTest.assert_diff-def"><a name="L46"></a><tt class="py-lineno"> 46</tt> <a class="py-toggle" href="#" id="DoctestCompareTest.assert_diff-toggle" onclick="return toggle('DoctestCompareTest.assert_diff');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.test_doctestcompare.DoctestCompareTest-class.html#assert_diff">assert_diff</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">want</tt><tt class="py-op">,</tt> <tt class="py-param">got</tt><tt class="py-op">,</tt> <tt class="py-param">diff</tt><tt class="py-op">,</tt> <tt class="py-param">html</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DoctestCompareTest.assert_diff-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="DoctestCompareTest.assert_diff-expanded"><a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertEqual</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-54" class="py-name" targets="Method lxml.tests.test_doctestcompare.DoctestCompareTest.compare()=lxml.tests.test_doctestcompare.DoctestCompareTest-class.html#compare"><a title="lxml.tests.test_doctestcompare.DoctestCompareTest.compare" class="py-name" href="#" onclick="return doclink('link-54', 'compare', 'link-54');">compare</a></tt><tt class="py-op">(</tt><tt class="py-name">want</tt><tt class="py-op">,</tt> <tt class="py-name">got</tt><tt class="py-op">,</tt> <tt id="link-55" class="py-name"><a title="lxml.html
+lxml.html.diff.href_token.html
+lxml.html.diff.tag_token.html
+lxml.html.diff.token.html" class="py-name" href="#" onclick="return doclink('link-55', 'html', 'link-39');">html</a></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt id="link-56" class="py-name" targets="Module lxml.html.diff=lxml.html.diff-module.html"><a title="lxml.html.diff" class="py-name" href="#" onclick="return doclink('link-56', 'diff', 'link-56');">diff</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line"> </tt>
+<a name="DoctestCompareTest.assert_nodiff"></a><div id="DoctestCompareTest.assert_nodiff-def"><a name="L49"></a><tt class="py-lineno"> 49</tt> <a class="py-toggle" href="#" id="DoctestCompareTest.assert_nodiff-toggle" onclick="return toggle('DoctestCompareTest.assert_nodiff');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.test_doctestcompare.DoctestCompareTest-class.html#assert_nodiff">assert_nodiff</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">want</tt><tt class="py-op">,</tt> <tt class="py-param">got</tt><tt class="py-op">,</tt> <tt class="py-param">html</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DoctestCompareTest.assert_nodiff-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="DoctestCompareTest.assert_nodiff-expanded"><a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line">        <tt id="link-57" class="py-name" targets="Variable lxml.etree.iterparse.root=lxml.etree.iterparse-class.html#root"><a title="lxml.etree.iterparse.root" class="py-name" href="#" onclick="return doclink('link-57', 'root', 'link-57');">root</a></tt> <tt class="py-op">=</tt> <tt id="link-58" class="py-name"><a title="lxml.etree
+lxml.sax.ElementTreeContentHandler.etree
+lxml.tests.test_elementtree.CElementTreeTestCase.etree
+lxml.tests.test_elementtree._ETreeTestCaseBase.etree
+lxml.tests.test_elementtree._XMLPullParserTest.etree
+lxml.tests.test_io._IOTestCaseBase.etree" class="py-name" href="#" onclick="return doclink('link-58', 'etree', 'link-1');">etree</a></tt><tt class="py-op">.</tt><tt id="link-59" class="py-name" targets="Function lxml.etree.fromstring()=lxml.etree-module.html#fromstring,Function lxml.html.html5parser.fromstring()=lxml.html.html5parser-module.html#fromstring,Function lxml.html.soupparser.fromstring()=lxml.html.soupparser-module.html#fromstring,Function lxml.objectify.fromstring()=lxml.objectify-module.html#fromstring"><a title="lxml.etree.fromstring
+lxml.html.html5parser.fromstring
+lxml.html.soupparser.fromstring
+lxml.objectify.fromstring" class="py-name" href="#" onclick="return doclink('link-59', 'fromstring', 'link-59');">fromstring</a></tt><tt class="py-op">(</tt><tt class="py-name">want</tt><tt class="py-op">)</tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line">        <tt id="link-60" class="py-name"><a title="lxml.etree.iterparse.root" class="py-name" href="#" onclick="return doclink('link-60', 'root', 'link-57');">root</a></tt><tt class="py-op">.</tt><tt id="link-61" class="py-name"><a title="lxml.etree._Element.tail
+xml.etree.ElementTree.Element.tail" class="py-name" href="#" onclick="return doclink('link-61', 'tail', 'link-22');">tail</a></tt> <tt class="py-op">=</tt> <tt class="py-string">'\n'</tt> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line">        <tt id="link-62" class="py-name"><a title="lxml.tests.test_doctestcompare.indent" class="py-name" href="#" onclick="return doclink('link-62', 'indent', 'link-26');">indent</a></tt><tt class="py-op">(</tt><tt id="link-63" class="py-name"><a title="lxml.etree.iterparse.root" class="py-name" href="#" onclick="return doclink('link-63', 'root', 'link-57');">root</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line">        <tt id="link-64" class="py-name"><a title="lxml.html.diff" class="py-name" href="#" onclick="return doclink('link-64', 'diff', 'link-56');">diff</a></tt> <tt class="py-op">=</tt> <tt id="link-65" class="py-name"><a title="lxml.etree
+lxml.sax.ElementTreeContentHandler.etree
+lxml.tests.test_elementtree.CElementTreeTestCase.etree
+lxml.tests.test_elementtree._ETreeTestCaseBase.etree
+lxml.tests.test_elementtree._XMLPullParserTest.etree
+lxml.tests.test_io._IOTestCaseBase.etree" class="py-name" href="#" onclick="return doclink('link-65', 'etree', 'link-1');">etree</a></tt><tt class="py-op">.</tt><tt id="link-66" class="py-name" targets="Method lxml.etree.XSLT.tostring()=lxml.etree.XSLT-class.html#tostring,Function lxml.etree.tostring()=lxml.etree-module.html#tostring"><a title="lxml.etree.XSLT.tostring
+lxml.etree.tostring" class="py-name" href="#" onclick="return doclink('link-66', 'tostring', 'link-66');">tostring</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line">            <tt id="link-67" class="py-name"><a title="lxml.etree.iterparse.root" class="py-name" href="#" onclick="return doclink('link-67', 'root', 'link-57');">root</a></tt><tt class="py-op">,</tt> <tt id="link-68" class="py-name" targets="Variable lxml.etree.DocInfo.encoding=lxml.etree.DocInfo-class.html#encoding,Function lxml.tests.selftest.encoding()=lxml.tests.selftest-module.html#encoding,Function lxml.tests.selftest2.encoding()=lxml.tests.selftest2-module.html#encoding"><a title="lxml.etree.DocInfo.encoding
+lxml.tests.selftest.encoding
+lxml.tests.selftest2.encoding" class="py-name" href="#" onclick="return doclink('link-68', 'encoding', 'link-68');">encoding</a></tt><tt class="py-op">=</tt><tt class="py-string">'unicode'</tt><tt class="py-op">,</tt> <tt id="link-69" class="py-name" targets="Variable lxml.html.FormElement.method=lxml.html.FormElement-class.html#method"><a title="lxml.html.FormElement.method" class="py-name" href="#" onclick="return doclink('link-69', 'method', 'link-69');">method</a></tt><tt class="py-op">=</tt><tt id="link-70" class="py-name"><a title="lxml.html
+lxml.html.diff.href_token.html
+lxml.html.diff.tag_token.html
+lxml.html.diff.token.html" class="py-name" href="#" onclick="return doclink('link-70', 'html', 'link-39');">html</a></tt> <tt class="py-keyword">and</tt> <tt class="py-string">'html'</tt> <tt class="py-keyword">or</tt> <tt class="py-string">'xml'</tt><tt class="py-op">)</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-71" class="py-name" targets="Method lxml.tests.test_doctestcompare.DoctestCompareTest.assert_diff()=lxml.tests.test_doctestcompare.DoctestCompareTest-class.html#assert_diff"><a title="lxml.tests.test_doctestcompare.DoctestCompareTest.assert_diff" class="py-name" href="#" onclick="return doclink('link-71', 'assert_diff', 'link-71');">assert_diff</a></tt><tt class="py-op">(</tt><tt class="py-name">want</tt><tt class="py-op">,</tt> <tt class="py-name">got</tt><tt class="py-op">,</tt> <tt id="link-72" class="py-name"><a title="lxml.html.diff" class="py-name" href="#" onclick="return doclink('link-72', 'diff', 'link-56');">diff</a></tt><tt class="py-op">,</tt> <tt id="link-73" class="py-name"><a title="lxml.html
+lxml.html.diff.href_token.html
+lxml.html.diff.tag_token.html
+lxml.html.diff.token.html" class="py-name" href="#" onclick="return doclink('link-73', 'html', 'link-39');">html</a></tt><tt class="py-op">=</tt><tt id="link-74" class="py-name"><a title="lxml.html
+lxml.html.diff.href_token.html
+lxml.html.diff.tag_token.html
+lxml.html.diff.token.html" class="py-name" href="#" onclick="return doclink('link-74', 'html', 'link-39');">html</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line"> </tt>
+<a name="DoctestCompareTest.test_equal_input"></a><div id="DoctestCompareTest.test_equal_input-def"><a name="L57"></a><tt class="py-lineno"> 57</tt> <a class="py-toggle" href="#" id="DoctestCompareTest.test_equal_input-toggle" onclick="return toggle('DoctestCompareTest.test_equal_input');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.test_doctestcompare.DoctestCompareTest-class.html#test_equal_input">test_equal_input</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DoctestCompareTest.test_equal_input-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="DoctestCompareTest.test_equal_input-expanded"><a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-75" class="py-name" targets="Method lxml.tests.test_doctestcompare.DoctestCompareTest.assert_nodiff()=lxml.tests.test_doctestcompare.DoctestCompareTest-class.html#assert_nodiff"><a title="lxml.tests.test_doctestcompare.DoctestCompareTest.assert_nodiff" class="py-name" href="#" onclick="return doclink('link-75', 'assert_nodiff', 'link-75');">assert_nodiff</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line">            <tt class="py-string">'&lt;p title="expected"&gt;Expected&lt;/p&gt;'</tt><tt class="py-op">,</tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line">            <tt class="py-string">'&lt;p title="expected"&gt;Expected&lt;/p&gt;'</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line"> </tt>
+<a name="DoctestCompareTest.test_differing_tags"></a><div id="DoctestCompareTest.test_differing_tags-def"><a name="L62"></a><tt class="py-lineno"> 62</tt> <a class="py-toggle" href="#" id="DoctestCompareTest.test_differing_tags-toggle" onclick="return toggle('DoctestCompareTest.test_differing_tags');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.test_doctestcompare.DoctestCompareTest-class.html#test_differing_tags">test_differing_tags</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DoctestCompareTest.test_differing_tags-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="DoctestCompareTest.test_differing_tags-expanded"><a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-76" class="py-name"><a title="lxml.tests.test_doctestcompare.DoctestCompareTest.assert_diff" class="py-name" href="#" onclick="return doclink('link-76', 'assert_diff', 'link-71');">assert_diff</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line">            <tt class="py-string">'&lt;p title="expected"&gt;Expected&lt;/p&gt;'</tt><tt class="py-op">,</tt> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line">            <tt class="py-string">'&lt;b title="expected"&gt;Expected&lt;/b&gt;'</tt><tt class="py-op">,</tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line">            <tt class="py-string">'&lt;p (got: b) title="expected"&gt;Expected&lt;/p (got: b)&gt;\n'</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line"> </tt>
+<a name="DoctestCompareTest.test_tags_upper_lower_case"></a><div id="DoctestCompareTest.test_tags_upper_lower_case-def"><a name="L68"></a><tt class="py-lineno"> 68</tt> <a class="py-toggle" href="#" id="DoctestCompareTest.test_tags_upper_lower_case-toggle" onclick="return toggle('DoctestCompareTest.test_tags_upper_lower_case');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.test_doctestcompare.DoctestCompareTest-class.html#test_tags_upper_lower_case">test_tags_upper_lower_case</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DoctestCompareTest.test_tags_upper_lower_case-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="DoctestCompareTest.test_tags_upper_lower_case-expanded"><a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-77" class="py-name"><a title="lxml.tests.test_doctestcompare.DoctestCompareTest.assert_diff" class="py-name" href="#" onclick="return doclink('link-77', 'assert_diff', 'link-71');">assert_diff</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line">            <tt class="py-string">'&lt;p title="expected"&gt;Expected&lt;/p&gt;'</tt><tt class="py-op">,</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line">            <tt class="py-string">'&lt;P title="expected"&gt;Expected&lt;/P&gt;'</tt><tt class="py-op">,</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line">            <tt class="py-string">'&lt;p (got: P) title="expected"&gt;Expected&lt;/p (got: P)&gt;\n'</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line"> </tt>
+<a name="DoctestCompareTest.test_tags_upper_lower_case_html"></a><div id="DoctestCompareTest.test_tags_upper_lower_case_html-def"><a name="L74"></a><tt class="py-lineno"> 74</tt> <a class="py-toggle" href="#" id="DoctestCompareTest.test_tags_upper_lower_case_html-toggle" onclick="return toggle('DoctestCompareTest.test_tags_upper_lower_case_html');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.test_doctestcompare.DoctestCompareTest-class.html#test_tags_upper_lower_case_html">test_tags_upper_lower_case_html</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DoctestCompareTest.test_tags_upper_lower_case_html-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="DoctestCompareTest.test_tags_upper_lower_case_html-expanded"><a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-78" class="py-name"><a title="lxml.tests.test_doctestcompare.DoctestCompareTest.assert_nodiff" class="py-name" href="#" onclick="return doclink('link-78', 'assert_nodiff', 'link-75');">assert_nodiff</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line">            <tt class="py-string">'&lt;html&gt;&lt;body&gt;&lt;p title="expected"&gt;Expected&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;'</tt><tt class="py-op">,</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line">            <tt class="py-string">'&lt;HTML&gt;&lt;BODY&gt;&lt;P title="expected"&gt;Expected&lt;/P&gt;&lt;/BODY&gt;&lt;/HTML&gt;'</tt><tt class="py-op">,</tt> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line">            <tt id="link-79" class="py-name"><a title="lxml.html
+lxml.html.diff.href_token.html
+lxml.html.diff.tag_token.html
+lxml.html.diff.token.html" class="py-name" href="#" onclick="return doclink('link-79', 'html', 'link-39');">html</a></tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line"> </tt>
+<a name="DoctestCompareTest.test_differing_attributes"></a><div id="DoctestCompareTest.test_differing_attributes-def"><a name="L80"></a><tt class="py-lineno"> 80</tt> <a class="py-toggle" href="#" id="DoctestCompareTest.test_differing_attributes-toggle" onclick="return toggle('DoctestCompareTest.test_differing_attributes');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.test_doctestcompare.DoctestCompareTest-class.html#test_differing_attributes">test_differing_attributes</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DoctestCompareTest.test_differing_attributes-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="DoctestCompareTest.test_differing_attributes-expanded"><a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-80" class="py-name"><a title="lxml.tests.test_doctestcompare.DoctestCompareTest.assert_diff" class="py-name" href="#" onclick="return doclink('link-80', 'assert_diff', 'link-71');">assert_diff</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line">            <tt class="py-string">'&lt;p title="expected"&gt;Expected&lt;/p&gt;'</tt><tt class="py-op">,</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line">            <tt class="py-string">'&lt;p title="actual"&gt;Actual&lt;/p&gt;'</tt><tt class="py-op">,</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line">            <tt class="py-string">'&lt;p title="expected (got: actual)"&gt;Expected (got: Actual)&lt;/p&gt;\n'</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line"> </tt>
+<a name="DoctestCompareTest.test_extra_children"></a><div id="DoctestCompareTest.test_extra_children-def"><a name="L86"></a><tt class="py-lineno"> 86</tt> <a class="py-toggle" href="#" id="DoctestCompareTest.test_extra_children-toggle" onclick="return toggle('DoctestCompareTest.test_extra_children');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.test_doctestcompare.DoctestCompareTest-class.html#test_extra_children">test_extra_children</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DoctestCompareTest.test_extra_children-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="DoctestCompareTest.test_extra_children-expanded"><a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line">        <tt class="py-comment"># https://bugs.launchpad.net/lxml/+bug/1238503</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-81" class="py-name"><a title="lxml.tests.test_doctestcompare.DoctestCompareTest.assert_diff" class="py-name" href="#" onclick="return doclink('link-81', 'assert_diff', 'link-71');">assert_diff</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">            <tt class="py-string">'&lt;p&gt;&lt;span&gt;One&lt;/span&gt;&lt;/p&gt;'</tt><tt class="py-op">,</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line">            <tt class="py-string">'&lt;p&gt;&lt;span&gt;One&lt;/span&gt;&lt;b&gt;Two&lt;/b&gt;&lt;em&gt;Three&lt;/em&gt;&lt;/p&gt;'</tt><tt class="py-op">,</tt> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">            <tt class="py-string">'&lt;p&gt;\n'</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">            <tt class="py-string">'  &lt;span&gt;One&lt;/span&gt;\n'</tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line">            <tt class="py-string">'  +&lt;b&gt;Two&lt;/b&gt;\n'</tt> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line">            <tt class="py-string">'  +&lt;em&gt;Three&lt;/em&gt;\n'</tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line">            <tt class="py-string">'&lt;/p&gt;\n'</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line"> </tt>
+<a name="DoctestCompareTest.test_missing_children"></a><div id="DoctestCompareTest.test_missing_children-def"><a name="L97"></a><tt class="py-lineno"> 97</tt> <a class="py-toggle" href="#" id="DoctestCompareTest.test_missing_children-toggle" onclick="return toggle('DoctestCompareTest.test_missing_children');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.test_doctestcompare.DoctestCompareTest-class.html#test_missing_children">test_missing_children</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DoctestCompareTest.test_missing_children-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="DoctestCompareTest.test_missing_children-expanded"><a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-82" class="py-name"><a title="lxml.tests.test_doctestcompare.DoctestCompareTest.assert_diff" class="py-name" href="#" onclick="return doclink('link-82', 'assert_diff', 'link-71');">assert_diff</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line">            <tt class="py-string">'&lt;p&gt;&lt;span&gt;One&lt;/span&gt;&lt;b&gt;Two&lt;/b&gt;&lt;em&gt;Three&lt;/em&gt;&lt;/p&gt;'</tt><tt class="py-op">,</tt> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line">            <tt class="py-string">'&lt;p&gt;&lt;span&gt;One&lt;/span&gt;&lt;/p&gt;'</tt><tt class="py-op">,</tt> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line">            <tt class="py-string">'&lt;p&gt;\n'</tt> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line">            <tt class="py-string">'  &lt;span&gt;One&lt;/span&gt;\n'</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line">            <tt class="py-string">'  -&lt;b&gt;Two&lt;/b&gt;\n'</tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">            <tt class="py-string">'  -&lt;em&gt;Three&lt;/em&gt;\n'</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line">            <tt class="py-string">'&lt;/p&gt;\n'</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line"> </tt>
+<a name="DoctestCompareTest.test_extra_attributes"></a><div id="DoctestCompareTest.test_extra_attributes-def"><a name="L107"></a><tt class="py-lineno">107</tt> <a class="py-toggle" href="#" id="DoctestCompareTest.test_extra_attributes-toggle" onclick="return toggle('DoctestCompareTest.test_extra_attributes');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.test_doctestcompare.DoctestCompareTest-class.html#test_extra_attributes">test_extra_attributes</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DoctestCompareTest.test_extra_attributes-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="DoctestCompareTest.test_extra_attributes-expanded"><a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-83" class="py-name"><a title="lxml.tests.test_doctestcompare.DoctestCompareTest.assert_diff" class="py-name" href="#" onclick="return doclink('link-83', 'assert_diff', 'link-71');">assert_diff</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line">            <tt class="py-string">'&lt;p&gt;&lt;span class="foo"&gt;Text&lt;/span&gt;&lt;/p&gt;'</tt><tt class="py-op">,</tt> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line">            <tt class="py-string">'&lt;p&gt;&lt;span class="foo" id="bar"&gt;Text&lt;/span&gt;&lt;/p&gt;'</tt><tt class="py-op">,</tt> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line">            <tt class="py-string">'&lt;p&gt;\n'</tt> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line">            <tt class="py-string">'  &lt;span class="foo" +id="bar"&gt;Text&lt;/span&gt;\n'</tt> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line">            <tt class="py-string">'&lt;/p&gt;\n'</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line"> </tt>
+<a name="DoctestCompareTest.test_missing_attributes"></a><div id="DoctestCompareTest.test_missing_attributes-def"><a name="L115"></a><tt class="py-lineno">115</tt> <a class="py-toggle" href="#" id="DoctestCompareTest.test_missing_attributes-toggle" onclick="return toggle('DoctestCompareTest.test_missing_attributes');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.test_doctestcompare.DoctestCompareTest-class.html#test_missing_attributes">test_missing_attributes</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DoctestCompareTest.test_missing_attributes-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="DoctestCompareTest.test_missing_attributes-expanded"><a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-84" class="py-name"><a title="lxml.tests.test_doctestcompare.DoctestCompareTest.assert_diff" class="py-name" href="#" onclick="return doclink('link-84', 'assert_diff', 'link-71');">assert_diff</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line">            <tt class="py-string">'&lt;p&gt;&lt;span class="foo" id="bar"&gt;Text&lt;/span&gt;&lt;/p&gt;'</tt><tt class="py-op">,</tt> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line">            <tt class="py-string">'&lt;p&gt;&lt;span class="foo"&gt;Text&lt;/span&gt;&lt;/p&gt;'</tt><tt class="py-op">,</tt> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line">            <tt class="py-string">'&lt;p&gt;\n'</tt> </tt>
+<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line">            <tt class="py-string">'  &lt;span class="foo" -id="bar"&gt;Text&lt;/span&gt;\n'</tt> </tt>
+<a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line">            <tt class="py-string">'&lt;/p&gt;\n'</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line"> </tt>
+<a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line"> </tt>
+<a name="test_suite"></a><div id="test_suite-def"><a name="L124"></a><tt class="py-lineno">124</tt> <a class="py-toggle" href="#" id="test_suite-toggle" onclick="return toggle('test_suite');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="lxml.tests.test_doctestcompare-module.html#test_suite">test_suite</a><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="test_suite-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="test_suite-expanded"><a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line">    <tt class="py-name">suite</tt> <tt class="py-op">=</tt> <tt class="py-name">unittest</tt><tt class="py-op">.</tt><tt class="py-name">TestSuite</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">version_info</tt> <tt class="py-op">&gt;=</tt> <tt class="py-op">(</tt><tt class="py-number">2</tt><tt class="py-op">,</tt><tt class="py-number">4</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line">        <tt class="py-name">suite</tt><tt class="py-op">.</tt><tt class="py-name">addTests</tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt class="py-name">unittest</tt><tt class="py-op">.</tt><tt class="py-name">makeSuite</tt><tt class="py-op">(</tt><tt id="link-85" class="py-name" targets="Class lxml.tests.test_doctestcompare.DoctestCompareTest=lxml.tests.test_doctestcompare.DoctestCompareTest-class.html"><a title="lxml.tests.test_doctestcompare.DoctestCompareTest" class="py-name" href="#" onclick="return doclink('link-85', 'DoctestCompareTest', 'link-85');">DoctestCompareTest</a></tt><tt class="py-op">)</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">suite</tt> </tt>
+</div><a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line"> </tt>
+<a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line"> </tt>
+<a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line"><tt class="py-keyword">if</tt> <tt class="py-name">__name__</tt> <tt class="py-op">==</tt> <tt class="py-string">'__main__'</tt><tt class="py-op">:</tt> </tt>
+<a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line">    <tt class="py-name">unittest</tt><tt class="py-op">.</tt><tt class="py-name">main</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lxml-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="/">lxml API</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Fri Jun 22 18:59:52 2018
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

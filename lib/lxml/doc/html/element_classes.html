@@ -1,0 +1,532 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.12: http://docutils.sourceforge.net/" />
+<title>Using custom Element classes in lxml</title>
+<link rel="stylesheet" href="style.css" type="text/css" />
+<script type="text/javascript">
+function trigger_menu(event) {
+    var sidemenu = document.getElementById("sidemenu");
+    var classes = sidemenu.getAttribute("class");
+    classes = (classes.indexOf(" visible") === -1) ? classes + " visible" : classes.replace(" visible", "");
+    sidemenu.setAttribute("class", classes);
+    event.preventDefault();
+    event.stopPropagation();
+}
+function hide_menu() {
+    var sidemenu = document.getElementById("sidemenu");
+    var classes = sidemenu.getAttribute("class");
+    if (classes.indexOf(" visible") !== -1) {
+        sidemenu.setAttribute("class", classes.replace(" visible", ""));
+    }
+}
+</script><meta content="width=device-width, initial-scale=1" name="viewport" /></head>
+<body onclick="hide_menu()">
+<div class="document" id="using-custom-element-classes-in-lxml">
+<div class="sidemenu" id="sidemenu"><div class="menutrigger" onclick="trigger_menu(event)">Menu</div><div class="menu"><ul id="lxml-section"><li><span class="section title">lxml</span><ul class="menu foreign" id="index-menu"><li class="menu title"><a href="index.html">lxml</a><ul class="submenu"><li class="menu item"><a href="index.html#introduction">Introduction</a></li><li class="menu item"><a href="index.html#support-the-project">Support the project</a></li><li class="menu item"><a href="index.html#documentation">Documentation</a></li><li class="menu item"><a href="index.html#download">Download</a></li><li class="menu item"><a href="index.html#mailing-list">Mailing list</a></li><li class="menu item"><a href="index.html#bug-tracker">Bug tracker</a></li><li class="menu item"><a href="index.html#license">License</a></li><li class="menu item"><a href="index.html#old-versions">Old Versions</a></li><li class="menu item"><a href="index.html#docutils-system-messages">Docutils System Messages</a></li><li class="menu item"><a href="index.html#legal-notice-for-donations">Legal Notice for Donations</a></li></ul></li></ul><ul class="menu foreign" id="intro-menu"><li class="menu title"><a href="intro.html">Why lxml?</a><ul class="submenu"><li class="menu item"><a href="intro.html#motto">Motto</a></li><li class="menu item"><a href="intro.html#aims">Aims</a></li></ul></li></ul><ul class="menu foreign" id="installation-menu"><li class="menu title"><a href="installation.html">Installing lxml</a><ul class="submenu"><li class="menu item"><a href="installation.html#where-to-get-it">Where to get it</a></li><li class="menu item"><a href="installation.html#requirements">Requirements</a></li><li class="menu item"><a href="installation.html#installation">Installation</a></li><li class="menu item"><a href="installation.html#building-lxml-from-dev-sources">Building lxml from dev sources</a></li><li class="menu item"><a href="installation.html#using-lxml-with-python-libxml2">Using lxml with python-libxml2</a></li><li class="menu item"><a href="installation.html#source-builds-on-ms-windows">Source builds on MS Windows</a></li><li class="menu item"><a href="installation.html#source-builds-on-macos-x">Source builds on MacOS-X</a></li></ul></li></ul><ul class="menu foreign" id="performance-menu"><li class="menu title"><a href="performance.html">Benchmarks and Speed</a><ul class="submenu"><li class="menu item"><a href="performance.html#general-notes">General notes</a></li><li class="menu item"><a href="performance.html#how-to-read-the-timings">How to read the timings</a></li><li class="menu item"><a href="performance.html#parsing-and-serialising">Parsing and Serialising</a></li><li class="menu item"><a href="performance.html#the-elementtree-api">The ElementTree API</a></li><li class="menu item"><a href="performance.html#xpath">XPath</a></li><li class="menu item"><a href="performance.html#a-longer-example">A longer example</a></li><li class="menu item"><a href="performance.html#lxml-objectify">lxml.objectify</a></li></ul></li></ul><ul class="menu foreign" id="compatibility-menu"><li class="menu title"><a href="compatibility.html">ElementTree compatibility of lxml.etree</a></li></ul><ul class="menu foreign" id="FAQ-menu"><li class="menu title"><a href="FAQ.html">lxml FAQ - Frequently Asked Questions</a><ul class="submenu"><li class="menu item"><a href="FAQ.html#general-questions">General Questions</a></li><li class="menu item"><a href="FAQ.html#installation">Installation</a></li><li class="menu item"><a href="FAQ.html#contributing">Contributing</a></li><li class="menu item"><a href="FAQ.html#bugs">Bugs</a></li><li class="menu item"><a href="FAQ.html#id1">Threading</a></li><li class="menu item"><a href="FAQ.html#parsing-and-serialisation">Parsing and Serialisation</a></li><li class="menu item"><a href="FAQ.html#xpath-and-document-traversal">XPath and Document Traversal</a></li></ul></li></ul></li></ul><ul id="Developing with lxml-section"><li><span class="section title">Developing with lxml</span><ul class="menu foreign" id="tutorial-menu"><li class="menu title"><a href="tutorial.html">The lxml.etree Tutorial</a><ul class="submenu"><li class="menu item"><a href="tutorial.html#the-element-class">The Element class</a></li><li class="menu item"><a href="tutorial.html#the-elementtree-class">The ElementTree class</a></li><li class="menu item"><a href="tutorial.html#parsing-from-strings-and-files">Parsing from strings and files</a></li><li class="menu item"><a href="tutorial.html#namespaces">Namespaces</a></li><li class="menu item"><a href="tutorial.html#the-e-factory">The E-factory</a></li><li class="menu item"><a href="tutorial.html#elementpath">ElementPath</a></li></ul></li></ul><ul class="menu foreign" id="api index-menu"><li class="menu title"><a href="api/index.html">API reference</a></li></ul><ul class="menu foreign" id="api-menu"><li class="menu title"><a href="api.html">APIs specific to lxml.etree</a><ul class="submenu"><li class="menu item"><a href="api.html#lxml-etree">lxml.etree</a></li><li class="menu item"><a href="api.html#other-element-apis">Other Element APIs</a></li><li class="menu item"><a href="api.html#trees-and-documents">Trees and Documents</a></li><li class="menu item"><a href="api.html#iteration">Iteration</a></li><li class="menu item"><a href="api.html#error-handling-on-exceptions">Error handling on exceptions</a></li><li class="menu item"><a href="api.html#error-logging">Error logging</a></li><li class="menu item"><a href="api.html#serialisation">Serialisation</a></li><li class="menu item"><a href="api.html#incremental-xml-generation">Incremental XML generation</a></li><li class="menu item"><a href="api.html#cdata">CDATA</a></li><li class="menu item"><a href="api.html#xinclude-and-elementinclude">XInclude and ElementInclude</a></li><li class="menu item"><a href="api.html#write-c14n-on-elementtree">write_c14n on ElementTree</a></li></ul></li></ul><ul class="menu foreign" id="parsing-menu"><li class="menu title"><a href="parsing.html">Parsing XML and HTML with lxml</a><ul class="submenu"><li class="menu item"><a href="parsing.html#parsers">Parsers</a></li><li class="menu item"><a href="parsing.html#the-target-parser-interface">The target parser interface</a></li><li class="menu item"><a href="parsing.html#the-feed-parser-interface">The feed parser interface</a></li><li class="menu item"><a href="parsing.html#incremental-event-parsing">Incremental event parsing</a></li><li class="menu item"><a href="parsing.html#iterparse-and-iterwalk">iterparse and iterwalk</a></li><li class="menu item"><a href="parsing.html#python-unicode-strings">Python unicode strings</a></li></ul></li></ul><ul class="menu foreign" id="validation-menu"><li class="menu title"><a href="validation.html">Validation with lxml</a><ul class="submenu"><li class="menu item"><a href="validation.html#validation-at-parse-time">Validation at parse time</a></li><li class="menu item"><a href="validation.html#id1">DTD</a></li><li class="menu item"><a href="validation.html#relaxng">RelaxNG</a></li><li class="menu item"><a href="validation.html#xmlschema">XMLSchema</a></li><li class="menu item"><a href="validation.html#id2">Schematron</a></li><li class="menu item"><a href="validation.html#id3">(Pre-ISO-Schematron)</a></li></ul></li></ul><ul class="menu foreign" id="xpathxslt-menu"><li class="menu title"><a href="xpathxslt.html">XPath and XSLT with lxml</a><ul class="submenu"><li class="menu item"><a href="xpathxslt.html#xpath">XPath</a></li><li class="menu item"><a href="xpathxslt.html#xslt">XSLT</a></li></ul></li></ul><ul class="menu foreign" id="objectify-menu"><li class="menu title"><a href="objectify.html">lxml.objectify</a><ul class="submenu"><li class="menu item"><a href="objectify.html#the-lxml-objectify-api">The lxml.objectify API</a></li><li class="menu item"><a href="objectify.html#asserting-a-schema">Asserting a Schema</a></li><li class="menu item"><a href="objectify.html#objectpath">ObjectPath</a></li><li class="menu item"><a href="objectify.html#python-data-types">Python data types</a></li><li class="menu item"><a href="objectify.html#how-data-types-are-matched">How data types are matched</a></li><li class="menu item"><a href="objectify.html#what-is-different-from-lxml-etree">What is different from lxml.etree?</a></li></ul></li></ul><ul class="menu foreign" id="lxmlhtml-menu"><li class="menu title"><a href="lxmlhtml.html">lxml.html</a><ul class="submenu"><li class="menu item"><a href="lxmlhtml.html#parsing-html">Parsing HTML</a></li><li class="menu item"><a href="lxmlhtml.html#html-element-methods">HTML Element Methods</a></li><li class="menu item"><a href="lxmlhtml.html#running-html-doctests">Running HTML doctests</a></li><li class="menu item"><a href="lxmlhtml.html#creating-html-with-the-e-factory">Creating HTML with the E-factory</a></li><li class="menu item"><a href="lxmlhtml.html#working-with-links">Working with links</a></li><li class="menu item"><a href="lxmlhtml.html#forms">Forms</a></li><li class="menu item"><a href="lxmlhtml.html#cleaning-up-html">Cleaning up HTML</a></li><li class="menu item"><a href="lxmlhtml.html#html-diff">HTML Diff</a></li><li class="menu item"><a href="lxmlhtml.html#examples">Examples</a></li></ul></li></ul><ul class="menu foreign" id="cssselect-menu"><li class="menu title"><a href="cssselect.html">lxml.cssselect</a><ul class="submenu"><li class="menu item"><a href="cssselect.html#the-cssselector-class">The CSSSelector class</a></li><li class="menu item"><a href="cssselect.html#the-cssselect-method">The cssselect method</a></li><li class="menu item"><a href="cssselect.html#supported-selectors">Supported Selectors</a></li><li class="menu item"><a href="cssselect.html#namespaces">Namespaces</a></li></ul></li></ul><ul class="menu foreign" id="elementsoup-menu"><li class="menu title"><a href="elementsoup.html">BeautifulSoup Parser</a><ul class="submenu"><li class="menu item"><a href="elementsoup.html#parsing-with-the-soupparser">Parsing with the soupparser</a></li><li class="menu item"><a href="elementsoup.html#entity-handling">Entity handling</a></li><li class="menu item"><a href="elementsoup.html#using-soupparser-as-a-fallback">Using soupparser as a fallback</a></li><li class="menu item"><a href="elementsoup.html#using-only-the-encoding-detection">Using only the encoding detection</a></li></ul></li></ul><ul class="menu foreign" id="html5parser-menu"><li class="menu title"><a href="html5parser.html">html5lib Parser</a><ul class="submenu"><li class="menu item"><a href="html5parser.html#differences-to-regular-html-parsing">Differences to regular HTML parsing</a></li><li class="menu item"><a href="html5parser.html#function-reference">Function Reference</a></li></ul></li></ul></li></ul><ul id="Extending lxml-section"><li><span class="section title">Extending lxml</span><ul class="menu foreign" id="resolvers-menu"><li class="menu title"><a href="resolvers.html">Document loading and URL resolving</a><ul class="submenu"><li class="menu item"><a href="resolvers.html#xml-catalogs">XML Catalogs</a></li><li class="menu item"><a href="resolvers.html#uri-resolvers">URI Resolvers</a></li><li class="menu item"><a href="resolvers.html#document-loading-in-context">Document loading in context</a></li><li class="menu item"><a href="resolvers.html#i-o-access-control-in-xslt">I/O access control in XSLT</a></li></ul></li></ul><ul class="menu foreign" id="extensions-menu"><li class="menu title"><a href="extensions.html">Python extensions for XPath and XSLT</a><ul class="submenu"><li class="menu item"><a href="extensions.html#xpath-extension-functions">XPath Extension functions</a></li><li class="menu item"><a href="extensions.html#xslt-extension-elements">XSLT extension elements</a></li></ul></li></ul><ul class="menu current" id="element classes-menu"><li class="menu title"><a href="element_classes.html">Using custom Element classes in lxml</a><ul class="submenu"><li class="menu item"><a href="element_classes.html#background-on-element-proxies">Background on Element proxies</a></li><li class="menu item"><a href="element_classes.html#element-initialization">Element initialization</a></li><li class="menu item"><a href="element_classes.html#setting-up-a-class-lookup-scheme">Setting up a class lookup scheme</a></li><li class="menu item"><a href="element_classes.html#generating-xml-with-custom-classes">Generating XML with custom classes</a></li><li class="menu item"><a href="element_classes.html#id1">Implementing namespaces</a></li></ul></li></ul><ul class="menu foreign" id="sax-menu"><li class="menu title"><a href="sax.html">Sax support</a><ul class="submenu"><li class="menu item"><a href="sax.html#building-a-tree-from-sax-events">Building a tree from SAX events</a></li><li class="menu item"><a href="sax.html#producing-sax-events-from-an-elementtree-or-element">Producing SAX events from an ElementTree or Element</a></li><li class="menu item"><a href="sax.html#interfacing-with-pulldom-minidom">Interfacing with pulldom/minidom</a></li></ul></li></ul><ul class="menu foreign" id="capi-menu"><li class="menu title"><a href="capi.html">The public C-API of lxml.etree</a><ul class="submenu"><li class="menu item"><a href="capi.html#passing-generated-trees-through-python">Passing generated trees through Python</a></li><li class="menu item"><a href="capi.html#writing-external-modules-in-cython">Writing external modules in Cython</a></li><li class="menu item"><a href="capi.html#writing-external-modules-in-c">Writing external modules in C</a></li></ul></li></ul></li></ul><ul id="Developing lxml-section"><li><span class="section title">Developing lxml</span><ul class="menu foreign" id="build-menu"><li class="menu title"><a href="build.html">How to build lxml from source</a><ul class="submenu"><li class="menu item"><a href="build.html#cython">Cython</a></li><li class="menu item"><a href="build.html#github-git-and-hg">Github, git and hg</a></li><li class="menu item"><a href="build.html#building-the-sources">Building the sources</a></li><li class="menu item"><a href="build.html#running-the-tests-and-reporting-errors">Running the tests and reporting errors</a></li><li class="menu item"><a href="build.html#building-an-egg-or-wheel">Building an egg or wheel</a></li><li class="menu item"><a href="build.html#building-lxml-on-macos-x">Building lxml on MacOS-X</a></li><li class="menu item"><a href="build.html#static-linking-on-windows">Static linking on Windows</a></li><li class="menu item"><a href="build.html#building-debian-packages-from-svn-sources">Building Debian packages from SVN sources</a></li></ul></li></ul><ul class="menu foreign" id="lxml source howto-menu"><li class="menu title"><a href="lxml-source-howto.html">How to read the source of lxml</a><ul class="submenu"><li class="menu item"><a href="lxml-source-howto.html#what-is-cython">What is Cython?</a></li><li class="menu item"><a href="lxml-source-howto.html#where-to-start">Where to start?</a></li><li class="menu item"><a href="lxml-source-howto.html#lxml-etree">lxml.etree</a></li><li class="menu item"><a href="lxml-source-howto.html#python-modules">Python modules</a></li><li class="menu item"><a href="lxml-source-howto.html#lxml-objectify">lxml.objectify</a></li><li class="menu item"><a href="lxml-source-howto.html#lxml-html">lxml.html</a></li></ul></li></ul><ul class="menu foreign" id="changes 4 2 2-menu"><li class="menu title"><a href="changes-4.2.2.html">Release Changelog</a></li></ul><ul class="menu foreign" id="credits-menu"><li class="menu title"><a href="credits.html">Credits</a><ul class="submenu"><li class="menu item"><a href="credits.html#main-contributors">Main contributors</a></li><li class="menu item"><a href="credits.html#special-thanks-goes-to">Special thanks goes to:</a></li></ul></li></ul></li><li><a href="/sitemap.html">Sitemap</a></li></ul></div></div><h1 class="title">Using custom Element classes in lxml</h1>
+
+<p>lxml has very sophisticated support for custom Element classes.  You
+can provide your own classes for Elements and have lxml use them by
+default for all elements generated by a specific parser, only for a
+specific tag name in a specific namespace or even for an exact element
+at a specific position in the tree.</p>
+<p>Custom Elements must inherit from the <tt class="docutils literal">lxml.etree.ElementBase</tt> class, which
+provides the Element interface for subclasses:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">lxml</span> <span class="kn">import</span> <span class="n">etree</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">honk</span><span class="p">(</span><span class="n">etree</span><span class="o">.</span><span class="n">ElementBase</span><span class="p">):</span>
+<span class="gp">... </span>   <span class="nd">@property</span>
+<span class="gp">... </span>   <span class="k">def</span> <span class="nf">honking</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="gp">... </span>      <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'honking'</span><span class="p">)</span> <span class="o">==</span> <span class="s1">'true'</span>
+</pre></div>
+<p>This defines a new Element class <tt class="docutils literal">honk</tt> with a property <tt class="docutils literal">honking</tt>.</p>
+<p>The following document describes how you can make lxml.etree use these
+custom Element classes.</p>
+<div class="contents topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#background-on-element-proxies" id="id2">Background on Element proxies</a></li>
+<li><a class="reference internal" href="#element-initialization" id="id3">Element initialization</a></li>
+<li><a class="reference internal" href="#setting-up-a-class-lookup-scheme" id="id4">Setting up a class lookup scheme</a><ul>
+<li><a class="reference internal" href="#default-class-lookup" id="id5">Default class lookup</a></li>
+<li><a class="reference internal" href="#namespace-class-lookup" id="id6">Namespace class lookup</a></li>
+<li><a class="reference internal" href="#attribute-based-lookup" id="id7">Attribute based lookup</a></li>
+<li><a class="reference internal" href="#custom-element-class-lookup" id="id8">Custom element class lookup</a></li>
+<li><a class="reference internal" href="#tree-based-element-class-lookup-in-python" id="id9">Tree based element class lookup in Python</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#generating-xml-with-custom-classes" id="id10">Generating XML with custom classes</a></li>
+<li><a class="reference internal" href="#id1" id="id11">Implementing namespaces</a></li>
+</ul>
+</div>
+<div class="section" id="background-on-element-proxies">
+<h1>Background on Element proxies</h1>
+<p>Being based on libxml2, lxml.etree holds the entire XML tree in a C
+structure.  To communicate with Python code, it creates Python proxy
+objects for the XML elements on demand.</p>
+<blockquote>
+<img alt="proxies.png" src="proxies.png" />
+</blockquote>
+<p>The mapping between C elements and Python Element classes is
+completely configurable.  When you ask lxml.etree for an Element by
+using its API, it will instantiate your classes for you.  All you have
+to do is tell lxml which class to use for which kind of Element.  This
+is done through a class lookup scheme, as described in the sections
+below.</p>
+</div>
+<div class="section" id="element-initialization">
+<h1>Element initialization</h1>
+<p>There is one thing to know up front.  Element classes <em>must not</em> have
+an <tt class="docutils literal">__init___</tt> or <tt class="docutils literal">__new__</tt> method.  There should not be any
+internal state either, except for the data stored in the underlying
+XML tree.  Element instances are created and garbage collected at
+need, so there is normally no way to predict when and how often a
+proxy is created for them.  Even worse, when the <tt class="docutils literal">__init__</tt> method
+is called, the object is not even initialized yet to represent the XML
+tag, so there is not much use in providing an <tt class="docutils literal">__init__</tt> method in
+subclasses.</p>
+<p>Most use cases will not require any class initialisation or proxy
+state, so you can content yourself with skipping to the next section
+for now.  However, if you really need to set up your element class on
+instantiation, or need a way to persistently store state in the proxy
+instances instead of the XML tree, here is a way to do so.</p>
+<p>There is one important guarantee regarding Element proxies.  Once a
+proxy has been instantiated, it will keep alive as long as there is a
+Python reference to it, and any access to the XML element in the tree
+will return this very instance.  Therefore, if you need to store local
+state in a custom Element class (which is generally discouraged), you
+can do so by keeping the Elements in a tree alive.  If the tree
+doesn't change, you can simply do this:</p>
+<div class="syntax"><pre><span class="n">proxy_cache</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">iter</span><span class="p">())</span>
+</pre></div>
+<p>or</p>
+<div class="syntax"><pre><span class="n">proxy_cache</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">iter</span><span class="p">())</span>
+</pre></div>
+<p>or use any other suitable container.  Note that you have to keep this
+cache manually up to date if the tree changes, which can get tricky in
+cases.</p>
+<p>For proxy initialisation, ElementBase classes have an <tt class="docutils literal">_init()</tt>
+method that can be overridden, as oppose to the normal <tt class="docutils literal">__init__()</tt>
+method.  It can be used to modify the XML tree, e.g. to construct
+special children or verify and update attributes.</p>
+<p>The semantics of <tt class="docutils literal">_init()</tt> are as follows:</p>
+<ul class="simple">
+<li>It is called once on Element class instantiation time.  That is,
+when a Python representation of the element is created by lxml.  At
+that time, the element object is completely initialized to represent
+a specific XML element within the tree.</li>
+<li>The method has complete access to the XML tree.  Modifications can be done
+in exactly the same way as anywhere else in the program.</li>
+<li>Python representations of elements may be created multiple times during the
+lifetime of an XML element in the underlying C tree.  The <tt class="docutils literal">_init()</tt> code
+provided by subclasses must take special care by itself that multiple
+executions either are harmless or that they are prevented by some kind of
+flag in the XML tree.  The latter can be achieved by modifying an attribute
+value or by removing or adding a specific child node and then verifying this
+before running through the init process.</li>
+<li>Any exceptions raised in <tt class="docutils literal">_init()</tt> will be propagated through the API
+call that lead to the creation of the Element.  So be careful with the code
+you write here as its exceptions may turn up in various unexpected places.</li>
+</ul>
+</div>
+<div class="section" id="setting-up-a-class-lookup-scheme">
+<h1>Setting up a class lookup scheme</h1>
+<p>The first thing to do when deploying custom element classes is to register a
+class lookup scheme on a parser.  lxml.etree provides quite a number of
+different schemes that also support class lookup based on namespaces or
+attribute values.  Most lookups support fallback chaining, which allows the
+next lookup mechanism to take over when the previous one fails to find a
+class.</p>
+<p>For example, setting the <tt class="docutils literal">honk</tt> Element as a default element class
+for a parser works as follows:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">parser_lookup</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">ElementDefaultClassLookup</span><span class="p">(</span><span class="n">element</span><span class="o">=</span><span class="n">honk</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">XMLParser</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span><span class="o">.</span><span class="n">set_element_class_lookup</span><span class="p">(</span><span class="n">parser_lookup</span><span class="p">)</span>
+</pre></div>
+<p>There is one drawback of the parser based scheme: the <tt class="docutils literal">Element()</tt> factory
+does not know about your specialised parser and creates a new document that
+deploys the default parser:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">el</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">Element</span><span class="p">(</span><span class="s2">"root"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">el</span><span class="p">,</span> <span class="n">honk</span><span class="p">))</span>
+<span class="go">False</span>
+</pre></div>
+<p>You should therefore avoid using this factory function in code that
+uses custom classes.  The <tt class="docutils literal">makeelement()</tt> method of parsers provides
+a simple replacement:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">el</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">makeelement</span><span class="p">(</span><span class="s2">"root"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">el</span><span class="p">,</span> <span class="n">honk</span><span class="p">))</span>
+<span class="go">True</span>
+</pre></div>
+<p>If you use a parser at the module level, you can easily redirect a module
+level <tt class="docutils literal">Element()</tt> factory to the parser method by adding code like this:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">module_level_parser</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">XMLParser</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Element</span> <span class="o">=</span> <span class="n">module_level_parser</span><span class="o">.</span><span class="n">makeelement</span>
+</pre></div>
+<p>While the <tt class="docutils literal">XML()</tt> and <tt class="docutils literal">HTML()</tt> factories also depend on the default
+parser, you can pass them a different parser as second argument:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">element</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">XML</span><span class="p">(</span><span class="s2">"&lt;test/&gt;"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">honk</span><span class="p">))</span>
+<span class="go">False</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">element</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">XML</span><span class="p">(</span><span class="s2">"&lt;test/&gt;"</span><span class="p">,</span> <span class="n">parser</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">honk</span><span class="p">))</span>
+<span class="go">True</span>
+</pre></div>
+<p>Whenever you create a document with a parser, it will inherit the lookup
+scheme and all subsequent element instantiations for this document will use
+it:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">element</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="s2">"&lt;test/&gt;"</span><span class="p">,</span> <span class="n">parser</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">honk</span><span class="p">))</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">el</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="s2">"subel"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">el</span><span class="p">,</span> <span class="n">honk</span><span class="p">))</span>
+<span class="go">True</span>
+</pre></div>
+<p>For testing code in the Python interpreter and for small projects, you
+may also consider setting a lookup scheme on the default parser.  To
+avoid interfering with other modules, however, it is usually a better
+idea to use a dedicated parser for each module (or a parser pool when
+using threads) and then register the required lookup scheme only for
+this parser.</p>
+<div class="section" id="default-class-lookup">
+<h2>Default class lookup</h2>
+<p>This is the most simple lookup mechanism.  It always returns the default
+element class.  Consequently, no further fallbacks are supported, but this
+scheme is a nice fallback for other custom lookup mechanisms.  Specifically,
+it also handles comments and processing instructions, which are easy to
+forget about when mapping proxies to classes.</p>
+<p>Usage:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">lookup</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">ElementDefaultClassLookup</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">XMLParser</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span><span class="o">.</span><span class="n">set_element_class_lookup</span><span class="p">(</span><span class="n">lookup</span><span class="p">)</span>
+</pre></div>
+<p>Note that the default for new parsers is to use the global fallback, which is
+also the default lookup (if not configured otherwise).</p>
+<p>To change the default element implementation, you can pass your new class to
+the constructor.  While it accepts classes for <tt class="docutils literal">element</tt>, <tt class="docutils literal">comment</tt> and
+<tt class="docutils literal">pi</tt> nodes, most use cases will only override the element class:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">el</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">makeelement</span><span class="p">(</span><span class="s2">"myelement"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">el</span><span class="p">,</span> <span class="n">honk</span><span class="p">))</span>
+<span class="go">False</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lookup</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">ElementDefaultClassLookup</span><span class="p">(</span><span class="n">element</span><span class="o">=</span><span class="n">honk</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span><span class="o">.</span><span class="n">set_element_class_lookup</span><span class="p">(</span><span class="n">lookup</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">el</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">makeelement</span><span class="p">(</span><span class="s2">"myelement"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">el</span><span class="p">,</span> <span class="n">honk</span><span class="p">))</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">el</span><span class="o">.</span><span class="n">honking</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">el</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">makeelement</span><span class="p">(</span><span class="s2">"myelement"</span><span class="p">,</span> <span class="n">honking</span><span class="o">=</span><span class="s1">'true'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">etree</span><span class="o">.</span><span class="n">tostring</span><span class="p">(</span><span class="n">el</span><span class="p">)</span>
+<span class="go">b'&lt;myelement honking="true"/&gt;'</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">el</span><span class="o">.</span><span class="n">honking</span>
+<span class="go">True</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">root</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s1">'&lt;root honking="true"&gt;&lt;!--comment--&gt;&lt;/root&gt;'</span><span class="p">,</span> <span class="n">parser</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">root</span><span class="o">.</span><span class="n">honking</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">root</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+<span class="go">comment</span>
+</pre></div>
+</div>
+<div class="section" id="namespace-class-lookup">
+<h2>Namespace class lookup</h2>
+<p>This is an advanced lookup mechanism that supports namespace/tag-name specific
+element classes.  You can select it by calling:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">lookup</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">ElementNamespaceClassLookup</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">XMLParser</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span><span class="o">.</span><span class="n">set_element_class_lookup</span><span class="p">(</span><span class="n">lookup</span><span class="p">)</span>
+</pre></div>
+<p>See the separate section on <a class="reference external" href="#implementing-namespaces">implementing namespaces</a> below to learn how to
+make use of it.</p>
+<p>This scheme supports a fallback mechanism that is used in the case where the
+namespace is not found or no class was registered for the element name.
+Normally, the default class lookup is used here.  To change it, pass the
+desired fallback lookup scheme to the constructor:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">fallback</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">ElementDefaultClassLookup</span><span class="p">(</span><span class="n">element</span><span class="o">=</span><span class="n">honk</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lookup</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">ElementNamespaceClassLookup</span><span class="p">(</span><span class="n">fallback</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span><span class="o">.</span><span class="n">set_element_class_lookup</span><span class="p">(</span><span class="n">lookup</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">root</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s1">'&lt;root honking="true"&gt;&lt;!--comment--&gt;&lt;/root&gt;'</span><span class="p">,</span> <span class="n">parser</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">root</span><span class="o">.</span><span class="n">honking</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">root</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+<span class="go">comment</span>
+</pre></div>
+</div>
+<div class="section" id="attribute-based-lookup">
+<h2>Attribute based lookup</h2>
+<p>This scheme uses a mapping from attribute values to classes.  An attribute
+name is set at initialisation time and is then used to find the corresponding
+value in a dictionary.  It is set up as follows:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">id_class_mapping</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'1234'</span> <span class="p">:</span> <span class="n">honk</span><span class="p">}</span> <span class="c1"># maps attribute values to classes</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lookup</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">AttributeBasedElementClassLookup</span><span class="p">(</span>
+<span class="gp">... </span>                                     <span class="s1">'id'</span><span class="p">,</span> <span class="n">id_class_mapping</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">XMLParser</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span><span class="o">.</span><span class="n">set_element_class_lookup</span><span class="p">(</span><span class="n">lookup</span><span class="p">)</span>
+</pre></div>
+<p>And here is how to use it:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">xml</span> <span class="o">=</span> <span class="s1">'&lt;a id="123"&gt;&lt;b id="1234"/&gt;&lt;b id="1234" honking="true"/&gt;&lt;/a&gt;'</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="n">xml</span><span class="p">,</span> <span class="n">parser</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">honking</span>       <span class="c1"># id does not match !</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="gr">AttributeError</span>: <span class="n">'lxml.etree._Element' object has no attribute 'honking'</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">honking</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">honking</span>
+<span class="go">True</span>
+</pre></div>
+<p>This lookup scheme uses its fallback if the attribute is not found or
+its value is not in the mapping.  Normally, the default class lookup
+is used here.  If you want to use the namespace lookup, for example,
+you can use this code:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">fallback</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">ElementNamespaceClassLookup</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lookup</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">AttributeBasedElementClassLookup</span><span class="p">(</span>
+<span class="gp">... </span>                      <span class="s1">'id'</span><span class="p">,</span> <span class="n">id_class_mapping</span><span class="p">,</span> <span class="n">fallback</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">XMLParser</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span><span class="o">.</span><span class="n">set_element_class_lookup</span><span class="p">(</span><span class="n">lookup</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="section" id="custom-element-class-lookup">
+<h2>Custom element class lookup</h2>
+<p>This is the most customisable way of finding element classes on a per-element
+basis.  It allows you to implement a custom lookup scheme in a subclass:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">MyLookup</span><span class="p">(</span><span class="n">etree</span><span class="o">.</span><span class="n">CustomElementClassLookup</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="nf">lookup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node_type</span><span class="p">,</span> <span class="n">document</span><span class="p">,</span> <span class="n">namespace</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="k">if</span> <span class="n">node_type</span> <span class="o">==</span> <span class="s1">'element'</span><span class="p">:</span>
+<span class="gp">... </span>            <span class="k">return</span> <span class="n">honk</span>  <span class="c1"># be a bit more selective here ...</span>
+<span class="gp">... </span>        <span class="k">else</span><span class="p">:</span>
+<span class="gp">... </span>            <span class="k">return</span> <span class="bp">None</span>  <span class="c1"># pass on to (default) fallback</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">XMLParser</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span><span class="o">.</span><span class="n">set_element_class_lookup</span><span class="p">(</span><span class="n">MyLookup</span><span class="p">())</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">root</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s1">'&lt;root honking="true"&gt;&lt;!--comment--&gt;&lt;/root&gt;'</span><span class="p">,</span> <span class="n">parser</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">root</span><span class="o">.</span><span class="n">honking</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">root</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+<span class="go">comment</span>
+</pre></div>
+<p>The <tt class="docutils literal">.lookup()</tt> method must return either None (which triggers the
+fallback mechanism) or a subclass of <tt class="docutils literal">lxml.etree.ElementBase</tt>.  It
+can take any decision it wants based on the node type (one of
+"element", "comment", "PI", "entity"), the XML document of the
+element, or its namespace or tag name.</p>
+</div>
+<div class="section" id="tree-based-element-class-lookup-in-python">
+<h2>Tree based element class lookup in Python</h2>
+<p>Taking more elaborate decisions than allowed by the custom scheme is
+difficult to achieve in pure Python, as it results in a
+chicken-and-egg problem.  It would require access to the tree - before
+the elements in the tree have been instantiated as Python Element
+proxies.</p>
+<p>Luckily, there is a way to do this.  The <tt class="docutils literal">PythonElementClassLookup</tt>
+works similar to the custom lookup scheme:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">MyLookup</span><span class="p">(</span><span class="n">etree</span><span class="o">.</span><span class="n">PythonElementClassLookup</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="nf">lookup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">document</span><span class="p">,</span> <span class="n">element</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="k">return</span> <span class="n">MyElementClass</span> <span class="c1"># defined elsewhere</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">XMLParser</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span><span class="o">.</span><span class="n">set_element_class_lookup</span><span class="p">(</span><span class="n">MyLookup</span><span class="p">())</span>
+</pre></div>
+<p>As before, the first argument to the <tt class="docutils literal">lookup()</tt> method is the opaque
+document instance that contains the Element.  The second arguments is a
+lightweight Element proxy implementation that is only valid during the lookup.
+Do not try to keep a reference to it.  Once the lookup is finished, the proxy
+will become invalid.  You will get an <tt class="docutils literal">AssertionError</tt> if you access any of
+the properties or methods outside the scope of the lookup call where they were
+instantiated.</p>
+<p>During the lookup, the element object behaves mostly like a normal Element
+instance.  It provides the properties <tt class="docutils literal">tag</tt>, <tt class="docutils literal">text</tt>, <tt class="docutils literal">tail</tt> etc. and
+supports indexing, slicing and the <tt class="docutils literal">getchildren()</tt>, <tt class="docutils literal">getparent()</tt>
+etc. methods.  It does <em>not</em> support iteration, nor does it support any kind
+of modification.  All of its properties are read-only and it cannot be removed
+or inserted into other trees.  You can use it as a starting point to freely
+traverse the tree and collect any kind of information that its elements
+provide.  Once you have taken the decision which class to use for this
+element, you can simply return it and have lxml take care of cleaning up the
+instantiated proxy classes.</p>
+<p>Sidenote: this lookup scheme originally lived in a separate module called
+<tt class="docutils literal">lxml.pyclasslookup</tt>.</p>
+</div>
+</div>
+<div class="section" id="generating-xml-with-custom-classes">
+<h1>Generating XML with custom classes</h1>
+<p>Up to lxml 2.1, you could not instantiate proxy classes yourself.
+Only lxml.etree could do that when creating an object representation
+of an existing XML element.  Since lxml 2.2, however, instantiating
+this class will simply create a new Element:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">el</span> <span class="o">=</span> <span class="n">honk</span><span class="p">(</span><span class="n">honking</span><span class="o">=</span><span class="s1">'true'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">el</span><span class="o">.</span><span class="n">tag</span>
+<span class="go">'honk'</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">el</span><span class="o">.</span><span class="n">honking</span>
+<span class="go">True</span>
+</pre></div>
+<p>Note, however, that the proxy you create here will be garbage
+collected just like any other proxy.  You can therefore not count on
+lxml.etree using the same class that you instantiated when you access
+this Element a second time after letting its reference go.  You should
+therefore always use a corresponding class lookup scheme that returns
+your Element proxy classes for the elements that they create.  The
+<tt class="docutils literal">ElementNamespaceClassLookup</tt> is generally a good match.</p>
+<p>You can use custom Element classes to quickly create XML fragments:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">hale</span><span class="p">(</span><span class="n">etree</span><span class="o">.</span><span class="n">ElementBase</span><span class="p">):</span> <span class="k">pass</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">bopp</span><span class="p">(</span><span class="n">etree</span><span class="o">.</span><span class="n">ElementBase</span><span class="p">):</span> <span class="k">pass</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">el</span> <span class="o">=</span> <span class="n">hale</span><span class="p">(</span> <span class="s2">"some "</span><span class="p">,</span> <span class="n">honk</span><span class="p">(</span><span class="n">honking</span> <span class="o">=</span> <span class="s1">'true'</span><span class="p">),</span> <span class="n">bopp</span><span class="p">,</span> <span class="s2">" text"</span> <span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">etree</span><span class="o">.</span><span class="n">tostring</span><span class="p">(</span><span class="n">el</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">'unicode'</span><span class="p">))</span>
+<span class="go">&lt;hale&gt;some &lt;honk honking="true"/&gt;&lt;bopp/&gt; text&lt;/hale&gt;</span>
+</pre></div>
+</div>
+<div class="section" id="id1">
+<h1>Implementing namespaces</h1>
+<p>lxml allows you to implement namespaces, in a rather literal sense.  After
+setting up the namespace class lookup mechanism as described above, you can
+build a new element namespace (or retrieve an existing one) by calling the
+<tt class="docutils literal">get_namespace(uri)</tt> method of the lookup:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">lookup</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">ElementNamespaceClassLookup</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">XMLParser</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span><span class="o">.</span><span class="n">set_element_class_lookup</span><span class="p">(</span><span class="n">lookup</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">namespace</span> <span class="o">=</span> <span class="n">lookup</span><span class="o">.</span><span class="n">get_namespace</span><span class="p">(</span><span class="s1">'http://hui.de/honk'</span><span class="p">)</span>
+</pre></div>
+<p>and then register the new element type with that namespace, say, under the tag
+name <tt class="docutils literal">honk</tt>:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">namespace</span><span class="p">[</span><span class="s1">'honk'</span><span class="p">]</span> <span class="o">=</span> <span class="n">honk</span>
+</pre></div>
+<p>If you have many Element classes declared in one module, and they are
+all named like the elements they create, you can simply use
+<tt class="docutils literal"><span class="pre">namespace.update(globals())</span></tt> at the end of your module to declare them
+automatically.  The implementation is smart enough to ignore
+everything that is not an Element class.</p>
+<p>After this, you create and use your XML elements through the normal API of
+lxml:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">xml</span> <span class="o">=</span> <span class="s1">'&lt;honk xmlns="http://hui.de/honk" honking="true"/&gt;'</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">honk_element</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">XML</span><span class="p">(</span><span class="n">xml</span><span class="p">,</span> <span class="n">parser</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">honk_element</span><span class="o">.</span><span class="n">honking</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+<p>The same works when creating elements by hand:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">honk_element</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">makeelement</span><span class="p">(</span><span class="s1">'{http://hui.de/honk}honk'</span><span class="p">,</span>
+<span class="gp">... </span>                                  <span class="n">honking</span><span class="o">=</span><span class="s1">'true'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">honk_element</span><span class="o">.</span><span class="n">honking</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+<p>Essentially, what this allows you to do, is to give Elements a custom API
+based on their namespace and tag name.</p>
+<p>A somewhat related topic are <a class="reference external" href="extensions.html">extension functions</a> which use a similar
+mechanism for registering Python functions for use in XPath and XSLT.</p>
+<p>In the setup example above, we associated the <tt class="docutils literal">honk</tt> Element class
+only with the 'honk' element.  If an XML tree contains different
+elements in the same namespace, they do not pick up the same
+implementation:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">xml</span> <span class="o">=</span> <span class="p">(</span><span class="s1">'&lt;honk xmlns="http://hui.de/honk" honking="true"&gt;'</span>
+<span class="gp">... </span>       <span class="s1">'&lt;bla/&gt;&lt;!--comment--&gt;'</span>
+<span class="gp">... </span>       <span class="s1">'&lt;/honk&gt;'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">honk_element</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">XML</span><span class="p">(</span><span class="n">xml</span><span class="p">,</span> <span class="n">parser</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">honk_element</span><span class="o">.</span><span class="n">honking</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">honk_element</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">honking</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+  <span class="c">...</span>
+<span class="gr">AttributeError</span>: <span class="n">'lxml.etree._Element' object has no attribute 'honking'</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">honk_element</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+<span class="go">comment</span>
+</pre></div>
+<p>You can therefore provide one implementation per element name in each
+namespace and have lxml select the right one on the fly.  If you want one
+element implementation per namespace (ignoring the element name) or prefer
+having a common class for most elements except a few, you can specify a
+default implementation for an entire namespace by registering that class with
+the empty element name (<tt class="docutils literal">None</tt>).</p>
+<p>You may consider following an object oriented approach here.  If you build a
+class hierarchy of element classes, you can also implement a base class for a
+namespace that is used if no specific element class is provided.  Again, you
+can just pass None as an element name:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">HonkNSElement</span><span class="p">(</span><span class="n">etree</span><span class="o">.</span><span class="n">ElementBase</span><span class="p">):</span>
+<span class="gp">... </span>   <span class="k">def</span> <span class="nf">honk</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="gp">... </span>      <span class="k">return</span> <span class="s2">"HONK"</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">namespace</span><span class="p">[</span><span class="bp">None</span><span class="p">]</span> <span class="o">=</span> <span class="n">HonkNSElement</span>  <span class="c1"># default Element for namespace</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">HonkElement</span><span class="p">(</span><span class="n">HonkNSElement</span><span class="p">):</span>
+<span class="gp">... </span>   <span class="nd">@property</span>
+<span class="gp">... </span>   <span class="k">def</span> <span class="nf">honking</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="gp">... </span>      <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'honking'</span><span class="p">)</span> <span class="o">==</span> <span class="s1">'true'</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">namespace</span><span class="p">[</span><span class="s1">'honk'</span><span class="p">]</span> <span class="o">=</span> <span class="n">HonkElement</span>  <span class="c1"># Element for specific tag</span>
+</pre></div>
+<p>Now you can rely on lxml to always return objects of type HonkNSElement or its
+subclasses for elements of this namespace:</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">xml</span> <span class="o">=</span> <span class="p">(</span><span class="s1">'&lt;honk xmlns="http://hui.de/honk" honking="true"&gt;'</span>
+<span class="gp">... </span>       <span class="s1">'&lt;bla/&gt;&lt;!--comment--&gt;'</span>
+<span class="gp">... </span>       <span class="s1">'&lt;/honk&gt;'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">honk_element</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="n">xml</span><span class="p">,</span> <span class="n">parser</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">honk_element</span><span class="p">))</span>
+<span class="go">&lt;class 'HonkElement'&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">honk_element</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+<span class="go">&lt;class 'HonkNSElement'&gt;</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">honk_element</span><span class="o">.</span><span class="n">honking</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">honk_element</span><span class="o">.</span><span class="n">honk</span><span class="p">())</span>
+<span class="go">HONK</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">honk_element</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">honk</span><span class="p">())</span>
+<span class="go">HONK</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">honk_element</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">honking</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="c">...</span>
+<span class="gr">AttributeError</span>: <span class="n">'HonkNSElement' object has no attribute 'honking'</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">honk_element</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>  <span class="c1"># uses fallback for non-elements</span>
+<span class="go">comment</span>
+</pre></div>
+<p>Since lxml 4.1, the registration is more conveniently done with
+class decorators.  The namespace registry object is callable with
+a name (or <tt class="docutils literal">None</tt>) as argument and can then be used as decorator.</p>
+<div class="syntax"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">honk_elements</span> <span class="o">=</span> <span class="n">lookup</span><span class="o">.</span><span class="n">get_namespace</span><span class="p">(</span><span class="s1">'http://hui.de/honk'</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="nd">@honk_elements</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
+<span class="gp">... </span><span class="k">class</span> <span class="nc">HonkNSElement</span><span class="p">(</span><span class="n">etree</span><span class="o">.</span><span class="n">ElementBase</span><span class="p">):</span>
+<span class="gp">... </span>   <span class="k">def</span> <span class="nf">honk</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="gp">... </span>      <span class="k">return</span> <span class="s2">"HONK"</span>
+</pre></div>
+<p>If the class has the same name as the tag, you can also leave out the call
+and use the blank decorator instead:</p>
+<blockquote>
+<pre class="doctest-block">
+&gt;&gt;&gt; @honk_elements
+... class honkel(HonkNSElement):
+...    @property
+...    def honking(self):
+...       return self.get('honking') == 'true'
+</pre>
+<pre class="doctest-block">
+&gt;&gt;&gt; xml = '&lt;honkel xmlns="http://hui.de/honk" honking="true"&gt;&lt;bla/&gt;&lt;!--comment--&gt;&lt;/honkel&gt;'
+&gt;&gt;&gt; honk_element = etree.fromstring(xml, parser)
+</pre>
+<pre class="doctest-block">
+&gt;&gt;&gt; print(type(honk_element))
+&lt;class 'honkel'&gt;
+&gt;&gt;&gt; print(type(honk_element[0]))
+&lt;class 'HonkNSElement'&gt;
+</pre>
+</blockquote>
+</div>
+</div>
+<div class="footer">
+<hr class="footer" />
+Generated on: 2018-06-22.
+
+</div>
+</body>
+</html>

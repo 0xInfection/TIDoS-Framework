@@ -1,0 +1,498 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>lxml.doctestcompare</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lxml-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="/">lxml API</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="lxml-module.html">Package&nbsp;lxml</a> ::
+        Module&nbsp;doctestcompare
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="lxml.doctestcompare-module.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== MODULE DESCRIPTION ==================== -->
+<h1 class="epydoc">Module doctestcompare</h1><p class="nomargin-top"><span class="codelink"><a href="lxml.doctestcompare-pysrc.html">source&nbsp;code</a></span></p>
+<p>lxml-based doctest output comparison.</p>
+<p>Note: normally, you should just import the <a href="lxml.usedoctest-module.html" class="link">lxml.usedoctest</a> and
+<a href="lxml.html.usedoctest-module.html" class="link">lxml.html.usedoctest</a> modules from within a doctest, instead of this
+one:</p>
+<pre class="rst-literal-block">
+&gt;&gt;&gt; import lxml.usedoctest # for XML output
+
+&gt;&gt;&gt; import lxml.html.usedoctest # for HTML output
+</pre>
+<p>To use this module directly, you must call <tt class="rst-docutils literal">lxmldoctest.install()</tt>,
+which will cause doctest to use this in all subsequent calls.</p>
+<p>This changes the way output is checked and comparisons are made for
+XML or HTML-like content.</p>
+<p>XML or HTML content is noticed because the example starts with <tt class="rst-docutils literal">&lt;</tt>
+(it's HTML if it starts with <tt class="rst-docutils literal">&lt;html</tt>).  You can also use the
+<tt class="rst-docutils literal">PARSE_HTML</tt> and <tt class="rst-docutils literal">PARSE_XML</tt> flags to force parsing.</p>
+<p>Some rough wildcard-like things are allowed.  Whitespace is generally
+ignored (except in attributes).  In text (attributes and text in the
+body) you can use <tt class="rst-docutils literal">...</tt> as a wildcard.  In an example it also
+matches any trailing tags in the element, though it does not match
+leading tags.  You may create a tag <tt class="rst-docutils literal">&lt;any&gt;</tt> or include an <tt class="rst-docutils literal">any</tt>
+attribute in the tag.  An <tt class="rst-docutils literal">any</tt> tag matches any tag, while the
+attribute matches any and all attributes.</p>
+<p>When a match fails, the reformatted example and gotten text is
+displayed (indented), and a rough diff-like output is given.  Anything
+marked with <tt class="rst-docutils literal">+</tt> is in the output but wasn't supposed to be, and
+similarly <tt class="rst-docutils literal">-</tt> means its in the example but wasn't in the output.</p>
+<p>You can disable parsing on one line with <tt class="rst-docutils literal"># <span class="pre">doctest:+NOPARSE_MARKUP</span></tt></p>
+
+<!-- ==================== CLASSES ==================== -->
+<a name="section-Classes"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Classes</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Classes"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.doctestcompare.LXMLOutputChecker-class.html" class="summary-name">LXMLOutputChecker</a>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.doctestcompare.LHTMLOutputChecker-class.html" class="summary-name">LHTMLOutputChecker</a>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.doctestcompare._RestoreChecker-class.html" class="summary-name" onclick="show_private();">_RestoreChecker</a>
+    </td>
+  </tr>
+</table>
+<!-- ==================== FUNCTIONS ==================== -->
+<a name="section-Functions"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Functions</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Functions"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="strip"></a><span class="summary-sig-name">strip</span>(<span class="summary-sig-arg">v</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.doctestcompare-pysrc.html#strip">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="norm_whitespace"></a><span class="summary-sig-name">norm_whitespace</span>(<span class="summary-sig-arg">v</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.doctestcompare-pysrc.html#norm_whitespace">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="html_fromstring"></a><span class="summary-sig-name">html_fromstring</span>(<span class="summary-sig-arg">html</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.doctestcompare-pysrc.html#html_fromstring">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lxml.doctestcompare-module.html#install" class="summary-sig-name">install</a>(<span class="summary-sig-arg">html</span>=<span class="summary-sig-default">False</span>)</span><br />
+      Install doctestcompare for all future doctests.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.doctestcompare-pysrc.html#install">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lxml.doctestcompare-module.html#temp_install" class="summary-sig-name">temp_install</a>(<span class="summary-sig-arg">html</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">del_module</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Use this <em>inside</em> a doctest to enable this checker for this
+doctest only.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.doctestcompare-pysrc.html#temp_install">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_find_doctest_frame"></a><span class="summary-sig-name">_find_doctest_frame</span>()</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.doctestcompare-pysrc.html#_find_doctest_frame">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== VARIABLES ==================== -->
+<a name="section-Variables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Variables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="_IS_PYTHON_3"></a><span class="summary-name">_IS_PYTHON_3</span> = <code title="False">False</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="PARSE_HTML"></a><span class="summary-name">PARSE_HTML</span> = <code title="1024">1024</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="PARSE_XML"></a><span class="summary-name">PARSE_XML</span> = <code title="2048">2048</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="NOPARSE_MARKUP"></a><span class="summary-name">NOPARSE_MARKUP</span> = <code title="4096">4096</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="_html_parser"></a><span class="summary-name">_html_parser</span> = <code title="&lt;lxml.etree.HTMLParser object&gt;">&lt;lxml.etree.HTMLParser object&gt;</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="_repr_re"></a><span class="summary-name">_repr_re</span> = <code title="re.compile(r'^&lt;[^&gt;]+ (at|object) ')">re.compile(r'^&lt;<code class="re-group">[^</code>&gt;<code class="re-group">]</code><code class="re-op">+</code> <code class="re-group">(</code>at<code class="re-op">|</code>object<code class="re-group">)</code> ')</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="_norm_whitespace_re"></a><span class="summary-name">_norm_whitespace_re</span> = <code title="re.compile(r'[ \t\n][ \t\n]+')">re.compile(r'<code class="re-group">[</code> \t\n<code class="re-group">]</code><code class="re-group">[</code> \t\n<code class="re-group">]</code><code class="re-op">+</code>')</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.doctestcompare-module.html#__test__" class="summary-name" onclick="show_private();">__test__</a> = <code title="{'basic': '''
+    &gt;&gt;&gt; temp_install()
+    &gt;&gt;&gt; print &quot;&quot;&quot;&lt;xml a=&quot;1&quot; b=&quot;2&quot;&gt;stuff&lt;/xml&gt;&quot;&quot;&quot;
+    &lt;xml b=&quot;2&quot; a=&quot;1&quot;&gt;...&lt;/xml&gt;
+    &gt;&gt;&gt; print &quot;&quot;&quot;&lt;xml xmlns=&quot;http://example.com&quot;&gt;&lt;tag   attr=&quot;bar&quot;   /\
+&gt;&lt;/xml&gt;&quot;&quot;&quot;
+    &lt;xml xmlns=&quot;...&quot;&gt;
+      &lt;tag attr=&quot;...&quot; /&gt;
+..."><code class="variable-group">{</code><code class="variable-quote">'</code><code class="variable-string">basic</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">\n    &gt;&gt;&gt; temp_install()\n    &gt;&gt;&gt; print </code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="__package__"></a><span class="summary-name">__package__</span> = <code title="'lxml'"><code class="variable-quote">'</code><code class="variable-string">lxml</code><code class="variable-quote">'</code></code>
+    </td>
+  </tr>
+</table>
+<!-- ==================== FUNCTION DETAILS ==================== -->
+<a name="section-FunctionDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Function Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-FunctionDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="install"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">install</span>(<span class="sig-arg">html</span>=<span class="sig-default">False</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lxml.doctestcompare-pysrc.html#install">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Install doctestcompare for all future doctests.</p>
+<p>If html is true, then by default the HTML parser will be used;
+otherwise the XML parser is used.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="temp_install"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">temp_install</span>(<span class="sig-arg">html</span>=<span class="sig-default">False</span>,
+        <span class="sig-arg">del_module</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lxml.doctestcompare-pysrc.html#temp_install">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Use this <em>inside</em> a doctest to enable this checker for this
+doctest only.</p>
+<p>If html is true, then by default the HTML parser will be used;
+otherwise the XML parser is used.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== VARIABLES DETAILS ==================== -->
+<a name="section-VariablesDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Variables Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-VariablesDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="__test__"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">__test__</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code><code class="variable-quote">'</code><code class="variable-string">basic</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-quote">'''</code><code class="variable-string"></code>
+<code class="variable-string">    &gt;&gt;&gt; temp_install()</code>
+<code class="variable-string">    &gt;&gt;&gt; print &quot;&quot;&quot;&lt;xml a=&quot;1&quot; b=&quot;2&quot;&gt;stuff&lt;/xml&gt;&quot;&quot;&quot;</code>
+<code class="variable-string">    &lt;xml b=&quot;2&quot; a=&quot;1&quot;&gt;...&lt;/xml&gt;</code>
+<code class="variable-string">    &gt;&gt;&gt; print &quot;&quot;&quot;&lt;xml xmlns=&quot;http://example.com&quot;&gt;&lt;tag   attr=&quot;bar&quot;   /</code><span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+<code class="variable-string">&gt;&lt;/xml&gt;&quot;&quot;&quot;</code>
+<code class="variable-string">    &lt;xml xmlns=&quot;...&quot;&gt;</code>
+<code class="variable-string">      &lt;tag attr=&quot;...&quot; /&gt;</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lxml-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="/">lxml API</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Fri Jun 22 18:59:52 2018
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

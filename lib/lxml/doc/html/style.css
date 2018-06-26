@@ -1,0 +1,367 @@
+body {
+    font: 11pt Arial, Verdana, Helvetica, sans-serif;
+    text-align: center;
+}
+
+@media screen and (min-width: 960px) and (min-height: 720px) and (max-resolution: 150dpi),
+       screen and (min-width: 1280px) and (min-height: 720px) {
+    body {
+        padding: 1em 3em 1em 26em;
+    }
+}
+
+@media screen {
+    div.document, div.footer {
+        max-width: 45em;
+        background-color: white;
+    }
+}
+
+@media print {
+    div.document, div.footer {
+        width: auto;
+        padding-left: 0;
+    }
+
+    div.sidemenu {
+        display: none;
+    }
+}
+
+div.document, div.footer {
+    margin: 1em auto 1em auto;
+    color: #222;
+}
+
+div.document {
+    text-align: left;
+}
+
+div.footer {
+    text-align: center;
+    font-size: 70%;
+}
+
+.center {
+    text-align: center;
+}
+
+/*** TOC ***/
+
+div.contents.topic ul {
+    margin-top: 0;
+}
+
+div.contents.topic ul > li {
+    text-decoration: none;
+    line-height: 1.2em;
+}
+
+div.contents.topic > p > a {
+    text-decoration: none;
+}
+
+/*** side menu ***/
+
+@media (min-width: 1280px) and (min-height: 720px),
+       (min-width: 960px) and (min-height: 720px) and (max-resolution: 150dpi) {
+    div.sidemenu .menutrigger {
+        display: none;
+    }
+
+    div.sidemenu {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 26em;
+        font-size: 8pt;
+        text-align: left;
+        border-right: groove gray;
+        border-bottom: groove gray;
+        padding-right: 1ex;
+        background: #FFFAFA url(python-xml.png) no-repeat top right;
+    }
+
+    html > body div.sidemenu {
+        /* ignored by IE -> everyone else knows 'fixed', right?  */
+        position: fixed;
+    }
+}
+
+@media (max-width: 959px), (max-height: 719px), (max-width: 1279px) and (min-resolution: 151dpi) {
+    div.sidemenu > div.menutrigger {
+        display: block;
+        border: solid darkgreen 2px;
+        padding: 2px;
+        text-align: center;
+        width: 6ex;
+    }
+
+    div.sidemenu > div.menu {
+        display: none;
+        position: absolute;
+        z-index: 999;
+        font-size: 9pt;
+        text-align: left;
+        border: groove gray;
+        padding-right: 1ex;
+        background: #FFFAFA url(python-xml.png) no-repeat top right;
+    }
+
+    div.sidemenu:hover > div.menu,
+    div.sidemenu.visible > div.menu {
+        display: block;
+    }
+}
+
+div.sidemenu > div.menu span.section.title {
+    line-height: 1.2em;
+    font-size: 130%;
+}
+
+div.sidemenu > div.menu ul.menu.current li {
+    color: #CC0000;
+    font-size: 105%;
+}
+
+div.sidemenu > div.menu ul.menu.current > li > a {
+    color: #CC0000;
+}
+
+div.sidemenu > div.menu ul.menu.current ul.submenu {
+    display: block;
+}
+
+div.sidemenu > div.menu ul.menu.foreign ul.submenu li {
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+div.sidemenu > div.menu ul.menu.foreign li.menu:hover ul.submenu {
+    display: block;
+    position: absolute;
+    border: groove #990000;
+    padding: 1ex 1ex 1ex 3ex;
+    margin-top: 0;
+    margin-left: 4em;
+    margin-right: -20em;
+    color: #990000;
+    background-color: white;
+}
+
+div.sidemenu > div.menu ul.submenu {
+    display: none;
+}
+
+div.sidemenu > div.menu ul {
+    line-height: 1em;
+    margin: 1ex;
+    padding-left: 1em;
+}
+
+/*** headings ***/
+
+h1.title {
+    background: url(python-xml-title.png) no-repeat;
+    padding: 20px 0 0 160px;
+    min-height: 60px;
+    font-size: 200%;
+}
+
+h1.title, h1 a, h2 a, h3 a {
+    color: #666;
+    font-weight: bold;
+    font-family: Helvetica, sans-serif;
+}
+
+@media screen {
+    div.section > h1:before {
+        margin-left: -2ex;
+        color: #CC0000;
+        content: "\00BB" " ";
+    }
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 130%;
+}
+
+h3 {
+    font-size: 110%;
+}
+
+/*** content ***/
+
+a, a:visited {
+    background-color: transparent;
+    font-weight: bold;
+    color: Black;
+    text-decoration: none;
+}
+
+p a:active, ul a:active {
+    color: Red;
+}
+
+p a:hover, ul a:hover {
+    text-decoration: underline;
+}
+
+p {
+    /*margin: 0.5em 0em 1em 0em;*/
+    text-align: justify;
+    line-height: 1.5em;
+    margin: 0.5em 0 0 0;
+}
+
+th.docinfo-name {
+    padding-left: 3ex;
+    text-align: right;
+    font-weight: bold;
+}
+
+hr {
+    clear: both;
+    height: 1px;
+    color: #8CACBB;
+    background-color: transparent;
+}
+
+dt {
+    line-height: 1.5em;
+    margin-left: 1em;
+}
+
+dt:before {
+    content: "\00BB" " ";
+}
+
+div.section ul {
+    line-height: 1.5em;
+    padding-left: 1ex;
+    margin-left: 1.5em;
+}
+
+div.section li {
+    padding-left: 0;
+}
+
+ol {
+    line-height: 1.5em;
+    margin-left: 0;
+}
+
+blockquote {
+    font-family: Times, "Times New Roman", serif;
+    font-style: italic;
+}
+
+div.eyecatcher, p.eyecatcher {
+    font-family: Times, "Times New Roman", serif;
+    text-align: center;
+    font-size: 140%;
+    line-height: 1.2em;
+    margin-left: 12%;
+    margin-right: 12%;
+}
+
+div.pagequote {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px 10px 0 0;
+    margin-left: 6em;
+    text-align: right;
+    font-size: 80%;
+    color: #990000;
+}
+
+div.pagequote .reference {
+    font-size: 140%;
+}
+
+html > .pagequote {
+    /* ignored by IE -> everyone else knows 'fixed', right?  */
+    position: fixed;
+}
+
+code {
+    color: Black;
+    background-color: #f0f0f0;
+    font-family: "Courier New", Courier, monospace;
+}
+
+pre {
+    padding: 0.5em;
+    border: 1px solid #8cacbb;
+    color: Black;
+    background-color: #f0f0f0;
+    font-family: "Courier New", Courier, monospace;
+}
+
+/* Syntax highlighting */
+
+.syntax  { background: #f0f0f0; }
+.syntax .c { color: #60a0b0; font-style: italic } /* Comment */
+.syntax .err { border: 1px solid #FF0000 } /* Error */
+.syntax .k { color: #007020; font-weight: bold } /* Keyword */
+.syntax .o { color: #666666 } /* Operator */
+.syntax .cm { color: #60a0b0; font-style: italic } /* Comment.Multiline */
+.syntax .cp { color: #007020 } /* Comment.Preproc */
+.syntax .c1 { color: #60a0b0; font-style: italic } /* Comment.Single */
+.syntax .cs { color: #60a0b0; background-color: #fff0f0 } /* Comment.Special */
+.syntax .gd { color: #A00000 } /* Generic.Deleted */
+.syntax .ge { font-style: italic } /* Generic.Emph */
+.syntax .gr { color: #FF0000 } /* Generic.Error */
+.syntax .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.syntax .gi { color: #00A000 } /* Generic.Inserted */
+.syntax .go { color: #404040 } /* Generic.Output */
+.syntax .gp { color: #c65d09; font-weight: bold } /* Generic.Prompt */
+.syntax .gs { font-weight: bold } /* Generic.Strong */
+.syntax .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.syntax .gt { color: #0040D0 } /* Generic.Traceback */
+.syntax .kc { color: #007020; font-weight: bold } /* Keyword.Constant */
+.syntax .kd { color: #007020; font-weight: bold } /* Keyword.Declaration */
+.syntax .kp { color: #007020 } /* Keyword.Pseudo */
+.syntax .kr { color: #007020; font-weight: bold } /* Keyword.Reserved */
+.syntax .kt { color: #902000 } /* Keyword.Type */
+.syntax .m { color: #40a070 } /* Literal.Number */
+.syntax .s { color: #4070a0 } /* Literal.String */
+.syntax .na { color: #4070a0 } /* Name.Attribute */
+.syntax .nb { color: #007020 } /* Name.Builtin */
+.syntax .nc { color: #0e84b5; font-weight: bold } /* Name.Class */
+.syntax .no { color: #60add5 } /* Name.Constant */
+.syntax .nd { color: #555555; font-weight: bold } /* Name.Decorator */
+.syntax .ni { color: #d55537; font-weight: bold } /* Name.Entity */
+.syntax .ne { color: #007020 } /* Name.Exception */
+.syntax .nf { color: #06287e } /* Name.Function */
+.syntax .nl { color: #002070; font-weight: bold } /* Name.Label */
+.syntax .nn { color: #0e84b5; font-weight: bold } /* Name.Namespace */
+.syntax .nt { color: #062873; font-weight: bold } /* Name.Tag */
+.syntax .nv { color: #bb60d5 } /* Name.Variable */
+.syntax .ow { color: #007020; font-weight: bold } /* Operator.Word */
+.syntax .w { color: #bbbbbb } /* Text.Whitespace */
+.syntax .mf { color: #40a070 } /* Literal.Number.Float */
+.syntax .mh { color: #40a070 } /* Literal.Number.Hex */
+.syntax .mi { color: #40a070 } /* Literal.Number.Integer */
+.syntax .mo { color: #40a070 } /* Literal.Number.Oct */
+.syntax .sb { color: #4070a0 } /* Literal.String.Backtick */
+.syntax .sc { color: #4070a0 } /* Literal.String.Char */
+.syntax .sd { color: #4070a0; font-style: italic } /* Literal.String.Doc */
+.syntax .s2 { color: #4070a0 } /* Literal.String.Double */
+.syntax .se { color: #4070a0; font-weight: bold } /* Literal.String.Escape */
+.syntax .sh { color: #4070a0 } /* Literal.String.Heredoc */
+.syntax .si { color: #70a0d0; font-style: italic } /* Literal.String.Interpol */
+.syntax .sx { color: #c65d09 } /* Literal.String.Other */
+.syntax .sr { color: #235388 } /* Literal.String.Regex */
+.syntax .s1 { color: #4070a0 } /* Literal.String.Single */
+.syntax .ss { color: #517918 } /* Literal.String.Symbol */
+.syntax .bp { color: #007020 } /* Name.Builtin.Pseudo */
+.syntax .vc { color: #bb60d5 } /* Name.Variable.Class */
+.syntax .vg { color: #bb60d5 } /* Name.Variable.Global */
+.syntax .vi { color: #bb60d5 } /* Name.Variable.Instance */
+.syntax .il { color: #40a070 } /* Literal.Number.Integer.Long */

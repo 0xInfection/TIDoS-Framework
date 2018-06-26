@@ -16,6 +16,4 @@ from install import *
 os.system("clear")
 
 time.sleep(1)
-print GR+' [*] Running install for TIDoS-Framework...'
-time.sleep(0.5)
 install()

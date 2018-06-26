@@ -1,0 +1,821 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>lxml.html.HtmlMixin</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lxml-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="/">lxml API</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        lxml ::
+        html ::
+        HtmlMixin ::
+        Class&nbsp;HtmlMixin
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="lxml.html.HtmlMixin-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class HtmlMixin</h1><p class="nomargin-top"><span class="codelink"><a href="lxml.html-pysrc.html#HtmlMixin">source&nbsp;code</a></span></p>
+<pre class="base-tree">
+object --+
+         |
+        <strong class="uidshort">HtmlMixin</strong>
+</pre>
+
+<dl><dt>Known Subclasses:</dt>
+<dd>
+      <ul class="subclass-list">
+<li><a href="lxml.html.HtmlElement-class.html">HtmlElement</a></li><li>, <a href="lxml.html.HtmlComment-class.html">HtmlComment</a></li><li>, <a href="lxml.html.HtmlEntity-class.html">HtmlEntity</a></li><li>, <a href="lxml.html.HtmlProcessingInstruction-class.html">HtmlProcessingInstruction</a></li>  </ul>
+</dd></dl>
+
+<hr />
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lxml.html.HtmlMixin-class.html#cssselect" class="summary-sig-name">cssselect</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">expr</span>,
+        <span class="summary-sig-arg">translator</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">html</code><code class="variable-quote">'</code></span>)</span><br />
+      Run the CSS expression on this element and its children,
+returning a list of the results.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.html-pysrc.html#HtmlMixin.cssselect">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lxml.html.HtmlMixin-class.html#drop_tag" class="summary-sig-name">drop_tag</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Remove the tag, but not its children or text.  The children and text
+are merged into the parent.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.html-pysrc.html#HtmlMixin.drop_tag">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="drop_tree"></a><span class="summary-sig-name">drop_tree</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Removes this element from the tree, including its children and
+text.  The tail text is joined to the previous element or
+parent.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.html-pysrc.html#HtmlMixin.drop_tree">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="find_class"></a><span class="summary-sig-name">find_class</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">class_name</span>)</span><br />
+      Find any elements with the given class name.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.html-pysrc.html#HtmlMixin.find_class">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="find_rel_links"></a><span class="summary-sig-name">find_rel_links</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">rel</span>)</span><br />
+      Find any links like <tt class="rst-docutils literal">&lt;a <span class="pre">rel=&quot;{rel}&quot;&gt;...&lt;/a&gt;</span></tt>; returns a list of elements.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.html-pysrc.html#HtmlMixin.find_rel_links">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lxml.html.HtmlMixin-class.html#get_element_by_id" class="summary-sig-name">get_element_by_id</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">id</span>,
+        <span class="summary-sig-arg">*default</span>)</span><br />
+      Get the first element in a document with the given id.  If none is
+found, return the default argument if provided or raise KeyError
+otherwise.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.html-pysrc.html#HtmlMixin.get_element_by_id">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lxml.html.HtmlMixin-class.html#iterlinks" class="summary-sig-name">iterlinks</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Yield (element, attribute, link, pos), where attribute may be None
+(indicating the link is in the text).  <tt class="rst-docutils literal">pos</tt> is the position
+where the link occurs; often 0, but sometimes something else in
+the case of links in stylesheets or style tags.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.html-pysrc.html#HtmlMixin.iterlinks">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lxml.html.HtmlMixin-class.html#make_links_absolute" class="summary-sig-name">make_links_absolute</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">base_url</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">resolve_base_href</span>=<span class="summary-sig-default">True</span>,
+        <span class="summary-sig-arg">handle_failures</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Make all links in the document absolute, given the
+<tt class="rst-docutils literal">base_url</tt> for the document (the full URL where the document
+came from), or if no <tt class="rst-docutils literal">base_url</tt> is given, then the <tt class="rst-docutils literal">.base_url</tt>
+of the document.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.html-pysrc.html#HtmlMixin.make_links_absolute">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lxml.html.HtmlMixin-class.html#resolve_base_href" class="summary-sig-name">resolve_base_href</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">handle_failures</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Find any <tt class="rst-docutils literal">&lt;base href&gt;</tt> tag in the document, and apply its
+values to all links found in the document.  Also remove the
+tag once it has been applied.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.html-pysrc.html#HtmlMixin.resolve_base_href">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lxml.html.HtmlMixin-class.html#rewrite_links" class="summary-sig-name">rewrite_links</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">link_repl_func</span>,
+        <span class="summary-sig-arg">resolve_base_href</span>=<span class="summary-sig-default">True</span>,
+        <span class="summary-sig-arg">base_href</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Rewrite all the links in the document.  For each link
+<tt class="rst-docutils literal">link_repl_func(link)</tt> will be called, and the return value
+will replace the old link.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.html-pysrc.html#HtmlMixin.rewrite_links">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="set"></a><span class="summary-sig-name">set</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">key</span>,
+        <span class="summary-sig-arg">value</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Sets an element attribute.  If no value is provided, or if the value is None,
+creates a 'boolean' attribute without value, e.g. &quot;&lt;form novalidate&gt;&lt;/form&gt;&quot;
+for <tt class="rst-docutils literal"><span class="pre">form.set('novalidate')</span></tt>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.html-pysrc.html#HtmlMixin.set">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="text_content"></a><span class="summary-sig-name">text_content</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Return the text content of the tag (and the text in any children).</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lxml.html-pysrc.html#HtmlMixin.text_content">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__init__</code>,
+      <code>__new__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__repr__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__str__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.html.HtmlMixin-class.html#base_url" class="summary-name">base_url</a><br />
+      Returns the base URL, given when the page was parsed.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.html.HtmlMixin-class.html#body" class="summary-name">body</a><br />
+      Return the &lt;body&gt; element.  Can be called from a child element
+to get the document's head.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.html.HtmlMixin-class.html#classes" class="summary-name">classes</a><br />
+      A set-like wrapper around the 'class' attribute.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.html.HtmlMixin-class.html#forms" class="summary-name">forms</a><br />
+      Return a list of all the forms
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.html.HtmlMixin-class.html#head" class="summary-name">head</a><br />
+      Returns the &lt;head&gt; element.  Can be called from a child
+element to get the document's head.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lxml.html.HtmlMixin-class.html#label" class="summary-name">label</a><br />
+      Get or set any &lt;label&gt; element associated with this element.
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="cssselect"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">cssselect</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">expr</span>,
+        <span class="sig-arg">translator</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string">html</code><code class="variable-quote">'</code></span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lxml.html-pysrc.html#HtmlMixin.cssselect">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Run the CSS expression on this element and its children,
+returning a list of the results.</p>
+<p>Equivalent to lxml.cssselect.CSSSelect(expr, translator='html')(self)
+-- note that pre-compiling the expression can provide a substantial
+speedup.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="drop_tag"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">drop_tag</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lxml.html-pysrc.html#HtmlMixin.drop_tag">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Remove the tag, but not its children or text.  The children and text
+are merged into the parent.</p>
+<p>Example:</p>
+<pre class="rst-literal-block">
+&gt;&gt;&gt; h = fragment_fromstring('&lt;div&gt;Hello &lt;b&gt;World!&lt;/b&gt;&lt;/div&gt;')
+&gt;&gt;&gt; h.find('.//b').drop_tag()
+&gt;&gt;&gt; print(tostring(h, encoding='unicode'))
+&lt;div&gt;Hello World!&lt;/div&gt;
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="get_element_by_id"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">get_element_by_id</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">id</span>,
+        <span class="sig-arg">*default</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lxml.html-pysrc.html#HtmlMixin.get_element_by_id">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Get the first element in a document with the given id.  If none is
+found, return the default argument if provided or raise KeyError
+otherwise.</p>
+<p>Note that there can be more than one element with the same id,
+and this isn't uncommon in HTML documents found in the wild.
+Browsers return only the first match, and this function does
+the same.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="iterlinks"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">iterlinks</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lxml.html-pysrc.html#HtmlMixin.iterlinks">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Yield (element, attribute, link, pos), where attribute may be None
+(indicating the link is in the text).  <tt class="rst-docutils literal">pos</tt> is the position
+where the link occurs; often 0, but sometimes something else in
+the case of links in stylesheets or style tags.</p>
+<p>Note: &lt;base href&gt; is <em>not</em> taken into account in any way.  The
+link you get is exactly the link in the document.</p>
+<p>Note: multiple links inside of a single text string or
+attribute value are returned in reversed order.  This makes it
+possible to replace or delete them from the text string value
+based on their reported text positions.  Otherwise, a
+modification at one text position can change the positions of
+links reported later on.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="make_links_absolute"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">make_links_absolute</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">base_url</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">resolve_base_href</span>=<span class="sig-default">True</span>,
+        <span class="sig-arg">handle_failures</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lxml.html-pysrc.html#HtmlMixin.make_links_absolute">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Make all links in the document absolute, given the
+<tt class="rst-docutils literal">base_url</tt> for the document (the full URL where the document
+came from), or if no <tt class="rst-docutils literal">base_url</tt> is given, then the <tt class="rst-docutils literal">.base_url</tt>
+of the document.</p>
+<p>If <tt class="rst-docutils literal">resolve_base_href</tt> is true, then any <tt class="rst-docutils literal">&lt;base href&gt;</tt>
+tags in the document are used <em>and</em> removed from the document.
+If it is false then any such tag is ignored.</p>
+<p>If <tt class="rst-docutils literal">handle_failures</tt> is None (default), a failure to process
+a URL will abort the processing.  If set to 'ignore', errors
+are ignored.  If set to 'discard', failing URLs will be removed.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="resolve_base_href"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">resolve_base_href</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">handle_failures</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lxml.html-pysrc.html#HtmlMixin.resolve_base_href">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Find any <tt class="rst-docutils literal">&lt;base href&gt;</tt> tag in the document, and apply its
+values to all links found in the document.  Also remove the
+tag once it has been applied.</p>
+<p>If <tt class="rst-docutils literal">handle_failures</tt> is None (default), a failure to process
+a URL will abort the processing.  If set to 'ignore', errors
+are ignored.  If set to 'discard', failing URLs will be removed.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="rewrite_links"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">rewrite_links</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">link_repl_func</span>,
+        <span class="sig-arg">resolve_base_href</span>=<span class="sig-default">True</span>,
+        <span class="sig-arg">base_href</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lxml.html-pysrc.html#HtmlMixin.rewrite_links">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Rewrite all the links in the document.  For each link
+<tt class="rst-docutils literal">link_repl_func(link)</tt> will be called, and the return value
+will replace the old link.</p>
+<p>Note that links may not be absolute (unless you first called
+<tt class="rst-docutils literal">make_links_absolute()</tt>), and may be internal (e.g.,
+<tt class="rst-docutils literal">'#anchor'</tt>).  They can also be values like
+<tt class="rst-docutils literal">'mailto:email'</tt> or <tt class="rst-docutils literal">'javascript:expr'</tt>.</p>
+<p>If you give <tt class="rst-docutils literal">base_href</tt> then all links passed to
+<tt class="rst-docutils literal">link_repl_func()</tt> will take that into account.</p>
+<p>If the <tt class="rst-docutils literal">link_repl_func</tt> returns None, the attribute or
+tag text will be removed completely.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== PROPERTY DETAILS ==================== -->
+<a name="section-PropertyDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Property Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-PropertyDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="base_url"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">base_url</h3>
+  <p>Returns the base URL, given when the page was parsed.</p>
+<p>Use with <tt class="rst-docutils literal">urlparse.urljoin(el.base_url, href)</tt> to get
+absolute URLs.</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>.base_url(<span class="summary-sig-arg">self</span>)</span>
+        - Returns the base URL, given when the page was parsed.
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="body"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">body</h3>
+  Return the &lt;body&gt; element.  Can be called from a child element
+to get the document's head.
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>.body(<span class="summary-sig-arg">self</span>)</span>
+        - Return the &lt;body&gt; element.  Can be called from a child element
+to get the document's head.
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="classes"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">classes</h3>
+  A set-like wrapper around the 'class' attribute.
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>.classes(<span class="summary-sig-arg">self</span>)</span>
+        - A set-like wrapper around the 'class' attribute.
+    </dd>
+    <dt>Set Method:</dt>
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>.classes(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">classes</span>)</span>
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="forms"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">forms</h3>
+  Return a list of all the forms
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>.forms(<span class="summary-sig-arg">self</span>)</span>
+        - Return a list of all the forms
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="head"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">head</h3>
+  Returns the &lt;head&gt; element.  Can be called from a child
+element to get the document's head.
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>.head(<span class="summary-sig-arg">self</span>)</span>
+        - Returns the &lt;head&gt; element.  Can be called from a child
+element to get the document's head.
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="label"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">label</h3>
+  Get or set any &lt;label&gt; element associated with this element.
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>.label(<span class="summary-sig-arg">self</span>)</span>
+        - Get or set any &lt;label&gt; element associated with this element.
+    </dd>
+    <dt>Set Method:</dt>
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>.label(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">label</span>)</span>
+    </dd>
+    <dt>Delete Method:</dt>
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>.label(<span class="summary-sig-arg">self</span>)</span>
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lxml-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="/">lxml API</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Fri Jun 22 18:59:52 2018
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

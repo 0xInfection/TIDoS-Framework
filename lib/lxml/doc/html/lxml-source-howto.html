@@ -1,0 +1,293 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.12: http://docutils.sourceforge.net/" />
+<title>How to read the source of lxml</title>
+<meta name="author" content="Stefan Behnel" />
+<meta content="How to read and work on the source code of lxml" name="description" />
+<meta content="lxml, XML, Cython, source code, develop, comprehend, understand" name="keywords" />
+<link rel="stylesheet" href="style.css" type="text/css" />
+<script type="text/javascript">
+function trigger_menu(event) {
+    var sidemenu = document.getElementById("sidemenu");
+    var classes = sidemenu.getAttribute("class");
+    classes = (classes.indexOf(" visible") === -1) ? classes + " visible" : classes.replace(" visible", "");
+    sidemenu.setAttribute("class", classes);
+    event.preventDefault();
+    event.stopPropagation();
+}
+function hide_menu() {
+    var sidemenu = document.getElementById("sidemenu");
+    var classes = sidemenu.getAttribute("class");
+    if (classes.indexOf(" visible") !== -1) {
+        sidemenu.setAttribute("class", classes.replace(" visible", ""));
+    }
+}
+</script><meta content="width=device-width, initial-scale=1" name="viewport" /></head>
+<body onclick="hide_menu()">
+<div class="document" id="how-to-read-the-source-of-lxml">
+<div class="sidemenu" id="sidemenu"><div class="menutrigger" onclick="trigger_menu(event)">Menu</div><div class="menu"><ul id="lxml-section"><li><span class="section title">lxml</span><ul class="menu foreign" id="index-menu"><li class="menu title"><a href="index.html">lxml</a><ul class="submenu"><li class="menu item"><a href="index.html#introduction">Introduction</a></li><li class="menu item"><a href="index.html#support-the-project">Support the project</a></li><li class="menu item"><a href="index.html#documentation">Documentation</a></li><li class="menu item"><a href="index.html#download">Download</a></li><li class="menu item"><a href="index.html#mailing-list">Mailing list</a></li><li class="menu item"><a href="index.html#bug-tracker">Bug tracker</a></li><li class="menu item"><a href="index.html#license">License</a></li><li class="menu item"><a href="index.html#old-versions">Old Versions</a></li><li class="menu item"><a href="index.html#docutils-system-messages">Docutils System Messages</a></li><li class="menu item"><a href="index.html#legal-notice-for-donations">Legal Notice for Donations</a></li></ul></li></ul><ul class="menu foreign" id="intro-menu"><li class="menu title"><a href="intro.html">Why lxml?</a><ul class="submenu"><li class="menu item"><a href="intro.html#motto">Motto</a></li><li class="menu item"><a href="intro.html#aims">Aims</a></li></ul></li></ul><ul class="menu foreign" id="installation-menu"><li class="menu title"><a href="installation.html">Installing lxml</a><ul class="submenu"><li class="menu item"><a href="installation.html#where-to-get-it">Where to get it</a></li><li class="menu item"><a href="installation.html#requirements">Requirements</a></li><li class="menu item"><a href="installation.html#installation">Installation</a></li><li class="menu item"><a href="installation.html#building-lxml-from-dev-sources">Building lxml from dev sources</a></li><li class="menu item"><a href="installation.html#using-lxml-with-python-libxml2">Using lxml with python-libxml2</a></li><li class="menu item"><a href="installation.html#source-builds-on-ms-windows">Source builds on MS Windows</a></li><li class="menu item"><a href="installation.html#source-builds-on-macos-x">Source builds on MacOS-X</a></li></ul></li></ul><ul class="menu foreign" id="performance-menu"><li class="menu title"><a href="performance.html">Benchmarks and Speed</a><ul class="submenu"><li class="menu item"><a href="performance.html#general-notes">General notes</a></li><li class="menu item"><a href="performance.html#how-to-read-the-timings">How to read the timings</a></li><li class="menu item"><a href="performance.html#parsing-and-serialising">Parsing and Serialising</a></li><li class="menu item"><a href="performance.html#the-elementtree-api">The ElementTree API</a></li><li class="menu item"><a href="performance.html#xpath">XPath</a></li><li class="menu item"><a href="performance.html#a-longer-example">A longer example</a></li><li class="menu item"><a href="performance.html#lxml-objectify">lxml.objectify</a></li></ul></li></ul><ul class="menu foreign" id="compatibility-menu"><li class="menu title"><a href="compatibility.html">ElementTree compatibility of lxml.etree</a></li></ul><ul class="menu foreign" id="FAQ-menu"><li class="menu title"><a href="FAQ.html">lxml FAQ - Frequently Asked Questions</a><ul class="submenu"><li class="menu item"><a href="FAQ.html#general-questions">General Questions</a></li><li class="menu item"><a href="FAQ.html#installation">Installation</a></li><li class="menu item"><a href="FAQ.html#contributing">Contributing</a></li><li class="menu item"><a href="FAQ.html#bugs">Bugs</a></li><li class="menu item"><a href="FAQ.html#id1">Threading</a></li><li class="menu item"><a href="FAQ.html#parsing-and-serialisation">Parsing and Serialisation</a></li><li class="menu item"><a href="FAQ.html#xpath-and-document-traversal">XPath and Document Traversal</a></li></ul></li></ul></li></ul><ul id="Developing with lxml-section"><li><span class="section title">Developing with lxml</span><ul class="menu foreign" id="tutorial-menu"><li class="menu title"><a href="tutorial.html">The lxml.etree Tutorial</a><ul class="submenu"><li class="menu item"><a href="tutorial.html#the-element-class">The Element class</a></li><li class="menu item"><a href="tutorial.html#the-elementtree-class">The ElementTree class</a></li><li class="menu item"><a href="tutorial.html#parsing-from-strings-and-files">Parsing from strings and files</a></li><li class="menu item"><a href="tutorial.html#namespaces">Namespaces</a></li><li class="menu item"><a href="tutorial.html#the-e-factory">The E-factory</a></li><li class="menu item"><a href="tutorial.html#elementpath">ElementPath</a></li></ul></li></ul><ul class="menu foreign" id="api index-menu"><li class="menu title"><a href="api/index.html">API reference</a></li></ul><ul class="menu foreign" id="api-menu"><li class="menu title"><a href="api.html">APIs specific to lxml.etree</a><ul class="submenu"><li class="menu item"><a href="api.html#lxml-etree">lxml.etree</a></li><li class="menu item"><a href="api.html#other-element-apis">Other Element APIs</a></li><li class="menu item"><a href="api.html#trees-and-documents">Trees and Documents</a></li><li class="menu item"><a href="api.html#iteration">Iteration</a></li><li class="menu item"><a href="api.html#error-handling-on-exceptions">Error handling on exceptions</a></li><li class="menu item"><a href="api.html#error-logging">Error logging</a></li><li class="menu item"><a href="api.html#serialisation">Serialisation</a></li><li class="menu item"><a href="api.html#incremental-xml-generation">Incremental XML generation</a></li><li class="menu item"><a href="api.html#cdata">CDATA</a></li><li class="menu item"><a href="api.html#xinclude-and-elementinclude">XInclude and ElementInclude</a></li><li class="menu item"><a href="api.html#write-c14n-on-elementtree">write_c14n on ElementTree</a></li></ul></li></ul><ul class="menu foreign" id="parsing-menu"><li class="menu title"><a href="parsing.html">Parsing XML and HTML with lxml</a><ul class="submenu"><li class="menu item"><a href="parsing.html#parsers">Parsers</a></li><li class="menu item"><a href="parsing.html#the-target-parser-interface">The target parser interface</a></li><li class="menu item"><a href="parsing.html#the-feed-parser-interface">The feed parser interface</a></li><li class="menu item"><a href="parsing.html#incremental-event-parsing">Incremental event parsing</a></li><li class="menu item"><a href="parsing.html#iterparse-and-iterwalk">iterparse and iterwalk</a></li><li class="menu item"><a href="parsing.html#python-unicode-strings">Python unicode strings</a></li></ul></li></ul><ul class="menu foreign" id="validation-menu"><li class="menu title"><a href="validation.html">Validation with lxml</a><ul class="submenu"><li class="menu item"><a href="validation.html#validation-at-parse-time">Validation at parse time</a></li><li class="menu item"><a href="validation.html#id1">DTD</a></li><li class="menu item"><a href="validation.html#relaxng">RelaxNG</a></li><li class="menu item"><a href="validation.html#xmlschema">XMLSchema</a></li><li class="menu item"><a href="validation.html#id2">Schematron</a></li><li class="menu item"><a href="validation.html#id3">(Pre-ISO-Schematron)</a></li></ul></li></ul><ul class="menu foreign" id="xpathxslt-menu"><li class="menu title"><a href="xpathxslt.html">XPath and XSLT with lxml</a><ul class="submenu"><li class="menu item"><a href="xpathxslt.html#xpath">XPath</a></li><li class="menu item"><a href="xpathxslt.html#xslt">XSLT</a></li></ul></li></ul><ul class="menu foreign" id="objectify-menu"><li class="menu title"><a href="objectify.html">lxml.objectify</a><ul class="submenu"><li class="menu item"><a href="objectify.html#the-lxml-objectify-api">The lxml.objectify API</a></li><li class="menu item"><a href="objectify.html#asserting-a-schema">Asserting a Schema</a></li><li class="menu item"><a href="objectify.html#objectpath">ObjectPath</a></li><li class="menu item"><a href="objectify.html#python-data-types">Python data types</a></li><li class="menu item"><a href="objectify.html#how-data-types-are-matched">How data types are matched</a></li><li class="menu item"><a href="objectify.html#what-is-different-from-lxml-etree">What is different from lxml.etree?</a></li></ul></li></ul><ul class="menu foreign" id="lxmlhtml-menu"><li class="menu title"><a href="lxmlhtml.html">lxml.html</a><ul class="submenu"><li class="menu item"><a href="lxmlhtml.html#parsing-html">Parsing HTML</a></li><li class="menu item"><a href="lxmlhtml.html#html-element-methods">HTML Element Methods</a></li><li class="menu item"><a href="lxmlhtml.html#running-html-doctests">Running HTML doctests</a></li><li class="menu item"><a href="lxmlhtml.html#creating-html-with-the-e-factory">Creating HTML with the E-factory</a></li><li class="menu item"><a href="lxmlhtml.html#working-with-links">Working with links</a></li><li class="menu item"><a href="lxmlhtml.html#forms">Forms</a></li><li class="menu item"><a href="lxmlhtml.html#cleaning-up-html">Cleaning up HTML</a></li><li class="menu item"><a href="lxmlhtml.html#html-diff">HTML Diff</a></li><li class="menu item"><a href="lxmlhtml.html#examples">Examples</a></li></ul></li></ul><ul class="menu foreign" id="cssselect-menu"><li class="menu title"><a href="cssselect.html">lxml.cssselect</a><ul class="submenu"><li class="menu item"><a href="cssselect.html#the-cssselector-class">The CSSSelector class</a></li><li class="menu item"><a href="cssselect.html#the-cssselect-method">The cssselect method</a></li><li class="menu item"><a href="cssselect.html#supported-selectors">Supported Selectors</a></li><li class="menu item"><a href="cssselect.html#namespaces">Namespaces</a></li></ul></li></ul><ul class="menu foreign" id="elementsoup-menu"><li class="menu title"><a href="elementsoup.html">BeautifulSoup Parser</a><ul class="submenu"><li class="menu item"><a href="elementsoup.html#parsing-with-the-soupparser">Parsing with the soupparser</a></li><li class="menu item"><a href="elementsoup.html#entity-handling">Entity handling</a></li><li class="menu item"><a href="elementsoup.html#using-soupparser-as-a-fallback">Using soupparser as a fallback</a></li><li class="menu item"><a href="elementsoup.html#using-only-the-encoding-detection">Using only the encoding detection</a></li></ul></li></ul><ul class="menu foreign" id="html5parser-menu"><li class="menu title"><a href="html5parser.html">html5lib Parser</a><ul class="submenu"><li class="menu item"><a href="html5parser.html#differences-to-regular-html-parsing">Differences to regular HTML parsing</a></li><li class="menu item"><a href="html5parser.html#function-reference">Function Reference</a></li></ul></li></ul></li></ul><ul id="Extending lxml-section"><li><span class="section title">Extending lxml</span><ul class="menu foreign" id="resolvers-menu"><li class="menu title"><a href="resolvers.html">Document loading and URL resolving</a><ul class="submenu"><li class="menu item"><a href="resolvers.html#xml-catalogs">XML Catalogs</a></li><li class="menu item"><a href="resolvers.html#uri-resolvers">URI Resolvers</a></li><li class="menu item"><a href="resolvers.html#document-loading-in-context">Document loading in context</a></li><li class="menu item"><a href="resolvers.html#i-o-access-control-in-xslt">I/O access control in XSLT</a></li></ul></li></ul><ul class="menu foreign" id="extensions-menu"><li class="menu title"><a href="extensions.html">Python extensions for XPath and XSLT</a><ul class="submenu"><li class="menu item"><a href="extensions.html#xpath-extension-functions">XPath Extension functions</a></li><li class="menu item"><a href="extensions.html#xslt-extension-elements">XSLT extension elements</a></li></ul></li></ul><ul class="menu foreign" id="element classes-menu"><li class="menu title"><a href="element_classes.html">Using custom Element classes in lxml</a><ul class="submenu"><li class="menu item"><a href="element_classes.html#background-on-element-proxies">Background on Element proxies</a></li><li class="menu item"><a href="element_classes.html#element-initialization">Element initialization</a></li><li class="menu item"><a href="element_classes.html#setting-up-a-class-lookup-scheme">Setting up a class lookup scheme</a></li><li class="menu item"><a href="element_classes.html#generating-xml-with-custom-classes">Generating XML with custom classes</a></li><li class="menu item"><a href="element_classes.html#id1">Implementing namespaces</a></li></ul></li></ul><ul class="menu foreign" id="sax-menu"><li class="menu title"><a href="sax.html">Sax support</a><ul class="submenu"><li class="menu item"><a href="sax.html#building-a-tree-from-sax-events">Building a tree from SAX events</a></li><li class="menu item"><a href="sax.html#producing-sax-events-from-an-elementtree-or-element">Producing SAX events from an ElementTree or Element</a></li><li class="menu item"><a href="sax.html#interfacing-with-pulldom-minidom">Interfacing with pulldom/minidom</a></li></ul></li></ul><ul class="menu foreign" id="capi-menu"><li class="menu title"><a href="capi.html">The public C-API of lxml.etree</a><ul class="submenu"><li class="menu item"><a href="capi.html#passing-generated-trees-through-python">Passing generated trees through Python</a></li><li class="menu item"><a href="capi.html#writing-external-modules-in-cython">Writing external modules in Cython</a></li><li class="menu item"><a href="capi.html#writing-external-modules-in-c">Writing external modules in C</a></li></ul></li></ul></li></ul><ul id="Developing lxml-section"><li><span class="section title">Developing lxml</span><ul class="menu foreign" id="build-menu"><li class="menu title"><a href="build.html">How to build lxml from source</a><ul class="submenu"><li class="menu item"><a href="build.html#cython">Cython</a></li><li class="menu item"><a href="build.html#github-git-and-hg">Github, git and hg</a></li><li class="menu item"><a href="build.html#building-the-sources">Building the sources</a></li><li class="menu item"><a href="build.html#running-the-tests-and-reporting-errors">Running the tests and reporting errors</a></li><li class="menu item"><a href="build.html#building-an-egg-or-wheel">Building an egg or wheel</a></li><li class="menu item"><a href="build.html#building-lxml-on-macos-x">Building lxml on MacOS-X</a></li><li class="menu item"><a href="build.html#static-linking-on-windows">Static linking on Windows</a></li><li class="menu item"><a href="build.html#building-debian-packages-from-svn-sources">Building Debian packages from SVN sources</a></li></ul></li></ul><ul class="menu current" id="lxml source howto-menu"><li class="menu title"><a href="lxml-source-howto.html">How to read the source of lxml</a><ul class="submenu"><li class="menu item"><a href="lxml-source-howto.html#what-is-cython">What is Cython?</a></li><li class="menu item"><a href="lxml-source-howto.html#where-to-start">Where to start?</a></li><li class="menu item"><a href="lxml-source-howto.html#lxml-etree">lxml.etree</a></li><li class="menu item"><a href="lxml-source-howto.html#python-modules">Python modules</a></li><li class="menu item"><a href="lxml-source-howto.html#lxml-objectify">lxml.objectify</a></li><li class="menu item"><a href="lxml-source-howto.html#lxml-html">lxml.html</a></li></ul></li></ul><ul class="menu foreign" id="changes 4 2 2-menu"><li class="menu title"><a href="changes-4.2.2.html">Release Changelog</a></li></ul><ul class="menu foreign" id="credits-menu"><li class="menu title"><a href="credits.html">Credits</a><ul class="submenu"><li class="menu item"><a href="credits.html#main-contributors">Main contributors</a></li><li class="menu item"><a href="credits.html#special-thanks-goes-to">Special thanks goes to:</a></li></ul></li></ul></li><li><a href="/sitemap.html">Sitemap</a></li></ul></div></div><h1 class="title">How to read the source of lxml</h1>
+<table class="docinfo" frame="void" rules="none">
+<col class="docinfo-name" />
+<col class="docinfo-content" />
+<tbody valign="top">
+<tr><th class="docinfo-name">Author:</th>
+<td>Stefan Behnel</td></tr>
+</tbody>
+</table>
+<p>This document describes how to read the source code of <a class="reference external" href="http://lxml.de/">lxml</a> and how
+to start working on it.  You might also be interested in the companion
+document that describes <a class="reference external" href="build.html">how to build lxml from sources</a>.</p>
+<div class="contents topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#what-is-cython" id="id1">What is Cython?</a></li>
+<li><a class="reference internal" href="#where-to-start" id="id2">Where to start?</a><ul>
+<li><a class="reference internal" href="#concepts" id="id3">Concepts</a></li>
+<li><a class="reference internal" href="#the-documentation" id="id4">The documentation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#lxml-etree" id="id5">lxml.etree</a></li>
+<li><a class="reference internal" href="#python-modules" id="id6">Python modules</a></li>
+<li><a class="reference internal" href="#lxml-objectify" id="id7">lxml.objectify</a></li>
+<li><a class="reference internal" href="#lxml-html" id="id8">lxml.html</a></li>
+</ul>
+</div>
+<div class="section" id="what-is-cython">
+<h1>What is Cython?</h1>
+<p><a class="reference external" href="http://cython.org/">Cython</a> is the language that lxml is written in.  It is a very
+Python-like language that was specifically designed for writing Python
+extension modules.</p>
+<p>The reason why Cython (or actually its predecessor <a class="reference external" href="http://www.cosc.canterbury.ac.nz/~greg/python/Pyrex/">Pyrex</a> at the time)
+was chosen as an implementation language for lxml, is that it makes it
+very easy to interface with both the Python world and external C code.
+Cython generates all the necessary glue code for the Python API,
+including Python types, calling conventions and reference counting.
+On the other side of the table, calling into C code is not more than
+declaring the signature of the function and maybe some variables as
+being C types, pointers or structs, and then calling it.  The rest of
+the code is just plain Python code.</p>
+<p>The Cython language is so close to Python that the Cython compiler can
+actually compile many, many Python programs to C without major
+modifications.  But the real speed gains of a C compilation come from
+type annotations that were added to the language and that allow Cython
+to generate very efficient C code.</p>
+<p>Even if you are not familiar with Cython, you should keep in mind that
+a slow implementation of a feature is better than none.  So, if you
+want to contribute and have an idea what code you want to write, feel
+free to start with a pure Python implementation.  Chances are, if you
+get the change officially accepted and integrated, others will take
+the time to optimise it so that it runs fast in Cython.</p>
+</div>
+<div class="section" id="where-to-start">
+<h1>Where to start?</h1>
+<p>First of all, read <a class="reference external" href="build.html">how to build lxml from sources</a> to learn how to
+retrieve the source code from the GitHub repository and how to
+build it.  The source code lives in the subdirectory <tt class="docutils literal">src</tt> of the
+checkout.</p>
+<p>The main extension modules in lxml are <tt class="docutils literal">lxml.etree</tt> and
+<tt class="docutils literal">lxml.objectify</tt>.  All main modules have the file extension
+<tt class="docutils literal">.pyx</tt>, which shows the descendence from Pyrex.  As usual in Python,
+the main files start with a short description and a couple of imports.
+Cython distinguishes between the run-time <tt class="docutils literal">import</tt> statement (as
+known from Python) and the compile-time <tt class="docutils literal">cimport</tt> statement, which
+imports C declarations, either from external libraries or from other
+Cython modules.</p>
+<div class="section" id="concepts">
+<h2>Concepts</h2>
+<p>lxml's tree API is based on proxy objects.  That means, every Element
+object (or rather <tt class="docutils literal">_Element</tt> object) is a proxy for a libxml2 node
+structure.  The class declaration is (mainly):</p>
+<pre class="literal-block">
+cdef class _Element:
+    cdef _Document _doc
+    cdef xmlNode* _c_node
+</pre>
+<p>It is a naming convention that C variables and C level class members
+that are passed into libxml2 start with a prefixed <tt class="docutils literal">c_</tt> (commonly
+libxml2 struct pointers), and that C level class members are prefixed
+with an underscore.  So you will often see names like <tt class="docutils literal">c_doc</tt> for an
+<tt class="docutils literal">xmlDoc*</tt> variable (or <tt class="docutils literal">c_node</tt> for an <tt class="docutils literal">xmlNode*</tt>), or the above
+<tt class="docutils literal">_c_node</tt> for a class member that points to an <tt class="docutils literal">xmlNode</tt> struct
+(or <tt class="docutils literal">_c_doc</tt> for an <tt class="docutils literal">xmlDoc*</tt>).</p>
+<p>It is important to know that every proxy in lxml has a factory
+function that properly sets up C level members.  Proxy objects must
+<em>never</em> be instantiated outside of that factory.  For example, to
+instantiate an _Element object or its subclasses, you must always call
+its factory function:</p>
+<pre class="literal-block">
+cdef xmlNode* c_node
+cdef _Document doc
+cdef _Element element
+...
+element = _elementFactory(doc, c_node)
+</pre>
+<p>A good place to see how this factory is used are the Element methods
+<tt class="docutils literal">getparent()</tt>, <tt class="docutils literal">getnext()</tt> and <tt class="docutils literal">getprevious()</tt>.</p>
+</div>
+<div class="section" id="the-documentation">
+<h2>The documentation</h2>
+<p>An important part of lxml is the documentation that lives in the
+<tt class="docutils literal">doc</tt> directory.  It describes a large part of the API and comprises
+a lot of example code in the form of doctests.</p>
+<p>The documentation is written in the <a class="reference external" href="http://docutils.sourceforge.net/rst.html">ReStructured Text</a> format, a
+very powerful text markup language that looks almost like plain text.
+It is part of the <a class="reference external" href="http://docutils.sourceforge.net/">docutils</a> package.</p>
+<p>The project web site of <a class="reference external" href="http://lxml.de/">lxml</a> is completely generated from these text
+documents.  Even the side menu is just collected from the table of
+contents that the ReST processor writes into each HTML page.
+Obviously, we use lxml for this.</p>
+<p>The easiest way to generate the HTML pages is by calling:</p>
+<pre class="literal-block">
+make html
+</pre>
+<p>This will call the script <tt class="docutils literal">doc/mkhtml.py</tt> to run the ReST processor
+on the files.  After generating an HTML page the script parses it back
+in to build the side menu, and injects the complete menu into each
+page at the very end.</p>
+<p>Running the <tt class="docutils literal">make</tt> command will also generate the API documentation
+if you have <a class="reference external" href="http://epydoc.sourceforge.net/">epydoc</a> installed.  The epydoc package will import and
+introspect the extension modules and also introspect and parse the
+Python modules of lxml.  The aggregated information will then be
+written out into an HTML documentation site.</p>
+</div>
+</div>
+<div class="section" id="lxml-etree">
+<h1>lxml.etree</h1>
+<p>The main module, <tt class="docutils literal">lxml.etree</tt>, is in the file <a class="reference external" href="https://github.com/lxml/lxml/blob/master/src/lxml/lxml.etree.pyx">lxml.etree.pyx</a>.  It
+implements the main functions and types of the ElementTree API, as
+well as all the factory functions for proxies.  It is the best place
+to start if you want to find out how a specific feature is
+implemented.</p>
+<p>At the very end of the file, it contains a series of <tt class="docutils literal">include</tt>
+statements that merge the rest of the implementation into the
+generated C code.  Yes, you read right: no importing, no source file
+namespacing, just plain good old include and a huge C code result of
+more than 100,000 lines that we throw right into the C compiler.</p>
+<p>The main include files are:</p>
+<dl class="docutils">
+<dt>apihelpers.pxi</dt>
+<dd>Private C helper functions.  Except for the factory functions,
+most of the little functions that are used all over the place are
+defined here.  This includes things like reading out the text
+content of a libxml2 tree node, checking input from the API level,
+creating a new Element node or handling attribute values.  If you
+want to work on the lxml code, you should keep these functions in
+the back of your head, as they will definitely make your life
+easier.</dd>
+<dt>classlookup.pxi</dt>
+<dd>Element class lookup mechanisms.  The main API and engines for
+those who want to define custom Element classes and inject them
+into lxml.</dd>
+<dt>docloader.pxi</dt>
+<dd>Support for custom document loaders.  Base class and registry for
+custom document resolvers.</dd>
+<dt>extensions.pxi</dt>
+<dd>Infrastructure for extension functions in XPath/XSLT, including
+XPath value conversion and function registration.</dd>
+<dt>iterparse.pxi</dt>
+<dd>Incremental XML parsing.  An iterator class that builds iterparse
+events while parsing.</dd>
+<dt>nsclasses.pxi</dt>
+<dd>Namespace implementation and registry.  The registry and engine
+for Element classes that use the ElementNamespaceClassLookup
+scheme.</dd>
+<dt>parser.pxi</dt>
+<dd>Parsers for XML and HTML.  This is the main parser engine.  It's
+the reason why you can parse a document from various sources in
+two lines of Python code.  It's definitely not the right place to
+start reading lxml's source code.</dd>
+<dt>parsertarget.pxi</dt>
+<dd>An ElementTree compatible parser target implementation based on
+the SAX2 interface of libxml2.</dd>
+<dt>proxy.pxi</dt>
+<dd>Very low-level functions for memory allocation/deallocation
+and Element proxy handling.  Ignoring this for the beginning
+will safe your head from exploding.</dd>
+<dt>public-api.pxi</dt>
+<dd>The set of C functions that are exported to other extension
+modules at the C level.  For example, <tt class="docutils literal">lxml.objectify</tt> makes use
+of these.  See the <cite>C-level API</cite> documentation.</dd>
+<dt>readonlytree.pxi</dt>
+<dd>A separate read-only implementation of the Element API.  This is
+used in places where non-intrusive access to a tree is required,
+such as the <tt class="docutils literal">PythonElementClassLookup</tt> or XSLT extension
+elements.</dd>
+<dt>saxparser.pxi</dt>
+<dd>SAX-like parser interfaces as known from ElementTree's TreeBuilder.</dd>
+<dt>serializer.pxi</dt>
+<dd>XML output functions.  Basically everything that creates byte
+sequences from XML trees.</dd>
+<dt>xinclude.pxi</dt>
+<dd>XInclude support.</dd>
+<dt>xmlerror.pxi</dt>
+<dd><p class="first">Error log handling.  All error messages that libxml2 generates
+internally walk through the code in this file to end up in lxml's
+Python level error logs.</p>
+<p class="last">At the end of the file, you will find a long list of named error
+codes.  It is generated from the libxml2 HTML documentation (using
+lxml, of course).  See the script <tt class="docutils literal"><span class="pre">update-error-constants.py</span></tt>
+for this.</p>
+</dd>
+<dt>xmlid.pxi</dt>
+<dd>XMLID and IDDict, a dictionary-like way to find Elements by their
+XML-ID attribute.</dd>
+<dt>xpath.pxi</dt>
+<dd>XPath evaluators.</dd>
+<dt>xslt.pxi</dt>
+<dd>XSL transformations, including the <tt class="docutils literal">XSLT</tt> class, document lookup
+handling and access control.</dd>
+</dl>
+<p>The different schema languages (DTD, RelaxNG, XML Schema and
+Schematron) are implemented in the following include files:</p>
+<ul class="simple">
+<li>dtd.pxi</li>
+<li>relaxng.pxi</li>
+<li>schematron.pxi</li>
+<li>xmlschema.pxi</li>
+</ul>
+</div>
+<div class="section" id="python-modules">
+<h1>Python modules</h1>
+<p>The <tt class="docutils literal">lxml</tt> package also contains a number of pure Python modules:</p>
+<dl class="docutils">
+<dt>builder.py</dt>
+<dd>The E-factory and the ElementBuilder class.  These provide a
+simple interface to XML tree generation.</dd>
+<dt>cssselect.py</dt>
+<dd>A CSS selector implementation based on XPath.  The main class is
+called <tt class="docutils literal">CSSSelector</tt>.</dd>
+<dt>doctestcompare.py</dt>
+<dd>A relaxed comparison scheme for XML/HTML markup in doctest.</dd>
+<dt>ElementInclude.py</dt>
+<dd>XInclude-like document inclusion, compatible with ElementTree.</dd>
+<dt>_elementpath.py</dt>
+<dd>XPath-like path language, compatible with ElementTree.</dd>
+<dt>sax.py</dt>
+<dd>SAX2 compatible interfaces to copy lxml trees from/to SAX compatible
+tools.</dd>
+<dt>usedoctest.py</dt>
+<dd>Wrapper module for <tt class="docutils literal">doctestcompare.py</tt> that simplifies its usage
+from inside a doctest.</dd>
+</dl>
+</div>
+<div class="section" id="lxml-objectify">
+<h1>lxml.objectify</h1>
+<p>A Cython implemented extension module that uses the public C-API of
+lxml.etree.  It provides a Python object-like interface to XML trees.
+The implementation resides in the file <a class="reference external" href="https://github.com/lxml/lxml/blob/master/src/lxml/lxml.objectify.pyx">lxml.objectify.pyx</a>.</p>
+</div>
+<div class="section" id="lxml-html">
+<h1>lxml.html</h1>
+<p>A specialised toolkit for HTML handling, based on lxml.etree.  This is
+implemented in pure Python.</p>
+</div>
+</div>
+<div class="footer">
+<hr class="footer" />
+Generated on: 2018-06-22.
+
+</div>
+</body>
+</html>
