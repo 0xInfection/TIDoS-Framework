@@ -18,6 +18,7 @@ from colors import *
 from scanenumban import *
 from scanenumban1 import *
 from portscan import *
+from waf import *
 
 def sca_alt(web):
 
@@ -25,7 +26,7 @@ def sca_alt(web):
     print '\n'
     if v == '1':
 	print B+' [!] Type Selected :'+C+' WAF Analysis'+O
-	os.system('wafw00f ' + web)
+	waf(web)
 	time.sleep(0.9)
 	scanenumban1()
 	sca_alt(web)
@@ -56,7 +57,7 @@ def sca_alt(web):
 	time.sleep(0.5)
 
 	print B+' [*] Firing up module -->'+C+' WAF Analysis'+O
-	os.system('wafw00f ' + web)
+	waf(web)
 	print B+' [!] Module Completed -->'+C+' WAF Analysis\n'
 	time.sleep(1)
 

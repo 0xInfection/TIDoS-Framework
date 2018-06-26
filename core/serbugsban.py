@@ -54,8 +54,8 @@ def serbugsban():
     time.sleep(0.1)
     print B+'  [10]'+C+' Shellshock Vulnerabilities'
     time.sleep(0.1)
-#    print B+'  [11]'+C+' URL Validation (Includes Open Redirects)\n'
-#    time.sleep(0.1)
+    print B+'  [11]'+C+' Unvalidated Redirects\n'
+    time.sleep(0.1)
     print B+'  [A]'+C+' Load all the modules 1 by 1\n'
     time.sleep(0.1)
     print B+'  [99]'+C+' Back\n'

@@ -21,39 +21,41 @@ from colors import *
 from scanenumban import *
 from scanenumban1 import *
 from portscan import *
+from waf import *
 
 def scenum_dup(web):
+
     v = raw_input('' + O + ' \x1b[4mTID\x1b[1;0m ' + GR + ':> ' + color.END)
     print '\n'
     if v == '1':
         print B + ' [!] Type Selected :' + C + ' WAF Analysis'
-        os.system('wafw00f ' + web)
-        time.sleep(0.9)
+	waf(web)
+        time.sleep(1.5)
         scanenumban1()
         scenum_dup(web)
     elif v == '2':
         print B + ' [!] Type Selected :' + C + ' Port Scanning'
         portscan(web)
-        time.sleep(0.9)
+        time.sleep(1.5)
         scanenumban1()
         scenum_dup(web)
     elif v == '3':
         print B + ' [!] Type Selected :' + C + ' Interactive NMap'
         nmapmain(web)
-        time.sleep(0.9)
+        time.sleep(1.5)
         scanenumban1()
         scenum_dup(web)
     elif v == '4':
         print B + ' [!] Type Selected :' + C + ' Crawlers'
         crawlers(web)
-        time.sleep(0.9)
+        time.sleep(1.5)
         scanenumban1()
         scenum_dup(web)
     elif v == 'A':
         print ' [!] Type Selected : All Modules'
         time.sleep(0.5)
         print B + ' [*] Firing up module -->' + C + ' WAF Analysis'
-        os.system('wafw00f ' + web)
+        waf(web)
         print B + ' [!] Module Completed -->' + C + ' WAF Analysis\n'
         time.sleep(1)
         print B + ' [*] Firing up module -->' + C + ' Port Scanning '
@@ -71,9 +73,12 @@ def scenum_dup(web):
         print G + ' [+] All modules successfully completed!'
         time.sleep(0.5)
         print GR + ' [*] Going back...'
+	time.sleep(3)
+
     elif v == '99':
         print '[!] Back'
         time.sleep(0.7)
+
     else:
         dope = ['You high dude?',
          'Hey there! Enter a valid option',

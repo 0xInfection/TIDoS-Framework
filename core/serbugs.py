@@ -25,8 +25,8 @@ from vulnban import *
 from shellshock import *
 from colors import *
 #from xss import *
-#from redirect import *
-#from pathtrav import * 
+from openredirect import *
+from pathtrav import * 
 
 def serbugs(web):
 
@@ -94,11 +94,11 @@ def serbugs(web):
 	time.sleep(1)	
 	serbugs(web)
 
- #   elif v == '11':
-#	print ' Type Selected : URL Validation'
-#	redirect(web)
-#	time.sleep(1)	
-#	serbugs(web)
+    elif v == '11':
+	print ' Type Selected : URL Validation'
+	redirect(web)
+	time.sleep(1)	
+	serbugs(web)
 
     elif v == 'A':
 	print ' [!] Type Selected : All Modules'
@@ -154,10 +154,10 @@ def serbugs(web):
 	print ' [!] Module Completed --> ShellShock\n'
 	time.sleep(1)
 
-#	print ' [*] Firing up module --> URL Forwards'
-#	redirect(web)
-#	print ' [!] Module Completed --> Url Forwards\n'
-#	time.sleep(0.5)
+	print ' [*] Firing up module --> URL Forwards'
+	redirect(web)
+	print ' [!] Module Completed --> Url Forwards\n'
+	time.sleep(0.5)
 	print G+' [+] All modules successfully completed!'
 	time.sleep(4)
 	vulnban1()

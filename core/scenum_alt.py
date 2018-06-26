@@ -18,6 +18,7 @@ from colors import *
 from tid_dup import tid_dup
 from scanenumban import *
 from scanenumban1 import *
+from waf import *
 from portscan import *
 
 def scenum_alt(web):
@@ -26,7 +27,7 @@ def scenum_alt(web):
     print '\n'
     if v == '1':
 	print B+' [!] Type Selected :'+C+' WAF Analysis'
-	os.system('wafw00f ' + web)
+	waf(web)
 	time.sleep(0.9)
 	scanenumban1()
 	scenum_alt(web)
@@ -57,7 +58,7 @@ def scenum_alt(web):
 	time.sleep(0.5)
 
 	print B+' [*] Firing up module -->'+C+' WAF Analysis'
-	os.system('wafw00f ' + web)
+	waf(web)
 	print B+' [!] Module Completed -->'+C+' WAF Analysis\n'
 	time.sleep(1)
 
