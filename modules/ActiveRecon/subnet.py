@@ -28,4 +28,11 @@ def subnet(web):
     for dom in domains:
         text = requests.get('http://api.hackertarget.com/subnetcalc/?q=' + dom).text
 	http = str(text)
-	print(""+G+ color.BOLD + http)
+	if 'error' not in http:
+		result = http.splitlines()
+		for r in result:	
+			print G+' '+r
+	elif 'No results found' in http:
+		print R+' [-] No results found!'
+	else:
+		print R+' [-] Outbound Query Exception!' 
