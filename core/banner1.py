@@ -23,7 +23,7 @@ def banner1():
 	sleep(0.2)
 	print ''+B+'[---]                                                  [---]'
 	sleep(0.2)
-	print ''+B+'[---]     \033[1;35m4 Phases  |  \033[1;31m13 Sub-Phases  |  \033[1;37m73 Modules    \033[1;34m[---]'
+	print ''+B+'[---]     \033[1;35m4 Phases  |  \033[1;31m13 Sub-Phases  |  \033[1;37m79 Modules    \033[1;34m[---]'
 	sleep(0.2)
 	print ''
 	print ''+B+'             Welcome to '+C+'The-TIDoS-Framework (TTF)'
