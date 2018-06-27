@@ -47,7 +47,7 @@ def cloud0x00(web):
 		ip_addr = socket.gethostbyname(web)
 		print G+' [+] Server detected online...'
 		time.sleep(0.5)
-		print G+' [+] Server IP :> '+ip_addr
+		print G+' [+] Server IP :> '+O+ip_addr
 	except:
 		print R+' [-] Server seems down...'
 
@@ -55,7 +55,9 @@ def cloud0x00(web):
 	time.sleep(0.4)
 	web = 'http://' + web 
 	try:
-	    r = requests.get(web)
+	    print GR+' [*] Making the no-verify request...'
+	    time.sleep(0.6)
+	    r = requests.get(web, verify=False)
 	    header = r.headers['Server']
 	    if 'cloudflare' in header:
 		print O+' [+] The website is behind '+R+'Cloudflare.'
