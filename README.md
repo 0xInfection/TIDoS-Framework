@@ -1,6 +1,6 @@
 <p align="middle"><img src='https://i.imgur.com/QAbaVdU.png' /></p>
 
-![Python](https://img.shields.io/badge/Python-2.7-green.svg) ![TIDoS](https://img.shields.io/badge/TIDoS-v1.1.1-blue.svg) ![Supported OS](https://img.shields.io/badge/Supported%20OS-Linux-yellow.svg) ![License](https://img.shields.io/badge/License-GPLv3-purple.svg) ![Build](https://img.shields.io/badge/Build-0073-red.svg) ![Modules](https://img.shields.io/badge/Modules-79-orange.svg) ![Status](https://img.shields.io/badge/Build%20Status-passing-green.svg) ![Stage](https://img.shields.io/badge/Release-Stable-brightgreen.svg)
+![Python](https://img.shields.io/badge/Python-2.7-green.svg) ![TIDoS](https://img.shields.io/badge/TIDoS-v1.1.1-lightblue.svg) ![Supported OS](https://img.shields.io/badge/Supported%20OS-Linux-yellow.svg) ![License](https://img.shields.io/badge/License-GPLv3-blue.svg) ![Build](https://img.shields.io/badge/Build-0073-red.svg) ![Modules](https://img.shields.io/badge/Modules-79-orange.svg) ![Status](https://img.shields.io/badge/Build%20Status-passing-green.svg) ![Stage](https://img.shields.io/badge/Release-Stable-brightgreen.svg)
 
 
 # TIDoS Framework 
