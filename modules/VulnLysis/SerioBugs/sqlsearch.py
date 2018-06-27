@@ -61,12 +61,12 @@ def sqlisearch0x00(web):
 		payloads.append(rem)
 	
 	br.open(web)
-	web0 = web.strip('https://')
-	web0 = web.strip('http://')
+	web0 = web.replace('https://','')
+	web0 = web.replace('http://','')
 	try:
 	        with open('tmp/'+web0+'-links.lst','r') as ro:
 		    for r in ro:
-			r = r.strip('\n')
+			r = r.replace('\n','')
 			path_list.append(r)
 	except IOError:
 		print R+' [-] Path file not found!'

@@ -58,7 +58,7 @@ def hsts(web):
 		m = raw_input(O+' [#] Force SSL/TLS (y/N) :> ')
 		if m == 'y' or m == 'Y':
 			print GR+' [*] Using revamped SSL...'
-			o = 'https://' + web.strip('http://')
+			o = 'https://' + web.replace('http://','')
 			m = getHeaders0x00(web)
 			check0x00(m)
 		elif m == 'n' or m == 'N':

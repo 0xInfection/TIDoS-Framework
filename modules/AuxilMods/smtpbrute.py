@@ -61,8 +61,8 @@ def smtpbrute(web):
 	except IOError:
 		print R+' [-] File paths not found!'
 
-	web = web.strip('https://')
-	web = web.strip('http://')
+	web = web.replace('https://','')
+	web = web.replace('http://','')
 	ip = socket.gethostbyname(web)
 	w = raw_input(O+' [#] Use IP '+R+ip+' ? (y/n) :> ')
 	if w == 'y' or w == 'Y':

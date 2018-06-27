@@ -97,7 +97,7 @@ def outer(web):
 	    mopo = result.splitlines()
 	    for mo in mopo:
 		ro = mo.split(',')[0]
-		print G+' [+] Reveived : '+ro
+		print G+' [+] Received : '+ro
 		final.append(str(ro))
 
 def report(web, found, final):
@@ -125,8 +125,8 @@ def subdom0x00(web):
     global fileo
 
     if 'http' in web:
-		web = web.strip('http://')
-		web = web.strip('https://')
+		web = web.replace('http://','')
+		web = web.replace('https://','')
     try:
 	fileo = 'tmp/'+web+'-subdomains.lst'
 	p = open(fileo,'w+')

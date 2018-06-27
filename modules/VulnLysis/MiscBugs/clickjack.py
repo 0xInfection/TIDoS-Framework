@@ -65,8 +65,8 @@ def clickjack(web):
 	        if w == "y":
 		    print''+B+' [!] Generating POC ...'
 		    time.sleep(1.0)
-		    web0 = web.strip('http://')
-		    web0 = web.strip('https://')
+		    web0 = web.replace('http://','')
+		    web0 = web.replace('https://','')
 		    html_file = open("tmp/"+web0+"-clickjack-poc.html","w+")
 		    html_file.write(code1)
 		    html_file.close()
