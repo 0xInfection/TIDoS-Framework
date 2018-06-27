@@ -24,8 +24,9 @@ def links(web):
     time.sleep(0.4)
     print('' + GR + color.BOLD + ' [!] Fetching links to the website...')
     time.sleep(0.4)
-    print(""+ GR + color.BOLD + " [~] Result: "+ color.END)
-    web0 = web.strip('http://')
+    print(GR +" [~] Result: "+ color.END)
+    web0 = web.replace('http://','')
+	
     domains = [web]
     for dom in domains:
         text = requests.get('http://api.hackertarget.com/pagelinks/?q=' + dom).text
@@ -40,7 +41,7 @@ def links(web):
 		print O+'\n [!] Receiving links...'
 		for p in final_links:
 			print G+' [+] Found link : '+O+p
-			time.sleep(0.15)
+			time.sleep(0.1)
 
 		w = raw_input(GR+"\n [*] Save this as a output file? (y/n) :> ")
 		if 'http://' in web:
