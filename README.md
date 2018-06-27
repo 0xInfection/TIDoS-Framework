@@ -1,6 +1,6 @@
 <p align="middle"><img src='https://i.imgur.com/QAbaVdU.png' /></p>
 
-![Python](https://img.shields.io/badge/Python-2.7-green.svg) ![TIDoS](https://img.shields.io/badge/TIDoS-v1.1.1-blue.svg) ![Supported OS](https://img.shields.io/badge/Supported%20OS-Linux-yellow.svg) ![License](https://img.shields.io/badge/License-GPLv3-blue.svg) ![Build](https://img.shields.io/badge/Build-0069-red.svg) ![Modules](https://img.shields.io/badge/Modules-73-blue.svg) ![Status](https://img.shields.io/badge/Build%20Status-passing-green.svg) ![Stage](https://img.shields.io/badge/Release-Stable-brightgreen.svg)
+![Python](https://img.shields.io/badge/Python-2.7-green.svg) ![TIDoS](https://img.shields.io/badge/TIDoS-v1.1.1-blue.svg) ![Supported OS](https://img.shields.io/badge/Supported%20OS-Linux-yellow.svg) ![License](https://img.shields.io/badge/License-GPLv3-blue.svg) ![Build](https://img.shields.io/badge/Build-0073-red.svg) ![Modules](https://img.shields.io/badge/Modules-79-blue.svg) ![Status](https://img.shields.io/badge/Build%20Status-passing-green.svg) ![Stage](https://img.shields.io/badge/Release-Stable-brightgreen.svg)
 
 
 # TIDoS Framework 
@@ -9,7 +9,7 @@ TIDoS Framework is a comprehensive web application audit framework with some ser
 ### Highlights :-
 The main highlights of this framework is:
 - [x] Basic first release (but huge).
-- [x] Has 4 main phases, subdivided into __13 sub-phases__ containing total of __73 modules__.
+- [x] Has 4 main phases, subdivided into __13 sub-phases__ containing total of __79 modules__.
 - [x] Reconnaissance Phase has 26 modules of its own (including active reconnaissance, passive reconnaissance and information disclosure modules).
 - [x] Scanning & Enumeration Phase has got 12 modules (including port scans, WAF analysis, etc)
 - [x] Vulnerability Analysis Phase has 32 modules (including most common vulnerabilites in action.
