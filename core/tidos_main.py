@@ -13,6 +13,7 @@ import sys
 import platform
 import os
 import time
+import warnings
 from os import path
 from time import sleep
 from impo import *
@@ -81,7 +82,7 @@ def tidos_main():
 			print C+' [+] Alvida, see ya!\n'
 			sys.exit(0)
 
-		except Exception as e:
+		#except Exception as e:
 			print R+' [-] Something happened! :('
 			print R+' [!] Error : '+str(e)
 

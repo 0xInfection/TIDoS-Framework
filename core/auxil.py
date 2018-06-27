@@ -13,11 +13,12 @@ import os
 import time
 import subprocess
 import random
+from vuln_dup import vuln_dup
 from vulnban1 import *
 from random import randint
 from subprocess import call
 sys.path.append('modules/AuxilMods/')
-
+from auxilban import *
 from encodeall import *
 from brutemods import *
 
@@ -34,18 +35,18 @@ def auxil(web):
 	brutemods(web)
 	print '\n\n'
 	vulnban1()
-	vuln(web)
+	vuln_dup(web)
 
     elif v == '2':
 	print ' [!] Type Selected : Encode Strings'
 	encodeall()
 	print '\n\n'
 	vulnban1()
-	vuln(web)
+	vuln_dup(web)
 
     elif v == '99':
 	print GR+' [*] Going back!'
 	vulnban1()
-	vuln(web)
+	vuln_dup(web)
 	time.sleep(0.6)
 

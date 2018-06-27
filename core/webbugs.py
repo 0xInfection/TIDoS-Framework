@@ -32,74 +32,74 @@ def webbugs(web):
     webbugsban()
     v = raw_input(O+B+' [#] \033[4mTID\033[1;0m '+GR+':> ' + color.END)
     print '\n'
-    if v == '1':
+    if v.strip() == '1':
 	print B+' [!] Type Selected :'+C+' iCORS'
 	icors(web)
+	time.sleep(2)
 	webbugs(web)
-	time.sleep(1)
 
-    elif v == '2':
+    elif v.strip() == '2':
 	print B+' [!] Type Selected :'+C+' Same Site Scripting'
-	ssscript(web)	
+	ssscript(web)
+	time.sleep(2)	
 	webbugs(web)
-	time.sleep(1)
 
-    elif v == '3':
+    elif v.strip() == '3':
 	print B+' [!] Type Selected :'+C+' Clickjack'
-	clickjack(web)	
+	clickjack(web)
+	time.sleep(2)	
 	webbugs(web)
-	time.sleep(1)
 
-    elif v == '4':
+    elif v.strip() == '4':
 	print B+' [!] Type Selected :'+C+' Zone Transfer'
 	zone(web)
+	time.sleep(2)
 	webbugs(web)
-	time.sleep(1)
 
-    elif v == '5':
+    elif v.strip() == '5':
 	print B+' [!] Type Selected :'+C+' Cookie Check'
 	cookiecheck(web)
+	time.sleep(2)
 	webbugs(web)
-	time.sleep(1)
 
-    elif v == '6':
+    elif v.strip() == '6':
 	print B+' [!] Type Selected :'+C+' Sec. Headers'
 	headers(web)
+	time.sleep(2)
 	webbugs(web)
-	time.sleep(1)
 
-    elif v == '7':
+    elif v.strip() == '7':
 	print B+' [!] Type Selected :'+C+' Cloudflare Misconfig.'
 	cloudflare(web)
+	time.sleep(2)
 	webbugs(web)
-	time.sleep(1)
 
-    elif v == '8':
+    elif v.strip() == '8':
 	print B+' [!] Type Selected :'+C+' HSTS Check'
 	hsts(web)
+	time.sleep(2)
 	webbugs(web)
-	time.sleep(1)
 
-    elif v == '9':
+    elif v.strip() == '9':
 	print B+' [!] Type Selected :'+C+' Cross Site Tracing'
 	xsstrace(web)
+	time.sleep(2)
 	webbugs(web)
-	time.sleep(1)
 
-    elif v == '10':
+    elif v.strip() == '10':
 	print B+' [!] Type Selected :'+C+' Telnet Enabled'
-	netmisc(web)	
+	netmisc(web)
+	time.sleep(2)	
 	webbugs(web)
-	time.sleep(1)
 
-    elif v == '11':
+    elif v.strip() == '11':
 	print B+' [!] Type Selected :'+C+' Email Spoof'
-	mailspoof(web)	
+	mailspoof(web)
+	time.sleep(2)	
 	webbugs(web)
-	time.sleep(1)
 
 
-    elif v == 'A':
+    elif v.strip() == 'A':
 	print B+' [!] Type Selected : All Modules'
 	time.sleep(0.5)
 
@@ -160,7 +160,7 @@ def webbugs(web):
 	print G+B+' [+] All modules successfully completed!'
 	time.sleep(0.5)
 
-    elif v == '99':
+    elif v.strip() == '99':
 	print '[!] Back'
 	time.sleep(0.7)
 

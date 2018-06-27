@@ -14,7 +14,7 @@ from random import *
 from webbugs_alt import webbugs_alt
 from vulnban1 import *
 from serbugs import *
-from auxil import *
+from auxil import auxil
 from colors import *
 
 def vuln(web):
