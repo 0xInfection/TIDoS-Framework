@@ -26,11 +26,11 @@ def brutemodsban():
     time.sleep(0.1)
     print B+'        [3]'+C+' SQL Protocol Bruteforce'
     time.sleep(0.1)
-    print B+'        [4]'+C+' POP 3/2 Protocol Bruteforce\n'
+    print B+'        [4]'+C+' POP 3/2 Protocol Bruteforce'
     time.sleep(0.1)
-    print B+'        [5]'+C+' SMTP Protocol Bruteforce\n'
+    print B+'        [5]'+C+' SMTP Protocol Bruteforce'
     time.sleep(0.1)
-    print B+'        [6]'+C+' TELNET Protocol Bruteforce\n'
+    print B+'        [6]'+C+' TELNET Protocol Bruteforce'
     time.sleep(0.1)
     print B+'        [7]'+C+' XMPP Protocol Bruteforce\n'
     time.sleep(0.1)
