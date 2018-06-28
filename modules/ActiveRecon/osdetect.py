@@ -43,7 +43,7 @@ def osdetect(web):
 
     try:
 	    time.sleep(0.4)
-	    print R+'\n      =================================='
+	    print R+'\n     ==================================='
 	    print R+'      O S   F I N G E R P R I N T I N G'
 	    print R+'     ===================================\n'
 	    web = web.replace('http://','')
