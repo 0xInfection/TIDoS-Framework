@@ -74,3 +74,8 @@ cd lib/lxml/
 sudo python setup.py install
 cd ..
 cd ..
+
+cd lib/logging/
+sudo python setup.py install
+cd ..
+cd ..
