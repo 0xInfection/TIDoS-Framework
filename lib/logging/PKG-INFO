@@ -1,0 +1,10 @@
+Metadata-Version: 1.0
+Name: logging
+Version: 0.4.9.6
+Summary: A logging module for Python
+Home-page: http://www.red-dove.com/python_logging.html
+Author: Vinay Sajip
+Author-email: vinay_sajip@red-dove.com
+License: Copyright (C) 2001-2005 by Vinay Sajip. All Rights Reserved. See LICENSE for license.
+Description: This module is intended to provide a standard error logging mechanism in Python as per PEP 282.
+Platform: UNKNOWN

@@ -1,0 +1,5 @@
+<?xml version="1.0" ?>
+<!DOCTYPE events SYSTEM "logging.dtd" [<!ENTITY data SYSTEM "events.xml">]>
+<events xmlns="http://www.red-dove.com/logging">
+&data;
+</events>

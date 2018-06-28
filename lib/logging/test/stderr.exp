@@ -1,0 +1,566 @@
+-- log_test0  begin  --------------------------------------------------------
+CRITICAL:ERR:Message 0
+ERROR:ERR:Message 1
+CRITICAL:INF:Message 2
+ERROR:INF:Message 3
+WARNING:INF:Message 4
+INFO:INF:Message 5
+CRITICAL:INF.UNDEF:Message 6
+ERROR:INF.UNDEF:Message 7
+WARNING:INF.UNDEF:Message 8
+INFO:INF.UNDEF:Message 9
+CRITICAL:INF.ERR:Message 10
+ERROR:INF.ERR:Message 11
+CRITICAL:INF.ERR.UNDEF:Message 12
+ERROR:INF.ERR.UNDEF:Message 13
+CRITICAL:DEB:Message 14
+ERROR:DEB:Message 15
+WARNING:DEB:Message 16
+INFO:DEB:Message 17
+DEBUG:DEB:Message 18
+CRITICAL:UNDEF:Message 19
+ERROR:UNDEF:Message 20
+WARNING:UNDEF:Message 21
+INFO:UNDEF:Message 22
+CRITICAL:INF.BADPARENT.UNDEF:Message 23
+CRITICAL:INF.BADPARENT:Message 24
+INFO:INF:Messages should bear numbers 0 through 24.
+-- log_test0  end    --------------------------------------------------------
+-- log_test2  begin  --------------------------------------------------------
+CRITICAL:ERR:Message 0
+ERROR:ERR:Message 1
+CRITICAL:INF:Message 2
+ERROR:INF:Message 3
+WARNING:INF:Message 4
+INFO:INF:Message 5
+CRITICAL:INF.UNDEF:Message 6
+ERROR:INF.UNDEF:Message 7
+WARNING:INF.UNDEF:Message 8
+INFO:INF.UNDEF:Message 9
+CRITICAL:INF.ERR:Message 10
+ERROR:INF.ERR:Message 11
+CRITICAL:INF.ERR.UNDEF:Message 12
+ERROR:INF.ERR.UNDEF:Message 13
+CRITICAL:DEB:Message 14
+ERROR:DEB:Message 15
+WARNING:DEB:Message 16
+INFO:DEB:Message 17
+DEBUG:DEB:Message 18
+CRITICAL:UNDEF:Message 19
+ERROR:UNDEF:Message 20
+WARNING:UNDEF:Message 21
+INFO:UNDEF:Message 22
+CRITICAL:INF.BADPARENT.UNDEF:Message 23
+CRITICAL:INF.BADPARENT:Message 24
+INFO:INF:Messages should bear numbers 0 through 24.
+-- log_test2  end    --------------------------------------------------------
+CRITICAL:ERR:Message 0
+ERROR:ERR:Message 1
+CRITICAL:INF:Message 2
+ERROR:INF:Message 3
+WARNING:INF:Message 4
+INFO:INF:Message 5
+CRITICAL:INF.UNDEF:Message 6
+ERROR:INF.UNDEF:Message 7
+WARNING:INF.UNDEF:Message 8
+INFO:INF.UNDEF:Message 9
+CRITICAL:INF.ERR:Message 10
+ERROR:INF.ERR:Message 11
+CRITICAL:INF.ERR.UNDEF:Message 12
+ERROR:INF.ERR.UNDEF:Message 13
+CRITICAL:DEB:Message 14
+ERROR:DEB:Message 15
+WARNING:DEB:Message 16
+INFO:DEB:Message 17
+DEBUG:DEB:Message 18
+CRITICAL:UNDEF:Message 19
+ERROR:UNDEF:Message 20
+WARNING:UNDEF:Message 21
+INFO:UNDEF:Message 22
+CRITICAL:INF.BADPARENT.UNDEF:Message 23
+CRITICAL:INF.BADPARENT:Message 24
+INFO:INF:Messages should bear numbers 0 through 24.
+-- log_test4  begin  --------------------------------------------------------
+-- setting logging level to 'Boring' -----
+Boring:root:This should only be seen at the 'Boring' logging level (or lower)
+Chatterbox:root:This should only be seen at the 'Chatterbox' logging level (or lower)
+Garrulous:root:This should only be seen at the 'Garrulous' logging level (or lower)
+Talkative:root:This should only be seen at the 'Talkative' logging level (or lower)
+Verbose:root:This should only be seen at the 'Verbose' logging level (or lower)
+Sociable:root:This should only be seen at the 'Sociable' logging level (or lower)
+Effusive:root:This should only be seen at the 'Effusive' logging level (or lower)
+Terse:root:This should only be seen at the 'Terse' logging level (or lower)
+Taciturn:root:This should only be seen at the 'Taciturn' logging level (or lower)
+Silent:root:This should only be seen at the 'Silent' logging level (or lower)
+-- setting logging level to 'Chatterbox' -----
+Chatterbox:root:This should only be seen at the 'Chatterbox' logging level (or lower)
+Garrulous:root:This should only be seen at the 'Garrulous' logging level (or lower)
+Talkative:root:This should only be seen at the 'Talkative' logging level (or lower)
+Verbose:root:This should only be seen at the 'Verbose' logging level (or lower)
+Sociable:root:This should only be seen at the 'Sociable' logging level (or lower)
+Effusive:root:This should only be seen at the 'Effusive' logging level (or lower)
+Terse:root:This should only be seen at the 'Terse' logging level (or lower)
+Taciturn:root:This should only be seen at the 'Taciturn' logging level (or lower)
+Silent:root:This should only be seen at the 'Silent' logging level (or lower)
+-- setting logging level to 'Garrulous' -----
+Garrulous:root:This should only be seen at the 'Garrulous' logging level (or lower)
+Talkative:root:This should only be seen at the 'Talkative' logging level (or lower)
+Verbose:root:This should only be seen at the 'Verbose' logging level (or lower)
+Sociable:root:This should only be seen at the 'Sociable' logging level (or lower)
+Effusive:root:This should only be seen at the 'Effusive' logging level (or lower)
+Terse:root:This should only be seen at the 'Terse' logging level (or lower)
+Taciturn:root:This should only be seen at the 'Taciturn' logging level (or lower)
+Silent:root:This should only be seen at the 'Silent' logging level (or lower)
+-- setting logging level to 'Talkative' -----
+Talkative:root:This should only be seen at the 'Talkative' logging level (or lower)
+Verbose:root:This should only be seen at the 'Verbose' logging level (or lower)
+Sociable:root:This should only be seen at the 'Sociable' logging level (or lower)
+Effusive:root:This should only be seen at the 'Effusive' logging level (or lower)
+Terse:root:This should only be seen at the 'Terse' logging level (or lower)
+Taciturn:root:This should only be seen at the 'Taciturn' logging level (or lower)
+Silent:root:This should only be seen at the 'Silent' logging level (or lower)
+-- setting logging level to 'Verbose' -----
+Verbose:root:This should only be seen at the 'Verbose' logging level (or lower)
+Sociable:root:This should only be seen at the 'Sociable' logging level (or lower)
+Effusive:root:This should only be seen at the 'Effusive' logging level (or lower)
+Terse:root:This should only be seen at the 'Terse' logging level (or lower)
+Taciturn:root:This should only be seen at the 'Taciturn' logging level (or lower)
+Silent:root:This should only be seen at the 'Silent' logging level (or lower)
+-- setting logging level to 'Sociable' -----
+Sociable:root:This should only be seen at the 'Sociable' logging level (or lower)
+Effusive:root:This should only be seen at the 'Effusive' logging level (or lower)
+Terse:root:This should only be seen at the 'Terse' logging level (or lower)
+Taciturn:root:This should only be seen at the 'Taciturn' logging level (or lower)
+Silent:root:This should only be seen at the 'Silent' logging level (or lower)
+-- setting logging level to 'Effusive' -----
+Effusive:root:This should only be seen at the 'Effusive' logging level (or lower)
+Terse:root:This should only be seen at the 'Terse' logging level (or lower)
+Taciturn:root:This should only be seen at the 'Taciturn' logging level (or lower)
+Silent:root:This should only be seen at the 'Silent' logging level (or lower)
+-- setting logging level to 'Terse' -----
+Terse:root:This should only be seen at the 'Terse' logging level (or lower)
+Taciturn:root:This should only be seen at the 'Taciturn' logging level (or lower)
+Silent:root:This should only be seen at the 'Silent' logging level (or lower)
+-- setting logging level to 'Taciturn' -----
+Taciturn:root:This should only be seen at the 'Taciturn' logging level (or lower)
+Silent:root:This should only be seen at the 'Silent' logging level (or lower)
+-- setting logging level to 'Silent' -----
+Silent:root:This should only be seen at the 'Silent' logging level (or lower)
+-- Filtering at handler level to SOCIABLE --
+-- setting logging level to 'Boring' -----
+Sociable:root:This should only be seen at the 'Sociable' logging level (or lower)
+Effusive:root:This should only be seen at the 'Effusive' logging level (or lower)
+Terse:root:This should only be seen at the 'Terse' logging level (or lower)
+Taciturn:root:This should only be seen at the 'Taciturn' logging level (or lower)
+Silent:root:This should only be seen at the 'Silent' logging level (or lower)
+-- setting logging level to 'Chatterbox' -----
+Sociable:root:This should only be seen at the 'Sociable' logging level (or lower)
+Effusive:root:This should only be seen at the 'Effusive' logging level (or lower)
+Terse:root:This should only be seen at the 'Terse' logging level (or lower)
+Taciturn:root:This should only be seen at the 'Taciturn' logging level (or lower)
+Silent:root:This should only be seen at the 'Silent' logging level (or lower)
+-- setting logging level to 'Garrulous' -----
+Sociable:root:This should only be seen at the 'Sociable' logging level (or lower)
+Effusive:root:This should only be seen at the 'Effusive' logging level (or lower)
+Terse:root:This should only be seen at the 'Terse' logging level (or lower)
+Taciturn:root:This should only be seen at the 'Taciturn' logging level (or lower)
+Silent:root:This should only be seen at the 'Silent' logging level (or lower)
+-- setting logging level to 'Talkative' -----
+Sociable:root:This should only be seen at the 'Sociable' logging level (or lower)
+Effusive:root:This should only be seen at the 'Effusive' logging level (or lower)
+Terse:root:This should only be seen at the 'Terse' logging level (or lower)
+Taciturn:root:This should only be seen at the 'Taciturn' logging level (or lower)
+Silent:root:This should only be seen at the 'Silent' logging level (or lower)
+-- setting logging level to 'Verbose' -----
+Sociable:root:This should only be seen at the 'Sociable' logging level (or lower)
+Effusive:root:This should only be seen at the 'Effusive' logging level (or lower)
+Terse:root:This should only be seen at the 'Terse' logging level (or lower)
+Taciturn:root:This should only be seen at the 'Taciturn' logging level (or lower)
+Silent:root:This should only be seen at the 'Silent' logging level (or lower)
+-- setting logging level to 'Sociable' -----
+Sociable:root:This should only be seen at the 'Sociable' logging level (or lower)
+Effusive:root:This should only be seen at the 'Effusive' logging level (or lower)
+Terse:root:This should only be seen at the 'Terse' logging level (or lower)
+Taciturn:root:This should only be seen at the 'Taciturn' logging level (or lower)
+Silent:root:This should only be seen at the 'Silent' logging level (or lower)
+-- setting logging level to 'Effusive' -----
+Effusive:root:This should only be seen at the 'Effusive' logging level (or lower)
+Terse:root:This should only be seen at the 'Terse' logging level (or lower)
+Taciturn:root:This should only be seen at the 'Taciturn' logging level (or lower)
+Silent:root:This should only be seen at the 'Silent' logging level (or lower)
+-- setting logging level to 'Terse' -----
+Terse:root:This should only be seen at the 'Terse' logging level (or lower)
+Taciturn:root:This should only be seen at the 'Taciturn' logging level (or lower)
+Silent:root:This should only be seen at the 'Silent' logging level (or lower)
+-- setting logging level to 'Taciturn' -----
+Taciturn:root:This should only be seen at the 'Taciturn' logging level (or lower)
+Silent:root:This should only be seen at the 'Silent' logging level (or lower)
+-- setting logging level to 'Silent' -----
+Silent:root:This should only be seen at the 'Silent' logging level (or lower)
+-- Filtering using GARRULOUS filter --
+-- setting logging level to 'Boring' -----
+Boring:root:This should only be seen at the 'Boring' logging level (or lower)
+Chatterbox:root:This should only be seen at the 'Chatterbox' logging level (or lower)
+Talkative:root:This should only be seen at the 'Talkative' logging level (or lower)
+Verbose:root:This should only be seen at the 'Verbose' logging level (or lower)
+Sociable:root:This should only be seen at the 'Sociable' logging level (or lower)
+Effusive:root:This should only be seen at the 'Effusive' logging level (or lower)
+Terse:root:This should only be seen at the 'Terse' logging level (or lower)
+Taciturn:root:This should only be seen at the 'Taciturn' logging level (or lower)
+Silent:root:This should only be seen at the 'Silent' logging level (or lower)
+-- setting logging level to 'Chatterbox' -----
+Chatterbox:root:This should only be seen at the 'Chatterbox' logging level (or lower)
+Talkative:root:This should only be seen at the 'Talkative' logging level (or lower)
+Verbose:root:This should only be seen at the 'Verbose' logging level (or lower)
+Sociable:root:This should only be seen at the 'Sociable' logging level (or lower)
+Effusive:root:This should only be seen at the 'Effusive' logging level (or lower)
+Terse:root:This should only be seen at the 'Terse' logging level (or lower)
+Taciturn:root:This should only be seen at the 'Taciturn' logging level (or lower)
+Silent:root:This should only be seen at the 'Silent' logging level (or lower)
+-- setting logging level to 'Garrulous' -----
+Talkative:root:This should only be seen at the 'Talkative' logging level (or lower)
+Verbose:root:This should only be seen at the 'Verbose' logging level (or lower)
+Sociable:root:This should only be seen at the 'Sociable' logging level (or lower)
+Effusive:root:This should only be seen at the 'Effusive' logging level (or lower)
+Terse:root:This should only be seen at the 'Terse' logging level (or lower)
+Taciturn:root:This should only be seen at the 'Taciturn' logging level (or lower)
+Silent:root:This should only be seen at the 'Silent' logging level (or lower)
+-- setting logging level to 'Talkative' -----
+Talkative:root:This should only be seen at the 'Talkative' logging level (or lower)
+Verbose:root:This should only be seen at the 'Verbose' logging level (or lower)
+Sociable:root:This should only be seen at the 'Sociable' logging level (or lower)
+Effusive:root:This should only be seen at the 'Effusive' logging level (or lower)
+Terse:root:This should only be seen at the 'Terse' logging level (or lower)
+Taciturn:root:This should only be seen at the 'Taciturn' logging level (or lower)
+Silent:root:This should only be seen at the 'Silent' logging level (or lower)
+-- setting logging level to 'Verbose' -----
+Verbose:root:This should only be seen at the 'Verbose' logging level (or lower)
+Sociable:root:This should only be seen at the 'Sociable' logging level (or lower)
+Effusive:root:This should only be seen at the 'Effusive' logging level (or lower)
+Terse:root:This should only be seen at the 'Terse' logging level (or lower)
+Taciturn:root:This should only be seen at the 'Taciturn' logging level (or lower)
+Silent:root:This should only be seen at the 'Silent' logging level (or lower)
+-- setting logging level to 'Sociable' -----
+Sociable:root:This should only be seen at the 'Sociable' logging level (or lower)
+Effusive:root:This should only be seen at the 'Effusive' logging level (or lower)
+Terse:root:This should only be seen at the 'Terse' logging level (or lower)
+Taciturn:root:This should only be seen at the 'Taciturn' logging level (or lower)
+Silent:root:This should only be seen at the 'Silent' logging level (or lower)
+-- setting logging level to 'Effusive' -----
+Effusive:root:This should only be seen at the 'Effusive' logging level (or lower)
+Terse:root:This should only be seen at the 'Terse' logging level (or lower)
+Taciturn:root:This should only be seen at the 'Taciturn' logging level (or lower)
+Silent:root:This should only be seen at the 'Silent' logging level (or lower)
+-- setting logging level to 'Terse' -----
+Terse:root:This should only be seen at the 'Terse' logging level (or lower)
+Taciturn:root:This should only be seen at the 'Taciturn' logging level (or lower)
+Silent:root:This should only be seen at the 'Silent' logging level (or lower)
+-- setting logging level to 'Taciturn' -----
+Taciturn:root:This should only be seen at the 'Taciturn' logging level (or lower)
+Silent:root:This should only be seen at the 'Silent' logging level (or lower)
+-- setting logging level to 'Silent' -----
+Silent:root:This should only be seen at the 'Silent' logging level (or lower)
+-- Filtering using specific filter for SOCIABLE, TACITURN --
+-- setting logging level to 'Boring' -----
+Boring:root:This should only be seen at the 'Boring' logging level (or lower)
+Chatterbox:root:This should only be seen at the 'Chatterbox' logging level (or lower)
+Talkative:root:This should only be seen at the 'Talkative' logging level (or lower)
+Verbose:root:This should only be seen at the 'Verbose' logging level (or lower)
+Effusive:root:This should only be seen at the 'Effusive' logging level (or lower)
+Terse:root:This should only be seen at the 'Terse' logging level (or lower)
+Silent:root:This should only be seen at the 'Silent' logging level (or lower)
+-- setting logging level to 'Chatterbox' -----
+Chatterbox:root:This should only be seen at the 'Chatterbox' logging level (or lower)
+Talkative:root:This should only be seen at the 'Talkative' logging level (or lower)
+Verbose:root:This should only be seen at the 'Verbose' logging level (or lower)
+Effusive:root:This should only be seen at the 'Effusive' logging level (or lower)
+Terse:root:This should only be seen at the 'Terse' logging level (or lower)
+Silent:root:This should only be seen at the 'Silent' logging level (or lower)
+-- setting logging level to 'Garrulous' -----
+Talkative:root:This should only be seen at the 'Talkative' logging level (or lower)
+Verbose:root:This should only be seen at the 'Verbose' logging level (or lower)
+Effusive:root:This should only be seen at the 'Effusive' logging level (or lower)
+Terse:root:This should only be seen at the 'Terse' logging level (or lower)
+Silent:root:This should only be seen at the 'Silent' logging level (or lower)
+-- setting logging level to 'Talkative' -----
+Talkative:root:This should only be seen at the 'Talkative' logging level (or lower)
+Verbose:root:This should only be seen at the 'Verbose' logging level (or lower)
+Effusive:root:This should only be seen at the 'Effusive' logging level (or lower)
+Terse:root:This should only be seen at the 'Terse' logging level (or lower)
+Silent:root:This should only be seen at the 'Silent' logging level (or lower)
+-- setting logging level to 'Verbose' -----
+Verbose:root:This should only be seen at the 'Verbose' logging level (or lower)
+Effusive:root:This should only be seen at the 'Effusive' logging level (or lower)
+Terse:root:This should only be seen at the 'Terse' logging level (or lower)
+Silent:root:This should only be seen at the 'Silent' logging level (or lower)
+-- setting logging level to 'Sociable' -----
+Effusive:root:This should only be seen at the 'Effusive' logging level (or lower)
+Terse:root:This should only be seen at the 'Terse' logging level (or lower)
+Silent:root:This should only be seen at the 'Silent' logging level (or lower)
+-- setting logging level to 'Effusive' -----
+Effusive:root:This should only be seen at the 'Effusive' logging level (or lower)
+Terse:root:This should only be seen at the 'Terse' logging level (or lower)
+Silent:root:This should only be seen at the 'Silent' logging level (or lower)
+-- setting logging level to 'Terse' -----
+Terse:root:This should only be seen at the 'Terse' logging level (or lower)
+Silent:root:This should only be seen at the 'Silent' logging level (or lower)
+-- setting logging level to 'Taciturn' -----
+Silent:root:This should only be seen at the 'Silent' logging level (or lower)
+-- setting logging level to 'Silent' -----
+Silent:root:This should only be seen at the 'Silent' logging level (or lower)
+-- log_test4  end    --------------------------------------------------------
+-- log_test7  begin  --------------------------------------------------------
+-- logging at DEBUG, nothing should be seen yet --
+-- logging at INFO, nothing should be seen yet --
+-- logging at WARNING, 3 messages should be seen --
+Debug message
+Info message
+Warning message
+-- logging 0 at level INFO, messages should be seen every 10 events --
+-- logging 1 at level INFO, messages should be seen every 10 events --
+-- logging 2 at level INFO, messages should be seen every 10 events --
+-- logging 3 at level INFO, messages should be seen every 10 events --
+-- logging 4 at level INFO, messages should be seen every 10 events --
+-- logging 5 at level INFO, messages should be seen every 10 events --
+-- logging 6 at level INFO, messages should be seen every 10 events --
+-- logging 7 at level INFO, messages should be seen every 10 events --
+-- logging 8 at level INFO, messages should be seen every 10 events --
+-- logging 9 at level INFO, messages should be seen every 10 events --
+Info index = 0
+Info index = 1
+Info index = 2
+Info index = 3
+Info index = 4
+Info index = 5
+Info index = 6
+Info index = 7
+Info index = 8
+Info index = 9
+-- logging 10 at level INFO, messages should be seen every 10 events --
+-- logging 11 at level INFO, messages should be seen every 10 events --
+-- logging 12 at level INFO, messages should be seen every 10 events --
+-- logging 13 at level INFO, messages should be seen every 10 events --
+-- logging 14 at level INFO, messages should be seen every 10 events --
+-- logging 15 at level INFO, messages should be seen every 10 events --
+-- logging 16 at level INFO, messages should be seen every 10 events --
+-- logging 17 at level INFO, messages should be seen every 10 events --
+-- logging 18 at level INFO, messages should be seen every 10 events --
+-- logging 19 at level INFO, messages should be seen every 10 events --
+Info index = 10
+Info index = 11
+Info index = 12
+Info index = 13
+Info index = 14
+Info index = 15
+Info index = 16
+Info index = 17
+Info index = 18
+Info index = 19
+-- logging 20 at level INFO, messages should be seen every 10 events --
+-- logging 21 at level INFO, messages should be seen every 10 events --
+-- logging 22 at level INFO, messages should be seen every 10 events --
+-- logging 23 at level INFO, messages should be seen every 10 events --
+-- logging 24 at level INFO, messages should be seen every 10 events --
+-- logging 25 at level INFO, messages should be seen every 10 events --
+-- logging 26 at level INFO, messages should be seen every 10 events --
+-- logging 27 at level INFO, messages should be seen every 10 events --
+-- logging 28 at level INFO, messages should be seen every 10 events --
+-- logging 29 at level INFO, messages should be seen every 10 events --
+Info index = 20
+Info index = 21
+Info index = 22
+Info index = 23
+Info index = 24
+Info index = 25
+Info index = 26
+Info index = 27
+Info index = 28
+Info index = 29
+-- logging 30 at level INFO, messages should be seen every 10 events --
+-- logging 31 at level INFO, messages should be seen every 10 events --
+-- logging 32 at level INFO, messages should be seen every 10 events --
+-- logging 33 at level INFO, messages should be seen every 10 events --
+-- logging 34 at level INFO, messages should be seen every 10 events --
+-- logging 35 at level INFO, messages should be seen every 10 events --
+-- logging 36 at level INFO, messages should be seen every 10 events --
+-- logging 37 at level INFO, messages should be seen every 10 events --
+-- logging 38 at level INFO, messages should be seen every 10 events --
+-- logging 39 at level INFO, messages should be seen every 10 events --
+Info index = 30
+Info index = 31
+Info index = 32
+Info index = 33
+Info index = 34
+Info index = 35
+Info index = 36
+Info index = 37
+Info index = 38
+Info index = 39
+-- logging 40 at level INFO, messages should be seen every 10 events --
+-- logging 41 at level INFO, messages should be seen every 10 events --
+-- logging 42 at level INFO, messages should be seen every 10 events --
+-- logging 43 at level INFO, messages should be seen every 10 events --
+-- logging 44 at level INFO, messages should be seen every 10 events --
+-- logging 45 at level INFO, messages should be seen every 10 events --
+-- logging 46 at level INFO, messages should be seen every 10 events --
+-- logging 47 at level INFO, messages should be seen every 10 events --
+-- logging 48 at level INFO, messages should be seen every 10 events --
+-- logging 49 at level INFO, messages should be seen every 10 events --
+Info index = 40
+Info index = 41
+Info index = 42
+Info index = 43
+Info index = 44
+Info index = 45
+Info index = 46
+Info index = 47
+Info index = 48
+Info index = 49
+-- logging 50 at level INFO, messages should be seen every 10 events --
+-- logging 51 at level INFO, messages should be seen every 10 events --
+-- logging 52 at level INFO, messages should be seen every 10 events --
+-- logging 53 at level INFO, messages should be seen every 10 events --
+-- logging 54 at level INFO, messages should be seen every 10 events --
+-- logging 55 at level INFO, messages should be seen every 10 events --
+-- logging 56 at level INFO, messages should be seen every 10 events --
+-- logging 57 at level INFO, messages should be seen every 10 events --
+-- logging 58 at level INFO, messages should be seen every 10 events --
+-- logging 59 at level INFO, messages should be seen every 10 events --
+Info index = 50
+Info index = 51
+Info index = 52
+Info index = 53
+Info index = 54
+Info index = 55
+Info index = 56
+Info index = 57
+Info index = 58
+Info index = 59
+-- logging 60 at level INFO, messages should be seen every 10 events --
+-- logging 61 at level INFO, messages should be seen every 10 events --
+-- logging 62 at level INFO, messages should be seen every 10 events --
+-- logging 63 at level INFO, messages should be seen every 10 events --
+-- logging 64 at level INFO, messages should be seen every 10 events --
+-- logging 65 at level INFO, messages should be seen every 10 events --
+-- logging 66 at level INFO, messages should be seen every 10 events --
+-- logging 67 at level INFO, messages should be seen every 10 events --
+-- logging 68 at level INFO, messages should be seen every 10 events --
+-- logging 69 at level INFO, messages should be seen every 10 events --
+Info index = 60
+Info index = 61
+Info index = 62
+Info index = 63
+Info index = 64
+Info index = 65
+Info index = 66
+Info index = 67
+Info index = 68
+Info index = 69
+-- logging 70 at level INFO, messages should be seen every 10 events --
+-- logging 71 at level INFO, messages should be seen every 10 events --
+-- logging 72 at level INFO, messages should be seen every 10 events --
+-- logging 73 at level INFO, messages should be seen every 10 events --
+-- logging 74 at level INFO, messages should be seen every 10 events --
+-- logging 75 at level INFO, messages should be seen every 10 events --
+-- logging 76 at level INFO, messages should be seen every 10 events --
+-- logging 77 at level INFO, messages should be seen every 10 events --
+-- logging 78 at level INFO, messages should be seen every 10 events --
+-- logging 79 at level INFO, messages should be seen every 10 events --
+Info index = 70
+Info index = 71
+Info index = 72
+Info index = 73
+Info index = 74
+Info index = 75
+Info index = 76
+Info index = 77
+Info index = 78
+Info index = 79
+-- logging 80 at level INFO, messages should be seen every 10 events --
+-- logging 81 at level INFO, messages should be seen every 10 events --
+-- logging 82 at level INFO, messages should be seen every 10 events --
+-- logging 83 at level INFO, messages should be seen every 10 events --
+-- logging 84 at level INFO, messages should be seen every 10 events --
+-- logging 85 at level INFO, messages should be seen every 10 events --
+-- logging 86 at level INFO, messages should be seen every 10 events --
+-- logging 87 at level INFO, messages should be seen every 10 events --
+-- logging 88 at level INFO, messages should be seen every 10 events --
+-- logging 89 at level INFO, messages should be seen every 10 events --
+Info index = 80
+Info index = 81
+Info index = 82
+Info index = 83
+Info index = 84
+Info index = 85
+Info index = 86
+Info index = 87
+Info index = 88
+Info index = 89
+-- logging 90 at level INFO, messages should be seen every 10 events --
+-- logging 91 at level INFO, messages should be seen every 10 events --
+-- logging 92 at level INFO, messages should be seen every 10 events --
+-- logging 93 at level INFO, messages should be seen every 10 events --
+-- logging 94 at level INFO, messages should be seen every 10 events --
+-- logging 95 at level INFO, messages should be seen every 10 events --
+-- logging 96 at level INFO, messages should be seen every 10 events --
+-- logging 97 at level INFO, messages should be seen every 10 events --
+-- logging 98 at level INFO, messages should be seen every 10 events --
+-- logging 99 at level INFO, messages should be seen every 10 events --
+Info index = 90
+Info index = 91
+Info index = 92
+Info index = 93
+Info index = 94
+Info index = 95
+Info index = 96
+Info index = 97
+Info index = 98
+Info index = 99
+-- logging 100 at level INFO, messages should be seen every 10 events --
+-- logging 101 at level INFO, messages should be seen every 10 events --
+Info index = 100
+Info index = 101
+-- log_test7  end    --------------------------------------------------------
+-- log_test8  begin  --------------------------------------------------------
+-- log_test8  end    --------------------------------------------------------
+-- log_test9  begin  --------------------------------------------------------
+-- log_test9  end    --------------------------------------------------------
+-- log_test10 begin  --------------------------------------------------------
+logger not derived from logging.Logger: NotALogger
+INFO:mylogger:Starting...
+DEBUG:mylogger:Debug message not in exception handler (no traceback)
+INFO:mylogger:About to throw exception...
+DEBUG:mylogger:Debug message inside exception handler (traceback)
+Traceback (most recent call last):
+  File "C:\Projects\RDC\Python\packages\logging\test\log_test10.py", line 77, in run
+    print "7" + 4
+TypeError: cannot concatenate 'str' and 'int' objects
+INFO:mylogger:Done.
+-- log_test10 end    --------------------------------------------------------
+-- log_test12 begin  --------------------------------------------------------
+INFO:log_test12:Jackdaws love my big sphinx of quartz
+INFO:log_test12:Jackdaws love my big sphinx of quartz
+DEBUG:log_test12:Pack my box with twelve dozen liquor jugs
+DEBUG:log_test12:Pack my box with twelve dozen liquor jugs
+-- log_test12 end    --------------------------------------------------------
+-- log_test13 begin  --------------------------------------------------------
+INFO:log_test13:Jackdaws love my big sphinx of quartz
+DEBUG:log_test13:Pack my box with five dozen liquor jugs
+-- log_test13 end    --------------------------------------------------------
+-- log_test15 begin  --------------------------------------------------------
+Unfiltered...
+INFO:a:Info 1
+INFO:a.b:Info 2
+INFO:a.c:Info 3
+INFO:a.b.c:Info 4
+INFO:a.b.c.d:Info 5
+INFO:a.bb.c:Info 6
+INFO:b:Info 7
+INFO:b.a:Info 8
+INFO:c.a.b:Info 9
+INFO:a.bb:Info 10
+Filtered with 'a.b'...
+INFO:a.b:Info 2
+INFO:a.b.c:Info 4
+INFO:a.b.c.d:Info 5
+-- log_test15 end    --------------------------------------------------------

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- Author: Vinay Sajip, Red Dove Consultants Ltd. http://www.red-dove.com/ -->
+
+<!-- THIS IS ONLY A VERY SIMPLE EXAMPLE -->
+
+<!ELEMENT logging:events (logging:event*)>
+
+<!ELEMENT logging:event (logging:message)>
+
+<!ATTLIST logging:event
+    name       CDATA #REQUIRED
+    level      CDATA #REQUIRED
+    created    CDATA #IMPLIED
+    filename   CDATA #IMPLIED
+    lineno     CDATA #IMPLIED
+>
+
+<!ELEMENT logging:message (#PCDATA)>

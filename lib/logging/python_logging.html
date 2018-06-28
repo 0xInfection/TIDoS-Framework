@@ -1,0 +1,1183 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+"http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+
+<head>
+<meta name="AUTHOR" content="Vinay Sajip">
+<meta name="COPYRIGHT" content="© 2002 Red Dove Consultants Limited">
+<meta name="KEYWORDS" content="Red Dove Consultants, Python, logging, PEP 282">
+<meta name="DESCRIPTION" content="A logging system for Python">
+<meta name="summary" content="A logging system for Python">
+<meta name="publisher" content="Red Dove Consultants Limited">
+<meta name="identifier" content="http://www.red-dove.com">
+<title>A Logging System for Python</title>
+<link title="Default Style" rel="stylesheet" href="default.css" type="text/css">
+</head>
+
+<body style="margin: 5px" marginheight="0">
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+  <tr>
+    <td class="bigtd">A Logging System for Python</td>
+    <td rowspan="2" align="right" style="text-align: right; vertical-align: top"><a href="/index.html">Home</a><br>
+    <a href="#download">Download</a><br>
+    <a href="#license">Copyright &amp; License</a><br>
+    <a href="#changes">Recent Changes</a><br>
+    <!-- a href="logging_manual.html">Online Manual</a --></td>
+  </tr>
+  <tr>
+  <td>"Oh, I'm a lumberjack and I'm okay..." <small>(Monty Python, <a href="http://www.montypython.net/scripts/lumberj.php">The Lumberjack Song</a>)</small></td>
+  </tr>
+</table>
+
+<h4>Table of Contents</h4>
+<a href="#abstract">Abstract</a><br>
+<a href="#motivation">Motivation</a><br>
+<a href="#influences">Influences</a><br>
+<a href="#simplest">A Simple Example</a><br>
+<a href="#ctrlflow">Control Flow</a><br>
+<a href="#levels">Levels</a><br>
+<a href="#loggers">Loggers</a><br>
+<a href="#handlers">Handlers</a><br>
+<a href="#formatters">Formatters</a><br>
+<a href="#filters">Filters</a><br>
+<a href="#config">Configuration</a><br>
+<a href="#guiconf">The GUI Configurator</a><br>
+<a href="#scenarios">Case Scenarios</a><br>
+<a href="#threadsafe">Thread Safety</a><br>
+<a href="#onthefly">On-The-Fly Reconfiguration</a><br>
+<a href="#mlcf">Module-Level Convenience Functions</a><br>
+<a href="#perf">Performance</a><br>
+<a href="#impstatus">Implementation Status</a><br>
+<a href="#acks">Acknowledgements</a><br>
+<a href="#todo">Still To Do</a><br>
+<a href="#download">Download and Installation</a><br>
+<a href="#changes">Change History</a><br>
+<a href="#license">Copyright and License</a><br>
+
+<a name="abstract"></a><h4>Abstract</h4>
+
+<p>There is a need for a standard logging system in Python, as comprehensively documented
+in <a href="http://www.python.org/peps/pep-0282.html">PEP 282</a> and
+enthusiastically endorsed by the BDFL in the <a
+href="http://www.python.org/doc/essays/pepparade.html">Parade of the PEPs</a>. By a happy
+coincidence, the package described here was already in development and fairly close in
+intent and design to the description in the aforementioned PEP, borrowing as it did
+heavily from JSR-47 (now JDK 1.4's java.util.logging package) and <a
+href="http://jakarta.apache.org/log4j/">log4j</a>. This page describes it in more detail.
+As I have tweaked the package to meet comments on PEP 282, I have structured this page in
+the same way as the original PEP. </p>
+
+<a name="motivation"></a><h4>Motivation</h4>
+
+<p>The Python community has been incredibly helpful to me, a relative newcomer to the
+language. Python and its community has certainly saved me much time and effort, and it
+seems appropriate to give something back to the community by offering up this package for
+people to try. Any <a href="mailto:vinay_sajip@red-dove.com">feedback</a> will be gratefully accepted. </p>
+
+<a name="influences"></a><h4>Influences</h4>
+
+<p>This package owes its greatest debt to Apache <a
+href="http://jakarta.apache.org/log4j/">log4j</a>. Due notice was also taken of log4j's
+comprehensive <a href="http://jakarta.apache.org/log4j/docs/critique.html">critique</a> of
+JSR47. This package bears a close resemblance to log4j, but is not a close translation
+(as, for example, <a href="http://log4p.sourceforge.net/">log4p</a> appears to be). I have
+attempted to be more minimalist (and hopefully more Pythonic) in my approach. You be the
+judge! </p>
+
+<a name="simplest"></a><h4>A Simple Example</h4>
+
+<p>Using the package doesn't get much simpler. It is packaged as a standard Python package called (unsurprisingly) <code>logging</code>. You just need to <code>import logging</code> and you're ready to go. Minimal example: </p>
+
+<pre class="program">
+# --- app.py --------------------------------------------------------------------
+import logging
+
+logging.warn(&quot;Hello&quot;)
+logging.error(&quot;Still here...&quot;)
+logging.warn(&quot;Goodbye&quot;)
+</pre>
+
+<p>When you run <code>app.py</code>, the results are: </p>
+
+<pre class="output">
+WARN:root:Hello
+ERROR:root:Still here...
+WARN:root:Goodbye
+</pre>
+
+<p>Don't worry about the format of the output - it's all configurable. Here's a slightly
+more involved example; if you've just looked at PEP 282 you will probably get a feeling of
+dejà vu. (This is intentional.)</p>
+
+<a name="nextsimplest"></a><pre class="program">
+# --- mymodule.py --------------------------------------------------------------------
+import logging
+log = logging.getLogger(&quot;MyModule&quot;)
+
+def doIt():
+    log.debug(&quot;doin' stuff&quot;)
+    <span class="comment">#do stuff...but suppose an error occurs?</span>
+    raise TypeError, &quot;bogus type error for testing&quot;
+
+# --- myapp.py -----------------------------------------------------------------------
+import logging, mymodule
+
+logging.basicConfig()
+
+log = logging.getLogger(&quot;MyApp&quot;)
+log.setLevel(logging.DEBUG) <span class="comment">#set verbosity to show all messages of severity >= DEBUG</span>
+log.info(&quot;Starting my app&quot;)
+try:
+    mymodule.doIt()
+except Exception, e:
+    log.exception(&quot;There was a problem.&quot;)
+log.info(&quot;Ending my app&quot;)
+</pre>
+
+<p>When you run <code>myapp.py</code>, the results are: </p>
+
+<pre class="output">
+INFO:MyApp:Starting my app
+ERROR:MyApp:There was a problem.
+Traceback (most recent call last):
+  File "myapp.py", line 9, in ?
+    mymodule.doIt()
+  File "mymodule.py", line 7, in doIt
+    raise TypeError, "Bogus type error for testing"
+TypeError: Bogus type error for testing
+INFO:MyApp:Ending my app
+</pre>
+
+<p>But don't worry - the above output is not hardcoded into the package. It's just an
+example of what you can do with very little work. As you can see, exceptions are handled
+as one would expect. </p>
+
+<a name="ctrlflow"></a><h4>Control Flow</h4>
+
+<p>The package pretty much matches the PEP regarding control flow. The user of the package
+makes logging calls on instances of <code>Logger</code>, which are organized into a
+hierarchy based on a &quot;dotted name&quot; namespace. This hierarchy is embodied in an
+encapsulated singleton <code>Manager</code> instance (which can be ignored by users of the
+package, for most purposes). Based on the type of logging call and the logging
+configuration (see below), the call may be passed through a set of <code>Filter</code>
+instances to decide whether it should be dropped. If not, then the logger consults a set
+of <code>Handler</code> instances which are associated with it, and asks each handler
+instance to &quot;handle&quot; the logging event. By default, the system moves up the
+namespace hierarchy and invokes handlers on all loggers at or above the level of the
+logger on which the logging call was made. (You can override this by setting a logger's
+&quot;propagate&quot; attribute to 0 - no traversal up the hierarchy is made from such a
+logger. But I'm getting ahead of myself...) </p>
+
+<p>Handlers are passed <code>LogRecord</code> instances which (should) contain all the
+information we're interested in logging. Handlers, too, can invoke filters to determine
+whether a record should be dropped. If not, then the handler takes a handler-specific
+action to actually log the record to a file, the console or whatever.</p>
+
+<a name="levels"></a><h4>Levels</h4>
+
+<p>The following levels are implemented by default: </p>
+
+<pre>
+DEBUG
+INFO
+WARN
+ERROR
+CRITICAL
+</pre>
+
+<p>The <code>CRITICAL</code> level replaces the earlier <code>FATAL</code> level. You can use either (for now), but <code>CRITICAL</code> is preferred since <code>FATAL</code> implies that the application is about to terminate. This is not true for many systems which use logging - for example, a Web server application which encounters a <code>CRITICAL</code> condition (e.g. running out of resources) will still try to keep going as best it can.</p>
+<p><code>FATAL</code> (and the corresponding <code>fatal()</code> methods) may be removed in future versions of the package. Currently, <code>CRITICAL</code> is synonymous with <code>FATAL</code> and <code>critical()</code> methods are synonymous with <code>fatal()</code>.</p>
+<p>Exceptions logged via <code>exception()</code> use the <code>ERROR</code> level for logging. If it is desired to log exception information with arbitrary logging levels, this can be done by passing a keyword argument <code>exc_info</code> with a true value to the logging methods (see the pydoc for more details).</p>
+<p>The levels are not deeply hardcoded into the package - the number of levels, their numeric values and their textual representation are all configurable. The above levels represent the experience of the log4j community and so are provided as the default levels for users who do not have very specific requirements in this area.</p>
+<p>The example script <code>log_test4.py</code> shows the use of bespoke logging levels (as well as filtering by level at logger and handler, as well as use of filter classes).</p>
+
+<a name="loggers"></a><h4>Loggers</h4>
+
+<p>The package implements loggers pretty much as mentioned in the PEP, except that the manager class is called <code>Manager</code> rather than <code>LogManager</code>.</p>
+<p>Each Logger instance represents "an area" of the application. This somewhat nebulous definition is needed because it's entirely up to each application developer to define an application's "areas".</p><p>For example, an application which reads and processes spreadsheet-type data in different formats might have an overall area "input", concerned with reading input files; and areas "input.csv", "input.xls" and "input.gnu", related to processing comma-separated-value, Excel and Gnumeric input files. Logging messages relating to the overall input function (e.g. deciding which files to process) might be logged used the logger named "input"; logging messages relating to reading individual files might be sent to any of "input.csv", "input.xls" or "input.gnu" depending on the type of file being read.</p><p>The advantage of the hierarchical structure is that logging verbosity may be controlled either at the high level or the low level. The levels are loosely coupled and new levels can easily be added at a later date, e.g."input.wks" for reading Lotus-123 format files. It's also possible to do things like routing messages relating to Excel file input to whoever is working on Excel imports, messages related to Gnumeric file processing to a different developer, and so on. Even if the same person works on both, they can at different times focus logging verbosity on particular areas of interest - for example, when debugging Excel imports, they can set the "input.xls" logger's verbosity to DEBUG and others to CRITICAL, and when moving to debug Gnumeric imports, they can reduce the "input.xls" verbosity by setting the level to CRITICAL, while increasing "input.gnu"'s verbosity by setting the level to DEBUG.</p>
+
+<a name="handlers"></a><h4>Handlers</h4>
+
+<p>The following handlers are implemented. I guess they could use more testing ;-)
+
+<ul>
+  <li>StreamHandler - logging to a stream, defaulting to sys.stderr.</li>
+  <li>FileHandler - logging to disk files.</li>
+  <li>RotatingFileHandler - logging to disk files with support for rollover, rotating files.</li>
+  <li>SocketHandler - logging to a streaming socket.</li>
+  <li>DatagramHandler - logging to a UDP socket.</li>
+  <li>SMTPHandler - logging to an email address.</li>
+  <li>SysLogHandler - logging to Unix syslog. Contributed by Nicolas Untz, based on <a href="http://www.nightmare.com/squirl/python-ext/misc/syslog.py
+">Sam Rushing's syslog module</a>.</li>
+  <li>MemoryHandler - buffering records in memory until a specific trigger occurs (or until the buffer gets full).</li>
+  <li>NTEventLogHandler - writes events to the NT event log. For this to work, you need to have Mark Hammond's Win32 extensions installed. (Though of course you can still log to NT from other platforms - just use SocketHandler to redirect to an NT machine).</li>
+  <li>HTTPHandler - sends events to a Web server using either GET or POST semantics.</li>
+</ul>
+<p>All of these except the first two are defined in a sub-module, handlers.py. (To use these handlers, you'll need to <code>import logging.handlers</code>. In addition to the above list, there are example implementations of <code>XMLHandler</code> (see <code>log_test9.py</code>), <code>BufferingSMTPHandler</code> (see <code>log_test11.py</code>) and <code>DBHandler</code> (see <code>log_test14.py</code>) in the test harnesses, on which you can base more specific classes. There is also a class called <code>SLHandler</code> (see <code>log_test1.py</code>) which implements an alternative SysLogHandler - one which uses the syslog module in the standard library (and which is therefore only available on Unix).</p>
+<p>SOAPHandler, which sends events to a SOAP server, has moved (as of release 0.4.4) from the core to an example script (log_test13.py). The SOAP message is packaged as a function call to a single <code>log()</code> function on the remote server, which takes each relevant member of the  LogRecord as a positional parameter. This is perhaps not ideal - but then this SOAPHandler is just a proof-of-concept example to get you started ;-)</p>
+<p>Note that the handlers are specifically intended <I>not</I> to raise exceptions when errors occur at runtime. This is to avoid error messages from the logging infrastructure polluting logging messages from the application being logged. If, for example, a SocketHandler sees a connection reset by the remote endpoint, it will silently drop all records passed to it (but it will try to connect each time). It may be that due to bugs there are some exceptions incorrectly raised by the logging system, I will try to rectify this kind of problem as soon as it is found and reported!</p>
+
+<a name="formatters"></a><h4>Formatters</h4>
+
+<p>A basic Formatter has been implemented, which should cater for most immediate
+requirements. You basically initialize the Formatter with a format string which knows how the attribute dictionary of a LogRecord looks. For example, the output in the example above was produced
+with a format string of <code>&quot;%(asctime)s %(name)-19s %(levelname)-5s -
+%(message)s&quot;</code>. Note that the &quot;message&quot; attribute of the <code>LogRecord</code>
+is derived from <code>&quot;msg % args&quot;</code> where <code>msg</code> and <code>args</code>
+are passed by the the user in a logging call.</p>
+
+<a name="filters"></a><h4>Filters</h4>
+
+<p>Filters are used to refine logging output at either logger or handler level with a finer control than is available by just using logging levels. The basic Filter class takes an optional name argument and passes all logging records from loggers which are at or below the specified name.</p>
+<p>For example, a <code>Filter</code> initialized with "A.B" will allow events logged by loggers "A.B", "A.B.C", "A.B.C.D", "A.B.D" but not "A.BB", "B.A.B".  If no name is specified, all events are passed by the filter.</p>
+
+<a name="config"></a><h4>Configuration</h4>
+
+<p>A basic configuration is provided via a module-level function, <code>basicConfig()</code>.
+If you want to use very simple logging, you can just call the <a href="#mlcf">module-level
+convenience functions</a> and they will call <code>basicConfig()</code> for you if
+necessary. It (basically) adds a <code>StreamHandler</code> (which writes to <code>sys.stderr</code>)to the root <code>Logger</code>.</p>
+
+<p>There are numerous examples of configuration in the test/example scripts included in the distribution. For example, <code>log_test8.py</code> has an example of using a file-based logger.</p>
+<p>An alternative using ConfigParser-based configuration files is also available (the older, dict-based function is no more). To use this functionality, you'll need to <code>import logging.config</code>. Here is an example of such a config file - it's a bit long, but a full working example so bear with me. I've annotated it as best I can :-): </p>
+<p>
+In the listing below, some values are used by both the logging configuration API
+and the GUI configurator, while others are used only by the GUI configurator. To
+make it clearer which values you absolutely need to have in the .ini file for it to be useful even if you hand-code it, the values used by the configuration API are shown
+<span class="program"><span class="strong">like this</span></span>. (The other ones are used by the GUI configurator, but ignored by the configuration API.)
+</p>
+<pre class="program">
+# --- logconf.ini -----------------------------------------------------------
+#The "loggers" section contains the key names for all the loggers in this
+#configuration. These are not the actual channel names, but values used to
+#identify where the parameters for each logger are found in this file.
+#The section for an individual logger is named "logger_xxx" where the "key"
+#for a logger is "xxx". So ... "logger_root", "logger_log02", etc. further
+#down the file, indicate how the root logger is set up, logger "log_02" is set
+#up, and so on.
+#Logger key names can be any identifier, except "root" which is reserved for
+#the root logger. (The names "lognn" are generated by the GUI configurator.)
+
+<span class="strong">[loggers]
+keys=root,log02,log03,log04,log05,log06,log07</span>
+
+#The "handlers" section contains the key names for all the handlers in this
+#configuration. Just as for loggers above, the key names are values used to
+#identify where the parameters for each handler are found in this file.
+#The section for an individual handler is named "handler_xxx" where the "key"
+#for a handler is "xxx". So sections "handler_hand01", "handler_hand02", etc.
+#further down the file, indicate how the handlers "hand01", "hand02" etc.
+#are set up.
+#Handler key names can be any identifier. (The names "handnn" are generated
+#by the GUI configurator.)
+
+<span class="strong">[handlers]
+keys=hand01,hand02,hand03,hand04,hand05,hand06,hand07,hand08,hand09</span>
+
+#The "formatters" section contains the key names for all the formatters in
+#this configuration. Just as for loggers and handlers above, the key names
+#are values used to identify where the parameters for each formatter are found
+#in this file.
+#The section for an individual formatter is named "formatter_xxx" where the
+#"key" for a formatter is "xxx". So sections "formatter_form01",
+#"formatter_form02", etc. further down the file indicate how the formatters
+#"form01", "form02" etc. are set up.
+#Formatter key names can be any identifier. (The names "formnn" are generated
+#by the GUI configurator.)
+
+<span class="strong">[formatters]
+keys=form01,form02,form03,form04,form05,form06,form07,form08,form09</span>
+
+#The section below indicates the information relating to the root logger.
+#
+#The level value needs to be one of DEBUG, INFO, WARN, ERROR, CRITICAL or NOTSET.
+#In the root logger, NOTSET indicates that all messages will be logged.
+#Level values are eval()'d in the context of the logging package's namespace.
+#
+#The propagate value indicates whether or not parents of this loggers will
+#be traversed when looking for handlers. It doesn't really make sense in the
+#root logger - it's just there because a root logger is almost like any other
+#logger.
+#
+#The channel value indicates the lowest portion of the channel name of the
+#logger. For a logger called "a.b.c", this value would be "c".
+#
+#The parent value indicates the key name of the parent logger, except that
+#root is shown as "(root)" rather than "root".
+#
+#The qualname value is the fully qualified channel name of the logger. For a
+#logger called "a.b.c", this value would be "a.b.c".
+#
+#The handlers value is a comma-separated list of the key names of the handlers
+#attached to this logger.
+#
+<span class="strong">[logger_root]
+level=NOTSET
+handlers=hand01</span>
+qualname=(root) <span class="comment"># note - this is used in non-root loggers</span>
+propagate=1 <span class="comment"># note - this is used in non-root loggers</span>
+channel=
+parent=
+
+#
+#The explanation for the values in this section is analogous to the above. The
+#logger is named "log02" and coincidentally has a key name of "log02". It has
+#a level of DEBUG and handler with key name "hand02". (See section
+#"handler_hand02" for handler details.) If the level value were NOTSET, this tells
+#the logging package to consult the parent (as long as propagate is 1) for the
+#effective level of this logger. If propagate is 0, this level is treated as for
+#the root logger - a value of NOTSET means "pass everything", and other values are
+#interpreted at face value.
+#
+<span class="strong">[logger_log02]
+level=DEBUG
+propagate=1
+qualname=log02
+handlers=hand02</span>
+channel=log02
+parent=(root)
+
+#
+#The explanation for the values in this section is analogous to the above. The
+#logger is named "log02.log03" and has a key name of "log03".
+#It has a level of INFO and handler with key name "hand03".
+#
+<span class="strong">[logger_log03]
+level=INFO
+propagate=1
+qualname=log02.log03
+handlers=hand03</span>
+channel=log03
+parent=log02
+
+#
+#The explanations for the values in this section and subsequent logger sections
+#are analogous to the above.
+#
+<span class="strong">[logger_log04]
+level=WARN
+propagate=0
+qualname=log02.log03.log04
+handlers=hand04</span>
+channel=log04
+parent=log03
+
+<span class="strong">[logger_log05]
+level=ERROR
+propagate=1
+qualname=log02.log03.log04.log05
+handlers=hand05</span>
+channel=log05
+parent=log04
+
+<span class="strong">[logger_log06]
+level=CRITICAL
+propagate=1
+qualname=log02.log03.log04.log05.log06
+handlers=hand06</span>
+channel=log06
+parent=log05
+
+<span class="strong">[logger_log07]
+level=WARN
+propagate=1
+qualname=log02.log03.log04.log05.log06.log07
+handlers=hand07</span>
+channel=log07
+parent=log06
+
+#The section below indicates the information relating to handler "hand01".
+#The first three keys (class, level and formatter) are common to all handlers.
+#Any other values are handler-specific, except that "args", when eval()'ed,
+#is the list of arguments to the constructor for the handler class.
+#
+#The class value indicates the handler's class (as determined by eval() in
+#the logging package's namespace).
+#
+#The level value needs to be one of DEBUG, INFO, WARN, ERROR, CRITICAL or NOTSET.
+#NOTSET means "use the parent's level".
+#
+#The formatter value indicates the key name of the formatter for this handler.
+#If blank, a default formatter (logging._defaultFormatter) is used.
+#
+#The stream value indicates the stream for this StreamHandler. It is computed
+#by doing eval() on the string value in the context of the logging package's
+#namespace.
+#
+#The args value is a tuple of arguments which is passed to the constructor for
+#this handler's class in addition to the "self" argument.
+#
+<span class="strong">[handler_hand01]
+class=StreamHandler
+level=NOTSET
+formatter=form01
+args=(sys.stdout,)</span>
+stream=sys.stdout
+
+#The section below indicates the information relating to handler "hand02".
+#The first three keys are common to all handlers.
+#Any other values are handler-specific, except that "args", when eval()'ed,
+#is the list of arguments to the constructor for the handler class.
+#
+#The filename value is the name of the file to write logging information to.
+#The mode value is the mode used to open() the file. The maxsize and backcount
+#values control rollover as described in the package's pydoc.
+#
+<span class="strong">[handler_hand02]
+class=FileHandler
+level=DEBUG
+formatter=form02
+args=('python.log', 'w')</span>
+filename=python.log
+mode=w
+
+#The section below indicates the information relating to handler "hand03".
+#The first three keys are common to all handlers.
+#Any other values are handler-specific, except that "args", when eval()'ed,
+#is the list of arguments to the constructor for the handler class.
+#
+#The host value is the name of the host to send logging information to.
+#The port value is the port number to use for the socket connection.
+#
+<span class="strong">[handler_hand03]
+class=handlers.SocketHandler
+level=INFO
+formatter=form03
+args=('localhost', handlers.DEFAULT_TCP_LOGGING_PORT)</span>
+host=localhost
+port=DEFAULT_TCP_LOGGING_PORT
+
+#The section below indicates the information relating to handler "hand04".
+#The first three keys are common to all handlers.
+#Any other values are handler-specific, except that "args", when eval()'ed,
+#is the list of arguments to the constructor for the handler class.
+#
+#The host value is the name of the host to send logging information to.
+#The port value is the port number to use for the socket connection.
+#
+<span class="strong">[handler_hand04]
+class=handlers.DatagramHandler
+level=WARN
+formatter=form04
+args=('localhost', handlers.DEFAULT_UDP_LOGGING_PORT)</span>
+host=localhost
+port=DEFAULT_UDP_LOGGING_PORT
+
+#The section below indicates the information relating to handler "hand05".
+#The first three keys are common to all handlers.
+#Any other values are handler-specific, except that "args", when eval()'ed,
+#is the list of arguments to the constructor for the handler class.
+#
+#The host value is the name of the host to send logging information to.
+#The port value is the port number to use for the socket connection.
+#The facility is the syslog facility to use for logging.
+#
+<span class="strong">[handler_hand05]
+class=handlers.SysLogHandler
+level=ERROR
+formatter=form05
+args=(('localhost', handlers.SYSLOG_UDP_PORT), handlers.SysLogHandler.LOG_USER)</span>
+host=localhost
+port=SYSLOG_UDP_PORT
+facility=LOG_USER
+
+#The section below indicates the information relating to handler "hand06".
+#The first three keys are common to all handlers.
+#Any other values are handler-specific, except that "args", when eval()'ed,
+#is the list of arguments to the constructor for the handler class.
+#
+#The appname value is the name of the application which appears in the
+#NT event log.
+#The dllname value is the pathname of a DLL to use for message definitions.
+#The logtype is the type of NT event log to write to - Application, Security
+#or System.
+#
+<span class="strong">[handler_hand06]
+class=NTEventLogHandler
+level=CRITICAL
+formatter=form06
+args=('Python Application', '', 'Application')</span>
+appname=Python Application
+dllname=
+logtype=Application
+
+#The section below indicates the information relating to handler "hand07".
+#The first three keys are common to all handlers.
+#Any other values are handler-specific, except that "args", when eval()'ed,
+#is the list of arguments to the constructor for the handler class.
+#
+#The host value is the name of the SMTP server to connect to.
+#The port value is the port number to use for the SMTP connection.
+#The from value is the "From" value in emails.
+#The to value is a comma-separated list of email addresses.
+#The subject value is the subject of the email.
+#
+<span class="strong">[handler_hand07]
+class=SMTPHandler
+level=WARN
+formatter=form07
+args=('localhost', 'from@abc', ['user1@abc', 'user2@xyz'], 'Logger Subject')</span>
+host=localhost
+port=25
+from=from@abc
+to=user1@abc,user2@xyz
+subject=Logger Subject
+
+#The section below indicates the information relating to handler "hand08".
+#The first three keys are common to all handlers.
+#Any other values are handler-specific, except that "args", when eval()'ed,
+#is the list of arguments to the constructor for the handler class.
+#
+#The capacity value is the size of this handler's buffer.
+#The flushlevel value is the logging level at which the buffer is flushed.
+#The from value is the "From" value in emails.
+#The target value is the key name of the handler which messages are flushed
+#to (i.e. sent to when flushing).
+#
+<span class="strong">[handler_hand08]
+class=MemoryHandler
+level=NOTSET
+formatter=form08
+target=
+args=(10, ERROR)</span>
+capacity=10
+flushlevel=ERROR
+
+#The section below indicates the information relating to handler "hand09".
+#The first three keys are common to all handlers.
+#Any other values are handler-specific, except that "args", when eval()'ed,
+#is the list of arguments to the constructor for the handler class.
+#
+#The host value is the name of the HTTP server to connect to.
+#The port value is the port number to use for the HTTP connection.
+#The url value is the url to request from the server.
+#The method value is the HTTP request type (GET or POST).
+#
+<span class="strong">[handler_hand09]
+class=HTTPHandler
+level=NOTSET
+formatter=form09
+args=('localhost:9022', '/log', 'GET')</span>
+host=localhost
+port=9022
+url=/log
+method=GET
+
+#The sections below indicate the information relating to the various
+#formatters. The format value is the overall format string, and the
+#datefmt value is the strftime-compatible date/time format string. If
+#empty, the logging package substitutes ISO8601 format date/times where
+#needed. See the package pydoc for more details of the format string
+#structure.
+#
+<span class="strong">[formatter_form01]
+format=F1 %(asctime)s %(levelname)s %(message)s
+datefmt=
+
+[formatter_form02]
+format=F2 %(asctime)s %(pathname)s(%(lineno)d): %(levelname)s %(message)s
+datefmt=
+
+[formatter_form03]
+format=F3 %(asctime)s %(levelname)s %(message)s
+datefmt=
+
+[formatter_form04]
+format=%(asctime)s %(levelname)s %(message)s
+datefmt=
+
+[formatter_form05]
+format=F5 %(asctime)s %(levelname)s %(message)s
+datefmt=
+
+[formatter_form06]
+format=F6 %(asctime)s %(levelname)s %(message)s
+datefmt=
+
+[formatter_form07]
+format=F7 %(asctime)s %(levelname)s %(message)s
+datefmt=
+
+[formatter_form08]
+format=F8 %(asctime)s %(levelname)s %(message)s
+datefmt=
+
+[formatter_form09]
+format=F9 %(asctime)s %(levelname)s %(message)s
+datefmt=</span>
+
+# --- end of logconf.ini ----------------------------------------------------
+</pre>
+
+<p>To use a file like this, you would call <code>logging.config.fileConfig(&quot;logconf.ini&quot;)</code>
+whereupon the file is read in and processed. Note that evaluation happens in the context of the logging package (hence the unqualified class names).
+
+
+<a name="guiconf"></a><h4>The GUI Configurator</h4>
+
+To create a file like the above, you can use the new GUI configurator, <code>logconf.py</code>, which is invoked either with no arguments or with a single argument giving the name of a configuration file to read. (Or, if you're a masochist/don't have Tk, you can do it by hand. The configurator is a quick hack, which I hope is reasonably intuitive - have a play with it and see what you think. I've used it with 1.5.2 and 2.1.2 on Windows and 1.5.2 on Linux/x86. There's no validation, rudimentary error checking and the usability could be better, but it's something to build on, hey?)</p>
+
+<p>Here's a screenshot of the configurator:</p>
+<img src="logconf.png" border="0"/>
+<p>Here's a quick guide on how to use it:
+<ul>
+<li>The screen is laid out in three panels - for loggers, handlers and formatters (see the yellow rectangles in the screenshot).</li>
+<li>Each panel consists of a listbox, New and Delete buttons and a "property editor" to set properties for each of the objects.</li>
+<li>To create loggers, you need to first select the parent logger before clicking the New button. To create handlers and formatters, just click the appropriate New button.</li>
+<li>To delete an item, just select it in the listbox and click the Delete button.</li>
+<li>Whenever an item is selected in the listbox, its properties are displayed in the property editor section.</li>
+<li>Whenever an item is deleted, the property editor section is cleared.</li>
+<li>To edit a property, just click on the name or value. If the property is read-only, nothing happens. If it's a user-editable value, an entry field appears and you can type into it. If it's a user-selectable value (I mean selectable from a list), a button with ... appears. Clicking on it causes a pseudo-combobox to appear. All such boxes are single-selection, except for the "Handlers" property of loggers, for which several handlers can be selected.</li>
+<li>To commit the changes, just click elsewhere in the property editor section, e.g. below the last property or on some other property.</li>
+<li>Formatters are referred to by handlers, and handlers are referred to by loggers. Hence formatters and handlers have names generated for them automatically, for use in cross-referencing. The names of these cannot be changed. The name for loggers is, however, editable (except for the root logger), as it represents the position of the logger in the hierarchy.</li>
+<li>The Load, Save, Save As and Reset buttons should be reasonably self-explanatory (except perhaps Reset, which just deletes all non-root loggers, handlers and formatters and starts with a clean slate).</li>
+<li>Filters are not supported in this release, but will be as soon as time permits and if there is enough demand.</li>
+</ul></p>
+<a name="scenarios"></a><h4>Case Scenarios</h4>
+
+<p>With reference to the <a href="http://www.python.org/peps/pep-0282.html">PEP</a>,
+here are my comments on the current state of play.
+
+<ol>
+  <li>A short simple script. See the example <a href="#simplest"><code>app.py</code></a>
+    above.</li>
+  <li>Medium sized app with C extension module. I have not specifically considered C extension
+    modules but I assume they can just use the standard Python C API to make logging calls.</li>
+  <li>Distutils. I would welcome more specific comments on what kind of configuration people
+    think would be useful. To a certain extent, controlling verbosity levels through setup.py
+    options is, I think, the domain of the app developer rather than the logging package.</li>
+  <li>Large applications. If users can restart a system after changing the logging settings
+    (via some user-friendly or support-desk-friendly interface) then present functionality
+    should cater for this. In the case where the logging behaviour of a (long-)running system needs
+    to be changed, then the functionality (new in 0.4.3) described <a href="#onthefly">below</a> can be used.</li>
+</ol>
+
+<a name="threadsafe"></a><h4>Thread Safety</h4>
+
+<p>The package is intended to be threadsafe. Although it makes no use of threads to provide its functionality (except for <a href="#onthefly">on-the-fly reconfiguration</a>), shared data in the package is protected by a thread lock which is acquired before, and released after, modifications to shared data. In addition, the Handler class creates a per-handler instance I/O lock which is acquired before, and released after, calling emit(). If you define your own handlers, in most situations you should not need to take any special precautions, as long as your I/O is called only from emit(). The thread locks impose a slight performance penalty, but it's no worse than for any other use of thread locks in Python applications.</p>
+
+<a name="onthefly"></a><h4>On-The-Fly Reconfiguration</h4>
+
+<p>The package also allows a program to permit changing of the logging configuration on the fly, i.e. <em>while the program is still running</em>. This should be a help for developers of long-running programs such as servers (e.g. Zope, Webware). At this stage, the on-the-fly configurability is fairly basic - to use it, two new module-level functions are provided (in the <code>logging.config</code> module).
+<ul>
+  <li><code>listen([port])</code> is used to create a thread which, when started, opens a socket server which listens on the specified port for configuration requests. The socket protocol is very basic - a two-byte length followed by a string of that length is sent to the listener. The string should be in the same format as logging configuration files, i.e. ConfigParser files conforming to the scheme described <a href="#config">above</a>.</li>
+  <li><code>stopListening()</code> tells the thread created by listening to terminate.</li>
+</ul>
+Currently, you can't just change part of the logging configuration - the sent configuration completely replaces the existing configuration, and if previously existing loggers are not in the new configurations, they will be disabled after the new configuration takes effect. The script <code>log_test17.py</code> in the distribution illustrates the on-the-fly configuration feature.
+</p>
+
+<a name="mlcf"></a><h4>Module-Level Convenience Functions</h4>
+
+<p>For the casual user, there are module-level convenience functions which operate on the
+root logger. <a href="logging_pydoc.html#functions">Here</a> is the pydoc for them. </p>
+
+<a name="perf"></a><h4>Performance</h4>
+
+<p>The implementation has not been optimized for performance. This is planned to be done in a later phase, following feature stabilization and benchmarking.</p>
+
+<a name="impstatus"></a><h4>Implementation Status</h4>
+
+<p>The implementation is what I have termed alpha - mainly because it has not had very wide exposure or extensive testing in many environments. Please try to use it/break it and give me
+any <a href="mailto:vinay_sajip@red-dove.com">feedback</a> you can! There is no reason I can see why this package should not be ready in time for the Python 2.3 release :-)</p>
+
+
+<a name="#acks"></a><h4>Acknowledgements</h4>
+<p>The biggest thank you goes to the <a href="http://jakarta.apache.org/log4j/">log4j</a> developers, whom I am attempting to flatter sincerely by imitation ;-) Thanks also to Trent Mick for <a href="http://www.python.org/peps/pep-0282.html">PEP 282</a>, which prompted me to offer this implementation.</p>
+<p>I'd also like to thank all of the people who have given me feedback, patches and encouragement. In particular (but in no particular order):</p>
+<ul>
+<li>Ollie Rutherfurd - patches and suggestions.</li>
+<li>Greg Ward - for nudging me in the direction of distutils.</li>
+<li>Hunter Matthews - questions about user-defined logging levels.</li>
+<li>Nicolas Untz - SysLogHandler implementation.</li>
+<li>Jeremy Hylton - discussions about logging exceptions.</li>
+<li>Kevin Butler - discussions about logging exceptions.</li>
+<li>Richard Jones - lots of positive feedback and ideas.</li>
+<li>David Goodger - suggestion about using CRITICAL rather than FATAL.</li>
+<li>Denis S. Otkidach - suggestions on filters and feedback on performance.</li>
+</ul>
+<a name="todo"></a><h4>Still To Do</h4>
+<p>No rest for the wicked...</p>
+<ul>
+<li>Improvements to the GUI configurator. Feedback, anyone?</li>
+<li>Overview-type documentation? The pydoc is reasonably comprehensive (I like to think). Perhaps a slightly formalized version of the information on this page?</li>
+<li>Testing, and more testing (you could help with this, too ...)</li>
+</ul>
+<p>If you can help with any of this, please <a href="mailto:vinay_sajip@red-dove.com">email me</a>.</p>
+<a name="download"></a><h4>Download and Installation</h4>
+<p>The current version is 0.4.7. <a href="logging-0.4.7.tar.gz">Here</a> is the latest tarball (also in <a href="logging-0.4.7.zip">zip</a> format or <a href="logging-0.4.7.win32.exe">Windows executable</a> - the latter includes the logging package only). The distribution contains the following files:
+<hr>
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr><th>Filename</th><th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th><th>Contents</th></tr>
+<tr><td colspan="3">&nbsp;</td></tr>
+<tr>
+<td><code>README.txt</code></td><td>&nbsp;</td>
+<td>Brief description and change history.</td>
+</tr>
+<tr>
+<td><code>__init__.py</code></td><td>&nbsp;</td>
+<td>The core logging package itself, including StreamHandler and FileHandler.</td>
+</tr>
+<tr>
+<td><code>handlers.py</code></td><td>&nbsp;</td>
+<td>The other handlers provided as part of the package.</td>
+</tr>
+<tr>
+<td><code>config.py</code></td><td>&nbsp;</td>
+<td>The code for configuring the package.</td>
+</tr>
+<tr>
+<td><code>setup.py</code></td><td>&nbsp;</td>
+<td>The distutils setup script.</td>
+</tr>
+<tr>
+<td><code>logrecv.py</code></td><td>&nbsp;</td>
+<td>A test server used for testing SocketHandler, DatagramHandler, HTTPHandler and SOAPHandler. Run it with an argument of one of "TCP", "UDP", "HTTP" or "SOAP" before running a test harness which logs to one of these handlers. Note that to use the SOAP handler, you need to have installed <a href="http://sourceforge.net/projects/pyxml">PyXML-0.6.6</a> and the <a href="http://www.zolera.com/opensrc/zsi/zsi.html">Zolera Soap Infrastructure</a>. This is needed for <code>logrecv.py</code> only, and not for the <code>logging</code> module itself. (Note that ZSI requires Python 2.x)</td>
+</tr>
+<tr>
+<td><code>app.py</code></td><td>&nbsp;</td>
+<td>The minimal example described <a href="#simplest">above</a>.</td>
+</tr>
+<tr>
+<td><code>mymodule.py</code></td><td>&nbsp;</td>
+<td>Another example described <a href="#nextsimplest">above</a>.</td>
+</tr>
+<tr>
+<td><code>myapp.py</code></td><td>&nbsp;</td>
+<td>From the second example described <a href="#nextsimplest">above</a>.</td>
+</tr>
+<tr>
+<td><code>log_test.py</code></td><td>&nbsp;</td>
+<td>A test script intended to work as a regression test harness. Runs a number of the other scripts and generates output to stdout.log and stderr.log.</td>
+</tr>
+<tr>
+<td><code>log_test0.py</code></td><td>&nbsp;</td>
+<td>A simple test script using <code>basicConfig()</code> only.</td>
+</tr>
+<tr>
+<td><code>log_test1.py</code></td><td>&nbsp;</td>
+<td>An example showing slightly more involved configuration and
+    exception handling, as well as a Unix syslog handler which uses the standard library's syslog module.</td>
+</tr>
+<tr>
+<td><code>log_test2.py</code></td><td>&nbsp;</td>
+<td>A version of <code>log_test0.py</code> which only logs to
+    a <code>SocketHandler</code>.</td>
+</tr>
+<tr>
+<td><code>log_test3.py</code></td><td>&nbsp;</td>
+<td>An example showing use of <code>fileConfig()</code> and
+    logging to various loggers.</td>
+</tr>
+<tr>
+<td><code>log_test4.py</code></td><td>&nbsp;</td>
+<td>An example showing use of bespoke levels, filtering by level at logger and handler, and use of filter classes (descendants of <code>Filter</code>).</td>
+</tr>
+<tr>
+<td><code>log_test5.py</code></td><td>&nbsp;</td>
+<td>An example showing use of <code>SMTPHandler</code>. Before running this script, be sure to change the bogus addresses it contains to real ones which you have access to.</td>
+</tr>
+<tr>
+<td><code>log_test6.py</code></td><td>&nbsp;</td>
+<td>An example showing use of <code>NTEventLogHandler</code>. This script needs to be run on an NT system.</td>
+</tr>
+<tr>
+<td><code>log_test7.py</code></td><td>&nbsp;</td>
+<td>An example showing use of <code>MemoryHandler</code>.</td>
+</tr>
+<tr>
+<td><code>log_test8.py</code></td><td>&nbsp;</td>
+<td>An example showing use of <code>FileHandler</code> with rollover across multiple files.</td>
+</tr>
+<tr>
+<td><code>log_test9.py</code></td><td>&nbsp;</td>
+<td>An example showing use of <code>BufferingHandler</code> and <code>BufferingFormatter</code> through implementing simple <code>XMLFormatter</code> and <code>XMLHandler</code> classes.</td>
+</tr>
+<tr>
+<td><code>log_test10.py</code></td><td>&nbsp;</td>
+<td>An example showing how to get the logging module to create loggers of your own class (though it needs to be a subclass of <code>Logger</code>).</td>
+</tr>
+<tr>
+<td><code>log_test11.py</code></td><td>&nbsp;</td>
+<td>An example SMTP handler, called <code>BufferingSMTPHandler</code>, which buffers events and sends them via email in batches.</td>
+</tr>
+<tr>
+<td><code>log_test12.py</code></td><td>&nbsp;</td>
+<td>An example showing the use of <code>HTTPHandler</code>, for use with <code>logrecv.py</code>.</td>
+</tr>
+<tr>
+<td><code>log_test13.py</code></td><td>&nbsp;</td>
+<td>An example showing the use of <code>SOAPHandler</code>, for use with <code>logrecv.py</code>.</td>
+</tr>
+<tr>
+<td><code>log_test14.py</code></td><td>&nbsp;</td>
+<td>An example showing an implementation of <code>DBHandler</code>, showing how to log requests to RDBMS tables using the Python Database API 2.0.</td>
+</tr>
+<tr>
+<td><code>log_test15.py</code></td><td>&nbsp;</td>
+<td>An example showing the use of the <code>Filter</code> class with a string initializer.</td>
+</tr>
+<tr>
+<td><code>log_test16.py</code></td><td>&nbsp;</td>
+<td>An example showing the use of logging in a multi-threaded program.</td>
+</tr>
+<tr>
+<td><code>log_test17.py</code></td><td>&nbsp;</td>
+<td>An example showing the use of logging in a multi-threaded program, together with reconfiguring logging on the fly through the use of <code>listen()</code> and <code>stopListening()</code>. This script serves as both server and client, depending on the arguments it's called with.</td>
+</tr>
+<tr>
+<td><code>log_test18.py</code></td><td>&nbsp;</td>
+<td>An example showing the use of an example filter, MatchFilter, which offers flexible match-based
+filtering of LogRecords.</td>
+</tr>
+<tr>
+<td><code>log_test19.py</code></td><td>&nbsp;</td>
+<td>A basic test of logger parents.</td>
+</tr>
+<tr>
+<td><code>log_test20.py</code></td><td>&nbsp;</td>
+<td>Demonstrates the use of custom class instances for messages and filtering based on classes.</td>
+</tr>
+<tr>
+<td><code>log_test21.py</code></td><td>&nbsp;</td>
+<td>Demonstrates the use of a wildcard name-space filter with and without custom message classes.</td>
+</tr>
+<tr>
+<td><code>log_test22.py</code></td><td>&nbsp;</td>
+<td>Demonstrates the use of either localtime or gmtime to do date/time formatting.</td>
+</tr>
+<tr>
+<td><code>debug.ini</code></td><td>&nbsp;</td>
+<td>An example configuration for use with log_test17.py.</td>
+</tr>
+<tr>
+<td><code>warn.ini</code></td><td>&nbsp;</td>
+<td>An example configuration for use with log_test17.py.</td>
+</tr>
+<tr>
+<td><code>error.ini</code></td><td>&nbsp;</td>
+<td>An example configuration for use with log_test17.py.</td>
+</tr>
+<tr>
+<td><code>critical.ini</code></td><td>&nbsp;</td>
+<td>An example configuration for use with log_test17.py.</td>
+</tr>
+<tr>
+<td><code>log_test3.ini</code></td><td>&nbsp;</td>
+<td>An example configuration for use with log_test3.py.</td>
+</tr>
+<tr>
+<td><code>stdout.exp</code></td><td>&nbsp;</td>
+<td>The expected results of stdout.log after running log_test.py.</td>
+</tr>
+<tr>
+<td><code>stderr.exp</code></td><td>&nbsp;</td>
+<td>The expected results of stderr.log after running log_test.py.</td>
+</tr>
+<tr>
+<td><code>logconf.py</code></td><td>&nbsp;</td>
+<td>A Tkinter-based GUI configurator.</td>
+</tr>
+<tr>
+<td><code>logconf.ini</code></td><td>&nbsp;</td>
+<td>Example configuration file, in ConfigParser format, for use with <code>logconf.py</code> and <code>log_test3.py</code>.</td>
+</tr>
+<tr>
+<td><code>logging.dtd</code></td><td>&nbsp;</td>
+<td>A simple example DTD for use with <code>log_test9.py</code>.</td>
+</tr>
+<tr>
+<td><code>logging.xml</code></td><td>&nbsp;</td>
+<td>An example XML file for use with <code>log_test9.py</code>. It references <code>events.xml</code> as external data.</td>
+</tr>
+<tr>
+<td><code>events.xml</code></td><td>&nbsp;</td>
+<td>An example XML file for use with <code>log_test9.py</code>. It holds the actual events in XML format.</td>
+</tr>
+<tr>
+<td><code>python_logging.html</code></td><td>&nbsp;</td>
+<td>The page you're reading now.</td>
+</tr>
+<td><code>default.css</code></td><td>&nbsp;</td>
+<td>Stylesheet for use with the HTML pages.</td>
+</tr>
+<tr><td colspan="3">&nbsp;</td></tr>
+</table>
+<hr>
+<p>To install, unpack the archive into any directory, and in that directory invoke the script <code>"setup.py install"</code> to install the module in the default location used by distutils.</p>
+<p>To use, just put <code>logging.py</code> in your Python path, "<code>import logging</code>" and go. (The installation procedure described above will normally put the logging module in your Python path. If you want to use file-based configuration API, you'll also need to <code>import logging.config</code>. To use the more esoteric handlers, you'll also need to <code>import logging.handlers</code>.)</p>
+
+<a name="changes"></a><h4>Change History</h4>
+
+<p>The change history is as follows.</p>
+
+<pre>
+Version   Date        Description
+=============================================================================
+0.4.7     15 Nov 2002 Made into a package with three modules: __init__ (the
+                      core code), handlers (all handlers other than
+                      FileHandler and its bases) and config (all the config
+                      stuff). Before doing this:
+                      Updated docstrings to include a short line, then a
+                      blank line, then more descriptive text.
+                      Renamed 'lvl' to 'level' in various functions.
+                      Changed FileHandler to use "a" and "w" instead of "a+"
+                      and "w+".
+                      Moved log file rotation functionality from FileHandler
+                      to a new class RotatingFileHandler.
+                      Improved docstring describing rollover.
+                      Updated makePickle to use 4-byte length and struct
+                      module, likewise logrecv.py. Also updated on-the-fly
+                      config reader to use 4-byte length/struct module.
+                      Altered ConfigParser test to look at 'readline' rather
+                      than 'read'.
+                      Added optional "defaults" argument to fileConfig, to
+                      be passed to ConfigParser.
+                      Renamed ALL to NOTSET to avoid confusion.
+                      Commented out getRootLogger(), as obsolete.
+                      To do regression testing, run log_test.py and compare
+                      the created files stdout.log and stderr.log against
+                      the files stdout.exp and stderr.exp. They should match
+                      except fir a couple of exception messages which give
+                      absolute file paths.
+                      Updated python_logging.html to remove links to
+                      logging_pydoc.html, which has been removed from the
+                      distribution.
+                      Changed default for raiseExceptions to 1.
+-----------------------------------------------------------------------------
+0.4.6     08 Jul 2002 Added raiseExceptions to allow conditional propagation
+                      of exceptions which occur during handling.
+                      Added converter to Formatter to allow use of any
+                      function to convert time from seconds to a tuple. It
+                      still defaults to time.localtime but now you can also
+                      use time.gmtime.
+                      Added log_test22.py to test the conversion feature.
+                      Changed rootlogger default level to WARN - was DEBUG.
+                      Updated some docstrings.
+                      Moved import of threading to where thread is imported.
+                      If either is unavailable, threading support is off.
+                      Updated minor defects in python_logging.html.
+                      Check to see if ConfigParser has readfp method; if it
+                      does and an object with a 'read' method is passed in,
+                      assumes a file-like object and uses readfp to read it
+                      in.
+-----------------------------------------------------------------------------
+0.4.5     04 Jun 2002 Fixed bug which caused problem if no args to message
+                      (suggested by Hye-Shik Chang).
+                      Fixed bug in _fixupParents (thanks to Nicholas Veeser)
+                      and added log_test19.py as a test case for this bug.
+                      Added getMessage to LogRecord (code was moved here from
+                      Formatter.format)
+                      Applied str() to record.msg to allow arbitrary classes
+                      to determine the formatting (as msg can now be a class
+                      instance).
+                      Table of Contents added to python_logging.html, the
+                      section on Loggers updated, and the logconf.ini file
+                      section annotated.
+                      Added log_test20.py which demonstrates how to use
+                      class instances to provide alternatives to numeric
+                      severities as mechanisms for control of logging.
+                      Added log_test21.py which builds on log_test20.py to
+                      show how you can use a regular expression-based Filter
+                      for flexible matching similar to e.g. Protomatter
+                      Syslog, where you can filter on e.g. "a.*" or "*.b" or
+                      "a.*.c".
+                      _levelNames changed to contain reverse mappings as well
+                      as forward mappings (leveltext->level as well as level
+                      -> leveltext). The reverse mappings are used by
+                      fileConfig().
+                      fileConfig() now more forgiving of missing options in
+                      .ini file - sensible defaults now used when some
+                      options are absent. Also, eval() is used less when
+                      interpreting .ini file contents - int() and dict lookup
+                      are used in more places. Altered log_test3.py and added
+                      log_test3.ini to show a hand-coded configuration file.
+-----------------------------------------------------------------------------
+0.4.4     02 May 2002 getEffectiveLevel() returns ALL instead of None when
+                      nothing found. Modified references to level=0 to
+                      level=ALL in a couple of places.
+                      SocketHandler now inherits from Handler (it used to
+                      inherit from StreamHandler, for no good reason).
+                      getLock() renamed to createLock().
+                      Docstring tidy-ups, and some tidying up of
+                      DatagramHandler.
+                      Factored out unpickling in logrecv.py.
+                      Added log_test18.py to illustrate MatchFilter, which is
+                      a general matching filter.
+                      Improved FileHandler.doRollover() so that the base
+                      file name is always the most recent, then .1, then .2
+                      etc. up to the maximum backup count. Renamed formal
+                      args and attributes used in rollover.
+                      Changed LogRecord attributes lvl -> levelno, level ->
+                      levelname (less ambiguity)
+                      Formatter.format searches for "%(asctime)" rather than
+                      "(asctime)"
+                      Renamed _start_time to _startTime
+                      Formatter.formatTime now returns the time
+                      Altered logrecv.py to support stopping servers
+                      programmatically
+                      Added log_test.py as overall test harness
+                      basicConfig() can now be safely called more than once
+                      Modified test scripts to make it easier to call them
+                      from log_test.py
+                      Moved SOAPHandler from core to log_test13.py. It's not
+                      general enough to be in the core; most production use
+                      will have differing RPC signatures.
+-----------------------------------------------------------------------------
+0.4.3     14 Apr 2002 Bug fix one-off error message to go to sys.stderr
+                      rather than sys.stdout.
+                      logrecv.py fix TCP for busy network.
+                      Thread safety - added locking to Handler and for shared
+                      data in module, and log_test16.py to test it.
+                      Added socket listener to allow on-the-fly configuration
+                      and added log_test17.py to test it.
+-----------------------------------------------------------------------------
+0.4.2     11 Apr 2002 Bug fix fileConfig() - setup of MemoryHandler target
+                      and errors when loggers have no handlers set or
+                      handlers have no formatters set
+                      logconf.py - seems to hang if window closed when combo
+                      dropdown is showing - added code to close popup on exit
+                      Some tweaks to _srcfile computation (normpath added)
+                      findCaller() optimized, now a lot faster!
+                      Logger.removeHandler now closes the handler before
+                      removing it
+                      fileConfig() removes existing handlers before adding
+                      the new set, to avoid memory leakage when repeated
+                      calls are made
+                      Fixed logrecv.py bug which hogged CPU time when TCP
+                      connection was closed from the client
+                      Added log_test14.py to demonstrate/test a DBHandler
+                      which writes logging records into an RDBMS using the
+                      Python Database API 2.0 (to run, you need something
+                      which supports this already installed - I tested with
+                      mxODBC)
+                      Made getLogger name argument optional - returns root
+                      logger if omitted
+                      Altered Filter to take a string initializer, filtering
+                      a sub-hierarchy rooted at a particular point (idea from
+                      Denis S. Otkidach).
+                      Added log_test15.py to test Filter initializer
+-----------------------------------------------------------------------------
+0.4.1     03 Apr 2002 Bug fix SMTPHandler - extra \r\n needed (Oleg Orlov)
+                      Added BufferingHandler, BufferingFormatter
+                      Renamed getChainedPriority to getEffectiveLevel
+                      Removed Logger.getRoot as it is redundant
+                      Added log_test9.py to test Buffering classes and
+                      to show an XMLFormatter example.
+                      Added setLoggerClass.
+                      Added log_test10.py to test setLoggerClass, using an
+                      example Logger-derived class which outputs exception
+                      info even for DEBUG level logging calls
+                      Added log_test11.py to test a buffering implementation
+                      of SMTPHandler
+                      Changed logging call implementation to allow keyword
+                      arguments (Kevin Butler and others)
+                      Changed default SysLogHandler implementation.
+                      Renamed "additive" to "propagate" as it better
+                      describes the attribute.
+                      Added HTTPHandler.
+                      Modified logrecv.py to remove "both" option and to add
+                      "HTTP" and "SOAP" options (SOAP option needs you to
+                      have PyXML-0.6.6 and ZSI installed - for logrecv.py
+                      only, and not for the core logging module itself).
+                      Added log_test12.py to test HTTPHandler.
+                      Added log_test13.py to test SOAPHandler.
+                      Formatted to Python source guidelines (spaces, indent
+                      of 4, within 80 columns).
+                      More method renamings (result of feedback) - _handle()
+                      renamed to emit(), _logRecord() renamed to handle().
+                      Renamed FATAL to CRITICAL (David Goodger), but left
+                      fatal() and FATAL in (until PEP is changed)
+                      Changed configuration file format to ConfigParser
+                      format.
+                      Factored filter application functionality out to a new
+                      Filterer class. The isLoggable() method is renamed to
+                      filter() in both Filter and Filterer classes.
+                      Altered SMTPHandler __init__ to accept (host, port)
+                      for the mail internet address.
+                      Added GUI configurator which uses Tkinter and the new
+                      configuration file format. (See logconf.py and an
+                      example configuration file in logconf.ini)
+                      Altered log_test3.py to test with the new file format.
+-----------------------------------------------------------------------------
+0.4       21 Mar 2002 Incorporated comments/patches from Ollie Rutherfurd:
+                      -Added level filtering for handlers.
+                      -Return root logger if no name specified in getLogger.
+                      Incorporated comments from Greg Ward:
+                      -Added distutils setup.py script.
+                      Added formatter initialization in Handler.__init__.
+                      Tidied up docstrings.
+                      Added removeHandler to Logger.
+                      Added removeFilter to Logger and Handler.
+                      logrecv.py modified to keep connection alive until
+                      client closes it.
+                      SocketHandler modified to not reset connection after
+                      each logging event.
+                      Added shutdown function which closes open sockets
+                      Renamed DEFAULT_LOGGING_PORT->DEFAULT_TCP_LOGGING_PORT
+                      Added DEFAULT_UDP_LOGGING_PORT
+                      Added log_test4.py (example of arbitrary levels)
+                      Added addLevelName, changed behaviour of getLevelName
+                      Fixed bugs in DatagramHandler
+                      Added SMTPHandler implementation
+                      Added log_test5.py to test SMTPHandler
+                      Added SysLogHandler (contribution from Nicolas Untz
+                      based on Sam Rushing's syslog.py)
+                      Modified log_test1.py to add a SysLogHandler
+                      Added rollover functionality to FileHandler
+                      Added NTEventLogHandler (based on Win32 extensions)
+                      Added MemoryHandler implementation
+                      Added log_test7.py to test MemoryHandler
+                      Added log_test8.py to test FileHandler rollover
+                      Added logException method to Logger
+                      Added formatException method to Formatter
+                      Added log_test6.py to test NTEventHandler and
+                      logException
+                      Numerous internal method renamings (sorry - but better
+                      to do this now, rather than when we enter beta status).
+-----------------------------------------------------------------------------
+0.3       14 Mar 2002 First public release, for early feedback
+-----------------------------------------------------------------------------
+0.2                   Consolidated into single file (for internal use only)
+-----------------------------------------------------------------------------
+0.1                   Initial implementation (for internal use only)
+-----------------------------------------------------------------------------
+</pre>
+
+<a name="license"></a><h4>Copyright and License</h4>
+
+<p>The copyright statement follows. </p>
+
+<pre>
+Copyright 2001-2002 by Vinay Sajip. All Rights Reserved.
+
+Permission to use, copy, modify, and distribute this software and its
+documentation for any purpose and without fee is hereby granted,
+provided that the above copyright notice appear in all copies and that
+both that copyright notice and this permission notice appear in
+supporting documentation, and that the name of Vinay Sajip
+not be used in advertising or publicity pertaining to distribution
+of the software without specific, written prior permission.
+VINAY SAJIP DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE, INCLUDING
+ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL
+VINAY SAJIP BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL DAMAGES OR
+ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN
+AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR
+IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</pre>
+</body>
+</html>
