@@ -6,7 +6,7 @@
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 
 #This module requires TIDoS Framework
-#https://github.com/the-Infected-Drake/TIDoS-Framework 
+#https://github.com/theInfectedDrake/TIDoS-Framework 
 
 import urllib, urllib2, requests, time
 from time import sleep
@@ -20,7 +20,7 @@ def updater():
     time.sleep(0.4)
     print(GR+' [*] Looking up for the latest version...')
     time.sleep(0.4)
-    text = requests.get('https://raw.githubusercontent.com/the-Infected-Drake/TIDoS-Framework/master/doc/Version_Num').text
+    text = requests.get('https://raw.githubusercontent.com/theInfectedDrake/TIDoS-Framework/master/doc/Version_Num').text
     result = str(text)
     print C+' [!] The version on GitHub is : '+result
     print B+' [!] The version you have is : '+Version

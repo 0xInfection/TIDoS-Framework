@@ -7,7 +7,7 @@
 
 #Author: @_tID
 #This module requires TIDoS Framework
-#https://github.com/theInfectedDrake/TIDoS
+#https://github.com/theInfectedDrake/TIDoS-Framework
 
 import sys, time
 sys.path.append('core/')
