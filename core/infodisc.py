@@ -40,36 +40,42 @@ def infodisc(web):
 	print C+' [!] Type Selected :'+B+' Credit Card Enumeration'
 	credit(web)
 	print '\n\n'
+	time.sleep(2)
 	infodisc(web)
 
     elif v == '2':
 	print C+' [!] Type Selected :'+B+' Extract All Emails'
 	emailext(web)
 	print '\n\n'
+	time.sleep(2)
 	infodisc(web)
 
     elif v == '3':
 	print C+' [!] Type Selected :'+B+' Enumerate Errors + FPD'
 	errors(web)
 	print '\n\n'
+	time.sleep(2)
 	infodisc(web)
 
     elif v == '4':
 	print C+' [!] Type Selected :'+B+' Internal IP disclosure'
 	internalip(web)
 	print '\n\n'
+	time.sleep(2)
 	infodisc(web)
 
     elif v == '5':
 	print C+' [!] Type Selected :'+B+' Phone Numbers Extract'
 	phone(web)
 	print '\n\n'
+	time.sleep(2)
 	infodisc(web)
 
     elif v == '6':
 	print C+' [!] Type Selected :'+B+' Social Security Numbers'
 	ssn(web)
 	print '\n\n'
+	time.sleep(2)
 	infodisc(web)
 
     elif v == 'A':
@@ -81,7 +87,7 @@ def infodisc(web):
 
 	time.sleep(1)
 	print C+' [*] Firing up module -->'+B+' Email Extraction'
-	email(web)
+	emailext(web)
 	print C+' [!] Module Completed -->'+B+' Email Hunt\n'
 	
 	time.sleep(1)

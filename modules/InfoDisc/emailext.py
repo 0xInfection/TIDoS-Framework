@@ -30,8 +30,9 @@ def mail0x00(url):
     for i in search:
         print G+" [+] E-mail found : "+O, str(i)
 
-def email(web):
+def emailext(web):
 
 	print GR+' [*] Loading module...'
 	time.sleep(0.6)
 	mail0x00(web)
+
