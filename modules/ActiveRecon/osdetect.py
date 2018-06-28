@@ -123,5 +123,3 @@ def port0x00(web):
 	print R+' [-] No exact matches for OS via port scan...'
     print G+' [+] Done!'
 
-web = '192.168.43.182'
-osdetect(web)
