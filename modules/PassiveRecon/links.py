@@ -11,6 +11,8 @@
 
 import time
 import os
+import sys
+sys.path.append('tmp/')
 import requests
 from colors import *
 
@@ -58,13 +60,12 @@ def links(web):
 			    ile = open(p,"a")
 			    ile.write(m)
 			    ile.close()
-			o = 'mv '+p+' files/'
+			o = 'mv '+p+' tmp/'
 			os.system(o)
-			print G+' [+] Successfully saved under "files/'+p+'!'
+			print G+' [+] Successfully saved under "tmp/'+p+'!'
 			print ''
 		else:
 			    print ''+B+' [*] Okay :)'
-
 	else:
 		print R+' [-] Outbound Query Exception!'
 		time.sleep(0.8)

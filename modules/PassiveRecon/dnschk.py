@@ -59,12 +59,12 @@ def dnschk(domain):
     st1 = str(domain)+'-dnsmap.jpg'
     p = 'mv '+st+' '+ st1
     os.system(p)
-    mov = 'mv '+ st1 + ' files/'
+    mov = 'mv '+ st1 + ' tmp/'
     os.system(mov)
-    print G+' [+] Map saved under "files/' + st1 + '"'
+    print G+' [+] Map saved under "tmp/' + st1 + '"'
     try:
         print GR+' [!] Trying to open DNS Map...'
-        os.system('xdg-open files/'+st1)
+        os.system('xdg-open tmp/'+st1)
     except:
 	print R+' [-] Failed to open automatically.'
 	print GR+' [!] Please view the map manually.' 

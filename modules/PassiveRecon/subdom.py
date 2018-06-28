@@ -30,7 +30,11 @@ def subdom(web):
 	result = str(text)
 	print "\n"+G+ color.BOLD + result
 	if 'error' not in result:
-		print G+ result
+		res = result.splitlines()
+		for r in res:
+			sub = sub.split(',')[0]
+			print B+' [+] Got subdomain :> '+C+sub
 	else:
 		print R+' [-] Outbound Query Exception!'
 		time.sleep(0.8)
+
