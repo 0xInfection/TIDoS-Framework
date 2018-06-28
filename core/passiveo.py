@@ -21,6 +21,9 @@ from revip import *
 from revdns import *
 from subdom import *
 from links import *
+from hackedmail import *
+from mailtodom import *
+from webarchive import *
 from footprint_dup import *
 from googledorker import *
 from googleSearch import *
@@ -39,70 +42,91 @@ def passiveo(web):
 	print C+' [!] Type Selected '+B+': Ping Check'
 	piweb(web)
 	os.system('clear')
-	time.sleep(1)
+	time.sleep(2)
 	passiveo(web)
 
     elif v == '2':
 	print C+' [!] Type Selected '+B+': WhoIS Checkup'
 	whoischeckup(web) 
 	os.system('clear')
-	time.sleep(1)
+	time.sleep(2)
 	passiveo(web)
 
     elif v == '3':
 	print C+' [!] Type Selected '+B+': GeoIP Lookup'
 	geoip(web)
 	os.system('clear')
-	time.sleep(1)
+	time.sleep(2)
 	passiveo(web)
 
     elif v == '4':
 	print C+' [!] Type Selected '+B+': DNS Lookup'
 	dnschk(web)
 	os.system('clear')
-	time.sleep(1)
+	time.sleep(2)
 	passiveo(web)
 
     elif v == '5':
 	print C+' [!] Type Selected '+B+': Subdomain Scan'
 	subdom(web)
 	os.system('clear')
-	time.sleep(1)
+	time.sleep(2)
 	passiveo(web)
 
     elif v == '6':
 	print C+' [!] Type Selected '+B+': Reverse DNS Lookup'
 	revdns(web)
 	os.system('clear')
-	time.sleep(1)
+	time.sleep(2)
 	passiveo(web)
 
     elif v == '7':
 	print C+' [!] Type Selected '+B+': Reverse IP Lookup'
 	revip(web)
 	os.system('clear')
-	time.sleep(1)
+	time.sleep(2)
 	passiveo(web)
 
     elif v == '8':
 	print C+' [!] Type Selected '+B+': Page Links'
 	links(web)
 	os.system('clear')
-	time.sleep(1)
+	time.sleep(2)
 	passiveo(web)
 
     elif v == '9':
 	print C+' [!] Type Selected '+B+': Google Search'
 	googleSearch()
 	os.system('clear')
-	time.sleep(1)
+	time.sleep(2)
 	passiveo(web)
 
     elif v == '10':
 	print C+' [!] Type Selected '+B+': Google Dorker'
 	googledorker(web)
 	os.system('clear')
-	time.sleep(1)
+	time.sleep(2)
+	passiveo(web)
+
+    elif v == '11':
+	print C+' [!] Type Selected '+B+': Wayback Machine'
+	webarchive(web)
+	os.system('clear')
+	time.sleep(2)
+	passiveo(web)
+
+    elif v == '12':
+	print C+' [!] Type Selected '+B+': Hacked Email Check'
+	hackedmail()
+	os.system('clear')
+	time.sleep(2)
+	passiveo(web)
+
+    elif v == '13':
+	print C+' [!] Type Selected '+B+': Mail to Domain'
+	mailtodom()
+	os.system('clear')
+	time.sleep(2)
 	passiveo(web)
 
     elif v == '99':
@@ -160,6 +184,21 @@ def passiveo(web):
 	print C+'\n [!] Module Completed -->'+O+' GSearch\n'
 	time.sleep(1)
 
+	print C+' [!] Firing up module -->'+O+' WayBack Machine'
+	webarchive(web)
+	print C+'\n [!] Module Completed -->'+O+' WayBack Machine\n'
+	time.sleep(1)
+
+	print C+' [!] Firing up module -->'+O+' Hacked Email Checker'
+	hackedmail()
+	print C+'\n [!] Module Completed -->'+O+' Hacked Email\n'
+	time.sleep(1)
+
+	print C+' [!] Firing up module -->'+O+' Mail to Domain'
+	mailtodom()
+	print C+'\n [!] Module Completed -->'+O+' Mail to Domain\n'
+	time.sleep(1)
+
 	print C+' [*] Firing up module -->'+O+' Google Dorker'
 	googledorker(web)
 	print C+'\n [!] Module Completed -->'+O+' GDorker\n'
@@ -174,7 +213,7 @@ def passiveo(web):
 
     else:
 	dope = ['You high dude?','Shit! Enter a valid option','Whoops! Thats not an option','Sorry! You just typed shit']
-	print dope[randint(0,3)] 
+	print C+'\n [!] '+dope[randint(0,3)] 
 	os.system('clear')
 	passiveo(web)
 

@@ -17,11 +17,11 @@ from colors import *
 print R+'\n   ==================='
 print R+'    U N I N S T A L L'
 print R+'   ===================\n' 
-m = raw_input(O+' [!] Are you sure you want to remove TIDoS (y/N) :> ')
+m = raw_input(O+' [#] Sure to remove TIDoS (y/N) :> ')
 if m == 'y' or 'Y':
     try:
 	time.sleep(0.5)
-	print GR+'Proceeding towards uninstallation...\n'
+	print GR+'\nProceeding towards uninstallation...\n'
 	time.sleep(1)
 	print B+'Removing installation packages for TIDoS...'+C 
 	os.system('rm -v -rf /opt/tidos-framework')
