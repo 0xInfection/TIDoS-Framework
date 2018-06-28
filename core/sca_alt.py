@@ -6,7 +6,7 @@
 
 #Author: @_tID
 #This script is a part of TIDoS Framework
-#https://github.com/the-Infected-Drake/TIDoS-Framework 
+#https://github.com/theInfectedDrake/TIDoS-Framework 
 
 import sys, platform, subprocess, time, os
 from subprocess import call

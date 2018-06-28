@@ -6,7 +6,7 @@
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 
 #This script is a part of TIDoS Framework
-#https://github.com/the-Infected-Drake/TIDoS-Framework 
+#https://github.com/theInfectedDrake/TIDoS-Framework 
 
 import time
 import os
