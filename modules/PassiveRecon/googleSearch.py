@@ -7,7 +7,7 @@
 
 #Author : @_tID
 #This module requires TIDoS Framework
-#https://github.com/the-Infected-Drake/TIDoS-Framework 
+#https://github.com/theInfectedDrake/TIDoS-Framework 
 
 import time
 import sys, platform
@@ -34,7 +34,8 @@ def googleSearch():
 	x = search(lol, tld='com', lang='es', stop=int(m))
 	for url in x:
 		print(""+O+color.BOLD+"   [!] Site Found :> "+W + url)
-		os.system('rm -f .google-cookie')
+		q = open('.google-cookie','w')
+		q.close()
     except urllib2.HTTPError:
 	print R+' [-] You have used google many times.'
 	print R+' [-] Service temporarily unavailable.'

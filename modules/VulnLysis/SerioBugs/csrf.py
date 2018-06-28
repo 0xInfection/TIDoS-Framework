@@ -5,12 +5,12 @@
 #    TIDoS Framework     #
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 
-#Author: the-Infected-Drake (@_tID)
+#Author: theInfectedDrake (@_tID)
 
 #Modified version of CSRFProbe
 #https://github.com/the-Infected-drake/CSRFProbe
 #This module requires TIDoS Framework
-#https://github.com/the-Infected-Drake/TIDoS-Framework 
+#https://github.com/theInfectedDrake/TIDoS-Framework 
 
 import difflib
 import cookielib

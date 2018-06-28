@@ -1,5 +1,5 @@
 # Just some modified version of CSRFProbe
-# https://github.com/the-Infected-Drake/CSRFProbe
+# https://github.com/theInfectedDrake/CSRFProbe
 #!/usr/bin/env python2
 #-*- coding: utf-8 -*-
 
@@ -7,9 +7,9 @@
 #    TIDoS Framework     #
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 
-#Author: the-Infected-Drake (@_tID)
+#Author: theInfectedDrake (@_tID)
 #This module requires TIDoS Framework
-#https://github.com/the-Infected-Drake/TIDoS-Framework 
+#https://github.com/theInfectedDrake/TIDoS-Framework 
 
 import uri
 import re

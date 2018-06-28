@@ -5,9 +5,9 @@
 #    TIDoS Framework     #
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 #
-#Author : @_tID (the-Infected-Drake)
+#Author : @_tID (theInfectedDrake)
 #This module requires TIDoS Framework
-#https://github.com/the-Infected-Drake/TIDoS-Framework 
+#https://github.com/theInfectedDrake/TIDoS-Framework 
 
 import re
 import time

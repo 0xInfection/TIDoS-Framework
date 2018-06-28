@@ -7,7 +7,7 @@
 
 #Author : @_tID
 #This module requires TIDoS Framework
-#https://github.com/the-Infected-Drake/TIDoS-Framework 
+#https://github.com/theInfectedDrake/TIDoS-Framework 
 
 import os
 import sys
@@ -26,7 +26,7 @@ global web
 
 goog = []
 payloads = []
-payload_url = 'https://raw.githubusercontent.com/the-Infected-Drake/TIDoS-Framework/master/runon.sh'
+payload_url = 'https://raw.githubusercontent.com/theInfectedDrake/TIDoS-Framework/master/runon.sh'
 payload_1 = '#!/bin/sh'
 payload_2 = 'cd /opt/tidos'
 payload_3 = 'python /opt/tidos/tidos.py'

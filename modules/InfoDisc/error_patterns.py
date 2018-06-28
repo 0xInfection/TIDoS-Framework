@@ -7,7 +7,7 @@
 
 #Author : @_tID
 #This module requires TIDoS Framework
-#https://github.com/the-Infected-Drake/TIDoS-Framework 
+#https://github.com/theInfectedDrake/TIDoS-Framework 
 
 patterns =	 ("<font face=\"Arial\" size=2>error \'800a0005\'</font>",
 				"<h2> <i>Runtime Error</i> </h2></span>",
