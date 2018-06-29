@@ -40,41 +40,41 @@ def install():
 
 	try:
 		header = color.BOLD + """
-      \033[37m---------------------------------
-	     < TIDoS \033[1;36mInstaller!!\033[1;36m >
-      ---------------------------------"""
+   \033[37m---------------------------------
+	  < TIDoS \033[1;36mInstaller!!\033[1;36m >
+   ---------------------------------"""
 		print header
-		print C+"                _nnnn_"
+		print C+"             _nnnn_"
 		time.sleep(0.1)
-		print C+"               dGGGGMMb"
+		print C+"            dGGGGMMb"
 		time.sleep(0.1)
-		print C+"              @p~qp~~qMb     "+O+"TIDoS Rules!!!" 
+		print C+"           @p~qp~~qMb     "+O+"TIDoS Rules!!!" 
 		time.sleep(0.1)
-		print C+"              M(\033[37m@\033[96m)(\033[37m@\033[96m) M|   "+GR+"_;"
+		print C+"           M(\033[37m@\033[96m)(\033[37m@\033[96m) M|   "+GR+"_;"
 		time.sleep(0.1)
-		print C+"              @\033[33m,----.\033[96mJM| "+GR+"-'"
+		print C+"           @\033[33m,----.\033[96mJM| "+GR+"-'"
 		time.sleep(0.1)
-		print C+"             JS^\033[33m\__/  \033[96mqKL"
+		print C+"          JS^\033[33m\__/  \033[96mqKL"
 		time.sleep(0.1)
-		print C+"            dZP        qKRb"
+		print C+"         dZP        qKRb"
 		time.sleep(0.1)
-		print C+"           dZP          qKKb"
+		print C+"        dZP          qKKb"
 		time.sleep(0.1)
-		print C+"          fZP            SMMb"
+		print C+"       fZP            SMMb"
 		time.sleep(0.1)
-		print C+"          HZM            MMMM"
+		print C+"       HZM            MMMM"
 		time.sleep(0.1)
-		print C+"          FqM            MMMM"
+		print C+"       FqM            MMMM"
 		time.sleep(0.1)
-		print C+"         \033[33m_| '.        |\033[96mdS'qML'"
+		print C+"      \033[33m_| '.        |\033[96mdS'qML'"
 		time.sleep(0.1)
-		print C+"        \033[33m|    `.       | `' \_\033[96mZq'"
+		print C+"     \033[33m|    `.       | `' \_\033[96mZq'"
 		time.sleep(0.1)
-		print C+"       \033[33m_)      \.___.,|     .'" 
+		print C+"    \033[33m_)      \.___.,|     .'" 
 		time.sleep(0.1)
-		print C+"       \033[33m\________)\033[96mMMMMM\033[33m|   .' "
+		print C+"    \033[33m\________)\033[96mMMMMM\033[33m|   .' "
 		time.sleep(0.1)
-		print color.BOLD+"                      \033[33m`--'         "+color.END
+		print color.BOLD+"                   \033[33m`--'         "
 		time.sleep(0.7)
 		print O+'\nPreparing for installation...'
 		time.sleep(0.5)

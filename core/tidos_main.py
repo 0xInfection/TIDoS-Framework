@@ -70,12 +70,12 @@ def tidos_main():
 			exploits(web)
 
 		    elif zop == '99':
-			
+
 			print R+'\n [-] Exiting...'
 			time.sleep(0.5)
 			print O+' [+] Goodluck mate, alvida!\n'
 			sys.exit(0)
-		
+
 		except KeyboardInterrupt:
 		        print R+"\n [-] " + color.UNDERLINE+ "User Interruption detected!"+color.END
 		        print GR+' [!] Stopping jobs...'
