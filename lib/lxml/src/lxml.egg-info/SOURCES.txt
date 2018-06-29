@@ -8,6 +8,7 @@ README.rst
 TODO.txt
 buildlibxml.py
 requirements.txt
+setup.cfg
 setup.py
 setupinfo.py
 test.py

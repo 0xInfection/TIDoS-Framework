@@ -32,7 +32,7 @@ def install():
 
 	else:
 
-	    sys.exit(color.PURPLE+" [!] Run this script as ROOT !!!\033[0m")
+	    sys.exit(color.PURPLE+" [-] Run this script as ROOT !!!\033[0m")
 	    sys.exit()
 	time.sleep(1)
 
@@ -76,11 +76,11 @@ def install():
 		time.sleep(0.1)
 		print color.BOLD+"                      \033[33m`--'         "+color.END
 		time.sleep(0.7)
-		print O+'Preparing for installation...'
+		print O+'\nPreparing for installation...'
 		time.sleep(0.5)
 		print GR+'Finalising options...'
 		time.sleep(0.5)
-		raw_input(''+G+"\nPress 'Enter' to start the installation...") 
+		raw_input(G+"\nPress 'Enter' to start the installation...") 
 		Preinstall="rm -v -rf /opt/tidos-framework && rm -v -rf /usr/bin/tidos"
 		print B+ '\nChecking for pre-installations...'
 		time.sleep(0.5)

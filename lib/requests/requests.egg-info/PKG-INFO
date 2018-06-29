@@ -6,7 +6,6 @@ Home-page: http://python-requests.org
 Author: Kenneth Reitz
 Author-email: me@kennethreitz.org
 License: Apache 2.0
-Description-Content-Type: text/x-rst
 Description: Requests: HTTP for Humans
         =========================
         
