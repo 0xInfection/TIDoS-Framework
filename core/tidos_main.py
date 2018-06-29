@@ -21,6 +21,7 @@ from logging import getLogger, ERROR
 getLogger("scapy.runtime").setLevel(ERROR)
 warnings.filterwarnings("ignore")
 
+global vuln
 def tidos_main():
 
 	try:
@@ -35,7 +36,7 @@ def tidos_main():
 		print R+' [-] Exception : '+str(e)
 		sys.exit(1)
 
-
+	print O+' [+] Okay, so what to start with?\n'
 	def tidosmain(web):
 
 	    while True:
@@ -82,8 +83,7 @@ def tidos_main():
 			print C+' [+] Alvida, see ya!\n'
 			sys.exit(0)
 
-		except Exception as e:
-			print R+' [-] Something happened! :('
-			print R+' [!] Error : '+str(e)
+		except Exception:
+			pass
 
 	tidosmain(web)

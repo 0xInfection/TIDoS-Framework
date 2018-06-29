@@ -34,15 +34,13 @@ def auxil(web):
 	print ' [!] Type Selected : Bruteforce Modules'
 	brutemods(web)
 	print '\n\n'
-	vulnban1()
-	vuln_dup(web)
+	auxil(web)
 
     elif v == '2':
 	print ' [!] Type Selected : Encode Strings'
 	encodeall()
 	print '\n\n'
-	vulnban1()
-	vuln_dup(web)
+	auxil(web)
 
     elif v == '99':
 	print GR+' [*] Going back!'
