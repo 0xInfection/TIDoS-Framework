@@ -59,7 +59,7 @@ def hostheader0x00(target):
 
 			frame_inject = "codesploit"
 			buffer1 = "GET / HTTP/1.1"
-			buffer2 = "Host: https://teamcodesploit.gq"
+			buffer2 = "Host: teamcodesploit.gq"
 
 			s.send(buffer1 + "\n")
 			s.send(buffer2 + "\n\n")

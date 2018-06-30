@@ -14,6 +14,7 @@ import random
 from random import *
 from webbugs import webbugs
 from vulnban1 import *
+from tid_alt import tid_alt
 from serbugs import *
 from auxil import auxil
 from colors import *
@@ -35,6 +36,7 @@ def vuln_alt(web):
     elif v == '99':
 	print '[!] Back'
 	time.sleep(0.7)
+	tid_alt(web)
 
     else:
 	dope = ['You high dude?','Hey there! Enter a valid option','Whoops! Thats not an option','Sorry fam! You just typed shit']

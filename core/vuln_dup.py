@@ -14,6 +14,7 @@ from random import *
 from webbugs import webbugs
 from vulnban1 import *
 from serbugs import *
+from tid_dup import tid_dup
 from auxil import *
 from colors import *
 
@@ -34,6 +35,7 @@ def vuln_dup(web):
     elif v == '99':
 	print '[!] Back'
 	time.sleep(0.7)
+	tid_dup(web)
 
     else:
 	dope = ['You high dude?','Hey there! Enter a valid option','Whoops! Thats not an option','Sorry fam! You just typed shit']
