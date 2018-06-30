@@ -5,6 +5,7 @@
 #    TIDoS Framework     #
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 
+#Author: @_tID
 #This module requires TIDoS Framework
 #https://github.com/theInfectedDrake/TIDoS-Framework 
 
@@ -160,14 +161,10 @@ def serbugs(web):
 	time.sleep(0.5)
 	print G+' [+] All modules successfully completed!'
 	time.sleep(4)
-	vulnban1()
-	vuln(web)
 
     elif v == '99':
 	print '[!] Back'
 	time.sleep(0.7)
-	vulnban1()
-	vuln(web)
 
     else:
 	print ''
