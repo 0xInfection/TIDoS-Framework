@@ -56,7 +56,7 @@
 	- Addition of CRLF to VulnLysis
 	- Proper configuration of the payload database.
 
-   * v1.1.1 (latest release) [#stable]
+   * v1.1.1
 
 	Addition of modules + bug fixes.
 	
@@ -65,3 +65,34 @@
 	- Bug fix to the main modules.
 	- Brute database updated with more default protocol changes.
 	- Addition of pre-config. database.
+
+    * v1.2.0 
+    
+    	Huge bug fixes + Utility Modules Additions.
+
+	Changelog:
+	- Bug fixes (huge).
+	- Added 4 modules to _brutemods_.
+	- Updates to the payload database + fuzz database.
+	- Improvements to the cloudflare misconfig. module.
+	- Operating System Detection Module improved.
+	
+    * v1.2.1
+    
+    	Major code changes. Improvements to the ActiveRecon modules. (thanks to CodeBy Forum).
+
+	Changlog:
+	- Added port scan support for OS fingerprinting module.
+	- Replaced all recursion string collisons. big bug fix
+	- Added support for minor updates via git pull.
+	- Added fix to the core end modules.
+	
+    * v1.2.2 [latest release] (#stable)
+    
+    	Improvements to the core features. Bug fixes.
+
+	Changelog:
+	- Added Exception Handling feature globally..
+	- Improved the crlf module.
+	- Fixed erring code at Host Header Injection module.
+	- Updated the payload database with new payloads.
