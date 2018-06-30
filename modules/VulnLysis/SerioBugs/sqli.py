@@ -118,6 +118,7 @@ def manual0x00(web):
 
 def sqli(web):
 
+    while True:
 	print GR+' [*] Loading module SQLi...'
 	sleep(0.6)
 	if web.endswith('/'):

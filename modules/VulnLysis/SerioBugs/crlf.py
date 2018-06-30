@@ -56,7 +56,7 @@ def getHeaders0x00(web0x00, headers):
 	try:
 		requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 		print GR+' [*] Requesting headers...'
-		r = requests.get(web, headers=headers, timeout=7, verify=False)
+		r = requests.get(web0x00, headers=headers, timeout=7, verify=False)
 		head = r.headers
 		return head
 	except Exception as e:
@@ -93,7 +93,6 @@ def getFile0x00():
 
 def crlf(web):
 
-	global web
 	print GR+' [*] Loading module...'
 	time.sleep(0.5)
 	print R+'\n    ============================='
