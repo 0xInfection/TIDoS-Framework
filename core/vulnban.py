@@ -40,7 +40,7 @@ def vulnban():
                     '''*'''
 
 """
-    print B+'   [1] '+C+' Web Bugs & Misconfigurations'
+    print B+'   [1] '+C+' Basic Web Bugs & Misconfigurations'
     time.sleep(0.2)
     print B+'   [2] '+C+' Serious Web Bugs (SQLi, XSS, CSRF, etc)'
     time.sleep(0.2)

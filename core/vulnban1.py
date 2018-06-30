@@ -23,9 +23,8 @@ def vulnban1():
 
     print O+'\n  Choose a module below:'
 
-    print B+'   [1] '+C+' Web Bugs & Misconfigurations'
+    print B+'   [1] '+C+' Basic Web Bugs & Misconfigurations'
     print B+'   [2] '+C+' Serious vulnerabilities (SQLi, XSS, etc)'
-    print B+'   [3] '+C+' Auxillaries (Manual Modes)\n'
-    print B+'   [99] '+C+'Back\n'
+    print B+'   [3] '+C+' Auxillaries \n'
     print B+'   [!nfo] '+C+' This module is still being worked on...\n' 
 

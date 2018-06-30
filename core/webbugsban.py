@@ -56,4 +56,3 @@ def webbugsban():
     print O+'  [A]'+GR+' Load all the modules 1 by 1\n'
     time.sleep(0.1)
     print O+'  [99]'+GR+' Back\n'
-

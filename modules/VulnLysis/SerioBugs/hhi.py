@@ -77,7 +77,8 @@ def hostheader0x00(target):
 			print ""
 			print O+data1
 			print ""
-
+			time.sleep(1)
+	
 def hhi(web):
 
 	print GR+' [*] Loading the module...'

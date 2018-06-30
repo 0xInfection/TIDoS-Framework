@@ -35,6 +35,11 @@ sudo python setup.py install
 cd .. 
 cd ..
 
+cd lib/idna/
+sudo python setup.py install
+cd .. 
+cd ..
+
 cd lib/bs4/
 sudo python setup.py install
 cd .. 

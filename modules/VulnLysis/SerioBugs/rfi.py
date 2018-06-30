@@ -73,7 +73,7 @@ def test(web0, web):
 		payload = 'http://www.google.com'
 		web000 = web0x0 + payload
 		time.sleep(0.5)
-		print C+' [+] Payload : '+GR+'http://www.google.com'
+		print C+' [+] Payload : http://www.google.com'
 		print GR+' [*] Fetching '+C+web000
 		om = u' '.join(requests.get(web000).text).encode('utf-8').strip()
 		pm = str(om)
@@ -101,11 +101,11 @@ def test(web0, web):
 				web0x0 = web00.split('=')[0]
 				web0x0 = web0x0 + '='
 				print O+' [!] Heuristics reveal that the page may not be vulnerable to RFI!'
-				print B+' [*] Trying null byte character injection...'
+				print C+' [*] Trying null byte character injection...'
 				payload1 = 'https://google.com%00'
 				web000 = web0x0 + payload1
 				time.sleep(0.5)
-				print C+' [+] Payload : '+GR+'http://www.google.com%00'
+				print C+' [+] Payload : http://www.google.com%00'
 				print GR+' [*] Fetching '+C+web000
 				om = u' '.join(requests.get(web000).text).encode('utf-8').strip()
 				pm = str(om)

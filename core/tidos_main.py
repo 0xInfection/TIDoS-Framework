@@ -36,7 +36,7 @@ def tidos_main():
 		print R+' [-] Exception : '+str(e)
 		sys.exit(1)
 
-	print P+' [+] Okay, so what to start with?'
+	print O+' [+] Okay, so what to start with?\n'
 	def tidosmain(web):
 
 	    while True:
@@ -70,12 +70,12 @@ def tidos_main():
 			exploits(web)
 
 		    elif zop == '99':
-
+			
 			print R+'\n [-] Exiting...'
 			time.sleep(0.5)
 			print O+' [+] Goodluck mate, alvida!\n'
 			sys.exit(0)
-
+		
 		except KeyboardInterrupt:
 		        print R+"\n [-] " + color.UNDERLINE+ "User Interruption detected!"+color.END
 		        print GR+' [!] Stopping jobs...'
@@ -83,7 +83,7 @@ def tidos_main():
 			print C+' [+] Alvida, see ya!\n'
 			sys.exit(0)
 
-		#except Exception:
+		except Exception:
 			pass
 
 	tidosmain(web)

@@ -113,9 +113,9 @@ def banner():
              .M.    \033[1;36mXXXXXXXXXXXXX      \033[1;37m\M%$M
             .M     \033[1;36m XXXXXXXXXXXXX       \033[1;37m\l$%M.
             M      \033[1;36m XXX                  \033[1;37m\M$%M:.
-           M      \033[1;36m XXX                    \033[1;37m\$MMM:
+           M       \033[1;36m XXX                   \033[1;37m\$MMM:
           M        \033[1;36m XXX   \033[1;34mXXXXXXX          \033[1;37m:$%MM:
-         :M         \033[1;36m XXX   \033[1;34mXX            \033[1;37m :$%MMM:
+         :M         \033[1;36m XXX   \033[1;34mXX             \033[1;37m :$%MMM:
           M        \033[1;36m XXX   \033[1;34mXXXXXXX       \033[1;37m  M%$MM:
           :M:      \033[1;36m XXX   \033[1;34m     XX       \033[1;37m M$%M:'
             NM     \033[1;36m XXXXXX\033[1;34mXXXXXXX\033[1;36mm    \033[1;37m .M$%MM:

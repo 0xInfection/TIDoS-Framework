@@ -67,10 +67,10 @@ def getFile0x00():
 	
 	try:
 		print GR+' [*] Importing filepath...'
-		print O+' [#] Enter path to file (default: files/crlf_payloads.lst)...'
+		print O+' [#] Enter path to file (default: files/payload-db/crlf_payloads.lst)...'
 		w = raw_input(O+' [#] Your input (Press Enter if default) :> ')
 		if w == '':
-			fi = 'files/crlf_payloads.lst'
+			fi = 'files/payload-db/crlf_payloads.lst'
 			print GR+' [*] Importing payloads...'
 			with open(fi, 'r') as q0:
 				for q in q0:
@@ -93,6 +93,7 @@ def getFile0x00():
 
 def crlf(web):
 
+	global web
 	print GR+' [*] Loading module...'
 	time.sleep(0.5)
 	print R+'\n    ============================='
