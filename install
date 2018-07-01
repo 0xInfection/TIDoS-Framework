@@ -13,7 +13,7 @@ import time
 sys.path.append('setup/')
 from colors import *
 from install import *
-os.system("clear")
 
 time.sleep(1)
-install()
+install()   # run the install
+
