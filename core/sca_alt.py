@@ -18,6 +18,7 @@ from colors import *
 from scanenumban import *
 from scanenumban1 import *
 from portscan import *
+from webtech import *
 from waf import *
 
 def sca_alt(web):
@@ -46,6 +47,13 @@ def sca_alt(web):
 	sca_alt(web)
 
     elif v == '4':
+	print B+' [!] Type Selected :'+C+' Webtech Fingerprinting'
+	webtech(web)
+	time.sleep(0.9)
+	scanenumban1()
+	sca_alt(web)
+
+    elif v == '5':
 	print B+' [!] Type Selected :'+C+' Crawlers'
 	crawlers_hunt(web)
 	time.sleep(0.9)
@@ -70,6 +78,11 @@ def sca_alt(web):
 	nmapmain(web)
 	print B+' [!] Module Completed -->'+C+' NMap\n'
 	time.sleep(1)
+
+        print B + ' [*] Firing up module -->' + C + ' WebTech Fingerprinting'
+        webtech(web)
+        print B + ' [!] Module Completed -->' + C + ' WebTech\n'
+        time.sleep(1)
 
 	print B+' [*] Firing up module -->'+C+' Crawlers'
 	crawlers_hunt(web)

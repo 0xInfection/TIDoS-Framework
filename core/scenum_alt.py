@@ -18,6 +18,7 @@ from colors import *
 from tid_dup import tid_dup
 from scanenumban import *
 from scanenumban1 import *
+from webtech import *
 from waf import *
 from portscan import *
 
@@ -47,6 +48,13 @@ def scenum_alt(web):
 	scenum_alt(web)
 
     elif v == '4':
+	print B+' [!] Type Selected :'+C+' Web tech Fingerprinting'
+	webtech(web)
+	time.sleep(0.9)
+	scanenumban1()
+	scenum_alt(web)
+
+    elif v == '5':
 	print B+' [!] Type Selected :'+C+' Crawlers'
 	crawlers(web)
 	time.sleep(0.9)
@@ -71,6 +79,11 @@ def scenum_alt(web):
 	nmapmain(web)
 	print B+' [!] Module Completed -->'+C+' NMap\n'
 	time.sleep(1)
+
+        print B + ' [*] Firing up module -->' + C + ' WebTech Fingerprinting'
+        webtech(web)
+        print B + ' [!] Module Completed -->' + C + ' WebTech\n'
+        time.sleep(1)
 
 	print B+' [*] Firing up module -->'+C+' Crawlers'
 	crawlers(web)
