@@ -1,6 +1,6 @@
 <p align="middle"><img src='https://i.imgur.com/QAbaVdU.png' /></p>
 
-![Python](https://img.shields.io/badge/Python-2.7-green.svg) ![TIDoS](https://img.shields.io/badge/TIDoS-v1.2-blue.svg) ![Supported OS](https://img.shields.io/badge/Supported%20OS-Linux-yellow.svg) ![License](https://img.shields.io/badge/License-GPLv3-orange.svg) ![Build](https://img.shields.io/badge/Build-0074-red.svg) ![Modules](https://img.shields.io/badge/Modules-83-blue.svg) ![Status](https://img.shields.io/badge/Build%20Status-failing-red.svg) ![Stage](https://img.shields.io/badge/Release-Stable-brightgreen.svg)
+![Python](https://img.shields.io/badge/Python-2.7-green.svg) ![TIDoS](https://img.shields.io/badge/TIDoS-v1.2-blue.svg) ![Supported OS](https://img.shields.io/badge/Supported%20OS-Linux-yellow.svg) ![License](https://img.shields.io/badge/License-GPLv3-orange.svg) ![Build](https://img.shields.io/badge/Build-0078-red.svg) ![Modules](https://img.shields.io/badge/Modules-83-blue.svg) ![Status](https://img.shields.io/badge/Build%20Status-failing-red.svg) ![Stage](https://img.shields.io/badge/Release-Stable-brightgreen.svg)
 
 
 # TIDoS Framework 
@@ -96,11 +96,11 @@ TIDoS Framework presently supports the following:
 	+ Remote Server WAF Analysis
 	+ Port Scanning `Ingenious Modules`
 	    - Simple Port Scanner `via Socket Connections`
-	    - TCP SYN Scan
-	    - TCP Connect Scan
-	    - XMAS Flag Scan 
-	    - Fin Flag Scan
-	    - Service Detector
+	    - TCP SYN Scan `Highly reliable`
+	    - TCP Connect Scan `Highly Reliable`
+	    - XMAS Flag Scan `Reliable Only in LANs`
+	    - Fin Flag Scan `Reliable Only in LANs`
+	    - port Service Detector
 	+ Interactive Scanning with NMap `16 modules`
 	+ Crawlers
 	    - Depth 1
@@ -110,38 +110,44 @@ TIDoS Framework presently supports the following:
 
     __Web-Bugs & Server Misconfigurations__
     
-	- Insecure CORS `iCORS`
+	- Insecure CORS `absolute`
 	- Same-Site Scripting `Sub-domain based`
 	- Zone Transfer `DNS Server based`
-	- Clickjacking `Framable Response`
+	- Clickjacking `Framable response based`
 	- Security on Cookies `HTTPOnly/Secure Flags`
 	- Cloudflare Misconfiguration Check `+ Getting Real IP` 
 	- HTTP High Transport Security Usage
-	- Spoofable Email `(Missing SPF and DMARC Records)`
+	- Spoofable Email `Missing SPF and DMARC Records`
 	- Security Headers Analysis 
-	- Cross-Site Tracing `(Port Based)`
-	- Network Security Misconfig. `(Telnet Enabled)`
+	- Cross-Site Tracing `Port Based`
+	- Network Security Misconfig. `Telnet Enabled`
 	
     __Serious Web Vulnerabilities__
     
 	+ File Intrusions
 	    - Local File Intrusion (LFI)
 	    - Remote File Inclusion (RFI)
+	    	- Parameter Based
+		- Pre-loaded Path Based
 	+ OS Command Execution `Linux & Windows (RCE)`
 	+ Path Traversal `(Sensitive Paths)`
-	+ Cross-Site Request Forgery 
+	+ Cross-Site Request Forgery `absolute`
 	+ SQL Injection
 	    - Cookie Value Based
 	    - Referer Value Based
 	    - User-Agent Value Based
-	+ Host Header Injection 
+	    - Automated `auto-gathering & pwning`
+	+ Host Header Injection `port based`
 	+ Bash Command Injection `Shellshock` 
 	+ Cross-Site Scripting `beta`
 	    - Cookie Value Based
 	    - Referer Value Based
 	    - User-Agent Value Based
+	    - Parameter Value Based
 	+ Unvalidated URL Forwards 
 	+ CRLF Injection and HTTP Response Splitting
+	    - User-Agent Value Based
+	    - Parameter value Based
 
     __Auxillaries__
 
@@ -168,9 +174,18 @@ TIDoS Framework presently supports the following:
 
 	+ ShellShock
 
+### Upcoming:
+
+There are some bruteforce modules to be added:
+- Common Backups
+- Common Password Locations
+- Common Dot files `(eg. .htaccess)`
+- Interesting Directories
+- Interesting Filepaths
+
 ### Known Bugs:
 
-This version of TIDoS is purely developmental `beta`. There are bugs in resolving the `[99] Back` at various end-points. Also TIDoS needs to develop more on logging all info displayed on the screen `(help needed)`.
+This version of TIDoS is purely developmental `beta`. There are bugs in resolving the `[99] Back` at various end-points which results in blind fall-backs. Also TIDoS needs to develop more on logging all info displayed on the screen `(help needed)`.
 
 ### Final Words:
 
@@ -178,5 +193,5 @@ This project is one of the best frameworks I have ever built and I would really 
 
 > Thank you,
 >
-> ✎ @_tID | Codesploit
+> @_tID | CodeSploit
 
