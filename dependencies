@@ -75,6 +75,11 @@ sudo python setup.py install
 cd ..
 cd ..
 
+cd lib/builtwith/
+sudo python setup.py install
+cd ..
+cd ..
+
 cd lib/lxml/
 sudo python setup.py install
 cd ..

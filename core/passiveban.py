@@ -48,9 +48,9 @@ def passiveban():
     time.sleep(0.1)
     print B+'      [14] '+C+'Email Enumeration via Google Groups '+W+''
     time.sleep(0.1)
-    print B+'      [15] '+C+'Check Alias Availability '+W+'(Social Networks)\n'
+    print B+'      [15] '+C+'Check Alias Availability '+W+'(Social Networks)'
     time.sleep(0.1)
-    print B+'      [16] '+C+'Find PasteBin Posts '+W+'(Domain Based)\n'
+    print B+'      [16] '+C+'Find PasteBin Posts '+W+'(Domain Based)'
     time.sleep(0.1)
     print B+'      [17] '+C+'LinkedIn Gathering '+W+'(Employees, Companies)\n'
     time.sleep(0.1)

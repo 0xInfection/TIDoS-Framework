@@ -53,4 +53,3 @@ def checkuser(web):
 	print O+' [!] Loaded '+GR+str(len(services))+O+' services...'
 	check0x00(web)	
 
-checkuser('https://theinfecteddrake.com')

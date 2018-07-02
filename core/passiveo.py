@@ -23,7 +23,7 @@ from subdom import *
 from links import *
 from hackedmail import *
 from mailtodom import *
-from chckuser import *
+from checkuser import *
 from googlegroups import *
 from webarchive import *
 from footprint_dup import *
