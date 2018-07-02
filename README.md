@@ -20,7 +20,7 @@ The main highlights of this framework is:
 - [x] Fully user friendly interaction environment. `(no shits)`
 
 
-<img src='https://i.imgur.com/ZhBUrDB.png' />
+<img src='https://i.imgur.com/AcErfM9.png' />
 
 ### Installing TIDoS :-
 * Clone the repository locally and navigate there:
@@ -33,7 +33,7 @@ cd tidos
 chmod +x install
 ./install
 ```
-<img src='https://i.imgur.com/B3eA0H5.png' />
+<img src='https://i.imgur.com/3JrbOPH.png' />
 
 Thats it! Now you are good to go! Now lets run the tool:
 ```
