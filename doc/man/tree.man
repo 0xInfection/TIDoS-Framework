@@ -44,52 +44,56 @@
 * __Reconnaissance + OSINT__
 
 	+ Passive Reconnaissance:
-
-	    - Ping/Nping Enumeration
-	    - WhoIS Lookup
-	    - GeoIP Lookup
-	    - DNS Config. Lookup 
-	    - Subdomains Lookup
-	    - Reverse DNS Lookup
-	    - Reverse IP Lookup
-	    - Web Links Gatherer
-	    - Google Search (manual search)
-	    - Google Dorking (multiple modules) `automated`
+	    - Nping Enumeration `via external APi`
+	    - WhoIS Lookup `domain info gathering`
+	    - GeoIP Lookup `pinpoint physical location`
+	    - DNS Configuration Lookup `DNSDump`
+	    - Subdomains Lookup `indexed ones`
+	    - Reverse DNS Configuration Lookup
+	    - Reverse IP Lookup `Hosts on same server`
+	    - Web Links Gatherer `Indexed ones`
+	    - Google Search `Manual search`
+	    - Google Dorking (multiple modules) `Automated`
+	    - Email to Domain Resolver `Email WhoIs` `__NEW__`
+	    - Wayback Machine Lookups `Find Backups` `__NEW__`
+      	    - Breached Email Check `Pwned Email Accounts` `__NEW__`
+	    - Enumeration via Google Groups `__NEW__`
+	    - Check Alias Availability `Social Networks` `__NEW__`
+	    - Find PasteBin Posts `Domain Based` `__NEW__`
+	    - LinkedIn Gathering `Employees & Company` `__NEW__`
 
 	+ Active Reconnaissance
-
-	    - HPing3 enumeration `(automated)`
+	    - Ping enumeration `Advanced`
 	    - CMS Detection `(185+ CMSs supported)`
 	    - Advanced Traceroute `IMPROVED`
-	    - Grab HTTP Headers
+	    - Grab HTTP Headers `Live Capture`
 	    - Detect Server `IMPROVED`
-	    - Examine SSL Certificate
+	    - Examine SSL Certificate `Absolute`
 	    - `robots.txt` and `sitemap.xml` Checker
-	    - Subnets Enumeration
-	    - Find Shared DNS Hosts
-	    - Operaing System Fingerprint
+	    - Subnets Enumeration `Class Based`
+	    - Find Shared DNS Hosts `Name Server Based`
+	    - Operating System Fingerprinting `IMPROVED`
 
 	+ Information Disclosure
-
-	    - Credit Cards Disclosure in Plaintext
-	    - Email Harvester
+	    - Credit Cards Disclosure `If Plaintext`
+	    - Email Harvester `IMPROVED`
 	    - Fatal Errors Enumeration `Includes Full Path Disclosure checks`
 	    - Internal IP Disclosure
 	    - Phone Number Havester
-	    - Social Security Number Harvester
+	    - Social Security Number Harvester `US Only`
 
 * __Scanning & Enumeration__
 
 	+ Remote Server WAF Analysis
-	+ Web technology Enumeration
 	+ Port Scanning `Ingenious Modules`
 	    - Simple Port Scanner `via Socket Connections`
-	    - TCP SYN Scan
-	    - TCP Connect Scan
-	    - XMAS Flag Scan 
-	    - Fin Flag Scan
-	    - Service Detector
-
+	    - TCP SYN Scan `Highly reliable`
+	    - TCP Connect Scan `Highly Reliable`
+	    - XMAS Flag Scan `Reliable Only in LANs`
+	    - Fin Flag Scan `Reliable Only in LANs`
+	    - Port Service Detector
+	+ Web Technology Enumeration `Absolute` `__NEW__`
+	+ Interactive Scanning with NMap `16 modules`
 	+ Crawlers
 	    - Depth 1
 	    - Depth 2 `IMPROVED`
@@ -98,49 +102,60 @@
 
     __Web-Bugs & Server Misconfigurations__
     
-	- Insecure CORS `iCORS`
-	- Same-Site Scripting
+	- Insecure CORS `Absolute`
+	- Same-Site Scripting `Sub-domain based`
 	- Zone Transfer `DNS Server based`
-	- Clickjacking `Framable Response`
+	- Clickjacking `Framable response based`
 	- Security on Cookies `HTTPOnly/Secure Flags`
 	- Cloudflare Misconfiguration Check `+ Getting Real IP` 
 	- HTTP High Transport Security Usage
-	- Security Headers Analysis 
-	- Cross-Site Tracing `(Port Based)`
-	- Network Security Misconfig. `(Telnet Enabled)`
+	- Spoofable Email `Missing SPF and DMARC Records`
+	- Security Headers Analysis `Live Capture`
+	- Cross-Site Tracing `Port Based`
+	- Network Security Misconfig. `Telnet Enabled`
 	
     __Serious Web Vulnerabilities__
     
 	+ File Intrusions
 	    - Local File Intrusion (LFI)
 	    - Remote File Inclusion (RFI)
-	+ OS Command Execution `Linux & Windows (RCE)`
-	+ Path Traversal (Sensitive Paths) 
-	+ Cross-Site Request Forgery 
+	    	- Parameter Based
+		- Pre-loaded Path Based
+	+ OS Command Injection `Linux & Windows (RCE)`
+	+ Path Traversal `(Sensitive Paths)`
+	+ Cross-Site Request Forgery `Absolute`
 	+ SQL Injection
 	    - Cookie Value Based
 	    - Referer Value Based
 	    - User-Agent Value Based
-	+ Host Header Injection 
+	    - Auto-gathering `IMPROVED`
+	    - Parameter Based `Manual`
+	+ Host Header Injection `port based`
 	+ Bash Command Injection `Shellshock` 
 	+ Cross-Site Scripting `beta`
 	    - Cookie Value Based
 	    - Referer Value Based
 	    - User-Agent Value Based
-	+ CRLF Injection & HTTP Response Splitting
+	    - Parameter Value Based `Manual`
+	+ Unvalidated URL Forwards 
+	+ CRLF Injection and HTTP Response Splitting
+	    - User-Agent Value Based
+	    - Parameter value Based `Manual`
 
     __Auxillaries__
 
-	+ Protocol Credential Bruteforce
+	+ Protocol Credential Bruteforce 
+
 	    - FTP Bruteforce
 	    - SSH Bruteforce
 	    - POP 2/3 Bruteforce
 	    - SQL Bruteforce
-	    - TELNET Bruteforce
-	    - SMTP Bruteforce
 	    - XMPP Bruteforce
-
+	    - SMTP Bruteforce
+	    - TELNET Bruteforce
+	    
 	+ String & Payload Encoder
+
 	    - URL Encode
 	    - Base64 Encode
 	    - HTML Encode
