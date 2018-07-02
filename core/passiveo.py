@@ -23,6 +23,8 @@ from subdom import *
 from links import *
 from hackedmail import *
 from mailtodom import *
+from chckuser import *
+from googlegroups import *
 from webarchive import *
 from footprint_dup import *
 from googledorker import *
@@ -30,6 +32,8 @@ from googleSearch import *
 from footprintban1 import *
 from footprintban import *
 from whoischeckup import *
+from pastebin import *
+from linkedin import *
 from colors import *
 
 def passiveo(web):
@@ -38,104 +42,132 @@ def passiveo(web):
     passiveban()
     v = raw_input (''+GR+'  [#] \033[1;4mTID\033[0m'+GR+' :> ' + color.END)
     print '\n\n'
-    if v == '1':
+    if v.strip() == '1':
 	print C+' [!] Type Selected '+B+': Ping Check'
 	piweb(web)
 	os.system('clear')
 	time.sleep(2)
 	passiveo(web)
 
-    elif v == '2':
+    elif v.strip() == '2':
 	print C+' [!] Type Selected '+B+': WhoIS Checkup'
 	whoischeckup(web) 
 	os.system('clear')
 	time.sleep(2)
 	passiveo(web)
 
-    elif v == '3':
+    elif v.strip() == '3':
 	print C+' [!] Type Selected '+B+': GeoIP Lookup'
 	geoip(web)
 	os.system('clear')
 	time.sleep(2)
 	passiveo(web)
 
-    elif v == '4':
+    elif v.strip() == '4':
 	print C+' [!] Type Selected '+B+': DNS Lookup'
 	dnschk(web)
 	os.system('clear')
 	time.sleep(2)
 	passiveo(web)
 
-    elif v == '5':
+    elif v.strip() == '5':
 	print C+' [!] Type Selected '+B+': Subdomain Scan'
 	subdom(web)
 	os.system('clear')
 	time.sleep(2)
 	passiveo(web)
 
-    elif v == '6':
+    elif v.strip() == '6':
 	print C+' [!] Type Selected '+B+': Reverse DNS Lookup'
 	revdns(web)
 	os.system('clear')
 	time.sleep(2)
 	passiveo(web)
 
-    elif v == '7':
+    elif v.strip() == '7':
 	print C+' [!] Type Selected '+B+': Reverse IP Lookup'
 	revip(web)
 	os.system('clear')
 	time.sleep(2)
 	passiveo(web)
 
-    elif v == '8':
+    elif v.strip() == '8':
 	print C+' [!] Type Selected '+B+': Page Links'
 	links(web)
 	os.system('clear')
 	time.sleep(2)
 	passiveo(web)
 
-    elif v == '9':
+    elif v.strip() == '9':
 	print C+' [!] Type Selected '+B+': Google Search'
 	googleSearch()
 	os.system('clear')
 	time.sleep(2)
 	passiveo(web)
 
-    elif v == '10':
+    elif v.strip() == '10':
 	print C+' [!] Type Selected '+B+': Google Dorker'
 	googledorker(web)
 	os.system('clear')
 	time.sleep(2)
 	passiveo(web)
 
-    elif v == '11':
+    elif v.strip() == '11':
 	print C+' [!] Type Selected '+B+': Wayback Machine'
 	webarchive(web)
 	os.system('clear')
 	time.sleep(2)
 	passiveo(web)
 
-    elif v == '12':
+    elif v.strip() == '12':
 	print C+' [!] Type Selected '+B+': Hacked Email Check'
 	hackedmail()
 	os.system('clear')
 	time.sleep(2)
 	passiveo(web)
 
-    elif v == '13':
+    elif v.strip() == '13':
 	print C+' [!] Type Selected '+B+': Mail to Domain'
 	mailtodom()
 	os.system('clear')
 	time.sleep(2)
 	passiveo(web)
 
-    elif v == '99':
+    elif v.strip() == '14':
+	print C+' [!] Type Selected '+B+': Google Groups Enum'
+	googlegroups(web)
+	os.system('clear')
+	time.sleep(2)
+	passiveo(web)
+
+    elif v.strip() == '15':
+	print C+' [!] Type Selected '+B+': Check Username'
+	checkuser(web)
+	os.system('clear')
+	time.sleep(2)
+	passiveo(web)
+
+    elif v.strip() == '16':
+	print C+' [!] Type Selected '+B+': PasteBin Posts'
+	pastebin(web)
+	os.system('clear')
+	time.sleep(2)
+	passiveo(web)
+
+    elif v.strip() == '17':
+	print C+' [!] Type Selected '+B+': LinkedIn Gathering'
+	linkedin(web)
+	os.system('clear')
+	time.sleep(2)
+	passiveo(web)
+
+    elif v.strip() == '99':
 	print C+' [*] Back!'
 	os.system('clear')
 	footprintban1()
 	footprint_dup(web)
 
-    elif v == 'A':
+    elif v.strip() == 'A':
 	print C+' [!] Type Selected '+B+': All Modules\n'
 	time.sleep(0.5)
 
@@ -202,6 +234,26 @@ def passiveo(web):
 	print C+' [*] Firing up module -->'+O+' Google Dorker'
 	googledorker(web)
 	print C+'\n [!] Module Completed -->'+O+' GDorker\n'
+	time.sleep(1)
+
+	print C+' [*] Firing up module -->'+O+' Google Groups Enum'
+	googlegroups(web)
+	print C+'\n [!] Module Completed -->'+O+' GGroups\n'
+	time.sleep(1)
+
+	print C+' [*] Firing up module -->'+O+' Check Username'
+	checkuser(web)
+	print C+'\n [!] Module Completed -->'+O+' Username\n'
+	time.sleep(1)
+
+	print C+' [*] Firing up module -->'+O+' LinkedIn gathering'
+	linkedin(web)
+	print C+'\n [!] Module Completed -->'+O+' LinkedIn\n'
+	time.sleep(1)
+
+	print C+' [*] Firing up module -->'+O+' Pastebin Posts'
+	pastebin(web)
+	print C+'\n [!] Module Completed -->'+O+' Pastebin\n'
 	time.sleep(1)
 
 	print G+' [+] All modules successfully completed!'

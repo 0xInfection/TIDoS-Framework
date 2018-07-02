@@ -22,8 +22,8 @@ def footprintban1():
 
  Choose from the following options:
 
-\033[1;34m  [1] \033[1;36mPassive Footprinting
-\033[1;34m  [2] \033[1;36mActive Footprinting
+\033[1;34m  [1] \033[1;36mPassive Footprinting (OSINT)
+\033[1;34m  [2] \033[1;36mActive Reconnaissance 
 \033[1;34m  [3] \033[1;36mInformation Disclosure
 
 \033[1;34m  [99] \033[1;36mBack

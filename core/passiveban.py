@@ -5,9 +5,9 @@
 #    TIDoS Framework     #
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 
+#Author: @_tID
 #This module requires TIDoS Framework
 #https://github.com/theInfectedDrake/TIDoS-Framework 
-
 
 import time
 from colors import *
@@ -26,7 +26,7 @@ def passiveban():
     time.sleep(0.1)
     print B+'      [3] '+C+'GeoIP Lookup '+W+'(Pinpoint Server Location)'
     time.sleep(0.1)
-    print B+'      [4]'+C+' DNS Configuration Lookup'
+    print B+'      [4]'+C+' DNS Configuration Lookup'+W+' (DNSDump)'
     time.sleep(0.1)
     print B+'      [5]'+C+' Gather Subdomains '+W+'(Only indexed ones)'
     time.sleep(0.1)
@@ -44,7 +44,15 @@ def passiveban():
     time.sleep(0.1)
     print B+'      [12] '+C+'Hacked Email Check '+W+'(Breached/leaked emails)'
     time.sleep(0.1)
-    print B+'      [13] '+C+'Email to Domain Resolver '+W+'(Email whois)\n'
+    print B+'      [13] '+C+'Email to Domain Resolver '+W+'(Email whois)'
+    time.sleep(0.1)
+    print B+'      [14] '+C+'Email Enumeration via Google Groups '+W+''
+    time.sleep(0.1)
+    print B+'      [15] '+C+'Check Alias Availability '+W+'(Social Networks)\n'
+    time.sleep(0.1)
+    print B+'      [16] '+C+'Find PasteBin Posts '+W+'(Domain Based)\n'
+    time.sleep(0.1)
+    print B+'      [17] '+C+'LinkedIn Gathering '+W+'(Employees, Companies)\n'
     time.sleep(0.1)
     print B+'      [A] '+C+'The Auto-Awesome Module '+W+'(Unleash the Beast)\n'
     time.sleep(0.1)
