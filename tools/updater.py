@@ -8,25 +8,33 @@
 #This module requires TIDoS Framework
 #https://github.com/theInfectedDrake/TIDoS-Framework 
 
-import urllib, urllib2, requests, time
-from time import sleep
+import time
+import os
 from colors import *
 
 def updater():
 
+    print R+'   ==============='
     print R+'    U P D A T E R'
     print R+'   ===============\n'
-    Version = 'v2.1.0'
     time.sleep(0.4)
     print(GR+' [*] Looking up for the latest version...')
     time.sleep(0.4)
     text = requests.get('https://raw.githubusercontent.com/theInfectedDrake/TIDoS-Framework/master/doc/Version_Num').text
     result = str(text)
-    print C+' [!] The version on GitHub is : '+result
-    print B+' [!] The version you have is : '+Version
+    m = open('doc/Version_Num','r').read()
+    print C+' [!] The version on GitHub is : '+B+result
+    print B+' [!] The version you have is : '+C+m
     if Version == result :
 	print O+' [!] An update is available to version '+result
-	print GR+' [!] Please download the latest version and run the install file...'
+	mn = raw_input(O+' [#] Update? (Y/n) :> ')
+	if mn == 'Y':
+		print GR+' [*] Updating...'
+		os.system('git pull')
+	else:
+		print R+' [-] Okay... Not updated!'
+
     else:
 	print G+' [!] You are using the latest version of this framework!'
 
+updater()

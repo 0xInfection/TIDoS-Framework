@@ -19,9 +19,9 @@ def agree():
 
 	os.system('clear')
 	if str(platform.system()) != "Linux":
-	    sys.exit(""+R+"[!] " + color.UNDERLINE + "\033[91m" + "You are not using a Linux Based OS! Linux is a must-have for this script!" + color.END)
+	    sys.exit(R+" [!] " + color.UNDERLINE + "\033[91m" + "You are not using a Linux Based OS! Linux is a must-have for this script!" + color.END)
 	if not os.geteuid() == 0:
-	    sys.exit("[!] " + color.UNDERLINE + "\033[91m" + "Must be run as root. :) " + color.END)
+	    sys.exit(" [!] " + color.UNDERLINE + "\033[91m" + "Must be run as root. :) " + color.END)
 	if 'no' in open('agree').read():
 	    agreement()
 

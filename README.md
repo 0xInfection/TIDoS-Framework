@@ -41,7 +41,7 @@ tidos
 ```
 
 ### Usage :-
-TIDoS is made to be comprehensive. Its highly flexible framework where you just have to select and use modules. 
+TIDoS is made to be comprehensive. It is a highly flexible framework where you just have to select and use modules. 
 
 As the framework opens up, enter the website name `eg. http://www.example.com` and let TIDoS lead you. Thats it! Its as easy as that.
 
@@ -50,6 +50,8 @@ As the framework opens up, enter the website name `eg. http://www.example.com` a
 >
 >    `Reconnaissance ➣ Scanning & Enumeration ➣ Vulnerability Analysis`
 
+To update this tool, use `tidos_updater.py` module under `tools/` folder.
+
 ### Flawless Features :-
 
 TIDoS Framework presently supports the following:
@@ -57,43 +59,43 @@ TIDoS Framework presently supports the following:
 * __Reconnaissance + OSINT__
 
 	+ Passive Reconnaissance:
-	    - Nping Enumeration 
-	    - WhoIS Lookup
-	    - GeoIP Lookup
-	    - DNS Config. Lookup 
-	    - Subdomains Lookup
-	    - Reverse DNS Lookup
-	    - Reverse IP Lookup
-	    - Web Links Gatherer
-	    - Google Search (manual search)
-	    - Google Dorking (multiple modules) `automated`
-	    - Email to Domain Resolver
-	    - Wayback Machine Lookups
-      	    - Breached Email Check
-	    - Email Enumeration via Google Groups 
-	    - Check Alias Availability
-	    - Find PasteBin Posts
-	    - LinkedIn Gathering
+	    - Nping Enumeration `via external APi`
+	    - WhoIS Lookup `domain info gathering`
+	    - GeoIP Lookup `pinpoint physical location`
+	    - DNS Configuration Lookup `DNSDump`
+	    - Subdomains Lookup `indexed ones`
+	    - Reverse DNS Configuration Lookup
+	    - Reverse IP Lookup `Hosts on same server`
+	    - Web Links Gatherer `Indexed ones`
+	    - Google Search `Manual search`
+	    - Google Dorking (multiple modules) `Automated`
+	    - Email to Domain Resolver `Email WhoIs` `__NEW__`
+	    - Wayback Machine Lookups `Find Backups` `__NEW__`
+      	    - Breached Email Check `Pwned Email Accounts` `__NEW__`
+	    - Enumeration via Google Groups `__NEW__`
+	    - Check Alias Availability `Social Networks` `__NEW__`
+	    - Find PasteBin Posts `Domain Based` `__NEW__`
+	    - LinkedIn Gathering `Employees & Company` `__NEW__`
 
 	+ Active Reconnaissance
-	    - Ping enumeration `advanced`
+	    - Ping enumeration `Advanced`
 	    - CMS Detection `(185+ CMSs supported)`
 	    - Advanced Traceroute `IMPROVED`
-	    - Grab HTTP Headers
+	    - Grab HTTP Headers `Live Capture`
 	    - Detect Server `IMPROVED`
-	    - Examine SSL Certificate
+	    - Examine SSL Certificate `Absolute`
 	    - `robots.txt` and `sitemap.xml` Checker
-	    - Subnets Enumeration
-	    - Find Shared DNS Hosts
+	    - Subnets Enumeration `Class Based`
+	    - Find Shared DNS Hosts `Name Server Based`
 	    - Operating System Fingerprinting `IMPROVED`
 
 	+ Information Disclosure
-	    - Credit Cards Disclosure in Plaintext
-	    - Email Harvester
+	    - Credit Cards Disclosure `If Plaintext`
+	    - Email Harvester `IMPROVED`
 	    - Fatal Errors Enumeration `Includes Full Path Disclosure checks`
 	    - Internal IP Disclosure
 	    - Phone Number Havester
-	    - Social Security Number Harvester
+	    - Social Security Number Harvester `US Only`
 
 * __Scanning & Enumeration__
 
@@ -105,7 +107,7 @@ TIDoS Framework presently supports the following:
 	    - XMAS Flag Scan `Reliable Only in LANs`
 	    - Fin Flag Scan `Reliable Only in LANs`
 	    - Port Service Detector
-	+ Web Technology Enumeration
+	+ Web Technology Enumeration `Absolute` `__NEW__`
 	+ Interactive Scanning with NMap `16 modules`
 	+ Crawlers
 	    - Depth 1
@@ -115,7 +117,7 @@ TIDoS Framework presently supports the following:
 
     __Web-Bugs & Server Misconfigurations__
     
-	- Insecure CORS `absolute`
+	- Insecure CORS `Absolute`
 	- Same-Site Scripting `Sub-domain based`
 	- Zone Transfer `DNS Server based`
 	- Clickjacking `Framable response based`
@@ -123,7 +125,7 @@ TIDoS Framework presently supports the following:
 	- Cloudflare Misconfiguration Check `+ Getting Real IP` 
 	- HTTP High Transport Security Usage
 	- Spoofable Email `Missing SPF and DMARC Records`
-	- Security Headers Analysis 
+	- Security Headers Analysis `Live Capture`
 	- Cross-Site Tracing `Port Based`
 	- Network Security Misconfig. `Telnet Enabled`
 	
@@ -136,27 +138,29 @@ TIDoS Framework presently supports the following:
 		- Pre-loaded Path Based
 	+ OS Command Injection `Linux & Windows (RCE)`
 	+ Path Traversal `(Sensitive Paths)`
-	+ Cross-Site Request Forgery `absolute`
+	+ Cross-Site Request Forgery `Absolute`
 	+ SQL Injection
 	    - Cookie Value Based
 	    - Referer Value Based
 	    - User-Agent Value Based
-	    - Automated `auto-gathering & pwning`
+	    - Auto-gathering `IMPROVED`
+	    - Parameter Based `Manual`
 	+ Host Header Injection `port based`
 	+ Bash Command Injection `Shellshock` 
 	+ Cross-Site Scripting `beta`
 	    - Cookie Value Based
 	    - Referer Value Based
 	    - User-Agent Value Based
-	    - Parameter Value Based
+	    - Parameter Value Based `Manual`
 	+ Unvalidated URL Forwards 
 	+ CRLF Injection and HTTP Response Splitting
 	    - User-Agent Value Based
-	    - Parameter value Based
+	    - Parameter value Based `Manual`
 
     __Auxillaries__
 
-	+ Protocol Credential Bruteforce `3 more under dev.`
+	+ Protocol Credential Bruteforce 
+
 	    - FTP Bruteforce
 	    - SSH Bruteforce
 	    - POP 2/3 Bruteforce
@@ -166,6 +170,7 @@ TIDoS Framework presently supports the following:
 	    - TELNET Bruteforce
 	    
 	+ String & Payload Encoder
+
 	    - URL Encode
 	    - Base64 Encode
 	    - HTML Encode

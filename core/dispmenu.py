@@ -21,7 +21,7 @@ def dispmenu():
 	time.sleep(0.1)
 	print ''+B+' [3] \033[1;36mVulnerability Analysis'+W+' (31 modules)'
 	time.sleep(0.1)
-	print ''+B+' [4] \033[1;36mExploitation (beta)'+W+' (only 1)
+	print ''+B+' [4] \033[1;36mExploitation (beta)'+W+' (only 1)'
 	time.sleep(0.1)
 	print ''+B+'\n [99] \033[1;36mSay "alvida"! (Exit TIDoS)\n'
 	time.sleep(0.1)

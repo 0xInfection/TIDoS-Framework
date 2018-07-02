@@ -21,7 +21,7 @@ def activeban():
     print ''
     print B+'     [1]'+C+' Ping/NPing Enumeration'+W+' (Adaptative+Debug)'
     time.sleep(0.1)
-    print B+'     [2]'+C+' Grab HTTP Headers'+W+' (Without Tampering)'
+    print B+'     [2]'+C+' Grab HTTP Headers'+W+' (Live Capture)'
     time.sleep(0.1)
     print B+'     [3]'+C+' Examine robots.txt and sitemap.xml'
     time.sleep(0.1)
