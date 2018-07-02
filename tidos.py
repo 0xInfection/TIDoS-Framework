@@ -9,8 +9,9 @@
 #This module requires TIDoS Framework
 #https://github.com/theInfectedDrake/TIDoS-Framework
 
-import sys, time
+import sys, time, warnings
 sys.path.append('core/')
+warnings.filterwarnings("ignore")
 from tidos_main import *
 
 try:

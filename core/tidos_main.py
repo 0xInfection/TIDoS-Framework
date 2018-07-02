@@ -72,8 +72,8 @@ def tidos_main():
 		    elif zop == '99':
 			
 			print R+'\n [-] Exiting...'
-			time.sleep(0.5)
-			print O+' [+] Goodluck mate, alvida!\n'
+			time.sleep(0.6)
+			print O+' [+] Goodluck mate, Alvida!\n'
 			sys.exit(0)
 		
 		except KeyboardInterrupt:
