@@ -15,6 +15,7 @@
     - Exploitation (presently in beta phase)
 
 
+
  > TIDoS has 13 sub-phases as below:
 
   * Reconnaissance (OSINT)
@@ -37,7 +38,8 @@
 	- ShellShock
  
 
- > TIDoS has 73 modules as the whole, so on expanding:
+
+ > TIDoS has 91 modules as the whole, so on expanding:
 
 * __Reconnaissance + OSINT__
 
@@ -79,6 +81,7 @@
 * __Scanning & Enumeration__
 
 	+ Remote Server WAF Analysis
+	+ Web technology Enumeration
 	+ Port Scanning `Ingenious Modules`
 	    - Simple Port Scanner `via Socket Connections`
 	    - TCP SYN Scan
@@ -128,11 +131,15 @@
 
     __Auxillaries__
 
-	+ Protocol Credential Bruteforce `3 more under dev.`
+	+ Protocol Credential Bruteforce
 	    - FTP Bruteforce
 	    - SSH Bruteforce
 	    - POP 2/3 Bruteforce
 	    - SQL Bruteforce
+	    - TELNET Bruteforce
+	    - SMTP Bruteforce
+	    - XMPP Bruteforce
+
 	+ String & Payload Encoder
 	    - URL Encode
 	    - Base64 Encode

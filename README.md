@@ -9,15 +9,15 @@ TIDoS Framework is a comprehensive web application audit framework. `let's keep 
 ### Highlights :-
 The main highlights of this framework is:
 - [x] Basic first release (but huge).
-- [x] Has 4 main phases, subdivided into __13 sub-phases__ containing total of __83 modules__.
-- [x] Reconnaissance Phase has 29 modules of its own (including active reconnaissance, passive reconnaissance and information disclosure modules).
-- [x] Scanning & Enumeration Phase has got 12 modules (including port scans, WAF analysis, etc)
-- [x] Vulnerability Analysis Phase has 34 modules (including most common vulnerabilites in action.
-- [x] Exploits Castle has only 1 exploit. `(alpha)`
-- [x] All four phases each have a `auto-awesome` module which automates every module for you.
+- [x] Has 4 main phases, subdivided into __13 sub-phases__ containing total of __91 modules__.
+- [x] Reconnaissance Phase has 33 modules of its own (including active and passive reconnaissance, and information disclosure modules).
+- [x] Scanning & Enumeration Phase has got 26 modules (including port scans, WAF analysis, etc)
+- [x] Vulnerability Analysis Phase has 31 modules (including most common vulnerabilites in action.
+- [x] Exploits Castle has only 1 exploit. `(purely developemental)`
+- [x] All four phases each have a `Auto-Awesome` module which automates every module for you.
 - [x] You just need the domain, and leave everything is to this tool.
-- [x] TIDoS has full verbose out support, so you'll know whats going on.
-- [x] User friendly interaction environment. `(no shits)`
+- [x] TIDoS has full verbose out support, so you'll know whats going on behind.
+- [x] Fully user friendly interaction environment. `(no shits)`
 
 
 <img src='https://i.imgur.com/ZhBUrDB.png' />
@@ -57,7 +57,7 @@ TIDoS Framework presently supports the following:
 * __Reconnaissance + OSINT__
 
 	+ Passive Reconnaissance:
-	    - Ping/Nping Enumeration
+	    - Nping Enumeration 
 	    - WhoIS Lookup
 	    - GeoIP Lookup
 	    - DNS Config. Lookup 
@@ -66,13 +66,17 @@ TIDoS Framework presently supports the following:
 	    - Reverse IP Lookup
 	    - Web Links Gatherer
 	    - Google Search (manual search)
-	    - Hacked Emails Lookup
 	    - Google Dorking (multiple modules) `automated`
 	    - Email to Domain Resolver
-	    - Wayback Machine Lookups 
+	    - Wayback Machine Lookups
+      	    - Breached Email Check
+	    - Email Enumeration via Google Groups 
+	    - Check Alias Availability
+	    - Find PasteBin Posts
+	    - LinkedIn Gathering
 
 	+ Active Reconnaissance
-	    - HPing3 enumeration `(under dev)`
+	    - Ping enumeration `advanced`
 	    - CMS Detection `(185+ CMSs supported)`
 	    - Advanced Traceroute `IMPROVED`
 	    - Grab HTTP Headers
@@ -100,7 +104,8 @@ TIDoS Framework presently supports the following:
 	    - TCP Connect Scan `Highly Reliable`
 	    - XMAS Flag Scan `Reliable Only in LANs`
 	    - Fin Flag Scan `Reliable Only in LANs`
-	    - port Service Detector
+	    - Port Service Detector
+	+ Web Technology Enumeration
 	+ Interactive Scanning with NMap `16 modules`
 	+ Crawlers
 	    - Depth 1
@@ -129,7 +134,7 @@ TIDoS Framework presently supports the following:
 	    - Remote File Inclusion (RFI)
 	    	- Parameter Based
 		- Pre-loaded Path Based
-	+ OS Command Execution `Linux & Windows (RCE)`
+	+ OS Command Injection `Linux & Windows (RCE)`
 	+ Path Traversal `(Sensitive Paths)`
 	+ Cross-Site Request Forgery `absolute`
 	+ SQL Injection
@@ -182,6 +187,7 @@ There are some bruteforce modules to be added:
 - Common Dot files `(eg. .htaccess)`
 - Interesting Directories
 - Interesting Filepaths
+- Lots more of OSINT
 
 ### Known Bugs:
 
@@ -189,7 +195,7 @@ This version of TIDoS is purely developmental `beta`. There are bugs in resolvin
 
 ### Final Words:
 
-This project is one of the best frameworks I have ever built and I would really like your constructive criticism, suggestions and help in converting this project into the best web penetration testing framework ever built `and trust me, it will be ;)`.
+Put this project on a watch, since it is updated frequently `(you can take a look at past commits history)`. This project is one of the best frameworks I have ever built and I would really like your constructive criticism, suggestions and help in converting this project into the best web penetration testing framework ever built `and trust me, it will be ;)`.
 
 > Thank you,
 >

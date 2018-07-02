@@ -28,11 +28,10 @@ def subdom(web):
     for dom in domains:
         text = requests.get('http://api.hackertarget.com/hostsearch/?q=' + dom).text
 	result = str(text)
-	print "\n"+G+ color.BOLD + result
 	if 'error' not in result:
 		res = result.splitlines()
 		for r in res:
-			sub = sub.split(',')[0]
+			sub = r.split(',')[0]
 			print B+' [+] Got subdomain :> '+C+sub
 	else:
 		print R+' [-] Outbound Query Exception!'
