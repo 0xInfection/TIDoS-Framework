@@ -102,9 +102,9 @@
         Additions to OSINT modules. Improvements to other parts of `ActiveRecon`.
 
         Changelog:
-- Addition and improvements to `ActiveRecon` modules.
-- New module added `Web Technology Enumeration`.
-- 3 new modules added to `PassiveRecon` modules:
-    - Enumeration via Google Groups.
-    - PasteBin Posts Gatherer.
-    - LinkedIn Gathering.
+        - Addition and improvements to `ActiveRecon` modules.
+        - New module added `Web Technology Enumeration`.
+        - 3 new modules added to `PassiveRecon` modules:
+            - Enumeration via Google Groups.
+            - PasteBin Posts Gatherer.
+            - LinkedIn Gathering.
