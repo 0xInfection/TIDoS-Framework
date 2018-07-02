@@ -1,6 +1,6 @@
 <p align="middle"><img src='https://i.imgur.com/QAbaVdU.png' /></p>
 
-![Python](https://img.shields.io/badge/Python-2.7-green.svg) ![TIDoS](https://img.shields.io/badge/TIDoS-v1.2-blue.svg) ![Supported OS](https://img.shields.io/badge/Supported%20OS-Linux-yellow.svg) ![License](https://img.shields.io/badge/License-GPLv3-orange.svg) ![Build](https://img.shields.io/badge/Build-0078-red.svg) ![Modules](https://img.shields.io/badge/Modules-83-blue.svg) ![Status](https://img.shields.io/badge/Build%20Status-failing-red.svg) ![Stage](https://img.shields.io/badge/Release-Stable-brightgreen.svg)
+![Python](https://img.shields.io/badge/Python-2.7-green.svg) ![TIDoS](https://img.shields.io/badge/TIDoS-v1.3-blue.svg) ![Supported OS](https://img.shields.io/badge/Supported%20OS-Linux-yellow.svg) ![License](https://img.shields.io/badge/License-GPLv3-orange.svg) ![Build](https://img.shields.io/badge/Build-0080-red.svg) ![Modules](https://img.shields.io/badge/Modules-91-blue.svg) ![Status](https://img.shields.io/badge/Build%20Status-success-red.svg) ![Stage](https://img.shields.io/badge/Release-Stable-brightgreen.svg)
 
 
 # TIDoS Framework 
@@ -59,23 +59,23 @@ TIDoS Framework presently supports the following:
 * __Reconnaissance + OSINT__
 
 	+ Passive Reconnaissance:
-	    - Nping Enumeration `via external APi`
-	    - WhoIS Lookup `domain info gathering`
-	    - GeoIP Lookup `pinpoint physical location`
+	    - Nping Enumeration `Via external APi`
+	    - WhoIS Lookup `Domain info gathering`
+	    - GeoIP Lookup `Pinpoint physical location`
 	    - DNS Configuration Lookup `DNSDump`
-	    - Subdomains Lookup `indexed ones`
+	    - Subdomains Lookup `Indexed ones`
 	    - Reverse DNS Configuration Lookup
 	    - Reverse IP Lookup `Hosts on same server`
 	    - Web Links Gatherer `Indexed ones`
 	    - Google Search `Manual search`
 	    - Google Dorking (multiple modules) `Automated`
-	    - Email to Domain Resolver `Email WhoIs` `__NEW__`
-	    - Wayback Machine Lookups `Find Backups` `__NEW__`
-      	    - Breached Email Check `Pwned Email Accounts` `__NEW__`
-	    - Enumeration via Google Groups `__NEW__`
-	    - Check Alias Availability `Social Networks` `__NEW__`
-	    - Find PasteBin Posts `Domain Based` `__NEW__`
-	    - LinkedIn Gathering `Employees & Company` `__NEW__`
+	    - Email to Domain Resolver `Email WhoIs`
+	    - Wayback Machine Lookups `Find Backups`
+      	    - Breached Email Check `Pwned Email Accounts`
+	    - Enumeration via Google Groups 
+	    - Check Alias Availability `Social Networks`
+	    - Find PasteBin Posts `Domain Based`
+	    - LinkedIn Gathering `Employees & Company`
 
 	+ Active Reconnaissance
 	    - Ping enumeration `Advanced`
@@ -92,10 +92,10 @@ TIDoS Framework presently supports the following:
 	+ Information Disclosure
 	    - Credit Cards Disclosure `If Plaintext`
 	    - Email Harvester `IMPROVED`
-	    - Fatal Errors Enumeration `Includes Full Path Disclosure checks`
-	    - Internal IP Disclosure
-	    - Phone Number Havester
-	    - Social Security Number Harvester `US Only`
+	    - Fatal Errors Enumeration `Includes Full Path Disclosure`
+	    - Internal IP Disclosure `Signature Based`
+	    - Phone Number Havester `Signature Based`
+	    - Social Security Number Harvester `US Ones`
 
 * __Scanning & Enumeration__
 
@@ -107,7 +107,7 @@ TIDoS Framework presently supports the following:
 	    - XMAS Flag Scan `Reliable Only in LANs`
 	    - Fin Flag Scan `Reliable Only in LANs`
 	    - Port Service Detector
-	+ Web Technology Enumeration `Absolute` `__NEW__`
+	+ Web Technology Enumeration `Absolute`
 	+ Interactive Scanning with NMap `16 modules`
 	+ Crawlers
 	    - Depth 1
@@ -170,7 +170,7 @@ TIDoS Framework presently supports the following:
 	    - TELNET Bruteforce
 	    
 	+ String & Payload Encoder
-
+	
 	    - URL Encode
 	    - Base64 Encode
 	    - HTML Encode
