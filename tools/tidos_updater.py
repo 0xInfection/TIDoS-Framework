@@ -10,6 +10,7 @@
 
 import time
 import os
+import requests
 from colors import *
 
 def updater():
