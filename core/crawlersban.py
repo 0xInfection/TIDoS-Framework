@@ -19,9 +19,9 @@ def crawlersban():
 	print O+'    +-----------------+\n'
 	print ''
 	sleep(0.2)
-	print C+"    [1] "+B+"Crawler (Depth 1)"
+	print C+"    [1] "+B+"Crawler \033[1;0m(Depth 1)"
 	sleep(0.2)
-	print C+'    [2] '+B+'Crawler (Depth 2) '
+	print C+'    [2] '+B+'Crawler \033[1;0m(Depth 2) '
 	sleep(0.2)
 	print C+'\n    [A] '+B+'Test both crawlers 1 by 1 '
 	sleep(0.2)

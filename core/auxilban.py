@@ -35,9 +35,9 @@ def auxilban():
 '''
     time.sleep(0.3)
     print ''
-    print B+'     [1]'+C+' Bruteforce Modules (FTP Brute, SSH Brute, etc.) '
+    print B+'     [1]'+C+' Bruteforce Modules '+W+'(FTP Brute, SSH Brute, etc.) '
     time.sleep(0.1)
-    print B+'     [2]'+C+' Encode payload or URL to various format.\n'
+    print B+'     [2]'+C+' Encode payload or string to various format.\n'
     time.sleep(0.1)
     print B+'     [99]'+C+' Back\n' 
 

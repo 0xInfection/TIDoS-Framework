@@ -19,27 +19,27 @@ def activeban():
     print G+'     +----------------+'
     time.sleep(0.3)
     print ''
-    print B+'     [1]'+C+' Ping/NPing Enumeration'
+    print B+'     [1]'+C+' Ping/NPing Enumeration'+W+' (Adaptative+Debug)'
     time.sleep(0.1)
-    print B+'     [2]'+C+' Grab HTTP Headers'
+    print B+'     [2]'+C+' Grab HTTP Headers'+W+' (Without Tampering)'
     time.sleep(0.1)
     print B+'     [3]'+C+' Examine robots.txt and sitemap.xml'
     time.sleep(0.1)
-    print B+'     [4]'+C+' Enumerate Subnets'
+    print B+'     [4]'+C+' Enumerate Subnets'+W+' (Class Based)'
     time.sleep(0.1)
-    print B+'     [5]'+C+' Perform Advanced Traceroute'
+    print B+'     [5]'+C+' Perform Advanced Traceroute'+W+' (TTL Based)'
     time.sleep(0.1)
-    print B+'     [6]'+C+' Find Shared DNS Hosts'
+    print B+'     [6]'+C+' Find Shared DNS Hosts'+W+' (NameServer Based)'
     time.sleep(0.1)
-    print B+'     [7]'+C+' Examine SSL Certificate'
+    print B+'     [7]'+C+' Examine SSL Certificate'+W+' (Absolute)'
     time.sleep(0.1)
-    print B+'     [8]'+C+' CMS Detection'
+    print B+'     [8]'+C+' CMS Detection '+W+'(185+ CMSs supported)'
     time.sleep(0.1)
-    print B+'     [9]'+C+' Enumerate Server behind website'
+    print B+'     [9]'+C+' Enumerate Server behind website'+W
     time.sleep(0.1)
-    print B+'     [10]'+C+' Operating System Fingerprinting\n'
+    print B+'     [10]'+C+' Operating System Fingerprinting'+W+' (Response Based)\n'
     time.sleep(0.1)
-    print B+'     [A]'+C+' Start up ALL modules 1 by 1\n'
+    print B+'     [A]'+C+' The Auto-Awesome Module\n'
     time.sleep(0.1)
     print B+'     [99]'+C+' Back\n' 
 
