@@ -23,5 +23,3 @@
 
 8. Use the uninstall script for removing the program completely from your system (REMEMBER - Only deleting the files off won't work)
         <./uninstall>
- 
-    Any suggestions? Ping me up here <theinfecteddrake@gmail.com> or knock me via a pull request.
