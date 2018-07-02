@@ -71,7 +71,7 @@ TIDoS Framework presently supports the following:
 	    - Google Dorking (multiple modules) `Automated`
 	    - Email to Domain Resolver `Email WhoIs`
 	    - Wayback Machine Lookups `Find Backups`
-      	    - Breached Email Check `Pwned Email Accounts`
+	    - Breached Email Check `Pwned Email Accounts`
 	    - Enumeration via Google Groups 
 	    - Check Alias Availability `Social Networks`
 	    - Find PasteBin Posts `Domain Based`
