@@ -108,7 +108,7 @@ TIDoS Framework presently supports the following:
 	    - Fin Flag Scan `Reliable Only in LANs`
 	    - Port Service Detector
 	+ Web Technology Enumeration `Absolute`
-	+ Interactive Scanning with NMap `16 modules`
+	+ Interactive Scanning with NMap `16 preloaded modules`
 	+ Crawlers
 	    - Depth 1
 	    - Depth 2 `IMPROVED`
@@ -132,7 +132,7 @@ TIDoS Framework presently supports the following:
     __Serious Web Vulnerabilities__
     
 	+ File Intrusions
-	    - Local File Intrusion (LFI)
+	    - Local File Intrusion (LFI) `Param based`
 	    - Remote File Inclusion (RFI)
 	    	- Parameter Based
 		- Pre-loaded Path Based
@@ -152,7 +152,7 @@ TIDoS Framework presently supports the following:
 	    - Referer Value Based
 	    - User-Agent Value Based
 	    - Parameter Value Based `Manual`
-	+ Unvalidated URL Forwards 
+	+ Unvalidated URL Forwards `Open Redirect`
 	+ CRLF Injection and HTTP Response Splitting
 	    - User-Agent Value Based
 	    - Parameter value Based `Manual`
