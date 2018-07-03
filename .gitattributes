@@ -1,2 +1,2 @@
 core/* linguist-vendored
-lib/* linguist-vendored=false
+lib/lxml/* linguist-vendored=false
