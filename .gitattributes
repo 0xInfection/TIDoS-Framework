@@ -1,5 +1,5 @@
 core/* linguist-language=Python
-lib/* linguist-detectable=Python
+lib/* linguist-language=Python
 modules/* linguist-language=Python
 runon.sh linguist-detectable=true
 dependencies linguist-detectable=true
