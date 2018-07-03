@@ -1,7 +1,7 @@
-core/* linguist-language=Python
+core/* linguist-vendored
 lib/* linguist-language=Python
-modules/* linguist-language=Python
-runon.sh linguist-detectable=true
+modules/* linguist-vendored
+runon.sh linguist-vendored
 dependencies linguist-detectable=true
 tmp/* linguist-vendored
 tools/* linguist-language=Python
