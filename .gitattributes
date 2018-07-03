@@ -1,2 +1,3 @@
+* linguist-language=Python
 core/* linguist-vendored
 lib/lxml/* linguist-vendored=false
