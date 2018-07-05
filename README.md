@@ -145,6 +145,7 @@ TIDoS Framework presently supports the following:
 	    - User-Agent Value Based
 	    - Auto-gathering `IMPROVED`
 	    - Parameter Based `Manual`
+	+ LDAP Injection `Parameter Based`
 	+ Host Header Injection `port based`
 	+ Bash Command Injection `Shellshock` 
 	+ Cross-Site Scripting `beta`
