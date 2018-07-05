@@ -37,11 +37,9 @@ br.set_handle_refresh(mechanize._http.HTTPRefreshProcessor(), max_time=1)
 br.addheaders = [
     ('User-agent', 'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.1) Gecko/2008071615 Fedora/3.0.1-1.fc9 Firefox/3.0.1')]
 
-global flag
-flag = 0x00
-
 def getos0x00(web):
 
+    flag = 0x00
     ip_addr = socket.gethostbyname(web)
     print GR+' [*] Getting ip address...'
     time.sleep(0.7)
@@ -55,14 +53,15 @@ def getos0x00(web):
     time.sleep(0.8)
     print R+' [*] Analysing responses...'
     try:
-        match = search(r'&#34;os_description&#34;: &#34;[^<]*&#34;', result)
+        match = search(r'&#34;os_description&#34;: &#34;[^<]*&#34;', result) # thanks d3v for this
         if match:
-	    flag = True
+	    flag = 0x01
             print B+' [+] Operating System Identified : ' + C+ match.group().split('n&#34;: &#34;')[1][:-5]
 	    
 	else:
 	    print R+' [-] No exact OS match for '+O+web+'...'
-	    flag = False
+	    flag = 0x00
+    	return flag
 
     except Exception as e:
 	print R+' [-] Unhandled Exception : '+str(e)
@@ -72,7 +71,7 @@ def port0x00(web):
     time.sleep(0.7)
     print O+' [!] Moving on to the second phase...'
     time.sleep(0.8)
-    print GR+' [*] Initiating port scan (TCP+UDP)...'
+    print O+' [*] Initiating port scan (TCP+UDP)...'
 
     try:
 	getports(web)
@@ -80,7 +79,7 @@ def port0x00(web):
     except Exception as e:
 	print R+' [-] Exception : '+str(e)
 
-    print G+' [*] Initiating OS detection response analysis...'
+    print GR+' [*] Initiating OS detection response analysis...'
     response = subprocess.check_output(['nmap','-Pn','-O','-sSU','-F','--osscan-guess','-T4', web])
     if "No OS matches for host".lower() not in response.lower():
 	if 'running:' in response.lower():
@@ -111,16 +110,16 @@ def osdetect(web):
 	    web = web.replace('http://','')
 	    web = web.replace('https://','')
 	    print GR+' [*] Initialising Module [1]...'
-	    getos0x00(web)
-	    print G+' [+] Module [1] Completed!'
-	    if flag == True:
+	    fl = getos0x00(web)
+	    print G+'\n [+] Module [1] Completed!'
+	    if fl == 0x01:
 		q = raw_input(O+' [#] OS Identified!\n [#] Move on to to module [2]? (y/N) :> ')
 		if q == 'Y'or q == 'y':
-		    print GR+' [*] Initialising Module [2]...'
+		    print GR+'\n [*] Initialising Module [2]...'
 		    port0x00(web)
 		elif q == 'N' or q == 'n':
 		    print G+' [+] Done!'
-	    elif flag == False:
+	    elif flag == 0x00:
 		    print GR+' [*] Initialising Module [2]...'
 		    port0x00(web)
 	    else:
@@ -132,4 +131,3 @@ def osdetect(web):
 	print R+' [-] Exception : '+str(e)
 	pass
 
-osdetect('http://manbhumpiti.org')

@@ -44,7 +44,7 @@ def scan0x00(host):
 		try:
 			sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 			sock.settimeout(0.5)
-			print C+"\n [*] Scanning port " + str(port)
+			print C+"\n [*] Scanning port " + str(port)+'...'
 			r = sock.connect_ex((host, port))
 			print GR+' [*] Analysing response...'
 			time.sleep(0.5)
@@ -68,7 +68,6 @@ def scan0x00(host):
 		time.sleep(0.8)
 		for p in ports:
 			sys.stdout.flush()
-			print p,
 			response = check_portv(host, p)  
 			if response == 0:
 				print G+' [!] Port ' +O+ str(p) +G+ ' detected Open !'
@@ -76,13 +75,11 @@ def scan0x00(host):
 			else:
 				print R+' [!] Port ' +O+ str(p) +R+ ' detected Closed !'
 				closed_ports.append(p)
-			if not p == end_port:
-				sys.stdout.write('\b' * len(str(p)))
 	
-		print G+"\n [+] Scanning completed at %s" %(time.strftime("%I:%M:%S %p"))
+		print C+"\n [+] Scanning completed at %s" %(time.strftime("%I:%M:%S %p"))
 		ending_time = time.time()
 		total_time = ending_time - starting_time
-		print G+' [*] Preparing report...\n'
+		print O+' [*] Preparing report...\n'
 		time.sleep(1)
 
 		print O+'    +--------+----------+'
