@@ -135,7 +135,7 @@ def crlf(web):
 	print O+' [*] Using !nfected UA Value : '+inf_headers['User-Agent']
 	m = getHeaders0x00(web, inf_headers)
 	check0x00(m, 'Mozilla/5.0 (Windows; U; Windows NT 6.1; rv:2.2) Gecko/20110201%0d%0aSet-Cookie: Infected_by=Drake')
-	print GR+' [*] Initiating '+R+'Parameter Based Check...'
+	print GR+'\n [*] Initiating '+R+'Parameter Based Check...'
 	param = raw_input(O+' [#] Scope parameter (eg. /vuln/page.php?crlf=x) :> ')
 	if param.startswith('/') == False:
 		param = '/' + param

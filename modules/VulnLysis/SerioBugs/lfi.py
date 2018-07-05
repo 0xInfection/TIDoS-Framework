@@ -124,9 +124,9 @@ def lfi(web):
 	global gotcha
 	print GR+' [*] Loading module...'
 	time.sleep(0.5)
-	print R+'\n     ======================='
-	print R+'      L F I   S C A N N E R'
-	print R+'     =======================\n'
+	print R+'\n     ========================================='
+	print R+'      L O C A L   F I L E   I N C L U S I O N'
+	print R+'     =========================================\n'
 	try:
 		web0 = raw_input(O+' [#] Parameter path to test (eg. /load.php?file=foo) :> ')
 		if "?" in web0 and '=' in web0:
