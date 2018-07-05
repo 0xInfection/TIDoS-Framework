@@ -31,7 +31,7 @@ def updater():
 	mn = raw_input(O+' [#] Update? '+R+'(Y/n) :> '+O)
 	if mn == 'Y' or mn == 'y':
 		print GR+' [*] Updating...'
-		os.system('git pull && git commit -m "Merged"')
+		os.system('cd .. && git pull && git update-index --assume-unchanged tools/tidos_updater.py && git commit -m "Merged"')
 	elif mn == 'n' or mn == 'N':
 		print R+' [-] Okay... Not updated!\n'
 	else:
