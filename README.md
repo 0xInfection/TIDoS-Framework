@@ -196,7 +196,7 @@ There are some bruteforce modules to be added:
 
 ### Known Bugs:
 
-This version of TIDoS is purely developmental `beta`. There are bugs in resolving the `[99] Back` at various end-points which results in blind fall-backs. Also TIDoS needs to develop more on logging all info displayed on the screen `(help needed)`.
+This version of TIDoS is purely developmental and is presently `stable`. There are bugs in resolving the `[99] Back` at various end-points which results in blind fall-backs. Though I have added global exception handling, still, there maybe bugs out there. Also TIDoS needs to develop more on logging all info displayed on the screen `(help needed)`.
 
 ### Final Words:
 
