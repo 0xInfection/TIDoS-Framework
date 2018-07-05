@@ -44,7 +44,6 @@ def activeo(web):
 	print C+' [!] Type Selected : Ping/NPing Enumeration'
 	piwebenum(web)
 	print '\n\n'
-	os.system('clear')
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	activeo(web)
 
@@ -52,7 +51,6 @@ def activeo(web):
 	print C+' [!] Type Selected : Grab HTTP Headers'
 	grabhead(web)
 	print '\n\n'
-	os.system('clear')
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	activeo(web)
 
@@ -60,7 +58,6 @@ def activeo(web):
 	print C+' [!] Type Selected : robots.txt and sitemap.xml Hunt'
 	robot(web)
 	print '\n\n'
-	os.system('clear')
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	activeo(web)
 
@@ -68,7 +65,6 @@ def activeo(web):
 	print C+' [!] Type Selected : Subnet Enumeration'
 	subnet(web)
 	print '\n\n'
-	os.system('clear')
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	activeo(web)
 
@@ -76,7 +72,6 @@ def activeo(web):
 	print C+' [!] Type Selected '+B+': Traceroute'
 	traceroute(web)
 	print '\n\n'
-	os.system('clear')
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	activeo(web)
 
@@ -84,7 +79,6 @@ def activeo(web):
 	print C+' [!] Type Selected : DNS Hosts'
 	sharedns(web)
 	print '\n\n'
-	os.system('clear')
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	activeo(web)
 
@@ -92,7 +86,6 @@ def activeo(web):
 	print C+' [!] Type Selected : SSL Certificate'
 	sslcert(web)
 	print '\n\n'
-	os.system('clear')
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	activeo(web)
 
@@ -100,7 +93,6 @@ def activeo(web):
 	print C+' [!] Type Selected : CMS Detection'
 	cms(web)
 	print '\n\n'
-	os.system('clear')
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	activeo(web)
 
@@ -108,7 +100,6 @@ def activeo(web):
 	print C+' [!] Type Selected : Server Detection'
 	serverdetect(web)
 	print '\n\n'
-	os.system('clear')
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	activeo(web)
 
@@ -116,7 +107,6 @@ def activeo(web):
 	print C+' [!] Type Selected : Operating System Fingerprinting'
 	osdetect(web)
 	print '\n\n'
-	os.system('clear')
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	activeo(web)
 
