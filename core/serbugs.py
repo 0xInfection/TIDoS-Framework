@@ -16,6 +16,7 @@ sys.path.append('modules/VulnLysis/SerioBugs')
 from serbugsban import *
 from lfi import *
 from rfi import *
+from ldap import *
 from rce import *
 from csrf import *
 from vulnban1 import *
@@ -78,24 +79,30 @@ def serbugs(web):
 	serbugs(web)
 
     elif v == '8':
+	print ' Type Selected : LDAP Injection'
+	ldap(web)
+	time.sleep(1)	
+	serbugs(web)
+
+    elif v == '9':
 	print ' Type Selected : HTTP Response Splitting'
 	crlf(web)
 	time.sleep(1)	
 	serbugs(web)
 
-    elif v == '9':
+    elif v == '10':
 	print ' Type Selected : Host Header Injection'
 	hhi(web)	
 	time.sleep(1)	
 	serbugs(web)
 
-    elif v == '10':
+    elif v == '11':
 	print ' Type Selected : Shellshock'
 	shellshock(web)
 	time.sleep(1)	
 	serbugs(web)
 
-    elif v == '11':
+    elif v == '12':
 	print ' Type Selected : URL Validation'
 	redirect(web)
 	time.sleep(1)	
@@ -138,6 +145,11 @@ def serbugs(web):
 	print ' [*] Firing up module --> SQLi'
 	sqli(web)
 	print ' [!] Module Completed --> SQLi\n'
+	time.sleep(1)
+
+	print ' [*] Firing up module --> LDAPi'
+	ldap(web)
+	print ' [!] Module Completed --> LDAPi\n'
 	time.sleep(1)
 
 	print ' [*] Firing up module --> CRLF'

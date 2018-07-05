@@ -21,7 +21,7 @@ def serbugsban():
 
 \033[1;34m
    ______________________________________________________
-  |  \033[1;37mTIDoS Dialog  (v2.1.0)                \033[1;33m[-] [口] [×]  \033[1;34m|
+  |     \033[1;37mTIDoS Dialog                       \033[1;33m[-] [口] [×]  \033[1;34m|
   | ---------------------------------------------------- |
 \033[1;36m  |                                                      |
   |  \033[1;33mTIDoS has detected that you want to hunt for bugs! \033[1;36m |
@@ -48,13 +48,15 @@ def serbugsban():
 #    time.sleep(0.1)
     print B+'  [7]'+C+' SQL Injection '
     time.sleep(0.1)
-    print B+'  [8]'+C+' HTTP Response Splitting '
+    print B+'  [8]'+C+' LDAP Injection '
     time.sleep(0.1)
-    print B+'  [9]'+C+' Host Header Injection '
+    print B+'  [9]'+C+' HTTP Response Splitting '
     time.sleep(0.1)
-    print B+'  [10]'+C+' Shellshock Vulnerabilities'
+    print B+'  [10]'+C+' Host Header Injection '
     time.sleep(0.1)
-    print B+'  [11]'+C+' Unvalidated Redirects\n'
+    print B+'  [11]'+C+' Shellshock Vulnerabilities'
+    time.sleep(0.1)
+    print B+'  [12]'+C+' Unvalidated URL Redirects\n'
     time.sleep(0.1)
     print B+'  [A]'+C+' Load all the modules 1 by 1\n'
     time.sleep(0.1)
