@@ -24,8 +24,9 @@ def geoIP(web):
     time.sleep(0.4)
     print('' + GR + color.BOLD + ' [!] Looking Up for WhoIS Information...')
     time.sleep(0.4)
-    print(""+ GR + color.BOLD + " [~] Found GeoIp Location: "+ color.END)
+    print(""+ GR + color.BOLD + " [~] Found GeoIp Location: \n"+ color.END)
     domains = socket.gethostbyname(web)
+    time.sleep(0.6)
     text = requests.get('http://api.hackertarget.com/geoip/?q=' + domains).text
     result = str(text)
     if 'error' not in result and 'invalid' not in result:

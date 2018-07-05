@@ -12,7 +12,7 @@ def agreement():
 
     print """
 \033[1;95m				=======================================================
-                               		T I D O S   F R A M E W O R K   v1.0.0
+                               		T I D O S   F R A M E W O R K   v1.3
 				=======================================================
 \033[1;37m
 	TIDoS is a open-source tool developed as a royalty-free website penetration testing tool.

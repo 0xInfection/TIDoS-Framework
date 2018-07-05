@@ -5,12 +5,15 @@
 #    TIDoS Framework     #
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 
+#Updater of TIDoS Framework
 #This module requires TIDoS Framework
 #https://github.com/theInfectedDrake/TIDoS-Framework 
 
 import time
 import os
+import sys
 import requests
+sys.path.append('../doc/')
 from colors import *
 
 def updater():
@@ -30,8 +33,11 @@ def updater():
 	print O+' [!] An update is available to version '+result
 	mn = raw_input(O+' [#] Update? '+R+'(Y/n) :> '+O)
 	if mn == 'Y' or mn == 'y':
-		print GR+' [*] Updating...'
-		os.system('cd .. && git pull && git update-index --assume-unchanged tools/tidos_updater.py && git commit -m "Merged"')
+		print GR+' [*] Updating...\n'
+		p = open('../doc/Version_Num','w')
+		p.write(result.replace('\n',''))
+		p.close()
+		os.system('cd .. && git add . && git commit -m "Did stuff" && git pull && git update-index --assume-unchanged tools/tidos_updater.py && git commit -m "Merged"')
 	elif mn == 'n' or mn == 'N':
 		print R+' [-] Okay... Not updated!\n'
 	else:
