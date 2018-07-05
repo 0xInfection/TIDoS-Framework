@@ -161,24 +161,24 @@ TIDoS Framework presently supports the following:
 
 	+ Protocol Credential Bruteforce 
 
-	    - FTP Bruteforce
-	    - SSH Bruteforce
-	    - POP 2/3 Bruteforce
-	    - SQL Bruteforce
-	    - XMPP Bruteforce
-	    - SMTP Bruteforce
-	    - TELNET Bruteforce
+	    - FTP Protocol Bruteforce
+	    - SSH Protocol Bruteforce
+	    - POP 2/3 Protocol Bruteforce
+	    - SQL Protocol Bruteforce
+	    - XMPP Protocol Bruteforce
+	    - SMTP Protocol Bruteforce
+	    - TELNET Protocol Bruteforce
 	    
 	+ String & Payload Encoder
 	
-	    - URL Encode
-	    - Base64 Encode
-	    - HTML Encode
-	    - Plain ASCII Encode
-	    - Hex Encode
-	    - Octal Encode
-	    - Binary Encode
-	    - GZip Encode
+	    - URL Character Encoding
+	    - Base64 Character Encoding
+	    - HTML Character Encoding
+	    - Plain ASCII Character Encoding
+	    - Hex Character Encoding
+	    - Octal Character Encoding
+	    - Binary Character Encoding
+	    - GZip Character Encoding
 
 - __Exploitation__ `purely developmental`
 
