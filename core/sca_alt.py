@@ -28,35 +28,35 @@ def sca_alt(web):
     if v == '1':
 	print B+' [!] Type Selected :'+C+' WAF Analysis'+O
 	waf(web)
-	time.sleep(0.9)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	scanenumban1()
 	sca_alt(web)
 
     elif v == '2':
 	print B+' [!] Type Selected :'+C+' Port Scanning'
 	portscan(web)
-	time.sleep(0.9)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	scanenumban1()
 	sca_alt(web)
 
     elif v == '3':
 	print B+' [!] Type Selected :'+C+' Interactive NMap'
 	nmapmain(web)
-	time.sleep(0.9)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	scanenumban1()
 	sca_alt(web)
 
     elif v == '4':
 	print B+' [!] Type Selected :'+C+' Webtech Fingerprinting'
 	webtech(web)
-	time.sleep(0.9)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	scanenumban1()
 	sca_alt(web)
 
     elif v == '5':
 	print B+' [!] Type Selected :'+C+' Crawlers'
 	crawlers_hunt(web)
-	time.sleep(0.9)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	scanenumban1()
 	sca_alt(web)
 
@@ -90,6 +90,7 @@ def sca_alt(web):
 	time.sleep(0.5)
 	print G+' [+] All modules successfully completed!'
 	time.sleep(0.5)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	print GR+' [*] Going back...'
 
     elif v == '99':

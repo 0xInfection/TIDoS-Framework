@@ -38,49 +38,49 @@ def brutemods(web):
     if v == '1':
 	print B+' [!] Type Selected :'+C+' FTP Brute'
 	ftpbrute(web)
-	time.sleep(2)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	print '\n\n'
 	auxil_alt(web)
 
     elif v == '2':
 	print B+' [!] Type Selected :'+C+' SSH Brute'
 	sshbrute(web)
-	time.sleep(2)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	print '\n\n'
 	auxil_alt(web)
 
     elif v == '3':
 	print B+' [!] Type Selected :'+C+' SQL Brute'
 	sqlbrute(web)
-	time.sleep(2)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	print '\n\n'
 	auxil_alt(web)
 
     elif v == '4':
 	print B+' [!] Type Selected :'+C+' POP 3/2 Brute'
 	popbrute(web)
-	time.sleep(2)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	print '\n\n'
 	auxil_alt(web)
 
     elif v == '5':
 	print B+' [!] Type Selected :'+C+' SMTP Brute'
 	smtpbrute(web)
-	time.sleep(2)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	print '\n\n'
 	auxil_alt(web)
 
     elif v == '6':
 	print B+' [!] Type Selected :'+C+' TELNET Brute'
 	telnetbrute(web)
-	time.sleep(2)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	print '\n\n'
 	auxil_alt(web)
 
     elif v == '7':
 	print B+' [!] Type Selected :'+C+' XMPP Brute'
 	xmppbrute(web)
-	time.sleep(2)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	print '\n\n'
 	auxil_alt(web)
 
@@ -90,6 +90,7 @@ def brutemods(web):
 	print B+' [*] Firing up module -->'+C+' FTP Brute'
 	ftpbrute(web)
 	print B+' [!] Module Completed -->'+C+' FTP Brute\n'
+	time.sleep(2)
 
 	print B+' [*] Firing up module -->'+C+' SSH Brute'
 	sshbrute(web)
@@ -123,6 +124,7 @@ def brutemods(web):
 
 	print B+' [!] All scantypes have been tested on target...'
 	time.sleep(4)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	print B+' [*] Going back to menu...'
 	auxil_alt(web)
 

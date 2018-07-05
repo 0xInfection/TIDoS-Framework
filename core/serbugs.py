@@ -39,73 +39,73 @@ def serbugs(web):
     if v == '1':
 	print ' Type Selected : LFI'
 	lfi(web)
-	time.sleep(1)	
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')	
 	serbugs(web)
 
     elif v == '2':
 	print ' Type Selected : RFI'
 	rfi(web)
-	time.sleep(1)	
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')	
 	serbugs(web)
 
     elif v == '3':
 	print ' Type Selected : RCE'
 	rce(web)	
-	time.sleep(1)	
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')	
 	serbugs(web)
 
     elif v == '4':
 	print ' Type Selected : Path Traversal'
 	pathtrav(web)	
-	time.sleep(1)	
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')	
 	serbugs(web)
 
     elif v == '5':
 	print ' Type Selected : CSRF'
 	csrf(web)
-	time.sleep(1)	
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')	
 	serbugs(web)
 
  #   elif v == '6':
 #	print ' Type Selected : XSS'
 #	xss(web)	
-#	time.sleep(1)	
+#	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')	
 #	serbugs(web)
 
     elif v == '7':
 	print ' Type Selected : SQLi'
 	sqli(web)	
-	time.sleep(1)	
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')	
 	serbugs(web)
 
     elif v == '8':
 	print ' Type Selected : LDAP Injection'
 	ldap(web)
-	time.sleep(1)	
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')	
 	serbugs(web)
 
     elif v == '9':
 	print ' Type Selected : HTTP Response Splitting'
 	crlf(web)
-	time.sleep(1)	
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')	
 	serbugs(web)
 
     elif v == '10':
 	print ' Type Selected : Host Header Injection'
 	hhi(web)	
-	time.sleep(1)	
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')	
 	serbugs(web)
 
     elif v == '11':
 	print ' Type Selected : Shellshock'
 	shellshock(web)
-	time.sleep(1)	
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')	
 	serbugs(web)
 
     elif v == '12':
 	print ' Type Selected : URL Validation'
 	redirect(web)
-	time.sleep(1)	
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')	
 	serbugs(web)
 
     elif v == 'A':
@@ -173,6 +173,7 @@ def serbugs(web):
 	time.sleep(0.5)
 	print G+' [+] All modules successfully completed!'
 	time.sleep(4)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 
     elif v == '99':
 	print '[!] Back'

@@ -29,35 +29,35 @@ def scanenum_dup(web):
     if v == '1':
 	print B+' [!] Type Selected :'+C+' WAF Analysis'
 	waf(web)
-	time.sleep(0.9)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	scanenumban1()
 	scanenum_dup(web)
 
     elif v == '2':
 	print B+' [!] Type Selected :'+C+' Port Scanning'
 	portscan(web)
-	time.sleep(0.9)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	scanenumban1()
 	scanenum_dup(web)
 
     elif v == '3':
 	print B+' [!] Type Selected :'+C+' Interactive NMap'
 	nmapmain(web)
-	time.sleep(0.9)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	scanenumban1()
 	scanenum_dup(web)
 
     elif v == '4':
 	print B+' [!] Type Selected :'+C+' WebTech Fingerprinting'
 	webtech(web)
-	time.sleep(0.9)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	scanenumban1()
 	scanenum_dup(web)
 
     elif v == '5':
 	print B+' [!] Type Selected :'+C+' Crawlers'
 	crawlers(web)
-	time.sleep(0.9)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	scanenumban1()
 	scanenum_dup(web)
 
@@ -91,6 +91,7 @@ def scanenum_dup(web):
 	time.sleep(0.5)
 	print G+' [+] All modules successfully completed!'
 	time.sleep(4)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	print GR+' [*] Going back...'
 	tid_dup(web)
 
