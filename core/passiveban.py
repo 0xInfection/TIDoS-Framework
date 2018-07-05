@@ -36,7 +36,7 @@ def passiveban():
     time.sleep(0.1)
     print B+'      [8]'+C+' Gather All Links from WebPage '+W+'(only indexed ones)'
     time.sleep(0.1)
-    print B+'      [9]'+C+' Google Search (Search your own Query or Dork)'
+    print B+'      [9]'+C+' Google Search '+W+'(Search your own Query or Dork)'
     time.sleep(0.1)
     print B+'      [10] '+C+'Google Dorking '+W+'(Multiple Modules)'
     time.sleep(0.1)

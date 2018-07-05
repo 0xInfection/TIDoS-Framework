@@ -39,3 +39,4 @@ def revdns(web):
 	else:
 		print R+' [-] Outbound Query Exception!'
 		time.sleep(0.8)
+

@@ -45,7 +45,7 @@ def activeo(web):
 	piwebenum(web)
 	print '\n\n'
 	os.system('clear')
-	time.sleep(1)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	activeo(web)
 
     elif v == '2':
@@ -53,7 +53,7 @@ def activeo(web):
 	grabhead(web)
 	print '\n\n'
 	os.system('clear')
-	time.sleep(1)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	activeo(web)
 
     elif v == '3':
@@ -61,7 +61,7 @@ def activeo(web):
 	robot(web)
 	print '\n\n'
 	os.system('clear')
-	time.sleep(1)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	activeo(web)
 
     elif v == '4':
@@ -69,7 +69,7 @@ def activeo(web):
 	subnet(web)
 	print '\n\n'
 	os.system('clear')
-	time.sleep(1)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	activeo(web)
 
     elif v == '5':
@@ -77,7 +77,7 @@ def activeo(web):
 	traceroute(web)
 	print '\n\n'
 	os.system('clear')
-	time.sleep(1)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	activeo(web)
 
     elif v == '6':
@@ -85,7 +85,7 @@ def activeo(web):
 	sharedns(web)
 	print '\n\n'
 	os.system('clear')
-	time.sleep(1)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	activeo(web)
 
     elif v == '7':
@@ -93,7 +93,7 @@ def activeo(web):
 	sslcert(web)
 	print '\n\n'
 	os.system('clear')
-	time.sleep(1)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	activeo(web)
 
     elif v == '8':
@@ -101,7 +101,7 @@ def activeo(web):
 	cms(web)
 	print '\n\n'
 	os.system('clear')
-	time.sleep(1)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	activeo(web)
 
     elif v == '9':
@@ -109,7 +109,7 @@ def activeo(web):
 	serverdetect(web)
 	print '\n\n'
 	os.system('clear')
-	time.sleep(1)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	activeo(web)
 
     elif v == '10':
@@ -117,7 +117,7 @@ def activeo(web):
 	osdetect(web)
 	print '\n\n'
 	os.system('clear')
-	time.sleep(1)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	activeo(web)
 
     elif v == 'A':
@@ -174,7 +174,7 @@ def activeo(web):
 	time.sleep(1)
 
 	print C+'\n [!] All scantypes have been tested on target...'
-	time.sleep(2)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	print C+' [*] Going back to menu...'
 	time.sleep(3)
 	os.system('clear')

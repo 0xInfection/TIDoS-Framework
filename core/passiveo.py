@@ -45,120 +45,103 @@ def passiveo(web):
     if v.strip() == '1':
 	print C+' [!] Type Selected '+B+': Ping Check'
 	piweb(web)
-	os.system('clear')
-	time.sleep(2)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	passiveo(web)
 
     elif v.strip() == '2':
 	print C+' [!] Type Selected '+B+': WhoIS Checkup'
 	whoischeckup(web) 
-	os.system('clear')
-	time.sleep(2)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	passiveo(web)
 
     elif v.strip() == '3':
 	print C+' [!] Type Selected '+B+': GeoIP Lookup'
 	geoip(web)
-	os.system('clear')
-	time.sleep(2)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	passiveo(web)
 
     elif v.strip() == '4':
 	print C+' [!] Type Selected '+B+': DNS Lookup'
 	dnschk(web)
-	os.system('clear')
-	time.sleep(2)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	passiveo(web)
 
     elif v.strip() == '5':
 	print C+' [!] Type Selected '+B+': Subdomain Scan'
 	subdom(web)
-	os.system('clear')
-	time.sleep(2)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	passiveo(web)
 
     elif v.strip() == '6':
 	print C+' [!] Type Selected '+B+': Reverse DNS Lookup'
 	revdns(web)
-	os.system('clear')
-	time.sleep(2)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	passiveo(web)
 
     elif v.strip() == '7':
 	print C+' [!] Type Selected '+B+': Reverse IP Lookup'
 	revip(web)
-	os.system('clear')
-	time.sleep(2)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	passiveo(web)
 
     elif v.strip() == '8':
 	print C+' [!] Type Selected '+B+': Page Links'
 	links(web)
-	os.system('clear')
-	time.sleep(2)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	passiveo(web)
 
     elif v.strip() == '9':
 	print C+' [!] Type Selected '+B+': Google Search'
 	googleSearch()
-	os.system('clear')
-	time.sleep(2)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	passiveo(web)
 
     elif v.strip() == '10':
 	print C+' [!] Type Selected '+B+': Google Dorker'
 	googledorker(web)
-	os.system('clear')
-	time.sleep(2)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	passiveo(web)
 
     elif v.strip() == '11':
 	print C+' [!] Type Selected '+B+': Wayback Machine'
 	webarchive(web)
-	os.system('clear')
-	time.sleep(2)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	passiveo(web)
 
     elif v.strip() == '12':
 	print C+' [!] Type Selected '+B+': Hacked Email Check'
 	hackedmail()
-	os.system('clear')
-	time.sleep(2)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	passiveo(web)
 
     elif v.strip() == '13':
 	print C+' [!] Type Selected '+B+': Mail to Domain'
 	mailtodom()
-	os.system('clear')
-	time.sleep(2)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	passiveo(web)
 
     elif v.strip() == '14':
 	print C+' [!] Type Selected '+B+': Google Groups Enum'
 	googlegroups(web)
-	os.system('clear')
-	time.sleep(2)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	passiveo(web)
 
     elif v.strip() == '15':
 	print C+' [!] Type Selected '+B+': Check Username'
 	checkuser(web)
-	os.system('clear')
-	time.sleep(2)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	passiveo(web)
 
     elif v.strip() == '16':
 	print C+' [!] Type Selected '+B+': PasteBin Posts'
 	pastebin(web)
-	os.system('clear')
-	time.sleep(2)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	passiveo(web)
 
     elif v.strip() == '17':
 	print C+' [!] Type Selected '+B+': LinkedIn Gathering'
 	linkedin(web)
-	os.system('clear')
-	time.sleep(2)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	passiveo(web)
 
     elif v.strip() == '99':
@@ -231,11 +214,6 @@ def passiveo(web):
 	print C+'\n [!] Module Completed -->'+O+' Mail to Domain\n'
 	time.sleep(1)
 
-	print C+' [*] Firing up module -->'+O+' Google Dorker'
-	googledorker(web)
-	print C+'\n [!] Module Completed -->'+O+' GDorker\n'
-	time.sleep(1)
-
 	print C+' [*] Firing up module -->'+O+' Google Groups Enum'
 	googlegroups(web)
 	print C+'\n [!] Module Completed -->'+O+' GGroups\n'
@@ -256,8 +234,14 @@ def passiveo(web):
 	print C+'\n [!] Module Completed -->'+O+' Pastebin\n'
 	time.sleep(1)
 
+	print C+' [*] Firing up module -->'+O+' Google Dorker'
+	googledorker(web)
+	print C+'\n [!] Module Completed -->'+O+' GDorker\n'
+	time.sleep(1)
+
 	print G+' [+] All modules successfully completed!'
 	time.sleep(3)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	print GR+' [*] Going back...'
 	os.system('clear')
 	footprintban1()
