@@ -29,7 +29,11 @@ def revdns(web):
         text = requests.get('http://api.hackertarget.com/reversedns/?q=' + dom).text
 	result = str(text)
 	if 'error' not in result:
-		print G+ result
+		res = result.splitlines()
+		for r in res:
+			print GR+' [+] Received : '+O+r
+			time.sleep(0.1)
+
 	elif 'No results found' in result:
 		print R+' [-] No result found!'
 	else:

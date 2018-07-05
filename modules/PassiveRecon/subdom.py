@@ -21,7 +21,7 @@ def subdom(web):
     print R+'    S U B D O M A I N S   L O O K U P'
     print R+'   ===================================\n'
     time.sleep(0.4)
-    print('' + GR + color.BOLD + ' [!] Looking Up for subdomains...')
+    print('' + GR + color.BOLD + ' [!] Looking Up for indexed subdomains...')
     time.sleep(0.4)
     print(""+ GR + color.BOLD + " [~] Result: "+ color.END)
     domains = [web]
@@ -33,6 +33,7 @@ def subdom(web):
 		for r in res:
 			sub = r.split(',')[0]
 			print B+' [+] Got subdomain :> '+C+sub
+			time.sleep(0.1)
 	else:
 		print R+' [-] Outbound Query Exception!'
 		time.sleep(0.8)

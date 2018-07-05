@@ -33,9 +33,10 @@ def googleSearch():
 	print G+ " [!] Below are the list of websites with info on '" +lol+ "'"
 	x = search(lol, tld='com', lang='es', stop=int(m))
 	for url in x:
-		print(""+O+color.BOLD+"   [!] Site Found :> "+W + url)
+		print O+"   [!] Site Found :> "+W + url
 		q = open('.google-cookie','w')
 		q.close()
     except urllib2.HTTPError:
 	print R+' [-] You have used google many times.'
 	print R+' [-] Service temporarily unavailable.'
+
