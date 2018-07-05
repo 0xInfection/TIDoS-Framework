@@ -1,8 +1,0 @@
-core/* linguist-vendored
-lib/* linguist-language=Python
-modules/* linguist-vendored
-runon.sh linguist-vendored
-dependencies linguist-detectable=true
-tmp/* linguist-vendored
-tools/* linguist-language=Python
-doc/* linguist-vendored
