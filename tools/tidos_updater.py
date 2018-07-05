@@ -10,11 +10,12 @@
 
 import time
 import os
+import requests
 from colors import *
 
 def updater():
 
-    print R+'   ==============='
+    print R+'\n   ==============='
     print R+'    U P D A T E R'
     print R+'   ===============\n'
     time.sleep(0.4)
@@ -22,18 +23,20 @@ def updater():
     time.sleep(0.4)
     text = requests.get('https://raw.githubusercontent.com/theInfectedDrake/TIDoS-Framework/master/doc/Version_Num').text
     result = str(text)
-    m = open('doc/Version_Num','r').read()
-    print C+' [!] The version on GitHub is : '+B+result
+    m = open('../doc/Version_Num','r').read()
+    print C+' [!] The version on GitHub is : '+B+result.replace('\n','')
     print B+' [!] The version you have is : '+C+m
-    if Version == result :
+    if m != result :
 	print O+' [!] An update is available to version '+result
-	mn = raw_input(O+' [#] Update? (Y/n) :> ')
-	if mn == 'Y':
+	mn = raw_input(O+' [#] Update? '+R+'(Y/n) :> '+O)
+	if mn == 'Y' or mn == 'y':
 		print GR+' [*] Updating...'
-		os.system('git pull')
+		os.system('git pull && git commit -m "Merged"')
+	elif mn == 'n' or mn == 'N':
+		print R+' [-] Okay... Not updated!\n'
 	else:
-		print R+' [-] Okay... Not updated!'
-
+		print R+'\n [-] U mad dude?\n'
+		time.sleep(0.7)
     else:
 	print G+' [!] You are using the latest version of this framework!'
 
