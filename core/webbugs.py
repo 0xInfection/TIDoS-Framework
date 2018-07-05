@@ -35,67 +35,67 @@ def webbugs(web):
     if v.strip() == '1':
 	print B+' [!] Type Selected :'+C+' iCORS'
 	icors(web)
-	time.sleep(2)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	webbugs(web)
 
     elif v.strip() == '2':
 	print B+' [!] Type Selected :'+C+' Same Site Scripting'
 	ssscript(web)
-	time.sleep(2)	
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')	
 	webbugs(web)
 
     elif v.strip() == '3':
 	print B+' [!] Type Selected :'+C+' Clickjack'
 	clickjack(web)
-	time.sleep(2)	
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')	
 	webbugs(web)
 
     elif v.strip() == '4':
 	print B+' [!] Type Selected :'+C+' Zone Transfer'
 	zone(web)
-	time.sleep(2)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	webbugs(web)
 
     elif v.strip() == '5':
 	print B+' [!] Type Selected :'+C+' Cookie Check'
 	cookiecheck(web)
-	time.sleep(2)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	webbugs(web)
 
     elif v.strip() == '6':
 	print B+' [!] Type Selected :'+C+' Sec. Headers'
 	headers(web)
-	time.sleep(2)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	webbugs(web)
 
     elif v.strip() == '7':
 	print B+' [!] Type Selected :'+C+' Cloudflare Misconfig.'
 	cloudflare(web)
-	time.sleep(2)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	webbugs(web)
 
     elif v.strip() == '8':
 	print B+' [!] Type Selected :'+C+' HSTS Check'
 	hsts(web)
-	time.sleep(2)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	webbugs(web)
 
     elif v.strip() == '9':
 	print B+' [!] Type Selected :'+C+' Cross Site Tracing'
 	xsstrace(web)
-	time.sleep(2)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	webbugs(web)
 
     elif v.strip() == '10':
 	print B+' [!] Type Selected :'+C+' Telnet Enabled'
 	netmisc(web)
-	time.sleep(2)	
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')	
 	webbugs(web)
 
     elif v.strip() == '11':
 	print B+' [!] Type Selected :'+C+' Email Spoof'
 	mailspoof(web)
-	time.sleep(2)	
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')	
 	webbugs(web)
 
 
@@ -157,8 +157,9 @@ def webbugs(web):
 	netmisc(web)
 	print B+'\n [!] Module Completed -->'+C+' Telnet Enabled\n'
 	time.sleep(1)
-	print G+B+' [+] All modules successfully completed!'
+	print G+' [+] All modules successfully completed!'
 	time.sleep(0.5)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 
     elif v.strip() == '99':
 	print '[!] Back'

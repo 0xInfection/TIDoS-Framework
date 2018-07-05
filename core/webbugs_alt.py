@@ -35,61 +35,61 @@ def webbugs_alt(web):
 	print B+' [!] Type Selected :'+C+' iCORS'
 	icors(web)
 	webbugs_alt(web)
-	time.sleep(1)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 
     elif v == '2':
 	print B+' [!] Type Selected :'+C+' Same Site Scripting'
 	ssscript(web)	
 	webbugs_alt(web)
-	time.sleep(1)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 
     elif v == '3':
 	print B+' [!] Type Selected :'+C+' Clickjack'
 	clickjack(web)	
 	webbugs_alt(web)
-	time.sleep(1)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 
     elif v == '4':
 	print B+' [!] Type Selected :'+C+' Zone Transfer'
 	zone(web)
 	webbugs_alt(web)
-	time.sleep(1)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 
     elif v == '5':
 	print B+' [!] Type Selected :'+C+' Cookie Check'
 	cookiecheck(web)
 	webbugs_alt(web)
-	time.sleep(1)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 
     elif v == '6':
 	print B+' [!] Type Selected :'+C+' Sec. Headers'
 	headers(web)
 	webbugs_alt(web)
-	time.sleep(1)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 
     elif v == '7':
 	print B+' [!] Type Selected :'+C+' Cloudflare Misconfig.'
 	cloudflare(web)
 	webbugs_alt(web)
-	time.sleep(1)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 
     elif v == '8':
 	print B+' [!] Type Selected :'+C+' Cross Site Tracing'
 	xsstrace(web)
 	webbugs_alt(web)
-	time.sleep(1)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 
     elif v == '11':
 	print B+' [!] Type Selected :'+C+' Email Spoof'
 	mailspoof(web)	
 	webbugs(web)
-	time.sleep(1)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 
     elif v == '9':
 	print B+' [!] Type Selected :'+C+' Telnet Enabled'
 	netmisc(web)	
 	webbugs_alt(web)
-	time.sleep(1)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 
 
     elif v == 'A':
@@ -147,6 +147,7 @@ def webbugs_alt(web):
 	time.sleep(3)
 	print G+B+' [+] All modules successfully completed!'
 	time.sleep(1)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 
     elif v == '99':
 	print '[!] Back'
