@@ -1,6 +1,6 @@
 <p align="middle"><img src='https://i.imgur.com/QAbaVdU.png' /></p>
 
-![Python](https://img.shields.io/badge/Python-2.7-green.svg) ![TIDoS](https://img.shields.io/badge/TIDoS-v1.3-blue.svg) ![Supported OS](https://img.shields.io/badge/Supported%20OS-Linux-yellow.svg) ![License](https://img.shields.io/badge/License-GPLv3-orange.svg) ![Build](https://img.shields.io/badge/Build-0080-red.svg) ![Modules](https://img.shields.io/badge/Modules-91-blue.svg) ![Status](https://img.shields.io/badge/Build%20Status-success-red.svg) ![Stage](https://img.shields.io/badge/Release-Stable-brightgreen.svg)
+![Python](https://img.shields.io/badge/Python-2.7-green.svg) ![TIDoS](https://img.shields.io/badge/TIDoS-v1.3-blue.svg) ![Supported OS](https://img.shields.io/badge/Supported%20OS-Linux-yellow.svg) ![License](https://img.shields.io/badge/License-GPLv3-orange.svg) ![Build](https://img.shields.io/badge/Build-0080-red.svg) ![Modules](https://img.shields.io/badge/Modules-91-blue.svg) ![Status](https://img.shields.io/badge/Build%20Status-passing-brightgreen.svg) ![Stage](https://img.shields.io/badge/Release-Stable-green.svg)
 
 
 # TIDoS Framework 
@@ -20,7 +20,7 @@ The main highlights of this framework is:
 - [x] Fully user friendly interaction environment. `(no shits)`
 
 
-<img src='https://i.imgur.com/ZhBUrDB.png' />
+<img src='https://i.imgur.com/AcErfM9.png' />
 
 ### Installing TIDoS :-
 * Clone the repository locally and navigate there:
@@ -33,7 +33,7 @@ cd tidos
 chmod +x install
 ./install
 ```
-<img src='https://i.imgur.com/B3eA0H5.png' />
+<img src='https://i.imgur.com/3JrbOPH.png' />
 
 Thats it! Now you are good to go! Now lets run the tool:
 ```
@@ -71,7 +71,7 @@ TIDoS Framework presently supports the following:
 	    - Google Dorking (multiple modules) `Automated`
 	    - Email to Domain Resolver `Email WhoIs`
 	    - Wayback Machine Lookups `Find Backups`
-      	    - Breached Email Check `Pwned Email Accounts`
+	    - Breached Email Check `Pwned Email Accounts`
 	    - Enumeration via Google Groups 
 	    - Check Alias Availability `Social Networks`
 	    - Find PasteBin Posts `Domain Based`
@@ -108,7 +108,7 @@ TIDoS Framework presently supports the following:
 	    - Fin Flag Scan `Reliable Only in LANs`
 	    - Port Service Detector
 	+ Web Technology Enumeration `Absolute`
-	+ Interactive Scanning with NMap `16 modules`
+	+ Interactive Scanning with NMap `16 preloaded modules`
 	+ Crawlers
 	    - Depth 1
 	    - Depth 2 `IMPROVED`
@@ -132,7 +132,7 @@ TIDoS Framework presently supports the following:
     __Serious Web Vulnerabilities__
     
 	+ File Intrusions
-	    - Local File Intrusion (LFI)
+	    - Local File Intrusion (LFI) `Param based`
 	    - Remote File Inclusion (RFI)
 	    	- Parameter Based
 		- Pre-loaded Path Based
@@ -152,7 +152,7 @@ TIDoS Framework presently supports the following:
 	    - Referer Value Based
 	    - User-Agent Value Based
 	    - Parameter Value Based `Manual`
-	+ Unvalidated URL Forwards 
+	+ Unvalidated URL Forwards `Open Redirect`
 	+ CRLF Injection and HTTP Response Splitting
 	    - User-Agent Value Based
 	    - Parameter value Based `Manual`
@@ -196,7 +196,7 @@ There are some bruteforce modules to be added:
 
 ### Known Bugs:
 
-This version of TIDoS is purely developmental `beta`. There are bugs in resolving the `[99] Back` at various end-points which results in blind fall-backs. Also TIDoS needs to develop more on logging all info displayed on the screen `(help needed)`.
+This version of TIDoS is purely developmental and is presently `stable`. There are bugs in resolving the `[99] Back` at various end-points which results in blind fall-backs. Though I have added global exception handling, still, there maybe bugs out there. Also TIDoS needs to develop more on logging all info displayed on the screen `(help needed)`.
 
 ### Final Words:
 
