@@ -14,7 +14,9 @@ import re
 from re import *
 import cookielib
 import requests
+import json
 import time
+import builtwith
 from time import sleep
 from colors import *
 import urllib2
@@ -34,6 +36,55 @@ br.set_handle_refresh(mechanize._http.HTTPRefreshProcessor(), max_time=1)
 br.addheaders = [
     ('User-agent', 'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.1) Gecko/2008071615 Fedora/3.0.1-1.fc9 Firefox/3.0.1')]
 
+def getcmslook(web):
+
+	global found
+	global dtect
+	global wordpress
+	print GR+' [*] Looking up for the CMS...'
+	time.sleep(1)
+        result = br.open('https://whatcms.org/?s=' + domain).read()
+        found = search(r'">[^<]*</a><a href="/New-Detection', result)
+        wordpress = False
+	dtect = False
+
+        try:
+            r = br.open(web + '/robots.txt').read()
+            if "wp-admin" in str(r):
+                wordpress = True
+		dtect = True
+        except:
+            pass
+
+	try:
+	    r = requests.get(web+'/wp-login.php')
+	    if str(r.status_code) == '200':
+	        wordpress = True
+		dtect = True
+	    else:
+		wordpress = False
+
+	except Exception as e:
+		print R+' [-] Exception handling failed!'
+		print R+' [-] Error : '+str(e)
+
+def cmsenum(web):
+
+	print GR+' [*] Fingerprinting CMS...\n' 
+       	resp = builtwith.parse(domain)
+	print O+' [*] Parsing raw-data...'
+	time.sleep(0.7)
+       	res = json.dumps(resp)
+	r = json.loads(res)
+	try:
+	    if "cms" in r:
+		print G+' [+] CMS Detected : %s' % (r['cms'])
+		dtect = True
+		time.sleep(0.7)
+
+	except Exception as e:
+	    print R+' [-] Error while CMS Enumeration...'
+	    print R+' [-] Exception : '+str(e)
 
 def cms(web):
 
@@ -54,39 +105,18 @@ def cms(web):
 	        web = 'https://' + web
 	print O+' [!] URL successfully parsed !'
 	time.sleep(0.2)
-	print GR+' [*] Looking up for the CMS the website is using...'
-	time.sleep(1)
-        result = br.open('https://whatcms.org/?s=' + domain).read()
-        detect = search(r'">[^<]*</a><a href="/New-Detection', result)
-        WordPress = False
+	getcmslook(web)
+	cmsenum(web)
 
-        try:
-            r = br.open(web + '/robots.txt').read()
-            if "wp-admin" in str(r):
-                WordPress = True
-        except:
-            pass
+        if found:
+            print G+" [+] CMS Detected : " + found.group().split('">')[1][:-27]
+            found = found.group().split('">')[1][:-27]
 
-	try:
-	    r = requests.get(web+'/wp-login.php')
-	    if str(r.status_code) == '200':
-	        WordPress = True
-	    else:
-		WordPress = False
-
-	except Exception as e:
-		print R+' [-] Exception handling failed!'
-		print R+' [-] Error : '+str(e)
-
-        if detect:
-            print G+" [+] CMS Detected : " + detect.group().split('">')[1][:-27]
-            detect = detect.group().split('">')[1][:-27]
-
-        elif WordPress == True:
+        elif wordpress == True:
 	    print O+' [!] Website seems to use Wordpress...'
 	    time.sleep(0.2)
             print G+" [+] CMS Detected : WordPress"
 
-        else:
+        if dtect == False:
             print R+" [-] "+O + domain+R + " doesn't seem to use a CMS"
 

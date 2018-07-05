@@ -31,7 +31,7 @@ from colors import *
 def request(referer,action,form,opener):
 
 	data = urllib.urlencode(form)
-	headers = {'User-Agent' : 'Mozilla/5.0 (Windows; U; Windows NT 5.2; en-US; rv:1.9.1.3) Gecko/20090824 Firefox/3.5.3 (.NET CLR 3.5.30729)','Referer' : referer}
+	headers = {'User-Agent' : 'Mozilla/5.0 (Windows 8.0; U; Windows NT 5.2; en-US; rv:1.9.1.3) Gecko/20090824 Firefox/3.5.3 (.NET CLR 3.5.30729)','Referer' : referer}
 	try:
 		return opener.open(action,data).read()
 

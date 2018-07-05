@@ -19,7 +19,7 @@ def banner1():
 	print B+'[---]                                                  [---]'
 	print B+'[---]               \033[1;31m~  Author \033[1;31m: \033[1;33m@_tID_  ~              \033[1;34m[---]'
 	sleep(0.2)
-	print B+'[---]         '+O+'~  github.com/\033[1;32mtheinfecteddrake  ~        \033[1;34m[---]'
+	print B+'[---]        '+O+'~  github.com / \033[1;32mtheinfecteddrake  ~       \033[1;34m[---]'
 	sleep(0.2)
 	print B+'[---]                                                  [---]'
 	sleep(0.2)
