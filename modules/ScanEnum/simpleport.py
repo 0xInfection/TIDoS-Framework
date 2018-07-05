@@ -43,9 +43,7 @@ def scan0x00(host):
 	closed_ports = []
 
 	def check_portv(host, port, result = 1):
-	
 		try:
-	
 			sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 			sock.settimeout(0.5)
 			print C+"\n [*] Connecting to '%s' via port %s" % (host, port)
@@ -54,7 +52,6 @@ def scan0x00(host):
 			time.sleep(0.05)
 			print O+' [*] Adding up results together...'
 			time.sleep(0.1)
-	
 			if r == 0:
 				result = r 
 	
