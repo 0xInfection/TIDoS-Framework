@@ -116,5 +116,5 @@
         Changelog:
         - New module added LDAP injection.
         - Improvements to the updater module.
-Addition of ldap_payloads at the payload-db.
+        - Addition of ldap_payloads at the payload-db.
 Other minor bug fixes.
