@@ -54,7 +54,7 @@ def passiveban():
     time.sleep(0.1)
     print B+'      [17] '+C+'Find PasteBin Posts '+W+'(Domain Based)'
     time.sleep(0.1)
-    print B+'      [18] '+C+'LinkedIn Gathering '+W+'(Employees, Companies)\n'
+    print B+'      [18] '+C+'LinkedIn Gathering '+W+'(Employees, Companies)'
     time.sleep(0.1)
     print B+'      [19] '+C+'Threat Intelligence Gathering '+W+'(Bad IPs)\n'
     time.sleep(0.1)
