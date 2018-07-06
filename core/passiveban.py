@@ -54,6 +54,8 @@ def passiveban():
     time.sleep(0.1)
     print B+'      [17] '+C+'LinkedIn Gathering '+W+'(Employees, Companies)\n'
     time.sleep(0.1)
+    print B+'      [18] '+C+'Threat Intelligence Gathering '+W+'(Bad IPs)\n'
+    time.sleep(0.1)
     print B+'      [A] '+C+'The Auto-Awesome Module '+W+'(Unleash the Beast)\n'
     time.sleep(0.1)
     print B+'      [99] '+C+'Back'+W+'\n'

@@ -25,6 +25,7 @@ from hackedmail import *
 from mailtodom import *
 from checkuser import *
 from googlegroups import *
+from threatintel import *
 from webarchive import *
 from footprint_dup import *
 from googledorker import *
@@ -144,6 +145,12 @@ def passiveo(web):
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	passiveo(web)
 
+    elif v.strip() == '18':
+	print C+' [!] Type Selected '+B+': Threat Intel Gathering'
+	threatintel(web)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
+	passiveo(web)
+
     elif v.strip() == '99':
 	print C+' [*] Back!'
 	os.system('clear')
@@ -237,6 +244,11 @@ def passiveo(web):
 	print C+' [*] Firing up module -->'+O+' Google Dorker'
 	googledorker(web)
 	print C+'\n [!] Module Completed -->'+O+' GDorker\n'
+	time.sleep(1)
+
+	print C+' [*] Firing up module -->'+O+' Threat Intelligence'
+	threatintel(web)
+	print C+'\n [!] Module Completed -->'+O+' Threat Intelligence\n'
 	time.sleep(1)
 
 	print G+' [+] All modules successfully completed!'
