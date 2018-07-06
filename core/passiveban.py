@@ -32,29 +32,31 @@ def passiveban():
     time.sleep(0.1)
     print B+'      [6]'+C+' Reverse DNS Configuration Lookup '
     time.sleep(0.1)
-    print B+'      [7]'+C+' Reverse IP Lookup '+W+'(Find hosts on same server)'
+    print B+'      [7]'+C+' Reverse IP Lookup '+W+'(Hosts on same server)'
     time.sleep(0.1)
-    print B+'      [8]'+C+' Gather All Links from WebPage '+W+'(only indexed ones)'
+    print B+'      [8]'+C+' Domain IP History '+W+'(IP History Instances)'
     time.sleep(0.1)
-    print B+'      [9]'+C+' Google Search '+W+'(Search your own Query or Dork)'
+    print B+'      [9]'+C+' Gather All Links from WebPage '+W+'(Indexed ones)'
     time.sleep(0.1)
-    print B+'      [10] '+C+'Google Dorking '+W+'(Multiple Modules)'
+    print B+'      [10]'+C+' Google Search '+W+'(Search your own Query or Dork)'
     time.sleep(0.1)
-    print B+'      [11] '+C+'Wayback Machine Lookup '+W+'(pure backups)'
+    print B+'      [11] '+C+'Google Dorking '+W+'(Multiple Modules)'
     time.sleep(0.1)
-    print B+'      [12] '+C+'Hacked Email Check '+W+'(Breached/leaked emails)'
+    print B+'      [12] '+C+'Wayback Machine Lookup '+W+'(pure backups)'
     time.sleep(0.1)
-    print B+'      [13] '+C+'Email to Domain Resolver '+W+'(Email whois)'
+    print B+'      [13] '+C+'Hacked Email Check '+W+'(Breached/leaked emails)'
     time.sleep(0.1)
-    print B+'      [14] '+C+'Email Enumeration via Google Groups '+W+''
+    print B+'      [14] '+C+'Email to Domain Resolver '+W+'(Email whois)'
     time.sleep(0.1)
-    print B+'      [15] '+C+'Check Alias Availability '+W+'(Social Networks)'
+    print B+'      [15] '+C+'Email Enumeration via Google Groups '+W+''
     time.sleep(0.1)
-    print B+'      [16] '+C+'Find PasteBin Posts '+W+'(Domain Based)'
+    print B+'      [16] '+C+'Check Alias Availability '+W+'(Social Networks)'
     time.sleep(0.1)
-    print B+'      [17] '+C+'LinkedIn Gathering '+W+'(Employees, Companies)\n'
+    print B+'      [17] '+C+'Find PasteBin Posts '+W+'(Domain Based)'
     time.sleep(0.1)
-    print B+'      [18] '+C+'Threat Intelligence Gathering '+W+'(Bad IPs)\n'
+    print B+'      [18] '+C+'LinkedIn Gathering '+W+'(Employees, Companies)\n'
+    time.sleep(0.1)
+    print B+'      [19] '+C+'Threat Intelligence Gathering '+W+'(Bad IPs)\n'
     time.sleep(0.1)
     print B+'      [A] '+C+'The Auto-Awesome Module '+W+'(Unleash the Beast)\n'
     time.sleep(0.1)

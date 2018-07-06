@@ -11,19 +11,21 @@
 
 import builtwith
 import json
+from bs4 import BeautifulSoup
 import time
+import requests
 from colors import *
 
 def check0x00(domain):
 
        	print O+" [+] Domain : "+GR+domain 
-	print GR+' [*] Fingerprinting web technologies...\n' 
+	print B+' [*] Fingerprinting web technologies...' 
        	resp = builtwith.parse(domain)
 	print O+' [*] Parsing raw-data...'
 	time.sleep(0.7)
        	res = json.dumps(resp)
 	r = json.loads(res)
-
+	print G+' [+] Result : \n'
 	try:
 
 		if "cdn" in r:
@@ -40,23 +42,9 @@ def check0x00(domain):
 			print ''
 			time.sleep(0.7)
 
-		if "javascript-frameworks" in r:
-			print G+' [+] JS Framework(s):'
-			for p in r["javascript-frameworks"]:
-				print C+'      '+p
-			print ''
-			time.sleep(0.7)
-
 		if "widgets" in r:
 			print G+' [+] Widgets:'
 			for p in r["widgets"]:
-				print C+'      '+p
-			print ''
-			time.sleep(0.7)
-
-		if "cms" in r:
-			print G+' [+] CMS:'
-			for p in r["cms"]:
 				print C+'      '+p
 			print ''
 			time.sleep(0.7)
@@ -82,13 +70,6 @@ def check0x00(domain):
 			print ''
 			time.sleep(0.7)
 
-		if "advertising-networks" in r:
-			print G+' [+] Advertising Source:'
-			for p in r["advertising-networks"]:
-				print C+'      '+p
-			print ''
-			time.sleep(0.7)
-
 		if "mobile-frameworks" in r:
 			print G+' [+] Mobile Frameworks:'
 			for p in r["mobile-frameworks"]:
@@ -106,13 +87,36 @@ def check0x00(domain):
 	except Exception as e:
 		print R+' [-] Exception : '+str(e)
 
-	print G+' [+] Done!'
+def apircv(web):
+
+	try:
+		domain = web.replace('http://','')
+		domain = web.replace('https://','')
+		html = requests.get('http://w3techs.com/siteinfo.html?fx=y&url=' + domain).text
+		soup = BeautifulSoup(html, 'lxml')
+		table = soup.findAll('table', attrs={'class':'w3t_t'})[0]
+		trs = table.findAll('tr')
+
+		for tr in trs:
+			th = tr.find('th')
+			td = tr.find('td').text
+			
+			if td[-7:] == 'more...':
+				td = td[:-9]
+			
+			print G+' [+] '+th.text+': '
+			print C+'      '+td+'\n'
+			time.sleep(0.7)
+	except:
+		print R+' [-] Outbound Query Exception!'
 
 def webtech(web):
 
-    print R+'\n    ================================='
-    print R+'     W E B   T E C H N O L O G I E S'
-    print R+'    =================================\n'
+    	print R+'\n    ================================='
+    	print R+'     W E B   T E C H N O L O G I E S'
+    	print R+'    =================================\n'
 
-    check0x00(web)
+    	check0x00(web)
+	apircv(web)
+	print O+' [+] Fingerprinting Done!'
 

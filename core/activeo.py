@@ -18,6 +18,7 @@ sys.path.append('modules/ActiveRecon/')
 
 from piwebenum import *
 from grabhead import *
+from httpmethods import *
 from robot import *
 from sharedns import *
 from subnet import *
@@ -40,77 +41,84 @@ def activeo(web):
     time.sleep(0.3)
     v = raw_input (''+GR+'  [#] \033[1;4mTID\033[0m'+GR+' :> ' + color.END)
     print ''
-    if v == '1':
+    if v.strip() == '1':
 	print C+' [!] Type Selected : Ping/NPing Enumeration'
 	piwebenum(web)
 	print '\n\n'
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	activeo(web)
 
-    elif v == '2':
+    elif v.strip() == '2':
 	print C+' [!] Type Selected : Grab HTTP Headers'
 	grabhead(web)
 	print '\n\n'
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	activeo(web)
 
-    elif v == '3':
+    elif v.strip() == '3':
+	print C+' [!] Type Selected : HTTP Allowed Methods'
+	httpmethods(web)
+	print '\n\n'
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
+	activeo(web)
+
+    elif v.strip() == '4':
 	print C+' [!] Type Selected : robots.txt and sitemap.xml Hunt'
 	robot(web)
 	print '\n\n'
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	activeo(web)
 
-    elif v == '4':
+    elif v.strip() == '5':
 	print C+' [!] Type Selected : Subnet Enumeration'
 	subnet(web)
 	print '\n\n'
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	activeo(web)
 
-    elif v == '5':
+    elif v.strip() == '6':
 	print C+' [!] Type Selected '+B+': Traceroute'
 	traceroute(web)
 	print '\n\n'
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	activeo(web)
 
-    elif v == '6':
+    elif v.strip() == '7':
 	print C+' [!] Type Selected : DNS Hosts'
 	sharedns(web)
 	print '\n\n'
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	activeo(web)
 
-    elif v == '7':
+    elif v.strip() == '8':
 	print C+' [!] Type Selected : SSL Certificate'
 	sslcert(web)
 	print '\n\n'
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	activeo(web)
 
-    elif v == '8':
+    elif v.strip() == '9':
 	print C+' [!] Type Selected : CMS Detection'
 	cms(web)
 	print '\n\n'
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	activeo(web)
 
-    elif v == '9':
+    elif v.strip() == '10':
 	print C+' [!] Type Selected : Server Detection'
 	serverdetect(web)
 	print '\n\n'
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	activeo(web)
 
-    elif v == '10':
+    elif v.strip() == '11':
 	print C+' [!] Type Selected : Operating System Fingerprinting'
 	osdetect(web)
 	print '\n\n'
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	activeo(web)
 
-    elif v == 'A':
+    elif v.strip() == 'A':
 	print C+' [!] Type Selected : All Modules'
 	time.sleep(0.5)
 	print C+' [*] Firing up module -->'+B+' Ping Enum'
@@ -171,7 +179,7 @@ def activeo(web):
 	footprintban1()
 	footprint(web)
 
-    elif v == '99':
+    elif v.strip() == '99':
 	print C+' [*] Back to the menu !'
 	os.system('clear')
 	footprintban1()

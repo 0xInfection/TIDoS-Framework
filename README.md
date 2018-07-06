@@ -20,7 +20,7 @@ The main highlights of this framework is:
 - [x] Fully user friendly interaction environment. `(no shits)`
 
 
-<img src='https://i.imgur.com/AcErfM9.png' />
+<img src='https://i.imgur.com/6TIPDoj.png' />
 
 ### Installing TIDoS :-
 * Clone the repository locally and navigate there:
@@ -191,7 +191,7 @@ TIDoS Framework presently supports the following:
 ### Upcoming:
 
 There are some bruteforce modules to be added:
-- Common Backups
+- Common Backups Locations
 - Common Password Locations
 - Common Dot files `(eg. .htaccess)`
 - Interesting Directories
