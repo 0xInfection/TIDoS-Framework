@@ -47,7 +47,7 @@ def getposts(web):
 	    print R+' [-] Captcha appeared...\n'
 	    pass
 
-def pastebin(web):
+def linkedin(web):
 
     print GR+' [*] Loading module...'
     time.sleep(0.6)
