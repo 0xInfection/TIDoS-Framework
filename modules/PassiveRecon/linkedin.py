@@ -30,16 +30,16 @@ def getposts(web):
     def google_it (dork):
 	clear_cookie()
 	for title in search(dork, stop=30):
-	    print GR+' [!] Post Found :> '+C+title
+	    print B+' [!] Profile Found :> '+C+title
 	    time.sleep(0.5)
 
     try:
-	print B+" [*] Finding LinkedIn Employees ...\n"
+	print GR+" [*] Finding LinkedIn Employees ...\n"
 	google_it("site:linkedin.com employees "+site+"")
 	print O+' [!] Pausing to avoid captcha...'
 	time.sleep(10)
 
-	print B+' [*} Finding Linkedin company profiles...\n'
+	print GR+' [*] Finding Linkedin company profiles...\n'
 	google_it("site:linkedin.com comapany "+site+"")
 
     except urllib2.HTTPError as err:
