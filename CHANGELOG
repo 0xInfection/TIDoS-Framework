@@ -97,7 +97,7 @@
 	- Fixed erring code at Host Header Injection module.
 	- Updated the payload database with new payloads.
 
-    * v1.3.0 [latest release] (#stable)
+    * v1.3.0 
 
         Additions to OSINT modules. Improvements to other parts of `ActiveRecon`.
 
@@ -109,3 +109,12 @@
             - PasteBin Posts Gatherer.
             - LinkedIn Gathering.
 
+    * v1.3.1 [latest release] (#stable)
+        
+        Addition of the new modules + bug fixes.
+
+        Changelog:
+New module added LDAP injection.
+Improvements to the updater module.
+Addition of ldap_payloads at the payload-db.
+Other minor bug fixes.
