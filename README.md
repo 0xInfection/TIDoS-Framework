@@ -1,6 +1,6 @@
 <p align="middle"><img src='https://i.imgur.com/QAbaVdU.png' /></p>
 
-![Python](https://img.shields.io/badge/Python-2.7-green.svg) ![TIDoS](https://img.shields.io/badge/TIDoS-v1.3-blue.svg) ![Supported OS](https://img.shields.io/badge/Supported%20OS-Linux-yellow.svg) ![License](https://img.shields.io/badge/License-GPLv3-orange.svg) ![Build](https://img.shields.io/badge/Build-0082-red.svg) ![Modules](https://img.shields.io/badge/Modules-93-blue.svg) ![Status](https://img.shields.io/badge/Build%20Status-passing-brightgreen.svg) ![Stage](https://img.shields.io/badge/Release-Stable-green.svg)
+![Python](https://img.shields.io/badge/Python-2.7-green.svg) ![TIDoS](https://img.shields.io/badge/TIDoS-v1.3-blue.svg) ![Supported OS](https://img.shields.io/badge/Supported%20OS-Linux-yellow.svg) ![License](https://img.shields.io/badge/License-GPLv3-orange.svg) ![Build](https://img.shields.io/badge/Build-0083-red.svg) ![Modules](https://img.shields.io/badge/Modules-95-blue.svg) ![Status](https://img.shields.io/badge/Build%20Status-passing-brightgreen.svg) ![Stage](https://img.shields.io/badge/Release-Stable-green.svg)
 
 
 # TIDoS Framework 
@@ -9,8 +9,8 @@ TIDoS Framework is a comprehensive web application audit framework. `let's keep 
 ### Highlights :-
 The main highlights of this framework is:
 - [x] Basic first release (but huge).
-- [x] Has 4 main phases, subdivided into __13 sub-phases__ containing total of __93 modules__.
-- [x] Reconnaissance Phase has 34 modules of its own (including active and passive reconnaissance, information disclosure modules).
+- [x] Has 4 main phases, subdivided into __13 sub-phases__ containing total of __95 modules__.
+- [x] Reconnaissance Phase has 35 modules of its own (including active and passive reconnaissance, information disclosure modules).
 - [x] Scanning & Enumeration Phase has got 26 modules (including port scans, WAF analysis, etc)
 - [x] Vulnerability Analysis Phase has 32 modules (including most common vulnerabilites in action.
 - [x] Exploits Castle has only 1 exploit. `(purely developemental)`
@@ -25,8 +25,8 @@ The main highlights of this framework is:
 ### Installing TIDoS :-
 * Clone the repository locally and navigate there:
 ```
-git clone https://github.com/theinfecteddrake/tidos.git
-cd tidos
+git clone https://github.com/theinfecteddrake/tidos-framework.git
+cd tidos-framework
 ```
 * Install the dependencies:
 ```
@@ -66,6 +66,7 @@ TIDoS Framework presently supports the following:
 	    - Subdomains Lookup `Indexed ones`
 	    - Reverse DNS Configuration Lookup
 	    - Reverse IP Lookup `Hosts on same server`
+	    - Domain IP History `IP Instances`
 	    - Web Links Gatherer `Indexed ones`
 	    - Google Search `Manual search`
 	    - Google Dorking (multiple modules) `Automated`
@@ -80,9 +81,10 @@ TIDoS Framework presently supports the following:
 
 	+ Active Reconnaissance
 	    - Ping enumeration `Advanced`
-	    - CMS Detection `(185+ CMSs supported)`
+	    - CMS Detection `(185+ CMSs supported)` `IMPROVED`
 	    - Advanced Traceroute `IMPROVED`
 	    - Grab HTTP Headers `Live Capture`
+	    - Find HTTP Methods Allowed `NEW`
 	    - Detect Server `IMPROVED`
 	    - Examine SSL Certificate `Absolute`
 	    - `robots.txt` and `sitemap.xml` Checker
