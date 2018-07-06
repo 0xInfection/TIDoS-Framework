@@ -1,6 +1,6 @@
 <p align="middle"><img src='https://i.imgur.com/QAbaVdU.png' /></p>
 
-![Python](https://img.shields.io/badge/Python-2.7-green.svg) ![TIDoS](https://img.shields.io/badge/TIDoS-v1.3-blue.svg) ![Supported OS](https://img.shields.io/badge/Supported%20OS-Linux-yellow.svg) ![License](https://img.shields.io/badge/License-GPLv3-orange.svg) ![Build](https://img.shields.io/badge/Build-0080-red.svg) ![Modules](https://img.shields.io/badge/Modules-91-blue.svg) ![Status](https://img.shields.io/badge/Build%20Status-passing-brightgreen.svg) ![Stage](https://img.shields.io/badge/Release-Stable-green.svg)
+![Python](https://img.shields.io/badge/Python-2.7-green.svg) ![TIDoS](https://img.shields.io/badge/TIDoS-v1.3-blue.svg) ![Supported OS](https://img.shields.io/badge/Supported%20OS-Linux-yellow.svg) ![License](https://img.shields.io/badge/License-GPLv3-orange.svg) ![Build](https://img.shields.io/badge/Build-0082-red.svg) ![Modules](https://img.shields.io/badge/Modules-93-blue.svg) ![Status](https://img.shields.io/badge/Build%20Status-passing-brightgreen.svg) ![Stage](https://img.shields.io/badge/Release-Stable-green.svg)
 
 
 # TIDoS Framework 
@@ -9,8 +9,8 @@ TIDoS Framework is a comprehensive web application audit framework. `let's keep 
 ### Highlights :-
 The main highlights of this framework is:
 - [x] Basic first release (but huge).
-- [x] Has 4 main phases, subdivided into __13 sub-phases__ containing total of __92 modules__.
-- [x] Reconnaissance Phase has 33 modules of its own (including active and passive reconnaissance, and information disclosure modules).
+- [x] Has 4 main phases, subdivided into __13 sub-phases__ containing total of __93 modules__.
+- [x] Reconnaissance Phase has 34 modules of its own (including active and passive reconnaissance, information disclosure modules).
 - [x] Scanning & Enumeration Phase has got 26 modules (including port scans, WAF analysis, etc)
 - [x] Vulnerability Analysis Phase has 32 modules (including most common vulnerabilites in action.
 - [x] Exploits Castle has only 1 exploit. `(purely developemental)`
@@ -76,6 +76,7 @@ TIDoS Framework presently supports the following:
 	    - Check Alias Availability `Social Networks`
 	    - Find PasteBin Posts `Domain Based`
 	    - LinkedIn Gathering `Employees & Company`
+	    - Threat Intelligence Gathering `Bad IPs`
 
 	+ Active Reconnaissance
 	    - Ping enumeration `Advanced`
