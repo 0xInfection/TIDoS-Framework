@@ -25,8 +25,8 @@ The main highlights of this framework is:
 ### Installing TIDoS :-
 * Clone the repository locally and navigate there:
 ```
-git clone https://github.com/theinfecteddrake/tidos.git
-cd tidos
+git clone https://github.com/theinfecteddrake/tidos-framework.git
+cd tidos-framework
 ```
 * Install the dependencies:
 ```
@@ -189,7 +189,7 @@ TIDoS Framework presently supports the following:
 ### Upcoming:
 
 There are some bruteforce modules to be added:
-- Common Backups
+- Common Backups Locations
 - Common Password Locations
 - Common Dot files `(eg. .htaccess)`
 - Interesting Directories
