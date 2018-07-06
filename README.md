@@ -20,7 +20,7 @@ The main highlights of this framework is:
 - [x] Fully user friendly interaction environment. `(no shits)`
 
 
-<img src='https://i.imgur.com/AcErfM9.png' />
+<img src='https://i.imgur.com/6TIPDoj.png' />
 
 ### Installing TIDoS :-
 * Clone the repository locally and navigate there:
