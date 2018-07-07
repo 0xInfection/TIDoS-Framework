@@ -25,6 +25,12 @@ pip install tldextract
 
 DIR=$(dirname $0)
 
+cd lib/setuptools/
+sudo python bootstrap.py
+sudo python setup.py install
+cd ..
+cd ..
+
 cd lib/scapy/
 sudo python setup.py install
 cd ..
@@ -49,6 +55,11 @@ cd lib/tld/
 sudo python setup.py install
 cd .. 
 cd .. 
+
+cd lib/shodan/
+sudo python setup.py install
+cd ..
+cd ..
 
 cd lib/requests/
 sudo python setup.py install
