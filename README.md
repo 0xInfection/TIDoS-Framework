@@ -43,7 +43,9 @@ tidos
 ### Usage :-
 TIDoS is made to be comprehensive. It is a highly flexible framework where you just have to select and use modules. 
 
-As the framework opens up, enter the website name `eg. http://www.example.com` and let TIDoS lead you. Thats it! Its as easy as that.
+But before that, you need to set your own API keys for `SHODAN`, `CENSYS`, `FULL CONTACT` and `WHATCMS`. Open up `files/config.json` and set your `API KEYS`.
+
+Finally, as the framework opens up, enter the website name `eg. http://www.example.com` and let TIDoS lead you. Thats it! Its as easy as that.
 
 > Recommended:
 > - Follow the order of the tool (Run in a schematic way).
