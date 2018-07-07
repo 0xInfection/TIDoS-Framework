@@ -16,6 +16,7 @@ from nmapmain import *
 from crawlers_hunt import *
 from colors import *
 from scanenumban import *
+from bannergrab import *
 from webtech import *
 from waf import *
 from scanenumban1 import *
@@ -54,6 +55,13 @@ def scanenum(web):
 	scanenum(web)
 
     elif v == '5':
+	print B+' [!] Type Selected :'+C+' Banner Grab'
+	bannergrab(web)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
+	scanenumban1()
+	scanenum(web)
+
+    elif v == '6':
 	print B+' [!] Type Selected :'+C+' Crawlers'
 	crawlers_hunt(web)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
@@ -84,10 +92,16 @@ def scanenum(web):
         print B + ' [!] Module Completed -->' + C + ' WebTech\n'
         time.sleep(1)
 
+        print B + ' [*] Firing up module -->' + C + ' Banner Grabbing'
+        bannergrab(web)
+        print B + ' [!] Module Completed -->' + C + ' Banner Grabbing\n'
+        time.sleep(1)
+
 	print B+' [*] Firing up module -->'+C+' Crawlers'
 	crawlers(web)
 	print B+' [!] Module Completed -->'+C+' Crawlers\n'
 	time.sleep(0.5)
+
 	print G+' [+] All modules successfully completed!'
 	time.sleep(0.5)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')

@@ -19,6 +19,7 @@ from tid_dup import tid_dup
 from scanenumban import *
 from scanenumban1 import *
 from webtech import *
+from bannergrab import *
 from waf import *
 from portscan import *
 
@@ -26,42 +27,49 @@ def scenum_alt(web):
 
     v = raw_input(''+O+' \033[4mTID\033[1;0m '+GR+':> ' + color.END)
     print '\n'
-    if v == '1':
+    if v.strip() == '1':
 	print B+' [!] Type Selected :'+C+' WAF Analysis'
 	waf(web)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	scanenumban1()
 	scenum_alt(web)
 
-    elif v == '2':
+    elif v.strip() == '2':
 	print B+' [!] Type Selected :'+C+' Port Scanning'
 	portscan(web)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	scanenumban1()
 	scenum_alt(web)
 
-    elif v == '3':
+    elif v.strip() == '3':
 	print B+' [!] Type Selected :'+C+' Interactive NMap'
 	nmapmain(web)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	scanenumban1()
 	scenum_alt(web)
 
-    elif v == '4':
+    elif v.strip() == '4':
 	print B+' [!] Type Selected :'+C+' Web tech Fingerprinting'
 	webtech(web)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	scanenumban1()
 	scenum_alt(web)
 
-    elif v == '5':
+    elif v.strip() == '5':
+	print B+' [!] Type Selected :'+C+' Banner Grabbing'
+	bannergrab(web)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
+	scanenumban1()
+	scenum_alt(web)
+
+    elif v.strip() == '6':
 	print B+' [!] Type Selected :'+C+' Crawlers'
 	crawlers(web)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	scanenumban1()
 	scenum_alt(web)
 
-    elif v == 'A':
+    elif v.strip() == 'A':
 	print ' [!] Type Selected : All Modules'
 	time.sleep(0.5)
 
@@ -85,17 +93,23 @@ def scenum_alt(web):
         print B + ' [!] Module Completed -->' + C + ' WebTech\n'
         time.sleep(1)
 
+        print B + ' [*] Firing up module -->' + C + ' Banner Grabbing'
+        bannergrab(web)
+        print B + ' [!] Module Completed -->' + C + ' Banner Grabbing\n'
+        time.sleep(1)
+
 	print B+' [*] Firing up module -->'+C+' Crawlers'
 	crawlers(web)
 	print B+' [!] Module Completed -->'+C+' Crawlers\n'
 	time.sleep(0.5)
+
 	print G+' [+] All modules successfully completed!'
 	time.sleep(0.5)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	print GR+' [*] Going back...'
 	tid_alt(web)
 
-    elif v == '99':
+    elif v.strip() == '99':
 	print '[!] Back'
 	time.sleep(0.7)
 	tid_dup(web)

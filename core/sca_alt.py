@@ -16,6 +16,7 @@ from nmapmain import *
 from crawlers_hunt import *
 from colors import *
 from scanenumban import *
+from bannergrab import *
 from scanenumban1 import *
 from portscan import *
 from webtech import *
@@ -54,6 +55,13 @@ def sca_alt(web):
 	sca_alt(web)
 
     elif v == '5':
+	print B+' [!] Type Selected :'+C+' Banner Grabbing'
+	bannergrab(web)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
+	scanenumban1()
+	sca_alt(web)
+
+    elif v == '6':
 	print B+' [!] Type Selected :'+C+' Crawlers'
 	crawlers_hunt(web)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
@@ -78,6 +86,11 @@ def sca_alt(web):
 	nmapmain(web)
 	print B+' [!] Module Completed -->'+C+' NMap\n'
 	time.sleep(1)
+
+        print B + ' [*] Firing up module -->' + C + ' Banner Grabbing'
+        bannergrab(web)
+        print B + ' [!] Module Completed -->' + C + ' Banner Grabbing\n'
+        time.sleep(1)
 
         print B + ' [*] Firing up module -->' + C + ' WebTech Fingerprinting'
         webtech(web)

@@ -16,6 +16,7 @@ from subprocess import call
 sys.path.append('modules/ScanEnum/')
 
 from nmapmain import *
+from bannergrab import *
 from crawlers import *
 from colors import *
 from webtech import *
@@ -28,42 +29,49 @@ def scenum_dup(web):
 
     v = raw_input('' + O + ' \x1b[4mTID\x1b[1;0m ' + GR + ':> ' + color.END)
     print '\n'
-    if v == '1':
+    if v.strip() == '1':
         print B + ' [!] Type Selected :' + C + ' WAF Analysis'
 	waf(web)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
         scanenumban1()
         scenum_dup(web)
 
-    elif v == '2':
+    elif v.strip() == '2':
         print B + ' [!] Type Selected :' + C + ' Port Scanning'
         portscan(web)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
         scanenumban1()
         scenum_dup(web)
 
-    elif v == '3':
+    elif v.strip() == '3':
         print B + ' [!] Type Selected :' + C + ' Interactive NMap'
         nmapmain(web)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
         scanenumban1()
         scenum_dup(web)
 
-    elif v == '4':
+    elif v.strip() == '4':
         print B + ' [!] Type Selected :' + C + ' Webtech Fingerprinting'
         webtech(web)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
         scanenumban1()
         scenum_dup(web)
 
-    elif v == '5':
+    elif v.strip() == '5':
+        print B + ' [!] Type Selected :' + C + ' Banner Garbbing'
+        bannergrab(web)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
+        scanenumban1()
+        scenum_dup(web)
+
+    elif v.strip() == '6':
         print B + ' [!] Type Selected :' + C + ' Crawlers'
         crawlers(web)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
         scanenumban1()
         scenum_dup(web)
 
-    elif v == 'A':
+    elif v.strip() == 'A':
         print ' [!] Type Selected : All Modules'
         time.sleep(0.5)
         print B + ' [*] Firing up module -->' + C + ' WAF Analysis'
@@ -86,6 +94,11 @@ def scenum_dup(web):
         print B + ' [!] Module Completed -->' + C + ' WebTech\n'
         time.sleep(1)
 
+        print B + ' [*] Firing up module -->' + C + ' Banner Grabbing'
+        bannergrab(web)
+        print B + ' [!] Module Completed -->' + C + ' Banner Grabbing\n'
+        time.sleep(1)
+
         print B + ' [*] Firing up module -->' + C + ' Crawlers'
         crawlers(web)
         print B + ' [!] Module Completed -->' + C + ' Crawlers\n'
@@ -97,7 +110,7 @@ def scenum_dup(web):
         print GR + ' [*] Going back...'
 	time.sleep(3)
 
-    elif v == '99':
+    elif v.strip() == '99':
         print '[!] Back'
         time.sleep(0.7)
 
