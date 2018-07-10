@@ -14,6 +14,7 @@ import platform
 import os
 import time
 import warnings
+from random import randint
 from os import path
 from time import sleep
 from impo import *
@@ -36,7 +37,7 @@ def tidos_main():
 		print R+' [-] Exception : '+str(e)
 		sys.exit(1)
 
-	print O+' [+] Okay, so what to start with?\n'
+	print P+' [+] Okay, so what to start with?'
 	def tidosmain(web):
 
 	    while True:
@@ -75,6 +76,11 @@ def tidos_main():
 			time.sleep(0.6)
 			print O+' [+] Goodluck mate, Alvida!\n'
 			sys.exit(0)
+
+		    else:
+        		dope = ['You high dude?', 'Sorry fam! You just typed shit']
+        		print R+' [-] ' + dope[randint(0,1)]
+			pass
 		
 		except KeyboardInterrupt:
 		        print R+"\n [-] " + color.UNDERLINE+ "User Interruption detected!"+color.END

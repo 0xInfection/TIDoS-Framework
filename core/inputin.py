@@ -11,6 +11,7 @@
 import sys
 import socket
 import time
+import os
 from colors import *
 
 def inputin():
@@ -30,8 +31,10 @@ def inputin():
 			po = web.replace('https://','')
 		if web.endswith('/'):
 			web = web[:-1]
+			po = web[:-1]
 		print GR+' [*] Checking server status...'
 		time.sleep(0.6)
+
 		try:
 			ip = socket.gethostbyname(po)
 			print G+' [+] Site seems to be up...'
@@ -39,7 +42,9 @@ def inputin():
 			print G+' [+] IP Detected : '+O+ip
 			time.sleep(0.5)
 			print ''
+			os.system('cd tmp/logs/ && rm -rf '+po+'-logs && mkdir '+po+'-logs')
 			return web
+
 		except socket.gaierror:
 			print R+' [-] Site seems to be down...'
 			sys.exit(1)
