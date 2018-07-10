@@ -20,7 +20,7 @@ The main highlights of this framework is:
 - [x] Fully user friendly interaction environment. `(no shits)`
 
 
-<img src='https://i.imgur.com/6TIPDoj.png' />
+<img src='https://i.imgur.com/fh7ieb0.png' />
 
 ### Installing TIDoS :-
 * Clone the repository locally and navigate there:
@@ -187,6 +187,18 @@ TIDoS Framework presently supports the following:
 - __Exploitation__ `purely developmental`
 
 	+ ShellShock
+
+### TIDoS In Action:
+<img src='https://i.imgur.com/OO6ENcQ.png'></img>
+<img src='https://i.imgur.com/O6r6EXy.png' width='33%'>  </img><img src='https://i.imgur.com/v418wIB.png' width='33%'>  </img><img src='https://i.imgur.com/IERK6gA.png' width='33%'></img>
+
+<img src='https://i.imgur.com/OYIFTZV.png'></img>
+<img src='https://i.imgur.com/kIJ3jqL.png' width='33%'>  </img><img src='https://i.imgur.com/8NiwySR.png' width='33%'>  </img><img src='https://i.imgur.com/mgU99gK.png' width='33%'> </img>
+
+<img src='https://i.imgur.com/7qsX6vA.png'></img>
+<img src='https://i.imgur.com/lCa42Dn.png' width='50%'></img><img src='https://i.imgur.com/xVYRZ4M.png' width='50%'></img>
+<img src='https://i.imgur.com/7yJmqA2.png' width='33%'>  </img><img src='https://i.imgur.com/qJhYCaL.png' width='33%'>  </img><img src='https://i.imgur.com/OK2gD9W.png' width='33%'> </img>
+
 
 ### Upcoming:
 
