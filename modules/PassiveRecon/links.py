@@ -43,7 +43,7 @@ def links(web):
 		print O+'\n [!] Receiving links...'
 		for p in final_links:
 			print G+' [+] Found link : '+O+p
-			time.sleep(0.1)
+			time.sleep(0.04)
 
 		w = raw_input(GR+"\n [*] Save this as a output file? (y/n) :> ")
 		if 'http://' in web:

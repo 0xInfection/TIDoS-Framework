@@ -33,7 +33,7 @@ def subdom(web):
 		for r in res:
 			sub = r.split(',')[0]
 			print B+' [+] Got subdomain :> '+C+sub
-			time.sleep(0.1)
+			time.sleep(0.06)
 	else:
 		print R+' [-] Outbound Query Exception!'
 		time.sleep(0.8)

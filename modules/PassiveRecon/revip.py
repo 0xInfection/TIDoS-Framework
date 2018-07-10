@@ -32,7 +32,7 @@ def revip(web):
 	if 'error' not in result:
 	    for r in res:
 		print O+' [+] Site :> '+G+r
-		time.sleep(0.1)
+		time.sleep(0.04)
 
 	elif 'error' in result:
 		print R+' [-] Outbound Query Exception!'

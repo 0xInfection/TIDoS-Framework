@@ -28,7 +28,7 @@ def check0x00(alias):
 			req = requests.get(url, headers = headers)
 			if 'notavailable' in req.text: 
 			#if req.content.split('|')[0] == '2': #found
-				print G+' [+] Found '+O+alias+G+' : '+GR+service 
+				print G+' [+] Found '+O+alias+G+' : '+C+service 
 		except Exception as e:
 			print R+' [-] Incurred Exception : '+str(e) 
 

@@ -32,7 +32,7 @@ def revdns(web):
 		res = result.splitlines()
 		for r in res:
 			print GR+' [+] Received : '+O+r
-			time.sleep(0.1)
+			time.sleep(0.04)
 
 	elif 'No results found' in result:
 		print R+' [-] No result found!'
