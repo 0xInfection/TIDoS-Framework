@@ -9,9 +9,11 @@
 #This module requires TIDoS Framework
 #https://github.com/theInfectedDrake/TIDoS-Framework 
 
+import os
 import time
 import requests
 from colors import *
+links = []
 
 def revdns(web):
 
@@ -33,6 +35,24 @@ def revdns(web):
 		for r in res:
 			print GR+' [+] Received : '+O+r
 			time.sleep(0.04)
+			links.append(r)
+
+		if 'http://' in web:
+			po = web.replace('http://','')
+		elif 'https://' in web:
+			po = web.replace('https://','')
+		p = 'tmp/logs/'+po+'-logs/'+str(po)+'-reverse-dns.lst'
+		open(p,'w+')
+		print B+' [!] Saving links...'
+		time.sleep(1)
+		for m in links:
+		    m = m + '\n'
+		    ile = open(p,"a")
+		    ile.write(m)
+		    ile.close()
+		pa = os.getcwd()
+		print G+' [+] Links saved under '+pa+'/'+p+'!'
+		print ''
 
 	elif 'No results found' in result:
 		print R+' [-] No result found!'

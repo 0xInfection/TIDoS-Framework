@@ -9,9 +9,11 @@
 #This module requires TIDoS Framework
 #https://github.com/theInfectedDrake/TIDoS-Framework 
 
+import os
 import time
 import requests
 from colors import *
+links = []
 
 def subdom(web):
 
@@ -33,7 +35,26 @@ def subdom(web):
 		for r in res:
 			sub = r.split(',')[0]
 			print B+' [+] Got subdomain :> '+C+sub
+			links.append(sub)
 			time.sleep(0.06)
+
+		if 'http://' in web:
+			po = web.replace('http://','')
+		elif 'https://' in web:
+			po = web.replace('https://','')
+		p = 'tmp/logs/'+po+'-logs/'+str(po)+'-subdomains.lst'
+		open(p,'w+')
+		print B+' [!] Saving links...'
+		time.sleep(1)
+		for m in links:
+		    m = m + '\n'
+		    ile = open(p,'a')
+		    ile.write(m)
+		    ile.close()
+		pa = os.getcwd()
+		print G+' [+] Links saved under '+pa+'/'+p+'!'
+		print ''
+
 	else:
 		print R+' [-] Outbound Query Exception!'
 		time.sleep(0.8)

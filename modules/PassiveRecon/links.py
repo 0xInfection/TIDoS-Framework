@@ -35,7 +35,7 @@ def links(web):
 	result = str(text)
 	if 'error' not in result and 'no links found' not in result:
 
-		woo = result.split('\n')
+		woo = result.splitlines()
 		for w in woo:
 			if str(web0).lower() in w.lower():
 				final_links.append(w)
@@ -43,29 +43,25 @@ def links(web):
 		print O+'\n [!] Receiving links...'
 		for p in final_links:
 			print G+' [+] Found link : '+O+p
-			time.sleep(0.04)
+			time.sleep(0.06)
 
-		w = raw_input(GR+"\n [*] Save this as a output file? (y/n) :> ")
 		if 'http://' in web:
 			po = web.replace('http://','')
 		elif 'https://' in web:
 			po = web.replace('https://','')
-		p = str(po) + '-links.lst'
+		p = 'tmp/logs/'+po+'-logs/'+str(po)+'-links.lst'
 		open(p, 'w+')
-		if w == "y":
-			print''+B+' [!] Generating output...'
-			time.sleep(1)
-			for m in final_links:
-			    m = m + '\n'
-			    ile = open(p,"a")
-			    ile.write(m)
-			    ile.close()
-			o = 'mv '+p+' tmp/'
-			os.system(o)
-			print G+' [+] Successfully saved under "tmp/'+p+'!'
-			print ''
-		else:
-			    print ''+B+' [*] Okay :)'
+		print B+' [!] Saving links...'
+		time.sleep(1)
+		for m in final_links:
+		    m = m + '\n'
+		    ile = open(p,"a")
+		    ile.write(m)
+		    ile.close()
+		pa = os.getcwd()
+		print G+' [+] Links saved under '+pa+'/'+p+'!'
+		print ''
+
 	else:
 		print R+' [-] Outbound Query Exception!'
 		time.sleep(0.8)

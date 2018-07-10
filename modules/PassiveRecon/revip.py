@@ -11,7 +11,9 @@
 
 import time
 import requests
+import os
 from colors import *
+links = []
 
 def revip(web):
 
@@ -30,10 +32,29 @@ def revip(web):
 	result = str(text)
 	res = result.splitlines()
 	if 'error' not in result:
-	    for r in res:
-		print O+' [+] Site :> '+G+r
-		time.sleep(0.04)
+		for r in res:
+			print O+' [+] Site :> '+G+r
+			links.append(r)
+			time.sleep(0.04)
+
+		if 'http://' in web:
+			po = web.replace('http://','')
+		elif 'https://' in web:
+			po = web.replace('https://','')
+		p = 'tmp/logs/'+po+'-logs/'+str(po)+'-reverse-ip.lst'
+		open(p,'w+')
+		print B+' [!] Saving links...'
+		time.sleep(1)
+		for m in links:
+		    m = m + '\n'
+		    ile = open(p,"a")
+		    ile.write(m)
+		    ile.close()
+		pa = os.getcwd()
+		print G+' [+] Links saved under '+pa+'/'+p+'!'
+		print ''
 
 	elif 'error' in result:
 		print R+' [-] Outbound Query Exception!'
 		time.sleep(0.8)
+

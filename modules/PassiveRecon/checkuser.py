@@ -11,11 +11,13 @@
 
 # WARNING : may return false positives
 
+import os
 import requests
 import json
 import time
 import urllib
-from colors import *		
+from colors import *
+serv = []
 
 def check0x00(alias):
 	
@@ -28,10 +30,28 @@ def check0x00(alias):
 			req = requests.get(url, headers = headers)
 			if 'notavailable' in req.text: 
 			#if req.content.split('|')[0] == '2': #found
-				print G+' [+] Found '+O+alias+G+' : '+C+service 
+				print GR+' [+] Found '+O+alias+G+' : '+C+service
+				serv.append(service)
+
 		except Exception as e:
 			print R+' [-] Incurred Exception : '+str(e) 
 
+	if 'http://' in web:
+		po = web.replace('http://','')
+	elif 'https://' in web:
+		po = web.replace('https://','')
+	p = 'tmp/logs/'+po+'-logs/'+str(po)+'-usernames.lst'
+	open(p,'w+')
+	print B+' [!] Saving links...'
+	time.sleep(1)
+	for m in serv:
+	    m = 'Social Network : ' + m + '\n'
+	    ile = open(p,"a")
+	    ile.write(m)
+	    ile.close()
+	pa = os.getcwd()
+	print G+' [+] Links saved under '+pa+'/'+p+'!'
+	print ''
 
 def checkuser(web):
 
