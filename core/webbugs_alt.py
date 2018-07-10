@@ -31,70 +31,75 @@ def webbugs_alt(web):
     webbugsban()
     v = raw_input(O+B+' [#] \033[4mTID\033[1;0m '+GR+':> ' + color.END)
     print '\n'
-    if v == '1':
+    if v.strip() == '1':
 	print B+' [!] Type Selected :'+C+' iCORS'
 	icors(web)
-	webbugs_alt(web)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
+	webbugs_alt(web)
 
-    elif v == '2':
+    elif v.strip() == '2':
 	print B+' [!] Type Selected :'+C+' Same Site Scripting'
 	ssscript(web)	
-	webbugs_alt(web)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
+	webbugs_alt(web)
 
-    elif v == '3':
+    elif v.strip() == '3':
 	print B+' [!] Type Selected :'+C+' Clickjack'
 	clickjack(web)	
-	webbugs_alt(web)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
+	webbugs_alt(web)
 
-    elif v == '4':
+    elif v.strip() == '4':
 	print B+' [!] Type Selected :'+C+' Zone Transfer'
 	zone(web)
-	webbugs_alt(web)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
+	webbugs_alt(web)
 
-    elif v == '5':
+    elif v.strip() == '5':
 	print B+' [!] Type Selected :'+C+' Cookie Check'
 	cookiecheck(web)
-	webbugs_alt(web)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
+	webbugs_alt(web)
 
-    elif v == '6':
+    elif v.strip() == '6':
 	print B+' [!] Type Selected :'+C+' Sec. Headers'
 	headers(web)
-	webbugs_alt(web)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
+	webbugs_alt(web)
 
-    elif v == '7':
+    elif v.strip() == '7':
 	print B+' [!] Type Selected :'+C+' Cloudflare Misconfig.'
 	cloudflare(web)
-	webbugs_alt(web)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
+	webbugs_alt(web)
 
-    elif v == '8':
+    elif v.strip() == '8':
 	print B+' [!] Type Selected :'+C+' Cross Site Tracing'
 	xsstrace(web)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	webbugs_alt(web)
-	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 
-    elif v == '11':
-	print B+' [!] Type Selected :'+C+' Email Spoof'
-	mailspoof(web)	
-	webbugs(web)
-	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
-
-    elif v == '9':
+    elif v.strip() == '10':
 	print B+' [!] Type Selected :'+C+' Telnet Enabled'
 	netmisc(web)	
-	webbugs_alt(web)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
+	webbugs_alt(web)
 
+    elif v.strip() == '9':
+	print B+' [!] Type Selected :'+C+' Cross Site Tracing'
+	xsstrace(web)	
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
+	webbugs_alt(web)
 
-    elif v == 'A':
+    elif v.strip() == '11':
+	print B+' [!] Type Selected :'+C+' Email Spoof'
+	mailspoof(web)	
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
+	webbugs_alt(web)
+
+    elif v.strip() == 'A':
 	print B+' [!] Type Selected : All Modules'
-	time.sleep(0.5)
+	time.sleep(1)
 
 	print B+' [*] Firing up module -->'+C+' iCORS'
 	icors(web)
@@ -134,12 +139,12 @@ def webbugs_alt(web):
 	print B+' [*] Firing up module -->'+C+' Mail Spoofing'
 	mailspoof(web)
 	print B+'\n [!] Module Completed -->'+C+' Mail Spoofing\n'
-	time.sleep(0.5)
+	time.sleep(1)
 
 	print B+' [*] Firing up module -->'+C+' Cross Site Tracing'
 	xsstrace(web)
 	print B+'\n [!] Module Completed -->'+C+' Cross Site Tracing\n'
-	time.sleep(0.5)
+	time.sleep(1)
 
 	print B+' [*] Firing up module -->'+C+' Telnet Enabled'
 	netmisc(web)
@@ -149,7 +154,7 @@ def webbugs_alt(web):
 	time.sleep(1)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 
-    elif v == '99':
+    elif v.strip() == '99':
 	print '[!] Back'
 	time.sleep(0.7)
 

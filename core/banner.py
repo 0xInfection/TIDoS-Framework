@@ -155,5 +155,5 @@ def banner():
 """
     headers = [header, oblique, modular, speed, codesploit, fb, swan]
     os.system('clear')
-    print headers[randint(0,6)]
+    print headers[6]
 
