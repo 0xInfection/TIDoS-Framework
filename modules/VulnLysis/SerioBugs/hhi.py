@@ -57,18 +57,23 @@ def hostheader0x00(web):
 
 		if result == 0:
 
+			print C+' [*] Setting injection frame buffers...'
 			frame_inject = "codesploit"
 			buffer1 = "GET / HTTP/1.1"
+			print B+' [+] Buffer Set : '+C+buffer1
 			buffer2 = "Host: teamcodesploit.gq"
-
+			print B+' [+] Buffer Set : '+C+buffer2
+			time.sleep(0.5)
+			print GR+' [+] Sending buffers...'
 			s.send(buffer1 + "\n")
 			s.send(buffer2 + "\n\n")
+			print O+' [!] Receiving response...'
 			data1 = s.recv(1024)
 			s.close()
-
+			time.sleep(0.7)
+			print GR+' [+] Analysing results...'
 			if frame_inject.lower() in data1.lower():
 				print G+' [+] Site is vulnerable to Host Header Injection...'
-
 			else:
 				print R+' [-] Site is immune against Host Header Injection...'
 
@@ -76,7 +81,6 @@ def hostheader0x00(web):
 			print GR+' [*] Obtaining header dump data...'
 			print ""
 			print O+data1
-			print ""
 			time.sleep(1)
 	
 def hhi(web):

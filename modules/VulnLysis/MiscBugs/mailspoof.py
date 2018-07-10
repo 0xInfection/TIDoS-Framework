@@ -93,6 +93,7 @@ def spfStr0x00(domain):
     print GR+' [*] Getting SPF records...'
     time.sleep(0.6)
     spfVal = True
+    print C+' [*] Setting parameters...'
     spfrec = spflib.SpfRecord.from_domain(domain)
     if spfrec is not None and spfrec.record is not None:
         print O+" [!] Found SPF record : " + str(spfrec.record)
@@ -118,7 +119,9 @@ def spfStr0x00(domain):
 
 
 def dmGet0x00(domain):
+    print C+' [*] Setting request parameters...'
     dmarc = dmarclib.DmarcRecord.from_domain(domain)
+    print GR+' [*] Analysing responses...'
     if dmarc is not None and dmarc.record is not None:
         print O+" [!] Found DMARC record : " + str(dmarc.record)
 
@@ -126,6 +129,7 @@ def dmGet0x00(domain):
 
 def dmGetOrg0x00(record):
     orgRec = record.get_org_record()
+    print C+' [*] Analysing responses...'
     if orgRec is not None:
         print O+" [!] Found DMARC Organizational record : " + str(orgRec.record)
 
@@ -223,7 +227,7 @@ def mailspoof(web):
     spoofable = False
     try:
         domain = web
-	print GR+' [*] Getting txt records...'
+	print O+' [!] Getting txt records...'
         spfstr = spfStr0x00(domain)
         dmValStr = dmCheck0x00(domain)
 
