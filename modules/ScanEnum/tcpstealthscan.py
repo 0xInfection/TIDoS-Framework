@@ -71,7 +71,7 @@ def scan0x00(target):
         	try:
                 	srcport = RandShort() 
                 	conf.verb = 0
-			print C+' [*] Sending SYN flagged packet to port : ' + str(port)
+			print GR+' [*] Sending SYN flagged packet to port : ' + str(port)
                 	SYNACKpkt = sr1(IP(dst = target)/TCP(sport = srcport, dport = port, flags = "S"), timeout=5) 
 			print C+' [*] Receiving incoming packet from port : ' + str(port)
 			print B+' [*] Extracting the received packet...'

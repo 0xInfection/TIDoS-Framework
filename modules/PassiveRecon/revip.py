@@ -37,11 +37,7 @@ def revip(web):
 			links.append(r)
 			time.sleep(0.04)
 
-		if 'http://' in web:
-			po = web.replace('http://','')
-		elif 'https://' in web:
-			po = web.replace('https://','')
-		p = 'tmp/logs/'+po+'-logs/'+str(po)+'-reverse-ip.lst'
+		p = 'tmp/logs/'+web+'-logs/'+str(web)+'-reverse-ip.lst'
 		open(p,'w+')
 		print B+' [!] Saving links...'
 		time.sleep(1)

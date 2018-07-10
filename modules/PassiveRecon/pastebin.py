@@ -30,11 +30,11 @@ def getposts(web):
     def google_it (dork):
 	clear_cookie()
 	for title in search(dork, stop=30):
-	    print GR+' [!] Post Found :> '+C+title
+	    print B+' [!] Post Found :> '+C+title
 	    time.sleep(0.5)
 
     try:
-	print B+" [*] Finding Pastebin posts ...\n"
+	print O+" [*] Finding Pastebin posts ...\n"
 	google_it("site:pastebin.com intext:"+site+"")
 
     except urllib2.HTTPError as err:

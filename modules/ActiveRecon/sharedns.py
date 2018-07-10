@@ -43,4 +43,6 @@ def sharedns(web):
 	    p = dns.splitlines()
 	    for i in p:
 		print O+' [+] Site found :> '+G+i
+		time.sleep(0.04)
+
 

@@ -33,15 +33,11 @@ def revdns(web):
 	if 'error' not in result:
 		res = result.splitlines()
 		for r in res:
-			print GR+' [+] Received : '+O+r
+			print B+' [+] Received : '+O+r.split(' ')[0].strip()+' => '+C+'('+r.split(' ')[1].strip()+')'
 			time.sleep(0.04)
 			links.append(r)
 
-		if 'http://' in web:
-			po = web.replace('http://','')
-		elif 'https://' in web:
-			po = web.replace('https://','')
-		p = 'tmp/logs/'+po+'-logs/'+str(po)+'-reverse-dns.lst'
+		p = 'tmp/logs/'+web+'-logs/'+web+'-reverse-dns.lst'
 		open(p,'w+')
 		print B+' [!] Saving links...'
 		time.sleep(1)

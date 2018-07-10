@@ -14,7 +14,7 @@ import requests
 import socket
 from colors import *
 
-def geoIP(web):
+def geoip(web):
 
     web = web.replace('http://','')
     web = web.replace('https://','')
@@ -22,9 +22,9 @@ def geoIP(web):
     print R+'    G E O I P   L O O K U P'
     print R+'   =========================\n'
     time.sleep(0.4)
-    print('' + GR + color.BOLD + ' [!] Looking Up for WhoIS Information...')
+    print GR+' [!] Looking Up for WhoIS Information...'
     time.sleep(0.4)
-    print(""+ GR + color.BOLD + " [~] Found GeoIp Location: \n"+ color.END)
+    print GR+" [~] Found GeoIp Location: \n"
     domains = socket.gethostbyname(web)
     time.sleep(0.6)
     text = requests.get('http://api.hackertarget.com/geoip/?q=' + domains).text
@@ -32,7 +32,7 @@ def geoIP(web):
     if 'error' not in result and 'invalid' not in result:
 	res = result.splitlines()
 	for r in res:
-		print G+' ' + r
+		print G+' ' + r.split(':')[0].strip() + ' : ' +O+ r.split(':')[1].strip()
 		time.sleep(0.1)
 
     else:

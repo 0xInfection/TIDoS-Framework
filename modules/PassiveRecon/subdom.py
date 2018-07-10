@@ -38,11 +38,7 @@ def subdom(web):
 			links.append(sub)
 			time.sleep(0.06)
 
-		if 'http://' in web:
-			po = web.replace('http://','')
-		elif 'https://' in web:
-			po = web.replace('https://','')
-		p = 'tmp/logs/'+po+'-logs/'+str(po)+'-subdomains.lst'
+		p = 'tmp/logs/'+web+'-logs/'+str(web)+'-subdomains.lst'
 		open(p,'w+')
 		print B+' [!] Saving links...'
 		time.sleep(1)
