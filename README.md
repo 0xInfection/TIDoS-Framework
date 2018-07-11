@@ -13,7 +13,7 @@ The main highlights of this framework is:
 - [x] Reconnaissance Phase has 36 modules of its own (including active and passive recon, information disclosure modules).
 - [x] Scanning & Enumeration Phase has got 26 modules (including port scans, WAF analysis, etc)
 - [x] Vulnerability Analysis Phase has 32 modules (including most common vulnerabilites in action.
-- [x] Exploits Castle has only 1 exploit. `(purely developemental)`
+- [x] Exploits Castle has only 1 exploit. `(purely developmental)`
 - [x] All four phases each have a `Auto-Awesome` module which automates every module for you.
 - [x] You just need the domain, and leave everything is to this tool.
 - [x] TIDoS has full verbose out support, so you'll know whats going on.
@@ -111,8 +111,9 @@ TIDoS Framework presently supports the following:
 	    - Fin Flag Scan `Reliable Only in LANs`
 	    - Port Service Detector
 	+ Web Technology Enumeration `Absolute`
-	+ Interactive Scanning with NMap `16 preloaded modules`
-	+ Crawlers
+	+ Banner Grabbing of Services `via Open Ports`
+	+ Interactive Scanning with NMap `15 preloaded modules`
+	+ Web Crawlers
 	    - Depth 1
 	    - Depth 2 `IMPROVED`
 
