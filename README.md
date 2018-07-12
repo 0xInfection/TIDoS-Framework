@@ -1,6 +1,6 @@
 <p align="middle"><img src='https://i.imgur.com/QAbaVdU.png' /></p>
 
-![Python](https://img.shields.io/badge/Python-2.7-green.svg) ![TIDoS](https://img.shields.io/badge/TIDoS-v1.3-blue.svg) ![Supported OS](https://img.shields.io/badge/Supported%20OS-Linux-yellow.svg) ![License](https://img.shields.io/badge/License-GPLv3-orange.svg) ![Build](https://img.shields.io/badge/Build-0085-red.svg) ![Modules](https://img.shields.io/badge/Modules-95-blue.svg) ![Status](https://img.shields.io/badge/Build%20Status-passing-brightgreen.svg) ![Stage](https://img.shields.io/badge/Release-Stable-green.svg)
+![Python](https://img.shields.io/badge/Python-2.7-green.svg) ![TIDoS](https://img.shields.io/badge/TIDoS-v1.3-blue.svg) ![Supported OS](https://img.shields.io/badge/Supported%20OS-Linux-yellow.svg) ![License](https://img.shields.io/badge/License-GPLv3-orange.svg) ![Build](https://img.shields.io/badge/Build-0083-red.svg) ![Modules](https://img.shields.io/badge/Modules-95-blue.svg) ![Status](https://img.shields.io/badge/Build%20Status-passing-brightgreen.svg) ![Stage](https://img.shields.io/badge/Release-Stable-green.svg)
 
 
 # TIDoS Framework 
@@ -13,7 +13,7 @@ The main highlights of this framework is:
 - [x] Reconnaissance Phase has 36 modules of its own (including active and passive recon, information disclosure modules).
 - [x] Scanning & Enumeration Phase has got 26 modules (including port scans, WAF analysis, etc)
 - [x] Vulnerability Analysis Phase has 32 modules (including most common vulnerabilites in action.
-- [x] Exploits Castle has only 1 exploit. `(purely developmental)`
+- [x] Exploits Castle has only 1 exploit. `(purely developemental)`
 - [x] All four phases each have a `Auto-Awesome` module which automates every module for you.
 - [x] You just need the domain, and leave everything is to this tool.
 - [x] TIDoS has full verbose out support, so you'll know whats going on.
@@ -112,8 +112,8 @@ TIDoS Framework presently supports the following:
 	    - Port Service Detector
 	+ Web Technology Enumeration `Absolute`
 	+ Banner Grabbing of Services `via Open Ports`
-	+ Interactive Scanning with NMap `15 preloaded modules`
-	+ Web Crawlers
+	+ Interactive Scanning with NMap `16 preloaded modules`
+	+ Crawlers
 	    - Depth 1
 	    - Depth 2 `IMPROVED`
 
