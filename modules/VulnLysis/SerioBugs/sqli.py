@@ -71,16 +71,16 @@ def auto0x00(web):
 			req = requests.get(web, headers=user_agent)
 			print O+' [*] Using '+R+'!nfected'+O+' UA : '+GR+user_agent['User-agent']
 			flag = u' '.join(req.text).encode('utf-8').strip()
-			check = ["have an error", "SQL syntax", "MySQL"]
+			check = ["have an error", "SQL syntax"]
 			for j in range(0, len(check)):
 				for line in finditer(check[j], flag):
 					print G+' [!] Error based SQLi (User-Agent Based) Detected!'
 					print R+' [!] User-Agent : '+user_agent
 
 	print P+' [!] Enter an option :\n'
-	print C+'   [1] '+B+'Cookie Error Based Injection'
-	print C+'   [2] '+B+'User-Agent Error Based Injection'
-	print C+'   [3] '+B+'Auto Awesome Module (automated searching and exploiting)\n'
+	print B+'   [1] '+C+'Cookie Error Based Injection'
+	print B+'   [2] '+C+'User-Agent Error Based Injection'
+	print B+'   [3] '+C+'Auto Awesome Module (automated searching and exploiting)\n'
 	q = raw_input(O+' [#] TID :> ')
 	if q == '3':
 		print GR+' [*] Launching Auto-Awesome Module...'
@@ -137,8 +137,8 @@ def sqli(web):
 		print R+' [-] Payloads file does not exist!'
 
 	print O+'\n [#] Enter the type you want to proceed:\n'
-	print C+'   [1] '+B+'Manual Mode'
-	print C+'   [2] '+B+'Automatic Mode\n'		
+	print B+'   [1] '+C+'Manual Mode'
+	print B+'   [2] '+C+'Automatic Mode\n'		
 	p = raw_input(O+' [#] TID :> ')
 	if p == '1':
 		print GR+' [*] Initializing manual mode...'
