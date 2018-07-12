@@ -14,7 +14,7 @@ from colors import *
 
 def banner1():
 
-	print B+'[---]       '+C+'The TIDoS Framework  \033[36m|  \033[1;37mVersion v1.3       \033[1;34m[---]'
+	print B+'[---]       '+C+'The TIDoS Framework  \033[36m|  \033[1;37mVersion v1.4       \033[1;34m[---]'
 	sleep(0.2)
 	print B+'[---]                                                  [---]'
 	print B+'[---]               \033[1;31m~  Author \033[1;31m: \033[1;33m@_tID_  ~              \033[1;34m[---]'
@@ -23,7 +23,7 @@ def banner1():
 	sleep(0.2)
 	print B+'[---]                                                  [---]'
 	sleep(0.2)
-	print B+'[---]     \033[1;35m4 Phases  |  \033[1;31m13 Sub-Phases  |  \033[1;37m95 Modules    \033[1;34m[---]'
+	print B+'[---]     \033[1;35m4 Phases  |  \033[1;31m13 Sub-Phases  |  \033[1;37m96 Modules    \033[1;34m[---]'
 	sleep(0.2)
 	print ''
 	print B+'             Welcome to '+C+'The TIDoS Framework (TTF)'
