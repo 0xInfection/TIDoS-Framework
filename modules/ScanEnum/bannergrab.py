@@ -14,6 +14,8 @@ import requests
 import socket
 import json
 import time
+import sys
+sys.path.append('files/')
 from colors import *
 from files.API_KEYS import SHODAN_API_KEY
 
