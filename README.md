@@ -8,7 +8,7 @@ TIDoS Framework is a comprehensive web application audit framework. `let's keep 
 
 ### Highlights :-
 The main highlights of this framework is:
-- [x] A all-in-one framework to cover up everything from Reconnaissance to Exploitation.
+- [x] An all-in-one framework to cover up everything from Reconnaissance to Exploitation.
 - [x] Has 4 main phases, subdivided into __13 sub-phases__ containing total of __96 modules__.
 - [x] Reconnaissance Phase has 36 modules of its own (including active and passive recon, information disclosure modules).
 - [x] Scanning & Enumeration Phase has got 27 modules (including port scans, WAF analysis, etc)
