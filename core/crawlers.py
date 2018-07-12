@@ -19,6 +19,7 @@ sys.path.append('modules/ScanEnum/')
 
 from crawler1 import *
 from crawler2 import *
+from crawler3 import *
 from scenum_alt import scenum_alt
 from scanenumban1 import *
 from crawlersban import *
@@ -43,6 +44,12 @@ def crawlers(web):
 	    time.sleep(1)
 	    crawlers(web)
 
+	elif v == '3':
+	    print B+' [!] Module Selected :'+C+' Crawler (Depth 3)'
+	    crawler3(web)
+	    time.sleep(1)
+	    crawlers(web)
+
 	elif v == '99':
 	    print GR+'\n [*] Back...'
 	    scanenumban1()
@@ -64,6 +71,6 @@ def crawlers(web):
 
 	else:
 	    dope = ['You high dude?','Shit! Enter a valid option','Whoops! Thats not an option','Sorry! You just typed shit']
-	    print dope[randint(0,3)]
+	    print ' [-] '+dope[randint(0,3)]
 	    sleep(1)
 	    crawlers(web)

@@ -19,6 +19,7 @@ sys.path.append('modules/ScanEnum/')
 
 from crawler1 import *
 from crawler2 import *
+from crawler3 import *
 from scanenum_dup import scanenum_dup
 from scanenumban1 import *
 from crawlersban import *
@@ -31,24 +32,30 @@ def crawlers_hunt(web):
 	time.sleep(0.4)
 	crawlersban() 
 	v = raw_input(O+' [#] TID :> ')
-	if v == '1':
-	    print B+' [!] Module Selected :'+C+' Crawler (Depth1)'
+	if v.strip() == '1':
+	    print B+' [!] Module Selected :'+C+' Crawler (Depth 1)'
 	    crawler1(web)
 	    time.sleep(1)
 	    crawlers_hunt(web)
 
-	elif v == '2':
+	elif v.strip() == '2':
 	    print B+' [!] Module Selected :'+C+' Crawler (Depth 2)'
 	    crawler2(web)
 	    time.sleep(1)
 	    crawlers_hunt(web)
 
-	elif v == '99':
+	elif v.strip() == '3':
+	    print B+' [!] Module Selected :'+C+' Crawler (Depth 3)'
+	    crawler3(web)
+	    time.sleep(1)
+	    crawlers_hunt(web)
+
+	elif v.strip() == '99':
 	    print GR+'\n [*] Back...'
 	    scanenumban1()
 	    scanenum_dup(web)
 
-	elif v == 'A':
+	elif v.strip() == 'A':
 	    print W+'\n [!] Module Automater Initialized...'
 	    sleep(0.5)
 	    print B+' [*] Initializing Scan Type :'+C+' Crawler (depth 1)'
