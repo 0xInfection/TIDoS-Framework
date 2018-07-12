@@ -48,15 +48,17 @@ def serbugsban():
 #    time.sleep(0.1)
     print B+'  [7]'+C+' SQL Injection '
     time.sleep(0.1)
-    print B+'  [8]'+C+' LDAP Injection '
+    print B+'  [8]'+C+' LDAP Entity Injection '
     time.sleep(0.1)
-    print B+'  [9]'+C+' HTTP Response Splitting '
+    print B+'  [9]'+C+' HTML Code Injection '
     time.sleep(0.1)
-    print B+'  [10]'+C+' Host Header Injection '
+    print B+'  [10]'+C+' HTTP Response Splitting '
     time.sleep(0.1)
-    print B+'  [11]'+C+' Shellshock Vulnerabilities'
+    print B+'  [11]'+C+' Host Header Injection '
     time.sleep(0.1)
-    print B+'  [12]'+C+' Unvalidated URL Redirects\n'
+    print B+'  [12]'+C+' Shellshock Vulnerabilities'
+    time.sleep(0.1)
+    print B+'  [13]'+C+' Unvalidated URL Redirects\n'
     time.sleep(0.1)
     print B+'  [A]'+C+' Load all the modules 1 by 1\n'
     time.sleep(0.1)

@@ -106,4 +106,3 @@ def htmli(web):
 		print R+' [-] Exception : '+str(e)
 	print G+'\n [+] HTMLi Module Completed!'
 
-htmli('http://ultimatelabs.tk')

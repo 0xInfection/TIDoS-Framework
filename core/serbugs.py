@@ -24,6 +24,8 @@ from sqli import *
 from crlf import *
 from hhi import *
 from vulnban import *
+from htmli import *
+#from xmli import *
 from shellshock import *
 from colors import *
 #from xss import *
@@ -36,79 +38,85 @@ def serbugs(web):
     serbugsban()
     v = raw_input(''+O+' \033[4mTID\033[1;0m '+GR+':> ' + color.END)
     print '\n'
-    if v == '1':
+    if v.strip() == '1':
 	print ' Type Selected : LFI'
 	lfi(web)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')	
 	serbugs(web)
 
-    elif v == '2':
+    elif v.strip() == '2':
 	print ' Type Selected : RFI'
 	rfi(web)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')	
 	serbugs(web)
 
-    elif v == '3':
+    elif v.strip() == '3':
 	print ' Type Selected : RCE'
 	rce(web)	
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')	
 	serbugs(web)
 
-    elif v == '4':
+    elif v.strip() == '4':
 	print ' Type Selected : Path Traversal'
 	pathtrav(web)	
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')	
 	serbugs(web)
 
-    elif v == '5':
+    elif v.strip() == '5':
 	print ' Type Selected : CSRF'
 	csrf(web)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')	
 	serbugs(web)
 
- #   elif v == '6':
+ #   elif v.strip() == '6':
 #	print ' Type Selected : XSS'
 #	xss(web)	
 #	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')	
 #	serbugs(web)
 
-    elif v == '7':
+    elif v.strip() == '7':
 	print ' Type Selected : SQLi'
 	sqli(web)	
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')	
 	serbugs(web)
 
-    elif v == '8':
+    elif v.strip() == '8':
 	print ' Type Selected : LDAP Injection'
 	ldap(web)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')	
 	serbugs(web)
 
-    elif v == '9':
+    elif v.strip() == '9':
+	print ' Type Selected : HTML Code Injection'
+	htmli(web)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')	
+	serbugs(web)
+
+    elif v.strip() == '10':
 	print ' Type Selected : HTTP Response Splitting'
 	crlf(web)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')	
 	serbugs(web)
 
-    elif v == '10':
+    elif v.strip() == '11':
 	print ' Type Selected : Host Header Injection'
 	hhi(web)	
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')	
 	serbugs(web)
 
-    elif v == '11':
+    elif v.strip() == '12':
 	print ' Type Selected : Shellshock'
 	shellshock(web)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')	
 	serbugs(web)
 
-    elif v == '12':
+    elif v.strip() == '13':
 	print ' Type Selected : URL Validation'
 	redirect(web)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')	
 	serbugs(web)
 
-    elif v == 'A':
+    elif v.strip() == 'A':
 	print ' [!] Type Selected : All Modules'
 	time.sleep(0.5)
 
@@ -175,7 +183,7 @@ def serbugs(web):
 	time.sleep(4)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 
-    elif v == '99':
+    elif v.strip() == '99':
 	print '[!] Back'
 	time.sleep(0.7)
 
