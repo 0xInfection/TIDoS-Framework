@@ -138,8 +138,8 @@ TIDoS Framework presently supports the following:
 	
     __Serious Web Vulnerabilities__
     
-	+ File Intrusions
-	    - Local File Intrusion (LFI) `Param based`
+	+ File Inclusions
+	    - Local File Inclusion (LFI) `Param based`
 	    - Remote File Inclusion (RFI)
 	    	- Parameter Based
 		- Pre-loaded Path Based
