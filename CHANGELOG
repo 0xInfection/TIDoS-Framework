@@ -92,7 +92,7 @@
     	Improvements to the core features. Bug fixes.
 
 	Changelog:
-	- Added Exception Handling feature globally..
+	- Added Exception Handling feature globally.
 	- Improved the crlf module.
 	- Fixed erring code at Host Header Injection module.
 	- Updated the payload database with new payloads.
@@ -109,7 +109,7 @@
             - PasteBin Posts Gatherer.
             - LinkedIn Gathering.
 
-    * v1.3.1 [latest release] (#stable)
+    * v1.3.1
         
         Addition of the new modules + bug fixes.
 
@@ -118,3 +118,15 @@
         - Improvements to the updater module.
         - Addition of ldap_payloads at the payload-db.
         - Other minor bug fixes.
+
+    * v1.4.0 [latest release] (#stable)
+
+	Big release with lots of changes.
+
+	Changelog:
+	- Addition of 4 major modules under ScanEnum and VulnLysis.
+	- Addition of HTML Payloads to the database.
+	- Support for API keys globally.
+	- Major ImportError bug fixes.
+	- Re-written 6 major modules for efficiency.
+ 
