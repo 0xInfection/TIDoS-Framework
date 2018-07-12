@@ -58,7 +58,7 @@ def crawler10x00(web):
 	        cis.append(m)
 	try:
             for x in cis:
-            	print ''+G+' [+] Crawling link :> '+ O + str(x)
+            	print G+' [+] Crawling link :> '+ O + str(x)
 	    	br.open(x)
 	    	crawled.append(x)	
 

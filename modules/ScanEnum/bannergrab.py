@@ -15,8 +15,7 @@ import socket
 import json
 import time
 from colors import *
-
-SHODAN_API_KEY = "v4YpsPUJ3wjDxEqywwu6aF5OZKWj8kik"
+from files.API_KEYS import SHODAN_API_KEY
 
 def grab(web):
 

@@ -1,110 +1,149 @@
 #!/usr/bin/env python2
-# coding: utf-8
+# -*- coding: utf-8 -*-
 
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 #    TIDoS Framework     #
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 
-#Author : @_tID
+#Author: @_tID
 #This module requires TIDoS Framework
-#https://github.com/the-Infected-Drake/TIDoS-Framework 
+#https://github.com/theInfectedDrake/TIDoS-Framework
 
-import sys
+import re
 import time
-sys.path.append('files/')
 import requests
-from lxml import etree
-from collections import OrderedDict
-from urlparse import urljoin
+import mechanize
+import cookielib
+from bs4 import BeautifulSoup
 from colors import *
 
-global actual_uri
-actual_uri = []
+br = mechanize.Browser()
 
-def crawler20x00(url, count):
+cj = cookielib.LWPCookieJar()
+br.set_cookiejar(cj)
 
-	visited_urls = set()
-	queued_urls = OrderedDict({ url: '' })
+br.set_handle_equiv(True)
+br.set_handle_redirect(True)
+br.set_handle_referer(True)
+br.set_handle_robots(False)
 
-	while len(queued_urls) > 0:
-	    (u, i) = queued_urls.popitem(last=False)
-	    try:
-		req = requests.get(u, timeout=5)
-		res = req.status_code
-		root = etree.HTML(req.content, base_url=u)
-	    except requests.ConnectionError as e:
-		res = e
-		continue
-	    except requests.Timeout as e:
-		res = e
-		continue
-	    except requests.TooManyRedirects as e:
-		res = e
-		continue
-	    except ValueError as e:
-		res = e
-		continue
-	    finally:
-		visited_urls.add(u)
-		pfx = "{}[{}]".format(i, len(visited_urls))
-		if res == 200:
-			print B+' [+] Crawling : '+GR+pfx+'  '+C+u+G+'  ('+str(res)+')'
-			actual_uri.append(u)
-		elif res == 404:
-			print B+' [+] Crawling : '+GR+pfx+'  '+C+u+R+'  ('+str(res)+')'
-		else:
-			print B+' [+] Crawling : '+GR+pfx+'  '+C+u+O+'  ('+str(res)+')'
+br.set_handle_refresh(mechanize._http.HTTPRefreshProcessor(), max_time=1)
+br.addheaders = [
+    ('User-agent', 'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.1) Gecko/2008071615 Fedora/3.0.1-1.fc9 Firefox/3.0.1')]
+from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
-	    if root is None: continue
-
-	    for a in root.xpath('//a'):
-		if (len(visited_urls) + len(queued_urls) >= count):
-		    break
-		href = a.get('href')
-		if href is None: continue
-		(uj, sep, ui) = urljoin(a.base, href).partition('#')
-		if uj not in visited_urls and uj not in queued_urls:
-		    if uj.startswith('http'): 
-			queued_urls[uj] = pfx
-		if (len(visited_urls) >= count):
-			break
-
-def out(web, list0):
-	
+requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
+            
+def out(web, totlist):
 	web = web.replace('http://','')
 	web = web.replace('https://','')
-	print GR+' [*] Writing found URLs to a file...'
-	fil = open('tmp/'+web+'-links.lst','w+')
-	for lists in list0:
-	    if str(web) in lists:
+	print GR+'\n [*] Writing found URLs to a file...'
+	fil = open('tmp/logs/'+web+'-logs/'+web+'-spllinks.lst','w+')
+	for lists in totlist:
 		fil.write("%s\n" % lists)
+	print 
+
+def parseurl(address):
+    	addr = address.replace("http://",'').split("/")
+    	return addr
+
+def externalcrawl(startpg):
+    	html = requests.get(startpg).text
+    	toparse = BeautifulSoup(html,"html.parser")
+    	extlinks = external(startpg, toparse, parseurl(startpg)[0])
+    	return extlinks
+
+def internalcrawl(startpg):
+    	html = requests.get(startpg).text
+    	toparse = BeautifulSoup(html,"html.parser")
+    	intlinks = internal(startpg, toparse, parseurl(startpg)[0])
+    	return intlinks
+
+def external(web, toparse, excurl):
+	try:
+	    	extlinks = []
+	    	for link in toparse.findAll("a", href=re.compile("^(http|www)((?!"+excurl+").)*$")):
+			if link.attrs['href'] is not None:
+			    	if link.attrs['href'] not in extlinks:
+					lk = link.attrs['href']
+					if lk.startswith('http') == False:
+						lk = str(web) + str(lk)
+			        		extlinks.append(lk)
+						res = br.open(lk)
+						if str(res.code) == '200':
+							print B+' [+] Crawling : '+C+str(lk)+G+' (200)'
+						elif str(res.code) == '404':
+							print B+' [+] Crawling : '+C+str(lk)+R+' (404)'
+						else:
+							print B+' [+] Crawling : '+C+str(lk)+O+' ('+str(res.code)+')'
+	except Exception as e:
+		print R+' [-] Exception : '+str(e)
+		pass
+
+    	return extlinks
+
+def internal(web, toparse, incurl):
+	try:
+	    	intlinks = []
+	    	for link in toparse.findAll("a", href=re.compile("^(/|.*"+incurl+")")):
+			if link.attrs['href'] is not None:
+		    		if link.attrs['href'] not in intlinks:
+					lk = link.attrs['href']
+					if lk.startswith('http') == False:
+						lk = str(web) + str(lk)
+			        		intlinks.append(lk)
+						res = br.open(lk)
+						if str(res.code) == '200':
+							print B+' [+] Crawling : '+C+str(lk)+G+' (200)'
+						elif str(res.code) == '404':
+							print B+' [+] Crawling : '+C+str(lk)+R+' (404)'
+						else:
+							print B+' [+] Crawling : '+C+str(lk)+O+' ('+str(res.code)+')'
+
+	except Exception as e:
+		print R+' [-] Exception : '+str(e)
+		pass
+
+    	return intlinks
 
 def crawler2(web):
 
-    try:
-	print GR+' [*] Loading (Level 2) crawler...'
-	time.sleep(0.5)
-	if 'http' not in web:
-		web = 'http://'+web
-
-	print R+'\n    =========================='
-	print R+'     C R A W L E R  (Depth 2)'
-	print R+'    =========================='
-	print O+' [This crawler will recursively crawl'
-	print O+' all the links of the website as well as all'
-	print O+'   links within each of the pages]'
-	print R+' [Warning: Use this with caution!]\n'
-	m = raw_input(GR+' [#] No. of links to be crawled (eg 100) :> ')
-	print O+' [!] Crawling limit set to : '+C+str(m)
-	w = int(m)
-	crawler20x00(web, w)
-	out(web, actual_uri)
-
-    except Exception as e:
-	print R+' [-] Further crawl aborted due to Exception!'
-	print R+' [-] Exception : '+str(e)
+	print GR+' [*] Loading Level 2 Crawler...'
+	time.sleep(0.6)
+	totlinks = []
+	print R+'\n    ========================='
+	print R+'     C R A W L E R (Depth 2)'
+	print R+'    ========================='
 	time.sleep(0.7)
-	print GR+' [*] Saving the links obtained...'
-	out(web, actual_uri)
-	print G+' [+] Saved!'
+	print O+' [This module will fetch both ext. '
+	print O+' and internal links from a website]\n'
+	print GR+' [*] Initiating the crawling...'
+	time.sleep(0.7)
+	try:
+		print O+' [*] Starting internal links gathering...'
+	    	intlinks = internalcrawl(web)
+		print G+' [+] Finished internal links crawling...'
+		print O+'\n [*] Starting external links gathering...'
+	    	extlinks = externalcrawl(web)
+		print G+' [+] Finished external links crawling...'
+
+	except Exception as e:
+		print R+' [-] Exception : '+str(e)
+		pass
+
+	print R+'   EXTERNAL LINKS'
+	print R+'  ================' 
+	print O+'   |'   
+    
+    	for lenk in extlinks:
+		print GR+'   + '+lenk
+
+	print R+'\n   INTERNAL LINKS'
+	print R+'  ================' 
+	print O+'   |'   
+    
+    	for lenk in intlinks:
+		print GR+'   + '+O+lenk
+	totlinks = list(set(intlinks + extlinks))
+	out(web, totlinks)
 
