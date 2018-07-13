@@ -14,19 +14,20 @@
 
 import difflib
 import cookielib
-import urlparse
 from BeautifulSoup import BeautifulSoup
 import urllib
 import urllib2
-import mechanize
 import re
 import time
+import ssl
 import sys
 sys.path.append('files/')
 from Crawler import *
 from Form import *
 from uri import *
 from colors import *
+
+ssl.match_hostname = lambda cert, hostname: True
 
 def request(referer,action,form,opener):
 
@@ -50,7 +51,10 @@ def check0x00(web):
 
 	print R+'\n   ===================================================='
 	print R+'    C R O S S   S I T E   R E Q U E S T   F O R G E R Y'
-	print R+'   ====================================================\n'
+	print R+'   ===================================================='
+	time.sleep(0.7)
+	print O+' [This module has only full support for domains of startpages]'
+	print O+'   [Hence, may not satisfactorily work for all domains]\n'
 
 	if 'http' not in web:
 		web = 'http://' + web
@@ -90,6 +94,7 @@ def check0x00(web):
 
 	Cookie0 = cookielib.CookieJar()
 	Cookie1 = cookielib.CookieJar()
+
 	resp1 = urllib2.build_opener(urllib2.HTTPCookieProcessor(Cookie0))
 	resp2 = urllib2.build_opener(urllib2.HTTPCookieProcessor(Cookie1)) 
 
@@ -224,9 +229,15 @@ def check0x00(web):
 
 def csrf(web):
 
-	time.sleep(0.5)
-	print GR+' [*] Loading up module...'
-	time.sleep(0.5)
-	check0x00(web)
-	print G+" [+] Scan completed!"
+	try:
+		time.sleep(0.5)
+		print GR+' [*] Loading up module...'
+		time.sleep(0.5)
+		check0x00(web)
+		print G+" [+] Scan completed!"
+	except ssl.CertificateError:
+		print R+" [-] This module only support domains of startpages..."
+
+	except:
+		pass
 

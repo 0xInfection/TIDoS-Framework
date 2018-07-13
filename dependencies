@@ -36,6 +36,16 @@ sudo python setup.py install
 cd ..
 cd ..
 
+cd lib/clearbit/
+sudo python setup.py install
+cd ..
+cd ..
+
+cd lib/fullcontact/
+sudo python setup.py install
+cd ..
+cd ..
+
 cd lib/pexpect/
 sudo python setup.py install
 cd .. 
@@ -100,3 +110,4 @@ cd lib/logging/
 sudo python setup.py install
 cd ..
 cd ..
+

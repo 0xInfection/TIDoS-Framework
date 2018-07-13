@@ -1,0 +1,10 @@
+setup.cfg
+setup.py
+FullContact.py.egg-info/PKG-INFO
+FullContact.py.egg-info/SOURCES.txt
+FullContact.py.egg-info/dependency_links.txt
+FullContact.py.egg-info/not-zip-safe
+FullContact.py.egg-info/requires.txt
+FullContact.py.egg-info/top_level.txt
+fullcontact/__init__.py
+fullcontact/fullcontact.py
