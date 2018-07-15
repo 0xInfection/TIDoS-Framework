@@ -12,7 +12,7 @@ The main highlights of this framework is:
 - [x] Has 4 main phases, subdivided into __13 sub-phases__ containing total of __96 modules__.
 - [x] Reconnaissance Phase has 36 modules of its own (including active and passive recon, information disclosure modules).
 - [x] Scanning & Enumeration Phase has got 27 modules (including port scans, WAF analysis, etc)
-- [x] Vulnerability Analysis Phase has 33 modules (including most common vulnerabilites in action.
+- [x] Vulnerability Analysis Phase has 33 modules (including most common vulnerabilites in action).
 - [x] Exploits Castle has only 1 exploit. `(purely developemental)`
 - [x] All four phases each have a `Auto-Awesome` module which automates every module for you.
 - [x] You just need the domain, and leave everything is to this tool.
