@@ -1,0 +1,4 @@
+html5lib>=0.999999999
+
+[fast]
+html5-parser>=0.4.4
