@@ -96,6 +96,7 @@
 	    - Fin Flag Scan `Reliable Only in LANs`
 	    - Port Service Detector
 	+ Web Technology Enumeration `Absolute`
+	+ Banner Grabbing of Services `via Open Ports`
 	+ Interactive Scanning with NMap `16 preloaded modules`
 	+ Crawlers
 	    - Depth 1
@@ -119,23 +120,24 @@
 	
     __Serious Web Vulnerabilities__
     
-	+ File Intrusions
-	    - Local File Intrusion (LFI) `Param based`
+	+ File Inclusions
+	    - Local File Inclusion (LFI) `Param based`
 	    - Remote File Inclusion (RFI)
 	    	- Parameter Based
 		- Pre-loaded Path Based
 	+ OS Command Injection `Linux & Windows (RCE)`
 	+ Path Traversal `(Sensitive Paths)`
 	+ Cross-Site Request Forgery `Absolute`
-	+ SQL Injection
+	+ SQL Injection `Error-Based`
 	    - Cookie Value Based
 	    - Referer Value Based
 	    - User-Agent Value Based
 	    - Auto-gathering `IMPROVED`
 	    - Parameter Based `Manual`
 	+ LDAP Injection `Parameter Based`
-	+ Host Header Injection `port based`
-	+ Bash Command Injection `Shellshock` 
+	+ HTML Injection `Parameter Based`
+	+ Host Header Injection `Port Based`
+	+ Bash Command Injection `ShellShock` 
 	+ Cross-Site Scripting `beta`
 	    - Cookie Value Based
 	    - Referer Value Based
@@ -145,6 +147,9 @@
 	+ CRLF Injection and HTTP Response Splitting
 	    - User-Agent Value Based
 	    - Parameter value Based `Manual`
+	+ Sub-domain Takeover `50+ Services`
+	    - Single Sub-domain `Manual`
+	    - All Subdomains `Automated`
 
     __Auxillaries__
 
