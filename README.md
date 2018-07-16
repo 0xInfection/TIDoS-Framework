@@ -1,6 +1,6 @@
 <p align="middle"><img src='https://i.imgur.com/QAbaVdU.png' /></p>
 
-![Python](https://img.shields.io/badge/Python-2.7-green.svg) ![TIDoS](https://img.shields.io/badge/TIDoS-v1.4-blue.svg) ![Supported OS](https://img.shields.io/badge/Supported%20OS-Linux-yellow.svg) ![License](https://img.shields.io/badge/License-GPLv3-orange.svg) ![Build](https://img.shields.io/badge/Build-0086-red.svg) ![Modules](https://img.shields.io/badge/Modules-96-blue.svg) ![Status](https://img.shields.io/badge/Build%20Status-passing-brightgreen.svg) ![Stage](https://img.shields.io/badge/Release-Stable-green.svg)
+![Python](https://img.shields.io/badge/Python-2.7-green.svg) ![TIDoS](https://img.shields.io/badge/TIDoS-v1.4-blue.svg) ![Supported OS](https://img.shields.io/badge/Supported%20OS-Linux-yellow.svg) ![License](https://img.shields.io/badge/License-GPLv3-orange.svg) ![Build](https://img.shields.io/badge/Build-0087-red.svg) ![Modules](https://img.shields.io/badge/Modules-97-blue.svg) ![Status](https://img.shields.io/badge/Build%20Status-passing-brightgreen.svg) ![Stage](https://img.shields.io/badge/Release-Stable-green.svg)
 
 
 # TIDoS Framework 
@@ -9,10 +9,10 @@ TIDoS Framework is a comprehensive web application audit framework. `let's keep 
 ### Highlights :-
 The main highlights of this framework is:
 - [x] An all-in-one framework to cover up everything from Reconnaissance to Exploitation.
-- [x] Has 4 main phases, subdivided into __13 sub-phases__ containing total of __96 modules__.
+- [x] Has 4 main phases, subdivided into __13 sub-phases__ consisting total of __97 modules__.
 - [x] Reconnaissance Phase has 36 modules of its own (including active and passive recon, information disclosure modules).
 - [x] Scanning & Enumeration Phase has got 27 modules (including port scans, WAF analysis, etc)
-- [x] Vulnerability Analysis Phase has 33 modules (including most common vulnerabilites in action).
+- [x] Vulnerability Analysis Phase has 34 modules (including most common vulnerabilites in action).
 - [x] Exploits Castle has only 1 exploit. `(purely developemental)`
 - [x] All four phases each have a `Auto-Awesome` module which automates every module for you.
 - [x] You just need the domain, and leave everything is to this tool.
@@ -146,7 +146,7 @@ TIDoS Framework presently supports the following:
 	+ OS Command Injection `Linux & Windows (RCE)`
 	+ Path Traversal `(Sensitive Paths)`
 	+ Cross-Site Request Forgery `Absolute`
-	+ SQL Injection
+	+ SQL Injection `Error-Based`
 	    - Cookie Value Based
 	    - Referer Value Based
 	    - User-Agent Value Based
@@ -165,6 +165,9 @@ TIDoS Framework presently supports the following:
 	+ CRLF Injection and HTTP Response Splitting
 	    - User-Agent Value Based
 	    - Parameter value Based `Manual`
+	+ Sub-domain Takeover `50+ Services`
+	    - Single Sub-domain `Manual`
+	    - All Subdomains `Automated`
 
     __Auxillaries__
 
