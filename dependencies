@@ -106,7 +106,7 @@ sudo python setup.py install
 cd ..
 cd ..
 
-cd lib/logging/
+cd lib/mechanize/
 sudo python setup.py install
 cd ..
 cd ..
