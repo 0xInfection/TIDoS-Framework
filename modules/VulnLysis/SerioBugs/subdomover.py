@@ -17,7 +17,7 @@ import urllib3
 import urlparse
 import requests
 from colors import *
-from subdom import subdom0x00
+from subdom import subdom
 from signatures import services
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 

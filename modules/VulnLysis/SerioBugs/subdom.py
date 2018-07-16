@@ -12,7 +12,6 @@ import time
 import os
 import re
 import sys
-import tld
 import socket
 import requests
 from time import sleep
@@ -117,7 +116,7 @@ def report(web, found, final):
 	print '\n'
 	return total
 
-def subdom0x00(web):
+def subdom(web):
 
     global fileo
 
