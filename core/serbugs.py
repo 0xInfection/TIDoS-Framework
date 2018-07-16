@@ -22,6 +22,7 @@ from csrf import *
 from vulnban1 import *
 from sqli import *
 from crlf import *
+from subdomover import *
 from hhi import *
 from vulnban import *
 from htmli import *
@@ -113,6 +114,12 @@ def serbugs(web):
     elif v.strip() == '13':
 	print ' Type Selected : URL Validation'
 	redirect(web)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')	
+	serbugs(web)
+
+    elif v.strip() == '14':
+	print ' Type Selected : Subdomain Takeover'
+	subdomover(web)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')	
 	serbugs(web)
 

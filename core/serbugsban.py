@@ -34,31 +34,33 @@ def serbugsban():
 
 '''
 
-    print B+'  [1]'+C+' Local File Intrusion'
+    print B+'  [1]'+C+' Local File Inclusion'+W+' (Root Directories)'
     time.sleep(0.1)
-    print B+'  [2]'+C+' Remote File Intrusion'
+    print B+'  [2]'+C+' Remote File Inclusion'+W+' (Executable Scripts)'
     time.sleep(0.1)
-    print B+'  [3]'+C+' Remote Command Execution'
+    print B+'  [3]'+C+' OS Command Injection'+W+' (Windows & Linux)'
     time.sleep(0.1)
-    print B+'  [4]'+C+' Path Traversal (Sensitive Paths) '
+    print B+'  [4]'+C+' Path Traversal '+W+'(Sensitive Paths)'
     time.sleep(0.1)
-    print B+'  [5]'+C+' Cross-Site Request Forgery '
+    print B+'  [5]'+C+' Cross-Site Request Forgery '+W+'(Absolute)'
     time.sleep(0.1)
-#    print B+'  [6]'+C+' Cross-Site Scripting '
+#    print B+'  [6]'+C+' Cross-Site Scripting '+W+'(Absolute)'
 #    time.sleep(0.1)
-    print B+'  [7]'+C+' SQL Injection '
+    print B+'  [7]'+C+' SQL Injection '+W+'(Error & Union Based)'
     time.sleep(0.1)
-    print B+'  [8]'+C+' LDAP Entity Injection '
+    print B+'  [8]'+C+' LDAP Entity Injection '+W+'(Error Enumeration)'
     time.sleep(0.1)
-    print B+'  [9]'+C+' HTML Code Injection '
+    print B+'  [9]'+C+' HTML Code Injection '+W+'(Handcoded Payloads)'
     time.sleep(0.1)
-    print B+'  [10]'+C+' HTTP Response Splitting '
+    print B+'  [10]'+C+' HTTP Response Splitting '+W+'(CRLF Injection)'
     time.sleep(0.1)
-    print B+'  [11]'+C+' Host Header Injection '
+    print B+'  [11]'+C+' Host Header Injection '+W+'(Socket Based)'
     time.sleep(0.1)
-    print B+'  [12]'+C+' Shellshock Vulnerabilities'
+    print B+'  [12]'+C+' Shellshock Vulnerabilities'+W+' (Bash RCE)'
     time.sleep(0.1)
-    print B+'  [13]'+C+' Unvalidated URL Redirects\n'
+    print B+'  [13]'+C+' Unvalidated URL Redirects'+W+' (Open Redirects)'
+    time.sleep(0.1)
+    print B+'  [14]'+C+' Sub-domain Takeover'+W+' (50+ Services)\n'
     time.sleep(0.1)
     print B+'  [A]'+C+' Load all the modules 1 by 1\n'
     time.sleep(0.1)
