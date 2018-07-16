@@ -73,8 +73,8 @@ def subdombrute(web):
 		    sys.stdout.write(B+'\r [*] Checking : '+C+url)
 		    sys.stdout.flush()
 	else:
-		print R+' [-] No wordlist found under tmp/.'
 		print R+' [-] Fatal Exception!'
+		print R+' [-] No wordlist found under '+O+'files/fuzz-db/.'
 	return found
 
 def outer(web):
