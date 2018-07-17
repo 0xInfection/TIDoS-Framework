@@ -32,45 +32,51 @@ def crawlers(web):
 	time.sleep(0.4)
 	crawlersban() 
 	v = raw_input(O+' [#] TID :> ')
-	if v == '1':
+	if v.strip() == '1':
 	    print B+' [!] Module Selected :'+C+' Crawler (Depth1)'
 	    crawler1(web)
 	    time.sleep(1)
 	    crawlers(web)
 
-	elif v == '2':
+	elif v.strip() == '2':
 	    print B+' [!] Module Selected :'+C+' Crawler (Depth 2)'
 	    crawler2(web)
 	    time.sleep(1)
 	    crawlers(web)
 
-	elif v == '3':
+	elif v.strip() == '3':
 	    print B+' [!] Module Selected :'+C+' Crawler (Depth 3)'
 	    crawler3(web)
 	    time.sleep(1)
 	    crawlers(web)
 
-	elif v == '99':
+	elif v.strip() == '99':
 	    print GR+'\n [*] Back...'
 	    scanenumban1()
 	    scenum_alt(web)
 
-	elif v == 'A':
+	elif v.strip() == 'A':
 	    print W+'\n [!] Module Automater Initialized...'
 	    sleep(0.5)
-	    print B+' [*] Initializing Scan Type :'+C+' Crawler (depth 1)'
-	    simpleport(web)
+	    print B+' [*] Initializing Scan Type :'+C+' Crawler (Depth 1)'
+	    crawler1(web)
 	    print B+'\n [!] Scan Type Completed :'+C+' Crawler 1\n'
 	    sleep(0.5)
-	    print B+' [!] Initializing Scan Type :'+C+' Crawler (depth 2)'
-	    tcpconnect(web)
+	    print B+' [!] Initializing Scan Type :'+C+' Crawler (Depth 2)'
+	    crawler2(web)
 	    print B+'\n [!] Scan Type Completed :'+C+' Crawler 2\n'
+	    sleep(0.5)
+	    print B+' [!] Initializing Scan Type :'+C+' Crawler (Depth 3)'
+	    crawler2(web)
+	    print B+'\n [!] Scan Type Completed :'+C+' Crawler 3\n'
 	    print G+' [+] All modules successfully completed!'
-	    sleep(2)
+	    raw_input(GR+' [+] Press '+O+'Enter '+GR+'to continue...')
 	    scanenumban1()
+	    scenum_alt(web)
 
 	else:
 	    dope = ['You high dude?','Shit! Enter a valid option','Whoops! Thats not an option','Sorry! You just typed shit']
 	    print ' [-] '+dope[randint(0,3)]
 	    sleep(1)
 	    crawlers(web)
+
