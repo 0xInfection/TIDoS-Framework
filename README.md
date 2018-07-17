@@ -2,7 +2,7 @@
 
 ![Python](https://img.shields.io/badge/Python-2.7-green.svg) ![TIDoS](https://img.shields.io/badge/TIDoS-v1.4-blue.svg) ![Supported OS](https://img.shields.io/badge/Supported%20OS-Linux-yellow.svg) ![License](https://img.shields.io/badge/License-GPLv3-orange.svg) ![Build](https://img.shields.io/badge/Build-0087-red.svg) ![Modules](https://img.shields.io/badge/Modules-100-blue.svg) ![Status](https://img.shields.io/badge/Build%20Status-passing-brightgreen.svg) ![Stage](https://img.shields.io/badge/Release-Stable-green.svg)
 
-# TIDoS Framework 
+# The TIDoS Framework 
 TIDoS Framework is a comprehensive web application audit framework. `let's keep this simple`
 
 ### Highlights :-
@@ -44,7 +44,7 @@ tidos
 
 TIDoS is made to be comprehensive. It is a highly flexible framework where you just have to select and use modules.
 
-But before that, you need to set your own `API KEYS` for various OSINT purposes. To do so, open up `API_KEYS.py` under `files/` directory and set your own keys and access tokens for `SHODAN`, `CENSYS`, `FULL CONTACT`, `GOOGLE` and `WHATCMS`. Public `API KEYS` for `SHODAN` and `WHATCMS` have been provided with the TIDoS release itself. You can still add your own... `no harm!`
+But before that, you need to set your own `API KEYS` for various OSINT purposes. To do so, open up `API_KEYS.py` under `files/` directory and set your own keys and access tokens for `SHODAN`, `CENSYS`, `FULL CONTACT`, `GOOGLE` and `WHATCMS`. Public API KEYS and tokens for `SHODAN` and `WHATCMS` have been provided with the TIDoS release itself. You can still add your own... `no harm!`
 
 Finally, as the framework opens up, enter the website name `eg. http://www.example.com` and let TIDoS lead you. Thats it! Its as easy as that.
 
