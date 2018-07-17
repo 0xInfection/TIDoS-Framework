@@ -20,6 +20,7 @@ if ! hash git 2>/dev/null; then sudo apt-get install --yes git ; fi
 if ! hash build-essential 2>/dev/null; then sudo apt-get install --yes build-essential ; fi
 if ! hash python-pip 2>/dev/null; then sudo apt-get install --yes python-pip ; fi
 if ! hash python-xmpp 2>/dev/null; then sudo apt-get install --yes python-xmpp ; fi
+if ! hash default-libmysqlclient-dev 2>/dev/null; then sudo apt-get install --yes default-libmysqlclient-dev ; fi
 pip install sslscan
 pip install tldextract
 
@@ -92,6 +93,11 @@ cd ..
 cd ..
 
 cd lib/emailprotectionslib/
+sudo python setup.py install
+cd ..
+cd ..
+
+cd lib/mysql/
 sudo python setup.py install
 cd ..
 cd ..
