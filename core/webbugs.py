@@ -17,6 +17,7 @@ from clickjack import *
 from zone import *
 from vulnban1 import *
 from webbugsban import *
+from hhi import *
 from netmisc import *
 from cloudflare import *
 from hsts import *
@@ -98,6 +99,11 @@ def webbugs(web):
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')	
 	webbugs(web)
 
+    elif v.strip() == '12':
+	print B+' [!] Type Selected :'+C+' Host Header Injection'
+	hhi(web)	
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
+	webbugs(web)
 
     elif v.strip() == 'A':
 	print B+' [!] Type Selected : All Modules'
@@ -157,6 +163,12 @@ def webbugs(web):
 	netmisc(web)
 	print B+'\n [!] Module Completed -->'+C+' Telnet Enabled\n'
 	time.sleep(1)
+
+	print B+' [*] Firing up module -->'+C+' Host Header Injection'
+	hhi(web)
+	print B+'\n [!] Module Completed -->'+C+' Host Header Injection\n'
+	time.sleep(1)
+
 	print G+' [+] All modules successfully completed!'
 	time.sleep(0.5)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')

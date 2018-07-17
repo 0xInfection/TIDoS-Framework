@@ -23,7 +23,7 @@ from vulnban1 import *
 from sqli import *
 from crlf import *
 from subdomover import *
-from hhi import *
+from phpi import *
 from vulnban import *
 from htmli import *
 #from xmli import *
@@ -100,8 +100,8 @@ def serbugs(web):
 	serbugs(web)
 
     elif v.strip() == '11':
-	print ' Type Selected : Host Header Injection'
-	hhi(web)	
+	print ' Type Selected : PHP Code Injection'
+	phpi(web)	
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')	
 	serbugs(web)
 
@@ -172,9 +172,9 @@ def serbugs(web):
 	print ' [!] Module Completed --> CRLF\n'
 	time.sleep(1)
 
-	print ' [*] Firing up module --> Host Header Injection'
-	hhi(web)
-	print ' [!] Module Completed --> Host Header Injection\n'
+	print ' [*] Firing up module --> PHP Code Injection'
+	phpi(web)
+	print ' [!] Module Completed --> PHP Code Injection\n'
 	time.sleep(0.5)
 
 	print ' [*] Firing up module --> ShellShock'

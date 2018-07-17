@@ -20,7 +20,7 @@ def serbugsban():
     print C+'''
 
 \033[1;34m
-   ______________________________________________________
+  +------------------------------------------------------+
   |     \033[1;37mTIDoS Dialog                       \033[1;33m[-] [口] [×]  \033[1;34m|
   | ---------------------------------------------------- |
 \033[1;36m  |                                                      |
@@ -46,7 +46,7 @@ def serbugsban():
     time.sleep(0.1)
 #    print B+'  [6]'+C+' Cross-Site Scripting '+W+'(Absolute)'
 #    time.sleep(0.1)
-    print B+'  [7]'+C+' SQL Injection '+W+'(Error & Union Based)'
+    print B+'  [7]'+C+' SQL Injection '+W+'(Error & Blind Based)'
     time.sleep(0.1)
     print B+'  [8]'+C+' LDAP Entity Injection '+W+'(Error Enumeration)'
     time.sleep(0.1)
@@ -54,7 +54,7 @@ def serbugsban():
     time.sleep(0.1)
     print B+'  [10]'+C+' HTTP Response Splitting '+W+'(CRLF Injection)'
     time.sleep(0.1)
-    print B+'  [11]'+C+' Host Header Injection '+W+'(Socket Based)'
+    print B+'  [11]'+C+' PHP Code Injection '+W+'(Windows + Linux)'
     time.sleep(0.1)
     print B+'  [12]'+C+' Shellshock Vulnerabilities'+W+' (Bash RCE)'
     time.sleep(0.1)

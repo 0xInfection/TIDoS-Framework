@@ -16,6 +16,7 @@ from ssscript import *
 from clickjack import *
 from zone import *
 from vulnban1 import *
+from hhi import *
 from webbugsban import *
 from netmisc import *
 from cloudflare import *
@@ -79,21 +80,27 @@ def webbugs_alt(web):
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	webbugs_alt(web)
 
-    elif v.strip() == '10':
-	print B+' [!] Type Selected :'+C+' Telnet Enabled'
-	netmisc(web)	
-	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
-	webbugs_alt(web)
-
     elif v.strip() == '9':
 	print B+' [!] Type Selected :'+C+' Cross Site Tracing'
 	xsstrace(web)	
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	webbugs_alt(web)
 
+    elif v.strip() == '10':
+	print B+' [!] Type Selected :'+C+' Telnet Enabled'
+	netmisc(web)	
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
+	webbugs_alt(web)
+
     elif v.strip() == '11':
 	print B+' [!] Type Selected :'+C+' Email Spoof'
 	mailspoof(web)	
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
+	webbugs_alt(web)
+
+    elif v.strip() == '12':
+	print B+' [!] Type Selected :'+C+' Host Header Injection'
+	hhi(web)	
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	webbugs_alt(web)
 
@@ -106,9 +113,9 @@ def webbugs_alt(web):
 	print B+'\n [!] Module Completed -->'+C+' iCORS\n'
 	time.sleep(1)
 
-	print B+' [*] Firing up module -->'+C+' SSS '
+	print B+' [*] Firing up module -->'+C+' Same Site Scripting '
 	ssscript(web)
-	print B+'\n [!] Module Completed -->'+C+' SSS \n'
+	print B+'\n [!] Module Completed -->'+C+' Same Site Scripting \n'
 	time.sleep(1)
 
 	print B+' [*] Firing up module -->'+C+' ClickJacking'
@@ -149,6 +156,12 @@ def webbugs_alt(web):
 	print B+' [*] Firing up module -->'+C+' Telnet Enabled'
 	netmisc(web)
 	print B+'\n [!] Module Completed -->'+C+' Telnet Enabled\n'
+	time.sleep(1)
+
+	print B+' [*] Firing up module -->'+C+' Host Header Injection'
+	hhi(web)
+	print B+'\n [!] Module Completed -->'+C+' Host Header Injection\n'
+
 	time.sleep(3)
 	print G+B+' [+] All modules successfully completed!'
 	time.sleep(1)
