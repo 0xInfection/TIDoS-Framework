@@ -1,6 +1,6 @@
 <p align="middle"><img src='https://i.imgur.com/QAbaVdU.png' /></p>
 
-![Python](https://img.shields.io/badge/Python-2.7-green.svg) ![TIDoS](https://img.shields.io/badge/TIDoS-v1.4-blue.svg) ![Supported OS](https://img.shields.io/badge/Supported%20OS-Linux-yellow.svg) ![License](https://img.shields.io/badge/License-GPLv3-orange.svg) ![Build](https://img.shields.io/badge/Build-0087-red.svg) ![Modules](https://img.shields.io/badge/Modules-97-blue.svg) ![Status](https://img.shields.io/badge/Build%20Status-passing-brightgreen.svg) ![Stage](https://img.shields.io/badge/Release-Stable-green.svg)
+![Python](https://img.shields.io/badge/Python-2.7-green.svg) ![TIDoS](https://img.shields.io/badge/TIDoS-v1.4-blue.svg) ![Supported OS](https://img.shields.io/badge/Supported%20OS-Linux-yellow.svg) ![License](https://img.shields.io/badge/License-GPLv3-orange.svg) ![Build](https://img.shields.io/badge/Build-0087-red.svg) ![Modules](https://img.shields.io/badge/Modules-99-blue.svg) ![Status](https://img.shields.io/badge/Build%20Status-passing-brightgreen.svg) ![Stage](https://img.shields.io/badge/Release-Stable-green.svg)
 
 
 # TIDoS Framework 
@@ -9,10 +9,10 @@ TIDoS Framework is a comprehensive web application audit framework. `let's keep 
 ### Highlights :-
 The main highlights of this framework is:
 - [x] An all-in-one framework to cover up everything from Reconnaissance to Exploitation.
-- [x] Has 4 main phases, subdivided into __13 sub-phases__ consisting total of __97 modules__.
+- [x] Has 4 main phases, subdivided into __13 sub-phases__ consisting total of __99 modules__.
 - [x] Reconnaissance Phase has 36 modules of its own (including active and passive recon, information disclosure modules).
-- [x] Scanning & Enumeration Phase has got 27 modules (including port scans, WAF analysis, etc)
-- [x] Vulnerability Analysis Phase has 34 modules (including most common vulnerabilites in action).
+- [x] Scanning & Enumeration Phase has got 28 modules (including port scans, WAF analysis, etc)
+- [x] Vulnerability Analysis Phase has 35 modules (including most common vulnerabilites in action).
 - [x] Exploits Castle has only 1 exploit. `(purely developemental)`
 - [x] All four phases each have a `Auto-Awesome` module which automates every module for you.
 - [x] You just need the domain, and leave everything is to this tool.
@@ -83,11 +83,11 @@ TIDoS Framework presently supports the following:
 	    - Threat Intelligence Gathering `Bad IPs`
 
 	+ Active Reconnaissance
-	    - Ping enumeration `Advanced`
+	    - Ping Enumeration `Advanced`
 	    - CMS Detection `(185+ CMSs supported)` `IMPROVED`
 	    - Advanced Traceroute `IMPROVED`
 	    - Grab HTTP Headers `Live Capture`
-	    - Find HTTP Methods Allowed `NEW`
+	    - Find HTTP Methods Allowed
 	    - Detect Server `IMPROVED`
 	    - Examine SSL Certificate `Absolute`
 	    - `robots.txt` and `sitemap.xml` Checker
@@ -105,7 +105,7 @@ TIDoS Framework presently supports the following:
 
 * __Scanning & Enumeration__
 
-	+ Remote Server WAF Analysis
+	+ Remote Server WAF Enumeration
 	+ Port Scanning `Ingenious Modules`
 	    - Simple Port Scanner `via Socket Connections`
 	    - TCP SYN Scan `Highly reliable`
@@ -168,7 +168,7 @@ TIDoS Framework presently supports the following:
 	    - User-Agent Value Based
 	    - Parameter Value Based `Manual`
 	+ Unvalidated URL Forwards `Open Redirect`
-	+ CRLF Injection and HTTP Response Splitting
+	+ HTTP Response Splitting `CRLF Injection`
 	    - User-Agent Value Based
 	    - Parameter value Based `Manual`
 	+ Sub-domain Takeover `50+ Services`
@@ -177,7 +177,7 @@ TIDoS Framework presently supports the following:
 
     __Auxillaries__
 
-	+ Protocol Credential Bruteforce 
+	+ Protocol Default Credential Bruteforce 
 
 	    - FTP Protocol Bruteforce
 	    - SSH Protocol Bruteforce
@@ -187,16 +187,7 @@ TIDoS Framework presently supports the following:
 	    - SMTP Protocol Bruteforce
 	    - TELNET Protocol Bruteforce
 	    
-	+ String & Payload Encoder
-	
-	    - URL Character Encoding
-	    - Base64 Character Encoding
-	    - HTML Character Encoding
-	    - Plain ASCII Character Encoding
-	    - Hex Character Encoding
-	    - Octal Character Encoding
-	    - Binary Character Encoding
-	    - GZip Character Encoding
+	+ String & Payload Encoder `6 Modules`
 
 - __Exploitation__ `purely developmental`
 
