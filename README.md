@@ -118,7 +118,8 @@ TIDoS Framework presently supports the following:
 	+ Interactive Scanning with NMap `16 preloaded modules`
 	+ Crawlers
 	    - Depth 1
-	    - Depth 2 `IMPROVED`
+	    - Depth 2 `Page Crawler`
+	    - Depth 3 `Link Crawler`
 
 + __Vulnerability Analysis__
 
@@ -132,6 +133,7 @@ TIDoS Framework presently supports the following:
 	- Cloudflare Misconfiguration Check `+ Getting Real IP` 
 	- HTTP High Transport Security Usage
 	- Spoofable Email `Missing SPF and DMARC Records`
+	- Host Header Injection `Port Based`
 	- Security Headers Analysis `Live Capture`
 	- Cross-Site Tracing `Port Based`
 	- Network Security Misconfig. `Telnet Enabled`
@@ -142,19 +144,23 @@ TIDoS Framework presently supports the following:
 	    - Local File Inclusion (LFI) `Param based`
 	    - Remote File Inclusion (RFI)
 	    	- Parameter Based
-		- Pre-loaded Path Based
+		     - Pre-loaded Path Based
 	+ OS Command Injection `Linux & Windows (RCE)`
 	+ Path Traversal `(Sensitive Paths)`
 	+ Cross-Site Request Forgery `Absolute`
-	+ SQL Injection `Error-Based`
-	    - Cookie Value Based
-	    - Referer Value Based
-	    - User-Agent Value Based
-	    - Auto-gathering `IMPROVED`
-	    - Parameter Based `Manual`
+	+ SQL Injection 
+	    + Error Based Injection
+		    - Cookie Value Based
+		    - Referer Value Based
+		    - User-Agent Value Based
+		    - Auto-gathering `IMPROVED`
+	    + Blind Based Injection `Crafted Payloads`
+		    - Cookie Value Based
+		    - Referer Value Based
+		    - User-Agent Value Based
+		    - Auto-gathering `IMPROVED`
 	+ LDAP Injection `Parameter Based`
 	+ HTML Injection `Parameter Based`
-	+ Host Header Injection `Port Based`
 	+ Bash Command Injection `ShellShock` 
 	+ Cross-Site Scripting `beta`
 	    - Cookie Value Based
