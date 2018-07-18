@@ -39,7 +39,9 @@ def activeban():
     time.sleep(0.1)
     print B+'     [10]'+C+' Enumerate Server behind website'+W
     time.sleep(0.1)
-    print B+'     [11]'+C+' Operating System Fingerprinting'+W+' (Response Based)\n'
+    print B+'     [11]'+C+' Operating System Fingerprinting'+W+' (Response Based)'
+    time.sleep(0.1)
+    print B+'     [12]'+C+' Common File Bruteforce'+W+' (5 modules)\n'
     time.sleep(0.1)
     print B+'     [A]'+C+' The Auto-Awesome Module\n'
     time.sleep(0.1)

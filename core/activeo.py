@@ -24,6 +24,7 @@ from sharedns import *
 from subnet import *
 from sslcert import *
 from activeban import *
+from filebrute import *
 from traceroute import *
 from footprint import *
 from footprintban import *
@@ -118,6 +119,13 @@ def activeo(web):
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	activeo(web)
 
+    elif v.strip() == '12':
+	print C+' [!] Type Selected : File Bruteforcers'
+	filebrute(web)
+	print '\n\n'
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
+	activeo(web)
+
     elif v.strip() == 'A':
 	print C+' [!] Type Selected : All Modules'
 	time.sleep(0.5)
@@ -169,6 +177,11 @@ def activeo(web):
 	print C+' [*] Firing up module -->'+B+' OS Fingerprinting'
 	osdetect(web)
 	print C+'\n [!] Module Completed -->'+B+' OS Detect\n'
+	time.sleep(1)
+
+	print C+' [*] Firing up module -->'+B+' File bruteforcer'
+	filebrute(web)
+	print C+'\n [!] Module Completed -->'+B+' File Bruteforcer\n'
 	time.sleep(1)
 
 	print C+'\n [!] All scantypes have been tested on target...'

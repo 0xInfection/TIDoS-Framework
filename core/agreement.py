@@ -12,9 +12,9 @@ def agreement():
 
     print """
 \033[1;95m
-				=======================================================
-                               		T I D O S   F R A M E W O R K   v1.4
-				=======================================================
+				==========================================
+                               	   T I D O S   F R A M E W O R K   v1.5
+				==========================================
 \033[1;37m
 	TIDoS is a open-source toolkit developed as a comprehensive web-app audit framework.
 
