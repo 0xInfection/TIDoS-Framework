@@ -9,6 +9,7 @@
 #This module requires TIDoS Framework
 #https://github.com/the-Infected-Drake/TIDoS-Framework 
 
+import os
 import requests
 import mechanize
 import cookielib
@@ -74,11 +75,20 @@ def out(web, list0):
 	web = web.replace('http://','')
 	web = web.replace('https://','')
 	print GR+' [*] Writing found URLs to a file...'
-	fil = open('tmp/'+web+'-links.lst','w+')
-	for lists in list0:
-	    if str(web) in lists:
-		fil.write("%s\n" % lists)
-
+	if os.path.exists('tmp/logs/'+web+'-logs/'+web+'-links.lst'):		
+		fil = open('tmp/logs/'+web+'-logs/'+web+'-links.lst','w+')
+		print O+' [!] Sorting only scope urls...'
+		time.sleep(1)
+		for lists in list0:
+		    if str(web) in lists:
+			fil.write("%s\n" % lists)
+	else:
+		fil = open('tmp/logs/'+web+'-logs/'+web+'-links.lst','a')
+		print O+' [!] Sorting only scope urls...'
+		time.sleep(1)
+		for lists in list0:
+		    if str(web) in lists:
+			fil.write("%s\n" % lists)
 def crawler1(web):
 
 	print GR+' [*] Loading crawler...'

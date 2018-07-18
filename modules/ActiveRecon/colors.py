@@ -5,7 +5,10 @@
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 
 #This module requires TIDoS Framework
-#https://github.com/theInfectedDrake/TIDoS-Framework 
+#https://github.com/the-Infected-Drake/TIDoS-Framework 
+
+import sys
+sys.path.append('core/')
 
 ###############################
 class color:
@@ -24,7 +27,6 @@ class color:
    OKGREEN = '\033[92m'
    WARNING = '\033[93m'
    FAIL = '\033[91m'
-
 W  = '\033[1;0m'  # white (normal)
 R  = '\033[1;31m' # red
 G  = '\033[1;32m' # green
@@ -34,4 +36,5 @@ P  = '\033[1;35m' # purple
 C  = '\033[1;36m' # cyan
 GR = '\033[1;37m' # gray
 T  = '\033[1;93m' # tan
+M = '\033[1;35;32m' # magenta
 ###############################

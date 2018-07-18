@@ -14,7 +14,7 @@ import time
 import requests
 import sys
 import FileUtils
-sys.path.append('lib/FileUtils/')
+sys.path.append('lib/fileutils/')
 from FileUtils import *
 from colors import *
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
@@ -72,18 +72,18 @@ def getFile0x00(filepath):
 		print R+' [-] No file path found under ' +filepath+'!'
 	return dir_path
 
-def passbrute(web):
+def dotbrute(web):
 	
 	print GR+' [*] Loading module...'
 	time.sleep(0.5)
-	print R+'\n    ========================================='
-	print R+'     P A S S   P A T H   B R U T E F O R C E'
-	print R+'    =========================================\n'
+	print R+'\n    ======================================='
+	print R+'     D O T   F I L E   B R U T E F O R C E'
+	print R+'    =======================================\n'
 
-	print O+' [*] Path to file to be used (Default: files/fuzz-db/pass_paths.lst)'
+	print O+' [*] Path to file to be used '+R+'(Default: files/fuzz-db/dot_paths.lst)...'
 	fil = raw_input(O+' [#] Your input (Press Enter if default) :> ')
 	if fil == '':
-		fil = 'files/fuzz-db/pass_paths.lst'
+		fil = 'files/fuzz-db/dot_paths.lst'
 	else:
 		print GR+' [*] Checking filepath...'
 		if os.path.exists(fil) == True:
@@ -97,18 +97,17 @@ def passbrute(web):
 			  'Accept-Encoding': 'gzip, deflate',
 			  'Accept': 'text/html,application/xhtml+xml,application/xml;',
 			  'Connection':'close'}
-
 	try:
 		ul = check0x00(web, mo, gen_headers)
-		if ul:
-			print G+' [+] The following possible password paths were found!'
-			for u in ul:
-				print G+' [+] Password file : '+O+u
-		else:
-			print R+' [-] No common password locations were found!'
-		print G+' [+] Done!'
-
 	except Exception as e:
-		print R+' [-] Unexpected Exception Encountered!'
+		print R+' [-] Exception Encountered!'
 		print R+' [-] Exception : '+str(e)
+
+	if ul:
+		print G+' [+] The following interesting files were found!'
+		for u in ul:
+			print G+' [+] Path : '+O+u
+	else:
+		print R+' [-] No common interesting files were found!'
+	print G+' [+] Done!'
 

@@ -14,6 +14,7 @@ import time
 import requests
 import sys
 import FileUtils
+sys.path.append('lib/fileutils/')
 from FileUtils import *
 from colors import *
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
@@ -75,14 +76,14 @@ def backbrute(web):
 	
 	print GR+' [*] Loading module...'
 	time.sleep(0.5)
-	print R+'\n    ================================================'
-	print R+'     P R O X Y   C O N F I G.   B R U T E F O R C E'
-	print R+'    ================================================\n'
+	print R+'\n    ======================================='
+	print R+'     B A C K D O O R   B R U T E F O R C E'
+	print R+'    =======================================\n'
 
-	print O+' [*] Path to file to be used (Default: files/fuzz-db/proxy_paths.lst)'
+	print O+' [*] Path to file to be used '+R+'(Default: files/fuzz-db/backdoor_paths.lst)...'
 	fil = raw_input(O+' [#] Your input (Press Enter if default) :> ')
 	if fil == '':
-		fil = 'files/fuzz-db/proxy_paths.lst'
+		fil = 'files/fuzz-db/backdoor_paths.lst'
 	else:
 		print GR+' [*] Checking filepath...'
 		if os.path.exists(fil) == True:
@@ -94,15 +95,19 @@ def backbrute(web):
 	gen_headers =    {'User-Agent':'Mozilla/5.0 (Windows; U; Windows NT 6.1; rv:2.2) Gecko/20110201',
 			  'Accept-Language':'en-US;',
 			  'Accept-Encoding': 'gzip, deflate',
-			  'Accept': 'text/html, application/xhtml+xml, application/xml;',
+			  'Accept': 'text/html,application/xhtml+xml,application/xml;',
 			  'Connection':'close'}
 
-	ul = check0x00(web, mo, gen_headers)
-	if ul:
-		print G+' [+] The following possible proxy config. paths were found!'
-		for u in ul:
-			print G+' [+] Proxy config path : '+O+u
-	else:
-		print R+' [-] No common proxy config paths were found!'
-	print G+' [+] Done!'
+	try:
+		ul = check0x00(web, mo, gen_headers)
+		if ul:
+			print G+' [+] The following possible backdoors were found!'
+			for u in ul:
+				print G+' [+] Path to backdoor : '+O+u
+		else:
+			print R+' [-] No backdoors were found!'
+		print G+' [+] Done!'
+
+	except Exception as e:
+		print R+' [-] Exception : '+str(e)
 
