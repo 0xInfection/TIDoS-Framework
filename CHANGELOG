@@ -119,7 +119,7 @@
         - Addition of ldap_payloads at the payload-db.
         - Other minor bug fixes.
 
-    * v1.4.0 [latest release] (#stable)
+    * v1.4.0 
 
 	Big release with lots of changes.
 
@@ -130,3 +130,13 @@
 	- Major ImportError bug fixes.
 	- Re-written 6 major modules for efficiency.
  
+    * v1.5.0 [latest release] (#stable)
+
+	Wholesome release with 8 new modules.
+
+	Changelog:
+	- Addition of 5 new modules under ActiveRecon Phase.
+	- Addition of 3 new modules under Vulnerability Analysis.
+	- Bug fixes to the BruteMods module.
+	- Most of PassiveRecon Phase modules rewritten for the better.
+	- Lastly, some minor bug fixes and stuff.
