@@ -1,18 +1,17 @@
 <p align="middle"><img src='https://i.imgur.com/QAbaVdU.png' /></p>
 
-![Python](https://img.shields.io/badge/Python-2.7-green.svg) ![TIDoS](https://img.shields.io/badge/TIDoS-v1.4-blue.svg) ![Supported OS](https://img.shields.io/badge/Supported%20OS-Linux-yellow.svg) ![License](https://img.shields.io/badge/License-GPLv3-orange.svg) ![Build](https://img.shields.io/badge/Build-0087-red.svg) ![Modules](https://img.shields.io/badge/Modules-100-blue.svg) ![Status](https://img.shields.io/badge/Build%20Status-passing-brightgreen.svg) ![Stage](https://img.shields.io/badge/Release-Stable-green.svg)
+![Python](https://img.shields.io/badge/Python-2.7-green.svg) ![TIDoS](https://img.shields.io/badge/TIDoS-v1.5-blue.svg) ![Supported OS](https://img.shields.io/badge/Supported%20OS-Linux-yellow.svg) ![License](https://img.shields.io/badge/License-GPLv3-orange.svg) ![Build](https://img.shields.io/badge/Build-0088-red.svg) ![Modules](https://img.shields.io/badge/Modules-89-blue.svg) ![Status](https://img.shields.io/badge/Build%20Status-passing-brightgreen.svg) ![Stage](https://img.shields.io/badge/Release-Stable-green.svg)
 
 # The TIDoS Framework 
-TIDoS Framework is a comprehensive web application audit framework. `let's keep this simple`
+TIDoS Framework is a comprehensive web-app audit framework. `let's keep this simple`
 
 ### Highlights :-
 The main highlights of this framework is:
-- [x] TIDoS Framework boasts of a century of modules.
 - [x] A framework to cover up everything from Reconnaissance to Exploitation.
-- [x] Has 4 main phases, subdivided into __13 sub-phases__ consisting total of __100 modules__.
-- [x] Reconnaissance Phase has 36 modules of its own (including active and passive recon, information disclosure modules).
-- [x] Scanning & Enumeration Phase has got 28 modules (including port scans, WAF analysis, etc)
-- [x] Vulnerability Analysis Phase has 36 modules (including most common vulnerabilites in action).
+- [x] Has 4 main phases, subdivided into __13 sub-phases__ consisting total of __89 modules__.
+- [x] Reconnaissance Phase has 41 modules of its own (including active and passive recon, information disclosure modules).
+- [x] Scanning & Enumeration Phase has got 13 modules (including port scans, WAF analysis, etc)
+- [x] Vulnerability Analysis Phase has 35 modules (including most common vulnerabilites in action).
 - [x] Exploits Castle has only 1 exploit. `(purely developemental)`
 - [x] All four phases each have a `Auto-Awesome` module which automates every module for you.
 - [x] You just need the domain, and leave everything is to this tool.
@@ -86,14 +85,20 @@ TIDoS Framework presently supports the following:
 	    - Ping Enumeration `Advanced`
 	    - CMS Detection `(185+ CMSs supported)` `IMPROVED`
 	    - Advanced Traceroute `IMPROVED`
-	    - Grab HTTP Headers `Live Capture`
-	    - Find HTTP Methods Allowed
-	    - Detect Server `IMPROVED`
-	    - Examine SSL Certificate `Absolute`
 	    - `robots.txt` and `sitemap.xml` Checker
+	    - Grab HTTP Headers `Live Capture`
+	    - Find HTTP Methods Allowed `via OPTIONS`
+	    - Detect Server behind `IMPROVED`
+	    - Examine SSL Certificate `Absolute`
 	    - Subnets Enumeration `Class Based`
 	    - Find Shared DNS Hosts `Name Server Based`
 	    - Operating System Fingerprinting `IMPROVED`
+	    - Discover Interesting Files
+		    - Common Backdoor Locations `c99.php`
+		    - Common Backup Locations `.bak, .db`
+		    - Common Password Locations ` .pgp, .skr`
+		    - Common Proxy Path Configs. `.pac`
+		    - Common Dot Files `.htaccess, .phpinfo`
 
 	+ Information Disclosure
 	    - Credit Cards Disclosure `If Plaintext`
@@ -162,7 +167,7 @@ TIDoS Framework presently supports the following:
 	+ LDAP Injection `Parameter Based`
 	+ HTML Injection `Parameter Based`
 	+ Bash Command Injection `ShellShock` 
-	+ Cross-Site Scripting `beta`
+	+ Cross-Site Scripting `IMPROVED`
 	    - Cookie Value Based
 	    - Referer Value Based
 	    - User-Agent Value Based
@@ -188,7 +193,7 @@ TIDoS Framework presently supports the following:
 	    - SMTP Protocol Bruteforce
 	    - TELNET Protocol Bruteforce
 	    
-	+ String & Payload Encoder `6 Modules`
+	+ String & Payload Encoder `6 Types`
 
 - __Exploitation__ `purely developmental`
 
@@ -205,20 +210,24 @@ TIDoS Framework presently supports the following:
 <img src='https://i.imgur.com/lCa42Dn.png' width='50%'></img><img src='https://i.imgur.com/xVYRZ4M.png' width='50%'></img>
 <img src='https://i.imgur.com/7yJmqA2.png' width='33%'>  </img><img src='https://i.imgur.com/qJhYCaL.png' width='33%'>  </img><img src='https://i.imgur.com/OK2gD9W.png' width='33%'> </img>
 
+### Version:
+```
+v1.5
+```
 
 ### Upcoming:
 
 There are some bruteforce modules to be added:
-- Common Backups Locations
-- Common Password Locations
-- Common Dot files `(eg. .htaccess)`
-- Interesting Directories
-- Interesting Filepaths
-- Lots more of OSINT
+- Some more of Enumeraton Techniques
+- Lots more of OSINT & Stuff
 
 ### Known Bugs:
 
 This version of TIDoS is purely developmental and is presently `stable`. There are bugs in resolving the `[99] Back` at various end-points which results in blind fall-backs. Though I have added global exception handling, still, there maybe bugs out there. Also TIDoS needs to develop more on logging all info displayed on the screen `(help needed)`.
+
+### Disclaimer:
+
+This tool is provided a toolkit for full-fledged web-app pentesting and related vulnerability analysis. This framework is built for hunting bugs and has already found many. THEREFORE, I AM NOT RESPONSIBLE FOR THE SHIT YOU DO WITH THIS TOOL.
 
 ### Final Words:
 
