@@ -44,8 +44,8 @@ def serbugsban():
     time.sleep(0.1)
     print B+'  [5]'+C+' Cross-Site Request Forgery '+W+'(Absolute)'
     time.sleep(0.1)
-#    print B+'  [6]'+C+' Cross-Site Scripting '+W+'(Absolute)'
-#    time.sleep(0.1)
+    print B+'  [6]'+C+' Cross-Site Scripting '+W+'(Absolute)'
+    time.sleep(0.1)
     print B+'  [7]'+C+' SQL Injection '+W+'(Error & Blind Based)'
     time.sleep(0.1)
     print B+'  [8]'+C+' LDAP Entity Injection '+W+'(Error Enumeration)'

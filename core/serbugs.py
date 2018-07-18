@@ -69,11 +69,11 @@ def serbugs(web):
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')	
 	serbugs(web)
 
- #   elif v.strip() == '6':
-#	print ' Type Selected : XSS'
-#	xss(web)	
-#	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')	
-#	serbugs(web)
+    elif v.strip() == '6':
+	print ' Type Selected : XSS'
+	xss(web)	
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')	
+	serbugs(web)
 
     elif v.strip() == '7':
 	print ' Type Selected : SQLi'
@@ -152,10 +152,10 @@ def serbugs(web):
 	print ' [!] Module Completed --> CSRF\n'
 	time.sleep(1)
 
-#	print ' [*] Firing up module --> XSS '
-#	xss(web)
-#	print ' [!] Module Completed --> XSS \n'
-#	time.sleep(1)
+	print ' [*] Firing up module --> XSS '
+	xss(web)
+	print ' [!] Module Completed --> XSS \n'
+	time.sleep(1)
 
 	print ' [*] Firing up module --> SQLi'
 	sqli(web)
