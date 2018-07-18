@@ -198,6 +198,10 @@ TIDoS Framework presently supports the following:
 - __Exploitation__ `purely developmental`
 
 	+ ShellShock
+	
+### Other Tools:
+- `net_info.py` - Displays information about your network. Located under `tools/`.
+- `tidos_updater.py` - Updates the framework to the latest release via signature matching. Located under `tools/'.
 
 ### TIDoS In Action:
 <img src='https://i.imgur.com/OO6ENcQ.png'></img>
@@ -218,8 +222,8 @@ v1.5
 ### Upcoming:
 
 There are some bruteforce modules to be added:
-- Some more of Enumeraton Techniques
-- Lots more of OSINT & Stuff
+- Some more of Enumeraton Techniques (like a multithreaded admin panel finder).
+- Lots more of OSINT & Stuff (let that be a secret).
 
 ### Known Bugs:
 
