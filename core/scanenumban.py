@@ -34,12 +34,12 @@ def scanenumban():
 
  Choose from the following options:
 
-\033[1;34m [1] \033[1;36mRemote Server WAF Enumeration
-\033[1;34m [2] \033[1;36mPort Scanning and Analysis \033[0m(several types of scans)
-\033[1;34m [3] \033[1;36mInteractive Scanning with NMap \033[0m(preloaded modules)
-\033[1;34m [4] \033[1;36mFingerprint Web Technologies \033[0m(front-end) 
+\033[1;34m [1] \033[1;36mRemote Server WAF Enumeration \033[0m(Generic)
+\033[1;34m [2] \033[1;36mPort Scanning and Analysis \033[0m(Several Types)
+\033[1;34m [3] \033[1;36mInteractive Scanning with NMap \033[0m(Preloaded modules)
+\033[1;34m [4] \033[1;36mFingerprint Web Technologies \033[0m(Front End) 
 \033[1;34m [5] \033[1;36mGrab Banners on Services \033[0m(via Open Ports)
-\033[1;34m [6] \033[1;36mLet loose Crawlers on the target \033[0m(Depth 1 & 2)
+\033[1;34m [6] \033[1;36mLet loose Crawlers on the target \033[0m(Depth 1, 2 & 3)
  
 \033[1;34m [A] \033[1;36mAutomate all one by one on target
 

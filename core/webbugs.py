@@ -19,7 +19,7 @@ from vulnban1 import *
 from webbugsban import *
 from hhi import *
 from netmisc import *
-from cloudflare import *
+from cloudflaremisc import *
 from hsts import *
 from headers import *
 from colors import *
@@ -71,7 +71,7 @@ def webbugs(web):
 
     elif v.strip() == '7':
 	print B+' [!] Type Selected :'+C+' Cloudflare Misconfig.'
-	cloudflare(web)
+	cloudflaremisc(web)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	webbugs(web)
 
@@ -140,7 +140,7 @@ def webbugs(web):
 	time.sleep(1)
 
 	print B+' [*] Firing up module -->'+C+' Cloudflare Misconfig.'
-	cloudflare(web)
+	cloudflaremisc(web)
 	print B+'\n [!] Module Completed -->'+C+' Cloudflare Misconfig.\n'
 	time.sleep(1)
 
