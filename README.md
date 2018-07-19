@@ -96,7 +96,6 @@ TIDoS Framework presently supports the following: `and is under active developme
 	    - Find Shared DNS Hosts `Name Server Based`
 	    - Operating System Fingerprinting `IMPROVED`
 	    - Discover Interesting Files
-
 		    - Common Backdoor Locations `c99.php`
 		    - Common Backup Locations `.bak, .db`
 		    - Common Password Locations ` .pgp, .skr`
