@@ -77,11 +77,6 @@ sudo python setup.py install
 cd ..
 cd ..
 
-cd lib/wafw00f/
-sudo python setup.py install
-cd ..
-cd ..
-
 cd lib/pymap/
 sudo python setup.py install
 cd ..
