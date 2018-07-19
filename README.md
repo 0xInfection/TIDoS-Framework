@@ -7,7 +7,7 @@ TIDoS Framework is a comprehensive web-app audit framework. `let's keep this sim
 
 ### Highlights :-
 The main highlights of this framework is:
-- [x] A framework to cover up everything from Reconnaissance to Exploitation.
+- [x] A complete versatile framework to cover up everything from Reconnaissance to Exploitation.
 - [x] Has 4 main phases, subdivided into __13 sub-phases__ consisting a total of __91 modules__.
 - [x] Reconnaissance Phase has 43 modules of its own (including active and passive recon, information disclosure modules).
 - [x] Scanning & Enumeration Phase has got 13 modules (including port scans, WAF analysis, etc)
@@ -41,7 +41,7 @@ tidos
 
 ### Getting Started :-
 
-TIDoS is made to be comprehensive. It is a highly flexible framework where you just have to select and use modules.
+TIDoS is made to be comprehensive and versatile. It is a highly flexible framework where you just have to select and use modules.
 
 But before that, you need to set your own `API KEYS` for various OSINT purposes. To do so, open up `API_KEYS.py` under `files/` directory and set your own keys and access tokens for `SHODAN`, `CENSYS`, `FULL CONTACT`, `GOOGLE` and `WHATCMS`. Public API KEYS and tokens for `SHODAN` and `WHATCMS` have been provided with the TIDoS release itself. You can still add your own... `no harm!`
 
@@ -95,12 +95,12 @@ TIDoS Framework presently supports the following: `and is under active developme
 	    - Subnets Enumeration `Class Based`
 	    - Find Shared DNS Hosts `Name Server Based`
 	    - Operating System Fingerprinting `IMPROVED`
-	    - Discover Interesting Files
-		    - Common Backdoor Locations `c99.php`
-		    - Common Backup Locations `.bak, .db`
-		    - Common Password Locations ` .pgp, .skr`
-		    - Common Proxy Path Configs. `.pac`
-		    - Common Dot Files `.htaccess, .phpinfo`
+	    - Discover Interesting Files `via Bruteforce`
+		    - Common Backdoor Locations `shells, etc.`
+		    - Common Backup Locations `.bak, .db, etc.`
+		    - Common Password Locations ` .pgp, .skr, etc.`
+		    - Common Proxy Path Configs. `.pac, etc.`
+		    - Common Dot Files `.htaccess, .apache, etc`
 
 	+ Information Disclosure
 	    - Credit Cards Disclosure `If Plaintext`
