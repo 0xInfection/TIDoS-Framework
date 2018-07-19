@@ -17,7 +17,6 @@ import requests
 sys.path.append('files/signature-db/waf-signatures/')
 from colors import *
 from wafimpo import *
-from wafi import wafi
 from time import sleep
 
 wafs = ['Airlock','Anquanboa','Armor','Asm','AWS','Baidu','Barracuda','BetterWPSecurity','F5 BigIP','BinarySec','BlackDoS','Cisco ACE XML',
@@ -129,4 +128,3 @@ def waf(web):
 
 	print G+'\n [+] WAF Fingerprinting module completed!\n'
 
-waf('http://indeed.com')

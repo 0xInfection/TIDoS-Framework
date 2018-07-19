@@ -98,8 +98,9 @@ def bypass(domain):
 	print R+' [-] Unable to find remote IP!\n'
 	pass
 
-def cloudflare(web):
+def cloudflaremisc(web):
 	
 	print GR+' [*] Loading...'
 	time.sleep(0.5)
 	cloud0x00(web)
+
