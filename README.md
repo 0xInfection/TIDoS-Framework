@@ -112,7 +112,7 @@ TIDoS Framework presently supports the following: `and is under active developme
 
 * __Scanning & Enumeration__
 
-	+ Remote Server WAF Enumeration
+	+ Remote Server WAF Enumeration `Generic`
 	+ Port Scanning `Ingenious Modules`
 	    - Simple Port Scanner `via Socket Connections`
 	    - TCP SYN Scan `Highly reliable`
