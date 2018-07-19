@@ -20,6 +20,8 @@ from piwebenum import *
 from grabhead import *
 from httpmethods import *
 from robot import *
+from apachestat import *
+from dav import *
 from sharedns import *
 from subnet import *
 from sslcert import *
@@ -106,20 +108,34 @@ def activeo(web):
 	activeo(web)
 
     elif v.strip() == '10':
+	print C+' [!] Type Selected : Apache Status'
+	apachestat(web)
+	print '\n\n'
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
+	activeo(web)
+
+    elif v.strip() == '11':
+	print C+' [!] Type Selected : WebDAV HTTP Enumeration'
+	dav(web)
+	print '\n\n'
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
+	activeo(web)
+
+    elif v.strip() == '12':
 	print C+' [!] Type Selected : Server Detection'
 	serverdetect(web)
 	print '\n\n'
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	activeo(web)
 
-    elif v.strip() == '11':
+    elif v.strip() == '13':
 	print C+' [!] Type Selected : Operating System Fingerprinting'
 	osdetect(web)
 	print '\n\n'
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	activeo(web)
 
-    elif v.strip() == '12':
+    elif v.strip() == '14':
 	print C+' [!] Type Selected : File Bruteforcers'
 	filebrute(web)
 	print '\n\n'
@@ -169,9 +185,14 @@ def activeo(web):
 	print C+'\n [!] Module Completed -->'+B+' CMS Detect\n'
 	time.sleep(1)
 
-	print C+' [*] Firing up module -->'+B+' Server Detection'
-	serverdetect(web)
-	print C+'\n [!] Module Completed -->'+B+' Server Detect\n'
+	print C+' [*] Firing up module -->'+B+' WebDAV HTTP Profiling'
+	dav(web)
+	print C+'\n [!] Module Completed -->'+B+' WebDAV HTTP Profiling\n'
+	time.sleep(1)
+
+	print C+' [*] Firing up module -->'+B+' Apache Status'
+	apachestat(web)
+	print C+'\n [!] Module Completed -->'+B+' Apache Status\n'
 	time.sleep(1)
 
 	print C+' [*] Firing up module -->'+B+' OS Fingerprinting'
@@ -182,6 +203,16 @@ def activeo(web):
 	print C+' [*] Firing up module -->'+B+' File bruteforcer'
 	filebrute(web)
 	print C+'\n [!] Module Completed -->'+B+' File Bruteforcer\n'
+	time.sleep(1)
+
+	print C+' [*] Firing up module -->'+B+' Server Detection'
+	serverdetect(web)
+	print C+'\n [!] Module Completed -->'+B+' Server Detect\n'
+	time.sleep(1)
+
+	print C+' [*] Firing up module -->'+B+' OS Fingerprinting'
+	osdetect(web)
+	print C+'\n [!] Module Completed -->'+B+' OS Detect\n'
 	time.sleep(1)
 
 	print C+'\n [!] All scantypes have been tested on target...'
