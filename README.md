@@ -112,7 +112,7 @@ TIDoS Framework presently supports the following: `and is under active developme
 
 * __Scanning & Enumeration__
 
-	+ Remote Server WAF Enumeration `Generic`
+	+ Remote Server WAF Enumeration `Generic` `54 WAFs`
 	+ Port Scanning `Ingenious Modules`
 	    - Simple Port Scanner `via Socket Connections`
 	    - TCP SYN Scan `Highly reliable`
@@ -124,9 +124,9 @@ TIDoS Framework presently supports the following: `and is under active developme
 	+ Banner Grabbing of Services `via Open Ports`
 	+ Interactive Scanning with NMap `16 preloaded modules`
 	+ Crawlers
-	    - Depth 1
-	    - Depth 2 `Page Crawler`
-	    - Depth 3 `Link Crawler`
+	    - Depth 1 `Indexed Uri Crawler`
+	    - Depth 2 `Single Page Crawler`
+	    - Depth 3 `Web Link Crawler`
 
 + __Vulnerability Analysis__
 
@@ -242,4 +242,3 @@ Put this project on a watch, since it is updated frequently `(you can take a loo
 > Thank you,
 >
 > @_tID | CodeSploit
-
