@@ -67,7 +67,7 @@ def crawlers(web):
 	    print B+'\n [!] Scan Type Completed :'+C+' Crawler 2\n'
 	    sleep(0.5)
 	    print B+' [!] Initializing Scan Type :'+C+' Crawler (Depth 3)'
-	    crawler2(web)
+	    crawler3(web)
 	    print B+'\n [!] Scan Type Completed :'+C+' Crawler 3\n'
 	    print G+' [+] All modules successfully completed!'
 	    raw_input(GR+' [+] Press '+O+'Enter '+GR+'to continue...')
