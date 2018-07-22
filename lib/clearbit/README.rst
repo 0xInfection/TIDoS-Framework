@@ -1,5 +1,7 @@
 # Clearbit
-#### A modified version of Clearbit suited to 
+
+#### A modified version of Clearbit suited to TIDoS (TIDoS is suited to this version)
+
 
 A Python API client to [https://clearbit.com](https://clearbit.com).
 
