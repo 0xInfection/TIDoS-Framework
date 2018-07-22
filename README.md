@@ -237,7 +237,7 @@ This tool is provided a toolkit for full-fledged web-app pentesting and related 
 
 ### Final Words:
 
-Put this project on a watch, since it is updated frequently `(you can take a look at past commits history)`. This project is one of the best frameworks I have ever built and I would really like your constructive criticism, suggestions and help in converting this project into the best web penetration testing framework ever built `and trust me, it will be ;)`.
+This project is presently under actuive developement so, put it on a watch, since it is updated frequently `(you can take a look at past commits history)`. This project is one of the best frameworks I have ever built and I would really like your constructive criticism, suggestions and help in converting this project into the best web penetration testing framework ever built `and trust me, it will be ;)`.
 
 > Thank you,
 >
