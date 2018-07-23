@@ -5,7 +5,7 @@
 #    TIDoS Framework     #
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 
-#Author: @_tID (forked help from wascan)
+#Author: @_tID
 #This module requires TIDoS Framework
 #https://github.com/the-Infected-Drake/TIDoS-Framework
 
