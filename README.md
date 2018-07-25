@@ -218,15 +218,15 @@ TIDoS Framework presently supports the following: `and is under active developme
 - `tidos_updater.py` - Updates the framework to the latest release via signature matching. Located under `tools/'.
 
 ### TIDoS In Action:
-<img src='https://i.imgur.com/OO6ENcQ.png'></img>
-<img src='https://i.imgur.com/O6r6EXy.png' width='33%'>  </img><img src='https://i.imgur.com/v418wIB.png' width='33%'>  </img><img src='https://i.imgur.com/IERK6gA.png' width='33%'></img>
+<img src='https://i.imgur.com/OO6ENcQ.png'>
+<img src='https://i.imgur.com/O6r6EXy.png' width='33%'>  <img src='https://i.imgur.com/v418wIB.png' width='33%'>  <img src='https://i.imgur.com/IERK6gA.png' width='33%'>
 
-<img src='https://i.imgur.com/OYIFTZV.png'></img>
-<img src='https://i.imgur.com/kIJ3jqL.png' width='33%'>  </img><img src='https://i.imgur.com/8NiwySR.png' width='33%'>  </img><img src='https://i.imgur.com/mgU99gK.png' width='33%'> </img>
+<img src='https://i.imgur.com/OYIFTZV.png'>
+<img src='https://i.imgur.com/kIJ3jqL.png' width='33%'>  <img src='https://i.imgur.com/8NiwySR.png' width='33%'>  <img src='https://i.imgur.com/mgU99gK.png' width='33%'> 
 
-<img src='https://i.imgur.com/7qsX6vA.png'></img>
-<img src='https://i.imgur.com/lCa42Dn.png' width='50%'></img><img src='https://i.imgur.com/xVYRZ4M.png' width='50%'></img>
-<img src='https://i.imgur.com/7yJmqA2.png' width='33%'>  </img><img src='https://i.imgur.com/qJhYCaL.png' width='33%'>  </img><img src='https://i.imgur.com/OK2gD9W.png' width='33%'> </img>
+<img src='https://i.imgur.com/7qsX6vA.png'>
+<img src='https://i.imgur.com/lCa42Dn.png' width='50%'><img src='https://i.imgur.com/xVYRZ4M.png' width='50%'>
+<img src='https://i.imgur.com/7yJmqA2.png' width='33%'>  <img src='https://i.imgur.com/qJhYCaL.png' width='33%'>  <img src='https://i.imgur.com/OK2gD9W.png' width='33%'> 
 
 ### Version:
 ```
