@@ -132,30 +132,30 @@ TIDoS Framework presently supports the following: `and is under active developme
 
     __Web-Bugs & Server Misconfigurations__
     
-	- Insecure CORS `Absolute`
-	- Same-Site Scripting `Sub-domain based`
-	- Zone Transfer `DNS Server based`
-	- Clickjacking 
-            - Frame-Busting Checks
-            - `X-FRAME-OPTIONS` Header Checks
-	- Security on Cookies
-            - `HTTPOnly` Flag
-            - `Secure` Flag
-	- Cloudflare Misconfiguration Check
-            - DNS Retrieval and Checks
-            - Online Database Lookup `For Breaches`
-	- HTTP Strict Transport Security Usage
-            - HTTPS Enabled but no HSTS
-	- Spoofable Email
-            - Missing `SPF` Records
-            - Missing `DMARC` Records
-	- Host Header Injection
-            - Port Based `Over HTTP 80`
-            - `X-Forwarded-For` Header Injection
-	- Security Headers Analysis `Live Capture`
-	- Cross-Site Tracing `Port Based`
-	- Network Security Misconfig.
-            - Checks for `TELNET` Enabled `via Port 23`
+	+ Insecure CORS `Absolute`
+	+ Same-Site Scripting `Sub-domain based`
+	+ Zone Transfer `DNS Server based`
+	+ Clickjacking 
+		- Frame-Busting Checks
+        	- `X-FRAME-OPTIONS` Header Checks
+	+ Security on Cookies
+        	- `HTTPOnly` Flag
+        	- `Secure` Flag
+	+ Cloudflare Misconfiguration Check
+        	- DNS Misconfiguration Checks
+        	- Online Database Lookup `For Breaches`
+	+ HTTP Strict Transport Security Usage
+        	- HTTPS Enabled but no HSTS
+	+ Domain Based Email Spoofing
+        	- Missing `SPF` Records
+        	- Missing `DMARC` Records
+	+ Host Header Injection
+        	- Port Based `Over HTTP 80`
+        	- `X-Forwarded-For` Header Injection
+	+ Security Headers Analysis `Live Capture`
+	+ Cross-Site Tracing `Port Based`
+	+ Network Security Misconfig.
+        	- Checks for `TELNET` Enabled `via Port 23`
 	
     __Serious Web Vulnerabilities__
     
@@ -237,7 +237,7 @@ v1.5
 
 There are some bruteforce modules to be added:
 - Some more of Enumeraton Techniques (like a multithreaded admin panel finder).
-- Lots more of OSINT & Stuff (let that be a secret).
+- Lots more of OSINT & Stuff (let that be a suspense).
 
 ### Known Bugs:
 
@@ -245,11 +245,11 @@ This version of TIDoS is purely developmental and is presently `stable`. There a
 
 ### Disclaimer:
 
-This tool is provided a toolkit for full-fledged web-app pentesting and related vulnerability analysis. This framework is built for hunting bugs and has already found many. THEREFORE, I AM NOT RESPONSIBLE FOR THE SHIT YOU DO WITH THIS TOOL.
+TIDoS is provided as a offensive web application audit framework. It has built-in modules which can reveal potential misconfigurations and vulnerabilties in web applications which could possibly be exploited maliciously. THEREFORE, I AM NOT EXCLUSIVELY RESPONSIBLE FOR ANY MISUSE OF THIS TOOLKIT.
 
 ### Final Words:
 
-This project is presently under actuive developement so, put it on a watch, since it is updated frequently `(you can take a look at past commits history)`. This project is one of the best frameworks I have ever built and I would really like your constructive criticism, suggestions and help in converting this project into the best web penetration testing framework ever built `and trust me, it will be ;)`.
+This project is presently under active development so you may want to put it on a watch, since it is updated frequently `(you can take a look at past commits history)`. This project is one of the best frameworks I have ever built and I would really like your constructive criticism, suggestions and help in converting this project into the best web penetration testing framework ever built `and trust me, it will be ;)`.
 
 > Thank you,
 >
