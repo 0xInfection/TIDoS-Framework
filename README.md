@@ -135,15 +135,27 @@ TIDoS Framework presently supports the following: `and is under active developme
 	- Insecure CORS `Absolute`
 	- Same-Site Scripting `Sub-domain based`
 	- Zone Transfer `DNS Server based`
-	- Clickjacking `Framable response based`
-	- Security on Cookies `HTTPOnly/Secure Flags`
-	- Cloudflare Misconfiguration Check `+ Getting Real IP` 
-	- HTTP High Transport Security Usage
-	- Spoofable Email `Missing SPF and DMARC Records`
-	- Host Header Injection `Port Based`
+	- Clickjacking 
+            - Frame-Busting Checks
+            - `X-FRAME-OPTIONS` Header Checks
+	- Security on Cookies
+            - `HTTPOnly` Flag
+            - `Secure` Flag
+	- Cloudflare Misconfiguration Check
+            - DNS Retrieval and Checks
+            - Online Database Lookup `For Breaches`
+	- HTTP Strict Transport Security Usage
+            - HTTPS Enabled but no HSTS
+	- Spoofable Email
+            - Missing `SPF` Records
+            - Missing `DMARC` Records
+	- Host Header Injection
+            - Port Based `Over HTTP 80`
+            - `X-Forwarded-For` Header Injection
 	- Security Headers Analysis `Live Capture`
 	- Cross-Site Tracing `Port Based`
-	- Network Security Misconfig. `Telnet Enabled`
+	- Network Security Misconfig.
+            - Checks for `TELNET` Enabled `via Port 23`
 	
     __Serious Web Vulnerabilities__
     
