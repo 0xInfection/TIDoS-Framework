@@ -137,25 +137,25 @@ TIDoS Framework presently supports the following: `and is under active developme
 	+ Zone Transfer `DNS Server based`
 	+ Clickjacking 
 		- Frame-Busting Checks
-        	- `X-FRAME-OPTIONS` Header Checks
+		- `X-FRAME-OPTIONS` Header Checks
 	+ Security on Cookies
-        	- `HTTPOnly` Flag
-        	- `Secure` Flag
+		- `HTTPOnly` Flag
+		- `Secure` Flag
 	+ Cloudflare Misconfiguration Check
-        	- DNS Misconfiguration Checks
-        	- Online Database Lookup `For Breaches`
+		- DNS Misconfiguration Checks
+		- Online Database Lookup `For Breaches`
 	+ HTTP Strict Transport Security Usage
-        	- HTTPS Enabled but no HSTS
+		- HTTPS Enabled but no HSTS
 	+ Domain Based Email Spoofing
-        	- Missing `SPF` Records
-        	- Missing `DMARC` Records
+		- Missing `SPF` Records
+		- Missing `DMARC` Records
 	+ Host Header Injection
-        	- Port Based `Over HTTP 80`
-        	- `X-Forwarded-For` Header Injection
+		- Port Based `Over HTTP 80`
+		- `X-Forwarded-For` Header Injection
 	+ Security Headers Analysis `Live Capture`
-	+ Cross-Site Tracing `Port Based`
+	+ Cross-Site Tracing `HTTP TRACE Method`
 	+ Network Security Misconfig.
-        	- Checks for `TELNET` Enabled `via Port 23`
+		- Checks for `TELNET` Enabled `via Port 23`
 	
     __Serious Web Vulnerabilities__
     
