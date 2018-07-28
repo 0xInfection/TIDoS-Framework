@@ -19,17 +19,15 @@ from rfi import *
 from ldap import *
 from rce import *
 from csrf import *
-from vulnban1 import *
 from sqli import *
 from crlf import *
 from subdomover import *
 from phpi import *
-from vulnban import *
 from htmli import *
 #from xmli import *
 from shellshock import *
 from colors import *
-#from xss import *
+from xss import *
 from openredirect import *
 from pathtrav import * 
 
@@ -189,6 +187,7 @@ def serbugs(web):
 	print G+' [+] All modules successfully completed!'
 	time.sleep(4)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
+	serbugs(web)
 
     elif v.strip() == '99':
 	print '[!] Back'

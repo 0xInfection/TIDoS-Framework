@@ -17,7 +17,6 @@ from passiveo import *
 from passiveban import *
 from activeo import *
 from activeban import *
-from footprint_dup import *
 from banner import *
 from dispmenu import *
 from infodisc import *
@@ -37,7 +36,6 @@ from exploitsban import *
 from footprintban import *
 from footprint import *
 from scanenumban import *
-from scanenumban1 import *
 from scanenum import *
 from vuln import *
 from vulnban import *

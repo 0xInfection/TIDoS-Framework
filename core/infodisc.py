@@ -25,8 +25,6 @@ from ssn import *
 from infodiscban import *
 from colors import *
 from internalip import *
-from footprint import *
-from footprintban1 import *
 
 def infodisc(web):
 
@@ -109,13 +107,12 @@ def infodisc(web):
 	print C+' [!] All scantypes have been tested on target...'
 	time.sleep(1)
 	print C+' [*] Going back to menu...'
-	footprintban1()
-	footprint(web)
+	infodisc(web)
 
     elif v == '99':
 	print C+' [*] Back to the menu !'
-	footprintban1()
-	footprint(web) 
+	time.sleep(0.8)
+	os.system('clear')
 
     else:
 	dope = ['You high dude?','Shit! Enter a valid option','Whoops! Thats not an option','Sorry! You just typed shit']

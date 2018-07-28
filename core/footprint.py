@@ -18,7 +18,6 @@ def footprint(web):
 	from infodisc import *
 	from footprintban import *
 	from colors import *
-	from footprintban1 import *
 
 	m = raw_input(O+' [#] \033[1;4mTID\033[0m'+GR+' :> ' + color.END)
 	print ''
@@ -40,5 +39,5 @@ def footprint(web):
 	    dope = [' [*] You high dude?',' [*] Hey there! Enter a valid option',' [*] Whoops! Thats not an option',' [*] Sorry fam! You just typed shit']
 	    print dope[randint(0,3)]
 	    time.sleep(0.5)
-	    footprintban1()
+	    footprintban()
 	    footprint(web)

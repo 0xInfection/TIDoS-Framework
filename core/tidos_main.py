@@ -22,7 +22,6 @@ from logging import getLogger, ERROR
 getLogger("scapy.runtime").setLevel(ERROR)
 warnings.filterwarnings("ignore")
 
-global vuln
 def tidos_main():
 
 	try:
@@ -80,6 +79,7 @@ def tidos_main():
 		    else:
         		dope = ['You high dude?', 'Sorry fam! You just typed shit']
         		print R+' [-] ' + dope[randint(0,1)]
+			time.sleep(0.5)
 			pass
 		
 		except KeyboardInterrupt:
@@ -89,7 +89,7 @@ def tidos_main():
 			print C+' [+] Alvida, see ya!\n'
 			sys.exit(0)
 
-		#except Exception:
+		except Exception:
 			pass
 
 	tidosmain(web)

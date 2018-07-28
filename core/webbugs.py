@@ -15,7 +15,7 @@ from icors import *
 from ssscript import *
 from clickjack import *
 from zone import *
-from vulnban1 import *
+from vulnban import *
 from webbugsban import *
 from hhi import *
 from netmisc import *
@@ -172,6 +172,7 @@ def webbugs(web):
 	print G+' [+] All modules successfully completed!'
 	time.sleep(0.5)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
+	webbugs(web)
 
     elif v.strip() == '99':
 	print '[!] Back'
@@ -184,4 +185,5 @@ def webbugs(web):
 	time.sleep(0.7)
 	os.system('clear')
 	webbugs(web)
+
 

@@ -13,8 +13,8 @@ from subprocess import call
 sys.path.append('modules/ScanEnum/')
 
 from nmapmain import *
-from crawlers_hunt import *
 from colors import *
+from crawlers import *
 from scanenumban import *
 from bannergrab import *
 from webtech import *
@@ -63,7 +63,7 @@ def scanenum(web):
 
     elif v == '6':
 	print B+' [!] Type Selected :'+C+' Crawlers'
-	crawlers_hunt(web)
+	crawlers(web)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	scanenumban1()
 	scanenum(web)

@@ -20,8 +20,6 @@ sys.path.append('modules/ScanEnum/')
 from crawler1 import *
 from crawler2 import *
 from crawler3 import *
-from scenum_alt import scenum_alt
-from scanenumban1 import *
 from crawlersban import *
 from colors import *
 
@@ -52,8 +50,7 @@ def crawlers(web):
 
 	elif v.strip() == '99':
 	    print GR+'\n [*] Back...'
-	    scanenumban1()
-	    scenum_alt(web)
+	    os.system('clear')
 
 	elif v.strip() == 'A':
 	    print W+'\n [!] Module Automater Initialized...'
@@ -71,8 +68,7 @@ def crawlers(web):
 	    print B+'\n [!] Scan Type Completed :'+C+' Crawler 3\n'
 	    print G+' [+] All modules successfully completed!'
 	    raw_input(GR+' [+] Press '+O+'Enter '+GR+'to continue...')
-	    scanenumban1()
-	    scenum_alt(web)
+	    crawlers(web)
 
 	else:
 	    dope = ['You high dude?','Shit! Enter a valid option','Whoops! Thats not an option','Sorry! You just typed shit']

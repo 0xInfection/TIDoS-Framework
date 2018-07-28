@@ -28,9 +28,6 @@ from sslcert import *
 from activeban import *
 from filebrute import *
 from traceroute import *
-from footprint import *
-from footprintban import *
-from footprintban1 import *
 from cms import *
 from serverdetect import *
 from osdetect import *
@@ -220,14 +217,11 @@ def activeo(web):
 	print C+' [*] Going back to menu...'
 	time.sleep(3)
 	os.system('clear')
-	footprintban1()
-	footprint(web)
+	activeo(web)
 
     elif v.strip() == '99':
 	print C+' [*] Back to the menu !'
 	os.system('clear')
-	footprintban1()
-	footprint(web) 
 
     else:
 	dope = ['You high dude?','Shit! Enter a valid option','Whoops! Thats not an option','Sorry! You just typed shit']

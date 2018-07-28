@@ -8,9 +8,10 @@
 #This module requires TIDoS Framework
 #https://github.com/theInfectedDrake/TIDoS-Framework 
 
-import sys, platform, subprocess, time, os
+import sys
+import time
+import os
 from random import randint
-from subprocess import call
 sys.path.append('modules/PassiveRecon/')
 
 from dnschk import *
@@ -29,11 +30,8 @@ from checkuser import *
 from googlegroups import *
 from threatintel import *
 from webarchive import *
-from footprint_dup import *
 from googledorker import *
 from googleSearch import *
-from footprintban1 import *
-from footprintban import *
 from whoischeckup import *
 from pastebin import *
 from linkedin import *
@@ -167,6 +165,7 @@ def passiveo(web):
 
     elif v.strip() == '99':
 	print C+' [*] Back!'
+	time.sleep(0.7)
 	os.system('clear')
 
     elif v.strip() == 'A':
@@ -278,8 +277,7 @@ def passiveo(web):
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	print GR+' [*] Going back...'
 	os.system('clear')
-	footprintban1()
-	footprint_dup(web)
+	passiveo(web)
 
     else:
 	dope = ['You high dude?','Shit! Enter a valid option','Whoops! Thats not an option','Sorry! You just typed shit']
