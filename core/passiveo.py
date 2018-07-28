@@ -20,6 +20,7 @@ from geoip import *
 from revip import *
 from revdns import *
 from subdom import *
+from googlenum import *
 from links import *
 from hackedmail import *
 from iphistory import *
@@ -153,6 +154,12 @@ def passiveo(web):
 	passiveo(web)
 
     elif v.strip() == '19':
+	print C+' [!] Type Selected '+B+': Google Plus Gathering'
+	googlenum(web)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
+	passiveo(web)
+
+    elif v.strip() == '20':
 	print C+' [!] Type Selected '+B+': Threat Intel Gathering'
 	threatintel(web)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
@@ -161,8 +168,6 @@ def passiveo(web):
     elif v.strip() == '99':
 	print C+' [*] Back!'
 	os.system('clear')
-	footprintban1()
-	footprint_dup(web)
 
     elif v.strip() == 'A':
 	print C+' [!] Type Selected '+B+': All Modules\n'
@@ -251,6 +256,11 @@ def passiveo(web):
 	print C+' [*] Firing up module -->'+O+' Pastebin Posts'
 	pastebin(web)
 	print C+'\n [!] Module Completed -->'+O+' Pastebin\n'
+	time.sleep(1)
+
+	print C+' [*] Firing up module -->'+O+' Google Plus Gathering'
+	googlenum(web)
+	print C+'\n [!] Module Completed -->'+O+' Google Plus Gathering\n'
 	time.sleep(1)
 
 	print C+' [*] Firing up module -->'+O+' Google Dorker'
