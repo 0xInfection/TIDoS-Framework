@@ -32,7 +32,7 @@ def googledorker(web):
 	clear_cookie()
 	for title in search(dork, stop=30):
 	    print(GR+' [!] Site Found :> '+B+title)
-	    time.sleep(0.5)
+	    time.sleep(0.1)
 
     try:
 

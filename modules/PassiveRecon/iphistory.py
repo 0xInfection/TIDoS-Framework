@@ -42,7 +42,7 @@ def iphistory(web):
 		td = tr.findAll('td')
 		info = {'ip' : td[0].text, 'owner' : td[2].text.rstrip(), 'last' : td[3].text}
 		print G+' [+] Instance : ' +C+ info['ip'] +GR+ ' => ' + info['owner'] +B+ ' - (' + info['last'] + ')'
-		time.sleep(0.04)
+		time.sleep(0.02)
 
     except:
 	print R+' [-] No instances of IP History found...'

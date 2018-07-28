@@ -63,7 +63,7 @@ def getRes0x00(web):
 				tlinks  = "https://web.archive.org/web/" + str(timestamp) + "/" + str(website)
 				sdates = str(timestamp[:4]) + "/" + str(timestamp[4:6]) + "/" + str(timestamp[6:8])
 				print " {}{}   {}{}  {}({})".format(C, sdates, B, website, O, tlinks)
-				time.sleep(0.1)
+				time.sleep(0.04)
 
 		except Exception as e:
 			print R+' [-] Unhandled Exception Encountered!'

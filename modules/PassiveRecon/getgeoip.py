@@ -14,7 +14,7 @@ import requests
 import socket
 from colors import *
 
-def geoip(web):
+def getgeoip(web):
 
     web = web.replace('http://','')
     web = web.replace('https://','')
