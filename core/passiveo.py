@@ -17,7 +17,7 @@ sys.path.append('modules/PassiveRecon/')
 from dnschk import *
 from passiveban import *
 from piweb import *
-from geoip import *
+from getgeoip import *
 from revip import *
 from revdns import *
 from subdom import *
@@ -57,7 +57,7 @@ def passiveo(web):
 
     elif v.strip() == '3':
 	print C+' [!] Type Selected '+B+': GeoIP Lookup'
-	geoip(web)
+	getgeoip(web)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	passiveo(web)
 
@@ -183,7 +183,7 @@ def passiveo(web):
 	time.sleep(1)
 
 	print C+' [*] Firing up module -->'+O+' GeoIP Lookup '
-	geoip(web)
+	getgeoip(web)
 	print C+'\n [!] Module Completed -->'+O+' GeoIP\n'
 	time.sleep(1)
 

@@ -19,7 +19,6 @@ sys.path.append('modules/AuxilMods/')
 from popbrute import *
 from ftpbrute import *
 from sqlbrute import *
-from auxil_alt import *
 from sshbrute import *
 from brutemodsban import *
 from colors import *
@@ -126,11 +125,12 @@ def brutemods(web):
 	time.sleep(4)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	print B+' [*] Going back to menu...'
-	auxil_alt(web)
+	brutemods(web)
 
     elif v == '99':
-	print B+' [*] Back to the menu !'
-	auxil_alt(web) 
+	    print GR+' [*] Going back...'
+	    time.sleep(0.5)
+	    os.system('clear')
 
     else:
 	dope = ['You high dude?','Shit! Enter a valid option','Whoops! Thats not an option','Sorry! You just typed shit']
@@ -138,3 +138,4 @@ def brutemods(web):
 	time.sleep(0.7)
 	os.system('clear')
 	brutemods(web)
+

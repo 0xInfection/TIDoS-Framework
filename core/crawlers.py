@@ -49,7 +49,8 @@ def crawlers(web):
 	    crawlers(web)
 
 	elif v.strip() == '99':
-	    print GR+'\n [*] Back...'
+	    print GR+' [*] Going back...'
+	    time.sleep(0.5)
 	    os.system('clear')
 
 	elif v.strip() == 'A':

@@ -15,7 +15,7 @@ def dispmenu():
 	
 	print ''+O+'\n Choose from the options below :\n'
 	time.sleep(0.2)
-	print ''+B+' [1] \033[1;36mReconnaissance & OSINT'+W+' (43 modules)'
+	print ''+B+' [1] \033[1;36mReconnaissance & OSINT'+W+' (44 modules)'
 	time.sleep(0.1)
 	print ''+B+' [2] \033[1;36mScanning & Enumeration'+W+' (13 modules)'
 	time.sleep(0.1)

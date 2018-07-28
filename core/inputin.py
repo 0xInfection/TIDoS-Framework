@@ -29,9 +29,9 @@ def inputin():
 			po = web.replace('http://','')
 		elif 'https://' in web:
 			po = web.replace('https://','')
-		if web.endswith('/'):
-			web = web[:-1]
-			po = web[:-1]
+		if str(web).endswith('/'):
+			web = po[:-1]
+			po = po[:-1]
 		print GR+' [*] Checking server status...'
 		time.sleep(0.6)
 

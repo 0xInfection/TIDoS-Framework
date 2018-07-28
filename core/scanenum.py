@@ -19,7 +19,6 @@ from scanenumban import *
 from bannergrab import *
 from webtech import *
 from waf import *
-from scanenumban1 import *
 from portscan import *
 
 def scanenum(web):
@@ -30,42 +29,42 @@ def scanenum(web):
 	print B+' [!] Type Selected :'+C+' WAF Analysis'+O
 	waf(web)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
-	scanenumban1()
+	scanenumban()
 	scanenum(web)
 
     elif v == '2':
 	print B+' [!] Type Selected :'+C+' Port Scanning'
 	portscan(web)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
-	scanenumban1()
+	scanenumban()
 	scanenum(web)
 
     elif v == '3':
 	print B+' [!] Type Selected :'+C+' Interactive NMap'
 	nmapmain(web)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
-	scanenumban1()
+	scanenumban()
 	scanenum(web)
 
     elif v == '4':
 	print B+' [!] Type Selected :'+C+' WebTech Fingerprinting'
 	webtech(web)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
-	scanenumban1()
+	scanenumban()
 	scanenum(web)
 
     elif v == '5':
 	print B+' [!] Type Selected :'+C+' Banner Grab'
 	bannergrab(web)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
-	scanenumban1()
+	scanenumban()
 	scanenum(web)
 
     elif v == '6':
 	print B+' [!] Type Selected :'+C+' Crawlers'
 	crawlers(web)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
-	scanenumban1()
+	scanenumban()
 	scanenum(web)
 
     elif v == 'A':
@@ -116,6 +115,6 @@ def scanenum(web):
 	print dope[randint(0,3)]
 	time.sleep(0.7)
 	os.system('clear')
-	scanenumban1()
+	scanenumban()
 	scanenum(web)
 
