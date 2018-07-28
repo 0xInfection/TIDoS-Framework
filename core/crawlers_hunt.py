@@ -59,12 +59,16 @@ def crawlers_hunt(web):
 	    print W+'\n [!] Module Automater Initialized...'
 	    sleep(0.5)
 	    print B+' [*] Initializing Scan Type :'+C+' Crawler (depth 1)'
-	    simpleport(web)
+	    crawler1(web)
 	    print B+'\n [!] Scan Type Completed :'+C+' Crawler 1\n'
 	    sleep(0.5)
 	    print B+' [!] Initializing Scan Type :'+C+' Crawler (depth 2)'
-	    tcpconnect(web)
+	    crawler2(web)
 	    print B+'\n [!] Scan Type Completed :'+C+' Crawler 2\n'
+        	
+	    print B+' [!] Initializing Scan Type :'+C+' Crawler (Depth 3)'
+	    crawler3(web)
+	    print B+'\n [!] Scan Type Completed :'+C+' Crawler 3\n'
 	    print G+' [+] All modules successfully completed!'
 	    sleep(2)
 	    scanenumban1()

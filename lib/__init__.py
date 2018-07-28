@@ -10,7 +10,7 @@
 #https://github.com/theInfectedDrake/TIDoS-Framework 
 
 from core import *
-
+# Just an __init__ file ;)
 pass
 
 

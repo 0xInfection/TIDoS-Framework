@@ -7,7 +7,7 @@ TIDoS Framework is a comprehensive web-app audit framework. `let's keep this sim
 
 ### Highlights :-
 The main highlights of this framework is:
-- [x] A framework to cover up everything from Reconnaissance to Exploitation.
+- [x] A complete versatile framework to cover up everything from Reconnaissance to Exploitation.
 - [x] Has 4 main phases, subdivided into __13 sub-phases__ consisting a total of __91 modules__.
 - [x] Reconnaissance Phase has 43 modules of its own (including active and passive recon, information disclosure modules).
 - [x] Scanning & Enumeration Phase has got 13 modules (including port scans, WAF analysis, etc)
@@ -41,9 +41,9 @@ tidos
 
 ### Getting Started :-
 
-TIDoS is made to be comprehensive. It is a highly flexible framework where you just have to select and use modules.
+TIDoS is made to be comprehensive and versatile. It is a highly flexible framework where you just have to select and use modules.
 
-But before that, you need to set your own `API KEYS` for various OSINT purposes. To do so, open up `API_KEYS.py` under `files/` directory and set your own keys and access tokens for `SHODAN`, `CENSYS`, `FULL CONTACT`, `GOOGLE` and `WHATCMS`. Public API KEYS and tokens for `SHODAN` and `WHATCMS` have been provided with the TIDoS release itself. You can still add your own... `no harm!`
+But before that, you need to set your own `API KEYS` for various OSINT purposes. To do so, open up `API_KEYS.py` under `files/` directory and set your own keys and access tokens for `SHODAN`, `CENSYS`, `FULL CONTACT`, `GOOGLE`, `CLEARBIT` and `WHATCMS`. Public `API KEYS` and `ACCESS TOKENS` for `SHODAN` and `WHATCMS` have been provided with the TIDoS release itself. You can still add your own... `no harm!`
 
 Finally, as the framework opens up, enter the website name `eg. http://www.example.com` and let TIDoS lead you. Thats it! Its as easy as that.
 
@@ -95,13 +95,12 @@ TIDoS Framework presently supports the following: `and is under active developme
 	    - Subnets Enumeration `Class Based`
 	    - Find Shared DNS Hosts `Name Server Based`
 	    - Operating System Fingerprinting `IMPROVED`
-	    - Discover Interesting Files
-
-		    - Common Backdoor Locations `c99.php`
-		    - Common Backup Locations `.bak, .db`
-		    - Common Password Locations ` .pgp, .skr`
-		    - Common Proxy Path Configs. `.pac`
-		    - Common Dot Files `.htaccess, .phpinfo`
+	    - Discover Interesting Files `via Bruteforce`
+		    - Common Backdoor Locations `shells, etc.`
+		    - Common Backup Locations `.bak, .db, etc.`
+		    - Common Password Locations ` .pgp, .skr, etc.`
+		    - Common Proxy Path Configs. `.pac, etc.`
+		    - Common Dot Files `.htaccess, .apache, etc`
 
 	+ Information Disclosure
 	    - Credit Cards Disclosure `If Plaintext`
@@ -113,7 +112,7 @@ TIDoS Framework presently supports the following: `and is under active developme
 
 * __Scanning & Enumeration__
 
-	+ Remote Server WAF Enumeration
+	+ Remote Server WAF Enumeration `Generic` `54 WAFs`
 	+ Port Scanning `Ingenious Modules`
 	    - Simple Port Scanner `via Socket Connections`
 	    - TCP SYN Scan `Highly reliable`
@@ -125,26 +124,38 @@ TIDoS Framework presently supports the following: `and is under active developme
 	+ Banner Grabbing of Services `via Open Ports`
 	+ Interactive Scanning with NMap `16 preloaded modules`
 	+ Crawlers
-	    - Depth 1
-	    - Depth 2 `Page Crawler`
-	    - Depth 3 `Link Crawler`
+	    - Depth 1 `Indexed Uri Crawler`
+	    - Depth 2 `Single Page Crawler`
+	    - Depth 3 `Web Link Crawler`
 
 + __Vulnerability Analysis__
 
     __Web-Bugs & Server Misconfigurations__
     
-	- Insecure CORS `Absolute`
-	- Same-Site Scripting `Sub-domain based`
-	- Zone Transfer `DNS Server based`
-	- Clickjacking `Framable response based`
-	- Security on Cookies `HTTPOnly/Secure Flags`
-	- Cloudflare Misconfiguration Check `+ Getting Real IP` 
-	- HTTP High Transport Security Usage
-	- Spoofable Email `Missing SPF and DMARC Records`
-	- Host Header Injection `Port Based`
-	- Security Headers Analysis `Live Capture`
-	- Cross-Site Tracing `Port Based`
-	- Network Security Misconfig. `Telnet Enabled`
+	+ Insecure CORS `Absolute`
+	+ Same-Site Scripting `Sub-domain based`
+	+ Zone Transfer `DNS Server based`
+	+ Clickjacking 
+		- Frame-Busting Checks
+		- `X-FRAME-OPTIONS` Header Checks
+	+ Security on Cookies
+		- `HTTPOnly` Flag
+		- `Secure` Flag
+	+ Cloudflare Misconfiguration Check
+		- DNS Misconfiguration Checks
+		- Online Database Lookup `For Breaches`
+	+ HTTP Strict Transport Security Usage
+		- HTTPS Enabled but no HSTS
+	+ Domain Based Email Spoofing
+		- Missing `SPF` Records
+		- Missing `DMARC` Records
+	+ Host Header Injection
+		- Port Based `Over HTTP 80`
+		- `X-Forwarded-For` Header Injection
+	+ Security Headers Analysis `Live Capture`
+	+ Cross-Site Tracing `HTTP TRACE Method`
+	+ Network Security Misconfig.
+		- Checks for `TELNET` Enabled `via Port 23`
 	
     __Serious Web Vulnerabilities__
     
@@ -214,7 +225,7 @@ TIDoS Framework presently supports the following: `and is under active developme
 <img src='https://i.imgur.com/kIJ3jqL.png' width='33%'>  </img><img src='https://i.imgur.com/8NiwySR.png' width='33%'>  </img><img src='https://i.imgur.com/mgU99gK.png' width='33%'> </img>
 
 <img src='https://i.imgur.com/7qsX6vA.png'></img>
-<img src='https://i.imgur.com/lCa42Dn.png' width='50%'></img><img src='https://i.imgur.com/xVYRZ4M.png' width='50%'></img>
+<img src='https://i.imgur.com/lCa42Dn.png' width='50%'></img><img src='https://i.imgur.com/xVYRZ4M.png' width='50%'>
 <img src='https://i.imgur.com/7yJmqA2.png' width='33%'>  </img><img src='https://i.imgur.com/qJhYCaL.png' width='33%'>  </img><img src='https://i.imgur.com/OK2gD9W.png' width='33%'> </img>
 
 ### Version:
@@ -226,7 +237,7 @@ v1.5
 
 There are some bruteforce modules to be added:
 - Some more of Enumeraton Techniques (like a multithreaded admin panel finder).
-- Lots more of OSINT & Stuff (let that be a secret).
+- Lots more of OSINT & Stuff (let that be a suspense).
 
 ### Known Bugs:
 
@@ -234,13 +245,12 @@ This version of TIDoS is purely developmental and is presently `stable`. There a
 
 ### Disclaimer:
 
-This tool is provided a toolkit for full-fledged web-app pentesting and related vulnerability analysis. This framework is built for hunting bugs and has already found many. THEREFORE, I AM NOT RESPONSIBLE FOR THE SHIT YOU DO WITH THIS TOOL.
+TIDoS is provided as a offensive web application audit framework. It has built-in modules which can reveal potential misconfigurations and vulnerabilties in web applications which could possibly be exploited maliciously. THEREFORE, I AM NOT EXCLUSIVELY RESPONSIBLE FOR ANY MISUSE OF THIS TOOLKIT.
 
 ### Final Words:
 
-Put this project on a watch, since it is updated frequently `(you can take a look at past commits history)`. This project is one of the best frameworks I have ever built and I would really like your constructive criticism, suggestions and help in converting this project into the best web penetration testing framework ever built `and trust me, it will be ;)`.
+This project is presently under active development so you may want to put it on a watch, since it is updated frequently `(you can take a look at past commits history)`. This project is one of the best frameworks I have ever built and I would really like your constructive criticism, suggestions and help in converting this project into the best web penetration testing framework ever built `and trust me, it will be ;)`.
 
 > Thank you,
 >
 > @_tID | CodeSploit
-

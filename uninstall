@@ -28,7 +28,7 @@ if m == 'y' or 'Y':
 	time.sleep(1)
 	print B+'Removing setup and executable files...'+C
 	time.sleep(1)
-	os.system('rm -v -rf /usr/bin/tidos')
+	os.system('rm -v /usr/bin/tidos')
 	time.sleep(0.4)
 	print GR+'All installation packages have been removed...\n'
 	time.sleep(0.4)
