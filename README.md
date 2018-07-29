@@ -1,6 +1,6 @@
 <p align="middle"><img src='https://i.imgur.com/QAbaVdU.png' /></p>
 
-![Python](https://img.shields.io/badge/Python-2.7-green.svg) ![TIDoS](https://img.shields.io/badge/TIDoS-v1.5-blue.svg) ![Supported OS](https://img.shields.io/badge/Supported%20OS-Linux-yellow.svg) ![License](https://img.shields.io/badge/License-GPLv3-orange.svg) ![Build](https://img.shields.io/badge/Build-0088-red.svg) ![Modules](https://img.shields.io/badge/Modules-91-blue.svg) ![Status](https://img.shields.io/badge/Build%20Status-passing-brightgreen.svg) ![Stage](https://img.shields.io/badge/Release-Stable-green.svg)
+![Python](https://img.shields.io/badge/Python-2.7-green.svg) ![TIDoS](https://img.shields.io/badge/TIDoS-v1.5.1-blue.svg) ![Supported OS](https://img.shields.io/badge/Supported%20OS-Linux-yellow.svg) ![License](https://img.shields.io/badge/License-GPLv3-orange.svg) ![Build](https://img.shields.io/badge/Build-0088-red.svg) ![Modules](https://img.shields.io/badge/Modules-95-blue.svg) ![Status](https://img.shields.io/badge/Build%20Status-passing-brightgreen.svg) ![Stage](https://img.shields.io/badge/Release-Stable-green.svg)
 
 # The TIDoS Framework 
 TIDoS Framework is a comprehensive web-app audit framework. `let's keep this simple`
@@ -8,17 +8,17 @@ TIDoS Framework is a comprehensive web-app audit framework. `let's keep this sim
 ### Highlights :-
 The main highlights of this framework is:
 - [x] A complete versatile framework to cover up everything from Reconnaissance to Exploitation.
-- [x] Has 4 main phases, subdivided into __13 sub-phases__ consisting a total of __91 modules__.
-- [x] Reconnaissance Phase has 43 modules of its own (including active and passive recon, information disclosure modules).
-- [x] Scanning & Enumeration Phase has got 13 modules (including port scans, WAF analysis, etc)
-- [x] Vulnerability Analysis Phase has 35 modules (including most common vulnerabilites in action).
+- [x] Has 4 main phases, subdivided into __13 sub-phases__ consisting a total of __95 modules__.
+- [x] Reconnaissance Phase has 45 modules of its own (including active and passive recon, information disclosure modules).
+- [x] Scanning & Enumeration Phase has got 14 modules (including port scans, WAF analysis, etc)
+- [x] Vulnerability Analysis Phase has 36 modules (including most common vulnerabilites in action).
 - [x] Exploits Castle has only 1 exploit. `(purely developemental)`
 - [x] All four phases each have a `Auto-Awesome` module which automates every module for you.
 - [x] You just need the domain, and leave everything is to this tool.
 - [x] TIDoS has full verbose out support, so you'll know whats going on.
 - [x] Fully user friendly interaction environment. `(no shits)`
 
-<img src='https://i.imgur.com/fkXyxS5.png' />
+<img src='https://i.imgur.com/znAkpen.png' />
 
 ### Installation :-
 
@@ -66,8 +66,9 @@ TIDoS Framework presently supports the following: `and is under active developme
 	    - GeoIP Lookup `Pinpoint physical location`
 	    - DNS Configuration Lookup `DNSDump`
 	    - Subdomains Lookup `Indexed ones`
-	    - Reverse DNS Configuration Lookup
+	    - Reverse DNS Lookup `Host Instances`
 	    - Reverse IP Lookup `Hosts on same server`
+	    - Subnets Enumeration `Class Based`
 	    - Domain IP History `IP Instances`
 	    - Web Links Gatherer `Indexed ones`
 	    - Google Search `Manual search`
@@ -75,10 +76,11 @@ TIDoS Framework presently supports the following: `and is under active developme
 	    - Email to Domain Resolver `Email WhoIs`
 	    - Wayback Machine Lookups `Find Backups`
 	    - Breached Email Check `Pwned Email Accounts`
-	    - Enumeration via Google Groups 
+	    - Enumeration via Google Groups `Emails Only`
 	    - Check Alias Availability `Social Networks`
 	    - Find PasteBin Posts `Domain Based`
 	    - LinkedIn Gathering `Employees & Company`
+	    - Google Plus Gathering `Domain Profiles`
 	    - Threat Intelligence Gathering `Bad IPs`
 
 	+ Active Reconnaissance
@@ -92,9 +94,9 @@ TIDoS Framework presently supports the following: `and is under active developme
 	    - Examine SSL Certificate `Absolute`
 	    - Apache Status Disclosure Checks `File Based`
 	    - WebDAV HTTP Enumeration `PROFIND & SEARCH`
-	    - Subnets Enumeration `Class Based`
+	    - Comments Scraper `Regex Based`
 	    - Find Shared DNS Hosts `Name Server Based`
-	    - Operating System Fingerprinting `IMPROVED`
+	    - Alternate Sites Discovery `User-Agent Based`
 	    - Discover Interesting Files `via Bruteforce`
 		    - Common Backdoor Locations `shells, etc.`
 		    - Common Backup Locations `.bak, .db, etc.`
@@ -121,6 +123,7 @@ TIDoS Framework presently supports the following: `and is under active developme
 	    - Fin Flag Scan `Reliable Only in LANs`
 	    - Port Service Detector
 	+ Web Technology Enumeration `Absolute`
+	+ Operating System Fingerprinting `IMPROVED`
 	+ Banner Grabbing of Services `via Open Ports`
 	+ Interactive Scanning with NMap `16 preloaded modules`
 	+ Crawlers
@@ -154,6 +157,7 @@ TIDoS Framework presently supports the following: `and is under active developme
 		- `X-Forwarded-For` Header Injection
 	+ Security Headers Analysis `Live Capture`
 	+ Cross-Site Tracing `HTTP TRACE Method`
+	+ Session Fixation `via Cookie Injection`
 	+ Network Security Misconfig.
 		- Checks for `TELNET` Enabled `via Port 23`
 	
@@ -230,13 +234,13 @@ TIDoS Framework presently supports the following: `and is under active developme
 
 ### Version:
 ```
-v1.5
+v1.5.1
 ```
 
 ### Upcoming:
 
 There are some bruteforce modules to be added:
-- Some more of Enumeraton Techniques (like a multithreaded admin panel finder).
+- Some more of Enumeraton & Information Disclosure modules.
 - Lots more of OSINT & Stuff (let that be a suspense).
 
 ### Known Bugs:
