@@ -37,10 +37,12 @@ def tidos_main():
 		sys.exit(1)
 
 	print P+' [+] Okay, so what to start with?'
+	time.sleep(1)
 	def tidosmain(web):
 
 	    while True:
 		try:
+		    os.system('clear')
 		    dispmenu()
 		    zop = raw_input(''+GR+' [#] \033[1;4mTID\033[0m'+GR+' :> ' + color.END)
 		    zop = zop.strip()

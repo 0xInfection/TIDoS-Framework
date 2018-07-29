@@ -12,16 +12,35 @@ import time
 from colors import *
 
 def dispmenu():
-	
-	print ''+O+'\n Choose from the options below :\n'
+
+	print '''
+
+\033[1;37m  .    +           \033[1;34m ______                \033[1;37m         .      .
+               +. \033[1;34m / ==== \ \033[1;37m     .        + .                    .
+   .        .  \033[1;36m ,-~--------~-. \033[1;37m                      *         +
+              \033[1;36m,^\033[1;33m ___          \033[1;36m^.\033[1;37m +        *         .    .       .
+  *     *   \033[1;36m / \033[1;33m.^   ^.          \033[1;36m\ \033[1;37m        .  \033[1;32m    _ | _
+            \033[1;36m|  \033[1;33m|  o  !           \033[1;36m|\033[1;37m  .        \033[1;32m __  \ /--.
+    .       \033[1;36m|\033[1;34m_ \033[1;33m'.___.'          \033[1;34m_\033[1;36m|\033[1;37m           \033[1;32mI__/_\ /  )}\033[1;36m======>   \033[1;37m      +
+            \033[1;36m| \033[1;34m"'----------------"\033[1;36m|\033[1;37m       +   \033[1;32m _[ _(\033[1;33m0\033[1;32m):  ))\033[1;36m========>
+  +       . \033[1;36m!                    !\033[1;37m     .     \033[1;32mI__\ / \. ]}\033[1;36m======>    \033[1;37m   .
+         .  \033[1;36m \   \033[1;37mTIDoS Prober   \033[1;36m/ \033[1;37m            \033[1;32m  ~^-.--'
+              \033[1;36m^.              .^ \033[1;37m           .   \033[1;32m   |   \033[1;37m    +.      *
+  .            \033[1;36m "-..______.,-" \033[1;37m.                    .                    *
+         +           .                .   +              *       .     
+             \033[1;33m-=[\033[1;31mL E T S   S T A R T\033[1;33m]=-\033[1;37m
+       +        .             '                 .            +         +
+   *       .            +           *        .         *     .
+'''
+	print O+'\n Choose from the options below :\n'
 	time.sleep(0.2)
-	print ''+B+' [1] \033[1;36mReconnaissance & OSINT'+W+' (44 modules)'
+	print B+' [1] \033[1;36mReconnaissance & OSINT'+W+' (45 modules)'
 	time.sleep(0.1)
-	print ''+B+' [2] \033[1;36mScanning & Enumeration'+W+' (13 modules)'
+	print B+' [2] \033[1;36mScanning & Enumeration'+W+' (14 modules)'
 	time.sleep(0.1)
-	print ''+B+' [3] \033[1;36mVulnerability Analysis'+W+' (35 modules)'
+	print B+' [3] \033[1;36mVulnerability Analysis'+W+' (36 modules)'
 	time.sleep(0.1)
-	print ''+B+' [4] \033[1;36mExploitation (beta)'+W+' (only 1)'
+	print B+' [4] \033[1;36mExploitation (beta)'+W+' (only 1)'
 	time.sleep(0.1)
-	print ''+B+'\n [99] \033[1;36mSay "alvida"! (Exit TIDoS)\n'
+	print B+'\n [99] \033[1;36mSay "alvida"! (Exit TIDoS)\n'
 	time.sleep(0.1)
