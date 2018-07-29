@@ -39,6 +39,7 @@ br.addheaders = [
 
 def getos0x00(web):
 
+    global flag
     flag = 0x00
     ip_addr = socket.gethostbyname(web)
     print GR+' [*] Getting ip address...'
@@ -112,7 +113,7 @@ def osdetect(web):
 	    print GR+' [*] Initialising Module [1]...'
 	    fl = getos0x00(web)
 	    print G+'\n [+] Module [1] Completed!'
-	    if fl == 0x01:
+	    if flag == 0x01:
 		q = raw_input(O+' [#] OS Identified!\n [#] Move on to to module [2]? (y/N) :> ')
 		if q == 'Y'or q == 'y':
 		    print GR+'\n [*] Initialising Module [2]...'
