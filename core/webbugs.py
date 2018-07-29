@@ -8,7 +8,9 @@
 #This module requires TIDoS Framework
 #https://github.com/theInfectedDrake/TIDoS-Framework 
 
-import time, os, sys
+import time
+import os
+import sys
 sys.path.append('modules/VulnLysis/MiscBugs')
 
 from icors import *
@@ -21,6 +23,7 @@ from hhi import *
 from netmisc import *
 from cloudflaremisc import *
 from hsts import *
+from sessionfix import *
 from headers import *
 from colors import *
 from xsstrace import *
@@ -105,6 +108,12 @@ def webbugs(web):
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	webbugs(web)
 
+    elif v.strip() == '13':
+	print B+' [!] Type Selected :'+C+' Cookie Injection'
+	sessionfix(web)	
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
+	webbugs(web)
+
     elif v.strip() == 'A':
 	print B+' [!] Type Selected : All Modules'
 	time.sleep(0.5)
@@ -169,6 +178,11 @@ def webbugs(web):
 	print B+'\n [!] Module Completed -->'+C+' Host Header Injection\n'
 	time.sleep(1)
 
+	print B+' [*] Firing up module -->'+C+' Cookie Injection'
+	sessionfix(web)
+	print B+'\n [!] Module Completed -->'+C+' Cookie Injection\n'
+	time.sleep(1)
+
 	print G+' [+] All modules successfully completed!'
 	time.sleep(0.5)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
@@ -185,5 +199,4 @@ def webbugs(web):
 	time.sleep(0.7)
 	os.system('clear')
 	webbugs(web)
-
 

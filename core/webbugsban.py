@@ -55,6 +55,8 @@ def webbugsban():
     time.sleep(0.1)
     print O+'  [12]'+GR+' Host Header Injection '+W+'(Port Based)\n '
     time.sleep(0.1)
+    print O+'  [13]'+GR+' Cookie Injection '+W+'(Session Fixation)\n '
+    time.sleep(0.1)
     print O+'  [A]'+GR+' Load all the modules 1 by 1\n'
     time.sleep(0.1)
     print O+'  [99]'+GR+' Back\n'

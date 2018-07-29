@@ -27,7 +27,7 @@ def activeban():
     time.sleep(0.1)
     print B+'     [4]'+C+' Examine robots.txt and sitemap.xml'
     time.sleep(0.1)
-    print B+'     [5]'+C+' Enumerate Subnets'+W+' (Class Based)'
+    print B+'     [5]'+C+' Scrape Comments from Webpage'+W+' (Regex Based)'
     time.sleep(0.1)
     print B+'     [6]'+C+' Perform Advanced Traceroute'+W+' (TTL Based)'
     time.sleep(0.1)
@@ -43,7 +43,7 @@ def activeban():
     time.sleep(0.1)
     print B+'     [12]'+C+' Enumerate Server behind website'+W
     time.sleep(0.1)
-    print B+'     [13]'+C+' Operating System Fingerprinting'+W+' (Response Based)'
+    print B+'     [13]'+C+' Alternate Sites'+W+' (User-Agent Based)'
     time.sleep(0.1)
     print B+'     [14]'+C+' Common File Bruteforce'+W+' (5 modules)\n'
     time.sleep(0.1)

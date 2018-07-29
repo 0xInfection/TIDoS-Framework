@@ -23,6 +23,7 @@ from revdns import *
 from subdom import *
 from googlenum import *
 from links import *
+from subnet import *
 from hackedmail import *
 from iphistory import *
 from mailtodom import *
@@ -80,84 +81,90 @@ def passiveo(web):
 	passiveo(web)
 
     elif v.strip() == '7':
+	print C+' [!] Type Selected : Subnet Enumeration'
+	subnet(web)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
+	passiveo(web)
+
+    elif v.strip() == '8':
 	print C+' [!] Type Selected '+B+': Reverse IP Lookup'
 	revip(web)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	passiveo(web)
 
-    elif v.strip() == '8':
+    elif v.strip() == '9':
 	print C+' [!] Type Selected '+B+': IP History'
 	iphistory(web)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	passiveo(web)
 
-    elif v.strip() == '9':
+    elif v.strip() == '10':
 	print C+' [!] Type Selected '+B+': Page Links'
 	links(web)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	passiveo(web)
 
-    elif v.strip() == '10':
+    elif v.strip() == '11':
 	print C+' [!] Type Selected '+B+': Google Search'
 	googleSearch()
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	passiveo(web)
 
-    elif v.strip() == '11':
+    elif v.strip() == '12':
 	print C+' [!] Type Selected '+B+': Google Dorker'
 	googledorker(web)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	passiveo(web)
 
-    elif v.strip() == '12':
+    elif v.strip() == '13':
 	print C+' [!] Type Selected '+B+': Wayback Machine'
 	webarchive(web)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	passiveo(web)
 
-    elif v.strip() == '13':
+    elif v.strip() == '14':
 	print C+' [!] Type Selected '+B+': Hacked Email Check'
 	hackedmail()
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	passiveo(web)
 
-    elif v.strip() == '14':
+    elif v.strip() == '15':
 	print C+' [!] Type Selected '+B+': Mail to Domain'
 	mailtodom()
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	passiveo(web)
 
-    elif v.strip() == '15':
+    elif v.strip() == '16':
 	print C+' [!] Type Selected '+B+': Google Groups Enum'
 	googlegroups(web)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	passiveo(web)
 
-    elif v.strip() == '16':
+    elif v.strip() == '17':
 	print C+' [!] Type Selected '+B+': Check Username'
 	checkuser(web)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	passiveo(web)
 
-    elif v.strip() == '17':
+    elif v.strip() == '18':
 	print C+' [!] Type Selected '+B+': PasteBin Posts'
 	pastebin(web)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	passiveo(web)
 
-    elif v.strip() == '18':
+    elif v.strip() == '19':
 	print C+' [!] Type Selected '+B+': LinkedIn Gathering'
 	linkedin(web)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	passiveo(web)
 
-    elif v.strip() == '19':
+    elif v.strip() == '20':
 	print C+' [!] Type Selected '+B+': Google Plus Gathering'
 	googlenum(web)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	passiveo(web)
 
-    elif v.strip() == '20':
+    elif v.strip() == '21':
 	print C+' [!] Type Selected '+B+': Threat Intel Gathering'
 	threatintel(web)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
@@ -195,6 +202,11 @@ def passiveo(web):
 	print C+' [*] Firing up module -->'+O+' Subdomain Scan '
 	subdom(web)
 	print C+'\n [!] Module Completed -->'+O+' Subdom\n'
+	time.sleep(1)
+
+	print C+' [*] Firing up module -->'+O+' Subnet Calc. '
+	subnet(web)
+	print C+'\n [!] Module Completed -->'+O+' Subnet Calculation\n'
 	time.sleep(1)
 
 	print C+' [*] Firing up module -->'+O+' Reverse DNS Lookup '

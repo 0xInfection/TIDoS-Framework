@@ -23,14 +23,14 @@ from robot import *
 from apachestat import *
 from dav import *
 from sharedns import *
-from subnet import *
+from commentssrc import *
 from sslcert import *
 from activeban import *
 from filebrute import *
 from traceroute import *
 from cms import *
 from serverdetect import *
-from osdetect import *
+from altsites import *
 from colors import *
 
 def activeo(web):
@@ -70,8 +70,8 @@ def activeo(web):
 	activeo(web)
 
     elif v.strip() == '5':
-	print C+' [!] Type Selected : Subnet Enumeration'
-	subnet(web)
+	print C+' [!] Type Selected : Scrape Comments'
+	commentssrc(web)
 	print '\n\n'
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	activeo(web)
@@ -126,8 +126,8 @@ def activeo(web):
 	activeo(web)
 
     elif v.strip() == '13':
-	print C+' [!] Type Selected : Operating System Fingerprinting'
-	osdetect(web)
+	print C+' [!] Type Selected : Alternate Sites '
+	altsites(web)
 	print '\n\n'
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	activeo(web)
@@ -157,9 +157,9 @@ def activeo(web):
 	print C+'\n [!] Module Completed -->'+B+' Robot Hunter\n'
 	time.sleep(1)
 
-	print C+' [*] Firing up module -->'+B+' Subnet Enumeration'
-	subnet(web)
-	print C+'\n [!] Module Completed -->'+B+' Subnet Enumeration\n'
+	print C+' [*] Firing up module -->'+B+' Comments Scraper'
+	commentssrc(web)
+	print C+'\n [!] Module Completed -->'+B+' Comments Src\n'
 	time.sleep(1)
 
 	print C+' [*] Firing up module -->'+B+' Traceroute'
@@ -207,9 +207,9 @@ def activeo(web):
 	print C+'\n [!] Module Completed -->'+B+' Server Detect\n'
 	time.sleep(1)
 
-	print C+' [*] Firing up module -->'+B+' OS Fingerprinting'
-	osdetect(web)
-	print C+'\n [!] Module Completed -->'+B+' OS Detect\n'
+	print C+' [*] Firing up module -->'+B+' Alt. Sites'
+	altsites(web)
+	print C+'\n [!] Module Completed -->'+B+' Alt. Sites\n'
 	time.sleep(1)
 
 	print C+'\n [!] All scantypes have been tested on target...'
