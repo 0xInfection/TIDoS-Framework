@@ -130,7 +130,7 @@
 	- Major ImportError bug fixes.
 	- Re-written 6 major modules for efficiency.
  
-    * v1.5.0 [latest release] (#stable)
+    * v1.5.0 
 
 	Wholesome release with 8 new modules.
 
@@ -140,3 +140,13 @@
 	- Bug fixes to the BruteMods module.
 	- Most of PassiveRecon Phase modules rewritten for the better.
 	- Lastly, some minor bug fixes and stuff.
+
+    * v1.5.1 [latest release] (#stable)
+
+	Small minor release with 3 new modules.
+
+	Changelog:
+	- Addition of 3 new modules under OSINT.
+	- Minor bug fixes.
+	- Code optimised for better threading.
+	- Removal of lots of unnecessary code.
