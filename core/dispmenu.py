@@ -38,11 +38,11 @@ def dispmenu():
 	time.sleep(0.1)
 	print B+' [2] \033[1;36mScanning & Enumeration'+W+' (14 modules)'
 	time.sleep(0.1)
-	print B+' [3] \033[1;36mVulnerability Analysis'+W+' (36 modules)'
+	print B+' [3] \033[1;36mVulnerability Analysis'+W+' (35 modules)'
 	time.sleep(0.1)
 	print B+' [4] \033[1;36mExploitation (beta)'+W+' (only 1)'
 	time.sleep(0.1)
-	print B+' [5] \033[1;36mAuxillary Modules'+W+' (4 modules)\n'
+	print B+' [5] \033[1;36mAuxillary Modules'+W+' (3 modules)\n'
 	time.sleep(0.1)
 	print B+' [99] \033[1;36mSay "alvida"! (Exit TIDoS)\n'
 	time.sleep(0.1)
