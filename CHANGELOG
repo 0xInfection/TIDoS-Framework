@@ -143,9 +143,11 @@
 
     * v1.5.1 [latest release] (#stable)
 
-	Small minor release with 3 new modules.
+	Small minor release with 5 new modules.
 
 	Changelog:
+	- Separated the auxillaries from mainstream phase.
+	- Addition of 2 new modules to auxillaries.
 	- Addition of 3 new modules under OSINT.
 	- Minor bug fixes.
 	- Code optimised for better threading.
