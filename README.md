@@ -199,9 +199,9 @@ TIDoS Framework presently supports the following: `and is under active developme
 	    - Single Sub-domain `Manual`
 	    - All Subdomains `Automated`
 
-    __Auxillaries__
+    __Other__
 
-	+ Protocol Default Credential Bruteforce 
+	+ PlainText Protocol Default Credential Bruteforce 
 
 	    - FTP Protocol Bruteforce
 	    - SSH Protocol Bruteforce
@@ -210,8 +210,12 @@ TIDoS Framework presently supports the following: `and is under active developme
 	    - XMPP Protocol Bruteforce
 	    - SMTP Protocol Bruteforce
 	    - TELNET Protocol Bruteforce
-	    
-	+ String & Payload Encoder `6 Types`
+
+- __Auxillary Modules__
+
+	+ Hash Generator `MD5, SHA1, SHA256, SHA512`
+	+ String & Payload Encoder `7 Categories`
+	+ Forensic Image Analysis `Metadata Extraction`
 
 - __Exploitation__ `purely developmental`
 
