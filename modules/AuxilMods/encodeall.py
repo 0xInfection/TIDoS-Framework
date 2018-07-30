@@ -69,8 +69,8 @@ def encodeall():
 	print R+'     S T R I N G   E N C O D E R'
 	print R+'    =============================\n'
 	st = raw_input(O+' [-] Enter a string to be encoded :> ')
+
 	def encode0x00(st):
-	    while True:
 		print O+'\n  Choose from the options to encode to:\n'
 		print B+'    [1]'+C+' URL Encode'
 		print B+'    [2]'+C+' HTML Encode'
