@@ -37,9 +37,9 @@ def check0x00(alias,web):
 		except Exception as e:
 			print R+' [-] Incurred Exception : '+str(e) 
 
-	if 'http://' in web:
+	if 'http://' in web.strip():
 		po = web.replace('http://','')
-	elif 'https://' in web:
+	elif 'https://' in web.strip():
 		po = web.replace('https://','')
 	p = 'tmp/logs/'+po+'-logs/'+str(po)+'-usernames.lst'
 	open(p,'w+')
@@ -63,9 +63,7 @@ def checkuser(web):
 	print R+'    =======================\n'
 
 	print GR+' [*] Parsing Url...'
-	web0 = web.replace('https://','')
-	web0 = web.replace('http://','')
-	web0 = web.split('.')[0]
+	web0 = web.split('//')[1].split('.')[0]
 	print G+' [+] Alias Set : '+web0
 	print O+' [*] Setting services...'
 	time.sleep(0.7)
