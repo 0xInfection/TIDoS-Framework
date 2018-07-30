@@ -11,7 +11,7 @@
 import time
 import os
 import sys
-sys.path.append('modules/VulnLysis/MiscBugs')
+sys.path.append('modules/VulnLysis/MiscBugs/')
 
 from icors import *
 from ssscript import *

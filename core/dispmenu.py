@@ -28,7 +28,7 @@ def dispmenu():
               \033[1;36m^.              .^ \033[1;37m           .   \033[1;32m   |   \033[1;37m    +.      *
   .            \033[1;36m "-..______.,-" \033[1;37m.                    .                    *
          +           .                .   +              *       .     
-             \033[1;33m-=[\033[1;31mL E T S   S T A R T\033[1;33m]=-\033[1;37m
+             \033[1;33m-=[ \033[1;31mL E T S   S T A R T\033[1;33m ]=-\033[1;37m
        +        .             '                 .            +         +
    *       .            +           *        .         *     .
 '''
@@ -42,5 +42,8 @@ def dispmenu():
 	time.sleep(0.1)
 	print B+' [4] \033[1;36mExploitation (beta)'+W+' (only 1)'
 	time.sleep(0.1)
-	print B+'\n [99] \033[1;36mSay "alvida"! (Exit TIDoS)\n'
+	print B+' [5] \033[1;36mAuxillary Modules'+W+' (4 modules)\n'
 	time.sleep(0.1)
+	print B+' [99] \033[1;36mSay "alvida"! (Exit TIDoS)\n'
+	time.sleep(0.1)
+

@@ -71,6 +71,12 @@ def tidos_main():
 			exploitsban()
 			exploits(web)
 
+		    elif zop == '5':
+
+			print G+'\n [+] Module loaded : Auxillaries'
+			auxilban()
+			auxil(web)
+
 		    elif zop == '99':
 			
 			print R+'\n [-] Exiting...'

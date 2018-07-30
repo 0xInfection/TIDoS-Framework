@@ -40,14 +40,12 @@ def vulnban():
                     '''*'''
 
 """
-    print B+'   [1] '+C+' Basic Web Bugs & Misconfigurations'
+    print B+'   [1] '+C+' Basic Bugs & Misconfigurations'+W+' (Low Priority [P0x3-P0x4])'
     time.sleep(0.2)
-    print B+'   [2] '+C+' Serious Web Bugs (SQLi, XSS, CSRF, etc)'
+    print B+'   [2] '+C+' Critical Vulnerabilities '+W+'(High Priority [P0x1-P0x2])'
     time.sleep(0.2)
-    print B+'   [3] '+C+' Auxillary Modules (Manual Modes)\n'
+    print B+'   [3] '+C+' Others '+W+'(Bruters)\n'
     time.sleep(0.2)
     print B+'   [99] '+C+'Back\n'
-    time.sleep(0.2)
-    print B+'   [!nfo] '+C+' This module is still being worked on (a lot more to add)...\n' 
     time.sleep(0.2)
 

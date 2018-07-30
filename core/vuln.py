@@ -13,6 +13,7 @@ import random
 from random import *
 from webbugs import *
 from vulnban import *
+from othbugs import *
 from serbugs import *
 from auxil import *
 from colors import *
@@ -29,7 +30,7 @@ def vuln(web):
 	serbugs(web)
 
     elif v == '3':
-	auxil(web)
+	othbugs(web)
 
     elif v == '99':
 	print '[!] Back'

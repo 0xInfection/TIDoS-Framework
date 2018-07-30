@@ -15,73 +15,73 @@ import time
 import subprocess
 import random
 from random import randint
-sys.path.append('modules/AuxilMods/')
+sys.path.append('modules/VulnLysis/OthBugs/')
 from popbrute import *
 from ftpbrute import *
 from sqlbrute import *
 from sshbrute import *
-from brutemodsban import *
+from othbugsban import *
 from colors import *
 from smtpbrute import *
 from xmppbrute import *
 from telnetbrute import *
 
-def brutemods(web):
+def othbugs(web):
 
     print " [!] Module Selected : Bruteforce Modules\n\n"
-    brutemodsban()
+    othbugsban()
     print ''
     time.sleep(0.3)
-    v = raw_input (''+GR+'  [#] \033[1;4mTID\033[0m'+GR+' :> ' + color.END)
+    v = raw_input (GR+'  [#] \033[1;4mTID\033[0m'+GR+' :> ' + color.END)
     print ''
     if v == '1':
 	print B+' [!] Type Selected :'+C+' FTP Brute'
 	ftpbrute(web)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	print '\n\n'
-	brutemods(web)
+	othbugs(web)
 
     elif v == '2':
 	print B+' [!] Type Selected :'+C+' SSH Brute'
 	sshbrute(web)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	print '\n\n'
-	brutemods(web)
+	othbugs(web)
 
     elif v == '3':
 	print B+' [!] Type Selected :'+C+' SQL Brute'
 	sqlbrute(web)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	print '\n\n'
-	brutemods(web)
+	othbugs(web)
 
     elif v == '4':
 	print B+' [!] Type Selected :'+C+' POP 3/2 Brute'
 	popbrute(web)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	print '\n\n'
-	brutemods(web)
+	othbugs(web)
 
     elif v == '5':
 	print B+' [!] Type Selected :'+C+' SMTP Brute'
 	smtpbrute(web)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	print '\n\n'
-	brutemods(web)
+	othbugs(web)
 
     elif v == '6':
 	print B+' [!] Type Selected :'+C+' TELNET Brute'
 	telnetbrute(web)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	print '\n\n'
-	brutemods(web)
+	othbugs(web)
 
     elif v == '7':
 	print B+' [!] Type Selected :'+C+' XMPP Brute'
 	xmppbrute(web)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	print '\n\n'
-	brutemods(web)
+	othbugs(web)
 
     elif v == 'A':
 	print B+' [!] Type Selected :'+C+' All Modules'
@@ -125,7 +125,7 @@ def brutemods(web):
 	time.sleep(4)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	print B+' [*] Going back to menu...'
-	brutemods(web)
+	othbugs(web)
 
     elif v == '99':
 	    print GR+' [*] Going back...'
@@ -137,5 +137,5 @@ def brutemods(web):
 	print dope[randint(0,3)]
 	time.sleep(0.7)
 	os.system('clear')
-	brutemods(web)
+	othbugs(web)
 

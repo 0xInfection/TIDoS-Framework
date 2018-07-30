@@ -25,6 +25,8 @@ from agree import *
 from loadstyle import *
 from banner1 import *
 from webbugs import *
+from othbugs import *
+from othbugsban import *
 from webbugsban import *
 from serbugs import *
 from serbugsban import *
