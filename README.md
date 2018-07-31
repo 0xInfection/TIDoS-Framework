@@ -166,7 +166,7 @@ TIDoS Framework presently supports the following: `and is under active developme
     
 	+ File Inclusions
 	    - Local File Inclusion (LFI) `Param based`
-	    - Remote File Inclusion (RFI)
+	    - Remote File Inclusion (RFI) `IMPROVED`
 	    	- Parameter Based
 		     - Pre-loaded Path Based
 	+ OS Command Injection `Linux & Windows (RCE)`
