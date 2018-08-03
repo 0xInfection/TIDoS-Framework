@@ -65,18 +65,18 @@ def clickjack(web):
 	        if w == "y":
 		    print''+B+' [!] Generating POC ...'
 		    time.sleep(1.0)
-		    web0 = web.replace('http://','')
-		    web0 = web.replace('https://','')
-		    html_file = open("tmp/"+web0+"-clickjack-poc.html","w+")
+		    web0 = web.split('//')[1]
+		    html_file = open("tmp/logs/"+web0+"-logs/"+web0+"-clickjack-poc.html","w+")
 		    html_file.write(code1)
 		    html_file.close()
 		    print ''
-		    print''+G+' [+] POC successfully saved under tmp/'+web0+'-clickjack-poc.html!'
+		    print''+G+' [+] POC successfully saved under tmp/logs/'+web0+"-logs/"+web0+'-clickjack-poc.html!'
 		    print ''
 	        else:
 		    print ''+B+' [+] Okay :)'
 	    else:
 	        print ''+R+' [-] Website not vulnerable to clickjacking...'
+
     except Exception as e:
 	    print ''+R+' [-] Something went wrong!'
 	    print G+' [-] Error : '+str(e) 
