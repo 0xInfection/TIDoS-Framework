@@ -141,7 +141,7 @@
 	- Most of PassiveRecon Phase modules rewritten for the better.
 	- Lastly, some minor bug fixes and stuff.
 
-    * v1.5.1 [latest release] (#stable)
+    * v1.5.1 
 
 	Small minor release with 5 new modules.
 
@@ -152,3 +152,14 @@
 	- Minor bug fixes.
 	- Code optimised for better threading.
 	- Removal of lots of unnecessary code.
+
+    * v1.5.2 [latest release] (#stable)
+
+	Addition of 2 new modules and picks to mainstream framework.
+
+	Changelog:
+	- TIDoS Framework now boasts of a century of modules.
+	- A new module added under Passive Recon.
+	- Full Contact Module saw its final touch.
+	- Another new module added under Auxillaries.
+	- Few bug fixes and stuff.
