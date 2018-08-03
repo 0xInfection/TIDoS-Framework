@@ -241,7 +241,7 @@ TIDoS Framework presently supports the following: `and is under active developme
 
 ### Version:
 ```
-v1.5.1 [latest release] [#stable]
+v1.5.2 [latest release] [#stable]
 ```
 
 ### Upcoming:
