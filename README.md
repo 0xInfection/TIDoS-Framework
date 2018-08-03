@@ -19,7 +19,7 @@ The main highlights of this framework is:
 - [x] TIDoS has full verbose out support, so you'll know whats going on.
 - [x] Fully user friendly interaction environment. `(no shits)`
 
-<img src='https://i.imgur.com/0z1HUlj.png' />
+<img src='https://i.imgur.com/EDqp1Eq.png' />
 
 ### Installation :-
 
@@ -33,7 +33,7 @@ cd tidos-framework
 chmod +x install
 ./install
 ```
-<img src='https://i.imgur.com/3JrbOPH.png' />
+<img src='https://i.imgur.com/YNiIioI.png' />
 
 Thats it! Now you are good to go! Now lets run the tool:
 ```
