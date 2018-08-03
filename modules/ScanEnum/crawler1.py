@@ -57,23 +57,27 @@ def crawler10x00(web):
         for m in linksall:
 	    if 'http' in m and 'https' not in m:
 	        cis.append(m)
-	try:
-            for x in cis:
-            	print G+' [+] Crawling link :> '+ O + str(x)
-	    	br.open(x)
-	    	crawled.append(x)	
 
-	except Exception as e:
-	    print R+' [!] Exception encountered!'
-	    print R+' [-] Error : '+str(e)+'\n'
-	    print O+' [+] Please use the second crawler... :)'
+	flag = 0x00
+	for x in cis:
+		try:
+			print G+' [+] Crawling link :> '+ O + str(x)
+			br.open(x)
+			flag = 0x01
+			crawled.append(x)	
+
+		except Exception as e:
+		    	print R+' [-] Exception : '+str(e)+'\n'
+
+	if flag == 0x00:
+		print R+' [-] Unable to find any links...'
+		print O+' [+] Please use the second crawler... :)'
 
 	return crawled
 
 def out(web, list0):
 	
-	web = web.replace('http://','')
-	web = web.replace('https://','')
+	web = web.split('//')[1]
 	print GR+' [*] Writing found URLs to a file...'
 	if os.path.exists('tmp/logs/'+web+'-logs/'+web+'-links.lst'):		
 		fil = open('tmp/logs/'+web+'-logs/'+web+'-links.lst','w+')
@@ -82,6 +86,9 @@ def out(web, list0):
 		for lists in list0:
 		    if str(web) in lists:
 			fil.write("%s\n" % lists)
+		mq = os.getcwd()
+		print G+' [+] Links saved under '+O+mq+'tmp/logs/'+web+'-logs/'+web+'-links.lst'
+
 	else:
 		fil = open('tmp/logs/'+web+'-logs/'+web+'-links.lst','a')
 		print O+' [!] Sorting only scope urls...'
@@ -89,6 +96,9 @@ def out(web, list0):
 		for lists in list0:
 		    if str(web) in lists:
 			fil.write("%s\n" % lists)
+		mq = os.getcwd()
+		print G+' [+] Links saved under '+O+mq+'tmp/logs/'+web+'-logs/'+web+'-links.lst'
+
 def crawler1(web):
 
 	print GR+' [*] Loading crawler...'
