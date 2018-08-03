@@ -18,6 +18,7 @@ from subprocess import call
 sys.path.append('modules/AuxilMods/')
 from auxilban import *
 from encodeall import *
+from honeypot import *
 from hashes import *
 from imgext import *
 
@@ -46,6 +47,14 @@ def auxil(web):
     elif v == '3':
 	print ' [!] Type Selected : Extract Metadata'
 	imgext()
+	print '\n\n'
+	raw_input(O+' [+] Press '+GR+'Enter'+O+' to Continue...')
+	auxilban()
+	auxil(web)
+
+    elif v == '4':
+	print ' [!] Type Selected : Honeypot Detector'
+	honeypot()
 	print '\n\n'
 	raw_input(O+' [+] Press '+GR+'Enter'+O+' to Continue...')
 	auxilban()

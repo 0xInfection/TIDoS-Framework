@@ -20,6 +20,7 @@ from piweb import *
 from getgeoip import *
 from revip import *
 from revdns import *
+from getconinfo import *
 from subdom import *
 from googlenum import *
 from links import *
@@ -165,6 +166,12 @@ def passiveo(web):
 	passiveo(web)
 
     elif v.strip() == '21':
+	print C+' [!] Type Selected '+B+': Public Contact Info'
+	getconinfo(web)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
+	passiveo(web)
+
+    elif v.strip() == '22':
 	print C+' [!] Type Selected '+B+': Threat Intel Gathering'
 	threatintel(web)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
@@ -277,6 +284,11 @@ def passiveo(web):
 	print C+' [*] Firing up module -->'+O+' Google Dorker'
 	googledorker(web)
 	print C+'\n [!] Module Completed -->'+O+' GDorker\n'
+	time.sleep(1)
+
+	print C+' [*] Firing up module -->'+O+' Public Contact Info'
+	getconinfo(web)
+	print C+'\n [!] Module Completed -->'+O+' Public Contact info\n'
 	time.sleep(1)
 
 	print C+' [*] Firing up module -->'+O+' Threat Intelligence'
