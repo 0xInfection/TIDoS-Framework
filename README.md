@@ -1,6 +1,6 @@
 <p align="middle"><img src='https://i.imgur.com/QAbaVdU.png' /></p>
 
-![Python](https://img.shields.io/badge/Python-2.7-green.svg) ![TIDoS](https://img.shields.io/badge/TIDoS-v1.5.1-blue.svg) ![Supported OS](https://img.shields.io/badge/Supported%20OS-Linux-yellow.svg) ![License](https://img.shields.io/badge/License-GPLv3-orange.svg) ![Build](https://img.shields.io/badge/Build-0088-red.svg) ![Modules](https://img.shields.io/badge/Modules-98-blue.svg) ![Status](https://img.shields.io/badge/Build%20Status-passing-brightgreen.svg) ![Stage](https://img.shields.io/badge/Release-Stable-green.svg)
+![Python](https://img.shields.io/badge/Python-2.7-green.svg) ![TIDoS](https://img.shields.io/badge/TIDoS-v1.5.1-blue.svg) ![Supported OS](https://img.shields.io/badge/Supported%20OS-Linux-yellow.svg) ![License](https://img.shields.io/badge/License-GPLv3-orange.svg) ![Build](https://img.shields.io/badge/Build-0088-red.svg) ![Modules](https://img.shields.io/badge/Modules-100-blue.svg) ![Status](https://img.shields.io/badge/Build%20Status-passing-brightgreen.svg) ![Stage](https://img.shields.io/badge/Release-Stable-green.svg)
 
 # The TIDoS Framework 
 TIDoS Framework is a comprehensive web-app audit framework. `let's keep this simple`
@@ -8,18 +8,18 @@ TIDoS Framework is a comprehensive web-app audit framework. `let's keep this sim
 ### Highlights :-
 The main highlights of this framework is:
 - [x] A complete versatile framework to cover up everything from Reconnaissance to Vulnerability Analysis.
-- [x] Has 5 main phases, subdivided into __14 sub-phases__ consisting a total of __98 modules__.
-- [x] Reconnaissance Phase has 45 modules of its own (including active and passive recon, information disclosure modules).
+- [x] Has 5 main phases, subdivided into __14 sub-phases__ consisting a total of __100 modules__.
+- [x] Reconnaissance Phase has 46 modules of its own (including active and passive recon, information disclosure modules).
 - [x] Scanning & Enumeration Phase has got 14 modules (including port scans, WAF analysis, etc)
 - [x] Vulnerability Analysis Phase has 35 modules (including most common vulnerabilites in action).
 - [x] Exploits Castle has only 1 exploit. `(purely developmental)`
-- [x] And finally, Auxillaries have got 3 modules. `under dev.`
+- [x] And finally, Auxillaries have got 4 modules. `under dev.`
 - [x] All four phases each have a `Auto-Awesome` module which automates every module for you.
 - [x] You just need the domain, and leave everything is to this tool.
 - [x] TIDoS has full verbose out support, so you'll know whats going on.
 - [x] Fully user friendly interaction environment. `(no shits)`
 
-<img src='https://i.imgur.com/TMl58M7.png' />
+<img src='https://i.imgur.com/0z1HUlj.png' />
 
 ### Installation :-
 
@@ -82,6 +82,7 @@ TIDoS Framework presently supports the following: `and is under active developme
 	    - Find PasteBin Posts `Domain Based`
 	    - LinkedIn Gathering `Employees & Company`
 	    - Google Plus Gathering `Domain Profiles`
+	    - Public Contact Info Scraping `FULL CONTACT`
 	    - Threat Intelligence Gathering `Bad IPs`
 
 	+ Active Reconnaissance
@@ -217,6 +218,7 @@ TIDoS Framework presently supports the following: `and is under active developme
 	+ Hash Generator `MD5, SHA1, SHA256, SHA512`
 	+ String & Payload Encoder `7 Categories`
 	+ Forensic Image Analysis `Metadata Extraction`
+	+ Web HoneyPot Probability `ShodanLabs HoneyScore` 
 
 - __Exploitation__ `purely developmental`
 
