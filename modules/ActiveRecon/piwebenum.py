@@ -16,12 +16,11 @@ from colors import *
 def piwebenum(web):
 
     time.sleep(0.4)
-    d = web.replace('http://','')
-    d = web.replace('https://','')
+    web = web.split('//')[1]
     print R+'\n   ============================================='
     print R+'    P I N G / N P I N G   E N U M E R A T I O N'
     print R+'   =============================================\n'
-    print GR + color.BOLD + ' [!] Pinging website...'
+    print GR + ' [!] Pinging website...'
     time.sleep(0.5)
     print O+' [*] Using adaptative ping and debug mode with count 5...'
     time.sleep(0.4)
