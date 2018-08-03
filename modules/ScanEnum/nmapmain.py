@@ -88,7 +88,7 @@ def nmapmain(web):
 			time.sleep(0.3)
 			print ''
 			print(""+ B +"                             [¬] ScanType Selected:"+GR+" Basic Port Scan")
-			print(""+ M +"                             [!] Scanning through default configured proxy...")
+			print(""+ O +"                             [!] Scanning through default configured proxy...")
 			print ''
 			print(""+ R + color.BOLD + "                                [~] Result: "+color.YELLOW+color.BOLD+"════════════════╗" + color.END)
 			print(""+ color.YELLOW + color.BOLD + "     ╔══════════════════════════════════════════════════════╝")            
@@ -107,7 +107,7 @@ def nmapmain(web):
 		      else:
 			print ''
 			print(""+ B +"                             [¬] ScanType Selected:"+GR+" Basic Port Scan")
-			print(""+ M +"                             [!] Scanning through direct IP...")
+			print(""+ O +"                             [!] Scanning through direct IP...")
 			print ''
 			print(""+ R + color.BOLD + "                                [~] Result: "+color.YELLOW+color.BOLD+"════════════════╗" + color.END)
 			print(""+ color.YELLOW + color.BOLD + "     ╔══════════════════════════════════════════════════════╝")            
@@ -127,7 +127,7 @@ def nmapmain(web):
 		      q = raw_input (''+G+'                        [*] Do you want to scan through a proxy? (Y/n) :> ')
 		      if q == "y":
 			print ''
-			print(""+ M +"                             [!] Scanning initiated through default configured proxy...")
+			print(""+ O +"                             [!] Scanning initiated through default configured proxy...")
 			print ''
 			print(""+ C +"                             [¬] ScanType Selected:"+GR+" Specific Port Scan")
 			print ''
@@ -149,7 +149,7 @@ def nmapmain(web):
 			    nmapsx(web)
 		      else:
 			print ''
-			print(""+ M +"                             [!] Scanning through direct IP...")
+			print(""+ O +"                             [!] Scanning through direct IP...")
 			print ''
 			print(""+ C +"                             [¬] ScanType Selected:"+GR+" Specific Port Scan")
 			print ''
@@ -173,7 +173,7 @@ def nmapmain(web):
 		      q = raw_input (''+G+'                        [*] Do you want to scan through a proxy? (Y/n) :> ')
 		      if q == "y":
 			print ''
-			print(""+ M +"                             [!] Scanning through default configured proxy...")
+			print(""+ O +"                             [!] Scanning through default configured proxy...")
 			print ''
 			print(""+ B +"                             [¬] ScanType Selected:"+GR+" Common Ports Scan")
 			print ''
@@ -193,7 +193,7 @@ def nmapmain(web):
 			    nmapsx(web)
 		      else:
 			print ''
-			print(""+ M +"                             [!] Scanning through direct IP...")
+			print(""+ O +"                             [!] Scanning through direct IP...")
 			print ''
 			print(""+ B +"                             [¬] ScanType Selected:"+GR+" Common Ports Scan")
 			print ''
@@ -215,7 +215,7 @@ def nmapmain(web):
 		      q = raw_input (''+G+'                        [*] Do you want to scan through a proxy? (Y/n) :> ')
 		      if q == "y":
 			print ''
-			print(""+ M +"                             [!] Scanning through default configured proxy...")
+			print(""+ O +"                             [!] Scanning through default configured proxy...")
 			print ''
 			print(""+ B +"                             [¬] ScanType Selected:"+GR+" TCP Port Scan")
 			print ''
@@ -235,7 +235,7 @@ def nmapmain(web):
 			    nmapsx(web)
 		      else:
 			print ''
-			print(""+ M +"                             [!] Scanning through direct IP...")
+			print(""+ O +"                             [!] Scanning through direct IP...")
 			print ''
 			print(""+ B +"                             [¬] ScanType Selected:"+GR+" TCP Port Scan")
 			print ''
@@ -257,7 +257,7 @@ def nmapmain(web):
 		      q = raw_input (''+G+'                        [*] Do you want to scan through a proxy? (Y/n) :> ')
 		      if q == "y":
 			print ''
-			print(""+ M +"                             [!] Scanning through default configured proxy...")
+			print(""+ O +"                             [!] Scanning through default configured proxy...")
 			print ''
 			print(""+ B +"                             [¬] ScanType Selected:"+GR+" UDP Port Scan")
 			print ''
@@ -277,7 +277,7 @@ def nmapmain(web):
 			    nmapsx(web)
 		      else:
 			print ''
-			print(""+ M +"                             [!] Scanning through direct IP...")
+			print(""+ O +"                             [!] Scanning through direct IP...")
 			print ''
 			print(""+ B +"                             [¬] ScanType Selected:"+GR+" UDP Port Scan")
 			print ''
@@ -299,7 +299,7 @@ def nmapmain(web):
 		      q = raw_input (''+G+'                        [*] Do you want to scan through a proxy? (Y/n) :> ')
 		      if q == "y":
 			print ''
-			print(""+ M +"                             [!] Scanning through default configured proxy...")
+			print(""+ O +"                             [!] Scanning through default configured proxy...")
 			print ''
 			print(""+ B +"                          [¬] ScanType Selected:"+GR+" OS Detection and Services Scan")
 			print ''
@@ -319,7 +319,7 @@ def nmapmain(web):
 			    nmapsx(web)
 		      else:
 			print ''
-			print(""+ M +"                             [!] Scanning through direct IP...")
+			print(""+ O +"                             [!] Scanning through direct IP...")
 			print ''
 			print(""+ B +"                          [¬] ScanType Selected:"+GR+" OS Detection and Services Scan")
 			print ''
@@ -341,7 +341,7 @@ def nmapmain(web):
 		      q = raw_input (''+G+'                        [*] Do you want to scan through a proxy? (Y/n) :> ')
 		      if q == "y":
 			print ''
-			print(""+ M +"                             [!] Scanning through default configured proxy...")
+			print(""+ O +"                             [!] Scanning through default configured proxy...")
 			print ''
 			print(""+ B +"                             [¬] ScanType Selected:"+GR+" UDP DDoS Reflectors Scan")
 			print ''
@@ -361,7 +361,7 @@ def nmapmain(web):
 			    nmapsx(web)
 		      else:
 			print ''
-			print(""+ M +"                             [!] Scanning through direct IP...")
+			print(""+ O +"                             [!] Scanning through direct IP...")
 			print ''
 			print(""+ B +"                             [¬] ScanType Selected:"+GR+" UDP DDoS Reflectors Scan")
 			print ''
@@ -383,7 +383,7 @@ def nmapmain(web):
 		      q = raw_input (''+G+'                        [*] Do you want to scan through a proxy? (Y/n) :> ')
 		      if q == "y":
 			print ''
-			print(""+ M +"                             [!] Scanning through default configured proxy...")
+			print(""+ O +"                             [!] Scanning through default configured proxy...")
 			print ''
 			print(""+ B +"                          [¬] ScanType Selected:"+GR+" Page Titles from HTTP Headers")
 			print ''
@@ -403,7 +403,7 @@ def nmapmain(web):
 			    nmapsx(web)
 		      else:
 			print ''
-			print(""+ M +"                             [!] Scanning through direct IP (exposes your IP)...")
+			print(""+ O +"                             [!] Scanning through direct IP (exposes your IP)...")
 			print ''
 			print(""+ B +"                             [¬] ScanType Selected:"+GR+" Page Titles from HTTP Headers")
 			print ''
@@ -425,7 +425,7 @@ def nmapmain(web):
 		      q = raw_input (''+G+'                        [*] Do you want to scan through a proxy? (Y/n) :> ')
 		      if q == "y":
 			print ''
-			print(""+ M +"                             [!] Scanning through default configured proxy...")
+			print(""+ O +"                             [!] Scanning through default configured proxy...")
 			print ''
 			print(""+ B +"                          [¬] ScanType Selected:"+GR+" Standard Services Scan")
 			print ''
@@ -445,7 +445,7 @@ def nmapmain(web):
 			    nmapsx(web)
 		      else:
 			print ''
-			print(""+ M +"                             [!] Scanning through direct IP (exposes your IP)...")
+			print(""+ O +"                             [!] Scanning through direct IP (exposes your IP)...")
 			print ''
 			print(""+ B +"                          [¬] ScanType Selected:"+GR+" Standard Services Scan")
 			print ''
@@ -467,7 +467,7 @@ def nmapmain(web):
 		      q = raw_input (''+G+'                        [*] Do you want to scan through a proxy? (Y/n) :> ')
 		      if q == "y":
 			print ''
-			print(""+ M +"                             [!] Scanning through default configured proxy...")
+			print(""+ O +"                             [!] Scanning through default configured proxy...")
 			print ''
 			print(""+ B +"                          [¬] ScanType Selected:"+GR+" DNS Hostname Bruteforce")
 			print ''
@@ -487,7 +487,7 @@ def nmapmain(web):
 			    nmapsx(web)
 		      else:
 			print ''
-			print(""+ M +"                             [!] Scanning through direct IP (exposes your IP)...")
+			print(""+ O +"                             [!] Scanning through direct IP (exposes your IP)...")
 			print ''
 			print(""+ B +"                          [¬] ScanType Selected:"+GR+" DNS Hostname Bruteforce")
 			print ''
@@ -509,7 +509,7 @@ def nmapmain(web):
 		      q = raw_input (''+G+'                        [*] Do you want to scan through a proxy? (Y/n) :> ')
 		      if q == "y":
 			print ''
-			print(""+ M +"                             [!] Scanning through default configured proxy...")
+			print(""+ O +"                             [!] Scanning through default configured proxy...")
 			print ''
 			print(""+ B +"                          [¬] ScanType Selected:"+GR+" XSS Scan")
 			print ''
@@ -529,7 +529,7 @@ def nmapmain(web):
 			    nmapsx(web)
 		      else:
 			print ''
-			print(""+ M +"                             [!] Scanning through direct IP (exposes your IP)...")
+			print(""+ O +"                             [!] Scanning through direct IP (exposes your IP)...")
 			print ''
 			print(""+ B +"                          [¬] ScanType Selected:"+GR+" XSS Scan")
 			print ''
@@ -551,7 +551,7 @@ def nmapmain(web):
 		      q = raw_input (''+G+'                        [*] Do you want to scan through a proxy? (Y/n) :> ')
 		      if q == "y":
 			print ''
-			print(""+ M +"                             [!] Scanning through default configured proxy...")
+			print(""+ O +"                             [!] Scanning through default configured proxy...")
 			print ''
 			print(""+ B +"                          [¬] ScanType Selected:"+GR+" SQLi Vulnerability Scan")
 			print ''
@@ -571,7 +571,7 @@ def nmapmain(web):
 			    nmapsx(web)
 		      else:
 			print ''
-			print(""+ M +"                             [!] Scanning through direct IP (exposes your IP)...")
+			print(""+ O +"                             [!] Scanning through direct IP (exposes your IP)...")
 			print ''
 			print(""+ B +"                          [¬] ScanType Selected:"+GR+" SQLi Vulnerability Scan")
 			print ''
@@ -593,7 +593,7 @@ def nmapmain(web):
 		      q = raw_input (''+G+'                        [*] Do you want to scan through a proxy? (Y/n) :> ')
 		      if q == "y":
 			print ''
-			print(""+ M +"                             [!] Scanning through default configured proxy...")
+			print(""+ O +"                             [!] Scanning through default configured proxy...")
 			print ''
 			print(""+ B +"                          [¬] ScanType Selected:"+GR+" HeartBleed SSL Vulnerability Scan")
 			print ''
@@ -613,7 +613,7 @@ def nmapmain(web):
 			    nmapsx(web)
 		      else:
 			print ''
-			print(""+ M +"                             [!] Scanning through direct IP (exposes your IP)...")
+			print(""+ O +"                             [!] Scanning through direct IP (exposes your IP)...")
 			print ''
 			print(""+ B +"                          [¬] ScanType Selected:"+GR+" HeartBleed SSL Vulnerability Scan")
 			print ''
@@ -633,12 +633,12 @@ def nmapmain(web):
 			    nmapsx(web)
 		elif main == "14":
 			print ''
-			print(""+ M +"                     [!] Scanning initiated through default configured proxy...")
+			print(""+ O +"                     [!] Scanning initiated through default configured proxy...")
 			print ''
 			print(""+ B +"                     [¬] ScanType Selected:"+GR+" Firewall/IDS Evasion with Fragmented Packet Scan")
 			print(''+ R +'                     [!] This scan may take a long time because it is extremely stealthy !')
 			print ''
-			nm = raw_input(""+ M + color.BOLD + "                     [!] Enter a domain to which your IP is to be spoofed(eg. google.com) :> ")
+			nm = raw_input(""+ O + color.BOLD + "                     [!] Enter a domain to which your IP is to be spoofed(eg. google.com) :> ")
 			print ''
 			print(""+ R + color.BOLD + "                                [~] Result: "+color.YELLOW+color.BOLD+"════════════════╗" + color.END)
 			print(""+ color.YELLOW + color.BOLD + "     ╔══════════════════════════════════════════════════════╝")            
@@ -658,7 +658,7 @@ def nmapmain(web):
 		      q = raw_input (''+G+'                        [*] Do you want to scan through a proxy? (Y/n) :> ')
 		      if q == "y":
 			print ''
-			print(""+ M +"                             [!] Scanning through default configured proxy...")
+			print(""+ O +"                             [!] Scanning through default configured proxy...")
 			print ''
 			print(""+ B +"                          [¬] ScanType Selected:"+GR+" Web-Application Scan")
 			print ''
@@ -678,7 +678,7 @@ def nmapmain(web):
 			    nmapsx(web)
 		      else:
 			print ''
-			print(""+ M +"                             [!] Scanning through direct IP (exposes your IP)...")
+			print(""+ O +"                             [!] Scanning through direct IP (exposes your IP)...")
 			print ''
 			print(""+ B +"                          [¬] ScanType Selected:"+GR+" Web-Application Scan")
 			print ''
@@ -750,7 +750,7 @@ def nmapmain(web):
 		      if q == "y":
 			print ''
 			print(""+ B +"                             [¬] ScanType Selected:"+GR+" Basic Port Scan")
-			print(""+ M +"                             [!] Scanning through default configured proxy...")
+			print(""+ O +"                             [!] Scanning through default configured proxy...")
 			print ''
 			print(""+ R + color.BOLD + "                                [~] Result: "+color.YELLOW+color.BOLD+"════════════════╗" + color.END)
 			print(""+ color.YELLOW + color.BOLD + "     ╔══════════════════════════════════════════════════════╝")            
@@ -769,7 +769,7 @@ def nmapmain(web):
 		      else:
 			print ''
 			print(""+ B +"                             [¬] ScanType Selected:"+GR+" Basic Port Scan")
-			print(""+ M +"                             [!] Scanning through direct IP...")
+			print(""+ O +"                             [!] Scanning through direct IP...")
 			print ''
 			print(""+ R + color.BOLD + "                                [~] Result: "+color.YELLOW+color.BOLD+"════════════════╗" + color.END)
 			print(""+ color.YELLOW + color.BOLD + "     ╔══════════════════════════════════════════════════════╝")            
@@ -789,7 +789,7 @@ def nmapmain(web):
 		      q = raw_input (''+G+'                        [*] Do you want to scan through a proxy? (Y/n) :> ')
 		      if q == "y":
 			print ''
-			print(""+ M +"                             [!] Scanning initiated through default configured proxy...")
+			print(""+ O +"                             [!] Scanning initiated through default configured proxy...")
 			print ''
 			print(""+ C +"                             [¬] ScanType Selected:"+GR+" Specific Port Scan")
 			print ''
@@ -811,7 +811,7 @@ def nmapmain(web):
 			    nmapsx(web)
 		      else:
 			print ''
-			print(""+ M +"                             [!] Scanning through direct IP...")
+			print(""+ O +"                             [!] Scanning through direct IP...")
 			print ''
 			print(""+ C +"                             [¬] ScanType Selected:"+GR+" Specific Port Scan")
 			print ''
@@ -835,7 +835,7 @@ def nmapmain(web):
 		      q = raw_input (''+G+'                        [*] Do you want to scan through a proxy? (Y/n) :> ')
 		      if q == "y":
 			print ''
-			print(""+ M +"                             [!] Scanning through default configured proxy...")
+			print(""+ O +"                             [!] Scanning through default configured proxy...")
 			print ''
 			print(""+ B +"                             [¬] ScanType Selected:"+GR+" Common Ports Scan")
 			print ''
@@ -855,7 +855,7 @@ def nmapmain(web):
 			    nmapsx(web)
 		      else:
 			print ''
-			print(""+ M +"                             [!] Scanning through direct IP...")
+			print(""+ O +"                             [!] Scanning through direct IP...")
 			print ''
 			print(""+ B +"                             [¬] ScanType Selected:"+GR+" Common Ports Scan")
 			print ''
@@ -877,7 +877,7 @@ def nmapmain(web):
 		      q = raw_input (''+G+'                        [*] Do you want to scan through a proxy? (Y/n) :> ')
 		      if q == "y":
 			print ''
-			print(""+ M +"                             [!] Scanning through default configured proxy...")
+			print(""+ O +"                             [!] Scanning through default configured proxy...")
 			print ''
 			print(""+ B +"                             [¬] ScanType Selected:"+GR+" TCP Port Scan")
 			print ''
@@ -897,7 +897,7 @@ def nmapmain(web):
 			    nmapsx(web)
 		      else:
 			print ''
-			print(""+ M +"                             [!] Scanning through direct IP...")
+			print(""+ O +"                             [!] Scanning through direct IP...")
 			print ''
 			print(""+ B +"                             [¬] ScanType Selected:"+GR+" TCP Port Scan")
 			print ''
@@ -919,7 +919,7 @@ def nmapmain(web):
 		      q = raw_input (''+G+'                        [*] Do you want to scan through a proxy? (Y/n) :> ')
 		      if q == "y":
 			print ''
-			print(""+ M +"                             [!] Scanning through default configured proxy...")
+			print(""+ O +"                             [!] Scanning through default configured proxy...")
 			print ''
 			print(""+ B +"                             [¬] ScanType Selected:"+GR+" UDP Port Scan")
 			print ''
@@ -939,7 +939,7 @@ def nmapmain(web):
 			    nmapsx(web)
 		      else:
 			print ''
-			print(""+ M +"                             [!] Scanning through direct IP...")
+			print(""+ O +"                             [!] Scanning through direct IP...")
 			print ''
 			print(""+ B +"                             [¬] ScanType Selected:"+GR+" UDP Port Scan")
 			print ''
@@ -961,7 +961,7 @@ def nmapmain(web):
 		      q = raw_input (''+G+'                        [*] Do you want to scan through a proxy? (Y/n) :> ')
 		      if q == "y":
 			print ''
-			print(""+ M +"                             [!] Scanning through default configured proxy...")
+			print(""+ O +"                             [!] Scanning through default configured proxy...")
 			print ''
 			print(""+ B +"                          [¬] ScanType Selected:"+GR+" OS Detection and Services Scan")
 			print ''
@@ -981,7 +981,7 @@ def nmapmain(web):
 			    nmapsx(web)
 		      else:
 			print ''
-			print(""+ M +"                             [!] Scanning through direct IP...")
+			print(""+ O +"                             [!] Scanning through direct IP...")
 			print ''
 			print(""+ B +"                          [¬] ScanType Selected:"+GR+" OS Detection and Services Scan")
 			print ''
@@ -1003,7 +1003,7 @@ def nmapmain(web):
 		      q = raw_input (''+G+'                        [*] Do you want to scan through a proxy? (Y/n) :> ')
 		      if q == "y":
 			print ''
-			print(""+ M +"                             [!] Scanning through default configured proxy...")
+			print(""+ O +"                             [!] Scanning through default configured proxy...")
 			print ''
 			print(""+ B +"                             [¬] ScanType Selected:"+GR+" UDP DDoS Reflectors Scan")
 			print ''
@@ -1023,7 +1023,7 @@ def nmapmain(web):
 			    nmapsx(web)
 		      else:
 			print ''
-			print(""+ M +"                             [!] Scanning through direct IP...")
+			print(""+ O +"                             [!] Scanning through direct IP...")
 			print ''
 			print(""+ B +"                             [¬] ScanType Selected:"+GR+" UDP DDoS Reflectors Scan")
 			print ''
@@ -1045,7 +1045,7 @@ def nmapmain(web):
 		      q = raw_input (''+G+'                        [*] Do you want to scan through a proxy? (Y/n) :> ')
 		      if q == "y":
 			print ''
-			print(""+ M +"                             [!] Scanning through default configured proxy...")
+			print(""+ O +"                             [!] Scanning through default configured proxy...")
 			print ''
 			print(""+ B +"                          [¬] ScanType Selected:"+GR+" Page Titles from HTTP Headers")
 			print ''
@@ -1065,7 +1065,7 @@ def nmapmain(web):
 			    nmapsx(web)
 		      else:
 			print ''
-			print(""+ M +"                             [!] Scanning through direct IP (exposes your IP)...")
+			print(""+ O +"                             [!] Scanning through direct IP (exposes your IP)...")
 			print ''
 			print(""+ B +"                             [¬] ScanType Selected:"+GR+" Page Titles from HTTP Headers")
 			print ''
@@ -1087,7 +1087,7 @@ def nmapmain(web):
 		      q = raw_input (''+G+'                        [*] Do you want to scan through a proxy? (Y/n) :> ')
 		      if q == "y":
 			print ''
-			print(""+ M +"                             [!] Scanning through default configured proxy...")
+			print(""+ O +"                             [!] Scanning through default configured proxy...")
 			print ''
 			print(""+ B +"                          [¬] ScanType Selected:"+GR+" Standard Services Scan")
 			print ''
@@ -1107,7 +1107,7 @@ def nmapmain(web):
 			    nmapsx(web)
 		      else:
 			print ''
-			print(""+ M +"                             [!] Scanning through direct IP (exposes your IP)...")
+			print(""+ O +"                             [!] Scanning through direct IP (exposes your IP)...")
 			print ''
 			print(""+ B +"                          [¬] ScanType Selected:"+GR+" Standard Services Scan")
 			print ''
@@ -1129,7 +1129,7 @@ def nmapmain(web):
 		      q = raw_input (''+G+'                        [*] Do you want to scan through a proxy? (Y/n) :> ')
 		      if q == "y":
 			print ''
-			print(""+ M +"                             [!] Scanning through default configured proxy...")
+			print(""+ O +"                             [!] Scanning through default configured proxy...")
 			print ''
 			print(""+ B +"                          [¬] ScanType Selected:"+GR+" DNS Hostname Bruteforce")
 			print ''
@@ -1149,7 +1149,7 @@ def nmapmain(web):
 			    nmapsx(web)
 		      else:
 			print ''
-			print(""+ M +"                             [!] Scanning through direct IP (exposes your IP)...")
+			print(""+ O +"                             [!] Scanning through direct IP (exposes your IP)...")
 			print ''
 			print(""+ B +"                          [¬] ScanType Selected:"+GR+" DNS Hostname Bruteforce")
 			print ''
@@ -1171,7 +1171,7 @@ def nmapmain(web):
 		      q = raw_input (''+G+'                        [*] Do you want to scan through a proxy? (Y/n) :> ')
 		      if q == "y":
 			print ''
-			print(""+ M +"                             [!] Scanning through default configured proxy...")
+			print(""+ O +"                             [!] Scanning through default configured proxy...")
 			print ''
 			print(""+ B +"                          [¬] ScanType Selected:"+GR+" XSS Scan")
 			print ''
@@ -1191,7 +1191,7 @@ def nmapmain(web):
 			    nmapsx(web)
 		      else:
 			print ''
-			print(""+ M +"                             [!] Scanning through direct IP (exposes your IP)...")
+			print(""+ O +"                             [!] Scanning through direct IP (exposes your IP)...")
 			print ''
 			print(""+ B +"                          [¬] ScanType Selected:"+GR+" XSS Scan")
 			print ''
@@ -1213,7 +1213,7 @@ def nmapmain(web):
 		      q = raw_input (''+G+'                        [*] Do you want to scan through a proxy? (Y/n) :> ')
 		      if q == "y":
 			print ''
-			print(""+ M +"                             [!] Scanning through default configured proxy...")
+			print(""+ O +"                             [!] Scanning through default configured proxy...")
 			print ''
 			print(""+ B +"                          [¬] ScanType Selected:"+GR+" SQLi Vulnerability Scan")
 			print ''
@@ -1233,7 +1233,7 @@ def nmapmain(web):
 			    nmapsx(web)
 		      else:
 			print ''
-			print(""+ M +"                             [!] Scanning through direct IP (exposes your IP)...")
+			print(""+ O +"                             [!] Scanning through direct IP (exposes your IP)...")
 			print ''
 			print(""+ B +"                          [¬] ScanType Selected:"+GR+" SQLi Vulnerability Scan")
 			print ''
@@ -1255,7 +1255,7 @@ def nmapmain(web):
 		      q = raw_input (''+G+'                        [*] Do you want to scan through a proxy? (Y/n) :> ')
 		      if q == "y":
 			print ''
-			print(""+ M +"                             [!] Scanning through default configured proxy...")
+			print(""+ O +"                             [!] Scanning through default configured proxy...")
 			print ''
 			print(""+ B +"                          [¬] ScanType Selected:"+GR+" HeartBleed SSL Vulnerability Scan")
 			print ''
@@ -1275,7 +1275,7 @@ def nmapmain(web):
 			    nmapsx(web)
 		      else:
 			print ''
-			print(""+ M +"                             [!] Scanning through direct IP (exposes your IP)...")
+			print(""+ O +"                             [!] Scanning through direct IP (exposes your IP)...")
 			print ''
 			print(""+ B +"                          [¬] ScanType Selected:"+GR+" HeartBleed SSL Vulnerability Scan")
 			print ''
@@ -1295,12 +1295,12 @@ def nmapmain(web):
 			    nmapsx(web)
 		elif main == "14":
 			print ''
-			print(""+ M +"                     [!] Scanning initiated through default configured proxy...")
+			print(""+ O +"                     [!] Scanning initiated through default configured proxy...")
 			print ''
 			print(""+ B +"                     [¬] ScanType Selected:"+GR+" Firewall/IDS Evasion with Fragmented Packet Scan")
 			print(''+ R +'                     [!] This scan may take a long time because it is extremely stealthy !')
 			print ''
-			nm = raw_input(""+ M + color.BOLD + "                     [!] Enter a domain to which your IP is to be spoofed(eg. google.com) :> ")
+			nm = raw_input(""+ O + color.BOLD + "                     [!] Enter a domain to which your IP is to be spoofed(eg. google.com) :> ")
 			print ''
 			print(""+ R + color.BOLD + "                                [~] Result: "+color.YELLOW+color.BOLD+"════════════════╗" + color.END)
 			print(""+ color.YELLOW + color.BOLD + "     ╔══════════════════════════════════════════════════════╝")            
@@ -1320,7 +1320,7 @@ def nmapmain(web):
 		      q = raw_input (''+G+'                        [*] Do you want to scan through a proxy? (Y/n) :> ')
 		      if q == "y":
 			print ''
-			print(""+ M +"                             [!] Scanning through default configured proxy...")
+			print(""+ O +"                             [!] Scanning through default configured proxy...")
 			print ''
 			print(""+ B +"                          [¬] ScanType Selected:"+GR+" Web-Application Scan")
 			print ''
@@ -1340,7 +1340,7 @@ def nmapmain(web):
 			    nmapsx(web)
 		      else:
 			print ''
-			print(""+ M +"                             [!] Scanning through direct IP (exposes your IP)...")
+			print(""+ O +"                             [!] Scanning through direct IP (exposes your IP)...")
 			print ''
 			print(""+ B +"                          [¬] ScanType Selected:"+GR+" Web-Application Scan")
 			print ''
