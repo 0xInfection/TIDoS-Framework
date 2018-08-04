@@ -16,6 +16,7 @@ from nmapmain import *
 from colors import *
 from crawlers import *
 from scanenumban import *
+from webscan import *
 from bannergrab import *
 from osdetect import *
 from webtech import *
@@ -69,6 +70,13 @@ def scanenum(web):
 	scanenum(web)
 
     elif v.strip() == '7':
+	print B+' [!] Type Selected :'+C+' IP Crawler'
+	webscan(web)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
+	scanenumban()
+	scanenum(web)
+
+    elif v.strip() == '8':
 	print B+' [!] Type Selected :'+C+' Crawlers'
 	crawlers(web)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
@@ -107,6 +115,11 @@ def scanenum(web):
         print B + ' [*] Firing up module -->' + C + ' Banner Grabbing'
         bannergrab(web)
         print B + ' [!] Module Completed -->' + C + ' Banner Grabbing\n'
+        time.sleep(1)
+
+        print B + ' [*] Firing up module -->' + C + ' Webserver Scanning'
+        webscan(web)
+        print B + ' [!] Module Completed -->' + C + ' Webserver Scanning\n'
         time.sleep(1)
 
 	print B+' [*] Firing up module -->'+C+' Crawlers'
