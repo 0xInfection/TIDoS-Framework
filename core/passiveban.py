@@ -62,7 +62,9 @@ def passiveban():
     time.sleep(0.04)
     print B+'      [21] '+C+'Public Contact Info Gathering '+W+'(Full Contact)'
     time.sleep(0.04)
-    print B+'      [22] '+C+'Threat Intelligence Gathering '+W+'(Bad IPs)\n'
+    print B+'      [22] '+C+'CENSYS Domain Reconnaissance '+W+'(CENSYS.IO)'
+    time.sleep(0.04)
+    print B+'      [23] '+C+'Threat Intelligence Gathering '+W+'(Bad IPs)\n'
     time.sleep(0.04)
     print B+'      [A] '+C+'The Auto-Awesome Module '+W+'(Unleash the Beast)\n'
     time.sleep(0.04)
