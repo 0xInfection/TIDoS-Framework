@@ -24,6 +24,7 @@ from getconinfo import *
 from subdom import *
 from googlenum import *
 from links import *
+from censysdom import *
 from subnet import *
 from hackedmail import *
 from iphistory import *
@@ -172,6 +173,12 @@ def passiveo(web):
 	passiveo(web)
 
     elif v.strip() == '22':
+	print C+' [!] Type Selected '+B+': CENSYS Gathering'
+	censysdom(web)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
+	passiveo(web)
+
+    elif v.strip() == '23':
 	print C+' [!] Type Selected '+B+': Threat Intel Gathering'
 	threatintel(web)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
@@ -291,6 +298,11 @@ def passiveo(web):
 	print C+'\n [!] Module Completed -->'+O+' Public Contact info\n'
 	time.sleep(1)
 
+	print C+' [*] Firing up module -->'+O+' Gathering via CENSYS'
+	censysdom(web)
+	print C+'\n [!] Module Completed -->'+O+' CENSYS Gathering\n'
+	time.sleep(1)
+
 	print C+' [*] Firing up module -->'+O+' Threat Intelligence'
 	threatintel(web)
 	print C+'\n [!] Module Completed -->'+O+' Threat Intelligence\n'
@@ -309,4 +321,3 @@ def passiveo(web):
 	os.system('clear')
 	passiveo(web)
 
-		
