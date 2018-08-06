@@ -1,6 +1,6 @@
 <p align="middle"><img src='https://i.imgur.com/QAbaVdU.png' /></p>
 
-![Python](https://img.shields.io/badge/Python-2.7-green.svg) ![TIDoS](https://img.shields.io/badge/TIDoS-v1.5.2-blue.svg) ![Supported OS](https://img.shields.io/badge/Supported%20OS-Linux-yellow.svg) ![License](https://img.shields.io/badge/License-GPLv3-orange.svg) ![Build](https://img.shields.io/badge/Build-0088-red.svg) ![Modules](https://img.shields.io/badge/Modules-102-blue.svg) ![Status](https://img.shields.io/badge/Build%20Status-passing-brightgreen.svg) ![Stage](https://img.shields.io/badge/Release-Stable-green.svg)
+![Python](https://img.shields.io/badge/Python-2.7-green.svg) ![TIDoS](https://img.shields.io/badge/TIDoS-v1.5.2-blue.svg) ![Supported OS](https://img.shields.io/badge/Supported%20OS-Linux-yellow.svg) ![License](https://img.shields.io/badge/License-GPLv3-orange.svg) ![Build](https://img.shields.io/badge/Build-0088-red.svg) ![Modules](https://img.shields.io/badge/Modules-104-blue.svg) ![Status](https://img.shields.io/badge/Build%20Status-passing-brightgreen.svg) ![Stage](https://img.shields.io/badge/Release-Stable-green.svg)
 
 # The TIDoS Framework 
 TIDoS Framework is a comprehensive web-app audit framework. `let's keep this simple`
@@ -9,7 +9,7 @@ TIDoS Framework is a comprehensive web-app audit framework. `let's keep this sim
 The main highlights of this framework is:
 - [x] TIDoS Framework now boasts of a century of modules.
 - [x] A complete versatile framework to cover up everything from Reconnaissance to Vulnerability Analysis.
-- [x] Has 5 main phases, subdivided into __14 sub-phases__ consisting a total of __102 modules__.
+- [x] Has 5 main phases, subdivided into __14 sub-phases__ consisting a total of __104 modules__.
 - [x] Reconnaissance Phase has 47 modules of its own (including active and passive recon, information disclosure modules).
 - [x] Scanning & Enumeration Phase has got 15 modules (including port scans, WAF analysis, etc)
 - [x] Vulnerability Analysis Phase has 35 modules (including most common vulnerabilites in action).
@@ -98,6 +98,7 @@ TIDoS Framework presently supports the following: `and is under active developme
 	    - Examine SSL Certificate `Absolute`
 	    - Apache Status Disclosure Checks `File Based`
 	    - WebDAV HTTP Enumeration `PROFIND & SEARCH`
+	    - PHPInfo File Enumeration `via Bruteforce`
 	    - Comments Scraper `Regex Based`
 	    - Find Shared DNS Hosts `Name Server Based`
 	    - Alternate Sites Discovery `User-Agent Based`
@@ -189,7 +190,8 @@ TIDoS Framework presently supports the following: `and is under active developme
 		    - Auto-gathering `IMPROVED`
 	+ LDAP Injection `Parameter Based`
 	+ HTML Injection `Parameter Based`
-	+ Bash Command Injection `ShellShock` 
+	+ Bash Command Injection `ShellShock`
+	+ XPATH Injection `Parameter Based`
 	+ Cross-Site Scripting `IMPROVED`
 	    - Cookie Value Based
 	    - Referer Value Based
