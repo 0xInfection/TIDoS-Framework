@@ -24,7 +24,7 @@ from crlf import *
 from subdomover import *
 from phpi import *
 from htmli import *
-#from xmli import *
+from xpathi import *
 from shellshock import *
 from colors import *
 from xss import *
@@ -104,18 +104,24 @@ def serbugs(web):
 	serbugs(web)
 
     elif v.strip() == '12':
+	print ' Type Selected : XPATH Injection'
+	xpathi(web)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')	
+	serbugs(web)
+
+    elif v.strip() == '13':
 	print ' Type Selected : Shellshock'
 	shellshock(web)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')	
 	serbugs(web)
 
-    elif v.strip() == '13':
+    elif v.strip() == '14':
 	print ' Type Selected : URL Validation'
 	redirect(web)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')	
 	serbugs(web)
 
-    elif v.strip() == '14':
+    elif v.strip() == '15':
 	print ' Type Selected : Subdomain Takeover'
 	subdomover(web)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')	
@@ -173,6 +179,11 @@ def serbugs(web):
 	print ' [*] Firing up module --> PHP Code Injection'
 	phpi(web)
 	print ' [!] Module Completed --> PHP Code Injection\n'
+	time.sleep(0.5)
+
+	print ' [*] Firing up module --> XPATH Injection'
+	xpathi(web)
+	print ' [!] Module Completed --> XPATH Injection\n'
 	time.sleep(0.5)
 
 	print ' [*] Firing up module --> ShellShock'

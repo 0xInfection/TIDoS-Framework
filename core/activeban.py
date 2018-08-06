@@ -41,11 +41,13 @@ def activeban():
     time.sleep(0.1)
     print B+'     [11]'+C+' WebDAV HTTP Enumeration'+W+' (SEARCH, PROFIND)'
     time.sleep(0.1)
-    print B+'     [12]'+C+' Enumerate Server behind website'+W
+    print B+'     [12]'+C+' Find PHPInfo File'+W+' (Regular Bruteforce)'
     time.sleep(0.1)
-    print B+'     [13]'+C+' Alternate Sites'+W+' (User-Agent Based)'
+    print B+'     [13]'+C+' Enumerate Server behind website'+W
     time.sleep(0.1)
-    print B+'     [14]'+C+' Common File Bruteforce'+W+' (5 modules)\n'
+    print B+'     [14]'+C+' Alternate Sites'+W+' (User-Agent Based)'
+    time.sleep(0.1)
+    print B+'     [15]'+C+' Common File Bruteforce'+W+' (5 modules)\n'
     time.sleep(0.1)
     print B+'     [A]'+C+' The Auto-Awesome Module\n'
     time.sleep(0.1)

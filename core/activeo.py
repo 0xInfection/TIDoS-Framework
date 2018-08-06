@@ -28,6 +28,7 @@ from sslcert import *
 from activeban import *
 from filebrute import *
 from traceroute import *
+from phpinfo import *
 from cms import *
 from serverdetect import *
 from altsites import *
@@ -119,20 +120,27 @@ def activeo(web):
 	activeo(web)
 
     elif v.strip() == '12':
+	print C+' [!] Type Selected : PHPInfo Enumeration'
+	phpinfo(web)
+	print '\n\n'
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
+	activeo(web)
+
+    elif v.strip() == '13':
 	print C+' [!] Type Selected : Server Detection'
 	serverdetect(web)
 	print '\n\n'
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	activeo(web)
 
-    elif v.strip() == '13':
+    elif v.strip() == '14':
 	print C+' [!] Type Selected : Alternate Sites '
 	altsites(web)
 	print '\n\n'
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	activeo(web)
 
-    elif v.strip() == '14':
+    elif v.strip() == '15':
 	print C+' [!] Type Selected : File Bruteforcers'
 	filebrute(web)
 	print '\n\n'
@@ -190,6 +198,11 @@ def activeo(web):
 	print C+' [*] Firing up module -->'+B+' Apache Status'
 	apachestat(web)
 	print C+'\n [!] Module Completed -->'+B+' Apache Status\n'
+	time.sleep(1)
+
+	print C+' [*] Firing up module -->'+B+' PHPInfo'
+	phpinfo(web)
+	print C+'\n [!] Module Completed -->'+B+' PHPInfo\n'
 	time.sleep(1)
 
 	print C+' [*] Firing up module -->'+B+' OS Fingerprinting'
