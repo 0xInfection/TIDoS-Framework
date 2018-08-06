@@ -10,9 +10,12 @@
 #https://github.com/the-Infected-Drake/TIDoS-Framework 
 
 import os
+import sys
 import time
 import requests
+sys.path.append('files/signature-db/')
 from colors import *
+from ldaperror_signatures import ldap_errors
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
@@ -31,29 +34,6 @@ def getFile0x00(fi):
 
 def check0x00(web000, headers):
 
-	errors = [
-		"supplied argument is not a valid ldap",
-		"javax.naming.NameNotFoundException",
-		"javax.naming.directory.InvalidSearchFilterException",
-		"Invalid DN syntax",
-		"LDAPException|com.sun.jndi.ldap",
-		"Search: Bad search filter",
-		"Protocol error occurred",
-		"Size limit has exceeded",
-		"The alias is invalid",
-		"Module Products.LDAPMultiPlugins",
-		"Object does not exist",
-		"The syntax is invalid",
-		"A constraint violation occurred",
-		"An inappropriate matching occurred",
-		"Unknown error occurred",
-		"Unknown exception encountered",
-		"The search filter is incorrect",
-		"Local error occurred",
-		"The search filter is invalid",
-		"The search filter cannot be recognized",
-		"IPWorksASP.LDAP"
-		]
 	print GR+' [*] Starting enumeration...'
 	time.sleep(0.7)
 	for payload in payloads:
@@ -65,7 +45,7 @@ def check0x00(web000, headers):
 		try:
 			req = requests.get(web0x00, headers=headers, allow_redirects=False, timeout=7, verify=False).text
 			print O+' [!] Searching through error database...'
-			for err in errors:
+			for err in ldap_errors:
 				if err.lower() in req.lower():
 					print G+' [+] Possible LDAP Injection Found : '+O+web0x00
 					gotcha=True
