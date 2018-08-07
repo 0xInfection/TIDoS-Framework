@@ -9,15 +9,13 @@
 #https://github.com/theInfectedDrake/TIDoS-Framework
 
 import sys, time, warnings
-sys.path.append('core/')
 warnings.filterwarnings("ignore")
-from tidos_main import *
+from core.tidos_main import *
 
 try:
     tidos_main()
 except KeyboardInterrupt:
     print R+' [-] User Interruption Detected!'
-    print C+' [+] Exiting...'
     time.sleep(0.5)
     print B+'\n [!] "Alvida", mate... See ya...\n'
     sys.exit(1)
