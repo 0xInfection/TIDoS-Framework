@@ -9,9 +9,10 @@
 #This module requires TIDoS Framework
 #https://github.com/theInfectedDrake/TIDoS-Framework 
 
-import sys, platform, subprocess, time, os
-from subprocess import call
-sys.path.append('modules/VulnLysis/SerioBugs')
+import sys
+import time
+import os
+sys.path.append('modules/0x03-VulnLysis/0x02-SerioBugs/')
 
 from serbugsban import *
 from lfi import *

@@ -11,13 +11,12 @@
 import time
 import os
 import sys
-sys.path.append('modules/VulnLysis/MiscBugs/')
+sys.path.append('modules/0x03-VulnLysis/0x01-MiscBugs/')
 
 from icors import *
 from ssscript import *
 from clickjack import *
 from zone import *
-from vulnban import *
 from webbugsban import *
 from hhi import *
 from netmisc import *

@@ -14,7 +14,7 @@ import time
 import subprocess
 import random
 from random import randint
-sys.path.append('modules/ActiveRecon/')
+sys.path.append('modules/0x01-Footprinting/0x02-ActiveRecon/')
 
 from piwebenum import *
 from grabhead import *

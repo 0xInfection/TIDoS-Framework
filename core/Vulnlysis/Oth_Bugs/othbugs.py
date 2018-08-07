@@ -1,5 +1,5 @@
 #!/usr/bin/env python2
-# coding: utf-8
+# -*- coding: utf-8 -*-
 
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 #    TIDoS Framework     #
@@ -15,7 +15,7 @@ import time
 import subprocess
 import random
 from random import randint
-sys.path.append('modules/VulnLysis/OthBugs/')
+sys.path.append('modules/0x03-VulnLysis/0x03-OthBugs/')
 from popbrute import *
 from ftpbrute import *
 from sqlbrute import *

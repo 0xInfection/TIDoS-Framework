@@ -11,28 +11,29 @@ import os
 import time
 import random
 from random import *
-from webbugs import *
 from vulnban import *
-from othbugs import *
-from serbugs import *
-from auxil import *
+from core.Vulnlysis.Misc_Bugs.webbugs import *
+from core.Vulnlysis.Oth_Bugs.othbugs import *
+from core.Vulnlysis.Serio_Bugs.serbugs import *
 from colors import *
 
 def vuln(web):
 
+    print B+' [+] Module Loaded : '+C+'Vulnerability Analysis'
+    vulnban()
     v = raw_input(''+O+' \033[4mTID\033[1;0m '+GR+':> ' + color.END)
     print '\n'
 
-    if v == '1':
+    if v.strip() == '1':
 	webbugs(web)
 
-    elif v == '2':
+    elif v.strip() == '2':
 	serbugs(web)
 
-    elif v == '3':
+    elif v.strip() == '3':
 	othbugs(web)
 
-    elif v == '99':
+    elif v.strip() == '99':
 	print '[!] Back'
 	time.sleep(0.7)
 	os.system('clear')

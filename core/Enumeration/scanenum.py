@@ -1,4 +1,5 @@
 #!/usr/bin/env python2
+# -*- coding: utf-8 -*-
 
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 #    TIDoS Framework     #
@@ -8,65 +9,62 @@
 #This script is a part of TIDoS Framework
 #https://github.com/theInfectedDrake/TIDoS-Framework 
 
-import sys, platform, subprocess, time, os
-from subprocess import call
-sys.path.append('modules/ScanEnum/')
+import sys
+import time
+import os
+sys.path.append('modules/0x02-ScanEnum/')
 
 from nmapmain import *
 from colors import *
-from crawlers import *
 from scanenumban import *
 from webscan import *
 from bannergrab import *
 from osdetect import *
 from webtech import *
 from waf import *
-from portscan import *
+from Crawling.crawlers import *
+from PortScans.portscan import *
 
 def scanenum(web):
 
+    print B+' [+] Module Selected : '+C+'Scanning and Enumeation'
+    scanenumban()
     v = raw_input(''+O+' \033[4mTID\033[1;0m '+GR+':> ' + color.END)
     print '\n'
     if v.strip() == '1':
 	print B+' [!] Type Selected :'+C+' WAF Analysis'+O
 	waf(web)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
-	scanenumban()
 	scanenum(web)
 
     elif v.strip() == '2':
 	print B+' [!] Type Selected :'+C+' Port Scanning'
 	portscan(web)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
-	scanenumban()
 	scanenum(web)
 
     elif v.strip() == '3':
 	print B+' [!] Type Selected :'+C+' Interactive NMap'
 	nmapmain(web)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
-	scanenumban()
 	scanenum(web)
 
     elif v.strip() == '4':
 	print B+' [!] Type Selected :'+C+' WebTech Fingerprinting'
 	webtech(web)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
-	scanenumban()
 	scanenum(web)
 
     elif v.strip() == '5':
 	print B+' [!] Type Selected :'+C+' OS Fingerprinting'
 	osdetect(web)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
-	scanenumban()
 	scanenum(web)
 
     elif v.strip() == '6':
 	print B+' [!] Type Selected :'+C+' Banner Grab'
 	bannergrab(web)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
-	scanenumban()
 	scanenum(web)
 
     elif v.strip() == '7':
@@ -80,7 +78,6 @@ def scanenum(web):
 	print B+' [!] Type Selected :'+C+' Crawlers'
 	crawlers(web)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
-	scanenumban()
 	scanenum(web)
 
     elif v.strip() == 'A':
@@ -141,6 +138,5 @@ def scanenum(web):
 	print dope[randint(0,3)]
 	time.sleep(0.7)
 	os.system('clear')
-	scanenumban()
 	scanenum(web)
 
