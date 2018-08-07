@@ -273,4 +273,4 @@ This project is presently under active development so you may want to put it on 
 
 > Thank you,
 >
-> @_tID | CodeSploit
+> [@_tID](https://twitter.com/infecteddrake)
