@@ -41,6 +41,8 @@
 
  > TIDoS has 95 modules as the whole, so on expanding:
 
+TIDoS Framework presently supports the following: `and is under active development`
+
 * __Reconnaissance + OSINT__
 
 	+ Passive Reconnaissance:
@@ -49,8 +51,9 @@
 	    - GeoIP Lookup `Pinpoint physical location`
 	    - DNS Configuration Lookup `DNSDump`
 	    - Subdomains Lookup `Indexed ones`
-	    - Reverse DNS Configuration Lookup
+	    - Reverse DNS Lookup `Host Instances`
 	    - Reverse IP Lookup `Hosts on same server`
+	    - Subnets Enumeration `Class Based`
 	    - Domain IP History `IP Instances`
 	    - Web Links Gatherer `Indexed ones`
 	    - Google Search `Manual search`
@@ -58,24 +61,36 @@
 	    - Email to Domain Resolver `Email WhoIs`
 	    - Wayback Machine Lookups `Find Backups`
 	    - Breached Email Check `Pwned Email Accounts`
-	    - Enumeration via Google Groups 
+	    - Enumeration via Google Groups `Emails Only`
 	    - Check Alias Availability `Social Networks`
 	    - Find PasteBin Posts `Domain Based`
 	    - LinkedIn Gathering `Employees & Company`
+	    - Google Plus Gathering `Domain Profiles`
+	    - Public Contact Info Scraping `FULL CONTACT`
+	    - Censys Intel Gathering `Domain Based`
 	    - Threat Intelligence Gathering `Bad IPs`
 
 	+ Active Reconnaissance
-	    - Ping enumeration `Advanced`
+	    - Ping Enumeration `Advanced`
 	    - CMS Detection `(185+ CMSs supported)` `IMPROVED`
 	    - Advanced Traceroute `IMPROVED`
-	    - Grab HTTP Headers `Live Capture`
-	    - Find HTTP Methods Allowed `NEW`
-	    - Detect Server `IMPROVED`
-	    - Examine SSL Certificate `Absolute`
 	    - `robots.txt` and `sitemap.xml` Checker
-	    - Subnets Enumeration `Class Based`
+	    - Grab HTTP Headers `Live Capture`
+	    - Find HTTP Methods Allowed `via OPTIONS`
+	    - Detect Server Type `IMPROVED`
+	    - Examine SSL Certificate `Absolute`
+	    - Apache Status Disclosure Checks `File Based`
+	    - WebDAV HTTP Enumeration `PROFIND & SEARCH`
+	    - PHPInfo File Enumeration `via Bruteforce`
+	    - Comments Scraper `Regex Based`
 	    - Find Shared DNS Hosts `Name Server Based`
-	    - Operating System Fingerprinting `IMPROVED`
+	    - Alternate Sites Discovery `User-Agent Based`
+	    - Discover Interesting Files `via Bruteforce`
+		    - Common Backdoor Locations `shells, etc.`
+		    - Common Backup Locations `.bak, .db, etc.`
+		    - Common Password Locations ` .pgp, .skr, etc.`
+		    - Common Proxy Path Configs. `.pac, etc.`
+		    - Common Dot Files `.htaccess, .apache, etc`
 
 	+ Information Disclosure
 	    - Credit Cards Disclosure `If Plaintext`
@@ -87,7 +102,7 @@
 
 * __Scanning & Enumeration__
 
-	+ Remote Server WAF Analysis
+	+ Remote Server WAF Enumeration `Generic` `54 WAFs`
 	+ Port Scanning `Ingenious Modules`
 	    - Simple Port Scanner `via Socket Connections`
 	    - TCP SYN Scan `Highly reliable`
@@ -96,64 +111,87 @@
 	    - Fin Flag Scan `Reliable Only in LANs`
 	    - Port Service Detector
 	+ Web Technology Enumeration `Absolute`
+	+ Operating System Fingerprinting `IMPROVED`
 	+ Banner Grabbing of Services `via Open Ports`
 	+ Interactive Scanning with NMap `16 preloaded modules`
+	+ Enumeration Domain-Linked IPs `Using CENSYS Database`
 	+ Crawlers
-	    - Depth 1
-	    - Depth 2 `IMPROVED`
+	    - Depth 1 `Indexed Uri Crawler`
+	    - Depth 2 `Single Page Crawler`
+	    - Depth 3 `Web Link Crawler`
 
 + __Vulnerability Analysis__
 
     __Web-Bugs & Server Misconfigurations__
     
-	- Insecure CORS `Absolute`
-	- Same-Site Scripting `Sub-domain based`
-	- Zone Transfer `DNS Server based`
-	- Clickjacking `Framable response based`
-	- Security on Cookies `HTTPOnly/Secure Flags`
-	- Cloudflare Misconfiguration Check `+ Getting Real IP` 
-	- HTTP High Transport Security Usage
-	- Spoofable Email `Missing SPF and DMARC Records`
-	- Security Headers Analysis `Live Capture`
-	- Cross-Site Tracing `Port Based`
-	- Network Security Misconfig. `Telnet Enabled`
+	+ Insecure CORS `Absolute`
+	+ Same-Site Scripting `Sub-domain based`
+	+ Zone Transfer `DNS Server based`
+	+ Clickjacking 
+		- Frame-Busting Checks
+		- `X-FRAME-OPTIONS` Header Checks
+	+ Security on Cookies
+		- `HTTPOnly` Flag
+		- `Secure` Flag
+	+ Cloudflare Misconfiguration Check
+		- DNS Misconfiguration Checks
+		- Online Database Lookup `For Breaches`
+	+ HTTP Strict Transport Security Usage
+		- HTTPS Enabled but no HSTS
+	+ Domain Based Email Spoofing
+		- Missing `SPF` Records
+		- Missing `DMARC` Records
+	+ Host Header Injection
+		- Port Based `Over HTTP 80`
+		- `X-Forwarded-For` Header Injection
+	+ Security Headers Analysis `Live Capture`
+	+ Cross-Site Tracing `HTTP TRACE Method`
+	+ Session Fixation `via Cookie Injection`
+	+ Network Security Misconfig.
+		- Checks for `TELNET` Enabled `via Port 23`
 	
     __Serious Web Vulnerabilities__
     
 	+ File Inclusions
 	    - Local File Inclusion (LFI) `Param based`
-	    - Remote File Inclusion (RFI)
+	    - Remote File Inclusion (RFI) `IMPROVED`
 	    	- Parameter Based
-		- Pre-loaded Path Based
+		     - Pre-loaded Path Based
 	+ OS Command Injection `Linux & Windows (RCE)`
 	+ Path Traversal `(Sensitive Paths)`
 	+ Cross-Site Request Forgery `Absolute`
-	+ SQL Injection `Error-Based`
-	    - Cookie Value Based
-	    - Referer Value Based
-	    - User-Agent Value Based
-	    - Auto-gathering `IMPROVED`
-	    - Parameter Based `Manual`
+	+ SQL Injection 
+	    + Error Based Injection
+		    - Cookie Value Based
+		    - Referer Value Based
+		    - User-Agent Value Based
+		    - Auto-gathering `IMPROVED`
+	    + Blind Based Injection `Crafted Payloads`
+		    - Cookie Value Based
+		    - Referer Value Based
+		    - User-Agent Value Based
+		    - Auto-gathering `IMPROVED`
 	+ LDAP Injection `Parameter Based`
 	+ HTML Injection `Parameter Based`
-	+ Host Header Injection `Port Based`
-	+ Bash Command Injection `ShellShock` 
-	+ Cross-Site Scripting `beta`
+	+ Bash Command Injection `ShellShock`
+	+ XPATH Injection `Parameter Based`
+	+ Cross-Site Scripting `IMPROVED`
 	    - Cookie Value Based
 	    - Referer Value Based
 	    - User-Agent Value Based
 	    - Parameter Value Based `Manual`
 	+ Unvalidated URL Forwards `Open Redirect`
-	+ CRLF Injection and HTTP Response Splitting
+	+ PHP Code Injection `Windows + Linux`
+	+ HTTP Response Splitting `CRLF Injection`
 	    - User-Agent Value Based
 	    - Parameter value Based `Manual`
 	+ Sub-domain Takeover `50+ Services`
 	    - Single Sub-domain `Manual`
 	    - All Subdomains `Automated`
 
-    __Auxillaries__
+    __Other__
 
-	+ Protocol Credential Bruteforce 
+	+ PlainText Protocol Default Credential Bruteforce 
 
 	    - FTP Protocol Bruteforce
 	    - SSH Protocol Bruteforce
@@ -162,17 +200,13 @@
 	    - XMPP Protocol Bruteforce
 	    - SMTP Protocol Bruteforce
 	    - TELNET Protocol Bruteforce
-	    
-	+ String & Payload Encoder
-	
-	    - URL Character Encoding
-	    - Base64 Character Encoding
-	    - HTML Character Encoding
-	    - Plain ASCII Character Encoding
-	    - Hex Character Encoding
-	    - Octal Character Encoding
-	    - Binary Character Encoding
-	    - GZip Character Encoding
+
+- __Auxillary Modules__
+
+	+ Hash Generator `MD5, SHA1, SHA256, SHA512`
+	+ String & Payload Encoder `7 Categories`
+	+ Forensic Image Analysis `Metadata Extraction`
+	+ Web HoneyPot Probability `ShodanLabs HoneyScore` 
 
 - __Exploitation__ `purely developmental`
 
