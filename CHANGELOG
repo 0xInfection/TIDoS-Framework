@@ -153,7 +153,7 @@
 	- Code optimised for better threading.
 	- Removal of lots of unnecessary code.
 
-    * v1.5.2 [latest release] (#stable)
+    * v1.5.2
 
 	Addition of 2 new modules and picks to mainstream framework.
 
@@ -163,3 +163,15 @@
 	- Full Contact Module saw its final touch.
 	- Another new module added under Auxillaries.
 	- Few bug fixes and stuff.
+
+    * v1.6.0 [latest release] (#stable)
+
+	Addition of 4 new modules and overall change in build structure to mainstream framework.
+
+	Changelog:
+	- TIDoS Framework now has a better build infrastructure.
+	- 2 new module added under ActiveRecon Phase.
+	- A new module addition to VulnLysis/SerioBugs.
+	- Another new module got featured in Auxillaries.
+	- Few bug fixes and stuff.
+
