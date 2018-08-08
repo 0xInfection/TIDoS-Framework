@@ -125,13 +125,13 @@ TIDoS Framework presently supports the following: `and is under active developme
 	    - TCP SYN Scan `Highly reliable`
 	    - TCP Connect Scan `Highly Reliable`
 	    - XMAS Flag Scan `Reliable Only in LANs`
-	    - Fin Flag Scan `Reliable Only in LANs`
+	    - FIN Flag Scan `Reliable Only in LANs`
 	    - Port Service Detector
 	+ Web Technology Enumeration `Absolute`
 	+ Operating System Fingerprinting `IMPROVED`
 	+ Banner Grabbing of Services `via Open Ports`
 	+ Interactive Scanning with NMap `16 preloaded modules`
-	+ Enumeration Domain-Linked IPs `Using CENSYS Database`
+	+ Enumeration of Domain-Linked IPs `Using CENSYS Database`
 	+ Web and Links Crawlers
 	    - Depth 1 `Indexed Uri Crawler`
 	    - Depth 2 `Single Page Crawler`
@@ -149,7 +149,7 @@ TIDoS Framework presently supports the following: `and is under active developme
 		- `X-FRAME-OPTIONS` Header Checks
 	+ Security on Cookies
 		- `HTTPOnly` Flag
-		- `Secure` Flag
+		- `Secure` Flag on Cookies
 	+ Cloudflare Misconfiguration Check
 		- DNS Misconfiguration Checks
 		- Online Database Lookup `For Breaches`
@@ -159,7 +159,7 @@ TIDoS Framework presently supports the following: `and is under active developme
 		- Missing `SPF` Records
 		- Missing `DMARC` Records
 	+ Host Header Injection
-		- Port Based `Over HTTP 80`
+		- Port Based `Web Socket Based`
 		- `X-Forwarded-For` Header Injection
 	+ Security Headers Analysis `Live Capture`
 	+ Cross-Site Tracing `HTTP TRACE Method`
@@ -198,8 +198,8 @@ TIDoS Framework presently supports the following: `and is under active developme
 	    - User-Agent Value Based
 	    - Parameter Value Based `Manual`
 	+ Unvalidated URL Forwards `Open Redirect`
-	+ PHP Code Injection `Windows + Linux`
-	+ HTTP Response Splitting `CRLF Injection`
+	+ PHP Code Injection `Windows + Linux RCE`
+	+ CRLF Injection `HTTP Response Splitting`
 	    - User-Agent Value Based
 	    - Parameter value Based `Manual`
 	+ Sub-domain Takeover `50+ Services`
