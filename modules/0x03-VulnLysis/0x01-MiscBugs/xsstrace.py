@@ -5,7 +5,7 @@
 #    TIDoS Framework     #
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 
-#Author : @_tID
+#Forked from XSSTracer (to recode the entire stuff again)
 #This module requires TIDoS Framework
 #https://github.com/theInfectedDrake/TIDoS-Framework 
 
