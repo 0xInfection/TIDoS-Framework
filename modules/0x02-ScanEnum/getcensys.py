@@ -54,7 +54,7 @@ def getos0x00(web):
     time.sleep(0.8)
     print R+' [*] Analysing responses...'
     try:
-        match = search(r'&#34;os_description&#34;: &#34;[^<]*&#34;', result)
+        match = search(r'&#34;os_description&#34;: &#34;[^<]*&#34;', result) # regex forked from Striker
         if match:
 	    flag = 0x01
             print B+' [+] Operating System Identified : ' + C+ match.group().split('n&#34;: &#34;')[1][:-5]
