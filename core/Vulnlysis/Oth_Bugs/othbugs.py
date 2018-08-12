@@ -15,7 +15,7 @@ import time
 import subprocess
 import random
 from random import randint
-sys.path.append('modules/0x03-VulnLysis/0x03-OthBugs/')
+sys.path.append('modules/0x03-Vulnerability+Analysis/0x03-OtherWebBugs/')
 from popbrute import *
 from ftpbrute import *
 from sqlbrute import *

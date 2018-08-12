@@ -106,6 +106,10 @@ def tidos_main(): # To be called by external
 			sys.exit(0)
 
 		except Exception: # Global Error Handling Stuff 
+			print R+' [-] Unhandled runtime exception while execution...' 
+			time.sleep(1)
+			print R+' [-] Returning back to main menu...'
+			time.sleep(1)
 			pass # (If user runs into a error, that would not quit this tool)
 
 	tidosmain(web) # The true start of this program

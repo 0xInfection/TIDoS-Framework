@@ -12,7 +12,7 @@
 import sys
 import time
 import os
-sys.path.append('modules/0x02-ScanEnum/')
+sys.path.append('modules/0x02-Scanning+Enumeration/')
 
 from nmapmain import *
 from colors import *

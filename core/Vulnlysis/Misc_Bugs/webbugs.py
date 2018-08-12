@@ -11,7 +11,7 @@
 import time
 import os
 import sys
-sys.path.append('modules/0x03-VulnLysis/0x01-MiscBugs/')
+sys.path.append('modules/0x03-Vulnerability+Analysis/0x02-MisconfigurationBugs/')
 
 from icors import *
 from ssscript import *

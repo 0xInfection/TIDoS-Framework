@@ -15,7 +15,7 @@ import subprocess
 import random
 from random import randint
 from subprocess import call
-sys.path.append('modules/0x01-Footprinting/0x03-InfoDisc/')
+sys.path.append('modules/0x01-OSINT+Footprinting/0x03-InformationDisclosure/')
 
 from credit import *
 from emailext import *

@@ -14,7 +14,7 @@ import time
 import random
 from random import *
 from time import sleep
-sys.path.append('modules/0x02-ScanEnum/0x01-PortScans/')
+sys.path.append('modules/0x02-Scanning+Enumeration/0x01-PortScanning/')
 
 from finscan import *
 from servicedetect import *

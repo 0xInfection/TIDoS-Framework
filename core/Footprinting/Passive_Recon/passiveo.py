@@ -12,7 +12,7 @@ import sys
 import time
 import os
 from random import randint
-sys.path.append('modules/0x01-Footprinting/0x01-PassiveRecon/')
+sys.path.append('modules/0x01-OSINT+Footprinting/0x01-PassiveReconnaissance/')
 
 from dnschk import *
 from passiveban import *

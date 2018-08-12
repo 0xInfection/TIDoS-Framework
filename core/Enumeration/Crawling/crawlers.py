@@ -15,7 +15,7 @@ import time
 import random
 import subprocess
 from random import *
-sys.path.append('modules/0x02-ScanEnum/0x02-Crawlers/')
+sys.path.append('modules/0x02-Scanning+Enumeration/0x02-WebCrawling/')
 
 # Import stuff
 from crawler1 import *

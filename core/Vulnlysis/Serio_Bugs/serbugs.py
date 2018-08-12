@@ -12,7 +12,7 @@
 import sys
 import time
 import os
-sys.path.append('modules/0x03-VulnLysis/0x02-SerioBugs/')
+sys.path.append('modules/0x03-Vulnerability+Analysis/0x01-TopPriorityBugs/')
 
 from serbugsban import *
 from lfi import *
