@@ -17,18 +17,18 @@ from colors import *
 def inputin():
 
 	try:
-		web = raw_input(''+O+' [#] Target web address :> '+C+'')
+		web = raw_input(''+O+' [#] Target web address :> '+C)
 		global web
-		if 'http' not in str(web):
+		if not str(web).startswith('http'):
 			mo = raw_input(GR+' [#] Does this website use SSL? (y/n) :> ')
 			if mo == 'y' or mo == 'Y':
 				web = 'https://'+web
 			elif mo == 'n':
 				web = 'http://'+web
 		if 'http://' in web:
-			po = web.replace('http://','')
+			po = web.split('//')[1]
 		elif 'https://' in web:
-			po = web.replace('https://','')
+			po = web.split('//')[1]
 		if str(web).endswith('/'):
 			web = po[:-1]
 			po = po[:-1]
@@ -42,7 +42,7 @@ def inputin():
 			print G+' [+] IP Detected : '+O+ip
 			time.sleep(0.5)
 			print ''
-			os.system('cd tmp/logs/ && rm -rf '+po+'-logs && mkdir '+po+'-logs')
+			os.system('cd tmp/logs/ && rm -rf '+po+'-logs && mkdir '+po+'-logs/')
 			return web
 
 		except socket.gaierror:
