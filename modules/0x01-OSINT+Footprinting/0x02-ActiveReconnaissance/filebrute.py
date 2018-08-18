@@ -17,6 +17,8 @@ from colors import *
 from backupbrute import *
 from backbrute import *
 from dotbrute import *
+from indexmulbrute import *
+from logbrute import *
 from proxybrute import *
 from passbrute import *
 
@@ -34,7 +36,9 @@ def filebrute(web):
     print B+'  [2]'+C+' Common Backup Locations'+W+' (.bak, .db, etc)'
     print B+'  [3]'+C+' Common Dot Files'+W+' (.phpinfo, .htaccess, etc)'
     print B+'  [4]'+C+' Common Password Paths'+W+' (.skg, .pgp etc)'
-    print B+'  [5]'+C+' Common Proxy Config. Locations'+W+' (.pac, etc)\n'
+    print B+'  [5]'+C+' Common Proxy Config. Locations'+W+' (.pac, etc)'
+    print B+'  [6]'+C+' Multiple Index Locations'+W+' (index1, index2, etc)
+    print B+'  [7]'+C+' Common Log Locations'+W+' (.log, changelogs, etc)\n'
     print B+'  [A]'+C+' The Auto-Awesome Module\n'
     print B+'  [99]'+C+' Back\n'
     time.sleep(0.3)
@@ -75,6 +79,20 @@ def filebrute(web):
 	print '\n\n'
 	filebrute(web)
 
+    elif v.strip() == '6':
+	print B+' [!] Type Selected :'+C+' Multiple Indices'
+	indexmulbrute(web)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
+	print '\n\n'
+	filebrute(web)
+
+    elif v.strip() == '7':
+	print B+' [!] Type Selected :'+C+' Log Locations'
+	logbrute(web)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
+	print '\n\n'
+	filebrute(web)
+
     elif v == 'A':
 	print B+' [!] Type Selected :'+C+' All Modules'
 	time.sleep(0.5)
@@ -101,6 +119,16 @@ def filebrute(web):
 	print B+' [*] Firing up module -->'+C+' Proxy Brute'
 	proxybrute(web)
 	print B+' [!] Module Completed -->'+C+' Proxy Brute\n'
+	time.sleep(2)
+
+	print B+' [*] Firing up module -->'+C+' Multiple Index Brute'
+	indexmulbrute(web)
+	print B+' [!] Module Completed -->'+C+' Multiple Index Brute\n'
+	time.sleep(2)
+
+	print B+' [*] Firing up module -->'+C+' Log Brute'
+	logbrute(web)
+	print B+' [!] Module Completed -->'+C+' Log Brute\n'
 	time.sleep(2)
 
 	print B+' [!] All scantypes have been tested on target...'
