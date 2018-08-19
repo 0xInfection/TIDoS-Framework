@@ -11,8 +11,7 @@
 import os
 import sys
 import time
-sys.path.append('core/')
-from colors import *
+from core.Core.colors import *
 
 print R+'\n   ==================='
 print R+'    U N I N S T A L L'
