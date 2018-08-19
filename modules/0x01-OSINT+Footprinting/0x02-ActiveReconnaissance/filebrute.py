@@ -37,7 +37,7 @@ def filebrute(web):
     print B+'  [3]'+C+' Common Dot Files'+W+' (.phpinfo, .htaccess, etc)'
     print B+'  [4]'+C+' Common Password Paths'+W+' (.skg, .pgp etc)'
     print B+'  [5]'+C+' Common Proxy Config. Locations'+W+' (.pac, etc)'
-    print B+'  [6]'+C+' Multiple Index Locations'+W+' (index1, index2, etc)
+    print B+'  [6]'+C+' Multiple Index Locations'+W+' (index1, index2, etc)'
     print B+'  [7]'+C+' Common Log Locations'+W+' (.log, changelogs, etc)\n'
     print B+'  [A]'+C+' The Auto-Awesome Module\n'
     print B+'  [99]'+C+' Back\n'

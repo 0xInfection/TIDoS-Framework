@@ -103,4 +103,3 @@ def dav(web):
 
 	print G+' [+] HTTP Profiling of DAV Completed!\n'
 
-dav('http://manbhumpiti.org')
