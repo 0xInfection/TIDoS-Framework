@@ -9,6 +9,8 @@
 #This module requires TIDoS Framework
 #https://github.com/the-Infected-Drake/TIDoS-Framework
 
+import lxml
+import os
 import requests
 import re
 import time
@@ -27,16 +29,15 @@ def commentssrc(web):
 	print O+' [It is recommended to run ScanEnum/Crawlers'
 	print O+'       before running this module]\n'
 	print GR+' [*] Importing links...'
-	po = web.replace('http://','')
-	po = web.replace('https://','')
-	p = 'tmp/logs/'+po+'-logs/'+str(po)+'-links.lst'
+	po = web.split('//')[1]
+	p = 'tmp/logs/'+po+'-logs/'+po+'-links.lst'
 	if os.path.exists(po):
 		with open(po,'r') as ro:
 			for i in ro:
 				i = i.replace('\n','')
 				links.append(i)
 	else:
-		print R+' [-] No files found!'
+		print R+' [-] No files found under '+p+'!'
 		links = [web]
 
 	for w in links:
@@ -50,7 +51,7 @@ def commentssrc(web):
 			time.sleep(0.03)
 			found = 0x01
 
-	soup = BeautifulSoup(req.text,'lxml')
+	soup = BeautifulSoup(req,'lxml')
 	for line in soup.find_all('a'):
 		newline = line.get('href')
 		try:
@@ -64,13 +65,17 @@ def commentssrc(web):
 			pass
         		print R+' [-] Unhandled Exception Occured!'
 
-	for uurl in urls:
-		print G+" [+] Comments on page: "+O+uurl+'\n'
-		req = requests.get(uurl)
-		comments = re.findall('<!--(.*)-->',req.text)
-		for comment in comments:
-			print C+'   '+comment
-			time.sleep(0.03)
+	try:
+		for uurl in urls:
+			print G+"\n [+] Comments on page: "+O+uurl+'\n'
+			req = requests.get(uurl)
+			comments = re.findall('<!--(.*)-->',req.text)
+			for comment in comments:
+				print C+'   '+comment
+				time.sleep(0.03)
+
+	except requests.exceptions:
+		print R+' [-] Outbound Query Exception...'
 
 	if found == 0x00:
 		print R+' [-] No comments found in source code!'

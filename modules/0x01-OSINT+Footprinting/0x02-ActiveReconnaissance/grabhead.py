@@ -1,5 +1,5 @@
 #!/usr/bin/env python2
-# coding:  utf-8
+# -*- coding: utf-8 -*-
 
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 #    TIDoS Framework     #
@@ -20,14 +20,14 @@ def grabhead(web):
     print R+'\n      =================================='
     print R+'      G R A B   H T T P   H E A D E R S'
     print R+'     ===================================\n'
-    print('' + GR + color.BOLD + ' [!] Grabbing HTTP Headers...')
+    print GR + color.BOLD + ' [!] Grabbing HTTP Headers...'
     time.sleep(0.4)
     web.rstrip
     try:
 	    header = urllib2.urlopen(web).info()
 	    print ''
 	    print(G+str(header))
+    except urllib.HTTPError:
+	print R+' [-] Exception while request (HTTPError)...'
     except:
 	print R+' [-] Something went wrong...'
-
-
