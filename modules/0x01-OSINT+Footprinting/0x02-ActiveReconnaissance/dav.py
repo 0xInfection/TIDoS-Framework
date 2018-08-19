@@ -43,8 +43,8 @@ def htsearch(url):
 
 	print C+' [+] Matching the signatures...'
 	time.sleep(0.7)
-	regexp = r"<a:response>|<a:status>|xmlns:a=\"DAV:\""
-	if search(regexp,resp.read()) and resp.code == 200:
+	regexp = r'<a:response>|<a:status>|xmlns:a=\"DAV:\"'
+	if re.search(regexp,resp.read()) and str(resp.code) == '200':
 		print G+' [+] HTTP Search Method found Enabled!'
 		print G+' [+] DAV Directory Listing at : '+O+url 
 	else:
@@ -103,3 +103,4 @@ def dav(web):
 
 	print G+' [+] HTTP Profiling of DAV Completed!\n'
 
+dav('http://manbhumpiti.org')

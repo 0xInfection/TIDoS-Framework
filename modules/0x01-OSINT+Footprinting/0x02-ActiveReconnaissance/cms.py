@@ -31,23 +31,26 @@ br.set_handle_equiv(True)
 br.set_handle_redirect(True)
 br.set_handle_referer(True)
 br.set_handle_robots(False)
-
+from requests.packages.urllib3.exceptions import InsecureRequestWarning
+requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 br.set_handle_refresh(mechanize._http.HTTPRefreshProcessor(), max_time=1)
 br.addheaders = [('User-agent', 'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.1) Gecko/2008071615 Fedora/3.0.1-1.fc9 Firefox/3.0.1')]
-whatcms_token = '756ab2cfa1ed5575a71e0714ef05c2e228f17b6b1476de7075f7f4d6b4978272376fb3'
 
 def getcmslook(web):
 
 	global found
 	global dtect
 	global wordpress
-	web = web.replace('http://','')
-	web = web.replace('https://','')
-	print GR+' [*] Looking up for the CMS...'
+	web = web.split('//')[1]
+	print GR+' [*] Passive Fingerprinting CMS...'
 	time.sleep(1)
+	print O+' [!] Setting priority to False...'
         wordpress = False
 	dtect = False
-	request = requests.get('https://whatcms.org/APIEndpoint/Detect?url=' + web + '&key=' + whatcms_token, verify=False)
+	print GR+' [*] Importing token...'
+	from files.API_KEYS import WHATCMS_ACCESS_TOKEN
+	print B+' [+] Token detected : '+C+WHATCMS_ACCESS_TOKEN
+	request = requests.get('https://whatcms.org/APIEndpoint/Detect?url=' + web + '&key=' + WHATCMS_ACCESS_TOKEN, verify=False)
 	response = json.loads(request.text)
 
 	status = response['result']['code']
@@ -57,14 +60,14 @@ def getcmslook(web):
 	else:
 		if status == 200:
 			dtect = True
-			print G+'[-] CMS detected: ' +O+ response['result']['name']
+			print G+' [+] CMS Detected: ' +O+ response['result']['name']+'\n'
 		else:
 			dtect = False
 
 def cmsenum(web):
 
-	print GR+' [*] Fingerprinting CMS...\n' 
-       	resp = builtwith.parse(domain)
+	print GR+' [*] Active Fingerprinting CMS...\n' 
+       	resp = builtwith.parse(web)
 	print O+' [*] Parsing raw-data...'
 	time.sleep(0.7)
        	res = json.dumps(resp)
@@ -87,15 +90,7 @@ def cms(web):
 	time.sleep(0.4)
 	print GR+' [*] Parsing the web URL... '
 	time.sleep(0.4)
-	if 'http' in web:
-		domain = web
-	else:
-	    domain = web
-	    try:
-	        br.open('http://' + web)
-	        web = 'http://' + web
-	    except:
-	        web = 'https://' + web
+	
 	print O+' [!] URL successfully parsed !'
 	time.sleep(0.2)
 	getcmslook(web)

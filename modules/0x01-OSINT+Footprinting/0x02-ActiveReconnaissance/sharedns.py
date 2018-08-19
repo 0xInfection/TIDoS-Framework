@@ -17,8 +17,7 @@ from colors import *
 
 def sharedns(web):
 
-    web = web.replace('https://','')
-    web = web.replace('http://','')
+    web = web.split('//')[1]
     print R+'\n    ========================================='
     print R+'     S H A R E D   D N S   H O S T N A M E S '
     print R+'    =========================================\n'
@@ -43,6 +42,6 @@ def sharedns(web):
 	    p = dns.splitlines()
 	    for i in p:
 		print O+' [+] Site found :> '+G+i
-		time.sleep(0.04)
+		time.sleep(0.02)
 
 
