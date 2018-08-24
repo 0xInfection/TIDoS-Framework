@@ -23,7 +23,7 @@ if m == 'y' or 'Y':
 	print GR+'\nProceeding towards uninstallation...\n'
 	time.sleep(1)
 	print B+'Removing installation packages for TIDoS...'+C 
-	os.system('rm -v -rf /opt/tidos-framework')
+	os.system('rm -v -rf /opt/tidos-framework/ && rm -rf tidos/')
 	time.sleep(1)
 	print B+'Removing setup and executable files...'+C
 	time.sleep(1)
