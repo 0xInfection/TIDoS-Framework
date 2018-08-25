@@ -7,5 +7,5 @@
 #This module requires TIDoS Framework
 #https://github.com/theInfectedDrake/TIDoS-Framework
 
-cd /opt/tidos-framework
-python /opt/tidos-framework/tidos.py
+cd /opt/tidos/
+python /opt/tidos/tidos.py
