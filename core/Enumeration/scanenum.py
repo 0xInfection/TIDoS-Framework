@@ -22,6 +22,7 @@ from bannergrab import *
 from osdetect import *
 from webtech import *
 from waf import *
+from ssltlsscan import *
 from Crawling.crawlers import *
 from PortScans.portscan import *
 
@@ -56,26 +57,32 @@ def scanenum(web):
 	scanenum(web)
 
     elif v.strip() == '5':
+	print B+' [!] Type Selected :'+C+' SSL Enumeration'
+	ssltlsscan(web)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
+	scanenum(web)
+
+    elif v.strip() == '6':
 	print B+' [!] Type Selected :'+C+' OS Fingerprinting'
 	osdetect(web)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	scanenum(web)
 
-    elif v.strip() == '6':
+    elif v.strip() == '7':
 	print B+' [!] Type Selected :'+C+' Banner Grab'
 	bannergrab(web)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	scanenum(web)
 
-    elif v.strip() == '7':
+    elif v.strip() == '8':
 	print B+' [!] Type Selected :'+C+' IP Crawler'
 	webscan(web)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	scanenumban()
 	scanenum(web)
 
-    elif v.strip() == '8':
-	print B+' [!] Type Selected :'+C+' Crawlers'
+    elif v.strip() == '9':
+	print B+' [!] Type Selected :'+C+' Web Crawlers'
 	crawlers(web)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
 	scanenum(web)
@@ -102,6 +109,11 @@ def scanenum(web):
         print B + ' [*] Firing up module -->' + C + ' WebTech Fingerprinting'
         webtech(web)
         print B + ' [!] Module Completed -->' + C + ' WebTech\n'
+        time.sleep(1)
+
+        print B + ' [*] Firing up module -->' + C + ' SSL Enumeration'
+        ssltlsscan(web)
+        print B + ' [!] Module Completed -->' + C + ' SSL Enumeration\n'
         time.sleep(1)
 
         print B + ' [*] Firing up module -->' + C + ' OS Detect'
