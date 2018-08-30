@@ -164,7 +164,7 @@
 	- Another new module added under Auxillaries.
 	- Few bug fixes and stuff.
 
-    * v1.6.0 [latest release] (#stable)
+    * v1.6.0
 
 	Addition of 4 new modules and overall change in build structure to mainstream framework.
 
@@ -175,3 +175,12 @@
 	- Another new module got featured in Auxillaries.
 	- Few bug fixes and stuff.
 
+    * v1.6.1 [latest release] (#stable)
+
+	Huge bug fixes + Addition of a new module.
+	
+	Changelog:
+	- A new module added under ScanEnum phase.
+	- Huge bug fixes to #22.
+	- TIDoS is now becoming more modular.
+	- Enhancements to some auxillaries.
