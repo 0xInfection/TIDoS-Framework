@@ -1,6 +1,6 @@
 <p align="middle"><img src='https://i.imgur.com/QAbaVdU.png' /></p>
 
-![Python](https://img.shields.io/badge/Python-2.7-green.svg) ![TIDoS](https://img.shields.io/badge/TIDoS-v1.6-blue.svg) ![Supported OS](https://img.shields.io/badge/Supported%20OS-Linux-yellow.svg) ![License](https://img.shields.io/badge/License-GPLv3-orange.svg) ![Build](https://img.shields.io/badge/Build-0090-red.svg) ![Modules](https://img.shields.io/badge/Modules-106-blue.svg) ![Status](https://img.shields.io/badge/Build%20Status-passing-brightgreen.svg) ![Stage](https://img.shields.io/badge/Release-Stable-green.svg)
+![Python](https://img.shields.io/badge/Python-2.7-green.svg) ![TIDoS](https://img.shields.io/badge/TIDoS-v1.6-blue.svg) ![Supported OS](https://img.shields.io/badge/Supported%20OS-Linux-yellow.svg) ![License](https://img.shields.io/badge/License-GPLv3-orange.svg) ![Build](https://img.shields.io/badge/Build-0090-red.svg) ![Modules](https://img.shields.io/badge/Modules-107-blue.svg) ![Status](https://img.shields.io/badge/Build%20Status-passing-brightgreen.svg) ![Stage](https://img.shields.io/badge/Release-Stable-green.svg)
 
 # The TIDoS Framework 
 TIDoS Framework is a comprehensive web-app audit framework. `let's keep this simple`
@@ -9,9 +9,9 @@ TIDoS Framework is a comprehensive web-app audit framework. `let's keep this sim
 The main highlights of this framework is:
 - [x] TIDoS Framework now boasts of a century+ of modules.
 - [x] A complete versatile framework to cover up everything from Reconnaissance to Vulnerability Analysis.
-- [x] Has 5 main phases, subdivided into __14 sub-phases__ consisting a total of __106 modules__.
+- [x] Has 5 main phases, subdivided into __14 sub-phases__ consisting a total of __107 modules__.
 - [x] Reconnaissance Phase has 50 modules of its own (including active and passive recon, information disclosure modules).
-- [x] Scanning & Enumeration Phase has got 15 modules (including port scans, WAF analysis, etc)
+- [x] Scanning & Enumeration Phase has got 16 modules (including port scans, WAF analysis, etc)
 - [x] Vulnerability Analysis Phase has 36 modules (including most common vulnerabilites in action).
 - [x] Exploits Castle has only 1 exploit. `(purely developmental)`
 - [x] And finally, Auxillaries have got 4 modules. `under dev.`
@@ -20,7 +20,7 @@ The main highlights of this framework is:
 - [x] TIDoS has full verbose out support, so you'll know whats going on.
 - [x] Fully user friendly interaction environment. `(no shits)`
 
-<img src='https://i.imgur.com/nnPBFYt.png' />
+<img src='https://i.imgur.com/q3FxiRn.png' />
 
 ### Installation :-
 
@@ -130,10 +130,11 @@ TIDoS Framework presently supports the following: `and is under active developme
 	    - FIN Flag Scan `Reliable Only in LANs`
 	    - Port Service Detector
 	+ Web Technology Enumeration `Absolute`
+	+ Complete SSL Enumeration `Absolute`
 	+ Operating System Fingerprinting `IMPROVED`
 	+ Banner Grabbing of Services `via Open Ports`
 	+ Interactive Scanning with NMap `16 preloaded modules`
-	+ Enumeration of Domain-Linked IPs `Using CENSYS Database`
+	+ Internet Wide Servers Scan `Using CENSYS Database`
 	+ Web and Links Crawlers
 	    - Depth 1 `Indexed Uri Crawler`
 	    - Depth 2 `Single Page Crawler`
@@ -240,7 +241,7 @@ TIDoS Framework presently supports the following: `and is under active developme
 <img src='https://i.imgur.com/jayWV9Z.png' width='33%'>  </img><img src='https://i.imgur.com/v418wIB.png' width='33%'>  </img><img src='https://i.imgur.com/HenvOhe.png' width='33%'></img>
 
 <img src='https://i.imgur.com/2xW1Wlj.png'></img>
-<img src='https://i.imgur.com/kIJ3jqL.png' width='33%'>  </img><img src='https://i.imgur.com/8NiwySR.png' width='33%'>  </img><img src='https://i.imgur.com/mgU99gK.png' width='33%'> </img>
+<img src='https://i.imgur.com/kIJ3jqL.png' width='33%'>  </img><img src='https://i.imgur.com/Vy9s30W.png' width='33%'>  </img><img src='https://i.imgur.com/mgU99gK.png' width='33%'> </img>
 
 <img src='https://i.imgur.com/7qsX6vA.png'></img>
 <img src='https://i.imgur.com/lCa42Dn.png' width='50%'></img><img src='https://i.imgur.com/xVYRZ4M.png' width='50%'>
@@ -279,4 +280,4 @@ This project is presently under active development so you may want to put it on 
 
 > Thank you,
 >
-> Copyright [@_tID](https://twitter.com/infecteddrake)
+> Copyright ©  [@_tID](https://twitter.com/infecteddrake)
