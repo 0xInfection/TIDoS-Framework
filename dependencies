@@ -26,7 +26,7 @@ if ! hash python-pip 2>/dev/null; then sudo apt-get install --yes python-pip ; f
 if ! hash python-xmpp 2>/dev/null; then sudo apt-get install --yes python-xmpp ; fi
 if ! hash default-libmysqlclient-dev 2>/dev/null; then sudo apt-get install --yes default-libmysqlclient-dev ; fi
 
-pip install sslscan # pip stuffs
+pip install sslyze # pip stuffs
 pip install tldextract
 pip install lxml
 pip install pillow
