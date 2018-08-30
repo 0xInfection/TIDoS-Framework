@@ -1,16 +1,21 @@
+---------------
+TIDoS Framework
+---------------
 
-				=====================================================
-                               		T I D O S   F R A M E W O R K   v1.6
-				=====================================================
+DISCLAIMER
+----------
 
-	TIDoS is a open-source tool developed as a royalty-free website penetration testing tool.
+TIDoS Framework was provided as an open-source, royalty-free penetration testing toolkit. It has capable 
+modules in various phases which can unveil potential dangerous flaws in various web-applications which can
+further be exploited maliciously. Therefore the author as well as the contrbutors assume no liability for misuse
+of this toolkit. Usage of CMSeeK for testing or exploiting websites without prior mutual consistency can be 
+considered as an illegal activity. It is the final user's responsibility to obey all applicable local, state 
+and federal laws. 
 
-	I was developed by Pinaxx Robinson, known by the name @_tID_ aka The Infected Drake of Team CodeSploit.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
+TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
+THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
+CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS 
+IN THE SOFTWARE.
 
-	This is to make you note that I was purely developed for Penetration Testing purposes. The developer is not responsible for any damage or data loss due to my misuse. If you intend to use me for any malicious purposes, use it at your own risk. ;)
-
-	Also by using this tool, you agree to be a awesome person. Try to help others, strive not being a scriptkid, and do not pollute the community with unwanted stuff.
-
-	You can edit these scripts within me as per your own needs, provided you use it only for yourself. If u wanna publish me again in a reformed appearance, give the developer some credits... :)
-
-
+Copyright (C) @_tID
