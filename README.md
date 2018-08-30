@@ -259,9 +259,13 @@ There are some bruteforce modules to be added:
 - More of Auxillary Modules.
 - Some Exploits are too being worked on.
 
-### Known Bugs:
+### Ongoing:
 
-This version of TIDoS is purely developmental and is presently `stable`. There are bugs in resolving the `[99] Back` at various end-points which results in blind fall-backs. Though I have added global exception handling, still, there maybe bugs out there. Also TIDoS needs to develop more on logging all info displayed on the screen `(help needed)`.
+- Normal Bug Fixing Stuffs.
+- A complete new meaning of framework.
+	- Working on a way for contributing new modules easily.
+	- A complete new method of multi-threaded fuzzing.
+	- Keeping better of new console stuff.
 
 ### Disclaimer:
 
