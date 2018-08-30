@@ -26,12 +26,13 @@ from setuptools.py27compat import get_all_headers
 from setuptools.py33compat import unescape
 from setuptools.wheel import Wheel
 
+__metaclass__ = type
+
 EGG_FRAGMENT = re.compile(r'^egg=([-A-Za-z0-9_.+!]+)$')
-HREF = re.compile("""href\\s*=\\s*['"]?([^'"> ]+)""", re.I)
-# this is here to fix emacs' cruddy broken syntax highlighting
+HREF = re.compile(r"""href\s*=\s*['"]?([^'"> ]+)""", re.I)
 PYPI_MD5 = re.compile(
-    '<a href="([^"#]+)">([^<]+)</a>\n\\s+\\(<a (?:title="MD5 hash"\n\\s+)'
-    'href="[^?]+\\?:action=show_md5&amp;digest=([0-9a-f]{32})">md5</a>\\)'
+    r'<a href="([^"#]+)">([^<]+)</a>\n\s+\(<a (?:title="MD5 hash"\n\s+)'
+    r'href="[^?]+\?:action=show_md5&amp;digest=([0-9a-f]{32})">md5</a>\)'
 )
 URL_SCHEME = re.compile('([-+.a-z0-9]{2,}):', re.I).match
 EXTENSIONS = ".tar.gz .tar.bz2 .tar .zip .tgz".split()
@@ -235,7 +236,7 @@ def find_external_links(url, page):
                 yield urllib.parse.urljoin(url, htmldecode(match.group(1)))
 
 
-class ContentChecker(object):
+class ContentChecker:
     """
     A null content checker that defines the interface for checking content
     """
@@ -933,12 +934,19 @@ entity_sub = re.compile(r'&(#(\d+|x[\da-fA-F]+)|[\w.:-]+);?').sub
 
 
 def decode_entity(match):
-    what = match.group(1)
+    what = match.group(0)
     return unescape(what)
 
 
 def htmldecode(text):
-    """Decode HTML entities in the given text."""
+    """
+    Decode HTML entities in the given text.
+
+    >>> htmldecode(
+    ...     'https://../package_name-0.1.2.tar.gz'
+    ...     '?tokena=A&amp;tokenb=B">package_name-0.1.2.tar.gz')
+    'https://../package_name-0.1.2.tar.gz?tokena=A&tokenb=B">package_name-0.1.2.tar.gz'
+    """
     return entity_sub(decode_entity, text)
 
 
@@ -980,7 +988,7 @@ def _encode_auth(auth):
     return encoded.replace('\n', '')
 
 
-class Credential(object):
+class Credential:
     """
     A username/password pair. Use like a namedtuple.
     """

@@ -178,11 +178,13 @@ setuptools/tests/test_msvc.py
 setuptools/tests/test_namespaces.py
 setuptools/tests/test_packageindex.py
 setuptools/tests/test_pep425tags.py
+setuptools/tests/test_register.py
 setuptools/tests/test_sandbox.py
 setuptools/tests/test_sdist.py
 setuptools/tests/test_setuptools.py
 setuptools/tests/test_test.py
 setuptools/tests/test_unicode_utils.py
+setuptools/tests/test_upload.py
 setuptools/tests/test_upload_docs.py
 setuptools/tests/test_virtualenv.py
 setuptools/tests/test_wheel.py
@@ -192,4 +194,3 @@ setuptools/tests/textwrap.py
 setuptools/tests/indexes/test_links_priority/external.html
 setuptools/tests/indexes/test_links_priority/simple/foobar/index.html
 tests/manual_test.py
-tests/test_pypi.py

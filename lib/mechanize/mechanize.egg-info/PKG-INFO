@@ -1,4 +1,4 @@
-Metadata-Version: 1.1
+Metadata-Version: 2.1
 Name: mechanize
 Version: 0.3.6
 Summary: Stateful programmatic web browsing.
@@ -7,7 +7,6 @@ Author: Kovid Goyal
 Author-email: no@no.no
 License: BSD
 Download-URL: https://pypi.python.org/packages/source/m/mechanize/mechanize-0.3.6.tar.gz
-Description-Content-Type: UNKNOWN
 Description: Stateful programmatic web browsing, after Andy Lester's Perl module
         WWW::Mechanize.
         
@@ -57,3 +56,4 @@ Classifier: Topic :: Text Processing
 Classifier: Topic :: Text Processing :: Markup
 Classifier: Topic :: Text Processing :: Markup :: HTML
 Classifier: Topic :: Text Processing :: Markup :: XML
+Provides-Extra: fast

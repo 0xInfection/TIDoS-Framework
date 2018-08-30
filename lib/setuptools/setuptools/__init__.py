@@ -1,12 +1,14 @@
 """Extensions to the 'distutils' for large or complex distributions"""
 
 import os
+import sys
 import functools
 import distutils.core
 import distutils.filelist
 from distutils.util import convert_path
 from fnmatch import fnmatchcase
 
+from setuptools.extern.six import PY3
 from setuptools.extern.six.moves import filter, map
 
 import setuptools.version
@@ -15,10 +17,16 @@ from setuptools.dist import Distribution, Feature
 from setuptools.depends import Require
 from . import monkey
 
+__metaclass__ = type
+
+
 __all__ = [
     'setup', 'Distribution', 'Feature', 'Command', 'Extension', 'Require',
-    'find_packages',
+    'find_packages'
 ]
+
+if PY3:
+  __all__.append('find_namespace_packages')
 
 __version__ = setuptools.version.__version__
 
@@ -31,7 +39,7 @@ run_2to3_on_doctests = True
 lib2to3_fixer_packages = ['lib2to3.fixes']
 
 
-class PackageFinder(object):
+class PackageFinder:
     """
     Generate a list of all Python packages found within a directory
     """
@@ -108,6 +116,9 @@ class PEP420PackageFinder(PackageFinder):
 
 
 find_packages = PackageFinder.find
+
+if PY3:
+  find_namespace_packages = PEP420PackageFinder.find
 
 
 def _install_setup_requires(attrs):

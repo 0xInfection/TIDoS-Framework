@@ -1,3 +1,42 @@
+v40.2.0
+-------
+
+* #1466: Fix handling of Unicode arguments in PEP 517 backend
+
+
+vv40.1.1
+--------
+
+* #1465: Fix regression with `egg_info` command when tagging is used.
+
+
+v40.1.0
+-------
+
+* #1410: Deprecated ``upload`` and ``register`` commands.
+* #1312: Introduced find_namespace_packages() to find PEP 420 namespace packages.
+* #1420: Added find_namespace: directive to config parser.
+* #1418: Solved race in when creating egg cache directories.
+* #1450: Upgraded vendored PyParsing from 2.1.10 to 2.2.0.
+* #1451: Upgraded vendored appdirs from 1.4.0 to 1.4.3.
+* #1388: Fixed "Microsoft Visual C++ Build Tools" link in exception when Visual C++ not found.
+* #1389: Added support for scripts which have unicode content.
+* #1416: Moved several Python version checks over to using ``six.PY2`` and ``six.PY3``.
+* #1441: Removed spurious executable permissions from files that don't need them.
+
+
+v40.0.0
+-------
+
+* #1342: Drop support for Python 3.3.
+* #1366: In package_index, fixed handling of encoded entities in URLs.
+* #1383: In pkg_resources VendorImporter, avoid removing packages imported from the root.
+* #1379: Minor doc fixes after actually using the new release process.
+* #1385: Removed section on non-package data files.
+* #1403: Fix developer's guide.
+* #1404: Fix PEP 518 configuration: set build requirements in ``pyproject.toml`` to ``["wheel"]``.
+
+
 v39.2.0
 -------
 
@@ -5,6 +44,8 @@ v39.2.0
   a text file.
 * #1360: Fixed issue with a mismatch between the name of the package and the
   name of the .dist-info file in wheel files
+* #1364: Add `__dir__()` implementation to `pkg_resources.Distribution()` that
+  includes the attributes in the `_provider` instance variable.
 * #1365: Take the package_dir option into account when loading the version from
   a module attribute.
 * #1353: Added coverage badge to README.
@@ -17,7 +58,7 @@ v39.2.0
   after any ``distutils`` ``setup_keywords`` calls, allowing them to override
   values.
 * #1352: Added ``tox`` environment for documentation builds.
-* #1354: Added ``towncrier`` for changelog managment.
+* #1354: Added ``towncrier`` for changelog management.
 * #1355: Add PR template.
 * #1368: Fixed tests which failed without network connectivity.
 * #1369: Added unit tests for PEP 425 compatibility tags support.

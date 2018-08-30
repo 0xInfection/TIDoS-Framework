@@ -4,6 +4,7 @@ MANIFEST.in
 README.rst
 publish.py
 run_tests.py
+setup.cfg
 setup.py
 examples/hack21.py
 examples/pypi.py

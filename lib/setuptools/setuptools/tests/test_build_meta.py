@@ -1,3 +1,5 @@
+from __future__ import unicode_literals
+
 import os
 
 import pytest
@@ -5,12 +7,14 @@ import pytest
 from .files import build_files
 from .textwrap import DALS
 
+__metaclass__ = type
+
 
 futures = pytest.importorskip('concurrent.futures')
 importlib = pytest.importorskip('importlib')
 
 
-class BuildBackendBase(object):
+class BuildBackendBase:
     def __init__(self, cwd=None, env={}, backend_name='setuptools.build_meta'):
         self.cwd = cwd
         self.env = env
@@ -119,6 +123,16 @@ def test_build_sdist(build_backend):
 
 def test_prepare_metadata_for_build_wheel(build_backend):
     dist_dir = os.path.abspath('pip-dist-info')
+    os.makedirs(dist_dir)
+
+    dist_info = build_backend.prepare_metadata_for_build_wheel(dist_dir)
+
+    assert os.path.isfile(os.path.join(dist_dir, dist_info, 'METADATA'))
+
+
+@pytest.mark.skipif('sys.version_info > (3,)')
+def test_prepare_metadata_for_build_wheel_with_str(build_backend):
+    dist_dir = os.path.abspath(str('pip-dist-info'))
     os.makedirs(dist_dir)
 
     dist_info = build_backend.prepare_metadata_for_build_wheel(dist_dir)

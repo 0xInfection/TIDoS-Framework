@@ -1,4 +1,4 @@
-Metadata-Version: 1.1
+Metadata-Version: 2.1
 Name: beautifulsoup4
 Version: 4.5.1
 Summary: Screen-scraping library
@@ -19,3 +19,5 @@ Classifier: Topic :: Text Processing :: Markup :: HTML
 Classifier: Topic :: Text Processing :: Markup :: XML
 Classifier: Topic :: Text Processing :: Markup :: SGML
 Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Provides-Extra: lxml
+Provides-Extra: html5lib

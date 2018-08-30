@@ -12,16 +12,19 @@ import stat
 import distutils.dist
 import distutils.command.install_egg_info
 
+try:
+    from unittest import mock
+except ImportError:
+    import mock
+
 from pkg_resources.extern.six.moves import map
+from pkg_resources.extern.six import text_type, string_types
 
 import pytest
 
 import pkg_resources
 
-try:
-    unicode
-except NameError:
-    unicode = str
+__metaclass__ = type
 
 
 def timestamp(dt):
@@ -35,7 +38,7 @@ def timestamp(dt):
         return time.mktime(dt.timetuple())
 
 
-class EggRemover(unicode):
+class EggRemover(text_type):
     def __call__(self):
         if self in sys.path:
             sys.path.remove(self)
@@ -43,7 +46,7 @@ class EggRemover(unicode):
             os.remove(self)
 
 
-class TestZipProvider(object):
+class TestZipProvider:
     finalizers = []
 
     ref_time = datetime.datetime(2013, 5, 12, 13, 25, 0)
@@ -132,16 +135,42 @@ class TestZipProvider(object):
         manager.cleanup_resources()
 
 
-class TestResourceManager(object):
+class TestResourceManager:
     def test_get_cache_path(self):
         mgr = pkg_resources.ResourceManager()
         path = mgr.get_cache_path('foo')
         type_ = str(type(path))
         message = "Unexpected type from get_cache_path: " + type_
-        assert isinstance(path, (unicode, str)), message
+        assert isinstance(path, string_types), message
 
+    def test_get_cache_path_race(self, tmpdir):
+        # Patch to os.path.isdir to create a race condition
+        def patched_isdir(dirname, unpatched_isdir=pkg_resources.isdir):
+            patched_isdir.dirnames.append(dirname)
 
-class TestIndependence:
+            was_dir = unpatched_isdir(dirname)
+            if not was_dir:
+                os.makedirs(dirname)
+            return was_dir
+
+        patched_isdir.dirnames = []
+
+        # Get a cache path with a "race condition"
+        mgr = pkg_resources.ResourceManager()
+        mgr.set_extraction_path(str(tmpdir))
+
+        archive_name = os.sep.join(('foo', 'bar', 'baz'))
+        with mock.patch.object(pkg_resources, 'isdir', new=patched_isdir):
+            mgr.get_cache_path(archive_name)
+
+        # Because this test relies on the implementation details of this
+        # function, these assertions are a sentinel to ensure that the
+        # test suite will not fail silently if the implementation changes.
+        called_dirnames = patched_isdir.dirnames
+        assert len(called_dirnames) == 2
+        assert called_dirnames[0].split(os.sep)[-2:] == ['foo', 'bar']
+        assert called_dirnames[1].split(os.sep)[-1:] == ['foo']
+
     """
     Tests to ensure that pkg_resources runs independently from setuptools.
     """
@@ -163,7 +192,7 @@ class TestIndependence:
         subprocess.check_call(cmd)
 
 
-class TestDeepVersionLookupDistutils(object):
+class TestDeepVersionLookupDistutils:
     @pytest.fixture
     def env(self, tmpdir):
         """

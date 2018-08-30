@@ -16,12 +16,14 @@ from .files import build_files
 from .textwrap import DALS
 from . import contexts
 
+__metaclass__ = type
+
 
 class Environment(str):
     pass
 
 
-class TestEggInfo(object):
+class TestEggInfo:
 
     setup_script = DALS("""
         from setuptools import setup
@@ -181,7 +183,7 @@ class TestEggInfo(object):
     )
     invalid_marker = "<=>++"
 
-    class RequiresTestHelper(object):
+    class RequiresTestHelper:
 
         @staticmethod
         def parametrize(*test_list, **format_dict):
@@ -452,7 +454,7 @@ class TestEggInfo(object):
 
     def test_doesnt_provides_extra(self, tmpdir_cwd, env):
         self._setup_script_with_requires(
-            '''install_requires=["spam ; python_version<'3.3'"]''')
+            '''install_requires=["spam ; python_version<'3.6'"]''')
         environ = os.environ.copy().update(
             HOME=env.paths['home'],
         )
@@ -568,3 +570,19 @@ class TestEggInfo(object):
             raise AssertionError(data)
         if output:
             assert output in data
+
+    def test_egg_info_tag_only_once(self, tmpdir_cwd, env):
+        self._create_project()
+        build_files({
+            'setup.cfg': DALS("""
+                              [egg_info]
+                              tag_build = dev
+                              tag_date = 0
+                              tag_svn_revision = 0
+                              """),
+        })
+        self._run_egg_info_command(tmpdir_cwd, env)
+        egg_info_dir = os.path.join('.', 'foo.egg-info')
+        with open(os.path.join(egg_info_dir, 'PKG-INFO')) as pkginfo_file:
+            pkg_info_lines = pkginfo_file.read().split('\n')
+        assert 'Version: 0.0.0.dev0' in pkg_info_lines
