@@ -20,15 +20,15 @@ def install():
 	os.system("clear")
 
 	time.sleep(1)
-	print ""+B+color.BOLD+" [!] Gathering info..."+color.END
+	print B+" [!] Gathering info..."
 	time.sleep(1)
-	print ""+GR+color.BOLD+" [*] Checking your resources..."+color.END
+	print GR+" [*] Checking your resources..."
 	time.sleep(1.5)
 
 	if os.geteuid() == 0:
 
-	    print ""+G+color.BOLD+" [!] No problems found."+color.END
-	    print ""+G+color.BOLD+" [!] CheckUP complete. Launching the installer..."+color.END
+	    print G+" [!] No problems found."
+	    print G+" [!] Checkup complete. Launching the installer..."
 
 	else:
 
@@ -81,7 +81,7 @@ def install():
 		print GR+'Finalising options...'
 		time.sleep(0.5)
 		raw_input(G+"\nPress 'Enter' to start the installation...") 
-		Preinstall="rm -v -rf /opt/tidos-framework && rm -v -rf /opt/tidos/ && rm -v -f /usr/bin/tidos"
+		Preinstall="rm -v -rf /opt/tidos/ && rm -v -f /usr/bin/tidos"
 		print B+ '\nChecking for pre-installations...'
 		time.sleep(0.5)
 		print GR+'Removing any trace of pre-installations...'+O+''
