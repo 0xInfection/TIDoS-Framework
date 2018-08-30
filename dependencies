@@ -28,6 +28,8 @@ if ! hash default-libmysqlclient-dev 2>/dev/null; then sudo apt-get install --ye
 
 pip install sslscan # pip stuffs
 pip install tldextract
+pip install lxml
+pip install pillow
 
 DIR=$(dirname $0)
 
@@ -94,11 +96,6 @@ cd ..
 cd ..
 
 cd lib/builtwith/
-sudo python setup.py install
-cd ..
-cd ..
-
-cd lib/lxml/
 sudo python setup.py install
 cd ..
 cd ..
