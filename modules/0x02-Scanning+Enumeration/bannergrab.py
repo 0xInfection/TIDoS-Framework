@@ -36,10 +36,13 @@ def grab(web):
 
 		for item in host['data']:
 		    	print GR+'\n [+] Port : '+O+ str(item['port'])
-		    	print B+' [+] Banner : '
+		    	print B+' [+] Banner : \n'
 		    	for q in str(item['data']).splitlines():
-				print C+'    '+q
-				time.sleep(0.02)
+		    		if ':' in q:
+					print G+'    '+q.split(':')[0]+' : '+O+q.split(':')[1].strip()
+				else:
+					print C+'    '+q
+					time.sleep(0.02)
 
     	except KeyboardInterrupt:
         	print R+' [-] An error occured...\n'
@@ -55,4 +58,3 @@ def bannergrab(web):
 	web = web.replace('https://','')
 	grab(web)
 	print G+'\n [+] Banner Grabbing Done!'
-
