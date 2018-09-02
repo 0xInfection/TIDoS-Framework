@@ -234,14 +234,14 @@ TIDoS Framework presently supports the following: `and is under active developme
 	
 ### Other Tools:
 - `net_info.py` - Displays information about your network. Located under `tools/`.
-- `tidos_updater.py` - Updates the framework to the latest release via signature matching. Located under `tools/'.
+- `tidos_updater.py` - Updates the framework to the latest release via signature matching. Located under `tools/`.
 
 ### TIDoS In Action:
 <img src='https://i.imgur.com/OO6ENcQ.png'></img>
 <img src='https://i.imgur.com/jayWV9Z.png' width='33%'>  </img><img src='https://i.imgur.com/v418wIB.png' width='33%'>  </img><img src='https://i.imgur.com/HenvOhe.png' width='33%'></img>
 
-<img src='https://i.imgur.com/2xW1Wlj.png'></img>
-<img src='https://i.imgur.com/kIJ3jqL.png' width='33%'>  </img><img src='https://i.imgur.com/Vy9s30W.png' width='33%'>  </img><img src='https://i.imgur.com/mgU99gK.png' width='33%'> </img>
+<img src='https://i.imgur.com/W16sVDZ.png'></img>
+<img src='https://i.imgur.com/kIJ3jqL.png' width='33%'>  </img><img src='https://i.imgur.com/Vy9s30W.png' width='33%'>  </img><img src='https://i.imgur.com/ejKLrCR.png' width='33%'> </img>
 
 <img src='https://i.imgur.com/7qsX6vA.png'></img>
 <img src='https://i.imgur.com/lCa42Dn.png' width='50%'></img><img src='https://i.imgur.com/xVYRZ4M.png' width='50%'>
