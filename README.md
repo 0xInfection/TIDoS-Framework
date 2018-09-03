@@ -262,8 +262,10 @@ There are some bruteforce modules to be added:
 
 ### Ongoing:
 
-- Normal Bug Fixing Stuffs.
-- A complete new meaning of framework.
+- Working on a new framework, a real framework. `To be released with v2`
+- Working on a campaign feature + addition of arguments.
+- Normal Bug Fixing Stuffs. `As per the issues being raised`
+- Some other perks:
 	- Working on a way for contributing new modules easily.
 	- A complete new method of multi-threaded fuzzing.
 	- Keeping better of new console stuff.
