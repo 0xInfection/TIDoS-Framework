@@ -178,6 +178,7 @@ TIDoS Framework presently supports the following: `and is under active developme
 	+ LDAP Injection `Parameter Based`
 	+ HTML Injection `Parameter Based`
 	+ Bash Command Injection `ShellShock`
+	+ Apache Struts Shock `Apache RCE`
 	+ XPATH Injection `Parameter Based`
 	+ Cross-Site Scripting `IMPROVED`
 	    - Cookie Value Based
