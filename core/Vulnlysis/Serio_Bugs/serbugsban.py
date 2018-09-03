@@ -60,9 +60,11 @@ def serbugsban():
     time.sleep(0.1)
     print B+'  [13]'+C+' Shellshock Vulnerabilities'+W+' (Bash RCE)'
     time.sleep(0.1)
-    print B+'  [14]'+C+' Unvalidated URL Redirects'+W+' (Open Redirects)'
+    print B+'  [14]'+C+' Apache Struts Shock'+W+' (Apache RCE)'
     time.sleep(0.1)
-    print B+'  [15]'+C+' Sub-domain Takeover'+W+' (50+ Services)\n'
+    print B+'  [15]'+C+' Unvalidated URL Redirects'+W+' (Open Redirects)'
+    time.sleep(0.1)
+    print B+'  [16]'+C+' Sub-domain Takeover'+W+' (50+ Services)\n'
     time.sleep(0.1)
     print B+'  [A]'+C+' Load all the modules 1 by 1\n'
     time.sleep(0.1)
