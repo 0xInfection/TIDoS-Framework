@@ -20,7 +20,7 @@ The main highlights of this framework is:
 - [x] TIDoS has full verbose out support, so you'll know whats going on.
 - [x] Fully user friendly interaction environment. `(no shits)`
 
-<img src='https://i.imgur.com/q3FxiRn.png' />
+<img src='https://i.imgur.com/ICzRgOQ.png' />
 
 ### Installation :-
 
