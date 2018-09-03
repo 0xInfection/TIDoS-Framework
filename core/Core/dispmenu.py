@@ -38,7 +38,7 @@ def dispmenu():
 	time.sleep(0.1)
 	print B+' [2] \033[1;36mScanning & Enumeration'+W+' (15 modules)'
 	time.sleep(0.1)
-	print B+' [3] \033[1;36mVulnerability Analysis'+W+' (36 modules)'
+	print B+' [3] \033[1;36mVulnerability Analysis'+W+' (37 modules)'
 	time.sleep(0.1)
 	print B+' [4] \033[1;36mExploitation (beta)'+W+' (1 modules)'
 	time.sleep(0.1)
