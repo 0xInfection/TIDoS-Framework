@@ -23,6 +23,7 @@ from csrf import *
 from sqli import *
 from crlf import *
 from subdomover import *
+from strutsshock import *
 from phpi import *
 from htmli import *
 from xpathi import *
@@ -117,12 +118,18 @@ def serbugs(web):
 	serbugs(web)
 
     elif v.strip() == '14':
+	print ' Type Selected : Apache Struts Shock'
+	strutsshock(web)
+	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')	
+	serbugs(web)
+
+    elif v.strip() == '15':
 	print ' Type Selected : URL Validation'
 	redirect(web)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')	
 	serbugs(web)
 
-    elif v.strip() == '15':
+    elif v.strip() == '16':
 	print ' Type Selected : Subdomain Takeover'
 	subdomover(web)
 	raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')	
