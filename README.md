@@ -1,4 +1,4 @@
-<p align="middle"><img src='https://i.imgur.com/QAbaVdU.png' /></p>
+<p align="middle"><img src='https://i.imgur.com/9MYjIjJ.png' /></p>
 
 ![Python](https://img.shields.io/badge/Python-2.7-green.svg) ![TIDoS](https://img.shields.io/badge/TIDoS-v1.6.1-blue.svg) ![Supported OS](https://img.shields.io/badge/Supported%20OS-Linux-yellow.svg) ![License](https://img.shields.io/badge/License-GPLv3-orange.svg) ![Build](https://img.shields.io/badge/Build-0090-red.svg) ![Modules](https://img.shields.io/badge/Modules-108-blue.svg) ![Status](https://img.shields.io/badge/Build%20Status-passing-brightgreen.svg) ![Stage](https://img.shields.io/badge/Release-Stable-green.svg)
 
@@ -20,7 +20,7 @@ The main highlights of this framework is:
 - [x] TIDoS has full verbose out support, so you'll know whats going on.
 - [x] Fully user friendly interaction environment. `(no shits)`
 
-<img src='https://i.imgur.com/ICzRgOQ.png' />
+<img src='https://i.imgur.com/FqwvW3m.gif' />
 
 ### Installation :-
 
@@ -34,7 +34,7 @@ cd tidos-framework
 chmod +x install
 ./install
 ```
-<img src='https://i.imgur.com/YNiIioI.png' />
+<img src='https://i.imgur.com/P28ZRY1.gif' />
 
 Thats it! Now you are good to go! Now lets run the tool:
 ```
@@ -238,8 +238,8 @@ TIDoS Framework presently supports the following: `and is under active developme
 - `tidos_updater.py` - Updates the framework to the latest release via signature matching. Located under `tools/`.
 
 ### TIDoS In Action:
-<img src='https://i.imgur.com/OO6ENcQ.png'></img>
-<img src='https://i.imgur.com/jayWV9Z.png' width='33%'>  </img><img src='https://i.imgur.com/v418wIB.png' width='33%'>  </img><img src='https://i.imgur.com/HenvOhe.png' width='33%'></img>
+<img src='https://i.imgur.com/p4gf1ei.gif'></img>
+<img src='https://i.imgur.com/otA94bH.gif' width='33%'>  </img><img src='https://i.imgur.com/4jK6ZKt.gif' width='33%'>  </img><img src='https://i.imgur.com/2AqxGoF.gif' width='33%'></img>
 
 <img src='https://i.imgur.com/W16sVDZ.png'></img>
 <img src='https://i.imgur.com/kIJ3jqL.png' width='33%'>  </img><img src='https://i.imgur.com/Vy9s30W.png' width='33%'>  </img><img src='https://i.imgur.com/ejKLrCR.png' width='33%'> </img>
