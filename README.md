@@ -15,22 +15,22 @@
   <a href="https://github.com/theInfectedDrake/TIDoS-Framework/releases">
     <img src="https://img.shields.io/badge/TIDoS-v1.6.1-blue.svg">
   </a>
-  <a href="https://github.com/theinfecteddrake/tidos-framework">
+  <a href="https://github.com/theinfecteddrake/tidos-framework/">
       <img src="https://img.shields.io/badge/Supported%20OS-Linux-yellow.svg">
   </a>
-  <a href="https://github.com/theInfectedDrake/TIDoS-Framework/blob/master/doc/LICENSE">
+  <a href="https://github.com/theInfectedDrake/TIDoS-Framework/blob/master/doc/LICENSE/">
     <img src="https://img.shields.io/badge/License-GPLv3-orange.svg">
   </a>  
-  <a href="https://github.com/theInfectedDrake/TIDoS-Framework/blob/master/CHANGELOG">
+  <a href="https://github.com/theInfectedDrake/TIDoS-Framework/blob/master/CHANGELOG/">
     <img src="https://img.shields.io/badge/Build-0090-red.svg">
   </a>
   <a href="https://github.com/theInfectedDrake/TIDoS-Framework#flawless-features--">
     <img src="https://img.shields.io/badge/Modules-108-blue.svg">
   </a>
-  <a href="https://github.com/theInfectedDrake/TIDoS-Framework/releases/tag/v1.6.1">
+  <a href="https://github.com/theInfectedDrake/TIDoS-Framework/releases/tag/v1.6.1/">
     <img src="https://img.shields.io/badge/Build%20Status-passing-brightgreen.svg">
   </a>
-  <a href="https://github.com/theInfectedDrake/TIDoS-Framework/releases/tag/v1.6.1">
+  <a href="https://github.com/theInfectedDrake/TIDoS-Framework/releases/tag/v1.6.1/">
     <img src="https://img.shields.io/badge/Release-Stable-green.svg">
   </a>
 </p>
