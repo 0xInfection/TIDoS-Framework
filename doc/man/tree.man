@@ -43,7 +43,6 @@
 
 TIDoS Framework presently supports the following: `and is under active development`
 
-
 * __Reconnaissance + OSINT__
 
 	+ Passive Reconnaissance:
@@ -215,5 +214,4 @@ TIDoS Framework presently supports the following: `and is under active developme
 
 - __Exploitation__ `purely developmental`
 
-	+ ShellShock
-	
+	+ ShellShock	
