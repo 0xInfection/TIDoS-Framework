@@ -7,16 +7,15 @@
    Tree Structure
   ================
 
- > TIDoS has 4 phases as below:
+ > TIDoS has 5 main phases as below:
 
     - Reconnaissance & OSINT
     - Scanning and Enumeration
     - Vulnerability Analysis
-    - Exploitation (presently in beta phase)
+    - Exploitation Stuff
+    - Auxillary Modules
 
-
-
- > TIDoS has 13 sub-phases as below:
+ > TIDoS has 14 sub-phases as below:
 
   * Reconnaissance (OSINT)
 	- Active Reconnaissance
@@ -24,20 +23,16 @@
 	- Information Disclosure
 
   * Scanning and Enumeration
-	- WAF Analysis
 	- Various Port Scanning Techniques
 	- Preloaded moduled NMap
-	- Crawlers (Depth 1 and 2)
+	- Crawlering and Enumeration
 
   * Vulnerability Analysis
+  	- Top Priority Bugs
 	- Server-based Misconfigurations
-	- Serious Vulnerabilities
-	- Auxillaries
-
-  * Exploitation (beta)
-	- ShellShock
  
-
+  * Auxillaries  
+  * Exploitation (beta)
 
  > TIDoS has 95 modules as the whole, so on expanding:
 
