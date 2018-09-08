@@ -241,12 +241,12 @@ TIDoS Framework presently supports the following: `and is under active developme
 <img src='https://i.imgur.com/p4gf1ei.gif'></img>
 <img src='https://i.imgur.com/otA94bH.gif' width='33%'>  </img><img src='https://i.imgur.com/4jK6ZKt.gif' width='33%'>  </img><img src='https://i.imgur.com/2AqxGoF.gif' width='33%'></img>
 
-<img src='https://i.imgur.com/W16sVDZ.png'></img>
-<img src='https://i.imgur.com/kIJ3jqL.png' width='33%'>  </img><img src='https://i.imgur.com/Vy9s30W.png' width='33%'>  </img><img src='https://i.imgur.com/ejKLrCR.png' width='33%'> </img>
+<img src='https://i.imgur.com/tVHcLd4.gif'></img>
+<img src='https://i.imgur.com/4ViGkUW.gif' width='33%'>  </img><img src='https://i.imgur.com/ZXAAtD8.gif' width='33%'>  </img><img src='https://i.imgur.com/6bIe9bt.gif' width='33%'> </img>
 
-<img src='https://i.imgur.com/7qsX6vA.png'></img>
-<img src='https://i.imgur.com/lCa42Dn.png' width='50%'></img><img src='https://i.imgur.com/xVYRZ4M.png' width='50%'>
-<img src='https://i.imgur.com/7yJmqA2.png' width='33%'>  </img><img src='https://i.imgur.com/qJhYCaL.png' width='33%'>  </img><img src='https://i.imgur.com/OK2gD9W.png' width='33%'> </img>
+<img src='https://i.imgur.com/95cAIKt.gif'></img>
+<img src='https://i.imgur.com/SdDgG8Q.gif' width='50%'></img><img src='https://i.imgur.com/f5p0DJ1.gif' width='50%'>
+<img src='https://i.imgur.com/ltETFN8.gif' width='33%'>  </img><img src='https://i.imgur.com/d7UIuYw.gif' width='33%'>  </img><img src='https://i.imgur.com/tvsqDOS.gif' width='33%'> </img>
 
 ### Version:
 ```
