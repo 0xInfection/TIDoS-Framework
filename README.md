@@ -1,15 +1,45 @@
-<p align="middle"><img src='https://i.imgur.com/9MYjIjJ.png' /></p>
+<h1 align="center">
+  <br>
+  <a href="https://github.com/s0md3v/Photon"><img src="https://i.imgur.com/9MYjIjJ.png" alt="TIDoS"></a>
+  <br>
+  TIDoS Framework
+  <br>
+</h1>
 
-![Python](https://img.shields.io/badge/Python-2.7-green.svg) ![TIDoS](https://img.shields.io/badge/TIDoS-v1.6.1-blue.svg) ![Supported OS](https://img.shields.io/badge/Supported%20OS-Linux-yellow.svg) ![License](https://img.shields.io/badge/License-GPLv3-orange.svg) ![Build](https://img.shields.io/badge/Build-0090-red.svg) ![Modules](https://img.shields.io/badge/Modules-108-blue.svg) ![Status](https://img.shields.io/badge/Build%20Status-passing-brightgreen.svg) ![Stage](https://img.shields.io/badge/Release-Stable-green.svg)
+<h4 align="center">The Offensive Web Application Penetration Testing Framework.</h4>
 
-# The TIDoS Framework 
-TIDoS Framework is a comprehensive web-app audit framework. `let's keep this simple`
+<p align="center">
+  <a href="https://www.python.org/download/releases/2.7">
+    <img src="https://img.shields.io/badge/Python-2.7-green.svg">
+  </a>
+  <a href="https://github.com/theInfectedDrake/TIDoS-Framework/releases">
+    <img src="https://img.shields.io/badge/TIDoS-v1.6.1-blue.svg">
+  </a>
+  <a href="https://github.com/theinfecteddrake/tidos-framework">
+      <img src="https://img.shields.io/badge/Supported%20OS-Linux-yellow.svg">
+  </a>
+  <a href="https://github.com/theInfectedDrake/TIDoS-Framework/blob/master/doc/LICENSE">
+    <img src="https://img.shields.io/badge/License-GPLv3-orange.svg">
+  </a>  
+  <a href="https://github.com/theInfectedDrake/TIDoS-Framework/blob/master/CHANGELOG">
+    <img src="https://img.shields.io/badge/Build-0090-red.svg">
+  </a>
+  <a href="https://github.com/theInfectedDrake/TIDoS-Framework#flawless-features--">
+    <img src="https://img.shields.io/badge/Modules-108-blue.svg">
+  </a>
+  <a href="https://github.com/theInfectedDrake/TIDoS-Framework/releases/tag/v1.6.1">
+    <img src="https://img.shields.io/badge/Build%20Status-passing-brightgreen.svg">
+  </a>
+  <a href="https://github.com/theInfectedDrake/TIDoS-Framework/releases/tag/v1.6.1">
+    <img src="https://img.shields.io/badge/Release-Stable-green.svg">
+  </a>
+</p>
 
 ### Highlights :-
-The main highlights of this framework is:
+Here is some light on what the framework is all about:
 - [x] TIDoS Framework now boasts of a century+ of modules.
 - [x] A complete versatile framework to cover up everything from Reconnaissance to Vulnerability Analysis.
-- [x] Has 5 main phases, subdivided into __14 sub-phases__ consisting a total of __108 modules__.
+- [x] Has 5 main phases, subdivided into __14 sub-phases__ consisting a total of <a href="https://github.com/theInfectedDrake/TIDoS-Framework/blob/master/doc/man/tree.man">__108 modules__</a>.
 - [x] Reconnaissance Phase has 50 modules of its own (including active and passive recon, information disclosure modules).
 - [x] Scanning & Enumeration Phase has got 16 modules (including port scans, WAF analysis, etc)
 - [x] Vulnerability Analysis Phase has 37 modules (including most common vulnerabilites in action).
