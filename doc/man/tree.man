@@ -34,7 +34,7 @@
   * Auxillaries  
   * Exploitation (beta)
 
- > TIDoS has 95 modules as the whole, so on expanding:
+ > TIDoS has 108 modules as the whole, so on expanding:
 
 TIDoS Framework presently supports the following: `and is under active development`
 
