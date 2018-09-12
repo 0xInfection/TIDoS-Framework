@@ -18,6 +18,7 @@ if ! hash libncurses5 2>/dev/null; then apt-get install --yes libncurses5 ; fi
 if ! hash libxml2 2>/dev/null; then apt-get install --yes libxml2 ; fi
 if ! hash nmap 2>/dev/null; then sudo apt-get install --yes nmap ; fi
 if ! hash git 2>/dev/null; then sudo apt-get install --yes git ; fi
+if ! hash tcpdump 2>/dev/null; then sudo apt-get install --yes tcpdump ; fi
 if ! hash scons 2>/dev/null; then sudo apt-get install --yes scons ; fi
 if ! hash libexiv2-dev 2>/dev/null; then sudo apt-get install --yes libexiv2-dev ; fi
 if ! hash python-pyexiv2 2>/dev/null; then sudo apt-get install --yes python-pyexiv2 ; fi
