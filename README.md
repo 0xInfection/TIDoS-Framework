@@ -296,6 +296,7 @@ There are some bruteforce modules to be added:
 
 ### Ongoing:
 
+- Working on a full-featured Web UI implementation on Flask and MongoDB and Node.js.
 - Working on a new framework, a real framework. `To be released with v2`
 - Working on a campaign feature + addition of arguments.
 - Normal Bug Fixing Stuffs. `As per the issues being raised`
