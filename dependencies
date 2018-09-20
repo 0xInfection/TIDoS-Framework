@@ -27,82 +27,83 @@ if ! hash python-pip 2>/dev/null; then sudo apt-get install --yes python-pip ; f
 if ! hash python-xmpp 2>/dev/null; then sudo apt-get install --yes python-xmpp ; fi
 if ! hash default-libmysqlclient-dev 2>/dev/null; then sudo apt-get install --yes default-libmysqlclient-dev ; fi
 
-pip install sslyze # pip stuffs
-pip install tldextract
-pip install lxml
-pip install pillow
+# pip install stuffs (not suitable via source installations)
+pip2 install sslyze
+pip2 install tldextract
+pip2 install lxml
+pip2 install pillow
 
 DIR=$(dirname $0)
 
 # install from scratch
 cd lib/setuptools/
-sudo python bootstrap.py
-sudo python setup.py install
+sudo python2 bootstrap.py
+sudo python2 setup.py install
 cd ..
 cd ..
 
 cd lib/scapy/
-sudo python setup.py install
+sudo python2 setup.py install
 cd ..
 cd ..
 
 cd lib/pexpect/
-sudo python setup.py install
+sudo python2 setup.py install
 cd .. 
 cd ..
 
 cd lib/idna/
-sudo python setup.py install
+sudo python2 setup.py install
 cd .. 
 cd ..
 
 cd lib/bs4/
-sudo python setup.py install
+sudo python2 setup.py install
 cd .. 
 cd .. 
 
 cd lib/tld/
-sudo python setup.py install
+sudo python2 setup.py install
 cd .. 
 cd .. 
 
 cd lib/shodan/
-sudo python setup.py install
+sudo python2 setup.py install
 cd ..
 cd ..
 
 cd lib/requests/
-sudo python setup.py install
+sudo python2 setup.py install
 cd ..
 cd ..
 
 cd lib/pymap/
-sudo python setup.py install
+sudo python2 setup.py install
 cd ..
 cd ..
 
 cd lib/google/
-sudo python setup.py install
+sudo python2 setup.py install
 cd ..
 cd ..
 
 cd lib/emailprotectionslib/
-sudo python setup.py install
+sudo python2 setup.py install
 cd ..
 cd ..
 
 cd lib/mysql/
-sudo python setup.py install
+sudo python2 setup.py install
 cd ..
 cd ..
 
 cd lib/builtwith/
-sudo python setup.py install
+sudo python2 setup.py install
 cd ..
 cd ..
 
 cd lib/mechanize/
-sudo python setup.py install
+sudo python2 setup.py install
 cd ..
 cd ..
 
