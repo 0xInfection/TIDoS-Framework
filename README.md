@@ -315,6 +315,8 @@ __THEREFORE, I AM NOT EXCLUSIVELY RESPONSIBLE FOR ANY MISUSE OF THIS TOOLKIT.__
 
 This project is presently under active development so you may want to put it on a watch, since it is updated frequently `(you can take a look at past commits history)`. This project is one of the best frameworks I have ever built and I would really like your constructive criticism, suggestions and help in converting this project into the best web penetration testing framework ever built `and trust me, it will be ;)`.
 
-> Thank you,
->
-> Copyright ©  [@_tID](https://twitter.com/infecteddrake)
+Got any suggestions? Encountering bugs with this framework? Raise up an [issue](https://github.com/theInfectedDrake/TIDoS-Framework/issues/new) or hit me up via DM on [twitter](https://twitter.com/infecteddrake).
+
+> Copyright ©  @_tID
+
+
