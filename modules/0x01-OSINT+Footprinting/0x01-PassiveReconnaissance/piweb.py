@@ -16,8 +16,7 @@ from colors import *
 
 def piweb(web):
 	
-    web = web.replace('http://','')
-    web = web.replace('https://','')
+    web = web.split('//')
     print R+'\n   ====================='
     print R+'    P I N G   C H E C K '
     print R+'   =====================\n'

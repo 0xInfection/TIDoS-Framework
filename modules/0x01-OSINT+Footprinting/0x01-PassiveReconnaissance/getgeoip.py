@@ -32,7 +32,7 @@ def getgeoip(web):
     if 'error' not in result and 'invalid' not in result:
 	res = result.splitlines()
 	for r in res:
-		print G+' ' + r.split(':')[0].strip() + ' : ' +O+ r.split(':')[1].strip()
+		print G+' [+] ' + r.split(':')[0].strip() + ' : ' +O+ r.split(':')[1].strip()
 		time.sleep(0.1)
 
     else:
