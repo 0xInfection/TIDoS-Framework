@@ -16,15 +16,13 @@ def agreement():
                                	   T I D O S   F R A M E W O R K   v1.6
 				==========================================
 \033[1;37m
-	TIDoS is a open-source toolkit developed as a comprehensive web-app audit framework.
+	TIDoS is an open-source toolkit developed as a comprehensive web-application penetration testing framework.
 
-	TIDoS was developed by \033[1;33mPinaxx Robinson\033[1;37m, known by the name \033[1;36m@_tID\033[1;37m aka \033[1;36mThe Infected Drake\033[1;37m of \033[1;33mTeam CodeSploit.\033[1;37m
+	TIDoS was developed by \033[1;36m@_tID\033[1;37m aka \033[1;36mThe Infected Drake.\033[1;37m
 
-	This is to make you note that TIDoS was purely developed for auditing purposes. The developer is not responsible for any damage or data loss due to misuse. If you intend to use this for any malicious purposes, use it at your own risk... ;)
+	This is for you to note that TIDoS Framework has capable modules in various phases which can unveil potential dangerous flaws in various web-applications, which can further be exploited maliciously. Therefore the author as well as the contrbutors assume no liability for misuse of this toolkit. Usage of TIDoS Framework for testing or exploiting websites without prior mutual consistency can be considered as an illegal activity. It is the end user's responsibility to obey all applicable local, state and federal laws.
 
-	Also by using this tool, you agree to be a awesome person. Try to help others, and do not pollute the community with unwanted stuff. 
-
-	You can edit these scripts within this tool as per your own needs, provided you use it only for yourself. If you want to publish TIDoS again in a reformed appearance, give the developer some credits. :) \033[1;91m
+	You can edit these scripts within this tool as per your own needs, provided you use it only for yourself. If you're using some source-code from here, give the developer some credits. :) \033[1;91m
 
 	P.S. - If you find any bugs with this tool, report it.
 
