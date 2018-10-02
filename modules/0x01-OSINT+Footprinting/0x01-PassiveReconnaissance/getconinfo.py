@@ -23,7 +23,7 @@ def getconinfo(domain):
 	print(GR+' [*] Importing API Key...')
 	try:
 		from files.API_KEYS import FULLCONTACT_API_KEY
-	except IOError as ImportError:
+	except (IOError, ImportError):
 		print(R+' [-] Error while importing key...')
 
 	try:
@@ -75,4 +75,3 @@ def getconinfo(domain):
 			print(R+' [-] Encountered Exception : '+str(e))
 
 	print(G+'\n [+] Public Contact Info Module Completed!\n')
-
