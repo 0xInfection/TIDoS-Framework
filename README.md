@@ -271,13 +271,13 @@ TIDoS Framework presently supports the following: `and is under active developme
 
 Lets see some screenshots of TIDoS in real world pentesting action:
 
-<img src='https://i.imgur.com/p4gf1ei.gif'></img>
-<img src='https://i.imgur.com/otA94bH.gif' width='33%'>  </img><img src='https://i.imgur.com/4jK6ZKt.gif' width='33%'>  </img><img src='https://i.imgur.com/2AqxGoF.gif' width='33%'></img>
+<img src='https://i.imgur.com/78NuLE0.gif'></img>
+<img src='https://i.imgur.com/j9Bl8mc.gif' width='33%'>  </img><img src='https://i.imgur.com/LeX5dOi.gif' width='33%'>  </img><img src='https://i.imgur.com/2BPvLRu.gif' width='33%'></img>
 
-<img src='https://i.imgur.com/tVHcLd4.gif'></img>
-<img src='https://i.imgur.com/4ViGkUW.gif' width='33%'>  </img><img src='https://i.imgur.com/ZXAAtD8.gif' width='33%'>  </img><img src='https://i.imgur.com/6bIe9bt.gif' width='33%'> </img>
+<img src='https://i.imgur.com/wLyefRk.gif'></img>
+<img src='https://i.imgur.com/YL4mbgu.gif' width='33%'>  </img><img src='https://i.imgur.com/ccnL1wo.gif' width='33%'>  </img><img src='https://i.imgur.com/GswFCse.gif' width='33%'> </img>
 
-<img src='https://i.imgur.com/95cAIKt.gif'></img>
+<img src='https://i.imgur.com/iMqvozm.gif'></img>
 <img src='https://i.imgur.com/SdDgG8Q.gif' width='50%'></img><img src='https://i.imgur.com/f5p0DJ1.gif' width='50%'>
 <img src='https://i.imgur.com/ltETFN8.gif' width='33%'>  </img><img src='https://i.imgur.com/d7UIuYw.gif' width='33%'>  </img><img src='https://i.imgur.com/tvsqDOS.gif' width='33%'> </img>
 
