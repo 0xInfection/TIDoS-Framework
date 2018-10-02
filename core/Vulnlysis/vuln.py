@@ -7,6 +7,7 @@
 #This module requires TIDoS Framework
 #https://github.com/theInfectedDrake/TIDoS-Framework 
 
+from __future__ import print_function
 import os
 import time
 import random
@@ -19,10 +20,10 @@ from colors import *
 
 def vuln(web):
 
-    print B+' [+] Module Loaded : '+C+'Vulnerability Analysis'
+    print(B+' [+] Module Loaded : '+C+'Vulnerability Analysis')
     vulnban()
     v = raw_input(''+O+' \033[4mTID\033[1;0m '+GR+':> ' + color.END)
-    print '\n'
+    print('\n')
 
     if v.strip() == '1':
 	webbugs(web)
@@ -34,13 +35,13 @@ def vuln(web):
 	othbugs(web)
 
     elif v.strip() == '99':
-	print '[!] Back'
+	print('[!] Back')
 	time.sleep(0.7)
 	os.system('clear')
 
     else:
 	dope = ['You high dude?','Hey there! Enter a valid option','Whoops! Thats not an option','Sorry fam! You just typed shit']
-	print dope[randint(0,3)]
+	print(dope[randint(0,3)])
 	time.sleep(0.7)
 	os.system('clear')
 	vulnban()

@@ -223,7 +223,7 @@ class ASN1F_SEQUENCE(ASN1F_field):
             if s:
                 warning("Too many bytes to decode sequence: [%r]" % s) # XXX not reversible!
             return remain
-        except ASN1_Error,e:
+        except ASN1_Error as e:
             raise ASN1F_badsequence(e)
 
 class ASN1F_SET(ASN1F_SEQUENCE):
@@ -263,7 +263,7 @@ class ASN1F_SEQUENCE_OF(ASN1F_SEQUENCE):
         while s1:
             try:
                 p = self.asn1pkt(s1)
-            except ASN1F_badsequence,e:
+            except ASN1F_badsequence as e:
                 lst.append(conf.raw_layer(s1))
                 break
             lst.append(p)

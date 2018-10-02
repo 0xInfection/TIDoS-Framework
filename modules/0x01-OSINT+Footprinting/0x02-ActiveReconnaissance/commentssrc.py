@@ -9,6 +9,7 @@
 #This module requires TIDoS Framework
 #https://github.com/the-Infected-Drake/TIDoS-Framework
 
+from __future__ import print_function
 import lxml
 import os
 import requests
@@ -23,12 +24,12 @@ links = []
 
 def commentssrc(web):
 
-	print R+'\n    ================================='
-	print R+'     C O M M E N T S   S C R A P E R'
-	print R+'    ================================='
-	print O+' [It is recommended to run ScanEnum/Crawlers'
-	print O+'       before running this module]\n'
-	print GR+' [*] Importing links...'
+	print(R+'\n    =================================')
+	print(R+'     C O M M E N T S   S C R A P E R')
+	print(R+'    =================================')
+	print(O+' [It is recommended to run ScanEnum/Crawlers')
+	print(O+'       before running this module]\n')
+	print(GR+' [*] Importing links...')
 	po = web.split('//')[1]
 	p = 'tmp/logs/'+po+'-logs/'+po+'-links.lst'
 	if os.path.exists(po):
@@ -37,17 +38,17 @@ def commentssrc(web):
 				i = i.replace('\n','')
 				links.append(i)
 	else:
-		print R+' [-] No files found under '+p+'!'
+		print(R+' [-] No files found under '+p+'!')
 		links = [web]
 
 	for w in links:
-		print GR+' [*] Making the request...'
+		print(GR+' [*] Making the request...')
 		req = requests.get(w).content
-		print O+' [!] Setting parse parameters...'
+		print(O+' [!] Setting parse parameters...')
 		comments = re.findall('<!--(.*)-->',req)
-		print G+" [+] Comments on page: "+O+web+'\n'
+		print(G+" [+] Comments on page: "+O+web+'\n')
 		for comment in comments:
-			print C+'   '+comment
+			print(C+'   '+comment)
 			time.sleep(0.03)
 			found = 0x01
 
@@ -63,22 +64,22 @@ def commentssrc(web):
 				urls.append(str(combline))
 		except:
 			pass
-        		print R+' [-] Unhandled Exception Occured!'
+        		print(R+' [-] Unhandled Exception Occured!')
 
 	try:
 		for uurl in urls:
-			print G+"\n [+] Comments on page: "+O+uurl+'\n'
+			print(G+"\n [+] Comments on page: "+O+uurl+'\n')
 			req = requests.get(uurl)
 			comments = re.findall('<!--(.*)-->',req.text)
 			for comment in comments:
-				print C+'   '+comment
+				print(C+'   '+comment)
 				time.sleep(0.03)
 
 	except requests.exceptions:
-		print R+' [-] Outbound Query Exception...'
+		print(R+' [-] Outbound Query Exception...')
 
 	if found == 0x00:
-		print R+' [-] No comments found in source code!'
+		print(R+' [-] No comments found in source code!')
 
-	print G+' [+] Comments Scraping Done!'
+	print(G+' [+] Comments Scraping Done!')
 

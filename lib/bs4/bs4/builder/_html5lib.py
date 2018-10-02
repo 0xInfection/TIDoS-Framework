@@ -29,7 +29,7 @@ try:
     # Pre-0.99999999
     from html5lib.treebuilders import _base as treebuilder_base
     new_html5lib = False
-except ImportError, e:
+except ImportError as e:
     # 0.99999999 and up
     from html5lib.treebuilders import base as treebuilder_base
     new_html5lib = True

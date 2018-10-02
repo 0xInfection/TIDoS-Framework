@@ -9,6 +9,7 @@
 #This module requires TIDoS Framework
 #https://github.com/the-Infected-Drake/TIDoS-Framework 
 
+from __future__ import print_function
 import os
 import sys
 import time
@@ -49,12 +50,12 @@ def crawler20x00(url, count):
 		visited_urls.add(u)
 		pfx = "{}[{}]".format(i, len(visited_urls))
 		if res == 200:
-			print B+' [+] Crawling : '+GR+pfx+'  '+C+u+G+'  ('+str(res)+')'
+			print(B+' [+] Crawling : '+GR+pfx+'  '+C+u+G+'  ('+str(res)+')')
 			actual_uri.append(u)
 		elif res == 404:
-			print B+' [+] Crawling : '+GR+pfx+'  '+C+u+R+'  ('+str(res)+')'
+			print(B+' [+] Crawling : '+GR+pfx+'  '+C+u+R+'  ('+str(res)+')')
 		else:
-			print B+' [+] Crawling : '+GR+pfx+'  '+C+u+O+'  ('+str(res)+')'
+			print(B+' [+] Crawling : '+GR+pfx+'  '+C+u+O+'  ('+str(res)+')')
 
 	    if root is None: continue
 
@@ -74,17 +75,17 @@ def out(web, list0):
 	
 	web = web.replace('http://','')
 	web = web.replace('https://','')
-	print GR+' [*] Writing found URLs to a file...'
+	print(GR+' [*] Writing found URLs to a file...')
 	if os.path.exists('tmp/logs/'+web+'-logs/'+web+'-links.lst'):		
 		fil = open('tmp/logs/'+web+'-logs/'+web+'-links.lst','w+')
-		print O+' [!] Sorting only scope urls...'
+		print(O+' [!] Sorting only scope urls...')
 		time.sleep(1)
 		for lists in list0:
 		    if str(web) in lists:
 			fil.write("%s\n" % lists)
 	else:
 		fil = open('tmp/logs/'+web+'-logs/'+web+'-links.lst','a')
-		print O+' [!] Sorting only scope urls...'
+		print(O+' [!] Sorting only scope urls...')
 		time.sleep(1)
 		for lists in list0:
 		    if str(web) in lists:
@@ -93,29 +94,29 @@ def out(web, list0):
 def crawler3(web):
 
     try:
-	print GR+' [*] Loading (Level 3) crawler...'
+	print(GR+' [*] Loading (Level 3) crawler...')
 	time.sleep(0.5)
 
-	print R+'\n    =========================='
-	print R+'     C R A W L E R  (Depth 3)'
-	print R+'    =========================='
+	print(R+'\n    ==========================')
+	print(R+'     C R A W L E R  (Depth 3)')
+	print(R+'    ==========================')
 	time.sleep(0.7)
-	print O+' [This crawler will recursively crawl'
-	print O+' all the links of the website as well as all'
-	print O+'   links within each of the pages]\n'
+	print(O+' [This crawler will recursively crawl')
+	print(O+' all the links of the website as well as all')
+	print(O+'   links within each of the pages]\n')
 	time.sleep(0.7)
-	print R+'  WARNING : Use this with CAUTION!\n'
+	print(R+'  WARNING : Use this with CAUTION!\n')
 	m = raw_input(GR+' [#] No. of links to be crawled (eg 100) :> ')
-	print O+' [!] Crawling limit set to : '+C+str(m)
+	print(O+' [!] Crawling limit set to : '+C+str(m))
 	w = int(m)
 	crawler20x00(web, w)
 	out(web, actual_uri)
 
     except Exception as e:
-	print R+' [-] Further crawl aborted due to Exception!'
-	print R+' [-] Exception : '+str(e)
+	print(R+' [-] Further crawl aborted due to Exception!')
+	print(R+' [-] Exception : '+str(e))
 	time.sleep(0.7)
-	print GR+' [*] Saving the links obtained...'
+	print(GR+' [*] Saving the links obtained...')
 	out(web, actual_uri)
-	print G+' [+] Saved!'
+	print(G+' [+] Saved!')
 

@@ -8,6 +8,7 @@
 #This module requires TIDoS Framework
 #https://github.com/theInfectedDrake/TIDoS-Framework 
 
+from __future__ import print_function
 import urllib2
 import time
 import sys
@@ -17,17 +18,17 @@ from colors import *
 def grabhead(web):
 
     time.sleep(0.4)
-    print R+'\n      =================================='
-    print R+'      G R A B   H T T P   H E A D E R S'
-    print R+'     ===================================\n'
-    print GR + color.BOLD + ' [!] Grabbing HTTP Headers...'
+    print(R+'\n      ==================================')
+    print(R+'      G R A B   H T T P   H E A D E R S')
+    print(R+'     ===================================\n')
+    print(GR + color.BOLD + ' [!] Grabbing HTTP Headers...')
     time.sleep(0.4)
     web.rstrip
     try:
 	    header = urllib2.urlopen(web).info()
-	    print ''
+	    print('')
 	    print(G+str(header))
     except urllib.HTTPError:
-	print R+' [-] Exception while request (HTTPError)...'
+	print(R+' [-] Exception while request (HTTPError)...')
     except:
-	print R+' [-] Something went wrong...'
+	print(R+' [-] Something went wrong...')

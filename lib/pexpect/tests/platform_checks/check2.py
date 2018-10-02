@@ -1,11 +1,12 @@
 #!/usr/bin/env python
+from __future__ import print_function
 import signal
 import os
 import time
 
 def signal_handler (signum, frame):
-	print 'Signal handler called with signal:', signum
-	print 'signal.SIGCHLD=', signal.SIGKILL
+	print('Signal handler called with signal:', signum)
+	print('signal.SIGCHLD=', signal.SIGKILL)
 
 # Create a child process for us to kill.
 pid = os.fork()
@@ -15,7 +16,7 @@ if pid == 0:
 #signal.signal (signal.SIGCHLD, signal.SIG_IGN)
 signal.signal (signal.SIGCHLD, signal_handler)
 
-print 'Sending SIGKILL to child pid:', pid
+print('Sending SIGKILL to child pid:', pid)
 os.kill (pid, signal.SIGKILL)
 
 # SIGCHLD should interrupt sleep.
@@ -27,18 +28,18 @@ interrupted = 0
 try:
 	time.sleep(10)
 except:
-	print 'sleep was interrupted by signal.'
+	print('sleep was interrupted by signal.')
 	interrupted = 1
 
 if not interrupted:
-	print 'ERROR. Signal did not interrupt sleep.'
+	print('ERROR. Signal did not interrupt sleep.')
 else:
-	print 'Signal interrupted sleep. This is good.'
+	print('Signal interrupted sleep. This is good.')
 
 # Let's see if the process is alive.
 try:
 	os.kill(pid, 0)
-	print 'Child is alive. This is ambiguous because it may be a Zombie.'
+	print('Child is alive. This is ambiguous because it may be a Zombie.')
 except OSError as e:
-	print 'Child appears to be dead.'
+	print('Child appears to be dead.')
 

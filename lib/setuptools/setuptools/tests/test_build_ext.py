@@ -1,3 +1,4 @@
+from __future__ import print_function
 import sys
 import distutils.command.build_ext as orig
 from distutils.sysconfig import get_config_var

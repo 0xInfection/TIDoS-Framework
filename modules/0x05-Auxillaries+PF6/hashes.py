@@ -9,17 +9,18 @@
 #This module requires TIDoS Framework
 #https://github.com/theInfectedDrake/TIDoS-Framework 
 
+from __future__ import print_function
 import time
 import hashlib
 from colors import *
 
 def hashes():
 
-	print R+'\n    ============================='
-	print R+'     H A S H   G E N E R A T O R'
-	print R+'    =============================\n'
+	print(R+'\n    =============================')
+	print(R+'     H A S H   G E N E R A T O R')
+	print(R+'    =============================\n')
 	message = raw_input(O+" [#] Enter the string :> ")
-	print GR+' [+] Generating hashes...'
+	print(GR+' [+] Generating hashes...')
 	time.sleep(0.6)
 
 	md5 = hashlib.md5(message)
@@ -34,8 +35,8 @@ def hashes():
 	sha512 = hashlib.sha512(message)
 	sha512 = sha512.hexdigest()
 
-	print G+" [+] MD5 Hash : "+O, md5
-	print G+" [+] SHA1 Hash : "+O, sha1
-	print G+" [+] SHA256 Hash : "+O, sha256
-	print G+" [+] SHA512 Hash : "+O, sha512
+	print(G+" [+] MD5 Hash : "+O, md5)
+	print(G+" [+] SHA1 Hash : "+O, sha1)
+	print(G+" [+] SHA256 Hash : "+O, sha256)
+	print(G+" [+] SHA512 Hash : "+O, sha512)
 

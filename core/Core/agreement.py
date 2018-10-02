@@ -8,9 +8,10 @@
 #This module requires TIDoS Framework
 #https://github.com/theInfectedDrake/TIDoS-Framework 
 
+from __future__ import print_function
 def agreement():
 
-    print """
+    print("""
 \033[1;95m
 				==========================================
                                	   T I D O S   F R A M E W O R K   v1.6
@@ -26,4 +27,4 @@ def agreement():
 
 	P.S. - If you find any bugs with this tool, report it.
 
-"""
+""")

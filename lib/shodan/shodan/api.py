@@ -1,3 +1,4 @@
+from __future__ import print_function
 try:
     # Python 2
     from urllib2    import urlopen

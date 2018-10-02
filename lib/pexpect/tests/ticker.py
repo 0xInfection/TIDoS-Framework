@@ -18,11 +18,12 @@ PEXPECT LICENSE
     OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 '''
+from __future__ import print_function
 
 import time, sys
 
 for i in range(5):
-  print "tick"
+  print("tick")
   time.sleep(1)
 
 sys.exit(0)

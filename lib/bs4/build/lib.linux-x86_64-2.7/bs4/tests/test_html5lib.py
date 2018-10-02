@@ -5,7 +5,7 @@ import warnings
 try:
     from bs4.builder import HTML5TreeBuilder
     HTML5LIB_PRESENT = True
-except ImportError, e:
+except ImportError as e:
     HTML5LIB_PRESENT = False
 from bs4.element import SoupStrainer
 from bs4.testing import (

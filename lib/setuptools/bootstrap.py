@@ -6,6 +6,7 @@ egg-info command to flesh out the egg-info directory.
 """
 
 from __future__ import unicode_literals
+from __future__ import print_function
 
 import os
 import sys

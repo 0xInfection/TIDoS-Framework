@@ -9,6 +9,7 @@
 """
 DHCPv6: Dynamic Host Configuration Protocol for IPv6. [RFC 3315]
 """
+from __future__ import print_function
 
 import socket
 from scapy.packet import *
@@ -891,7 +892,7 @@ DHCP6PrefVal="" # la valeur de preference a utiliser dans
 class _DHCP6GuessPayload(Packet):
     def guess_payload_class(self, payload):
         if len(payload) > 1 :
-            print ord(payload[0])
+            print(ord(payload[0]))
             return get_cls(dhcp6opts.get(ord(payload[0]),"DHCP6OptUnknown"), conf.raw_layer)
         return conf.raw_layer
 
@@ -1263,7 +1264,7 @@ dhcp6d( dns="2001:500::1035", domain="localdomain, local", duid=None)
          See RFC 4280 for details.
 
    If you have a need for others, just ask ... or provide a patch."""
-        print msg
+        print(msg)
 
     def parse_options(self, dns="2001:500::1035", domain="localdomain, local",
                       startip="2001:db8::1", endip="2001:db8::20", duid=None,
@@ -1280,7 +1281,7 @@ dhcp6d( dns="2001:500::1035", domain="localdomain, local", duid=None)
                 l = val.split(',')
                 return map(lambda x: x.strip(), l)
             else:
-                print "Bad '%s' parameter provided." % param_name
+                print("Bad '%s' parameter provided." % param_name)
                 self.usage()
                 return -1
 
@@ -1313,11 +1314,11 @@ dhcp6d( dns="2001:500::1035", domain="localdomain, local", duid=None)
                 self.dhcpv6_options[o[2]] = o[3](opt)
 
         if self.debug:
-            print "\n[+] List of active DHCPv6 options:"
+            print("\n[+] List of active DHCPv6 options:")
             opts = self.dhcpv6_options.keys()
             opts.sort()
             for i in opts:
-                print "    %d: %s" % (i, repr(self.dhcpv6_options[i]))
+                print("    %d: %s" % (i, repr(self.dhcpv6_options[i])))
 
         # Preference value used in Advertise. 
         self.advpref = advpref
@@ -1349,7 +1350,7 @@ dhcp6d( dns="2001:500::1035", domain="localdomain, local", duid=None)
             self.duid = DUID_LLT(timeval = timeval, lladdr = mac)
             
         if self.debug:
-            print "\n[+] Our server DUID:" 
+            print("\n[+] Our server DUID:") 
             self.duid.show(label_lvl=" "*4)
 
         ####
@@ -1368,7 +1369,7 @@ dhcp6d( dns="2001:500::1035", domain="localdomain, local", duid=None)
         
 
         if self.debug:
-            print "\n[+] Starting DHCPv6 service on %s:" % self.iface 
+            print("\n[+] Starting DHCPv6 service on %s:" % self.iface) 
 
     def is_request(self, p):
         if not IPv6 in p:
@@ -1464,7 +1465,7 @@ dhcp6d( dns="2001:500::1035", domain="localdomain, local", duid=None)
                 msg = r + "[DEBUG]" + n + " Received " + g + "Decline" + n 
                 msg += " from " + bo + src + vendor + " for "
                 msg += ", ".join(addrs)+ n
-                print msg
+                print(msg)
 
             # See sect 18.1.7
 
@@ -1521,7 +1522,7 @@ dhcp6d( dns="2001:500::1035", domain="localdomain, local", duid=None)
         reqsrc  = bo + reqsrc + n
         reptype = g + norm(reply.getlayer(UDP).payload.name) + n
 
-        print "Sent %s answering to %s from %s%s" % (reptype, reqtype, reqsrc, vendor)
+        print("Sent %s answering to %s from %s%s" % (reptype, reqtype, reqsrc, vendor))
 
     def make_reply(self, req):
         req_mac_src = req.src

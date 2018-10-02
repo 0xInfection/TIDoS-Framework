@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+from __future__ import print_function
 import signal
 import os
 import time
@@ -7,11 +8,11 @@ import sys
 GLOBAL_SIGCHLD_RECEIVED = 0
 
 def signal_handler (signum, frame):
-    print '<HANDLER>'
+    print('<HANDLER>')
     global GLOBAL_SIGCHLD_RECEIVED
     status = os.waitpid (-1, os.WNOHANG)
-    print 'WIFEXITED(status):', os.WIFEXITED(status)
-    print 'WEXITSTATUS(status):', os.WEXITSTATUS(status) 
+    print('WIFEXITED(status):', os.WIFEXITED(status))
+    print('WEXITSTATUS(status):', os.WEXITSTATUS(status)) 
     GLOBAL_SIGCHLD_RECEIVED = 1
 
 def main ():
@@ -25,10 +26,10 @@ def main ():
 #	sig_test ('handler', 'osfork', 'no')
 
 def sig_test (sig_handler_type, fork_type, child_output):
-	print 'Testing with:'
-	print '\tsig_handler_type:', sig_handler_type
-	print '\tfork_type:', fork_type
-	print '\tchild_output:', child_output
+	print('Testing with:')
+	print('\tsig_handler_type:', sig_handler_type)
+	print('\tfork_type:', fork_type)
+	print('\tchild_output:', child_output)
 
 	if sig_handler_type == 'SIG_IGN':
 		signal.signal (signal.SIGCHLD, signal.SIG_IGN)
@@ -57,11 +58,11 @@ def sig_test (sig_handler_type, fork_type, child_output):
 		pass
 	try:
 		os.kill(pid, 0)
-		print '\tChild is alive. This is ambiguous because it may be a Zombie.'
+		print('\tChild is alive. This is ambiguous because it may be a Zombie.')
 	except OSError as e:
-		print '\tChild appears to be dead.'
+		print('\tChild appears to be dead.')
 #		print str(e)
-	print
+	print()
 
 if __name__ == '__main__':
 	main ()

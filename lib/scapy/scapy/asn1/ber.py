@@ -167,12 +167,12 @@ class BERcodec_Object:
             return cls.do_dec(s, context, safe)
         try:
             return cls.do_dec(s, context, safe)
-        except BER_BadTag_Decoding_Error,e:
+        except BER_BadTag_Decoding_Error as e:
             o,remain = BERcodec_Object.dec(e.remaining, context, safe)
             return ASN1_BADTAG(o),remain
-        except BER_Decoding_Error, e:
+        except BER_Decoding_Error as e:
             return ASN1_DECODING_ERROR(s, exc=e),""
-        except ASN1_Error, e:
+        except ASN1_Error as e:
             return ASN1_DECODING_ERROR(s, exc=e),""
 
     @classmethod
@@ -322,7 +322,7 @@ class BERcodec_SEQUENCE(BERcodec_Object):
         while s:
             try:
                 o,s = BERcodec_Object.dec(s, context, safe)
-            except BER_Decoding_Error, err:
+            except BER_Decoding_Error as err:
                 err.remaining += t
                 if err.decoded is not None:
                     obj.append(err.decoded)

@@ -6,6 +6,7 @@
 """
 Customizations needed to support Microsoft Windows.
 """
+from __future__ import print_function
 
 import os,re,sys,socket,time
 from glob import glob
@@ -202,13 +203,13 @@ class NetworkInterfaceDict(IterableUserDict):
     
     def show(self, resolve_mac=True):
         """Print list of available network interfaces in human readable form"""
-        print "%s  %s  %s" % ("IFACE".ljust(5), "IP".ljust(15), "MAC")
+        print("%s  %s  %s" % ("IFACE".ljust(5), "IP".ljust(15), "MAC"))
         for iface_name in sorted(self.data.keys()):
             dev = self.data[iface_name]
             mac = str(dev.mac)
             if resolve_mac:
                 mac = conf.manufdb._resolve_MAC(mac)
-            print "%s  %s  %s" % (str(dev.name).ljust(5), str(dev.ip).ljust(15), mac)     
+            print("%s  %s  %s" % (str(dev.name).ljust(5), str(dev.ip).ljust(15), mac))     
             
 ifaces = NetworkInterfaceDict()
 ifaces.load_from_dnet()
@@ -369,13 +370,13 @@ def sndrcv(pks, pkt, timeout = 2, inter = 0, verbose=None, chainCC=0, retry=0, m
                     try:
                         i = 0
                         if verbose:
-                            print "Begin emission:"
+                            print("Begin emission:")
                         for p in tobesent:
                             pks.send(p)
                             i += 1
                             time.sleep(inter)
                         if verbose:
-                            print "Finished to send %i packets." % i
+                            print("Finished to send %i packets." % i)
                     except SystemExit:
                         pass
                     except KeyboardInterrupt:
@@ -465,7 +466,7 @@ def sndrcv(pks, pkt, timeout = 2, inter = 0, verbose=None, chainCC=0, retry=0, m
                 del(s._answered)
     
     if verbose:
-        print "\nReceived %i packets, got %i answers, remaining %i packets" % (nbrecv+len(ans), len(ans), notans)
+        print("\nReceived %i packets, got %i answers, remaining %i packets" % (nbrecv+len(ans), len(ans), notans))
     return plist.SndRcvList(ans),plist.PacketList(remain,"Unanswered")
 
 
@@ -522,7 +523,7 @@ L2socket: use the provided L2socket
             if prn:
                 r = prn(p)
                 if r is not None:
-                    print r
+                    print(r)
             if count > 0 and c >= count:
                 break
         except KeyboardInterrupt:

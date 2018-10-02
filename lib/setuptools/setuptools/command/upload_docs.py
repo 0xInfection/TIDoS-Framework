@@ -4,6 +4,7 @@
 Implements a Distutils 'upload_docs' subcommand (upload documentation to
 PyPI's pythonhosted.org).
 """
+from __future__ import print_function
 
 from base64 import standard_b64encode
 from distutils import log
@@ -203,4 +204,4 @@ class upload_docs(upload):
             msg = 'Upload failed (%s): %s' % (r.status, r.reason)
             self.announce(msg, log.ERROR)
         if self.show_response:
-            print('-' * 75, r.read(), '-' * 75)
+            print(('-' * 75, r.read(), '-' * 75))

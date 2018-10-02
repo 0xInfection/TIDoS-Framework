@@ -9,6 +9,7 @@
 #This module requires TIDoS Framework
 #https://github.com/theInfectedDrake/TIDoS-Framework
 
+from __future__ import print_function
 import os
 import sys
 import requests
@@ -30,31 +31,31 @@ def getRes0x00(web):
 	if "://" in web:
 		web = web.split('://')[1]
 
-	print GR+' [*] Setting headers... (behaving as a browser)...'
+	print(GR+' [*] Setting headers... (behaving as a browser)...')
 	time.sleep(0.7)
 	headers =   {'User-Agent':'Mozilla/5.0 (Windows; U; Windows NT 6.1; rv:2.2) Gecko/20110201',
 		     'Accept-Language':'en-US;',
 		     'Accept-Encoding': 'gzip, deflate',
 		     'Accept': 'text/html,application/xhtml+xml,application/xml;',
 		     'Connection':'close'}
-	print GR+' [*] Setting parameters...'
+	print(GR+' [*] Setting parameters...')
 	url = "https://web.archive.org/cdx/search/cdx?url="+web+"&matchType=domain&limit="+limit+"&output=json&from="+fdate+"&to="+tdate
 	time.sleep(0.5)
 	try:
-		print O+' [!] Making the no-verify request...'
+		print(O+' [!] Making the no-verify request...')
 		req = requests.get(url, headers=headers, timeout=10, verify=False)
 		json_data = json.loads(req.text)
 		if len(json_data) == 0:
-			print R+' [-] No results found!'
+			print(R+' [-] No results found!')
 			error = 1
 	except Exception as e:
-		print R+' [-] Error loading Url...'
-		print R+' [-] Request got timed out!'
+		print(R+' [-] Error loading Url...')
+		print(R+' [-] Request got timed out!')
 		error = 1
 
 	if error == 0:
 		try:
-			print GR+' [*] Found the following backups at '+O+'web.archive.org...\n'
+			print(GR+' [*] Found the following backups at '+O+'web.archive.org...\n')
 			result = [ x for x in json_data if x[2] != 'original']
 			result.sort(key=lambda x: x[1])
 			for line in result:
@@ -62,20 +63,20 @@ def getRes0x00(web):
 				website   = line[2]
 				tlinks  = "https://web.archive.org/web/" + str(timestamp) + "/" + str(website)
 				sdates = str(timestamp[:4]) + "/" + str(timestamp[4:6]) + "/" + str(timestamp[6:8])
-				print " {}{}   {}{}  {}({})".format(C, sdates, B, website, O, tlinks)
+				print(" {}{}   {}{}  {}({})".format(C, sdates, B, website, O, tlinks))
 				time.sleep(0.04)
 
 		except Exception as e:
-			print R+' [-] Unhandled Exception Encountered!'
-			print R+' [-] Exception : '+str(e) 
+			print(R+' [-] Unhandled Exception Encountered!')
+			print(R+' [-] Exception : '+str(e)) 
 
 def webarchive(web):
 
-	print GR+' [*] Loading module...'
+	print(GR+' [*] Loading module...')
 	time.sleep(0.6)
-	print R+'\n    ============================================='
-	print R+'     W A Y B A C K   M A C H I N E   L O O K U P'
-	print R+'    =============================================\n'
+	print(R+'\n    =============================================')
+	print(R+'     W A Y B A C K   M A C H I N E   L O O K U P')
+	print(R+'    =============================================\n')
 	time.sleep(0.7)
 	getRes0x00(web)
 

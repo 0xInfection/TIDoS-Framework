@@ -119,7 +119,7 @@ def attach_filter(s, filter):
         return
     try:
         f = os.popen("%s -i %s -ddd -s 1600 '%s'" % (conf.prog.tcpdump,conf.iface,filter))
-    except OSError,msg:
+    except OSError as msg:
         log_interactive.warning("Failed to execute tcpdump: (%s)")
         return
     lines = f.readlines()
@@ -209,7 +209,7 @@ def in6_getifaddr():
     ret = []
     try:
         f = open("/proc/net/if_inet6","r")
-    except IOError, err:    
+    except IOError as err:    
         return ret
     l = f.readlines()
     for i in l:
@@ -223,7 +223,7 @@ def in6_getifaddr():
 def read_routes6():
     try:
         f = open("/proc/net/ipv6_route","r")
-    except IOError, err:
+    except IOError as err:
         return []
     # 1. destination network
     # 2. destination prefix length
@@ -395,7 +395,7 @@ class L3PacketSocket(SuperSocket):
             sx = str(ll(x))
             x.sent_time = time.time()
             self.outs.sendto(sx, sdto)
-        except socket.error,msg:
+        except socket.error as msg:
             x.sent_time = time.time()  # bad approximation
             if conf.auto_fragment and msg[0] == 90:
                 for p in x.fragment():

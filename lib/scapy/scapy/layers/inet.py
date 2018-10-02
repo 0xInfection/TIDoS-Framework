@@ -6,6 +6,7 @@
 """
 IPv4 (Internet Protocol v4).
 """
+from __future__ import print_function
 
 import os,time,struct,re,socket,new
 from select import select
@@ -358,7 +359,7 @@ class IP(Packet, IPTools):
         for p in self:
             try:
                 s.sendto(str(p), (p.dst,0))
-            except socket.error, msg:
+            except socket.error as msg:
                 log_runtime.error(msg)
             if slp:
                 time.sleep(slp)
@@ -1477,9 +1478,9 @@ def IPID_count(lst, funcID=lambda x:x[1].id, funcpres=lambda x:x[1].summary()):
     classes = [idlst[0]]+map(lambda x:x[1],filter(lambda (x,y): abs(x-y)>50, map(lambda x,y: (x,y),idlst[:-1], idlst[1:])))
     lst = map(lambda x:(funcID(x), funcpres(x)), lst)
     lst.sort()
-    print "Probably %i classes:" % len(classes), classes
+    print("Probably %i classes:" % len(classes), classes)
     for id,pr in lst:
-        print "%5i" % id, pr
+        print("%5i" % id, pr)
     
     
 def fragleak(target,sport=123, dport=123, timeout=0.2, onlyasc=0):
@@ -1508,7 +1509,7 @@ def fragleak(target,sport=123, dport=123, timeout=0.2, onlyasc=0):
                 if ans.payload.payload.dst != target:
                     continue
                 if ans.src  != target:
-                    print "leak from", ans.src,
+                    print("leak from", ans.src, end=' ')
 
 
 #                print repr(ans)

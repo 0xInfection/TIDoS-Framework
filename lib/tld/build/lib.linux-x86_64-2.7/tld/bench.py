@@ -1,3 +1,4 @@
+from __future__ import print_function
 from timeit import default_timer as timer
 from faker import Faker
 from tld import get_tld
@@ -15,4 +16,4 @@ for _ in range(TIMES):
     for url in URLS:
         tld = get_tld(url)
 
-print('get_tld:', timer() - start)
+print(('get_tld:', timer() - start))

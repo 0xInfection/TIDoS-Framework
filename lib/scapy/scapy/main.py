@@ -8,6 +8,7 @@ Main module for interactive startup.
 """
 
 from __future__ import generators
+from __future__ import print_function
 import os,sys
 import glob
 import __builtin__
@@ -28,9 +29,9 @@ def _read_config_file(cf):
     log_loading.debug("Loading config file [%s]" % cf)
     try:
         execfile(cf)
-    except IOError,e:
+    except IOError as e:
         log_loading.warning("Cannot read config file [%s] [%s]" % (cf,e))
-    except Exception,e:
+    except Exception as e:
         log_loading.exception("Error during evaluation of config file [%s]" % cf)
         
 
@@ -38,9 +39,9 @@ DEFAULT_PRESTART_FILE = _probe_config_file(".scapy_prestart.py")
 DEFAULT_STARTUP_FILE = _probe_config_file(".scapy_startup.py")
 
 def _usage():
-    print """Usage: scapy.py [-s sessionfile] [-c new_startup_file] [-p new_prestart_file] [-C] [-P]
+    print("""Usage: scapy.py [-s sessionfile] [-c new_startup_file] [-p new_prestart_file] [-C] [-P]
     -C: do not read startup file
-    -P: do not read pre-startup file"""
+    -P: do not read pre-startup file""")
     sys.exit(0)
 
 
@@ -57,7 +58,7 @@ def _load(module):
     try:
         mod = __import__(module,globals(),locals(),".")
         __builtin__.__dict__.update(mod.__dict__)
-    except Exception,e:
+    except Exception as e:
         log_interactive.error(e)
         
 def load_module(name):
@@ -90,7 +91,7 @@ def list_contrib(name=None):
                 key = l[p:q].strip()
                 value = l[q+1:].strip()
                 desc[key] = value
-        print "%(name)-20s: %(description)-40s status=%(status)s" % desc
+        print("%(name)-20s: %(description)-40s status=%(status)s" % desc)
 
                         
 
@@ -166,7 +167,7 @@ def scapy_write_history_file(readline):
     if conf.histfile:
         try:
             readline.write_history_file(conf.histfile)
-        except IOError,e:
+        except IOError as e:
             try:
                 warning("Could not write history to [%s]\n\t (%s)" % (conf.histfile,e))
                 tmp = utils.get_temp_file(keep=True)
@@ -268,7 +269,7 @@ def interact(mydict=None,argv=None,mybanner=None,loglevel=20):
             raise getopt.GetoptError("Too many parameters : [%s]" % " ".join(opts[1]))
 
 
-    except getopt.GetoptError, msg:
+    except getopt.GetoptError as msg:
         log_loading.error(msg)
         sys.exit(1)
 
@@ -335,7 +336,7 @@ def interact(mydict=None,argv=None,mybanner=None,loglevel=20):
         try:
             import IPython
             IPYTHON=True
-        except ImportError, e:
+        except ImportError as e:
             log_loading.warning("IPython not available. Using standard Python shell instead.")
             IPYTHON=False
         
@@ -347,7 +348,7 @@ def interact(mydict=None,argv=None,mybanner=None,loglevel=20):
           args = ['']  # IPython command line args (will be seen as sys.argv)
           ipshell = IPython.Shell.IPShellEmbed(args, banner = banner)
           ipshell(local_ns=session)
-        except AttributeError, e:
+        except AttributeError as e:
           pass
 
         # In the IPython cookbook, see 'Updating-code-for-use-with-IPython-0.11-and-later'

@@ -6,6 +6,7 @@
 
 # thanks Moof (aka Giles Antonio Radford) for some of these
 
+from __future__ import print_function
 import copy
 import errno
 import os

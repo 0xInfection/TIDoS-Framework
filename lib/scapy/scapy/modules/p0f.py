@@ -6,6 +6,7 @@
 """
 Clone of p0f passive OS fingerprinting
 """
+from __future__ import print_function
 
 from scapy.data import KnowledgeBase
 from scapy.config import conf
@@ -304,7 +305,7 @@ def prnp0f(pkt):
         res += pkt.sprintf("\n  -> %IP.dst%:%TCP.dport% (%TCP.flags%)")
     if r[2] is not None:
         res += " (distance " + str(r[2]) + ")"
-    print res
+    print(res)
 
 @conf.commands.register
 def pkt2uptime(pkt, HZ=100):

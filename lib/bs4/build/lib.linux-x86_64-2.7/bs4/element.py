@@ -1,3 +1,4 @@
+from __future__ import print_function
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
 __license__ = "MIT"
@@ -1354,7 +1355,7 @@ class Tag(PageElement):
                 'Final combinator "%s" is missing an argument.' % tokens[-1])
 
         if self._select_debug:
-            print 'Running CSS selector "%s"' % selector
+            print('Running CSS selector "%s"' % selector)
 
         for index, token in enumerate(tokens):
             new_context = []
@@ -1363,11 +1364,11 @@ class Tag(PageElement):
             if tokens[index-1] in self._selector_combinators:
                 # This token was consumed by the previous combinator. Skip it.
                 if self._select_debug:
-                    print '  Token was consumed by the previous combinator.'
+                    print('  Token was consumed by the previous combinator.')
                 continue
 
             if self._select_debug:
-                print ' Considering token "%s"' % token
+                print(' Considering token "%s"' % token)
             recursive_candidate_generator = None
             tag_name = None
 
@@ -1474,14 +1475,14 @@ class Tag(PageElement):
                 next_token = tokens[index+1]
                 def recursive_select(tag):
                     if self._select_debug:
-                        print '    Calling select("%s") recursively on %s %s' % (next_token, tag.name, tag.attrs)
-                        print '-' * 40
+                        print('    Calling select("%s") recursively on %s %s' % (next_token, tag.name, tag.attrs))
+                        print('-' * 40)
                     for i in tag.select(next_token, recursive_candidate_generator):
                         if self._select_debug:
-                            print '(Recursive select picked up candidate %s %s)' % (i.name, i.attrs)
+                            print('(Recursive select picked up candidate %s %s)' % (i.name, i.attrs))
                         yield i
                     if self._select_debug:
-                        print '-' * 40
+                        print('-' * 40)
                 _use_candidate_generator = recursive_select
             elif _candidate_generator is None:
                 # By default, a tag's candidates are all of its
@@ -1492,7 +1493,7 @@ class Tag(PageElement):
                         check = "[any]"
                     else:
                         check = tag_name
-                    print '   Default candidate generator, tag name="%s"' % check
+                    print('   Default candidate generator, tag name="%s"' % check)
                 if self._select_debug:
                     # This is redundant with later code, but it stops
                     # a bunch of bogus tags from cluttering up the
@@ -1513,8 +1514,8 @@ class Tag(PageElement):
             count = 0
             for tag in current_context:
                 if self._select_debug:
-                    print "    Running candidate generator on %s %s" % (
-                        tag.name, repr(tag.attrs))
+                    print("    Running candidate generator on %s %s" % (
+                        tag.name, repr(tag.attrs)))
                 for candidate in _use_candidate_generator(tag):
                     if not isinstance(candidate, Tag):
                         continue
@@ -1529,23 +1530,23 @@ class Tag(PageElement):
                             break
                     if checker is None or result:
                         if self._select_debug:
-                            print "     SUCCESS %s %s" % (candidate.name, repr(candidate.attrs))
+                            print("     SUCCESS %s %s" % (candidate.name, repr(candidate.attrs)))
                         if id(candidate) not in new_context_ids:
                             # If a tag matches a selector more than once,
                             # don't include it in the context more than once.
                             new_context.append(candidate)
                             new_context_ids.add(id(candidate))
                     elif self._select_debug:
-                        print "     FAILURE %s %s" % (candidate.name, repr(candidate.attrs))
+                        print("     FAILURE %s %s" % (candidate.name, repr(candidate.attrs)))
 
             current_context = new_context
         if limit and len(current_context) >= limit:
             current_context = current_context[:limit]
 
         if self._select_debug:
-            print "Final verdict:"
+            print("Final verdict:")
             for i in current_context:
-                print " %s %s" % (i.name, i.attrs)
+                print(" %s %s" % (i.name, i.attrs))
         return current_context
 
     # Old names for backwards compatibility

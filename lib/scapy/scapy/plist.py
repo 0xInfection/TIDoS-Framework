@@ -6,6 +6,7 @@
 """
 PacketList: holds several packets and allows to do operations on them.
 """
+from __future__ import print_function
 
 
 import os,subprocess
@@ -98,9 +99,9 @@ lfilter: truth function to apply to each packet to decide whether it will be dis
                 if not lfilter(r):
                     continue
             if prn is None:
-                print self._elt2sum(r)
+                print(self._elt2sum(r))
             else:
-                print prn(r)
+                print(prn(r))
     def nsummary(self,prn=None, lfilter=None):
         """prints a summary of each packet with the packet's number
 prn:     function to apply to each packet instead of lambda x:x.summary()
@@ -109,11 +110,11 @@ lfilter: truth function to apply to each packet to decide whether it will be dis
             if lfilter is not None:
                 if not lfilter(self.res[i]):
                     continue
-            print conf.color_theme.id(i,fmt="%04i"),
+            print(conf.color_theme.id(i,fmt="%04i"), end=' ')
             if prn is None:
-                print self._elt2sum(self.res[i])
+                print(self._elt2sum(self.res[i]))
             else:
-                print prn(self.res[i])
+                print(prn(self.res[i]))
     def display(self): # Deprecated. Use show()
         """deprecated. is show()"""
         self.show()
@@ -192,9 +193,9 @@ lfilter: truth function to apply to each packet to decide whether it will be dis
             p = self._elt2pkt(self.res[i])
             if lfilter is not None and not lfilter(p):
                 continue
-            print "%s %s %s" % (conf.color_theme.id(i,fmt="%04i"),
+            print("%s %s %s" % (conf.color_theme.id(i,fmt="%04i"),
                                 p.sprintf("%.time%"),
-                                self._elt2sum(self.res[i]))
+                                self._elt2sum(self.res[i])))
             if p.haslayer(conf.raw_layer):
                 hexdump(p.getlayer(conf.raw_layer).load)
 
@@ -205,9 +206,9 @@ lfilter: truth function to apply to each packet to decide whether it will be dis
             p = self._elt2pkt(self.res[i])
             if lfilter is not None and not lfilter(p):
                 continue
-            print "%s %s %s" % (conf.color_theme.id(i,fmt="%04i"),
+            print("%s %s %s" % (conf.color_theme.id(i,fmt="%04i"),
                                 p.sprintf("%.time%"),
-                                self._elt2sum(self.res[i]))
+                                self._elt2sum(self.res[i])))
             hexdump(p)
 
     def padding(self, lfilter=None):
@@ -216,9 +217,9 @@ lfilter: truth function to apply to each packet to decide whether it will be dis
             p = self._elt2pkt(self.res[i])
             if p.haslayer(conf.padding_layer):
                 if lfilter is None or lfilter(p):
-                    print "%s %s %s" % (conf.color_theme.id(i,fmt="%04i"),
+                    print("%s %s %s" % (conf.color_theme.id(i,fmt="%04i"),
                                         p.sprintf("%.time%"),
-                                        self._elt2sum(self.res[i]))
+                                        self._elt2sum(self.res[i])))
                     hexdump(p.getlayer(conf.padding_layer).load)
 
     def nzpadding(self, lfilter=None):
@@ -230,9 +231,9 @@ lfilter: truth function to apply to each packet to decide whether it will be dis
                 if pad == pad[0]*len(pad):
                     continue
                 if lfilter is None or lfilter(p):
-                    print "%s %s %s" % (conf.color_theme.id(i,fmt="%04i"),
+                    print("%s %s %s" % (conf.color_theme.id(i,fmt="%04i"),
                                         p.sprintf("%.time%"),
-                                        self._elt2sum(self.res[i]))
+                                        self._elt2sum(self.res[i])))
                     hexdump(p.getlayer(conf.padding_layer).load)
         
 
@@ -370,7 +371,7 @@ lfilter: truth function to apply to each packet to decide whether it will be dis
             subprocess.Popen([conf.prog.psreader, filename+".ps"])
         else:
             d.writePSfile(filename)
-        print
+        print()
         
     def pdfdump(self, filename = None, **kargs):
         """Creates a PDF file with a psdump of every packet
@@ -383,7 +384,7 @@ lfilter: truth function to apply to each packet to decide whether it will be dis
             subprocess.Popen([conf.prog.pdfreader, filename+".pdf"])
         else:
             d.writePDFfile(filename)
-        print
+        print()
 
     def sr(self,multi=0):
         """sr([multi=1]) -> (SndRcvList, PacketList)

@@ -9,6 +9,7 @@
 #This module requires TIDoS Framework
 #https://github.com/theInfectedDrake/TIDoS-Framework
 
+from __future__ import print_function
 import os
 import sys
 import requests
@@ -28,14 +29,14 @@ def getRes0x00():
 	else:
 		email = raw_input(O+' [#] Enter a valid email :> '+R)
 
-	print GR+' [*] Setting headers... (behaving as a browser)...'
+	print(GR+' [*] Setting headers... (behaving as a browser)...')
 	time.sleep(0.7)
 	headers =   {'User-Agent':'Mozilla/5.0 (Windows; U; Windows NT 6.1; rv:2.2) Gecko/20110201',
 		     'Accept-Language':'en-US;',
 		     'Accept-Encoding': 'gzip, deflate',
 		     'Accept': 'text/html,application/xhtml+xml,application/xml;',
 		     'Connection':'close'}
-	print O+' [!] Making the no-verify request...'
+	print(O+' [!] Making the no-verify request...')
 	time.sleep(0.5)
 	url = 'https://hacked-emails.com/api?q='+str(email)
 
@@ -45,28 +46,28 @@ def getRes0x00():
                 if content != "":
                     content = json.loads(content)
                     if content['status'] == "found":
-                        print "Result found ("+G+str(content['results']) + " results" + Style.RESET_ALL + ")"
+                        print("Result found ("+G+str(content['results']) + " results" + Style.RESET_ALL + ")")
                         for line in content['data']:
                             try:
-                                print G+" [+] "+O+email+G+" found in : " +C+ str(line['title']) +R+" (" + str(line['date_leaked'])+')'
+                                print(G+" [+] "+O+email+G+" found in : " +C+ str(line['title']) +R+" (" + str(line['date_leaked'])+')')
                             except:
-                                print R+" [-] Can't parse the leak titles via APi..."
+                                print(R+" [-] Can't parse the leak titles via APi...")
                     else:
-                        print R+' [-] Email '+O+email+R+' not found in any breaches!'
+                        print(R+' [-] Email '+O+email+R+' not found in any breaches!')
                 else:
-                    print R+' [-] Error found in Json Request...'
+                    print(R+' [-] Error found in Json Request...')
 
 	except Exception:
-		print R+" [-] Can't reach url..."
-		print R+' [-] Request timed out!'
+		print(R+" [-] Can't reach url...")
+		print(R+' [-] Request timed out!')
 
 def hackedmail():
 
-	print GR+' [*] Loading module...'
+	print(GR+' [*] Loading module...')
 	time.sleep(0.6)
-	print R+'\n    ========================='
-	print R+'     H A C K E D   E M A I L '
-	print R+'    =========================\n'
+	print(R+'\n    =========================')
+	print(R+'     H A C K E D   E M A I L ')
+	print(R+'    =========================\n')
 	time.sleep(0.7)
 	getRes0x00()
 

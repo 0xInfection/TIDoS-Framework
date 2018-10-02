@@ -9,6 +9,7 @@
 #This module requires TIDoS Framework
 #https://github.com/theInfectedDrake/TIDoS-Framework 
 
+from __future__ import print_function
 import time
 import sys, platform
 import os
@@ -24,19 +25,19 @@ def googleSearch():
 
     try:
 	time.sleep(0.4)
-	print R+'\n   ==========================='
-	print R+'    G O O G L E   S E A R C H'
-	print R+'   ===========================\n'
+	print(R+'\n   ===========================')
+	print(R+'    G O O G L E   S E A R C H')
+	print(R+'   ===========================\n')
 	lol = raw_input(O+ " [#] QUERY :> " + color.END)
 	time.sleep(0.8)
 	m = raw_input(O+' [#] Search limit (not recommended above 30) :> ') 
-	print G+ " [!] Below are the list of websites with info on '" +lol+ "'"
+	print(G+ " [!] Below are the list of websites with info on '" +lol+ "'")
 	x = search(lol, tld='com', lang='es', stop=int(m))
 	for url in x:
-		print O+"   [!] Site Found :> "+W + url
+		print(O+"   [!] Site Found :> "+W + url)
 		q = open('.google-cookie','w')
 		q.close()
     except urllib2.HTTPError:
-	print R+' [-] You have used google many times.'
-	print R+' [-] Service temporarily unavailable.'
+	print(R+' [-] You have used google many times.')
+	print(R+' [-] Service temporarily unavailable.')
 

@@ -6,6 +6,7 @@
 """
 Packet class. Binding mechanism. fuzz() method.
 """
+from __future__ import print_function
 
 import time,itertools,os
 import copy
@@ -57,12 +58,12 @@ class Packet(BasePacket):
     @classmethod
     def upper_bonds(self):
         for fval,upper in self.payload_guess:
-            print "%-20s  %s" % (upper.__name__, ", ".join("%-12s" % ("%s=%r"%i) for i in fval.iteritems()))
+            print("%-20s  %s" % (upper.__name__, ", ".join("%-12s" % ("%s=%r"%i) for i in fval.iteritems())))
 
     @classmethod
     def lower_bonds(self):
         for lower,fval in self.overload_fields.iteritems():
-            print "%-20s  %s" % (lower.__name__, ", ".join("%-12s" % ("%s=%r"%i) for i in fval.iteritems()))
+            print("%-20s  %s" % (lower.__name__, ", ".join("%-12s" % ("%s=%r"%i) for i in fval.iteritems())))
 
     def __init__(self, _pkt="", post_transform=None, _internal=0, _underlayer=None, **fields):
         self.time  = time.time()
@@ -812,10 +813,10 @@ Creates an EPS file describing a packet. If filename is not provided a temporary
     def show(self, indent=3, lvl="", label_lvl=""):
         """Prints a hierarchical view of the packet. "indent" gives the size of indentation for each layer."""
         ct = conf.color_theme
-        print "%s%s %s %s" % (label_lvl,
+        print("%s%s %s %s" % (label_lvl,
                               ct.punct("###["),
                               ct.layer_name(self.name),
-                              ct.punct("]###"))
+                              ct.punct("]###")))
         for f in self.fields_desc:
             if isinstance(f, ConditionalField) and not f._evalcond(self):
                 continue
@@ -827,7 +828,7 @@ Creates an EPS file describing a packet. If filename is not provided a temporary
                 vcol = ct.field_value
             fvalue = self.getfieldval(f.name)
             if isinstance(fvalue, Packet) or (f.islist and f.holds_packets and type(fvalue) is list):
-                print "%s  \\%-10s\\" % (label_lvl+lvl, ncol(f.name))
+                print("%s  \\%-10s\\" % (label_lvl+lvl, ncol(f.name)))
                 fvalue_gen = SetGen(fvalue,_iterpacket=0)
                 for fvalue in fvalue_gen:
                     fvalue.show(indent=indent, label_lvl=label_lvl+lvl+"   |")
@@ -841,7 +842,7 @@ Creates an EPS file describing a packet. If filename is not provided a temporary
                                                               +len(lvl)
                                                               +len(f.name)
                                                               +4))
-                print "%s%s" % (begn,vcol(reprval))
+                print("%s%s" % (begn,vcol(reprval)))
         self.payload.show(indent=indent, lvl=lvl+(" "*indent*self.show_indent), label_lvl=label_lvl)
     def show2(self):
         """Prints a hierarchical view of an assembled version of the packet, so that automatic fields are calculated (checksums, etc.)"""
@@ -1003,7 +1004,7 @@ A side effect is that, to obtain "{" and "}" characters, you must use
 
     def libnet(self):
         """Not ready yet. Should give the necessary C code that interfaces with libnet to recreate the packet"""
-        print "libnet_build_%s(" % self.__class__.name.lower()
+        print("libnet_build_%s(" % self.__class__.name.lower())
         det = self.__class__(str(self))
         for f in self.fields_desc:
             val = det.getfieldval(f.name)
@@ -1013,8 +1014,8 @@ A side effect is that, to obtain "{" and "}" characters, you must use
                 val = str(val)
             else:
                 val = '"%s"' % str(val)
-            print "\t%s, \t\t/* %s */" % (val,f.name)
-        print ");"
+            print("\t%s, \t\t/* %s */" % (val,f.name))
+        print(");")
     def command(self):
         """Returns a string representing the command you have to type to obtain the same packet"""
         f = []
@@ -1084,7 +1085,7 @@ class NoPayload(Packet):
         elif attr in self.__class__.__dict__:
             return self.__class__.__dict__[attr]
         else:
-            raise AttributeError, attr
+            raise AttributeError(attr)
     def hide_defaults(self):
         pass
     def __iter__(self):
@@ -1223,21 +1224,21 @@ def ls(obj=None):
         all.update(globals())
         objlst = sorted(conf.layers, key=lambda x:x.__name__)
         for o in objlst:
-            print "%-10s : %s" %(o.__name__,o.name)
+            print("%-10s : %s" %(o.__name__,o.name))
     else:
         if isinstance(obj, type) and issubclass(obj, Packet):
             for f in obj.fields_desc:
-                print "%-10s : %-20s = (%s)" % (f.name, f.__class__.__name__,  repr(f.default))
+                print("%-10s : %-20s = (%s)" % (f.name, f.__class__.__name__,  repr(f.default)))
         elif isinstance(obj, Packet):
             for f in obj.fields_desc:
-                print "%-10s : %-20s = %-15s (%s)" % (f.name, f.__class__.__name__, repr(getattr(obj,f.name)), repr(f.default))
+                print("%-10s : %-20s = %-15s (%s)" % (f.name, f.__class__.__name__, repr(getattr(obj,f.name)), repr(f.default)))
             if not isinstance(obj.payload, NoPayload):
-                print "--"
+                print("--")
                 ls(obj.payload)
                 
 
         else:
-            print "Not a packet class. Type 'ls()' to list packet classes."
+            print("Not a packet class. Type 'ls()' to list packet classes.")
 
 
     
@@ -1255,7 +1256,7 @@ def fuzz(p, _inplace=0):
         for f in q.fields_desc:
             if isinstance(f, PacketListField):
                 for r in getattr(q, f.name):
-                    print "fuzzing", repr(r)
+                    print("fuzzing", repr(r))
                     fuzz(r, _inplace=1)
             elif f.default is not None:
                 rnd = f.randval()
@@ -1263,6 +1264,3 @@ def fuzz(p, _inplace=0):
                     q.default_fields[f.name] = rnd
         q = q.payload
     return p
-
-
-

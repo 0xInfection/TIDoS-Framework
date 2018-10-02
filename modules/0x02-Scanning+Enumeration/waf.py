@@ -9,6 +9,7 @@
 #This module requires TIDoS Framework
 #https://github.com/the-Infected-Drake/TIDoS-Framework
 
+from __future__ import print_function
 import os
 import re
 import sys
@@ -27,7 +28,7 @@ wafs = ['Airlock','Anquanboa','Armor','Asm','AWS','Baidu','Barracuda','BetterWPS
 
 def getReq0x00(web):
 	
-	print O+' [!] Making the request...'
+	print(O+' [!] Making the request...')
 	req = requests.get(web)
 	sleep(0.7)
 	return req.headers,req.content
@@ -95,36 +96,36 @@ def detectWaf0x00(headers,content):
 def waf(web):
 
 	check = 0x00
-	print GR+' [*] Loading module...'
+	print(GR+' [*] Loading module...')
 	time.sleep(0.7)
-	print R+'\n    ==============================='
-	print R+'     W A F   E N U M E R A T I O N '
-	print R+'    ===============================\n'
+	print(R+'\n    ===============================')
+	print(R+'     W A F   E N U M E R A T I O N ')
+	print(R+'    ===============================\n')
 	time.sleep(0.7)
-	print GR+' [*] Testing the firewall/loadbalancer...'
+	print(GR+' [*] Testing the firewall/loadbalancer...')
 	time.sleep(1)
 	head, con = getReq0x00(web)
 	waftypes = detectWaf0x00(head, con)
 	for i in xrange(0,len(waftypes)):
 		try:
 			if waftypes[i] != None and waftypes[i] != '':
-				print GR+'\n [*] Response seems to be matching a WAF signature...'
+				print(GR+'\n [*] Response seems to be matching a WAF signature...')
 				time.sleep(0.6)
-				print O+' [+] The website seems to be behind a WAF...'
+				print(O+' [+] The website seems to be behind a WAF...')
 				time.sleep(0.6)
-				print B+' [+] Firewall Detected : ' +C+waftypes[i]
+				print(B+' [+] Firewall Detected : ' +C+waftypes[i])
 				check = 0x01
 				break
 
 			else:
-				print B+'\r [+] Matching signatures for : '+C+wafs[i]
+				print(B+'\r [+] Matching signatures for : '+C+wafs[i])
 				time.sleep(0.1)
 
 		except Exception as e:
 			pass
 
 	if check == 0x00:
-		print R+' [-] Generic detection failed to fingerprint WAF...'
+		print(R+' [-] Generic detection failed to fingerprint WAF...')
 
-	print G+'\n [+] WAF Fingerprinting module completed!\n'
+	print(G+'\n [+] WAF Fingerprinting module completed!\n')
 

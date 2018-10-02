@@ -1,3 +1,4 @@
+from __future__ import print_function
 #/usr/bin/env python
 
 # Port of Hack 21 from the O'Reilly book "Spidering Hacks" by Tara
@@ -44,7 +45,7 @@ except HTTPError as e:
 # Get all the tarballs
 urls = [link.absolute_url for link in
         mech.links(url_regex=re.compile(r"\.tar\.gz$"))]
-print "Found", len(urls), "tarballs to download"
+print("Found", len(urls), "tarballs to download")
 
 if "--all" not in sys.argv[1:]:
     urls = urls[:1]
@@ -52,7 +53,7 @@ if "--all" not in sys.argv[1:]:
 for url in urls:
     filename = os.path.basename(url)
     f = open(filename, "wb")
-    print "%s -->" % filename,
+    print("%s -->" % filename, end=' ')
     r = mech.open(url)
     while 1:
         data = r.read(1024)
@@ -60,4 +61,4 @@ for url in urls:
             break
         f.write(data)
     f.close()
-    print os.stat(filename).st_size, "bytes"
+    print(os.stat(filename).st_size, "bytes")

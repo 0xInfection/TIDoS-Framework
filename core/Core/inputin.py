@@ -8,6 +8,7 @@
 #This module requires TIDoS Framework
 #https://github.com/theInfectedDrake/TIDoS-Framework 
 
+from __future__ import print_function
 import sys
 import socket
 import time
@@ -32,26 +33,26 @@ def inputin():
 		if str(web).endswith('/'):
 			web = po[:-1]
 			po = po[:-1]
-		print GR+' [*] Checking server status...'
+		print(GR+' [*] Checking server status...')
 		time.sleep(0.6)
 
 		try:
 			ip = socket.gethostbyname(po)
-			print G+' [+] Site seems to be up...'
+			print(G+' [+] Site seems to be up...')
 			time.sleep(0.5)
-			print G+' [+] IP Detected : '+O+ip
+			print(G+' [+] IP Detected : '+O+ip)
 			time.sleep(0.5)
-			print ''
+			print('')
 			os.system('cd tmp/logs/ && rm -rf '+po+'-logs && mkdir '+po+'-logs/')
 			return web
 
 		except socket.gaierror:
-			print R+' [-] Site seems to be down...'
+			print(R+' [-] Site seems to be down...')
 			sys.exit(1)
 
 	except KeyboardInterrupt:
-		print R+' [-] Exiting...'
+		print(R+' [-] Exiting...')
 		time.sleep(0.7)
-		print C+' [#] Alvida, my friend!'
+		print(C+' [#] Alvida, my friend!')
 		sys.exit(1)
 	

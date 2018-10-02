@@ -6,6 +6,7 @@
 """
 Cryptographic certificates.
 """
+from __future__ import print_function
 
 import os, sys, math, socket, struct, hmac, string, time, random, tempfile
 from subprocess import Popen, PIPE
@@ -37,7 +38,7 @@ def popen3(cmd):
     return p.stdout, p.stdin, p.stderr
 
 def warning(m):
-    print "WARNING: %s" % m
+    print("WARNING: %s" % m)
 
 def randstring(l):
     """
@@ -1853,8 +1854,8 @@ class Cert(OSSLHelper, _EncryptAndVerify):
                     self.keyUsage.append(ku_mapping[c])
                 else:
                     self.keyUsage.append(c) # Add it anyway
-                    print "Found unknown X509v3 Key Usage: '%s'" % c
-                    print "Report it to arno (at) natisbad.org for addition"
+                    print("Found unknown X509v3 Key Usage: '%s'" % c)
+                    print("Report it to arno (at) natisbad.org for addition")
 
         # X509v3 Extended Key Usage
         self.extKeyUsage = []
@@ -1883,8 +1884,8 @@ class Cert(OSSLHelper, _EncryptAndVerify):
                     self.extKeyUsage.append(eku_mapping[c])
                 else:
                     self.extKeyUsage.append(c) # Add it anyway
-                    print "Found unknown X509v3 Extended Key Usage: '%s'" % c
-                    print "Report it to arno (at) natisbad.org for addition"
+                    print("Found unknown X509v3 Extended Key Usage: '%s'" % c)
+                    print("Report it to arno (at) natisbad.org for addition")
 
         # CRL Distribution points
         self.cRLDistributionPoints = []
@@ -2064,11 +2065,11 @@ class Cert(OSSLHelper, _EncryptAndVerify):
 
     # Print main informations stored in certificate
     def show(self):
-        print "Serial: %s" % self.serial
-        print "Issuer: " + self.issuer
-        print "Subject: " + self.subject
-        print "Validity: %s to %s" % (self.notBefore_str_simple,
-                                      self.notAfter_str_simple)
+        print("Serial: %s" % self.serial)
+        print("Issuer: " + self.issuer)
+        print("Subject: " + self.subject)
+        print("Validity: %s to %s" % (self.notBefore_str_simple,
+                                      self.notAfter_str_simple))
 
     def __repr__(self):
         return "[X.509 Cert. Subject:%s, Issuer:%s]" % (self.subject, self.issuer)
@@ -2190,7 +2191,7 @@ def print_chain(l):
             s += "\n"
         i += 2
         llen -= 1
-    print s
+    print(s)
 
 # import popen2
 # a=popen3("openssl crl -text -inform DER -noout ", capturestderr=True)
@@ -2459,11 +2460,11 @@ class CRL(OSSLHelper):
         
     # Print main informations stored in CRL
     def show(self):
-        print "Version: %d" % self.version
-        print "sigAlg: " + self.sigAlg
-        print "Issuer: " + self.issuer
-        print "lastUpdate: %s" % self.lastUpdate_str_simple
-        print "nextUpdate: %s" % self.nextUpdate_str_simple
+        print("Version: %d" % self.version)
+        print("sigAlg: " + self.sigAlg)
+        print("Issuer: " + self.issuer)
+        print("lastUpdate: %s" % self.lastUpdate_str_simple)
+        print("nextUpdate: %s" % self.nextUpdate_str_simple)
 
     def verify(self, anchors):
         """

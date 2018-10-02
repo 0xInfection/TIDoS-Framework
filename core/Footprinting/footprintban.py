@@ -8,6 +8,7 @@
 #This module requires TIDoS Framework
 #https://github.com/theInfectedDrake/TIDoS-Framework 
 
+from __future__ import print_function
 import os, time
 from colors import *
 
@@ -15,8 +16,8 @@ def footprintban():
 
     time.sleep(0.5)
     os.system('clear')
-    print G+' [!] Module Loaded : Reconnaissance\n'
-    print """
+    print(G+' [!] Module Loaded : Reconnaissance\n')
+    print("""
 \033[1;36m
 
 \033[1;37m                .                                            .
@@ -49,4 +50,4 @@ Choose from the following options:
 \033[1;34m [3] \033[1;36mInformation Disclosure \033[1;0m(Errors, Emails, etc)
 
 \033[1;34m [99] \033[1;36mBack
-"""
+""")

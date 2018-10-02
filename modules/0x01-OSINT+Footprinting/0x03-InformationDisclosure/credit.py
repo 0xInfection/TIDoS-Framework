@@ -9,6 +9,7 @@
 #This module requires TIDoS Framework
 #https://github.com/theInfectedDrake/TIDoS-Framework 
 
+from __future__ import print_function
 import re
 import sys
 sys.path.append('files/')
@@ -18,14 +19,14 @@ from colors import *
 
 def credit0x00(url):
 
-    print R+'\n     ========================'
-    print R+'      CREDIT CARD DISCLOSURE'
-    print R+'     ========================\n'
+    print(R+'\n     ========================')
+    print(R+'      CREDIT CARD DISCLOSURE')
+    print(R+'     ========================\n')
 
-    print O+' [*] Making the request...'
+    print(O+' [*] Making the request...')
     req = requests.get(url, verify=False)
     req_read = str(req).split()
-    print GR+' [*] Reading response...'
+    print(GR+' [*] Reading response...')
     time.sleep(1)
     append_name = str("".join(req_read))
     AMEX = re.match(r"^3[47][0-9]{13}$", append_name)
@@ -36,68 +37,68 @@ def credit0x00(url):
     VISA_MASTERCARD = re.match(r'^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14})$', append_name)
 
     try:
-	print GR+' [*] Trying to find out existing American Express Cards...'
+	print(GR+' [*] Trying to find out existing American Express Cards...')
 	time.sleep(1)
         if EXPRESS.group():
-            print G+" [+] Website has American Express Cards!"
-            print O+' [!] Card : ' + GR+EXPRESS.group()
+            print(G+" [+] Website has American Express Cards!")
+            print(O+' [!] Card : ' + GR+EXPRESS.group())
 
     except:
-        print R+" [-] No American Express Cards found!"
+        print(R+" [-] No American Express Cards found!")
 
     try:
-	print GR+' [*] Trying to find out existing Visa-Master Cards...'
+	print(GR+' [*] Trying to find out existing Visa-Master Cards...')
 	time.sleep(1)
         if VISA_MASTERCARD.group():
-            print G+" [+] Website has a Visa-Master Card!"
-            print O+' [!] Card : ' + GR+VISA_MASTERCARD.group()
+            print(G+" [+] Website has a Visa-Master Card!")
+            print(O+' [!] Card : ' + GR+VISA_MASTERCARD.group())
 
     except:
-        print R+" [-] No Visa-MasterCard found!"
+        print(R+" [-] No Visa-MasterCard found!")
 
     try:
-	print GR+' [*] Trying to find out existing MasterCards...'
+	print(GR+' [*] Trying to find out existing MasterCards...')
 	time.sleep(1)
         if MASTERCARD.group():
-            print G+" [+] Website has a Master Card!"
-            print O+' [!] Card : ' + GR+MASTERCARD.group()
+            print(G+" [+] Website has a Master Card!")
+            print(O+' [!] Card : ' + GR+MASTERCARD.group())
 
     except:
-        print R+" [-] No MasterCard found!"
+        print(R+" [-] No MasterCard found!")
 
     try:
-	print GR+' [*] Trying to find out existing VISA credit cards...'
+	print(GR+' [*] Trying to find out existing VISA credit cards...')
 	time.sleep(1)
         if VISA.group():
-            print G+" [+] Website has a VISA card!"
-            print O+' [!] Card : ' + GR+VISA.group()
+            print(G+" [+] Website has a VISA card!")
+            print(O+' [!] Card : ' + GR+VISA.group())
 
     except:
-        print R+" [-] No VISA Cards found!"
+        print(R+" [-] No VISA Cards found!")
 
     try:
-	print GR+' [*] Trying to find out existing AMEX Cards...'
+	print(GR+' [*] Trying to find out existing AMEX Cards...')
 	time.sleep(1)
         if AMEX.group():
-            print G+" [+] Website has a AMEX card!"
-            print O+' [!] Card : ' + GR+AMEX.group()
+            print(G+" [+] Website has a AMEX card!")
+            print(O+' [!] Card : ' + GR+AMEX.group())
 
     except:
-        print R+" [-] No Amex Cards found!"
+        print(R+" [-] No Amex Cards found!")
 
     try:
-	print GR+' [*] Trying to find out existing Discover Cards...'
+	print(GR+' [*] Trying to find out existing Discover Cards...')
 	time.sleep(1)
         if DISCOVER.group():
-            print G+" [+] Website has a DISCOVER card!"
-            print O+' [!] Card : ' + GR+DISCOVER.group()
+            print(G+" [+] Website has a DISCOVER card!")
+            print(O+' [!] Card : ' + GR+DISCOVER.group())
 
     except:
-        print R+" [-] No Discover Cards found!"
+        print(R+" [-] No Discover Cards found!")
 
 def credit(web):
 	
-	print GR+' [*] Initiating module...'
+	print(GR+' [*] Initiating module...')
 	time.sleep(0.5)
 	credit0x00(web)
 

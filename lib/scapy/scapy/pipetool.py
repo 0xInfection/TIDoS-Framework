@@ -6,6 +6,7 @@
 ## This program is published under a GPLv2 license
 
 from __future__ import with_statement
+from __future__ import print_function
 
 import scapy.utils
 from scapy.config import conf
@@ -25,14 +26,14 @@ class PipeEngine:
             doc = pc.__doc__ or ""
             if doc:
                 doc = doc.splitlines()[0]
-            print "%20s: %s" % (pn, doc)
+            print("%20s: %s" % (pn, doc))
     @classmethod
     def list_pipes_detailed(cls):
         for pn,pc in sorted(cls.pipes.items()):
             if pc.__doc__:
-                print "###### %s\n %s" % (pn ,pc.__doc__)
+                print("###### %s\n %s" % (pn ,pc.__doc__))
             else:
-                print "###### %s" % pn
+                print("###### %s" % pn)
     
     def __init__(self, *pipes):
         self.active_pipes = set()
@@ -113,7 +114,7 @@ class PipeEngine:
                     elif fd in sources:
                         try:
                             fd.deliver()
-                        except Exception,e:
+                        except Exception as e:
                             log_interactive.exception("piping from %s failed: %s" % (fd.name, e))
                         else:
                             if fd.exhausted():
@@ -147,7 +148,7 @@ class PipeEngine:
                 else:
                     warning("Pipe engine thread not running")
         except KeyboardInterrupt:
-            print "Interrupted by user."
+            print("Interrupted by user.")
 
     def add(self, *pipes):
         pipes = self._add_pipes(*pipes)
@@ -353,9 +354,9 @@ class ConsoleSink(Sink):
      +-------+
 """
     def push(self, msg):
-        print ">%r" % msg
+        print(">%r" % msg)
     def high_push(self, msg):
-        print ">>%r" % msg
+        print(">>%r" % msg)
 
 class RawConsoleSink(Sink):
     """Print messages on low and high entries
@@ -556,7 +557,7 @@ def _testmain():
     p.graph(type="png",target="> /tmp/pipe.png")
 
     p.start()
-    print p.threadid
+    print(p.threadid)
     time.sleep(5)
     p.stop()
 

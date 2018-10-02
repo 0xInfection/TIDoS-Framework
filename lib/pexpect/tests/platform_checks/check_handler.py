@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+from __future__ import print_function
 import signal
 import os
 import time
@@ -17,15 +18,15 @@ def nonblock (fd):
 	return original_flags
 
 def signal_handler (signum, frame):
-	print '<HANDLER>'
+	print('<HANDLER>')
 	global GLOBAL_SIGCHLD_RECEIVED
 	status = os.waitpid (-1, os.WNOHANG)
 	if status[0] == 0:
-		print 'No process for waitpid:', status
+		print('No process for waitpid:', status)
 	else:
-		print 'Status:', status
-	print 'WIFEXITED(status):', os.WIFEXITED(status[1])
-	print 'WEXITSTATUS(status):', os.WEXITSTATUS(status[1]) 
+		print('Status:', status)
+	print('WIFEXITED(status):', os.WIFEXITED(status[1]))
+	print('WEXITSTATUS(status):', os.WEXITSTATUS(status[1])) 
 	GLOBAL_SIGCHLD_RECEIVED = 1
 
 def main ():
@@ -36,23 +37,23 @@ def main ():
 		time.sleep(10000)
 	nonblock (fd)
 	tty.setraw(fd) #STDIN_FILENO)
-	print 'Sending SIGKILL to child pid:', pid
+	print('Sending SIGKILL to child pid:', pid)
 	time.sleep(2)
 	os.kill (pid, signal.SIGKILL)
 
-	print 'Entering to sleep...'
+	print('Entering to sleep...')
 	try:
 		time.sleep(2)
 	except:
-		print 'Sleep interrupted'
+		print('Sleep interrupted')
 	try:
 		os.kill(pid, 0)
-		print '\tChild is alive. This is ambiguous because it may be a Zombie.'
+		print('\tChild is alive. This is ambiguous because it may be a Zombie.')
 	except OSError as e:
-		print '\tChild appears to be dead.'
+		print('\tChild appears to be dead.')
 #		print str(e)
-	print
-	print 'Reading from master fd:', os.read (fd, 1000)
+	print()
+	print('Reading from master fd:', os.read (fd, 1000))
 
 
 
