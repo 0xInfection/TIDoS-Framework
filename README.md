@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <a href="https://github.com/s0md3v/Photon"><img src="https://i.imgur.com/9MYjIjJ.png" alt="TIDoS"></a>
+  <a href="https://github.com/theinfecteddrake"><img src="https://i.imgur.com/9MYjIjJ.png" alt="TIDoS"></a>
   <br>
   TIDoS Framework
   <br>
