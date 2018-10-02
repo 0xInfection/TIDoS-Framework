@@ -192,7 +192,7 @@ TIDoS Framework presently supports the following: `and is under active developme
 		- Missing `SPF` Records
 		- Missing `DMARC` Records
 	+ Host Header Injection
-		- Port Based `Web Socket Based`
+		- Port Based Injection `via Web-Sockets`
 		- `X-Forwarded-For` Header Injection
 	+ Security Headers Analysis `Live Capture`
 	+ Cross-Site Tracing `HTTP TRACE Method`
