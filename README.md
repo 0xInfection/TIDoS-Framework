@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <a href="https://github.com/theinfecteddrake"><img src="https://i.imgur.com/9MYjIjJ.png" alt="TIDoS"></a>
+  <a href="https://github.com/theinfecteddrake"><img src="https://i.imgur.com/QAbaVdU.png" alt="TIDoS"></a>
   <br>
   TIDoS Framework
   <br>
@@ -50,7 +50,7 @@ Here is some light on what the framework is all about:
 - [x] TIDoS has full verbose out support, so you'll know whats going on.
 - [x] Fully user friendly interaction environment. `(no shits)`
 
-<img src='https://i.imgur.com/FqwvW3m.gif' />
+<img src='https://i.imgur.com/Gb30Y4k.gif' />
 
 ### Installation :-
 
@@ -64,7 +64,7 @@ cd tidos-framework
 chmod +x install
 ./install
 ```
-<img src='https://i.imgur.com/P28ZRY1.gif' />
+<img src='https://i.imgur.com/zxZBUoW.gif' />
 
 Thats it! Now you are good to go! Now lets run the tool:
 ```
