@@ -315,8 +315,12 @@ __THEREFORE, I AM NOT EXCLUSIVELY RESPONSIBLE FOR ANY MISUSE OF THIS TOOLKIT.__
 
 This project is presently under active development so you may want to put it on a watch, since it is updated frequently `(you can take a look at past commits history)`. This project is one of the best frameworks I have ever built and I would really like your constructive criticism, suggestions and help in converting this project into the best web penetration testing framework ever built `and trust me, it will be ;)`.
 
+> __TEMPORARY UPDATE__:
+> 
+> Please avoid doing pull requests temporarily, since work on v2 of this framework has already begun, which actually will fix the shitty code which I casually wrote all the way through. :)
+
 Got any suggestions? Encountering bugs with this framework? Raise up an [issue](https://github.com/theInfectedDrake/TIDoS-Framework/issues/new) or hit me up via DM on [twitter](https://twitter.com/infecteddrake).
 
-> Copyright ©  @_tID
+> Copyright © __The Infected Drake__.
 
 
