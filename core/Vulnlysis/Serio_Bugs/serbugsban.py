@@ -50,7 +50,7 @@ def serbugsban():
     time.sleep(0.1)
     print B+'  [8]'+C+' LDAP Entity Injection '+W+'(Error Enumeration)'
     time.sleep(0.1)
-    print B+'  [9]'+C+' HTML Code Injection '+W+'(Handcoded Payloads)'
+    print B+'  [9]'+C+' HTML Code Injection '+W+'(Tag Based)'
     time.sleep(0.1)
     print B+'  [10]'+C+' HTTP Response Splitting '+W+'(CRLF Injection)'
     time.sleep(0.1)

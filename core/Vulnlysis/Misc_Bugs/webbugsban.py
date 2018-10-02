@@ -53,7 +53,7 @@ def webbugsban():
     time.sleep(0.1)
     print O+'  [11]'+GR+' Spoofable Emails '+W+'(Missing SPF & DMARC Records) '
     time.sleep(0.1)
-    print O+'  [12]'+GR+' Host Header Injection '+W+'(Port Based)\n '
+    print O+'  [12]'+GR+' Host Header Injection '+W+'(Port Based) '
     time.sleep(0.1)
     print O+'  [13]'+GR+' Cookie Injection '+W+'(Session Fixation)\n '
     time.sleep(0.1)
