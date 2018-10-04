@@ -326,18 +326,20 @@ These are some modules which I have thought of adding:
 
 ### Disclaimer:
 
-TIDoS is provided as a offensive web application audit framework. It has built-in modules which can reveal potential misconfigurations and vulnerabilties in web applications which could possibly be exploited maliciously. 
+TIDoS is provided as a offensive web application audit framework. It has built-in modules which can reveal potential misconfigurations and vulnerabilties in web applications which could possibly be exploited maliciously.
 
-__THEREFORE, I AM NOT EXCLUSIVELY RESPONSIBLE FOR ANY MISUSE OR DAMAGE DUE TO THIS TOOLKIT.__
+__THEREFORE, THE AUTHOR AND NEITHER THE CONTRIBUTORS ARE NOT EXCLUSIVELY RESPONSIBLE FOR ANY MISUSE OR DAMAGE DUE TO THIS TOOLKIT.__
 
 ### Final Words:
 
-This project is presently under active development so you may want to put it on a watch, since it is updated frequently `(you can take a look at past commits history)`. This project is one of the best frameworks I have ever built and I would really like your constructive criticisms, suggestions and help in converting this project into the best web penetration testing framework ever built `and trust me, it will be ;)`.
+This project is a very fresh and new project which just simply springed off my mind, and is presently under active development so you may want to put it on a watch, since it is updated frequently. 
+
+I admit that there may be bugs out there which may cause many modules not to work properly and just bug out before anything worthwhile is achieved. :( However, being the only single author and maintainer behind this framework, it is my humble request to all users of this framework to hand me the list of modules via raising a [new issue](https://github.com/theInfectedDrake/TIDoS-Framework/issues/new) which simply do not work and bug out, and I would be more than happy to fix them as we jointly make our journey to realising TIDoS as the greatest web penetration testing framework ever built.
 
 > TEMPORARY UPDATE:
 >
 > Please avoid doing any pull requests temporarily as work for v2 of this framework is already underway and in active development. 
 
-Got any suggestions? Encountering bugs with this framework? Raise up an [issue](https://github.com/theInfectedDrake/TIDoS-Framework/issues/new) or hit me up via DM on [twitter](https://twitter.com/infecteddrake).
+Got more suggestions or new ideas? Raise up an [issue](https://github.com/theInfectedDrake/TIDoS-Framework/issues/new) or hit me up via DM on [twitter](https://twitter.com/infecteddrake).
 
 > Copyright © __The Infected Drake__
