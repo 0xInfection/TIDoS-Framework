@@ -307,7 +307,7 @@ v1.6.1 [latest release] [#stable]
 
 ### Upcoming:
 
-There are some bruteforce modules to be added:
+These are some modules which I have thought of adding:
 - Some more of Enumeraton & Information Disclosure modules.
 - Lots more of OSINT & Stuff (let that be a suspense).
 - More of Auxillary Modules.
