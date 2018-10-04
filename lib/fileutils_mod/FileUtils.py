@@ -1,21 +1,11 @@
 # -*- coding: utf-8 -*-
-# ----------------------------------------------------------------------
-# This file is part of TIDoS Framework and is provided as a library file.
-#
-# TIDoS is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# TIDoS is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with TIDoS. If not, see <http://www.gnu.org/licenses/>.
-# ----------------------------------------------------------------------
-# @author Chamli Mohamed 14|06|2016
+
+#-:-:-:-:-:-:-:-:-:-:-:-:#
+#    TIDoS Framework     #
+#-:-:-:-:-:-:-:-:-:-:-:-:#
+
+#This module requires TIDoS Framework
+#https://github.com/theInfectedDrake/TIDoS-Framework
 
 import os
 import os.path
