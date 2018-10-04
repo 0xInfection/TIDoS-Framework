@@ -17,7 +17,7 @@ This directory contains forks of many existing Python Packages which have been m
 - [MySQL-python](https://pypi.org/project/MySQL-python)
 - [DNSDumpsterAPI](https://github.com/paulsec/api-dnsdumpster.com)
 
-[Setuptools](https://pypi.org/project/setuptools) is a non-modified version of the original copy and is just a fork. 
+[Setuptools](https://pypi.org/project/setuptools) is a non-modified version of the original package and is just a fork. 
 
 It is these Python Packages which TIDoS needs to run.
 
