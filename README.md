@@ -2,7 +2,7 @@
   <br>
   <a href="https://github.com/theinfecteddrake"><img src="https://i.imgur.com/QAbaVdU.png" alt="TIDoS"></a>
   <br>
-  TIDoS Framework
+  The TIDoS Framework
   <br>
 </h1>
 
@@ -54,6 +54,10 @@ Here is some light on what the framework is all about:
 
 ### Installation :-
 
+#### Global Installation:
+
+> NOTE: For installing globally, you will need to default your Python version to 2.x.
+
 * Clone the repository locally and navigate there:
 ```
 git clone https://github.com/theinfecteddrake/tidos-framework.git
@@ -71,11 +75,26 @@ Thats it! Now you are good to go! Now lets run the tool:
 tidos
 ```
 
+#### Manual Installation (Locally) :
+
+TIDoS needs some libraries to run, which can be installed via `aptitude` or `yum` Package Managers.
+```
+sudo apt-get install libncurses5 libxml2 nmap tcpdump scons libexiv2-dev python-pyexiv2 build-essential python-pip default-libmysqlclient-dev python-xmpp
+```
+Now after these dependencies are finished installing, we need to install the remaining Python Package dependencies, hence run:
+```
+pip2 install -r requirements.txt
+```
+Thats it, You now have TIDoS at your service. Fire it up using:
+```
+python2 tidos.py
+```
+
 ### Getting Started :-
 
 TIDoS is made to be comprehensive and versatile. It is a highly flexible framework where you just have to select and use modules.
 
-But before that, you need to set your own `API KEYS` for various OSINT purposes. To do so, open up `API_KEYS.py` under `files/` directory and set your own keys and access tokens for `SHODAN`, `CENSYS`, `FULL CONTACT`, `GOOGLE` and `WHATCMS`. Public `API KEYS` and `ACCESS TOKENS` for `SHODAN` and `WHATCMS` have been provided with the TIDoS release itself. You can still add your own... `no harm!`
+But before that, you need to set your own `API KEYS` for various OSINT & Scanning and Enumeration purposes. To do so, open up `API_KEYS.py` under `files/` directory and set your own keys and access tokens for `SHODAN`, `CENSYS`, `FULL CONTACT`, `GOOGLE` and `WHATCMS`. Public `API KEYS` and `ACCESS TOKENS` for `SHODAN` and `WHATCMS` have been provided with the TIDoS release itself. You can still add your own... `no harm!`
 
 Finally, as the framework opens up, enter the website name `eg. http://www.example.com` and let TIDoS lead you. Thats it! Its as easy as that.
 
@@ -88,7 +107,7 @@ To update this tool, use `tidos_updater.py` module under `tools/` folder.
 
 ### Flawless Features :-
 
-TIDoS Framework presently supports the following: `and is under active development`
+TIDoS Framework presently supports the following: `and more modules are under active development`
 
 * __Reconnaissance + OSINT__
 
@@ -192,7 +211,7 @@ TIDoS Framework presently supports the following: `and is under active developme
 		- Missing `SPF` Records
 		- Missing `DMARC` Records
 	+ Host Header Injection
-		- Port Based Injection `via Web-Sockets`
+		- Port Based `Web Socket Based`
 		- `X-Forwarded-For` Header Injection
 	+ Security Headers Analysis `Live Capture`
 	+ Cross-Site Tracing `HTTP TRACE Method`
@@ -302,25 +321,23 @@ There are some bruteforce modules to be added:
 - Normal Bug Fixing Stuffs. `As per the issues being raised`
 - Some other perks:
 	- Working on a way for contributing new modules easily.
-	- A complete new method of multi-threaded fuzzing.
+	- A complete new method of multi-threaded fuzzing of parameters.
 	- Keeping better of new console stuff.
 
 ### Disclaimer:
 
 TIDoS is provided as a offensive web application audit framework. It has built-in modules which can reveal potential misconfigurations and vulnerabilties in web applications which could possibly be exploited maliciously. 
 
-__THEREFORE, I AM NOT EXCLUSIVELY RESPONSIBLE FOR ANY MISUSE OF THIS TOOLKIT.__
+__THEREFORE, I AM NOT EXCLUSIVELY RESPONSIBLE FOR ANY MISUSE OR DAMAGE DUE TO THIS TOOLKIT.__
 
 ### Final Words:
 
-This project is presently under active development so you may want to put it on a watch, since it is updated frequently `(you can take a look at past commits history)`. This project is one of the best frameworks I have ever built and I would really like your constructive criticism, suggestions and help in converting this project into the best web penetration testing framework ever built `and trust me, it will be ;)`.
+This project is presently under active development so you may want to put it on a watch, since it is updated frequently `(you can take a look at past commits history)`. This project is one of the best frameworks I have ever built and I would really like your constructive criticisms, suggestions and help in converting this project into the best web penetration testing framework ever built `and trust me, it will be ;)`.
 
-> __TEMPORARY UPDATE__:
-> 
-> Please avoid doing pull requests temporarily, since work on v2 of this framework has already begun, which actually will fix the shitty code which I casually wrote all the way through. :)
+> TEMPORARY UPDATE:
+>
+> Please avoid doing any pull requests temporarily as work for v2 of this framework is already underway and in active development. 
 
 Got any suggestions? Encountering bugs with this framework? Raise up an [issue](https://github.com/theInfectedDrake/TIDoS-Framework/issues/new) or hit me up via DM on [twitter](https://twitter.com/infecteddrake).
 
-> Copyright © __The Infected Drake__.
-
-
+> Copyright © __The Infected Drake__
