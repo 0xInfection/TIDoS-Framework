@@ -44,7 +44,7 @@ def auxilban():
     time.sleep(0.1)
     print(B+'     [2]'+C+' Encode Payload or Strings'+W+' (7 Types)')
     time.sleep(0.1)
-    print(B+'     [3]'+C+' Extract Metadata from Images'+W+' (EXIF Data)\n')
+    print(B+'     [3]'+C+' Extract Metadata from Images'+W+' (EXIF Data)')
     time.sleep(0.1)
     print(B+'     [4]'+C+' HoneyPot Probability'+W+' (ShodanLabs HoneyScore)\n')
     time.sleep(0.1)
