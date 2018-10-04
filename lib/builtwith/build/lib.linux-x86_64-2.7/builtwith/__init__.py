@@ -1,3 +1,4 @@
+from __future__ import print_function
 import six
 import sys
 import os
@@ -45,7 +46,7 @@ def builtwith(url, headers=None, html=None, user_agent='builtwith'):
             if html is None:
                 html = response.read()
         except Exception as e:
-            print('Error:', e)
+            print(('Error:', e))
 
     # check headers
     if headers:

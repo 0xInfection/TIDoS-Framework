@@ -9,6 +9,7 @@
 #This module requires TIDoS Framework
 #https://github.com/the-Infected-Drake/TIDoS-Framework 
 
+from __future__ import print_function
 import os
 import time
 import requests
@@ -42,23 +43,23 @@ def check0x00(web, dirpath, headers):
 
 			resp = str(req.status_code)
 			if (resp == '200' or resp == '302' or resp == '304'):
-			    print G+' [*] Found : ' + O + web0x00 +GR+' - '+ size + G + ' ('+resp+')'
+			    print(G+' [*] Found : ' + O + web0x00 +GR+' - '+ size + G + ' ('+resp+')')
 			    file_paths.append(web0x00)
 
 			else:
-				print C+' [*] Checking : ' + B + web0x00 + R + ' ('+resp+')'
+				print(C+' [*] Checking : ' + B + web0x00 + R + ' ('+resp+')')
 		return file_paths
 
 	except Exception as e:
-		print R+' [-] Unknown Exception Encountered!'
-		print R+' [-] Exception : '+str(e)
+		print(R+' [-] Unknown Exception Encountered!')
+		print(R+' [-] Exception : '+str(e))
 		return file_paths
 
 def getFile0x00(filepath):
 
 	if os.path.exists(filepath) == True:
 		time.sleep(0.5)
-		print GR+' [*] Importing wordlist...'
+		print(GR+' [*] Importing wordlist...')
 		with open(filepath, 'r') as f0:
 			for f in f0:
 				f = f.strip('\n')
@@ -69,27 +70,27 @@ def getFile0x00(filepath):
 					dir_path.append(f)
 
 	else:
-		print R+' [-] No file path found under ' +filepath+'!'
+		print(R+' [-] No file path found under ' +filepath+'!')
 	return dir_path
 
 def dotbrute(web):
 	
-	print GR+' [*] Loading module...'
+	print(GR+' [*] Loading module...')
 	time.sleep(0.5)
-	print R+'\n    ======================================='
-	print R+'     D O T   F I L E   B R U T E F O R C E'
-	print R+'    =======================================\n'
+	print(R+'\n    =======================================')
+	print(R+'     D O T   F I L E   B R U T E F O R C E')
+	print(R+'    =======================================\n')
 
-	print O+' [*] Path to file to be used '+R+'(Default: files/fuzz-db/dot_paths.lst)...'
+	print(O+' [*] Path to file to be used '+R+'(Default: files/fuzz-db/dot_paths.lst)...')
 	fil = raw_input(O+' [#] Your input (Press Enter if default) :> ')
 	if fil == '':
 		fil = 'files/fuzz-db/dot_paths.lst'
 	else:
-		print GR+' [*] Checking filepath...'
+		print(GR+' [*] Checking filepath...')
 		if os.path.exists(fil) == True:
-			print G+' [+] File found!'
+			print(G+' [+] File found!')
 		else:
-			print R+' [-] File not found!'
+			print(R+' [-] File not found!')
 
 	mo = getFile0x00(fil)
 	gen_headers =    {'User-Agent':'Mozilla/5.0 (Windows; U; Windows NT 6.1; rv:2.2) Gecko/20110201',
@@ -100,14 +101,14 @@ def dotbrute(web):
 	try:
 		ul = check0x00(web, mo, gen_headers)
 	except Exception as e:
-		print R+' [-] Exception Encountered!'
-		print R+' [-] Exception : '+str(e)
+		print(R+' [-] Exception Encountered!')
+		print(R+' [-] Exception : '+str(e))
 
 	if ul:
-		print G+' [+] The following interesting files were found!'
+		print(G+' [+] The following interesting files were found!')
 		for u in ul:
-			print G+' [+] Path : '+O+u
+			print(G+' [+] Path : '+O+u)
 	else:
-		print R+' [-] No common interesting files were found!'
-	print G+' [+] Done!'
+		print(R+' [-] No common interesting files were found!')
+	print(G+' [+] Done!')
 

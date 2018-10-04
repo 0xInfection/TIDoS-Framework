@@ -17,6 +17,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
+from __future__ import print_function
 
     ####################################################################
     # This file holds the GSM UM interface implementation for Scapy    #
@@ -66,8 +67,8 @@ def sendum(x, typeSock=0):
         s.send(x)
         s.close()
     except:
-        print "[Error]: There was a problem when trying to transmit data.\
-               Please make sure you started the socket server."
+        print("[Error]: There was a problem when trying to transmit data.\
+               Please make sure you started the socket server.")
 
 # Known Bugs/Problems:
 # If a message uses multiple times the same IE you cannot set the values
@@ -126,14 +127,14 @@ def adapt(min_length, max_length, fields, fields2, location=2):
 
 def examples(example=None):
     if example == None:
-        print """This command presents some example to introduce scapy
+        print("""This command presents some example to introduce scapy
 gsm-um to new users.
 The following parameters can be used:
     examples("imsiDetach")
     examples("call")
-    examples("dissect")"""
+    examples("dissect")""")
     elif example == "imsiDetach":
-        print """
+        print("""
 >>> a=imsiDetachIndication()
 ... a.typeOfId=1; a.odd=1; a.idDigit1=0xF; 
 ... a.idDigit2_1=2; a.idDigit2=7; a.idDigit3_1=0;
@@ -144,13 +145,13 @@ The following parameters can be used:
 >>> hexdump(a)
 0000   05 01 00 08 F0 27 07 72  00 01 27 75 14   .....'.r..'u.
 >>> sendum(a)
-"""
+""")
     elif example == "call":
-        print """
+        print("""
 If you use an USRP and the testcall function this sets up a phonecall:
 >>> sendum(setupMobileOriginated())
 >>> sendum(connectAcknowledge())
-"""
+""")
 
 
 # Section 10.2/3
@@ -2936,7 +2937,7 @@ class MobileIdHdr(Packet):
             p = p[:1] + struct.pack(">B", res[1]) + p[2:]
         if res[0] is not 0:
             p = p[:-res[0]]
-        print repr(p)
+        print(repr(p))
         return p + pay
 
 
@@ -3514,10 +3515,10 @@ class BaRangeHdr(Packet):
         a = []
         i = 0
         for i in range(0, len(self.fields_desc)):
-            print "i is %s" % (i,)
+            print("i is %s" % (i,))
             aList.append(self.fields_desc[i].name)
-            print "aList %s" % (len(aList))
-            print "self.fields_desc %s" % (len(self.fields_desc))
+            print("aList %s" % (len(aList)))
+            print("self.fields_desc %s" % (len(self.fields_desc)))
         for i in aList:
             a.append(getattr(self, i))
         res = adapt(6, 251, a, self.fields_desc)
@@ -6018,7 +6019,7 @@ class BearerCapabilityHdr(Packet):
         if len(p) is 5:
             p = p[:-2]
         if self.lengthBC is None:
-            print "len von a %s" % (len(p),)
+            print("len von a %s" % (len(p),))
             p = p[:1] + struct.pack(">B", len(p)-3) + p[2:]
         return p + pay
 

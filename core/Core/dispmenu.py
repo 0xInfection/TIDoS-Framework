@@ -8,12 +8,13 @@
 #This module requires TIDoS Framework
 #https://github.com/theInfectedDrake/TIDoS-Framework 
 
+from __future__ import print_function
 import time
 from colors import *
 
 def dispmenu():
 
-	print '''
+	print('''
 
 \033[1;37m  .    +           \033[1;34m ______                \033[1;37m         .      .
                +. \033[1;34m / ==== \ \033[1;37m     .        + .                    .
@@ -31,19 +32,19 @@ def dispmenu():
              \033[1;33m-=[ \033[1;31mL E T S   S T A R T\033[1;33m ]=-\033[1;37m
        +        .             '                 .            +         +
    *       .            +           *        .         *     .
-'''
-	print O+'\n Choose from the options below :\n'
+''')
+	print(O+'\n Choose from the options below :\n')
 	time.sleep(0.2)
-	print B+' [1] \033[1;36mReconnaissance & OSINT'+W+' (50 modules)'
+	print(B+' [1] \033[1;36mReconnaissance & OSINT'+W+' (50 modules)')
 	time.sleep(0.1)
-	print B+' [2] \033[1;36mScanning & Enumeration'+W+' (16 modules)'
+	print(B+' [2] \033[1;36mScanning & Enumeration'+W+' (16 modules)')
 	time.sleep(0.1)
-	print B+' [3] \033[1;36mVulnerability Analysis'+W+' (37 modules)'
+	print(B+' [3] \033[1;36mVulnerability Analysis'+W+' (37 modules)')
 	time.sleep(0.1)
-	print B+' [4] \033[1;36mExploitation (beta)'+W+' (1 modules)'
+	print(B+' [4] \033[1;36mExploitation (beta)'+W+' (1 modules)')
 	time.sleep(0.1)
-	print B+' [5] \033[1;36mAuxillary Modules'+W+' (4 modules)\n'
+	print(B+' [5] \033[1;36mAuxillary Modules'+W+' (4 modules)\n')
 	time.sleep(0.1)
-	print B+' [99] \033[1;36mSay "alvida"! (Exit TIDoS)\n'
+	print(B+' [99] \033[1;36mSay "alvida"! (Exit TIDoS)\n')
 	time.sleep(0.1)
 

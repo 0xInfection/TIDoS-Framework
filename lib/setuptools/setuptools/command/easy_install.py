@@ -10,6 +10,7 @@ file, or visit the `EasyInstall home page`__.
 __ https://setuptools.readthedocs.io/en/latest/easy_install.html
 
 """
+from __future__ import print_function
 
 from glob import glob
 from distutils.util import get_platform

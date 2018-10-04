@@ -9,6 +9,7 @@
 #This module requires TIDoS Framework
 #https://github.com/theInfectedDrake/TIDoS-Framework 
 
+from __future__ import print_function
 from colors import *
 import time
 
@@ -16,7 +17,7 @@ def othbugsban():
 
     time.sleep(0.4)
     os.system('clear')
-    print C+'''
+    print(C+'''
 \033[1;34m
   +------------------------------------------------------+
   |      \033[1;37mTIDoS Dialog                      \033[1;33m[-] [口] [×]  \033[1;34m|
@@ -30,24 +31,24 @@ def othbugsban():
   |     \033[1;37m'----------'   '----------'    '----------'     \033[1;36m |
   |______________________________________________________|
 
-'''
+''')
     time.sleep(0.3)
-    print ''
-    print B+'        [1]'+C+' FTP Protocol Bruteforce'+W+' (Default Credentials)' 
+    print('')
+    print(B+'        [1]'+C+' FTP Protocol Bruteforce'+W+' (Default Credentials)') 
     time.sleep(0.1)
-    print B+'        [2]'+C+' SSH Protocol Bruteforce'+W+' (Default Credentials)'
+    print(B+'        [2]'+C+' SSH Protocol Bruteforce'+W+' (Default Credentials)')
     time.sleep(0.1)
-    print B+'        [3]'+C+' SQL Protocol Bruteforce'+W+' (Default Credentials)'
+    print(B+'        [3]'+C+' SQL Protocol Bruteforce'+W+' (Default Credentials)')
     time.sleep(0.1)
-    print B+'        [4]'+C+' POP 3/2 Protocol Bruteforce'+W+' (Default Credentials)'
+    print(B+'        [4]'+C+' POP 3/2 Protocol Bruteforce'+W+' (Default Credentials)')
     time.sleep(0.1)
-    print B+'        [5]'+C+' SMTP Protocol Bruteforce'+W+' (Default Credentials)'
+    print(B+'        [5]'+C+' SMTP Protocol Bruteforce'+W+' (Default Credentials)')
     time.sleep(0.1)
-    print B+'        [6]'+C+' TELNET Protocol Bruteforce'+W+' (Default Credentials)'
+    print(B+'        [6]'+C+' TELNET Protocol Bruteforce'+W+' (Default Credentials)')
     time.sleep(0.1)
-    print B+'        [7]'+C+' XMPP Protocol Bruteforce'+W+' (Default Credentials)\n'
+    print(B+'        [7]'+C+' XMPP Protocol Bruteforce'+W+' (Default Credentials)\n')
     time.sleep(0.1)
-    print B+'        [A]'+C+' Start up ALL modules 1 by 1\n'
+    print(B+'        [A]'+C+' Start up ALL modules 1 by 1\n')
     time.sleep(0.1)
-    print B+'        [99]'+C+' Back\n' 
+    print(B+'        [99]'+C+' Back\n') 
 

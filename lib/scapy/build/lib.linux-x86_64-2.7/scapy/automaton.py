@@ -490,7 +490,7 @@ class Automaton:
         try:
             self.debug(5, "Trying %s [%s]" % (cond.atmt_type, cond.atmt_condname))
             cond(self,*args, **kargs)
-        except ATMT.NewStateRequested, state_req:
+        except ATMT.NewStateRequested as state_req:
             self.debug(2, "%s [%s] taken to state [%s]" % (cond.atmt_type, cond.atmt_condname, state_req.state))
             if cond.atmt_type == ATMT.RECV:
                 self.packets.append(args[0])
@@ -498,7 +498,7 @@ class Automaton:
                 self.debug(2, "   + Running action [%s]" % action.func_name)
                 action(self, *state_req.action_args, **state_req.action_kargs)
             raise
-        except Exception,e:
+        except Exception as e:
             self.debug(2, "%s [%s] raised exception [%s]" % (cond.atmt_type, cond.atmt_condname, e))
             raise
         else:
@@ -552,10 +552,10 @@ class Automaton:
                             c = Message(type=_ATMT_Command.SINGLESTEP,state=state)
                             self.cmdout.send(c)
                             break
-            except StopIteration,e:
+            except StopIteration as e:
                 c = Message(type=_ATMT_Command.END, result=e.args[0])
                 self.cmdout.send(c)
-            except Exception,e:
+            except Exception as e:
                 self.debug(3, "Transfering exception [%s] from tid=%i"% (e,self.threadid))
                 m = Message(type = _ATMT_Command.EXCEPTION, exception=e, exc_info=sys.exc_info())
                 self.cmdout.send(m)        
@@ -639,7 +639,7 @@ class Automaton:
                                 if ioevt.atmt_ioname == fd.ioname:
                                     self._run_condition(ioevt, fd, *state_output)
     
-            except ATMT.NewStateRequested,state_req:
+            except ATMT.NewStateRequested as state_req:
                 self.debug(2, "switching from [%s] to [%s]" % (self.state.state,state_req.state))
                 self.state = state_req
                 yield state_req

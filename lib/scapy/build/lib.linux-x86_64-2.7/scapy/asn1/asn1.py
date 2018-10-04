@@ -6,6 +6,7 @@
 """
 ASN.1 (Abstract Syntax Notation One)
 """
+from __future__ import print_function
 
 import random
 from scapy.config import conf
@@ -100,7 +101,7 @@ class ASN1Tag(EnumElement):
     def get_codec(self, codec):
         try:
             c = self._codec[codec]
-        except KeyError,msg:
+        except KeyError as msg:
             raise ASN1_Error("Codec %r not found for tag %r" % (codec, self))
         return c
 
@@ -196,7 +197,7 @@ class ASN1_Object:
     def strshow(self, lvl=0):
         return ("  "*lvl)+repr(self)+"\n"
     def show(self, lvl=0):
-        print self.strshow(lvl)
+        print(self.strshow(lvl))
     def __eq__(self, other):
         return self.val == other
     def __cmp__(self, other):

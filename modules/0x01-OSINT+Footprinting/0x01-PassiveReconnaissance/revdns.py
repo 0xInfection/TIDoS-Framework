@@ -9,6 +9,7 @@
 #This module requires TIDoS Framework
 #https://github.com/theInfectedDrake/TIDoS-Framework 
 
+from __future__ import print_function
 import os
 import time
 import requests
@@ -19,9 +20,9 @@ def revdns(web):
 
     web = web.replace('http://','')
     web = web.replace('https://','')
-    print R+'\n   ====================================='
-    print R+'    R E V E R S E   D N S   L O O K U P'
-    print R+'   =====================================\n'
+    print(R+'\n   =====================================')
+    print(R+'    R E V E R S E   D N S   L O O K U P')
+    print(R+'   =====================================\n')
     time.sleep(0.4)
     print('' + GR + color.BOLD + ' [!] Looking Up for Reverse DNS Info...')
     time.sleep(0.4)
@@ -33,13 +34,13 @@ def revdns(web):
 	if 'error' not in result:
 		res = result.splitlines()
 		for r in res:
-			print B+' [+] Received : '+O+r.split(' ')[0].strip()+' => '+C+'('+r.split(' ')[1].strip()+')'
+			print(B+' [+] Received : '+O+r.split(' ')[0].strip()+' => '+C+'('+r.split(' ')[1].strip()+')')
 			time.sleep(0.04)
 			links.append(r)
 
 		p = 'tmp/logs/'+web+'-logs/'+web+'-reverse-dns.lst'
 		open(p,'w+')
-		print B+' [!] Saving links...'
+		print(B+' [!] Saving links...')
 		time.sleep(1)
 		for m in links:
 		    m = m + '\n'
@@ -47,12 +48,12 @@ def revdns(web):
 		    ile.write(m)
 		    ile.close()
 		pa = os.getcwd()
-		print G+' [+] Links saved under '+pa+'/'+p+'!'
-		print ''
+		print(G+' [+] Links saved under '+pa+'/'+p+'!')
+		print('')
 
 	elif 'No results found' in result:
-		print R+' [-] No result found!'
+		print(R+' [-] No result found!')
 	else:
-		print R+' [-] Outbound Query Exception!'
+		print(R+' [-] Outbound Query Exception!')
 		time.sleep(0.8)
 

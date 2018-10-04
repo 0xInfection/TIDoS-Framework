@@ -23,6 +23,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 """
+from __future__ import print_function
 import sys
 import os
 
@@ -30,10 +31,10 @@ import nmap                         # import nmap.py module
 try:
     nm = nmap.PortScanner()         # instantiate nmap.PortScanner object
 except nmap.PortScannerError:
-    print('Nmap not found', sys.exc_info()[0])
+    print(('Nmap not found', sys.exc_info()[0]))
     sys.exit(1)
 except:
-    print("Unexpected error:", sys.exc_info()[0])
+    print(("Unexpected error:", sys.exc_info()[0]))
     sys.exit(1)
 
 
@@ -145,7 +146,7 @@ nma = nmap.PortScannerAsync()
 
 def callback_result(host, scan_result):
     print('------------------')
-    print(host, scan_result)
+    print((host, scan_result))
 
 nma.scan(hosts='192.168.0.0/30', arguments='-sP', callback=callback_result)
 
@@ -184,7 +185,7 @@ if (os.getuid() == 0):
     for h in nm.all_hosts():
         print(h)
         if 'mac' in nm[h]['addresses']:
-            print(nm[h]['addresses'], nm[h]['vendor'])
+            print((nm[h]['addresses'], nm[h]['vendor']))
 
 
 

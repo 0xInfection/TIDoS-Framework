@@ -32,7 +32,7 @@ import warnings
 try:
     from bs4.builder import LXMLTreeBuilder, LXMLTreeBuilderForXML
     LXML_PRESENT = True
-except ImportError, e:
+except ImportError as e:
     LXML_PRESENT = False
 
 PYTHON_3_PRE_3_2 = (sys.version_info[0] == 3 and sys.version_info < (3,2))

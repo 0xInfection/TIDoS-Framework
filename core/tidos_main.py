@@ -9,6 +9,7 @@
 #This module requires TIDoS Framework
 #https://github.com/theInfectedDrake/TIDoS
 
+from __future__ import print_function
 import sys
 import platform
 import os
@@ -44,11 +45,11 @@ def tidos_main(): # To be called by external
 		bannerbelow() # banner 2
 		web = inputin() # take the website as input
 	except Exception as e:
-		print R+' [-] Exception encountered!'
-		print R+' [-] Exception : '+str(e)
+		print(R+' [-] Exception encountered!')
+		print(R+' [-] Exception : '+str(e))
 		sys.exit(1)
 
-	print P+' [+] Okay, so what to start with?' # lets start
+	print(P+' [+] Okay, so what to start with?') # lets start
 	time.sleep(1)
 	def tidosmain(web): # this is to be iterated repeatedly
 
@@ -61,54 +62,54 @@ def tidos_main(): # To be called by external
 
 		    if zap == '1': # 1 - OSINT + Recon
 
-			print G+"\n [+] Module loaded : Reconnaissance"
+			print(G+"\n [+] Module loaded : Reconnaissance")
 			footprint(web)
 
 		    elif zap == '2': # 2 - Scanning + Enumeration
 
-			print G+'\n [+] Module loaded : Scanning & Enumeration'
+			print(G+'\n [+] Module loaded : Scanning & Enumeration')
 			scanenum(web)
 
 		    elif zap == '3': # 3 - Vulnerability Analysis
 
-			print G+'\n [+] Module loaded : Vulnerability Analysis'
+			print(G+'\n [+] Module loaded : Vulnerability Analysis')
 			vuln(web)
 
 		    elif zap == '4': # Exploitation
 
-			print G+'\n [+] Module loaded : Exploits Castle'
+			print(G+'\n [+] Module loaded : Exploits Castle')
 			exploits(web)
 
 		    elif zap == '5': # Auxillary modules
 
-			print G+'\n [+] Module loaded : Auxillaries'
+			print(G+'\n [+] Module loaded : Auxillaries')
 			auxil(web)
 
 		    elif zap == '99': # Say Goodbye!
 			
-			print R+'\n [-] Exiting...'
+			print(R+'\n [-] Exiting...')
 			time.sleep(0.6)
-			print O+' [+] Goodluck mate, Alvida!\n'
+			print(O+' [+] Goodluck mate, Alvida!\n')
 			sys.exit(0)
 
 		    else: # Troll for not selecting right option :p
 
         		dope = ['You high dude?', 'Sorry fam! You just typed shit']
-        		print R+' [-] ' + dope[randint(0,1)]
+        		print(R+' [-] ' + dope[randint(0,1)])
 			time.sleep(0.5)
 			pass
 		
 		except KeyboardInterrupt: # Incase user wants to quit
 
-		        print R+"\n [-] " + color.UNDERLINE+ "User Interruption detected!"+color.END
+		        print(R+"\n [-] " + color.UNDERLINE+ "User Interruption detected!"+color.END)
 			time.sleep(0.4)
-			print C+' [+] Alvida, see ya!\n'
+			print(C+' [+] Alvida, see ya!\n')
 			sys.exit(0)
 
 		except Exception: # Global Error Handling Stuff 
-			print R+' [-] Unhandled runtime exception while execution...' 
+			print(R+' [-] Unhandled runtime exception while execution...') 
 			time.sleep(1)
-			print R+' [-] Returning back to main menu...'
+			print(R+' [-] Returning back to main menu...')
 			time.sleep(1)
 			pass # (If user runs into a error, that would not quit this tool)
 

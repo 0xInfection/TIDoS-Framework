@@ -9,6 +9,7 @@
 #This module requires TIDoS Framework
 #https://github.com/theInfectedDrake/TIDoS-Framework 
 
+from __future__ import print_function
 import requests
 import time
 import re
@@ -37,41 +38,41 @@ br.addheaders = [
 
 def serverdetect(web):
 
-	print R+'\n   ==========================='
-	print R+'    D E T E C T   S E R V E R'
-	print R+'   ===========================\n'
+	print(R+'\n   ===========================')
+	print(R+'    D E T E C T   S E R V E R')
+	print(R+'   ===========================\n')
 	time.sleep(0.4)
-	print GR+' [*] Checking server status...'
+	print(GR+' [*] Checking server status...')
 	web = web.replace('https://','')
 	web = web.replace('http://','')
 	try:
 		ip_addr = socket.gethostbyname(web)
-		print G+' [+] Server detected online...'
+		print(G+' [+] Server detected online...')
 		time.sleep(0.5)
-		print G+' [+] Server IP :> '+ip_addr
+		print(G+' [+] Server IP :> '+ip_addr)
 	except:
-		print R+' [-] Server seems down...'
+		print(R+' [-] Server seems down...')
 
-	print GR+' [*] Trying to identify backend...'
+	print(GR+' [*] Trying to identify backend...')
 	time.sleep(0.4)
 	web = 'http://' + web 
 	try:
 	    r = requests.get(web)
 	    header = r.headers['Server']
 	    if 'cloudflare' in header:
-		print O+' [+] The website is behind Cloudflare.'
-		print G+' [+] Server : Cloudflare'
+		print(O+' [+] The website is behind Cloudflare.')
+		print(G+' [+] Server : Cloudflare')
 		time.sleep(0.4)
 		print(O+' [+] Use the "Cloudflare" VulnLysis module to try bypassing Clouflare...')
 
 	    else:
-		print B+' [+] Server : ' +C+header
+		print(B+' [+] Server : ' +C+header)
 	    try:
-		print O+' [+] Powered By : ' +G+ r.headers['X-Powered-By']
+		print(O+' [+] Powered By : ' +G+ r.headers['X-Powered-By'])
 	    except:
 		pass
 	except:
-	    print R+' [-] Failed to identify server. Some error occured!'
+	    print(R+' [-] Failed to identify server. Some error occured!')
 	    pass
 
 # ===============================================================#

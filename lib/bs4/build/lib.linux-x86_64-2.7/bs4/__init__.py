@@ -16,6 +16,7 @@ documentation:
 http://www.crummy.com/software/BeautifulSoup/bs4/doc/
 
 """
+from __future__ import print_function
 
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
@@ -205,7 +206,7 @@ class BeautifulSoup(Tag):
             is_file = False
             try:
                 is_file = os.path.exists(possible_filename)
-            except Exception, e:
+            except Exception as e:
                 # This is almost certainly a problem involving
                 # characters not valid in filenames on this
                 # system. Just let it go.
@@ -526,4 +527,4 @@ class FeatureNotFound(ValueError):
 if __name__ == '__main__':
     import sys
     soup = BeautifulSoup(sys.stdin)
-    print soup.prettify()
+    print(soup.prettify())

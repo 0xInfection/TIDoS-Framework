@@ -9,6 +9,7 @@
 #This script is a part of TIDoS Framework
 #https://github.com/the-Infected-Drake/TIDoS-Framework 
 
+from __future__ import print_function
 from scapy.all import *
 import sys
 from datetime import datetime
@@ -24,9 +25,9 @@ def scan0x00(target):
 
     try:
 
-	print R+'\n    ================================='
-	print R+'     T C P   C O N N E C T   S C A N '
-	print R+'    =================================\n'
+	print(R+'\n    =================================')
+	print(R+'     T C P   C O N N E C T   S C A N ')
+	print(R+'    =================================\n')
         min_port = raw_input(O+" [#] Enter Minumum Port Number -> ") 
         max_port = raw_input(O+" [#] Enter Maximum Port Number -> ") 
 	open_ports = []
@@ -36,11 +37,11 @@ def scan0x00(target):
 	if chk == 'y':
  
             try:
-		print GR+' [*] Checking port range...'
+		print(GR+' [*] Checking port range...')
                 if int(min_port) >= 0 and int(max_port) >= 0 and int(max_port) >= int(min_port) and int(max_port) <= 65536:
-		    print '\033[1;32m [!] Port range detected valid...'
+		    print('\033[1;32m [!] Port range detected valid...')
 		    time.sleep(0.3)
-		    print GR+' [*] Preparing for the the Scan...'
+		    print(GR+' [*] Preparing for the the Scan...')
 
 		    ports = range(int(min_port), int(max_port)+1) # Build range from given port numbers
 		    starting_time = time.time() # Start clock for scan time
@@ -51,12 +52,12 @@ def scan0x00(target):
 			    conf.verb = 0 # Hide output
 			    try:
 		    	        ping = sr1(IP(dst = ip)/ICMP()) # Ping the target
-		    	        print "\n\033[1;32m [+] Target server detected online..."
+		    	        print("\n\033[1;32m [+] Target server detected online...")
 				time.sleep(0.6)
-				print O+' [*] Beginning scan...'
+				print(O+' [*] Beginning scan...')
 			    except Exception: # If ping fails
-		        	print "\n\033[91m [!] Couldn't Resolve Target"
-		        	print " [!] Exiting..."
+		        	print("\n\033[91m [!] Couldn't Resolve Target")
+		        	print(" [!] Exiting...")
 		        	quit()
 
 		    def scanport(port): # Function to scan a given port
@@ -65,95 +66,95 @@ def scan0x00(target):
 				
 		        	srcport = RandShort() 
 		        	conf.verb = 0
-				print C+' [*] Sending SYN flagged packet to port : ' + str(port)
-				print GR+' [*] Trying handshake...'
+				print(C+' [*] Sending SYN flagged packet to port : ' + str(port))
+				print(GR+' [*] Trying handshake...')
 				tcp_connect_scan_resp = sr1(IP(dst=ip_host)/TCP(sport = srcport, dport=port,flags="S"),timeout=5)
-				print GR+' [*] Receiving incoming packet from port : ' + str(port)
-				print B+' [*] Extracting the received packet...'
+				print(GR+' [*] Receiving incoming packet from port : ' + str(port))
+				print(B+' [*] Extracting the received packet...')
 				try:
 
 					if(str(type(tcp_connect_scan_resp))=="<type 'NoneType'>"):
 						closed_ports.append(ports)
-						print ''+R+" [!] Port %s detected Closed..." % port
+						print(''+R+" [!] Port %s detected Closed..." % port)
 
 					elif(tcp_connect_scan_resp.haslayer(TCP)):
 
 					    if(tcp_connect_scan_resp.getlayer(TCP).flags == 0x12):
-						print "\033[1;92m [!] Port \033[33m%s \033[1;92mdetected Open..." % port
+						print("\033[1;92m [!] Port \033[33m%s \033[1;92mdetected Open..." % port)
 						open_ports.append(port)
-						print C+' [*] Sending back a ACK flag to confirm the connection...'
+						print(C+' [*] Sending back a ACK flag to confirm the connection...')
 						send_rst = sr(IP(dst=ip_host)/TCP(sport=srcport, dport=port, flags="AR"),timeout=5)
 
 					    elif (tcp_connect_scan_resp.getlayer(TCP).flags == 0x14):
 						closed_ports.append(ports)
-						print R+" [!] Port %s detected Closed..." % port
+						print(R+" [!] Port %s detected Closed..." % port)
 
 				except:
 				    pass
 
 			except KeyboardInterrupt: # In case the user needs to quit
 
-				print '\033[91m [*] User requested shutdown...'
-		        	print " [*] Exiting..."
+				print('\033[91m [*] User requested shutdown...')
+		        	print(" [*] Exiting...")
 		        	quit()
 
 		    checkhost(ip_host) # Run checkhost() function from earlier
-		    print O+" [*] Scanning initiated at " + strftime("%H:%M:%S") + "!\n" # Confirm scan start
+		    print(O+" [*] Scanning initiated at " + strftime("%H:%M:%S") + "!\n") # Confirm scan start
 	 
 		    for port in ports: 
 			scanport(port) # Feed each port into scanning function
 
-		    print O+"\n [!] Scanning completed at %s" %(time.strftime("%I:%M:%S %p"))
+		    print(O+"\n [!] Scanning completed at %s" %(time.strftime("%I:%M:%S %p")))
 		    ending_time = time.time()
 		    total_time = ending_time - starting_time
-		    print GR+' [*] Preparing report...\n'
+		    print(GR+' [*] Preparing report...\n')
 		    time.sleep(1)
-		    print O+'    +-------------+'
-		    print O+'    | '+R+'SCAN REPORT '+O+'|'
-		    print O+'    +-------------+'
-		    print O+'    |'
-		    print O+'    +--------+------------------+'
-		    print O+'    |  '+GR+'PORT  '+O+'|       '+GR+'STATE      '+O+'|'
-		    print O+'    +--------+------------------+'
+		    print(O+'    +-------------+')
+		    print(O+'    | '+R+'SCAN REPORT '+O+'|')
+		    print(O+'    +-------------+')
+		    print(O+'    |')
+		    print(O+'    +--------+------------------+')
+		    print(O+'    |  '+GR+'PORT  '+O+'|       '+GR+'STATE      '+O+'|')
+		    print(O+'    +--------+------------------+')
 		
 		    if open_ports: 
 			for i in sorted(open_ports):
 
 				c = str(i)
 				if len(c) == 1:
-					print O+'    |   '+C+c+O+'    |       '+G+'OPEN       '+O+'|'
-				    	print O+'    +--------+------------------+'
+					print(O+'    |   '+C+c+O+'    |       '+G+'OPEN       '+O+'|')
+				    	print(O+'    +--------+------------------+')
 					time.sleep(0.2)
 				elif len(c) == 2:
-					print O+'    |   '+C+c+'   '+O+'|       '+G+'OPEN       '+O+'|'
-				    	print O+'    +--------+------------------+'
+					print(O+'    |   '+C+c+'   '+O+'|       '+G+'OPEN       '+O+'|')
+				    	print(O+'    +--------+------------------+')
 					time.sleep(0.2)
 				elif len(c) == 3:
-					print O+'    |  '+C+c+'   '+O+'|       '+G+'OPEN       '+O+'|'
-				    	print O+'    +--------+------------------+'
+					print(O+'    |  '+C+c+'   '+O+'|       '+G+'OPEN       '+O+'|')
+				    	print(O+'    +--------+------------------+')
 					time.sleep(0.2)
 				elif len(c) == 4:
-					print O+'    |  '+C+c+'  '+O+'|       '+G+'OPEN       '+O+'|'
-				    	print O+'    +--------+------------------+'
+					print(O+'    |  '+C+c+'  '+O+'|       '+G+'OPEN       '+O+'|')
+				    	print(O+'    +--------+------------------+')
 					time.sleep(0.2)
 				elif len(c) == 5:
-					print O+'    | '+C+c+'  '+O+'|       '+G+'OPEN       '+O+'|'
-					print O+'    +--------+------------------+'
+					print(O+'    | '+C+c+'  '+O+'|       '+G+'OPEN       '+O+'|')
+					print(O+'    +--------+------------------+')
 					time.sleep(0.2)
-			print ''
+			print('')
 		    else:
-			print R+' [-] No open ports found!'
+			print(R+' [-] No open ports found!')
 
-		    print O+' [!] '+ str(len(closed_ports)) + ' closed ports not shown'
-		    print C+" [!] Host %s scanned in %s seconds.\n" %(target, total_time)
+		    print(O+' [!] '+ str(len(closed_ports)) + ' closed ports not shown')
+		    print(C+" [!] Host %s scanned in %s seconds.\n" %(target, total_time))
 
                 else: # If range didn't raise error, but didn't meet criteria
-                        print "\n\033[91m [!] Invalid Range of Ports"
-                        print " [!] Exiting..."
+                        print("\n\033[91m [!] Invalid Range of Ports")
+                        print(" [!] Exiting...")
                         quit()
             except Exception: # If input range raises an error
-                print "\n\033[91m [!] Invalid Range of Ports"
-                print " [!] Exiting..."
+                print("\n\033[91m [!] Invalid Range of Ports")
+                print(" [!] Exiting...")
                 quit()            
 
 	elif chk == 'n':
@@ -162,12 +163,12 @@ def scan0x00(target):
         	        if int(min_port) >= 0 and int(max_port) >= 0 and int(max_port) >= int(min_port): # Test for valid range of ports
         	                pass
         	        else: # If range didn't raise error, but didn't meet criteria
-        	                print "\n\033[91m [!] Invalid Range of Ports"
-        	                print " [!] Exiting..."
+        	                print("\n\033[91m [!] Invalid Range of Ports")
+        	                print(" [!] Exiting...")
         	                quit()
         	except Exception: # If input range raises an error
-                	print "\n\033[91m [!] Invalid Range of Ports"
-                	print " [!] Exiting..."
+                	print("\n\033[91m [!] Invalid Range of Ports")
+                	print(" [!] Exiting...")
                 	quit()            
  
 		ports = range(int(min_port), int(max_port)+1) # Build range from given port numbers
@@ -179,10 +180,10 @@ def scan0x00(target):
 		        conf.verb = 0 # Hide output
 		        try:
 		                ping = sr1(IP(dst = ip)/ICMP()) # Ping the target
-		                print "\n\033[1;92m [+] Target is Up, Beginning Scan..."
+		                print("\n\033[1;92m [+] Target is Up, Beginning Scan...")
 		        except Exception: # If ping fails
-		                print "\n [!] Couldn't Resolve Target"
-		                print " [!] Exiting..."
+		                print("\n [!] Couldn't Resolve Target")
+		                print(" [!] Exiting...")
 		                quit()
  
 		def scanport(port): # Function to scan a given port
@@ -205,66 +206,66 @@ def scan0x00(target):
 				except:
 			    		pass
 		        except KeyboardInterrupt: # In case the user needs to quit
-		                print "\n\033[91m [*] User Requested Shutdown..."
-		                print " [*] Exiting..."
+		                print("\n\033[91m [*] User Requested Shutdown...")
+		                print(" [*] Exiting...")
 		                quit()
 	 
 	        checkhost(ip_host)
-		print O+" [*] Scanning Started at " + strftime("%H:%M:%S") + "!\n"
+		print(O+" [*] Scanning Started at " + strftime("%H:%M:%S") + "!\n")
 		for port in ports: # Iterate through range of ports
 		        scanport(port) 
 
-	        print O+"\n [!] Scanning completed at %s" %(time.strftime("%I:%M:%S %p"))
+	        print(O+"\n [!] Scanning completed at %s" %(time.strftime("%I:%M:%S %p")))
 	    	ending_time = time.time()
 	    	total_time = ending_time - starting_time
-	    	print GR+' [*] Preparing report...\n'
+	    	print(GR+' [*] Preparing report...\n')
 	    	time.sleep(1)
-	    	print O+'    +-------------+'
-	    	print O+'    |   '+R+' REPORT   '+O+'|'
-	    	print O+'    +-------------+'
-	    	print O+'    |'
-	    	print O+'    +--------+------------------+'
-	    	print O+'    |  '+GR+'PORT  '+O+'|       '+GR+'STATE      '+O+'|'
-	    	print O+'    +--------+------------------+'
+	    	print(O+'    +-------------+')
+	    	print(O+'    |   '+R+' REPORT   '+O+'|')
+	    	print(O+'    +-------------+')
+	    	print(O+'    |')
+	    	print(O+'    +--------+------------------+')
+	    	print(O+'    |  '+GR+'PORT  '+O+'|       '+GR+'STATE      '+O+'|')
+	    	print(O+'    +--------+------------------+')
 		
 	    	if open_ports: 
 			for i in sorted(open_ports):
 
 				c = str(i)
 				if len(c) == 1:
-					print O+'    |   '+C+c+O+'    |       '+G+'OPEN       '+O+'|'
-				    	print O+'    +--------+------------------+'
+					print(O+'    |   '+C+c+O+'    |       '+G+'OPEN       '+O+'|')
+				    	print(O+'    +--------+------------------+')
 					time.sleep(0.2)
 				elif len(c) == 2:
-					print O+'    |   '+C+c+'   '+O+'|       '+G+'OPEN       '+O+'|'
-				    	print O+'    +--------+------------------+'
+					print(O+'    |   '+C+c+'   '+O+'|       '+G+'OPEN       '+O+'|')
+				    	print(O+'    +--------+------------------+')
 					time.sleep(0.2)
 				elif len(c) == 3:
-					print O+'    |  '+C+c+'   '+O+'|       '+G+'OPEN       '+O+'|'
-					print O+'    +--------+------------------+'
+					print(O+'    |  '+C+c+'   '+O+'|       '+G+'OPEN       '+O+'|')
+					print(O+'    +--------+------------------+')
 					time.sleep(0.2)
 				elif len(c) == 4:
-					print O+'    |  '+C+c+'  '+O+'|       '+G+'OPEN       '+O+'|'
-					print O+'    +--------+------------------+'
+					print(O+'    |  '+C+c+'  '+O+'|       '+G+'OPEN       '+O+'|')
+					print(O+'    +--------+------------------+')
 					time.sleep(0.2)
 				elif len(c) == 5:
-					print O+'    | '+C+c+'  '+O+'|       '+G+'OPEN       '+O+'|'
-					print O+'    +--------+------------------+'
+					print(O+'    | '+C+c+'  '+O+'|       '+G+'OPEN       '+O+'|')
+					print(O+'    +--------+------------------+')
 					time.sleep(0.2)
 		else:
-			print ''+R+' [-] No open ports found!'
+			print(''+R+' [-] No open ports found!')
 
-		print O+'\n [!] ' + str(len(closed_ports)) + ' closed ports not shown'
-	    	print C+" [!] Host %s scanned in %s seconds\n" %(target, total_time)
+		print(O+'\n [!] ' + str(len(closed_ports)) + ' closed ports not shown')
+	    	print(C+" [!] Host %s scanned in %s seconds\n" %(target, total_time))
 
     except KeyboardInterrupt: # In case the user wants to quit
-        print "\n\033[91m [*] User Requested Shutdown..."
-        print " [*] Exiting..."
+        print("\n\033[91m [*] User Requested Shutdown...")
+        print(" [*] Exiting...")
         quit()
 
 def tcpconnectscan(web):
 
-	print GR+' [*] Loading scanner...'
+	print(GR+' [*] Loading scanner...')
 	time.sleep(0.5)
 	if 'http://' in web:
 		web = web.replace('http://','')

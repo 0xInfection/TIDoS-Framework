@@ -8,6 +8,7 @@
 #This script is a part of TIDoS Framework
 #https://github.com/theInfectedDrake/TIDoS-Framework 
 
+from __future__ import print_function
 import os
 import time
 
@@ -15,7 +16,7 @@ def scanenumban():
 
     os.system('clear')
     time.sleep(0.7)
-    print """
+    print("""
                    \033[1;33m,-.        .      \033[1;37m   +           .                   +               
 \033[1;37m           *     \033[1;33m / \  `. \033[1;31m __..-,O \033[1;37m           +         *        .
 \033[1;37m       +         \033[1;33m:   \ \033[1;31m--''_..-'.'     
@@ -49,4 +50,4 @@ def scanenumban():
 \033[1;34m [A] \033[1;36mAutomate all one by one on target
 
 \033[1;34m [99] \033[1;36mBack
-"""
+""")

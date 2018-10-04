@@ -9,6 +9,7 @@
 #This module requires TIDoS Framework
 #https://github.com/theInfectedDrake/TIDoS-Framework 
 
+from __future__ import print_function
 import time
 import os
 import sys
@@ -20,9 +21,9 @@ final_links = []
 
 def links(web):
 
-    print R+'\n   ====================='
-    print R+'    P A G E   L I N K S '
-    print R+'   =====================\n'
+    print(R+'\n   =====================')
+    print(R+'    P A G E   L I N K S ')
+    print(R+'   =====================\n')
     time.sleep(0.4)
     print('' + GR + color.BOLD + ' [!] Fetching links to the website...')
     time.sleep(0.4)
@@ -40,9 +41,9 @@ def links(web):
 			if str(web0).lower() in w.lower():
 				final_links.append(w)
 
-		print O+'\n [!] Receiving links...'
+		print(O+'\n [!] Receiving links...')
 		for p in final_links:
-			print G+' [+] Found link : '+O+p
+			print(G+' [+] Found link : '+O+p)
 			time.sleep(0.06)
 
 		if 'http://' in web:
@@ -51,7 +52,7 @@ def links(web):
 			po = web.replace('https://','')
 		p = 'tmp/logs/'+po+'-logs/'+str(po)+'-links.lst'
 		open(p, 'w+')
-		print B+' [!] Saving links...'
+		print(B+' [!] Saving links...')
 		time.sleep(1)
 		for m in final_links:
 		    m = m + '\n'
@@ -59,10 +60,10 @@ def links(web):
 		    ile.write(m)
 		    ile.close()
 		pa = os.getcwd()
-		print G+' [+] Links saved under '+pa+'/'+p+'!'
-		print ''
+		print(G+' [+] Links saved under '+pa+'/'+p+'!')
+		print('')
 
 	else:
-		print R+' [-] Outbound Query Exception!'
+		print(R+' [-] Outbound Query Exception!')
 		time.sleep(0.8)
 

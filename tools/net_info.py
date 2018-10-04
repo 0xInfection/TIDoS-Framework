@@ -1,3 +1,4 @@
+from __future__ import print_function
 import os, io, platform, sys, socket, time
 from time import sleep
 from urllib2 import urlopen

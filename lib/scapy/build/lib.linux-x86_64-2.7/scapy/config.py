@@ -6,6 +6,7 @@
 """
 Implementation for of the configuration object.
 """
+from __future__ import print_function
 
 import os,time,socket,sys
 from data import *
@@ -161,7 +162,7 @@ class CommandsList(list):
         return cmd # return cmd so that method can be used as a decorator
 
 def lsc():
-    print repr(conf.commands)
+    print(repr(conf.commands))
 
 class CacheInstance(dict):
     def __init__(self, name="noname", timeout=None):

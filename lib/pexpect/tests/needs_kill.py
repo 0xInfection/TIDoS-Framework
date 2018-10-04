@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 """This script can only be killed by SIGKILL."""
+from __future__ import print_function
 import signal, time
 
 # Ignore interrupt, hangup and continue signals - only SIGKILL will work

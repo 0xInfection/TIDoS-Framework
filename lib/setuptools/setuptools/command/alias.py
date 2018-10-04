@@ -1,3 +1,4 @@
+from __future__ import print_function
 from distutils.errors import DistutilsOptionError
 
 from setuptools.extern.six.moves import map
@@ -47,7 +48,7 @@ class alias(option_base):
             print("Command Aliases")
             print("---------------")
             for alias in aliases:
-                print("setup.py alias", format_alias(alias, aliases))
+                print(("setup.py alias", format_alias(alias, aliases)))
             return
 
         elif len(self.args) == 1:
@@ -55,7 +56,7 @@ class alias(option_base):
             if self.remove:
                 command = None
             elif alias in aliases:
-                print("setup.py alias", format_alias(alias, aliases))
+                print(("setup.py alias", format_alias(alias, aliases)))
                 return
             else:
                 print("No alias definition found for %r" % alias)

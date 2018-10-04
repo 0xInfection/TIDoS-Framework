@@ -7,7 +7,7 @@ try:
     import lxml.etree
     LXML_PRESENT = True
     LXML_VERSION = lxml.etree.LXML_VERSION
-except ImportError, e:
+except ImportError as e:
     LXML_PRESENT = False
     LXML_VERSION = (0,)
 

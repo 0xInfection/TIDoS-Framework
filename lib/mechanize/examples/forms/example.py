@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+from __future__ import print_function
 import sys
 
 import mechanize
@@ -17,7 +18,7 @@ forms = list(br.forms())
 # backwards_compat=False)
 # f.close()
 form = forms[0]
-print form  # very useful!
+print(form)  # very useful!
 
 # A 'control' is a graphical HTML form widget: a text entry box, a
 # dropdown 'select' list, a checkbox, etc.
@@ -44,9 +45,9 @@ form.add_file(open("data.txt"), "text/plain", "data.txt")
 
 # All Controls may be disabled (equivalent of greyed-out in browser)...
 control = form.find_control("comments")
-print control.disabled
+print(control.disabled)
 #  ...or readonly
-print control.readonly
+print(control.readonly)
 #  readonly and disabled attributes can be assigned to
 control.disabled = False
 #  convenience method, used here to make all controls writable (unless
@@ -80,11 +81,11 @@ form.set_all_readonly(False)
 
 # You can get the Control instances from inside the form...
 control = form.find_control("cheeses", type="select")
-print control.name, control.value, control.type
+print(control.name, control.value, control.type)
 control.value = ["mascarpone", "curd"]
 # ...and the Item instances from inside the Control
 item = control.get("curd")
-print item.name, item.selected, item.id, item.attrs
+print(item.name, item.selected, item.id, item.attrs)
 item.selected = False
 
 # Controls may be referred to by label:
@@ -126,7 +127,7 @@ for control in form.controls:
 
 # Control.items is a list of all Item instances in the control
 for item in form.find_control("cheeses").items:
-    print item.name
+    print(item.name)
 
 # To remove items from a list control, remove it from .items:
 cheeses = form.find_control("cheeses")
@@ -151,13 +152,13 @@ form.set_value_by_label(["Mozzarella", "Caerphilly"], "cheeses")
 # Which items are present, selected, and successful?
 #  is the "parmesan" item of the "cheeses" control successful (selected
 #   and not disabled)?
-print "parmesan" in form["cheeses"]
+print("parmesan" in form["cheeses"])
 #  is the "parmesan" item of the "cheeses" control selected?
-print "parmesan" in [
-    item.name for item in form.find_control("cheeses").items if item.selected]
+print("parmesan" in [
+    item.name for item in form.find_control("cheeses").items if item.selected])
 #  does cheeses control have a "caerphilly" item?
-print "caerphilly" in [
-    item.name for item in form.find_control("cheeses").items]
+print("caerphilly" in [
+    item.name for item in form.find_control("cheeses").items])
 
 # Sometimes one wants to set or clear individual items in a list, rather
 # than setting the whole .value:
@@ -179,7 +180,7 @@ form.find_control("smelly").items[0].selected = False  # uncheck
 # Items may be disabled (selecting or de-selecting a disabled item is
 # not allowed):
 control = form.find_control("cheeses")
-print control.get("emmenthal").disabled
+print(control.get("emmenthal").disabled)
 control.get("emmenthal").disabled = True
 #  enable all items in control
 control.set_all_items_disabled(False)
@@ -187,13 +188,13 @@ control.set_all_items_disabled(False)
 request2 = form.click()  # mechanize.Request object
 try:
     response2 = mechanize.urlopen(request2)
-except mechanize.HTTPError, response2:
+except mechanize.HTTPError as response2:
     pass
 
-print response2.geturl()
+print(response2.geturl())
 # headers
 for name, value in response2.info().items():
     if name != "date":
-        print "%s: %s" % (name.title(), value)
-print response2.read()  # body
+        print("%s: %s" % (name.title(), value))
+print(response2.read())  # body
 response2.close()

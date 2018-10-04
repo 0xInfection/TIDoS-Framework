@@ -9,6 +9,7 @@
 #This module requires TIDoS Framework
 #https://github.com/theInfectedDrake/TIDoS-Framework
 
+from __future__ import print_function
 try:
     from google import search
 except:
@@ -30,29 +31,29 @@ def getposts(web):
     def google_it (dork):
 	clear_cookie()
 	for title in search(dork, stop=30):
-	    print B+' [!] Profile Found :> '+C+title
+	    print(B+' [!] Profile Found :> '+C+title)
 	    time.sleep(0.5)
 
     try:
-	print GR+" [*] Finding LinkedIn Employees ...\n"
+	print(GR+" [*] Finding LinkedIn Employees ...\n")
 	google_it("site:linkedin.com employees "+site+"")
-	print O+' [!] Pausing to avoid captcha...'
+	print(O+' [!] Pausing to avoid captcha...')
 	time.sleep(10)
 
-	print GR+' [*] Finding Linkedin company profiles...\n'
+	print(GR+' [*] Finding Linkedin company profiles...\n')
 	google_it("site:linkedin.com comapany "+site+"")
 
     except urllib2.HTTPError as err:
 	if err.code == 503:
-	    print R+' [-] Captcha appeared...\n'
+	    print(R+' [-] Captcha appeared...\n')
 	    pass
 
 def linkedin(web):
 
-    print GR+' [*] Loading module...'
+    print(GR+' [*] Loading module...')
     time.sleep(0.6)
-    print R+'\n    ====================================='
-    print R+'     L I N K E D I N   G A T H E R I N G'
-    print R+'    =====================================\n'
+    print(R+'\n    =====================================')
+    print(R+'     L I N K E D I N   G A T H E R I N G')
+    print(R+'    =====================================\n')
     getposts(web)
 

@@ -6,6 +6,7 @@
 """
 Classes and functions for layer 2 protocols.
 """
+from __future__ import print_function
 
 import os,struct,time
 from scapy.base_classes import Net
@@ -456,7 +457,7 @@ class ARPingResult(SndRcvList):
 
     def show(self):
         for s,r in self.res:
-            print r.sprintf("%19s,Ether.src% %ARP.psrc%")
+            print(r.sprintf("%19s,Ether.src% %ARP.psrc%"))
 
 
 

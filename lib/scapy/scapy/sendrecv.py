@@ -6,6 +6,7 @@
 """
 Functions to send and receive packets.
 """
+from __future__ import print_function
 
 import cPickle,os,sys,time,subprocess
 from select import select
@@ -84,13 +85,13 @@ def sndrcv(pks, pkt, timeout = None, inter = 0, verbose=None, chainCC=0, retry=0
                     try:
                         i = 0
                         if verbose:
-                            print "Begin emission:"
+                            print("Begin emission:")
                         for p in tobesent:
                             pks.send(p)
                             i += 1
                             time.sleep(inter)
                         if verbose:
-                            print "Finished to send %i packets." % i
+                            print("Finished to send %i packets." % i)
                     except SystemExit:
                         pass
                     except KeyboardInterrupt:
@@ -203,7 +204,7 @@ def sndrcv(pks, pkt, timeout = None, inter = 0, verbose=None, chainCC=0, retry=0
                 del(s._answered)
     
     if verbose:
-        print "\nReceived %i packets, got %i answers, remaining %i packets" % (nbrecv+len(ans), len(ans), notans)
+        print("\nReceived %i packets, got %i answers, remaining %i packets" % (nbrecv+len(ans), len(ans), notans))
     return plist.SndRcvList(ans),plist.PacketList(remain,"Unanswered")
 
 
@@ -242,7 +243,7 @@ def __gen_send(s, x, inter=0, loop=0, count=None, verbose=None, realtime=None, *
         pass
     s.close()
     if verbose:
-        print "\nSent %i packets." % n
+        print("\nSent %i packets." % n)
         
 @conf.commands.register
 def send(x, inter=0, loop=0, count=None, verbose=None, realtime=None, *args, **kargs):
@@ -291,7 +292,7 @@ def sendpfast(x, pps=None, mbps=None, realtime=None, loop=0, file_cache=False, i
         subprocess.check_call(argv)
     except KeyboardInterrupt:
         log_interactive.info("Interrupted by user")
-    except Exception,e:
+    except Exception as e:
         log_interactive.error("while trying to exec [%s]: %s" % (argv[0],e))
     finally:
         os.unlink(f)
@@ -398,24 +399,24 @@ def __sr_loop(srfunc, pkts, prn=lambda x:x[1].summary(), prnfail=lambda x:x.summ
                     break
                 count -= 1
             start = time.time()
-            print "\rsend...\r",
+            print("\rsend...\r", end=' ')
             res = srfunc(pkts, timeout=timeout, verbose=0, chainCC=1, *args, **kargs)
             n += len(res[0])+len(res[1])
             r += len(res[0])
             if verbose > 1 and prn and len(res[0]) > 0:
                 msg = "RECV %i:" % len(res[0])
-                print  "\r"+ct.success(msg),
+                print("\r"+ct.success(msg), end=' ')
                 for p in res[0]:
-                    print col(prn(p))
-                    print " "*len(msg),
+                    print(col(prn(p)))
+                    print(" "*len(msg), end=' ')
             if verbose > 1 and prnfail and len(res[1]) > 0:
                 msg = "fail %i:" % len(res[1])
-                print "\r"+ct.fail(msg),
+                print("\r"+ct.fail(msg), end=' ')
                 for p in res[1]:
-                    print col(prnfail(p))
-                    print " "*len(msg),
+                    print(col(prnfail(p)))
+                    print(" "*len(msg), end=' ')
             if verbose > 1 and not (prn or prnfail):
-                print "recv:%i  fail:%i" % tuple(map(len, res[:2]))
+                print("recv:%i  fail:%i" % tuple(map(len, res[:2])))
             if store:
                 ans += res[0]
                 unans += res[1]
@@ -426,7 +427,7 @@ def __sr_loop(srfunc, pkts, prn=lambda x:x[1].summary(), prnfail=lambda x:x.summ
         pass
  
     if verbose and n>0:
-        print ct.normal("\nSent %i packets, received %i packets. %3.1f%% hits." % (n,r,100.0*r/n))
+        print(ct.normal("\nSent %i packets, received %i packets. %3.1f%% hits." % (n,r,100.0*r/n)))
     return plist.SndRcvList(ans),plist.PacketList(unans)
 
 @conf.commands.register
@@ -487,7 +488,7 @@ def sndrcvflood(pks, pkt, prn=lambda (s,r):r.summary(), chainCC=0, store=1, uniq
                                     continue
                                 seen[res] = None
                             if res is not None:
-                                print res
+                                print(res)
                             if store:
                                 received.append((i,p))
     except KeyboardInterrupt:
@@ -585,7 +586,7 @@ stop_filter: python function applied to each packet to determine
                 if prn:
                     r = prn(p)
                     if r is not None:
-                        print r
+                        print(r)
                 if stop_filter and stop_filter(p):
                     break
                 if count > 0 and c >= count:
@@ -649,7 +650,7 @@ stop_filter: python function applied to each packet to determine
                     if prn:
                         r = prn(p)
                         if r is not None:
-                            print "%s: %s" % (label[s],r)
+                            print("%s: %s" % (label[s],r))
                     if stop_filter and stop_filter(p):
                         break
                     if count > 0 and c >= count:
