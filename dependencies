@@ -42,67 +42,67 @@ sudo python2 setup.py install
 cd ..
 cd ..
 
-cd lib/scapy/
+cd lib/scapy_mod/
 sudo python2 setup.py install
 cd ..
 cd ..
 
-cd lib/pexpect/
-sudo python2 setup.py install
-cd .. 
-cd ..
-
-cd lib/idna/
+cd lib/pexpect_mod/
 sudo python2 setup.py install
 cd .. 
 cd ..
 
-cd lib/bs4/
+cd lib/idna_mod/
+sudo python2 setup.py install
+cd .. 
+cd ..
+
+cd lib/bs4_mod/
 sudo python2 setup.py install
 cd .. 
 cd .. 
 
-cd lib/tld/
+cd lib/tld_mod/
 sudo python2 setup.py install
 cd .. 
 cd .. 
 
-cd lib/shodan/
+cd lib/shodan_mod/
 sudo python2 setup.py install
 cd ..
 cd ..
 
-cd lib/requests/
+cd lib/requests_mod/
 sudo python2 setup.py install
 cd ..
 cd ..
 
-cd lib/pymap/
+cd lib/pymap_mod/
 sudo python2 setup.py install
 cd ..
 cd ..
 
-cd lib/google/
+cd lib/google_mod/
 sudo python2 setup.py install
 cd ..
 cd ..
 
-cd lib/emailprotectionslib/
+cd lib/emailprotectionslib_mod/
 sudo python2 setup.py install
 cd ..
 cd ..
 
-cd lib/mysql/
+cd lib/mysql_mod/
 sudo python2 setup.py install
 cd ..
 cd ..
 
-cd lib/builtwith/
+cd lib/builtwith_mod/
 sudo python2 setup.py install
 cd ..
 cd ..
 
-cd lib/mechanize/
+cd lib/mechanize_mod/
 sudo python2 setup.py install
 cd ..
 cd ..
