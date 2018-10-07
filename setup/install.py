@@ -16,6 +16,23 @@ import subprocess
 from sys import stdout
 from colors import *
 
+TIDOS_RULES = """
+                _nnnn_
+               dGGGGMMb
+              @p~qp~~qMb     {}TIDoS Rules!!!
+              M(\033[37m@\033[96m)(\033[37m@\033[96m) M|   {}_;
+              @\033[33m,----.\033[96mJM| {}-'
+             JS^\033[33m\__/  \033[96mqKL
+            dZP        qKRb
+           dZP          qKKb
+          fZP            SMMb
+          HZM            MMMM
+          FqM            MMMM
+         \033[33m_| '.        |\033[96mdS'qML'
+        \033[33m|    `.       | `' \_\033[96mZq'
+       \033[33m_)      \.___.,|     .'
+       \033[33m\________)\033[96mMMMMM\033[33m|   .'""".format(O, GR, GR)
+
 def install():
 
 	os.system("clear")
@@ -45,35 +62,10 @@ def install():
 	     < TIDoS \033[1;36mInstaller!!\033[1;36m >
       ---------------------------------"""
 		print(header)
-		print(C+"                _nnnn_")
-		time.sleep(0.1)
-		print(C+"               dGGGGMMb")
-		time.sleep(0.1)
-		print(C+"              @p~qp~~qMb     "+O+"TIDoS Rules!!!") 
-		time.sleep(0.1)
-		print(C+"              M(\033[37m@\033[96m)(\033[37m@\033[96m) M|   "+GR+"_;")
-		time.sleep(0.1)
-		print(C+"              @\033[33m,----.\033[96mJM| "+GR+"-'")
-		time.sleep(0.1)
-		print(C+"             JS^\033[33m\__/  \033[96mqKL")
-		time.sleep(0.1)
-		print(C+"            dZP        qKRb")
-		time.sleep(0.1)
-		print(C+"           dZP          qKKb")
-		time.sleep(0.1)
-		print(C+"          fZP            SMMb")
-		time.sleep(0.1)
-		print(C+"          HZM            MMMM")
-		time.sleep(0.1)
-		print(C+"          FqM            MMMM")
-		time.sleep(0.1)
-		print(C+"         \033[33m_| '.        |\033[96mdS'qML'")
-		time.sleep(0.1)
-		print(C+"        \033[33m|    `.       | `' \_\033[96mZq'")
-		time.sleep(0.1)
-		print(C+"       \033[33m_)      \.___.,|     .'") 
-		time.sleep(0.1)
-		print(C+"       \033[33m\________)\033[96mMMMMM\033[33m|   .' ")
+		for line in TIDOS_RULES.splitlines():
+			if line:
+				time.sleep(0.1)
+				print(C + line)
 		time.sleep(0.1)
 		print(color.BOLD+"                      \033[33m`--'         "+color.END)
 		time.sleep(0.7)
