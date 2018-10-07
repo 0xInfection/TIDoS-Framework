@@ -32,14 +32,7 @@ def commentssrc(web):
 	print(GR+' [*] Importing links...')
 	po = web.split('//')[1]
 	p = 'tmp/logs/'+po+'-logs/'+po+'-links.lst'
-	if os.path.exists(po):
-		with open(po,'r') as ro:
-			for i in ro:
-				i = i.replace('\n','')
-				links.append(i)
-	else:
-		print(R+' [-] No files found under '+p+'!')
-		links = [web]
+	links = [web]
 
 	for w in links:
 		print(GR+' [*] Making the request...')
