@@ -10,6 +10,7 @@
 #https://github.com/theInfectedDrake/TIDoS-Framework 
 
 from __future__ import print_function
+from core.Core.arts import bugsban_art
 from colors import *
 import time
 
@@ -17,24 +18,9 @@ def othbugsban():
 
     time.sleep(0.4)
     os.system('clear')
-    print(C+'''
-\033[1;34m
-  +------------------------------------------------------+
-  |      \033[1;37mTIDoS Dialog                      \033[1;33m[-] [口] [×]  \033[1;34m|
-  | ---------------------------------------------------- |
-\033[1;36m  |                                                      |
-  |  \033[1;33mTIDoS has detected that you want to hunt for bugs! \033[1;36m |
-  |   \033[1;33mDo you wish to continue?                          \033[1;36m |
-  |                                                      |
-  |     \033[1;37m.----------.   .----------.    .----------.      \033[1;36m|  
-  |     \033[1;37m|    Yes   \033[1;37m|   |    No    \033[1;37m|    |   Maybe  \033[1;37m|      \033[1;36m|
-  |     \033[1;37m'----------'   '----------'    '----------'     \033[1;36m |
-  |______________________________________________________|
-
-''')
+    print(bugsban_art)
     time.sleep(0.3)
-    print('')
-    print(B+'        [1]'+C+' FTP Protocol Bruteforce'+W+' (Default Credentials)') 
+    print(B+'\n        [1]'+C+' FTP Protocol Bruteforce'+W+' (Default Credentials)') 
     time.sleep(0.1)
     print(B+'        [2]'+C+' SSH Protocol Bruteforce'+W+' (Default Credentials)')
     time.sleep(0.1)

@@ -12,26 +12,12 @@ from __future__ import print_function
 import time
 import os
 from colors import *
+from core.Core.arts import bugsban_art
 
 def webbugsban():
 
     os.system('clear')
-    print(C+'''
-\033[1;34m
-  +------------------------------------------------------+
-  |      \033[1;37mTIDoS Dialog                      \033[1;33m[-] [口] [×]  \033[1;34m|
-  | ---------------------------------------------------- |
-\033[1;36m  |                                                      |
-  |  \033[1;33mTIDoS has detected that you want to hunt for bugs! \033[1;36m |
-  |   \033[1;33mDo you wish to continue?                          \033[1;36m |
-  |                                                      |
-  |     \033[1;37m.----------.   .----------.    .----------.      \033[1;36m|  
-  |     \033[1;37m|    Yes   \033[1;37m|   |    No    \033[1;37m|    |   Maybe  \033[1;37m|      \033[1;36m|
-  |     \033[1;37m'----------'   '----------'    '----------'     \033[1;36m |
-  |______________________________________________________|
-
-''')
-
+    print(bugsban_art)
     print(O+'  [1]'+GR+' Insecure Cross Origin Resource Sharing'+W+' (Absolute)')
     time.sleep(0.1)
     print(O+'  [2]'+GR+' Same Site Scripting'+W+' (Sub-Domains Based)')
