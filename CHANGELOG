@@ -175,7 +175,7 @@
 	- Another new module got featured in Auxillaries.
 	- Few bug fixes and stuff.
 
-    * v1.6.1 [latest release] (#stable)
+    * v1.6.1
 
 	Huge bug fixes + Addition of a new module.
 	
@@ -184,3 +184,13 @@
 	- Huge bug fixes to #22.
 	- TIDoS is now becoming more modular.
 	- Enhancements to some auxillaries.
+
+    * v1.6.2 [latest release] (#stable)
+
+	Minor release with small bug fixes and module enhncements.
+
+	Changelog:
+	- Almost 100% code refactors to Information Disclosure modules.
+	- Efficiency of InfoDisc Phase modules highly uplifted.
+	- Migration from Python2 to Python3 is on the roll.
+	- Small bug fixes (as usual). 
