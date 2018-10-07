@@ -13,9 +13,9 @@ def agreement():
 
     print("""
 \033[1;95m
-				==========================================
-                               	   T I D O S   F R A M E W O R K   v1.6
-				==========================================
+				==================================
+                               	   T I D O S   F R A M E W O R K  
+				==================================
 \033[1;37m
 	TIDoS is an open-source toolkit developed as a comprehensive web-application penetration testing framework.
 
