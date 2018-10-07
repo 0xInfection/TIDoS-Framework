@@ -13,7 +13,7 @@
     <img src="https://img.shields.io/badge/Python-2.7-green.svg">
   </a>
   <a href="https://github.com/theInfectedDrake/TIDoS-Framework/releases">
-    <img src="https://img.shields.io/badge/TIDoS-v1.6.1-blue.svg">
+    <img src="https://img.shields.io/badge/TIDoS-v1.6.2-blue.svg">
   </a>
   <a href="https://github.com/theinfecteddrake/tidos-framework/">
       <img src="https://img.shields.io/badge/Supported%20OS-Linux-yellow.svg">
@@ -302,7 +302,7 @@ Lets see some screenshots of TIDoS in real world pentesting action:
 
 ### Version:
 ```
-v1.6.1 [latest release] [#stable]
+v1.6.2 [latest release] [#stable]
 ```
 
 ### Upcoming:
