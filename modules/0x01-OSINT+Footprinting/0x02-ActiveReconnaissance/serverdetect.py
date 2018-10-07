@@ -68,7 +68,7 @@ def serverdetect(web):
 	    else:
 		print(B+' [+] Server : ' +C+header)
 	    try:
-		print(O+' [+] Powered By : ' +G+ r.headers['X-Powered-By'])
+		print(O+' [+] Running On : ' +G+ r.headers['X-Powered-By'])
 	    except:
 		pass
 	except:

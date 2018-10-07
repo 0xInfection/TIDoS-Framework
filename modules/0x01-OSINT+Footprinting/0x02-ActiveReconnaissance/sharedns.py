@@ -27,9 +27,9 @@ def sharedns(web):
     system('dig +nocmd '+web+' ns +noall +answer')
     h = raw_input(O+'\n [*] Enter any DNS Server from above :> ') 
     time.sleep(0.4)
-    print('' + GR + ' [!] Discovering hosts on same DNS Server...')
+    print(GR + ' [!] Discovering hosts on same DNS Server...')
     time.sleep(0.4)
-    print(""+ GR +" [~] Result: \n"+ color.END)
+    print(GR +" [~] Result: \n"+ color.END)
     domains = [h]
     for dom in domains:
         text = requests.get('http://api.hackertarget.com/findshareddns/?q=' + dom).text

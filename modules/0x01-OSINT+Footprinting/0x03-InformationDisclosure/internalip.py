@@ -11,9 +11,18 @@
 
 from __future__ import print_function
 import re
+import sys
 import time
 import requests
 from colors import *
+sys.path.append('files/signature-db/')
+from bs4 import BeautifulSoup
+from infodisc_signatures import INTERNAL_IP_SIGNATURE as signature
+links = []
+urls = []
+found = 0x00
+from requests.packages.urllib3.exceptions import InsecureRequestWarning
+requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 def internalip0x00(url):
 
@@ -21,18 +30,47 @@ def internalip0x00(url):
     print(R+'     INTERNAL IP DISCLOSURE')
     print(R+'    ========================\n')
     time.sleep(0.5)
-    print(GR+' [*] Making the request...')
-    req = requests.get(url, verify=False)
-    print(O+' [*] Finding internal IP addresses...')
-    time.sleep(0.5)
-    print(GR+' [*] Covering both IPv4 and IPv6 internal addresses...')
-    time.sleep(0.8)
-    search = re.findall(r'/(^127\.)|(^192\.168\.)|(^10\.)|(^172\.1[6-9]\.)|(^172\.2[0-9]\.)|(^172\.3[0-1]\.)|(^::1$)|(^[fF][cCdD])/', req.content)
-    if search:
-    	for i in search:
-        	print(G+" [+] Internal IP found : "+O, str(i))
-    else:
-	print(R+' [-] Nothing found... ')
+    links = [url]
+    po = url.split('//')[1]
+    for w in links:
+        print(GR+' [*] Scraping Page: '+O+url)
+        req = requests.get(w).text
+        check0x00(req)
+
+    soup = BeautifulSoup(req,'lxml')
+    for line in soup.find_all('a', href=True):
+        newline = line['href']
+        try:
+            if newline[:4] == "http":
+                if po in newline:
+                    urls.append(str(newline))
+            elif newline[:1] == "/":
+                combline = url+newline
+                urls.append(str(combline))
+        except:
+            print(R+' [-] Unhandled Exception Occured!')
+
+    try:
+        for uurl in urls:
+            print(G+"\n [+] Scraping Page: "+O+uurl)
+            req = requests.get(uurl).text
+            check0x00(req)
+
+    except requests.exceptions:
+        print(R+' [-] Outbound Query Exception...')
+
+    if found == 0x00:
+        print(R+'\n [-] No Internal IPs found disclosed in plaintext in source code!\n')
+
+    print(G+' [+] Scraping Done!')
+
+def check0x00(req):
+    comments = re.findall(signature,req)
+    print(GR+" [*] Searching for Internal IPs...")
+    for comment in comments:
+        print(C+'   '+comment)
+        time.sleep(0.03)
+        found = 0x01
 
 def internalip(web):
 
