@@ -134,3 +134,20 @@ bugsban_art = C+'''
   |______________________________________________________|
 
 '''
+
+tidosrules_art = """
+                _nnnn_
+               dGGGGMMb
+              @p~qp~~qMb     {}TIDoS Rules!!!
+              M(\033[37m@\033[96m)(\033[37m@\033[96m) M|   {}_;
+              @\033[33m,----.\033[96mJM| {}-'
+             JS^\033[33m\__/  \033[96mqKL
+            dZP        qKRb
+           dZP          qKKb
+          fZP            SMMb
+          HZM            MMMM
+          FqM            MMMM
+         \033[33m_| '.        |\033[96mdS'qML'
+        \033[33m|    `.       | `' \_\033[96mZq'
+       \033[33m_)      \.___.,|     .'
+       \033[33m\________)\033[96mMMMMM\033[33m|   .'""".format(O, GR, GR)
