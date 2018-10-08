@@ -342,4 +342,4 @@ TIDoS is an in progress work far from perfection and I admit that there may be b
 
 Got more suggestions or new ideas? Raise up an [issue](https://github.com/theInfectedDrake/TIDoS-Framework/issues/new) or hit me up via DM on [twitter](https://twitter.com/infecteddrake).
 
-> Copyright © __The Infected Drake__
+> Copyright © [__The Infected Drake__](https://twitter.com/infecteddrake)
