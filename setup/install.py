@@ -91,6 +91,6 @@ def install():
 		print(''+GR+" [+] Also note that the next time you want to run this tool, just simply execute "+O+'tidos'+GR+" in terminal.\n")
 		sys.exit()
 
-	except KeyboardInterrupt:
+	except KeyboardInterrupt: # incase user wants to exit
 
 		print(R+'\n [-] Installation aborted...\n')
