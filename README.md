@@ -92,9 +92,9 @@ python2 tidos.py
 
 ### Getting Started :-
 
-TIDoS is made to be comprehensive and versatile. It is a highly flexible framework where you just have to select and use modules.
+TIDoS is built to be a comprehensive, flexible and versatile framework where you just have to select and use modules.
 
-But before that, you need to set your own `API KEYS` for various OSINT & Scanning and Enumeration purposes. To do so, open up `API_KEYS.py` under `files/` directory and set your own keys and access tokens for `SHODAN`, `CENSYS`, `FULL CONTACT`, `GOOGLE` and `WHATCMS`. Public `API KEYS` and `ACCESS TOKENS` for `SHODAN` and `WHATCMS` have been provided with the TIDoS release itself. You can still add your own... `no harm!`
+So to get started, you need to set your own `API KEYS` for various OSINT & Scanning and Enumeration purposes. To do so, open up `API_KEYS.py` under `files/` directory and set your own keys and access tokens for `SHODAN`, `CENSYS`, `FULL CONTACT`, `GOOGLE` and `WHATCMS`. Public `API KEYS` and `ACCESS TOKENS` for `SHODAN` and `WHATCMS` have been provided with the TIDoS release itself. You can still add your own... `no harm!`
 
 Finally, as the framework opens up, enter the website name `eg. http://www.example.com` and let TIDoS lead you. Thats it! Its as easy as that.
 
