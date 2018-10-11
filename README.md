@@ -27,7 +27,7 @@
   <a href="https://github.com/theInfectedDrake/TIDoS-Framework#flawless-features--">
     <img src="https://img.shields.io/badge/Modules-108-blue.svg">
   </a>
-  <a href="https://travis-ci.com/theInfectedDrake/TIDoS-Framework">
+  <a href="https://travis-ci.org/theInfectedDrake/TIDoS-Framework">
     <img src="https://img.shields.io/badge/Build%20Status-passing-brightgreen.svg">
   </a>
   <a href="https://github.com/theInfectedDrake/TIDoS-Framework/releases/tag/v1.6.1/">
