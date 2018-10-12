@@ -11,7 +11,7 @@
 from __future__ import print_function
 import os
 from random import randint
-from colors import *
+from core.Core.colors import *
 
 def banner():
 

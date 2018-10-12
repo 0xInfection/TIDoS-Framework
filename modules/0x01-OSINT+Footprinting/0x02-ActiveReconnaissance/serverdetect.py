@@ -18,7 +18,7 @@ import mechanize
 import cookielib
 from urllib import urlencode
 from re import search
-from colors import *
+from core.Core.colors import *
 br = mechanize.Browser()
 
 # Cookie Jar

@@ -14,7 +14,7 @@ import re
 import time
 import os
 import requests
-from colors import *
+from core.Core.colors import *
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 pathsinfo = []
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)

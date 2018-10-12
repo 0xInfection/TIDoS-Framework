@@ -14,7 +14,7 @@ import os
 import time
 import requests
 import urlparse
-from colors import *
+from core.Core.colors import *
 
 def apachestat(web):
 

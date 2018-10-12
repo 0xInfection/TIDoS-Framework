@@ -13,7 +13,7 @@ import urllib2
 import time
 import sys
 from time import sleep
-from colors import *
+from core.Core.colors import *
 
 def grabhead(web):
 

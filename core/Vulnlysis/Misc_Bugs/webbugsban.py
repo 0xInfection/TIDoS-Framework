@@ -11,7 +11,7 @@
 from __future__ import print_function
 import time
 import os
-from colors import *
+from core.Core.colors import *
 from core.Core.arts import bugsban_art
 
 def webbugsban():

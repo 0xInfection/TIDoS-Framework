@@ -15,7 +15,7 @@ import os
 import sys
 import requests
 sys.path.append('../doc/')
-from colors import *
+from core.Core.colors import *
 
 def updater():
 

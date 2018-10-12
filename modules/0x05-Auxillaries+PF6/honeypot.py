@@ -12,7 +12,7 @@ from __future__ import print_function
 import socket
 import requests
 import time
-from colors import *
+from core.Core.colors import *
 from files.API_KEYS import SHODAN_API_KEY
 
 def honeypot(web):

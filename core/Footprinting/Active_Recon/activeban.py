@@ -9,7 +9,7 @@
 #https://github.com/theInfectedDrake/TIDoS-Framework
 
 from __future__ import print_function
-from colors import *
+from core.Core.colors import *
 import time
 
 def activeban():

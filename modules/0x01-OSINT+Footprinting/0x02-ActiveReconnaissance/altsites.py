@@ -14,7 +14,7 @@ import os
 import time
 import requests
 import hashlib
-from colors import *
+from core.Core.colors import *
 
 md5s = {}
 responses = {}

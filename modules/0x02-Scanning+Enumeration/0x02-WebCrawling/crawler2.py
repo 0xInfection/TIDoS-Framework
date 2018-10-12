@@ -17,7 +17,7 @@ import requests
 import mechanize
 import cookielib
 from bs4 import BeautifulSoup
-from colors import *
+from core.Core.colors import *
 
 br = mechanize.Browser()
 

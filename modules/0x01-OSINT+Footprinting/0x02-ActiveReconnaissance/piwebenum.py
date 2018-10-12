@@ -12,7 +12,7 @@
 from __future__ import print_function
 import os, requests, time
 from time import sleep
-from colors import *
+from core.Core.colors import *
 
 def piwebenum(web):
 

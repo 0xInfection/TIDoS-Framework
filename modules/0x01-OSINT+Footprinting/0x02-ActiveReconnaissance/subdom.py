@@ -17,7 +17,7 @@ import tld
 import requests
 from time import sleep
 from tld import get_tld
-from colors import *
+from core.Core.colors import *
 
 sublist = []
 flist = []

@@ -11,7 +11,7 @@
 
 from __future__ import print_function
 import urllib
-from colors import *
+from core.Core.colors import *
 from cgi import escape
 from time import sleep
 import StringIO

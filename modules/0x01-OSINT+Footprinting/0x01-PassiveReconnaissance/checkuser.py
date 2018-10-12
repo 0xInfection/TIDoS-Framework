@@ -17,7 +17,7 @@ import requests
 import json
 import time
 import urllib
-from colors import *
+from core.Core.colors import *
 serv = []
 
 def check0x00(alias,web):

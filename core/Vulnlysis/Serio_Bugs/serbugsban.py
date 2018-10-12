@@ -10,7 +10,7 @@
 
 from __future__ import print_function
 import time
-from colors import *
+from core.Core.colors import *
 import os
 from core.Core.arts import bugsban_art
 

@@ -17,7 +17,7 @@ import json
 import time
 import sys
 sys.path.append('files/')
-from colors import *
+from core.Core.colors import *
 from files.API_KEYS import SHODAN_API_KEY
 
 def grab(web):

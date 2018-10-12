@@ -13,7 +13,7 @@ from __future__ import print_function
 import time
 import requests
 import os
-from colors import *
+from core.Core.colors import *
 links = []
 
 def revip(web):

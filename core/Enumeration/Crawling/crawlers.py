@@ -23,7 +23,7 @@ from crawler1 import *
 from crawler2 import *
 from crawler3 import *
 from crawlersban import *
-from colors import *
+from core.Core.colors import *
 
 def crawlers(web):
 

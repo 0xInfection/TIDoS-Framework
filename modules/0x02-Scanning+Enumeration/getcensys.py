@@ -18,7 +18,7 @@ import subprocess
 import time
 from re import search
 from getports import *
-from colors import *
+from core.Core.colors import *
 
 # Browser
 br = mechanize.Browser()

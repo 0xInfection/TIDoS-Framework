@@ -15,7 +15,7 @@ import sys
 sys.path.append('files/signature-db/')
 import time
 import requests
-from colors import *
+from core.Core.colors import *
 from re import search
 from bs4 import BeautifulSoup
 from commonerror_signatures import patterns

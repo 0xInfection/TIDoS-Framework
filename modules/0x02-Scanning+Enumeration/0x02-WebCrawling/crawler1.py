@@ -17,7 +17,7 @@ import cookielib
 from urllib2 import urlparse
 import time
 from time import sleep
-from colors import *
+from core.Core.colors import *
 
 br = mechanize.Browser()
 

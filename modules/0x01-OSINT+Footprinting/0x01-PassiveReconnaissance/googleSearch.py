@@ -19,7 +19,7 @@ try:
 except:
     from googlesearch import search
 from time import sleep
-from colors import *
+from core.Core.colors import *
 
 def googleSearch():
 

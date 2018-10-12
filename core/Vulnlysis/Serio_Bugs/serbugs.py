@@ -29,7 +29,7 @@ from phpi import *
 from htmli import *
 from xpathi import *
 from shellshock import *
-from colors import *
+from core.Core.colors import *
 from xss import *
 from openredirect import *
 from pathtrav import *

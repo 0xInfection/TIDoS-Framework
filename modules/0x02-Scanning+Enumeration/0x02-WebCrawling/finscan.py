@@ -15,7 +15,7 @@ import sys
 from datetime import datetime
 import time
 import socket
-from colors import *
+from core.Core.colors import *
 from time import sleep
 from time import strftime
 from logging import getLogger, ERROR

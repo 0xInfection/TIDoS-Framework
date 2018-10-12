@@ -22,7 +22,7 @@ from ftpbrute import *
 from sqlbrute import *
 from sshbrute import *
 from othbugsban import *
-from colors import *
+from core.Core.colors import *
 from smtpbrute import *
 from xmppbrute import *
 from telnetbrute import *

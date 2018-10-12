@@ -14,7 +14,7 @@ import json
 import time
 import requests
 import re
-from colors import *
+from core.Core.colors import *
 
 def getemails0x00(domain):
 

@@ -14,7 +14,7 @@ import requests
 import time
 import json
 import urllib2
-from colors import *
+from core.Core.colors import *
 
 def googlenum(web):
 

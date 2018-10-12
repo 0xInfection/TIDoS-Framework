@@ -15,7 +15,7 @@ import json
 from bs4 import BeautifulSoup
 import time
 import requests
-from colors import *
+from core.Core.colors import *
 
 def check0x00(domain):
 

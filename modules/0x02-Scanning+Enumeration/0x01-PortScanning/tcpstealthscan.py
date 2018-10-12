@@ -18,7 +18,7 @@ from time import sleep
 from time import strftime
 from logging import getLogger, ERROR
 getLogger("scapy.runtime").setLevel(ERROR)
-from colors import *
+from core.Core.colors import *
 
 def scan0x00(target):
 

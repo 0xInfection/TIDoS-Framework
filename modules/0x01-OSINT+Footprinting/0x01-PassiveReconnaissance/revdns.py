@@ -13,7 +13,7 @@ from __future__ import print_function
 import os
 import time
 import requests
-from colors import *
+from core.Core.colors import *
 links = []
 
 def revdns(web):

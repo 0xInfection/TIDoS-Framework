@@ -11,7 +11,7 @@
 import sys
 import time
 sys.path.append('setup/')
-from colors import *
+from core.Core.colors import *
 from install import *
 
 time.sleep(1)

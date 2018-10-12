@@ -16,7 +16,7 @@ import json
 import requests
 import re
 import time
-from colors import *
+from core.Core.colors import *
 
 def webscan(web):
 

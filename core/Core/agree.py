@@ -13,8 +13,8 @@ import os
 import sys
 import platform
 import time
-from agreement import *
-from colors import *
+from core.Core.agreement import *
+from core.Core.colors import *
 
 def agree():
 

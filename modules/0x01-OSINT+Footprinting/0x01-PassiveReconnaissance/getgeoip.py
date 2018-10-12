@@ -13,7 +13,7 @@ from __future__ import print_function
 import time
 import requests
 import socket
-from colors import *
+from core.Core.colors import *
 
 def getgeoip(web):
 

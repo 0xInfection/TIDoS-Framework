@@ -14,7 +14,7 @@ import re
 import sys
 import time
 import requests
-from colors import *
+from core.Core.colors import *
 sys.path.append('files/signature-db/')
 from bs4 import BeautifulSoup
 from infodisc_signatures import INTERNAL_IP_SIGNATURE as signature

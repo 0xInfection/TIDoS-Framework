@@ -13,7 +13,7 @@ from __future__ import print_function
 import socket
 import ssl
 import time
-from colors import *
+from core.Core.colors import *
 
 def sslcert(web):
 

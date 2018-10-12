@@ -18,7 +18,7 @@ import requests
 from lxml import etree
 from collections import OrderedDict
 from urlparse import urljoin
-from colors import *
+from core.Core.colors import *
 
 global actual_uri
 actual_uri = []

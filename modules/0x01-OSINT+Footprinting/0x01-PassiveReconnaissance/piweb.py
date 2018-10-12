@@ -13,7 +13,7 @@ from __future__ import print_function
 import requests
 import time
 from time import sleep
-from colors import *
+from core.Core.colors import *
 
 def piweb(web):
 

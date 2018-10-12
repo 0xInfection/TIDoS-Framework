@@ -13,7 +13,7 @@ import os
 import time
 
 # Get module imports
-from colors import *
+from core.Core.colors import *
 from footprintban import *
 from Info_Disc.infodisc import *
 from Active_Recon.activeo import *

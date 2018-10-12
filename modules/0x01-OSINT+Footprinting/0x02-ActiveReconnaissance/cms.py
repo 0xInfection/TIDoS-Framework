@@ -19,7 +19,7 @@ import json
 import time
 import builtwith
 from time import sleep
-from colors import *
+from core.Core.colors import *
 import urllib2
 from urllib2 import urlparse
 

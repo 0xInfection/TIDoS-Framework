@@ -18,7 +18,7 @@ import time
 import urllib2
 from random import randint
 from time import sleep
-from colors import *
+from core.Core.colors import *
 
 def getposts(web):
 

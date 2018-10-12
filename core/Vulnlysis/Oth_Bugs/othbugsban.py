@@ -11,7 +11,7 @@
 
 from __future__ import print_function
 from core.Core.arts import bugsban_art
-from colors import *
+from core.Core.colors import *
 import time
 
 def othbugsban():

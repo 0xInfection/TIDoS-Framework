@@ -14,7 +14,7 @@ import os
 import time
 import sslyze
 import requests
-from colors import *
+from core.Core.colors import *
 from sslyze.plugins.certificate_info_plugin import CertificateInfoScanCommand
 from sslyze.plugins.heartbleed_plugin import HeartbleedScanCommand
 from sslyze.plugins.http_headers_plugin import HttpHeadersScanCommand

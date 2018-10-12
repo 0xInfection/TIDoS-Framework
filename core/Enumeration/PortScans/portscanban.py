@@ -12,7 +12,7 @@ from __future__ import print_function
 import time
 import os
 from time import sleep
-from colors import *
+from core.Core.colors import *
 
 def portscanban():
 

@@ -15,7 +15,7 @@ import PIL.ExifTags
 from PIL.ExifTags import TAGS, GPSTAGS
 from PIL import Image
 from pyexiv2 import ImageMetadata, ExifTag
-from colors import *
+from core.Core.colors import *
 
 from collections import namedtuple
 import os

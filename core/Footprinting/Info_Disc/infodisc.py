@@ -24,7 +24,7 @@ from errors import *
 from phone import *
 from ssn import *
 from infodiscban import *
-from colors import *
+from core.Core.colors import *
 from internalip import *
 
 def infodisc(web):

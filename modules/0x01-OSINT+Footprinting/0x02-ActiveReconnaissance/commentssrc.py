@@ -17,7 +17,7 @@ import re
 import time
 from bs4 import BeautifulSoup
 import sys
-from colors import *
+from core.Core.colors import *
 found = 0x00
 urls = []
 links = []

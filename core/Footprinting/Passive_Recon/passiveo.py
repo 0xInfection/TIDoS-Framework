@@ -39,7 +39,7 @@ from googleSearch import *
 from whoischeckup import *
 from pastebin import *
 from linkedin import *
-from colors import *
+from core.Core.colors import *
 
 def passiveo(web):
 

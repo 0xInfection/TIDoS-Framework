@@ -15,7 +15,7 @@ import re
 import time
 import urllib2
 from re import search, I
-from colors import *
+from core.Core.colors import *
 
 content_type = 'application/xml; charset="utf-8"'
 

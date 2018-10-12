@@ -16,7 +16,7 @@ from vulnban import *
 from core.Vulnlysis.Misc_Bugs.webbugs import *
 from core.Vulnlysis.Oth_Bugs.othbugs import *
 from core.Vulnlysis.Serio_Bugs.serbugs import *
-from colors import *
+from core.Core.colors import *
 
 def vuln(web):
 

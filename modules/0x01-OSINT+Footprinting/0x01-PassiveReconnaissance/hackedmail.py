@@ -16,7 +16,7 @@ import requests
 import re
 import time
 import json
-from colors import *
+from core.Core.colors import *
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)

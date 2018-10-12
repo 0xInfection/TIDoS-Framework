@@ -25,7 +25,7 @@ from cloudflaremisc import *
 from hsts import *
 from sessionfix import *
 from headers import *
-from colors import *
+from core.Core.colors import *
 from xsstrace import *
 from cookiecheck import *
 from mailspoof import *

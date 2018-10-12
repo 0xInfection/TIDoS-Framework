@@ -12,7 +12,7 @@
 from __future__ import print_function
 import time
 import hashlib
-from colors import *
+from core.Core.colors import *
 
 def hashes():
 

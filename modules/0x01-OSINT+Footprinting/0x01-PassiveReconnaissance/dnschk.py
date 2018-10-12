@@ -14,7 +14,7 @@ import re
 import time
 import os
 import sys
-from colors import *
+from core.Core.colors import *
 sys.path.append('files/')
 from DNSDumpsterAPI import *
 

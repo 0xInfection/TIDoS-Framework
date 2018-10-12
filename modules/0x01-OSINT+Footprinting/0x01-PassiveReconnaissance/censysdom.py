@@ -14,7 +14,7 @@ import os
 import json
 import requests
 import time
-from colors import *
+from core.Core.colors import *
 
 def censysdom(web):
 

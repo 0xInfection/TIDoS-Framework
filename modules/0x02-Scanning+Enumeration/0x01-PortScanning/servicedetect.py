@@ -16,7 +16,7 @@ import os
 import socket
 import scapy
 from scapy.all import *
-from colors import *
+from core.Core.colors import *
 
 def service0x00(host):
 

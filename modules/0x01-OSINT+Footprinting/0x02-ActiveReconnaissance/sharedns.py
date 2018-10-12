@@ -14,7 +14,7 @@ import time
 import requests
 import os
 from os import system
-from colors import *
+from core.Core.colors import *
 
 def sharedns(web):
 

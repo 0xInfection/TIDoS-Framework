@@ -14,7 +14,7 @@ import time
 import os
 import sys
 from random import randint
-from colors import *
+from core.Core.colors import *
 from backupbrute import *
 from backbrute import *
 from dotbrute import *

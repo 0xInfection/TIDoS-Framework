@@ -16,7 +16,7 @@ import os
 sys.path.append('modules/0x02-Scanning+Enumeration/')
 
 from nmapmain import *
-from colors import *
+from core.Core.colors import *
 from scanenumban import *
 from webscan import *
 from bannergrab import *

@@ -12,7 +12,7 @@
 from __future__ import print_function
 import requests
 import time
-from colors import *
+from core.Core.colors import *
 
 def getconinfo(domain):
 

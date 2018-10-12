@@ -16,7 +16,7 @@ import sys
 import time
 import requests
 sys.path.append('files/signature-db/waf-signatures/')
-from colors import *
+from core.Core.colors import *
 from wafimpo import *
 from time import sleep
 

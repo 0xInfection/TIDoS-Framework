@@ -13,7 +13,7 @@ from __future__ import print_function
 import requests
 import socket
 import time
-from colors import *
+from core.Core.colors import *
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)

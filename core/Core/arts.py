@@ -9,7 +9,7 @@
 #This module requires TIDoS Framework
 #https://github.com/theInfectedDrake/TIDoS-Framework
 
-from colors import *
+from core.Core.colors import *
 
 auxilban_art = C+'''
 \033[1;37m

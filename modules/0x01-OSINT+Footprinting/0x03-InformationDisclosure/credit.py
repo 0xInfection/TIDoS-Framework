@@ -16,7 +16,7 @@ sys.path.append('files/signature-db/')
 import lxml
 import time
 import requests
-from colors import *
+from core.Core.colors import *
 urls = []
 links = []
 found = 0x00

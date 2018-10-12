@@ -12,7 +12,7 @@
 from __future__ import print_function
 import os, sys, urllib, urllib2, time
 from time import sleep
-from colors import *
+from core.Core.colors import *
 
 def nmapmain(web):
 

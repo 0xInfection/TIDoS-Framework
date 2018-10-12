@@ -12,7 +12,7 @@
 from __future__ import print_function
 import os
 from time import sleep
-from colors import *
+from core.Core.colors import *
 
 def traceroute(web):
 

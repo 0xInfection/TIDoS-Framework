@@ -15,7 +15,7 @@ import sys
 sys.path.append('files/signature-db/')
 import time
 import requests
-from colors import *
+from core.Core.colors import *
 from bs4 import BeautifulSoup
 from infodisc_signatures import PHONE_NUMBER_SIGNATURE as signature
 links = []

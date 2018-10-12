@@ -33,7 +33,7 @@ from phpinfo import *
 from cms import *
 from serverdetect import *
 from altsites import *
-from colors import *
+from core.Core.colors import *
 
 def activeo(web):
 

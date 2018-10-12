@@ -15,7 +15,7 @@ import os
 import sys
 sys.path.append('tmp/')
 import requests
-from colors import *
+from core.Core.colors import *
 
 final_links = []
 
