@@ -108,3 +108,7 @@ sudo python2 setup.py install
 cd ..
 cd ..
 
+cd lib/pyexiv2_mod/
+sudo python2 setup.py install
+cd ..
+cd ..
