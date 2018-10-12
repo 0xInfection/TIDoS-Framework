@@ -1,3 +1,5 @@
+> This is a modified fork of the actual library to suit TIDoS's needs. See README.md at root of lib/ directory.
+
 .. image:: https://travis-ci.org/pexpect/pexpect.svg?branch=master
    :target: https://travis-ci.org/pexpect/pexpect
    :align: right
