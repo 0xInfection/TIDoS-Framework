@@ -20,6 +20,12 @@
 import os
 import os.path
 
+try:
+    cmp             # Python 2
+except NameError:
+    def cmp(x, y):  # Python 3
+        return (x > y) - (x < y)
+
 
 class File(object):
     def __init__(self, *pathComponents):
