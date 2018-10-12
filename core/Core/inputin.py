@@ -13,13 +13,13 @@ import sys
 import socket
 import time
 import os
-from colors import *
+from core.Core.colors import *
 
 def inputin():
 
     try:
-        web = raw_input(''+O+' [#] Target web address :> '+C)
         global web
+        web = raw_input(''+O+' [#] Target web address :> '+C)
         if not str(web).startswith('http'):
             mo = raw_input(GR+' [#] Does this website use SSL? (y/n) :> ')
             if mo == 'y' or mo == 'Y':
