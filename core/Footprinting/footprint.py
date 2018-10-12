@@ -14,10 +14,10 @@ import time
 
 # Get module imports
 from core.Core.colors import *
-from footprintban import *
-from Info_Disc.infodisc import *
-from Active_Recon.activeo import *
-from Passive_Recon.passiveo import *
+from core.Footprinting.footprintban import *
+from core.Footprinting.Info_Disc.infodisc import *
+from core.Footprinting.Active_Recon.activeo import *
+from core.Footprinting.Passive_Recon.passiveo import *
 
 def footprint(web):
 

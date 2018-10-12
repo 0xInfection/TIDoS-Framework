@@ -21,11 +21,11 @@ from popbrute import *
 from ftpbrute import *
 from sqlbrute import *
 from sshbrute import *
-from othbugsban import *
-from core.Core.colors import *
 from smtpbrute import *
 from xmppbrute import *
 from telnetbrute import *
+from core.Core.colors import *
+from core.Vulnlysis.Oth_Bugs.othbugsban import *
 
 def othbugs(web):
 

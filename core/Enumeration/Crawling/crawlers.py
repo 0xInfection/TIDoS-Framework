@@ -22,8 +22,8 @@ sys.path.append('modules/0x02-Scanning+Enumeration/0x02-WebCrawling/')
 from crawler1 import *
 from crawler2 import *
 from crawler3 import *
-from crawlersban import *
 from core.Core.colors import *
+from core.Enumeration.Crawling.crawlersban import *
 
 def crawlers(web):
 

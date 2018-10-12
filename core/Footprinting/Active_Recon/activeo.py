@@ -26,13 +26,13 @@ from dav import *
 from sharedns import *
 from commentssrc import *
 from sslcert import *
-from activeban import *
 from filebrute import *
 from traceroute import *
 from phpinfo import *
 from cms import *
 from serverdetect import *
 from altsites import *
+from core.Footprinting.Active_Recon.activeban import *
 from core.Core.colors import *
 
 def activeo(web):

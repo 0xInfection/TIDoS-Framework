@@ -17,11 +17,11 @@ import random
 from random import randint
 from subprocess import call
 sys.path.append('modules/0x05-Auxillaries+PF6/')
-from auxilban import *
 from encodeall import *
 from honeypot import *
 from hashes import *
 from imgext import *
+from core.Auxillaries.auxilban import *
 
 def auxil(web):
 

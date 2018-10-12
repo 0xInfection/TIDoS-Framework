@@ -15,17 +15,16 @@ import time
 import subprocess
 import random
 from random import randint
-from subprocess import call
-sys.path.append('modules/0x01-OSINT+Footprinting/0x03-InformationDisclosure/')
 
 from credit import *
 from emailext import *
 from errors import *
 from phone import *
 from ssn import *
-from infodiscban import *
-from core.Core.colors import *
 from internalip import *
+from core.Core.colors import *
+from core.Footprinting.Info_Disc.infodiscban import *
+sys.path.append('modules/0x01-OSINT+Footprinting/0x03-InformationDisclosure/')
 
 def infodisc(web):
 

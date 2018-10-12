@@ -28,7 +28,7 @@ from tcpstealthscan import *
 #from udpscan import *
 from xmasscan import *
 from core.Core.colors import *
-from portscanban import *
+from core.Enumeration.PortScans.portscanban import *
 
 def portscan(web):
 

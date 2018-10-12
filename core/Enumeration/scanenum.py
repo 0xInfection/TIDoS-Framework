@@ -16,16 +16,16 @@ import os
 sys.path.append('modules/0x02-Scanning+Enumeration/')
 
 from nmapmain import *
-from core.Core.colors import *
-from scanenumban import *
 from webscan import *
 from bannergrab import *
 from osdetect import *
 from webtech import *
 from waf import *
 from ssltlsscan import *
-from Crawling.crawlers import *
-from PortScans.portscan import *
+from core.Core.colors import *
+from core.Enumeration.scanenumban import *
+from core.Enumeration.Crawling.crawlers import *
+from core.Enumeration.PortScans.portscan import *
 
 def scanenum(web):
 

@@ -16,7 +16,6 @@ from random import randint
 sys.path.append('modules/0x01-OSINT+Footprinting/0x01-PassiveReconnaissance/')
 
 from dnschk import *
-from passiveban import *
 from piweb import *
 from getgeoip import *
 from revip import *
@@ -40,6 +39,7 @@ from whoischeckup import *
 from pastebin import *
 from linkedin import *
 from core.Core.colors import *
+from core.Footprinting.Passive_Recon.passiveban import *
 
 def passiveo(web):
 

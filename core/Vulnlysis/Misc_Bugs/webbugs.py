@@ -18,17 +18,17 @@ from icors import *
 from ssscript import *
 from clickjack import *
 from zone import *
-from webbugsban import *
 from hhi import *
 from netmisc import *
 from cloudflaremisc import *
 from hsts import *
 from sessionfix import *
 from headers import *
-from core.Core.colors import *
 from xsstrace import *
 from cookiecheck import *
 from mailspoof import *
+from core.Core.colors import *
+from core.Vulnlysis.Misc_Bugs.webbugsban import *
 
 def webbugs(web):
 
