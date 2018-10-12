@@ -94,7 +94,7 @@ footprintban_art = """
          --           -            --  -      -         ---  __       ^
    --  __                      ___--  ^  ^                         --  __"""
 
-vulnban_art = R+"""
+vulnban_art = R+r"""
                      .....
                .:noONNNNNNNOon:.
             .:NNNNNNNmddddNNNNNNN:.
