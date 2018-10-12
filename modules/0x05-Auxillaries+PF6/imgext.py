@@ -14,11 +14,7 @@ import time
 import PIL.ExifTags
 from PIL.ExifTags import TAGS, GPSTAGS
 from PIL import Image
-try:
-    from pyexiv2 import ImageMetadata, ExifTag # python2
-except ImportError:
-    from py3exiv2 import ImageMetadata, ExifTag 
-    # python3
+#from pyexiv2 import ImageMetadata, ExifTag # python2
 from core.Core.colors import *
 from collections import namedtuple
 import os

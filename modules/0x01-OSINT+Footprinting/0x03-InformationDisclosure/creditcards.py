@@ -137,7 +137,7 @@ def check0x00(req):
     except:
         pass
 
-def credit(web):
+def creditcards(web):
 
     print(GR+' [*] Initiating module...')
     time.sleep(0.5)

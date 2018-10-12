@@ -9,7 +9,7 @@
 #https://github.com/theInfectedDrake/TIDoS-Framework
 
 from __future__ import print_function
-import urllib2
+import urllib
 import time
 import sys
 from time import sleep
@@ -23,9 +23,9 @@ def grabhead(web):
     print(R+'     ===================================\n')
     print(GR + color.BOLD + ' [!] Grabbing HTTP Headers...')
     time.sleep(0.4)
-    web.rstrip
+    web = web.rstrip()
     try:
-        header = urllib2.urlopen(web).info()
+        header = urllib.request.urlopen(web).info()
         print('')
         print(G+str(header))
     except urllib.HTTPError:
