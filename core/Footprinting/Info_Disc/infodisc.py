@@ -1,7 +1,7 @@
 #!/usr/bin/env python
-# coding:'+B+' utf-8
+# -*- coding: utf-8 -*-
 
-#-:'+B+'-:-:-:-:-:-:-:-:-:-:-:#
+#-:-:-:-:-:-:-:-:-:-:-:-:#
 #    TIDoS Framework     #
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 
@@ -15,8 +15,8 @@ import time
 import subprocess
 import random
 from random import randint
-
-from credit import *
+sys.path.append('modules/0x01-OSINT+Footprinting/0x03-InformationDisclosure/')
+from creditcards import *
 from emailext import *
 from errors import *
 from phone import *
@@ -24,7 +24,6 @@ from ssn import *
 from internalip import *
 from core.Core.colors import *
 from core.Footprinting.Info_Disc.infodiscban import *
-sys.path.append('modules/0x01-OSINT+Footprinting/0x03-InformationDisclosure/')
 
 def infodisc(web):
 
@@ -36,7 +35,7 @@ def infodisc(web):
     print('')
     if v == '1':
         print(C+' [!] Type Selected :'+B+' Credit Card Enumeration')
-        credit(web)
+        creditcards(web)
         print('\n\n')
         raw_input(O+' [#] Press '+GR+'Enter'+O+' to continue...')
         infodisc(web)
@@ -80,7 +79,7 @@ def infodisc(web):
         print(C+' [!] Type Selected :'+B+' All Modules')
         time.sleep(0.5)
         print(C+' [*] Firing up module -->'+B+' Credit Cards')
-        credit(web)
+        creditcards(web)
         print(C+' [!] Module Completed -->'+B+' Credit Cards\n')
 
         time.sleep(1)
