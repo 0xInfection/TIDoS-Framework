@@ -7,7 +7,7 @@
 
 #Author: @_tID
 #This module requires TIDoS Framework
-#https://github.com/the-Infected-Drake/TIDoS-Framework
+#https://github.com/theInfectedDrake/TIDoS-Framework
 
 EMAIL_HARVESTER_SIGNATURE = r'''[-a-zA-Z0-9._]+@[-a-zA-Z0-9_]+.[a-zA-Z0-9_.]+'''
 PHONE_NUMBER_SIGNATURE = r'''\+\d{2}\s?0?\d{10}'''
