@@ -19,7 +19,7 @@ import scapy.arch
 
 
 
-if conf.use_pcap:    
+if conf.use_pcap:
 
 
 
@@ -35,7 +35,7 @@ if conf.use_pcap:
             else:
                 raise
     if conf.use_pcap:
-        
+
         # From BSD net/bpf.h
         #BIOCIMMEDIATE=0x80044270
         BIOCIMMEDIATE=-2147204496
@@ -47,7 +47,7 @@ if conf.use_pcap:
                         self.pcap = pcap.pcap(device, snaplen, promisc, immediate=1, timeout_ms=to_ms)
                     except TypeError:
                         # Older pypcap versions do not support the timeout_ms argument
-                        self.pcap = pcap.pcap(device, snaplen, promisc, immediate=1)                    
+                        self.pcap = pcap.pcap(device, snaplen, promisc, immediate=1)
                 def __getattr__(self, attr):
                     return getattr(self.pcap, attr)
                 def __del__(self):
@@ -70,7 +70,7 @@ if conf.use_pcap:
                     c = self.pcap.next()
                     if c is None:
                         return
-                    l,pkt,ts = c 
+                    l,pkt,ts = c
                     return ts,pkt
                 def __getattr__(self, attr):
                     return getattr(self.pcap, attr)
@@ -100,10 +100,10 @@ if conf.use_pcap:
                     warning("__del__: don't know how to close the file descriptor. Bugs ahead ! Please report this bug.")
             open_pcap = lambda *args,**kargs: _PcapWrapper_pcapy(*args,**kargs)
 
-        
+
         class PcapTimeoutElapsed(Scapy_Exception):
             pass
-    
+
         class L2pcapListenSocket(SuperSocket):
             desc = "read packets at layer 2 using libpcap"
             def __init__(self, iface = None, type = ETH_P_ALL, promisc=None, filter=None):
@@ -128,10 +128,10 @@ if conf.use_pcap:
                             filter = "not (%s)" % conf.except_filter
                     if filter:
                         self.ins.setfilter(filter)
-        
+
             def close(self):
                 del(self.ins)
-                
+
             def recv(self, x=MTU):
                 ll = self.ins.datalink()
                 if ll in conf.l2types:
@@ -139,7 +139,7 @@ if conf.use_pcap:
                 else:
                     cls = conf.default_l2
                     warning("Unable to guess datalink type (interface=%s linktype=%i). Using %s" % (self.iface, ll, cls.name))
-        
+
                 pkt = None
                 while pkt is None:
                     pkt = self.ins.next()
@@ -147,7 +147,7 @@ if conf.use_pcap:
                         ts,pkt = pkt
                     if scapy.arch.WINDOWS and pkt is None:
                         raise PcapTimeoutElapsed
-                
+
                 try:
                     pkt = cls(pkt)
                 except KeyboardInterrupt:
@@ -158,15 +158,15 @@ if conf.use_pcap:
                     pkt = conf.raw_layer(pkt)
                 pkt.time = ts
                 return pkt
-        
+
             def send(self, x):
                 raise Scapy_Exception("Can't send anything with L2pcapListenSocket")
-        
-    
+
+
         conf.L2listen = L2pcapListenSocket
 
-        
-    
+
+
 
 if conf.use_dnet:
     try:
@@ -201,8 +201,8 @@ if conf.use_dnet:
             return i.get(ifname)["addr"].data
         def get_if_list():
             return [i.get("name", None) for i in dnet.intf()]
-    
-    
+
+
 if conf.use_pcap and conf.use_dnet:
     class L3dnetSocket(SuperSocket):
         desc = "read/write packets at layer 3 using libdnet and libpcap"
@@ -264,13 +264,13 @@ if conf.use_pcap and conf.use_dnet:
             else:
                 cls = conf.default_l2
                 warning("Unable to guess datalink type (interface=%s linktype=%i). Using %s" % (self.iface, ll, cls.name))
-    
+
             pkt = self.ins.next()
             if pkt is not None:
                 ts,pkt = pkt
             if pkt is None:
                 return
-    
+
             try:
                 pkt = cls(pkt)
             except KeyboardInterrupt:
@@ -281,19 +281,19 @@ if conf.use_pcap and conf.use_dnet:
                 pkt = conf.raw_layer(pkt)
             pkt.time = ts
             return pkt.payload
-    
+
         def nonblock_recv(self):
             self.ins.setnonblock(1)
             p = self.recv()
             self.ins.setnonblock(0)
             return p
-    
+
         def close(self):
             if hasattr(self, "ins"):
                 del(self.ins)
             if hasattr(self, "outs"):
                 del(self.outs)
-    
+
     class L2dnetSocket(SuperSocket):
         desc = "read/write packets at layer 2 using libdnet and libpcap"
         def __init__(self, iface = None, type = ETH_P_ALL, filter=None, nofilter=0):
@@ -331,13 +331,13 @@ if conf.use_pcap and conf.use_dnet:
             else:
                 cls = conf.default_l2
                 warning("Unable to guess datalink type (interface=%s linktype=%i). Using %s" % (self.iface, ll, cls.name))
-    
+
             pkt = self.ins.next()
             if pkt is not None:
                 ts,pkt = pkt
             if pkt is None:
                 return
-            
+
             try:
                 pkt = cls(pkt)
             except KeyboardInterrupt:
@@ -348,13 +348,13 @@ if conf.use_pcap and conf.use_dnet:
                 pkt = conf.raw_layer(pkt)
             pkt.time = ts
             return pkt
-    
+
         def nonblock_recv(self):
             self.ins.setnonblock(1)
             p = self.recv(MTU)
             self.ins.setnonblock(0)
             return p
-    
+
         def close(self):
             if hasattr(self, "ins"):
                 del(self.ins)
@@ -363,6 +363,3 @@ if conf.use_pcap and conf.use_dnet:
 
     conf.L3socket=L3dnetSocket
     conf.L2socket=L2dnetSocket
-
-        
-    

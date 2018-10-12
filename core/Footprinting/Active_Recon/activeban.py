@@ -6,7 +6,7 @@
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 
 #This module requires TIDoS Framework
-#https://github.com/theInfectedDrake/TIDoS-Framework 
+#https://github.com/theInfectedDrake/TIDoS-Framework
 
 from __future__ import print_function
 from colors import *
@@ -52,5 +52,4 @@ def activeban():
     time.sleep(0.04)
     print(B+'     [A]'+C+' The Auto-Awesome Module\n')
     time.sleep(0.04)
-    print(B+'     [99]'+C+' Back\n') 
-
+    print(B+'     [99]'+C+' Back\n')

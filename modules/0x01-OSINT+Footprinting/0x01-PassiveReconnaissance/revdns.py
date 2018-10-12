@@ -7,7 +7,7 @@
 
 #Author : @_tID
 #This module requires TIDoS Framework
-#https://github.com/theInfectedDrake/TIDoS-Framework 
+#https://github.com/theInfectedDrake/TIDoS-Framework
 
 from __future__ import print_function
 import os
@@ -30,30 +30,29 @@ def revdns(web):
     domains = [web]
     for dom in domains:
         text = requests.get('http://api.hackertarget.com/reversedns/?q=' + dom).text
-	result = str(text)
-	if 'error' not in result:
-		res = result.splitlines()
-		for r in res:
-			print(B+' [+] Received : '+O+r.split(' ')[0].strip()+' => '+C+'('+r.split(' ')[1].strip()+')')
-			time.sleep(0.04)
-			links.append(r)
+        result = str(text)
+        if 'error' not in result:
+            res = result.splitlines()
+            for r in res:
+                print(B+' [+] Received : '+O+r.split(' ')[0].strip()+' => '+C+'('+r.split(' ')[1].strip()+')')
+                time.sleep(0.04)
+                links.append(r)
 
-		p = 'tmp/logs/'+web+'-logs/'+web+'-reverse-dns.lst'
-		open(p,'w+')
-		print(B+' [!] Saving links...')
-		time.sleep(1)
-		for m in links:
-		    m = m + '\n'
-		    ile = open(p,"a")
-		    ile.write(m)
-		    ile.close()
-		pa = os.getcwd()
-		print(G+' [+] Links saved under '+pa+'/'+p+'!')
-		print('')
+            p = 'tmp/logs/'+web+'-logs/'+web+'-reverse-dns.lst'
+            open(p,'w+')
+            print(B+' [!] Saving links...')
+            time.sleep(1)
+            for m in links:
+                m = m + '\n'
+                ile = open(p,"a")
+                ile.write(m)
+                ile.close()
+            pa = os.getcwd()
+            print(G+' [+] Links saved under '+pa+'/'+p+'!')
+            print('')
 
-	elif 'No results found' in result:
-		print(R+' [-] No result found!')
-	else:
-		print(R+' [-] Outbound Query Exception!')
-		time.sleep(0.8)
-
+        elif 'No results found' in result:
+            print(R+' [-] No result found!')
+        else:
+            print(R+' [-] Outbound Query Exception!')
+            time.sleep(0.8)

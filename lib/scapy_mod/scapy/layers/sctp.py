@@ -434,4 +434,3 @@ class SCTPChunkShutdownComplete(_SCTPChunkGuessPayload, Packet):
                     ]
 
 bind_layers( IP,           SCTP,          proto=IPPROTO_SCTP)
-

@@ -64,7 +64,7 @@ class ASN1Codec(EnumElement):
         return cls._stem.safedec(s, context=context)
     def get_stem(cls):
         return cls.stem
-    
+
 
 class ASN1_Codecs_metaclass(Enum_metaclass):
     element_class = ASN1Codec
@@ -116,7 +116,7 @@ class ASN1_Class_metaclass(Enum_metaclass):
         rdict = {}
         for k,v in dct.iteritems():
             if type(v) is int:
-                v = ASN1Tag(k,v) 
+                v = ASN1Tag(k,v)
                 dct[k] = v
                 rdict[v] = v
             elif isinstance(v, ASN1Tag):
@@ -125,10 +125,10 @@ class ASN1_Class_metaclass(Enum_metaclass):
 
         cls = type.__new__(cls, name, bases, dct)
         for v in cls.__dict__.values():
-            if isinstance(v, ASN1Tag): 
+            if isinstance(v, ASN1Tag):
                 v.context = cls # overwrite ASN1Tag contexts, even cloned ones
         return cls
-            
+
 
 class ASN1_Class:
     __metaclass__ = ASN1_Class_metaclass
@@ -267,7 +267,7 @@ class ASN1_BOOLEAN(ASN1_INTEGER):
 
 class ASN1_ENUMERATED(ASN1_INTEGER):
     tag = ASN1_Class_UNIVERSAL.ENUMERATED
-    
+
 class ASN1_NULL(ASN1_INTEGER):
     tag = ASN1_Class_UNIVERSAL.NULL
 
@@ -276,10 +276,10 @@ class ASN1_SEP(ASN1_NULL):
 
 class ASN1_GAUGE32(ASN1_INTEGER):
     tag = ASN1_Class_UNIVERSAL.GAUGE32
-    
+
 class ASN1_COUNTER32(ASN1_INTEGER):
     tag = ASN1_Class_UNIVERSAL.COUNTER32
-    
+
 class ASN1_SEQUENCE(ASN1_Object):
     tag = ASN1_Class_UNIVERSAL.SEQUENCE
     def strshow(self, lvl=0):
@@ -287,10 +287,10 @@ class ASN1_SEQUENCE(ASN1_Object):
         for o in self.val:
             s += o.strshow(lvl=lvl+1)
         return s
-    
+
 class ASN1_SET(ASN1_SEQUENCE):
     tag = ASN1_Class_UNIVERSAL.SET
-    
+
 class ASN1_OID(ASN1_Object):
     tag = ASN1_Class_UNIVERSAL.OID
     def __init__(self, val):
@@ -300,7 +300,7 @@ class ASN1_OID(ASN1_Object):
         return "<%s[%r]>" % (self.__dict__.get("name", self.__class__.__name__), conf.mib._oidname(self.val))
     def __oidname__(self):
         return '%s'%conf.mib._oidname(self.val)
-    
+
 
 
 conf.ASN1_default_codec = ASN1_Codecs.BER

@@ -57,14 +57,13 @@ def getos0x00(web):
     try:
         match = search(r'&#34;os_description&#34;: &#34;[^<]*&#34;', result) # regex forked from Striker
         if match:
-	    flag = 0x01
+            flag = 0x01
             print(B+' [+] Operating System Identified : ' + C+ match.group().split('n&#34;: &#34;')[1][:-5])
-	    
-	else:
-	    print(R+' [-] No exact OS match for '+O+web+'...')
-	    flag = 0x00
-    	return flag
+
+        else:
+            print(R+' [-] No exact OS match for '+O+web+'...')
+            flag = 0x00
+        return flag
 
     except Exception as e:
-	print(R+' [-] Unhandled Exception : '+str(e))
-
+        print(R+' [-] Unhandled Exception : '+str(e))

@@ -1,5 +1,5 @@
 #!/usr/bin/env python2
-# -*- coding: utf-8 -*- 
+# -*- coding: utf-8 -*-
 
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 #    TIDoS Framework     #
@@ -13,5 +13,5 @@ CENSYS_UID = ''
 CENSYS_SECRET = ''
 GOOGLE_API_TOKEN = ''
 FULLCONTACT_API_KEY = ''
-WHATCMS_ACCESS_TOKEN = '756ab2cfa1ed5575a71e0714ef05c2e228f17b6b1476de7075f7f4d6b4978272376fb3' 
-					#Public WHATCMS Access Token Bundled with TIDoS-Framework
+WHATCMS_ACCESS_TOKEN = '756ab2cfa1ed5575a71e0714ef05c2e228f17b6b1476de7075f7f4d6b4978272376fb3'
+                                        #Public WHATCMS Access Token Bundled with TIDoS-Framework

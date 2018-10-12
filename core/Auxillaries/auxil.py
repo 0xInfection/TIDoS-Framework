@@ -6,7 +6,7 @@
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 
 #This module requires TIDoS Framework
-#https://github.com/theInfectedDrake/TIDoS-Framework 
+#https://github.com/theInfectedDrake/TIDoS-Framework
 
 from __future__ import print_function
 import sys
@@ -31,46 +31,46 @@ def auxil(web):
     v = raw_input(GR+'  [#] \033[1;4mTID\033[0m'+GR+' :> ' + color.END)
     print('')
     if v == '1':
-	print(' [!] Type Selected : Generate Hashes')
-	hashes()
-	print('\n\n')
-	raw_input(O+' [+] Press '+GR+'Enter'+O+' to Continue...')
-	auxilban()
-	auxil(web)
+        print(' [!] Type Selected : Generate Hashes')
+        hashes()
+        print('\n\n')
+        raw_input(O+' [+] Press '+GR+'Enter'+O+' to Continue...')
+        auxilban()
+        auxil(web)
 
     elif v == '2':
-	print(' [!] Type Selected : Encode Strings')
-	encodeall()
-	print('\n\n')
-	raw_input(O+' [+] Press '+GR+'Enter'+O+' to Continue...')
-	auxilban()
-	auxil(web)
+        print(' [!] Type Selected : Encode Strings')
+        encodeall()
+        print('\n\n')
+        raw_input(O+' [+] Press '+GR+'Enter'+O+' to Continue...')
+        auxilban()
+        auxil(web)
 
     elif v == '3':
-	print(' [!] Type Selected : Extract Metadata')
-	imgext()
-	print('\n\n')
-	raw_input(O+' [+] Press '+GR+'Enter'+O+' to Continue...')
-	auxilban()
-	auxil(web)
+        print(' [!] Type Selected : Extract Metadata')
+        imgext()
+        print('\n\n')
+        raw_input(O+' [+] Press '+GR+'Enter'+O+' to Continue...')
+        auxilban()
+        auxil(web)
 
     elif v == '4':
-	print(' [!] Type Selected : Honeypot Detector')
-	honeypot()
-	print('\n\n')
-	raw_input(O+' [+] Press '+GR+'Enter'+O+' to Continue...')
-	auxilban()
-	auxil(web)
+        print(' [!] Type Selected : Honeypot Detector')
+        honeypot()
+        print('\n\n')
+        raw_input(O+' [+] Press '+GR+'Enter'+O+' to Continue...')
+        auxilban()
+        auxil(web)
 
     elif v == '99':
-	print(GR+' [*] Going back!')
-	time.sleep(0.7)
-	os.system('clear')
+        print(GR+' [*] Going back!')
+        time.sleep(0.7)
+        os.system('clear')
 
     else:
-	dope = ['You high dude?','Shit! Enter a valid option','Whoops! Thats not an option','Sorry! You just typed shit']
-	print(dope[randint(0,3)])
-	time.sleep(0.7)
-	os.system('clear')
-	auxilban()
-	auxil(web)
+        dope = ['You high dude?','Shit! Enter a valid option','Whoops! Thats not an option','Sorry! You just typed shit']
+        print(dope[randint(0,3)])
+        time.sleep(0.7)
+        os.system('clear')
+        auxilban()
+        auxil(web)

@@ -12,7 +12,7 @@
 from re import search,I
 
 def betterwpsecurity(headers,content):
-	detect = False
-	detect |= search(r'/wp-content/plugins/better-wp-security/',content,I) is not None
-	if detect:
-		return "Better WP Security"
+    detect = False
+    detect |= search(r'/wp-content/plugins/better-wp-security/',content,I) is not None
+    if detect:
+        return "Better WP Security"

@@ -28,7 +28,7 @@ Contributors:
 * Johan Lundberg
 * Thomas D. maaaaz
 * Robert Bost
- 
+
 Licence : GPL v3 or any later version
 
 
@@ -67,7 +67,7 @@ class Pdb(Plugin):
     enabled_for_errors = False
     enabled_for_failures = False
     score = 5 # run last, among builtins
-    
+
     def options(self, parser, env):
         """Register commandline options.
         """
@@ -144,7 +144,7 @@ def test_command_line():
         NMAP_XML_VERSION = os.environ['NMAP_XML_VERSION']
     except:
         raise ValueError('Set env NMAP_XML_VERSION')
-    
+
     assert_equals(nm.command_line(), './nmap-{0}/nmap -sV -oX scanme_output-{0}.xml scanme.nmap.org'.format(NMAP_XML_VERSION))
 
 @with_setup(xmlfile_read_setup)
@@ -171,7 +171,7 @@ def test_host_no_hostname():
     nm.scan('127.0.0.2')
     assert_equals('', nm['127.0.0.2'].hostname())
 
-    
+
 @with_setup(xmlfile_read_setup)
 def test_port():
     assert_equals([80, 9929, 22, 31337], list(nm['45.33.32.156']['tcp'].keys()))
@@ -184,7 +184,7 @@ def test_port():
     assert('reason' in list(nm['45.33.32.156']['tcp'][22]))
     assert('state' in list(nm['45.33.32.156']['tcp'][22]))
     assert('version' in list(nm['45.33.32.156']['tcp'][22]))
-                  
+
     assert('10' in nm['45.33.32.156']['tcp'][22]['conf'])
     global NMAP_XML_VERSION
     if NMAP_XML_VERSION=='6.40':
@@ -195,7 +195,7 @@ def test_port():
         assert('cpe:/o:linux:linux_kernel' in nm['45.33.32.156']['tcp'][22]['cpe'])
         assert('OpenSSH' in nm['45.33.32.156']['tcp'][22]['product'])
         assert('6.6.1p1 Ubuntu 2ubuntu2.3' in nm['45.33.32.156']['tcp'][22]['version'])
-        
+
     assert('ssh' in nm['45.33.32.156']['tcp'][22]['name'])
     assert('syn-ack' in nm['45.33.32.156']['tcp'][22]['reason'])
     assert('open' in nm['45.33.32.156']['tcp'][22]['state'])
@@ -211,7 +211,7 @@ def test_listscan():
     assert('timestr' in nm.scanstats().keys())
     assert('elapsed' in nm.scanstats().keys())
 
-    
+
 @with_setup(xmlfile_read_setup)
 def test_csv_output():
     assert_equals('host;hostname;hostname_type;protocol;port;name;state;product;extrainfo;reason;version;conf;cpe',
@@ -225,10 +225,10 @@ def test_csv_output():
         assert_equals('45.33.32.156;scanme.nmap.org;user;tcp;22;ssh;open;OpenSSH;"Ubuntu Linux; protocol 2.0";syn-ack;6.6.1p1 Ubuntu 2ubuntu2.3;10;cpe:/o:linux:linux_kernel',
                       nm.csv().split('\n')[1].strip())
 
-    
+
 def test_listscan():
     assert(0 < len(nm.listscan('192.168.1.0/30')))
-    assert_equals(['127.0.0.0', '127.0.0.1', '127.0.0.2', '127.0.0.3'], 
+    assert_equals(['127.0.0.0', '127.0.0.1', '127.0.0.2', '127.0.0.3'],
                   nm.listscan('localhost/30'))
 
 
@@ -384,7 +384,6 @@ def test_scan_progressive():
 
     def callback(host, scan_data):
         assert(host is not None)
-    
+
     nmp.scan(hosts='127.0.0.1', arguments='-sV', callback=callback)
     nmp.wait()
-    

@@ -12,9 +12,9 @@
 from re import search,I
 
 def barracuda(headers,content):
-	detect = False
-	for header in headers.items():
-		detect |= search(r'\Abarra_counter_session=|(\A|\b)barracuda_',header[1],I) is not None
-		if detect : break
-	if detect:
-		return "Barracuda Web Application Firewall (Barracuda Networks)"
+    detect = False
+    for header in headers.items():
+        detect |= search(r'\Abarra_counter_session=|(\A|\b)barracuda_',header[1],I) is not None
+        if detect : break
+    if detect:
+        return "Barracuda Web Application Firewall (Barracuda Networks)"

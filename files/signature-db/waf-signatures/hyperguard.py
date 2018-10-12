@@ -9,12 +9,12 @@
 #This module requires TIDoS Framework
 #https://github.com/the-Infected-Drake/TIDoS-Framework
 
-from re import search,I 
+from re import search,I
 
 def hyperguard(headers,content):
-	detect = False
-	for header in headers.items():
-		detect |= search(r'odsession=',header[1],I) is not None
-		if detect: break
-	if detect :
-		return "Hyperguard Web Application Firewall (art of defence)"
+    detect = False
+    for header in headers.items():
+        detect |= search(r'odsession=',header[1],I) is not None
+        if detect: break
+    if detect :
+        return "Hyperguard Web Application Firewall (art of defence)"

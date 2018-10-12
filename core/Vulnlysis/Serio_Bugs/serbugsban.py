@@ -6,7 +6,7 @@
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 
 #This module requires TIDoS Framework
-#https://github.com/theInfectedDrake/TIDoS-Framework  
+#https://github.com/theInfectedDrake/TIDoS-Framework
 
 from __future__ import print_function
 import time
@@ -54,4 +54,3 @@ def serbugsban():
     print(B+'  [A]'+C+' Load all the modules 1 by 1\n')
     time.sleep(0.1)
     print(B+'  [99]'+C+' Back\n')
-

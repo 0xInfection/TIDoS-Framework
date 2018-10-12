@@ -9,10 +9,10 @@
 #This module requires TIDoS Framework
 #https://github.com/the-Infected-Drake/TIDoS-Framework
 
-from re import search,I 
+from re import search,I
 
 def wallarm(headers,content):
-	detect = False
-	detect |= headers['server'] == 'nginx-wallarm'
-	if detect : 
-		return "Wallarm Web Application Firewall (Wallarm)" 
+    detect = False
+    detect |= headers['server'] == 'nginx-wallarm'
+    if detect :
+        return "Wallarm Web Application Firewall (Wallarm)"

@@ -34,7 +34,7 @@ class PipeEngine:
                 print("###### %s\n %s" % (pn ,pc.__doc__))
             else:
                 print("###### %s" % pn)
-    
+
     def __init__(self, *pipes):
         self.active_pipes = set()
         self.active_sources = set()
@@ -84,7 +84,7 @@ class PipeEngine:
         for q in pl:
             self.add_one_pipe(q)
         return pl
-            
+
 
     def run(self):
         log_interactive.info("Pipe engine thread started.")
@@ -157,7 +157,7 @@ class PipeEngine:
                 for p in pipes:
                     p.start()
                 os.write(self.__fdw, "A")
-    
+
     def graph(self,**kargs):
         g=['digraph "pipe" {',"\tnode [shape=rectangle];",]
         for p in self.active_pipes:
@@ -174,7 +174,7 @@ class PipeEngine:
                 g.append('\t"%i" -> "%i" [color="red"];' % (id(p), id(q)))
         g.append('}')
         graph = "\n".join(g)
-        scapy.utils.do_graph(graph, **kargs) 
+        scapy.utils.do_graph(graph, **kargs)
 
 
 class _ConnectorLogic(object):
@@ -344,7 +344,7 @@ class ThreadGenSource(AutoSource):
         self.RUN = False
 
 
-        
+
 class ConsoleSink(Sink):
     """Print messages on low and high entries
      +-------+
@@ -429,7 +429,7 @@ class PeriodicSource(ThreadGenSource):
                 self.is_exhausted = True
                 self._wake_up()
             time.sleep(self.period2)
-        
+
 class TermSink(Sink):
     """Print messages on low and high entries on a separate terminal
      +-------+
@@ -469,12 +469,12 @@ class TermSink(Sink):
         if self.newlines:
             s+="\n"
         os.write(self.__w, s)
-            
+
     def push(self, msg):
         self._print(str(msg))
     def high_push(self, msg):
         self._print(str(msg))
-    
+
 
 class QueueSink(Sink):
     """Collect messages from high and low entries and queue them. Messages are unqueued with the .recv() method.
@@ -540,7 +540,7 @@ class DownDrain(Drain):
         pass
     def high_push(self, msg):
         self._send(msg)
-        
+
 
 def _testmain():
     s = PeriodicSource("hello", 1, name="src")

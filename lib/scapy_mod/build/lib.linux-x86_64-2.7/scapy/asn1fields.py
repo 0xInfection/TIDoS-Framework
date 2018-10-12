@@ -48,7 +48,7 @@ class ASN1F_field(ASN1F_element):
 
     ASN1_tag = ASN1_Class_UNIVERSAL.ANY
     context=ASN1_Class_UNIVERSAL
-    
+
     def __init__(self, name, default, context=None):
         if context is not None:
             self.context = context
@@ -93,7 +93,7 @@ class ASN1F_field(ASN1F_element):
         setattr(pkt, self.name, val)
     def is_empty(self, pkt):
         return getattr(pkt,self.name) is None
-    
+
     def dissect(self, pkt, s):
         v,s = self.m2i(pkt, s)
         self.set_val(pkt, v)
@@ -150,12 +150,12 @@ class ASN1F_enum_INTEGER(ASN1F_INTEGER):
         return x
     def i2repr_one(self, pkt, x):
         return self.i2s.get(x, repr(x))
-    
+
     def any2i(self, pkt, x):
         if type(x) is list:
             return map(lambda z,pkt=pkt:self.any2i_one(pkt,z), x)
         else:
-            return self.any2i_one(pkt,x)        
+            return self.any2i_one(pkt,x)
     def i2repr(self, pkt, x):
         if type(x) is list:
             return map(lambda z,pkt=pkt:self.i2repr_one(pkt,z), x)
@@ -175,9 +175,9 @@ class ASN1F_PRINTABLE_STRING(ASN1F_STRING):
 
 class ASN1F_BIT_STRING(ASN1F_STRING):
     ASN1_tag = ASN1_Class_UNIVERSAL.BIT_STRING
-    
+
 class ASN1F_IPADDRESS(ASN1F_STRING):
-    ASN1_tag = ASN1_Class_UNIVERSAL.IPADDRESS    
+    ASN1_tag = ASN1_Class_UNIVERSAL.IPADDRESS
 
 class ASN1F_TIME_TICKS(ASN1F_INTEGER):
     ASN1_tag = ASN1_Class_UNIVERSAL.TIME_TICKS
@@ -317,14 +317,14 @@ class ASN1F_CHOICE(ASN1F_PACKET):
             return conf.raw_layer(),""
             raise ASN1_Error("ASN1F_CHOICE: got empty string")
         if ord(x[0]) not in self.choice:
-            return conf.raw_layer(x),"" # XXX return RawASN1 packet ? Raise error 
+            return conf.raw_layer(x),"" # XXX return RawASN1 packet ? Raise error
             raise ASN1_Error("Decoding Error: choice [%i] not found in %r" % (ord(x[0]), self.choice.keys()))
 
         z = ASN1F_PACKET.extract_packet(self, self.choice[ord(x[0])], x)
         return z
     def randval(self):
         return RandChoice(*map(lambda x:fuzz(x()), self.choice.values()))
-            
-    
+
+
 # This import must come in last to avoid problems with cyclic dependencies
 import packet

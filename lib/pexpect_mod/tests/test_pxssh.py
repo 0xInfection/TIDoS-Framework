@@ -111,7 +111,7 @@ class PxsshTestCase(SSHTestBase):
         for confirmation in confirmation_array:
             if confirmation in string:
                 confirmation_strings+=1
-        
+
         if confirmation_strings!=len(confirmation_array):
             assert False, 'String generated from adding an SSH key is incorrect.'
 

@@ -12,10 +12,10 @@
 from re import search,I
 
 def airlock(headers,content):
-	detect = False
-	for header in headers.items():
-		detect |= search(r'\AAL[_-]?(SESS|LB)=',header[1],I) is not None
-		if detect : 
-			break
-	if detect:
-		return "Airlock (Phion/Ergon)" 
+    detect = False
+    for header in headers.items():
+        detect |= search(r'\AAL[_-]?(SESS|LB)=',header[1],I) is not None
+        if detect :
+            break
+    if detect:
+        return "Airlock (Phion/Ergon)"

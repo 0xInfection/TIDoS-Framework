@@ -40,9 +40,9 @@ def make_ezipfile(base_name, base_dir, verbose=0, dry_run=0, **kwargs):
 archive_util.ARCHIVE_FORMATS["ezip"] = (make_ezipfile,[],'Executable ZIP file')
 
 SCRIPTS = ['bin/scapy','bin/UTscapy']
-# On Windows we also need additional batch files to run the above scripts 
+# On Windows we also need additional batch files to run the above scripts
 if os.name == "nt":
-  SCRIPTS += ['bin/scapy.bat','bin/UTscapy.bat']
+    SCRIPTS += ['bin/scapy.bat','bin/UTscapy.bat']
 
 setup(
     name = 'scapy',

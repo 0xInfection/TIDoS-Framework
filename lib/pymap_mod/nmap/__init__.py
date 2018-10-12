@@ -19,7 +19,7 @@ Contributors:
 * Brian Bustin - brian at bustin.us
 * old.schepperhand
 * Johan Lundberg
-* Thomas D. maaaaz 
+* Thomas D. maaaaz
 
 Licence : GPL v3 or any later version
 

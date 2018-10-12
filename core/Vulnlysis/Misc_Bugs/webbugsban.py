@@ -6,7 +6,7 @@
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 
 #This module requires TIDoS Framework
-#https://github.com/theInfectedDrake/TIDoS-Framework  
+#https://github.com/theInfectedDrake/TIDoS-Framework
 
 from __future__ import print_function
 import time
@@ -47,4 +47,3 @@ def webbugsban():
     print(O+'  [A]'+GR+' Load all the modules 1 by 1\n')
     time.sleep(0.1)
     print(O+'  [99]'+GR+' Back\n')
-

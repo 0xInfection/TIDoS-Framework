@@ -27,7 +27,7 @@ class CsvConverter(Converter):
         'transport',
         'product',
         'version',
-        
+
         'ssl.cipher.version',
         'ssl.cipher.bits',
         'ssl.cipher.name',
@@ -36,17 +36,17 @@ class CsvConverter(Converter):
         'ssl.cert.serial',
         'ssl.cert.fingerprint.sha1',
         'ssl.cert.fingerprint.sha256',
-        
+
         'html',
         'title',
     ]
-    
+
     def process(self, files):
         writer = csv_writer(self.fout, dialect=excel)
-        
+
         # Write the header
         writer.writerow(self.fields)
-        
+
         for banner in iterate_files(files):
             try:
                 row = []
@@ -56,26 +56,26 @@ class CsvConverter(Converter):
                 writer.writerow(row)
             except:
                 pass
-    
+
     def banner_field(self, banner, flat_field):
         # The provided field is a collapsed form of the actual field
         fields = flat_field.split('.')
-    
+
         try:
             current_obj = banner
             for field in fields:
                 current_obj = current_obj[field]
-            
+
             # Convert a list into a concatenated string
             if isinstance(current_obj, list):
                 current_obj = ','.join([str(i) for i in current_obj])
-            
+
             return current_obj
         except:
             pass
-    
+
         return ''
-    
+
     def flatten(self, d, parent_key='', sep='.'):
         items = []
         for k, v in d.items():

@@ -7,7 +7,7 @@
 #
 #Author : @_tID (theInfectedDrake)
 #This module requires TIDoS Framework
-#https://github.com/theInfectedDrake/TIDoS-Framework 
+#https://github.com/theInfectedDrake/TIDoS-Framework
 
 from __future__ import print_function
 import re
@@ -69,7 +69,7 @@ def check0x00(req):
     comments = re.findall(signature,req)
     print(GR+" [+] Searching for Phone Numbers...")
     if comments:
-    	print(G+'\n [+] Found Phone Numbers:')
+        print(G+'\n [+] Found Phone Numbers:')
     for comment in comments:
         print(C+'   '+comment)
         time.sleep(0.03)
@@ -77,7 +77,6 @@ def check0x00(req):
 
 def phone(web):
 
-	print(GR+' [*] Loading module...')
-	time.sleep(0.6)
-	phone0x00(web)
-
+    print(GR+' [*] Loading module...')
+    time.sleep(0.6)
+    phone0x00(web)

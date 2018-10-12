@@ -2039,6 +2039,3 @@ class TestSoupSelector(TreeTest):
 
     def test_multiple_select_nested(self):
         self.assertSelects('body > div > x, y > z', ['xid', 'zidb'])
-
-
-

@@ -39,17 +39,17 @@ FILTER=''.join([(len(repr(chr(x)))==3) and chr(x) or '.' for x in range(256)])
 def hex_dump(src, length=16):
     result=[]
     for i in xrange(0, len(src), length):
-       s = src[i:i+length]
-       hexa = ' '.join(["%02X"%ord(x) for x in s])
-       printable = s.translate(FILTER)
-       result.append("%04X   %-*s   %s\n" % (i, length*3, hexa, printable))
+        s = src[i:i+length]
+        hexa = ' '.join(["%02X"%ord(x) for x in s])
+        printable = s.translate(FILTER)
+        result.append("%04X   %-*s   %s\n" % (i, length*3, hexa, printable))
     return ''.join(result)
 
 def hex_diff(left, right):
-        diff = ['< %s\n> %s' % (_left, _right,) for _left, _right in zip(
-            hex_dump(left).splitlines(), hex_dump(right).splitlines())
-            if _left != _right]
-        return '\n' + '\n'.join(diff,)
+    diff = ['< %s\n> %s' % (_left, _right,) for _left, _right in zip(
+        hex_dump(left).splitlines(), hex_dump(right).splitlines())
+        if _left != _right]
+    return '\n' + '\n'.join(diff,)
 
 
 class ExpectTestCase (PexpectTestCase.PexpectTestCase):

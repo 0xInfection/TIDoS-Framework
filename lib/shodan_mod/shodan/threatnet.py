@@ -11,7 +11,7 @@ class Threatnet:
     :type key: str
     :ivar stream: An instance of `shodan.Threatnet.Stream` that provides access to the Streaming API.
     """
-    
+
     class Stream:
 
         base_url = 'https://stream.shodan.io'
@@ -53,14 +53,13 @@ class Threatnet:
                 if line:
                     banner = json.loads(line)
                     yield banner
-    
+
     def __init__(self, key):
         """Initializes the API object.
-        
+
         :param key: The Shodan API key.
         :type key: str
         """
         self.api_key = key
         self.base_url = 'https://api.shodan.io'
         self.stream = self.Stream(self)
-

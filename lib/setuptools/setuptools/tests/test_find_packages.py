@@ -12,7 +12,7 @@ from . import py3_only
 from setuptools.extern.six import PY3
 from setuptools import find_packages
 if PY3:
-  from setuptools import find_namespace_packages
+    from setuptools import find_namespace_packages
 
 # modeled after CPython's test.support.can_symlink
 
@@ -185,4 +185,3 @@ class TestFindPackages:
         shutil.rmtree(os.path.join(self.dist_dir, 'pkg/subpkg/assets'))
         packages = find_namespace_packages(self.dist_dir)
         self._assert_packages(packages, ['pkg', 'pkg.nspkg', 'pkg.subpkg'])
-

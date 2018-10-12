@@ -50,7 +50,7 @@ class RdpcapSource(Source):
         self.f.close()
     def fileno(self):
         return self.f.fileno()
-    def deliver(self):    
+    def deliver(self):
         p = self.f.recv()
         print("deliver %r" % p)
         if p is None:
@@ -82,8 +82,8 @@ class InjectSink(Sink):
 class Inject3Sink(InjectSink):
     def start(self):
         self.s = conf.L3socket(iface=self.iface)
-    
-    
+
+
 class WrpcapSink(Sink):
     """Packets received on low input are written to PCA file
      +----------+
@@ -99,7 +99,7 @@ class WrpcapSink(Sink):
         self.f.flush()
     def push(self, msg):
         self.f.write(msg)
-        
+
 
 class UDPDrain(Drain):
     """Apply a function to messages on low and high entry
@@ -121,4 +121,3 @@ class UDPDrain(Drain):
     def high_push(self, msg):
         p = IP(dst=self.ip)/UDP(sport=1234,dport=self.port)/msg
         self._send(p)
-        

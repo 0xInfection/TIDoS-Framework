@@ -181,7 +181,7 @@ class SNMPset(ASN1_Packet):
                                     ASN1F_INTEGER("error_index",0),
                                     ASN1F_SEQUENCE_OF("varbindlist", [], SNMPvarbind)
                                     )
-    
+
 class SNMPtrapv1(ASN1_Packet):
     ASN1_codec = ASN1_Codecs.BER
     ASN1_root = ASN1F_SNMP_PDU_TRAPv1( ASN1F_OID("enterprise", "1.3"),
@@ -199,7 +199,7 @@ class SNMPbulk(ASN1_Packet):
                                      ASN1F_INTEGER("max_repetitions",0),
                                      ASN1F_SEQUENCE_OF("varbindlist", [], SNMPvarbind)
                                      )
-    
+
 class SNMPinform(ASN1_Packet):
     ASN1_codec = ASN1_Codecs.BER
     ASN1_root = ASN1F_SNMP_PDU_INFORM( ASN1F_INTEGER("id",0),
@@ -207,7 +207,7 @@ class SNMPinform(ASN1_Packet):
                                        ASN1F_INTEGER("error_index",0),
                                        ASN1F_SEQUENCE_OF("varbindlist", [], SNMPvarbind)
                                        )
-    
+
 class SNMPtrapv2(ASN1_Packet):
     ASN1_codec = ASN1_Codecs.BER
     ASN1_root = ASN1F_SNMP_PDU_TRAPv2( ASN1F_INTEGER("id",0),
@@ -215,7 +215,7 @@ class SNMPtrapv2(ASN1_Packet):
                                        ASN1F_INTEGER("error_index",0),
                                        ASN1F_SEQUENCE_OF("varbindlist", [], SNMPvarbind)
                                        )
-    
+
 
 class SNMP(ASN1_Packet):
     ASN1_codec = ASN1_Codecs.BER
@@ -235,8 +235,8 @@ class SNMP(ASN1_Packet):
 
 bind_layers( UDP,           SNMP,          sport=161)
 bind_layers( UDP,           SNMP,          dport=161)
-bind_layers( UDP,           SNMP,          sport=162) 
-bind_layers( UDP,           SNMP,          dport=162) 
+bind_layers( UDP,           SNMP,          sport=162)
+bind_layers( UDP,           SNMP,          dport=162)
 
 def snmpwalk(dst, oid="1", community="public"):
     try:
@@ -250,7 +250,6 @@ def snmpwalk(dst, oid="1", community="public"):
                 break
             print("%-40s: %r" % (r[SNMPvarbind].oid.val,r[SNMPvarbind].value))
             oid = r[SNMPvarbind].oid
-            
+
     except KeyboardInterrupt:
         pass
-

@@ -124,9 +124,9 @@ def get_requires_for_build_sdist(config_settings=None):
 def prepare_metadata_for_build_wheel(metadata_directory, config_settings=None):
     sys.argv = sys.argv[:1] + ['dist_info', '--egg-base', _to_str(metadata_directory)]
     _run_setup()
-    
+
     dist_info_directory = metadata_directory
-    while True:    
+    while True:
         dist_infos = [f for f in os.listdir(dist_info_directory)
                       if f.endswith('.dist-info')]
 

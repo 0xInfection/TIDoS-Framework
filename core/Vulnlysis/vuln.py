@@ -5,7 +5,7 @@
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 
 #This module requires TIDoS Framework
-#https://github.com/theInfectedDrake/TIDoS-Framework 
+#https://github.com/theInfectedDrake/TIDoS-Framework
 
 from __future__ import print_function
 import os
@@ -26,24 +26,23 @@ def vuln(web):
     print('\n')
 
     if v.strip() == '1':
-	webbugs(web)
+        webbugs(web)
 
     elif v.strip() == '2':
-	serbugs(web)
+        serbugs(web)
 
     elif v.strip() == '3':
-	othbugs(web)
+        othbugs(web)
 
     elif v.strip() == '99':
-	print('[!] Back')
-	time.sleep(0.7)
-	os.system('clear')
+        print('[!] Back')
+        time.sleep(0.7)
+        os.system('clear')
 
     else:
-	dope = ['You high dude?','Hey there! Enter a valid option','Whoops! Thats not an option','Sorry fam! You just typed shit']
-	print(dope[randint(0,3)])
-	time.sleep(0.7)
-	os.system('clear')
-	vulnban()
-	vuln(web)
-
+        dope = ['You high dude?','Hey there! Enter a valid option','Whoops! Thats not an option','Sorry fam! You just typed shit']
+        print(dope[randint(0,3)])
+        time.sleep(0.7)
+        os.system('clear')
+        vulnban()
+        vuln(web)

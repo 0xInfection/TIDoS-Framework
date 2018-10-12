@@ -122,7 +122,7 @@ class TestWarnings(SoupTest):
             soup = self.soup(b"http://www.crummybytes.com/")
         # Be aware this isn't the only warning that can be raised during
         # execution..
-        self.assertTrue(any("looks like a URL" in str(w.message) 
+        self.assertTrue(any("looks like a URL" in str(w.message)
             for w in warning_list))
 
     def test_url_warning_with_unicode_url(self):
@@ -130,19 +130,19 @@ class TestWarnings(SoupTest):
             # note - this url must differ from the bytes one otherwise
             # python's warnings system swallows the second warning
             soup = self.soup(u"http://www.crummyunicode.com/")
-        self.assertTrue(any("looks like a URL" in str(w.message) 
+        self.assertTrue(any("looks like a URL" in str(w.message)
             for w in warning_list))
 
     def test_url_warning_with_bytes_and_space(self):
         with warnings.catch_warnings(record=True) as warning_list:
             soup = self.soup(b"http://www.crummybytes.com/ is great")
-        self.assertFalse(any("looks like a URL" in str(w.message) 
+        self.assertFalse(any("looks like a URL" in str(w.message)
             for w in warning_list))
 
     def test_url_warning_with_unicode_and_space(self):
         with warnings.catch_warnings(record=True) as warning_list:
             soup = self.soup(u"http://www.crummyuncode.com/ is great")
-        self.assertFalse(any("looks like a URL" in str(w.message) 
+        self.assertFalse(any("looks like a URL" in str(w.message)
             for w in warning_list))
 
 

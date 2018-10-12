@@ -6,6 +6,6 @@
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 
 #This module requires TIDoS Framework
-#https://github.com/the-Infected-Drake/TIDoS-Framework 
+#https://github.com/the-Infected-Drake/TIDoS-Framework
 
 pass

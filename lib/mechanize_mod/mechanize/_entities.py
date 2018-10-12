@@ -1504,7 +1504,7 @@ html5_entities = {
     'swarrow': '↙',
     'swnwar': '⤪',
     'szlig': 'ß',
-    'tab': '	',
+    'tab': '    ',
     'target': '⌖',
     'tau': 'τ',
     'tbrk': '⎴',

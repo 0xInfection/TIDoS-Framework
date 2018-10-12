@@ -7,7 +7,7 @@
 
 #Author : @_tID
 #This module requires TIDoS Framework
-#https://github.com/theInfectedDrake/TIDoS-Framework 
+#https://github.com/theInfectedDrake/TIDoS-Framework
 
 from __future__ import print_function
 from core.Core.arts import bugsban_art
@@ -20,7 +20,7 @@ def othbugsban():
     os.system('clear')
     print(bugsban_art)
     time.sleep(0.3)
-    print(B+'\n        [1]'+C+' FTP Protocol Bruteforce'+W+' (Default Credentials)') 
+    print(B+'\n        [1]'+C+' FTP Protocol Bruteforce'+W+' (Default Credentials)')
     time.sleep(0.1)
     print(B+'        [2]'+C+' SSH Protocol Bruteforce'+W+' (Default Credentials)')
     time.sleep(0.1)
@@ -36,5 +36,4 @@ def othbugsban():
     time.sleep(0.1)
     print(B+'        [A]'+C+' Start up ALL modules 1 by 1\n')
     time.sleep(0.1)
-    print(B+'        [99]'+C+' Back\n') 
-
+    print(B+'        [99]'+C+' Back\n')

@@ -6,7 +6,7 @@
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 
 #This module requires TIDoS Framework
-#https://github.com/theInfectedDrake/TIDoS-Framework 
+#https://github.com/theInfectedDrake/TIDoS-Framework
 
 from __future__ import print_function
 import os, time
@@ -27,4 +27,3 @@ def vulnban():
     time.sleep(0.2)
     print(B+'   [99] '+C+'Back\n')
     time.sleep(0.2)
-

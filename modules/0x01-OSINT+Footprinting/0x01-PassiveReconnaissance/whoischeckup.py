@@ -7,7 +7,7 @@
 
 #Author : @_tID
 #This module requires TIDoS Framework
-#https://github.com/theInfectedDrake/TIDoS-Framework 
+#https://github.com/theInfectedDrake/TIDoS-Framework
 
 from __future__ import print_function
 import time
@@ -28,9 +28,9 @@ def whoischeckup(web):
     domains = [web]
     for dom in domains:
         text = requests.get('http://api.hackertarget.com/whois/?q=' + dom).text
-	nping = str(text)
-	if 'error' not in nping:
-		print(G+ nping)
-	else:
-		print(R+' [-] Outbound Query Exception!')
-		time.sleep(0.8)
+        nping = str(text)
+        if 'error' not in nping:
+            print(G+ nping)
+        else:
+            print(R+' [-] Outbound Query Exception!')
+            time.sleep(0.8)

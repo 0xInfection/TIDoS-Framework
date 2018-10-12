@@ -24,24 +24,24 @@ def getposts(web):
 
     site = str(web)
     def clear_cookie():
-	fo = open(".google-cookie", "w")
-	fo.close()
+        fo = open(".google-cookie", "w")
+        fo.close()
 
 
     def google_it (dork):
-	clear_cookie()
-	for title in search(dork, stop=30):
-	    print(B+' [!] Post Found :> '+C+title)
-	    time.sleep(0.5)
+        clear_cookie()
+        for title in search(dork, stop=30):
+            print(B+' [!] Post Found :> '+C+title)
+            time.sleep(0.5)
 
     try:
-	print(O+" [*] Finding Pastebin posts ...\n")
-	google_it("site:pastebin.com intext:"+site+"")
+        print(O+" [*] Finding Pastebin posts ...\n")
+        google_it("site:pastebin.com intext:"+site+"")
 
     except urllib2.HTTPError as err:
-	if err.code == 503:
-	    print(R+' [-] Captcha appeared...\n')
-	    pass
+        if err.code == 503:
+            print(R+' [-] Captcha appeared...\n')
+            pass
 
 def pastebin(web):
 
@@ -51,4 +51,3 @@ def pastebin(web):
     print(R+'     P A S T E B I N   P O S T S')
     print(R+'    =============================\n')
     getposts(web)
-

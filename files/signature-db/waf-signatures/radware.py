@@ -9,13 +9,13 @@
 #This module requires TIDoS Framework
 #https://github.com/the-Infected-Drake/TIDoS-Framework
 
-from re import search,I 
+from re import search,I
 
 def radware(headers,content):
-	detect = False
-	for header in headers.items():
-		detect |= header[0] == "x-sl-compstate"
-		if detect:break
-	detect |= search(r'Unauthorized Activity Has Been Detected.+Case Number:',content) is not None
-	if detect : 
-		return "AppWall (Radware)"
+    detect = False
+    for header in headers.items():
+        detect |= header[0] == "x-sl-compstate"
+        if detect:break
+    detect |= search(r'Unauthorized Activity Has Been Detected.+Case Number:',content) is not None
+    if detect :
+        return "AppWall (Radware)"

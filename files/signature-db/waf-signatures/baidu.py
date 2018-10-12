@@ -12,9 +12,9 @@
 from re import search,I
 
 def baidu(headers,content):
-	detect = False
-	for header in headers.items():
-		detect |= search(r'fh1|yunjiasu-nginx',header[1],I) is not None
-		if detect : break
-	if detect :
-		return "Yunjiasu Web Application Firewall (Baidu)" 
+    detect = False
+    for header in headers.items():
+        detect |= search(r'fh1|yunjiasu-nginx',header[1],I) is not None
+        if detect : break
+    if detect :
+        return "Yunjiasu Web Application Firewall (Baidu)"

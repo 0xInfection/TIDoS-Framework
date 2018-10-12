@@ -7,7 +7,7 @@
 
 #Author : @_tID
 #This module requires TIDoS Framework
-#https://github.com/theInfectedDrake/TIDoS-Framework 
+#https://github.com/theInfectedDrake/TIDoS-Framework
 
 from __future__ import print_function
 import requests
@@ -16,7 +16,7 @@ from time import sleep
 from colors import *
 
 def piweb(web):
-	
+
     web = web.split('//')
     print(R+'\n   =====================')
     print(R+'    P I N G   C H E C K ')
@@ -28,10 +28,9 @@ def piweb(web):
     domains = [web]
     for dom in domains:
         text = requests.get('http://api.hackertarget.com/nping/?q=' + dom).text
-	nping = str(text)
-	if 'error' not in nping:
-		print(G+ nping)
-	else:
-		print(R+' [-] Outbound Query Exception!')
-		sleep(0.8)
-		
+        nping = str(text)
+        if 'error' not in nping:
+            print(G+ nping)
+        else:
+            print(R+' [-] Outbound Query Exception!')
+            sleep(0.8)

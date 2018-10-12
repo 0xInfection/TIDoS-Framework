@@ -42,10 +42,10 @@ class BERcodec_X509_CONT0(BERcodec_SEQUENCE):
 
 class BERcodec_X509_CONT1(BERcodec_SEQUENCE):
     tag = ASN1_Class_X509.CONT1
-    
+
 class BERcodec_X509_CONT2(BERcodec_SEQUENCE):
     tag = ASN1_Class_X509.CONT2
-    
+
 class BERcodec_X509_CONT3(BERcodec_SEQUENCE):
     tag = ASN1_Class_X509.CONT3
 
@@ -53,13 +53,13 @@ class BERcodec_X509_CONT3(BERcodec_SEQUENCE):
 
 class ASN1F_X509_CONT0(ASN1F_SEQUENCE):
     ASN1_tag = ASN1_Class_X509.CONT0
-    
+
 class ASN1F_X509_CONT1(ASN1F_SEQUENCE):
     ASN1_tag = ASN1_Class_X509.CONT1
-    
+
 class ASN1F_X509_CONT2(ASN1F_SEQUENCE):
     ASN1_tag = ASN1_Class_X509.CONT2
-    
+
 class ASN1F_X509_CONT3(ASN1F_SEQUENCE):
     ASN1_tag = ASN1_Class_X509.CONT3
 
@@ -76,7 +76,7 @@ class X509RDN(ASN1_Packet):
 class X509v3Ext(ASN1_Packet):
     ASN1_codec = ASN1_Codecs.BER
     ASN1_root = ASN1F_field("val",ASN1_NULL(0))
-    
+
 
 class X509Cert(ASN1_Packet):
     ASN1_codec = ASN1_Codecs.BER
@@ -96,13 +96,9 @@ class X509Cert(ASN1_Packet):
                 ASN1F_BIT_STRING("pubkey","")
                 ),
             ASN1F_optionnal(ASN1F_X509_CONT3(ASN1F_SEQUENCE_OF("x509v3ext",[],X509v3Ext))),
-            
+
         ),
         ASN1F_SEQUENCE(ASN1F_OID("sign_algo2","1.2.840.113549.1.1.5"),
                        ASN1F_field("sa2_value",ASN1_NULL(0))),
         ASN1F_BIT_STRING("signature","")
         )
-
-
-
-

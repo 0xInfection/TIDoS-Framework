@@ -6,7 +6,7 @@
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 
 #This script is a part of TIDoS Framework
-#https://github.com/theInfectedDrake/TIDoS-Framework 
+#https://github.com/theInfectedDrake/TIDoS-Framework
 
 from __future__ import print_function
 import os
@@ -30,7 +30,7 @@ def scanenumban():
 \033[1;34m [7] \033[1;36mGrab Banners on Services \033[0m(via Open Ports)
 \033[1;34m [8] \033[1;36mScan all IP Addresses Linked to Domain \033[0m(CENSYS)
 \033[1;34m [9] \033[1;36mLet loose Crawlers on the target \033[0m(Depth 1, 2 & 3)
- 
+
 \033[1;34m [A] \033[1;36mAutomate all one by one on target
 
 \033[1;34m [99] \033[1;36mBack

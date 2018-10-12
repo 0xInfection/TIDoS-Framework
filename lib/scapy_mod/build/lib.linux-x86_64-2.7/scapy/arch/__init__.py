@@ -28,13 +28,13 @@ except ImportError:
 
 
 def str2mac(s):
-    return ("%02x:"*6)[:-1] % tuple(map(ord, s)) 
+    return ("%02x:"*6)[:-1] % tuple(map(ord, s))
 
 
-    
+
 def get_if_addr(iff):
     return socket.inet_ntoa(get_if_raw_addr(iff))
-    
+
 def get_if_hwaddr(iff):
     addrfamily, mac = get_if_raw_hwaddr(iff)
     if addrfamily in [ARPHDR_ETHER,ARPHDR_LOOPBACK]:
@@ -84,13 +84,13 @@ if scapy.config.conf.iface is None:
 
 def get_if_raw_addr6(iff):
     """
-    Returns the main global unicast address associated with provided 
-    interface, in network format. If no global address is found, None 
-    is returned. 
+    Returns the main global unicast address associated with provided
+    interface, in network format. If no global address is found, None
+    is returned.
     """
     r = filter(lambda x: x[2] == iff and x[1] == IPV6_ADDR_GLOBAL, in6_getifaddr())
     if len(r) == 0:
         return None
     else:
-        r = r[0][0] 
+        r = r[0][0]
     return inet_pton(socket.AF_INET6, r)

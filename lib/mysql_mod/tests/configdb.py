@@ -20,6 +20,3 @@ def connection_factory(**kwargs):
     db_kwargs = connection_kwargs(kwargs)
     db = MySQLdb.connect(**db_kwargs)
     return db
-
-
-

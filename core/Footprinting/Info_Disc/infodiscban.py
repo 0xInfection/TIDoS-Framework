@@ -6,7 +6,7 @@
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 
 #This module requires TIDoS Framework
-#https://github.com/theInfectedDrake/TIDoS-Framework 
+#https://github.com/theInfectedDrake/TIDoS-Framework
 
 from __future__ import print_function
 from colors import *
@@ -34,5 +34,4 @@ def infodiscban():
     time.sleep(0.1)
     print(B+'     [A]'+C+' Start up ALL modules 1 by 1\n')
     time.sleep(0.1)
-    print(B+'     [99]'+C+' Back\n') 
-
+    print(B+'     [99]'+C+' Back\n')

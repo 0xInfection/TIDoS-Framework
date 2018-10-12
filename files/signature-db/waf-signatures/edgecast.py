@@ -12,9 +12,9 @@
 from re import search,I
 
 def edgecast(headers,content):
-	detect = False
-	for header in headers.items():
-		detect |= search(r"ecdf",header[1],I) is not None
-		if detect: break
-	if detect : 
-		return "EdgeCast WAF (Verizon)"
+    detect = False
+    for header in headers.items():
+        detect |= search(r"ecdf",header[1],I) is not None
+        if detect: break
+    if detect :
+        return "EdgeCast WAF (Verizon)"

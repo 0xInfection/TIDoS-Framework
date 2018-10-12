@@ -16,8 +16,8 @@ def make_package_dir(name, base_dir, ns=False):
         dir_package = dir_package.mkdir(dir_name)
     init_file = None
     if not ns:
-      init_file = dir_package.join('__init__.py')
-      init_file.write('')
+        init_file = dir_package.join('__init__.py')
+        init_file.write('')
     return dir_package, init_file
 
 
@@ -622,7 +622,7 @@ class TestOptions:
         dir_sub_two, _ = make_package_dir('sub_two', dir_package, ns=True)
 
         with get_dist(tmpdir) as dist:
-            assert set(dist.packages) == { 
+            assert set(dist.packages) == {
                 'fake_package', 'fake_package.sub_two', 'fake_package.sub_one'
             }
 

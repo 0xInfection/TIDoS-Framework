@@ -38,80 +38,79 @@ from core.Vulnlysis.vuln import *
 
 def tidos_main(): # To be called by external
 
-	try:
-		agree() # the agreement (to appear only at time of installation)
-		loadstyle() # some swag stuff :p
-		banner() # main banner
-		bannerbelow() # banner 2
-		web = inputin() # take the website as input
-	except Exception as e:
-		print(R+' [-] Exception encountered!')
-		print(R+' [-] Exception : '+str(e))
-		sys.exit(1)
+    try:
+        agree() # the agreement (to appear only at time of installation)
+        loadstyle() # some swag stuff :p
+        banner() # main banner
+        bannerbelow() # banner 2
+        web = inputin() # take the website as input
+    except Exception as e:
+        print(R+' [-] Exception encountered!')
+        print(R+' [-] Exception : '+str(e))
+        sys.exit(1)
 
-	print(P+' [+] Okay, so what to start with?') # lets start
-	time.sleep(1)
-	def tidosmain(web): # this is to be iterated repeatedly
+    print(P+' [+] Okay, so what to start with?') # lets start
+    time.sleep(1)
+    def tidosmain(web): # this is to be iterated repeatedly
 
-	    while True:
-		try:
-		    os.system('clear')
-		    dispmenu() # displaying the options
-		    zop = raw_input(''+GR+' [#] \033[1;4mTID\033[0m'+GR+' :> ' + color.END)
-		    zap = zop.strip()
+        while True:
+            try:
+                os.system('clear')
+                dispmenu() # displaying the options
+                zop = raw_input(''+GR+' [#] \033[1;4mTID\033[0m'+GR+' :> ' + color.END)
+                zap = zop.strip()
 
-		    if zap == '1': # 1 - OSINT + Recon
+                if zap == '1': # 1 - OSINT + Recon
 
-			print(G+"\n [+] Module loaded : Reconnaissance")
-			footprint(web)
+                    print(G+"\n [+] Module loaded : Reconnaissance")
+                    footprint(web)
 
-		    elif zap == '2': # 2 - Scanning + Enumeration
+                elif zap == '2': # 2 - Scanning + Enumeration
 
-			print(G+'\n [+] Module loaded : Scanning & Enumeration')
-			scanenum(web)
+                    print(G+'\n [+] Module loaded : Scanning & Enumeration')
+                    scanenum(web)
 
-		    elif zap == '3': # 3 - Vulnerability Analysis
+                elif zap == '3': # 3 - Vulnerability Analysis
 
-			print(G+'\n [+] Module loaded : Vulnerability Analysis')
-			vuln(web)
+                    print(G+'\n [+] Module loaded : Vulnerability Analysis')
+                    vuln(web)
 
-		    elif zap == '4': # Exploitation
+                elif zap == '4': # Exploitation
 
-			print(G+'\n [+] Module loaded : Exploits Castle')
-			exploits(web)
+                    print(G+'\n [+] Module loaded : Exploits Castle')
+                    exploits(web)
 
-		    elif zap == '5': # Auxillary modules
+                elif zap == '5': # Auxillary modules
 
-			print(G+'\n [+] Module loaded : Auxillaries')
-			auxil(web)
+                    print(G+'\n [+] Module loaded : Auxillaries')
+                    auxil(web)
 
-		    elif zap == '99': # Say Goodbye!
-			
-			print(R+'\n [-] Exiting...')
-			time.sleep(0.6)
-			print(O+' [+] Goodluck mate, Alvida!\n')
-			sys.exit(0)
+                elif zap == '99': # Say Goodbye!
 
-		    else: # Troll for not selecting right option :p
+                    print(R+'\n [-] Exiting...')
+                    time.sleep(0.6)
+                    print(O+' [+] Goodluck mate, Alvida!\n')
+                    sys.exit(0)
 
-        		dope = ['You high dude?', 'Sorry fam! You just typed shit']
-        		print(R+' [-] ' + dope[randint(0,1)])
-			time.sleep(0.5)
-			pass
-		
-		except KeyboardInterrupt: # Incase user wants to quit
+                else: # Troll for not selecting right option :p
 
-		        print(R+"\n [-] " + color.UNDERLINE+ "User Interruption detected!"+color.END)
-			time.sleep(0.4)
-			print(C+' [+] Alvida, see ya!\n')
-			sys.exit(0)
+                    dope = ['You high dude?', 'Sorry fam! You just typed shit']
+                    print(R+' [-] ' + dope[randint(0,1)])
+                    time.sleep(0.5)
+                    pass
 
-		except Exception: # Global Error Handling Stuff 
-			print(R+' [-] Unhandled runtime exception while execution...') 
-			time.sleep(1)
-			print(R+' [-] Returning back to main menu...')
-			time.sleep(1)
-			pass # (If user runs into a error, that would not quit this tool)
+            except KeyboardInterrupt: # Incase user wants to quit
 
-	tidosmain(web) # The true start of this program
+                print(R+"\n [-] " + color.UNDERLINE+ "User Interruption detected!"+color.END)
+                time.sleep(0.4)
+                print(C+' [+] Alvida, see ya!\n')
+                sys.exit(0)
 
+            except Exception: # Global Error Handling Stuff
+                print(R+' [-] Unhandled runtime exception while execution...')
+                time.sleep(1)
+                print(R+' [-] Returning back to main menu...')
+                time.sleep(1)
+                pass # (If user runs into a error, that would not quit this tool)
+
+    tidosmain(web) # The true start of this program

@@ -7,12 +7,12 @@
 
 #Author : @_tID
 #This module requires TIDoS Framework
-#https://github.com/theInfectedDrake/TIDoS-Framework 
+#https://github.com/theInfectedDrake/TIDoS-Framework
 
 from __future__ import print_function
 import requests, time
 from time import sleep
-from colors import * 
+from colors import *
 
 def subnet(web):
 
@@ -28,14 +28,14 @@ def subnet(web):
     domains = [web]
     for dom in domains:
         text = requests.get('http://api.hackertarget.com/subnetcalc/?q=' + dom).text
-	http = str(text)
+        http = str(text)
 
-	if 'error' not in http:
-		result = http.splitlines()
-		for r in result:	
-			print(G+' '+r.split('=')[0]+'='+O+r.split('=')[1])
+        if 'error' not in http:
+            result = http.splitlines()
+            for r in result:
+                print(G+' '+r.split('=')[0]+'='+O+r.split('=')[1])
 
-	elif 'No results found' in http:
-		print(R+' [-] No results found!')
-	else:
-		print(R+' [-] Outbound Query Exception!') 
+        elif 'No results found' in http:
+            print(R+' [-] No results found!')
+        else:
+            print(R+' [-] Outbound Query Exception!')

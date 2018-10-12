@@ -12,7 +12,7 @@
 from re import search,I
 
 def armor(headers,content):
-	detect = False
-	detect |= search(r'This request has been blocked by website protection from Armor',content,I) is not None
-	if detect : 
-		return "Armor Protection (Armor Defense)" 
+    detect = False
+    detect |= search(r'This request has been blocked by website protection from Armor',content,I) is not None
+    if detect :
+        return "Armor Protection (Armor Defense)"

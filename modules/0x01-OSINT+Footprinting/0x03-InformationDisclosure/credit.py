@@ -7,7 +7,7 @@
 
 #Author : @_tID
 #This module requires TIDoS Framework
-#https://github.com/theInfectedDrake/TIDoS-Framework 
+#https://github.com/theInfectedDrake/TIDoS-Framework
 
 from __future__ import print_function
 import re
@@ -72,7 +72,7 @@ def check0x00(req):
     try:
         append_name = ' '.join(req.encode('utf-8')).strip()
     except UnicodeDecodeError:
-        append_name = ' '.join(req.decode('utf-8')).strip()       
+        append_name = ' '.join(req.decode('utf-8')).strip()
     print(O+' [!] Reading response...')
     print(GR+' [*] Searching for credit cards...')
     AMEX = re.match(AMEX_CARD_SIGNATURE, append_name)
@@ -138,11 +138,10 @@ def check0x00(req):
         pass
 
 def credit(web):
-	
+
     print(GR+' [*] Initiating module...')
     time.sleep(0.5)
     print(R+'\n     ========================')
     print(R+'      CREDIT CARD DISCLOSURE')
     print(R+'     ========================\n')
     credit0x00(web)
-    

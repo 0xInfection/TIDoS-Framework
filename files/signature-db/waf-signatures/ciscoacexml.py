@@ -12,9 +12,9 @@
 from re import search,I
 
 def ciscoacexml(headers,content):
-	detect = False
-	for header in headers.items():
-		detect |= search(r'ace xml gateway',header[1],I) is not None
-		if detect: break
-	if detect : 
-		return "Cisco ACE XML Gateway (Cisco Systems)"
+    detect = False
+    for header in headers.items():
+        detect |= search(r'ace xml gateway',header[1],I) is not None
+        if detect: break
+    if detect :
+        return "Cisco ACE XML Gateway (Cisco Systems)"

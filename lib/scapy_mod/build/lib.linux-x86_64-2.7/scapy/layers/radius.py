@@ -60,6 +60,3 @@ class Radius(Packet):
             l = len(p)
             p = p[:2]+struct.pack("!H",l)+p[4:]
         return p
-
-
-

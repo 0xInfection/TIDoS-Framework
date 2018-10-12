@@ -17,7 +17,7 @@ Key: Python type object (from types) or class
 
 Conversion function:
 
-    Arguments: Python object of indicated type or class AND 
+    Arguments: Python object of indicated type or class AND
                conversion dictionary
 
     Returns: SQL literal value
@@ -65,7 +65,7 @@ def Str2Set(s):
 
 def Set2Str(s, d):
     return string_literal(','.join(s), d)
-    
+
 def Thing2Str(s, d):
     """Convert something into a string via str()."""
     return str(s)
@@ -86,7 +86,7 @@ def None2NULL(o, d):
     return NULL # duh
 
 def Thing2Literal(o, d):
-    
+
     """Convert something into a SQL string literal.  If using
     MySQL-3.23 or newer, string_literal() is a method of the
     _mysql.MYSQL object, and this function will be overridden with
@@ -184,6 +184,3 @@ try:
     conversions[FIELD_TYPE.NEWDECIMAL] = Decimal
 except ImportError:
     pass
-
-
-

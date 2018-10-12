@@ -17,13 +17,13 @@ from scapy.layers.inet import IP, UDP
 class DNSStrField(StrField):
 
     def h2i(self, pkt, x):
-      if x == "":
-        return "."
-      return x
+        if x == "":
+            return "."
+        return x
 
     def i2m(self, pkt, x):
         if x == ".":
-          return "\x00"
+            return "\x00"
 
         x = [k[:63] for k in x.split(".")] # Truncate chunks that cannot be encoded (more than 63 bytes..)
         x = map(lambda y: chr(len(y))+y, x)
@@ -36,7 +36,7 @@ class DNSStrField(StrField):
         n = ""
 
         if ord(s[0]) == 0:
-          return s[1:], "."
+            return s[1:], "."
 
         while 1:
             l = ord(s[0])
@@ -63,7 +63,7 @@ class DNSRRCountField(ShortField):
             x = x.payload
             i += 1
         return i
-        
+
     def i2m(self, pkt, x):
         if x is None:
             x = self._countRR(pkt)
@@ -72,7 +72,7 @@ class DNSRRCountField(ShortField):
         if x is None:
             x = self._countRR(pkt)
         return x
-    
+
 
 def DNSgetstr(s,p):
     name = ""
@@ -104,7 +104,7 @@ def DNSgetstr(s,p):
     if q:
         p = q
     return name,p
-        
+
 
 class DNSRRField(StrField):
     holds_packets=1
@@ -126,11 +126,11 @@ class DNSRRField(StrField):
             del(rr.rdlen)
         elif type in dnsRRdispatcher.keys():
             rr = dnsRRdispatcher[type]("\x00"+ret+s[p:p+rdlen])
-	else:
-          del(rr.rdlen)
-        
+        else:
+            del(rr.rdlen)
+
         p += rdlen
-        
+
         rr.rrname = name
         return rr,p
     def getfield(self, pkt, s):
@@ -155,8 +155,8 @@ class DNSRRField(StrField):
             return (s,p),ret
         else:
             return s[p:],ret
-            
-            
+
+
 class DNSQRField(DNSRRField):
     holds_packets=1
     def decodeRR(self, name, s, p):
@@ -165,8 +165,8 @@ class DNSQRField(DNSRRField):
         rr = DNSQR("\x00"+ret)
         rr.qname = name
         return rr,p
-        
-        
+
+
 
 class RDataField(StrLenField):
     def m2i(self, pkt, s):
@@ -183,13 +183,13 @@ class RDataField(StrLenField):
             while tmp_s:
                 tmp_len = struct.unpack("!B", tmp_s[0])[0] + 1
                 if tmp_len > len(tmp_s):
-                  warning("DNS RR TXT prematured end of character-string (size=%i, remaining bytes=%i)" % (tmp_len, len(tmp_s)))
+                    warning("DNS RR TXT prematured end of character-string (size=%i, remaining bytes=%i)" % (tmp_len, len(tmp_s)))
                 ret_s += tmp_s[1:tmp_len]
                 tmp_s = tmp_s[tmp_len:]
             s = ret_s
         elif pkt.type == 28: # AAAA
             family = socket.AF_INET6
-        if family is not None:    
+        if family is not None:
             s = inet_ntop(family, s)
         return s
     def i2m(self, pkt, s):
@@ -208,7 +208,7 @@ class RDataField(StrLenField):
                 while len(s) >= 255:
                     ret_s += "\xff" + s[:255]
                     s = s[255:]
-                # The remaining string is less than 255 bytes long    
+                # The remaining string is less than 255 bytes long
                 if len(s):
                     ret_s += struct.pack("!B", len(s)) + s
                 s = ret_s
@@ -230,7 +230,7 @@ class RDLenField(Field):
             rdataf = pkt.get_field("rdata")
             x = len(rdataf.i2m(pkt, pkt.rdata))
         return x
-    
+
 
 class DNS(Packet):
     name = "DNS"
@@ -259,7 +259,7 @@ class DNS(Packet):
                 and self.id == other.id
                 and self.qr == 1
                 and other.qr == 0)
-        
+
     def mysummary(self):
         type = ["Qry","Ans"][self.qr]
         name = ""
@@ -278,7 +278,7 @@ dnstypes = { 0:"ANY", 255:"ALL",
              9:"MR",10:"NULL",11:"WKS",12:"PTR",13:"HINFO",14:"MINFO",15:"MX",16:"TXT",
              17:"RP",18:"AFSDB",28:"AAAA", 33:"SRV",38:"A6",39:"DNAME",
              41:"OPT", 43:"DS", 46:"RRSIG", 47:"NSEC", 48:"DNSKEY",
-	     50: "NSEC3", 51: "NSEC3PARAM", 32769:"DLV" }
+             50: "NSEC3", 51: "NSEC3PARAM", 32769:"DLV" }
 
 dnsqtypes = {251:"IXFR",252:"AXFR",253:"MAILB",254:"MAILA",255:"ALL"}
 dnsqtypes.update(dnstypes)
@@ -291,8 +291,8 @@ class DNSQR(Packet):
     fields_desc = [ DNSStrField("qname",""),
                     ShortEnumField("qtype", 1, dnsqtypes),
                     ShortEnumField("qclass", 1, dnsclasses) ]
-                    
-                    
+
+
 
 # RFC 2671 - Extension Mechanisms for DNS (EDNS0)
 
@@ -303,7 +303,7 @@ class EDNS0TLV(Packet):
                     StrLenField("optdata", "", length_from=lambda pkt: pkt.optlen) ]
 
     def extract_padding(self, p):
-	return "", p
+        return "", p
 
 class DNSRROPT(Packet):
     name = "DNS OPT Resource Record"
@@ -321,7 +321,7 @@ class DNSRROPT(Packet):
 # RFC 4034 - Resource Records for the DNS Security Extensions
 
 # 09/2013 from http://www.iana.org/assignments/dns-sec-alg-numbers/dns-sec-alg-numbers.xhtml
-dnssecalgotypes = { 0:"Reserved", 1:"RSA/MD5", 2:"Diffie-Hellman", 3:"DSA/SHA-1", 
+dnssecalgotypes = { 0:"Reserved", 1:"RSA/MD5", 2:"Diffie-Hellman", 3:"DSA/SHA-1",
                     4:"Reserved", 5:"RSA/SHA-1", 6:"DSA-NSEC3-SHA1",
                     7:"RSASHA1-NSEC3-SHA1", 8:"RSA/SHA-256", 9:"Reserved",
                    10:"RSA/SHA-512", 11:"Reserved", 12:"GOST R 34.10-2001",
@@ -337,21 +337,21 @@ class TimeField(IntField):
 
     def any2i(self, pkt, x):
         if type(x) == str:
-	    import time, calendar
-	    t = time.strptime(x, "%Y%m%d%H%M%S")
+            import time, calendar
+            t = time.strptime(x, "%Y%m%d%H%M%S")
             return int(calendar.timegm(t))
         return x
 
     def i2repr(self, pkt, x):
-	import time
-	x = self.i2h(pkt, x)
-	t = time.strftime("%Y%m%d%H%M%S", time.gmtime(x))
-	return "%s (%d)" % (t ,x) 
+        import time
+        x = self.i2h(pkt, x)
+        t = time.strftime("%Y%m%d%H%M%S", time.gmtime(x))
+        return "%s (%d)" % (t ,x)
 
 
 def bitmap2RRlist(bitmap):
     """
-    Decode the 'Type Bit Maps' field of the NSEC Resource Record into an 
+    Decode the 'Type Bit Maps' field of the NSEC Resource Record into an
     integer list.
     """
     # RFC 4034, 4.1.2. The Type Bit Maps Field
@@ -360,38 +360,38 @@ def bitmap2RRlist(bitmap):
 
     while bitmap:
 
-	if len(bitmap) < 2:
-	    warning("bitmap too short (%i)" % len(bitmap))
-	    return
-   
-	window_block = ord(bitmap[0]) # window number
-	offset = 256*window_block # offset of the Ressource Record
-	bitmap_len = ord(bitmap[1]) # length of the bitmap in bytes
+        if len(bitmap) < 2:
+            warning("bitmap too short (%i)" % len(bitmap))
+            return
 
-	if bitmap_len <= 0 or bitmap_len > 32:
-	    warning("bitmap length is no valid (%i)" % bitmap_len)
-	    return
+        window_block = ord(bitmap[0]) # window number
+        offset = 256*window_block # offset of the Ressource Record
+        bitmap_len = ord(bitmap[1]) # length of the bitmap in bytes
 
-	tmp_bitmap = bitmap[2:2+bitmap_len]
+        if bitmap_len <= 0 or bitmap_len > 32:
+            warning("bitmap length is no valid (%i)" % bitmap_len)
+            return
 
-	# Let's compare each bit of tmp_bitmap and compute the real RR value
-	for b in xrange(len(tmp_bitmap)):
-	    v = 128
-	    for i in xrange(8):
-		if ord(tmp_bitmap[b]) & v:
-		    # each of the RR is encoded as a bit
-		    RRlist += [ offset + b*8 + i ] 
-		v = v >> 1
-	
-	# Next block if any
-	bitmap = bitmap[2+bitmap_len:]
+        tmp_bitmap = bitmap[2:2+bitmap_len]
+
+        # Let's compare each bit of tmp_bitmap and compute the real RR value
+        for b in xrange(len(tmp_bitmap)):
+            v = 128
+            for i in xrange(8):
+                if ord(tmp_bitmap[b]) & v:
+                    # each of the RR is encoded as a bit
+                    RRlist += [ offset + b*8 + i ]
+                v = v >> 1
+
+        # Next block if any
+        bitmap = bitmap[2+bitmap_len:]
 
     return RRlist
 
 
 def RRlist2bitmap(lst):
     """
-    Encode a list of integers representing Resource Records to a bitmap field 
+    Encode a list of integers representing Resource Records to a bitmap field
     used in the NSEC Resource Record.
     """
     # RFC 4034, 4.1.2. The Type Bit Maps Field
@@ -401,7 +401,7 @@ def RRlist2bitmap(lst):
     bitmap = ""
     lst = list(set(lst))
     lst.sort()
-    
+
     lst = filter(lambda x: x <= 65535, lst)
     lst = map(lambda x: abs(x), lst)
 
@@ -409,7 +409,7 @@ def RRlist2bitmap(lst):
     max_window_blocks = int(math.ceil(lst[-1] / 256.))
     min_window_blocks = int(math.floor(lst[0] / 256.))
     if min_window_blocks == max_window_blocks:
-	max_window_blocks += 1
+        max_window_blocks += 1
 
     for wb in xrange(min_window_blocks, max_window_blocks+1):
         # First, filter out RR not encoded in the current window block
@@ -418,15 +418,15 @@ def RRlist2bitmap(lst):
         rrlist.sort()
         if rrlist == []:
             continue
-     
+
         # Compute the number of bytes used to store the bitmap
         if rrlist[-1] == 0: # only one element in the list
-	    bytes = 1
+            bytes = 1
         else:
-	    max = rrlist[-1] - 256*wb
-	    bytes = int(math.ceil(max / 8)) + 1  # use at least 1 byte
+            max = rrlist[-1] - 256*wb
+            bytes = int(math.ceil(max / 8)) + 1  # use at least 1 byte
         if bytes > 32: # Don't encode more than 256 bits / values
-	    bytes = 32
+            bytes = 32
 
         bitmap += struct.pack("B", wb)
         bitmap += struct.pack("B", bytes)
@@ -444,20 +444,20 @@ def RRlist2bitmap(lst):
                 # 3. sum everything
                 v = reduce(lambda x,y: x+y, tmp_rrlist)
             bitmap += struct.pack("B", v)
-   
+
     return bitmap
 
 
 class RRlistField(StrField):
     def h2i(self, pkt, x):
-	if type(x) == list:
-	    return RRlist2bitmap(x)
-	return x
+        if type(x) == list:
+            return RRlist2bitmap(x)
+        return x
 
     def i2repr(self, pkt, x):
-	x = self.i2h(pkt, x)
-	rrlist = bitmap2RRlist(x)
-	return [ dnstypes.get(rr, rr) for rr in rrlist ]
+        x = self.i2h(pkt, x)
+        rrlist = bitmap2RRlist(x)
+        return [ dnstypes.get(rr, rr) for rr in rrlist ]
 
 
 class _DNSRRdummy(Packet):
@@ -469,7 +469,7 @@ class _DNSRRdummy(Packet):
         lrrname = len(self.fields_desc[0].i2m("", self.getfieldval("rrname")))
         l = len(pkt) - lrrname - 10
         pkt = pkt[:lrrname+8] + struct.pack("!H", l) + pkt[lrrname+8+2:]
-        
+
         return pkt
 
 class DNSRRSOA(_DNSRRdummy):
@@ -553,9 +553,9 @@ class DNSRRDS(_DNSRRdummy):
 class DNSRRDLV(DNSRRDS):
     name = "DNS DLV Resource Record"
     def __init__(self, *args, **kargs):
-       DNSRRDS.__init__(self, *args, **kargs)
-       if not kargs.get('type', 0):
-           self.type = 32769
+        DNSRRDS.__init__(self, *args, **kargs)
+        if not kargs.get('type', 0):
+            self.type = 32769
 
 # RFC 5155 - DNS Security (DNSSEC) Hashed Authenticated Denial of Existence
 class DNSRRNSEC3(_DNSRRdummy):
@@ -565,15 +565,15 @@ class DNSRRNSEC3(_DNSRRdummy):
                     ShortEnumField("rclass", 1, dnsclasses),
                     IntField("ttl", 0),
                     ShortField("rdlen", None),
-		    ByteField("hashalg", 0), 
+                    ByteField("hashalg", 0),
                     BitEnumField("flags", 0, 8, {1:"Opt-Out"}),
-		    ShortField("iterations", 0), 
-		    FieldLenField("saltlength", 0, fmt="!B", length_of="salt"),
-		    StrLenField("salt", "", length_from=lambda x: x.saltlength),
-		    FieldLenField("hashlength", 0, fmt="!B", length_of="nexthashedownername"),
-		    StrLenField("nexthashedownername", "", length_from=lambda x: x.hashlength),
+                    ShortField("iterations", 0),
+                    FieldLenField("saltlength", 0, fmt="!B", length_of="salt"),
+                    StrLenField("salt", "", length_from=lambda x: x.saltlength),
+                    FieldLenField("hashlength", 0, fmt="!B", length_of="nexthashedownername"),
+                    StrLenField("nexthashedownername", "", length_from=lambda x: x.hashlength),
                     RRlistField("typebitmaps", "")
-		  ]
+                  ]
 
 
 class DNSRRNSEC3PARAM(_DNSRRdummy):
@@ -583,12 +583,12 @@ class DNSRRNSEC3PARAM(_DNSRRdummy):
                     ShortEnumField("rclass", 1, dnsclasses),
                     IntField("ttl", 0),
                     ShortField("rdlen", None),
-		    ByteField("hashalg", 0), 
-		    ByteField("flags", 0), 
-		    ShortField("iterations", 0), 
-		    FieldLenField("saltlength", 0, fmt="!B", length_of="salt"),
-		    StrLenField("salt", "", length_from=lambda pkt: pkt.saltlength)
-		  ]
+                    ByteField("hashalg", 0),
+                    ByteField("flags", 0),
+                    ShortField("iterations", 0),
+                    FieldLenField("saltlength", 0, fmt="!B", length_of="salt"),
+                    StrLenField("salt", "", length_from=lambda pkt: pkt.saltlength)
+                  ]
 
 
 dnssecclasses = [ DNSRROPT, DNSRRRSIG, DNSRRDLV, DNSRRDNSKEY, DNSRRNSEC, DNSRRDS, DNSRRNSEC3, DNSRRNSEC3PARAM ]
@@ -640,9 +640,9 @@ RFC2136
         return r.getlayer(DNS).rcode
     else:
         return -1
-    
-    
-    
+
+
+
 
 @conf.commands.register
 def dyndns_del(nameserver, name, type="ALL", ttl=10):
@@ -662,7 +662,7 @@ RFC2136
         return r.getlayer(DNS).rcode
     else:
         return -1
-    
+
 
 class DNS_am(AnsweringMachine):
     function_name="dns_spoof"
@@ -677,7 +677,7 @@ class DNS_am(AnsweringMachine):
 
     def is_request(self, req):
         return req.haslayer(DNS) and req.getlayer(DNS).qr == 0
-    
+
     def make_reply(self, req):
         ip = req.getlayer(IP)
         dns = req.getlayer(DNS)
@@ -686,5 +686,3 @@ class DNS_am(AnsweringMachine):
         resp /= DNS(id=dns.id, qr=1, qd=dns.qd,
                     an=DNSRR(rrname=dns.qd.qname, ttl=10, rdata=rdata))
         return resp
-
-

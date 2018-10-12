@@ -11,4 +11,3 @@ signal.signal(signal.SIGCONT, signal.SIG_IGN)
 print('READY')
 while True:
     time.sleep(10)
-    

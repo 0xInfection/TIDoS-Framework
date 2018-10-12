@@ -6,7 +6,7 @@
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 
 #This module requires TIDoS Framework
-#https://github.com/theInfectedDrake/TIDoS-Framework 
+#https://github.com/theInfectedDrake/TIDoS-Framework
 
 from __future__ import print_function
 import time
@@ -30,5 +30,4 @@ def auxilban():
     time.sleep(0.1)
     print(B+'     [4]'+C+' HoneyPot Probability'+W+' (ShodanLabs HoneyScore)\n')
     time.sleep(0.1)
-    print(B+'     [99]'+C+' Back\n') 
-
+    print(B+'     [99]'+C+' Back\n')

@@ -33,4 +33,3 @@ print('isalive',p.isalive())
 print('exitstatus',p.exitstatus)
 print('isalive',p.isalive())
 print('exitstatus',p.exitstatus)
-

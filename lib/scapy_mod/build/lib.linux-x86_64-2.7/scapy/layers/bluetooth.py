@@ -34,21 +34,21 @@ class HCI_ACL_Hdr(Packet):
             l = len(p)-4
             p = p[:2]+chr(l&0xff)+chr((l>>8)&0xff)+p[4:]
         return p
-                    
+
 
 class L2CAP_Hdr(Packet):
     name = "L2CAP header"
     fields_desc = [ LEShortField("len",None),
                     LEShortEnumField("cid",0,{1:"control"}),]
-    
+
     def post_build(self, p, pay):
         p += pay
         if self.len is None:
             l = len(p)-4
             p = p[:2]+chr(l&0xff)+chr((l>>8)&0xff)+p[4:]
         return p
-                    
-                
+
+
 
 class L2CAP_CmdHdr(Packet):
     name = "L2CAP command header"
@@ -96,7 +96,7 @@ class L2CAP_CmdRej(Packet):
     name = "L2CAP Command Rej"
     fields_desc = [ LEShortField("reason",0),
                     ]
-    
+
 
 class L2CAP_ConfReq(Packet):
     name = "L2CAP Conf Req"
@@ -126,7 +126,7 @@ class L2CAP_DisconnResp(Packet):
     def answers(self, other):
         return self.scid == other.scid
 
-    
+
 
 class L2CAP_InfoReq(Packet):
     name = "L2CAP Info Req"
@@ -158,19 +158,19 @@ bind_layers( L2CAP_CmdHdr,  L2CAP_DisconnReq,  code=6)
 bind_layers( L2CAP_CmdHdr,  L2CAP_DisconnResp, code=7)
 bind_layers( L2CAP_CmdHdr,  L2CAP_InfoReq,     code=10)
 bind_layers( L2CAP_CmdHdr,  L2CAP_InfoResp,    code=11)
-        
+
 class BluetoothL2CAPSocket(SuperSocket):
     desc = "read/write packets on a connected L2CAP socket"
     def __init__(self, peer):
         s = socket.socket(socket.AF_BLUETOOTH, socket.SOCK_RAW,
                           socket.BTPROTO_L2CAP)
         s.connect((peer,0))
-        
+
         self.ins = self.outs = s
 
     def recv(self, x=MTU):
         return L2CAP_CmdHdr(self.ins.recv(x))
-    
+
 
 class BluetoothHCISocket(SuperSocket):
     desc = "read/write on a BlueTooth HCI socket"
@@ -182,11 +182,11 @@ class BluetoothHCISocket(SuperSocket):
         s.bind((iface,))
         self.ins = self.outs = s
 #        s.connect((peer,0))
-        
+
 
     def recv(self, x):
         return HCI_Hdr(self.ins.recv(x))
-    
+
 ## Bluetooth
 
 
@@ -204,7 +204,7 @@ def srbt1(peer, pkts, *args, **kargs):
     a,b = srbt(peer, pkts, *args, **kargs)
     if len(a) > 0:
         return a[0][1]
-        
-    
+
+
 
 conf.BTsocket = BluetoothL2CAPSocket

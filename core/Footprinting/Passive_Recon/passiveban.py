@@ -7,7 +7,7 @@
 
 #Author: @_tID
 #This module requires TIDoS Framework
-#https://github.com/theInfectedDrake/TIDoS-Framework 
+#https://github.com/theInfectedDrake/TIDoS-Framework
 
 from __future__ import print_function
 import time
@@ -71,4 +71,3 @@ def passiveban():
     time.sleep(0.04)
     print(B+'      [99] '+C+'Back'+W+'\n')
     time.sleep(0.3)
-

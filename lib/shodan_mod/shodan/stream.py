@@ -17,18 +17,18 @@ class Stream:
             'key': self.api_key,
         }
         stream_url = self.base_url + name
-        
+
         # The user doesn't want to use a timeout
         # If the timeout is specified as 0 then we also don't want to have a timeout
         if ( timeout and timeout <= 0 ) or ( timeout == 0 ):
             timeout = None
-        
+
         # If the user requested a timeout then we need to disable heartbeat messages
         # which are intended to keep stream connections alive even if there isn't any data
         # flowing through.
         if timeout:
             params['heartbeat'] = False
-        
+
         try:
             while True:
                 req = requests.get(stream_url, params=params, stream=True, timeout=timeout)
@@ -121,4 +121,3 @@ class Stream:
         stream = self._create_stream('/shodan/ports/%s' % ','.join([str(port) for port in ports]), timeout=timeout)
         for line in self._iter_stream(stream, raw):
             yield line
-            

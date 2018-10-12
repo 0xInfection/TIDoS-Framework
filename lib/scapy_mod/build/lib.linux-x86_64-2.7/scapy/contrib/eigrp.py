@@ -435,7 +435,7 @@ def _EIGRPGuessPayloadClass(p, **kargs):
         t = struct.unpack("!H", p[:2])[0]
         clsname = _eigrp_tlv_cls.get(t, "EIGRPGeneric")
         cls = globals()[clsname]
-	return cls(p, **kargs)
+        return cls(p, **kargs)
 
 _EIGRP_OPCODES = { 1 : "Update",
                    2 : "Request",
@@ -485,4 +485,3 @@ bind_layers(IPv6, EIGRP, nh=88)
 if __name__ == "__main__":
     from scapy.main import interact
     interact(mydict=globals(), mybanner="EIGRP")
-

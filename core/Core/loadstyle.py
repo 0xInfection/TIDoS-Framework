@@ -5,7 +5,7 @@
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 
 #This module requires TIDoS Framework
-#https://github.com/theInfectedDrake/TIDoS-Framework 
+#https://github.com/theInfectedDrake/TIDoS-Framework
 
 from __future__ import print_function
 import os
@@ -20,16 +20,15 @@ def loadstyle():
     loading = "Loading the TIDoS Framework..."
     action = 0
     while action < 1:
-	for i,char in enumerate(loading):
-		if i == 0:
-			print("%s%s%s%s" %(red_bold,char.upper(),reset,loading[1:]))
-		elif i == 1:
-			old_loading = loading[0].lower()
-			print("%s%s%s%s%s" %(old_loading,red_bold,char.upper(),reset,loading[2:]))
-		elif i == i:
-			old_loading = loading[-0:i].lower()
-			print("%s%s%s%s%s" %(old_loading,red_bold,char.upper(),reset,loading[i+1:]))
-		time.sleep(0.1)
-		os.system('clear')
-	action += 1
-
+        for i,char in enumerate(loading):
+            if i == 0:
+                print("%s%s%s%s" %(red_bold,char.upper(),reset,loading[1:]))
+            elif i == 1:
+                old_loading = loading[0].lower()
+                print("%s%s%s%s%s" %(old_loading,red_bold,char.upper(),reset,loading[2:]))
+            elif i == i:
+                old_loading = loading[-0:i].lower()
+                print("%s%s%s%s%s" %(old_loading,red_bold,char.upper(),reset,loading[i+1:]))
+            time.sleep(0.1)
+            os.system('clear')
+        action += 1

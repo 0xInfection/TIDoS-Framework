@@ -1777,7 +1777,7 @@ class LWPCookieTests(unittest.TestCase, TempfileTestMixin):
         # Test for empty path
         # Broken web-server ORION/1.3.38 returns to the client response like
         #
-        #	Set-Cookie: JSESSIONID=ABCDERANDOM123; Path=
+        #       Set-Cookie: JSESSIONID=ABCDERANDOM123; Path=
         #
         # ie. with Path set to nothing.
         # In this case, extract_cookies() must set cookie to / (root)
