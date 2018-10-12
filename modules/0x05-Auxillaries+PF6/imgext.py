@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 #-:-:-:-:-:-:-:-:-:-:-:-:#
@@ -14,9 +14,12 @@ import time
 import PIL.ExifTags
 from PIL.ExifTags import TAGS, GPSTAGS
 from PIL import Image
-from pyexiv2 import ImageMetadata, ExifTag
+try:
+    from pyexiv2 import ImageMetadata, ExifTag # python2
+except ImportError:
+    from py3exiv2 import ImageMetadata, ExifTag 
+    # python3
 from core.Core.colors import *
-
 from collections import namedtuple
 import os
 

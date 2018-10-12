@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 #-:-:-:-:-:-:-:-:-:-:-:-:#
@@ -16,7 +16,7 @@ import os
 import sys
 from core.Core.colors import *
 sys.path.append('files/')
-from DNSDumpsterAPI import *
+from lib.dnsdump_mod.DNSDumpsterAPI import *
 
 def dnschk(domain):
 

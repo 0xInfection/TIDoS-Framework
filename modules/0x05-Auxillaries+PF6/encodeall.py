@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 #-:-:-:-:-:-:-:-:-:-:-:-:#
@@ -14,7 +14,11 @@ import urllib
 from core.Core.colors import *
 from cgi import escape
 from time import sleep
-import StringIO
+try:
+    import StringIO # python2
+except ImportError:
+    from io import StringIO
+    # python3
 import gzip
 import os
 

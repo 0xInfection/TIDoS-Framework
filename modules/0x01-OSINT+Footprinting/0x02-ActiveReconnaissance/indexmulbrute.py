@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 #-:-:-:-:-:-:-:-:-:-:-:-:#
@@ -14,12 +14,10 @@ import os
 import time
 import requests
 import sys
+sys.path.append('lib/fileutils_mod/')
 import FileUtils
-sys.path.append('lib/FileUtils/')
-from FileUtils import *
 from core.Core.colors import *
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
-
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 file_paths = []
 dir_path = []
