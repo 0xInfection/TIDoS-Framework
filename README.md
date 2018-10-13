@@ -37,7 +37,6 @@
 
 ### Highlights :-
 Here is some light on what the framework is all about:
-- [x] TIDoS Framework now boasts of a century+ of modules.
 - [x] A complete versatile framework to cover up everything from Reconnaissance to Vulnerability Analysis.
 - [x] Has 5 main phases, subdivided into __14 sub-phases__ consisting a total of <a href="https://github.com/theInfectedDrake/TIDoS-Framework/blob/master/doc/man/tree.man">__108 modules__</a>.
 - [x] Reconnaissance Phase has 50 modules of its own (including active and passive recon, information disclosure modules).
@@ -57,6 +56,7 @@ Here is some light on what the framework is all about:
 #### Global Installation:
 
 > NOTE: For installing globally, you will need to default your Python version to 2.x.
+> However, the work of migration from Python2 to Python3 is already underway.
 
 * Clone the repository locally and navigate there:
 ```
