@@ -143,7 +143,7 @@ def ghcommit_role(name, rawtext, text, lineno, inliner, options={}, content=[]):
 
 def setup(app):
     """Install the plugin.
-    
+
     :param app: Sphinx application context.
     """
     app.info('Initializing GitHub plugin')

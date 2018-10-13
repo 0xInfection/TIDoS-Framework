@@ -90,7 +90,7 @@ class screen:
         self.encoding = encoding
         self.encoding_errors = encoding_errors
         if encoding is not None:
-            self.decoder = codecs.getincrementaldecoder(encoding)(encoding_errors)            
+            self.decoder = codecs.getincrementaldecoder(encoding)(encoding_errors)
         else:
             self.decoder = None
         self.cur_r = 1
@@ -428,4 +428,3 @@ class screen:
 #        Delete line             Esc [ Pn M
 #        Delete character        Esc [ Pn P
 #        Scrolling region        Esc [ Pn(top);Pn(bot) r
-

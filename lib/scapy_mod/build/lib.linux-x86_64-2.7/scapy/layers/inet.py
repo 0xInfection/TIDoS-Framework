@@ -37,7 +37,7 @@ class IPTools:
         t.sort()
         return t[t.index(self.ttl)+1]
     def hops(self):
-        return self.ottl()-self.ttl-1 
+        return self.ottl()-self.ttl-1
 
 
 _ip_options_names = { 0: "end_of_list",
@@ -65,22 +65,22 @@ _ip_options_names = { 0: "end_of_list",
                       23: "dynamic_packet_state",
                       24: "upstream_multicast_packet",
                       25: "quick_start",
-                      30: "rfc4727_experiment", 
+                      30: "rfc4727_experiment",
                       }
-                      
+
 
 class _IPOption_HDR(Packet):
     fields_desc = [ BitField("copy_flag",0, 1),
                     BitEnumField("optclass",0,2,{0:"control",2:"debug"}),
                     BitEnumField("option",0,5, _ip_options_names) ]
-    
+
 class IPOption(Packet):
     name = "IP Option"
     fields_desc = [ _IPOption_HDR,
                     FieldLenField("length", None, fmt="B",  # Only option 0 and 1 have no length and value
                                   length_of="value", adjust=lambda pkt,l:l+2),
                     StrLenField("value", "",length_from=lambda pkt:pkt.length-2) ]
-    
+
     def extract_padding(self, p):
         return "",p
 
@@ -100,7 +100,7 @@ class IPOption_EOL(IPOption):
     name = "IP Option End of Options List"
     option = 0
     fields_desc = [ _IPOption_HDR ]
-    
+
 
 class IPOption_NOP(IPOption):
     name = "IP Option No Operation"
@@ -118,7 +118,7 @@ class IPOption_Security(IPOption):
                     ShortField("handling_restrictions",0),
                     StrFixedLenField("transmission_control_code","xxx",3),
                     ]
-    
+
 class IPOption_LSRR(IPOption):
     name = "IP Option Loose Source and Record Route"
     copy_flag = 1
@@ -127,7 +127,7 @@ class IPOption_LSRR(IPOption):
                     FieldLenField("length", None, fmt="B",
                                   length_of="routers", adjust=lambda pkt,l:l+3),
                     ByteField("pointer",4), # 4 is first IP
-                    FieldListField("routers",[],IPField("","0.0.0.0"), 
+                    FieldListField("routers",[],IPField("","0.0.0.0"),
                                    length_from=lambda pkt:pkt.length-3)
                     ]
     def get_current_router(self):
@@ -147,7 +147,7 @@ class IPOption_Stream_Id(IPOption):
     fields_desc = [ _IPOption_HDR,
                     ByteField("length", 4),
                     ShortField("security",0), ]
-                    
+
 class IPOption_MTU_Probe(IPOption):
     name = "IP Option MTU Probe"
     option = 11
@@ -195,10 +195,10 @@ class IPOption_SDBM(IPOption):
     fields_desc = [ _IPOption_HDR,
                     FieldLenField("length", None, fmt="B",
                                   length_of="addresses", adjust=lambda pkt,l:l+2),
-                    FieldListField("addresses",[],IPField("","0.0.0.0"), 
+                    FieldListField("addresses",[],IPField("","0.0.0.0"),
                                    length_from=lambda pkt:pkt.length-2)
                     ]
-    
+
 
 
 TCPOptions = (
@@ -263,7 +263,7 @@ class TCPOptionsField(StrField):
                 opt.append((onum, oval))
             x = x[olen:]
         return opt
-    
+
     def i2m(self, pkt, x):
         opt = ""
         for oname,oval in x:
@@ -295,7 +295,7 @@ class TCPOptionsField(StrField):
         return opt+"\x00"*(3-((len(opt)+3)%4))
     def randval(self):
         return [] # XXX
-    
+
 
 class ICMPTimeStampField(IntField):
     re_hmsm = re.compile("([0-2]?[0-9])[Hh:](([0-5]?[0-9])([Mm:]([0-5]?[0-9])([sS:.]([0-9]{0,3}))?)?)?$")
@@ -399,7 +399,7 @@ class IP(Packet, IPTools):
         if self.frag:
             s += " frag:%i" % self.frag
         return s
-                 
+
     def fragment(self, fragsize=1480):
         """Fragment IP datagrams"""
         fragsize = (fragsize+7)/8*8
@@ -409,11 +409,11 @@ class IP(Packet, IPTools):
         while fl.underlayer is not None:
             fnb += 1
             fl = fl.underlayer
-        
+
         for p in fl:
             s = str(p[fnb].payload)
             nb = (len(s)+fragsize-1)/fragsize
-            for i in range(nb):            
+            for i in range(nb):
                 q = p.copy()
                 del(q[fnb].payload)
                 del(q[fnb].chksum)
@@ -421,7 +421,7 @@ class IP(Packet, IPTools):
                 if i == nb-1:
                     q[IP].flags &= ~1
                 else:
-                    q[IP].flags |= 1 
+                    q[IP].flags |= 1
                 q[IP].frag = i*fragsize/8
                 r = conf.raw_layer(load=s[i*fragsize:(i+1)*fragsize])
                 r.overload_fields = p[IP].payload.overload_fields.copy()
@@ -540,7 +540,7 @@ class UDP(Packet):
         elif isinstance(self.underlayer, scapy.layers.inet6.IPv6):
             return self.underlayer.sprintf("UDP %IPv6.src%:%UDP.sport% > %IPv6.dst%:%UDP.dport%")
         else:
-            return self.sprintf("UDP %UDP.sport% > %UDP.dport%")    
+            return self.sprintf("UDP %UDP.sport% > %UDP.dport%")
 
 icmptypes = { 0 : "echo-reply",
               3 : "dest-unreach",
@@ -581,8 +581,8 @@ icmpcodes = { 3 : { 0  : "network-unreachable",
                      1 : "ttl-zero-during-reassembly", },
               12 : { 0 : "ip-header-bad",
                      1 : "required-option-missing", }, }
-                         
-                   
+
+
 
 
 class ICMP(Packet):
@@ -600,7 +600,7 @@ class ICMP(Packet):
                     ConditionalField(X3BytesField("reserved",0), lambda pkt:pkt.type==12),
                     ConditionalField(IPField("addr_mask","0.0.0.0"), lambda pkt:pkt.type in [17,18]),
                     ConditionalField(IntField("unused",0), lambda pkt:pkt.type not in [0,5,8,12,13,14,15,16,17,18]),
-                    
+
                     ]
     def post_build(self, p, pay):
         p += pay
@@ -608,7 +608,7 @@ class ICMP(Packet):
             ck = checksum(p)
             p = p[:2]+chr(ck>>8)+chr(ck&0xff)+p[4:]
         return p
-    
+
     def hashret(self):
         if self.type in [0,8,13,14,15,16,17,18]:
             return struct.pack("HH",self.id,self.seq)+self.payload.hashret()
@@ -632,8 +632,8 @@ class ICMP(Packet):
             return self.underlayer.sprintf("ICMP %IP.src% > %IP.dst% %ICMP.type% %ICMP.code%")
         else:
             return self.sprintf("ICMP %ICMP.type% %ICMP.code%")
-    
-        
+
+
 
 
 
@@ -688,7 +688,7 @@ class UDPerror(UDP):
     def mysummary(self):
         return Packet.mysummary(self)
 
-                    
+
 
 class ICMPerror(ICMP):
     name = "ICMP in ICMP"
@@ -746,7 +746,7 @@ def fragment(pkt, fragsize=1480):
     for p in pkt:
         s = str(p[IP].payload)
         nb = (len(s)+fragsize-1)/fragsize
-        for i in range(nb):            
+        for i in range(nb):
             q = p.copy()
             del(q[IP].payload)
             del(q[IP].chksum)
@@ -754,7 +754,7 @@ def fragment(pkt, fragsize=1480):
             if i == nb-1:
                 q[IP].flags &= ~1
             else:
-                q[IP].flags |= 1 
+                q[IP].flags |= 1
             q[IP].frag = i*fragsize/8
             r = conf.raw_layer(load=s[i*fragsize:(i+1)*fragsize])
             r.overload_fields = p[IP].payload.overload_fields.copy()
@@ -830,7 +830,7 @@ def defrag(plist):
     for p in defrag:
         defrag2.append(p.__class__(str(p)))
     return nofrag,defrag2,missfrag
-            
+
 @conf.commands.register
 def defragment(plist):
     """defrag(plist) -> plist defragmented as much as possible """
@@ -903,10 +903,10 @@ def defragment(plist):
         name = "Defragmented %s" % plist.listname
     else:
         name = "Defragmented"
-    
+
     return PacketList(final, name=name)
-            
-        
+
+
 
 ### Add timeskew_graph() method to PacketList
 def _packetlist_timeskew_graph(self, ip, **kargs):
@@ -1021,7 +1021,7 @@ class TracerouteResult(SndRcvList):
                     col = visual.color.green
                 else:
                     col = visual.color.blue
-                
+
                 s = IPsphere(pos=((l-1)*visual.cos(2*i*visual.pi/l),(l-1)*visual.sin(2*i*visual.pi/l),2*t),
                              ip = r[i][0],
                              color = col)
@@ -1036,7 +1036,7 @@ class TracerouteResult(SndRcvList):
             for ip in trlst:
                 visual.cylinder(pos=start,axis=ip.pos-start,color=col,radius=0.2)
                 start = ip.pos
-        
+
         movcenter=None
         while 1:
             visual.rate(50)
@@ -1073,8 +1073,8 @@ class TracerouteResult(SndRcvList):
             if movcenter:
                 visual.scene.center -= visual.scene.mouse.pos-movcenter
                 movcenter = visual.scene.mouse.pos
-                
-                
+
+
     def world_trace(self):
         from modules.geo import locate_ip
         ips = {}
@@ -1162,7 +1162,7 @@ class TracerouteResult(SndRcvList):
             else:
                 trace[ttl] = r.sprintf('"%r,src%"')
             rt[trace_id] = trace
-    
+
         # Fill holes with unk%i nodes
         unknown_label = incremental_label("unk%i")
         blackholes = []
@@ -1178,23 +1178,23 @@ class TracerouteResult(SndRcvList):
                     bh = "%s %i/icmp" % (rtk[1],rtk[3])
                 elif rtk[2] == 6: #TCP
                     bh = "%s %i/tcp" % (rtk[1],rtk[3])
-                elif rtk[2] == 17: #UDP                    
+                elif rtk[2] == 17: #UDP
                     bh = '%s %i/udp' % (rtk[1],rtk[3])
                 else:
-                    bh = '%s %i/proto' % (rtk[1],rtk[2]) 
+                    bh = '%s %i/proto' % (rtk[1],rtk[2])
                 ips[bh] = None
                 bhip[rtk[1]] = bh
                 bh = '"%s"' % bh
                 trace[max(k)+1] = bh
                 blackholes.append(bh)
-    
+
         # Find AS numbers
         ASN_query_list = dict.fromkeys(map(lambda x:x.rsplit(" ",1)[0],ips)).keys()
-        if ASres is None:            
+        if ASres is None:
             ASNlist = []
         else:
-            ASNlist = ASres.resolve(*ASN_query_list)            
-    
+            ASNlist = ASres.resolve(*ASN_query_list)
+
         ASNs = {}
         ASDs = {}
         for ip,asn,desc, in ASNlist:
@@ -1209,15 +1209,15 @@ class TracerouteResult(SndRcvList):
                 iplist.append(ip)
             ASNs[asn] = iplist
             ASDs[asn] = desc
-    
-    
+
+
         backcolorlist=colgen("60","86","ba","ff")
         forecolorlist=colgen("a0","70","40","20")
-    
+
         s = "digraph trace {\n"
-    
+
         s += "\n\tnode [shape=ellipse,color=black,style=solid];\n\n"
-    
+
         s += "\n#ASN clustering\n"
         for asn in ASNs:
             s += '\tsubgraph cluster_%s {\n' % asn
@@ -1227,17 +1227,17 @@ class TracerouteResult(SndRcvList):
             s += '\t\tfontsize = 10;'
             s += '\t\tlabel = "%s\\n[%s]"\n' % (asn,ASDs[asn])
             for ip in ASNs[asn]:
-    
+
                 s += '\t\t"%s";\n'%ip
             s += "\t}\n"
-    
-    
-    
-    
+
+
+
+
         s += "#endpoints\n"
         for p in ports:
             s += '\t"%s" [shape=record,color=black,fillcolor=green,style=filled,label="%s|%s"];\n' % (p,p,"|".join(ports[p]))
-    
+
         s += "\n#Blackholes\n"
         for bh in blackholes:
             s += '\t%s [shape=octagon,color=black,fillcolor=red,style=filled];\n' % bh
@@ -1252,12 +1252,12 @@ class TracerouteResult(SndRcvList):
                         pad[rcv.src]=None
             for rcv in pad:
                 s += '\t"%s" [shape=triangle,color=black,fillcolor=red,style=filled];\n' % rcv
-    
-    
-            
+
+
+
         s += "\n\tnode [shape=ellipse,color=black,style=solid];\n\n"
-    
-    
+
+
         for rtk in rt:
             s += "#---[%s\n" % `rtk`
             s += '\t\tedge [color="#%s%s%s"];\n' % forecolorlist.next()
@@ -1266,10 +1266,10 @@ class TracerouteResult(SndRcvList):
             for n in range(min(k), max(k)):
                 s += '\t%s ->\n' % trace[n]
             s += '\t%s;\n' % trace[max(k)]
-    
+
         s += "}\n";
         self.graphdef = s
-    
+
     def graph(self, ASres=None, padding=0, **kargs):
         """x.graph(ASres=conf.AS_resolver, other args):
         ASres=None          : no AS resolver => no clustering
@@ -1323,7 +1323,7 @@ traceroute(target, [maxttl=30,] [dport=80,] [sport=80,] [verbose=conf.verb]) -> 
 #############################
 
 class TCP_client(Automaton):
-    
+
     def parse_args(self, ip, port, *args, **kargs):
         self.dst = iter(Net(ip)).next()
         self.dport = port
@@ -1342,7 +1342,7 @@ class TCP_client(Automaton):
 #        bpf=None
         Automaton.parse_args(self, filter=bpf, **kargs)
 
-    
+
     def master_filter(self, pkt):
         return (IP in pkt and
                 pkt[IP].src == self.dst and
@@ -1361,7 +1361,7 @@ class TCP_client(Automaton):
     @ATMT.state()
     def SYN_SENT(self):
         pass
-    
+
     @ATMT.state()
     def ESTABLISHED(self):
         pass
@@ -1374,7 +1374,7 @@ class TCP_client(Automaton):
     def CLOSED(self):
         pass
 
-    
+
     @ATMT.condition(START)
     def connect(self):
         raise self.SYN_SENT()
@@ -1410,7 +1410,7 @@ class TCP_client(Automaton):
             if pkt[TCP].flags & 8 != 0: #PUSH
                 self.oi.tcp.send(self.rcvbuf)
                 self.rcvbuf = ""
-    
+
     @ATMT.ioevent(ESTABLISHED,name="tcp", as_supersocket="tcplink")
     def outgoing_data_received(self, fd):
         raise self.ESTABLISHED().action_parameters(fd.recv())
@@ -1419,8 +1419,8 @@ class TCP_client(Automaton):
         self.l4[TCP].flags = "PA"
         self.send(self.l4/d)
         self.l4[TCP].seq += len(d)
-        
-    
+
+
     @ATMT.receive_condition(ESTABLISHED)
     def reset_received(self, pkt):
         if pkt[TCP].flags & 4 != 0:
@@ -1481,8 +1481,8 @@ def IPID_count(lst, funcID=lambda x:x[1].id, funcpres=lambda x:x[1].summary()):
     print("Probably %i classes:" % len(classes), classes)
     for id,pr in lst:
         print("%5i" % id, pr)
-    
-    
+
+
 def fragleak(target,sport=123, dport=123, timeout=0.2, onlyasc=0):
     load = "XXXXYYYYYYYYYY"
 #    getmacbyip(target)
@@ -1516,9 +1516,9 @@ def fragleak(target,sport=123, dport=123, timeout=0.2, onlyasc=0):
                 if not ans.haslayer(conf.padding_layer):
                     continue
 
-                
+
 #                print repr(ans.payload.payload.payload.payload)
-                
+
 #                if not isinstance(ans.payload.payload.payload.payload, conf.raw_layer):
 #                    continue
 #                leak = ans.payload.payload.payload.payload.load[len(load):]
@@ -1547,7 +1547,7 @@ def fragleak2(target, timeout=0.4, onlyasc=0):
                     linehexdump(leak,onlyasc=onlyasc)
     except:
         pass
-    
+
 
 conf.stats_classic_protocols += [TCP,UDP,ICMP]
 conf.stats_dot11_protocols += [TCP,UDP,ICMP]

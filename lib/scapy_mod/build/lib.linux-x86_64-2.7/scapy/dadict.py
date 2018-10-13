@@ -33,7 +33,7 @@ class DADict:
         return val in self.__dict__
     def __getitem__(self, attr):
         return getattr(self, attr)
-    def __setitem__(self, attr, val):        
+    def __setitem__(self, attr, val):
         return setattr(self, self.fixname(attr), val)
     def __iter__(self):
         return iter(map(lambda (x,y):y,filter(lambda (x,y):x and x[0]!="_", self.__dict__.items())))
@@ -56,9 +56,9 @@ class DADict:
             if k not in self or self[k] != kargs[k]:
                 return False
         return True
-    
+
     def _find(self, *args, **kargs):
-         return self._recurs_find((), *args, **kargs)
+        return self._recurs_find((), *args, **kargs)
     def _recurs_find(self, path, *args, **kargs):
         if self in path:
             return None
@@ -85,4 +85,3 @@ class DADict:
         return r
     def keys(self):
         return filter(lambda x:x and x[0]!="_", self.__dict__.keys())
-        

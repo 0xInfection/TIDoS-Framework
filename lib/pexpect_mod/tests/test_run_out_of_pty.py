@@ -33,19 +33,18 @@ class ExpectTestCase(PexpectTestCase.PexpectTestCase):
         '''
         plist=[]
         for count in range (0,10000):
-                try:
-                        plist.append (pexpect.spawn('ls -l'))
-                except pexpect.ExceptionPexpect:
-                        for c in range (0, count):
-                            plist[c].close()
-                        return
-                except Exception:
-                        err = sys.exc_info()[1]
-                        self.fail ('Expected ExceptionPexpect. ' + str(err))
+            try:
+                plist.append (pexpect.spawn('ls -l'))
+            except pexpect.ExceptionPexpect:
+                for c in range (0, count):
+                    plist[c].close()
+                return
+            except Exception:
+                err = sys.exc_info()[1]
+                self.fail ('Expected ExceptionPexpect. ' + str(err))
         self.fail ('Could not run out of pty devices. This may be OK.')
 
 if __name__ == '__main__':
     unittest.main()
 
 suite = unittest.makeSuite(ExpectTestCase,'test')
-

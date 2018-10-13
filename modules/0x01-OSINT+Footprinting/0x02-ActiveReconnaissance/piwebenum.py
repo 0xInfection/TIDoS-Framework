@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
 # coding:  utf-8
 
 #-:-:-:-:-:-:-:-:-:-:-:-:#
@@ -7,12 +7,12 @@
 
 #Author : @_tID
 #This module requires TIDoS Framework
-#https://github.com/theInfectedDrake/TIDoS-Framework 
+#https://github.com/theInfectedDrake/TIDoS-Framework
 
 from __future__ import print_function
 import os, requests, time
 from time import sleep
-from colors import *
+from core.Core.colors import *
 
 def piwebenum(web):
 

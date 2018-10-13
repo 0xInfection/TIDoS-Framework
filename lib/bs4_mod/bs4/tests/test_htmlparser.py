@@ -28,5 +28,3 @@ class HTMLParserTreeBuilderSmokeTest(SoupTest, HTMLTreeBuilderSmokeTest):
         dumped = pickle.dumps(tree, 2)
         loaded = pickle.loads(dumped)
         self.assertTrue(isinstance(loaded.builder, type(tree.builder)))
-
-

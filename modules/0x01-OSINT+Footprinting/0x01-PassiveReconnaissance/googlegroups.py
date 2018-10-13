@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 #-:-:-:-:-:-:-:-:-:-:-:-:#
@@ -14,7 +14,7 @@ import json
 import time
 import requests
 import re
-from colors import *
+from core.Core.colors import *
 
 def getemails0x00(domain):
 
@@ -23,34 +23,34 @@ def getemails0x00(domain):
     page_counter = 0
     try:
         while page_counter < 100 :
-	    print(GR+' [*] Setting parameters...')
-	    time.sleep(0.6)
+            print(GR+' [*] Setting parameters...')
+            time.sleep(0.6)
             results = 'http://www.google.com/search?q='+str(domain)+'&hl=en&lr=&ie=UTF-8&start=' + repr(page_counter) + '&sa=N'
-	    print(O+' [!] Making the request...')
+            print(O+' [!] Making the request...')
             response = requests.get(results)
-	    print(GR+' [*] Extracting reponse...')
+            print(GR+' [*] Extracting reponse...')
             text = response.text
             emails = re.findall('([\w\.\-]+@'+domain+')',tagparse(text))
             for email in emails:
                 print(G+' [+] Received e-mail : '+O+email)
-		flag = True
+                flag = True
             page_counter = page_counter + 10
     except IOError:
         print(R+" [-] Error connecting to Google Groups...")
-        
+
     try:
         while page_counter < 100 :
-	    print(GR+' [*] Setting parameters...')
-	    time.sleep(0.6)
+            print(GR+' [*] Setting parameters...')
+            time.sleep(0.6)
             results = 'http://groups.google.com/groups?q='+str(domain)+'&hl=en&lr=&ie=UTF-8&start=' + repr(page_counter) + '&sa=N'
-	    print(O+' [!] Making the request...')
+            print(O+' [!] Making the request...')
             response = requests.get(results)
-	    print(GR+' [*] Extracting reponse...')
+            print(GR+' [*] Extracting reponse...')
             text = response.text
             emails = re.findall('([\w\.\-]+@'+domain+')',tagparse(text))
             for email in emails:
                 print(G+' [+] Received e-mail : '+O+email)
-		flag = True
+                flag = True
             page_counter = page_counter + 10
     except IOError:
         print(R+" [-] Error connecting to Google Groups...")
@@ -77,13 +77,12 @@ def googlegroups(web):
     print(R+'     G O O G L E   G R O U P S')
     print(R+'    ===========================\n')
 
-    print(O+' [!] Initiating enumeration via Google Web...')    
+    print(O+' [!] Initiating enumeration via Google Web...')
     time.sleep(0.7)
     print(O+' [!] Parsing url...')
     web = web.replace('https://','')
     web = web.replace('http://','')
     getemails0x00(web)
     if flag == False:
-	print(R+' [-] No results found via enumeration on Google Groups...')
+        print(R+' [-] No results found via enumeration on Google Groups...')
     print(G+' [+] Done!')
-

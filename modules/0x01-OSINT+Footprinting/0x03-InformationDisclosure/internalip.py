@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
 # coding: utf-8
 #
 #-:-:-:-:-:-:-:-:-:-:-:-:#
@@ -7,14 +7,14 @@
 #
 #Author : @_tID (theInfectedDrake)
 #This module requires TIDoS Framework
-#https://github.com/theInfectedDrake/TIDoS-Framework 
+#https://github.com/theInfectedDrake/TIDoS-Framework
 
 from __future__ import print_function
 import re
 import sys
 import time
 import requests
-from colors import *
+from core.Core.colors import *
 sys.path.append('files/signature-db/')
 from bs4 import BeautifulSoup
 from infodisc_signatures import INTERNAL_IP_SIGNATURE as signature
@@ -74,7 +74,6 @@ def check0x00(req):
 
 def internalip(web):
 
-	print(GR+' [*] Loading module...')
-	time.sleep(0.6)
-	internalip0x00(web)
-
+    print(GR+' [*] Loading module...')
+    time.sleep(0.6)
+    internalip0x00(web)

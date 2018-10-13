@@ -6,6 +6,7 @@ This directory contains forks of many existing Python Packages which have been m
 - [Pexpect](https://pypi.org/project/pexpect)
 - [Idna](https://pypi.org/project/idna)
 - [Bs4](https://pypi.org/project/bs4)
+- [PyExiv2](https://github.com/escaped/pyexiv2)
 - [Tld](https://pypi.org/project/tld)
 - [Shodan](https://pypi.org/project/shodan)
 - [Requests](https://pypi.org/project/requests)

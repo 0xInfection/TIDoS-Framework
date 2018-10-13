@@ -277,7 +277,7 @@ class PortScanner(object):
         If not present, everything was ok.
 
         :param nmap_xml_output: xml string to analyse
-        :returns: scan_result as dictionnary 
+        :returns: scan_result as dictionnary
         """
 
         # nmap xml output looks like :
@@ -314,7 +314,7 @@ class PortScanner(object):
 
         if nmap_xml_output is not None:
             self._nmap_last_output = nmap_xml_output
-            
+
         scan_result = {}
 
 
@@ -347,14 +347,14 @@ class PortScanner(object):
 
         # info about scan
         for dsci in dom.findall('scaninfo'):
-            scan_result['nmap']['scaninfo'][dsci.get('protocol')] = {                
+            scan_result['nmap']['scaninfo'][dsci.get('protocol')] = {
                 'method': dsci.get('type'),
                 'services': dsci.get('services')
                 }
 
 
         scan_result['scan'] = {}
-        
+
         for dhost in  dom.findall('host'):
             # host ip, mac and other addresses
             host = None
@@ -370,7 +370,7 @@ class PortScanner(object):
 
             if host is None:
                 host = dhost.find('address').get('addr')
-                
+
             hostnames = []
             if len(dhost.findall('hostnames/hostname')) > 0:
                 for dhostname in dhost.findall('hostnames/hostname'):
@@ -489,7 +489,7 @@ class PortScanner(object):
 
                 scan_result['scan'][host]['portused'] = portused
 
-                    
+
                 for dosmatch in dos.findall('osmatch'):
                     # <osmatch name="Linux 3.7 - 3.15" accuracy="100" line="52790">
                     name = ''
@@ -521,8 +521,8 @@ class PortScanner(object):
 
                         cpe = []
                         for dcpe in dosclass.findall('cpe'):
-                            cpe.append(dcpe.text)                                           
-                        
+                            cpe.append(dcpe.text)
+
                         osclass.append({
                             'type': ostype,
                             'vendor': vendor,
@@ -556,7 +556,7 @@ class PortScanner(object):
         return scan_result
 
 
-    
+
     def __getitem__(self, host):
         """
         returns a host detail
@@ -577,7 +577,7 @@ class PortScanner(object):
         listh = list(self._scan_result['scan'].keys())
         listh.sort()
         return listh
-        
+
 
     def command_line(self):
         """
@@ -602,8 +602,8 @@ class PortScanner(object):
         assert 'scaninfo' in self._scan_result['nmap'], 'Do a scan before trying to get result !'
 
         return self._scan_result['nmap']['scaninfo']
-            
-        
+
+
     def scanstats(self):
         """
         returns scanstats structure
@@ -614,7 +614,7 @@ class PortScanner(object):
         assert 'nmap' in self._scan_result, 'Do a scan before trying to get result !'
         assert 'scanstats' in self._scan_result['nmap'], 'Do a scan before trying to get result !'
 
-        return self._scan_result['nmap']['scanstats']        
+        return self._scan_result['nmap']['scanstats']
 
 
     def has_host(self, host):
@@ -646,7 +646,7 @@ class PortScanner(object):
             fd = io.BytesIO()
         else:
             fd = io.StringIO()
-            
+
         csv_ouput = csv.writer(fd, delimiter=';')
         csv_header = [
             'host',
@@ -768,7 +768,7 @@ class PortScannerAsync(object):
             assert type(hosts) is str, 'Wrong type for [hosts], should be a string [was {0}]'.format(type(hosts))
             assert type(ports) in (str, type(None)), 'Wrong type for [ports], should be a string [was {0}]'.format(type(ports))
             assert type(arguments) is str, 'Wrong type for [arguments], should be a string [was {0}]'.format(type(arguments))
-            
+
         assert callable(callback) or callback is None, 'The [callback] {0} should be callable or None.'.format(str(callback))
 
         for redirecting_output in ['-oX', '-oA']:
@@ -796,7 +796,7 @@ class PortScannerAsync(object):
         """
         Wait for the current scan process to finish, or timeout
 
-        :param timeout: default = None, wait timeout seconds 
+        :param timeout: default = None, wait timeout seconds
 
         """
         assert type(timeout) in (int, type(None)), 'Wrong type for [timeout], should be an int or None [was {0}]'.format(type(timeout))
@@ -949,8 +949,8 @@ class PortScannerHostDict(dict):
             ltcp.sort()
             return ltcp
         return []
-            
-    
+
+
     def has_tcp(self, port):
         """
         :param port: (int) tcp port
@@ -958,7 +958,7 @@ class PortScannerHostDict(dict):
 
         """
         assert type(port) is int, 'Wrong type for [port], should be an int [was {0}]'.format(type(port))
-        
+
         if ('tcp' in list(self.keys())
             and port in list(self['tcp'].keys())):
             return True
@@ -1084,7 +1084,7 @@ class PortScannerHostDict(dict):
         return self['sctp'][port]
 
 
-    
+
 ############################################################################
 
 
@@ -1108,7 +1108,7 @@ class PortScannerError(Exception):
 def __get_last_online_version():
     """
     Gets last python-nmap published version
-    
+
     WARNING : it does an http connection to http://xael.org/pages/python-nmap/python-nmap_CURRENT_VERSION.txt
 
     :returns: a string which indicate last published version (example :'0.4.3')
@@ -1126,7 +1126,7 @@ def __get_last_online_version():
 def convert_nmap_output_to_encoding(value, code="ascii"):
     """
     Change encoding for scan_result object from unicode to whatever
-    
+
     :param value: scan_result as dictionnary
     :param code: default = "ascii", encoding destination
 

@@ -121,7 +121,7 @@ lfilter: truth function to apply to each packet to decide whether it will be dis
     def show(self, *args, **kargs):
         """Best way to display the packet list. Defaults to nsummary() method"""
         return self.nsummary(*args, **kargs)
-    
+
     def filter(self, func):
         """Returns a packet list filtered by a truth function"""
         return self.__class__(filter(func,self.res),
@@ -179,7 +179,7 @@ lfilter: truth function to apply to each packet to decide whether it will be dis
 
         g.plot(*data)
         return g
-        
+
 
     def rawhexdump(self):
         """Prints an hexadecimal dump of each packet in the list"""
@@ -235,7 +235,7 @@ lfilter: truth function to apply to each packet to decide whether it will be dis
                                         p.sprintf("%.time%"),
                                         self._elt2sum(self.res[i])))
                     hexdump(p.getlayer(conf.padding_layer).load)
-        
+
 
     def conversations(self, getsrcdst=None,**kargs):
         """Graphes a conversations between sources and destinations and display it
@@ -259,7 +259,7 @@ lfilter: truth function to apply to each packet to decide whether it will be dis
         gr = 'digraph "conv" {\n'
         for s,d in conv:
             gr += '\t "%s" -> "%s"\n' % (s,d)
-        gr += "}\n"        
+        gr += "}\n"
         return do_graph(gr, **kargs)
 
     def afterglow(self, src=None, event=None, dst=None, **kargs):
@@ -313,7 +313,7 @@ lfilter: truth function to apply to each packet to decide whether it will be dis
         mins,maxs = minmax(map(lambda (x,y): x, sl.values()))
         mine,maxe = minmax(map(lambda (x,y): x, el.values()))
         mind,maxd = minmax(dl.values())
-    
+
         gr = 'digraph "afterglow" {\n\tedge [len=2.5];\n'
 
         gr += "# src nodes\n"
@@ -332,12 +332,12 @@ lfilter: truth function to apply to each packet to decide whether it will be dis
         for s in sl:
             n,l = sl[s]
             for e in l:
-                gr += ' "src.%s" -> "evt.%s";\n' % (`s`,`e`) 
+                gr += ' "src.%s" -> "evt.%s";\n' % (`s`,`e`)
         for e in el:
             n,l = el[e]
             for d in l:
-                gr += ' "evt.%s" -> "dst.%s";\n' % (`e`,`d`) 
-            
+                gr += ' "evt.%s" -> "dst.%s";\n' % (`e`,`d`)
+
         gr += "}"
         return do_graph(gr, **kargs)
 
@@ -357,8 +357,8 @@ lfilter: truth function to apply to each packet to decide whether it will be dis
                                        margin=1*pyx.unit.t_cm,
                                        fittosize=1))
         return d
-                     
-                 
+
+
 
     def psdump(self, filename = None, **kargs):
         """Creates a multipage poscript file with a psdump of every packet
@@ -372,7 +372,7 @@ lfilter: truth function to apply to each packet to decide whether it will be dis
         else:
             d.writePSfile(filename)
         print()
-        
+
     def pdfdump(self, filename = None, **kargs):
         """Creates a PDF file with a psdump of every packet
         filename: name of the file to write to. If empty, a temporary file is used and
@@ -437,7 +437,7 @@ lfilter: truth function to apply to each packet to decide whether it will be dis
             sess = session_extractor(self._elt2pkt(p))
             sessions[sess].append(p)
         return dict(sessions)
-    
+
     def replace(self, *args, **kargs):
         """
         lst.replace(<field>,[<oldvalue>,]<newvalue>)
@@ -470,11 +470,11 @@ lfilter: truth function to apply to each packet to decide whether it will be dis
                             setattr(p[o], fld.name, new)
             x.append(p)
         return x
-                
-            
-        
-    
-        
+
+
+
+
+
 
 
 class SndRcvList(PacketList):
@@ -483,11 +483,4 @@ class SndRcvList(PacketList):
     def _elt2pkt(self, elt):
         return elt[1]
     def _elt2sum(self, elt):
-        return "%s ==> %s" % (elt[0].summary(),elt[1].summary()) 
-
-
-
-    
-
-        
-                                                                               
+        return "%s ==> %s" % (elt[0].summary(),elt[1].summary())

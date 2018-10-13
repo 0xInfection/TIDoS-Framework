@@ -7,7 +7,7 @@
 # scapy.contrib.status = loads
 
 """
-CACE PPI types 
+CACE PPI types
 """
 import logging,struct
 from scapy.config import conf
@@ -84,4 +84,3 @@ class Dot11Common(Packet):
 
 #Add the dot11common layer to the PPI array
 addPPIType(PPI_DOT11COMMON, Dot11Common)
-

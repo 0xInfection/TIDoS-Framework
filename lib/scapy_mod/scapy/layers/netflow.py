@@ -15,7 +15,7 @@ from scapy.packet import *
 class NetflowHeader(Packet):
     name = "Netflow Header"
     fields_desc = [ ShortField("version", 1) ]
-    
+
 class NetflowHeaderV1(Packet):
     name = "Netflow Header V1"
     fields_desc = [ ShortField("count", 0),

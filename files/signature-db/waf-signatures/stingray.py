@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 #-:-:-:-:-:-:-:-:-:-:-:-:#
@@ -7,12 +7,12 @@
 
 #Author: @_tID (Modified version from wascan)
 #This module requires TIDoS Framework
-#https://github.com/the-Infected-Drake/TIDoS-Framework
+#https://github.com/theInfectedDrake/TIDoS-Framework
 
-from re import search,I 
+from re import search,I
 
 def stingray(headers,content):
-	detect = False
-	detect |= search(r'X-Mapping-',str(headers.keys()),I) is not None
-	if detect : 
-		return "Stingray Application Firewall (Riverbed / Brocade)"
+    detect = False
+    detect |= search(r'X-Mapping-',str(headers.keys()),I) is not None
+    if detect :
+        return "Stingray Application Firewall (Riverbed / Brocade)"

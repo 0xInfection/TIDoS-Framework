@@ -38,4 +38,3 @@ bind_layers(RIPngEntry, RIPngEntry)
 if __name__ == "__main__":
     from scapy.main import interact
     interact(mydict=globals(), mybanner="RIPng")
-

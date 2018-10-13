@@ -5,7 +5,7 @@ def read(filename):
     return open(os.path.join(os.path.dirname(__file__), filename)).read()
 
 setup(
-    name='builtwith', 
+    name='builtwith',
     version='1.3.3',
     packages=['builtwith'],
     package_dir={'builtwith' : '.'}, # look for package contents in current directory

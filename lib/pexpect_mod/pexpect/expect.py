@@ -61,7 +61,7 @@ class Expecter(object):
             if err is not None:
                 msg = str(err) + '\n' + msg
             raise EOF(msg)
-    
+
     def timeout(self, err=None):
         spawn = self.spawn
 
@@ -87,7 +87,7 @@ class Expecter(object):
         spawn.after = None
         spawn.match = None
         spawn.match_index = None
-    
+
     def expect_loop(self, timeout=-1):
         """Blocking expect"""
         spawn = self.spawn

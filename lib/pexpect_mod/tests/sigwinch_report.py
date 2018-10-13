@@ -47,4 +47,3 @@ print("READY")
 while 1:
     sys.stdout.flush()
     time.sleep(1)
-

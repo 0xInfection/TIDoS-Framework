@@ -33,93 +33,93 @@ import time
 
 class Chess:
 
-        def __init__(self, engine = "/usr/local/bin/gnuchess -a -h 1"):
-                self.child = pexpect.spawn (engine)
-                self.term = ANSI.ANSI ()
+    def __init__(self, engine = "/usr/local/bin/gnuchess -a -h 1"):
+        self.child = pexpect.spawn (engine)
+        self.term = ANSI.ANSI ()
 
-                #self.child.expect ('Chess')
-                #if self.child.after != 'Chess':
-                #        raise IOError, 'incompatible chess program'
-                #self.term.process_list (self.child.before)
-                #self.term.process_list (self.child.after)
+        #self.child.expect ('Chess')
+        #if self.child.after != 'Chess':
+        #        raise IOError, 'incompatible chess program'
+        #self.term.process_list (self.child.before)
+        #self.term.process_list (self.child.after)
 
-                self.last_computer_move = ''
+        self.last_computer_move = ''
 
-        def read_until_cursor (self, r,c, e=0):
-            '''Eventually something like this should move into the screen class or
-            a subclass. Maybe a combination of pexpect and screen...
-            '''
-            fout = open ('log','a')
-            while self.term.cur_r != r or self.term.cur_c != c:
-                try:
-                    k = self.child.read(1, 10)
-                except Exception as e:
-                    print('EXCEPTION, (r,c):(%d,%d)\n' %(self.term.cur_r, self.term.cur_c))
-                    sys.stdout.flush()
-                self.term.process (k)
-                fout.write ('(r,c):(%d,%d)\n' %(self.term.cur_r, self.term.cur_c))
-                fout.flush()
-                if e:
-                    sys.stdout.write (k)
-                    sys.stdout.flush()
-                if self.term.cur_r == r and self.term.cur_c == c:
-                    fout.close()
-                    return 1
-            print('DIDNT EVEN HIT.')
-            fout.close()
-            return 1
-
-        def expect_region (self):
-            '''This is another method that would be moved into the
-            screen class.
-            '''
-            pass
-        def do_scan (self):
-            fout = open ('log','a')
-            while 1:
-                c = self.child.read(1,10)
-                self.term.process (c)
-                fout.write ('(r,c):(%d,%d)\n' %(self.term.cur_r, self.term.cur_c))
-                fout.flush()
-                sys.stdout.write (c)
+    def read_until_cursor (self, r,c, e=0):
+        '''Eventually something like this should move into the screen class or
+        a subclass. Maybe a combination of pexpect and screen...
+        '''
+        fout = open ('log','a')
+        while self.term.cur_r != r or self.term.cur_c != c:
+            try:
+                k = self.child.read(1, 10)
+            except Exception as e:
+                print('EXCEPTION, (r,c):(%d,%d)\n' %(self.term.cur_r, self.term.cur_c))
                 sys.stdout.flush()
+            self.term.process (k)
+            fout.write ('(r,c):(%d,%d)\n' %(self.term.cur_r, self.term.cur_c))
+            fout.flush()
+            if e:
+                sys.stdout.write (k)
+                sys.stdout.flush()
+            if self.term.cur_r == r and self.term.cur_c == c:
+                fout.close()
+                return 1
+        print('DIDNT EVEN HIT.')
+        fout.close()
+        return 1
 
-        def do_move (self, move, e = 0):
-                time.sleep(1)
-                self.read_until_cursor (19,60, e)
-                self.child.sendline (move)
+    def expect_region (self):
+        '''This is another method that would be moved into the
+        screen class.
+        '''
+        pass
+    def do_scan (self):
+        fout = open ('log','a')
+        while 1:
+            c = self.child.read(1,10)
+            self.term.process (c)
+            fout.write ('(r,c):(%d,%d)\n' %(self.term.cur_r, self.term.cur_c))
+            fout.flush()
+            sys.stdout.write (c)
+            sys.stdout.flush()
 
-        def wait (self, color):
-            while 1:
-                r = self.term.get_region (14,50,14,60)[0]
-                r = r.strip()
-                if r == color:
-                    return
-                time.sleep (1)
+    def do_move (self, move, e = 0):
+        time.sleep(1)
+        self.read_until_cursor (19,60, e)
+        self.child.sendline (move)
 
-        def parse_computer_move (self, s):
-                i = s.find ('is: ')
-                cm = s[i+3:i+9]
-                return cm
-        def get_computer_move (self, e = 0):
-                time.sleep(1)
-                self.read_until_cursor (19,60, e)
-                time.sleep(1)
-                r = self.term.get_region (17,50,17,62)[0]
-                cm = self.parse_computer_move (r)
-                return cm
+    def wait (self, color):
+        while 1:
+            r = self.term.get_region (14,50,14,60)[0]
+            r = r.strip()
+            if r == color:
+                return
+            time.sleep (1)
 
-        def switch (self):
-                print('switching')
-                self.child.sendline ('switch')
+    def parse_computer_move (self, s):
+        i = s.find ('is: ')
+        cm = s[i+3:i+9]
+        return cm
+    def get_computer_move (self, e = 0):
+        time.sleep(1)
+        self.read_until_cursor (19,60, e)
+        time.sleep(1)
+        r = self.term.get_region (17,50,17,62)[0]
+        cm = self.parse_computer_move (r)
+        return cm
 
-        def set_depth (self, depth):
-                self.child.sendline ('depth')
-                self.child.expect ('depth=')
-                self.child.sendline ('%d' % depth)
+    def switch (self):
+        print('switching')
+        self.child.sendline ('switch')
 
-        def quit(self):
-                self.child.sendline ('quit')
+    def set_depth (self, depth):
+        self.child.sendline ('depth')
+        self.child.expect ('depth=')
+        self.child.sendline ('%d' % depth)
+
+    def quit(self):
+        self.child.sendline ('quit')
 
 def LOG (s):
     print(s)
@@ -149,5 +149,3 @@ while not done:
     white.do_move (move_black, 1)
 
 g.quit()
-
-

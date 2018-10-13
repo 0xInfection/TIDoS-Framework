@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 #-:-:-:-:-:-:-:-:-:-:-:-:#
@@ -7,12 +7,12 @@
 
 #Author: @_tID (Modified version from wascan)
 #This module requires TIDoS Framework
-#https://github.com/the-Infected-Drake/TIDoS-Framework
+#https://github.com/theInfectedDrake/TIDoS-Framework
 
-from re import search,I 
+from re import search,I
 
 def senginx(headers,content):
-	detect = False
-	detect |= search(r"SENGINX-ROBOT-MITIGATION",content,I) is not None
-	if detect : 
-		return "SEnginx (Neusoft Corporation)"
+    detect = False
+    detect |= search(r"SENGINX-ROBOT-MITIGATION",content,I) is not None
+    if detect :
+        return "SEnginx (Neusoft Corporation)"

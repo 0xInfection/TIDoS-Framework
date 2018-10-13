@@ -19,16 +19,16 @@ class FSMTestCase(unittest.TestCase):
         orig_stdout = sys.stdout
         setattr(builtins, input_name, _input)
         sys.stdout = sio = (io.StringIO if PY3 else io.BytesIO)()
-        
+
         try:
             FSM.main()
         finally:
             setattr(builtins, input_name, orig_input)
             sys.stdout = orig_stdout
-        
+
         printed = sio.getvalue()
         assert '2003' in printed, printed
-        
-        
+
+
 if __name__ == '__main__':
     unittest.main()

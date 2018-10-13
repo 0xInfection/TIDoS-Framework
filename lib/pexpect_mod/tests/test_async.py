@@ -28,7 +28,7 @@ class AsyncTests(PexpectTestCase):
         coro = p.expect('foo', timeout=1, async_=True)
         with self.assertRaises(pexpect.TIMEOUT):
             run(coro)
-        
+
         p = pexpect.spawn('cat')
         coro = p.expect(['foo', pexpect.TIMEOUT], timeout=1, async_=True)
         assert run(coro) == 1

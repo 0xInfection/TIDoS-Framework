@@ -35,16 +35,16 @@ def main(argv):
                 APPEND = True
             elif opt == "-z":
                 COMPRESS = True
-                
-                
+
+
         if PCAP_IN is None:
             raise getopt.GetoptError("Missing pcap file (-i)")
-    
+
     except getopt.GetoptError as e:
         print("ERROR: %s" % e, file=sys.stderr)
         raise SystemExit
-    
-    
+
+
 
     from scapy.config import conf
     from scapy.utils import RawPcapReader,RawPcapWriter,hexdiff
@@ -61,8 +61,8 @@ def main(argv):
     if LLcls is None:
         print(" Unknown link type [%i]. Can't test anything!" % pcap.linktype, file=sys.stderr)
         raise SystemExit
-    
-    
+
+
     i=-1
     differ=0
     failed=0
@@ -94,8 +94,8 @@ def main(argv):
     correct = i-differ-failed
     print("%i total packets. %i ok, %i differed, %i failed. %.2f%% correct." % (i, correct, differ,
                                                                                 failed, i and 100.0*(correct)/i))
-    
-        
+
+
 if __name__ == "__main__":
     import sys
     try:

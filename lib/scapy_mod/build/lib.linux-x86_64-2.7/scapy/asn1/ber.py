@@ -55,49 +55,49 @@ class BER_BadTag_Decoding_Error(BER_Decoding_Error, ASN1_BadTag_Decoding_Error):
     pass
 
 def BER_len_enc(l, size=0):
-        if l <= 127 and size==0:
-            return chr(l)
-        s = ""
-        while l or size>0:
-            s = chr(l&0xff)+s
-            l >>= 8L
-            size -= 1
-        if len(s) > 127:
-            raise BER_Exception("BER_len_enc: Length too long (%i) to be encoded [%r]" % (len(s),s))
-        return chr(len(s)|0x80)+s
+    if l <= 127 and size==0:
+        return chr(l)
+    s = ""
+    while l or size>0:
+        s = chr(l&0xff)+s
+        l >>= 8L
+        size -= 1
+    if len(s) > 127:
+        raise BER_Exception("BER_len_enc: Length too long (%i) to be encoded [%r]" % (len(s),s))
+    return chr(len(s)|0x80)+s
 def BER_len_dec(s):
-        l = ord(s[0])
-        if not l & 0x80:
-            return l,s[1:]
-        l &= 0x7f
-        if len(s) <= l:
-            raise BER_Decoding_Error("BER_len_dec: Got %i bytes while expecting %i" % (len(s)-1, l),remaining=s)
-        ll = 0L
-        for c in s[1:l+1]:
-            ll <<= 8L
-            ll |= ord(c)
-        return ll,s[l+1:]
-        
+    l = ord(s[0])
+    if not l & 0x80:
+        return l,s[1:]
+    l &= 0x7f
+    if len(s) <= l:
+        raise BER_Decoding_Error("BER_len_dec: Got %i bytes while expecting %i" % (len(s)-1, l),remaining=s)
+    ll = 0L
+    for c in s[1:l+1]:
+        ll <<= 8L
+        ll |= ord(c)
+    return ll,s[l+1:]
+
 def BER_num_enc(l, size=1):
-        x=[]
-        while l or size>0:
-            x.insert(0, l & 0x7f)
-            if len(x) > 1:
-                x[0] |= 0x80
-            l >>= 7
-            size -= 1
-        return "".join([chr(k) for k in x])
+    x=[]
+    while l or size>0:
+        x.insert(0, l & 0x7f)
+        if len(x) > 1:
+            x[0] |= 0x80
+        l >>= 7
+        size -= 1
+    return "".join([chr(k) for k in x])
 def BER_num_dec(s):
-        x = 0
-        for i in range(len(s)):
-            c = ord(s[i])
-            x <<= 7
-            x |= c&0x7f
-            if not c&0x80:
-                break
-        if c&0x80:
-            raise BER_Decoding_Error("BER_num_dec: unfinished number description", remaining=s)
-        return x, s[i+1:]
+    x = 0
+    for i in range(len(s)):
+        c = ord(s[i])
+        x <<= 7
+        x |= c&0x7f
+        if not c&0x80:
+            break
+    if c&0x80:
+        raise BER_Decoding_Error("BER_num_dec: unfinished number description", remaining=s)
+    return x, s[i+1:]
 
 #####[ BER classes ]#####
 
@@ -124,7 +124,7 @@ class BERcodec_Object:
     def check_string(cls, s):
         if not s:
             raise BER_Decoding_Error("%s: Got empty object while expecting tag %r" %
-                                     (cls.__name__,cls.tag), remaining=s)        
+                                     (cls.__name__,cls.tag), remaining=s)
     @classmethod
     def check_type(cls, s):
         cls.check_string(s)
@@ -187,7 +187,7 @@ class BERcodec_Object:
         else:
             return BERcodec_INTEGER.enc(int(s))
 
-            
+
 
 ASN1_Codecs.BER.register_stem(BERcodec_Object)
 
@@ -222,7 +222,7 @@ class BERcodec_INTEGER(BERcodec_Object):
                 x <<= 8
                 x |= ord(c)
         return cls.asn1_object(x),t
-    
+
 
 class BERcodec_BOOLEAN(BERcodec_INTEGER):
     tag = ASN1_Class_UNIVERSAL.BOOLEAN
@@ -272,15 +272,15 @@ class BERcodec_VIDEOTEX_STRING(BERcodec_STRING):
 
 class BERcodec_IPADDRESS(BERcodec_STRING):
     tag = ASN1_Class_UNIVERSAL.IPADDRESS
-    
+
     @classmethod
     def enc(cls, ipaddr_ascii):
         try:
             s = inet_aton(ipaddr_ascii)
         except Exception:
-            raise BER_Encoding_Error("IPv4 address could not be encoded") 
+            raise BER_Encoding_Error("IPv4 address could not be encoded")
         return chr(cls.tag)+BER_len_enc(len(s))+s
-    
+
     @classmethod
     def do_dec(cls, s, context=None, safe=False):
         l,s,t = cls.check_type_check_len(s)
@@ -327,7 +327,7 @@ class BERcodec_SEQUENCE(BERcodec_Object):
                 if err.decoded is not None:
                     obj.append(err.decoded)
                 err.decoded = obj
-                raise 
+                raise
             obj.append(o)
         if len(st) < l:
             raise BER_Decoding_Error("Not enough bytes to decode sequence", decoded=obj)
@@ -359,5 +359,3 @@ class BERcodec_OID(BERcodec_Object):
             lst.insert(0,lst[0]/40)
             lst[1] %= 40
         return cls.asn1_object(".".join([str(k) for k in lst])), t
-
-

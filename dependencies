@@ -25,6 +25,7 @@ if ! hash python-pyexiv2 2>/dev/null; then sudo apt-get install --yes python-pye
 if ! hash build-essential 2>/dev/null; then sudo apt-get install --yes build-essential ; fi
 if ! hash python-pip 2>/dev/null; then sudo apt-get install --yes python-pip ; fi
 if ! hash python-xmpp 2>/dev/null; then sudo apt-get install --yes python-xmpp ; fi
+if ! hash libboost-python-dev 2>/dev/null; then sudo apt-get install --yes libboost-python-dev ; fi
 if ! hash default-libmysqlclient-dev 2>/dev/null; then sudo apt-get install --yes default-libmysqlclient-dev ; fi
 
 # pip install stuffs (not suitable via source installations)
@@ -107,3 +108,7 @@ sudo python2 setup.py install
 cd ..
 cd ..
 
+cd lib/pyexiv2_mod/
+sudo python2 setup.py install
+cd ..
+cd ..

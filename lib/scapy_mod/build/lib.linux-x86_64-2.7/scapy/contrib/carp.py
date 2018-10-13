@@ -35,7 +35,7 @@ class CARP(Packet):
 
 def build_hmac_sha1(pkt, pw = '\0' * 20, ip4l = [], ip6l = []):
     if not pkt.haslayer(CARP):
-        return None 
+        return None
 
     p = pkt[CARP]
     h = hmac.new(pw, digestmod = hashlib.sha1)
@@ -58,7 +58,7 @@ def build_hmac_sha1(pkt, pw = '\0' * 20, ip4l = [], ip6l = []):
     return h.digest()
 
 """
-XXX: Usually CARP is multicast to 224.0.0.18 but because of virtual setup, it'll 
+XXX: Usually CARP is multicast to 224.0.0.18 but because of virtual setup, it'll
 be unicast between nodes. Uncomment the following line for normal use
 bind_layers(IP, CARP, proto=112, dst='224.0.0.18')
 """

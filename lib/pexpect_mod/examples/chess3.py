@@ -38,9 +38,9 @@ class Chess:
         self.child = pexpect.spawn (engine)
         self.term = ANSI.ANSI ()
 
-#		self.child.expect ('Chess')
-    #	if self.child.after != 'Chess':
-    #		raise IOError, 'incompatible chess program'
+#               self.child.expect ('Chess')
+    #   if self.child.after != 'Chess':
+    #           raise IOError, 'incompatible chess program'
     #        self.term.process_list (self.before)
     #        self.term.process_list (self.after)
         self.last_computer_move = ''

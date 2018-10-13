@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 #-:-:-:-:-:-:-:-:-:-:-:-:#
@@ -7,16 +7,16 @@
 
 #Author : @_tID
 #This module requires TIDoS Framework
-#https://github.com/theInfectedDrake/TIDoS-Framework 
+#https://github.com/theInfectedDrake/TIDoS-Framework
 
 from __future__ import print_function
 import re
 import time
 import os
 import sys
-from colors import *
+from core.Core.colors import *
 sys.path.append('files/')
-from DNSDumpsterAPI import *
+from lib.dnsdump_mod.DNSDumpsterAPI import *
 
 def dnschk(domain):
 
@@ -25,11 +25,11 @@ def dnschk(domain):
     print(R+'   =====================\n')
 
     if 'http://' in domain:
-	domain = domain.replace('http://','')
+        domain = domain.replace('http://','')
     elif 'https://' in domain:
-	domain = domain.replace('https://','')
+        domain = domain.replace('https://','')
     else:
-	pass
+        pass
 
     res = DNSDumpsterAPI(False).search(domain)
     print(G+'\n [+] DNS Records')
@@ -52,10 +52,10 @@ def dnschk(domain):
     url = 'https://dnsdumpster.com/static/map/' + str(domain) + '.png'
     print(GR+' [!] Fetching map...')
     try:
-	os.system('wget -q ' + url)
+        os.system('wget -q ' + url)
     except:
-	print(R+' [-] Map generation failed!')
-	sys.exit(1)
+        print(R+' [-] Map generation failed!')
+        sys.exit(1)
     st = str(domain) + '.png'
     st1 = str(domain)+'-dnsmap.jpg'
     p = 'mv '+st+' '+ st1
@@ -67,6 +67,5 @@ def dnschk(domain):
         print(GR+' [!] Trying to open DNS Map...')
         os.system('xdg-open tmp/'+st1)
     except:
-	print(R+' [-] Failed to open automatically.')
-	print(GR+' [!] Please view the map manually.') 
-
+        print(R+' [-] Failed to open automatically.')
+        print(GR+' [!] Please view the map manually.')

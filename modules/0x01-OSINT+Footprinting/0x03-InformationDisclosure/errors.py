@@ -1,5 +1,5 @@
-#!/usr/bin/env python2
-# -*- coding: utf-8 -*- 
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 #    TIDoS Framework     #
@@ -7,7 +7,7 @@
 
 #Author : @_tID
 #This module requires TIDoS Framework
-#https://github.com/theInfectedDrake/TIDoS-Framework 
+#https://github.com/theInfectedDrake/TIDoS-Framework
 
 from __future__ import print_function
 import re
@@ -15,7 +15,7 @@ import sys
 sys.path.append('files/signature-db/')
 import time
 import requests
-from colors import *
+from core.Core.colors import *
 from re import search
 from bs4 import BeautifulSoup
 from commonerror_signatures import patterns
@@ -25,13 +25,13 @@ found = 0x00
 
 def check0x00(content,url):
 
-	for pattern in patterns:
-		print(C+' [!] Finding '+B+pattern+C+' ...')
-		time.sleep(0.005)
-		if search(pattern, content):
-			print(G+' [!] Possible error at '+O+url)
-			print(G+" [+] Found : \"%s\" at %s" % (pattern,url))
-			found = 0x01
+    for pattern in patterns:
+        print(C+' [!] Finding '+B+pattern+C+' ...')
+        time.sleep(0.005)
+        if search(pattern, content):
+            print(G+' [!] Possible error at '+O+url)
+            print(G+" [+] Found : \"%s\" at %s" % (pattern,url))
+            found = 0x01
 
 def request(url):
 
@@ -72,11 +72,10 @@ def request(url):
 
 def errors(web):
 
-	print(R+'\n       =========================')
-	print(R+'        E R R O R   H U N T E R ')
-	print(R+'       =========================')
-	print(O+'  [This module covers up Full Path Disclosures]\n')
-	print(GR+' [*] Making the request...')
-	time.sleep(0.5)
-	request(web)
-
+    print(R+'\n       =========================')
+    print(R+'        E R R O R   H U N T E R ')
+    print(R+'       =========================')
+    print(O+'  [This module covers up Full Path Disclosures]\n')
+    print(GR+' [*] Making the request...')
+    time.sleep(0.5)
+    request(web)

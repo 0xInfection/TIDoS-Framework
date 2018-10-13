@@ -221,7 +221,7 @@ _PPP_conftypes = { 1:"Configure-Request",
 
 ### PPP IPCP stuff (RFC 1332)
 
-# All IPCP options are defined below (names and associated classes) 
+# All IPCP options are defined below (names and associated classes)
 _PPP_ipcpopttypes = {     1:"IP-Addresses (Deprecated)",
                           2:"IP-Compression-Protocol",
                           3:"IP-Address",
@@ -290,7 +290,7 @@ class PPP_IPCP_Option_NBNS2(PPP_IPCP_Option):
 
 class PPP_IPCP(Packet):
     fields_desc = [ ByteEnumField("code" , 1, _PPP_conftypes),
-		    XByteField("id", 0 ),
+                    XByteField("id", 0 ),
                     FieldLenField("len" , None, fmt="H", length_of="options", adjust=lambda p,x:x+4 ),
                     PacketListField("options", [],  PPP_IPCP_Option, length_from=lambda p:p.len-4,) ]
 
@@ -325,12 +325,12 @@ class PPP_ECP_Option_OUI(PPP_ECP_Option):
                     StrFixedLenField("oui","",3),
                     ByteField("subtype",0),
                     StrLenField("data", "", length_from=lambda p:p.len-6) ]
-                    
+
 
 
 class PPP_ECP(Packet):
     fields_desc = [ ByteEnumField("code" , 1, _PPP_conftypes),
-		    XByteField("id", 0 ),
+                    XByteField("id", 0 ),
                     FieldLenField("len" , None, fmt="H", length_of="options", adjust=lambda p,x:x+4 ),
                     PacketListField("options", [],  PPP_ECP_Option, length_from=lambda p:p.len-4,) ]
 

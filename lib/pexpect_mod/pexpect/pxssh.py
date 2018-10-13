@@ -109,7 +109,7 @@ class pxssh (spawn):
             username = raw_input('username: ')
             password = getpass.getpass('password: ')
             s.login (hostname, username, password)
-    
+
     `debug_command_string` is only for the test suite to confirm that the string
     generated for SSH is correct, using this will not allow you to do
     anything other than get a string back from `pxssh.pxssh.login()`.
@@ -154,7 +154,7 @@ class pxssh (spawn):
         # Unsetting SSH_ASKPASS on the remote side doesn't disable it! Annoying!
         #self.SSH_OPTS = "-x -o'RSAAuthentication=no' -o 'PubkeyAuthentication=no'"
         self.force_password = False
-        
+
         self.debug_command_string = debug_command_string
 
         # User defined SSH options, eg,
@@ -220,7 +220,7 @@ class pxssh (spawn):
         can take 12 seconds. Low latency connections are more likely to fail
         with a low sync_multiplier. Best case sync time gets worse with a
         high sync multiplier (500 ms with default). '''
-        
+
         # All of these timing pace values are magic.
         # I came up with these based on what seemed reliable for
         # connecting to a heavily loaded machine I have.
@@ -284,27 +284,27 @@ class pxssh (spawn):
         uses a unique prompt in the :meth:`prompt` method. If the original prompt is
         not reset then this will disable the :meth:`prompt` method unless you
         manually set the :attr:`PROMPT` attribute.
-        
+
         Set ``password_regex`` if there is a MOTD message with `password` in it.
         Changing this is like playing in traffic, don't (p)expect it to match straight
         away.
-        
+
         If you require to connect to another SSH server from the your original SSH
         connection set ``spawn_local_ssh`` to `False` and this will use your current
         session to do so. Setting this option to `False` and not having an active session
         will trigger an error.
-        
+
         Set ``ssh_key`` to a file path to an SSH private key to use that SSH key
         for the session authentication.
         Set ``ssh_key`` to `True` to force passing the current SSH authentication socket
         to the desired ``hostname``.
-        
+
         Set ``ssh_config`` to a file path string of an SSH client config file to pass that
         file to the client to handle itself. You may set any options you wish in here, however
         doing so will require you to post extra information that you may not want to if you
         run into issues.
         '''
-        
+
         session_regex_array = ["(?i)are you sure you want to continue connecting", original_prompt, password_regex, "(?i)permission denied", "(?i)terminal type", TIMEOUT]
         session_init_regex_array = []
         session_init_regex_array.extend(session_regex_array)
@@ -331,7 +331,7 @@ class pxssh (spawn):
                 if spawn_local_ssh and not os.path.isfile(ssh_key):
                     raise ExceptionPxssh('private ssh key does not exist or is not a file.')
                 ssh_options = ssh_options + ' -i %s' % (ssh_key)
-        
+
         # SSH tunnels, make sure you know what you're putting into the lists
         # under each heading. Do not expect these to open 100% of the time,
         # The port you're requesting might be bound.

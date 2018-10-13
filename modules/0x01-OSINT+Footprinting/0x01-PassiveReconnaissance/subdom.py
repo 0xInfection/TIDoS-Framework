@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 #-:-:-:-:-:-:-:-:-:-:-:-:#
@@ -7,13 +7,13 @@
 
 #Author : @_tID
 #This module requires TIDoS Framework
-#https://github.com/theInfectedDrake/TIDoS-Framework 
+#https://github.com/theInfectedDrake/TIDoS-Framework
 
 from __future__ import print_function
 import os
 import time
 import requests
-from colors import *
+from core.Core.colors import *
 links = []
 
 def subdom(web):
@@ -30,29 +30,28 @@ def subdom(web):
     domains = [web]
     for dom in domains:
         text = requests.get('http://api.hackertarget.com/hostsearch/?q=' + dom).text
-	result = str(text)
-	if 'error' not in result:
-		res = result.splitlines()
-		for r in res:
-			sub = r.split(',')[0]
-			print(B+' [+] Got subdomain :> '+C+sub)
-			links.append(sub)
-			time.sleep(0.06)
+        result = str(text)
+        if 'error' not in result:
+            res = result.splitlines()
+            for r in res:
+                sub = r.split(',')[0]
+                print(B+' [+] Got subdomain :> '+C+sub)
+                links.append(sub)
+                time.sleep(0.06)
 
-		p = 'tmp/logs/'+web+'-logs/'+str(web)+'-subdomains.lst'
-		open(p,'w+')
-		print(B+' [!] Saving links...')
-		time.sleep(1)
-		for m in links:
-		    m = m + '\n'
-		    ile = open(p,'a')
-		    ile.write(m)
-		    ile.close()
-		pa = os.getcwd()
-		print(G+' [+] Links saved under '+pa+'/'+p+'!')
-		print('')
+            p = 'tmp/logs/'+web+'-logs/'+str(web)+'-subdomains.lst'
+            open(p,'w+')
+            print(B+' [!] Saving links...')
+            time.sleep(1)
+            for m in links:
+                m = m + '\n'
+                ile = open(p,'a')
+                ile.write(m)
+                ile.close()
+            pa = os.getcwd()
+            print(G+' [+] Links saved under '+pa+'/'+p+'!')
+            print('')
 
-	else:
-		print(R+' [-] Outbound Query Exception!')
-		time.sleep(0.8)
-
+        else:
+            print(R+' [-] Outbound Query Exception!')
+            time.sleep(0.8)

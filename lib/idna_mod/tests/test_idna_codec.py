@@ -7,7 +7,7 @@ import unittest
 import idna.codec
 
 class IDNACodecTests(unittest.TestCase):
-    
+
     def testCodec(self):
         pass
 

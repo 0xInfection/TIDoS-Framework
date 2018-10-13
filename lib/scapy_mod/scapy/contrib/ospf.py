@@ -91,7 +91,7 @@ class OSPF_Hdr(Packet):
         if (isinstance(other, OSPF_Hdr) and
             self.area == other.area and
             self.type == 5):  # Only acknowledgements answer other packets
-                return self.payload.answers(other.payload)
+            return self.payload.answers(other.payload)
         return 0
 
 

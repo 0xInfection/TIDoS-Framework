@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
 #-*- coding: utf-8 -*-
 
 #-:-:-:-:-:-:-:-:-:-:-:-:#
@@ -6,6 +6,6 @@
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 
 #This module requires TIDoS Framework
-#https://github.com/the-Infected-Drake/TIDoS-Framework 
+#https://github.com/theInfectedDrake/TIDoS-Framework
 
 pass

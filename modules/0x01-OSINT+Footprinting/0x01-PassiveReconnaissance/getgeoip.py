@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 #-:-:-:-:-:-:-:-:-:-:-:-:#
@@ -7,13 +7,13 @@
 
 #Author : @_tID
 #This module requires TIDoS Framework
-#https://github.com/theInfectedDrake/TIDoS-Framework 
+#https://github.com/theInfectedDrake/TIDoS-Framework
 
 from __future__ import print_function
 import time
 import requests
 import socket
-from colors import *
+from core.Core.colors import *
 
 def getgeoip(web):
 
@@ -31,12 +31,11 @@ def getgeoip(web):
     text = requests.get('http://api.hackertarget.com/geoip/?q=' + domains).text
     result = str(text)
     if 'error' not in result and 'invalid' not in result:
-	res = result.splitlines()
-	for r in res:
-		print(G+' [+] ' + r.split(':')[0].strip() + ' : ' +O+ r.split(':')[1].strip())
-		time.sleep(0.1)
+        res = result.splitlines()
+        for r in res:
+            print(G+' [+] ' + r.split(':')[0].strip() + ' : ' +O+ r.split(':')[1].strip())
+            time.sleep(0.1)
 
     else:
-	print(R+' [-] Outbound Query Exception!')
-	time.sleep(0.8)
-
+        print(R+' [-] Outbound Query Exception!')
+        time.sleep(0.8)

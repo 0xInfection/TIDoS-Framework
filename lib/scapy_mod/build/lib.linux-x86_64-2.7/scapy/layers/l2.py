@@ -94,7 +94,7 @@ class DestMACField(MACField):
         return MACField.i2h(self, pkt, x)
     def i2m(self, pkt, x):
         return MACField.i2m(self, pkt, self.i2h(pkt, x))
-        
+
 class SourceMACField(MACField):
     def __init__(self, name):
         MACField.__init__(self, name, None)
@@ -111,7 +111,7 @@ class SourceMACField(MACField):
         return MACField.i2h(self, pkt, x)
     def i2m(self, pkt, x):
         return MACField.i2m(self, pkt, self.i2h(pkt, x))
-        
+
 class ARPSourceMACField(MACField):
     def __init__(self, name):
         MACField.__init__(self, name, None)
@@ -196,8 +196,8 @@ class CookedLinux(Packet):
                     ShortField("lladdrlen",0),
                     StrFixedLenField("src","",8),
                     XShortEnumField("proto",0x800,ETHER_TYPES) ]
-                    
-                                   
+
+
 
 class SNAP(Packet):
     name = "SNAP"
@@ -236,7 +236,7 @@ class Dot1Q(Packet):
         else:
             return self.sprintf("802.1q (%Dot1Q.type%) vlan %Dot1Q.vlan%")
 
-            
+
 conf.neighbor.register_l3(Ether, Dot1Q, lambda l2,l3: conf.neighbor.resolve(l2,l3.payload))
 
 class STP(Packet):
@@ -262,7 +262,7 @@ class EAPOL(Packet):
     fields_desc = [ ByteField("version", 1),
                     ByteEnumField("type", 0, ["EAP_PACKET", "START", "LOGOFF", "KEY", "ASF"]),
                     LenField("len", None, "H") ]
-    
+
     EAP_PACKET= 0
     START = 1
     LOGOFF = 2
@@ -281,7 +281,7 @@ class EAPOL(Packet):
         return 0
     def mysummary(self):
         return self.sprintf("EAPOL %EAPOL.type%")
-             
+
 
 class EAP(Packet):
     name = "EAP"
@@ -291,7 +291,7 @@ class EAP(Packet):
                     ConditionalField(ByteEnumField("type",0, {1:"ID",4:"MD5"}), lambda pkt:pkt.code not in [EAP.SUCCESS, EAP.FAILURE])
 
                                      ]
-    
+
     REQUEST = 1
     RESPONSE = 2
     SUCCESS = 3
@@ -309,13 +309,13 @@ class EAP(Packet):
             elif other.code == self.RESPONSE:
                 return 1
         return 0
-    
+
     def post_build(self, p, pay):
         if self.len is None:
             l = len(p)+len(pay)
             p = p[:2]+chr((l>>8)&0xff)+chr(l&0xff)+p[4:]
         return p+pay
-             
+
 
 class ARP(Packet):
     name = "ARP"
@@ -351,7 +351,7 @@ class ARP(Packet):
             return self.sprintf("ARP who has %pdst% says %psrc%")
         else:
             return self.sprintf("ARP %op% %psrc% > %pdst%")
-                 
+
 conf.neighbor.register_l3(Ether, ARP, lambda l2,l3: getmacbyip(l3.pdst))
 
 class GRErouting(Packet):
@@ -513,7 +513,7 @@ class ARP_am(AnsweringMachine):
         return (req.haslayer(ARP) and
                 req.getlayer(ARP).op == 1 and
                 (self.IP_addr == None or self.IP_addr == req.getlayer(ARP).pdst))
-    
+
     def make_reply(self, req):
         ether = req.getlayer(Ether)
         arp = req.getlayer(ARP)
@@ -536,8 +536,6 @@ class ARP_am(AnsweringMachine):
 @conf.commands.register
 def etherleak(target, **kargs):
     """Exploit Etherleak flaw"""
-    return srpflood(Ether()/ARP(pdst=target), 
+    return srpflood(Ether()/ARP(pdst=target),
                     prn=lambda (s,r): conf.padding_layer in r and hexstr(r[conf.padding_layer].load),
                     filter="arp", **kargs)
-
-

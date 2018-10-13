@@ -18,7 +18,7 @@ import error
 class Gen(object):
     def __iter__(self):
         return iter([])
-    
+
 class SetGen(Gen):
     def __init__(self, set, _iterpacket=1):
         self._iterpacket=_iterpacket
@@ -78,7 +78,7 @@ class Net(Gen):
         self.parsed,self.netmask = self._parse_net(net)
 
 
-                                                                                               
+
     def __iter__(self):
         for d in xrange(*self.parsed[3]):
             for c in xrange(*self.parsed[2]):
@@ -89,8 +89,8 @@ class Net(Gen):
         ip = []
         for v in self.parsed:
             ip.append(str(random.randint(v[0],v[1]-1)))
-        return ".".join(ip) 
-                          
+        return ".".join(ip)
+
     def __repr__(self):
         return "Net(%r)" % self.repr
     def __eq__(self, other):
@@ -108,16 +108,16 @@ class Net(Gen):
             if a1 > a2 or b1 < b2:
                 return False
         return True
-    def __rcontains__(self, other):        
+    def __rcontains__(self, other):
         return self in self.__class__(other)
-        
+
 
 class OID(Gen):
     name = "OID"
     def __init__(self, oid):
-        self.oid = oid        
+        self.oid = oid
         self.cmpt = []
-        fmt = []        
+        fmt = []
         for i in oid.split("."):
             if "-" in i:
                 fmt.append("%i")
@@ -127,7 +127,7 @@ class OID(Gen):
         self.fmt = ".".join(fmt)
     def __repr__(self):
         return "OID(%r)" % self.oid
-    def __iter__(self):        
+    def __iter__(self):
         ii = [k[0] for k in self.cmpt]
         while 1:
             yield self.fmt % tuple(ii)
@@ -143,7 +143,7 @@ class OID(Gen):
                 i += 1
 
 
- 
+
 ######################################
 ## Packet abstract and base classes ##
 ######################################
@@ -180,7 +180,7 @@ class Packet_metaclass(type):
         newcls = super(Packet_metaclass, cls).__new__(cls, name, bases, dct)
         if hasattr(newcls,"register_variant"):
             newcls.register_variant()
-        for f in newcls.fields_desc:                
+        for f in newcls.fields_desc:
             f.register_owner(newcls)
         config.conf.layers.register(newcls)
         return newcls
@@ -201,11 +201,11 @@ class Packet_metaclass(type):
 
 class NewDefaultValues(Packet_metaclass):
     """NewDefaultValues is deprecated (not needed anymore)
-    
+
     remove this:
         __metaclass__ = NewDefaultValues
     and it should still work.
-    """    
+    """
     def __new__(cls, name, bases, dct):
         from error import log_loading
         import traceback
@@ -218,7 +218,7 @@ class NewDefaultValues(Packet_metaclass):
             f,l="??",-1
             raise
         log_loading.warning("Deprecated (no more needed) use of NewDefaultValues  (%s l. %i)." % (f,l))
-        
+
         return super(NewDefaultValues, cls).__new__(cls, name, bases, dct)
 
 class BasePacket(Gen):
@@ -231,6 +231,3 @@ class BasePacket(Gen):
 
 class BasePacketList:
     pass
-
-
-

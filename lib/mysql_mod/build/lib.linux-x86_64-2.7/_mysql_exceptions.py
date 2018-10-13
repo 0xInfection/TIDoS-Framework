@@ -13,7 +13,7 @@ except ImportError:
 
 
 class MySQLError(StandardError):
-    
+
     """Exception related to operation with MySQL."""
 
 
@@ -83,5 +83,3 @@ class NotSupportedError(DatabaseError):
     which is not supported by the database, e.g. requesting a
     .rollback() on a connection that does not support transaction or
     has transactions turned off."""
-
-

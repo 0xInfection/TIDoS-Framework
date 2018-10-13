@@ -70,4 +70,3 @@ if child.isalive():
     print('Child did not exit gracefully.')
 else:
     print('Child exited gracefully.')
-

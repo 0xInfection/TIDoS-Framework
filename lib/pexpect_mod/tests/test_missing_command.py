@@ -35,4 +35,3 @@ if __name__ == '__main__':
     unittest.main()
 
 suite = unittest.makeSuite(MissingCommandTestCase,'test')
-

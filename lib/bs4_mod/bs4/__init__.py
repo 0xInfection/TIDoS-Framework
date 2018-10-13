@@ -257,8 +257,8 @@ class BeautifulSoup(Tag):
 
     @staticmethod
     def _check_markup_is_url(markup):
-        """ 
-        Check if markup looks like it's actually a url and raise a warning 
+        """
+        Check if markup looks like it's actually a url and raise a warning
         if so. Markup can be unicode or str (py2) / bytes (py3).
         """
         if isinstance(markup, bytes):

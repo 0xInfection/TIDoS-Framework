@@ -44,11 +44,11 @@ class CountryLocKnowledgeBase(KnowledgeBase):
             if len(l) != 3:
                 continue
             c,lat,long = l
-            
+
             self.base[c] = (float(long),float(lat))
         f.close()
-            
-        
+
+
 
 @conf.commands.register
 def locate_ip(ip):

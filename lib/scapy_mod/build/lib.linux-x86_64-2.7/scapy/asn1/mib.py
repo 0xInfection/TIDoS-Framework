@@ -47,7 +47,7 @@ class MIBDict(DADict):
             p -= 1
         if p != 0 or xl[p] not in self:
             return x
-        xl[p] = self[xl[p]] 
+        xl[p] = self[xl[p]]
         return ".".join(xl[p:])
     def _make_graph(self, other_keys=[], **kargs):
         nodes = [(k,self[k]) for k in self.keys()]
@@ -106,7 +106,7 @@ def mib_register(ident, value, the_mib, unresolved):
                 i = 0
             else:
                 i += 1
-                    
+
         return True
 
 

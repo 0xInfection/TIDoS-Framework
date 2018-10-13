@@ -61,5 +61,3 @@ bind_bottom_up(UDP, _llmnr_dispatcher, { "dport": 5355 })
 bind_bottom_up(UDP, _llmnr_dispatcher, { "sport": 5355 })
 
 # LLMNRQuery(id=RandShort(), qd=DNSQR(qname="vista.")))
-
-

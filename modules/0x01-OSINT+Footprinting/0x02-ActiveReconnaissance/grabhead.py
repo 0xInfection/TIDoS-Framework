@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 #-:-:-:-:-:-:-:-:-:-:-:-:#
@@ -6,14 +6,14 @@
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 
 #This module requires TIDoS Framework
-#https://github.com/theInfectedDrake/TIDoS-Framework 
+#https://github.com/theInfectedDrake/TIDoS-Framework
 
 from __future__ import print_function
-import urllib2
+import urllib
 import time
 import sys
 from time import sleep
-from colors import * 
+from core.Core.colors import *
 
 def grabhead(web):
 
@@ -23,12 +23,12 @@ def grabhead(web):
     print(R+'     ===================================\n')
     print(GR + color.BOLD + ' [!] Grabbing HTTP Headers...')
     time.sleep(0.4)
-    web.rstrip
+    web = web.rstrip()
     try:
-	    header = urllib2.urlopen(web).info()
-	    print('')
-	    print(G+str(header))
+        header = urllib.request.urlopen(web).info()
+        print('')
+        print(G+str(header))
     except urllib.HTTPError:
-	print(R+' [-] Exception while request (HTTPError)...')
+        print(R+' [-] Exception while request (HTTPError)...')
     except:
-	print(R+' [-] Something went wrong...')
+        print(R+' [-] Something went wrong...')

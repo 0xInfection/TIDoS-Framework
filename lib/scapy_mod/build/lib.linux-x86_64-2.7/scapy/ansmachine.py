@@ -33,8 +33,8 @@ class AnsweringMachine(object):
     send_options = { "verbose":0 }
     send_options_list = ["iface", "inter", "loop", "verbose"]
     send_function = staticmethod(send)
-    
-    
+
+
     def __init__(self, **kargs):
         self.mode = 0
         if self.filter:
@@ -69,7 +69,7 @@ class AnsweringMachine(object):
     def parse_all_options(self, mode, kargs):
         sniffopt = {}
         sendopt = {}
-        for k in kargs.keys():            
+        for k in kargs.keys():
             if k in self.sniff_options_list:
                 sniffopt[k] = kargs[k]
             if k in self.send_options_list:
@@ -83,7 +83,7 @@ class AnsweringMachine(object):
                 k = self.optam0.copy()
                 k.update(kargs)
                 self.parse_options(**k)
-                kargs = k 
+                kargs = k
             omode = self.__dict__.get("mode",0)
             self.__dict__["mode"] = mode
             self.parse_options(**kargs)
@@ -125,6 +125,6 @@ class AnsweringMachine(object):
             self.sniff()
         except KeyboardInterrupt:
             print("Interrupted by user")
-        
+
     def sniff(self):
         sniff(**self.optsniff)

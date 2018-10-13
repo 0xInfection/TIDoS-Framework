@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
 # vim:fileencoding=utf-8
 # License: BSD Copyright: 2017, Kovid Goyal <kovid at kovidgoyal.net>
 
@@ -1504,7 +1504,7 @@ html5_entities = {
     'swarrow': '↙',
     'swnwar': '⤪',
     'szlig': 'ß',
-    'tab': '	',
+    'tab': '    ',
     'target': '⌖',
     'tau': 'τ',
     'tbrk': '⎴',

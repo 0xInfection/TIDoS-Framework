@@ -106,7 +106,7 @@ def Date_or_None(s):
 def DateTime2literal(d, c):
     """Format a DateTime object as an ISO timestamp."""
     return string_literal(format_TIMESTAMP(d),c)
-    
+
 def DateTimeDelta2literal(d, c):
     """Format a DateTimeDelta object as a time."""
     return string_literal(format_TIMEDELTA(d),c)

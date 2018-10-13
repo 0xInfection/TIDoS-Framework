@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
 # coding: utf-8
 #
 #-:-:-:-:-:-:-:-:-:-:-:-:#
@@ -7,7 +7,7 @@
 #
 #Author : @_tID (theInfectedDrake)
 #This module requires TIDoS Framework
-#https://github.com/theInfectedDrake/TIDoS-Framework 
+#https://github.com/theInfectedDrake/TIDoS-Framework
 
 from __future__ import print_function
 import re
@@ -15,7 +15,7 @@ import sys
 sys.path.append('files/signature-db/')
 import time
 import requests
-from colors import *
+from core.Core.colors import *
 from bs4 import BeautifulSoup
 from infodisc_signatures import SOCIAL_SECURITY_SIGNATURE as signature
 found = 0x00
@@ -74,7 +74,6 @@ def check0x00(req):
 
 def ssn(web):
 
-	print(GR+' [*] Loading module...')
-	time.sleep(0.6)
-	ssn0x00(web)
-
+    print(GR+' [*] Loading module...')
+    time.sleep(0.6)
+    ssn0x00(web)
