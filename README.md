@@ -55,7 +55,9 @@ Here is some light on what the framework is all about:
 
 #### Global Installation:
 
-> NOTE: For installing globally, you will need to default your Python version to 2.x.
+> __NOTE:__
+>
+> Presently, for installing globally, you will need to default your Python version to 2.x.
 > However, the work of migration from Python2 to Python3 is already underway.
 
 * Clone the repository locally and navigate there:
