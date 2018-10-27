@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <a href="https://github.com/theinfecteddrake"><img src="https://i.imgur.com/QAbaVdU.png" alt="TIDoS"></a>
+  <a href="https://github.com/0xinfection"><img src="https://i.imgur.com/QAbaVdU.png" alt="TIDoS"></a>
   <br>
   The TIDoS Framework
   <br>
@@ -12,22 +12,22 @@
   <a href="https://www.python.org/download/releases/2.7">
     <img src="https://img.shields.io/badge/Python-2.7-green.svg">
   </a>
-  <a href="https://github.com/theInfectedDrake/TIDoS-Framework/releases">
+  <a href="https://github.com/0xinfection/TIDoS-Framework/releases">
     <img src="https://img.shields.io/badge/TIDoS-v1.6.2-blue.svg">
   </a>
-  <a href="https://github.com/theinfecteddrake/tidos-framework/">
+  <a href="https://github.com/0xinfection/tidos-framework/">
       <img src="https://img.shields.io/badge/Supported%20OS-Linux-yellow.svg">
   </a>
-  <a href="https://github.com/theInfectedDrake/TIDoS-Framework/blob/master/doc/LICENSE/">
+  <a href="https://github.com/0xinfection/TIDoS-Framework/blob/master/doc/LICENSE/">
     <img src="https://img.shields.io/badge/License-GPLv3-orange.svg">
   </a> 
-  <a href="https://github.com/theInfectedDrake/TIDoS-Framework#flawless-features--">
+  <a href="https://github.com/0xinfection/TIDoS-Framework#flawless-features--">
     <img src="https://img.shields.io/badge/Modules-108-blue.svg">
   </a>
-  <a href="https://travis-ci.org/theInfectedDrake/TIDoS-Framework">
+  <a href="https://travis-ci.org/0xinfection/TIDoS-Framework">
     <img src="https://img.shields.io/badge/Build-passing-brightgreen.svg">
   </a>
-  <a href="https://github.com/theInfectedDrake/TIDoS-Framework/releases/tag/v1.6.1/">
+  <a href="https://github.com/0xinfection/TIDoS-Framework/releases/tag/v1.6.1/">
     <img src="https://img.shields.io/badge/Release-Stable-green.svg">
   </a>
 </p>
@@ -35,7 +35,7 @@
 ### Highlights :-
 Here is some light on what the framework is all about:
 - [x] A complete versatile framework to cover up everything from Reconnaissance to Vulnerability Analysis.
-- [x] Has 5 main phases, subdivided into __14 sub-phases__ consisting a total of <a href="https://github.com/theInfectedDrake/TIDoS-Framework/blob/master/doc/man/tree.man">__108 modules__</a>.
+- [x] Has 5 main phases, subdivided into __14 sub-phases__ consisting a total of <a href="https://github.com/0xinfection/TIDoS-Framework/blob/master/doc/man/tree.man">__108 modules__</a>.
 - [x] Reconnaissance Phase has 50 modules of its own (including active and passive recon, information disclosure modules).
 - [x] Scanning & Enumeration Phase has got 16 modules (including port scans, WAF analysis, etc)
 - [x] Vulnerability Analysis Phase has 37 modules (including most common vulnerabilites in action).
@@ -59,7 +59,7 @@ Here is some light on what the framework is all about:
 
 * Clone the repository locally and navigate there:
 ```
-git clone https://github.com/theinfecteddrake/tidos-framework.git
+git clone https://github.com/0xinfection/tidos-framework.git
 cd tidos-framework
 ```
 * Install the dependencies:
@@ -339,6 +339,6 @@ TIDoS is an in progress work far from perfection and I admit that there may be b
 >
 > Please avoid doing any pull requests temporarily as work for v2 of this framework is already underway and in active development. 
 
-Got more suggestions or new ideas? Raise up an [issue](https://github.com/theInfectedDrake/TIDoS-Framework/issues/new) or hit me up via DM on [twitter](https://twitter.com/infecteddrake).
+Got more suggestions or new ideas? Raise up an [issue](https://github.com/0xinfection/TIDoS-Framework/issues/new) or hit me up via DM on [twitter](https://twitter.com/0xinfection).
 
-> Copyright © [__The Infected Drake__](https://twitter.com/infecteddrake)
+> Copyright © [__The Infected Drake__](https://twitter.com/0xinfection)
