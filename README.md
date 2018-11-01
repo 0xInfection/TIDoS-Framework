@@ -22,7 +22,7 @@
     <img src="https://img.shields.io/badge/License-GPLv3-orange.svg">
   </a> 
   <a href="https://github.com/0xinfection/TIDoS-Framework#flawless-features--">
-    <img src="https://img.shields.io/badge/Modules-108-blue.svg">
+    <img src="https://img.shields.io/badge/Modules-108-red.svg">
   </a>
   <a href="https://travis-ci.org/0xinfection/TIDoS-Framework">
     <img src="https://img.shields.io/badge/Build-passing-brightgreen.svg">
