@@ -99,8 +99,9 @@ Finally, as the framework opens up, enter the website name `eg. http://www.examp
 
 > Recommended:
 > - Follow the order of the tool (Run in a schematic way).
->
->    `Reconnaissance ➣ Scanning & Enumeration ➣ Vulnerability Analysis`
+> ```
+> Reconnaissance ➣ Scanning & Enumeration ➣ Vulnerability Analysis
+> ```
 
 To update this tool, use `tidos_updater.py` module under `tools/` folder.
 
