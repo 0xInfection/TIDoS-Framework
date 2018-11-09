@@ -334,7 +334,7 @@ __THEREFORE, THE AUTHOR AND NEITHER THE CONTRIBUTORS ARE NOT EXCLUSIVELY RESPONS
 
 This project is a very fresh and new project which just simply springed off my mind, and is presently under active development so you may want to put it on a watch, since it is updated frequently.
 
-TIDoS is an in progress work far from perfection and I admit that there may be bugs out there which may cause many modules not to work properly and just bug out. However, being the only single author and maintainer behind this framework, it is my humble request to all users of this framework to hand me the list of modules via raising a [new issue](https://github.com/theInfectedDrake/TIDoS-Framework/issues/new) which simply do not work and bug out, and I would be more than happy to fix them as we jointly make our journey to realising TIDoS as the greatest web penetration testing framework ever built.
+TIDoS is an in progress work far from perfection and I admit that there may be bugs out there which may cause many modules not to work properly and just bug out. However, being the only single author and maintainer behind this framework, it is my humble request to all users of this framework to hand me the list of modules via raising a [new issue](https://github.com/0xInfection/TIDoS-Framework/issues/new) which simply do not work and bug out, and I would be more than happy to fix them as we jointly make our journey to realising TIDoS as the greatest web penetration testing framework ever built.
 
 > __TEMPORARY UPDATE__:
 >

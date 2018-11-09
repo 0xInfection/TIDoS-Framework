@@ -5,9 +5,9 @@
 #    TIDoS Framework     #
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 #
-#Author : @_tID (theInfectedDrake)
+#Author : @_tID (0xInfection)
 #This module requires TIDoS Framework
-#https://github.com/theInfectedDrake/TIDoS-Framework
+#https://github.com/0xInfection/TIDoS-Framework
 
 from __future__ import print_function
 import re

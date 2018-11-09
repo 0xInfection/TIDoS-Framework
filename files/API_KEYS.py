@@ -6,7 +6,7 @@
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 
 #This module requires TIDoS Framework
-#https://github.com/theInfectedDrake/TIDoS-Framework
+#https://github.com/0xInfection/TIDoS-Framework
 
 # DISCLAIMER: All these API tokens have been publicly disclosed on some repositories
 # or other on GitHub. THESE ARE PUBLICLY AVAILABLE FOR ANYONE TO USE.

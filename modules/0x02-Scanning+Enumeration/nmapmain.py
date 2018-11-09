@@ -7,7 +7,7 @@
 
 #Author : @_tID
 #This script is a part of TIDoS Framework
-#https://github.com/theInfectedDrake/TIDoS-Framework
+#https://github.com/0xInfection/TIDoS-Framework
 
 from __future__ import print_function
 import os, sys, urllib, urllib2, time

@@ -7,7 +7,7 @@
 
 #Author: @_tID
 #This module requires TIDoS Framework
-#https://github.com/theInfectedDrake/TIDoS
+#https://github.com/0xInfection/TIDoS
 
 from __future__ import print_function
 import sys

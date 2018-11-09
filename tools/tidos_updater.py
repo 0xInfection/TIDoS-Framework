@@ -7,7 +7,7 @@
 
 #Updater of TIDoS Framework
 #This module requires TIDoS Framework
-#https://github.com/theInfectedDrake/TIDoS-Framework
+#https://github.com/0xInfection/TIDoS-Framework
 
 from __future__ import print_function
 import time
@@ -25,7 +25,7 @@ def updater():
     time.sleep(0.4)
     print(GR+' [*] Looking up for the latest version...')
     time.sleep(0.4)
-    text = requests.get('https://raw.githubusercontent.com/theInfectedDrake/TIDoS-Framework/master/doc/Version_Num').text
+    text = requests.get('https://raw.githubusercontent.com/0xInfection/TIDoS-Framework/master/doc/Version_Num').text
     result = str(text)
     m = open('../doc/Version_Num','r').read()
     print(C+' [!] The version on GitHub is : '+B+result.replace('\n',''))

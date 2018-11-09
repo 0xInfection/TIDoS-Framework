@@ -6,7 +6,7 @@
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 
 #This file is a part of TIDoS Framework
-#https://github.com/theInfectedDrake/TIDoS-Framework
+#https://github.com/0xInfection/TIDoS-Framework
 
 errorsig = [    "[<a href='function.main'>function.main</a>",
                 "[<a href='function.include'>function.include</a>",

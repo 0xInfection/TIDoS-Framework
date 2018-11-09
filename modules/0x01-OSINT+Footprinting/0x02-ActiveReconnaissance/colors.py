@@ -5,7 +5,7 @@
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 
 #This module requires TIDoS Framework
-#https://github.com/theInfectedDrake/TIDoS-Framework
+#https://github.com/0xInfection/TIDoS-Framework
 
 import sys
 sys.path.append('core/')
