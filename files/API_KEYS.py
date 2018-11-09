@@ -8,10 +8,12 @@
 #This module requires TIDoS Framework
 #https://github.com/theInfectedDrake/TIDoS-Framework
 
-SHODAN_API_KEY = 'v4YpsPUJ3wjDxEqywwu6aF5OZKWj8kik' #Public Shodan API Key Bundled with TIDoS-Framework
-CENSYS_UID = ''
-CENSYS_SECRET = ''
-GOOGLE_API_TOKEN = ''
-FULLCONTACT_API_KEY = ''
+# DISCLAIMER: All these API tokens have been publicly disclosed on some repositories
+# or other on GitHub. THESE ARE PUBLICLY AVAILABLE FOR ANYONE TO USE.
+
+SHODAN_API_KEY = 'v4YpsPUJ3wjDxEqywwu6aF5OZKWj8kik'
+CENSYS_UID = '6f5c0df4-3908-430f-9f17-fb350db03fa3'
+CENSYS_SECRET = '9s7nwqeXjJxzBkij4gxFNYC5EQYhX6QG'
+GOOGLE_API_TOKEN = 'AIzaSyDDnc-68uaF-E4gzvJslt1fppiUl9dyTrc'
+FULLCONTACT_API_KEY = 'a82ad9009f6b1b1'
 WHATCMS_ACCESS_TOKEN = '756ab2cfa1ed5575a71e0714ef05c2e228f17b6b1476de7075f7f4d6b4978272376fb3'
-                                        #Public WHATCMS Access Token Bundled with TIDoS-Framework
