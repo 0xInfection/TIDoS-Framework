@@ -13,7 +13,7 @@
     <img src="https://img.shields.io/badge/Python-2.7-green.svg">
   </a>
   <a href="https://github.com/0xinfection/TIDoS-Framework/releases">
-    <img src="https://img.shields.io/badge/TIDoS-v1.6.2-blue.svg">
+    <img src="https://img.shields.io/badge/TIDoS-v1.7-blue.svg">
   </a>
   <a href="https://github.com/0xinfection/tidos-framework/">
       <img src="https://img.shields.io/badge/Supported%20OS-Linux-yellow.svg">
@@ -27,7 +27,7 @@
   <a href="https://travis-ci.org/0xinfection/TIDoS-Framework">
     <img src="https://img.shields.io/badge/Build-passing-brightgreen.svg">
   </a>
-  <a href="https://github.com/0xinfection/TIDoS-Framework/releases/tag/v1.6.1/">
+  <a href="https://github.com/0xinfection/TIDoS-Framework/releases/tag/v1.7/">
     <img src="https://img.shields.io/badge/Release-Stable-green.svg">
   </a>
 </p>
@@ -93,7 +93,11 @@ python2 tidos.py
 
 TIDoS is built to be a comprehensive, flexible and versatile framework where you just have to select and use modules.
 
-So to get started, you need to set your own `API KEYS` for various OSINT & Scanning and Enumeration purposes. To do so, open up `API_KEYS.py` under `files/` directory and set your own keys and access tokens for `SHODAN`, `CENSYS`, `FULL CONTACT`, `GOOGLE` and `WHATCMS`. Public `API KEYS` and `ACCESS TOKENS` for `SHODAN` and `WHATCMS` have been provided with the TIDoS release itself. You can still add your own... `no harm!`
+So to get started, you need to set your own `API KEYS` for various OSINT & Scanning and Enumeration purposes. To do so, open up `API_KEYS.py` under `files/` directory and set your own keys and access tokens for `SHODAN`, `CENSYS`, `FULL CONTACT`, `GOOGLE` and `WHATCMS`.
+
+> __GOOD NEWS__:
+>
+> The latest release of TIDoS includes all API KEYS and ACCESS TOKENS for `SHODAN`, `CENSYS`, `FULL CONTACT`, `GOOGLE` and `WHATCMS` by default. I found these tokens on various repositories on GitHub itself. __You can now use all the modules__ which use the API KEYS. :)
 
 Finally, as the framework opens up, enter the website name `eg. http://www.example.com` and let TIDoS lead you. Thats it! Its as easy as that.
 
@@ -302,7 +306,7 @@ Lets see some screenshots of TIDoS in real world pentesting action:
 
 ### Version:
 ```
-v1.6.2 [latest release] [#stable]
+v1.7 [latest release] [#stable]
 ```
 
 ### Upcoming:
