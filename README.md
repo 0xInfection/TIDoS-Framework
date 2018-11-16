@@ -78,7 +78,7 @@ tidos
 
 TIDoS needs some libraries to run, which can be installed via `aptitude` or `yum` Package Managers.
 ```
-sudo apt-get install libncurses5 libxml2 nmap tcpdump scons libexiv2-dev python-pyexiv2 build-essential python-pip default-libmysqlclient-dev python-xmpp
+sudo apt-get install libncurses5 libxml2 nmap tcpdump scons libexiv2-dev python-pyexiv2 build-essential python-pip default-libmysqlclient-dev python-xmpp libboost-python-dev
 ```
 Now after these dependencies are finished installing, we need to install the remaining Python Package dependencies, hence run:
 ```
