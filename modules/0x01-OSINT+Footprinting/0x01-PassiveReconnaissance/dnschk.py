@@ -24,12 +24,7 @@ def dnschk(domain):
     print(R+'    D N S   L 0 0 K U P')
     print(R+'   =====================\n')
 
-    if 'http://' in domain:
-        domain = domain.replace('http://','')
-    elif 'https://' in domain:
-        domain = domain.replace('https://','')
-    else:
-        pass
+    domain = domain.split('//')[1]
 
     res = DNSDumpsterAPI(False).search(domain)
     print(G+'\n [+] DNS Records')
