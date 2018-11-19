@@ -106,9 +106,9 @@ def tidos_main(): # To be called by external
                 print(C+' [+] Alvida, see ya!\n')
                 sys.exit(0)
 
-            except Exception: # Global Error Handling Stuff
+            except Exception as e: # Global Error Handling Stuff
                 print(R+' [-] Unhandled runtime exception while execution...')
-                time.sleep(1)
+                print(R+' [-] Exception Encountered: '+e.__str__())
                 print(R+' [-] Returning back to main menu...')
                 time.sleep(1)
                 pass # (If user runs into a error, that would not quit this tool)
