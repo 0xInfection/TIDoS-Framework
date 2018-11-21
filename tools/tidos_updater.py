@@ -33,12 +33,13 @@ def updater():
     if m != result :
         print(O+' [!] An update is available to version '+result)
         mn = raw_input(O+' [#] Update? '+R+'(Y/n) :> '+O)
+        current_path = os.getcwd().split('/')
+        folder = current_path[-1] # current directory name
+        path = '/'.join(current_path) # current directory path
         if mn == 'Y' or mn == 'y':
             print(GR+' [*] Updating...\n')
-            p = open('../doc/Version_Num','w')
-            p.write(result.replace('\n',''))
-            p.close()
-            os.system('cd .. && git add . && git commit -m "Did stuff" && git pull && git update-index --assume-unchanged tools/tidos_updater.py && git commit -m "Merged"')
+            os.system('git clone --quiet https://github.com/0xInfection/XSRFProbe %s' % (folder))
+            os.system('cp -r %s/%s/* %s && rm -r %s/%s/ 2>/dev/null' % (path, folder, path, path, folder))
         elif mn == 'n' or mn == 'N':
             print(R+' [-] Okay... Not updated!\n')
         else:
