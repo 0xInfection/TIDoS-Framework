@@ -15,12 +15,12 @@ from core.Core.colors import *
 
 def bannerbelow():
 
-    print(B+'[---]       '+C+'The TIDoS Framework  \033[36m|  \033[1;37mVersion v1.6       \033[1;34m[---]')
+    print(B+'[---]       '+C+'The TIDoS Framework  \033[36m|  \033[1;37mVersion '+open('doc/Version_Num').read().strip()+'       \033[1;34m[---]')
     sleep(0.2)
     print(B+'[---]                                                  [---]')
-    print(B+'[---]               \033[1;31m~  Author \033[1;31m: \033[1;33m@_tID  ~               \033[1;34m[---]')
+    print(B+'[---]          \033[1;31m~  Author \033[1;31m: \033[1;33mInfected Drake  ~           \033[1;34m[---]')
     sleep(0.2)
-    print(B+'[---]        '+O+'~  github.com / \033[1;32m0xInfection  ~       \033[1;34m[---]')
+    print(B+'[---]         '+O+'~  github.com / \033[1;32m0xInfection  ~           \033[1;34m[---]')
     sleep(0.2)
     print(B+'[---]                                                  [---]')
     sleep(0.2)
@@ -30,3 +30,4 @@ def bannerbelow():
     print(B+'             Welcome to '+C+'The TIDoS Framework (TTF)')
     sleep(0.2)
     print(GR+'      The TIDoS Framework is a project by '+R+'Team CodeSploit\n')
+
