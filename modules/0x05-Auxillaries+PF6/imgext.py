@@ -14,7 +14,6 @@ import time
 import PIL.ExifTags
 from PIL.ExifTags import TAGS, GPSTAGS
 from PIL import Image
-from pyexiv2 import ImageMetadata, ExifTag # python2
 from core.Core.colors import *
 from collections import namedtuple
 import os
@@ -64,14 +63,9 @@ def exif1meta(image_path):
 
 def exif3meta(image_path):
 
-    print(GR+' [*] Reading METADATA info...')
-    metadata = ImageMetadata(image_path)
-    metadata.read()
-    print(O+' [!] Found '+GR+str(len(metadata.exif_keys))+O+' keys...')
-    for item in metadata.exif_keys:
-        tag = metadata[item]
-        print(C+' [+] '+str(tag).split('[')[0]+B+' ['+str(tag).split('[')[1].split(']')[0]+'] = '+GR+str(tag).split('=')[1].strip())
-        time.sleep(0.2)
+    print(GR+'\n [*] Reading METADATA info...')
+    for tag, value in Image.open(image_path)._getexif().iteritems():
+        print(O+' [+] '+str(TAGS.get(tag))+' : '+C+str(value))
 
 def imgext():
 
@@ -90,7 +84,6 @@ def imgext():
             for metadata in exif:
                 print(G+" [+] "+str(metadata)+O+ " - Value :"+C+" %s " %(str(exif[metadata])))
                 time.sleep(0.1)
-            print('\n')
             exif3meta(name)
 
         except Exception as e:
