@@ -47,5 +47,6 @@ def updater():
             time.sleep(0.7)
     else:
         print(G+' [!] You are using the latest version of this framework!')
+    quit()
 
 updater()
