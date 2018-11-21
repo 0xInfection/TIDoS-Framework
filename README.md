@@ -346,4 +346,4 @@ TIDoS is an in progress work far from perfection and I admit that there may be b
 
 Got more suggestions or new ideas? Raise up an [issue](https://github.com/0xinfection/TIDoS-Framework/issues/new) or hit me up via DM on [twitter](https://twitter.com/0xinfection).
 
-> Copyright © [__The Infected Drake__](https://twitter.com/0xinfection)
+> Copyright © [__Infected Drake__](https://twitter.com/0xinfection)
