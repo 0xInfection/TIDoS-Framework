@@ -68,7 +68,7 @@ try:
     from bs4 import BeautifulSoup
     is_bs4 = True
 except ImportError:
-    from BeautifulSoup import BeautifulSoup
+    from bs4 import BeautifulSoup
     is_bs4 = False
 
 # URL templates to make Google searches.
