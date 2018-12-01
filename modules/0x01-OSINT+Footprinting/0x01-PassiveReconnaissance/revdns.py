@@ -51,4 +51,4 @@ def revdns(web):
     else:
         print(R+' [-] No result found!')
         time.sleep(0.8)
-revdns('http://criteo.com')
+
