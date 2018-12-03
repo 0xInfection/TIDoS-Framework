@@ -118,7 +118,7 @@ def waf(web):
                 break
 
             else:
-                print(B+'\r [+] Matching signatures for : '+C+wafs[i])
+                print(B+' [+] Matching signatures for : '+C+wafs[i], end='', flush=True)
                 time.sleep(0.1)
 
         except Exception as e:
