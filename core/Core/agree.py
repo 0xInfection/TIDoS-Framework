@@ -27,7 +27,7 @@ def agree():
         agreement()
 
         a1 = raw_input(O+' [0x00] '+G+'Do you agree to these terms and conditions? :> '+C)
-        if a1 == "yes" or a1 == 'y' or a1 == 'Y' or a1 == 'Yes' or a1 == 'yo' or a1 == 'YES' or a1 == 'yep' or a1 == 'Yep' or a1 == 'YEP':
+        if a1.lower().startswith('y'):
             print(G+' [0x01] '+O+'Thats awesome! Move on...')
             time.sleep(3)
             FILE = open("agree","w")
