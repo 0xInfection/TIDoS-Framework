@@ -41,29 +41,29 @@ def getcmslook(web):
 
     global found
     global dtect
-    global wordpress
     web = web.split('//')[1]
     print(GR+' [*] Passive Fingerprinting CMS...')
     time.sleep(1)
     print(O+' [!] Setting priority to False...')
-    wordpress = False
     dtect = False
     print(GR+' [*] Importing token...')
-    from files.API_KEYS import WHATCMS_ACCESS_TOKEN
-    print(B+' [+] Token detected : '+C+WHATCMS_ACCESS_TOKEN)
-    request = requests.get('https://whatcms.org/APIEndpoint/Detect?url=' + web + '&key=' + WHATCMS_ACCESS_TOKEN, verify=False)
-    response = json.loads(request.text)
-
-    status = response['result']['code']
-
-    if 'retry_in_seconds' in response:
-        print(R+' [-] Outbound Query Exception!')
-    else:
-        if status == 200:
-            dtect = True
-            print(G+' [+] CMS Detected: ' +O+ response['result']['name']+'\n')
+    try:
+        from files.API_KEYS import WHATCMS_ACCESS_TOKEN
+        print(B+' [+] Token detected : '+C+WHATCMS_ACCESS_TOKEN)
+        request = requests.get('https://whatcms.org/APIEndpoint/Detect?url=' + web + '&key=' + WHATCMS_ACCESS_TOKEN, verify=False)
+        response = json.loads(request.text)
+        status = response['result']['code']
+        if 'retry' in response:
+            print(R+' [-] Outbound Query Exception!')
         else:
-            dtect = False
+            if status == 200:
+                dtect = True
+                print(G+' [+] CMS Detected: ' +O+ response['result']['name']+'\n')
+            else:
+                dtect = False
+    except ImportError:
+        print(R+' [-] No API Token detected. Skipping first module...')
+        time.sleep(0.4)
 
 def cmsenum(web):
 
@@ -91,11 +91,9 @@ def cms(web):
     time.sleep(0.4)
     print(GR+' [*] Parsing the web URL... ')
     time.sleep(0.4)
-
-    print(O+' [!] URL successfully parsed !')
-    time.sleep(0.2)
+    print(O+' [!] Initiating Content Management System Detection!')
     getcmslook(web)
     cmsenum(web)
-
     if dtect == False:
-        print(R+" [-] "+O + domain+R + " doesn't seem to use a CMS")
+        print(R+" [-] "+O+web+R + " doesn't seem to use a CMS")
+    print(G+' [+] CMS Detection Module Completed!')

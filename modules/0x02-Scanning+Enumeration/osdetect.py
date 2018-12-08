@@ -11,7 +11,6 @@
 
 from __future__ import print_function
 import re
-import mechanize
 import socket
 import cookielib
 import subprocess
@@ -20,24 +19,6 @@ from re import search
 from getports import *
 from core.Core.colors import *
 from getcensys import getos0x00
-
-# Browser
-br = mechanize.Browser()
-
-# Cookie Jar
-cj = cookielib.LWPCookieJar()
-br.set_cookiejar(cj)
-
-# Browser options
-br.set_handle_equiv(True)
-br.set_handle_redirect(True)
-br.set_handle_referer(True)
-br.set_handle_robots(False)
-
-# Follows refresh 0 but not hangs on refresh > 0
-br.set_handle_refresh(mechanize._http.HTTPRefreshProcessor(), max_time=1)
-br.addheaders = [
-    ('User-agent', 'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.1) Gecko/2008071615 Fedora/3.0.1-1.fc9 Firefox/3.0.1')]
 
 def port0x00(web):
 
@@ -48,10 +29,8 @@ def port0x00(web):
 
     try:
         getports(web)
-
     except Exception as e:
         print(R+' [-] Exception : '+str(e))
-
     print(GR+' [*] Initiating OS detection response analysis...')
     response = subprocess.check_output(['nmap','-Pn','-O','-sSU','-F','--osscan-guess','-T4', web])
     if "No OS matches for host".lower() not in response.lower():
@@ -71,10 +50,8 @@ def port0x00(web):
             print(C+' [+] Operating System Details : '+B+result[0].strip())
     else:
         print(R+' [-] No exact matches for OS via port scan...')
-    print(G+' [+] Done!')
 
 def osdetect(web):
-
     try:
         time.sleep(0.4)
         print(R+'\n     ===================================')
@@ -83,7 +60,7 @@ def osdetect(web):
         web = web.replace('http://','')
         web = web.replace('https://','')
         print(GR+' [*] Initialising Module [1]...')
-        fl = getos0x00(web)
+        flag = getos0x00(web)
         print(G+'\n [+] Module [1] Completed!')
         if flag == 0x01:
             q = raw_input(O+' [#] OS Identified!\n [#] Move on to to module [2]? (y/N) :> ')
@@ -102,4 +79,4 @@ def osdetect(web):
     except Exception as e:
         print(R+' [-] Unhandled Exception occured...')
         print(R+' [-] Exception : '+str(e))
-        pass
+    print(G+' [+] OS Fingerprinting Module Completed!\n')
