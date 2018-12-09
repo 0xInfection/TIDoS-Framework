@@ -9,7 +9,7 @@
  $ Author(s) 
    =========
 
- * The Infected Drake <@_tID>
+ * The Infected Drake <@0xInfection>
 
    - Main author behind this framework.
    - Current developer and maintainer through the latest version.
@@ -30,4 +30,8 @@
    - Suggestor of awesome fixes for improvements to overall build + runtime efficiency.
    - Contact - <biprodeep [at] gmail.com>
 
-
+ * Cclauss <@cclauss>
+ 
+   - Bug fixer and remediator of TIDoS.
+   - Helped rolling out migration from Py2 to Py3.
+   - Contact - <█████████████████████>
