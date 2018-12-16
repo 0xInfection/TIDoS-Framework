@@ -115,7 +115,7 @@ TIDoS Framework presently supports the following: `and more modules are under ac
 
 * __Reconnaissance + OSINT__
 
-	+ Passive Reconnaissance:
+	+ __Passive Reconnaissance:__
 	    - Nping Enumeration `Via external APi`
 	    - WhoIS Lookup `Domain info gathering`
 	    - GeoIP Lookup `Pinpoint physical location`
@@ -140,7 +140,7 @@ TIDoS Framework presently supports the following: `and more modules are under ac
 	    - Censys Intel Gathering `Domain Based`
 	    - Threat Intelligence Gathering `Bad IPs`
 
-	+ Active Reconnaissance
+	+ __Active Reconnaissance:__
 	    - Ping Enumeration `Advanced`
 	    - CMS Detection `(185+ CMSs supported)` `IMPROVED`
 	    - Advanced Traceroute `IMPROVED`
@@ -164,7 +164,7 @@ TIDoS Framework presently supports the following: `and more modules are under ac
 		    - Common Dot Files `.htaccess, .apache, etc`
 		    - Common Logfile Locations `.log, .changelog, etc`
 
-	+ Information Disclosure
+	+ __Information Disclosure:__
 	    - Credit Cards Disclosure `If Plaintext`
 	    - Email Harvester `IMPROVED`
 	    - Fatal Errors Enumeration `Includes Full Path Disclosure`
