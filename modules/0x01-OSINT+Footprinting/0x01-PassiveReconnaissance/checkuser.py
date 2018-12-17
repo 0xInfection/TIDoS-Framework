@@ -13,6 +13,7 @@
 
 from __future__ import print_function
 import os
+import tld
 import requests
 import json
 import time
@@ -64,7 +65,7 @@ def checkuser(web):
     print(R+'    =======================\n')
 
     print(GR+' [*] Parsing Url...')
-    web0 = web.split('//')[1].split('.')[0]
+    web0 = tld.get_fld(web).split('.', 1)[0]
     print(G+' [+] Alias Set : '+web0)
     print(O+' [*] Setting services...')
     time.sleep(0.7)
