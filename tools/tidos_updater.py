@@ -38,7 +38,7 @@ def updater():
         path = '/'.join(current_path) # current directory path
         if mn == 'Y' or mn == 'y':
             print(GR+' [*] Updating...\n')
-            os.system('git clone --quiet https://github.com/0xInfection/XSRFProbe %s' % (folder))
+            os.system('git clone --quiet https://github.com/0xInfection/TIDoS-Framework %s' % (folder))
             os.system('cp -r %s/%s/* %s && rm -r %s/%s/ 2>/dev/null' % (path, folder, path, path, folder))
         elif mn == 'n' or mn == 'N':
             print(R+' [-] Okay... Not updated!\n')
