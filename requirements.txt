@@ -1,4 +1,5 @@
 sslyze
+dnslib
 tldextract
 lxml
 pillow
