@@ -25,7 +25,7 @@
     <img src="https://img.shields.io/badge/Modules-108-red.svg">
   </a>
   <a href="https://travis-ci.org/0xinfection/TIDoS-Framework">
-    <img src="https://camo.githubusercontent.com/e748965ef2afbc44d14cf41001c0c29b9f685965/68747470733a2f2f696d672e736869656c64732e696f2f7472617669732f63636c617573732f54656e2d6c696e65732d6f722d6c6573732f6d61737465722e7376673f6c6f676f3d747261766973">
+    <img src="https://img.shields.io/badge/Build-Passing-brightgreen.svg?logo=travis">
   </a>
   <a href="https://github.com/0xinfection/TIDoS-Framework/releases/tag/v1.7/">
     <img src="https://img.shields.io/badge/Release-Stable-green.svg">
