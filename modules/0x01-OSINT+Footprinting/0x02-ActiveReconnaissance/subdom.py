@@ -46,7 +46,7 @@ def subdombrute(web):
 
     web = 'http://' + web
 
-    tld0 = get_tld(web, as_object=True)
+    tld0 = get_fld(web, as_object=True)
 
     if len(sublist) > 0:
         for m in sublist:
@@ -63,13 +63,12 @@ def subdombrute(web):
                 url = url.replace('http://','')
             elif 'https://' in url:
                 url = url.replace('https://','')
-            else:
-                pass
+
             try:
                 ip = socket.gethostbyname(url)
                 print(G+'\n [+] Subdomain Found : '+O+url+P+' ['+str(ip)+']')
                 found.append(url)
-            except:
+            except socket.gaierror:
                 sys.stdout.write(B+'\r [*] Checking : '+C+url)
                 sys.stdout.flush()
     return found
@@ -89,7 +88,7 @@ def outer(web):
     dom = 'http://' + web
     text = requests.get('http://api.hackertarget.com/hostsearch/?q=' + dom).text
     result = str(text)
-    while 'error' not in result:
+    if 'error' not in result:
         print(G + result)
         mopo = result.splitlines()
         for mo in mopo:
