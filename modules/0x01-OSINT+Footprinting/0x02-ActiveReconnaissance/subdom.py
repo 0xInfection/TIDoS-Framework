@@ -13,10 +13,9 @@ from __future__ import print_function
 import time
 import os
 import sys
-import tld
 import requests
 from time import sleep
-from tld import get_tld
+from tld import get_fld
 from core.Core.colors import *
 
 sublist = []
@@ -46,7 +45,7 @@ def subdombrute(web):
 
     web = 'http://' + web
 
-    tld0 = get_fld(web, as_object=True)
+    tld0 = get_fld(web)
 
     if len(sublist) > 0:
         for m in sublist:
@@ -66,9 +65,9 @@ def subdombrute(web):
 
             try:
                 ip = socket.gethostbyname(url)
-                print(G+'\n [+] Subdomain Found : '+O+url+P+' ['+str(ip)+']')
+                print(G+'\n [+] Subdomain Found : '+O+url+P+'\t\t['+str(ip)+']')
                 found.append(url)
-            except socket.gaierror:
+            except:
                 sys.stdout.write(B+'\r [*] Checking : '+C+url)
                 sys.stdout.flush()
     return found
@@ -123,7 +122,7 @@ def subdom(web):
         web = web.replace('http://','')
         web = web.replace('https://','')
 
-    fileo = 'tmp/'+web+'-subdomains.lst'
+    fileo = 'tmp/logs/'+web+'-logs/'+str(web)+'-subdomains.lst'
     p = open(fileo,'w+')
     p.close
     print(R+'\n   =====================================')
@@ -141,7 +140,8 @@ def subdom(web):
     if acc:
         for pwn in acc:
             vul = str(pwn) + '\n'
-            miv = open(fileo,'a')
+            miv = open(fileo, 'a')
             miv.write(vul)
             miv.close()
     print(G+' [+] Done!')
+
