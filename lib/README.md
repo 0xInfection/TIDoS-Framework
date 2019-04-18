@@ -14,7 +14,6 @@ This directory contains forks of many existing Python Packages which have been m
 - [Emailprotectionslib](https://pypi.org/project/emailprotectionslib)
 - [Builtwith](https://pypi.org/project/builtwith)
 - [Mechanize](https://pypi.org/project/mechanize)
-- [MySQL-python](https://pypi.org/project/MySQL-python)
 - [DNSDumpsterAPI](https://github.com/paulsec/api-dnsdumpster.com)
 
 [Setuptools](https://pypi.org/project/setuptools) is a non-modified version of the original package and is just a fork. 

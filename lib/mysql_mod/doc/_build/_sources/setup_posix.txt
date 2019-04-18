@@ -1,7 +1,0 @@
-setup_posix Module
-==================
-
-.. automodule:: setup_posix
-    :members:
-    :undoc-members:
-    :show-inheritance:
