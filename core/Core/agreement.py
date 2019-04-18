@@ -19,7 +19,7 @@ def agreement():
 \033[1;37m
         TIDoS is an open-source toolkit developed as a comprehensive web-application penetration testing framework.
 
-        TIDoS was developed by \033[1;36m@_tID\033[1;37m aka \033[1;36mThe Infected Drake.\033[1;37m
+        TIDoS was developed by \033[1;36mInfected Drake\033[1;37m aka \033[1;36m0xInfection.\033[1;37m
 
         This is for you to note that TIDoS Framework has capable modules in various phases which can unveil potential dangerous flaws in various web-applications, which can further be exploited maliciously. Therefore the author as well as the contrbutors assume no liability for misuse of this toolkit. Usage of TIDoS Framework for testing or exploiting websites without prior mutual consistency can be considered as an illegal activity. It is the end user's responsibility to obey all applicable local, state and federal laws.
 
