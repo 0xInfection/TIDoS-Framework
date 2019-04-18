@@ -16,5 +16,6 @@ emailprotectionslib
 builtwith
 mechanize
 mysql
-MySQL-python
+mysql-connector-python-rf
+ptyprocess
 dnslib
