@@ -78,13 +78,13 @@ tidos
 
 TIDoS needs some libraries to run, which can be installed via `aptitude` or `yum` Package Managers.
 ```
-sudo apt-get install libncurses5 libxml2 nmap tcpdump libexiv2-dev build-essential python-pip default-libmysqlclient-dev python-xmpp
+sudo apt-get install libncurses5 libxml2 nmap tcpdump libexiv2-dev build-essential python-pip default-libmysqlclient-dev python-xmpp libmariadbclient18
 ```
 Now after these dependencies are finished installing, we need to install the remaining Python Package dependencies, hence run:
 ```
 pip2 install -r requirements.txt
 ```
-Thats it, You now have TIDoS at your service. Fire it up using:
+Thats it. You now have TIDoS at your service. Fire it up using:
 ```
 python2 tidos.py
 ```

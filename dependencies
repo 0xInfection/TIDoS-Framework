@@ -24,12 +24,14 @@ if ! hash build-essential 2>/dev/null; then sudo apt-get install --yes build-ess
 if ! hash python-pip 2>/dev/null; then sudo apt-get install --yes python-pip ; fi
 if ! hash python-xmpp 2>/dev/null; then sudo apt-get install --yes python-xmpp ; fi
 if ! hash default-libmysqlclient-dev 2>/dev/null; then sudo apt-get install --yes default-libmysqlclient-dev ; fi
+if ! hash libmariadbclient18 2>/dev/null; then sudo apt-get install --yes libmariadbclient18 ; fi
 
 # pip install stuffs (not suitable via source installations)
 pip2 install sslyze
 pip2 install tldextract
 pip2 install lxml
 pip2 install pillow
+pip2 install ptyprocess
 
 DIR=$(dirname $0)
 
