@@ -37,6 +37,8 @@ def censysdom(web):
         print(GR+' [*] Looking up info...')
         time.sleep(0.7)
         resp = requests.get(base_url + "/view/websites/"+web, auth=(CENSYS_UID, CENSYS_SECRET))
+        if 'quota_exceeded' in resp.text:
+            print(R+' [-] Daily limit reached for this module. Use you own API key for CENSYS.')
 
         if resp.status_code == 200:
 
