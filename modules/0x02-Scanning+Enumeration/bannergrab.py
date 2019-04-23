@@ -11,7 +11,6 @@
 
 from __future__ import print_function
 import shodan
-import requests
 import socket
 import json
 import time
@@ -25,12 +24,9 @@ def grab(web):
     api = shodan.Shodan(SHODAN_API_KEY)
     print(GR+' [*] Resolving hostnames...')
     time.sleep(0.7)
-    dnsResolve = 'https://api.shodan.io/dns/resolve?hostnames=' + web + '&key=' + SHODAN_API_KEY
-
     try:
-        resolved = requests.get(dnsResolve)
         print(O+' [!] Parsing information...')
-        hostIP = resolved.json()[web]
+        hostIP = socket.gethostbyname(web)
 
         print(O+' [!] Setting query parameters...')
         host = api.host(hostIP)
@@ -59,3 +55,4 @@ def bannergrab(web):
     web = web.replace('https://','')
     grab(web)
     print(G+'\n [+] Banner Grabbing Done!')
+
