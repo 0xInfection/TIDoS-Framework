@@ -15,7 +15,7 @@ import time
 import requests
 import sys
 sys.path.append('lib/fileutils_mod/')
-import FileUtils
+from FileUtils import FileUtils
 from core.Core.colors import *
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
@@ -108,5 +108,6 @@ def backupbrute(web):
         for u in ul:
             print(G+' [+] Path to backup file : '+O+u)
     else:
-        print(R+' [-] No backdoors were found!')
+        print(R+' [-] No backup directories or files were found!')
     print(G+' [+] Done!')
+

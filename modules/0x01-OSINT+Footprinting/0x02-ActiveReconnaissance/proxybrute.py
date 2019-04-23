@@ -15,7 +15,7 @@ import time
 import requests
 import sys
 sys.path.append('lib/fileutils_mod/')
-import FileUtils
+from FileUtils import FileUtils
 from core.Core.colors import *
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
