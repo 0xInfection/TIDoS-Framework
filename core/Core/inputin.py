@@ -20,6 +20,11 @@ def inputin():
     try:
         global web
         web = raw_input(''+O+' [#] Target web address :> '+C)
+        if 'exit' in web:
+            print(R+' [-] Exiting...')
+            time.sleep(0.7)
+            print(C+' [#] Alvida, my friend!')
+            sys.exit(1)
         if not str(web).startswith('http'):
             mo = raw_input(GR+' [#] Does this website use SSL? (y/n) :> ')
             if mo == 'y' or mo == 'Y':
