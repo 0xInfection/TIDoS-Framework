@@ -31,8 +31,8 @@ def censysdom(web):
 
     web = web.split('//')[1]
     if CENSYS_SECRET != '' and CENSYS_UID != '':
-        print('MY UID KEY', CENSYS_UID)
-        print('MY SECRET KEY', CENSYS_SECRET)
+        print('MY UID KEY', +O+CENSYS_UID)
+        print('MY SECRET KEY', +O+CENSYS_SECRET)
         print(G+' [+] Found Censys UID Key : '+O+CENSYS_UID)
         print(G+' [+] Found Censys Secret Token : '+O+CENSYS_SECRET)
         base_url = 'https://www.censys.io/api/v1'
