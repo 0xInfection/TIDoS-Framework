@@ -34,4 +34,14 @@ P  = '\033[1;35m' # purple
 C  = '\033[1;36m' # cyan
 GR = '\033[1;37m' # gray
 T  = '\033[1;93m' # tan
+
+WHITE  = '\033[1;0m'  # white (normal)
+RED  = '\033[1;31m' # red
+GREEN  = '\033[1;32m' # green
+ORANGE  = '\033[1;33m' # orange
+BLUE  = '\033[1;34m' # blue
+PURPLE  = '\033[1;35m' # purple
+CYAN  = '\033[1;36m' # cyan
+GRAY = '\033[1;37m' # gray
+TAN  = '\033[1;93m' # tan
 ###############################
