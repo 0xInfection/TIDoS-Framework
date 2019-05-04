@@ -16,7 +16,7 @@ from core.tidos_main import *
 try:
     tidos_main()
 except KeyboardInterrupt:
-    print(R+' [-] User Interruption Detected!')
+    print(RED+' [-] User Interruption Detected!')
     time.sleep(0.5)
-    print(B+'\n [!] "Alvida", mate... See ya...\n')
+    print(BLUE+'\n [!] "Alvida", mate... See ya...\n')
     sys.exit(1)
