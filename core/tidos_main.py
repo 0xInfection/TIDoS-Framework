@@ -94,7 +94,7 @@ def tidos_main(): # To be called by external
                 os.system('clear')
                 #dispmenu() # displaying the options
                 menu_art('main')              #display menu art
-                buildmenu(main_menu)          # build main menu
+                buildmenu('main',main_menu)          # build main menu
                 input_dirty = raw_input(''+GRAY+' [#] \033[1;4mChoose Option\033[0m'+GRAY+' :> ' + color.END)
                 choice = input_dirty.strip()
                 
@@ -123,7 +123,7 @@ def tidos_main(): # To be called by external
                     print(GREEN+'\n [+] Module loaded : Auxillaries')
                     auxil(web)
 
-                elif choice == '99': # Say Goodbye!
+                elif choice == '0': # Say Goodbye!
 
                     print(RED+'\n [-] Exiting...')
                     time.sleep(0.6)
