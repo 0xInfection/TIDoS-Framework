@@ -23,6 +23,7 @@ from multiprocessing import Process, Queue, current_process, Manager
 import multiprocessing
 getLogger("scapy.runtime").setLevel(ERROR)
 warnings.filterwarnings("ignore")
+from collections import OrderedDict
 
 # All module imports
 from core.Core.inputin import *
@@ -38,6 +39,7 @@ from core.Footprinting.footprint import *
 from core.Enumeration.scanenum import *
 from core.Vulnlysis.vuln import *
 from core.Core.build_menu import *
+from core.Core.arts import *
 
 # Global Variables
 NUM_WORKERS = multiprocessing.cpu_count()   # You can hard code this if you do not have multiple processors
@@ -47,12 +49,12 @@ manager = multiprocessing.Manager()         # this is a dictionary manager, usef
 master_dict = manager.dict()                # the master dictionary. this needs passed from global scope for sharing across multi-processes
 procs = []                                  # list for processes
 
-main_menu = OrderedDict({
-        'Reconnaissance & OSINT'+WHITE+' (50 Modules)':'footprint',\
-        'Scanning & Enumeration'+WHITE+' (16 Modules)':'scanenum',\
-        'Vulnerability Analysis'+WHITE+' (37 Modules)':'vuln',\
-        'Exploitation (beta)'+WHITE+' (1 Module)':'exploits',\
-        'Auxillary Modules'+WHITE+' (4 Modules)':'auxil'\
+main_menu = OrderedDict({ # module, [description, function]
+        'Reconnaissance & OSINT':['(50 Modules)','footprint'],\
+        'Scanning & Enumeration':['(16 Modules)','scanenum'],\
+        'Vulnerability Analysis':['(37 Modules)','vuln'],\
+        'Exploitation (beta)':['(1 Module)','exploits'],\
+        'Auxillary Modules':['(4 Modules)','auxil']\
     })
 
 def multProc(target_func, arg0):
@@ -93,7 +95,7 @@ def tidos_main(): # To be called by external
             try:
                 os.system('clear')
                 #dispmenu() # displaying the options
-                menu_art('main')              #display menu art
+                print(main_menu_art)                #display menu art
                 buildmenu('main',main_menu)          # build main menu
                 input_dirty = raw_input(''+GRAY+' [#] \033[1;4mChoose Option\033[0m'+GRAY+' :> ' + color.END)
                 choice = input_dirty.strip()
