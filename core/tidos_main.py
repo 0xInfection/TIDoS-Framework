@@ -23,22 +23,15 @@ from multiprocessing import Process, Queue, current_process, Manager
 import multiprocessing
 getLogger("scapy.runtime").setLevel(ERROR)
 warnings.filterwarnings("ignore")
-from collections import OrderedDict
 
 # All module imports
 from core.Core.inputin import *
 from core.Core.banner import *
-from core.Core.dispmenu import *
 from core.Core.agree import *
 from core.Core.loadstyle import *
 from core.Core.bannerbelow import *
-from core.Auxillaries.auxil import *
 from core.Core.colors import *
-from core.Exploitation.exploits import *
-from core.Footprinting.footprint import *
-from core.Enumeration.scanenum import *
-from core.Vulnlysis.vuln import *
-from core.Core.build_menu import *
+from core.Core.build_menu import buildmenu
 from core.Core.arts import *
 
 # Global Variables
@@ -49,13 +42,13 @@ manager = multiprocessing.Manager()         # this is a dictionary manager, usef
 master_dict = manager.dict()                # the master dictionary. this needs passed from global scope for sharing across multi-processes
 procs = []                                  # list for processes
 
-main_menu = OrderedDict({ # module, [description, function]
-        'Reconnaissance & OSINT':['(50 Modules)','footprint'],\
-        'Scanning & Enumeration':['(16 Modules)','scanenum'],\
-        'Vulnerability Analysis':['(37 Modules)','vuln'],\
-        'Exploitation (beta)':['(1 Module)','exploits'],\
-        'Auxillary Modules':['(4 Modules)','auxil']\
-    })
+menu = { # : [module, description, function]
+        '1':['Reconnaissance & OSINT','(50 Modules)','footprint'],\
+        '2':['Scanning & Enumeration','(16 Modules)','scanenum'],\
+        '3':['Vulnerability Analysis','(37 Modules)','vuln'],\
+        '4':['Exploitation (beta)','(1 Module)','exploits'],\
+        '5':['Auxillary Modules','(4 Modules)','auxil']\
+    }
 
 def multProc(target_func, arg0):
     try:
@@ -74,9 +67,10 @@ def exit(exit):
     return
 
 
-def tidos_main(): # To be called by external
+def tidos_main(website): # To be called by external
 
     try:
+        global web
         agree()         # the agreement (to appear only at time of installation)
         loadstyle()     # some swag stuff :p
         banner()        # main banner
@@ -94,53 +88,10 @@ def tidos_main(): # To be called by external
         while True:
             try:
                 os.system('clear')
-                #dispmenu() # displaying the options
-                print(main_menu_art)                #display menu art
-                buildmenu('main',main_menu)          # build main menu
-                input_dirty = raw_input(''+GRAY+' [#] \033[1;4mChoose Option\033[0m'+GRAY+' :> ' + color.END)
-                choice = input_dirty.strip()
-                
-                if choice == '1': # 1 - OSINT + Recon
-
-                    print(GREEN+"\n [+] Module loaded : Reconnaissance")
-                    footprint(web)
-
-                elif choice == '2': # 2 - Scanning + Enumeration
-
-                    print(GREEN+'\n [+] Module loaded : Scanning & Enumeration')
-                    scanenum(web)
-
-                elif choice == '3': # 3 - Vulnerability Analysis
-
-                    print(GREEN+'\n [+] Module loaded : Vulnerability Analysis')
-                    vuln(web)
-
-                elif choice == '4': # Exploitation
-
-                    print(GREEN+'\n [+] Module loaded : Exploits Castle')
-                    exploits(web)
-
-                elif choice == '5': # Auxillary modules
-
-                    print(GREEN+'\n [+] Module loaded : Auxillaries')
-                    auxil(web)
-
-                elif choice == '0': # Say Goodbye!
-
-                    print(RED+'\n [-] Exiting...')
-                    time.sleep(0.6)
-                    print(O+' [+] Goodluck mate, Alvida!\n')
-                    sys.exit(0)
-
-                else: # Troll for not selecting right option :p
-
-                    dope = ['You high dude?', 'Sorry fam! You just typed shit']
-                    print(RED+' [-] ' + dope[randint(0,1)])
-                    time.sleep(0.5)
-                    pass
+                print(main_menu_art)            #display menu art
+                buildmenu('main',menu)          # build main menu
 
             except KeyboardInterrupt: # Incase user wants to quit
-
                 print(RED+"\n [-] " + color.UNDERLINE+ "User Interruption detected!"+color.END)
                 time.sleep(0.4)
                 print(CYAN+' [+] Alvida, see ya!\n')

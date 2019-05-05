@@ -9,14 +9,17 @@
 #https://github.com/0xInfection/TIDoS-Framework
 
 from __future__ import print_function
-import sys, time, warnings
+import sys, warnings
 warnings.filterwarnings("ignore")
 from core.tidos_main import *
+from core.Core.colors import *
 
-try:
-    tidos_main()
-except KeyboardInterrupt:
-    print(RED+' [-] User Interruption Detected!')
-    time.sleep(0.5)
-    print(BLUE+'\n [!] "Alvida", mate... See ya...\n')
-    sys.exit(1)
+web = ''
+
+if __name__=='__main__':
+    try:
+        tidos_main(web)
+    except KeyboardInterrupt:
+        print(RED+' [-] User Interruption Detected!')
+        print(BLUE+'\n [!] "Alvida", mate... See ya...\n')
+        sys.exit(1)
