@@ -37,6 +37,7 @@ from core.Exploitation.exploits import *
 from core.Footprinting.footprint import *
 from core.Enumeration.scanenum import *
 from core.Vulnlysis.vuln import *
+from core.Core.build_menu import *
 
 # Global Variables
 NUM_WORKERS = multiprocessing.cpu_count()   # You can hard code this if you do not have multiple processors
@@ -45,6 +46,14 @@ done_queue = multiprocessing.Queue()        # all completed processes are placed
 manager = multiprocessing.Manager()         # this is a dictionary manager, useful for storing links and webscrapes
 master_dict = manager.dict()                # the master dictionary. this needs passed from global scope for sharing across multi-processes
 procs = []                                  # list for processes
+
+main_menu = OrderedDict({
+        'Reconnaissance & OSINT'+WHITE+' (50 Modules)':'footprint',\
+        'Scanning & Enumeration'+WHITE+' (16 Modules)':'scanenum',\
+        'Vulnerability Analysis'+WHITE+' (37 Modules)':'vuln',\
+        'Exploitation (beta)'+WHITE+' (1 Module)':'exploits',\
+        'Auxillary Modules'+WHITE+' (4 Modules)':'auxil'\
+    })
 
 def multProc(target_func, arg0):
     try:
@@ -61,6 +70,7 @@ def exit(exit):
     print(CYAN+' [+] Alvida, see ya!\n')
     sys.exit(0)
     return
+
 
 def tidos_main(): # To be called by external
 
@@ -82,7 +92,9 @@ def tidos_main(): # To be called by external
         while True:
             try:
                 os.system('clear')
-                dispmenu() # displaying the options
+                #dispmenu() # displaying the options
+                menu_art('main')              #display menu art
+                buildmenu(main_menu)          # build main menu
                 input_dirty = raw_input(''+GRAY+' [#] \033[1;4mChoose Option\033[0m'+GRAY+' :> ' + color.END)
                 choice = input_dirty.strip()
                 
