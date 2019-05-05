@@ -42,7 +42,7 @@ manager = multiprocessing.Manager()         # this is a dictionary manager, usef
 master_dict = manager.dict()                # the master dictionary. this needs passed from global scope for sharing across multi-processes
 procs = []                                  # list for processes
 
-menu = { # : [module, description, function]
+menu = { # '#' : ['module', 'description', 'function']
         '1':['Reconnaissance & OSINT','(50 Modules)','footprint'],\
         '2':['Scanning & Enumeration','(16 Modules)','scanenum'],\
         '3':['Vulnerability Analysis','(37 Modules)','vuln'],\
@@ -87,9 +87,7 @@ def tidos_main(website): # To be called by external
     def tidosmain(web): # this is to be iterated repeatedly
         while True:
             try:
-                os.system('clear')
-                print(main_menu_art)            #display menu art
-                buildmenu('main',menu)          # build main menu
+                buildmenu(menu,'Main Menu',main_menu_art)          # build main menu
 
             except KeyboardInterrupt: # Incase user wants to quit
                 print(RED+"\n [-] " + color.UNDERLINE+ "User Interruption detected!"+color.END)
