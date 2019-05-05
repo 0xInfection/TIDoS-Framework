@@ -9,7 +9,7 @@ def buildmenu(dictionary):
     for key, value in dictionary.items():
         print(BLUE+' ['+str(i)+'] \033[1;36m'+ '{} - {}'.format(key, value))
         i+=1
-    print(BLUE+' [99] \033[1;36mSay "alvida"! (Exit TIDoS)\n')
+    print(BLUE+' [0] \033[1;36mSay "alvida"! (Exit TIDoS)\n')
 
 def menu_art(menu):
 
