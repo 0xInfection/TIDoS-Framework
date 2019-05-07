@@ -10,4 +10,4 @@ def auxil(web):
         '3':['Extract Metadata','','imgext'],\
         '4':['Honeypot Detector','','honeypot'],\
     }
-    buildmenu(menu,'Auxillaries',auxilban_art)          # build menu
+    buildmenu(web,menu,'Auxillaries',auxilban_art)          # build menu

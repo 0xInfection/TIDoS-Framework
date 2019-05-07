@@ -8,4 +8,4 @@ def vuln(web):
         '2':['Critical Vulnerabilities','(High Priority [P0x1-P0x2])','serbugs'],\
         '3':['Others','(Bruter Force Tools)','othbugs'],\
     }
-    buildmenu(menu,'Vulnerability Analysis',vulnban_art)          # build menu
+    buildmenu(web,menu,'Vulnerability Analysis',vulnban_art)          # build menu

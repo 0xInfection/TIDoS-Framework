@@ -14,4 +14,4 @@ def scanenum(web):
         '8':['IP Crawler','','webscan'],
         '9':['Web Crawlers','','crawlers'],
     }
-    buildmenu(menu,'Scanning and Enumeration',scanenumban_art)          # build menu
+    buildmenu(web,menu,'Scanning and Enumeration',scanenumban_art)          # build menu

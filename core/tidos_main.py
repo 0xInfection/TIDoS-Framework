@@ -15,6 +15,7 @@ import platform
 import os
 import time
 import warnings
+import subprocess
 from random import randint
 from os import path
 from time import sleep
@@ -67,15 +68,15 @@ def exit(exit):
     return
 
 
-def tidos_main(website): # To be called by external
+def tidos_main(): # To be called by external
 
     try:
-        global web
         agree()         # the agreement (to appear only at time of installation)
         loadstyle()     # some swag stuff :p
         banner()        # main banner
         bannerbelow()   # banner 2
-        web = inputin() # take the website as input
+        target = inputin() # take the website as input
+
     except Exception as e:
         print(RED+' [-] Exception encountered!')
         print(RED+' [-] Exception : '+str(e))
@@ -84,10 +85,10 @@ def tidos_main(website): # To be called by external
     print(PURPLE+' [+] Okay, so what to start with?') # lets start
     time.sleep(1)
 
-    def tidosmain(web): # this is to be iterated repeatedly
+    def tidosmain(target): # this is to be iterated repeatedly
         while True:
             try:
-                buildmenu(menu,'Main Menu',main_menu_art)          # build main menu
+                buildmenu(target,menu,'Main Menu',main_menu_art)          # build main menu
 
             except KeyboardInterrupt: # Incase user wants to quit
                 print(RED+"\n [-] " + color.UNDERLINE+ "User Interruption detected!"+color.END)
@@ -95,11 +96,12 @@ def tidos_main(website): # To be called by external
                 print(CYAN+' [+] Alvida, see ya!\n')
                 sys.exit(0)
 
-            except Exception as e: # Global Error Handling Stuff
-                print(RED+' [-] Unhandled runtime exception while execution...')
-                print(RED+' [-] Exception Encountered: '+e.__str__())
-                print(RED+' [-] Returning back to main menu...')
-                time.sleep(1)
-                pass # (If user runs into a error, that would not quit this tool)
+            # except Exception as e: # Global Error Handling Stuff
+            #     print(e)
+            #     print(RED+' [-] Unhandled runtime exception while execution...')
+            #     print(RED+' [-] Exception Encountered: '+e.__str__())
+            #     print(RED+' [-] Returning back to main menu...')
+            #     time.sleep(1)
+            #     pass # (If user runs into a error, that would not quit this tool)
 
-    tidosmain(web) # The true start of this program
+    tidosmain(target) # The true start of this program

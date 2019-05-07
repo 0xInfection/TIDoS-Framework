@@ -20,7 +20,7 @@ def inputin():
     try:
         global web
         web = raw_input(''+O+' [#] Target web address :> '+C)
-        if 'exit' in web:
+        if 'exit' == web:
             print(R+' [-] Exiting...')
             print(C+' [#] Alvida, my friend!')
             sys.exit(1)

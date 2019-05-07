@@ -14,11 +14,9 @@ warnings.filterwarnings("ignore")
 from core.tidos_main import *
 from core.Core.colors import *
 
-web = ''
-
 if __name__=='__main__':
     try:
-        tidos_main(web)
+        tidos_main()
     except KeyboardInterrupt:
         print(RED+' [-] User Interruption Detected!')
         print(BLUE+'\n [!] "Alvida", mate... See ya...\n')

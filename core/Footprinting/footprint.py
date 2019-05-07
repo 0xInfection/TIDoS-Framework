@@ -8,4 +8,4 @@ def footprint(web):
         '2':['Active Reconnaissance','(Gather via Interaction)','activeo'],\
         '3':['Information Disclosure','(Errors, Emails, etc)','infodisc'],\
     }
-    buildmenu(menu,'Footprinting',footprintban_art)          # build menu
+    buildmenu(web,menu,'Footprinting',footprintban_art)          # build menu
