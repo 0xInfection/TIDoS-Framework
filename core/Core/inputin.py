@@ -20,9 +20,8 @@ def inputin():
     try:
         global web
         web = raw_input(''+O+' [#] Target web address :> '+C)
-        if 'exit' in web:
+        if 'exit' == web:
             print(R+' [-] Exiting...')
-            time.sleep(0.7)
             print(C+' [#] Alvida, my friend!')
             sys.exit(1)
         if not str(web).startswith('http'):
@@ -39,14 +38,11 @@ def inputin():
             web = po[:-1]
             po = po[:-1]
         print(GR+' [*] Checking server status...')
-        time.sleep(0.6)
 
         try:
             ip = socket.gethostbyname(po)
             print(G+' [+] Site seems to be up...')
-            time.sleep(0.5)
             print(G+' [+] IP Detected : '+O+ip)
-            time.sleep(0.5)
             print('')
             os.system('cd tmp/logs/ && rm -rf '+po+'-logs && mkdir '+po+'-logs/')
             return web
@@ -57,6 +53,5 @@ def inputin():
 
     except KeyboardInterrupt:
         print(R+' [-] Exiting...')
-        time.sleep(0.7)
         print(C+' [#] Alvida, my friend!')
         sys.exit(1)

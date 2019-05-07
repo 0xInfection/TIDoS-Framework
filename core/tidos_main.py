@@ -15,102 +15,93 @@ import platform
 import os
 import time
 import warnings
+import subprocess
 from random import randint
 from os import path
 from time import sleep
 from logging import getLogger, ERROR
+from multiprocessing import Process, Queue, current_process, Manager
+import multiprocessing
 getLogger("scapy.runtime").setLevel(ERROR)
 warnings.filterwarnings("ignore")
 
 # All module imports
 from core.Core.inputin import *
 from core.Core.banner import *
-from core.Core.dispmenu import *
 from core.Core.agree import *
 from core.Core.loadstyle import *
 from core.Core.bannerbelow import *
-from core.Auxillaries.auxil import *
 from core.Core.colors import *
-from core.Exploitation.exploits import *
-from core.Footprinting.footprint import *
-from core.Enumeration.scanenum import *
-from core.Vulnlysis.vuln import *
+from core.Core.build_menu import buildmenu
+from core.Core.arts import *
+
+# Global Variables
+NUM_WORKERS = multiprocessing.cpu_count()   # You can hard code this if you do not have multiple processors
+process_queue = multiprocessing.Queue()     # all processes are thrown here
+done_queue = multiprocessing.Queue()        # all completed processes are placed here
+manager = multiprocessing.Manager()         # this is a dictionary manager, useful for storing links and webscrapes
+master_dict = manager.dict()                # the master dictionary. this needs passed from global scope for sharing across multi-processes
+procs = []                                  # list for processes
+
+menu = { # '#' : ['module', 'description', 'function']
+        '1':['Reconnaissance & OSINT','(50 Modules)','footprint'],\
+        '2':['Scanning & Enumeration','(16 Modules)','scanenum'],\
+        '3':['Vulnerability Analysis','(37 Modules)','vuln'],\
+        '4':['Exploitation (beta)','(1 Module)','exploits'],\
+        '5':['Auxillary Modules','(4 Modules)','auxil']\
+    }
+
+def multProc(target_func, arg0):
+    try:
+        p = multiprocessing.Process(target=target_func, args=(arg0))
+        procs.append(p)
+        p.start()
+    except Exception as e: # Global Error Handling Stuff
+        print(RED+' [-] Unhandled runtime exception while execution...')
+        print(RED+' [-] Exception Encountered: '+e.__str__())
+        print(RED+' [-] Returning back to main menu...')
+    return
+
+def exit(exit):
+    print(CYAN+' [+] Alvida, see ya!\n')
+    sys.exit(0)
+    return
+
 
 def tidos_main(): # To be called by external
 
     try:
-        agree() # the agreement (to appear only at time of installation)
-        loadstyle() # some swag stuff :p
-        banner() # main banner
-        bannerbelow() # banner 2
-        web = inputin() # take the website as input
+        agree()         # the agreement (to appear only at time of installation)
+        loadstyle()     # some swag stuff :p
+        banner()        # main banner
+        bannerbelow()   # banner 2
+        target = inputin() # take the website as input
+
     except Exception as e:
-        print(R+' [-] Exception encountered!')
-        print(R+' [-] Exception : '+str(e))
+        print(RED+' [-] Exception encountered!')
+        print(RED+' [-] Exception : '+str(e))
         sys.exit(1)
 
-    print(P+' [+] Okay, so what to start with?') # lets start
+    print(PURPLE+' [+] Okay, so what to start with?') # lets start
     time.sleep(1)
-    def tidosmain(web): # this is to be iterated repeatedly
 
+    def tidosmain(target): # this is to be iterated repeatedly
         while True:
             try:
-                os.system('clear')
-                dispmenu() # displaying the options
-                zop = raw_input(''+GR+' [#] \033[1;4mTID\033[0m'+GR+' :> ' + color.END)
-                zap = zop.strip()
-
-                if zap == '1': # 1 - OSINT + Recon
-
-                    print(G+"\n [+] Module loaded : Reconnaissance")
-                    footprint(web)
-
-                elif zap == '2': # 2 - Scanning + Enumeration
-
-                    print(G+'\n [+] Module loaded : Scanning & Enumeration')
-                    scanenum(web)
-
-                elif zap == '3': # 3 - Vulnerability Analysis
-
-                    print(G+'\n [+] Module loaded : Vulnerability Analysis')
-                    vuln(web)
-
-                elif zap == '4': # Exploitation
-
-                    print(G+'\n [+] Module loaded : Exploits Castle')
-                    exploits(web)
-
-                elif zap == '5': # Auxillary modules
-
-                    print(G+'\n [+] Module loaded : Auxillaries')
-                    auxil(web)
-
-                elif zap == '99': # Say Goodbye!
-
-                    print(R+'\n [-] Exiting...')
-                    time.sleep(0.6)
-                    print(O+' [+] Goodluck mate, Alvida!\n')
-                    sys.exit(0)
-
-                else: # Troll for not selecting right option :p
-
-                    dope = ['You high dude?', 'Sorry fam! You just typed shit']
-                    print(R+' [-] ' + dope[randint(0,1)])
-                    time.sleep(0.5)
-                    pass
+                buildmenu(target,menu,'Main Menu',main_menu_art)          # build main menu
 
             except KeyboardInterrupt: # Incase user wants to quit
-
-                print(R+"\n [-] " + color.UNDERLINE+ "User Interruption detected!"+color.END)
+                print(RED+"\n [-] " + color.UNDERLINE+ "User Interruption detected!"+color.END)
                 time.sleep(0.4)
-                print(C+' [+] Alvida, see ya!\n')
+                print(CYAN+' [+] Alvida, see ya!\n')
                 sys.exit(0)
 
-            except Exception as e: # Global Error Handling Stuff
-                print(R+' [-] Unhandled runtime exception while execution...')
-                print(R+' [-] Exception Encountered: '+e.__str__())
-                print(R+' [-] Returning back to main menu...')
-                time.sleep(1)
-                pass # (If user runs into a error, that would not quit this tool)
+            # except Exception as e: # Global Error Handling Stuff
+            #     print(e)
+            #     print(RED+' [-] Unhandled runtime exception while execution...')
+            #     print(RED+' [-] Exception Encountered: '+e.__str__())
+            #     print(RED+' [-] Returning back to main menu...')
+            #     time.sleep(1)
+            #     pass # (If user runs into a error, that would not quit this tool)
 
-    tidosmain(web) # The true start of this program
+    tidosmain(target) # The true start of this program
