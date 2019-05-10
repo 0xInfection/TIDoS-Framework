@@ -3,14 +3,26 @@ import os
 import sys
 from core.colors import color
 from collections import OrderedDict
-from core.functions import functions
+from core.functions import functions, multiprocess_functions
+from core.process import multi
 
 def exit():
     print(color.red(' [-] Exiting...'))
     sys.exit(0)
 
+def build_banner(banner):
+    size = len(banner)*2 + 4
+    padding = "".join("=" for i in range(size))
+    letters = "| "
+    for letter in banner:
+        letters = letters + color.yellow(letter.upper()) + " "
+    letters = letters + color.blue(" |")
+    print(color.blue(padding))
+    print(color.blue(letters))
+    print(color.blue(padding))
+
 def buildmenu(target,dict,banner,art):
-    os.system('clear')
+    #os.system('clear')
     for each in target:
         each.last_menu = each.current_menu
         each.current_menu=dict
@@ -20,7 +32,7 @@ def buildmenu(target,dict,banner,art):
     print(art)
     print(color.yellow(' Choose from the options below:\n'))
     for key, value in dictionary.items():
-        print(color.green(' ['+str(i)+'] ') + color.blue(value[0]) + " - " + color.custom(value[1], orange=True))
+        print(color.green(' ['+str(i)+'] ') + color.blue(value[0]) + " - " + color.custom(value[1], white=True))
         i+=1
     if 'Main Menu' in banner:
         print('\n ' + color.custom('[0] Exit',bold=True,white=True,bg_red=True)+'\n')
@@ -39,7 +51,15 @@ def buildmenu(target,dict,banner,art):
         buildmenu(target,target[0].last_menu,'','')
     elif choice.lower() == 'a':
         for key, value in dictionary.items():
-            results=functions[value[2]](target)
+            target[0].module = value[0]
+            target[0].description = value[1]
+            build_banner(value[0].replace('(','').replace(')',''))
+            try:
+                multi(multiprocess_functions[value[2]],target)
+            except Exception as e:
+                pass
+            finally:
+                pass
         found = True
     elif choice.lower() == 'm':
         found = True
@@ -47,10 +67,29 @@ def buildmenu(target,dict,banner,art):
     else:
         for key, value in dictionary.items():
             if str(choice) == str(key): # select option
+                target[0].module = value[0]
+                target[0].description = value[1]
                 if 'Temp if statement in case dont want to pass target' in banner: # DEBUG: Might use this option
                     results=functions[value[2]]
                 else:
-                    results=functions[value[2]](target)
+                    build_banner(value[0].replace('(','').replace(')',''))
+                    mp = False
+                    try:
+                        multi(multiprocess_functions[value[2]],target)
+                        mp = True
+                    except Exception as e:
+                        pass
+                    finally:
+                        pass
+                    if mp ==False:
+                        try:
+                            results=functions[value[2]](target)
+                        except Exception as e:
+                            target[0].current_menu=target[0].last_menu
+                            art=color.red('\nInvalid selection. ') + color.blue(value[0]) + color.red(' is not implemented yet.\n')
+                            buildmenu(target,dict,banner,art)
+                        finally:
+                            pass
                 found = True
                 break
 

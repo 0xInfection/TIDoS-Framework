@@ -88,6 +88,11 @@ class color(object):
         return cls.__format__()
 
     @classmethod
+    def white(clss, text):
+        cls = clss(text, bold=True, white=True)
+        return cls.__format__()
+
+    @classmethod
     def custom(clss, text, **custom_styles):
         cls = clss(text, **custom_styles)
         return cls.__format__()
