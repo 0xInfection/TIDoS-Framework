@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 import os
 import sys
-from core.colors import color
+from .colors import color
 from collections import OrderedDict
-from core.functions import functions, multiprocess_functions
-from core.process import multi
+from .functions import functions, multiprocess_functions
+from .process import multi
 
 def exit():
     print(color.red(' [-] Exiting...'))
@@ -23,10 +23,11 @@ def build_banner(banner):
 
 def buildmenu(target,dict,banner,art):
     #os.system('clear')
+    print('TARGET', target[0].name)
     for each in target:
         each.last_menu = each.current_menu
         each.current_menu=dict
-    dictionary = OrderedDict(sorted(dict.items(), key=lambda x: int(x[0]))) 
+    dictionary = OrderedDict(sorted(dict.items(), key=lambda x: int(x[0])))
     i=1
     print(color.blue('[+] Module Selected : ') + color.yellow(banner))
     print(art)

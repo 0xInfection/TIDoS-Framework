@@ -3,7 +3,7 @@ from multiprocessing import Lock, Process, Queue, current_process
 import time
 import queue # imported for using queue.Empty exception
 from threat import processes, tasks_that_are_done, tasks_to_accomplish
-from core.colors import color
+from .colors import color
 
 NUM_WORKERS = 4#multiprocessing.cpu_count()
 
@@ -11,8 +11,8 @@ def do_job(func,tgt):#,tasks_to_accomplish, tasks_that_are_done):
     while True:
         try:
             '''
-                try to get task from the queue. get_nowait() function will 
-                raise queue.Empty exception if the queue is empty. 
+                try to get task from the queue. get_nowait() function will
+                raise queue.Empty exception if the queue is empty.
                 queue(False) function would do the same task also.
             '''
             #global processes
@@ -26,7 +26,7 @@ def do_job(func,tgt):#,tasks_to_accomplish, tasks_that_are_done):
             break
         else:
             '''
-                if no exception has been raised, add the task completion 
+                if no exception has been raised, add the task completion
                 message to task_that_are_done queue
             '''
             #global tasks_that_are_done
