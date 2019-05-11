@@ -13,4 +13,8 @@ def dig(target):
         print(this)
         # write_to_file(ip_address, "dig", this)
         # print(bcolors.OKGREEN + "INFO: nmap scan still in progress.. " + ip_address + bcolors.ENDC)
+<<<<<<< HEAD
     return
+=======
+    return
+>>>>>>> 18da86a265a3e6d60feaa9b35fba8cf3105a3014
