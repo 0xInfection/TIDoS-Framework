@@ -1,0 +1,36 @@
+.TH "MKDOCS GH-DEPLOY" "1" "10-May-2019" "1.0.4" "mkdocs gh-deploy Manual"
+.SH NAME
+mkdocs\-gh-deploy \- Deploy your documentation to GitHub Pages
+.SH SYNOPSIS
+.B mkdocs gh-deploy
+[OPTIONS]
+.SH DESCRIPTION
+Deploy your documentation to GitHub Pages
+.SH OPTIONS
+.TP
+\fB\-c,\fP \-\-clean / \-\-dirty
+Remove old files from the site_dir before building (the default).
+.TP
+\fB\-f,\fP \-\-config\-file FILENAME
+Provide a specific MkDocs config
+.TP
+\fB\-m,\fP \-\-message TEXT
+A commit message to use when committing to the Github Pages remote branch. Commit {sha} and MkDocs {version} are available as expansions
+.TP
+\fB\-b,\fP \-\-remote\-branch TEXT
+The remote branch to commit to for Github Pages. This overrides the value specified in config
+.TP
+\fB\-r,\fP \-\-remote\-name TEXT
+The remote name to commit to for Github Pages. This overrides the value specified in config
+.TP
+\fB\-\-force\fP
+Force the push to the repository.
+.TP
+\fB\-\-ignore\-version\fP
+Ignore check that build is not being deployed with an older version of MkDocs.
+.TP
+\fB\-q,\fP \-\-quiet
+Silence warnings
+.TP
+\fB\-v,\fP \-\-verbose
+Enable verbose output
