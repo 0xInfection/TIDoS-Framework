@@ -1,5 +1,0 @@
-include AUTHORS
-include LICENSE
-include requirements.txt
-graft docs
-recursive-include shodan *.py
