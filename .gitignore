@@ -138,8 +138,4 @@ files/API_KEYS.py
 # MkDocs
 site/
 
-#misc
-lib/*
-*.egg
-
 # End of https://www.gitignore.io/api/python

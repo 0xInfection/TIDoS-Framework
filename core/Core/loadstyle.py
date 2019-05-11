@@ -29,6 +29,5 @@ def loadstyle():
             elif i == i:
                 old_loading = loading[-0:i].lower()
                 print("%s%s%s%s%s" %(old_loading,red_bold,char.upper(),reset,loading[i+1:]))
-            time.sleep(0.1)
             os.system('clear')
         action += 1
