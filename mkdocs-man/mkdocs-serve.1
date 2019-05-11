@@ -1,0 +1,39 @@
+.TH "MKDOCS SERVE" "1" "10-May-2019" "1.0.4" "mkdocs serve Manual"
+.SH NAME
+mkdocs\-serve \- Run the builtin development server
+.SH SYNOPSIS
+.B mkdocs serve
+[OPTIONS]
+.SH DESCRIPTION
+Run the builtin development server
+.SH OPTIONS
+.TP
+\fB\-f,\fP \-\-config\-file FILENAME
+Provide a specific MkDocs config
+.TP
+\fB\-a,\fP \-\-dev\-addr <IP:PORT>
+IP address and port to serve documentation locally (default: localhost:8000)
+.TP
+\fB\-s,\fP \-\-strict
+Enable strict mode. This will cause MkDocs to abort the build on any warnings.
+.TP
+\fB\-t,\fP \-\-theme [mkdocs|readthedocs]
+The theme to use when building your documentation.
+.TP
+\fB\-e,\fP \-\-theme\-dir PATH
+The theme directory to use when building your documentation.
+.TP
+\fB\-\-livereload\fP
+Enable the live reloading in the development server (this is the default)
+.TP
+\fB\-\-no\-livereload\fP
+Disable the live reloading in the development server.
+.TP
+\fB\-\-dirtyreload\fP
+Enable the live reloading in the development server, but only re-build files that have changed
+.TP
+\fB\-q,\fP \-\-quiet
+Silence warnings
+.TP
+\fB\-v,\fP \-\-verbose
+Enable verbose output

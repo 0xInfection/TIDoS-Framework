@@ -136,4 +136,7 @@ tmp/logs/devleague.com-logs/
 # API Keys
 files/API_KEYS.py
 
+# MkDocs
+site/
+
 # End of https://www.gitignore.io/api/python
