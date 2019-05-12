@@ -19,7 +19,7 @@ tasks_to_accomplish = Queue()
 tasks_that_are_done = Queue()
 
 class Target:
-    def __init__(self,name,current_menu,last_menu,main_menu):
+    def __init__(self,name,current_menu,last_menu,main_menu,ip,port):
         self.name = name
         self.current_menu = current_menu
         self.last_menu = last_menu
@@ -27,15 +27,18 @@ class Target:
         self.module=''
         self.description=''
         self.ip=''
+        self.port=''
 
 def threat():
     while True:
         print('MENU 1')
         try:
             host = '1.1.1.1'# DEBUG: temp value
+            ip = ''
+            port = ''
             current_menu = menu
             last_menu = menu
-            target.append(Target(host,current_menu,last_menu,menu))
+            target.append(Target(host,current_menu,last_menu,menu,ip,port))
             buildmenu(target,menu,'Main Menu','')
         except KeyboardInterrupt:
             print("Keyboard interrupted")
