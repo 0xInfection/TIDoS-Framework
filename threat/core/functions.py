@@ -64,6 +64,9 @@ from modules.recon.info.internalip import internalip
 from modules.recon.info.phone import phone
 from modules.recon.info.ssn import ssn
 
+#enum
+from modules.enumeration.nmap_menu import nmap_menu
+
 functions = {
     'recon':recon,
     'scanenum':scanenum,
@@ -75,7 +78,7 @@ functions = {
     'passive_recon':passive_recon,
     'active_recon':active_recon,
     'info_disclosure':info_disclosure,
-
+    'nmap_menu':nmap_menu
     #'dig':dig,
     #''
 }
