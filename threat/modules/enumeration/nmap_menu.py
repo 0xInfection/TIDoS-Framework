@@ -15,18 +15,30 @@ test_target = [{
 # These variables represent menu display names which tie the entire nmap menu together
 edit_target_module = 'Edit Target'
 set_port_module = 'Set Port Range'
+run_nmap = 'Run NMAP'
 
 # This Array determines the order of Menu Items and can be adjusted freely. 
 # Must have matching header value in {menu_objects} to appear in menu
 preferred_order = [
-'Run NMAP',
+run_nmap,
 edit_target_module,
 set_port_module,
 "Run Default Scripts",
 "Scan Service Versions"
 ]
 
-# Display Menu is built into this dict object
+# This dict associates nmap tags with their numbered order when ran thru the associator function
+# This helps find all relevant menu attributes from the nmap tag alone (ie: -sV)
+cmd_list = ['-sC', '-sV']
+cmd2num = {}
+def cmd2num_associator(arg, menu_obj):
+    for each_tag in arg:
+        for menu_number in menu_obj:
+            if("tag" in menu_obj[menu_number] and menu_obj[menu_number]["tag"] == each_tag):
+                cmd2num[each_tag] = menu_number
+
+
+# Final Display Menu is built into this dict object
 menu = {}
 
 # List of menu item dicts and their various attributes
@@ -38,14 +50,14 @@ menu_objects = [
     {
         "header": edit_target_module ,
         "start_msg" : "Enter New Target Address\n",
-        "error": '\nINVALID ADDRESS FORMAT\n',
+        "error": '\n ***** INVALID ADDRESS FORMAT ***** \n',
         "description": "x"
     },
     {
         "start_msg" : "Enter Desired Port Range (ie: 80, 5-100, \'ALL\')\n",
         "header": set_port_module,
         "tag": "-p",
-        "error": '\nINVALID PORT RANGE\n',
+        "error": '\n***** INVALID PORT RANGE ***** \n',
         "description": "x"
     },
     {
@@ -70,68 +82,69 @@ menu_objects = [
     },
 ]
 
-# This dict associates nmap tags with their order (needs to be dynamic but is not yet)
-cmd2num = {
-    "-sC": "4",
-    "-sV": "5",
-}
-
+# Which index number is each module?
 def retrieve_module_index(invoked_module):
     return str(preferred_order.index(invoked_module) + 1)
 
 def create_nmap_menu(menu):
-    # Dynamically create enumerated list of Menu Commands based off "preferred_order" object
     for index, order_header in enumerate(preferred_order):
         for each_menu in menu_objects:
             if (each_menu["header"].find(order_header) != -1):
                 string_index = str(index + 1)
                 menu[string_index] = each_menu
+    cmd2num_associator(cmd_list, menu)
 
     nmap_obj = test_target[0]["nmap"]
 
     # DYNAMIC UPDATING OF MENU ICONS using {cmd2num} as template to access {menu} values
     for key in cmd2num:
-        if(nmap_obj[key] == True): # If target obj has a relevant param set to true, reflect it in menu as yellow & turned on
-            node = menu[cmd2num[key]]
-            on_icon = color.yellow(node["on"])
-            header = color.blue(node["header_template"])
-            node["header"] = on_icon + header
+        node = menu[cmd2num[key]]
+        header = color.blue(node["header_template"])
+        # If target obj has a relevant param set to true, show in menu as on. Otherwise show as turned off
+        if(nmap_obj[key] == True):
+            node["header"] = color.yellow(node["on"]) + header
         else:
-            node = menu[cmd2num[key]] # Otherwise, reflect it in meny as turned off (no icon, color red)
-            off_icon = color.red(node["off"])
-            header = color.blue(node["header_template"])
-            node["header"] = off_icon + header
+            node["header"] = color.red(node["off"]) + header
 
     # Display Menu on screen
     for menu_number in menu:
         print(color.green(" [") +color.green(menu_number)+color.green("]"), color.blue(menu[menu_number]["header"]))
 
 
+# This is the start of the function
+# After {create_nmap_menu} is ran in {nmap_meny}, menu items are displayed and user_input determines next steps
 def nmap_menu(target):
     user_input = ''
     nmap_obj = test_target[0]
     nmap_params = nmap_obj["nmap"]
     exit_condition = False
+
+    # Tag manager can be used to create as many menu options pertaining to nmap tags that toggle on/off
+    def tag_manager(module_type, choice):
+        target_edit_index = retrieve_module_index(module_type)
+        if(choice == target_edit_index):
+            order_header = not nmap_params[menu[choice]["tag"]] # Reverse Boolean
+            nmap_params[menu[choice]["tag"]] = order_header
+            if(order_header == True):
+                print(menu[choice]["on_msg"])
+            elif(order_header == False):
+                print(menu[choice]["off_msg"])
+
     while(exit_condition == False):
         # Invoke Create Menu Function
         create_nmap_menu(menu)
         nmap_command = str(nmap_target_sorter(nmap_obj)[0])
-        print('\n')
-        print('-'*40)
-        print(color.green('Current nmap Command:  '))
-        print(color.red(nmap_command))
-        print('-'*40)
+        print('\n' + '-'*55)
+        print(color.green('Current nmap Command:  ') + color.red(nmap_command) + '\n' + '-'*55)
 
-        # User Choices
         user_input = input('\n[#] Choose Option:> ')
-
-        # Consider Exit
         if(user_input.lower() == 'exit' or user_input.lower() == 'e'):
             exit_condition = True
 
-        # 2 :  Adjust IP Address (Target Address)
         target_edit_index = retrieve_module_index(edit_target_module)
-
+        port_edit_index = retrieve_module_index(set_port_module)
+        
+        # 2 :  Adjust IP Address (Target Address)
         if(user_input == target_edit_index):
             address = input(menu[user_input]["start_msg"])
             reg_string = r'^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$'
@@ -143,11 +156,13 @@ def nmap_menu(target):
                 print(color.red(menu[user_input]["error"]))
 
         # 3: Set Port Range
-        target_edit_index = retrieve_module_index(set_port_module)
-        if(user_input == target_edit_index):
+        elif(user_input == port_edit_index):
             port_range = input(menu[user_input]["start_msg"])
             if(port_range == 'exit'):
                 print('Exiting')
+            elif(port_range.lower() == 'none' or port_range == 0):
+                nmap_params['-p'] = False
+                nmap_params['-p-'] = False   
             elif(port_range.lower() == 'all' or port_range == '-p-'):
                 nmap_params['-p'] = False
                 nmap_params['-p-'] = True
@@ -155,24 +170,7 @@ def nmap_menu(target):
                 nmap_params['-p'] = port_range
             else:
                 print(color.red(menu[user_input]["error"]))
-
-        # 4. Run Default Script
-        target_edit_index = retrieve_module_index('Run Default Scripts')
-        if(user_input == target_edit_index):
-            order_header = not nmap_params[menu[user_input]["tag"]]
-            nmap_params['-sC'] = order_header
-            if(order_header == True):
-                print(menu[user_input]["on_msg"])
-            elif(order_header == False):
-                print(menu[user_input]["off_msg"])
-        
-        # 5. Set Service Scan
-        target_edit_index = retrieve_module_index('Scan Service Versions')
-        if(user_input == target_edit_index):
-            order_header = not nmap_params[menu[user_input]["tag"]]
-            nmap_params['-sV'] = order_header
-            if(order_header == True):
-                print(menu[user_input]["on_msg"])
-            elif(order_header == False):
-                print(menu[user_input]["off_msg"])
-        
+        else:
+            tag_manager('Run Default Scripts', user_input)
+            tag_manager('Scan Service Versions', user_input)
+  
