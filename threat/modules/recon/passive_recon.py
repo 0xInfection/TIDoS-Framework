@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+# menu 3
+
 def passive_recon(target):
     from core.build_menu import buildmenu
     menu = { # '#' : ['module', 'description', 'function']

@@ -3,6 +3,8 @@ import sys
 
 from multiprocessing import Queue
 
+# menu 1
+
 menu = { # '#' : ['module', 'description', 'function']
         '1':['Reconnaissance & OSINT','Description','recon'],\
         '2':['Scanning & Enumeration','Description','scanenum'],\
@@ -28,6 +30,7 @@ class Target:
 
 def threat():
     while True:
+        print('MENU 1')
         try:
             host = '1.1.1.1'# DEBUG: temp value
             current_menu = menu

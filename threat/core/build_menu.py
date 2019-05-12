@@ -23,7 +23,7 @@ def build_banner(banner):
 
 def buildmenu(target,dict,banner,art):
     #os.system('clear')
-    print('TARGET', target[0].name)
+    # print('TARGET', target[0].name)
     for each in target:
         each.last_menu = each.current_menu
         each.current_menu=dict
@@ -70,6 +70,9 @@ def buildmenu(target,dict,banner,art):
             if str(choice) == str(key): # select option
                 target[0].module = value[0]
                 target[0].description = value[1]
+                # print('MODULE', target[0].module)
+                # print('DESCRIPTION', target[0].description)
+
                 if 'Temp if statement in case dont want to pass target' in banner: # DEBUG: Might use this option
                     results=functions[value[2]]
                 else:

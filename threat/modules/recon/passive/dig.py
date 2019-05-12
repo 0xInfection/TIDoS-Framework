@@ -3,7 +3,7 @@ import subprocess
 def dig(target):
     for domain in target:
         DIGSCAN = "dig "+domain.name
-        
+
         # print(bcolors.HEADER + "INFO: Starting dig scan for " + ip_address + bcolors.ENDC)
         #DIGSCAN = "dig " + target[0].name
         # print(bcolors.HEADER + DIGSCAN + bcolors.ENDC)
@@ -13,8 +13,4 @@ def dig(target):
         print(this)
         # write_to_file(ip_address, "dig", this)
         # print(bcolors.OKGREEN + "INFO: nmap scan still in progress.. " + ip_address + bcolors.ENDC)
-<<<<<<< HEAD
     return
-=======
-    return
->>>>>>> 18da86a265a3e6d60feaa9b35fba8cf3105a3014

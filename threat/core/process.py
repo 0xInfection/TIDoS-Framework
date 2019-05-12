@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 from multiprocessing import Lock, Process, Queue, current_process
+import os
 import time
 import queue # imported for using queue.Empty exception
 from threat import processes, tasks_that_are_done, tasks_to_accomplish
@@ -36,6 +37,7 @@ def do_job(func,tgt):#,tasks_to_accomplish, tasks_that_are_done):
 
 
 def multi(func,tgt):
+    print('MULTI')
 
     tasks_to_accomplish.put(str(func))
 

@@ -9,6 +9,7 @@ from modules.recon.recon import recon
 from modules.enumeration.scanenum import scanenum
 from modules.exploitation.exploitation import exploitation
 from modules.vulnysis.vulnysis import vulnysis
+from modules.enumeration.windows_enum import windows_enum       # enables windows enum module
 
 # passive recon
 from modules.recon.passive_recon import passive_recon
@@ -64,6 +65,9 @@ from modules.recon.info.internalip import internalip
 from modules.recon.info.phone import phone
 from modules.recon.info.ssn import ssn
 
+# enumeration
+from modules.enumeration.windows.enum4linux import enum4linux       # enables enum4linux module
+
 functions = {
     'recon':recon,
     'scanenum':scanenum,
@@ -78,6 +82,9 @@ functions = {
 
     #'dig':dig,
     #''
+
+    # enumeration
+    'windows_enum':windows_enum,
 }
 
 multiprocess_functions = {
@@ -130,5 +137,8 @@ multiprocess_functions = {
     'internalip':internalip,
     'phone':phone,
     'ssn':ssn,
+
+    # enumeration
+    'enum4linux':enum4linux,
 
 }
