@@ -1,0 +1,69 @@
+[
+    {
+        "header": "Run NMAP",
+        "description": "x"
+    },
+    {
+        "header": "Edit Target",
+        "start_msg" : "Enter New Target Address\n",
+        "error": "\n ***** INVALID ADDRESS FORMAT ***** \n",
+        "description": "x"
+    },
+    {
+        "start_msg" : "Enter Desired Port Range (ie: 80, 5-100, \"ALL\")\n",
+        "header": "Set Port Range",
+        "tag": "-p",
+        "error": "\n***** INVALID PORT RANGE ***** \n",
+        "description": "x"
+    },
+    {
+        "header": "[ ] Run Default Scripts",
+        "tag": "-sC",
+        "on": "[!] ",
+        "off": "[ ] ",
+        "on_msg": "\n *** Run Default Scripts has been turned on\n",
+        "off_msg": "\n *** Run Default Scripts has been turned off\n",
+        "header_template": "Run Default Scripts",
+        "description": " (-sC) nmap.org/nsedoc/categories/default"
+    },
+    {
+        "header": "\n [ ] Scan Service Versions\n",
+        "tag": "-sV",
+        "on": "[!] ",
+        "off": "[ ] ",
+        "on_msg": "\n *** Service Version Scan has been turned on\n",
+        "off_msg": "\n *** Service Version Scan has been turned off\n",
+        "header_template": "Scan Service Versions",
+        "description": "x"
+    },
+    {
+        "header": "\n [ ] TCP ACK Ping\n",
+        "tag": "-PA",
+        "on": "[!] ",
+        "off": "[ ] ",
+        "on_msg": "\n *** TCP ACK Ping has been turned on\n",
+        "off_msg": "\n *** TCP ACK Ping has been turned off\n",
+        "header_template": "TCP ACK Ping",
+        "description": "x"
+    }, 
+    {
+        "header": "\n [ ] TCP SYN Ping\n",
+        "tag": "-PS",
+        "on": "[!] ",
+        "off": "[ ] ",
+        "on_msg": "\n *** TCP SYN Ping has been turned on\n",
+        "off_msg": "\n *** TCP SYN Ping has been turned off\n",
+        "header_template": "TCP SYN Ping",
+        "description": "x"
+    },
+    {
+        "header": "\n [ ] UDP SYN Ping\n",
+        "tag": "-PU",
+        "on": "[!] ",
+        "off": "[ ] ",
+        "on_msg": "\n *** UDP SYN Ping has been turned on\n",
+        "off_msg": "\n *** UDP SYN Ping has been turned off\n",
+        "header_template": "UDP SYN Ping",
+        "description": "x"
+    }
+]
