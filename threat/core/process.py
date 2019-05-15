@@ -9,6 +9,8 @@ from .colors import color
 NUM_WORKERS = 4#multiprocessing.cpu_count()
 
 def do_job(func,tgt):#,tasks_to_accomplish, tasks_that_are_done):
+    print('FUNC', func)
+    print('TGT', tgt)
     while True:
         try:
             '''
@@ -54,7 +56,7 @@ def multi(func,tgt):
         p.join()
 
     # print the output
-    # while not tasks_that_are_done.empty():
-    #     print(tasks_that_are_done.get())
+    while not tasks_that_are_done.empty():
+        print(tasks_that_are_done.get())
 
     return True

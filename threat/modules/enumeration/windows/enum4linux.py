@@ -6,12 +6,12 @@ def enum4linux(target):
     target[0].ip = '10.10.10.125'       # temp value
     target[0].port = '445'              # temp value
 
-    enum4linux_str = 'enum4linux ' + target[0].ip
+    process = subprocess.run(['enum4linux {}'.format(target[0].ip)], shell=True)
 
-    print(enum4linux_str)
-
-    process = subprocess.run(['enum4linux', '10.10.10.125'], check=True, stdout=subprocess.PIPE, universal_newlines=True)
-    output = process.stdout
-
-    print('PROCESS', process)
-    print('OUTPUT', output)
+if __name__=='__main__':
+    try:
+        enum4linux(target)
+    except (KeyboardInterrupt, SystemExit):
+        print("\nKeyboard interrupted")
+        exit()
+        raise
