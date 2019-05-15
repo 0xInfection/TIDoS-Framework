@@ -26,10 +26,12 @@ list_create_and_dedupe("tag", menu_objects, cmd_list, ignore_list, menu_objects)
 # Master menu list is combination of ALL "header_templates" in {nmap_menu.json} 
 preferred_order = start_menu_order + menu_toggle_items
 
-# Variables (LETTERS) for Menu buttons
-the_off_button = "F"
-the_on_button = "O"
+# Variables (LETTERS) for Menu buttons (If like to customize, only need to change here)
+the_all_off_button = "F"
+the_all_on_button = "O"
 exit_button = "E"
+
+
 # --------------------- Helper Functions -----------------------------
 cmd2num = {}
 def cmd2num_associator(arg, menu_obj):
@@ -46,10 +48,10 @@ def create_nmap_menu(menu):
                 string_index = str(index + 1)
                 menu[string_index] = each_menu
 
-    # Custom Menu all be created in this section
+    # --------------------- Lower Menu -----------------------------
     menu[" "] = {"header" : False} 
-    menu[the_off_button.upper()] = {"header" : "Turn off all options"}
-    menu[the_on_button.upper()] = {"header" : "Turn on all options"}
+    menu[the_all_off_button.upper()] = {"header" : "Turn off all options"}
+    menu[the_all_on_button.upper()] = {"header" : "Turn on all options"}
     menu[exit_button.upper()] = {"header" : "Exit"}
     cmd2num_associator(cmd_list, menu)
 
@@ -90,21 +92,24 @@ def nmap_menu(target):
         print('\n' + '-'*55)
         print(color.green('Current nmap Command:  \n') + color.red(nmap_command) + '\n' + '-'*55)
 
+        # [E] :  ----------- Graceful Exit  --------------------
         user_input = input('\n[#] Choose Option:> ')
         if(user_input.lower() == 'exit' or user_input.lower() == 'e'):
             exit_condition = True
 
-
+        # Clean user input hardcore-ly
+        user_input = list(user_input.strip())[0].lower()
         tag_arg_set = [preferred_order, nmap_params, menu]
-        port_edit_index = retrieve_module_index('Set Port Range', preferred_order)
-        
-        # 2 :  -------- 2. Turn on all toggles -----------------------------
-        if(user_input.upper() == the_off_button):
-            print('shikaka')
-      
-        # 2 :  -------- 2. Adjust IP Address (Target Address)  -----------------------------
-        target_edit_index = retrieve_module_index('Edit Target', preferred_order)
-        if(user_input == target_edit_index):
+
+
+        # [O] or [F] : --------- Turn ON/OFF ALL toggles -------------------------
+        if(user_input.upper() == the_all_on_button):
+            tag_manager(menu_toggle_items, True, tag_arg_set)
+        elif(user_input.upper() == the_all_off_button):
+            tag_manager(menu_toggle_items, False, tag_arg_set)
+
+        # [2] :  -------- 2. Adjust IP Address (Target Address)  -----------------------------
+        elif(user_input == retrieve_module_index('Edit Target', preferred_order)):
             address = input(menu[user_input]["start_msg"])
             reg_string = r'^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$'
             if(address == 'exit'):
@@ -114,9 +119,8 @@ def nmap_menu(target):
             else:
                 print(color.red(menu[user_input]["error"]))
 
-        # 3: -------------------- 3. Set Port Range ---------------------------------------
-        
-        elif(user_input == port_edit_index):
+        # [3] : -------------------- 3. Set Port Range ---------------------------------------
+        elif(user_input == retrieve_module_index('Set Port Range', preferred_order)):
             port_range = input(menu[user_input]["start_msg"])
             if(port_range == 'exit'):
                 print('Exiting')

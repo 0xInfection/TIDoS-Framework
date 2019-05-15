@@ -7,6 +7,15 @@ def tag_manager(module_type, choice, set):
     order = set[0]
     params = set[1]
     menu = set[2]
+    if (type(module_type) is list):
+        for each_toggle in module_type:
+            target_edit_index = retrieve_module_index(each_toggle, order)
+            params[menu[target_edit_index]["tag"]] = choice
+        if (choice):
+            print('**** All toggle tags ON')
+        else:
+            print('**** All toggle tags OFF')     
+        return True
     target_edit_index = retrieve_module_index(module_type, order)
     if(choice == target_edit_index):
         order_header = not params[menu[choice]["tag"]] # Reverse Boolean
