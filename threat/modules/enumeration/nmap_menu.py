@@ -30,7 +30,8 @@ preferred_order = start_menu_order + menu_toggle_items
 the_all_off_button = "F"
 the_all_on_button = "O"
 exit_button = "E"
-
+description_button = "D"
+description_boolean = False
 
 # --------------------- Helper Functions -----------------------------
 cmd2num = {}
@@ -41,6 +42,7 @@ def cmd2num_associator(arg, menu_obj):
                 cmd2num[each_tag] = menu_number
 
 def create_nmap_menu(menu):
+    global description_boolean
     index = 0
     for index, order_header in enumerate(preferred_order):
         for each_menu in menu_objects:
@@ -52,6 +54,7 @@ def create_nmap_menu(menu):
     menu[" "] = {"header" : False} 
     menu[the_all_off_button.upper()] = {"header" : "Turn off all options"}
     menu[the_all_on_button.upper()] = {"header" : "Turn on all options"}
+    menu[description_button.upper()] = {"header" : "Description Toggle"}
     menu[exit_button.upper()] = {"header" : "Exit"}
     cmd2num_associator(cmd_list, menu)
 
@@ -71,15 +74,24 @@ def create_nmap_menu(menu):
 
     # Display Menu on screen
     for menu_number in menu:
-        if(menu[menu_number]["header"] == False):
-            print(' ')
+        each_menu = menu[menu_number]
+        single_digit_buffer = ''
+        if(menu_number.isdigit() and int(menu_number) < 10):
+            single_digit_buffer = ' '
         else:
-            print(color.green(" [") +color.green(menu_number)+color.green("]"), color.blue(menu[menu_number]["header"]))
+            single_digit_buffer = ''
+        if(each_menu["header"] == False):
+            print(' ')
+        elif(description_boolean and "description" in each_menu):
+            print(color.green(" [") +color.green(menu_number)+color.green("]"), single_digit_buffer, color.blue(each_menu["header"]), color.dark_grey(each_menu["description"]))
+        else:
+            print(color.green(" [") +color.green(menu_number)+color.green("]"), single_digit_buffer, color.blue(each_menu["header"]))
 
 
 # ------------------ This is the start of the NMAP MENU function -------------------------------
-# After {create_nmap_menu} is ran in {nmap_menu}, menu items are displayed and user_input determines next steps
+# After {create_nmap_menu} is ran in {nmap_menu} function, menu items are displayed and user_input determines next steps
 def nmap_menu(target):
+    global description_boolean
     user_input = ''
     nmap_obj = test_target[0]
     nmap_params = nmap_obj["nmap"]
@@ -97,13 +109,17 @@ def nmap_menu(target):
         if(user_input.lower() == 'exit' or user_input.lower() == 'e'):
             exit_condition = True
 
-        # Clean user input hardcore-ly
+        # Clean user input
         user_input = list(user_input.strip())[0].lower()
         tag_arg_set = [preferred_order, nmap_params, menu]
 
+        # [D] : --------- Description toggle -------------------------
+        if(user_input.lower() == 'd'):
+            reversed = not description_boolean # Reverse Boolean
+            description_boolean = reversed
 
-        # [O] or [F] : --------- Turn ON/OFF ALL toggles -------------------------
-        if(user_input.upper() == the_all_on_button):
+        # [O] or [F] : --------- Turn ON/OFF ALL NMAP tag toggles -------------------------
+        elif(user_input.upper() == the_all_on_button):
             tag_manager(menu_toggle_items, True, tag_arg_set)
         elif(user_input.upper() == the_all_off_button):
             tag_manager(menu_toggle_items, False, tag_arg_set)
