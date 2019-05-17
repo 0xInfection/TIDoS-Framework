@@ -13,7 +13,7 @@ def enum4linux(target):
     target[0].ip = '10.10.10.125'       # temp value
     target[0].port = '445'              # temp value
 
-    process = subprocess.run(['enum4linux {}'.format(target[0].ip)], shell=True)
+    enum4linux_str = 'enum4linux ' + target[0].ip
 
 if __name__=='__main__':
     try:

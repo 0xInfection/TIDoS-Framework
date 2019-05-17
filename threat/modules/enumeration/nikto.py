@@ -49,10 +49,7 @@ def nikto(target):
     # process = subprocess.run('nikto -h {}'.format(target[0].ip), shell=True, capture_output=True)
     process = subprocess.run(cmd_str, shell=True)
 
-if __name__=='__main__':
-    try:
-        nikto(target)
-    except (KeyboardInterrupt, SystemExit):
-        print("\nKeyboard interrupted")
-        exit()
-        raise
+    print(nikto_str)
+
+    process = subprocess.run(['nikto', '-h', target[0].ip, target[0].port], check=True, stdout=subprocess.PIPE, universal_newlines=True)
+    output = process.stdout
