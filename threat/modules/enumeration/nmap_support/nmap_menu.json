@@ -37,6 +37,16 @@
         "description": " (-sV) Checks version of service running on port"
     },
     {
+        "header": "\n [ ] Only Scan OS Versions\n",
+        "tag": "-O",
+        "on": "[!] ",
+        "off": "[ ] ",
+        "on_msg": "\n *** OS Scan turned on\n",
+        "off_msg": "\n *** OS Scan turned off\n",
+        "header_template": "Only Scan OS Versions",
+        "description": " (-O) Checks version of service running on port"
+    },
+    {
         "header": "\n [ ] Skip Port scan Phase\n",
         "tag": "-sn",
         "on": "[!] ",
