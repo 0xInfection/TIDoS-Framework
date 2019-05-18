@@ -45,13 +45,13 @@ def threat():
             port = ''
             cmd_options = {}
             target.append(Target(host,current_menu,last_menu,menu,module,ip,port,cmd_options))
-            target[0].ip = '10.10.10.123'
-            target[0].port = '80'
-            target[0].cmd_options = {
-                '-C all':True,
-                '-h':True,
-                '-p':True
-            }
+            # target[0].ip = '10.10.10.123'
+            # target[0].port = '80'
+            # target[0].cmd_options = {
+            #     '-C all':True,
+            #     '-h':True,
+            #     '-p':True
+            # }
             # print('TARGET', dict(target[0]))
             buildmenu(target,menu,'Main Menu','')
         except KeyboardInterrupt:
