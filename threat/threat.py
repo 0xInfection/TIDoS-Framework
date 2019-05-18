@@ -9,7 +9,7 @@ menu = { # '#' : ['module', 'description', 'function']
         '2':['Scanning & Enumeration','Description','scanenum'],\
         '3':['Vulnerability Analysis','Description','vulnysis'],\
         '4':['Exploitation','Description','exploitation'],\
-        '5':['Post Analysis','Description','post']\
+        '5':['Post Analysis','Description','post_exploitation']\
     }
 
 processes=[]
@@ -31,6 +31,8 @@ class Target:
         self.ip = ip
         self.port = ''
         self.cmd_options = {}
+        self.lvl = 0
+        self.last_lvl=0
     def __iter__(self):
         for attr, value in self.__dict__.items():
             yield attr, value

@@ -9,6 +9,7 @@ from modules.recon.recon import recon
 from modules.enumeration.scanenum import scanenum
 from modules.exploitation.exploitation import exploitation
 from modules.vulnysis.vulnysis import vulnysis
+from modules.post.post_exploitation import post_exploitation
 
 # passive recon
 from modules.recon.passive_recon import passive_recon
@@ -70,12 +71,64 @@ from modules.enumeration.windows_enum import windows_enum           # enables wi
 from modules.enumeration.windows.enum4linux import enum4linux       # enables enum4linux module
 from modules.enumeration.nmap_menu import nmap_menu
 
+# post / aux modules
+# critical bugs
+from modules.vulnysis.critical_bugs import critical
+from modules.vulnysis.critical.lfi import lfi
+from modules.vulnysis.critical.rfi import rfi
+from modules.vulnysis.critical.ldap import ldap
+from modules.vulnysis.critical.rce import rce
+from modules.vulnysis.critical.csrf import csrf
+from modules.vulnysis.critical.sqli import sqli
+from modules.vulnysis.critical.crlf import crlf
+from modules.vulnysis.critical.subdomover import subdomover 
+from modules.vulnysis.critical.strutsshock import strutsshock
+from modules.vulnysis.critical.phpi import phpi
+from modules.vulnysis.critical.htmli import htmli
+from modules.vulnysis.critical.xpathi import xpathi
+from modules.vulnysis.critical.shellshock import shellshock
+from modules.vulnysis.critical.xss import xss
+from modules.vulnysis.critical.openredirect import openredirect
+from modules.vulnysis.critical.pathtrav import pathtrav
+
+# misconfiguration	
+from modules.vulnysis.misconfig_bugs import misconfig
+from modules.vulnysis.misconfig.icors import icors
+from modules.vulnysis.misconfig.ssscript import ssscript
+from modules.vulnysis.misconfig.clickjack import clickjack
+from modules.vulnysis.misconfig.zone import zone
+from modules.vulnysis.misconfig.hhi import hhi
+from modules.vulnysis.misconfig.netmisc import netmisc
+from modules.vulnysis.misconfig.cloudflaremisc import cloudflaremisc
+from modules.vulnysis.misconfig.hsts import hsts
+from modules.vulnysis.misconfig.sessionfix import sessionfix
+from modules.vulnysis.misconfig.headers import headers
+from modules.vulnysis.misconfig.xsstrace import xsstrace
+from modules.vulnysis.misconfig.cookiecheck import cookiecheck
+from modules.vulnysis.misconfig.mailspoof import mailspoof
+
+# vuln others
+from modules.vulnysis.other_bugs import other	
+from modules.vulnysis.other.popbrute import popbrute
+from modules.vulnysis.other.ftpbrute import ftpbrute
+from modules.vulnysis.other.sqlbrute import sqlbrute
+from modules.vulnysis.other.sshbrute import sshbrute
+from modules.vulnysis.other.smtpbrute import smtpbrute
+from modules.vulnysis.other.xmppbrute import xmppbrute
+from modules.vulnysis.other.telnetbrute import telnetbrute
+
+# post
+from modules.post.encodeall import encodeall
+from modules.post.hashes import hashes
+from modules.post.honeypot import honeypot
+from modules.post.imgext import imgext
+
 functions = {
     'recon':recon,
     'scanenum':scanenum,
     'exploitation':exploitation,
     'vulnysis':vulnysis,
-    #'post':post
+    'post_exploitation':post_exploitation,
 
     # recon related
     'passive_recon':passive_recon,
@@ -86,7 +139,12 @@ functions = {
     #''
 
     # enumeration
-    'windows_enum':windows_enum
+    'windows_enum':windows_enum,
+
+    #vuln
+    'critical':critical,
+    'misconfig':misconfig,
+    'other':other,
 }
 
 multiprocess_functions = {
@@ -143,5 +201,53 @@ multiprocess_functions = {
     # enumeration
     'nikto':nikto,
     'enum4linux':enum4linux,
+
+    #critical bugs
+    'lfi':lfi,
+    'rfi':rfi,
+    'ldap':ldap,
+    'rce':rce,
+    'csrf':csrf,
+    'sqli':sqli,
+    'crlf':crlf,
+    'subdomover':subdomover,
+    'strutsshock':strutsshock,
+    'phpi':phpi,
+    'htmli':htmli,
+    'xpathi':xpathi,
+    #'shellshock':shellshock,
+    'xss':xss,
+    'openredirect':openredirect,
+    'pathtrav':pathtrav,
+
+    # misconfigurations
+    'icors':icors,
+    'ssscript':ssscript,
+    'clickjack':clickjack,
+    'zone':zone,
+    'hhi':hhi,
+    'netmisc':netmisc,
+    'cloudflaremisc':cloudflaremisc,
+    'hsts':hsts,
+    'sessionfix':sessionfix,
+    'headers':headers,
+    'xsstrace':xsstrace,
+    'cookiecheck':cookiecheck,
+    'mailspoof':mailspoof,
+
+    # other
+    'popbrute':popbrute,
+    'ftpbrute':ftpbrute,
+    'sqlbrute':sqlbrute,
+    'sshbrute':sshbrute,
+    'smtpbrute':smtpbrute,
+    'xmppbrute':xmppbrute,
+    'telnetbrute':telnetbrute,
+
+    # post
+    'encodeall':encodeall,
+    'hashes':hashes,
+    'honeypot':honeypot,
+    'imgext':imgext,
 
 }

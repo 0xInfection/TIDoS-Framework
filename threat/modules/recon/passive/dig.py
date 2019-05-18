@@ -2,6 +2,7 @@ import subprocess
 
 def dig(target):
     for domain in target:
+        domain.lvl2='dig'
         DIGSCAN = "dig "+domain.name
 
         # print(bcolors.HEADER + "INFO: Starting dig scan for " + ip_address + bcolors.ENDC)
