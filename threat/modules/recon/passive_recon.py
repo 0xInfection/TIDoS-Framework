@@ -4,6 +4,10 @@
 
 def passive_recon(target):
     from core.build_menu import buildmenu
+    module = 'Passive Reconnaissance & OSINT'
+    art=''
+    for host in target:
+        host.lvl1=module
     menu = { # '#' : ['module', 'description', 'function']
         '1':['dig lookup','(DIG SCAN)','dig'],\
         '2':['WhoIS lookup','(Gather via Interaction)','whois'],\
@@ -30,4 +34,4 @@ def passive_recon(target):
         '23':['CENSYS Gathering','','censysdom'],\
         '24':['Threat Intel Gathering','','threatintel'],\
     }
-    buildmenu(target,menu,'Passive Reconnaissance & OSINT','')          # build menu
+    buildmenu(target,menu,module,art)          # build menu

@@ -2,6 +2,10 @@
 
 def active_recon(target):
     from core.build_menu import buildmenu
+    module = 'Active Reconnaissance'
+    art=''
+    for host in target:
+        host.lvl1=module
     menu = { # '#' : ['module', 'description', 'function']
         '1':['Ping/NPing Enumeration','xxx','piwebenum'],\
         '2':['Grab HTTP Headers','xxx','grabhead'],\
@@ -19,4 +23,4 @@ def active_recon(target):
         '14':['Alternate Sites','xxx','altsites'],\
         '15':['File Bruteforcers','xxx','filebrute'],\
     }
-    buildmenu(target,menu,'Active Reconnaissance','')          # build menu
+    buildmenu(target,menu,module,art)          # build menu
