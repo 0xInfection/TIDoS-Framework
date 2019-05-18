@@ -3,6 +3,8 @@ import sys
 
 from multiprocessing import Queue
 
+# menu 1
+
 menu = { # '#' : ['module', 'description', 'function']
         '1':['Reconnaissance & OSINT','Description','recon'],\
         '2':['Scanning & Enumeration','Description','scanenum'],\
@@ -17,22 +19,31 @@ tasks_to_accomplish = Queue()
 tasks_that_are_done = Queue()
 
 class Target:
-    def __init__(self,name,current_menu,last_menu,main_menu):
+    def __init__(self,name,current_menu,last_menu,main_menu,ip):
         self.name = name
         self.current_menu = current_menu
         self.last_menu = last_menu
         self.main_menu = main_menu
-        self.module=''
-        self.description=''
-        self.ip=''
+        self.lvl1 = ''
+        self.lvl2 = ''
+        self.lvl3 = ''
+        self.module = ''
+        self.description = ''
+        self.ip = ip
+        self.port = ''
+        self.cmd_options = {}
+    def __iter__(self):
+        for attr, value in self.__dict__.items():
+            yield attr, value
 
 def threat():
     while True:
         try:
-            host = '1.1.1.1'# DEBUG: temp value
+            host = input('\nInput host/IP\n')# DEBUG: temp value
             current_menu = menu
             last_menu = menu
-            target.append(Target(host,current_menu,last_menu,menu))
+            ip = host
+            target.append(Target(host,current_menu,last_menu,menu,ip))
             buildmenu(target,menu,'Main Menu','')
         except KeyboardInterrupt:
             print("Keyboard interrupted")

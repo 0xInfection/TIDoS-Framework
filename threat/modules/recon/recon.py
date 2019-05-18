@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+# menu 2
+
 def recon(target):
     from core.build_menu import buildmenu
     menu = { # '#' : ['module', 'description', 'function']

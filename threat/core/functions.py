@@ -64,7 +64,10 @@ from modules.recon.info.internalip import internalip
 from modules.recon.info.phone import phone
 from modules.recon.info.ssn import ssn
 
-#enum
+# enumeration
+from modules.enumeration.nikto import nikto                         # nikto
+from modules.enumeration.windows_enum import windows_enum           # enables windows enum module
+from modules.enumeration.windows.enum4linux import enum4linux       # enables enum4linux module
 from modules.enumeration.nmap_menu import nmap_menu
 
 functions = {
@@ -81,6 +84,9 @@ functions = {
     'nmap_menu':nmap_menu
     #'dig':dig,
     #''
+
+    # enumeration
+    'windows_enum':windows_enum,
 }
 
 multiprocess_functions = {
@@ -133,5 +139,9 @@ multiprocess_functions = {
     'internalip':internalip,
     'phone':phone,
     'ssn':ssn,
+
+    # enumeration
+    'nikto':nikto,
+    'enum4linux':enum4linux,
 
 }

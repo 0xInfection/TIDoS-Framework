@@ -1,8 +1,0 @@
->>> from mechanize._http import MechanizeRobotFileParser
-
-Calling .set_opener() without args sets a default opener.
-
->>> rfp = MechanizeRobotFileParser()
->>> rfp.set_opener()
->>> rfp._opener  # doctest: +ELLIPSIS
-<mechanize._opener.OpenerDirector instance at ...>
