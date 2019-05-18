@@ -5,11 +5,17 @@ import json
 from core.colors import color
 from modules.enumeration.nmap_builder import nmap_target_sorter
 from modules.enumeration.nmap_support.nmap_helper_functions import *
+
+
+### -- THIS IS THE PATH OF THE DEFAULT TARGET ACCESSED INITIALLY IN THE EDITOR -- ###
 with open('modules/enumeration/nmap_support/sample_target.json') as the_json:
-    test_target = json.load(the_json)
+    default_target = json.load(the_json)
+#####################################################################################
+
+
 with open('modules/enumeration/nmap_support/nmap_menu.json') as the_json:
     menu_objects = json.load(the_json)
-    
+
 # Final Display Menu is built into this dict object
 menu = {}
 
@@ -58,8 +64,11 @@ def create_nmap_menu(menu):
     menu[exit_button.upper()] = {"header" : "Exit"}
     cmd2num_associator(cmd_list, menu)
 
-    # Access target object nmap KEY object in List to avoid repeated typing of ~[0]["nmap"]
-    nmap_obj = test_target[0]["nmap"]
+
+    ### --- Shortcut variable to avoid repeated typing of ~[0]["nmap"] --- ###
+    nmap_obj = default_target[0]["nmap"]
+    ##########################################################################
+
 
     # DYNAMIC TOGGLE UPDATING OF MENU ICONS using {cmd2num} as template to access {menu} values
     for key in cmd2num:
@@ -93,7 +102,7 @@ def create_nmap_menu(menu):
 def nmap_menu(target):
     global description_boolean
     user_input = ''
-    nmap_obj = test_target[0]
+    nmap_obj = default_target[0]
     nmap_params = nmap_obj["nmap"]
     exit_condition = False
 
@@ -123,6 +132,11 @@ def nmap_menu(target):
             tag_manager(menu_toggle_items, True, tag_arg_set)
         elif(user_input.upper() == the_all_off_button):
             tag_manager(menu_toggle_items, False, tag_arg_set)
+
+        # [1] :  --------------------- 2. Run NMAP  -----------------------------------------
+        elif(user_input == '1'):
+            print('Run NMAP ', nmap_command)
+            return nmap_command
 
         # [2] :  -------- 2. Adjust IP Address (Target Address)  -----------------------------
         elif(user_input == retrieve_module_index('Edit Target', preferred_order)):
