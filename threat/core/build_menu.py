@@ -23,11 +23,6 @@ def build_banner(banner):
 
 def buildmenu(target,dict,banner,art):
     #os.system('clear')
-    print('TARGET NAME', target[0].name)
-    print('TARGET MODULE', target[0].module)
-    print('TARGET IP', target[0].ip)
-    print('TARGET PORT', target[0].port)
-    print('TARGET CMD OPTIONS', target[0].cmd_options)
     for each in target:
         each.last_menu = each.current_menu
         each.current_menu=dict
