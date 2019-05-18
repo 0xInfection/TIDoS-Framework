@@ -81,12 +81,12 @@ functions = {
     'passive_recon':passive_recon,
     'active_recon':active_recon,
     'info_disclosure':info_disclosure,
-    'nmap_menu':nmap_menu
+    'nmap_menu':nmap_menu,
     #'dig':dig,
     #''
 
     # enumeration
-    'windows_enum':windows_enum,
+    'windows_enum':windows_enum
 }
 
 multiprocess_functions = {
