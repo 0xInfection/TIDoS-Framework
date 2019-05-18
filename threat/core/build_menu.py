@@ -41,6 +41,7 @@ def buildmenu(target,dict,banner,art):
             print('\n'+color.green(' [A] ') + color.yellow('Run all\n'))
         print(color.green(' [M] ') + color.yellow('Main Menu\n'))
         print(" " + color.custom('[B] Back',bold=True,white=True,bg_red=True)+'\n')
+        print(" "+ color.custom('[0] Exit',bold=True,white=True,bg_red=True)+'\n')
 
     choice = input('[#] Choose Option:> ')
     found = False
@@ -97,3 +98,5 @@ def buildmenu(target,dict,banner,art):
     if found == False:
         print(color.red('Invalid selection.'))
         pass
+
+    buildmenu(target,dict,banner,art)
