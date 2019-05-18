@@ -1,0 +1,99 @@
+[
+    {
+        "header": "Run NMAP",
+        "description": ""
+    },
+    {
+        "header": "Edit Target",
+        "start_msg" : "Enter New Target Address\n",
+        "error": "\n ***** INVALID ADDRESS FORMAT ***** \n",
+        "description": ""
+    },
+    {
+        "start_msg" : "Enter Desired Port Range (ie: 80, 5-100, \"ALL\")\n",
+        "header": "Set Port Range",
+        "tag": "-p",
+        "error": "\n***** INVALID PORT RANGE ***** \n",
+        "description": ""
+    },
+    {
+        "header": "[ ] Run Default Scripts",
+        "tag": "-sC",
+        "on": "[!] ",
+        "off": "[ ] ",
+        "on_msg": "\n *** Run Default Scripts has been turned on\n",
+        "off_msg": "\n *** Run Default Scripts has been turned off\n",
+        "header_template": "Run Default Scripts",
+        "description": " (-sC) Ref: nmap.org/nsedoc/categories/default"
+    },
+    {
+        "header": "\n [ ] Scan Service Versions\n",
+        "tag": "-sV",
+        "on": "[!] ",
+        "off": "[ ] ",
+        "on_msg": "\n *** Service Version Scan has been turned on\n",
+        "off_msg": "\n *** Service Version Scan has been turned off\n",
+        "header_template": "Scan Service Versions",
+        "description": " (-sV) Checks version of service running on port"
+    },
+    {
+        "header": "\n [ ] Only Scan OS Versions\n",
+        "tag": "-O",
+        "on": "[!] ",
+        "off": "[ ] ",
+        "on_msg": "\n *** OS Scan turned on\n",
+        "off_msg": "\n *** OS Scan turned off\n",
+        "header_template": "Only Scan OS Versions",
+        "description": " (-O) Checks version of service running on port"
+    },
+    {
+        "header": "\n [ ] Skip Port scan Phase\n",
+        "tag": "-sn",
+        "on": "[!] ",
+        "off": "[ ] ",
+        "on_msg": "\n *** Skip Port scan has been turned on\n",
+        "off_msg": "\n *** Skip Port scan has been turned off\n",
+        "header_template": "Skip Port scan",
+        "description": " (-sn) Nmap skips port scan but perform host discovery"
+    },
+    {
+        "header": "\n [ ] TCP ACK Ping\n",
+        "tag": "-PA",
+        "on": "[!] ",
+        "off": "[ ] ",
+        "on_msg": "\n *** TCP ACK Ping has been turned on\n",
+        "off_msg": "\n *** TCP ACK Ping has been turned off\n",
+        "header_template": "TCP ACK Ping",
+        "description": " (-PA) Check if target responds to TCP ACK Packets"
+    }, 
+    {
+        "header": "\n [ ] TCP SYN Ping\n",
+        "tag": "-PS",
+        "on": "[!] ",
+        "off": "[ ] ",
+        "on_msg": "\n *** TCP SYN Ping has been turned on\n",
+        "off_msg": "\n *** TCP SYN Ping has been turned off\n",
+        "header_template": "TCP SYN Ping",
+        "description": " (-PS) Check if target responds to TCP SYN Packets"
+    },
+    {
+        "header": "\n [ ] UDP Ping\n",
+        "tag": "-PU",
+        "on": "[!] ",
+        "off": "[ ] ",
+        "on_msg": "\n *** UDP Ping has been turned on\n",
+        "off_msg": "\n *** UDP Ping has been turned off\n",
+        "header_template": "UDP Ping",
+        "description": " (-PU) Check if target responds to UDP Ping"
+    },
+    {
+        "header": "\n [ ] Ping Only Scan\n",
+        "tag": "-sP",
+        "on": "[!] ",
+        "off": "[ ] ",
+        "on_msg": "\n *** Ping Only Scan has been turned on\n",
+        "off_msg": "\n *** Ping Only Scan has been turned off\n",
+        "header_template": "Ping Only Scan",
+        "description": " (-sP) Only does ICMP Scan"
+    }
+]
