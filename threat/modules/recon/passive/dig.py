@@ -7,5 +7,5 @@ def dig(target):
         DIGSCAN = "dig "+host.name
         results_dig = subprocess.check_output(DIGSCAN, shell=True)
         data=results_dig.decode().replace("<<","").replace(">>","")
-        save_data(host.database, host.module, host.lvl1, host.lvl2, host.lvl3, data, host.name)
+        save_data(host.database, host.module, host.lvl1, host.lvl2, host.lvl3, host.name, data)
     return
