@@ -16,6 +16,7 @@ processes=[]
 target=[]
 tasks_to_accomplish = Queue()
 tasks_that_are_done = Queue()
+database = './database/tidos.db'
 
 class Target:
     def __init__(self,name,current_menu,last_menu,main_menu,ip):
@@ -33,6 +34,7 @@ class Target:
         self.cmd_options = {}
         self.lvl = 0
         self.last_lvl=0
+        self.database = database
     def __iter__(self):
         for attr, value in self.__dict__.items():
             yield attr, value
