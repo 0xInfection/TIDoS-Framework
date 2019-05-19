@@ -3,35 +3,24 @@ import os
 import time
 import requests
 from core.colors import color
+from database.database_module import save_data
+import inspect
 links = []
 
 def revdns(target):
-    for t in target:
-        site = t.name.replace('http://','').replace('https://','')
+    for host in target:
+        host.lvl2=inspect.stack()[0][3]
+        host.lvl3=''
+        site = host.name.replace('http://','').replace('https://','')
         print('[!] Looking Up for Reverse DNS Info...')
         print(' [~] Result: \n')
-        text = requests.get('http://api.hackertarget.com/reversedns/?q=' + site)
-        result = text.text.split(' ')
-        if 'error' not in result and 'no' != result[0]:
-            #res = result.splitlines()
-            #for r in result:
-            print(color.blue(' [+] Received : ')+color.yellow(result[0])+color.white(' => ')+color.blue('('+result[1].strip()+')'))
-
-            #p = 'tmp/logs/'+web+'-logs/'+web+'-reverse-dns.lst'
-            #open(p,'w+')
-            #print(B+' [!] Saving links...')
-
-            # for m in links:
-            #     print(m)
-            #     m = m + '\n'
-            #     ile = open(p,"a")
-            #     ile.write(m)
-            #     ile.close()
-            # pa = os.getcwd()
-            # print(G+' [+] Links saved under '+pa+'/'+p+'!')
-            # print('')
-
+        text = requests.get('http://api.hackertarget.com/reversedns/?q=' + site).text
+        result = str(text)
+        res = result.splitlines()
+        if 'error' not in res and 'no' != res[0]:
+            data = result
+            save_data(host.database, host.module, host.lvl1, host.lvl2, host.lvl3, host.name, data)
         else:
             print(color.red(' [-] No result found!'))
-
+    return
 
