@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import subprocess
+from database.database_module import save_data
 
 '''
 TODO:
@@ -40,6 +41,7 @@ TODO:
 '''
 
 def nikto(target):
+    from core.build_menu import buildmenu
     print('NIKTO', dict(target[0]))
 
     for host in target:
@@ -49,7 +51,7 @@ def nikto(target):
         print('NIKTOSCAN', NIKTOSCAN)
         # results_nikto = subprocess.run(NIKTOSCAN, shell=True)
         return NIKTOSCAN
-
+    buildmenu(target,target[0].main_menu,'Main Menu','')
 
 
     # process = subprocess.run('nikto -h {}'.format(target[0].ip), shell=True, capture_output=True)

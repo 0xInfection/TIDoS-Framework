@@ -74,7 +74,7 @@ def buildmenu(target,dict,banner,art):
     elif choice.lower() == 'p':
         found = True
         print('MULTIPROCESS OPTION')
-
+        print('PROCESS', Process.name)
     else:
         for key, value in dictionary.items():
             if str(choice) == str(key): # select option
