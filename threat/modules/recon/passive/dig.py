@@ -1,16 +1,12 @@
 import subprocess
+from database.database_module import save_data
 
 def dig(target):
-    for domain in target:
-        DIGSCAN = "dig "+domain.name
-
-        # print(bcolors.HEADER + "INFO: Starting dig scan for " + ip_address + bcolors.ENDC)
-        #DIGSCAN = "dig " + target[0].name
-        # print(bcolors.HEADER + DIGSCAN + bcolors.ENDC)
+    for host in target:
+        host.lvl2='dig'
+        host.lvl3=''
+        DIGSCAN = "dig "+host.name
         results_dig = subprocess.check_output(DIGSCAN, shell=True)
-        # print(bcolors.OKGREEN + "INFO: RESULT BELOW - Finished with dig scan for " + ip_address + bcolors.ENDC)
-        this=results_dig.decode().replace("<<-","")
-        print(this)
-        # write_to_file(ip_address, "dig", this)
-        # print(bcolors.OKGREEN + "INFO: nmap scan still in progress.. " + ip_address + bcolors.ENDC)
+        data=results_dig.decode().replace("<<","").replace(">>","")
+        save_data(host.database, host.module, host.lvl1, host.lvl2, host.lvl3, host.name, data)
     return

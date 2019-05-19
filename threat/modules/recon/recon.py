@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 
-# menu 2
-
 def recon(target):
     from core.build_menu import buildmenu
+    for host in target:
+        host.module = 'ReconANDOSINT'
     menu = { # '#' : ['module', 'description', 'function']
         '1':['Passive Reconnaissance','(Open Source Intelligence)','passive_recon'],\
         '2':['Active Reconnaissance','(Gather via Interaction)','active_recon'],\

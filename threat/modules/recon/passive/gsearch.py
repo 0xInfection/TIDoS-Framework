@@ -123,19 +123,21 @@ def search(query, num_results=10):
 			links.append((name, url))
 	return links
 
-
-def gsearch(target):
+def gsearch(host):
 	"""
 	CLI endpoint to run the program
 	"""
-	print(target)
+	print(host.dork)
 	#query=t.name.replace('http://','').replace('https://','')
-	results = search(target)
+	results = search(str(host.dork))
 	# output
 	if type(results) == list:
-		ct = 1
+		obj_list=[]
+		# ct = 1
 		for r in results:
-			print(str(ct) + '.', r[0] + '\n  ' + r[1])
-			ct += 1
+			obj_list.append(r[0].replace('|','')+'::'+r[1])
+			# 	print(str(ct) + '.', r[0] + '\n  ' + r[1])
+			# 	ct += 1
+		return obj_list
 	else:
 		print(results)
