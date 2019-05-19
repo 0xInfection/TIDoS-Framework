@@ -4,8 +4,8 @@ import sys
 from modules.database.db_menu import db_menu
 from .colors import color
 from collections import OrderedDict
-from .functions import functions, multiprocess_functions, multi
-
+from .functions import functions, multiprocess_functions
+from .process import multi
 
 def exit():
     print(color.red(' [-] Exiting...'))
@@ -42,7 +42,6 @@ def buildmenu(target,dict,banner,art):
             print('\n'+color.green(' [A] ') + color.yellow('Run all\n'))
         print(color.green(' [M] ') + color.yellow('Main Menu\n'))
         print(" " + color.custom('[B] Back',bold=True,white=True,bg_red=True)+'\n')
-        print(" "+ color.custom('[0] Exit',bold=True,white=True,bg_red=True)+'\n')
 
     choice = input('[#] Choose Option:> ')
     found = False
@@ -53,7 +52,7 @@ def buildmenu(target,dict,banner,art):
         buildmenu(target,target[0].last_menu,'','')
     elif choice.lower() == 'a':
         for key, value in dictionary.items():
-            target[0].option = value[0]
+            target[0].module = value[0]
             target[0].description = value[1]
             build_banner(value[0].replace('(','').replace(')',''))
             try:
@@ -71,8 +70,9 @@ def buildmenu(target,dict,banner,art):
     else:
         for key, value in dictionary.items():
             if str(choice) == str(key): # select option
-                target[0].option = value[0]
+                target[0].module = value[0]
                 target[0].description = value[1]
+
                 if 'Temp if statement in case dont want to pass target' in banner: # DEBUG: Might use this option
                     results=functions[value[2]]
                 else:
@@ -100,5 +100,3 @@ def buildmenu(target,dict,banner,art):
     if found == False:
         print(color.red('Invalid selection.'))
         pass
-
-    buildmenu(target,dict,banner,art)
