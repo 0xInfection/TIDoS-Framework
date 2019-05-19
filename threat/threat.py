@@ -10,7 +10,8 @@ menu = { # '#' : ['module', 'description', 'function']
         '2':['Scanning & Enumeration','Description','scanenum'],\
         '3':['Vulnerability Analysis','Description','vulnysis'],\
         '4':['Exploitation','Description','exploitation'],\
-        '5':['Post Analysis','Description','post']\
+        '5':['Post Analysis','Description','post'],\
+        '6':['Access Data', 'Description', 'db_menu']
     }
 
 processes=[]

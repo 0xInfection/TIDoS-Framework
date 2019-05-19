@@ -9,6 +9,7 @@ from modules.recon.recon import recon
 from modules.enumeration.scanenum import scanenum
 from modules.exploitation.exploitation import exploitation
 from modules.vulnysis.vulnysis import vulnysis
+from modules.database.db_menu import db_menu
 
 # passive recon
 from modules.recon.passive_recon import passive_recon
@@ -70,11 +71,15 @@ from modules.enumeration.windows_enum import windows_enum           # enables wi
 from modules.enumeration.windows.enum4linux import enum4linux       # enables enum4linux module
 from modules.enumeration.nmap_menu import nmap_menu
 
+# database
+from modules.database.database_module import get_info
+
 functions = {
     'recon':recon,
     'scanenum':scanenum,
     'exploitation':exploitation,
     'vulnysis':vulnysis,
+    'db_menu':db_menu,
     #'post':post
 
     # recon related
@@ -86,7 +91,10 @@ functions = {
     #''
 
     # enumeration
-    'windows_enum':windows_enum
+    'windows_enum':windows_enum,
+
+    # databased
+    'get_info':get_info
 }
 
 multiprocess_functions = {
