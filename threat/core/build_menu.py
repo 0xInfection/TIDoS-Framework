@@ -4,6 +4,7 @@ import sys
 from .colors import color
 from collections import OrderedDict
 from .functions import functions, multiprocess_functions, multi
+from multiprocessing import Process
 
 
 def exit():
@@ -35,6 +36,9 @@ def buildmenu(target,dict,banner,art):
         print(color.green(' ['+str(i)+'] ') + color.blue(value[0]) + " - " + color.custom(value[1], white=True))
         i+=1
     if 'Main Menu' in banner:
+        # MULTIPROCESS OPTIONS
+        print('\n ' + color.green('[P] ') + color.blue('Multiprocess Queue ') + color.custom('- Check Status of Multiprocesses',reset=True,white=True))
+
         print('\n ' + color.custom('[0] Exit',bold=True,white=True,bg_red=True)+'\n')
     else:
         if not 'Temp if statement in case dont want to run all' in banner: # DEBUG: might want to not run all on a sub menu
@@ -64,9 +68,22 @@ def buildmenu(target,dict,banner,art):
     elif choice.lower() == 'm':
         found = True
         buildmenu(target,target[0].main_menu,'Main Menu','')
+    elif choice.lower() == 'p':
+        found = True
+        print('MULTIPROCESS OPTION')
+
     else:
         for key, value in dictionary.items():
             if str(choice) == str(key): # select option
+                # print('SELECT TARGET OPTIONS KEY', key)
+                # print('SELECT TARGET OPTIONS VALUE', value)
+
+                # NIKTO
+                if value[0] == 'Nikto':
+                    for host in target:
+                        host.port = '80'
+                        # print('NIKTO HOST', host.port)
+
                 target[0].description = value[1]
                 if 'Temp if statement in case dont want to pass target' in banner: # DEBUG: Might use this option
                     results=functions[value[2]]

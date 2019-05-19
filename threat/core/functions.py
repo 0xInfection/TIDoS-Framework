@@ -261,6 +261,7 @@ multiprocess_functions = {
 
 
 def do_job(func,tgt):#,tasks_to_accomplish, tasks_that_are_done):
+    print('DO JOB')
     while True:
         try:
             '''
@@ -289,6 +290,7 @@ def do_job(func,tgt):#,tasks_to_accomplish, tasks_that_are_done):
 
 
 def multi(func,tgt):
+    print('MULTI')
     tasks_to_accomplish.put(str(func))
 
     # creating processes
