@@ -48,7 +48,7 @@ def cmd2num_associator(arg, menu_obj):
             if("tag" in menu_obj[menu_number] and menu_obj[menu_number]["tag"] == each_tag):
                 cmd2num[each_tag] = menu_number
 
-def create_nmap_menu(menu):
+def create_nmap_menu(menu, passed_target):
     global description_boolean
     index = 0
     for index, order_header in enumerate(preferred_order):
@@ -109,7 +109,7 @@ def nmap_menu(target):
 
     while(exit_condition == False):
         # Invoke Create Menu Function
-        create_nmap_menu(menu)
+        create_nmap_menu(menu, target)
         nmap_command = str(nmap_target_sorter(nmap_obj)[0])
         print('\n' + '-'*55)
         print(color.green('Current nmap Command:  \n') + color.red(nmap_command) + '\n' + '-'*55)
@@ -120,7 +120,10 @@ def nmap_menu(target):
             exit_condition = True
 
         # Clean user input
-        user_input = list(user_input.strip())[0].lower()
+        if (list(user_input.strip())[0].isalpha()):
+            user_input = list(user_input.strip())[0].lower()
+        else:
+            user_input = str(user_input.strip())
         tag_arg_set = [preferred_order, nmap_params, menu]
 
         # [D] : --------- Description toggle -------------------------
