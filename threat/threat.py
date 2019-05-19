@@ -3,6 +3,8 @@ import re
 import sys
 from core.colors import color
 from multiprocessing import Queue
+import re
+from core.colors import color
 
 # menu 1
 
@@ -34,7 +36,7 @@ class Target:
         self.description = ''
         self.ip = ip
         self.port = ''
-        self.cmd_options = { "empty": False }
+        self.cmd_options = {}
         self.lvl = 0
         self.last_lvl=0
         self.database = database
@@ -50,7 +52,7 @@ def threat():
     while True:
         try:
             while(host_valid is False):
-                host = input('\nInput host/IP (ie: 192.168.10.1) \n')# DEBUG: temp value
+                host = input('\n[#] Input Host/IP (ie: 192.168.10.1):> ')# DEBUG: temp value
                 if(host.lower() == 'exit' or host.lower() == 'q'):
                     sys.exit()
                 elif(re.match(valid_host_regex, host)):
