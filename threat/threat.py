@@ -30,7 +30,7 @@ class Target:
         self.description = ''
         self.ip = ip
         self.port = ''
-        self.cmd_options = {}
+        self.cmd_options = { "empty": False }
         self.lvl = 0
         self.last_lvl=0
     def __iter__(self):

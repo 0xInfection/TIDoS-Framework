@@ -4,8 +4,9 @@ import re
 import json
 from core.colors import color
 from modules.enumeration.nmap_builder import nmap_target_sorter
-from modules.enumeration.nmap_support.nmap_helper_functions import *
-
+from modules.enumeration.nmap_support.nmap_helper_functions import list_create_and_dedupe
+from modules.enumeration.nmap_support.nmap_helper_functions import tag_manager
+from modules.enumeration.nmap_support.nmap_helper_functions import retrieve_module_index
 
 ### -- THIS IS THE PATH OF THE DEFAULT TARGET ACCESSED INITIALLY IN THE EDITOR -- ###
 with open('modules/enumeration/nmap_support/sample_target.json') as the_json:
