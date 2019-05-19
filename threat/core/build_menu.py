@@ -3,8 +3,8 @@ import os
 import sys
 from .colors import color
 from collections import OrderedDict
-from .functions import functions, multiprocess_functions
-from .process import multi
+from .functions import functions, multiprocess_functions, multi
+
 
 def exit():
     print(color.red(' [-] Exiting...'))
