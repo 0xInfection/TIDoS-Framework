@@ -1,5 +1,7 @@
 #!/usr/bin/env python
+import re
 import sys
+from core.colors import color
 from multiprocessing import Queue
 import re
 from core.colors import color
@@ -34,7 +36,7 @@ class Target:
         self.description = ''
         self.ip = ip
         self.port = ''
-        self.cmd_options = ''
+        self.cmd_options = {}
         self.lvl = 0
         self.last_lvl=0
         self.database = database
@@ -61,7 +63,7 @@ def threat():
                     target.append(Target(host,current_menu,last_menu,menu,ip))
                     buildmenu(target,menu,'Main Menu','')
                 else:
-                    print(color.red("Invali d Host Address, try again: "))
+                    print(color.red("Invalid Host Address, try again: "))
                     host_valid = False
         except KeyboardInterrupt:
             print("Keyboard interrupted")

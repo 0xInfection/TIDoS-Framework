@@ -4,8 +4,9 @@ import re
 import json
 from core.colors import color
 from modules.enumeration.nmap_builder import nmap_target_sorter
-from modules.enumeration.nmap_support.nmap_helper_functions import *
-
+from modules.enumeration.nmap_support.nmap_helper_functions import list_create_and_dedupe
+from modules.enumeration.nmap_support.nmap_helper_functions import tag_manager
+from modules.enumeration.nmap_support.nmap_helper_functions import retrieve_module_index
 
 ### -- THIS IS THE PATH OF THE DEFAULT TARGET ACCESSED INITIALLY IN THE EDITOR -- ###
 with open('modules/enumeration/nmap_support/sample_target.json') as the_json:
@@ -35,7 +36,7 @@ preferred_order = start_menu_order + menu_toggle_items
 # Variables (LETTERS) for Menu buttons (If like to customize, only need to change here)
 the_all_off_button = "F"
 the_all_on_button = "O"
-exit_button = "E"
+exit_button = "0"
 description_button = "D"
 description_boolean = False
 
@@ -47,7 +48,7 @@ def cmd2num_associator(arg, menu_obj):
             if("tag" in menu_obj[menu_number] and menu_obj[menu_number]["tag"] == each_tag):
                 cmd2num[each_tag] = menu_number
 
-def create_nmap_menu(menu):
+def create_nmap_menu(menu, passed_target):
     global description_boolean
     index = 0
     for index, order_header in enumerate(preferred_order):
@@ -61,12 +62,13 @@ def create_nmap_menu(menu):
     menu[the_all_off_button.upper()] = {"header" : "Turn off all options"}
     menu[the_all_on_button.upper()] = {"header" : "Turn on all options"}
     menu[description_button.upper()] = {"header" : "Description Toggle"}
-    menu[exit_button.upper()] = {"header" : "Exit"}
+    menu[exit_button.upper()] = {"header" : ">>> Exit"}
     cmd2num_associator(cmd_list, menu)
 
 
     ### --- Shortcut variable to avoid repeated typing of ~[0]["nmap"] --- ###
-    nmap_obj = default_target[0]["nmap"]
+    # nmap_obj = default_target[0]["nmap"]
+    nmap_obj = passed_target[0].cmd_options
     ##########################################################################
 
 
@@ -76,7 +78,11 @@ def create_nmap_menu(menu):
         header = color.blue(node["header_template"])
         # If target obj has a relevant param set to true, show in menu as on. Otherwise show as turned off
         if(key in nmap_obj and nmap_obj[key] == True):
+            nmap_obj[key] = True
             node["header"] = color.yellow(node["on"]) + header
+        elif(key in nmap_obj and nmap_obj[key] == True):
+            nmap_obj[key] = False
+            node["header"] = color.red(node["off"]) + header
         else:
             nmap_obj[key] = False
             node["header"] = color.red(node["off"]) + header
@@ -99,27 +105,32 @@ def create_nmap_menu(menu):
 
 # ------------------ This is the start of the NMAP MENU function -------------------------------
 # After {create_nmap_menu} is ran in {nmap_menu} function, menu items are displayed and user_input determines next steps
-def nmap_menu(target):
+def nmap_menu(passed_target):
     global description_boolean
     user_input = ''
-    nmap_obj = default_target[0]
-    nmap_params = nmap_obj["nmap"]
+    nmap_obj = passed_target[0]
+    nmap_params = passed_target[0].cmd_options
+    # nmap_params = nmap_obj["nmap"]
     exit_condition = False
 
     while(exit_condition == False):
         # Invoke Create Menu Function
-        create_nmap_menu(menu)
-        nmap_command = str(nmap_target_sorter(nmap_obj)[0])
+        create_nmap_menu(menu, passed_target)
+        nmap_command = str(nmap_target_sorter(passed_target[0]))
         print('\n' + '-'*55)
         print(color.green('Current nmap Command:  \n') + color.red(nmap_command) + '\n' + '-'*55)
 
         # [E] :  ----------- Graceful Exit  --------------------
         user_input = input('\n[#] Choose Option:> ')
-        if(user_input.lower() == 'exit' or user_input.lower() == 'e'):
+        lowered = user_input.lower()
+        if(lowered == exit_button or lowered == 'exit' or lowered == 'e'):
             exit_condition = True
 
         # Clean user input
-        user_input = list(user_input.strip())[0].lower()
+        if (list(user_input.strip())[0].isalpha()):
+            user_input = list(user_input.strip())[0].lower()
+        else:
+            user_input = str(user_input.strip())
         tag_arg_set = [preferred_order, nmap_params, menu]
 
         # [D] : --------- Description toggle -------------------------
@@ -145,7 +156,7 @@ def nmap_menu(target):
             if(address == 'exit'):
                 print('Exiting')
             elif(re.match(reg_string, address)):
-                nmap_obj["ip"] = address
+                nmap_obj.name = address
             else:
                 print(color.red(menu[user_input]["error"]))
 
