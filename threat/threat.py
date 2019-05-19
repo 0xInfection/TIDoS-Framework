@@ -11,13 +11,15 @@ menu = { # '#' : ['module', 'description', 'function']
         '2':['Scanning & Enumeration','Description','scanenum'],\
         '3':['Vulnerability Analysis','Description','vulnysis'],\
         '4':['Exploitation','Description','exploitation'],\
-        '5':['Post Analysis','Description','post_exploitation']\
+        '5':['Post Analysis','Description','post'],\
+        '6':['Access Data', 'Description', 'db_menu']
     }
 
 processes=[]
 target=[]
 tasks_to_accomplish = Queue()
 tasks_that_are_done = Queue()
+database = './database/tidos.db'
 
 class Target:
     def __init__(self,name,current_menu,last_menu,main_menu,ip):
@@ -35,6 +37,9 @@ class Target:
         self.cmd_options = { "empty": False }
         self.lvl = 0
         self.last_lvl=0
+        self.database = database
+        self.option = ''
+        self.dork=''
     def __iter__(self):
         for attr, value in self.__dict__.items():
             yield attr, value
