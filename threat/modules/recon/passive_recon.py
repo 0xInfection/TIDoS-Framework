@@ -12,7 +12,7 @@ def passive_recon(target):
         '1':['dig lookup','(DIG SCAN)','dig'],\
         '2':['WhoIS lookup','(Gather via Interaction)','whois'],\
         '3':['NPING','(NPING Target)','nping'],\
-        '4':['GeoIP Lookup','','getgeoip'],\
+        '4':['GeoIP Lookup','(Geographic IP Lookup)','getgeoip'],\
         '5':['DNS Lookup','','dnschk'],\
         '6':['Subdomain Scan','','subdom'],\
         '7':['Reverse DNS Lookup','(Reverse DNS Lookup)','revdns'],\
@@ -30,7 +30,7 @@ def passive_recon(target):
         '19':['PasteBin Posts','','pastebin'],\
         '20':['LinkedIn Gathering','(Lookup LinkedIn Profiles)','linkedin'],\
         '21':['Google Plus Gathering','','googlenum'],\
-        '22':['Public Contact Info','','getconinfo'],\
+        '22':['Public Contact Info','(all fullcontact.com information)','getconinfo'],\
         '23':['CENSYS Gathering','','censysdom'],\
         '24':['Threat Intel Gathering','','threatintel'],\
     }

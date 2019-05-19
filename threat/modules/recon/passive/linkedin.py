@@ -23,11 +23,11 @@ def linkedin(target):
                 this = gsearch(host)
                 if len(this)>0:
                     data=str(this)
-                    print(data)
+                    #print(data)
                     save_data(host.database, host.module, host.lvl1, host.lvl2, host.lvl3, host.name, data)
                     time.sleep(5)
             except Exception as data:
-                #save_data(host.database, host.module, host.lvl1, host.lvl2, host.lvl3, host.name, data)
+                save_data(host.database, host.module, host.lvl1, host.lvl2, host.lvl3, host.name, data)
                 pass
 
         try:
@@ -41,7 +41,7 @@ def linkedin(target):
             print(' [*] Finding Linkedin company profiles...\n')
             host.dork = "site:linkedin.com company "+site+""
 
-            #google_it(host)
+            google_it(host)
 
         except requests.HTTPError as err:
             if err.code == 503:
