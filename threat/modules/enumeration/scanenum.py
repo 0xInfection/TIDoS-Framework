@@ -6,7 +6,7 @@ def scanenum(target):
     from core.build_menu import buildmenu
     for host in target:
         host.module = 'ScanANDEnum'
-    # print('TARGET', dict(target[0]))
+    print('TARGET', dict(target[0]))
     # nikto_options = {
     #     '-h': target[0].ip,
     #     '-p': target[0].port

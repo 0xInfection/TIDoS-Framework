@@ -40,7 +40,7 @@ class Target:
 def threat():
     while True:
         try:
-            host = input('\nInput host/IP\n')# DEBUG: temp value
+            host = input('\n[#] Input Host/IP:> ')
             current_menu = menu
             last_menu = menu
             ip = host

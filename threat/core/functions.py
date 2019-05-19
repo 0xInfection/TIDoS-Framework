@@ -66,9 +66,9 @@ from modules.recon.info.phone import phone
 from modules.recon.info.ssn import ssn
 
 # enumeration
-from modules.enumeration.nikto import nikto                         # nikto
-from modules.enumeration.windows_enum import windows_enum           # enables windows enum module
-from modules.enumeration.windows.enum4linux import enum4linux       # enables enum4linux module
+from modules.enumeration.nikto import nikto
+from modules.enumeration.windows_enum import windows_enum
+from modules.enumeration.windows.enum4linux import enum4linux
 from modules.enumeration.nmap_menu import nmap_menu
 
 # post / aux modules
@@ -81,7 +81,7 @@ from modules.vulnysis.critical.rce import rce
 from modules.vulnysis.critical.csrf import csrf
 from modules.vulnysis.critical.sqli import sqli
 from modules.vulnysis.critical.crlf import crlf
-from modules.vulnysis.critical.subdomover import subdomover 
+from modules.vulnysis.critical.subdomover import subdomover
 from modules.vulnysis.critical.strutsshock import strutsshock
 from modules.vulnysis.critical.phpi import phpi
 from modules.vulnysis.critical.htmli import htmli
@@ -91,7 +91,7 @@ from modules.vulnysis.critical.xss import xss
 from modules.vulnysis.critical.openredirect import openredirect
 from modules.vulnysis.critical.pathtrav import pathtrav
 
-# misconfiguration	
+# misconfiguration
 from modules.vulnysis.misconfig_bugs import misconfig
 from modules.vulnysis.misconfig.icors import icors
 from modules.vulnysis.misconfig.ssscript import ssscript
@@ -108,7 +108,7 @@ from modules.vulnysis.misconfig.cookiecheck import cookiecheck
 from modules.vulnysis.misconfig.mailspoof import mailspoof
 
 # vuln others
-from modules.vulnysis.other_bugs import other	
+from modules.vulnysis.other_bugs import other
 from modules.vulnysis.other.popbrute import popbrute
 from modules.vulnysis.other.ftpbrute import ftpbrute
 from modules.vulnysis.other.sqlbrute import sqlbrute
