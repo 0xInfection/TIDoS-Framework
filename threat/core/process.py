@@ -44,7 +44,7 @@ def multi(func,tgt):
         #p = Process(target=do_job, args=(func,tgt,tasks_to_accomplish, tasks_that_are_done))
     p = Process(target=do_job, args=(func,tgt))
     processes.append(p)
-    print(color.green('INFO: Starting '+tgt[0].module))
+    print(color.green('INFO: Starting '+tgt[0].module+':'+tgt[0].lvl1+':'+tgt[0].lvl2+':' +tgt[0].lvl3))
     p.start()
 
     # completing process
