@@ -7,6 +7,7 @@ import queue # imported for using queue.Empty exception
 from threat import processes, tasks_that_are_done, tasks_to_accomplish
 from .colors import color
 
+
 NUM_WORKERS = 4#multiprocessing.cpu_count()
 
 sys.path.append(os.path.abspath('.'))
@@ -268,6 +269,12 @@ multiprocess_functions = {
 
 
 def do_job(func,tgt):#,tasks_to_accomplish, tasks_that_are_done):
+    from core.build_menu import buildmenu
+    '''
+    TODO:
+        1. buildmenu callback after multiprocess runs
+    '''
+
     print('DO JOB')
     while True:
         try:
@@ -278,10 +285,24 @@ def do_job(func,tgt):#,tasks_to_accomplish, tasks_that_are_done):
             '''
             #global processes
             #global tasks_to_accomplish
+
+            menu = { # '#' : ['module', 'description', 'function']
+                '1':['Reconnaissance & OSINT','Description','recon'],\
+                '2':['Scanning & Enumeration','Description','scanenum'],\
+                '3':['Vulnerability Analysis','Description','vulnysis'],\
+                '4':['Exploitation','Description','exploitation'],\
+                '5':['Post Analysis','Description','post'],\
+                '6':['Access Data', 'Description', 'db_menu']
+            }
+
             task = tasks_to_accomplish.get_nowait()
             p = Process(target=func, args=(tgt,))
             processes.append(p)
+            print('PROCESSES', processes)
+            print('PPPP', p)
             p.start()
+            print('STARTED')
+            buildmenu(tgt,menu,'Scanning and Enumeration','')          # build menu
         except queue.Empty:
 
             break

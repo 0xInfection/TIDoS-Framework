@@ -42,17 +42,18 @@ TODO:
 
 def nikto(target):
     from core.build_menu import buildmenu
-    print('NIKTO', dict(target[0]))
+    # print('NIKTO', dict(target[0]))
 
     for host in target:
         host.lvl2 = 'nikto'
         host.lvl3 = ''
         NIKTOSCAN = 'nikto -h ' + host.ip + ' -p ' + host.port
-        print('NIKTOSCAN', NIKTOSCAN)
+        # print('NIKTOSCAN', NIKTOSCAN)
         # results_nikto = subprocess.run(NIKTOSCAN, shell=True)
-        return NIKTOSCAN
-    buildmenu(target,target[0].main_menu,'Main Menu','')
-
+        results_nikto = subprocess.check_output(NIKTOSCAN, shell=True)
+        data=results_nikto.decode().replace("<<","").replace(">>","")
+        # print('DATA', data)
+        # return NIKTOSCAN
 
     # process = subprocess.run('nikto -h {}'.format(target[0].ip), shell=True, capture_output=True)
     # process = subprocess.run(cmd_str, shell=True)
