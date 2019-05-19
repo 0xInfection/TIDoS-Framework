@@ -35,6 +35,8 @@ class Target:
         self.lvl = 0
         self.last_lvl=0
         self.database = database
+        self.option = ''
+        self.dork=''
     def __iter__(self):
         for attr, value in self.__dict__.items():
             yield attr, value
