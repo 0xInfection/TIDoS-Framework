@@ -1,5 +1,7 @@
 #!/usr/bin/env python
+import re
 import sys
+from core.colors import color
 from multiprocessing import Queue
 
 # menu 1
@@ -38,14 +40,24 @@ class Target:
             yield attr, value
 
 def threat():
+    valid_host_regex = r'^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$'
+    host_valid = False
     while True:
         try:
-            host = input('\nInput host/IP\n')# DEBUG: temp value
-            current_menu = menu
-            last_menu = menu
-            ip = host
-            target.append(Target(host,current_menu,last_menu,menu,ip))
-            buildmenu(target,menu,'Main Menu','')
+            while(host_valid is False):
+                host = input('\nInput host/IP (ie: 192.168.10.1) \n')# DEBUG: temp value
+                if(host.lower() == 'exit' or host.lower() == 'q'):
+                    sys.exit()
+                elif(re.match(valid_host_regex, host)):
+                    host_valid =True
+                    current_menu = menu
+                    last_menu = menu
+                    ip = host
+                    target.append(Target(host,current_menu,last_menu,menu,ip))
+                    buildmenu(target,menu,'Main Menu','')
+                else:
+                    print(color.red("Invalid Host Address, try again: "))
+                    host_valid = False
         except KeyboardInterrupt:
             print("Keyboard interrupted")
         finally:
