@@ -1,10 +1,12 @@
 #!/usr/bin/env python
 import os
 import sys
+from modules.database.db_menu import db_menu
 from .colors import color
 from collections import OrderedDict
 from .functions import functions, multiprocess_functions, multi
 from .settings import settings
+from multiprocessing import Process
 
 
 def exit():
@@ -36,6 +38,9 @@ def buildmenu(target,dict,banner,art):
         print(color.green(' ['+str(i)+'] ') + color.blue(value[0]) + " - " + color.custom(value[1], white=True))
         i+=1
     if 'Main Menu' in banner:
+        # MULTIPROCESS OPTIONS
+        print('\n ' + color.green('[P] ') + color.blue('Multiprocess Queue ') + color.custom('- Check Status of Multiprocesses',reset=True,white=True))
+
         print('\n ' + color.custom('[0] Exit',bold=True,white=True,bg_red=True)+'\n')
     else:
         if not 'Temp if statement in case dont want to run all' in banner: # DEBUG: might want to not run all on a sub menu
@@ -43,7 +48,6 @@ def buildmenu(target,dict,banner,art):
         print(color.green(' [M] ') + color.yellow('Main Menu\n'))
         print(color.green(' [S] ') + color.yellow('Settings\n'))
         print(" " + color.custom('[B] Back',bold=True,white=True,bg_red=True)+'\n')
-        print(" "+ color.custom('[0] Exit',bold=True,white=True,bg_red=True)+'\n')
 
     choice = input('[#] Choose Option:> ')
     found = False
@@ -54,7 +58,7 @@ def buildmenu(target,dict,banner,art):
         buildmenu(target,target[0].last_menu,'','')
     elif choice.lower() == 'a':
         for key, value in dictionary.items():
-            target[0].option = value[0]
+            target[0].module = value[0]
             target[0].description = value[1]
             build_banner(value[0].replace('(','').replace(')',''))
             try:
@@ -70,11 +74,25 @@ def buildmenu(target,dict,banner,art):
     elif choice.lower() == 's':
         found = True
         buildmenu(target,target[0].settings_menu,'Settings','')
+    elif choice == '6':
+        db_menu()
+    elif choice.lower() == 'p':
+        found = True
+        print('MULTIPROCESS OPTION')
     else:
         for key, value in dictionary.items():
             if str(choice) == str(key): # select option
-                target[0].option = value[0]
+                # print('SELECT TARGET OPTIONS KEY', key)
+                # print('SELECT TARGET OPTIONS VALUE', value)
+
+                # NIKTO
+                if value[0] == 'Nikto':
+                    for host in target:
+                        host.port = '80'
+                        # print('NIKTO HOST', host.port)
+
                 target[0].description = value[1]
+
                 if 'Temp if statement in case dont want to pass target' in banner: # DEBUG: Might use this option
                     results=functions[value[2]]
                 else:
@@ -102,5 +120,3 @@ def buildmenu(target,dict,banner,art):
     if found == False:
         print(color.red('Invalid selection.'))
         pass
-
-    buildmenu(target,dict,banner,art)
