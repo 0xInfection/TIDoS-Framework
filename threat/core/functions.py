@@ -7,7 +7,6 @@ import queue # imported for using queue.Empty exception
 from threat import processes, tasks_that_are_done, tasks_to_accomplish
 from .colors import color
 
-
 NUM_WORKERS = 4#multiprocessing.cpu_count()
 
 sys.path.append(os.path.abspath('.'))
@@ -17,7 +16,6 @@ from modules.recon.recon import recon
 from modules.enumeration.scanenum import scanenum
 from modules.exploitation.exploitation import exploitation
 from modules.vulnysis.vulnysis import vulnysis
-from modules.database.db_menu import db_menu
 from modules.post.post_exploitation import post_exploitation
 
 # passive recon
@@ -76,12 +74,12 @@ from modules.recon.info.ssn import ssn
 
 # enumeration
 from modules.enumeration.nikto import nikto
+from modules.enumeration.nikto_menu import nikto_menu
+from modules.enumeration.nikto_help import nikto_help
 from modules.enumeration.windows_enum import windows_enum
 from modules.enumeration.windows.enum4linux import enum4linux
 from modules.enumeration.nmap_menu import nmap_menu
 
-# database
-from modules.database.database_module import get_info
 # post / aux modules
 # critical bugs
 from modules.vulnysis.critical_bugs import critical
@@ -139,8 +137,6 @@ functions = {
     'scanenum':scanenum,
     'exploitation':exploitation,
     'vulnysis':vulnysis,
-    'db_menu':db_menu,
-    #'post':post
     'post_exploitation':post_exploitation,
 
     # recon related
@@ -153,9 +149,9 @@ functions = {
 
     # enumeration
     'windows_enum':windows_enum,
+    'nikto_menu':nikto_menu,
+    'nikto_help':nikto_help,
 
-    # databased
-    'get_info':get_info,
     #vuln
     'critical':critical,
     'misconfig':misconfig,
@@ -269,12 +265,6 @@ multiprocess_functions = {
 
 
 def do_job(func,tgt):#,tasks_to_accomplish, tasks_that_are_done):
-    from core.build_menu import buildmenu
-    '''
-    TODO:
-        1. buildmenu callback after multiprocess runs
-    '''
-
     print('DO JOB')
     while True:
         try:
@@ -285,24 +275,12 @@ def do_job(func,tgt):#,tasks_to_accomplish, tasks_that_are_done):
             '''
             #global processes
             #global tasks_to_accomplish
-
-            menu = { # '#' : ['module', 'description', 'function']
-                '1':['Reconnaissance & OSINT','Description','recon'],\
-                '2':['Scanning & Enumeration','Description','scanenum'],\
-                '3':['Vulnerability Analysis','Description','vulnysis'],\
-                '4':['Exploitation','Description','exploitation'],\
-                '5':['Post Analysis','Description','post'],\
-                '6':['Access Data', 'Description', 'db_menu']
-            }
-
             task = tasks_to_accomplish.get_nowait()
             p = Process(target=func, args=(tgt,))
+            print('DO JOB P', p)
             processes.append(p)
             print('PROCESSES', processes)
-            print('PPPP', p)
             p.start()
-            print('STARTED')
-            buildmenu(tgt,menu,'Scanning and Enumeration','')          # build menu
         except queue.Empty:
 
             break
@@ -319,6 +297,7 @@ def do_job(func,tgt):#,tasks_to_accomplish, tasks_that_are_done):
 
 def multi(func,tgt):
     print('MULTI')
+    print('PROCESSES', processes)
     tasks_to_accomplish.put(str(func))
 
     # creating processes
@@ -326,15 +305,17 @@ def multi(func,tgt):
         #p = Process(target=do_job, args=(func,tgt,tasks_to_accomplish, tasks_that_are_done))
     p = Process(target=do_job, args=(func,tgt))
     processes.append(p)
-    print(color.green('INFO: Starting '+tgt[0].option))
+    print(color.green('INFO: Starting '+tgt[0].module+':'+tgt[0].lvl1+':'+tgt[0].lvl2+':' +tgt[0].lvl3))
     p.start()
 
     # completing process
     for p in processes:
+        print('P AT START', p)
         p.join()
+        print('P AT STOP', p)
 
     # print the output
-    # while not tasks_that_are_done.empty():
-    #     print(tasks_that_are_done.get())
+    while not tasks_that_are_done.empty():
+        print(tasks_that_are_done.get())
 
     return True

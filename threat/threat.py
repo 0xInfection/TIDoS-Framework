@@ -42,6 +42,7 @@ class Target:
         self.database = database
         self.option = ''
         self.dork=''
+        self.help = ''
     def __iter__(self):
         for attr, value in self.__dict__.items():
             yield attr, value

@@ -6,6 +6,7 @@ from .colors import color
 from collections import OrderedDict
 from .functions import functions, multiprocess_functions, multi
 from multiprocessing import Process
+import subprocess
 
 
 def exit():
@@ -45,6 +46,7 @@ def buildmenu(target,dict,banner,art):
         if not 'Temp if statement in case dont want to run all' in banner: # DEBUG: might want to not run all on a sub menu
             print('\n'+color.green(' [A] ') + color.yellow('Run all\n'))
         print(color.green(' [M] ') + color.yellow('Main Menu\n'))
+        print(color.green(' [H] ') + color.yellow('Help\n'))
         print(" " + color.custom('[B] Back',bold=True,white=True,bg_red=True)+'\n')
 
     choice = input('[#] Choose Option:> ')
@@ -75,18 +77,24 @@ def buildmenu(target,dict,banner,art):
         found = True
         print('MULTIPROCESS OPTION')
         print('PROCESS', Process.name)
+        buildmenu(target,target[0].main_menu,'Main Menu','')
+    elif choice.lower() == 'h':
+        found = True
+        print('HELP OPTION')
+        print(target[0].help)
+        if target[0].help == '':
+            target[0].current_menu=target[0].last_menu
+            art=color.red('\nInvalid selection. ') + color.blue('Help') + color.red(' is not implemented yet.\n')
+            buildmenu(target,dict,banner,art)
+        else:
+            print('FOUND HELP', target[0].help)
+            print(color.green('INFO: Grabbing ' + target[0].help + ' Help Page'))
+            get_help = target[0].help.lower() + ' -H'
+            subprocess.run(get_help, shell=True)
+            buildmenu(target,dict,banner,art)
     else:
         for key, value in dictionary.items():
             if str(choice) == str(key): # select option
-                # print('SELECT TARGET OPTIONS KEY', key)
-                # print('SELECT TARGET OPTIONS VALUE', value)
-
-                # NIKTO
-                if value[0] == 'Nikto':
-                    for host in target:
-                        host.port = '80'
-                        # print('NIKTO HOST', host.port)
-
                 target[0].description = value[1]
 
                 if 'Temp if statement in case dont want to pass target' in banner: # DEBUG: Might use this option
@@ -97,6 +105,7 @@ def buildmenu(target,dict,banner,art):
                     try:
                         multi(multiprocess_functions[value[2]],target)
                         mp = True
+                        buildmenu(target,target[0].main_menu,'Main Menu','')
                     except Exception as e:
                         pass
                     finally:
