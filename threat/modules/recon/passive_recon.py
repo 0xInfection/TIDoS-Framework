@@ -26,12 +26,12 @@ def passive_recon(target):
         '15':['Hacked Email Check','','hackedmail'],\
         '16':['Mail to Domain','','mailtodom'],\
         '17':['Google Groups Enum','','googlegroups'],\
-        '18':['Check Username','','checkuser'],\
+        '18':['Check Username','(Check 160+ social media sites for username)','checkuser'],\
         '19':['PasteBin Posts','','pastebin'],\
         '20':['LinkedIn Gathering','(Lookup LinkedIn Profiles)','linkedin'],\
         '21':['Google Plus Gathering','','googlenum'],\
         '22':['Public Contact Info','(all fullcontact.com information)','getconinfo'],\
-        '23':['CENSYS Gathering','','censysdom'],\
+        '23':['CENSYS Gathering','(Gather CENSYS data if API not used up)','censysdom'],\
         '24':['Threat Intel Gathering','','threatintel'],\
     }
     buildmenu(target,menu,module,art)          # build menu

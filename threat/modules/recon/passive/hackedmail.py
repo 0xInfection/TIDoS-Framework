@@ -1,41 +1,32 @@
 #!/usr/bin/env python
 from core.colors import color
-def hackedmail(target):
-    print('This module is not yet available.')
-    pass
+from database.database_module import save_data
 
-# #!/usr/bin/env python
-# # -*- coding: utf-8 -*-
 
-# #-:-:-:-:-:-:-:-:-:-:-:-:#
-# #    TIDoS Framework     #
-# #-:-:-:-:-:-:-:-:-:-:-:-:#
+#save_data(host.database, host.module, host.lvl1, host.lvl2, host.lvl3, host.name, data)
 
-# #Author: @_tID
-# #This module requires TIDoS Framework
-# #https://github.com/0xInfection/TIDoS-Framework
-
-# from __future__ import print_function
 # import os
 # import sys
-# import requests
+import requests
 # import re
 # import time
 # import json
-# from core.Core.colors import *
-# from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
-# requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
+#from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
-# def getRes0x00():
+#requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
+def getRes0x00(target):
+    for host in target:
+        host.lvl2='hacked_emails'
+        host.lvl3=''
 #     email = raw_input(O+' [#] Enter the email :> '+R)
 #     if '@' in email and '.' in email:
 #         pass
 #     else:
 #         email = raw_input(O+' [#] Enter a valid email :> '+R)
 
-#     print(GR+' [*] Setting headers... (behaving as a browser)...')
+#     print(' [*] Setting headers... (behaving as a browser)...')
 #     time.sleep(0.7)
 #     headers =   {'User-Agent':'Mozilla/5.0 (Windows; U; Windows NT 6.1; rv:2.2) Gecko/20110201',
 #                  'Accept-Language':'en-US;',
@@ -67,12 +58,5 @@ def hackedmail(target):
 #         print(R+" [-] Can't reach url...")
 #         print(R+' [-] Request timed out!')
 
-# def hackedmail():
-
-#     print(GR+' [*] Loading module...')
-#     time.sleep(0.6)
-#     print(R+'\n    =========================')
-#     print(R+'     H A C K E D   E M A I L ')
-#     print(R+'    =========================\n')
-#     time.sleep(0.7)
-#     getRes0x00()
+def hackedmail(target):
+    getRes0x00(target)
