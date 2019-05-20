@@ -74,8 +74,6 @@ def buildmenu(target,dict,banner,art):
     elif choice.lower() == 's':
         found = True
         buildmenu(target,target[0].settings_menu,'Settings','')
-    elif choice == '6':
-        db_menu()
     elif choice.lower() == 'p':
         found = True
         print('MULTIPROCESS OPTION')
