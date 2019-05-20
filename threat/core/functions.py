@@ -74,8 +74,7 @@ from modules.recon.info.ssn import ssn
 
 # enumeration
 from modules.enumeration.nikto import nikto
-from modules.enumeration.nikto_menu import nikto_menu
-from modules.enumeration.nikto_help import nikto_help
+from modules.enumeration.nikto_menu import nikto_menu, nikto_ip, nikto_port, nikto_add_options
 from modules.enumeration.windows_enum import windows_enum
 from modules.enumeration.windows.enum4linux import enum4linux
 from modules.enumeration.nmap_menu import nmap_menu
@@ -150,7 +149,9 @@ functions = {
     # enumeration
     'windows_enum':windows_enum,
     'nikto_menu':nikto_menu,
-    'nikto_help':nikto_help,
+    'nikto_ip':nikto_ip,
+    'nikto_port':nikto_port,
+    'nikto_add_options':nikto_add_options,
 
     #vuln
     'critical':critical,

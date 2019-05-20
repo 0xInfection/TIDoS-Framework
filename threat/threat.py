@@ -14,7 +14,7 @@ menu = { # '#' : ['module', 'description', 'function']
         '3':['Vulnerability Analysis','Description','vulnysis'],\
         '4':['Exploitation','Description','exploitation'],\
         '5':['Post Analysis','Description','post'],\
-        '6':['Access Data', 'Description', 'db_menu']
+        # '6':['Access Data', 'Description', 'db_menu']
     }
 
 processes=[]
@@ -43,6 +43,8 @@ class Target:
         self.option = ''
         self.dork=''
         self.help = ''
+        self.options_list = ''
+        self.options_str = ''
     def __iter__(self):
         for attr, value in self.__dict__.items():
             yield attr, value
