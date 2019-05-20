@@ -13,8 +13,9 @@ menu = { # '#' : ['module', 'description', 'function']
         '2':['Scanning & Enumeration','Description','scanenum'],\
         '3':['Vulnerability Analysis','Description','vulnysis'],\
         '4':['Exploitation','Description','exploitation'],\
-        '5':['Post Analysis','Description','post'],\
-        '6':['Access Data', 'Description', 'db_menu']
+        '5':['Post Analysis','Description','post_exploitation'],\
+        '6':['Access Data', 'Description', 'db_menu'],\
+        '7':['Settings','View/Change settings','settings'],\
     }
 
 processes=[]
@@ -29,6 +30,7 @@ class Target:
         self.current_menu = current_menu
         self.last_menu = last_menu
         self.main_menu = main_menu
+        self.settings_menu=''
         self.lvl1 = ''
         self.lvl2 = ''
         self.lvl3 = ''
@@ -42,6 +44,9 @@ class Target:
         self.database = database
         self.option = ''
         self.dork=''
+        self.usernames=[]
+        self.emails=[]
+
     def __iter__(self):
         for attr, value in self.__dict__.items():
             yield attr, value

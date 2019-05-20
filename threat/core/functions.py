@@ -18,6 +18,13 @@ from modules.exploitation.exploitation import exploitation
 from modules.vulnysis.vulnysis import vulnysis
 from modules.database.db_menu import db_menu
 from modules.post.post_exploitation import post_exploitation
+from core import settings
+from core.settings import settings
+
+# settings
+from core.settings import add_host
+from core.settings import add_email
+from core.settings import add_username
 
 # passive recon
 from modules.recon.passive_recon import passive_recon
@@ -141,6 +148,12 @@ functions = {
     'db_menu':db_menu,
     #'post':post
     'post_exploitation':post_exploitation,
+    'settings':settings,
+
+    # settings
+    'add_host':add_host, 
+    'add_email':add_email,
+    'add_username':add_username,
 
     # recon related
     'passive_recon':passive_recon,

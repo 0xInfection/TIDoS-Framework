@@ -5,6 +5,7 @@ from modules.database.db_menu import db_menu
 from .colors import color
 from collections import OrderedDict
 from .functions import functions, multiprocess_functions, multi
+from .settings import settings
 from multiprocessing import Process
 
 
@@ -45,6 +46,7 @@ def buildmenu(target,dict,banner,art):
         if not 'Temp if statement in case dont want to run all' in banner: # DEBUG: might want to not run all on a sub menu
             print('\n'+color.green(' [A] ') + color.yellow('Run all\n'))
         print(color.green(' [M] ') + color.yellow('Main Menu\n'))
+        print(color.green(' [S] ') + color.yellow('Settings\n'))
         print(" " + color.custom('[B] Back',bold=True,white=True,bg_red=True)+'\n')
 
     choice = input('[#] Choose Option:> ')
@@ -69,12 +71,14 @@ def buildmenu(target,dict,banner,art):
     elif choice.lower() == 'm':
         found = True
         buildmenu(target,target[0].main_menu,'Main Menu','')
+    elif choice.lower() == 's':
+        found = True
+        buildmenu(target,target[0].settings_menu,'Settings','')
     elif choice == '6':
         db_menu()
     elif choice.lower() == 'p':
         found = True
         print('MULTIPROCESS OPTION')
-
     else:
         for key, value in dictionary.items():
             if str(choice) == str(key): # select option
