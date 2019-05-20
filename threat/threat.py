@@ -45,6 +45,7 @@ class Target:
         self.help = ''
         self.options_list = ''
         self.options_str = ''
+        self.cmd_str = ''
     def __iter__(self):
         for attr, value in self.__dict__.items():
             yield attr, value

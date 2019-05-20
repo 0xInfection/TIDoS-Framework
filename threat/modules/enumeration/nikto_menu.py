@@ -58,16 +58,16 @@ def nikto_menu(target):
     nikto_options = ''
 
     for host in target:
-        print('NIKTO MENU HOST', dict(host))
+        # print('NIKTO MENU HOST', dict(host))
         host.help = 'Nikto'
         host.lvl2 = 'Nikto'
 
         nikto_ip = host.ip
         nikto_ports = host.port
         nikto_options = host.options_str
+        host.cmd_str = current_cmd_str
 
         print('NIKTO MENU HOST', dict(host))
-
 
     target_ip = nikto_ip if nikto_ip else target[0].ip
     target_ports = nikto_ports if nikto_ports else '80'
@@ -80,21 +80,11 @@ def nikto_menu(target):
     print('target PORTS', target_ports)
     print('target OPTIONS', target_options)
 
-    # if not target[0].cmd_options:
-    #     pass
-    # else:
-    #     for key, value in target[0].cmd_options:
-    #         print('OPTIONS KEY', key)
-    #         print('OPTIONS VALUE', value)
-    #         cmd_options_str += cmd_options_str + key.replace(' ', '')
-    #     print('CMD OPTIONS STR', cmd_options_str)
-
-
     menu = { # '#' : ['module', 'description', 'function']
         '1':['Update Target IP',target_ip,'nikto_ip'],\
         '2':['Update Target Port(s)',target_ports,'nikto_port'],\
         '3':['Update Command Options',target_options,'nikto_add_options'],\
-        '4':['Nikto Menu','(Web Server Vulnerability Scans Menu)','nikto_menu'],\
+        '4':['Run Nikto','(Run Current Nikto Command)','nikto'],\
         '5':['Windows Enumeration','(Windows Specific Enumeration)','windows_enum'],\
     }
 
@@ -103,10 +93,3 @@ def nikto_menu(target):
     print(current_cmd)
 
     buildmenu(target,menu,'Nikto Scan Configuration','')          # build menu
-
-    '''
-    TODO:
-        1. display current_cmd_str nicely
-        2. add cmd options
-        3. remove cmd options
-    '''
