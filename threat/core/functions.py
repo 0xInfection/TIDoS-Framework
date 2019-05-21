@@ -17,6 +17,13 @@ from modules.enumeration.scanenum import scanenum
 from modules.exploitation.exploitation import exploitation
 from modules.vulnysis.vulnysis import vulnysis
 from modules.post.post_exploitation import post_exploitation
+from core import settings
+from core.settings import settings
+
+# settings
+from core.settings import add_host
+from core.settings import add_email
+from core.settings import add_username
 
 # passive recon
 from modules.recon.passive_recon import passive_recon
@@ -137,6 +144,12 @@ functions = {
     'exploitation':exploitation,
     'vulnysis':vulnysis,
     'post_exploitation':post_exploitation,
+    'settings':settings,
+
+    # settings
+    'add_host':add_host, 
+    'add_email':add_email,
+    'add_username':add_username,
 
     # recon related
     'passive_recon':passive_recon,

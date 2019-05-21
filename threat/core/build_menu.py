@@ -5,6 +5,7 @@ from modules.database.db_menu import db_menu
 from .colors import color
 from collections import OrderedDict
 from .functions import functions, multiprocess_functions, multi
+from .settings import settings
 from multiprocessing import Process
 import subprocess
 
@@ -47,6 +48,7 @@ def buildmenu(target,dict,banner,art):
             print('\n'+color.green(' [A] ') + color.yellow('Run all\n'))
         print(color.green(' [M] ') + color.yellow('Main Menu\n'))
         print(color.green(' [H] ') + color.yellow('Help\n'))
+        print(color.green(' [S] ') + color.yellow('Settings\n'))
         print(" " + color.custom('[B] Back',bold=True,white=True,bg_red=True)+'\n')
 
     choice = input('[#] Choose Option:> ')
@@ -71,8 +73,9 @@ def buildmenu(target,dict,banner,art):
     elif choice.lower() == 'm':
         found = True
         buildmenu(target,target[0].main_menu,'Main Menu','')
-    elif choice == '6':
-        db_menu()
+    elif choice.lower() == 's':
+        found = True
+        buildmenu(target,target[0].settings_menu,'Settings','')
     elif choice.lower() == 'p':
         found = True
         print('MULTIPROCESS OPTION')
