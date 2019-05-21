@@ -83,11 +83,11 @@ from modules.recon.info.ssn import ssn
 
 # enumeration
 from modules.enumeration.nikto import nikto
+from modules.enumeration.nikto_menu import nikto_menu, nikto_ip, nikto_port, nikto_add_options
 from modules.enumeration.windows_enum import windows_enum
 from modules.enumeration.windows.enum4linux import enum4linux
 from modules.enumeration.nmap_menu import nmap_menu
 
-# database
 from modules.database.database_module import get_info
 
 # post / aux modules
@@ -166,9 +166,11 @@ functions = {
 
     # enumeration
     'windows_enum':windows_enum,
+    'nikto_menu':nikto_menu,
+    'nikto_ip':nikto_ip,
+    'nikto_port':nikto_port,
+    'nikto_add_options':nikto_add_options,
 
-    # databased
-    'get_info':get_info,
     #vuln
     'critical':critical,
     'misconfig':misconfig,
@@ -294,7 +296,9 @@ def do_job(func,tgt):#,tasks_to_accomplish, tasks_that_are_done):
             #global tasks_to_accomplish
             task = tasks_to_accomplish.get_nowait()
             p = Process(target=func, args=(tgt,))
+            print('DO JOB P', p)
             processes.append(p)
+            print('PROCESSES', processes)
             p.start()
         except queue.Empty:
 
@@ -312,6 +316,7 @@ def do_job(func,tgt):#,tasks_to_accomplish, tasks_that_are_done):
 
 def multi(func,tgt):
     print('MULTI')
+    print('PROCESSES', processes)
     tasks_to_accomplish.put(str(func))
 
     # creating processes
@@ -319,15 +324,17 @@ def multi(func,tgt):
         #p = Process(target=do_job, args=(func,tgt,tasks_to_accomplish, tasks_that_are_done))
     p = Process(target=do_job, args=(func,tgt))
     processes.append(p)
-    print(color.green('INFO: Starting '+tgt[0].option))
+    print(color.green('INFO: Starting '+tgt[0].module+':'+tgt[0].lvl1+':'+tgt[0].lvl2+':' +tgt[0].lvl3))
     p.start()
 
     # completing process
     for p in processes:
+        print('P AT START', p)
         p.join()
+        print('P AT STOP', p)
 
     # print the output
-    # while not tasks_that_are_done.empty():
-    #     print(tasks_that_are_done.get())
+    while not tasks_that_are_done.empty():
+        print(tasks_that_are_done.get())
 
     return True

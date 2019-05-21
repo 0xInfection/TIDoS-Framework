@@ -42,6 +42,10 @@ class Target:
         self.database = database
         self.option = ''
         self.dork=''
+        self.help = ''
+        self.options_list = ''
+        self.options_str = ''
+        self.cmd_str = ''
         self.usernames=[]
         self.emails=[]
 
