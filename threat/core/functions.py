@@ -147,7 +147,7 @@ functions = {
     'settings':settings,
 
     # settings
-    'add_host':add_host, 
+    'add_host':add_host,
     'add_email':add_email,
     'add_username':add_username,
 
@@ -279,7 +279,9 @@ multiprocess_functions = {
 
 
 def do_job(func,tgt):#,tasks_to_accomplish, tasks_that_are_done):
-    print('DO JOB')
+    from core.build_menu import buildmenu
+    # print('DO JOB')
+    # print('TGT',dict(tgt[0]))
     while True:
         try:
             '''
@@ -291,10 +293,12 @@ def do_job(func,tgt):#,tasks_to_accomplish, tasks_that_are_done):
             #global tasks_to_accomplish
             task = tasks_to_accomplish.get_nowait()
             p = Process(target=func, args=(tgt,))
-            print('DO JOB P', p)
+            # print('DO JOB P', p)
             processes.append(p)
-            print('PROCESSES', processes)
+            # print('PROCESSES', processes)
+            # buildmenu(tgt,tgt[0].main_menu,'Main Menu','')
             p.start()
+            # buildmenu(tgt,tgt[0].main_menu,'Main Menu','')
         except queue.Empty:
 
             break
@@ -310,8 +314,10 @@ def do_job(func,tgt):#,tasks_to_accomplish, tasks_that_are_done):
 
 
 def multi(func,tgt):
-    print('MULTI')
-    print('PROCESSES', processes)
+    from core.build_menu import buildmenu
+
+    # print('MULTI')
+    # print('PROCESSES', processes)
     tasks_to_accomplish.put(str(func))
 
     # creating processes
@@ -319,14 +325,19 @@ def multi(func,tgt):
         #p = Process(target=do_job, args=(func,tgt,tasks_to_accomplish, tasks_that_are_done))
     p = Process(target=do_job, args=(func,tgt))
     processes.append(p)
-    print(color.green('INFO: Starting '+tgt[0].module+':'+tgt[0].lvl1+':'+tgt[0].lvl2+':' +tgt[0].lvl3))
+    print(color.green('INFO: Starting '+tgt[0].module+':'+tgt[0].lvl1+':'+tgt[0].lvl2+':' +tgt[0].lvl3) + '\n')
+
     p.start()
+
+    print('AFTER START')
+
+    buildmenu(tgt,tgt[0].main_menu,'Main Menu','')
 
     # completing process
     for p in processes:
-        print('P AT START', p)
+        # print('P AT START', p)
         p.join()
-        print('P AT STOP', p)
+        # print('P AT STOP', p)
 
     # print the output
     while not tasks_that_are_done.empty():
