@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-def post_exploitation(target):
+def aux(target):
     from core.build_menu import buildmenu
     for host in target:
         host.module = 'AuxModules'
@@ -10,4 +10,4 @@ def post_exploitation(target):
         '3':['Extract Metadata','','imgext'],\
         '4':['Honeypot Detector','','honeypot'],\
     }
-    buildmenu(target,menu,'Post Analysis and Aux Modules','')          # build menu
+    buildmenu(target,menu,'Aux Modules','')          # build menu

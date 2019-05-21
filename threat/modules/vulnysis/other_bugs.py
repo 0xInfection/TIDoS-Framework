@@ -2,7 +2,7 @@
 
 def other(target):
     from core.build_menu import buildmenu
-    module = 'Misconfigurations and Lower Priority Vulnerabilities'
+    module = 'Brute Force Tools'
     art=''
     for host in target:
         host.lvl1=module

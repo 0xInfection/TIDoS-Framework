@@ -3,19 +3,17 @@ import re
 import sys
 from core.colors import color
 from multiprocessing import Queue
-import re
-from core.colors import color
 
 # menu 1
 
 menu = { # '#' : ['module', 'description', 'function']
-        '1':['Reconnaissance & OSINT','Description','recon'],\
-        '2':['Scanning & Enumeration','Description','scanenum'],\
-        '3':['Vulnerability Analysis','Description','vulnysis'],\
-        '4':['Exploitation','Description','exploitation'],\
-        '5':['Post Analysis','Description','post_exploitation'],\
-        '6':['Access Data', 'Description', 'db_menu'],\
-        '7':['Settings','View/Change settings','settings'],\
+        '1':['Reconnaissance & OSINT','Passive/Active Recon & Information Disclosure','recon'],\
+        '2':['Scanning & Enumeration','Port Scanning and Directory Enumeration','scanenum'],\
+        '3':['Vulnerability Analysis','Check for bugs, misconfigurations, critical vulns, and brute force tools','vulnysis'],\
+        '4':['Exploitation','Exploit Modules','exploitation'],\
+        '5':['Auxillary Modules','Auxillary Modules','aux'],\
+        '6':['Database', 'Access Stored Results', 'db_menu'],\
+        '7':['Settings','View/Change Settings','settings'],\
     }
 
 processes=[]
