@@ -6,7 +6,8 @@ from .colors import color
 from collections import OrderedDict
 from .functions import functions, multiprocess_functions, multi
 from .settings import settings
-from multiprocessing import Process
+from multiprocessing import Lock, Process, Queue, current_process
+from threat import processes, tasks_that_are_done, tasks_to_accomplish
 import subprocess
 
 
@@ -79,7 +80,13 @@ def buildmenu(target,dict,banner,art):
     elif choice.lower() == 'p':
         found = True
         print('MULTIPROCESS OPTION')
-        print('PROCESS', Process.name)
+        print('PROCESS', Process)
+        print('CURRENT PROCESS', current_process)
+        print('THREAT PROCESSES', processes)
+        print('THREAT TASKS TO ACCOMPLISH', tasks_to_accomplish)
+        print('THREAT TASKS TO ACCOMPLISH QUEUE', tasks_to_accomplish.qsize())
+        print('THREAT TASKS DONE', tasks_that_are_done)
+        print('THREAT TASKS DONE QUEUE', tasks_that_are_done.qsize())
         buildmenu(target,target[0].main_menu,'Main Menu','')
     elif choice.lower() == 'h':
         found = True

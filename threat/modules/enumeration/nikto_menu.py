@@ -9,14 +9,14 @@ def nikto_ip(target):
     for host in target:
         host.name = ip
         host.ip = ip
-    nikto_menu(target)
+    return nikto_menu(target)
 
 def nikto_port(target):
     print('NIKTO PORT')
     ports = input('\n[#] List Ports to Scan (e.g. 80,443):> ').replace(' ','')
     for host in target:
         host.port = ports
-    nikto_menu(target)
+    return nikto_menu(target)
 
 def nikto_add_options(target):
     print('NIKTO OPTIONS')
@@ -43,24 +43,34 @@ def nikto_add_options(target):
         host.options_str = options_str
 
     print('ALL OPTIONS',target[0].options_list)
-    nikto_menu(target)
+    return nikto_menu(target)
 
 
 def nikto_menu(target):
     print('NIKTO MENU')
     from core.build_menu import buildmenu
 
-    current_cmd_str = ''
-    cmd_options_str = ''
+    # current_cmd_str = ''
+    # cmd_options_str = ''
 
     nikto_ip = ''
-    nikto_ports = ''
+    nikto_ports = '80' if not target[0].port else target[0].port
     nikto_options = ''
+
+    target_ip = nikto_ip if nikto_ip else target[0].ip
+    target_ports = nikto_ports if nikto_ports else target[0].port
+    target_options = nikto_options if nikto_options else target[0].options_str
+
+    current_cmd_str = 'nikto -h ' + target_ip + ' -p ' + target_ports + ' ' + target_options
+    # cmd_options_str = ''
 
     for host in target:
         # print('NIKTO MENU HOST', dict(host))
         host.help = 'Nikto'
         host.lvl2 = 'Nikto'
+
+        if host.port == '':
+            host.port = '80'
 
         nikto_ip = host.ip
         nikto_ports = host.port
@@ -69,12 +79,12 @@ def nikto_menu(target):
 
         print('NIKTO MENU HOST', dict(host))
 
-    target_ip = nikto_ip if nikto_ip else target[0].ip
-    target_ports = nikto_ports if nikto_ports else '80'
-    target_options = nikto_options if nikto_options else ''
+    # target_ip = nikto_ip if nikto_ip else target[0].ip
+    # target_ports = nikto_ports if nikto_ports else '80'
+    # target_options = nikto_options if nikto_options else ''
 
-    if target_ip != '':
-        current_cmd_str = 'nikto -h ' + target_ip + ' -p ' + target_ports + ' ' + nikto_options
+    # if target_ip != '':
+    #     current_cmd_str = 'nikto -h ' + target_ip + ' -p ' + target_ports + ' ' + nikto_options
 
     print('target IP', target_ip)
     print('target PORTS', target_ports)
@@ -85,7 +95,6 @@ def nikto_menu(target):
         '2':['Update Target Port(s)',target_ports,'nikto_port'],\
         '3':['Update Command Options',target_options,'nikto_add_options'],\
         '4':['Run Nikto','(Run Current Nikto Command)','nikto'],\
-        '5':['Windows Enumeration','(Windows Specific Enumeration)','windows_enum'],\
     }
 
     current_cmd = '\n' + '-'*55 + '\n' + color.green('Current nikto Command:  \n') + color.red(current_cmd_str) + '\n' + '-'*55
