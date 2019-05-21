@@ -16,8 +16,9 @@ from modules.recon.recon import recon
 from modules.enumeration.scanenum import scanenum
 from modules.exploitation.exploitation import exploitation
 from modules.vulnysis.vulnysis import vulnysis
+from modules.database import db_menu
 from modules.database.db_menu import db_menu
-from modules.post.post_exploitation import post_exploitation
+from modules.aux.aux import aux
 from core import settings
 from core.settings import settings
 
@@ -88,6 +89,7 @@ from modules.enumeration.nmap_menu import nmap_menu
 
 # database
 from modules.database.database_module import get_info
+
 # post / aux modules
 # critical bugs
 from modules.vulnysis.critical_bugs import critical
@@ -134,11 +136,11 @@ from modules.vulnysis.other.smtpbrute import smtpbrute
 from modules.vulnysis.other.xmppbrute import xmppbrute
 from modules.vulnysis.other.telnetbrute import telnetbrute
 
-# post
-from modules.post.encodeall import encodeall
-from modules.post.hashes import hashes
-from modules.post.honeypot import honeypot
-from modules.post.imgext import imgext
+# aux
+from modules.aux.encodeall import encodeall
+from modules.aux.hashes import hashes
+from modules.aux.honeypot import honeypot
+from modules.aux.imgext import imgext
 
 functions = {
     'recon':recon,
@@ -146,8 +148,7 @@ functions = {
     'exploitation':exploitation,
     'vulnysis':vulnysis,
     'db_menu':db_menu,
-    #'post':post
-    'post_exploitation':post_exploitation,
+    'aux':aux,
     'settings':settings,
 
     # settings
