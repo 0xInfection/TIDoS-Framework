@@ -149,7 +149,7 @@ def nmap_editor(passed_target):
 
         # [1] :  --------------------- 2. Run NMAP  -----------------------------------------
         elif(user_input == '1'):
-            print('Run NMAP ', nmap_command)
+            exit_condition = True
 
         # [2] :  -------- 2. Adjust IP Address (Target Address)  -----------------------------
         elif(user_input == retrieve_module_index('Edit Target', preferred_order)):
@@ -182,4 +182,4 @@ def nmap_editor(passed_target):
         else:
             for each_toggle in menu_toggle_items:
                 tag_manager(each_toggle, user_input, tag_arg_set)
-    nmap_menu(target)
+    nmap_menu(passed_target)
