@@ -4,11 +4,6 @@ import subprocess
 from database.database_module import save_data
 
 def nikto(target):
-    # from core.build_menu import buildmenu
-
-    # print('NIKTO')
-
-
     for host in target:
         host.lvl2 = 'nikto'
         host.lvl3 = ''

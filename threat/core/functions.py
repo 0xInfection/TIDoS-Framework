@@ -285,8 +285,6 @@ multiprocess_functions = {
 
 def do_job(func,tgt):#,tasks_to_accomplish, tasks_that_are_done):
     from core.build_menu import buildmenu
-    # print('DO JOB')
-    # print('TGT',dict(tgt[0]))
     while True:
         try:
             '''
@@ -298,12 +296,8 @@ def do_job(func,tgt):#,tasks_to_accomplish, tasks_that_are_done):
             #global tasks_to_accomplish
             task = tasks_to_accomplish.get_nowait()
             p = Process(target=func, args=(tgt,))
-            # print('DO JOB P', p)
             processes.append(p)
-            # print('PROCESSES', processes)
-            # buildmenu(tgt,tgt[0].main_menu,'Main Menu','')
             p.start()
-            # buildmenu(tgt,tgt[0].main_menu,'Main Menu','')
         except Exception as e:
             print(e)
             break
@@ -313,7 +307,6 @@ def do_job(func,tgt):#,tasks_to_accomplish, tasks_that_are_done):
                 message to task_that_are_done queue
             '''
             #global tasks_that_are_done
-            print('FINALLY')
             tasks_that_are_done.put(task + ' is done by ' + current_process().name)
             time.sleep(.5)
     return True
@@ -322,8 +315,6 @@ def do_job(func,tgt):#,tasks_to_accomplish, tasks_that_are_done):
 def multi(func,tgt):
     from core.build_menu import buildmenu
 
-    # print('MULTI')
-    # print('PROCESSES', processes)
     tasks_to_accomplish.put(str(func))
 
     # creating processes
@@ -335,15 +326,11 @@ def multi(func,tgt):
 
     p.start()
 
-    print('AFTER START')
-
     buildmenu(tgt,tgt[0].main_menu,'Main Menu','')
 
     # completing process
     for p in processes:
-        # print('P AT START', p)
         p.join()
-        print('P AFTER JOIN', p)
 
     # print the output
     while not tasks_that_are_done.empty():

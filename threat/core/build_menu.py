@@ -40,7 +40,6 @@ def buildmenu(target,dict,banner,art):
         print(color.green(' ['+str(i)+'] ') + color.blue(value[0]) + " - " + color.custom(value[1], white=True))
         i+=1
     if 'Main Menu' in banner:
-        # MULTIPROCESS OPTIONS
         print('\n ' + color.green('[P] ') + color.blue('Multiprocess Queue ') + color.custom('- Check Status of Multiprocesses',reset=True,white=True))
 
         print('\n ' + color.custom('[0] Exit',bold=True,white=True,bg_red=True)+'\n')
@@ -79,25 +78,20 @@ def buildmenu(target,dict,banner,art):
         buildmenu(target,target[0].settings_menu,'Settings','')
     elif choice.lower() == 'p':
         found = True
-        print('MULTIPROCESS OPTION')
-        print('PROCESS', Process)
-        print('CURRENT PROCESS', current_process)
-        print('THREAT PROCESSES', processes)
-        print('THREAT TASKS TO ACCOMPLISH', tasks_to_accomplish)
+        print('Process Status', processes)
         print('THREAT TASKS TO ACCOMPLISH QUEUE', tasks_to_accomplish.qsize())
-        print('THREAT TASKS DONE', tasks_that_are_done)
         print('THREAT TASKS DONE QUEUE', tasks_that_are_done.qsize())
+        # print('\n ' + color.green('[+] ') + color.blue('Status of Processes: ') + color.custom(processes,reset=True,white=True))
+        # print('\n ' + color.green('[+] ') + color.blue('Tasks to Accomplish Queue Size: ') + color.custom(tasks_to_accomplish.qsize(),reset=True,white=True))
+        # print('\n ' + color.green('[+] ') + color.blue('Tasks that are done Queue Size: ') + color.custom(tasks_that_are_done.qsize(),reset=True,white=True))
         buildmenu(target,target[0].main_menu,'Main Menu','')
     elif choice.lower() == 'h':
         found = True
-        print('HELP OPTION')
-        print(target[0].help)
         if target[0].help == '':
             target[0].current_menu=target[0].last_menu
             art=color.red('\nInvalid selection. ') + color.blue('Help') + color.red(' is not implemented yet.\n')
             buildmenu(target,dict,banner,art)
         else:
-            print('FOUND HELP', target[0].help)
             print(color.green('INFO: Grabbing ' + target[0].help + ' Help Page'))
             get_help = target[0].help.lower() + ' -H'
             subprocess.run(get_help, shell=True)
