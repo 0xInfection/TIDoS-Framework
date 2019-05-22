@@ -29,6 +29,7 @@ from core.settings import add_username
 
 # passive recon
 from modules.recon.passive_recon import passive_recon
+from modules.recon.passive.hackertarget import hackertarget
 from modules.recon.passive.dig import dig
 from modules.recon.passive.whois import whois
 from modules.recon.passive.nping import nping
@@ -179,6 +180,7 @@ functions = {
 
 multiprocess_functions = {
     # passive recon
+    'hackertarget':hackertarget,
     'dig':dig,
     'whois':whois,
     'nping':nping,
