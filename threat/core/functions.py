@@ -29,6 +29,7 @@ from core.settings import add_username
 
 # passive recon
 from modules.recon.passive_recon import passive_recon
+from modules.recon.passive.hackertarget import hackertarget
 from modules.recon.passive.dig import dig
 from modules.recon.passive.whois import whois
 from modules.recon.passive.nping import nping
@@ -181,6 +182,7 @@ functions = {
 
 multiprocess_functions = {
     # passive recon
+    'hackertarget':hackertarget,
     'dig':dig,
     'whois':whois,
     'nping':nping,
@@ -288,8 +290,6 @@ multiprocess_functions = {
 
 def do_job(func,tgt):#,tasks_to_accomplish, tasks_that_are_done):
     from core.build_menu import buildmenu
-    # print('DO JOB')
-    # print('TGT',dict(tgt[0]))
     while True:
         try:
             '''
@@ -301,16 +301,12 @@ def do_job(func,tgt):#,tasks_to_accomplish, tasks_that_are_done):
             #global tasks_to_accomplish
             task = tasks_to_accomplish.get_nowait()
             p = Process(target=func, args=(tgt,))
-            # print('DO JOB P', p)
             processes.append(p)
-            # print('PROCESSES', processes)
-            # buildmenu(tgt,tgt[0].main_menu,'Main Menu','')
             p.start()
-            # buildmenu(tgt,tgt[0].main_menu,'Main Menu','')
-        except queue.Empty:
-
+        except Exception as e:
+            print(e)
             break
-        else:
+        finally:
             '''
                 if no exception has been raised, add the task completion
                 message to task_that_are_done queue
@@ -324,8 +320,6 @@ def do_job(func,tgt):#,tasks_to_accomplish, tasks_that_are_done):
 def multi(func,tgt):
     from core.build_menu import buildmenu
 
-    # print('MULTI')
-    # print('PROCESSES', processes)
     tasks_to_accomplish.put(str(func))
 
     # creating processes
@@ -337,15 +331,11 @@ def multi(func,tgt):
 
     p.start()
 
-    print('AFTER START')
-
     buildmenu(tgt,tgt[0].main_menu,'Main Menu','')
 
     # completing process
     for p in processes:
-        # print('P AT START', p)
         p.join()
-        # print('P AT STOP', p)
 
     # print the output
     while not tasks_that_are_done.empty():
