@@ -37,6 +37,7 @@ class Target:
         self.ip = ip
         self.port = ''
         self.cmd_options = {}
+        self.nmap = ''
         self.lvl = 0
         self.last_lvl=0
         self.database = database

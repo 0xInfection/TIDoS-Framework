@@ -86,8 +86,9 @@ from modules.enumeration.nikto import nikto
 from modules.enumeration.nikto_menu import nikto_menu, nikto_ip, nikto_port, nikto_add_options
 from modules.enumeration.windows_enum import windows_enum
 from modules.enumeration.windows.enum4linux import enum4linux
+from modules.enumeration.nmap import nmap
 from modules.enumeration.nmap_menu import nmap_menu
-
+from modules.enumeration.nmap_editor import nmap_editor
 from modules.database.database_module import get_info
 
 # post / aux modules
@@ -160,7 +161,6 @@ functions = {
     'passive_recon':passive_recon,
     'active_recon':active_recon,
     'info_disclosure':info_disclosure,
-    'nmap_menu':nmap_menu,
     #'dig':dig,
     #''
 
@@ -170,6 +170,8 @@ functions = {
     'nikto_ip':nikto_ip,
     'nikto_port':nikto_port,
     'nikto_add_options':nikto_add_options,
+    'nmap_menu':nmap_menu,
+    'nmap_editor':nmap_editor,
 
     #vuln
     'critical':critical,
@@ -229,6 +231,7 @@ multiprocess_functions = {
     'ssn':ssn,
 
     # enumeration
+    'nmap':nmap,
     'nikto':nikto,
     'enum4linux':enum4linux,
 
