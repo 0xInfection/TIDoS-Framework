@@ -40,8 +40,8 @@ def query_db(query_list):
     else:
         lvl2, lvl3, num = query_list[3], query_list[4], query_list[5]
     retrieved_data = retrieve_data(db, module, lvl1, lvl2, lvl3, num)
-    print("Target: " + retrieved_data[0][0])
-    print("Data  : " + retrieved_data[0][1])
+    print("Target: " + str(retrieved_data[0][0]))
+    print("Data  : " + str(retrieved_data[0][1]))
 
 def build_db_menu(a_list, b_list, selection, target):
     from core.build_menu import buildmenu

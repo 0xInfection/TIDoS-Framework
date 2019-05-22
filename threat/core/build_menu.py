@@ -4,8 +4,7 @@ import sys
 from modules.database.db_menu import db_menu
 from .colors import color
 from collections import OrderedDict
-from .functions import functions, multiprocess_functions
-from .process import multi
+from .functions import functions, multiprocess_functions, multi
 
 def exit():
     print(color.red(' [-] Exiting...'))
@@ -66,7 +65,7 @@ def buildmenu(target,dict,banner,art):
         found = True
         buildmenu(target,target[0].main_menu,'Main Menu','')
     elif choice == '6':
-        db_menu()
+        db_menu(target)
     else:
         for key, value in dictionary.items():
             if str(choice) == str(key): # select option

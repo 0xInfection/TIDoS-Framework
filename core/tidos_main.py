@@ -49,6 +49,7 @@ menu = { # '#' : ['module', 'description', 'function']
         '3':['Vulnerability Analysis','(37 Modules)','vuln'],\
         '4':['Exploitation (beta)','(1 Module)','exploits'],\
         '5':['Auxillary Modules','(4 Modules)','auxil']\
+        '6':['Access Data', '(1 Module)', 'db_menu']
     }
 
 def multProc(target_func, arg0):

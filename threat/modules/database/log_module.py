@@ -8,5 +8,3 @@ def log(module_name, target, body):
     file = open(module_name, 'a')
     file.write(target + ':' + '\n' + body + '\n' + '\n')
     file.close()
-
-    
