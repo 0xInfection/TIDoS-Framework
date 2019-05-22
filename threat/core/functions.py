@@ -304,15 +304,16 @@ def do_job(func,tgt):#,tasks_to_accomplish, tasks_that_are_done):
             # buildmenu(tgt,tgt[0].main_menu,'Main Menu','')
             p.start()
             # buildmenu(tgt,tgt[0].main_menu,'Main Menu','')
-        except queue.Empty:
-
+        except Exception as e:
+            print(e)
             break
-        else:
+        finally:
             '''
                 if no exception has been raised, add the task completion
                 message to task_that_are_done queue
             '''
             #global tasks_that_are_done
+            print('FINALLY')
             tasks_that_are_done.put(task + ' is done by ' + current_process().name)
             time.sleep(.5)
     return True
@@ -342,7 +343,7 @@ def multi(func,tgt):
     for p in processes:
         # print('P AT START', p)
         p.join()
-        # print('P AT STOP', p)
+        print('P AFTER JOIN', p)
 
     # print the output
     while not tasks_that_are_done.empty():
