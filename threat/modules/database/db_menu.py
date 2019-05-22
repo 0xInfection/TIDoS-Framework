@@ -40,10 +40,11 @@ def query_db(query_list):
     else:
         lvl2, lvl3, num = query_list[3], query_list[4], query_list[5]
     retrieved_data = retrieve_data(db, module, lvl1, lvl2, lvl3, num)
-    print("Target: " + retrieved_data[0][0])
-    print("Data  : " + retrieved_data[0][1])
+    print("Target: " + str(retrieved_data[0][0]))
+    print("Data  : " + str(retrieved_data[0][1]))
 
-def build_db_menu(a_list, b_list, selection):
+def build_db_menu(a_list, b_list, selection, target):
+    from core.build_menu import buildmenu
     if selection == "None":
         build_banner("Access Data")
     else:
@@ -51,8 +52,8 @@ def build_db_menu(a_list, b_list, selection):
     while True:
         ctr = 0
         while ctr < len(a_list):
-            if selection == "Data":
-                print(color.green(' ['+str(ctr + 1)+'] ') + color.blue(a_list[ctr]))
+            if "Data" in selection.values():
+                print(color.green(' ['+str(ctr + 1)+'] ') + color.blue(str(a_list[ctr])))
             elif b_list != "None":
                 print(color.green(' ['+str(ctr + 1)+'] ') + color.blue(b_list[ctr]))
             else:
@@ -63,7 +64,8 @@ def build_db_menu(a_list, b_list, selection):
         print(main_exit_message)
         cmd = input(input_cursor)
         if cmd.lower() == "m":
-            break
+            found = True
+            buildmenu(target,target[0].main_menu,'Main Menu','')
         elif cmd == "0":
             del query_list[-1]
             return cmd
@@ -72,53 +74,52 @@ def build_db_menu(a_list, b_list, selection):
             if selection == "None":
                 return a_list[int(cmd) - 1]
             elif selection[a_list[int(cmd) - 1]] == "Data":
-                print(selection[a_list[int(cmd) - 1]])
                 query_db(query_list)
                 del query_list[-1]
             else:
                 return a_list[int(cmd) - 1]
         else:
             print(error_message)
-
-def level_five_menu(choice1, choice2, choice3, choice4, menu_data):
+                
+def level_five_menu(choice1, choice2, choice3, choice4, menu_data, target):
     a_list = list(menu_data[choice1][choice2][choice3][choice4].keys())
     selection = menu_data[choice1][choice2][choice3][choice4]
-    result = build_db_menu(a_list, "None", selection)
+    result = build_db_menu(a_list, "None", selection, target)
     if result == "0":
-        level_four_menu(choice1, choice2, choice3, menu_data)
+        level_four_menu(choice1, choice2, choice3, menu_data, target)
 
-def level_four_menu(choice1, choice2, choice3, menu_data):
+def level_four_menu(choice1, choice2, choice3, menu_data, target):
     a_list = list(menu_data[choice1][choice2][choice3].keys())
     selection = menu_data[choice1][choice2][choice3]
-    result = build_db_menu(a_list, "None", selection)
+    result = build_db_menu(a_list, "None", selection, target)
     if result == "0":
-        level_three_menu(choice1, choice2, menu_data)
+        level_three_menu(choice1, choice2, menu_data, target)
     else:
-        level_five_menu(choice1, choice2, choice3, result, menu_data)
+        level_five_menu(choice1, choice2, choice3, result, menu_data, target)
 
-def level_three_menu(choice1, choice2, menu_data):
+def level_three_menu(choice1, choice2, menu_data, target):
     a_list = list(menu_data[choice1][choice2].keys())
     selection = menu_data[choice1][choice2]
-    result = build_db_menu(a_list, "None", selection)
+    result = build_db_menu(a_list, "None", selection, target)
     if result == "0":
-        level_two_menu(choice1, menu_data)
+        level_two_menu(choice1, menu_data, target)
     else:
-        level_four_menu(choice1, choice2, result, menu_data)
-    
-def level_two_menu(choice, menu_data):
+        level_four_menu(choice1, choice2, result, menu_data, target)
+
+def level_two_menu(choice, menu_data, target):
     a_list = list(menu_data[choice].keys())
     selection = menu_data[choice]
-    result = build_db_menu(a_list, "None", selection)
+    result = build_db_menu(a_list, "None", selection, target)
     if result == "0":
-        db_menu()
+        db_menu(target)
     else:
-        level_three_menu(choice, result, menu_data)
+        level_three_menu(choice, result, menu_data, target)
 
-def db_menu():
+def db_menu(target):
     menu_data = get_info(db_name)
     a_list = list(menu_data.keys())
     b_list = []
     for item in a_list:
         b_list.append(menu_dict[item])
-    result = build_db_menu(a_list, b_list, "None")
-    level_two_menu(result, menu_data)
+    result = build_db_menu(a_list, b_list, menu_data, target)
+    level_two_menu(result, menu_data, target)
