@@ -48,6 +48,7 @@ class Target:
         self.cmd_str = ''
         self.usernames=[]
         self.emails=[]
+        self.website = ''
 
     def __iter__(self):
         for attr, value in self.__dict__.items():
