@@ -176,6 +176,12 @@ functions = {
     'critical':critical,
     'misconfig':misconfig,
     'other':other,
+
+    # aux
+    'encodeall':encodeall,
+    'hashes':hashes,
+    'honeypot':honeypot,
+    'imgext':imgext,
 }
 
 multiprocess_functions = {
@@ -276,11 +282,7 @@ multiprocess_functions = {
     'xmppbrute':xmppbrute,
     'telnetbrute':telnetbrute,
 
-    # post
-    'encodeall':encodeall,
-    'hashes':hashes,
-    'honeypot':honeypot,
-    'imgext':imgext,
+    
 
 }
 
