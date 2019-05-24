@@ -5,9 +5,9 @@ def aux(target):
     for host in target:
         host.module = 'AuxModules'
     menu = { # '#' : ['module', 'description', 'function']
-        '1':['Generate Hashes','','hashes'],\
-        '2':['Encode Strings','','encodeall'],\
+        '1':['Generate Hashes','Generate Hashes from String','hashes'],\
+        '2':['Encode/Decode Strings','Base64, Base32, Base16/Hex, URL','encodeall'],\
         '3':['Extract Metadata','','imgext'],\
-        '4':['Honeypot Detector','','honeypot'],\
+        '4':['Honeypot Detector','Shodan Honeypot Check','honeypot'],\
     }
     buildmenu(target,menu,'Aux Modules','')          # build menu
