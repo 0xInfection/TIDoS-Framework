@@ -1,12 +1,8 @@
 #!/usr/bin/env python3
 
-import subprocess
 from core.colors import color
-from os import path
-import sys
-sys.path.append(path.abspath('lib/Photon'))
 
-# from Photon.photon import photon
+options_with_val = ['-l','--level','-t','--threads','-d','--delay','--timeout','-c','--cookies','-o','--output','--exclude','--seeds','--user-agent','-r','--regex','e','--export','--stdout']
 
 def photon_website(target):
     website = input('\n[#] Enter New Target Website:> ')
@@ -16,8 +12,6 @@ def photon_website(target):
     return photon_menu(target)
 
 def photon_options(target):
-    options_with_val = ['-l','--level','-t','--threads','-d','--delay','--timeout','-c','--cookies','-o','--output','--exclude','--seeds','--user-agent','-r','--regex','e','--export','--stdout']
-
     all_options = []
     options_str = ''
 
@@ -41,10 +35,7 @@ def photon_options(target):
 def photon_menu(target):
     from core.build_menu import buildmenu
 
-    print('PHOTON MENU')
-    # print('TARGET DICT', dict(target[0]))
-
-    photon_site = ''
+    photon_site = target[0].ip if not target[0].website else target[0].website
     photon_options = ''
 
     target_website = photon_site if photon_site else target[0].website
@@ -53,22 +44,18 @@ def photon_menu(target):
 
     display_cmd_str = 'photon -u ' + target_website + ' ' + target_options
     current_cmd_str = 'python3 ' + target_run_file + ' -u ' + target_website + ' ' + target_options
-    print('CURRENT CMD STRING', current_cmd_str)
 
     for host in target:
         # host.module = 'ScanANDEnum'
         # host.lvl1 = 'Scanning & Enumeration'
-        host.help = 'photon'
-        host.lvl2 = 'Photon'
+        host.help = 'python3 lib/Photon/photon.py'
+        host.lvl2 = 'Crawler'
+        host.lvl3 = 'Photon'
         host.run_file = './lib/Photon/photon.py'
 
         photon_site = host.website
         photon_options = host.options_str
         host.cmd_str = current_cmd_str
-
-    print('SUBPROCESS')
-    # subprocess.run('cd database/', shell=True)
-    # subprocess.run('python ./lib/Photon/photon.py', shell=True)
 
     menu = { # '#' : ['module', 'description', 'function']
         '1':['Update Target Website',target_website,'photon_website'],\

@@ -85,8 +85,8 @@ from modules.recon.info.ssn import ssn
 # enumeration
 from modules.enumeration.nikto import nikto
 from modules.enumeration.nikto_menu import nikto_menu, nikto_ip, nikto_port, nikto_add_options
-from modules.enumeration.windows_enum import windows_enum
-from modules.enumeration.windows.enum4linux import enum4linux
+# # from modules.enumeration.windows_enum import windows_enum
+# from modules.enumeration.windows.enum4linux import enum4linux
 from modules.enumeration.nmap_menu import nmap_menu
 from modules.enumeration.photon_menu import photon_menu, photon_website, photon_options
 from modules.enumeration.crawlers.photon_run import photon_run
@@ -169,7 +169,7 @@ functions = {
     #''
 
     # enumeration
-    'windows_enum':windows_enum,
+    # # 'windows_enum':windows_enum,
     'nikto_menu':nikto_menu,
     'nikto_ip':nikto_ip,
     'nikto_port':nikto_port,
@@ -177,7 +177,7 @@ functions = {
     'photon_menu':photon_menu,
     'photon_website':photon_website,
     'photon_options':photon_options,
-    'photon_run':photon_run,
+    # 'photon_run':photon_run,
     # 'photon':photon,
 
 
@@ -241,7 +241,8 @@ multiprocess_functions = {
 
     # enumeration
     'nikto':nikto,
-    'enum4linux':enum4linux,
+    'photon_run':photon_run,
+    # 'enum4linux':enum4linux,
 
     #critical bugs
     'lfi':lfi,

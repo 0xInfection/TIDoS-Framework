@@ -10,7 +10,6 @@ from multiprocessing import Lock, Process, Queue, current_process
 from threat import processes, tasks_that_are_done, tasks_to_accomplish
 import subprocess
 
-
 def exit():
     print(color.red(' [-] Exiting...'))
     sys.exit(0)
@@ -53,6 +52,7 @@ def buildmenu(target,dict,banner,art):
 
     choice = input('[#] Choose Option:> ')
     found = False
+    get_help = ''
     if choice == '0': # exit
         exit()
     elif choice.lower() == 'b': # go back
@@ -72,18 +72,26 @@ def buildmenu(target,dict,banner,art):
         found = True
     elif choice.lower() == 'm':
         found = True
+        target[0].help = ''
+        get_help = ''
         buildmenu(target,target[0].main_menu,'Main Menu','')
     elif choice.lower() == 's':
         found = True
+        target[0].help = ''
+        get_help = ''
         buildmenu(target,target[0].settings_menu,'Settings','')
     elif choice.lower() == 'p':
         found = True
         print('Process Status', processes)
-        print('THREAT TASKS TO ACCOMPLISH QUEUE', tasks_to_accomplish.qsize())
-        print('THREAT TASKS DONE QUEUE', tasks_that_are_done.qsize())
+        # print('THREAT TASKS TO ACCOMPLISH QUEUE', tasks_to_accomplish.qsize())
+        # print('THREAT TASKS DONE QUEUE', tasks_that_are_done.qsize())
+
+        ########## These multiprocess prints with color break the menu ##########
         # print('\n ' + color.green('[+] ') + color.blue('Status of Processes: ') + color.custom(processes,reset=True,white=True))
         # print('\n ' + color.green('[+] ') + color.blue('Tasks to Accomplish Queue Size: ') + color.custom(tasks_to_accomplish.qsize(),reset=True,white=True))
         # print('\n ' + color.green('[+] ') + color.blue('Tasks that are done Queue Size: ') + color.custom(tasks_that_are_done.qsize(),reset=True,white=True))
+        ########## These multiprocess prints with color break the menu ##########
+
         buildmenu(target,target[0].main_menu,'Main Menu','')
     elif choice.lower() == 'h':
         found = True
@@ -91,11 +99,19 @@ def buildmenu(target,dict,banner,art):
             target[0].current_menu=target[0].last_menu
             art=color.red('\nInvalid selection. ') + color.blue('Help') + color.red(' is not implemented yet.\n')
             buildmenu(target,dict,banner,art)
-        else:
-            print(color.green('INFO: Grabbing ' + target[0].help + ' Help Page'))
-            get_help = target[0].help.lower() + ' -H'
-            subprocess.run(get_help, shell=True)
-            buildmenu(target,dict,banner,art)
+        if target[0].help.split('/')[1] == 'Photon':        # WORKING
+            print(color.green('INFO: Grabbing Photon Help Page'))
+            get_help = target[0].help + ' -h'
+            # subprocess.run(get_help, shell=True)
+            # buildmenu(target,dict,banner,art)
+        if target[0].help == 'nikto':       # DO NOT RUN
+            print(color.green('INFO: Grabbing Nikto Help Page'))
+            get_help = target[0].help + ' -H'
+            # subprocess.run('nikto -H', shell=True)
+            # buildmenu(target,dict,banner,art)
+
+        subprocess.run(get_help, shell=True)
+        buildmenu(target,dict,banner,art)
     else:
         for key, value in dictionary.items():
             if str(choice) == str(key): # select option
@@ -127,5 +143,6 @@ def buildmenu(target,dict,banner,art):
                 break
 
     if found == False:
+        get_help = ''
         print(color.red('Invalid selection.'))
         pass

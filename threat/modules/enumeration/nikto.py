@@ -5,7 +5,8 @@ from database.database_module import save_data
 
 def nikto(target):
     for host in target:
-        host.lvl2 = 'nikto'
+        host.help = 'Nikto'
+        host.lvl2 = 'Nikto'
         host.lvl3 = ''
         host.option = 'Nikto'
         NIKTOSCAN = host.cmd_str

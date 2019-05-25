@@ -42,7 +42,7 @@ def nikto_menu(target):
     from core.build_menu import buildmenu
 
     nikto_ip = ''
-    nikto_ports = '80' if not target[0].port else target[0].port
+    nikto_ports = target[0].port or ''
     nikto_options = ''
 
     target_ip = nikto_ip if nikto_ip else target[0].ip
@@ -52,7 +52,7 @@ def nikto_menu(target):
     current_cmd_str = 'nikto -h ' + target_ip + ' -p ' + target_ports + ' ' + target_options
 
     for host in target:
-        host.help = 'Nikto'
+        host.help = 'nikto'
         host.lvl2 = 'Nikto'
 
         if host.port == '':

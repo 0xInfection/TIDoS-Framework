@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """The Photon main part."""
-from __future__ import print_function
 
 import argparse
 import os
@@ -27,7 +26,7 @@ print('''%s      ____  __          __
 try:
     from urllib.parse import urlparse  # For Python 3
 except ImportError:
-    print('%s Photon runs only on Python 3.2 and above.' % info)
+    # print('%s Photon runs only on Python 3.2 and above.' % info)
     # quit()
     pass
 
