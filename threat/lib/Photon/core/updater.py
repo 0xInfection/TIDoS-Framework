@@ -1,8 +1,11 @@
 import os
 import re
+import sys
+from os import path
+sys.path.append(os.path.abspath('.'))
 
-from core.colors import run, que, good, green, end, info
-from core.requester import requester
+from .colors import run, que, good, green, end, info
+from .requester import requester
 
 
 def updater():

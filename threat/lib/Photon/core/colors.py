@@ -1,6 +1,5 @@
 import sys
 
-
 if sys.platform.lower().startswith(('os', 'win', 'darwin', 'ios')):
     # Colors shouldn't be displayed on Mac and Windows
     end = red = white = green = yellow = run = bad = good = info = que = ''

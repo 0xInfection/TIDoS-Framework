@@ -1,19 +1,19 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """The Photon main part."""
-from __future__ import print_function
 
 import argparse
 import os
+from os import path
 import re
 import requests
 import sys
+sys.path.append(os.path.abspath('.'))
 import time
 import warnings
 import random
-import urllib.parse
 
-from core.colors import good, info, run, green, red, white, end, bad
+from .core.colors import good, info, run, green, red, white, end, bad
 
 # Just a fancy ass banner
 print('''%s      ____  __          __
@@ -28,17 +28,18 @@ try:
     from urllib.parse import urlparse  # For Python 3
 except ImportError:
     print('%s Photon runs only on Python 3.2 and above.' % info)
-    # quit()
-    pass
+    quit()
 
-import core.config
-from core.config import INTELS
-from core.flash import flash
-from core.mirror import mirror
-from core.prompt import prompt
-from core.requester import requester
-from core.updater import updater
-from core.utils import (luhn,
+# print('PATH', os.path.abspath('lib/Photon'))
+# import .core.config
+# from path.abspath('lib/Photon/core') import core
+from .core.config import INTELS
+from .core.flash import flash
+from .core.mirror import mirror
+from .core.prompt import prompt
+from .core.requester import requester
+from .core.updater import updater
+from .core.utils import (luhn,
                         proxy_type,
                         is_good_proxy,
                         top_level,
@@ -48,9 +49,9 @@ from core.utils import (luhn,
                         remove_regex,
                         timer,
                         writer)
-from core.regex import rintels, rendpoint, rhref, rscript, rentropy
+from .core.regex import rintels, rendpoint, rhref, rscript, rentropy
 
-from core.zap import zap
+from .core.zap import zap
 
 # Disable SSL related warnings
 warnings.filterwarnings('ignore')
@@ -425,3 +426,6 @@ print('%s Results saved in %s%s%s directory' % (good, green, output_dir, end))
 if args.std:
     for string in datasets[args.std]:
         sys.stdout.write(string + '\n')
+
+def photon(target):
+    print('PHOTON')

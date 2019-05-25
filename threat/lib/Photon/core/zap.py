@@ -1,9 +1,13 @@
 import re
 import requests
 import random
+import sys
+import os
+from os import path
+sys.path.append(os.path.abspath('.'))
 
-from core.utils import verb, xml_parser
-from core.colors import run, good
+from .utils import verb, xml_parser
+from .colors import run, good
 from plugins.wayback import time_machine
 
 

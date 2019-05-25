@@ -49,6 +49,7 @@ class Target:
         self.usernames=[]
         self.emails=[]
         self.website = ''
+        self.run_file = ''
 
     def __iter__(self):
         for attr, value in self.__dict__.items():

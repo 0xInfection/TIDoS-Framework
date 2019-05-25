@@ -90,7 +90,7 @@ from modules.enumeration.windows.enum4linux import enum4linux
 from modules.enumeration.nmap_menu import nmap_menu
 from modules.enumeration.photon_menu import photon_menu, photon_website, photon_options
 from modules.enumeration.crawlers.photon_run import photon_run
-from lib.Photon.photon import photon
+# from lib.Photon.photon import photon
 
 from modules.database.database_module import get_info
 
@@ -178,7 +178,7 @@ functions = {
     'photon_website':photon_website,
     'photon_options':photon_options,
     'photon_run':photon_run,
-    'photon':photon,
+    # 'photon':photon,
 
 
     #vuln
