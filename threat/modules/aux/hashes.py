@@ -47,5 +47,5 @@ def hashes(target):
     except EOFError as e:
         #os.system('clear')
         print(e)
-
+    st = input(color.blue(' [#] Press')+color.red(' Enter ')+color.blue('to continue... '))
     buildmenu(target,target[0].main_menu,'Main Menu','')
