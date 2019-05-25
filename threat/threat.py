@@ -61,7 +61,11 @@ def threat():
     while True:
         try:
             while(host_valid is False):
-                host = input('\n[#] Input Host/IP (ie: 192.168.10.1):> ')# DEBUG: temp value
+                temp = input('\n[#] Input Host/IP (ie: 192.168.10.1):> ')# DEBUG: temp value
+                if '//' in temp:
+                    host=temp.replace('http://','').replace('https://','')
+                else:
+                    host=temp
                 if(host.lower() == 'exit' or host.lower() == 'q'):
                     sys.exit()
                 elif(re.match(valid_host_regex, host) or re.match(valid_ip_regex, host)):
@@ -69,7 +73,7 @@ def threat():
                     current_menu = menu
                     last_menu = menu
                     ip = host
-                    target.append(Target(host,current_menu,last_menu,menu,ip))
+                    target.append(Target(temp,current_menu,last_menu,menu,ip))
                     buildmenu(target,menu,'Main Menu','')
                 else:
                     print(color.red("Invalid Host Address, try again: "))

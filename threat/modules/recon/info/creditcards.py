@@ -1,151 +1,129 @@
 #!/usr/bin/env python
 from core.colors import color
+from database.database_module import save_data
+import inspect
+import re
+import sys
+import lxml
+import time
+import requests
+from bs4 import BeautifulSoup
+sys.path.append('files/signature-db/')
+from infodisc_signatures import EXPRESS_CARD_SIGNATURE
+from infodisc_signatures import VISA_MASTERCARD_SIGNATURE
+from infodisc_signatures import MASTERCARD_SIGNATURE, DISCOVER_CARD_SIGNATURE
+from infodisc_signatures import VISA_SIGNATURE, AMEX_CARD_SIGNATURE
+from requests.packages.urllib3.exceptions import InsecureRequestWarning
+requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
+
+
+urls = []
+links = []
+found = 0x00
+
+def credit0x00(host):
+    print(color.green(' [+] Importing credit card signatures...'))
+    links = [host.name]
+    if '//' in host.name:
+        site = host.name.split('//')[1]
+    else:
+        site=host.name
+    for link in links:
+        print(' [*] Scraping Page: '+color.yellow(site))
+        req = requests.get(link).text
+        check0x00(req)
+    soup = BeautifulSoup(req,'lxml')
+    #site='https://'+site
+    for line in soup.find_all('a', href=True):
+        newline = line['href']
+        try:
+            if newline[:4] == "http":
+                if site in newline:
+                    urls.append(str(newline))
+            elif newline[:1] == "/":
+                combline = site+newline
+                urls.append(str(combline))
+        except:
+            print(color.red(' [-] Unhandled Exception Occured!'))
+    try:
+        for uurl in urls:
+            print(color.green("\n [+] Scraping Page: "+color.yellow(uurl)))
+            req = requests.get(uurl).text
+            check0x00(req)
+    except Exception as e: #requests.exceptions:
+        print(color.red(' [-] Outbound Query Exception...'))
+    if found == 0x00:
+        print(color.red(' [-] No Credit Cards found disclosed in plaintext in source code!'))
+    print(color.green(' [+] Scraping Done!'))
+
+
+def check0x00(req):
+    try:
+        append_name = ' '.join(str(req.encode('utf-8')).strip())
+    except UnicodeDecodeError:
+        append_name = ' '.join(str(req.decode('utf-8')).strip())
+    print(color.yellow(' [!] Reading response...'))
+    print(color.green(' [*] Searching for credit cards...'))
+    AMEX = re.match(AMEX_CARD_SIGNATURE, append_name)
+    VISA = re.match(VISA_SIGNATURE, append_name)
+    MASTERCARD = re.match(MASTERCARD_SIGNATURE, append_name)
+    DISCOVER = re.match(DISCOVER_CARD_SIGNATURE, append_name)
+    EXPRESS = re.match(EXPRESS_CARD_SIGNATURE, append_name)
+    VISA_MASTERCARD = re.match(VISA_MASTERCARD_SIGNATURE, append_name)
+    print(color.yellow(' [!] Matching signatures...'))
+    try:
+        if EXPRESS.group():
+            print(color.green(" [+] Website has American Express Cards!"))
+            print(color.yellow(' [!] Card : ') + color.green(EXPRESS.group()))
+            found = 0x01
+    except:
+        pass
+    try:
+        if VISA_MASTERCARD.group():
+            print(color.green(" [+] Website has a Visa-Master Card!"))
+            print(color.yellow(' [!] Card : ') + color.green(VISA_MASTERCARD.group()))
+            found = 0x01
+    except:
+        pass
+    try:
+        if MASTERCARD.group():
+            print(color.green(" [+] Website has a Master Card!"))
+            print(color.yellow(' [!] Card : ') + color.green(MASTERCARD.group()))
+            found = 0x01
+    except:
+        pass
+    try:
+        if VISA.group():
+            print(color.green(" [+] Website has a VISA card!"))
+            print(color.yellow(' [!] Card : ') + color.green(VISA.group()))
+            found = 0x01
+    except:
+        pass
+    try:
+        if AMEX.group():
+            print(color.green(" [+] Website has a AMEX card!"))
+            print(color.yellow(' [!] Card : ') + color.green(AMEX.group()))
+            found = 0x01
+    except:
+        pass
+    try:
+        if DISCOVER.group():
+            print(color.green(" [+] Website has a DISCOVER card!"))
+            print(color.yellow(' [!] Card : ') + color.green(DISCOVER.group()))
+            found = 0x01
+    except:
+        pass
+    return
+
 def creditcards(target):
-    print('This module is not yet available.')
-    pass
-# #!/usr/bin/env python
-# # coding: utf-8
-
-# #-:-:-:-:-:-:-:-:-:-:-:-:#
-# #    TIDoS Framework     #
-# #-:-:-:-:-:-:-:-:-:-:-:-:#
-
-# #Author : @_tID
-# #This module requires TIDoS Framework
-# #https://github.com/0xInfection/TIDoS-Framework
-
-# from __future__ import print_function
-# import re
-# import sys
-# sys.path.append('files/signature-db/')
-# import lxml
-# import time
-# import requests
-# from core.Core.colors import *
-# urls = []
-# links = []
-# found = 0x00
-# from bs4 import BeautifulSoup
-# from infodisc_signatures import EXPRESS_CARD_SIGNATURE
-# from infodisc_signatures import VISA_MASTERCARD_SIGNATURE
-# from infodisc_signatures import MASTERCARD_SIGNATURE, DISCOVER_CARD_SIGNATURE
-# from infodisc_signatures import VISA_SIGNATURE, AMEX_CARD_SIGNATURE
-# from requests.packages.urllib3.exceptions import InsecureRequestWarning
-# requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
-
-# def credit0x00(url):
-
-#     print(G+' [+] Importing credit card signatures...')
-#     links = [url]
-#     po = url.split('//')[1]
-#     for w in links:
-#         print(GR+' [*] Scraping Page: '+O+url)
-#         req = requests.get(w).text
-#         check0x00(req)
-
-#     soup = BeautifulSoup(req,'lxml')
-#     for line in soup.find_all('a', href=True):
-#         newline = line['href']
-#         try:
-#             if newline[:4] == "http":
-#                 if po in newline:
-#                     urls.append(str(newline))
-#             elif newline[:1] == "/":
-#                 combline = url+newline
-#                 urls.append(str(combline))
-#         except:
-#             print(R+' [-] Unhandled Exception Occured!')
-
-#     try:
-#         for uurl in urls:
-#             print(G+"\n [+] Scraping Page: "+O+uurl)
-#             req = requests.get(uurl).text
-#             check0x00(req)
-
-#     except requests.exceptions:
-#         print(R+' [-] Outbound Query Exception...')
-
-#     if found == 0x00:
-#         print(R+' [-] No Credit Cards found disclosed in plaintext in source code!')
-
-#     print(G+' [+] Scraping Done!')
-
-
-# def check0x00(req):
-
-#     try:
-#         append_name = ' '.join(req.encode('utf-8')).strip()
-#     except UnicodeDecodeError:
-#         append_name = ' '.join(req.decode('utf-8')).strip()
-#     print(O+' [!] Reading response...')
-#     print(GR+' [*] Searching for credit cards...')
-#     AMEX = re.match(AMEX_CARD_SIGNATURE, append_name)
-#     VISA = re.match(VISA_SIGNATURE, append_name)
-#     MASTERCARD = re.match(MASTERCARD_SIGNATURE, append_name)
-#     DISCOVER = re.match(DISCOVER_CARD_SIGNATURE, append_name)
-#     EXPRESS = re.match(EXPRESS_CARD_SIGNATURE, append_name)
-#     VISA_MASTERCARD = re.match(VISA_MASTERCARD_SIGNATURE, append_name)
-#     print(O+' [!] Matching signatures...')
-
-#     try:
-#         if EXPRESS.group():
-#             print(G+" [+] Website has American Express Cards!")
-#             print(O+' [!] Card : ' + GR+EXPRESS.group())
-#             found = 0x01
-
-#     except:
-#         pass
-
-#     try:
-#         if VISA_MASTERCARD.group():
-#             print(G+" [+] Website has a Visa-Master Card!")
-#             print(O+' [!] Card : ' + GR+VISA_MASTERCARD.group())
-#             found = 0x01
-
-#     except:
-#         pass
-
-#     try:
-#         if MASTERCARD.group():
-#             print(G+" [+] Website has a Master Card!")
-#             print(O+' [!] Card : ' + GR+MASTERCARD.group())
-#             found = 0x01
-
-#     except:
-#         pass
-
-#     try:
-#         if VISA.group():
-#             print(G+" [+] Website has a VISA card!")
-#             print(O+' [!] Card : ' + GR+VISA.group())
-#             found = 0x01
-
-#     except:
-#         pass
-
-#     try:
-#         if AMEX.group():
-#             print(G+" [+] Website has a AMEX card!")
-#             print(O+' [!] Card : ' + GR+AMEX.group())
-#             found = 0x01
-
-#     except:
-#         pass
-
-#     try:
-#         if DISCOVER.group():
-#             print(G+" [+] Website has a DISCOVER card!")
-#             print(O+' [!] Card : ' + GR+DISCOVER.group())
-#             found = 0x01
-
-#     except:
-#         pass
-
-# def creditcards(web):
-#     print('web_link'+web)
-#     print(GR+' [*] Initiating module...')
-#     time.sleep(0.5)
-#     print(R+'\n     ========================')
-#     print(R+'      CREDIT CARD DISCLOSURE')
-#     print(R+'     ========================\n')
-#     credit0x00(web)
+    from core.build_menu import buildmenu
+    for host in target:
+        host.lvl2=inspect.stack()[0][3]
+        host.lvl3=''
+        credit0x00(host)
+    try:
+        input(color.blue(' [#] Press')+color.red(' Enter ')+color.blue('to continue... \n'))
+        buildmenu(target,target[0].main_menu,'Main Menu','')
+    except EOFError as e:  
+        buildmenu(target,target[0].main_menu,'Main Menu','')
+    return

@@ -51,81 +51,84 @@ def buildmenu(target,dict,banner,art):
         print(color.green(' [S] ') + color.yellow('Settings\n'))
         print(" " + color.custom('[B] Back',bold=True,white=True,bg_red=True)+'\n')
 
-    choice = input('[#] Choose Option:> ')
-    found = False
-    if choice == '0': # exit
-        exit()
-    elif choice.lower() == 'b': # go back
-        found = True
-        buildmenu(target,target[0].last_menu,'','')
-    elif choice.lower() == 'a':
-        for key, value in dictionary.items():
-            target[0].module = value[0]
-            target[0].description = value[1]
-            build_banner(value[0].replace('(','').replace(')',''))
-            try:
-                multi(multiprocess_functions[value[2]],target)
-            except Exception as e:
-                pass
-            finally:
-                pass
-        found = True
-    elif choice.lower() == 'm':
-        found = True
-        buildmenu(target,target[0].main_menu,'Main Menu','')
-    elif choice.lower() == 's':
-        found = True
-        buildmenu(target,target[0].settings_menu,'Settings','')
-    elif choice.lower() == 'p':
-        found = True
-        print('Process Status', processes)
-        print('THREAT TASKS TO ACCOMPLISH QUEUE', tasks_to_accomplish.qsize())
-        print('THREAT TASKS DONE QUEUE', tasks_that_are_done.qsize())
-        # print('\n ' + color.green('[+] ') + color.blue('Status of Processes: ') + color.custom(processes,reset=True,white=True))
-        # print('\n ' + color.green('[+] ') + color.blue('Tasks to Accomplish Queue Size: ') + color.custom(tasks_to_accomplish.qsize(),reset=True,white=True))
-        # print('\n ' + color.green('[+] ') + color.blue('Tasks that are done Queue Size: ') + color.custom(tasks_that_are_done.qsize(),reset=True,white=True))
-        buildmenu(target,target[0].main_menu,'Main Menu','')
-    elif choice.lower() == 'h':
-        found = True
-        if target[0].help == '':
-            target[0].current_menu=target[0].last_menu
-            art=color.red('\nInvalid selection. ') + color.blue('Help') + color.red(' is not implemented yet.\n')
-            buildmenu(target,dict,banner,art)
-        else:
-            print(color.green('INFO: Grabbing ' + target[0].help + ' Help Page'))
-            get_help = target[0].help.lower() + ' -H'
-            subprocess.run(get_help, shell=True)
-            buildmenu(target,dict,banner,art)
-    else:
-        for key, value in dictionary.items():
-            if str(choice) == str(key): # select option
+    try:
+        choice = input('[#] Choose Option:> ')
+        found = False
+        if choice == '0': # exit
+            exit()
+        elif choice.lower() == 'b': # go back
+            found = True
+            buildmenu(target,target[0].last_menu,'','')
+        elif choice.lower() == 'a':
+            for key, value in dictionary.items():
+                target[0].module = value[0]
                 target[0].description = value[1]
+                build_banner(value[0].replace('(','').replace(')',''))
+                try:
+                    multi(multiprocess_functions[value[2]],target)
+                except Exception as e:
+                    pass
+                finally:
+                    pass
+            found = True
+        elif choice.lower() == 'm':
+            found = True
+            buildmenu(target,target[0].main_menu,'Main Menu','')
+        elif choice.lower() == 's':
+            found = True
+            buildmenu(target,target[0].settings_menu,'Settings','')
+        elif choice.lower() == 'p':
+            found = True
+            print('Process Status', processes)
+            print('THREAT TASKS TO ACCOMPLISH QUEUE', tasks_to_accomplish.qsize())
+            print('THREAT TASKS DONE QUEUE', tasks_that_are_done.qsize())
+            # print('\n ' + color.green('[+] ') + color.blue('Status of Processes: ') + color.custom(processes,reset=True,white=True))
+            # print('\n ' + color.green('[+] ') + color.blue('Tasks to Accomplish Queue Size: ') + color.custom(tasks_to_accomplish.qsize(),reset=True,white=True))
+            # print('\n ' + color.green('[+] ') + color.blue('Tasks that are done Queue Size: ') + color.custom(tasks_that_are_done.qsize(),reset=True,white=True))
+            buildmenu(target,target[0].main_menu,'Main Menu','')
+        elif choice.lower() == 'h':
+            found = True
+            if target[0].help == '':
+                target[0].current_menu=target[0].last_menu
+                art=color.red('\nInvalid selection. ') + color.blue('Help') + color.red(' is not implemented yet.\n')
+                buildmenu(target,dict,banner,art)
+            else:
+                print(color.green('INFO: Grabbing ' + target[0].help + ' Help Page'))
+                get_help = target[0].help.lower() + ' -H'
+                subprocess.run(get_help, shell=True)
+                buildmenu(target,dict,banner,art)
+        else:
+            for key, value in dictionary.items():
+                if str(choice) == str(key): # select option
+                    target[0].description = value[1]
 
-                if 'Temp if statement in case dont want to pass target' in banner: # DEBUG: Might use this option
-                    results=functions[value[2]]
-                else:
-                    build_banner(value[0].replace('(','').replace(')',''))
-                    mp = False
-                    try:
-                        multi(multiprocess_functions[value[2]],target)
-                        mp = True
-                        buildmenu(target,target[0].main_menu,'Main Menu','')
-                    except Exception as e:
-                        pass
-                    finally:
-                        pass
-                    if mp ==False:
+                    if 'Temp if statement in case dont want to pass target' in banner: # DEBUG: Might use this option
+                        results=functions[value[2]]
+                    else:
+                        build_banner(value[0].replace('(','').replace(')',''))
+                        mp = False
                         try:
-                            results=functions[value[2]](target)
+                            multi(multiprocess_functions[value[2]],target)
+                            mp = True
+                            buildmenu(target,target[0].main_menu,'Main Menu','')
                         except Exception as e:
-                            target[0].current_menu=target[0].last_menu
-                            art=color.red('\nInvalid selection. ') + color.blue(value[0]) + color.red(' is not implemented yet.\n')
-                            buildmenu(target,dict,banner,art)
+                            pass
                         finally:
                             pass
-                found = True
-                break
+                        if mp ==False:
+                            try:
+                                results=functions[value[2]](target)
+                            except Exception as e:
+                                target[0].current_menu=target[0].last_menu
+                                art=color.red('\nInvalid selection. ') + color.blue(value[0]) + color.red(' is not implemented yet.\n')
+                                buildmenu(target,dict,banner,art)
+                            finally:
+                                pass
+                    found = True
+                    break
 
-    if found == False:
-        print(color.red('Invalid selection.'))
+        if found == False:
+            print(color.red('Invalid selection.'))
+            pass
+    except EOFError as e:
         pass
