@@ -29,7 +29,7 @@ def hackertarget(target):
                 time.sleep(.5) # max query is 3 per second or you get blocked
                 if check.status_code == 200:
                         data = check.text
-                        save_data(host.database, host.module, host.lvl1, host.lvl2, host.lvl3, host.name, data)
+                        save_data(host.database, host.module, host.lvl1, host.lvl2, host.lvl3, host.name, str(data))
                 else:
                     print(color.red(' [-] Did not find any info about domain ')+color.yellow(host.name))
                     print(color.red(' [+] Try with another one...'))
