@@ -39,6 +39,9 @@ def photon_menu(target):
     photon_options = ''
 
     target_website = photon_site if photon_site else target[0].website
+    if 'https://' not in target_website:
+        target_website = 'https://' + target_website
+
     target_options = photon_options if photon_options else target[0].options_str
     target_run_file = target[0].run_file
 
