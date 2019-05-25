@@ -9,7 +9,7 @@ from multiprocessing import Queue
 menu = { # '#' : ['module', 'description', 'function']
         '1':['Reconnaissance & OSINT','Passive/Active Recon & Information Disclosure','recon'],\
         '2':['Scanning & Enumeration','Port Scanning and Directory Enumeration','scanenum'],\
-        '3':['Vulnerability Analysis','Check for bugs, misconfigurations, critical vulns, and brute force tools','vulnysis'],\
+        '3':['Vulnerability Analysis','Check for bugs, misconfigs, crit vulns, and bruters','vulnysis'],\
         '4':['Exploitation','Exploit Modules','exploitation'],\
         '5':['Auxillary Modules','Auxillary Modules','aux'],\
         '6':['Database', 'Access Stored Results', 'db_menu'],\
