@@ -85,11 +85,18 @@ from modules.recon.info.ssn import ssn
 # enumeration
 from modules.enumeration.nikto import nikto
 from modules.enumeration.nikto_menu import nikto_menu, nikto_ip, nikto_port, nikto_add_options
-from modules.enumeration.windows_enum import windows_enum
-from modules.enumeration.windows.enum4linux import enum4linux
+# from modules.enumeration.windows_enum import windows_enum
+# from modules.enumeration.windows.enum4linux import enum4linux
 from modules.enumeration.nmap import nmap
 from modules.enumeration.nmap_menu import nmap_menu
 from modules.enumeration.nmap_editor import nmap_editor
+# # from modules.enumeration.windows_enum import windows_enum
+# from modules.enumeration.windows.enum4linux import enum4linux
+from modules.enumeration.nmap_menu import nmap_menu
+from modules.enumeration.photon_menu import photon_menu, photon_website, photon_options
+from modules.enumeration.crawlers.photon_run import photon_run
+# from lib.Photon.photon import photon
+
 from modules.database.database_module import get_info
 
 # post / aux modules
@@ -166,13 +173,19 @@ functions = {
     #''
 
     # enumeration
-    'windows_enum':windows_enum,
+    # # 'windows_enum':windows_enum,
     'nikto_menu':nikto_menu,
     'nikto_ip':nikto_ip,
     'nikto_port':nikto_port,
     'nikto_add_options':nikto_add_options,
     'nmap_menu':nmap_menu,
     'nmap_editor':nmap_editor,
+    'photon_menu':photon_menu,
+    'photon_website':photon_website,
+    'photon_options':photon_options,
+    # 'photon_run':photon_run,
+    # 'photon':photon,
+
 
     #vuln
     'critical':critical,
@@ -241,7 +254,8 @@ multiprocess_functions = {
     # enumeration
     'nmap':nmap,
     'nikto':nikto,
-    'enum4linux':enum4linux,
+    'photon_run':photon_run,
+    # 'enum4linux':enum4linux,
 
     #critical bugs
     'lfi':lfi,
@@ -285,7 +299,7 @@ multiprocess_functions = {
     'xmppbrute':xmppbrute,
     'telnetbrute':telnetbrute,
 
-    
+
 
 }
 
