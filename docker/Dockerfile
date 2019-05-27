@@ -1,6 +1,5 @@
 # Pulling base image
 FROM ubuntu:18.04
-MAINTAINER Arie Kurniawan "contact.arkwrn@gmail.com"
 
 # Install TIDoS-Framework dependencies
 RUN apt-get update && \
