@@ -91,11 +91,7 @@ python2 tidos.py
 
 #### Docker image :
 
-You can pull dockerized TIDoS-Framework from dockerhub :
-```
-docker pull tuantakoer/tidos-framework
-```
-or You can build it from Dockerfile :
+You can build it from Dockerfile :
 ```
 git clone https://github.com/0xinfection/tidos-framework.git
 cd tidos-framework/docker
