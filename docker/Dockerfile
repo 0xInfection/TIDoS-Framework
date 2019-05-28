@@ -4,16 +4,12 @@ FROM ubuntu:18.04
 # Install TIDoS-Framework dependencies
 RUN apt-get update && \
     apt-get -y install \
-      git \
-      python  \
-      python-pip \
       libncurses5 \
       libxml2 \
       nmap \
       tcpdump  \
       libexiv2-dev \
       build-essential \
-      default-libmysqlclient-dev \
       python-xmpp \
     && \
     rm -rf /var/lib/apt/lists/* && \
