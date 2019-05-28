@@ -22,7 +22,6 @@ RUN apt-get update && \
 # Installing TIDoS-Framework
 RUN git clone https://github.com/0xinfection/tidos-framework.git && \
     cd tidos-framework && \
-    if [ $(grep 'dnslib' requirements.txt | wc -l) -eq 0 ]; then $(echo 'dnslib' >> requirements.txt); fi && \
     pip2 install -r requirements.txt && \
     chmod +x install && \
     echo -e '\n' | ./install
