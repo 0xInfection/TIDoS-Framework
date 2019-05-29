@@ -1,4 +1,3 @@
-
    ===============================
     T I D o S - F R A M E W O R K 
    ===============================
@@ -9,7 +8,7 @@
  $ Author(s) 
    =========
 
- * The Infected Drake <@0xInfection>
+ * Infected Drake <@0xInfection>
 
    - Main author behind this framework.
    - Current developer and maintainer through the latest version.
@@ -18,20 +17,36 @@
  $ Contributor(s)
    ==============
 
- * Yugabdh Pashte <@attacker_loaded>
+ * Chaz Leong <@cleong14>
+ 
+   - Contributed actively towards efficiency of TIDoS.
+   - Helped out in refactoring existing code structure.
+   - Contact - cleong14 [at] gmail.com
 
-   - Ideator and bug fixer of this framework.
-   - Former tester and maintainer till version v1.2.
-   - Contact - <yugabdh.pashte [at] gmail.com>
+ * Matt Gluck <@PeteSampras>
+ 
+   - Contributed actively towards efficiency of TIDoS.
+   - Helped out in refactoring existing code structure.
+   - Contact - petesampras.mmobugs [at] gmail.com
 
- * Biprodeep Roy <@virtu4lgh0st>
+ * Sidney Dodson <@sidjtd>
+ 
+   - Contributed actively towards efficiency of TIDoS.
+   - Helped out in refactoring existing code structure.
+   - Contact - siddodson [at] gmail.com
 
-   - Ideator and remediator of this project.
-   - Helped improving overall build + runtime efficiency.
-   - Contact - <biprodeep [at] gmail.com>
+* Nathanael Coxx <@nathanaelcox>
+
+   - Contributed actively towards efficiency of TIDoS.
+   - Helped out in refactoring existing code structure.
+  - Contact - nathanaeltcox [at] gmail.com
+
+* Arie Kurniawan <@arkwrn>
+
+   - Contributed a dockerfile to TIDoS.
+   - Contact - <contact.arkwrn [at] gmail.com>
 
  * Cclauss <@cclauss>
  
-   - Bug fixer and remediator of TIDoS.
-   - Helped rolling out migration from Py2 to Py3.
-   - Contact - <█████████████████████>
+   - Helped rolling out migration from Python2 to Python3.
+   - Contact - <███████████████ [at] █████████>
