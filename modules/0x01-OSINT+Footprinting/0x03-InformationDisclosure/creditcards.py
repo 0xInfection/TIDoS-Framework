@@ -31,7 +31,6 @@ requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 def credit0x00(url):
 
     print(G+' [+] Importing credit card signatures...')
-    time.sleep(0.5)
     links = [url]
     po = url.split('//')[1]
     for w in links:
@@ -138,7 +137,7 @@ def check0x00(req):
         pass
 
 def creditcards(web):
-
+    print('web_link'+web)
     print(GR+' [*] Initiating module...')
     time.sleep(0.5)
     print(R+'\n     ========================')
