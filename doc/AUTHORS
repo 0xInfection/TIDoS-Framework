@@ -17,6 +17,9 @@
  $ Contributor(s)
    ==============
 
+ + These people deserve a special mention for helping out and accelerating the 
+   pace of TIDoS development.
+
  * Chaz Leong <@cleong14>
  
    - Contributed actively towards efficiency of TIDoS.
@@ -39,7 +42,13 @@
 
    - Contributed actively towards efficiency of TIDoS.
    - Helped out in refactoring existing code structure.
-  - Contact - nathanaeltcox [at] gmail.com
+   - Contact - nathanaeltcox [at] gmail.com
+
+* Jason Sewell <@jaywon>
+
+   - Collaborated on various issues and helped fix bugs.
+   - Kickstarter to framework v2.
+   - Contact - jason [at] sudokrew.com
 
 * Arie Kurniawan <@arkwrn>
 
