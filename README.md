@@ -95,7 +95,14 @@ You can build it from Dockerfile :
 ```
 git clone https://github.com/0xinfection/tidos-framework.git
 cd tidos-framework/docker
-docker build - < Dockerfile
+docker build -r tidos .
+```
+
+To run TIDoS :
+
+```
+docker run --interactive --tty --rm tidos bash
+tidos
 ```
 
 ### Getting Started :-
