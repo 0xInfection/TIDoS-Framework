@@ -356,10 +356,6 @@ This project is a very fresh and new project which just simply springed off my m
 
 TIDoS is an in progress work far from perfection and I admit that there may be bugs out there which may cause many modules not to work properly and just bug out. However, being the only single author and maintainer behind this framework, it is my humble request to all users of this framework to hand me the list of modules via raising a [new issue](https://github.com/0xInfection/TIDoS-Framework/issues/new) which simply do not work and bug out, and I would be more than happy to fix them as we jointly make our journey to realising TIDoS as the greatest web penetration testing framework ever built.
 
-> __TEMPORARY UPDATE__:
->
-> Please avoid doing any pull requests temporarily as work for v2 of this framework is already underway and in active development. 
-
 Got more suggestions or new ideas? Raise up an [issue](https://github.com/0xinfection/TIDoS-Framework/issues/new) or hit me up via DM on [twitter](https://twitter.com/0xinfection).
 
 > Copyright © [__Infected Drake__](https://twitter.com/0xinfection)
