@@ -27,7 +27,7 @@ def subnet(web):
     print(GR+' [*] Getting subnet class infos...\n')
     domains = [web]
     for dom in domains:
-        text = requests.get('http://api.hackertarget.com/subnetcalc/?q=' + dom).text
+        text = requests.get('https://steakovercooked.com/api/ping/?host=' + dom).text
         http = str(text)
 
         if 'error' not in http:
