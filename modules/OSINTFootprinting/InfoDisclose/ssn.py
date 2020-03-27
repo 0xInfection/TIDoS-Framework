@@ -86,4 +86,5 @@ def ssn(web):
     ssn0x00(web)
 
 def attack(web):
+    web = web.fullurl
     ssn(web)

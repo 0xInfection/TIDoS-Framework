@@ -112,4 +112,5 @@ def serverdetect(web):
 #
 
 def attack(web):
+    web = web.fullurl
     serverdetect(web)

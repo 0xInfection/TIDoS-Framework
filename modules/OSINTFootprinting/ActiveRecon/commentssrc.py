@@ -84,4 +84,5 @@ def commentssrc(web):
     print(G+' [+] Comments Scraping Done!'+C+color.TR2+C)
 
 def attack(web):
+    web = web.fullurl
     commentssrc(web)

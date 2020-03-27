@@ -85,4 +85,5 @@ def cookiecheck(web):
     cookiecheck0x00(Headers)
 
 def attack(web):
+    web = web.fullurl
     cookiecheck(web)

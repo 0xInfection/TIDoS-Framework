@@ -185,4 +185,5 @@ def phpi(web):
     print(G+'\n [+] PHPi Module Completed!')
 
 def attack(web):
+    web = web.fullurl
     phpi(web)

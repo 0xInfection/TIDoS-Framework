@@ -70,4 +70,5 @@ def strutsshock(web):
 	strutsshock0x00(web)
 
 def attack(web):
-    strutsshock(web)
+	web = web.fullurl
+	strutsshock(web)

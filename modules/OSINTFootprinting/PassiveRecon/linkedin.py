@@ -66,4 +66,5 @@ def linkedin(web):
     getposts(web)
 
 def attack(web):
+    web = web.fullurl
     linkedin(web)

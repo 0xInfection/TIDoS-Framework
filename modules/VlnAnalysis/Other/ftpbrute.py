@@ -87,4 +87,5 @@ def ftpbrute(web):
     print(G+' [+] Done!')
 
 def attack(web):
+    web = web.fullurl
     ftpbrute(web)

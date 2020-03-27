@@ -118,4 +118,5 @@ def indexmulbrute(web):
     print(C+' [+] Done!')
 
 def attack(web):
+    web = web.fullurl
     indexmulbrute(web)

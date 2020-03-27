@@ -101,4 +101,5 @@ def blindsqlsearch(web):
             time.sleep(0.2)
 
 def attack(web):
+    web = web.fullurl
     blindsqlsearch(web)

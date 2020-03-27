@@ -104,4 +104,5 @@ def errorsqlsearch(web):
             time.sleep(0.2)
 
 def attack(web):
+    web = web.fullurl
     errorsqlsearch(web)

@@ -87,4 +87,5 @@ def errors(web):
     request(web)
 
 def attack(web):
+    web = web.fullurl
     errors(web)

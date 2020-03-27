@@ -109,4 +109,5 @@ def xsstrace(web):
     xsstrace0x00(web)
 
 def attack(web):
+    web = web.fullurl
     xsstrace(web)

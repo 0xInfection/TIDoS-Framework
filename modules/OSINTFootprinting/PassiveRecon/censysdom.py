@@ -88,4 +88,5 @@ def censysdom(web):
         print(R+' [-] This module cannot be used!')
 
 def attack(web):
+    web = web.fullurl
     censysdom(web)

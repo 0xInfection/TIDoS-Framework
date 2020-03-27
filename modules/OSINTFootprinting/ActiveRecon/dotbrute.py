@@ -116,4 +116,5 @@ def dotbrute(web):
     print(C+' [+] Done!')
 
 def attack(web):
+    web = web.fullurl
     dotbrute(web)

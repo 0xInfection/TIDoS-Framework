@@ -41,8 +41,10 @@ def creds(inp):
             if correct:
                 found = False
                 for i in range(0,len(vars.targets)):
-                    if vars.targets[i] == url:
-                        vars.targets[i] = url2
+                    if vars.targets[i].fullurl == url:
+                        vars.targets[i].fullurl = url2
+                        vars.targets[i].urluser = user
+                        vars.targets[i].urlpasswd = passwd
                         found = True
                 if found:
                     print(" [+] {} > {}".format(url,url2))
@@ -63,8 +65,10 @@ def creds(inp):
         if correct:
             found = False
             for i in range(0,len(vars.targets)):
-                if vars.targets[i] == url:
-                    vars.targets[i] = url2
+                if vars.targets[i].fullurl == url:
+                    vars.targets[i].fullurl = url2
+                    vars.targets[i].urluser = ""
+                    vars.targets[i].urlpasswd = ""
                     found = True
             if found:
                 print(" [+] {} > {}".format(url,url2))

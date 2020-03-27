@@ -53,4 +53,5 @@ def zone(web):
         print(R+' [-] Error : '+str(e))
 
 def attack(web):
+    web = web.fullurl
     zone(web)

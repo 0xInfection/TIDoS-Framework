@@ -154,4 +154,5 @@ def filebrute(web):
         filebrute(web)
 
 def attack(web):
+    web = web.fullurl
     filebrute(web)

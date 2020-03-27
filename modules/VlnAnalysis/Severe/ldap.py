@@ -174,4 +174,5 @@ def ldap(web):
     print(G+'\n [+] LDAP Injection module completed!\n')
 
 def attack(web):
+    web = web.fullurl
     ldap(web)

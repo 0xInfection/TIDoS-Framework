@@ -164,4 +164,5 @@ def crawler2(web):
     out(web, totlinks)
 
 def attack(web):
+    web = web.fullurl
     crawler2(web)

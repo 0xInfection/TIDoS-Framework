@@ -119,4 +119,5 @@ def passbrute(web):
 
 
 def attack(web):
+    web = web.fullurl
     passbrute(web)

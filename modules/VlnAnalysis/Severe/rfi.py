@@ -328,4 +328,5 @@ def rfi(web):
         rfi(web)
 
 def attack(web):
+    web = web.fullurl
     rfi(web)

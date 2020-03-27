@@ -111,4 +111,5 @@ def cms(web):
     print(G+' [+] CMS Detection Module Completed!'+C+color.TR2+C)
 
 def attack(web):
+    web = web.fullurl
     cms(web)

@@ -103,4 +103,5 @@ def ssltlsscan(web):
     print(G+' [+] SSlScan Module Completed!'+C+color.TR2+C)
 
 def attack(web):
+    web = web.fullurl
     ssltlsscan(web)

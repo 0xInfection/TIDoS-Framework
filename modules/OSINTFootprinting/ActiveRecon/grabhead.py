@@ -40,4 +40,5 @@ def grabhead(web):
         print(R+' [-] '+e.__str__())
 
 def attack(web):
+    web = web.fullurl
     grabhead(web)

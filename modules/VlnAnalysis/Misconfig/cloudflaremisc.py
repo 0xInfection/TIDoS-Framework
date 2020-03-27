@@ -123,4 +123,5 @@ def cloudflaremisc(web):
     cloud0x00(web)
 
 def attack(web):
+    web = web.fullurl
     cloudflaremisc(web)

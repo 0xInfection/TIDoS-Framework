@@ -269,4 +269,5 @@ def servicedetect(web):
     service0x00(web)
 
 def attack(web):
+    web = web.fullurl
     servicedetect(web)

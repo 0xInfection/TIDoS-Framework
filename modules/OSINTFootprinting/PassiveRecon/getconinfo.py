@@ -90,4 +90,5 @@ def getconinfo(domain):
     print(G+'\n [+] Public Contact Info Module Completed!'+C+color.TR2+C+'\n')
 
 def attack(web):
+    web = web.fullurl
     getconinfo(web)

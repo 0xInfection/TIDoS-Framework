@@ -17,9 +17,13 @@ import string
 
 import core.variables as vars
 from core.Core.colors import *
+from core.methods.threat import Target
 
 
 def inputin(target):
+    valid_ip_regex = r'^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$'
+    valid_host_regex = r'^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\-]*[A-Za-z0-9])$'
+    
     try:
         web = target
         if not str(web).startswith('http'):
@@ -28,15 +32,27 @@ def inputin(target):
                 web = 'https://' + web
             elif mo == 'n':
                 web = 'http://' + web
+                
         if 'http://' in web:
             po = web.split('//')[1]
+            port = 80
         elif 'https://' in web:
             po = web.split('//')[1]
+            port = 443
         else:
             po = ''
+            port = 1337
         if str(web).endswith('/'):
             web = po[:-1]
             po = po[:-1]
+        custport = input(" [?] Does the site use a custom port? (enter if not) :> ")
+        if custport != "":
+            inport = input(" [§] Enter port :> ")
+            try:
+                port = int(inport)
+                assert port in range(1, 65535)
+            except:
+                print(R+" [!] Not a valid port value"+C)
         print(GR + ' [*] Checking server status...')
         time.sleep(0.6)
 
@@ -54,7 +70,15 @@ def inputin(target):
             if user != "" and passwd != "":
                 wl = web.split("://")
                 webfin = wl[0] + "://" + user + ":" + passwd + "@" + wl[1]
-            vars.targets.append(webfin)
+                if port not in [80, 443]:
+                    webfin = webfin + ":" + str(port)
+            #vars.targets.append(webfin)
+            newTarget = Target(po, ip)
+            newTarget.port = port
+            newTarget.urluser = user
+            newTarget.urlpasswd = passwd
+            newTarget.fullurl = webfin
+            vars.targets.append(newTarget)
             print(O+" [+] Target added:"+C+color.TR3+C+G+webfin+C+color.TR2+C)
 
         except socket.gaierror:
@@ -82,11 +106,13 @@ def inputip(target, net=False):
         print(R + " [-] " + "\033[0m" + color.UNDERLINE + "\033[1m" + "Invalid IP: {}".format(target))
         pass
 
+    newTarget = Target(target, target)
+
     if net:
-        vars.targets.append(target)
+        vars.targets.append(newTarget)
         print(O+" [+] Target added:"+C+color.TR3+C+G+target+C+color.TR2+C)
     elif os.system("ping -c 1 " + target) is 0:
-        vars.targets.append(target)
+        vars.targets.append(newTarget)
         print(O+" [+] Target added:"+C+color.TR3+C+G+target+C+color.TR2+C)
     else:
         print(R + " [-] " + "\033[0m" + color.UNDERLINE + "\033[1m" + "Target seems down...")

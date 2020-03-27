@@ -52,4 +52,5 @@ def sharedns(web):
                 time.sleep(0.02)
 
 def attack(web):
+    web = web.fullurl
     sharedns(web)

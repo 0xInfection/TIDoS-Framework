@@ -94,4 +94,5 @@ def smtpbrute(web):
     print(G+' [+] Done!')
 
 def attack(web):
+    web = web.fullurl
     smtpbrute(web)

@@ -41,4 +41,5 @@ def piweb(web):
         time.sleep(0.8)
 
 def attack(web):
+    web = web.fullurl
     piweb(web)

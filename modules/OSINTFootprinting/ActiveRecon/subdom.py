@@ -153,4 +153,5 @@ def subdom(web):
     print(C+' [+] Done!')
 
 def attack(web):
+    web = web.fullurl
     subdom(web)

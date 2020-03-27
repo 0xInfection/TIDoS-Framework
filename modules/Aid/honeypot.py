@@ -64,4 +64,5 @@ def honeypot(web):
         print(R+' [-] Cannot use this module!')
 
 def attack(web):
+    web = web.fullurl
     honeypot(web)

@@ -52,4 +52,5 @@ def getos0x00(web):
         print(R+' [-] Unhandled Exception : '+str(e))
 
 def attack(web):
+    web = web.fullurl
     getos0x00(web)

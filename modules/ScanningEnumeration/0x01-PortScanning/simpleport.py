@@ -199,4 +199,5 @@ def simpleport(web):
     scan0x00(web)
 
 def attack(web):
+    web = web.fullurl
     simpleport(web)

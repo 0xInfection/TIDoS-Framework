@@ -385,4 +385,5 @@ def xss(web):
     print(G+' [+] XSS Module Completed!\n')
 
 def attack(web):
+    web = web.fullurl
     xss(web)

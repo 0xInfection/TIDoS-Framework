@@ -91,4 +91,5 @@ def clickjack(web):
         print(G+' [-] Error : '+str(e))
 
 def attack(web):
+    web = web.fullurl
     clickjack(web)

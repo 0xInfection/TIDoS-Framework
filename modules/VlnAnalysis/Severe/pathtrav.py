@@ -349,4 +349,5 @@ def pathtrav(web):
         print(R+' [-] Error : '+str(e))
 
 def attack(web):
+    web = web.fullurl
     pathtrav(web)

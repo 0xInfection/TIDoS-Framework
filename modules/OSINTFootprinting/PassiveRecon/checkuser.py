@@ -83,4 +83,5 @@ def checkuser(web):
     check0x00(web0,web)
 
 def attack(web):
+    web = web.fullurl
     checkuser(web)

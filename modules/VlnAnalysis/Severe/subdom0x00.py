@@ -161,4 +161,5 @@ def subdom0x00(web):
         print(R+' [-] Error : '+str(e))
 
 def attack(web):
+    web = web.fullurl
     subdom0x00(web)

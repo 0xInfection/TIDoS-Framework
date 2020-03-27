@@ -58,4 +58,5 @@ def sessionfix(url):
     print(G+' [+] Session Fixation Module Completed!\n')
 
 def attack(web):
+    web = web.fullurl
     sessionfix(web)

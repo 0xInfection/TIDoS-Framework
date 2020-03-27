@@ -111,4 +111,5 @@ def dav(web):
     print(G+' [+] HTTP Profiling of DAV Completed!'+C+color.TR2+C+'\n')
 
 def attack(web):
+    web = web.fullurl
     dav(web)

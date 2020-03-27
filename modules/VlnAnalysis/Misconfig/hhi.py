@@ -103,4 +103,5 @@ def hhi(web):
     hostheader0x00(web)
 
 def attack(web):
+    web = web.fullurl
     hhi(web)

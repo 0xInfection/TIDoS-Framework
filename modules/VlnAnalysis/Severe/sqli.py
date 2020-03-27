@@ -48,4 +48,5 @@ def sqli(web):
         print(R+' [-] U high dude?')
 
 def attack(web):
+    web = web.fullurl
     sqli(web)

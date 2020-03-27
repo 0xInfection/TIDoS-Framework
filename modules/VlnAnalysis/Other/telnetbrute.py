@@ -90,4 +90,5 @@ def telnetbrute(web):
     print(G+' [+] Done!')
 
 def attack(web):
+    web = web.fullurl
     telnetbrute(web)

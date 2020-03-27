@@ -96,4 +96,5 @@ def osdetect(web):
     print(G+' [+] OS Fingerprinting Module Completed!'+C+color.TR2+C+'\n')
 
 def attack(web):
+    web = web.fullurl
     osdetect(web)

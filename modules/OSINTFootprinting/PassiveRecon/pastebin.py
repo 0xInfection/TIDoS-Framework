@@ -61,4 +61,5 @@ def pastebin(web):
     getposts(web)
 
 def attack(web):
+    web = web.fullurl
     pastebin(web)

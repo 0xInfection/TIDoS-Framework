@@ -201,4 +201,5 @@ def openredirect(web):
         pass
 
 def attack(web):
+    web = web.fullurl
     openredirect(web)

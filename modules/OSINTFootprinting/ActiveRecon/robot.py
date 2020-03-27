@@ -51,4 +51,5 @@ def robot(web):
         print(R+' [-] Sitemap.xml not found')
 
 def attack(web):
+    web = web.fullurl
     robot(web)

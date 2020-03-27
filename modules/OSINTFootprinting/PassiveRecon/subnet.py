@@ -51,4 +51,5 @@ def subnet(web):
             print(R+' [-] Outbound Query Exception!')
 
 def attack(web):
+    web = web.fullurl
     subnet(web)

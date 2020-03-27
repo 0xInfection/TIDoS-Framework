@@ -108,4 +108,5 @@ def traceroute(web):
     print(G+' [+] Traceroute done.'+C+color.TR2+C+'\n')
 
 def attack(web):
+    web = web.fullurl
     traceroute(web)

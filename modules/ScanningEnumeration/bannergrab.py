@@ -63,4 +63,5 @@ def bannergrab(web):
     print(G+'\n [+] Banner Grabbing Done!'+C+color.TR2+C)
 
 def attack(web):
+    web = web.fullurl
     bannergrab(web)

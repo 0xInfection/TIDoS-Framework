@@ -169,4 +169,5 @@ def rce(web):
         rce(web)
 
 def attack(web):
+    web = web.fullurl
     rce(web)

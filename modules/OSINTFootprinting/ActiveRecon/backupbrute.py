@@ -117,4 +117,5 @@ def backupbrute(web):
     print(C+' [+] Done!')
 
 def attack(web):
+    web = web.fullurl
     backupbrute(web)

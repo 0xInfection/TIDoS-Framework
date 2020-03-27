@@ -181,4 +181,5 @@ def xpathi(web):
     print(G+'\n [+] XPATHi Module Completed!\n')
 
 def attack(web):
+    web = web.fullurl
     xpathi(web)

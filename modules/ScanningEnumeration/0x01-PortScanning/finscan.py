@@ -245,4 +245,5 @@ def finscan(web):
     scan0x00(web)
 
 def attack(web):
+    web = web.fullurl
     finscan(web)

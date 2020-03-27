@@ -50,4 +50,5 @@ def httpmethods(web):
         print(R+' [-] Error : '+str(e))
 
 def attack(web):
+    web = web.fullurl
     httpmethods(web)

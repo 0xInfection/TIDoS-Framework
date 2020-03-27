@@ -117,4 +117,5 @@ def backbrute(web):
         print(R+' [-] Exception : '+str(e))
 
 def attack(web):
+    web = web.fullurl
     backbrute(web)

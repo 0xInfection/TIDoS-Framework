@@ -30,7 +30,7 @@ import core.methods.print as prnt
 import core.methods.select as select
 import core.variables as varis
 from core.Core.colors import R, B, C, color, O, G, RD
-from core.methods.cache import load, save, sessionparse, createVal
+from core.methods.cache import load, save, sessionparse, createVal, targetparse
 from core.methods.creds import creds
 from core.methods.tor import torpipe, initcheck, session
 from core.methods.parser import build_parser
@@ -124,7 +124,8 @@ class TIDcon(Cmd):
         print()
         victims, options = sessionparse(inp, load=False)
         for victim in victims:
-            varis.targets.append(victim)
+            target = targetparse(victim)
+            varis.targets.append(target)
             for module, props in options.items():
                 self.do_load(module)
                 print("{}{}{}{}\n".format(C, color.UNDERLINE, module, C))
@@ -352,7 +353,7 @@ class TIDcon(Cmd):
             #print(" --------")
             for i in varis.targets:
                 if len(varis.targets) > 1:
-                    print( "\n"+O+" [i] Target:"+C+color.TR3+C+G+i+C+color.TR2+C+"\n")
+                    print( "\n"+O+" [i] Target:"+C+color.TR3+C+G+i.fullurl+C+color.TR2+C+"\n")
                 select.attack(i)
 
     def help_attack(self):
@@ -430,7 +431,7 @@ class TIDcon(Cmd):
             print(" [+] Cleared target list.")
         else:
             old = varis.targets
-            varis.targets = list(filter(lambda a: a != inp, varis.targets))
+            varis.targets = list(filter(lambda a: a.fullurl != inp, varis.targets))
             found = old != varis.targets
             if found:
                 print(O+" [+] Deleted Target:"+C+color.TR3+C+G+inp+C+color.TR2+C)
@@ -439,7 +440,7 @@ class TIDcon(Cmd):
 
     def do_viclist(self, inp):
         for i in varis.targets:
-            print(i)
+            print(i.fullurl)
 
     def help_viclist(self):
         print("""

@@ -114,4 +114,5 @@ def icors(web):
     time.sleep(1)
 
 def attack(web):
+    web = web.fullurl
     icors(web)

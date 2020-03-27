@@ -131,4 +131,5 @@ def crawler3(web):
         print(G+' [+] Saved!'+C+color.TR2+C)
 
 def attack(web):
+    web = web.fullurl
     crawler3(web)

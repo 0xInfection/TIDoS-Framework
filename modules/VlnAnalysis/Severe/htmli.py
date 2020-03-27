@@ -177,4 +177,5 @@ def htmli(web):
     print(G+'\n [+] HTMLi Module Completed!')
 
 def attack(web):
+    web = web.fullurl
     htmli(web)

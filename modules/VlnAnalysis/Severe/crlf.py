@@ -199,4 +199,5 @@ def crlf(web):
     print(G+' [+] CRLF Module Completed!')
 
 def attack(web):
+    web = web.fullurl
     crlf(web)

@@ -240,4 +240,5 @@ def xmasscan(web):
     scan0x00(web)
 
 def attack(web):
+    web = web.fullurl
     xmasscan(web)

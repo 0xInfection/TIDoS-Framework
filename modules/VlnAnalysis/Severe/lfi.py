@@ -307,4 +307,5 @@ def lfi(web):
     print(G+'\n [+] LFi Module Completed!')
 
 def attack(web):
+    web = web.fullurl
     lfi(web)

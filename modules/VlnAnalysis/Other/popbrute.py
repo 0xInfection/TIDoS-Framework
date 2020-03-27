@@ -81,4 +81,5 @@ def popbrute(web):
         print(R+' [-] Target seems to be down!')
 
 def attack(web):
+    web = web.fullurl
     popbrute(web)

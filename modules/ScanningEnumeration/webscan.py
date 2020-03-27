@@ -103,4 +103,5 @@ def view(server, ur, uid, sec, requests):
         print(R+' [-] Exception : '+str(error))
 
 def attack(web):
+    web = web.fullurl
     webscan(web)

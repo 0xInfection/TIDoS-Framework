@@ -198,4 +198,5 @@ def tcpconnectscan(web):
     scan0x00(web)
 
 def attack(web):
+    web = web.fullurl
     tcpconnectscan(web)

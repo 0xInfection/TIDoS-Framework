@@ -60,4 +60,5 @@ def iphistory(web):
         print(R+' [-] No instances of IP History found...')
 
 def attack(web):
+    web = web.fullurl
     iphistory(web)

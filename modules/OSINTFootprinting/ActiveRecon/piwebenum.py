@@ -44,4 +44,5 @@ def piwebenum(web):
     print(color.END+ nping +C+'\n')
 
 def attack(web):
+    web = web.fullurl
     piwebenum(web)

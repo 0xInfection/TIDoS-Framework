@@ -71,4 +71,5 @@ def sshbrute(web):
     print(G+" [+] Done!")
 
 def attack(web):
+    web = web.fullurl
     sshbrute(web)

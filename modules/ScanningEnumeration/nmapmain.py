@@ -1375,4 +1375,5 @@ def nmapmain(web):
     nmapsx(web)
 
 def attack(web):
+    web = web.fullurl
     nmapmain(web)

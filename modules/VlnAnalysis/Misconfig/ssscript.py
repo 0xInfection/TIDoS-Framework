@@ -79,4 +79,5 @@ def ssscript(web):
         pass
 
 def attack(web):
+    web = web.fullurl
     ssscript(web)

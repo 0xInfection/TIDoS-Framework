@@ -64,4 +64,5 @@ def revip(web):
             time.sleep(0.8)
 
 def attack(web):
+    web = web.fullurl
     revip(web)

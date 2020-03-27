@@ -254,4 +254,5 @@ def mailspoof(web):
         print(R+' [-] Exception : ' +str(e))
 
 def attack(web):
+    web = web.fullurl
     mailspoof(web)

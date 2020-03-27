@@ -50,4 +50,5 @@ def sslcert(web):
         print(B+' [+] Certificate as Raw : \n'+W+str(cer))
 
 def attack(web):
+    web = web.fullurl
     sslcert(web)

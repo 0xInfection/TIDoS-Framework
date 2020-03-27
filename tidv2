@@ -21,7 +21,7 @@ import sys, platform
 import os, socket
 import requests
 from tidconsole import TIDcon
-from core.methods.cache import createVal
+from core.methods.cache import createVal, targetparse
 from PyQt5.QtCore import Qt
 import core.variables as variables
 from subprocess import Popen, PIPE
@@ -343,7 +343,12 @@ class TIDapp(QtWidgets.QDialog):
                 os.system("pkexec /opt/TIDoS/core/methods/create.py OPT {}".format(username))
             else:
                 os.system("pkexec /home/{0}/TIDoS/core/methods/create.py HOME {0}".format(username))
-        createVal(viclist, modlist, "syn.val")   
+        tlist = []
+        for i in viclist:
+            j = targetparse(i)
+            if j:
+                tlist.append(j)
+        createVal(tlist, modlist, "syn.val")   
         if tor:
             os.system("konsole --hold -e 'sudo ./tidconsole.py -p -c syn.val'")
         else:
@@ -366,17 +371,19 @@ class TIDapp(QtWidgets.QDialog):
             os.system("git stash; git pull")
         else:
             os.system("pkexec /opt/TIDoS/core/methods/vpdate.py")
-        self.done(123454321)
+        self.REBOOT = True
+        self.done(0)
 
 
-REBOOT_CODE = 123454321
+    REBOOT = False
 
 app = QtWidgets.QApplication(sys.argv) # Create an instance of QtWidgets.QApplication
 window = TIDapp() # Create an instance of our class
 app.setWindowIcon(QtGui.QIcon("core/qt5/icons/tidos.png"))
 rcode = app.exec_() # Start the application
 
-while rcode == REBOOT_CODE:
+while window.REBOOT:
+    window.REBOOT = False
     app = QtWidgets.QApplication(sys.argv) # Create an instance of QtWidgets.QApplication
     window = TIDapp() # Create an instance of our class
     app.setWindowIcon(QtGui.QIcon("core/qt5/icons/tidos.png"))

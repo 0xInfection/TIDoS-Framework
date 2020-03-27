@@ -47,4 +47,5 @@ def googleSearch():
         print(R+' [-] Service temporarily unavailable.')
 
 def attack(web):
+    web = web.fullurl
     googleSearch()

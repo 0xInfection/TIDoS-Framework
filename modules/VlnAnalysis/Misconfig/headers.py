@@ -160,4 +160,5 @@ def headers(web):
         print(R+' [-] Error : '+str(e))
 
 def attack(web):
+    web = web.fullurl
     headers(web)

@@ -100,4 +100,5 @@ def webarchive(web):
     getRes0x00(web)
 
 def attack(web):
+    web = web.fullurl
     webarchive(web)

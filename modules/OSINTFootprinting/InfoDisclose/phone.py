@@ -88,4 +88,5 @@ def phone(web):
     phone0x00(web)
 
 def attack(web):
+    web = web.fullurl
     phone(web)

@@ -74,4 +74,5 @@ def sqlbrute(web):
         print(R+' [-] Target seems to be down!')
 
 def attack(web):
+    web = web.fullurl
     sqlbrute(web)

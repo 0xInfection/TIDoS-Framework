@@ -137,4 +137,5 @@ def waf(web):
     print('\n'+G+' [+] WAF Fingerprinting module completed!'+C+color.TR2+C+'\n')
 
 def attack(web):
+    web = web.fullurl
     waf(web)

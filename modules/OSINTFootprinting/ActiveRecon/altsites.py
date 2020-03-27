@@ -69,4 +69,5 @@ def altsites(web):
     print(C+'\n [+] Alternate Site Discovery Completed!\n')
 
 def attack(web):
+    web = web.fullurl
     altsites(web)

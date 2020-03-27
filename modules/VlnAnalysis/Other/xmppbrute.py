@@ -91,4 +91,5 @@ def xmppbrute(web):
     print(G+' [+] Done!')
 
 def attack(web):
+    web = web.fullurl
     xmppbrute(web)

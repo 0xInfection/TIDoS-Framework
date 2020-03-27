@@ -48,6 +48,7 @@ catlist = """
   vlnysis  
 """
 
+#target of type Target  TODO conversion in modules
 def attack(target):
     try:
         j = imp.import_module(vars.module)

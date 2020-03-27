@@ -133,4 +133,5 @@ def googledorker(web):
             pass
 
 def attack(web):
+    web = web.fullurl
     googledorker(web)

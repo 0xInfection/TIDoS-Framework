@@ -292,4 +292,5 @@ def errorsqli(web, properties):
             print(R+' [-] Payloads file does not exist!')
 
 def attack(web):
+    web = web.fullurl
     errorsqli(web, properties)

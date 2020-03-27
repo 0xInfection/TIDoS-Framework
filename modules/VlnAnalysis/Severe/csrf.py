@@ -251,4 +251,5 @@ def csrf(web):
         pass
 
 def attack(web):
+    web = web.fullurl
     csrf(web)

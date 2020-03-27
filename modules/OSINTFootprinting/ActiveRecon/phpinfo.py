@@ -57,4 +57,5 @@ def phpinfo(web):
         print(R+' [-] Bruteforce filepath not found!')
 
 def attack(web):
+    web = web.fullurl
     phpinfo(web)

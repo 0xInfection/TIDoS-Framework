@@ -88,4 +88,5 @@ def emailext(web):
     mail0x00(web)
 
 def attack(web):
+    web = web.fullurl
     emailext(web)

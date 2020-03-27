@@ -154,4 +154,5 @@ def creditcards(web):
     credit0x00(web)
 
 def attack(web):
+    web = web.fullurl
     creditcards(web)

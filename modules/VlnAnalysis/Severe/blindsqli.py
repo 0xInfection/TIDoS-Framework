@@ -290,4 +290,5 @@ def blindsqli(web, properties):
             print(R+' [-] Payloads file does not exist!')
 
 def attack(web):
+    web = web.fullurl
     blindsqli(web, properties)

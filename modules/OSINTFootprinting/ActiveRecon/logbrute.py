@@ -116,4 +116,5 @@ def logbrute(web):
     print(C+' [+] Done!')
 
 def attack(web):
+    web = web.fullurl
     logbrute(web)

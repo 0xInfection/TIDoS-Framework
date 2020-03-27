@@ -69,4 +69,5 @@ def netmisc(web):
     time.sleep(0.5)
 
 def attack(web):
+    web = web.fullurl
     netmisc(web)

@@ -130,4 +130,5 @@ def webtech(web):
     print(C+' [+] Fingerprinting Done!')
 
 def attack(web):
+    web = web.fullurl
     webtech(web)

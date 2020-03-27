@@ -84,4 +84,5 @@ def googlenum(web):
         print(R+' [-] Google API Token Key not set... This modules cannot be used!')
 
 def attack(web):
+    web = web.fullurl
     googlenum(web)

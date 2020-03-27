@@ -74,4 +74,5 @@ def dnschk(domain):
         print(R+' [-] No standard publicly recorded DNS records found.\n')
 
 def attack(web):
+    web = web.fullurl
     dnschk(web)

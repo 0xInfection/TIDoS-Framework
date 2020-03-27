@@ -50,4 +50,5 @@ def apachestat(web):
     print(C+' [+] Apache server status completed!\n')
 
 def attack(web):
+    web = web.fullurl
     apachestat(web)

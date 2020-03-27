@@ -171,4 +171,5 @@ def subdomover(web):
     print(G+' [+] Subdomain takeover module completed!')
 
 def attack(web):
+    web = web.fullurl
     subdomover(web)

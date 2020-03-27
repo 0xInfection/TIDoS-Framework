@@ -86,4 +86,5 @@ def internalip(web):
     internalip0x00(web)
 
 def attack(web):
+    web = web.fullurl
     internalip(web)

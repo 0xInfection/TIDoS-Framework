@@ -62,4 +62,5 @@ def revdns(web):
         time.sleep(0.8)
 
 def attack(web):
+    web = web.fullurl
     revdns(web)

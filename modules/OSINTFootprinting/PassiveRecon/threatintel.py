@@ -475,4 +475,5 @@ def threatintel(web):
     print(G+' [+] Done!')
 
 def attack(web):
+    web = web.fullurl
     threatintel(web)

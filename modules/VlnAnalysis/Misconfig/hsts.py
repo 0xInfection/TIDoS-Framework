@@ -74,4 +74,5 @@ def hsts(web):
             print(GR+' [-] Skipping module...')
 
 def attack(web):
+    web = web.fullurl
     hsts(web)

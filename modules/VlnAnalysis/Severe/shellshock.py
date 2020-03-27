@@ -71,4 +71,5 @@ def shellshock(web):
     shellshock0x00(web)
 
 def attack(web):
+    web = web.fullurl
     shellshock(web)
