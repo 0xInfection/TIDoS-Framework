@@ -1,0 +1,10 @@
+<victim TARGET URL/IP>
+  <module MODULE1>
+    PROP1:VAL1;
+    PROP2:VAL2;
+    PROP3:VAL3
+  </module>
+  <module MODULE2>
+    PROP1:VAL1
+  </module>
+</victim>

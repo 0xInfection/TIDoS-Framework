@@ -1,0 +1,1 @@
+"""The Photon core."""

@@ -1,17 +1,17 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-#-:-:-:-:-:-:-:-:-:-:-:-:#
+# -:-:-:-:-:-:-:-:-:-:-:-:#
 #    TIDoS Framework     #
-#-:-:-:-:-:-:-:-:-:-:-:-:#
+# -:-:-:-:-:-:-:-:-:-:-:-:#
 
-#This module requires TIDoS Framework
-#https://github.com/0xInfection/TIDoS-Framework
+# This module requires TIDoS Framework
+# https://github.com/VainlyStrain/TIDoS
 
 # DISCLAIMER: All these API tokens have been publicly disclosed on some repositories
 # or other on GitHub. THESE ARE PUBLICLY AVAILABLE FOR ANYONE TO USE.
 
-SHODAN_API_KEY = ''
+SHODAN_API_KEY = 'olj8BVTzKccQDbfyXSvYYzrrhQhaRW0J'
 CENSYS_UID = '6f5c0df4-3908-430f-9f17-fb350db03fa3'
 CENSYS_SECRET = '9s7nwqeXjJxzBkij4gxFNYC5EQYhX6QG'
 GOOGLE_API_TOKEN = 'AIzaSyDDnc-68uaF-E4gzvJslt1fppiUl9dyTrc'

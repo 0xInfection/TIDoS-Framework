@@ -1,0 +1,34 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+_____, ___
+   '+ .;    
+    , ;   
+     .   
+           
+       .    
+     .;.    
+     .;  
+      :  
+      ,   
+       
+
+┌─[TIDoS]─[]
+└──╼ VainlyStrain
+"""
+
+import os 
+import sys
+
+script = "tidconsole.py"
+app = "tidv2"
+
+if len(sys.argv) > 1:
+    if "--app" not in sys.argv:
+        for i in range(1, len(sys.argv)):
+            script += " {}".format(sys.argv[i])
+        os.system("cd /opt/TIDoS ; sudo python3 -B {}".format(script))
+    else:
+        os.system("cd /opt/TIDoS ; python3 -B {}".format(app))
+else:
+    os.system("cd /opt/TIDoS ; sudo python3 -B {}".format(script))
