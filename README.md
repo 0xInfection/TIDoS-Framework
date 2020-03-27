@@ -6,12 +6,12 @@
 
 <p align="center">
   <a href="https://github.com/VainlyStrain/TIDoS/blob/master/TIDoS">
-    <img src="https://img.shields.io/static/v1.svg?label=Version&message=2.2&color=lightgrey&style=flat-square&logo=dev.to&logoColor=white">
+    <img src="https://img.shields.io/static/v1.svg?label=Version&message=2.0&color=lightgrey&style=flat-square&logo=dev.to&logoColor=white">
   </a>
   <a href="https://www.python.org/">
     <img src="https://img.shields.io/static/v1.svg?label=Python&message=3.7&color=lightgrey&style=flat-square&logo=python&logoColor=white">
   </a><br>
-  Pentest framework based on TIDoS.
+  The Offensive Web Application Penetration Testing Framework.
 </p>
 
 > __IMPORTANT__:
@@ -28,14 +28,13 @@ Here is some light on what the framework is all about:
 - [x] Exploits Castle has only 1 exploit. `(purely developmental)`
 - [x] And finally, Auxiliaries have got 4 modules. `more under development`
 - [x] All four phases each have an `Auto-Awesome` module which automates every module for you.
-- [x] Since 2.1: huge performance boost through parallelisation in various modules
+- [x] huge performance boost through multiprocessing
 - [x] Piping Attacks through Tor (not implemented everywhere yet)
 - [x] You just need the domain, and leave everything is to this tool.
 - [x] TIDoS has full verbose out support, so you'll know whats going on.
-- [x] Since 2.2: Attacking now even easier with a new GUI
+- [x] Attacking now even easier with a new GUI
 
 ### Main new features
-The main differences between TIDoS and TIDoS are:
 - [x] the programming language: TIDoS is fully ported to Python3
 - [x] the interface: TIDoS presents a new, Metasploit-like console interface
 - [x] Parallelisation: TIDoS uses multiprocessing to speed up attacks
@@ -49,14 +48,14 @@ The main differences between TIDoS and TIDoS are:
 
 #### Installation Script (Globally) :
 
-To install the framework globally in /opt, run the provided `core/install.py` script as root. After this, you can launch TIDoS simply by typing `TIDoS` on the command line.
+To install the framework globally in /opt, run the provided `core/install.py` script as root. After this, you can launch TIDoS simply by typing `tidos` on the command line.
 
 #### Manual Installation (Locally) :
 
 * Clone the repository locally and navigate there:
 ```
-git clone https://github.com/vainlystrain/tidos.git
-cd TIDoS
+git clone https://github.com/0xinfection/tidos-framework.git
+cd tidos-framework
 ```
 
 TIDoS needs some libraries to run, which can be installed via `aptitude` or `dnf` Package Managers.
@@ -69,8 +68,24 @@ pip3 install -r requirements.txt
 ```
 Thats it. You now have TIDoS at your service. Fire it up using:
 ```
-python3 TIDoS              #Qt5 interface
+python3 tidv2               #Qt5 interface
 sudo python3 tidconsole.py  #console interface
+```
+
+#### Docker image :
+
+You can build it from Dockerfile :
+```
+git clone https://github.com/0xinfection/tidos-framework.git
+cd tidos-framework/core/docker
+docker build -t tidos .
+```
+
+To run TIDoS :
+
+```
+docker run --interactive --tty --rm tidos bash
+tidos
 ```
 
 #### Updating TIDoS :
@@ -120,7 +135,7 @@ __                                                    __
 
 ### Flawless Features :-
 
-TIDoS Attack presently supports the following: `and more modules are under active development`
+TIDoS presently supports the following: `and more modules are under active development`
 
 * __Reconnaissance + OSINT__
 
@@ -324,7 +339,7 @@ Lets see some screenshots of TIDoS in action:
 
 ### Version:
 ```
-v2.2.5-10 [latest release] [#stable]
+v2.0.0-0 [latest release] [#stable]
 ```
 
 ### Disclaimer:
