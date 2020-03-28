@@ -20,13 +20,22 @@ import json
 from core.Core.colors import *
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
+from core.database.database_module import save_data
+from core.variables import database
+from core.methods.cache import targetname
+import inspect
+
 wrn.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 info = "Find past versions of a website using the Wayback Machine."
 searchinfo = "Wayback Machine Lookup"
 properties = {"START":["Year from when results to be fetched", " "], "END":["Year till when results to be fetched", " "], "LIMIT":["No. of results", " "]}
 
-def getRes0x00(web):
+def getRes0x00(web, lvl2):
+    name = targetname(web)
+    module = "ReconANDOSINT"
+    lvl1 = "Passive Reconnaissance & OSINT"
+    lvl3=''
     requests = session()
     error = 0
     if properties["START"][1] == " ":
@@ -82,6 +91,7 @@ def getRes0x00(web):
                 sdates = str(timestamp[:4]) + "/" + str(timestamp[4:6]) + "/" + str(timestamp[6:8])
                 print(" {}{}   {}{}  {}({})".format(C, sdates, B, website, C, tlinks))
                 time.sleep(0.04)
+            save_data(database, module, lvl1, lvl2, lvl3, name, str(result))
 
         except Exception as e:
             print(R+' [-] Unhandled Exception Encountered!')
@@ -89,7 +99,6 @@ def getRes0x00(web):
 
 def webarchive(web):
 
-    print(GR+' [*] Loading module...')
     time.sleep(0.6)
     #print(R+'\n    =============================================')
     #print(R+'     W A Y B A C K   M A C H I N E   L O O K U P')
@@ -97,7 +106,8 @@ def webarchive(web):
     from core.methods.print import posintpas
     posintpas("wayback machine lookup")
     time.sleep(0.7)
-    getRes0x00(web)
+    lvl2=inspect.stack()[0][3]
+    getRes0x00(web, lvl2)
 
 def attack(web):
     web = web.fullurl

@@ -8,9 +8,9 @@ class Target:
         #self.last_menu = last_menu
         #self.main_menu = main_menu
         #self.settings_menu=''
-        self.lvl1 = ''
-        self.lvl2 = ''
-        self.lvl3 = ''
+        #self.lvl1 = ''
+        #self.lvl2 = ''
+        #self.lvl3 = ''
         #self.module = ''
         self.description = ''
         self.ip = ip

@@ -23,12 +23,16 @@ import random
 from time import sleep
 from datetime import datetime
 from random import uniform as rflt
+import threading
 
 from core import variables as vars
+from core.methods.select import modulecount
 from core.Core.colors import *
 
 
 def loadstyle():
+    thread = threading.Thread(target=modulecount, args=("count",))
+    thread.start()
     os.system(vars.CMD_CLEAR)
     red_bold = R
     cursive = color.END + "\033[3m"
@@ -54,7 +58,8 @@ ____, __{}
     """.format(color.END, R, color.END, RB, color.END, R, C, cursive, swappy, color.END)
     #loading = "——·‹› TIDoS ‹›·——"
     action = 0
-    while action < 2:
+    #while action < 2:
+    while thread.isAlive():
         for i, char in enumerate(loading):
             if i == 0:
                 swappy = "%s%s%s%s" % (red_bold, char.swapcase(), reset, loading[1:])
@@ -371,7 +376,8 @@ def randomsg():
 
 def bannerbelownew():
     #print("   {}tidos{}{}{}{}{}{}{}{}{}{}".format(color.END, color.END, color.TR6, color.END, RB, vars.e_version.split("#")[0],C,color.TR3,G,vars.e_version.split("#")[1],color.TR2) + C)
-    print("   {}tidconsole{}{}{}{}{}{}{}{}{}{}".format(color.END, color.END, color.TR6, color.END, RB, vars.version,C,color.TR3,G,vars.e_version.split("#")[1],color.TR2) + C)
+    #print("   {}tidconsole{}{}{}{}{}{}{}{}{}{}".format(color.END, color.END, color.TR6, color.END, RB, vars.version,C,color.TR3,G,vars.e_version.split("#")[1],color.TR2) + C)
+    print("   {}tidconsole{}{}{}{}{}{}{}{}{}{}".format(color.END, color.END, color.TR6, color.END, RB, vars.version,C,color.TR3,G,vars.count,color.TR2) + C)
     print("  {}{}{}".format(RC, randomsg(), color.END))
 
 

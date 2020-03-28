@@ -68,6 +68,13 @@ def targetparse(targetinp):
         print(R + " [-] " + "\033[0m" + color.UNDERLINE + "\033[1m" + "Target seems down...")
         pass
     return None
+
+def targetname(fulltarget):
+    target = targetparse(fulltarget)
+    if target:
+        return target.name
+    else:
+        return ""
         
 
 def load(i):

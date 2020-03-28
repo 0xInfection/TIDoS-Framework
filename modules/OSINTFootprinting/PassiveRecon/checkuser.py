@@ -12,76 +12,81 @@
 # WARNING : may return false positives
 
 
-import os
+import os, time
 import tld
+import threading
 from core.methods.tor import session
-import json
-import time
-import urllib
 from core.Core.colors import *
-serv = []
+
+from core.database.database_module import save_data
+from core.variables import database
+from core.methods.cache import targetname
+import inspect
+
+tasks=[]
+data = []
+headers = {'X-Requested-With':'XMLHttpRequest'}
 
 info = "Alias Check"
 searchinfo = "Alias Check"
 properties = {}
 
-def check0x00(alias,web):
-    requests = session()
-    print(GR+" [*] Searching alias "+O+alias+GR+" on 160 websites...\n")
+
+def thread(url,service,hostname):
+    try:
+        requests = session()
+        req = requests.get(url, headers = headers)
+        if 'notavailable' in req.text:
+            print(' [+] Found '+hostname+' : '+service)
+            data.append(service)
+    except Exception as e:
+        print(R+' [-] Incurred Exception : '+str(e))
+
+def check0x00(host, lvl2):
+    module = "ReconANDOSINT"
+    lvl1 = "Passive Reconnaissance & OSINT"
+    lvl3 = ""
+    for user in host.usernames:
+        print(GR+" [*] Searching alias "+O+user+GR+" on " + str(len(services)) + " websites...\n")
+        for service in services:
+            url = 'http://checkusernames.com/usercheckv2.php?target=' + service + '&username=' + user
+            #check = threading.Thread(target=thread,args=(url,service,host.name))
+            check = threading.Thread(target=thread,args=(url,service,user))
+            tasks.append(check)
     print(GR+' [¬] Result : \n')
-    headers = {'X-Requested-With':'XMLHttpRequest'}
+    for task in tasks:
+        task.start()
+    for task in tasks:
+        task.join()
+    
+        #print(host.database, host.module, host.lvl1, host.lvl2, host.lvl3, host.name, data)
+    save_data(database, module, lvl1, lvl2, lvl3, host.fullurl, str(data))
 
-    for service in services:
-        try:
-            url = 'http://checkusernames.com/usercheckv2.php?target=' + service + '&username=' + alias
-            req = requests.get(url, headers = headers)
-            if 'notavailable' in req.text:
-            #if req.content.split('|')[0] == '2': #found
-                print(GR+' [+] Found '+R+alias+C+' : '+C+service)
-                serv.append(service)
-
-        except Exception as e:
-            print(R+' [-] Incurred Exception : '+str(e))
-
-    if 'http://' in web.strip():
-        po = web.replace('http://','')
-    elif 'https://' in web.strip():
-        po = web.replace('https://','')
-    if "@" in po:
-        po = po.split("@")[1]
-    p = 'tmp/logs/'+po+'-logs/'+str(po)+'-usernames.lst'
-    open(p,'w+')
-    print(B+' [!] Saving links...')
-    time.sleep(1)
-    for m in serv:
-        m = 'Social Network : ' + m + '\n'
-        ile = open(p,"a")
-        ile.write(m)
-        ile.close()
-    pa = os.getcwd()
-    print(C+' [+] Links saved under '+pa+'/'+p+'!')
-    print('')
 
 def checkuser(web):
 
-    print(GR+' [*] Loading module...')
     time.sleep(0.6)
     #print(R+'\n    =======================')
     #print(R+'     C H E C K   A L I A S')
     #print(R+'    =======================\n')
     from core.methods.print import posintpas
     posintpas("check alias") 
-
-    print(GR+' [*] Parsing Url...')
-    web0 = tld.get_fld(web).split('.', 1)[0]
-    print(G+' [+] Alias Set : '+web0+C+color.TR2+C)
-    print(O+' [*] Setting services...'+C)
+    
+    if len(web.usernames) < 1:
+        print(" [!] No usernames have been set for target {}".format(web.fullurl))
+        a = "a"
+        while a != "":
+            a = input(" [§] Add username (enter if done) :> ")
+            if a != "":
+                web.usernames.append(a)
+    
     time.sleep(0.7)
     global services
     services = ['YouTube', 'Hypemachine', 'Yahoo', 'Linkagogo', 'Coolspotters', 'Wikipedia', 'Twitter', 'gdgt', 'BlogMarks', 'LinkedIn', 'Ebay', 'Tumblr', 'Pinterest','yotify', 'Blogger', 'Flickr', 'FortyThreeMarks,Moof', 'HuffingtonPost', 'Wordpress', 'DailyMotion', 'LiveJournal', 'vimeo', 'DeviantArt', 'reddit','StumbleUpon', 'Answers', 'Sourceforge', 'Wikia', 'ArmChairGM', 'Photobucket', 'MySpace', 'Etsy,SlideShare', 'Fiverr', 'scribd', 'Squidoo', 'ImageShack','ThemeForest', 'SoundCloud', 'Tagged', 'Hulu', 'Typepad', 'Hubpages', 'weebly', 'Zimbio', 'github', 'TMZ', 'WikiHow', 'Delicious', 'zillow', 'Jimdo', 'goodreads','Segnalo', 'Netlog', 'Issuu', 'ForumNokia', 'UStream', 'Gamespot', 'MetaCafe', 'askfm', 'hi5', 'JustinTV', 'Blekko', 'Skyrock', 'Cracked', 'foursquare', 'LastFM','posterous', 'steam', 'Opera', 'Dreamstime', 'Fixya', 'UltimateGuitar', 'docstoc', 'FanPop', 'Break', 'tinyurl', 'Kongregate', 'Disqus', 'Armorgames', 'Behance','ChaCha', 'CafeMom', 'Liveleak', 'Topix', 'lonelyplanet', 'Stardoll', 'Instructables', 'Polyvore', 'Proboards', 'Weheartit', 'Diigo', 'Gawker', 'FriendFeed','Videobash', 'Technorati', 'Gravatar', 'Dribbble', 'formspringme', 'myfitnesspal', '500px', 'Newgrounds', 'GrindTV', 'smugmug', 'ibibo', 'ReverbNation', 'Netvibes','Slashdot', 'Fool', 'Plurk', 'zedge', 'Discogs', 'YardBarker', 'Ebaumsworld', 'sparkpeople', 'Sharethis', 'Xmarks', 'Crunchbase', 'FunnyOrDie,Suite101', 'OVGuide','Veoh', 'Yuku', 'Experienceproject', 'Fotolog', 'Hotklix', 'Epinions', 'Hyves', 'Sodahead', 'Stylebistro', 'fark', 'AboutMe', 'Metacritic', 'Toluna', 'Mobypicture','Gather', 'Datpiff', 'mouthshut', 'blogtalkradio', 'Dzone', 'APSense', 'Bigstockphoto', 'n4g', 'Newsvine', 'ColourLovers', 'Icanhazcheezburger', 'Xanga','InsaneJournal', 'redbubble', 'Kaboodle', 'Folkd', 'Bebo', 'Getsatisfaction', 'WebShots', 'threadless', 'Active', 'GetGlue', 'Shockwave', 'Pbase']
     print(C+' [!] Loaded '+str(len(services))+' services...')
-    check0x00(web0,web)
+    lvl2 = inspect.stack()[0][3]
+    
+    check0x00(web, lvl2)
 
 def attack(web):
-    web = web.fullurl
     checkuser(web)

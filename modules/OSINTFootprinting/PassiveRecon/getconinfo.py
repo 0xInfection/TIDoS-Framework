@@ -14,11 +14,17 @@ from core.methods.tor import session
 import time
 from core.Core.colors import *
 
+from core.database.database_module import save_data
+from core.variables import database
+from core.methods.cache import targetname
+import inspect
+
 info = "Find domain contact info."
 searchinfo = "Domain Contact Info"
 properties = {}
 
 def getconinfo(domain):
+    name = targetname(domain)
     requests = session()
     web = domain
     if "@" in web:
@@ -53,6 +59,7 @@ def getconinfo(domain):
 
                 print(G+' [+] Found domain info!'+C+color.TR2+C)
                 w = resp.text.encode('ascii', 'ignore')
+                result = resp.text
                 quest = w.splitlines()
                 print(O+' [!] Parsing info...'+C+'\n')
                 print(R+' [+] REPORT :-\n')
@@ -76,6 +83,13 @@ def getconinfo(domain):
                         else:
                             print(C+'\n [+] '+w1+' :-'+'\n')
 
+                module = "ReconANDOSINT"
+                lvl1 = "Passive Reconnaissance & OSINT"
+                lvl2 = inspect.stack()[0][3]
+                lvl3 = ""
+                data = result
+                save_data(database, module, lvl1, lvl2, lvl3, name, data)
+
             else:
                 print(R+' [-] Did not find any info about domain '+O+domain+C)
                 print(R+' [+] Try with another one...')
@@ -88,6 +102,7 @@ def getconinfo(domain):
         print(R+' [-] Encountered Exception : '+str(e))
 
     print(G+'\n [+] Public Contact Info Module Completed!'+C+color.TR2+C+'\n')
+
 
 def attack(web):
     web = web.fullurl

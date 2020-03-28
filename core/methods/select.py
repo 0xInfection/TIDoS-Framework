@@ -27,7 +27,6 @@ import texttable as table
 
 import core.variables as vars
 import core.methods.print as prnt
-from core.methods.print import cprint
 
 from core.Core.colors import R, B, C, color, O, G
 from core.methods.creds import attackdrop
@@ -48,7 +47,7 @@ catlist = """
   vlnysis  
 """
 
-#target of type Target  TODO conversion in modules
+#target of type Target  TODO conversion in modules DONE
 def attack(target):
     try:
         j = imp.import_module(vars.module)
@@ -67,7 +66,7 @@ def attack(target):
                 print(R + " [-] " + "\033[0m" + color.UNDERLINE + "\033[1m" + "Module {} failed on target {}:".format(mod,target)+"\033[0m"+ color.CURSIVE +"\n{}".format(e) + C)
     except Exception as e:
         mod = vars.module.split(".")[-1]
-        print(R + " [-] " + "\033[0m" + color.UNDERLINE + "\033[1m" + "Module {} failed on target {}:".format(mod,target)+"\033[0m"+ color.CURSIVE +"\n{}".format(e) + C)
+        print(R + " [-] " + "\033[0m" + color.UNDERLINE + "\033[1m" + "Module {} failed on target {}:".format(mod,target.fullurl)+"\033[0m"+ color.CURSIVE +"\n{}".format(e) + C)
 
 
 def set(mod, param, value):
@@ -142,6 +141,10 @@ def opts(mod):
 
 def mlist(arg,display):
     return list(arg,display,single=False)
+
+def modulecount(a):
+    lst = list("all", False)
+    vars.count = len(lst)
 
 def list(arg,display,single=True):
     names = []
@@ -248,6 +251,7 @@ def list(arg,display,single=True):
         except ImportError:
             pass
     if display:
+        from core.methods.print import cprint
         if len(passivenames) > 0 or len(activenames) > 0 or len(discdescs) > 0:
             prnt.posint("Phase 1")
             if len(passivenames) > 0:
@@ -295,6 +299,7 @@ def list(arg,display,single=True):
 
 
 def search(inp):
+    from core.methods.print import cprint
     names = []
     descs = []
 

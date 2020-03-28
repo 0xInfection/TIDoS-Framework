@@ -687,7 +687,7 @@ def main():
         s = TIDcon()
         if not opt["quiet"]:
             prnt.banner()
-            prnt.bannerbelownew()
+            #prnt.bannerbelownew()
         if not opt["session"]:
             s.do_vicadd(args.victim)
         else:
@@ -703,7 +703,7 @@ def main():
     elif opt["file"]:
         if not opt["quiet"]:
             prnt.banner()
-            prnt.bannerbelownew()
+            #prnt.bannerbelownew()
         s = TIDcon()
         if opt["tor"]:
             s.do_tor("on")

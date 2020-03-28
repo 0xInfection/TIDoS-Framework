@@ -17,6 +17,11 @@ sys.path.append('tmp/')
 from core.methods.tor import session
 from core.Core.colors import *
 
+from core.database.database_module import save_data
+from core.variables import database
+from core.methods.cache import targetname
+import inspect
+
 final_links = []
 
 info = "Find Links pointing to the target."
@@ -24,6 +29,11 @@ searchinfo = "Page Links"
 properties = {}
 
 def links(web):
+    name = targetname(web)
+    module = "ReconANDOSINT"
+    lvl1 = "Passive Reconnaissance & OSINT"
+    lvl3=''
+    lvl2=inspect.stack()[0][3]
     requests = session()
     #print(R+'\n   =====================')
     #print(R+'    P A G E   L I N K S ')
@@ -63,23 +73,7 @@ def links(web):
                 print(O+' [+] Found link :'+C+color.TR3+C+G+p+C+color.TR2+C)
                 time.sleep(0.06)
 
-            if 'http://' in web:
-                po = web.replace('http://','')
-            elif 'https://' in web:
-                po = web.replace('https://','')
-            if "@" in po:
-                po = po.split("@")[1]
-            p = 'tmp/logs/'+po+'-logs/'+str(po)+'-links.lst'
-            open(p, 'w+')
-            print(B+' [!] Saving links...')
-            time.sleep(1)
-            for m in final_links:
-                m = m + '\n'
-                ile = open(p,"a")
-                ile.write(m)
-                ile.close()
-            pa = os.getcwd()
-            print(G+' [+] Links saved under '+pa+'/'+p+'!')
+            save_data(database, module, lvl1, lvl2, lvl3, name, str(final_links))
             print('')
 
         else:

@@ -14,6 +14,11 @@ import os
 import time
 from core.methods.tor import session
 from core.Core.colors import *
+
+from core.database.database_module import save_data
+from core.variables import database
+from core.methods.cache import targetname
+import inspect
 links = []
 
 info = "Perform a reverse DNS lookup using free API."
@@ -21,6 +26,11 @@ searchinfo = "Reverse DNS Lookup"
 properties = {}
 
 def revdns(web):
+    name = targetname(web)
+    module = "ReconANDOSINT"
+    lvl1 = "Passive Reconnaissance & OSINT"
+    lvl3=''
+    lvl2=inspect.stack()[0][3]
     requests = session()
     web = web.split('//')[1]
     if "@" in web:
@@ -44,18 +54,8 @@ def revdns(web):
             time.sleep(0.04)
             links.append(r)
 
-        p = 'tmp/logs/'+web+'-logs/'+web+'-reverse-dns.lst'
-        open(p,'w+')
-        print(P+' [!] Saving links...'+C)
-        time.sleep(1)
-        for m in links:
-            m = m + '\n'
-            ile = open(p,"a")
-            ile.write(m)
-            ile.close()
-        pa = os.getcwd()
-        print(C+' [+] Links saved under '+pa+'/'+p+'!')
-        print('')
+        data = result
+        save_data(database, module, lvl1, lvl2, lvl3, name, data)
 
     else:
         print(R+' [-] No result found!')

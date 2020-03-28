@@ -14,12 +14,17 @@ import time
 from core.methods.tor import session
 import socket
 from core.Core.colors import *
+from core.database.database_module import save_data
+from core.variables import database
+from core.methods.cache import targetname
+import inspect
 
 info = "Find out where the target server is located."
 searchinfo = "GeoIP Lookup"
 properties = {}
 
 def getgeoip(web):
+    name = targetname(web)
     requests = session()
     web = web.replace('http://','')
     web = web.replace('https://','')
@@ -47,7 +52,15 @@ def getgeoip(web):
     else:
         print(R+' [-] Outbound Query Exception!')
         time.sleep(0.8)
+     
+    module = "ReconANDOSINT"
+    lvl1 = "Passive Reconnaissance & OSINT"
+    lvl2 = inspect.stack()[0][3]
+    lvl3 = ""
+    data = result
+    save_data(database, module, lvl1, lvl2, lvl3, name, data)
 
 def attack(web):
     web = web.fullurl
     getgeoip(web)
+    #print(inspect.stack()[0][3])  --> attack

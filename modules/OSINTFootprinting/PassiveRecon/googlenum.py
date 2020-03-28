@@ -16,12 +16,28 @@ import json
 import urllib.request
 from core.Core.colors import *
 
+from core.database.database_module import save_data
+from core.variables import database
+from core.methods.cache import targetname
+import inspect
+
 info = "Enumerate profiles using Google."
 searchinfo = "Google Gathering"
 properties = {}
 
 def googlenum(web):
     requests = session()
+    name = targetname(web)
+    module = "ReconANDOSINT"
+    lvl1 = "Passive Reconnaissance & OSINT"
+    lvl3=''
+    lvl2=inspect.stack()[0][3]
+    kind = []
+    etag = []
+    obj = []
+    ID = []
+    disp = []
+    url = []
     #print(R+'\n    =================================')
     #print(R+'     G O O G L E   G A T H E R I N G ')
     #print(R+'    =================================\n')
@@ -58,23 +74,31 @@ def googlenum(web):
                     print(C+'\n [+] Info about Profile '+P+str(ctr)+C+' ...')
                     if 'kind' in p:
                         print(O+' [+] Kind :'+C+color.TR3+C+G+p['kind']+C+color.TR2+C)
+                        kind.append(p['kind'])
                     time.sleep(0.05)
                     if 'etag' in p:
                         print(O+' [+] E-Tag :'+C+color.TR3+C+G+p['etag']+C+color.TR2+C)
+                        etag.append(p['etag'])
                     time.sleep(0.05)
                     if 'objectType' in p:
                         print(O+' [+] Object Type :'+C+color.TR3+C+G+p['objectType']+C+color.TR2+C)
+                        obj.append(p['objectType'])
                     time.sleep(0.05)
                     if 'id' in p:
                         print(O+' [+] ID :'+C+color.TR3+C+G+p['id']+C+color.TR2+C)
+                        ID.append(p['id'])
                     time.sleep(0.05)
                     if 'displayName' in p:
                         print(O+' [+] Display Name :'+C+color.TR3+C+G+p['displayName']+C+color.TR2+C)
+                        disp.append(p['displayName'])
                     time.sleep(0.05)
                     if 'url' in p:
                         print(O+' [+] Link :'+C+color.TR3+C+G+p['url']+C+color.TR2+C)
+                        url.append(p['url'])
                     time.sleep(0.05)
-
+                    
+            data = {"Kind":kind, "E-Tag":etag, "ObjectType":obj, "ID":ID, "DisplayName":disp, "Link":url}
+            save_data(database, module, lvl1, lvl2, lvl3, name, str(data))
             print(G+' [+] Google Enumeration Completed!'+C+color.TR2+C)
 
         else:

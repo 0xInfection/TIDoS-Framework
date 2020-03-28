@@ -15,11 +15,21 @@ from core.methods.tor import session
 from time import sleep
 from core.Core.colors import *
 
+from core.database.database_module import save_data
+from core.variables import database
+from core.methods.cache import targetname
+import inspect
+
 info = "Enumerate subnets of the target's network."
 searchinfo = "Subnet Enumeration"
 properties = {}
 
 def subnet(web):
+    name = targetname(web)
+    module = "ReconANDOSINT"
+    lvl1 = "Passive Reconnaissance & OSINT"
+    lvl3=''
+    lvl2=inspect.stack()[0][3]
     requests = session()
     web = web.replace('http://','')
     web = web.replace('https://','')
@@ -44,7 +54,7 @@ def subnet(web):
             result = http.splitlines()
             for r in result:
                 print(O+' '+r.split('=')[0]+C+color.TR3+C+G+'='+r.split('=')[1]+C+color.TR2+C)
-
+            save_data(database, module, lvl1, lvl2, lvl3, name, http)
         elif 'No results found' in http:
             print(R+' [-] No results found!')
         else:

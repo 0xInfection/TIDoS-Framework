@@ -20,29 +20,34 @@
 
 ### Highlights :-
 Here is some light on what the framework is all about:
-- [x] A complete versatile framework to cover up everything from Reconnaissance to Vulnerability Analysis.
-- [x] Has 5 main phases, subdivided into __14 sub-phases__ consisting a total of __108 modules__.
-- [x] Reconnaissance Phase has 50 modules of its own (including active and passive recon, information disclosure modules).
-- [x] Scanning & Enumeration Phase has got 16 modules (including port scans, WAF analysis, etc)
-- [x] Vulnerability Analysis Phase has 37 modules (including most common vulnerabilities in action).
-- [x] Exploits Castle has only 1 exploit. `(purely developmental)`
-- [x] And finally, Auxiliaries have got 4 modules. `more under development`
-- [x] All four phases each have an `Auto-Awesome` module which automates every module for you.
-- [x] huge performance boost through multiprocessing
-- [x] Piping Attacks through Tor (not implemented everywhere yet)
-- [x] You just need the domain, and leave everything is to this tool.
-- [x] TIDoS has full verbose out support, so you'll know whats going on.
-- [x] Attacking now even easier with a new GUI
+-  A complete versatile framework to cover up everything from Reconnaissance to Vulnerability Analysis.
+-  Has 5 main phases, subdivided into __14 sub-phases__ consisting a total of __108 modules__.
+-  Reconnaissance Phase has 50 modules of its own (including active and passive recon, information disclosure modules).
+-  Scanning & Enumeration Phase has got 16 modules (including port scans, WAF analysis, etc)
+-  Vulnerability Analysis Phase has 37 modules (including most common vulnerabilities in action).
+-  Exploits Castle has only 1 exploit. `(purely developmental)`
+-  And finally, Auxiliaries have got 4 modules. `more under development`
+-  All four phases each have an `Auto-Awesome` module which automates every module for you.
+-  huge performance boost through multiprocessing
+-  Piping Attacks through Tor (not implemented everywhere yet)
+-  You just need the domain, and leave everything is to this tool.
+-  TIDoS has full verbose out support, so you'll know whats going on.
+-  Attacking now even easier with a new GUI
 
 ### Main new features
-- [x] the programming language: TIDoS is fully ported to Python3
-- [x] the interface: TIDoS presents a new, Metasploit-like console interface
-- [x] Parallelisation: TIDoS uses multiprocessing to speed up attacks
-- [x] An alternative CLI interface for faster interaction with one specific module
-- [x] Anonymity: Attacking through Tor is possible (95% done)
-- [x] Module Completion: Some modules have been feature-extended (e.g. more evasion, supporting more than 1 query parameter)
-- [x] Some new modules: arpscan
-- [x] A Graphical User Interface for easier interaction with the toolkit
+-  the programming language: TIDoS is fully ported to Python3
+-  the interface: TIDoS presents a new, Metasploit-like console interface
+-  Parallelisation: TIDoS uses multiprocessing to speed up attacks
+-  An alternative CLI interface for faster interaction with one specific module
+-  Anonymity: Attacking through Tor is possible (95% done)
+-  Module Completion: Some modules have been feature-extended (e.g. more evasion, supporting more than 1 query parameter)
+-  Some new modules: arpscan
+-  A Graphical User Interface for easier interaction with the toolkit
+-  Supports non-default http(s) ports
+
+### Upcoming
+-  results of modules will be stored in a database
+-  new modules: nikto&photon
 
 ### Installation :-
 
@@ -339,7 +344,7 @@ Lets see some screenshots of TIDoS in action:
 
 ### Version:
 ```
-v2.0.0-0 [latest release] [#stable]
+v2.0.1-5 [latest release] [#stable]
 ```
 
 ### Disclaimer:

@@ -16,11 +16,21 @@ from core.methods.tor import session
 import time
 from core.Core.colors import *
 
+from core.database.database_module import save_data
+from core.variables import database
+from core.methods.cache import targetname
+import inspect
+
 info = "Find information about domains using CENSYS."
 searchinfo = "CENSYS Domain Recon"
 properties = {}
 
 def censysdom(web):
+    name = targetname(web)
+    module = "ReconANDOSINT"
+    lvl1 = "Passive Reconnaissance & OSINT"
+    lvl2 = inspect.stack()[0][3]
+    lvl3 = ""
     requests = session()
     #print(R+'\n    =======================================')
     #print(R+'     C E N S Y S   D O M A I N   R E C O N')
@@ -53,6 +63,8 @@ def censysdom(web):
             print(G+' [+] Found domain info!'+C+color.TR2+C)
             w = resp.text.encode('utf-8')
             asio = json.dumps(resp.json(), indent=4)
+            data = asio.splitlines()
+            save_data(database, module, lvl1, lvl2, lvl3, name, str(data))
             quest = asio.splitlines()
             print(O+' [!] Parsing info...'+C+'\n')
             time.sleep(1)

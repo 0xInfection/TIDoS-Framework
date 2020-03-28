@@ -88,3 +88,4 @@ CMD_LS = "dir /b" if sys.platform.lower().startswith("win") else "\\ls"
 
 
 database = './core/database/tidos.db'
+count = 0

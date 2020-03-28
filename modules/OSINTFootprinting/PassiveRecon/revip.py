@@ -14,6 +14,11 @@ import time
 from core.methods.tor import session
 import os
 from core.Core.colors import *
+
+from core.database.database_module import save_data
+from core.variables import database
+from core.methods.cache import targetname
+import inspect
 links = []
 
 info = "Perform a reverse IP lookup using a free API."
@@ -21,6 +26,11 @@ searchinfo = "Reverse IP Lookup"
 properties = {}
 
 def revip(web):
+    name = targetname(web)
+    module = "ReconANDOSINT"
+    lvl1 = "Passive Reconnaissance & OSINT"
+    lvl3=''
+    lvl2=inspect.stack()[0][3]
     requests = session()
     web = web.replace('http://','')
     web = web.replace('https://','')
@@ -45,19 +55,7 @@ def revip(web):
                 print(O+' [+] Site :>'+C+color.TR3+C+G+r+C+color.TR2+C)
                 links.append(r)
                 time.sleep(0.04)
-
-            p = 'tmp/logs/'+web+'-logs/'+str(web)+'-reverse-ip.lst'
-            open(p,'w+')
-            print(P+' [!] Saving links...'+C)
-            time.sleep(1)
-            for m in links:
-                m = m + '\n'
-                ile = open(p,"a")
-                ile.write(m)
-                ile.close()
-            pa = os.getcwd()
-            print(C+' [+] Links saved under '+pa+'/'+p+'!')
-            print('')
+            save_data(database, module, lvl1, lvl2, lvl3, name, result)
 
         elif 'error' in result:
             print(R+' [-] Outbound Query Exception!')

@@ -21,6 +21,11 @@ from colorama import Style
 from core.Core.colors import *
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
+from core.database.database_module import save_data
+from core.variables import database
+from core.methods.cache import targetname
+import inspect
+
 wrn.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 info = "This module looks up if an email address was found in a data breach."
@@ -68,7 +73,6 @@ def getRes0x00():
         print(R+' [-] Request timed out!')
 
 def hackedmail():
-
     print(GR+' [*] Loading module...')
     time.sleep(0.6)
     #print(R+'\n    =========================')

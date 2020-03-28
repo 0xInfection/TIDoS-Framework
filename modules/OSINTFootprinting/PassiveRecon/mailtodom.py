@@ -61,8 +61,6 @@ def getRes0x00():
         print(R+' [-] Request timed out!')
 
 def mailtodom():
-
-    print(GR+' [*] Loading module...')
     time.sleep(0.6)
     #print(R+'\n    ===============================')
     #print(R+'     E M A I L   T O   D O M A I N ')
