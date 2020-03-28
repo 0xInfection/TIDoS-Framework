@@ -132,27 +132,40 @@ class TIDapp(QtWidgets.QDialog):
     def addTarget(self):
         try:
             base = self.addTargetDialog.urlField.text()
-            assert base != "" and "://" not in base and "@" not in base
+            assert base != "" and "://" not in base and "@" not in base and ":" not in base
             user = self.addTargetDialog.userField.text()
             passwd = self.addTargetDialog.passwordField.text()
             protocol = self.addTargetDialog.httpBox.currentText()
             if protocol == "":
                 protocol = "http"
+            port = self.addTargetDialog.portEdit.text()
+            portgiven = True
+            if port == "":
+                portgiven = False
+                if protocol == "https":
+                    port = "443"
+                else:
+                    port = "80"
+            assert int(port) in range(1, 65535)
             if user != "" and passwd != "":
                 if self.addTargetDialog.ipOnly.isChecked():
                     target = base
                 else:
                     target = protocol + "://" + user + ":" + passwd + "@" + base
+                if portgiven:
+                    target = target + ":" + port
             else:
                 if self.addTargetDialog.ipOnly.isChecked():
                     target = base
                 else:
                     target = protocol + "://" + base
+                if portgiven:
+                    target = target + ":" + port
             self.targetsListWidget.addItem(target)
             self.targetsListWidget.show()
             self.addTargetDialog.close()
         except AssertionError:
-            os.system("konsole -x 'echo AssertionError'")
+            print("AssertionError")
 
     def addClose(self):
         self.addTargetDialog.close()
@@ -180,6 +193,14 @@ class TIDapp(QtWidgets.QDialog):
                     user = ""
                     passwd = ""
                     base = rest
+                if ":" in base:
+                    port = base.split(":")[1].split("/")[0]
+                    base = base.split(":")[0]
+                    self.editTargetDialog.portEdit.setText(port)
+                elif protocol == "https":
+                    port = "443"
+                else:
+                    port = "80"
                 index = self.editTargetDialog.httpBox.findText(protocol, QtCore.Qt.MatchFixedString)
                 if index >= 0:
                     self.editTargetDialog.httpBox.setCurrentIndex(index)
@@ -198,29 +219,42 @@ class TIDapp(QtWidgets.QDialog):
     def editTarget(self):
         try:
             base = self.editTargetDialog.urlField.text()
-            assert base != "" and "://" not in base and "@" not in base
+            assert base != "" and "://" not in base and "@" not in base and ":" not in base
             user = self.editTargetDialog.userField.text()
             passwd = self.editTargetDialog.passwordField.text()
             protocol = self.editTargetDialog.httpBox.currentText()
+            port = self.editTargetDialog.portEdit.text()
             if protocol == "":
                 protocol = "http"
+            portgiven = True
+            if port == "":
+                portgiven = False
+                if protocol == "https":
+                    port = "443"
+                else:
+                    port = "80"
+            assert int(port) in range(1, 65535)
             if user != "" and passwd != "":
                 if self.editTargetDialog.ipOnly.isChecked():
                     target = base
                 else:
                     target = protocol + "://" + user + ":" + passwd + "@" + base
+                if portgiven:
+                    target = target + ":" + port
             else:
                 if self.editTargetDialog.ipOnly.isChecked():
                     target = base
                 else:
                     target = protocol + "://" + base
+                if portgiven:
+                    target = target + ":" + port
             for item in self.targetsListWidget.selectedItems():
                 self.targetsListWidget.takeItem(self.targetsListWidget.row(item))
             self.targetsListWidget.addItem(target)
             self.targetsListWidget.show()
             self.editTargetDialog.close()
         except AssertionError:
-            os.system("konsole -x 'echo AssertionError'")
+            print("AssertionError")
 
     def closeEdit(self):
         self.editTargetDialog.close()

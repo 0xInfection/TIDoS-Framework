@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>450</width>
+    <width>478</width>
     <height>350</height>
    </rect>
   </property>
@@ -69,9 +69,6 @@
      <property name="formAlignment">
       <set>Qt::AlignCenter</set>
      </property>
-     <item row="0" column="1">
-      <widget class="QLineEdit" name="urlField"/>
-     </item>
      <item row="0" column="0">
       <widget class="QLabel" name="label">
        <property name="font">
@@ -84,6 +81,9 @@
         <string>Base URL</string>
        </property>
       </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLineEdit" name="urlField"/>
      </item>
      <item row="1" column="0">
       <widget class="QLabel" name="label_2">
@@ -114,6 +114,36 @@
      </item>
      <item row="2" column="1">
       <widget class="QLineEdit" name="passwordField"/>
+     </item>
+     <item row="4" column="1">
+      <widget class="QLineEdit" name="portEdit"/>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="portLabel">
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Port</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="Line" name="line">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="Line" name="line_2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>

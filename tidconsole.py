@@ -608,7 +608,7 @@ class TIDcon(Cmd):
         try:
             localver = varis.e_version.split("#")[0]
             s = session()
-            onver = s.get("https://raw.githubusercontent.com/VainlyStrain/TIDoS/master/core/doc/version").text.strip()
+            onver = s.get("https://raw.githubusercontent.com/VainlyStrain/TIDoS-Framework/dev/core/doc/version").text.strip()
             localmain = localver.split("-")[0]
             localrev = localver.split("-")[1]
             locallist = localmain.split(".")
