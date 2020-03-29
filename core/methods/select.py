@@ -47,7 +47,7 @@ catlist = """
   vlnysis  
 """
 
-#target of type Target  TODO conversion in modules DONE
+
 def attack(target):
     try:
         j = imp.import_module(vars.module)
@@ -57,13 +57,13 @@ def attack(target):
     except SystemExit:
         pass
     except gaierror:
-        delcred = input(R + " [-] " + "\033[0m" + color.UNDERLINE + "\033[1m" + "Socket Error received. This may be caused by credentials. \n" +"\033[0m"+ color.CURSIVE + "Temporarily remove creds from {}?".format(target) + C + " (enter for not) :> ")
+        delcred = input(R + " [-] " + "\033[0m" + color.UNDERLINE + "\033[1m" + "Socket Error received. This may be caused by credentials. \n" +"\033[0m"+ color.CURSIVE + "Temporarily remove creds from {}?".format(target.fullurl) + C + " (enter for not) :> ")
         if delcred != "":
             newtarget = attackdrop(target)
             try:
                 j.attack(newtarget)
             except Exception as e:
-                print(R + " [-] " + "\033[0m" + color.UNDERLINE + "\033[1m" + "Module {} failed on target {}:".format(mod,target)+"\033[0m"+ color.CURSIVE +"\n{}".format(e) + C)
+                print(R + " [-] " + "\033[0m" + color.UNDERLINE + "\033[1m" + "Module {} failed on target {}:".format(mod,target.fullurl)+"\033[0m"+ color.CURSIVE +"\n{}".format(e) + C)
     except Exception as e:
         mod = vars.module.split(".")[-1]
         print(R + " [-] " + "\033[0m" + color.UNDERLINE + "\033[1m" + "Module {} failed on target {}:".format(mod,target.fullurl)+"\033[0m"+ color.CURSIVE +"\n{}".format(e) + C)

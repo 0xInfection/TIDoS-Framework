@@ -31,6 +31,7 @@ from core.methods.select import mlist as modulelist
 from PyQt5.QtWidgets import QTreeWidgetItem, QTableWidgetItem
 
 shell = TIDcon()
+code = [False]
 
 class TIDapp(QtWidgets.QDialog):
     def __init__(self):
@@ -405,19 +406,17 @@ class TIDapp(QtWidgets.QDialog):
             os.system("git stash; git pull")
         else:
             os.system("pkexec /opt/TIDoS/core/methods/vpdate.py")
-        self.REBOOT = True
+        code[0] = True
         self.done(0)
 
-
-    REBOOT = False
 
 app = QtWidgets.QApplication(sys.argv) # Create an instance of QtWidgets.QApplication
 window = TIDapp() # Create an instance of our class
 app.setWindowIcon(QtGui.QIcon("core/qt5/icons/tidos.png"))
 rcode = app.exec_() # Start the application
 
-while window.REBOOT:
-    window.REBOOT = False
+while code[0]:
+    code[0] = False
     app = QtWidgets.QApplication(sys.argv) # Create an instance of QtWidgets.QApplication
     window = TIDapp() # Create an instance of our class
     app.setWindowIcon(QtGui.QIcon("core/qt5/icons/tidos.png"))

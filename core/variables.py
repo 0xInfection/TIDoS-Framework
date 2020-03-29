@@ -45,8 +45,10 @@ global dlist
 global interface
 
 version = "2.0"
-e_version = "2.0.1-5#lsp"
-r_version = "2.0.1-5"
+r_version = ""
+with open("core/doc/version", "r") as versionfile:
+    r_version = versionfile.read().strip()
+e_version = r_version + "#lsp"
 module = ""
 targets = []
 processes = multiprocessing.cpu_count()
@@ -89,3 +91,4 @@ CMD_LS = "dir /b" if sys.platform.lower().startswith("win") else "\\ls"
 
 database = './core/database/tidos.db'
 count = 0
+upd = False

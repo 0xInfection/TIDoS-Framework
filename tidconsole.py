@@ -48,10 +48,10 @@ class TIDcon(Cmd):
     undoc_header = "NoDocs:"
 
     def cmdloop(self, intro=None):
-        print(self.intro)
+        #print(self.intro)
         while True:
             try:
-                super(TIDcon, self).cmdloop(intro="")
+                super(TIDcon, self).cmdloop(intro=None)
                 break
             except KeyboardInterrupt:
                 if varis.module == "":
@@ -452,8 +452,8 @@ class TIDcon(Cmd):
 
     def do_intro(self, inp):
         prnt.banner()
-        prnt.bannerbelownew()
-        print()
+        #prnt.bannerbelownew()
+        #print()
 
     def help_intro(self):
         print("""
@@ -603,6 +603,10 @@ class TIDcon(Cmd):
 """)
 
     do_EOF = do_q
+    do_quit = do_q
+    do_exit = do_q
+    help_quit = help_q
+    help_exit = help_q
 
     def do_fetch(self, inp, gui=False):
         try:
@@ -688,6 +692,7 @@ def main():
         if not opt["quiet"]:
             prnt.banner()
             #prnt.bannerbelownew()
+        prnt.upinfo()
         if not opt["session"]:
             s.do_vicadd(args.victim)
         else:
@@ -704,6 +709,7 @@ def main():
         if not opt["quiet"]:
             prnt.banner()
             #prnt.bannerbelownew()
+        prnt.upinfo()
         s = TIDcon()
         if opt["tor"]:
             s.do_tor("on")
@@ -715,12 +721,14 @@ def main():
     elif opt["help"]:
         if not opt["quiet"]:
             prnt.banner()
-        #prnt.bannerbelownew()
+            #prnt.bannerbelownew()
+        prnt.upinfo()
         parser.print_help()
     elif opt["list"]:
         s = TIDcon()
         if not opt["quiet"]:
             prnt.banner()
+        prnt.upinfo()
         s.do_list(args.list)
     elif opt["fetch"]:
         s = TIDcon()
@@ -731,7 +739,8 @@ def main():
         if not opt["quiet"]:
             prnt.loadstyle()
             prnt.banner()
-            prnt.bannerbelownew()
+            #prnt.bannerbelownew()
+            prnt.upinfo()
         TIDcon().cmdloop()
         print(R + "[TIDoS] " + "\033[0m" + color.END + "Alvida, my chosen")
 

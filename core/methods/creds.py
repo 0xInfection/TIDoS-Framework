@@ -76,14 +76,17 @@ def creds(inp):
         print(R + " [-] " + "\033[0m" + color.UNDERLINE + "\033[1m" + "Syntax: creds add|del target")
 
 def attackdrop(target):
-    if "@" in target:
-        ssl = False
-        if "https" in target:
-            ssl = True
-        splitar = target.split("@")[1]
-        if ssl:
-            return "https://" + splitar
-        else:
-            return "http://" + splitar
+    if "@" in target.fullurl:
+        newtarget = target
+        newtarget.fullurl = newtarget.name
+        return newtarget
+        #ssl = False
+        #if "https" in target:
+        #    ssl = True
+        #splitar = target.split("@")[1]
+        #if ssl:
+        #    return "https://" + splitar
+        #else:
+        #    return "http://" + splitar
     else:
         print(R + " [-] " + "\033[0m" + color.UNDERLINE + "\033[1m" + "No credentials found.")

@@ -26,12 +26,14 @@ from random import uniform as rflt
 import threading
 
 from core import variables as vars
-from core.methods.select import modulecount
+#from core.methods.select import modulecount
+from core.methods.fetch import fetchinit
 from core.Core.colors import *
 
 
 def loadstyle():
-    thread = threading.Thread(target=modulecount, args=("count",))
+    success = False
+    thread = threading.Thread(target=fetchinit, args=(1,))
     thread.start()
     os.system(vars.CMD_CLEAR)
     red_bold = R
@@ -125,53 +127,92 @@ ____, __             .|
                     .|.   
                      | .  
                      .    
+                     
 '''.format(color.END, color.BOLD, color.CURSIVE)
 
-tidos = """
-                                    |
-                                    ;                                 
-                                   :;,                             
-                                  :' ´,                           
-                                 ;'   ',                          
-                                : ,--. :.                        
-                 .            .' {    } ',            .           
-                 |;.,        .'  c    ,   ;.       ,.;|           
-                 ;   '':.   .:    ;  '    /    .:''   ;           
-                  :  '.  'o,;   ,.'  '., ';,o''  .'  :            
-                   \\   ',     .;        ',     ,'   /             
-                    '.   '    ;          :    '    .:              
-                     .\\       : :      : ',      /.               
-          ____.,  ,...:      : ; '     |: ,      :...,  ,.____    
-            `:.          '::'.: /       \'.'::.'         .:´     
-               ':,         ....;        .'.....       .:'       
-                  ':..    '                    '   .:'          
-                      ''   '                                   
+metasploit_hakcers = '''                                                 ,˛
+                                              .:oDFo:.                            
+                                           ./ymM0dayMmy/.                          
+                                        -+dHJ5aGFyZGVyIQ==+-                    
+                                    .:sm⏣~~Destroy.No.Data~~s:`                
+                                 -+h2~~Maintain.No.Persistence~~h+-              
+                             .:odNo2~~Above.All.Else.Do.No.Harm~~Ndo:`          
+                          ./etc/shadow.0days-Data'%20OR%201=1--.No.0MN8'/.      
+                       -++SecKCoin++e.AMd`       `.-://///+hbove.913.ElsMNh+-    
+                      -~/.ssh/id_rsa.Des-                  `htN01UserWroteMe!-  
+                      :dopeAW.No<nano>o                     :is:TЯiKC.sudo-.A:  
+                      :we're.all.alike'`                     The.PFYroy.No.D7:  
+                      :PLACEDRINKHERE!:                      yxp_cmdshell.Ab0:    
+                      :msf>exploit -j.                       :Ns.BOB&ALICEes7:    
+                      :---srwxrwx:-.`                        `MS146.52.No.Per:    
+                      :<script>.Ac816/                        sENbove3101.404:    
+                      :NT_AUTHORITY.Do                        `T:/shSYSTEM-.N:    
+                      :09.14.2011.raid                       /STFU|wall.No.Pr:    
+                      :hevnsntSurb025N.                      dNVRGOING2GIVUUP:    
+                      :#OUTHOUSE-  -s:                       /corykennedyData:    
+                      :$nmap -oS                              SSo.6178306Ence:    
+                      :Awsm.da:                            /shMTl#beats3o.No.:    
+                      :Ring0:                             `dDestRoyREXKC3ta/M:    
+                      :23d:                               sSETEC.ASTRONOMYist:    
+                       /-                        /yo-    .ence.N:(){ :|: & };:    
+                                                 `:Shall.We.Play.A.Game?tron/    
+                                                 ```-ooy.if1ghtf0r+ehUser5`    
+                                               ..th3.H1V3.U2VjRFNN.jMh+.`          
+                                              `MjM~~WE.ARE.se~~MMjMs              
+                                               +~KANSAS.CITY's~-`                  
+                                                J~HAKCERS~./.`                    
+                                                .esc:wq!:`                        
+                                                 +++ATH`                            '''
+
+
+
+tidos1 = color.BOLD + """
+
+   T H E
+
+         ███      ▄█  ████████▄   ▄██████▄     ▄████████
+     ▀█████████▄ ███  ███   ▀███ ███    ███   ███    ███ 
+        ▀███▀▀██ ███▌ ███    ███ ███    ███   ███    █▀
+         ███   ▀ ███▌ ███    ███ ███    ███   ███
+         ███     ███▌ ███    ███ ███    ███ ▀███████████
+         ███     ███  ███    ███ ███    ███          ███ 
+         ███     ███  ███   ▄███ ███    ███    ▄█    ███
+        ▄████▀   █▀   ████████▀   ▀██████▀   ▄████████▀
+
+                                                 F R A M E W O R K
+""" + color.END
+
+tidos2 = """
+
+   T H E
+
+    _________ ___ ______        _______  
+     |       |   |   _  \.--.--|       | 
+     |.|   | |.  |.  |   |  |  |___|   | 
+     `-|.  |-|.  |.  |    \___/ /  ___/  
+       |:  | |:  |:  1    /    |:  1  \  
+       |::.| |::.|::.. . /     |::.. . | 
+       `---' `---`------'      `-------' 
+       
+                                  F R A M E W O R K
 """
 
-nehrim = """
-                       ':·;,.                     
-                           ;';:                   
-                      ,:'    : ;.'                
-                     :' :     :. ;.               
-                    ;' /       ;. :               
-                   :   :        '; ,    ;'        
-               ; ,;    |          : .  ':.        
-              .:'    . ;. ,:      .; ': :         
-              ;    .: ;  ': l     .     .         
-         :..  :   ;.  .' ,. ;     ;   .'          
-         .  ''   .    ; |  |:     :  ;            
-          .,    .     ,  '^' '   ,' ;             
-            ,,  :      :..;, ;  '; :              
-              ;. ;     .'   : ;·'  .              
-                ; ;         |      ;              
-                . |         ;    ,;               
-               .;  ,       ;  ,;'                 
-                 l  ',    ;l;'                    
-                   .;.;.;.                        
-                       :,::'                      
-"""
 
-bannerlist = [vaile, tidos, vaile, tidos, vaile, nehrim, nehrim]
+tidos3 = """
+
+____, · 
+   + ;  {0}T H E{1}      ____        _______
+   .:,          |   _  \.--.--|       | 
+     ’      |.  |.  {2}|   |  |  |___|   |
+    .  `-|. |.  |.  |    \___/ /  ___/    
+    + ;  |: |{1}:  |:  1    /    |:  1  \\
+    ;.      |::.|::.. . /     |::{2}.. . |{1} 
+     ;      `---`------'      `-------' 
+     ;                           
+     ’                           {0}F R A M E W O R K{1}
+""".format(color.CURSIVE, color.END, color.BOLD)
+
+bannerlist = [vaile]
 
 sp00k70b3r = """
       ___
@@ -603,3 +644,7 @@ def loadstyle2():
             progressbar(i, 30, fill="{}༛{}".format(color.END, color.END), length=20, suffix="-", prefix=disp+" ୰")
     time.sleep(0.75)
     os.system("clear")
+
+def upinfo():
+    if vars.upd:
+        print(" ! A new version of TIDoS is available.")

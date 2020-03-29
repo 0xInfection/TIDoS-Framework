@@ -36,5 +36,5 @@ def attack(web):
         except ImportError:
             print(R + " [-] " + "\033[0m" + color.UNDERLINE + "\033[1m" + "Failed to import module: {}".format(module))
         except Exception as e:
-            print(R + " [-] " + "\033[0m" + color.UNDERLINE + "\033[1m" + "Module {} failed on target {}:".format(mod, web)+"\033[0m"+ color.CURSIVE +"\n{}".format(e) + C)
+            print(R + " [-] " + "\033[0m" + color.UNDERLINE + "\033[1m" + "Module {} failed on target {}:".format(mod, web.fullurl)+"\033[0m"+ color.CURSIVE +"\n{}".format(e) + C)
            
