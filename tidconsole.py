@@ -29,26 +29,24 @@ import core.methods.inputin as addtarget
 import core.methods.print as prnt
 import core.methods.select as select
 import core.variables as varis
-from core.Core.colors import R, B, C, color, O, G, RD
+from core.Core.colors import R, B, C, color, O, G, RD, RC
 from core.methods.cache import load, save, sessionparse, createVal, targetparse
 from core.methods.creds import creds
 from core.methods.tor import torpipe, initcheck, session
 from core.methods.parser import build_parser
 
-
+"""The metasploit-like shell, binding the framework together"""
 class TIDcon(Cmd):
-    # prompt = "\033[1;31m──·»\033[0m\033[4mVaile\033[0m\033[1;31m]─[\033[0m{}\033[1;31m]\033[0m\033[1m –› \033[
-    # 0m".format(varis.module)
+    #design stuff
     intro = ""
     prompt = '{} tid2 > {}'.format(C, color.END)
-    #prompt = '{}`└─[{}tidos@{}{}{}]─[{}չ {}'.format(RD, C, color.END, varis.username, RD, C, color.END)
     ruler = "—-"
     doc_header = "Docvmented:"
     misc_header = "Misc.:"
     undoc_header = "NoDocs:"
 
+    """override the default cmdloop to handle ctrl+c"""
     def cmdloop(self, intro=None):
-        #print(self.intro)
         while True:
             try:
                 super(TIDcon, self).cmdloop(intro=None)
@@ -58,7 +56,8 @@ class TIDcon(Cmd):
                     print("^C\n" + R + " [-] " + "\033[0m" + color.UNDERLINE + "\033[1m" + "Command 'q' to end session.")
                 else:
                     print("^C")
-                    
+
+    """override the default help function to point to our help menu"""
     def do_help(self, arg):
         """List available commands with "help" or detailed help with "help cmd"."""
         if arg:
@@ -104,6 +103,10 @@ class TIDcon(Cmd):
   [!] The session is not cached, use command 'sessions' for this.
 """)
 
+    """
+    help loading VAL sessions by setting options, providing terminal output 
+    and the target list to the GUI if in use
+    """
     def sessionhelper(self, inp, gui):
         print()
         if gui:
@@ -120,6 +123,10 @@ class TIDcon(Cmd):
         if gui:
             return victims
 
+    """
+    fully automate the framework providing a VAL file with the -c argument
+    supports different options for different targets, however not while using GUI (TODO)
+    """
     def automator(self, inp):
         print()
         victims, options = sessionparse(inp, load=False)
@@ -192,6 +199,8 @@ class TIDcon(Cmd):
     list     list all available sessions to load.
     load ID  restore session ID
     save ID  save current session as ID.
+
+  Using the --val flag or .val file ending will save configured module options too.
 """)
 
     def do_clear(self, inp):
@@ -202,7 +211,7 @@ class TIDcon(Cmd):
   clear
   -------
 
-  Clear the terminal using the native 'clear' command.
+  Clear the terminal using the native 'clear' or 'cls' command.
 """)
 
     def do_tor(self, inp, shell=True):
@@ -211,11 +220,16 @@ class TIDcon(Cmd):
             acc = False
             if initv:
                 try:
+                    """
+                    check the initial IP - will be used later to verify that Tor
+                    works
+                    """
                     initcheck()
                     acc = True
                 except:
                     acc = False
             if "on" in inp.lower():
+                #check if Tor service is running; if not, prompt user to start it
                 if acc or not initv:
                     p = torpipe(True)
                     if p:
@@ -349,8 +363,6 @@ class TIDcon(Cmd):
             print(R + " [-] " + "\033[0m" + color.UNDERLINE + "\033[1m" + "No target(s) set.")
             return None
         else:
-            #print("\n Attack")
-            #print(" --------")
             for i in varis.targets:
                 if len(varis.targets) > 1:
                     print( "\n"+O+" [i] Target:"+C+color.TR3+C+G+i.fullurl+C+color.TR2+C+"\n")
@@ -364,8 +376,8 @@ class TIDcon(Cmd):
   unleash the loaded module on the specified target(s)
   if no options have been specified
 
-    + default options will be applied
-    + if above not possible, user will be prompted for live input.
+    + configured options will be applied
+    + if option not set, user will be prompted for live input.
 """)
 
     def do_vicadd(self, inp):
@@ -550,7 +562,6 @@ class TIDcon(Cmd):
             if success:
                 varis.module = impmod
                 self.prompt = '{} tid2({}{}{}) > {}'.format(C, R, varis.module.split(".")[-1], C, color.END)
-                #self.prompt = '{}`└─[{}tidos#{}{}{}]─[{}չ {}'.format(RD, C, color.END, varis.module.split(".")[-1], RD, C, color.END)
         except ImportError:
             print(R + " [-] " + "\033[0m" + color.UNDERLINE + "\033[1m" + "Not a valid module: {}".format(inp))
         except ValueError:
@@ -592,7 +603,6 @@ class TIDcon(Cmd):
     def do_leave(self, inp):
         varis.module = ""
         self.prompt = '{} tid2 > {}'.format(C, color.END)
-        #self.prompt = '{}`└─[{}tidos@{}{}{}]─[{}չ {}'.format(RD, C, color.END, varis.username, RD, C, color.END)
 
     def help_leave(self):
         print("""
@@ -602,6 +612,7 @@ class TIDcon(Cmd):
   Leave the current module.
 """)
 
+    #aliases and shortcuts to exit the framework
     do_EOF = do_q
     do_quit = do_q
     do_exit = do_q
@@ -653,19 +664,23 @@ class TIDcon(Cmd):
   Check for and install updates of the framework.
 """)
 
-# help_EOF = help_q
+# tidos shell main function
 
 def main():
+    #parse arguments
     parser = build_parser()
     opt = vars(parser.parse_args())
     args = parser.parse_args()
-    os.system('clear')
+    os.system(varis.CMD_CLEAR)
+    #currently, only Linux is supported - TODO support other OSes as well
     if str(platform.system()) != "Linux":
         sys.exit(
             R + " [!] " + color.UNDERLINE + "\033[1m" + "You are not using a Linux Based OS! Linux is a must-have for "
                                                         "this script!" + color.END)
+    #some modules require root permissions to work
     if not os.geteuid() == 0:
         sys.exit(R + " [!] " + "\033[0m" + color.UNDERLINE + "\033[1m" + "Must be run as root." + B + " :)" + color.END)
+    #prompt the user with the terms&conditions if not already accepted
     if 'no' in open('core/doc/choice').read():
         prnt.disclaimer()
 
@@ -687,6 +702,10 @@ def main():
         with open("core/doc/local","w") as localfile:
             localfile.write(user)
 
+    """
+    handle arguments. Note that the --app argument for the GUI is handled in
+    tmp/tidos (which will be executed after global installation)
+    """
     if opt["load"] and opt["victim"] and not opt["help"] and not opt["list"]:
         s = TIDcon()
         if not opt["quiet"]:
@@ -743,6 +762,7 @@ def main():
             prnt.upinfo()
         TIDcon().cmdloop()
         print(R + "[TIDoS] " + "\033[0m" + color.END + "Alvida, my chosen")
+        #print(R + "[TIDoS] "+color.END+RC+prnt.randomsg()+color.END)
 
 if __name__ == '__main__':
     main()
