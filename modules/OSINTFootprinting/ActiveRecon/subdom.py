@@ -154,10 +154,6 @@ def subdom(web):
     lvl3 = ""
     if acc:
         for pwn in acc:
-            vul = str(pwn) + '\n'
-            miv = open(fileo, 'a')
-            miv.write(vul)
-            miv.close()
             save_data(database, module, lvl1, lvl2, lvl3, name, str(pwn))
     print(C+' [+] Done!')
 
