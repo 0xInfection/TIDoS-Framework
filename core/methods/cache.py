@@ -27,47 +27,56 @@ from core.Core.colors import R, color
 def targetparse(targetinp):
     user = ""
     passwd = ""
+    ip = False
     if "https://" in targetinp:
         port = 443
-    else:
+    elif "http://" in targetinp:
         port = 80
-    target = targetinp.split("://")[1]
-    tchk = target
-    if "@" in target:
-        creds = target.split("@")[0]
-        user = creds.split(":")[0]
-        passwd = creds.split(":")[1]
-        rest = target.split("@")[1]
-        tchk = rest
-        if ":" in rest:
-            try:
-                port = int(rest.split(":")[1])
-                tchk = rest.split(":")[0]
-            except Exception as e:
-                print(e)
     else:
-        if ":" in target:
-            try:
-                port = int(target.split(":")[1])
-                tchk = target.split(":")[0]
-            except Exception as e:
-                print(e)
+        ip = True
+    if not ip:
+        target = targetinp.split("://")[1]
+        tchk = target
+        if "@" in target:
+            creds = target.split("@")[0]
+            user = creds.split(":")[0]
+            passwd = creds.split(":")[1]
+            rest = target.split("@")[1]
+            tchk = rest
+            if ":" in rest:
+                try:
+                    port = int(rest.split(":")[1])
+                    tchk = rest.split(":")[0]
+                except Exception as e:
+                    print(e)
+        else:
+            if ":" in target:
+                try:
+                    port = int(target.split(":")[1])
+                    tchk = target.split(":")[0]
+                except Exception as e:
+                    print(e)
                 
-    if str(tchk).endswith('/'):
-        tchk = tchk[:-1]
-        
-    try:
-        ip = socket.gethostbyname(tchk)
-        parsedTarget = Target(tchk, ip)
+        if str(tchk).endswith('/'):
+            tchk = tchk[:-1]
+            
+        try:
+            ip = socket.gethostbyname(tchk)
+            parsedTarget = Target(tchk, ip)
+            parsedTarget.fullurl = targetinp
+            parsedTarget.port = port
+            parsedTarget.urluser = user
+            parsedTarget.urlpasswd = passwd
+            return parsedTarget
+        except socket.gaierror:
+            print(R + " [-] " + "\033[0m" + color.UNDERLINE + "\033[1m" + "Target seems down...")
+            pass
+        return None
+    else:
+        parsedTarget = Target(targetinp, targetinp)
         parsedTarget.fullurl = targetinp
-        parsedTarget.port = port
-        parsedTarget.urluser = user
-        parsedTarget.urlpasswd = passwd
         return parsedTarget
-    except socket.gaierror:
-        print(R + " [-] " + "\033[0m" + color.UNDERLINE + "\033[1m" + "Target seems down...")
-        pass
-    return None
+
 
 def targetname(fulltarget):
     target = targetparse(fulltarget)
