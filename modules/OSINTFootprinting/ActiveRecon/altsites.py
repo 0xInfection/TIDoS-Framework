@@ -23,8 +23,18 @@ info = "Alternate Site Discovery using UserAgent spoofing."
 searchinfo = "Alternate Site Discovery"
 properties = {}
 
+from core.database.database_module import save_data
+from core.variables import database
+from core.methods.cache import targetname
+import inspect
+
 def altsites(web):
     requests = session()
+    tname = targetname(web)
+    lvl2 = "altsites"
+    module = "ReconANDOSINT"
+    lvl1 = "Active Reconnaissance"
+    lvl3 = ""
     #print(R+'\n    ===================================')
     #print(R+'     A L T E R N A T I V E   S I T E S')
     #print(R+'    ===================================\n')
@@ -64,6 +74,7 @@ def altsites(web):
         if name != 'Chrome on Windows 8.1':
             if md5 != md5s['Chrome on Windows 8.1']:
                 print(G+' [+] '+str(name)+' differs fromk baseline!'+C+color.TR2+C)
+                save_data(database, module, lvl1, lvl2, lvl3, tname, str(name))
             else:
                 print(R+' [-] No alternative site found via User-Agent spoofing:'+ str(md5))
     print(C+'\n [+] Alternate Site Discovery Completed!\n')

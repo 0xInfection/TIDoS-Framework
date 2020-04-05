@@ -16,14 +16,23 @@ from core.methods.tor import session
 import urllib.parse
 from core.Core.colors import *
 
+from core.database.database_module import save_data
+from core.variables import database
+from core.methods.cache import targetname
+import inspect
+
 info = "Apache server status hunter."
 searchinfo = "Apache Status Hunter"
 properties = {}
 
 def apachestat(web):
+    name = targetname(web)
     requests = session()
+    lvl2 = "apachestat"
+    module = "ReconANDOSINT"
+    lvl1 = "Active Reconnaissance"
+    lvl3 = ""
     flag = 0x00
-    print(GR+' [*] Loading module...')
     time.sleep(0.7)
     #print(R+'\n    ===========================')
     #print(R+'     A P A C H E   S T A T U S ')
@@ -44,6 +53,7 @@ def apachestat(web):
             if resp.status_code == 200 or resp.status_code == 302:
                 print(O+' [+] Apache Server Status Enabled at :'+C+color.TR3+C+G+url+C+color.TR2+C)
                 flag = 0x01
+                save_data(database, module, lvl1, lvl2, lvl3, name, url)
 
     if flag == 0x00:
         print(R+' [-] No server status enabled!')

@@ -23,6 +23,11 @@ wrn.packages.urllib3.disable_warnings(InsecureRequestWarning)
 file_paths = []
 dir_path = []
 
+from core.database.database_module import save_data
+from core.variables import database
+from core.methods.cache import targetname
+import inspect
+
 info = "This module finds common hidden files on the target's server using a dictionary."
 searchinfo = "Hidden File Enumeration"
 properties = {}
@@ -77,8 +82,11 @@ def getFile0x00(filepath):
     return dir_path
 
 def dotbrute(web):
-
-    print(GR+' [*] Loading module...')
+    name = targetname(web)
+    lvl2 = "filebrute"
+    module = "ReconANDOSINT"
+    lvl1 = "Active Reconnaissance"
+    lvl3 = "dotbrute"
     time.sleep(0.5)
     #print(R+'\n    =======================================')
     print(R+'\n     D O T   F I L E   B R U T E F O R C E')
@@ -111,6 +119,7 @@ def dotbrute(web):
         print(G+' [+] The following interesting files were found!'+C+color.TR2+C)
         for u in ul:
             print(O+' [+] Path :'+C+color.TR3+C+G+u+C+color.TR2+C)
+            save_data(database, module, lvl1, lvl2, lvl3, name, u)
     else:
         print(R+' [-] No common interesting files were found!')
     print(C+' [+] Done!')

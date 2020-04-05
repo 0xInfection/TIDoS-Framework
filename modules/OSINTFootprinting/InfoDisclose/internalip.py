@@ -25,11 +25,17 @@ found = 0x00
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 wrn.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
+from core.database.database_module import save_data
+from core.variables import database
+from core.methods.cache import targetname
+import inspect
+
 info = "This module tries to find internal IPs disclosed in target's source code."
 searchinfo = "Internal IP hunter"
 properties = {}
 
 def internalip0x00(url):
+    name = targetname(url)
     requests = session()
     #print(R+'\n    ========================')
     #print(R+'     INTERNAL IP DISCLOSURE')
@@ -42,7 +48,7 @@ def internalip0x00(url):
     for w in links:
         print(O+' [*] Scraping Page: '+C+color.TR3+C+G+url+C+color.TR2+C)
         req = requests.get(w).text
-        check0x00(req)
+        check0x00(req, name)
 
     soup = BeautifulSoup(req,'lxml')
     for line in soup.find_all('a', href=True):
@@ -61,7 +67,7 @@ def internalip0x00(url):
         for uurl in urls:
             print("\n"+O+" [+] Scraping Page: "+C+color.TR3+C*G+uurl+C+color.TR2+C)
             req = requests.get(uurl).text
-            check0x00(req)
+            check0x00(req, name)
 
     except:
         print(R+' [-] Outbound Query Exception...')
@@ -71,17 +77,20 @@ def internalip0x00(url):
 
     print(G+' [+] Scraping Done!'+C+color.TR2+C)
 
-def check0x00(req):
+def check0x00(req, name):
+    lvl2 = "internalip"
+    module = "ReconANDOSINT"
+    lvl1 = "Information Disclosure"
+    lvl3 = ""
     comments = re.findall(signature,req)
     print(GR+" [*] Searching for Internal IPs...")
     for comment in comments:
         print(C+'   '+comment)
         time.sleep(0.03)
         found = 0x01
+        save_data(database, module, lvl1, lvl2, lvl3, name, comment)
 
 def internalip(web):
-
-    print(GR+' [*] Loading module...')
     time.sleep(0.6)
     internalip0x00(web)
 

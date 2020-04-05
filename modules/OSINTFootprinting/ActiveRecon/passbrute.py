@@ -23,6 +23,11 @@ wrn.packages.urllib3.disable_warnings(InsecureRequestWarning)
 file_paths = []
 dir_path = []
 
+from core.database.database_module import save_data
+from core.variables import database
+from core.methods.cache import targetname
+import inspect
+
 info = "This module tries to find password files on the target's webserver."
 searchinfo = "Password hunter"
 properties = {}
@@ -77,8 +82,11 @@ def getFile0x00(filepath):
     return dir_path
 
 def passbrute(web):
-
-    print(GR+' [*] Loading module...')
+    name = targetname(web)
+    lvl2 = "filebrute"
+    module = "ReconANDOSINT"
+    lvl1 = "Active Reconnaissance"
+    lvl3 = "passbrute"
     time.sleep(0.5)
     #print(R+'\n    =========================================')
     print(R+'\n     P A S S   P A T H   B R U T E F O R C E')
@@ -113,6 +121,7 @@ def passbrute(web):
         print(G+' [+] The following possible password paths were found!'+C+color.TR2+C)
         for u in ul:
             print(O+' [+] Password file :'+C+color.TR3+C+G+u+C+color.TR2+C)
+            save_data(database, module, lvl1, lvl2, lvl3, name, u)
     else:
         print(R+' [-] No common password locations were found!')
     print(C+' [+] Done!')

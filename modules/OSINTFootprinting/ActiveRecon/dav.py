@@ -23,8 +23,16 @@ info = "DAV HTTP Enumeration module."
 searchinfo = "DAV HTTP Enumeration"
 properties = {}
 
-def htsearch(url):
+from core.database.database_module import save_data
+from core.variables import database
+from core.methods.cache import targetname
+import inspect
 
+def htsearch(url, name):
+    lvl2 = "dav"
+    module = "ReconANDOSINT"
+    lvl1 = "Active Reconnaissance"
+    lvl3 = ""
     print(C+' [!] Setting headers...')
     time.sleep(0.7)
     headers = {'Content-Type' : content_type}
@@ -52,11 +60,15 @@ def htsearch(url):
     if re.search(regexp,resp.read()) and str(resp.code) == '200':
         print(G+' [+] HTTP Search Method found Enabled!'+C+color.TR2+C)
         print(O+' [+] DAV Directory Listing at :'+C+color.TR3+C+G+url+C+color.TR2+C)
+        save_data(database, module, lvl1, lvl2, lvl3, name, "htsearch: "+url)
     else:
         print(R+' [-] No HTTP Searching Profiling Found...')
 
-def profind(url):
-
+def profind(url, name):
+    lvl2 = "dav"
+    module = "ReconANDOSINT"
+    lvl1 = "Active Reconnaissance"
+    lvl3 = ""
     print(C+' [!] Setting headers...')
     headers = {'Depth' : 1,
                'Content-Type' : content_type}
@@ -83,12 +95,12 @@ def profind(url):
     if 'D:href' in resp.read() and resp.code == 200:
         print(G+' [+] HTTP Profind Method Found Enabled!'+C+color.TR2+C)
         print(O+' [+] DAV Directory Listing at :'+C+color.TR3+C+G+url+C+color.TR2+C)
+        save_data(database, module, lvl1, lvl2, lvl3, name, "profind: "+url)
     else:
         print(R+' [-] No Profind HTTP Profiling Found...')
 
 def dav(web):
-
-    print(GR+' [*] Loading module...')
+    name = targetname(web)
     time.sleep(0.7)
     #print(R+'\n    =========================================')
     #print(R+'     D A V   H T T P   E N U M E R A T I O N')
@@ -101,11 +113,11 @@ def dav(web):
     pro = 'PROFIND'
     sr = 'SEARCH'
     print(GR+'\n [*] Initiating HTTP Search module...')
-    htsearch(web)
+    htsearch(web, name)
     print(C+' [+] HTTP Search module Completed!')
     time.sleep(1)
     print(GR+'\n [*] Initiating HTTP Profind Moule...')
-    profind(web)
+    profind(web, name)
     print(C+' [+] HTTP Profind Module Completed!')
 
     print(G+' [+] HTTP Profiling of DAV Completed!'+C+color.TR2+C+'\n')

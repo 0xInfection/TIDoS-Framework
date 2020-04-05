@@ -25,11 +25,17 @@ from files.signaturedb.infodisc_signatures import EMAIL_HARVESTER_SIGNATURE as s
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 wrn.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
+from core.database.database_module import save_data
+from core.variables import database
+from core.methods.cache import targetname
+import inspect
+
 info = "This module tries to find email addresses disclosed in target's source code."
 searchinfo = "Email hunter"
 properties = {}
 
-def mail0x00(url):
+def mail0x00(url, lvl2):
+    name = targetname(url)
     requests = session()
     #print(R+'\n    ======================')
     #print(R+'     EMAIl INFO HARVESTER')
@@ -42,7 +48,7 @@ def mail0x00(url):
     for w in links:
         print(O+' [*] Scraping Page:'+C+color.TR3+C+G+url+C+color.TR2+C)
         req = requests.get(w).text
-        check0x00(req)
+        check0x00(req, lvl2, name)
 
     soup = BeautifulSoup(req,'lxml')
     for line in soup.find_all('a', href=True):
@@ -61,7 +67,7 @@ def mail0x00(url):
         for uurl in urls:
             print("\n"+O+" [+] Scraping Page:"+C+color.TR3+C+G+uurl+C+color.TR2+C)
             req = requests.get(uurl).text
-            check0x00(req)
+            check0x00(req, lvl2, name)
 
     except:
         print(R+' [-] Outbound Query Exception...')
@@ -71,7 +77,10 @@ def mail0x00(url):
 
     print(G+' [+] Scraping Done!'+C+color.TR2+C)
 
-def check0x00(req):
+def check0x00(req, lvl2, name):
+    module = "ReconANDOSINT"
+    lvl1 = "Information Disclosure"
+    lvl3 = ""
     comments = re.findall(signature,req)
     print(GR+" [*] Searching for Emails...")
     if comments:
@@ -80,12 +89,12 @@ def check0x00(req):
             print(C+'   - '+comment)
             time.sleep(0.03)
             found = 0x01
+            save_data(database, module, lvl1, lvl2, lvl3, name, comment)
 
 def emailext(web):
-
-    print(GR+' [*] Loading module...')
+    lvl2 = inspect.stack()[0][3]
     time.sleep(0.6)
-    mail0x00(web)
+    mail0x00(web, lvl2)
 
 def attack(web):
     web = web.fullurl

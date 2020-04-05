@@ -15,12 +15,21 @@ from core.methods.tor import session
 import os
 from os import system
 from core.Core.colors import *
+from core.database.database_module import save_data
+from core.variables import database
+from core.methods.cache import targetname
+import inspect
 
 info = "Discovers hosts on the same DNS server."
 searchinfo = "DNS Shared Hostnames"
 properties = {}
 
 def sharedns(web):
+    name = targetname(web)
+    lvl2 = "sharedns"
+    module = "ReconANDOSINT"
+    lvl1 = "Active Reconnaissance"
+    lvl3 = ""
     requests = session()
     web = web.split('//')[1]
     #print(R+'\n    =========================================')
@@ -50,6 +59,7 @@ def sharedns(web):
             for i in p:
                 print(O+' [+] Site found :>'+C+color.TR3+C+G+i+C+color.TR2+C)
                 time.sleep(0.02)
+            save_data(database, module, lvl1, lvl2, lvl3, name, dns)
 
 def attack(web):
     web = web.fullurl

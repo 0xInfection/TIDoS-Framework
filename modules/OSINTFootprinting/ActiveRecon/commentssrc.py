@@ -23,11 +23,21 @@ found = 0x00
 urls = []
 links = []
 
+from core.database.database_module import save_data
+from core.variables import database
+from core.methods.cache import targetname
+import inspect
+
 info = "This module hunts down comments in the source code. It is recommended to run the crawlers before using this module."
 searchinfo = "Comment Scraper"
 properties = {}
 
 def commentssrc(web):
+    name = targetname(web)
+    lvl2 = "commentssrc"
+    module = "ReconANDOSINT"
+    lvl1 = "Active Reconnaissance"
+    lvl3 = ""
     requests = session()
     #print(R+'\n    =================================')
     #print(R+'     C O M M E N T S   S C R A P E R')
@@ -49,6 +59,7 @@ def commentssrc(web):
         print(O+" [+] Searching for comments on page:"+C+color.TR3+C+G+web+C+color.TR2+C+'\n')
         for comment in comments:
             print(C+'   '+comment)
+            save_data(database, module, lvl1, lvl2, lvl3, name, comment)
             time.sleep(0.03)
             found = 0x01
 
@@ -73,9 +84,10 @@ def commentssrc(web):
             comments = re.findall('<!--(.*)-->',req.text)
             for comment in comments:
                 print(C+'   '+comment)
+                save_data(database, module, lvl1, lvl2, lvl3, name, comment)
                 time.sleep(0.03)
 
-    except wrn.exceptions:
+    except:
         print(R+' [-] Outbound Query Exception...')
 
     if found == 0x00:

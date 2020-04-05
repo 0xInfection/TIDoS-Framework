@@ -20,6 +20,12 @@ from urllib.parse import urlencode
 from re import search
 from core.Core.colors import *
 from core.variables import tor
+
+from core.database.database_module import save_data
+from core.variables import database
+from core.methods.cache import targetname
+import inspect
+
 br = mechanize.Browser()
 
 # Cookie Jar
@@ -46,6 +52,11 @@ searchinfo = "Server Detection module"
 properties = {}
 
 def serverdetect(web):
+    name = targetname(web)
+    lvl2 = "serverdetect"
+    module = "ReconANDOSINT"
+    lvl1 = "Active Reconnaissance"
+    lvl3 = ""
     requests = session()
     #print(R+'\n   ===========================')
     #print(R+'    D E T E C T   S E R V E R')
@@ -61,6 +72,8 @@ def serverdetect(web):
         print(G+' [+] Server detected online...'+C+color.TR2+C)
         time.sleep(0.5)
         print(O+' [+] Server IP :>'+C+color.TR3+C+G+ip_addr+C+color.TR2+C)
+        data = "IP: " + ip_addr
+        save_data(database, module, lvl1, lvl2, lvl3, name, data)
     except:
         print(R+' [-] Server seems down...')
 
@@ -78,8 +91,12 @@ def serverdetect(web):
 
         else:
             print(G+' [+] Server : '+header+C+color.TR2+C)
+        data = "Server: " + header
+        save_data(database, module, lvl1, lvl2, lvl3, name, data)
         try:
             print(O+' [+] Running On :'+C+color.TR3+C+G+ r.headers['X-Powered-By']+C+color.TR2+C)
+            data = "Running On: " + r.headers['X-Powered-By']
+            save_data(database, module, lvl1, lvl2, lvl3, name, data)
         except:
             pass
     except:

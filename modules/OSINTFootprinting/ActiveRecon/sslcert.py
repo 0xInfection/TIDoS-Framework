@@ -14,13 +14,21 @@ import socket
 import ssl
 import time
 from core.Core.colors import *
+from core.database.database_module import save_data
+from core.variables import database
+from core.methods.cache import targetname
+import inspect
 
 info = "Displays info on the website's certificate."
 searchinfo = "SSL Cert Info"
 properties = {}
 
 def sslcert(web):
-
+    name = targetname(web)
+    lvl2 = "sslcert"
+    module = "ReconANDOSINT"
+    lvl1 = "Active Reconnaissance"
+    lvl3 = ""
     if 'https' not in web:
         print(R+' [-] Website does not use SSL...')
     else:
@@ -42,12 +50,20 @@ def sslcert(web):
         cerpec = server.cipher()
         for x in cerpec:
             cerp.append(x)
-        print(B+" [+] Certificate Serial Number : "+W+ str(cer.get('serialNumber')))
-        print(B+" [+] Certificate SSL Version : "+W+ str(cer.get('version')))
-        print(B+' [+] SSL Cipher Suite : '+W+ str(cerp[0]))
-        print(B+' [+] Encryption Protocol : '+W+ str(cerp[1]))
-        print(B+' [+] Encryption Type : '+W+ str(cerp[2]) + ' bit')
+        sn = str(cer.get('serialNumber'))
+        vers = str(cer.get('version'))
+        cs = str(cerp[0])
+        proto = str(cerp[1])
+        etype = str(cerp[2])
+        print(B+" [+] Certificate Serial Number : "+W+ sn)
+        print(B+" [+] Certificate SSL Version : "+W+ vers)
+        print(B+' [+] SSL Cipher Suite : '+W+ cs)
+        print(B+' [+] Encryption Protocol : '+W+ proto)
+        print(B+' [+] Encryption Type : '+W+ etype + ' bit')
         print(B+' [+] Certificate as Raw : \n'+W+str(cer))
+        data = "Serial Number :> {}\nVersion :> {}\nCipher Suite :> {}\n".format(sn, vers, cs) 
+        data = data + "Encryption Protocol :> {}\nEncryption Type :> {}\n\n{}".format(proto, etype, str(cer))
+        save_data(database, module, lvl1, lvl2, lvl3, name, data)
 
 def attack(web):
     web = web.fullurl

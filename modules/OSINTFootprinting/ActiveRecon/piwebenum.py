@@ -14,12 +14,21 @@ import os, time
 from core.methods.tor import session
 from time import sleep
 from core.Core.colors import *
+from core.database.database_module import save_data
+from core.variables import database
+from core.methods.cache import targetname
+import inspect
 
 info = "Ping/NPing Enumeration."
 searchinfo = "(N)Ping Enumeration"
 properties = {}
 
 def piwebenum(web):
+    name = targetname(web)
+    lvl2 = "piwebenum"
+    module = "ReconANDOSINT"
+    lvl1 = "Active Reconnaissance"
+    lvl3 = ""
     requests = session()
     time.sleep(0.4)
     web = web.split('//')[1]
@@ -42,6 +51,7 @@ def piwebenum(web):
     text = requests.get('http://api.hackertarget.com/nping/?q=' + web).text
     nping = str(text)
     print(color.END+ nping +C+'\n')
+    save_data(database, module, lvl1, lvl2, lvl3, name, nping)
 
 def attack(web):
     web = web.fullurl

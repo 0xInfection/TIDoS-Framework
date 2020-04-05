@@ -13,13 +13,21 @@
 import http.client
 import time
 from core.Core.colors import *
+from core.database.database_module import save_data
+from core.variables import database
+from core.methods.cache import targetname
+import inspect
 
 info = "Lists allowed HTTP methods."
 searchinfo = "HTTP Methods Lister"
 properties = {}
 
 def httpmethods(web):
-
+    name = targetname(web)
+    lvl2 = "httpmethods"
+    module = "ReconANDOSINT"
+    lvl1 = "Active Reconnaissance"
+    lvl3 = ""
     try:
         #print(R+'\n    =========================')
         #print(R+'     H T T P   M E T H O D S ')
@@ -42,6 +50,7 @@ def httpmethods(web):
             methods = q.split(',')
             for method in methods:
                 print(O+'     '+method+C)
+            save_data(database, module, lvl1, lvl2, lvl3, name, q)
         else:
             print(R+' [-] HTTP Method Options Request Unsuccessful...')
 

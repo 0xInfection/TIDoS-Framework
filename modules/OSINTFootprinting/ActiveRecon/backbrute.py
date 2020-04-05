@@ -23,6 +23,11 @@ wrn.packages.urllib3.disable_warnings(InsecureRequestWarning)
 file_paths = []
 dir_path = []
 
+from core.database.database_module import save_data
+from core.variables import database
+from core.methods.cache import targetname
+import inspect
+
 info = "This module tries to find backdoors on target's webserver."
 searchinfo = "Backdoor Hunter"
 properties = {}
@@ -77,8 +82,11 @@ def getFile0x00(filepath):
     return dir_path
 
 def backbrute(web):
-
-    print(GR+' [*] Loading module...')
+    name = targetname(web)
+    lvl2 = "filebrute"
+    module = "ReconANDOSINT"
+    lvl1 = "Active Reconnaissance"
+    lvl3 = "backbrute"
     time.sleep(0.5)
     #print(R+'\n    =======================================')
     print(R+'\n     B A C K D O O R   B R U T E F O R C E')
@@ -109,6 +117,7 @@ def backbrute(web):
             print(G+' [+] The following possible backdoors were found!'+C+color.TR2+C)
             for u in ul:
                 print(O+' [+] Path to backdoor :'+C+color.TR3+C+G+u+C+color.TR2+C)
+                save_data(database, module, lvl1, lvl2, lvl3, name, u)
         else:
             print(R+' [-] No backdoors were found!')
         print(C+' [+] Done!')

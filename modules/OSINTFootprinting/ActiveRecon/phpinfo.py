@@ -24,7 +24,17 @@ info = "This module tries to find PHPInfo files on the target's webserver."
 searchinfo = "PHPInfo search"
 properties = {}
 
+from core.database.database_module import save_data
+from core.variables import database
+from core.methods.cache import targetname
+import inspect
+
 def phpinfo(web):
+    name = targetname(web)
+    lvl2 = "phpinfo"
+    module = "ReconANDOSINT"
+    lvl1 = "Active Reconnaissance"
+    lvl3 = ""
     requests = session()
     found = 0x00
     #print(R+'\n    =============================')
@@ -48,6 +58,8 @@ def phpinfo(web):
                 if re.search(r'\<title\>phpinfo()\<\/title\>|\<h1 class\=\"p\"\>PHP Version',req.content):
                     found = 0x01
                     print(O+' [+] Found PHPInfo File At :'+C+color.TR3+C+G+web0x00+C+color.TR2+C)
+                    data = "phpinfo @ " + web0x00
+                    save_data(database, module, lvl1, lvl2, lvl3, name, data)
             else:
                 print(B+' [*] Checking : '+C+web0x00+R+' ('+str(req.status_code)+')')
 

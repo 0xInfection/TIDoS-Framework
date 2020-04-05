@@ -22,6 +22,11 @@ from core.variables import processes
 from core.Core.colors import *
 from core.methods.print import summary
 
+from core.database.database_module import save_data
+from core.variables import database
+from core.methods.cache import targetname
+import inspect
+
 info = "This module checks if common ports are open."
 searchinfo = "Port Scanner"
 properties = {}
@@ -62,7 +67,7 @@ def portloop(portlist, host):
             closed.append(p)
     return (open, closed)
 
-def scan0x00(host):
+def scan0x00(host, name):
 
     #print(R+'\n   =========================')
     #print(R+'    P O R T   S C A N N E R')
@@ -116,6 +121,7 @@ def scan0x00(host):
         print(P+'    +--------+----------+')
 
         if open_ports:
+            data = "Open Ports: " + str(open_ports)
             for i in sorted(open_ports):
                 c = str(i)
                 if len(c) == 1:
@@ -138,6 +144,11 @@ def scan0x00(host):
                     print(P+'    | '+C+c+P+'  '+'|   '+C+'OPEN'+P+'   '+'| ')
                     print(P+'    +--------+----------+')
                     time.sleep(0.2)
+            lvl2 = "getports"
+            module = "ReconANDOSINT"
+            lvl1 = "Active Reconnaissance"
+            lvl3 = ""
+            save_data(database, module, lvl1, lvl2, lvl3, name, data)
         else:
             print(R+"\n [-] No open ports found.!!\n")
         print(B+'\n [!] ' + str(len(closed_ports)) + ' closed ports not shown')
@@ -149,8 +160,7 @@ def scan0x00(host):
         quit()
 
 def getports(web):
-
-    print(GR+' [*] Loading up scanner...')
+    name = targetname(web)
     time.sleep(0.5)
     if 'http://' in web:
         web = web.replace('http://','')
@@ -158,7 +168,7 @@ def getports(web):
         web = web.replace('https://','')
     else:
         pass
-    scan0x00(web)
+    scan0x00(web, name)
 
 def attack(web):
     web = web.fullurl

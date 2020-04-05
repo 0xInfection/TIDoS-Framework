@@ -13,13 +13,22 @@
 import os
 from time import sleep
 from core.Core.colors import *
+from core.database.database_module import save_data
+from core.variables import database
+from core.methods.cache import targetname
+import inspect
 
 info = "Traceroute module."
 searchinfo = "Traceroute module"
 properties = {}
 
+#TODO DB saving
 def traceroute(web):
-
+    name = targetname(web)
+    lvl2 = "traceroute"
+    module = "ReconANDOSINT"
+    lvl1 = "Active Reconnaissance"
+    lvl3 = ""
     #print(R+'\n   =====================')
     #print(R+'    T R A C E R O U T E')
     #print(R+'   =====================\n')

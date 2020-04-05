@@ -23,21 +23,31 @@ urls = []
 links = []
 found = 0x00
 
+from core.database.database_module import save_data
+from core.variables import database
+from core.methods.cache import targetname
+import inspect
+
 info = "This module tries to find errors in target's source code."
 searchinfo = "Error hunter"
 properties = {}
 
-def check0x00(content,url):
-
+def check0x00(content,url, lvl2, name):
+    module = "ReconANDOSINT"
+    lvl1 = "Information Disclosure"
+    lvl3 = ""
     for pattern in patterns:
         print(C+' [!] Finding '+B+pattern+C+' ...')
         time.sleep(0.005)
         if search(pattern, content):
             print(O+' [!] Possible error at '+C+color.TR3+C+G+url+C+color.TR2+C)
             print(G+" [+] Found : \"%s\" at %s" % (pattern,url)+C+color.TR2+C)
+            data = str(pattern) + " @ " + str(url)
+            save_data(database, module, lvl1, lvl2, lvl3, name, data)
             found = 0x01
 
-def request(url):
+def request(url, lvl2):
+    name = targetname(url)
     requests = session()
     time.sleep(0.5)
     links = [url]
@@ -45,7 +55,7 @@ def request(url):
     for w in links:
         print(GR+' [*] Scraping Page: '+O+url+C)
         req = requests.get(w).text
-        check0x00(req, url)
+        check0x00(req, url, lvl2, name)
 
     soup = BeautifulSoup(req,'lxml')
     for line in soup.find_all('a', href=True):
@@ -64,7 +74,7 @@ def request(url):
         for uurl in urls:
             print("\n"+O+" [+] Scraping Page: "+C+color.TR3+C+G+uurl+C+color.TR2+C)
             req = requests.get(uurl).text
-            check0x00(req, url)
+            check0x00(req, url, lvl2, name)
 
     except:
         print(R+' [-] Outbound Query Exception...')
@@ -75,16 +85,13 @@ def request(url):
     print(G+' [+] Scraping Done!'+C+color.TR2+C)
 
 def errors(web):
-
-    #print(R+'\n       =========================')
-    #print(R+'        E R R O R   H U N T E R ')
-    #print(R+'       =========================')
+    lvl2 = inspect.stack()[0][3]
     from core.methods.print import pleak
     pleak("error hunter")
     print(C+'  [This module covers up Full Path Disclosures]\n')
     print(GR+' [*] Making the request...')
     time.sleep(0.5)
-    request(web)
+    request(web, lvl2)
 
 def attack(web):
     web = web.fullurl

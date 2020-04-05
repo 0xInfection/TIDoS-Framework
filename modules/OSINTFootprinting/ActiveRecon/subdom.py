@@ -17,6 +17,10 @@ from core.methods.tor import session
 from time import sleep
 from tld import get_fld
 from core.Core.colors import *
+from core.database.database_module import save_data
+from core.variables import database
+from core.methods.cache import targetname
+import inspect
 
 sublist = []
 flist = []
@@ -118,7 +122,7 @@ def report(web, found, final):
     return total
 
 def subdom(web):
-
+    name = targetname(web)
     global fileo
 
     if 'http' in web:
@@ -143,13 +147,18 @@ def subdom(web):
     outer(web)
     print(C+' [+] Module [2] API Retriever Completed!\n')
     acc = report(web, found, final)
-    print(C+' [*] Writing found subdomains to a file...')
+    print(C+' [*] Writing found subdomains to DB...')
+    lvl2 = "subdom"
+    module = "ReconANDOSINT"
+    lvl1 = "Active Reconnaissance"
+    lvl3 = ""
     if acc:
         for pwn in acc:
             vul = str(pwn) + '\n'
             miv = open(fileo, 'a')
             miv.write(vul)
             miv.close()
+            save_data(database, module, lvl1, lvl2, lvl3, name, str(pwn))
     print(C+' [+] Done!')
 
 def attack(web):
