@@ -107,6 +107,7 @@ def inputip(target, net=False):
         pass
 
     newTarget = Target(target, target)
+    newTarget.fullurl = target
 
     if net:
         vars.targets.append(newTarget)
