@@ -24,6 +24,11 @@ from core.variables import processes
 from core.Core.colors import *
 from core.methods.print import summary
 
+from core.database.database_module import save_data
+from core.variables import database
+from core.methods.cache import targetname
+import inspect
+
 info = "TCP Stealth Scanner."
 searchinfo = "TCP Stealth Scan"
 properties = {"INIT":["Start of port range to scan.", " "], "FIN":["End of the port range to scan.", " "], "VERBOSE":["Verbose Output? [1/0]", " "]}
@@ -192,6 +197,8 @@ def scan0x00(target):
                     print(P+'    +--------+------------------+')
                     time.sleep(0.2)
             print('')
+            data = "Open Ports: " + str(open_ports)
+            save_data(database, module, lvl1, lvl2, lvl3, name, data)
         else:
             print(''+R+" [-] Sorry, No open ports found.!!")
         print(C+'\n [!] ' + str(len(closed_ports)) + ' closed ports not shown')
@@ -203,8 +210,16 @@ def scan0x00(target):
         quit()
 
 def tcpstealthscan(web):
-
-    print(GR+' [*] Loading scanner...')
+    global name
+    name = targetname(web)
+    global lvl2
+    lvl2 = "tcpstealthscan"
+    global module
+    module = "ScanANDEnum"
+    global lvl1
+    lvl1 = "Port Scanning"
+    global lvl3
+    lvl3 = ""
     time.sleep(0.5)
     if 'http://' in web:
         web = web.replace('http://','')

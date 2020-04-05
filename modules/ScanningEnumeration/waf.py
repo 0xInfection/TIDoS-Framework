@@ -20,6 +20,10 @@ from core.Core.colors import *
 from modules.ScanningEnumeration.wafimpo import *
 
 from time import sleep
+from core.database.database_module import save_data
+from core.variables import database
+from core.methods.cache import targetname
+import inspect
 
 wafs = ['Airlock','Anquanboa','Armor','Asm','AWS','Baidu','Barracuda','BetterWPSecurity','F5 BigIP','BinarySec','BlackDoS','Cisco ACE XML',
  'Cloudflare','Cloudfront','Comodo','Data Power','Deny All','Dot Defender','Edge Cast','Expression Engine','Forti Web','Hyper Guard','Incapsula',
@@ -99,9 +103,17 @@ def detectWaf0x00(headers,content):
     return waf0x00
 
 def waf(web):
-
+    global name
+    name = targetname(web)
+    global lvl2
+    lvl2 = "waf"
+    global module
+    module = "ScanANDEnum"
+    global lvl1
+    lvl1 = "Scanning & Enumeration"
+    global lvl3
+    lvl3 = ""
     check = 0x00
-    print(GR+' [*] Loading module...')
     time.sleep(0.7)
     #print(R+'\n    ===============================')
     #print(R+'     W A F   E N U M E R A T I O N ')
@@ -122,6 +134,7 @@ def waf(web):
                 time.sleep(0.6)
                 print(B+' [+] Firewall Detected : ' +C+waftypes[i])
                 check = 0x01
+                save_data(database, module, lvl1, lvl2, lvl3, name, waftypes[i])
                 break
 
             else:

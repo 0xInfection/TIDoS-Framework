@@ -23,8 +23,16 @@ info = "Bannergrabbing using Shodan API."
 searchinfo = "Bannergrab module"
 properties = {}
 
-def grab(web):
+from core.database.database_module import save_data
+from core.variables import database
+from core.methods.cache import targetname
+import inspect
 
+def grab(web):
+    lvl2 = "bannergrab"
+    module = "ScanANDEnum"
+    lvl1 = "Scanning & Enumeration"
+    lvl3 = ""
     api = shodan.Shodan(SHODAN_API_KEY)
     print(GR+' [*] Resolving hostnames...')
     time.sleep(0.7)
@@ -44,12 +52,15 @@ def grab(web):
                 else:
                     print(C+'    '+q)
                     time.sleep(0.02)
+                data = q + " @ port " + str(item['port'])
+                save_data(database, module, lvl1, lvl2, lvl3, name, data)
 
     except KeyboardInterrupt:
         print(R+' [-] An error occured...\n')
 
 def bannergrab(web):
-
+    global name
+    name = targetname(web)
     #print(R+'\n    ===============================')
     #print(R+'     B A N N E R   G R A B B I N G')
     #print(R+'    ===============================\n')

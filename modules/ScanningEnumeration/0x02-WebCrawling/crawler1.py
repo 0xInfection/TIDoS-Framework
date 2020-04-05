@@ -21,6 +21,11 @@ from time import sleep
 from core.Core.colors import *
 from core.variables import tor
 
+from core.database.database_module import save_data
+from core.variables import database
+from core.methods.cache import targetname
+import inspect
+
 br = mechanize.Browser()
 
 cj = http.cookiejar.LWPCookieJar()
@@ -91,30 +96,27 @@ def crawler10x00(web):
 def out(web, list0):
 
     web = web.split('//')[1]
-    print(GR+' [*] Writing found URLs to a file...')
-    if os.path.exists('tmp/logs/'+web+'-logs/'+web+'-links.lst'):
-        fil = open('tmp/logs/'+web+'-logs/'+web+'-links.lst','w+')
-        print(P+' [!] Sorting only scope urls...'+C)
-        time.sleep(1)
-        for lists in list0:
-            if str(web) in lists:
-                fil.write("%s\n" % lists)
-        mq = os.getcwd()
-        print(O+' [+] Links saved under'+C+color.TR3+C+G+mq+'tmp/logs/'+web+'-logs/'+web+'-links.lst'+C+color.TR2+C)
+    print(GR+' [*] Writing found URLs to DB...')
+    #if os.path.exists('tmp/logs/'+web+'-logs/'+web+'-links.lst'):
+    #    fil = open('tmp/logs/'+web+'-logs/'+web+'-links.lst','w+')
+    print(P+' [!] Sorting only scope urls...'+C)
+    time.sleep(1)
+    for lists in list0:
+        if str(web) in lists:
+            save_data(database, module, lvl1, lvl2, lvl3, name, str(lists))
 
-    else:
-        fil = open('tmp/logs/'+web+'-logs/'+web+'-links.lst','a')
-        print(C+' [!] Sorting only scope urls...')
-        time.sleep(1)
-        for lists in list0:
-            if str(web) in lists:
-                fil.write("%s\n" % lists)
-        mq = os.getcwd()
-        print(O+' [+] Links saved under'+C+color.TR3+C+G+mq+'tmp/logs/'+web+'-logs/'+web+'-links.lst'+C+color.TR2+C)
 
 def crawler1(web):
-
-    print(GR+' [*] Loading crawler...')
+    global name
+    name = targetname(web)
+    global lvl2
+    lvl2 = "crawler1"
+    global module
+    module = "ScanANDEnum"
+    global lvl1
+    lvl1 = "Crawling"
+    global lvl3
+    lvl3 = ""
     time.sleep(0.5)
     q = crawler10x00(web)
     out(web, q)

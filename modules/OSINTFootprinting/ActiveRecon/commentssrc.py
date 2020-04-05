@@ -48,7 +48,7 @@ def commentssrc(web):
     print(C+'       before running this module]\n')
     print(GR+' [*] Importing links...')
     po = web.split('//')[1]
-    p = 'tmp/logs/'+po+'-logs/'+po+'-links.lst'
+    #p = 'tmp/logs/'+po+'-logs/'+po+'-links.lst'
     links = [web]
 
     for w in links:

@@ -23,12 +23,26 @@ from sslyze.server_connectivity_tester import ServerConnectivityTester
 from sslyze.synchronous_scanner import SynchronousScanner
 domains = []
 
+from core.database.database_module import save_data
+from core.variables import database
+from core.methods.cache import targetname
+import inspect
+
 info = "SSL Enumeration module."
 searchinfo = "SSL Enumeration module"
 properties = {}
 
 def ssltlsscan(web):
-
+    global name
+    name = targetname(web)
+    global lvl2
+    lvl2 = "ssltlsscan"
+    global module
+    module = "ScanANDEnum"
+    global lvl1
+    lvl1 = "Scanning & Enumeration"
+    global lvl3
+    lvl3 = ""
     target = web.split('//')[1]
     #print(R+'\n    ===============================')
     #print(R+'     S S L   E N U M E R A T I O N')
@@ -52,6 +66,8 @@ def ssltlsscan(web):
             for cipher in scan_result.accepted_cipher_list:
                 print(C+'    {}'.format(cipher.name))
             print('')
+            data = "TLS 1.0 :> " + str(scan_result.accepted_cipher_list)
+            save_data(database, module, lvl1, lvl2, lvl3, name, data)
 
             command = Tlsv11ScanCommand()
             scan_result = scanner.run_scan_command(server_info, command)
@@ -59,6 +75,8 @@ def ssltlsscan(web):
             for cipher in scan_result.accepted_cipher_list:
                 print(C+'    {}'.format(cipher.name))
             print('')
+            data = "TLS 1.1 :> " + str(scan_result.accepted_cipher_list)
+            save_data(database, module, lvl1, lvl2, lvl3, name, data)
 
             command = Tlsv12ScanCommand()
             scan_result = scanner.run_scan_command(server_info, command)
@@ -66,6 +84,8 @@ def ssltlsscan(web):
             for cipher in scan_result.accepted_cipher_list:
                 print(C+'    {}'.format(cipher.name))
             print('')
+            data = "TLS 1.2 :> " + str(scan_result.accepted_cipher_list)
+            save_data(database, module, lvl1, lvl2, lvl3, name, data)
 
             command = CertificateInfoScanCommand()
             scan_result = scanner.run_scan_command(server_info, command)
@@ -79,6 +99,8 @@ def ssltlsscan(web):
                     else:
                         print(C+'\n  [+] ' +entry.strip())
             print('')
+            data = "Cert Info :> " + str(scan_result.as_text())
+            save_data(database, module, lvl1, lvl2, lvl3, name, data)
 
             command = HttpHeadersScanCommand()
             scan_result = scanner.run_scan_command(server_info, command)
@@ -92,6 +114,8 @@ def ssltlsscan(web):
                     else:
                         print(C+'\n  [+] ' +entry.strip())
             print('')
+            data = "HTTP :> " + str(scan_result.as_text())
+            save_data(database, module, lvl1, lvl2, lvl3, name, data)
 
         except Exception as e:
             print(R+' [-] Unhandled SSL Runtime Exception : '+str(e))

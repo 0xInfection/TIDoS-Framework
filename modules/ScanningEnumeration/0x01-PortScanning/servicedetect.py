@@ -22,6 +22,11 @@ from core.variables import processes
 from core.Core.colors import *
 from core.methods.print import summary
 
+from core.database.database_module import save_data
+from core.variables import database
+from core.methods.cache import targetname
+import inspect
+
 info = "This module tries to find out what services the target is running."
 searchinfo = "Service Detection"
 properties = {"INIT":["Start of port range to scan.", " "], "FIN":["End of the port range to scan.", " "], "VERBOSE":["Verbose Output? [1/0]", " "]}
@@ -219,12 +224,14 @@ def service0x00(host):
         print(P+'    +--------+----------+-----------+')
 
         if open_ports:
+            data = "Port:Service >>\n"
             for i in sorted(open_ports):
                 service = get_servicev(i)
                 if not service:
                     service = "Unknown"
                 m = str(service)
                 c = str(i)
+                data = data + "\n" + c + ":" + m
                 if len(c) == 1:
                     print(P+'    |   '+C+c+P+'    |   '+C+'OPEN   '+P+'|  '+C+m+'')
                     print(P+'    +--------+----------+-----------+')
@@ -245,6 +252,7 @@ def service0x00(host):
                     print(P+'    | '+C+c+'  '+P+'|   '+C+'OPEN   '+P+'|   '+C+m+'')
                     print(P+'    +--------+----------+-----------+')
                     time.sleep(0.2)
+            save_data(database, module, lvl1, lvl2, lvl3, name, data)
         else:
             print(R+"\n [-] No open ports found.!!\n")
         print(B+'\n [!] ' + str(len(closed_ports)) + ' closed ports not shown')
@@ -257,8 +265,16 @@ def service0x00(host):
 
 
 def servicedetect(web):
-
-    print(GR+' [*] Loading up scanner...')
+    global name
+    name = targetname(web)
+    global lvl2
+    lvl2 = "servicedetect"
+    global module
+    module = "ScanANDEnum"
+    global lvl1
+    lvl1 = "Port Scanning"
+    global lvl3
+    lvl3 = ""
     time.sleep(0.5)
     if 'http://' in web:
         web = web.replace('http://','')

@@ -25,6 +25,11 @@ from core.variables import processes
 from core.Core.colors import *
 from core.methods.print import summary
 
+from core.database.database_module import save_data
+from core.variables import database
+from core.methods.cache import targetname
+import inspect
+
 info = "XMAS Scanner."
 searchinfo = "XMAS Scanner"
 properties = {"INIT":["Start of port range to scan.", " "], "FIN":["End of the port range to scan.", " "], "VERBOSE":["Verbose Output? [1/0]", " "]}
@@ -191,6 +196,8 @@ def scan0x00(target):
                     print(P+'    | '+C+c+'  '+P+'|       '+C+'OPEN       '+P+'|')
                     print(P+'    +--------+------------------+')
                     time.sleep(0.2)
+            data = "Open Ports: " + str(openfil_ports)
+            save_data(database, module, lvl1, lvl2, lvl3, name, data)
 
         if filter_ports:
             for i in sorted(filter_ports):
@@ -216,6 +223,8 @@ def scan0x00(target):
                     print(P+'    +--------+------------------+')
                     time.sleep(0.2)
             print('')
+            data = "Filtered Ports: " + str(filter_ports)
+            save_data(database, module, lvl1, lvl2, lvl3, name, data)
 
         else:
             print(''+R+" [-] No open/filtered ports found.!!"+R+'')
@@ -229,7 +238,16 @@ def scan0x00(target):
         quit()
 
 def xmasscan(web):
-    print(GR+' [*] Loading scanner...')
+    global name
+    name = targetname(web)
+    global lvl2
+    lvl2 = "xmasscan"
+    global module
+    module = "ScanANDEnum"
+    global lvl1
+    lvl1 = "Port Scanning"
+    global lvl3
+    lvl3 = ""
     time.sleep(0.5)
     if 'http://' in web:
         web = web.replace('http://','')

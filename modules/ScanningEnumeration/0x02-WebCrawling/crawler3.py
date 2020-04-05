@@ -21,6 +21,11 @@ from collections import OrderedDict
 from urllib.parse import urljoin
 from core.Core.colors import *
 
+from core.database.database_module import save_data
+from core.variables import database
+from core.methods.cache import targetname
+import inspect
+
 global actual_uri
 actual_uri = []
 
@@ -80,26 +85,26 @@ def out(web, list0):
 
     web = web.replace('http://','')
     web = web.replace('https://','')
-    print(GR+' [*] Writing found URLs to a file...')
-    if os.path.exists('tmp/logs/'+web+'-logs/'+web+'-links.lst'):
-        fil = open('tmp/logs/'+web+'-logs/'+web+'-links.lst','w+')
-        print(C+' [!] Sorting only scope urls...')
-        time.sleep(1)
-        for lists in list0:
-            if str(web) in lists:
-                fil.write("%s\n" % lists)
-    else:
-        fil = open('tmp/logs/'+web+'-logs/'+web+'-links.lst','a')
-        print(C+' [!] Sorting only scope urls...')
-        time.sleep(1)
-        for lists in list0:
-            if str(web) in lists:
-                fil.write("%s\n" % lists)
+    print(GR+' [*] Writing found URLs to DB...')
+    print(C+' [!] Sorting only scope urls...')
+    time.sleep(1)
+    for lists in list0:
+        if str(web) in lists:
+            save_data(database, module, lvl1, lvl2, lvl3, name, str(lists))
+
 
 def crawler3(web):
-
+    global name
+    name = targetname(web)
+    global lvl2
+    lvl2 = "crawler3"
+    global module
+    module = "ScanANDEnum"
+    global lvl1
+    lvl1 = "Crawling"
+    global lvl3
+    lvl3 = ""
     try:
-        print(GR+' [*] Loading (Level 3) crawler...')
         time.sleep(0.5)
 
         #print(R+'\n    ==========================')

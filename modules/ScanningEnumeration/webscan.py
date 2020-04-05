@@ -18,12 +18,27 @@ from core.methods.tor import session
 import re
 import time
 from core.Core.colors import *
+from time import sleep
+from core.database.database_module import save_data
+from core.variables import database
+from core.methods.cache import targetname
+import inspect
 
 info = "This module scans the CENSYS database for IP addresses belonging to the target."
 searchinfo = "Webserver enumeration"
 properties = {}
 
 def webscan(web):
+    global name
+    name = targetname(web)
+    global lvl2
+    lvl2 = "webscan"
+    global module
+    module = "ScanANDEnum"
+    global lvl1
+    lvl1 = "Scanning & Enumeration"
+    global lvl3
+    lvl3 = ""
     requests = session()
     try:
         #print(R+'\n    ===========================================')
@@ -96,8 +111,12 @@ def view(server, ur, uid, sec, requests):
     try:
         if 'title' in payload['80']['http']['get'].keys():
             print(C+" [+] Title : "+GR+"%s" % payload['80']['http']['get']['title'])
+            data = "Title :> " + payload['80']['http']['get']['title']
+            save_data(database, module, lvl1, lvl2, lvl3, name, data)
         if 'server' in payload['80']['http']['get']['headers'].keys():
             print(C+" [+] Server : "+GR+"%s" % payload['80']['http']['get']['headers']['server'])
+            data = "Server :> " + payload['80']['http']['get']['headers']['server']
+            save_data(database, module, lvl1, lvl2, lvl3, name, data)
 
     except Exception as error:
         print(R+' [-] Exception : '+str(error))

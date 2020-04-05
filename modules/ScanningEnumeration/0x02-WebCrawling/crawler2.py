@@ -21,6 +21,11 @@ from bs4 import BeautifulSoup
 from core.Core.colors import *
 from core.variables import tor
 
+from core.database.database_module import save_data
+from core.variables import database
+from core.methods.cache import targetname
+import inspect
+
 br = mechanize.Browser()
 
 cj = http.cookiejar.LWPCookieJar()
@@ -49,10 +54,9 @@ properties = {}
 def out(web, totlist):
     web = web.replace('http://','')
     web = web.replace('https://','')
-    print(GR+'\n [*] Writing found URLs to a file...')
-    fil = open('tmp/logs/'+web+'-logs/'+web+'-spllinks.lst','w+')
+    print(GR+'\n [*] Writing found URLs to DB...')
     for lists in totlist:
-        fil.write("%s\n" % lists)
+        save_data(database, module, lvl1, lvl2, lvl3, name, str(lists))
     print()
 
 def parseurl(address):
@@ -121,8 +125,16 @@ def internal(web, toparse, incurl):
     return intlinks
 
 def crawler2(web):
-
-    print(GR+' [*] Loading Level 2 Crawler...')
+    global name
+    name = targetname(web)
+    global lvl2
+    lvl2 = "crawler2"
+    global module
+    module = "ScanANDEnum"
+    global lvl1
+    lvl1 = "Crawling"
+    global lvl3
+    lvl3 = ""
     time.sleep(0.6)
     totlinks = []
     #print(R+'\n    =========================')
@@ -148,14 +160,14 @@ def crawler2(web):
         pass
 
     print(R+'   EXTERNAL LINKS')
-    print(R+'  ================')
+    print(R+'  ––·‹›·––·‹›·––·‹')
     print(R+'   |')
 
     for lenk in extlinks:
         print(GR+'   + '+lenk)
 
     print(R+'\n   INTERNAL LINKS')
-    print(R+'  ================')
+    print(R+'  ––·‹›·––·‹›·––·‹')
     print(R+'   |')
 
     for lenk in intlinks:

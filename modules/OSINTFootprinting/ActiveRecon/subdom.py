@@ -62,7 +62,7 @@ def subdombrute(web):
     if flist:
         time.sleep(0.5)
         print(R+'\n      B R U T E F O R C E R')
-        print(R+'     =======================\n')
+        print(R+'     ––·‹›·––·‹›·––·‹––·‹›·–\n')
         print(GR+' [*] Bruteforcing for possible subdomains...')
         for url in flist:
             if 'http://' in url:
@@ -86,7 +86,7 @@ def outer(web):
     wew = []
     time.sleep(0.4)
     print(R+'\n    A P I   R E T R I E V E R  ')
-    print(R+'   ===========================')
+    print(R+'   ––·‹›·––·‹›·––·‹––·‹›·––·‹›')
 
     print(GR + color.BOLD + ' [!] Retriving subdomains...')
     time.sleep(0.4)
@@ -104,7 +104,7 @@ def outer(web):
 def report(web, found, final):
 
     print(R+'\n   R E P O R T')
-    print(R+'  =============\n')
+    print(R+'  ––·‹›·––·‹›·–\n')
     if ((len(found) > 0) or (len(final) > 0)):
         print(O+' [!] Subdomains found for'+C+color.TR3+C+G+web+C+color.TR2+C)
         print(C+'  |')

@@ -23,8 +23,17 @@ info = "This module tries to determine the target's OS using censys."
 searchinfo = "OS Identifier"
 properties = {}
 
-def getos0x00(web):
+from core.database.database_module import save_data
+from core.variables import database
+from core.methods.cache import targetname
+import inspect
 
+def getos0x00(web):
+    name = targetname(web)
+    lvl2 = "getcensys"
+    module = "ScanANDEnum"
+    lvl1 = "Scanning & Enumeration"
+    lvl3 = ""
     global flag
     flag = 0x00
     ip_addr = socket.gethostbyname(web)
@@ -43,11 +52,14 @@ def getos0x00(web):
         match = re.search(r'&#34;os_description&#34;: &#34;[^<]*&#34;', result)
         if match:
             flag = 0x01
-            print(B+' [+] Operating System Identified : ' + C+ match.group().split('n&#34;: &#34;')[1][:-5])
+            os = match.group().split('n&#34;: &#34;')[1][:-5]
+            print(B+' [+] Operating System Identified : ' + C+ os)
+            save_data(database, module, lvl1, lvl2, lvl3, name, os)
         else:
             print(R+' [-] No exact Operating System matches for '+O+web+C+'...')
+            os = ""
             flag = 0x00
-        return flag
+        return (flag, os)
     except Exception as e:
         print(R+' [-] Unhandled Exception : '+str(e))
 

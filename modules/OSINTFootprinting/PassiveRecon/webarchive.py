@@ -32,7 +32,7 @@ searchinfo = "Wayback Machine Lookup"
 properties = {"START":["Year from when results to be fetched", " "], "END":["Year till when results to be fetched", " "], "LIMIT":["No. of results", " "]}
 
 def getRes0x00(web, lvl2):
-    name = targetname(web)
+    #name = targetname(web)
     module = "ReconANDOSINT"
     lvl1 = "Passive Reconnaissance & OSINT"
     lvl3=''
@@ -98,7 +98,8 @@ def getRes0x00(web, lvl2):
             print(R+' [-] Exception : '+str(e))
 
 def webarchive(web):
-
+    global name
+    name = targetname(web)
     time.sleep(0.6)
     #print(R+'\n    =============================================')
     #print(R+'     W A Y B A C K   M A C H I N E   L O O K U P')

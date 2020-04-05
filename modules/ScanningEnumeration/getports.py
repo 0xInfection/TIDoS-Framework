@@ -26,6 +26,11 @@ info = "This module checks if common ports are open."
 searchinfo = "Port Scanner"
 properties = {}
 
+from core.database.database_module import save_data
+from core.variables import database
+from core.methods.cache import targetname
+import inspect
+
 
 def check_portv(host, port, result = 1):
     try:
@@ -138,6 +143,12 @@ def scan0x00(host):
                     print(P+'    | '+C+c+P+'  '+'|   '+C+'OPEN'+P+'   '+'| ')
                     print(P+'    +--------+----------+')
                     time.sleep(0.2)
+            data = "Open Ports: " + str(open_ports)
+            lvl2 = "getports"
+            module = "ScanANDEnum"
+            lvl1 = "Scanning & Enumeration"
+            lvl3 = ""
+            save_data(database, module, lvl1, lvl2, lvl3, name, data)
         else:
             print(R+"\n [-] No open ports found.!!\n")
         print(B+'\n [!] ' + str(len(closed_ports)) + ' closed ports not shown')
@@ -149,7 +160,8 @@ def scan0x00(host):
         quit()
 
 def getports(web):
-
+    global name
+    name = targetname(web)
     print(GR+' [*] Loading up scanner...')
     time.sleep(0.5)
     if 'http://' in web:
