@@ -737,6 +737,7 @@ def main():
                s.do_tor("off")
         else:
             s.automator(args.file)
+        print("Done.")
     elif opt["help"]:
         if not opt["quiet"]:
             prnt.banner()

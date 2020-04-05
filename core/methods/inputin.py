@@ -112,7 +112,7 @@ def inputip(target, net=False):
     if net:
         vars.targets.append(newTarget)
         print(O+" [+] Target added:"+C+color.TR3+C+G+target+C+color.TR2+C)
-    elif os.system("ping -c 1 " + target) is 0:
+    elif os.system("ping -c 1 -q -W 5 " + target + " > /dev/null") is 0:
         vars.targets.append(newTarget)
         print(O+" [+] Target added:"+C+color.TR3+C+G+target+C+color.TR2+C)
     else:
