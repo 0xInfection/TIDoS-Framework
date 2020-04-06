@@ -42,6 +42,7 @@ catlist = """
   infdisc
   osint-active
   osint-passive
+  post
   scan
   sploit
   vlnysis  
@@ -173,6 +174,8 @@ def list(arg,display,single=True):
     sploitdescs = []
     aidnames = []
     aiddescs = []
+    postnames = []
+    postdescs = []
 
     if arg == "all":
         dir = vars.modir
@@ -190,6 +193,8 @@ def list(arg,display,single=True):
         dir = vars.vlndir
     elif arg == "infdisc":
         dir = vars.infdir
+    elif arg == "post":
+        dir = vars.postdir
     else:
         print(catlist)
         return
@@ -247,6 +252,9 @@ def list(arg,display,single=True):
                 elif "VlnAnalysis.Misconfig" in module2:
                     misnames.append(module2.split(".")[-1])
                     misdescs.append(i)
+                elif "PostSploit" in module2:
+                    postnames.append(module2.split(".")[-1])
+                    postdescs.append(i)
 
         except ImportError:
             pass
@@ -289,13 +297,17 @@ def list(arg,display,single=True):
             prnt.psploit("Phase 4")
             cprint("Exploitation: ","Exploits")
             listdisplay(sploitnames, sploitdescs)
+        if len(postdescs) > 0:
+            prnt.ppost("Phase 5")
+            cprint("Post Exploitation: ","All")
+            listdisplay(postnames, postdescs)
         if len(aidnames) > 0:
             print("\nAdditional Modules")
             listdisplay(aidnames, aiddescs)
     if single:
         return names
     else:
-        return (passivenames, activenames, discnames, scannames, portnames, crawlnames, misnames, severenames, brutenames, sploitnames, aidnames)
+        return (passivenames, activenames, discnames, scannames, portnames, crawlnames, misnames, severenames, brutenames, sploitnames, aidnames, postnames)
 
 
 def search(inp):
@@ -325,6 +337,8 @@ def search(inp):
     sploitdescs = []
     aidnames = []
     aiddescs = []
+    postnames = []
+    postdescs = []
 
     def filematch(id, filenames):
         patt = '.*{}.*'.format(id)
@@ -418,6 +432,9 @@ def search(inp):
                     elif "VlnAnalysis.Misconfig" in parsedfile:
                         misnames.append(parsedfile.split(".")[-1])
                         misdescs.append(i)
+                    elif "PostSploit" in parsedfile:
+                        postnames.append(parsedfile.split(".")[-1])
+                        postdescs.append(i)
             except ImportError:
                 pass
 
@@ -458,6 +475,10 @@ def search(inp):
         prnt.psploit("Phase 4")
         cprint("Exploitation: ","Exploits")
         listdisplay(sploitnames, sploitdescs)
+    if len(postdescs) > 0:
+            prnt.ppost("Phase 5")
+            cprint("Post Exploitation: ","All")
+            listdisplay(postnames, postdescs)
     if len(aidnames) > 0:
         print("\nAdditional Modules")
         listdisplay(aidnames, aiddescs)

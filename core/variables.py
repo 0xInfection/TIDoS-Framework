@@ -27,6 +27,7 @@ global acdir
 global vlndir
 global scadir
 global infdir
+global postdir
 global phpsploit
 
 global ai
@@ -40,6 +41,7 @@ global sp
 global vam
 global vao
 global vas
+global po
 
 global dlist
 global interface
@@ -69,6 +71,7 @@ acdir = os.path.dirname(os.path.realpath(__file__)) + "/../modules/OSINTFootprin
 infdir = os.path.dirname(os.path.realpath(__file__)) + "/../modules/OSINTFootprinting/InfoDisclose/"
 vlndir = os.path.dirname(os.path.realpath(__file__)) + "/../modules/VlnAnalysis/"
 aidir = os.path.dirname(os.path.realpath(__file__)) + "/../modules/Aid/"
+postdir = os.path.dirname(os.path.realpath(__file__)) + "/../modules/PostSploit/"
 phpsploit = os.path.dirname(os.path.realpath(__file__)) + "/../../phpsploit/phpsploit"
 
 ai = "modules.Aid."
@@ -82,8 +85,9 @@ sp = "modules.SploitLoot."
 vam = "modules.VlnAnalysis.Misconfig."
 vao = "modules.VlnAnalysis.Other."
 vas = "modules.VlnAnalysis.Severe."
+po = "modules.PostSploit."
 
-dlist = [ai, op, oa, od, sc, sc1, sc2, sp, vam, vao, vas]
+dlist = [ai, op, oa, od, po, sc, sc1, sc2, sp, vam, vao, vas]
 
 CMD_CLEAR = "cls" if sys.platform.lower().startswith("win") else "clear"
 CMD_LS = "dir /b" if sys.platform.lower().startswith("win") else "\\ls"

@@ -510,6 +510,19 @@ def psploit(mod):
  `9MMP'  
 """.format(color.END, C, RC, title(mod), C))
 
+def ppost(mod):
+    print("""
+       /\\
+      /  \\
+     /    \\   {}P O S T{}
+    /      \\
+   /        \\   {}S P L O I T {}
+  /          \\
+ / /\\/\\  /\\/\\ \\   {}{}{}
+/ /    \\/    \\ \\
+\\/            \\/
+""".format(color.END, C, color.END, C, RC, title(mod), C))
+
 def pvln(mod):
     print("""
    (

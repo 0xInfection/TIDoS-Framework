@@ -91,6 +91,12 @@ class TIDapp(QtWidgets.QDialog):
         sploit.setText(0, "Phase 4: Exploitation")
         sploit.setFlags(sploit.flags() | Qt.ItemIsTristate | Qt.ItemIsUserCheckable)
         self.genTree(sploit, modules[9])
+
+        post = QTreeWidgetItem(self.treeView)
+        post.setText(0, "Phase 5: Post Exploitation")
+        post.setFlags(post.flags() | Qt.ItemIsTristate | Qt.ItemIsUserCheckable)
+        self.genTree(post, modules[11])
+
         aid = QTreeWidgetItem(self.treeView)
         aid.setText(0, "Additional Modules")
         aid.setFlags(aid.flags() | Qt.ItemIsTristate | Qt.ItemIsUserCheckable)
