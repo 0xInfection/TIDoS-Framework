@@ -23,6 +23,11 @@ from core.Core.colors import *
 from files.signaturedb.ldaperror_signatures import ldap_errors
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
+from core.database.database_module import save_data
+from core.variables import database
+from core.methods.cache import targetname
+import inspect
+
 wrn.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 info = "This module tests LDAP Injections using either the default payload database, or an user-provided dictionary."
@@ -74,8 +79,16 @@ def check0x00(web000, headers, pays):
     return success
 
 def ldap(web):
-
-    print(GR+' [*] Loading module...')
+    global name
+    name = targetname(web)
+    global lvl2
+    lvl2 = inspect.stack()[0][3]
+    global module
+    module = "VulnAnalysis"
+    global lvl1
+    lvl1 = "Critical Vulnerabilities"
+    global lvl3
+    lvl3 = ""
     time.sleep(0.5)
     #print(R+'\n     =============================')
     #print(R+'\n      L D A P   I N J E C T I O N')
@@ -160,10 +173,13 @@ def ldap(web):
                     i = y.get()
                     success += i
         if success:
+            data = "LDAPi Vulnerability found!\nVulnerable param: " + web00 + "\nPayloads: " + str(success)
+            save_data(database, module, lvl1, lvl2, lvl3, name, data)
             print(" [+] LDAPi Vulnerability found! Successful payloads:")
             for i in success:
                 print(i)
         else:
+            save_data(database, module, lvl1, lvl2, lvl3, name, "No payload succeeded.")
             print(R + "\n [-] No payload succeeded."+C)
 
     except KeyboardInterrupt:

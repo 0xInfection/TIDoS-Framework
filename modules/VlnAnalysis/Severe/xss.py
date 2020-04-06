@@ -23,6 +23,11 @@ from core.methods.multiproc import listsplit
 from core.variables import processes
 from core.methods.tor import session
 
+from core.database.database_module import save_data
+from core.variables import database
+from core.methods.cache import targetname
+import inspect
+
 global pay, poly
 poly = []
 pay = []
@@ -120,15 +125,21 @@ def auto0x00(web, parallel):
                         i = y.get()
                         success += i
             if success:
+                data = "XSS Vulnerability (Cookie) found! Payloads :> " + str(success)
+                save_data(database, module, lvl1, lvl2, lvl3, name, data)
                 print(" [+] XSS (Cookie) Vulnerability found! Successful payloads:")
                 for i in success:
                     print(i)
             else:
+                data = "(cookie) no payload succeeded."
+                save_data(database, module, lvl1, lvl2, lvl3, name, data)
                 print(R + "\n [-] No payload succeeded."+C)
         else:
             print(R+' [-] No support for cookies...')
             time.sleep(0.5)
             print(R+' [-] Cookie based injection not possible...')
+            data = "No support for cookies. Cookie based injection not possible."
+            save_data(database, module, lvl1, lvl2, lvl3, name, data)
 
     def xssuser0x00(web, parallel):
 
@@ -147,10 +158,14 @@ def auto0x00(web, parallel):
                     i = y.get()
                     success += i
         if success:
+            data = "XSS Vulnerability (useragent) found! Payloads :> " + str(success)
+            save_data(database, module, lvl1, lvl2, lvl3, name, data)
             print(" [+] XSS Vulnerability (UserAgent) found! Successful payloads:")
             for i in success:
                 print(i)
         else:
+            data = "(useragent) no payloads succeeded."
+            save_data(database, module, lvl1, lvl2, lvl3, name, data)
             print(R + "\n [-] No payload succeeded."+C)
 
     def xssref0x00(web, parallel):
@@ -170,10 +185,14 @@ def auto0x00(web, parallel):
                     i = y.get()
                     success += i
         if success:
+            data = "XSS Vulnerability (Referrer) found! Payloads :> " + str(success)
+            save_data(database, module, lvl1, lvl2, lvl3, name, data)
             print(" [+] XSS Vulnerability (Referrer) found! Successful payloads:")
             for i in success:
                 print(i)
         else:
+            data = "(referrer) no payload succeeded."
+            save_data(database, module, lvl1, lvl2, lvl3, name, data)
             print(R + "\n [-] No payload succeeded."+C)
 
     print(P+' [!] Enter an option :\n')
@@ -208,7 +227,7 @@ def polyatck(polys, li, bug2):
                 print(B+' [!] PoC : ' + str(bugged))
                 print(R+" [!] Payload : " + O + p + '\033[0m')
                 print("\033[1m [!] Code Snippet :\n \033[0m" + str(resp) + '\n')
-                success.append(p)
+                success.append(str(bugged))
             else:
                 print(R+' [-] No successful payload reflection...')
                 print(R+' [-] Payload '+O+p+R+' unsuccessful...')
@@ -235,10 +254,14 @@ def xsspoly0x00(li, bug2, parallel):
                     i = y.get()
                     success += i
         if success:
+            data = "XSS Vulnerability (Polyglot) found! POCs :> " + str(success)
+            save_data(database, module, lvl1, lvl2, lvl3, name, data)
             print(" [+] XSS Vulnerability (Polyglot) found! Successful payloads:")
             for i in success:
                 print(i)
         else:
+            data = "(polyglot) no payload succeeded."
+            save_data(database, module, lvl1, lvl2, lvl3, name, data)
             print(R + "\n [-] No payload succeeded."+C)
 
     except KeyboardInterrupt:
@@ -261,7 +284,7 @@ def manualatck(pays, bugs, bug2):
                 print(B+' [!] PoC : ' + str(bugged))
                 print(R+" [!] Payload : " + O + p + '\033[0m')
                 print("\033[1m [!] Code Snippet :\n \033[0m" + str(response) + '\n')
-                success.append(str(p))
+                success.append(str(bugged))
             else:
                 print(R+' [-] No successful payload reflection...')
                 print(R+' [-] Payload '+O+p+R+' unsuccessful...')
@@ -306,10 +329,14 @@ def manual0x00(web, parallel):
                     i = y.get()
                     success += i
         if success:
+            data = "XSS Vulnerability (manual) found! POCs :> " + str(success)
+            save_data(database, module, lvl1, lvl2, lvl3, name, data)
             print(" [+] XSS Vulnerability found! Successful payloads:")
             for i in success:
                 print(i)
         else:
+            data = "(manual) no payload succeeded."
+            save_data(database, module, lvl1, lvl2, lvl3, name, data)
             print(R + "\n [-] No payload succeeded."+C)
             x = input(O+' [§] Test Polyglots? (Y/n) :> ')
             if x == 'Y' or x == 'y':
@@ -325,9 +352,18 @@ def manual0x00(web, parallel):
         manual0x00(web, parallel)
 
 def xss(web):
+    global name
+    name = targetname(web)
+    global lvl2
+    lvl2 = inspect.stack()[0][3]
+    global module
+    module = "VulnAnalysis"
+    global lvl1
+    lvl1 = "Critical Vulnerabilities"
+    global lvl3
+    lvl3 = ""
     first = True
     while True:
-        print(GR+' [*] Loading module XSS...')
         sleep(0.6)
         if web.endswith('/'):
             web = web[:-1]

@@ -22,6 +22,11 @@ from core.Core.colors import *
 from core.variables import processes
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
+from core.database.database_module import save_data
+from core.variables import database
+from core.methods.cache import targetname
+import inspect
+
 payloads = []
 
 info = "This module looks for HTML injection possibilities using the default database or a custom, user-provided file."
@@ -100,8 +105,16 @@ def checkpre(payloads, web00, bug2, gen_headers):
     return success
 
 def htmli(web):
-
-    print(GR+' [*] Loading module...')
+    global name
+    name = targetname(web)
+    global lvl2
+    lvl2 = inspect.stack()[0][3]
+    global module
+    module = "VulnAnalysis"
+    global lvl1
+    lvl1 = "Critical Vulnerabilities"
+    global lvl3
+    lvl3 = ""
     time.sleep(0.5)
     #print(R+'\n    =============================')
     #print(R+'\n     H T M L   I N J E C T I O N')
@@ -166,10 +179,13 @@ def htmli(web):
                     success += i
         if success:
             print(" [+] HTMLi Vulnerability found! Successful payloads:")
+            data = "HTMLi Vulnerability found!\nVulnerable param: " + web00 + "\nPayloads: " + str(success)
+            save_data(database, module, lvl1, lvl2, lvl3, name, data)
             for i in success:
                 print(i)
         else:
             print(R + "\n [-] No payload succeeded."+C)
+            save_data(database, module, lvl1, lvl2, lvl3, name, "No payloads succeeded.")
 
     except Exception as e:
         print(R+' [-] Unexpected Exception Encountered!')

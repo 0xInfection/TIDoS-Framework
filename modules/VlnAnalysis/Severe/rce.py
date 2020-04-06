@@ -19,6 +19,11 @@ from core.methods.multiproc import listsplit
 from core.variables import processes
 from core.Core.colors import *
 from core.methods.tor import session
+
+from core.database.database_module import save_data
+from core.variables import database
+from core.methods.cache import targetname
+import inspect
 payloads = []
 
 info = "This module probes the target for Command Injection vulnerabilities using TIDoS's built-in payload dictionary."
@@ -77,7 +82,7 @@ def check0x00(url, pays, check):
                 print(C+" [+] Payload: ", payload)
                 print(R+" [+] Example PoC: " + bugs)
                 #vuln = vuln + 1
-                success.append(payload)
+                success.append(bugs)
             else:
                 print(R+' [-] No command injection flaw detected!')
                 print(O+' [-] Payload '+R+payload+O+' not working!')
@@ -127,14 +132,26 @@ def getPayloads(url, parallel):
                 i = y.get()
                 success += i
     if success:
+        data = "CRLF Injection Vulnerability found! POCs: " + str(success)
+        save_data(database, module, lvl1, lvl2, lvl3, name, data)
         print(" [+] CMDi Vulnerability found! Successful payloads:")
         for i in success:
             print(i)
     else:
+        save_data(database, module, lvl1, lvl2, lvl3, name, "No payload succeeded.")
         print(R + "\n [-] No payload succeeded."+C)
 
 def rce(web):
-
+    global name
+    name = targetname(web)
+    global lvl2
+    lvl2 = inspect.stack()[0][3]
+    global module
+    module = "VulnAnalysis"
+    global lvl1
+    lvl1 = "Critical Vulnerabilities"
+    global lvl3
+    lvl3 = ""
     #print(R+'\n    =========================================')
     #print(R+'\n     O S   C O M M A N D   I N J E C T I O N ')
     #print(R+'    ——·‹›·––·‹›·——·‹›·——·‹›·––·‹›·——·‹›·——·‹›\n')

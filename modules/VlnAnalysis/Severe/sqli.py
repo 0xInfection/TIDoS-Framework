@@ -12,6 +12,10 @@
 
 import sys
 import time
+from core.database.database_module import save_data
+from core.variables import database
+from core.methods.cache import targetname
+import inspect
 from modules.VlnAnalysis.Severe.errorsqli import errorsqli
 from modules.VlnAnalysis.Severe.blindsqli import blindsqli
 from core.Core.colors import *
@@ -21,8 +25,16 @@ searchinfo = "SQL Injection Scanner"
 properties = {"PARAM":["Directory and Parameter to attack (eg /vuln/page.php?q=lmao)", " "], "PARALLEL":["Parallelise Attack? [1/0]", " "]}
 
 def sqli(web):
-
-    print(GR+'\n [*] Loading module...')
+    global name
+    name = targetname(web)
+    global lvl2
+    lvl2 = inspect.stack()[0][3]
+    global module
+    module = "VulnAnalysis"
+    global lvl1
+    lvl1 = "Critical Vulnerabilities"
+    global lvl3
+    lvl3 = ""
     time.sleep(0.7)
     #print(R+'\n    ===========================')
     #print(R+'\n     S Q L   ! N J E C T I O N')

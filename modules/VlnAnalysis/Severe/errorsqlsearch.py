@@ -26,6 +26,11 @@ from core.methods.tor import session
 from core.variables import tor
 from time import sleep
 
+from core.database.database_module import save_data
+from core.variables import database
+from core.methods.cache import targetname
+import inspect
+
 br = mechanize.Browser()
 
 cj = http.cookiejar.LWPCookieJar()
@@ -57,6 +62,16 @@ searchinfo = ""
 properties = {}
 
 def errorsqlsearch(web):
+    global name
+    name = targetname(web)
+    global lvl2
+    lvl2 = "sqli"
+    global module
+    module = "VulnAnalysis"
+    global lvl1
+    lvl1 = "Critical Vulnerabilities"
+    global lvl3
+    lvl3 = "errorsqli"
     os.system('clear')
     #print(R+'\n    ======================================')
     print(R+'\n     S Q L i   H U N T E R (Auto Awesome)')
@@ -81,7 +96,9 @@ def errorsqlsearch(web):
             path_list.append(o.base_url+'/'+o.url)
         print(path_list)
     requests = session()
+    success = []
     for bugs in path_list:
+        spays = []
         ctr = 0
         print(B+' [*] Testing '+C+str(bugs))
         if '?' in str(bugs) and '=' in str(bugs):
@@ -95,13 +112,20 @@ def errorsqlsearch(web):
                     print('\n'+G+' [+] Vulnerable link detected: ' + web)
                     print(R+' [*] Injecting Error SQLi payloads...')
                     print(B+' [!] PoC : ' + str(bugs))
+                    spays.append(str(bugs))
                     print(R+" [!] Payload : " + O + p + '\033[0m')
                     #print("\033[1m [!] Code Snippet : \n\033[0m" + response.content + '\n')
                     ctr+= 1
                     break
+            success += spays
         else:
             print(GR+' [-] Link without parameter : '+B+'' + str(bugs))
             time.sleep(0.2)
+    if success:
+        data = "SQLi Vulnerability (auto) found! PoCs: " + str(success)
+    else:
+        data = "(auto) no payload succeeded."
+    save_data(database, module, lvl1, lvl2, lvl3, name, data)
 
 def attack(web):
     web = web.fullurl

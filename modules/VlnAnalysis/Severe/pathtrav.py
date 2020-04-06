@@ -16,6 +16,10 @@ import sys
 import urllib
 import requests as wrn
 import time
+from core.database.database_module import save_data
+from core.variables import database
+from core.methods.cache import targetname
+import inspect
 from core.methods.print import summary
 from multiprocessing import Pool, TimeoutError
 from core.methods.multiproc import listsplit, file2list
@@ -251,6 +255,11 @@ def check0x00(website0, gen_headers, parallel):
         printOut0x00("Configuration", cnfy)
     if len(generic) > 0:
         printOut0x00("Diverse",generic)
+    if gotcha:
+        data = "Paths leaked!\n" + str(gotcha)
+        save_data(database, module, lvl1, lvl2, lvl3, name, data)
+    else:
+        save_data(database, module, lvl1, lvl2, lvl3, name, "No vulnerable paths found.")
 
 
 def printOut0x00(pathlist,stack):
@@ -276,9 +285,17 @@ def getFile0x00(filename):
         filename = input(C+' [*] File containing paths :> ')
 
 def pathtrav(web):
-
+    global name
+    name = targetname(web)
+    global lvl2
+    lvl2 = inspect.stack()[0][3]
+    global module
+    module = "VulnAnalysis"
+    global lvl1
+    lvl1 = "Critical Vulnerabilities"
+    global lvl3
+    lvl3 = ""
     #global gotcha
-    print(GR+'\n  ·› Loading module...')
     time.sleep(0.5)
     #print(R+'\n     ================================================')
     #print(R+'\n      P A T H   T R A V E R S A L  (Sensitive Paths)')

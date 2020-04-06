@@ -28,6 +28,11 @@ from modules.VlnAnalysis.Severe.Form import *
 from modules.VlnAnalysis.Severe.uri import *
 from core.Core.colors import *
 
+from core.database.database_module import save_data
+from core.variables import database
+from core.methods.cache import targetname
+import inspect
+
 ssl.match_hostname = lambda cert, hostname: True
 
 info = "This module tests for Cross Site Request Forgery flaws."
@@ -127,7 +132,7 @@ def check0x00(web):
 
     global url
     try:
-
+        vln = []
         while crawler.noinit():
             url = crawler.next()
             print(C+' [+] Crawling :> ' +B+ url)
@@ -152,6 +157,7 @@ def check0x00(web):
                             if(len(csrf)>0):
                                 if not re.search(csrf, r2):
                                     print(G+ '[+] Looks like we got a CSRF vulnerability on '+O+url+G+'!\n')
+                                    vln.append(url)
                                     try:
                                         if m['name']:
                                             print(R+'\n  =====')
@@ -232,15 +238,27 @@ def check0x00(web):
                 print(R+' [-] Exception at %s' % url)
                 print(R+' [-] Error : '+str(e))
                 continue
-
+        if vln:
+            data = "Vulnerable Forms found! :> " + str(vln)
+            save_data(database, module, lvl1, lvl2, lvl3, name, data)
+        else:
+            save_data(database, module, lvl1, lvl2, lvl3, name, "No vulnerable forms found.")
     except KeyboardInterrupt:
         print(R+"\n [-] Interrupted by user")
 
 def csrf(web):
-
+    global name
+    name = targetname(web)
+    global lvl2
+    lvl2 = inspect.stack()[0][3]
+    global module
+    module = "VulnAnalysis"
+    global lvl1
+    lvl1 = "Critical Vulnerabilities"
+    global lvl3
+    lvl3 = ""
     try:
         time.sleep(0.5)
-        print(GR+' [*] Loading up module...')
         time.sleep(0.5)
         check0x00(web)
         print(G+" [+] Scan completed!")

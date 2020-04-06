@@ -24,6 +24,11 @@ from core.variables import processes
 from core.methods.tor import session
 from core.methods.multiproc import listsplit
 
+from core.database.database_module import save_data
+from core.variables import database
+from core.methods.cache import targetname
+import inspect
+
 wrn.packages.urllib3.disable_warnings(InsecureRequestWarning)
 payloads = []
 
@@ -108,8 +113,16 @@ def checkpre(payloads, web00, bug2, gen_headers):
     return success
 
 def phpi(web):
-
-    print(GR+' [*] Loading module...')
+    global name
+    name = targetname(web)
+    global lvl2
+    lvl2 = inspect.stack()[0][3]
+    global module
+    module = "VulnAnalysis"
+    global lvl1
+    lvl1 = "Critical Vulnerabilities"
+    global lvl3
+    lvl3 = ""
     time.sleep(0.5)
     #print(R+'\n    =====================================')
     #print(R+'\n     P H P   C O D E   I N J E C T I O N')
@@ -173,11 +186,14 @@ def phpi(web):
                     i = y.get()
                     success += i
         if success:
+            data = "CRLF Injection Vulnerability found!\nVulnerable param: " + web00 + "\nPayloads: " + str(success)
+            save_data(database, module, lvl1, lvl2, lvl3, name, data)
             print(" [+] PHPi Vulnerability found! Successful payloads:")
             for i in success:
                 print(i)
         else:
             print(R + "\n [-] No payload succeeded."+C)
+            save_data(database, module, lvl1, lvl2, lvl3, name, "No payload succeeded.")
     except Exception as e: # if error
         print(R+' [-] Unexpected Exception Encountered!')
         print(R+' [-] Exception : '+str(e))

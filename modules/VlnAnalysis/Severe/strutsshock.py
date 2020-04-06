@@ -18,6 +18,10 @@ import time
 import string
 from core.Core.colors import *
 from core.methods.tor import session
+from core.database.database_module import save_data
+from core.variables import database
+from core.methods.cache import targetname
+import inspect
 
 info = "This module detects the Apache Struts Shock vulnerability. (CVE-2017-5638)"
 searchinfo = "Struts Shock Detector"
@@ -53,12 +57,22 @@ def strutsshock0x00(web):
 	resp = requests.get(web, headers=headers, verify=False)
 	if re.search(r'*?:/bin/bash',resp.content,re.I) or ('root:x' in resp.content and 'daemon:x:' in resp.content):
 		print(G+' [+] Website Vulnerable to Apache Struts-Shock (CVE-2017-5638) ! ')
+		save_data(database, module, lvl1, lvl2, lvl3, name, "Website Vulnerable to Apache Struts-Shock (CVE-2017-5638)!")
 	else:
-		print(R+' [-] The web seems immune to Apache Struts-Shock...')
+		print(R+' [-] The website seems immune to Apache Struts-Shock...')
+		save_data(database, module, lvl1, lvl2, lvl3, name, "The website seems immune to Apache Struts-Shock.")
 
 def strutsshock(web):
-
-	print(GR+'\n [*] Loading module...')
+	global name
+	name = targetname(web)
+	global lvl2
+	lvl2 = inspect.stack()[0][3]
+	global module
+	module = "VulnAnalysis"
+	global lvl1
+	lvl1 = "Critical Vulnerabilities"
+	global lvl3
+	lvl3 = ""
 	time.sleep(0.5)
 	#print(R+'\n    =======================================')
 	#print(R+'\n     A P A C H E   S T R U T S   S H O C K ')

@@ -27,6 +27,11 @@ from core.variables import processes
 from core.Core.colors import *
 from core.methods.tor import session
 
+from core.database.database_module import save_data
+from core.variables import database
+from core.methods.cache import targetname
+import inspect
+
 info = "This module scans the target site for Remote File Inclusion vulnerabilities by either a specific attack, or by brute force."
 searchinfo = "Remote File Inclusion Scanner"
 properties = {"PARAM":["Directory and Parameter to attack (eg /vuln/page.php?q=lmao)", " "], "PARALLEL":["Parallelise Attack? [1/0]", " "], "DICT":["Path to dictionary to be used in normal attacks (default: files/fuzz-db/rfi_paths.lst)", " "]}
@@ -101,6 +106,8 @@ def test(web0, web):
             pom = str(oom)
             if ((payload_1 in pom) and (payload_2 in pom) and (payload_3 in pom)):
                 print(G+' [+] Remote File Inclusion at '+O+web00+G+' is confirmed!')
+                data = "Confirmed RFI Vulnerability @ " + web00 + "!"
+                save_data(database, module, lvl1, lvl2, lvl3, name, data)
 
         elif 'Warning'.lower() in pm.lower():
 
@@ -133,6 +140,8 @@ def test(web0, web):
                     pom = str(oom)
                     if ((payload_1 in pom) and (payload_2 in pom) and (payload_3 in pom)):
                         print(G+' [+] Remote File Inclusion at '+O+web00+G+' is confirmed!')
+                        data = "Confirmed RFI Vulnerability @ " + web00 + "!"
+                        save_data(database, module, lvl1, lvl2, lvl3, name, data)
         else:
             if (('=' in str(web0)) and ('?' in str(web0))):
                 if 'http' in str(web0):
@@ -163,8 +172,11 @@ def test(web0, web):
                     pom = str(oom)
                     if ((payload_1 in pom) and (payload_2 in pom) and (payload_3 in pom)):
                         print(G+' [+] Remote File Inclusion at '+O+web00+G+' is confirmed!')
+                        data = "Confirmed RFI Vulnerability @ " + web00 + "!"
+                        save_data(database, module, lvl1, lvl2, lvl3, name, data)
                 else:
-
+                    data = "(custom) no vulnerability found."
+                    save_data(database, module, lvl1, lvl2, lvl3, name, data)
                     print(R+' [-] This RFI module could not find out any RFI.')
                     print(O+' [-] This module is extreme basic (more improvements on the way).')
     else:
@@ -188,7 +200,7 @@ def checkbrute(payloads, web):
             c = str(req.status_code)
             if c == '200' and payload_1 in req.text and payload_2 in req.text and payload_3 in req.text:
                 print(G+' [+] Possible RFi at : '+O+web0x00+G+' (200)')
-                success.append(pay)
+                success.append(web0x00)
             elif c == '404':
                 print(B+' [*] Checking dir : '+C+web0x00+R+' (404)')
             elif c == '302':
@@ -236,11 +248,14 @@ def brute0x00(web, parallel):
                         i = y.get()
                         success += i
             if success:
+                data = "Possible RFI at: " + str(success)
+                save_data(database, module, lvl1, lvl2, lvl3, name, data)
                 print(" [+] Remote File Inclusion found! Successful payloads:")
                 for i in success:
                     print(i)
             else:
                 print(R + "\n [-] No payload succeeded."+C)
+                save_data(database, module, lvl1, lvl2, lvl3, name, "(brute) no payload succeeded.")
 
     except Exception as e:
         print(R+' [-] Unexpected Exception Encountered!')
@@ -290,7 +305,16 @@ def auto0x00(web, parallel):
         print(R+' [-] No network connectivity!')
 
 def rfi(web):
-
+    global name
+    name = targetname(web)
+    global lvl2
+    lvl2 = inspect.stack()[0][3]
+    global module
+    module = "VulnAnalysis"
+    global lvl1
+    lvl1 = "Critical Vulnerabilities"
+    global lvl3
+    lvl3 = ""
     #print(R+'\n   ===========================================')
     #print(R+'\n    R E M O T E   F I L E   I N C L U S I O N')
     #print(R+'   ——·‹›·––·‹›·——·‹›·——·‹›·––·‹›·——·‹›·——·‹›·–\n')

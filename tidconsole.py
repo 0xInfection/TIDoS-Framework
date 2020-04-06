@@ -348,6 +348,7 @@ class TIDcon(Cmd):
     infdisc       information disclosure modules
     osint-active  modules for active reconnaissance
     osint-passive modules for passive reconnaissance
+    post          post exploitation modules
     scan          modules for scanning and enumeration
     sploit        exploits (in progress)
     vlnysis       modules useful for vulnerability analysis

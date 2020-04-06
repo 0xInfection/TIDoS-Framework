@@ -27,6 +27,11 @@ from core.variables import processes
 from urllib.request import Request, urlopen
 from modules.VlnAnalysis.Severe.blindsqlsearch import blindsqlsearch
 
+from core.database.database_module import save_data
+from core.variables import database
+from core.methods.cache import targetname
+import inspect
+
 global pay
 pay = []
 
@@ -104,15 +109,20 @@ def auto0x00(web, parallel):
                         j = i.get()
                         success += j
             if success:
+                data = "SQLi Vulnerability (Cookie) found!\nSuccessful payloads: " + str(success)
+                save_data(database, module, lvl1, lvl2, lvl3, name, data)
                 print(" [+] SQLi Vulnerability (Cookie) found! Successful payloads:")
                 for i in success:
                     print(i)
             else:
                 print(R + "\n [-] No payload succeeded."+C)
+                save_data(database, module, lvl1, lvl2, lvl3, name, "(cookie) no payload succeeded.")
         else:
             print(R+' [-] No support for cookies...')
             time.sleep(0.5)
             print(R+' [-] Cookie based injection not possible...')
+            data = "No support for cookies. Cookie based injection not possible."
+            save_data(database, module, lvl1, lvl2, lvl3, name, data)
 
     def sqliuser0x00(web, parallel):
 
@@ -143,11 +153,14 @@ def auto0x00(web, parallel):
                     j = i.get()
                     success += j
         if success:
-            print(" [+] SQLi Vulnerability (Cookie) found! Successful payloads:")
+            data = "SQLi Vulnerability (useragent) found!\nSuccessful payloads: " + str(success)
+            save_data(database, module, lvl1, lvl2, lvl3, name, data)
+            print(" [+] SQLi Vulnerability (useragent) found! Successful payloads:")
             for i in success:
                 print(i)
         else:
             print(R + "\n [-] No payload succeeded."+C)
+            save_data(database, module, lvl1, lvl2, lvl3, name, "(useragent) no payload succeeded.")
 
     print(P+' [!] Enter an option :\n')
     print(B+'   [1] '+C+'Cookie Based Blind Injection')
@@ -238,19 +251,31 @@ def manual0x00(web, parallel, properties):
                     j = i.get()
                     success += j
         if success:
+            data = "SQLi Vulnerability found!\nVulnerable Link: "+bugs+"\nSuccessful payloads: " + str(success)
+            save_data(database, module, lvl1, lvl2, lvl3, name, data)
             print(" [+] SQLi Vulnerability found! Successful payloads:")
             for i in success:
                 print(i)
         else:
+            save_data(database, module, lvl1, lvl2, lvl3, name, "(manual) no payload succeeded.")
             print(R + "\n [-] No payload succeeded."+C)
     else:
         print(R+' [-] Enter an URL with scope parameter...')
         manual0x00(web, parallel, properties)
 
 def blindsqli(web, properties):
+    global name
+    name = targetname(web)
+    global lvl2
+    lvl2 = "sqli"
+    global module
+    module = "VulnAnalysis"
+    global lvl1
+    lvl1 = "Critical Vulnerabilities"
+    global lvl3
+    lvl3 = "blindsqli"
     begin = True
     while True:
-        print(GR+' [*] Loading module SQLi...')
         sleep(0.6)
         if web.endswith('/'):
             web = web[:-1]

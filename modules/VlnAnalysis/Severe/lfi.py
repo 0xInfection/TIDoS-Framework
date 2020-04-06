@@ -26,6 +26,11 @@ from random import choice
 from string import ascii_uppercase, ascii_lowercase
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
+from core.database.database_module import save_data
+from core.variables import database
+from core.methods.cache import targetname
+import inspect
+
 wrn.packages.urllib3.disable_warnings(InsecureRequestWarning)
 payloads = []
 ev = [""]
@@ -223,7 +228,8 @@ def atck(evasion, filepath, payloads, web00, bug2, parallel, gen_headers):
                 fud += paths[4]
                 cnfy += paths[5]
     if gotcha:
-
+        data = "Paths leaked!\n" + str(gotcha)
+        save_data(database, module, lvl1, lvl2, lvl3, name, data)
         print(G+"\n [+] Retrieved %s interesting paths...\n" % str(len(gotcha)))
         time.sleep(0.5)
 
@@ -235,10 +241,19 @@ def atck(evasion, filepath, payloads, web00, bug2, parallel, gen_headers):
 
     else:
         print(R+' [-] No vulnerable paths found!')
+        save_data(database, module, lvl1, lvl2, lvl3, name, "No vulnerable paths found.")
 
 def lfi(web):
-
-    print(GR+' [*] Loading module...')
+    global name
+    name = targetname(web)
+    global lvl2
+    lvl2 = inspect.stack()[0][3]
+    global module
+    module = "VulnAnalysis"
+    global lvl1
+    lvl1 = "Critical Vulnerabilities"
+    global lvl3
+    lvl3 = ""
     ev[0] = ""
     payloads.clear()
     time.sleep(0.5)

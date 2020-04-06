@@ -24,6 +24,11 @@ from modules.VlnAnalysis.Severe.signatures import services
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 wrn.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
+from core.database.database_module import save_data
+from core.variables import database
+from core.methods.cache import targetname
+import inspect
+
 info = "This module searches for possibilities of subdomain takeovers, either for a single subdomain, or for all of them."
 searchinfo = "Subdomain Takeover Module"
 properties = {"SUBDOM":["Subdomain to attack in single mode", " "]}
@@ -73,7 +78,16 @@ def check0x00(status,content):
     return None, None
 
 def subdomover(web):
-
+    global name
+    name = targetname(web)
+    global lvl2
+    lvl2 = inspect.stack()[0][3]
+    global module
+    module = "VulnAnalysis"
+    global lvl1
+    lvl1 = "Critical Vulnerabilities"
+    global lvl3
+    lvl3 = ""
     #print(R+'\n    =====================================')
     #print(R+'\n     S U B D O M A I N   T A K E O V E R ')
     #print(R+'    ——·‹›·––·‹›·——·‹›·——·‹›·——·‹›·——·‹›·–\n')
@@ -110,9 +124,13 @@ def subdomover(web):
             time.sleep(0.5)
             print(G+' [+] Potential subdomain takeover was found!')
             print(G+' [+] Service Identified : '+O+str(service))
+            data = "Potential subdomain takeover @ " + su + "\nService: " + str(service)
+            save_data(database, module, lvl1, lvl2, lvl3, name, data)
         else:
             time.sleep(0.5)
             print(R+' [-] No subdomain takeover possible for '+O+su)
+            data = "No takeover possible for " + su
+            save_data(database, module, lvl1, lvl2, lvl3, name, data)
 
     elif v.strip() == '2':
 
@@ -160,9 +178,13 @@ def subdomover(web):
                     time.sleep(0.5)
                     print(G+' [+] Potential subdomain takeover was found!')
                     print(G+' [+] Service Identified : '+O+str(service))
+                    data = "Potential subdomain takeover @ " + sub_domain + "\nService: " + str(service)
+                    save_data(database, module, lvl1, lvl2, lvl3, name, data)
                 else:
                     time.sleep(0.5)
                     print(R+' [-] No subdomain takeover possible for '+O+sub_domain)
+                    data = "No takeover possible for " + sub_domain
+                    save_data(database, module, lvl1, lvl2, lvl3, name, data)
 
     else:
         print(W+' [-] U high dude?')

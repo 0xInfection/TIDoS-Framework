@@ -25,6 +25,11 @@ from random import choice
 from core.methods.tor import session
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
+from core.database.database_module import save_data
+from core.variables import database
+from core.methods.cache import targetname
+import inspect
+
 wrn.packages.urllib3.disable_warnings(InsecureRequestWarning)
 payloads = []
 
@@ -52,7 +57,7 @@ def check0x00(web0x00, pay, gen_headers):
                 print(O+' [+] Response : \033[0m\n')
                 print(c)
                 found = True
-                success.append(pay)
+                success.append(web0x00)
         if not found:
             print(R+' [-] Payload '+O+pay+R+' unsuccessful...')
             print(R+' [-] No successful code injection at : '+O+web0x00)
@@ -102,8 +107,16 @@ def checkpre(payloads, web00, bug2, gen_headers):
     return success
 
 def xpathi(web):
-
-    print(GR+' [*] Loading module...')
+    global name
+    name = targetname(web)
+    global lvl2
+    lvl2 = inspect.stack()[0][3]
+    global module
+    module = "VulnAnalysis"
+    global lvl1
+    lvl1 = "Critical Vulnerabilities"
+    global lvl3
+    lvl3 = ""
     time.sleep(0.5)
     #print(R+'\n    ===============================')
     #print(R+'\n     X P A T H   I N J E C T I O N')
@@ -168,11 +181,15 @@ def xpathi(web):
                     i = y.get()
                     success += i
         if success:
+            data = "XPATHi Vulnerability found! POCs :> " + str(success)
+            save_data(database, module, lvl1, lvl2, lvl3, name, data)
             print(" [+] XPATHi Vulnerability found! Successful payloads:")
             for i in success:
                 print(i)
         else:
             print(R + "\n [-] No payload succeeded."+C)
+            data = "No payload succeeded."
+            save_data(database, module, lvl1, lvl2, lvl3, name, data)
 
     except Exception as e:
         print(R+' [-] Unexpected Exception Encountered!')

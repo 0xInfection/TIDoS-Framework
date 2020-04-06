@@ -18,6 +18,11 @@ import re
 from core.Core.colors import *
 from core.methods.tor import session
 
+from core.database.database_module import save_data
+from core.variables import database
+from core.methods.cache import targetname
+import inspect
+
 info = "This module tests the target for the shellshock vulnerability."
 searchinfo = "Shellshock Tester"
 properties = {}
@@ -50,16 +55,28 @@ def shellshock0x00(web):
         if resp.status_code == 200:
             if re.search(r_str,resp.content,re.I):
                 print(G+' [+] ShellShock was found in: {}'.format(resp.url))
+                data = 'ShellShock was found in: {}'.format(resp.url)
+                save_data(database, module, lvl1, lvl2, lvl3, name, data)
 
         elif r.status_code:
             print(R+' [-] 2nd phase of detection does not reveal vulnerability...')
             print(O+' [!] Please check manually...')
+            save_data(database, module, lvl1, lvl2, lvl3, name, "2nd phase of detection does not reveal vulnerability. Please check manually.")
     else:
-        print(R+' [-] The web seems immune to shellshock...')
+        print(R+' [-] The website seems immune to shellshock...')
+        save_data(database, module, lvl1, lvl2, lvl3, name, "Not vulnerable.")
 
 def shellshock(web):
-
-    print(GR+'\n [*] Loading module...')
+    global name
+    name = targetname(web)
+    global lvl2
+    lvl2 = inspect.stack()[0][3]
+    global module
+    module = "VulnAnalysis"
+    global lvl1
+    lvl1 = "Critical Vulnerabilities"
+    global lvl3
+    lvl3 = ""
     time.sleep(0.5)
     #print(R+'\n    =====================')
     #print(R+'\n     S H E L L S H O C K ')

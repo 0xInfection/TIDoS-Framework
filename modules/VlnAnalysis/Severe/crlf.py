@@ -24,6 +24,11 @@ from core.Core.colors import *
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 wrn.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
+from core.database.database_module import save_data
+from core.variables import database
+from core.methods.cache import targetname
+import inspect
+
 payloads = []
 
 info = "CRLF Injection module."
@@ -122,8 +127,16 @@ def checkpre(payloads, web00, gen_headers):
     return success
 
 def crlf(web):
-
-    print(GR+' [*] Loading module...')
+    global name
+    name = targetname(web)
+    global lvl2
+    lvl2 = inspect.stack()[0][3]
+    global module
+    module = "VulnAnalysis"
+    global lvl1
+    lvl1 = "Critical Vulnerabilities"
+    global lvl3
+    lvl3 = ""
     time.sleep(0.5)
     #print(R+'\n    =============================')
     #print(R+'\n     C R L F   I N J E C T I O N')
@@ -188,11 +201,14 @@ def crlf(web):
                     i = y.get()
                     success += i
         if success:
+            data = "CRLF Injection Vulnerability found!\nVulnerable param: " + web00 + "\nPayloads: " + str(success)
+            save_data(database, module, lvl1, lvl2, lvl3, name, data)
             print(" [+] CRLF Injection Vulnerability found! Successful payloads:")
             for i in success:
                 print(i)
         else:
             print(R + "\n [-] No payload succeeded."+C)
+            save_data(database, module, lvl1, lvl2, lvl3, name, "No payload succeeded.")
     except Exception as e:
         print(R+' [-] Unexpected Exception Encountered!')
         print(R+' [-] Exception : '+str(e))
