@@ -16,12 +16,18 @@ import socket
 import time
 from core.Core.colors import *
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
+from core.database.database_module import save_data
+from core.variables import database
+from core.methods.cache import targetname
+import inspect
 
 wrn.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 info = "Find out if the target site is harmful or not."
 searchinfo = "Threat Intelligence Module"
 properties = {}
+
+flaglist = []
 
 def usom(web,ip):
     requests = session()
@@ -35,6 +41,7 @@ def usom(web,ip):
         for i in str(resp).splitlines():
             if ip in i:
                 flag = True
+                flaglist.append("usom")
         if flag == True:
             print(R+' [+] '+O+web+G+' is harmful and has been reported on Usom...')
         else:
@@ -66,6 +73,7 @@ def badip(web,ip):
             print(G+" [+] Country : "+O+r['CountryCode'])
             print(G+" [+] Report number: "+O+str(r['ReporterCount']['sum']))
             print(G+" [+] Category: " +O+r['Categories'][0])
+            flaglist.append("badips")
         else:
             print(G+' [+] '+O+web+G+' is clean as per badips.com...')
 
@@ -87,6 +95,7 @@ def blocklistssh(web,ip):
                 flag = True
         if flag == True:
             print(R+' [+] '+O+web+G+' has been reported for attacks on SSH services...')
+            flaglist.append("blocklists: ssh threatlist")
         else:
             print(G+' [+] '+O+web+G+' is clean as per BlockLists...')
 
@@ -108,6 +117,7 @@ def blocklistmail(web,ip):
                 flag = True
         if flag == True:
             print(R+' [+] '+O+web+G+' has been reported for attacks on SMTP services...')
+            flaglist.append("blocklists: smtp threatlist")
         else:
             print(G+' [+] '+O+web+G+' is clean as per BlockLists...')
 
@@ -129,6 +139,7 @@ def blocklistapache(web,ip):
                 flag = True
         if flag == True:
             print(R+' [+] '+O+web+G+' has been reported for attacks on Apache services...')
+            flaglist.append("blocklists: apache threatlist")
         else:
             print(G+' [+] '+O+web+G+' is clean as per BlockLists...')
 
@@ -150,6 +161,7 @@ def blocklistimap(web,ip):
                 flag = True
         if flag == True:
             print(R+' [+] '+O+web+G+' has been reported for attacks on IMAP services...')
+            flaglist.append("blocklists: imap threatlist")
         else:
             print(G+' [+] '+O+web+G+' is clean as per BlockLists...')
 
@@ -171,6 +183,7 @@ def blocklistpop3(web,ip):
                 flag = True
         if flag == True:
             print(R+' [+] '+O+web+G+' has been reported for attacks on POP3 services...')
+            flaglist.append("blocklists: pop3 threatlist")
         else:
             print(G+' [+] '+O+web+G+' is clean as per BlockLists...')
 
@@ -192,6 +205,7 @@ def blocklistftp(web,ip):
                 flag = True
         if flag == True:
             print(R+' [+] '+O+web+G+' has been reported for attacks on FTP services...')
+            flaglist.append("blocklists: ftp threatlist")
         else:
             print(G+' [+] '+O+web+G+' is clean as per BlockLists...')
 
@@ -213,6 +227,7 @@ def blocklistsip(web,ip):
                 flag = True
         if flag == True:
             print(R+' [+] '+O+web+G+' has been reported for attacks on SIP, VoIP services...')
+            flaglist.append("blocklists: sip threatlist")
         else:
             print(G+' [+] '+O+web+G+' is clean as per BlockLists...')
 
@@ -234,6 +249,7 @@ def blocklistbots(web,ip):
                 flag = True
         if flag == True:
             print(R+' [+] '+O+web+G+' has been reported for attacks as HTTPD Bots, BAD Bots...')
+            flaglist.append("blocklists: bots threatlist")
         else:
             print(G+' [+] '+O+web+G+' is clean as per BlockLists...')
 
@@ -255,6 +271,7 @@ def blocklistirc(web,ip):
                 flag = True
         if flag == True:
             print(R+' [+] '+O+web+G+' has been reported for attacks as IRC Bot...')
+            flaglist.append("blocklists: irc threatlist")
         else:
             print(G+' [+] '+O+web+G+' is clean as per BlockLists...')
 
@@ -276,6 +293,7 @@ def blockliststrong(web,ip):
                 flag = True
         if flag == True:
             print(R+' [+] '+O+web+G+' has been reported for attacks as Strong IPs...')
+            flaglist.append("blocklists: strongips threatlist")
         else:
             print(G+' [+] '+O+web+G+' is clean as per BlockLists...')
 
@@ -297,6 +315,7 @@ def blocklistbrute(web,ip):
                 flag = True
         if flag == True:
             print(R+' [+] '+O+web+G+' has been reported for attacks via Bruteforce on services...')
+            flaglist.append("blocklists: brute threatlist")
         else:
             print(G+' [+] '+O+web+G+' is clean as per BlockLists...')
 
@@ -318,6 +337,7 @@ def emergethreats(web,ip):
                 flag = True
         if flag == True:
             print(R+' [+] '+O+web+G+' is harmful and has been reported on Emerging Threats...')
+            flaglist.append("emerging threats")
         else:
             print(G+' [+] '+O+web+G+' is clean as per Emerging Threats...')
 
@@ -339,6 +359,7 @@ def emergecompro(web,ip):
                 flag = True
         if flag == True:
             print(R+' [+] '+O+web+G+' is harmful and has been reported on Emerging Threats...')
+            flaglist.append("emerging threats: compromised ips")
         else:
             print(G+' [+] '+O+web+G+' is clean as per Emerging Threats...')
 
@@ -360,6 +381,7 @@ def binarydefense(web,ip):
                 flag = True
         if flag == True:
             print(R+' [+] '+O+web+G+' has a banned IP and has been reported on Binary Defense...')
+            flaglist.append("binary defense")
         else:
             print(G+' [+] '+O+web+G+' is clean as per Binary Defense...')
 
@@ -381,6 +403,7 @@ def openphish(web,ip):
                 flag = True
         if flag == True:
             print(R+' [+] '+O+web+G+' is a harmful phishing site and has been reported on Open Phish...')
+            flaglist.append("openphish")
         else:
             print(G+' [+] '+O+web+G+' is clean as per Open Phish...')
 
@@ -403,6 +426,7 @@ def zeustracker(web,ip):
                 break
         if flag == True:
             print(R+' [+] '+O+web+G+' is a harmful phishing site and has been reported on Zeus Tracker...')
+            flaglist.append("zeustracker")
         else:
             print(G+' [+] '+O+web+G+' is clean as per Zeus Tracker...')
 
@@ -422,6 +446,7 @@ def projecthoneypot(web,ip):
 
         if flag == True:
             print(R+' [+] '+O+web+G+' is a harmful site and has been reported on Project HoneyPot...')
+            flaglist.append("project honeypot")
         else:
             print(G+' [+] '+O+web+G+' is clean as per Project HoneyPot...')
 
@@ -430,8 +455,11 @@ def projecthoneypot(web,ip):
         pass
 
 def threatintel(web):
-
-    print(GR+' [*] Loading components...')
+    name = targetname(web)
+    module = "ReconANDOSINT"
+    lvl1 = "Passive Reconnaissance & OSINT"
+    lvl3=''
+    lvl2=inspect.stack()[0][3]
     time.sleep(0.7)
     #print(R+'\n    =======================================')
     #print(R+'     T H R E A T   I N T E L L I G E N C E')
@@ -472,6 +500,11 @@ def threatintel(web):
     openphish(web,ip)
     zeustracker(web,ip)
     projecthoneypot(web,ip)
+    if flaglist:
+        data = web + " appeared as a threat on the following lists: " + str(flaglist)
+    else:
+        data = web + " seems to be clean."
+    save_data(database, module, lvl1, lvl2, lvl3, name, data)
     print(G+' [+] Done!')
 
 def attack(web):

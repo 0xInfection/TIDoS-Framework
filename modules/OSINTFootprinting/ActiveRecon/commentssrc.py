@@ -92,6 +92,7 @@ def commentssrc(web):
 
     if found == 0x00:
         print(R+' [-] No comments found in source code!')
+        save_data(database, module, lvl1, lvl2, lvl3, name, "No comments found in source code.")
 
     print(G+' [+] Comments Scraping Done!'+C+color.TR2+C)
 

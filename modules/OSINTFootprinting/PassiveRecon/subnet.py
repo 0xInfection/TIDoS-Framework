@@ -57,6 +57,7 @@ def subnet(web):
             save_data(database, module, lvl1, lvl2, lvl3, name, http)
         elif 'No results found' in http:
             print(R+' [-] No results found!')
+            save_data(database, module, lvl1, lvl2, lvl3, name, "No results found.")
         else:
             print(R+' [-] Outbound Query Exception!')
 

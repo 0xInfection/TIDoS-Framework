@@ -32,7 +32,6 @@ searchinfo = "Phone Number Harvester"
 properties = {}
 
 def phone0x00(url):
-    name = targetname(url)
     requests = session()
     #print(R+'\n    ========================')
     #print(R+'     PHON3 NuMBER HARVESTER')
@@ -71,14 +70,11 @@ def phone0x00(url):
 
     if found == 0x00:
         print(R+' [-] No Phone Numbers found disclosed in plaintext in Source Code!\n')
+        save_data(database, module, lvl1, lvl2, lvl3, name, "No Phone Numbers found disclosed in plaintext in Source Code.")
 
     print(G+' [+] Scraping Done!'+C+color.TR2+C)
 
 def check0x00(req, name):
-    lvl2 = "phone"
-    module = "ReconANDOSINT"
-    lvl1 = "Information Disclosure"
-    lvl3 = ""
     found = 0x00
     print(C+' [!] Setting parse parameters...')
     comments = re.findall(signature,req)
@@ -92,6 +88,12 @@ def check0x00(req, name):
         save_data(database, module, lvl1, lvl2, lvl3, name, comment)
 
 def phone(web):
+    global name, lvl2, module, lvl1, lvl3
+    lvl2 = inspect.stack()[0][3]
+    module = "ReconANDOSINT"
+    lvl1 = "Information Disclosure"
+    lvl3 = ""
+    name = targetname(web)
     time.sleep(0.6)
     phone0x00(web)
 

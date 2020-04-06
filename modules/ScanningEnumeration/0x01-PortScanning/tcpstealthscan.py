@@ -200,6 +200,7 @@ def scan0x00(target):
             data = "Open Ports: " + str(open_ports)
             save_data(database, module, lvl1, lvl2, lvl3, name, data)
         else:
+            save_data(database, module, lvl1, lvl2, lvl3, name, "No open ports found.")
             print(''+R+" [-] Sorry, No open ports found.!!")
         print(C+'\n [!] ' + str(len(closed_ports)) + ' closed ports not shown')
         print(G+" [+] Host %s scanned in %s seconds" %(target, total_time)+C+color.TR2+C+"\n")

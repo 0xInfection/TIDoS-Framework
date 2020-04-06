@@ -155,6 +155,8 @@ def subdom(web):
     if acc:
         for pwn in acc:
             save_data(database, module, lvl1, lvl2, lvl3, name, str(pwn))
+    else:
+        save_data(database, module, lvl1, lvl2, lvl3, name, "No subdomains found for "+web)
     print(C+' [+] Done!')
 
 def attack(web):

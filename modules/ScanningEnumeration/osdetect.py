@@ -69,6 +69,7 @@ def port0x00(web):
             save_data(database, module, lvl1, lvl2, lvl3, name, os2)
     else:
         print(R+' [-] No exact matches for OS via port scan...')
+        save_data(database, module, lvl1, lvl2, lvl3, name, "No exact matches for OS via port scan.")
 
 def osdetect(web):
     global name

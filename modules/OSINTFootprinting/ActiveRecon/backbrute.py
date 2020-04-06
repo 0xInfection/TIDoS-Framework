@@ -120,6 +120,7 @@ def backbrute(web):
                 save_data(database, module, lvl1, lvl2, lvl3, name, u)
         else:
             print(R+' [-] No backdoors were found!')
+            save_data(database, module, lvl1, lvl2, lvl3, name, "No backdoors found.")
         print(C+' [+] Done!')
 
     except Exception as e:

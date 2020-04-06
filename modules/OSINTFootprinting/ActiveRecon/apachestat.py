@@ -56,7 +56,9 @@ def apachestat(web):
                 save_data(database, module, lvl1, lvl2, lvl3, name, url)
 
     if flag == 0x00:
+        save_data(database, module, lvl1, lvl2, lvl3, name, "No server status enabled.")
         print(R+' [-] No server status enabled!')
+
     print(C+' [+] Apache server status completed!\n')
 
 def attack(web):

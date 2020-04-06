@@ -107,6 +107,7 @@ def googlegroups(web):
     data = getemails0x00(web)
     if flag == False:
         print(R+' [-] No results found via enumeration on Google Groups...')
+        save_data(database, module, lvl1, lvl2, lvl3, name, "No results found via enumeration on Google Groups.")
     else:
         save_data(database, module, lvl1, lvl2, lvl3, name, str(data))
     print(C+' [+] Done!')

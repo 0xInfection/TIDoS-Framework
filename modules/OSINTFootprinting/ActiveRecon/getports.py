@@ -119,7 +119,10 @@ def scan0x00(host, name):
         print(P+'    +--------+----------+')
         print(P+'    |  '+C+'PORT'+P+'  '+'|  '+C+'STATE'+P+'   '+'|')
         print(P+'    +--------+----------+')
-
+        lvl2 = "getports"
+        module = "ReconANDOSINT"
+        lvl1 = "Active Reconnaissance"
+        lvl3 = ""
         if open_ports:
             data = "Open Ports: " + str(open_ports)
             for i in sorted(open_ports):
@@ -144,13 +147,11 @@ def scan0x00(host, name):
                     print(P+'    | '+C+c+P+'  '+'|   '+C+'OPEN'+P+'   '+'| ')
                     print(P+'    +--------+----------+')
                     time.sleep(0.2)
-            lvl2 = "getports"
-            module = "ReconANDOSINT"
-            lvl1 = "Active Reconnaissance"
-            lvl3 = ""
+            
             save_data(database, module, lvl1, lvl2, lvl3, name, data)
         else:
             print(R+"\n [-] No open ports found.!!\n")
+            save_data(database, module, lvl1, lvl2, lvl3, name, "No open ports found.")
         print(B+'\n [!] ' + str(len(closed_ports)) + ' closed ports not shown')
         print(G+" [+] Host %s scanned in %s seconds" %(host, total_time)+C+color.TR2+C+"\n")
 

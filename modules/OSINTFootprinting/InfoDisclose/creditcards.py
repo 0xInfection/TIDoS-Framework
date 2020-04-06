@@ -74,14 +74,12 @@ def credit0x00(url, lvl2):
 
     if found == 0x00:
         print(R+' [-] No Credit Cards found disclosed in plaintext in source code!')
+        save_data(database, module, lvl1, lvl2, lvl3, name, "No Credit Cards found disclosed in plaintext in source code")
 
     print(G+' [+] Scraping Done!'+C+color.TR2+C)
 
 
 def check0x00(req, lvl2, name):
-    module = "ReconANDOSINT"
-    lvl1 = "Information Disclosure"
-    lvl3 = ""
     try:
         append_name = ' '.join(req.encode('utf-8')).strip()
     except UnicodeDecodeError:
@@ -158,6 +156,12 @@ def check0x00(req, lvl2, name):
 
 def creditcards(web):
     lvl2 = inspect.stack()[0][3]
+    global module
+    module = "ReconANDOSINT"
+    global lvl1
+    lvl1 = "Information Disclosure"
+    global lvl3
+    lvl3 = ""
     time.sleep(0.5)
     #print(R+'\n     ========================')
     #print(R+'      CREDIT CARD DISCLOSURE')

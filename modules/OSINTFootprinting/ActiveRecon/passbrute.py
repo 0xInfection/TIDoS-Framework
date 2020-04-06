@@ -124,6 +124,7 @@ def passbrute(web):
             save_data(database, module, lvl1, lvl2, lvl3, name, u)
     else:
         print(R+' [-] No common password locations were found!')
+        save_data(database, module, lvl1, lvl2, lvl3, name, "No password locations found.")
     print(C+' [+] Done!')
 
 

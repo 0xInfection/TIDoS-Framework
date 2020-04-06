@@ -65,6 +65,7 @@ def phpinfo(web):
 
         if found == 0x00:
             print(R+'\n [-] Did not find PHPInfo file...\n')
+            save_data(database, module, lvl1, lvl2, lvl3, name, "Did not find PHPInfo file.")
     else:
         print(R+' [-] Bruteforce filepath not found!')
 

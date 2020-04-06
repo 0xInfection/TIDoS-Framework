@@ -145,6 +145,7 @@ def waf(web):
             pass
 
     if check == 0x00:
+        save_data(database, module, lvl1, lvl2, lvl3, name, "Generic detection failed to fingerprint WAF.")
         print(R+' [-] Generic detection failed to fingerprint WAF...')
 
     print('\n'+G+' [+] WAF Fingerprinting module completed!'+C+color.TR2+C+'\n')

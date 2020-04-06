@@ -72,10 +72,6 @@ def getcmslook(web, name):
         else:
             if status == 200:
                 dtect = True
-                lvl2 = "cms"
-                module = "ReconANDOSINT"
-                lvl1 = "Active Reconnaissance"
-                lvl3 = ""
                 print(O+' [+] CMS Detected:' +C+color.TR3+C+G+ response['result']['name']+C+color.TR2+C+'\n')
                 save_data(database, module, lvl1, lvl2, lvl3, name, response['result']['name'])
             else:
@@ -94,10 +90,6 @@ def cmsenum(web, name):
     r = json.loads(res)
     try:
         if "cms" in r:
-            lvl2 = "cms"
-            module = "ReconANDOSINT"
-            lvl1 = "Active Reconnaissance"
-            lvl3 = ""
             print(O+' [+] CMS Detected :'+C+color.TR3+C+G+'%s' % (r['cms'])+C+color.TR2+C)
             dtect = True
             save_data(database, module, lvl1, lvl2, lvl3, name, str(r['cms']))
@@ -108,6 +100,11 @@ def cmsenum(web, name):
         print(R+' [-] Exception : '+str(e))
 
 def cms(web):
+    global lvl1, lvl2, lvl3, module
+    lvl2 = "cms"
+    module = "ReconANDOSINT"
+    lvl1 = "Active Reconnaissance"
+    lvl3 = ""
     name = targetname(web)
     #print(R+'\n   =========================')
     #print(R+'    C M S   D E T E C T O R')
@@ -122,6 +119,7 @@ def cms(web):
     cmsenum(web, name)
     if dtect == False:
         print(R+" [-] "+O+web+R + " doesn't seem to use a CMS")
+        save_data(database, module, lvl1, lvl2, lvl3, name, "No CMS detected.")
     print(G+' [+] CMS Detection Module Completed!'+C+color.TR2+C)
 
 def attack(web):

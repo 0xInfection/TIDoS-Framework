@@ -54,6 +54,7 @@ def sharedns(web):
             time.sleep(0.8)
         elif 'No results found' in dns:
             print(R+' [-] No shared DNS nameserver hosts...')
+            save_data(database, module, lvl1, lvl2, lvl3, name, "No shared DNS nameserver hosts.")
         else:
             p = dns.splitlines()
             for i in p:

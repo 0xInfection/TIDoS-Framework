@@ -124,6 +124,7 @@ def indexmulbrute(web):
             save_data(database, module, lvl1, lvl2, lvl3, name, u)
     else:
         print(R+' [-] No multiple index locations were found!')
+        save_data(database, module, lvl1, lvl2, lvl3, name, "No multiple index locations found.")
     print(C+' [+] Done!')
 
 def attack(web):

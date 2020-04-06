@@ -33,9 +33,6 @@ searchinfo = "Error hunter"
 properties = {}
 
 def check0x00(content,url, lvl2, name):
-    module = "ReconANDOSINT"
-    lvl1 = "Information Disclosure"
-    lvl3 = ""
     for pattern in patterns:
         print(C+' [!] Finding '+B+pattern+C+' ...')
         time.sleep(0.005)
@@ -81,10 +78,15 @@ def request(url, lvl2):
 
     if found == 0x00:
         print(R+'\n [-] No Errors found in Source Code!\n')
+        save_data(database, module, lvl1, lvl2, lvl3, name, "No Errors found in Source Code.")
 
     print(G+' [+] Scraping Done!'+C+color.TR2+C)
 
 def errors(web):
+    global module, lvl1, lvl3
+    module = "ReconANDOSINT"
+    lvl1 = "Information Disclosure"
+    lvl3 = ""
     lvl2 = inspect.stack()[0][3]
     from core.methods.print import pleak
     pleak("error hunter")

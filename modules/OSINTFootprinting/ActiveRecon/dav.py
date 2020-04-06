@@ -63,6 +63,7 @@ def htsearch(url, name):
         save_data(database, module, lvl1, lvl2, lvl3, name, "htsearch: "+url)
     else:
         print(R+' [-] No HTTP Searching Profiling Found...')
+        save_data(database, module, lvl1, lvl2, lvl3, name, "No HTTP Searching Profiling Found.")
 
 def profind(url, name):
     lvl2 = "dav"
@@ -98,6 +99,7 @@ def profind(url, name):
         save_data(database, module, lvl1, lvl2, lvl3, name, "profind: "+url)
     else:
         print(R+' [-] No Profind HTTP Profiling Found...')
+        save_data(database, module, lvl1, lvl2, lvl3, name, "No Profind HTTP Profiling Found.")
 
 def dav(web):
     name = targetname(web)

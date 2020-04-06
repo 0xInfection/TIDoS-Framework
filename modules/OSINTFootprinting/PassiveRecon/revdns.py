@@ -59,6 +59,7 @@ def revdns(web):
 
     else:
         print(R+' [-] No result found!')
+        save_data(database, module, lvl1, lvl2, lvl3, name, "No result found.")
         time.sleep(0.8)
 
 def attack(web):

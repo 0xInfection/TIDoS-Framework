@@ -74,13 +74,11 @@ def mail0x00(url, lvl2):
 
     if found == 0x00:
         print(R+'\n [-] No Emails found disclosed in plaintext in source code!\n')
+        save_data(database, module, lvl1, lvl2, lvl3, name, "No emails found disclosed in plaintext in source code")
 
     print(G+' [+] Scraping Done!'+C+color.TR2+C)
 
 def check0x00(req, lvl2, name):
-    module = "ReconANDOSINT"
-    lvl1 = "Information Disclosure"
-    lvl3 = ""
     comments = re.findall(signature,req)
     print(GR+" [*] Searching for Emails...")
     if comments:
@@ -92,6 +90,10 @@ def check0x00(req, lvl2, name):
             save_data(database, module, lvl1, lvl2, lvl3, name, comment)
 
 def emailext(web):
+    global module, lvl1, lvl3
+    module = "ReconANDOSINT"
+    lvl1 = "Information Disclosure"
+    lvl3 = ""
     lvl2 = inspect.stack()[0][3]
     time.sleep(0.6)
     mail0x00(web, lvl2)

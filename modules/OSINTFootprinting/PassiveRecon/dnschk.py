@@ -78,7 +78,7 @@ def dnschk(domain):
             print(R+' [-] Map generation failed!')
             sys.exit(1)
         st = str(domain) + '.png'
-        st1 = str(domain)+'-dnsmap.jpg'
+        st1 = str(domain)+'-dnsmap.png'
         p = 'mv '+st+' '+ st1
         os.system(p)
         mov = 'mv '+ st1 + ' tmp/'

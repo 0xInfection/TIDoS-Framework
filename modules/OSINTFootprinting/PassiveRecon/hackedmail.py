@@ -61,10 +61,14 @@ def getRes0x00():
                 for line in content['data']:
                     try:
                         print(O+" [+] "+email+" found in :" +C+color.TR3+C+G+ str(line['title']) +" (" + str(line['date_leaked'])+')'+C+color.TR2+C)
+                        data = email+" found in :" + str(line['title']) +" (" + str(line['date_leaked'])+')'
+                        save_data(database, module, lvl1, lvl2, lvl3, "", data)
                     except:
                         print(R+" [-] Can't parse the leak titles via APi...")
             else:
                 print(R+' [-] Email '+O+email+R+' not found in any breaches!')
+                data = 'Email '+email+' not found in any breaches!'
+                save_data(database, module, lvl1, lvl2, lvl3, "", data)
         else:
             print(R+' [-] Error found in Json Request...')
 
@@ -73,7 +77,14 @@ def getRes0x00():
         print(R+' [-] Request timed out!')
 
 def hackedmail():
-    print(GR+' [*] Loading module...')
+    global lvl2
+    lvl2 = inspect.stack()[0][3]
+    global module
+    module = "ReconANDOSINT"
+    global lvl1
+    lvl1 = "Passive Reconnaissance & OSINT"
+    global lvl3
+    lvl3 = ""
     time.sleep(0.6)
     #print(R+'\n    =========================')
     #print(R+'     H A C K E D   E M A I L ')

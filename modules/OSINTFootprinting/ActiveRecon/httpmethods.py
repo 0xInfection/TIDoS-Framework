@@ -53,6 +53,7 @@ def httpmethods(web):
             save_data(database, module, lvl1, lvl2, lvl3, name, q)
         else:
             print(R+' [-] HTTP Method Options Request Unsuccessful...')
+            save_data(database, module, lvl1, lvl2, lvl3, name, "HTTP Method Options Request Unsuccessful.")
 
     except Exception as e:
         print(R+' [-] Exception Encountered!')

@@ -24,6 +24,10 @@ searchinfo = "Domain Contact Info"
 properties = {}
 
 def getconinfo(domain):
+    module = "ReconANDOSINT"
+    lvl1 = "Passive Reconnaissance & OSINT"
+    lvl2 = inspect.stack()[0][3]
+    lvl3 = ""
     name = targetname(domain)
     requests = session()
     web = domain
@@ -83,16 +87,13 @@ def getconinfo(domain):
                         else:
                             print(C+'\n [+] '+w1+' :-'+'\n')
 
-                module = "ReconANDOSINT"
-                lvl1 = "Passive Reconnaissance & OSINT"
-                lvl2 = inspect.stack()[0][3]
-                lvl3 = ""
                 data = result
                 save_data(database, module, lvl1, lvl2, lvl3, name, data)
 
             else:
                 print(R+' [-] Did not find any info about domain '+O+domain+C)
                 print(R+' [+] Try with another one...')
+                save_data(database, module, lvl1, lvl2, lvl3, name, "Did not find any info about domain "+domain)
 
         else:
             print(R+' [-] FULL CONTACT API TOKEN not set!')

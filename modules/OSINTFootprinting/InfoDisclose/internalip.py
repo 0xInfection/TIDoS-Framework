@@ -35,7 +35,6 @@ searchinfo = "Internal IP hunter"
 properties = {}
 
 def internalip0x00(url):
-    name = targetname(url)
     requests = session()
     #print(R+'\n    ========================')
     #print(R+'     INTERNAL IP DISCLOSURE')
@@ -74,14 +73,11 @@ def internalip0x00(url):
 
     if found == 0x00:
         print(R+'\n [-] No Internal IPs found disclosed in plaintext in source code!\n')
+        save_data(database, module, lvl1, lvl2, lvl3, name, "No Internal IPs found disclosed in plaintext in source code.")
 
     print(G+' [+] Scraping Done!'+C+color.TR2+C)
 
 def check0x00(req, name):
-    lvl2 = "internalip"
-    module = "ReconANDOSINT"
-    lvl1 = "Information Disclosure"
-    lvl3 = ""
     comments = re.findall(signature,req)
     print(GR+" [*] Searching for Internal IPs...")
     for comment in comments:
@@ -91,6 +87,12 @@ def check0x00(req, name):
         save_data(database, module, lvl1, lvl2, lvl3, name, comment)
 
 def internalip(web):
+    global lvl1, lvl2, lvl3, name, module
+    lvl2 = inspect.stack()[0][3]
+    module = "ReconANDOSINT"
+    lvl1 = "Information Disclosure"
+    lvl3 = ""
+    name = targetname(web)
     time.sleep(0.6)
     internalip0x00(web)
 

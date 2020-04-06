@@ -50,6 +50,7 @@ def robot(web):
         save_data(database, module, lvl1, lvl2, lvl3, name, data)
     except:
         print(R+' [-] Robots.txt not found')
+        save_data(database, module, lvl1, lvl2, lvl3, name, "robots.txt not found.")
 
     print(' [!] Testing for sitemap.xml...\n')
     url0 = web + '/sitemap.xml'
@@ -63,6 +64,7 @@ def robot(web):
         save_data(database, module, lvl1, lvl2, lvl3, name, data)
     except:
         print(R+' [-] Sitemap.xml not found')
+        save_data(database, module, lvl1, lvl2, lvl3, name, "sitemap.xml not found.")
 
 def attack(web):
     web = web.fullurl

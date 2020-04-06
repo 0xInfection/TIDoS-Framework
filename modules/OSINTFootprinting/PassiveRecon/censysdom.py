@@ -94,6 +94,7 @@ def censysdom(web):
         else:
             print(R+' [-] Did not find any info about domain '+O+web+C)
             print(R+' [+] Try with another one...')
+            save_data(database, module, lvl1, lvl2, lvl3, name, "Did not find any info about domain "+web)
 
     else:
         print(R+' [-] CENSYS API TOKENs not set!')

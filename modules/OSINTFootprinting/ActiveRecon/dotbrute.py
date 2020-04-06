@@ -122,6 +122,7 @@ def dotbrute(web):
             save_data(database, module, lvl1, lvl2, lvl3, name, u)
     else:
         print(R+' [-] No common interesting files were found!')
+        save_data(database, module, lvl1, lvl2, lvl3, name, "No dotfiles found.")
     print(C+' [+] Done!')
 
 def attack(web):

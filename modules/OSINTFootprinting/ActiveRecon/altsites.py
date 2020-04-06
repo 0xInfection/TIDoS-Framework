@@ -74,9 +74,10 @@ def altsites(web):
         if name != 'Chrome on Windows 8.1':
             if md5 != md5s['Chrome on Windows 8.1']:
                 print(G+' [+] '+str(name)+' differs fromk baseline!'+C+color.TR2+C)
-                save_data(database, module, lvl1, lvl2, lvl3, tname, str(name))
+                save_data(database, module, lvl1, lvl2, lvl3, tname, str(name)+" differs fromk baseline")
             else:
                 print(R+' [-] No alternative site found via User-Agent spoofing:'+ str(md5))
+                save_data(database, module, lvl1, lvl2, lvl3, tname, "No alternative site found via User-Agent spoofing: "+ str(md5))
     print(C+'\n [+] Alternate Site Discovery Completed!\n')
 
 def attack(web):

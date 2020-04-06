@@ -233,6 +233,7 @@ def scan0x00(target):
             print('')
         else:
             print(''+R+" [-] No open/filtered ports found.!!"+'')
+            save_data(database, module, lvl1, lvl2, lvl3, name, "No open/filtered ports found.")
         print(B+"\n [!] " + str(len(closed_ports)) + ' closed ports not shown')
         print(G+" [+] Host %s scanned in %s seconds" %(target, total_time)+C+color.TR2+C+"\n")
     except KeyboardInterrupt:

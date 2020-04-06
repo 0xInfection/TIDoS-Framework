@@ -661,3 +661,9 @@ def loadstyle2():
 def upinfo():
     if vars.upd:
         print(" ! A new version of TIDoS is available.")
+
+def ogprint(s1, s2):
+    print(O + s1 + C + color.TR3 + C + G + s2 + C + color.TR2 + C)
+
+def gprint(s):
+    print(G+s+C+color.TR2+C)

@@ -57,6 +57,7 @@ def getos0x00(web):
             save_data(database, module, lvl1, lvl2, lvl3, name, os)
         else:
             print(R+' [-] No exact Operating System matches for '+O+web+C+'...')
+            save_data(database, module, lvl1, lvl2, lvl3, name, "No exact Operating System matches for "+web)
             os = ""
             flag = 0x00
         return (flag, os)

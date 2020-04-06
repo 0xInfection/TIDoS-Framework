@@ -254,6 +254,7 @@ def service0x00(host):
                     time.sleep(0.2)
             save_data(database, module, lvl1, lvl2, lvl3, name, data)
         else:
+            save_data(database, module, lvl1, lvl2, lvl3, name, "No open ports found.")
             print(R+"\n [-] No open ports found.!!\n")
         print(B+'\n [!] ' + str(len(closed_ports)) + ' closed ports not shown')
         print(G+" [+] Host %s scanned in %s seconds" %(host, total_time)+C+color.TR2+C+"\n")
