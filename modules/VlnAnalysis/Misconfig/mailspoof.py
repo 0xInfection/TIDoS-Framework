@@ -15,6 +15,10 @@ import os, time
 import core.lib.emailprotectionslib.dmarc as dmarclib
 import core.lib.emailprotectionslib.spf as spflib
 from core.Core.colors import *
+from core.database.database_module import save_data
+from core.variables import database
+from core.methods.cache import targetname
+import inspect
 
 info = "This module checks if target's mail is spoofable."
 searchinfo = "Mail Spoofer"
@@ -222,16 +226,22 @@ def dmCheck0x00(domain):
     return dmVal
 
 def mailspoof(web):
-
-    print(GR+' [*] Loading module...')
+    global name
+    name = targetname(web)
+    global lvl2
+    lvl2 = inspect.stack()[0][3]
+    global module
+    module = "VulnAnalysis"
+    global lvl1
+    lvl1 = "Basic Bugs & Misconfigurations"
+    global lvl3
+    lvl3 = ""
     time.sleep(0.5)
     #print(R+'\n     =========================')
     #print(R+'\n      M A I L   S P O O F E R ')
     #print(R+'     ——·‹›·––·‹›·——·‹›·——·‹›·–\n')
     from core.methods.print import pvln
     pvln("mail spoofer")            
-
-    print(GR+' [*] Setting inital value '+R+'"False"...')
     spoofable = False
     try:
         domain = web
@@ -246,8 +256,10 @@ def mailspoof(web):
 
         if spoofable == True:
             print(G+" [+] Spoofing possible for " +O+ domain + "!")
+            save_data(database, module, lvl1, lvl2, lvl3, name, "Spoofing possible for " + domain)
         else:
             print(R+" [-] Spoofing not possible for " +O+ domain+'...')
+            save_data(database, module, lvl1, lvl2, lvl3, name, "Spoofing not possible for " + domain)
 
     except Exception as e:
         print(R+" [-] Undefault KeyError encountered!")

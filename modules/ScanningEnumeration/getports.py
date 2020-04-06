@@ -162,7 +162,6 @@ def scan0x00(host):
 def getports(web):
     global name
     name = targetname(web)
-    print(GR+' [*] Loading up scanner...')
     time.sleep(0.5)
     if 'http://' in web:
         web = web.replace('http://','')

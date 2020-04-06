@@ -16,6 +16,10 @@ from time import sleep
 from sys import exit
 from core.Core.colors import *
 from ftplib import FTP
+from core.database.database_module import save_data
+from core.variables import database
+from core.methods.cache import targetname
+import inspect
 
 ftppass = []
 ftpuser = []
@@ -27,25 +31,44 @@ properties = {}
 def ftpBrute0x00(ip, usernames, passwords, port, delay):
 
     ftp = FTP()
+    found = False
     for username in usernames:
         for password in passwords:
             try:
                 ftp.connect(ip, port)
                 ftp.login(username, password)
                 print(G + ' [+] Username: %s | Password found: %s\n' % (username, password))
+                found = True
+                data = username + " : " + password
+                save_data(database, module, lvl1, lvl2, lvl3, name, data)
                 ftp.quit()
                 exit(0)
             except ftplib.error_perm:
-                print(GR+ " [*] Checking : "+C+"Username: %s | "+B+"Password: %s "+R+"| Incorrect!\n" % (username, password))
+                print(GR+ " [*] Checking : "+C+"Username: {} | ".format(username)+B+"Password: {} ".format(password)+R+"| Incorrect!\n")
                 sleep(delay)
             except ftplib.all_errors as e:
                 print(R+" [-] Error caught! Name: "+str(e))
             except KeyboardInterrupt:
+                if not found:
+                    data = "Nothing found."
+                    save_data(database, module, lvl1, lvl2, lvl3, name, data)
                 ftp.quit()
+    if not found:
+        data = "Nothing found."
+        save_data(database, module, lvl1, lvl2, lvl3, name, data)
+
 
 def ftpbrute(web):
-
-    print(GR+' [*] Loading module...\n')
+    global name
+    name = targetname(web)
+    global lvl2
+    lvl2 = inspect.stack()[0][3]
+    global module
+    module = "VulnAnalysis"
+    global lvl1
+    lvl1 = "Brute Force Tools"
+    global lvl3
+    lvl3 = ""
     time.sleep(0.6)
     #print(R+'    ===================')
     #print(R+'\n     F T P   B R U T E ')

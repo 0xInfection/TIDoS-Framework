@@ -18,12 +18,26 @@ sys.path.append('files/')
 from core.Core.colors import *
 from modules.VlnAnalysis.Misconfig.subdom0x00 import *
 
+from core.database.database_module import save_data
+from core.variables import database
+from core.methods.cache import targetname
+import inspect
+
 info = "This module hunts for Same Site scripting vulnerabilities."
 searchinfo = "Same Site Scripting"
 properties = {}
 
 def ssscript(web):
-
+    global name
+    name = targetname(web)
+    global lvl2
+    lvl2 = inspect.stack()[0][3]
+    global module
+    module = "VulnAnalysis"
+    global lvl1
+    lvl1 = "Basic Bugs & Misconfigurations"
+    global lvl3
+    lvl3 = ""
     vuln = []
     novuln = []
     web = web.replace('https://','')
@@ -65,9 +79,11 @@ def ssscript(web):
                         time.sleep(0.7)
                         print(G+' [+] This website is vulnerable to Same Site Scripting!')
                         vuln.append(web)
+                        save_data(database, module, lvl1, lvl2, lvl3, name, "This website is vulnerable to Same Site Scripting!")
                     else:
                         time.sleep(0.7)
                         print(R+' [-] '+O+m+R+' is immune to Same-Site Scripting!')
+                        save_data(database, module, lvl1, lvl2, lvl3, name, m+" is immune to Same Site Scripting.")
                         novuln.append(web)
 
                 except socket.gaierror:

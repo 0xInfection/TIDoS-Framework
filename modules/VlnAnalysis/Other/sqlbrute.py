@@ -13,6 +13,10 @@ import time
 import socket
 from core.Core.colors import *
 import mysql.connector as mysql
+from core.database.database_module import save_data
+from core.variables import database
+from core.methods.cache import targetname
+import inspect
 
 sqluser = []
 sqlpass = []
@@ -30,7 +34,16 @@ def bruter(user, passwd, ip, flag=False):
     return flag
 
 def sqlbrute(web):
-
+    global name
+    name = targetname(web)
+    global lvl2
+    lvl2 = inspect.stack()[0][3]
+    global module
+    module = "VulnAnalysis"
+    global lvl1
+    lvl1 = "Brute Force Tools"
+    global lvl3
+    lvl3 = ""
     #print(R+'\n   ===============================')
     #print(R+'\n    S Q L   B R U T E F O R C E R')
     #print(R+'   ——·‹›·––·‹›·——·‹›·——·‹›·——·‹›·–\n')
@@ -60,18 +73,29 @@ def sqlbrute(web):
         except IOError:
             print(R+' [-] Importing wordlist failed!')
 
+        found = False
         for user in sqluser:
             for password in sqlpass:
                 print(C+' [!] Checking '+B+user+C+' and '+B+password+'...')
                 res = bruter(user, password, ip)
                 if res:
+                    found = True
+                    data = user + " : " + password
+                    save_data(database, module, lvl1, lvl2, lvl3, name, data)
                     print(G+' [!] Successful login with ' +O+user+G+ ' and ' +O+password)
                     break
-            else:
-                continue
-            break
+                else:
+                    continue
+        if not found:
+            data = "Nothing found."
+            save_data(database, module, lvl1, lvl2, lvl3, name, data)
+            
     except socket.gaierror:
         print(R+' [-] Target seems to be down!')
+    except KeyboardInterrupt:
+        if not found:
+            data = "Nothing found."
+            save_data(database, module, lvl1, lvl2, lvl3, name, data)
 
 def attack(web):
     web = web.fullurl

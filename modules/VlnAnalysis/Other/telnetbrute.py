@@ -18,6 +18,11 @@ from time import sleep
 import telnetlib
 from core.Core.colors import *
 
+from core.database.database_module import save_data
+from core.variables import database
+from core.methods.cache import targetname
+import inspect
+
 teluser = []
 telpass = []
 
@@ -28,6 +33,7 @@ properties = {}
 def telnetBrute0x00(ip, usernames, passwords, port, delay):
     telnet = telnetlib.Telnet(ip)
     telnet.read_until("login: ")
+    found = False
     for username in usernames:
         for password in passwords:
             try:
@@ -37,18 +43,35 @@ def telnetBrute0x00(ip, usernames, passwords, port, delay):
                 telnet.write("vt100\n")
                 print(G + ' [+] Username: %s | Password found: %s\n' % (username, password) + W)
                 telnet.close()
+                found = True
+                data = username + " : " + password
+                save_data(database, module, lvl1, lvl2, lvl3, name, data)
             except socket.error:
                 print(R + " [-] Error: Connection failed! Port closed!" + W)
             except KeyboardInterrupt:
                 telnet.close()
+                if not found:
+                    data = "Nothing found."
+                    save_data(database, module, lvl1, lvl2, lvl3, name, data)
                 sys.exit(1)
             except:
-                print(GR+ " [*] Checking : "+C+"Username: %s | "+B+"Password: %s "+R+"...\n" % (username, password))
+                print(GR+ " [*] Checking : "+C+"Username: {} | ".format(username)+B+"Password: {} ".format(password)+R+"...\n")
                 sleep(delay)
+    if not found:
+        data = "Nothing found."
+        save_data(database, module, lvl1, lvl2, lvl3, name, data)
 
 def telnetbrute(web):
-
-    print(GR+' [*] Loading module...\n')
+    global name
+    name = targetname(web)
+    global lvl2
+    lvl2 = inspect.stack()[0][3]
+    global module
+    module = "VulnAnalysis"
+    global lvl1
+    lvl1 = "Brute Force Tools"
+    global lvl3
+    lvl3 = ""
     time.sleep(0.6)
     #print(R+'    =========================')
     #print(R+'\n     T E L N E T   B R U T E ')

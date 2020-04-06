@@ -15,6 +15,10 @@ import time
 import requests
 import sys
 from core.Core.colors import *
+from core.database.database_module import save_data
+from core.variables import database
+from core.methods.cache import targetname
+import inspect
 
 info = "This module checks if target uses HSTS."
 searchinfo = "HSTS Check"
@@ -30,10 +34,12 @@ def check0x00(headers):
         print(G+' [+] Seems like the website uses strong HSTS...')
         time.sleep(0.6)
         print(G+' [+] HSTS Presence Confirmed!')
+        save_data(database, module, lvl1, lvl2, lvl3, name, "HSTS Presence Confirmed.")
     else:
         print(GR+' [!] HTTP Strict Transport Security Header not found in response headers!')
-        print(O+' [-] Websites uses complete SSL throughout website.')
+        print(O+' [-] Website uses complete SSL throughout website.')
         print(R+' [-] However, it does not seem to use HSTS.\n')
+        save_data(database, module, lvl1, lvl2, lvl3, name, "Website uses SSL, however, it does not seem to use HSTS.")
 
 def getHeaders0x00(web):
     print(O+' [*] Configuring headers...')
@@ -53,7 +59,16 @@ def getHeaders0x00(web):
     return h
 
 def hsts(web):
-    print(GR+' [*] Loading module...')
+    global name
+    name = targetname(web)
+    global lvl2
+    lvl2 = inspect.stack()[0][3]
+    global module
+    module = "VulnAnalysis"
+    global lvl1
+    lvl1 = "Basic Bugs & Misconfigurations"
+    global lvl3
+    lvl3 = ""
     time.sleep(0.5)
     #print(R+'\n    ================================')
     #print(R+'\n     HTTP STRICT TRANSPORT SECURITY')

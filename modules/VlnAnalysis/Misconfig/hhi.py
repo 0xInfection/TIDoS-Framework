@@ -17,6 +17,11 @@ import getopt
 import http.client
 from core.Core.colors import *
 
+from core.database.database_module import save_data
+from core.variables import database
+from core.methods.cache import targetname
+import inspect
+
 info = "This module tries to determine if the target is vulnerable to Host Header Injection Attacks."
 searchinfo = "Host Header Injection"
 properties = {}
@@ -51,6 +56,7 @@ def hostheader0x00(web):
         print(O+' [!] Response : '+GR, response.status, response.reason)
         print(O+' [!] Data (raw) : \n'+GR)
         print(data + '\n')
+        save_data(database, module, lvl1, lvl2, lvl3, name, str(data))
 
     else:
         print(GR+' [*] Setting buffers...')
@@ -82,19 +88,30 @@ def hostheader0x00(web):
             time.sleep(0.7)
             print(GR+' [+] Analysing results...')
             if frame_inject.lower() in data1.lower():
-                print(G+' [+] Site is vulnerable to Host Header Injection...')
+                print(G+' [+] Site is vulnerable to Host Header Injection.')
+                save_data(database, module, lvl1, lvl2, lvl3, name, "Site is vulnerable to Host Header Injection!")
             else:
                 print(R+' [-] Site is immune against Host Header Injection...')
+                save_data(database, module, lvl1, lvl2, lvl3, name, "Site is immune against Host Header Injection.")
 
             print("")
             print(GR+' [*] Obtaining header dump data...')
             print("")
             print(O+data1)
+            save_data(database, module, lvl1, lvl2, lvl3, name, str(data1))
             time.sleep(1)
 
 def hhi(web):
-
-    print(GR+' [*] Loading the module...')
+    global name
+    name = targetname(web)
+    global lvl2
+    lvl2 = inspect.stack()[0][3]
+    global module
+    module = "VulnAnalysis"
+    global lvl1
+    lvl1 = "Basic Bugs & Misconfigurations"
+    global lvl3
+    lvl3 = ""
     time.sleep(0.5)
     if 'http' in web:
         web = web.replace('http://','')

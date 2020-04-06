@@ -14,6 +14,10 @@ import urllib.request as urllib
 import time
 import ssl
 from core.Core.colors import *
+from core.database.database_module import save_data
+from core.variables import database
+from core.methods.cache import targetname
+import inspect
 
 info = "This module analyzes the security of cookies (HTTPOnly/Secure Flags)"
 searchinfo = "Cookie Analysis"
@@ -39,12 +43,16 @@ def cookiecheck0x00(searchheaders):
                 CookieSplit[-1] = CookieSplit[-1].rstrip()
                 CookieString = ''.join(CookieSplit)
                 if "HttpOnly".lower() not in CookieString.lower():
+                    save_data(database, module, lvl1, lvl2, lvl3, name, "Cookie not marked HttpOnly - "+header.rstrip())
                     print(R+" [-] Cookie not marked HttpOnly - "+C+"'" + header.rstrip() + "' ")
                 else:
+                    save_data(database, module, lvl1, lvl2, lvl3, name, "Cookie marked HttpOnly - "+header.rstrip())
                     print(G+' [+] Cookie marked HTTPOnly - '+C+'"'+header.rstrip()+'"')
                 if "Secure".lower() not in CookieString.lower():
+                    save_data(database, module, lvl1, lvl2, lvl3, name, "Cookie not marked Secure - "+header.rstrip())
                     print(R+" [-] Cookie not marked Secure - "+C+"'" + header.rstrip() + "' ")
                 else:
+                    save_data(database, module, lvl1, lvl2, lvl3, name, "Cookie marked Secure - "+header.rstrip())
                     print(G+' [+] Cookie marked Secure - '+C+'"'+header.rstrip()+'"')
 
             except Exception as e:
@@ -72,7 +80,16 @@ def RetrieveHeader(Target):
         return ReplyHeaders
 
 def cookiecheck(web):
-
+    global name
+    name = targetname(web)
+    global lvl2
+    lvl2 = inspect.stack()[0][3]
+    global module
+    module = "VulnAnalysis"
+    global lvl1
+    lvl1 = "Basic Bugs & Misconfigurations"
+    global lvl3
+    lvl3 = ""
     #print(R+'\n    ==================================================')
     #print(R+'\n     C O O K I E   C H E C K  (HTTPOnly/Secure Flags)')
     #print(R+'    ——·‹›·––·‹›·——·‹›·——·‹›·——·‹›·——·‹›·––·‹›·——·‹›·––\n')

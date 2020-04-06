@@ -17,6 +17,11 @@ import getopt
 import http.client
 from core.Core.colors import *
 
+from core.database.database_module import save_data
+from core.variables import database
+from core.methods.cache import targetname
+import inspect
+
 info = "This module searches Cross Site Tracing vulnerabilities."
 searchinfo = "Cross Site Tracing"
 properties = {"PORT":["Port to use", " "]}
@@ -55,6 +60,7 @@ def xsstrace0x00(target):
         print(O+' [!] Response : '+GR, response.status, response.reason)
         print(O+' [!] Data (raw) : \n'+GR)
         print(data + '\n')
+        save_data(database, module, lvl1, lvl2, lvl3, name, str(data))
 
     else:
         print(GR+' [*] Setting buffers...')
@@ -83,15 +89,18 @@ def xsstrace0x00(target):
 
             if script.lower() in data1.lower():
                 print(G+' [+] Site is vulnerable to Cross Site Tracing...')
+                save_data(database, module, lvl1, lvl2, lvl3, name, "Site is vulnerable to Cross Site Tracing!")
 
             else:
                 print(R+' [-] Site is immune against Cross-Site Tracing...')
+                save_data(database, module, lvl1, lvl2, lvl3, name, "Site is immune against Cross-Site Tracing.")
             print("")
 
             print(GR+' [*] Obtaining header dump data...')
             time.sleep(1)
             print("")
             print(O+data1)
+            save_data(database, module, lvl1, lvl2, lvl3, name, str(data1))
             print("")
 
         else:
@@ -99,8 +108,16 @@ def xsstrace0x00(target):
             print(R+' [-] Port '+O+str(port)+' is closed!')
 
 def xsstrace(web):
-
-    print(GR+' [*] Loading the module...')
+    global name
+    name = targetname(web)
+    global lvl2
+    lvl2 = inspect.stack()[0][3]
+    global module
+    module = "VulnAnalysis"
+    global lvl1
+    lvl1 = "Basic Bugs & Misconfigurations"
+    global lvl3
+    lvl3 = ""
     time.sleep(0.5)
     if 'http' in web:
         web = web.replace('http://','')

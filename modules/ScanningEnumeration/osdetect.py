@@ -74,7 +74,7 @@ def osdetect(web):
     global name
     name = targetname(web)
     global lvl2
-    lvl2 = "osdetect"
+    lvl2 = inspect.stack()[0][3]
     global module
     module = "ScanANDEnum"
     global lvl1

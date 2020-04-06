@@ -21,6 +21,10 @@ from core.Core.colors import *
 from core.variables import tor
 from core.methods.tor import session
 from modules.OSINTFootprinting.ActiveRecon.serverdetect import serverdetect
+from core.database.database_module import save_data
+from core.variables import database
+from core.methods.cache import targetname
+import inspect
 br = mechanize.Browser()
 
 cj = http.cookiejar.LWPCookieJar()
@@ -111,14 +115,24 @@ def bypass(domain):
         print(GR+' [*] Identifying IP...')
         time.sleep(0.5)
         print(G+' [+] Real IP Address : ' + bypass.ip_addr + '\n')
+        save_data(database, module, lvl1, lvl2, lvl3, name, "Cloudflare misconfigured! IP address: {}".format(bypass.ip_addr))
     else:
         print(R+' [-] Cloudflare properly configured...')
         print(R+' [-] Unable to find remote IP!\n')
+        save_data(database, module, lvl1, lvl2, lvl3, name, "Cloudflare properly configured.")
         pass
 
 def cloudflaremisc(web):
-
-    print(GR+' [*] Loading...')
+    global name
+    name = targetname(web)
+    global lvl2
+    lvl2 = inspect.stack()[0][3]
+    global module
+    module = "VulnAnalysis"
+    global lvl1
+    lvl1 = "Basic Bugs & Misconfigurations"
+    global lvl3
+    lvl3 = ""
     time.sleep(0.5)
     cloud0x00(web)
 

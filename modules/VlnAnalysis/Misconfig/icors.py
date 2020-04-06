@@ -17,6 +17,11 @@ import urllib.parse
 import time
 from core.Core.colors import *
 
+from core.database.database_module import save_data
+from core.variables import database
+from core.methods.cache import targetname
+import inspect
+
 info = "This module searches for several misconfigurations in domain of ICORS."
 searchinfo = "Insecure Cross Origin Resource Sharing"
 properties = {}
@@ -37,34 +42,48 @@ def check0x00(url):
 
         if (acao == "no_acac" or "*" == acao):
             print(O+'\n [+] Access Control Allow Origin present (Without Credentials)...')
+            save_data(database, module, lvl1, lvl2, lvl3, name, "Access Control Allow Origin present (Without Credentials).")
         elif acao == "*":
             print(O+' [!] Access Control Allow Origin present (point blank)...')
+            save_data(database, module, lvl1, lvl2, lvl3, name, "Access Control Allow Origin present (point blank).")
         elif acao in ["//", "://"]:
             print(G+' [+] Possible iCORS vulnerability found!...')
             print(G+' [+] Access Control Allow Origin : '+O+'Any Origin Allowed...')
+            save_data(database, module, lvl1, lvl2, lvl3, name, "Possible iCORS vulnerability found!\nAccess Control Allow Origin: Any Origin Allowed.")
         elif re.findall("\s|,|\|", acao):
-            print(R+' [¬]  Access Control Allow Origin present (multiple Credentials)...')
+            print(R+' [¬] Access Control Allow Origin present (multiple Credentials)...')
+            save_data(database, module, lvl1, lvl2, lvl3, name, "Access Control Allow Origin present (multiple Credentials).")
         elif re.findall("\*.", acao):
             print(R+' [-] Invalid iCORS : Only "*" is valid...')
+            save_data(database, module, lvl1, lvl2, lvl3, name, "Invalid iCORS : Only "*" is valid.")
         elif re.findall("fiddle.jshell.net|s.codepen.io", acao):
             print(GR+' [!] Access Control Allow Origin : Developer backdoor found!...')
+            save_data(database, module, lvl1, lvl2, lvl3, name, "Access Control Allow Origin : Developer backdoor found!")
         elif "evil.org" in cors0x00(url, "evil.org"):
             print(G+' [+] Access Control Allow Origin present : Origin Reflection...')
+            save_data(database, module, lvl1, lvl2, lvl3, name, "Access Control Allow Origin present : Origin Reflection.")
         elif "null" == cors0x00(url, "null").lower():
             print(G+' [+] Access Control Allow Origin present : Null Misconfiguration...')
+            save_data(database, module, lvl1, lvl2, lvl3, name, "Access Control Allow Origin present : Null Misconfiguration.")
         elif host+".tk" in cors0x00(url, host+".tk"):
             print(G+' [+] Access Control Allow Origin present : Post-domain Wildcard...')
+            save_data(database, module, lvl1, lvl2, lvl3, name, "Access Control Allow Origin present : Post-domain Wildcard.")
         elif "not"+host in cors0x00(url, "not"+url):
             print(GR+' [¬] Access Control Allow Origin present : Post-Subdomain WildCard...')
+            save_data(database, module, lvl1, lvl2, lvl3, name, "Access Control Allow Origin present : Post-Subdomain WildCard.")
         elif "sub."+host in cors0x00(url, "sub."+url):
             print(G+' [+] Access Control Allow Origin present : Arbitrary Subdomains Allowed...')
+            save_data(database, module, lvl1, lvl2, lvl3, name, "Access Control Allow Origin present : Arbitrary Subdomains Allowed.")
         elif cors0x00(url, url, True).startswith("http://"):
             print(G+' [+] Access Control Allow Origin present : Non-SSL Sites Allowed...')
+            save_data(database, module, lvl1, lvl2, lvl3, name, "Access Control Allow Origin present : Non-SSL Sites Allowed.")
         else:
             print(G+' [+] Access Control Allow Origin present : '+acao)
+            save_data(database, module, lvl1, lvl2, lvl3, name, "Access Control Allow Origin present: " + acao)
 
     else:
         print(R+' [-] Not vulnerable to iCORS...')
+        save_data(database, module, lvl1, lvl2, lvl3, name, "Not vulnerable to iCORS.")
     time.sleep(1)
 
 def cors0x00(url, ssltest, firstrun=False):
@@ -100,8 +119,16 @@ def cors0x00(url, ssltest, firstrun=False):
         print(R+' [-] Error : '+str(e))
 
 def icors(web):
-
-    print(GR+' [*] Loading module...')
+    global name
+    name = targetname(web)
+    global lvl2
+    lvl2 = inspect.stack()[0][3]
+    global module
+    module = "VulnAnalysis"
+    global lvl1
+    lvl1 = "Basic Bugs & Misconfigurations"
+    global lvl3
+    lvl3 = ""
     #print(R+'\n    =========================================')
     #print(R+'\n     iNSECURE CROSS ORIGIN RESCOURCE SHARING')
     #print(R+'    ——·‹›·––·‹›·——·‹›·——·‹›·——·‹›·––·‹›·——·‹›\n')

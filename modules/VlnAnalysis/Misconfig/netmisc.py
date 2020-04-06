@@ -13,6 +13,10 @@ import nmap
 import time
 from core.Core.colors import *
 import socket
+from core.database.database_module import save_data
+from core.variables import database
+from core.methods.cache import targetname
+import inspect
 
 info = "This module discovers possible Telnet misconfiguration."
 searchinfo = "Telnet Checker"
@@ -40,13 +44,19 @@ def netmisc0x00(web):
             port = 23
             thisDict = nmScan[ip]['tcp'][port]
             print(G+' [+] Telnet network misconfiguration confirmed!')
+            save_data(database, module, lvl1, lvl2, lvl3, name, "Telnet misconfiguration confirmed!")
             time.sleep(0.5)
             if thisDict['version']:
                 print(G+' [+] Port ' + str(port) + ': ' +C+ thisDict['product'] +GR+ ', v' + thisDict['version'])
+                data = "Port " + str(port) + ": " + thisDict["product"] + ", v" + thisDict["version"]
+                save_data(database, module, lvl1, lvl2, lvl3, name, data)
             else:
                 print(G+' [+] Port ' + str(port) + ': ' +C+ thisDict['product'])
+                data = "Port " + str(port) + ": " + thisDict["product"]
+                save_data(database, module, lvl1, lvl2, lvl3, name, data)
         else:
             print(R+' [-] Telnet Disabled!')
+            save_data(database, module, lvl1, lvl2, lvl3, name, "Telnet disabled.")
         sock.close()
 
     except Exception as e:
@@ -54,8 +64,16 @@ def netmisc0x00(web):
         print(R+' [-] Error : '+str(e))
 
 def netmisc(web):
-
-    print(GR+' [*] Loading module...')
+    global name
+    name = targetname(web)
+    global lvl2
+    lvl2 = inspect.stack()[0][3]
+    global module
+    module = "VulnAnalysis"
+    global lvl1
+    lvl1 = "Basic Bugs & Misconfigurations"
+    global lvl3
+    lvl3 = ""
     #print(R+'\n    ===================================')
     #print(R+'\n     TELNET ENABLED (Network Misconf.)')
     #print(R+'    ——·‹›·––·‹›·——·‹›·——·‹›·––·‹›·——·‹›\n')

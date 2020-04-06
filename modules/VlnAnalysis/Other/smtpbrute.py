@@ -17,6 +17,10 @@ import socket
 from time import sleep
 import smtplib
 from core.Core.colors import *
+from core.database.database_module import save_data
+from core.variables import database
+from core.methods.cache import targetname
+import inspect
 
 smtpuser = []
 smtppass = []
@@ -28,6 +32,7 @@ properties = {}
 def smtpBrute0x00(ip, usernames, passwords, port, delay):
 
     s = smtplib.SMTP(str(ip), port)
+    found = False
     for username in usernames:
         for password in passwords:
             try:
@@ -36,20 +41,37 @@ def smtpBrute0x00(ip, usernames, passwords, port, delay):
                 s.ehlo
                 s.login(str(username), str(password))
                 print(G + ' [+] Username: %s | Password found: %s\n' % (username, password))
+                data = username + " : " + password
+                save_data(database, module, lvl1, lvl2, lvl3, name, data)
+                found = True
                 s.close()
             except smtplib.SMTPAuthenticationError:
-                print(GR+ " [*] Checking : "+C+"Username: %s | "+B+"Password: %s "+R+"| Incorrect!\n" % (username, password))
+                print(GR+ " [*] Checking : "+C+"Username: {} | ".format(username)+B+"Password: {} ".format(password)+R+"| Incorrect!\n")
                 sleep(delay)
             except Exception as e:
                 print(R+" [-] Error caught! Exception: "+str(e))
                 pass
             except KeyboardInterrupt:
                 s.close()
+                if not found:
+                    data = "Nothing found."
+                    save_data(database, module, lvl1, lvl2, lvl3, name, data)
                 sys.exit(1)
+    if not found:
+        data = "Nothing found."
+        save_data(database, module, lvl1, lvl2, lvl3, name, data)
 
 def smtpbrute(web):
-
-    print(GR+' [*] Loading module...\n')
+    global name
+    name = targetname(web)
+    global lvl2
+    lvl2 = inspect.stack()[0][3]
+    global module
+    module = "VulnAnalysis"
+    global lvl1
+    lvl1 = "Brute Force Tools"
+    global lvl3
+    lvl3 = ""
     time.sleep(0.6)
     #print(R+'    =====================')
     #print(R+'\n     S M T P   B R U T E ')
