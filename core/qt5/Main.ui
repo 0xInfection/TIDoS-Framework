@@ -1084,6 +1084,10 @@
                         <property name="text">
                          <string>Clear</string>
                         </property>
+                        <property name="icon">
+                         <iconset>
+                          <normaloff>icons/delete.svg</normaloff>icons/delete.svg</iconset>
+                        </property>
                        </widget>
                       </item>
                       <item row="0" column="1">
@@ -1103,6 +1107,10 @@
                        <widget class="QPushButton" name="newDbButton">
                         <property name="text">
                          <string>New</string>
+                        </property>
+                        <property name="icon">
+                         <iconset>
+                          <normaloff>icons/add.svg</normaloff>icons/add.svg</iconset>
                         </property>
                        </widget>
                       </item>
@@ -1134,17 +1142,94 @@
                </layout>
               </item>
               <item>
-               <spacer name="verticalSpacer">
+               <layout class="QFormLayout" name="formLayout">
+                <item row="0" column="1">
+                 <widget class="QLineEdit" name="dbSearchField">
+                  <property name="placeholderText">
+                   <string>Search in database...</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="0">
+                 <widget class="QPushButton" name="dbSearchButton">
+                  <property name="text">
+                   <string>Search</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <widget class="QTextBrowser" name="dbSearchOutput">
+              <property name="palette">
+               <palette>
+                <active>
+                 <colorrole role="Base">
+                  <brush brushstyle="SolidPattern">
+                   <color alpha="255">
+                    <red>19</red>
+                    <green>14</green>
+                    <blue>19</blue>
+                   </color>
+                  </brush>
+                 </colorrole>
+                </active>
+                <inactive>
+                 <colorrole role="Base">
+                  <brush brushstyle="SolidPattern">
+                   <color alpha="255">
+                    <red>19</red>
+                    <green>14</green>
+                    <blue>19</blue>
+                   </color>
+                  </brush>
+                 </colorrole>
+                </inactive>
+                <disabled>
+                 <colorrole role="Base">
+                  <brush brushstyle="SolidPattern">
+                   <color alpha="255">
+                    <red>27</red>
+                    <green>21</green>
+                    <blue>27</blue>
+                   </color>
+                  </brush>
+                 </colorrole>
+                </disabled>
+               </palette>
+              </property>
+              <property name="frameShape">
+               <enum>QFrame::NoFrame</enum>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_10">
+              <item>
+               <spacer name="horizontalSpacer_9">
                 <property name="orientation">
-                 <enum>Qt::Vertical</enum>
+                 <enum>Qt::Horizontal</enum>
                 </property>
                 <property name="sizeHint" stdset="0">
                  <size>
-                  <width>20</width>
-                  <height>40</height>
+                  <width>40</width>
+                  <height>20</height>
                  </size>
                 </property>
                </spacer>
+              </item>
+              <item>
+               <widget class="QPushButton" name="updateDBInfoButton">
+                <property name="text">
+                 <string>Reload</string>
+                </property>
+                <property name="icon">
+                 <iconset>
+                  <normaloff>icons/reload.svg</normaloff>icons/reload.svg</iconset>
+                </property>
+               </widget>
               </item>
              </layout>
             </item>

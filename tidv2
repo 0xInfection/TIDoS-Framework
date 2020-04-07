@@ -139,8 +139,14 @@ class TIDapp(QtWidgets.QDialog):
         self.addTargetDialog.cancelButton.clicked.connect(self.addClose)
 
     def addTarget(self):
+        base1Error = False
+        base2Error = False
         try:
             base = self.addTargetDialog.urlField.text()
+            if ":" in base or "@" in base:
+                base1Error = True
+            elif base == "":
+                base2Error = True
             assert base != "" and "://" not in base and "@" not in base and ":" not in base
             user = self.addTargetDialog.userField.text()
             passwd = self.addTargetDialog.passwordField.text()
@@ -174,7 +180,15 @@ class TIDapp(QtWidgets.QDialog):
             self.targetsListWidget.show()
             self.addTargetDialog.close()
         except AssertionError:
+            if base1Error:
+                self.showError("Base URL must be provided without protocol, port and credentials.")
+            elif base2Error:
+                self.showError("Base URL must be provided.")
+            else:
+                self.showError("'{}' is not a valid port number.".format(port))
             print("AssertionError")
+        except ValueError:
+            self.showError("'{}' is not a valid port number.".format(port))
 
     def addClose(self):
         self.addTargetDialog.close()
@@ -226,8 +240,14 @@ class TIDapp(QtWidgets.QDialog):
         self.editTargetDialog.cancelButton.clicked.connect(self.closeEdit)
 
     def editTarget(self):
+        base1Error = False
+        base2Error = False
         try:
             base = self.editTargetDialog.urlField.text()
+            if ":" in base or "@" in base:
+                base1Error = True
+            elif base == "":
+                base2Error = True
             assert base != "" and "://" not in base and "@" not in base and ":" not in base
             user = self.editTargetDialog.userField.text()
             passwd = self.editTargetDialog.passwordField.text()
@@ -263,7 +283,15 @@ class TIDapp(QtWidgets.QDialog):
             self.targetsListWidget.show()
             self.editTargetDialog.close()
         except AssertionError:
+            if base1Error:
+                self.showError("Base URL must be provided without protocol, port and credentials.")
+            elif base2Error:
+                self.showError("Base URL must be provided.")
+            else:
+                self.showError("'{}' is not a valid port number.".format(port))
             print("AssertionError")
+        except ValueError:
+            self.showError("'{}' is not a valid port number.".format(port))
 
     def closeEdit(self):
         self.editTargetDialog.close()
@@ -288,6 +316,7 @@ class TIDapp(QtWidgets.QDialog):
             self.targetsListWidget.show()
         except AssertionError:
             print("AssertionError")
+            self.showError("'{}' is not a valid session file.".format(filepath))
 
     def loadValSession(self):
         try:
@@ -299,6 +328,7 @@ class TIDapp(QtWidgets.QDialog):
                 self.targetsListWidget.addItem(vic)
             self.targetsListWidget.show()
         except AssertionError:
+            self.showError("'{}' is not a valid session file.".format(filepath))
             print("AssertionError")
 
     def fetchNetInfo(self):
@@ -318,6 +348,7 @@ class TIDapp(QtWidgets.QDialog):
             self.whoIsDisplay.addItem("Interface: " + def_gw_device)
             self.networkTab.show()
         except Exception as e:
+            self.showError(e)
             print("Exception encountered: {}".format(e))
 
     def displayInfo(self):
@@ -335,8 +366,8 @@ class TIDapp(QtWidgets.QDialog):
                     self.infoOptDialog.optionTable.setItem(rowPosition , 0, QTableWidgetItem(key))
                     self.infoOptDialog.optionTable.setItem(rowPosition , 1, QTableWidgetItem(value[0]))
                     self.infoOptDialog.optionTable.setItem(rowPosition , 2, QTableWidgetItem(value[1]))
-        except:
-            pass
+        except Exception as e:
+            self.showError(e)
         self.infoOptDialog.show()
         self.infoOptDialog.cancelButton.clicked.connect(self.closeOpts)
         self.infoOptDialog.saveButton.clicked.connect(self.saveOpts)
@@ -349,8 +380,8 @@ class TIDapp(QtWidgets.QDialog):
                     prop = self.infoOptDialog.optionTable.item(i, 0).text()
                     val = self.infoOptDialog.optionTable.item(i, 2).text()
                     shell.do_set("{} {}".format(prop, val))
-        except:
-            pass
+        except Exception as e:
+            self.showError(e)
         self.infoOptDialog.close()
 
     def closeOpts(self):
@@ -410,7 +441,7 @@ class TIDapp(QtWidgets.QDialog):
     def installUpdate(self):
         path = os.path.dirname(os.path.realpath(__file__))
         if "/home/" in path:
-            user = path.split("/")[2]
+            #user = path.split("/")[2]
             os.system("git stash; git pull")
         else:
             os.system("pkexec /opt/TIDoS/core/methods/vpdate.py")
@@ -425,8 +456,18 @@ class TIDapp(QtWidgets.QDialog):
             self.nameLabel.setText(variables.database.split("/")[-1])
             self.show()
         except:
-            print("error: ls does not support the -h flag.")
+            self.showError("Local 'ls' does not support the '-h' flag.")
             filesize = "LSh"
+
+    def showError(self, message):
+        self.errorDialog = QtWidgets.QDialog()
+        uic.loadUi("core/qt5/Error.ui", self.errorDialog)
+        self.errorDialog.errorMessage.setText(message)
+        self.errorDialog.show()
+        self.errorDialog.errorOkButton.clicked.connect(self.closeError)
+
+    def closeError(self):
+        self.errorDialog.close()
 
 
 app = QtWidgets.QApplication(sys.argv) # Create an instance of QtWidgets.QApplication
