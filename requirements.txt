@@ -23,6 +23,7 @@ mysql-connector-python-rf
 ptyprocess
 dnslib
 PyQt5
+photon
 
 # Optionals (needed for additional features)
 # ------------------------------------------

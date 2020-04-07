@@ -657,7 +657,7 @@ class TIDcon(Cmd):
             else:
                 print(" [+] You are running the latest version of TIDoS-framework ({}).".format(localver))
             if gui:
-                return (uptodate, onver)
+                return (uptodate, localver)
         except:
             print(R + " [-] " + "\033[0m" + color.UNDERLINE + "\033[1m" + "An error occurred fetching...")
 

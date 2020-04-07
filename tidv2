@@ -20,6 +20,7 @@ _____, ___
 import sys, platform
 import os, socket
 import requests
+import subprocess, re
 from tidconsole import TIDcon
 from core.methods.cache import createVal, targetparse
 from PyQt5.QtCore import Qt
@@ -104,6 +105,7 @@ class TIDapp(QtWidgets.QDialog):
         self.treeView.header().hide()
         self.processNumberLabel.setText(str(variables.processes))
         self.show() # Show the GUI
+        self.setDBinfo()
         self.addTargetButton.clicked.connect(self.addTargetInput)
         self.editTargetButton.clicked.connect(self.editTargetInput)
         self.deleteTargetButton.clicked.connect(self.deleteTarget)
@@ -414,6 +416,17 @@ class TIDapp(QtWidgets.QDialog):
             os.system("pkexec /opt/TIDoS/core/methods/vpdate.py")
         code[0] = True
         self.done(0)
+
+    def setDBinfo(self):
+        try:
+            response = subprocess.check_output(["ls","-lh",variables.database]).decode("utf-8")
+            filesize = re.split("\s+", response)[4]
+            self.sizeLabel.setText(filesize)
+            self.nameLabel.setText(variables.database.split("/")[-1])
+            self.show()
+        except:
+            print("error: ls does not support the -h flag.")
+            filesize = "LSh"
 
 
 app = QtWidgets.QApplication(sys.argv) # Create an instance of QtWidgets.QApplication
