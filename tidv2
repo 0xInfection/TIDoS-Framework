@@ -43,7 +43,7 @@ class TIDapp(QtWidgets.QDialog):
         #info_action = QtWidgets.QAction('Info', self)
         #menu.addAction(info_action)
         self.sessionType.addItem("normal")
-        self.sessionType.addItem("parametrised")
+        self.sessionType.addItem("param (.val)")
         self.versionNumber.setText(variables.r_version)
         modules = modulelist("all", False)
         rootrecon = QTreeWidgetItem(self.treeView)
@@ -297,7 +297,7 @@ class TIDapp(QtWidgets.QDialog):
         self.editTargetDialog.close()
 
     def chooseSession(self):
-        if ".val" in self.sessionFileEdit.text() or self.sessionType.currentText() != "normal":
+        if ".val" in self.sessionFileEdit.text().lower() or self.sessionType.currentText() != "normal":
             self.loadValSession()
         else:
             self.loadNormalSession()
@@ -479,5 +479,5 @@ while code[0]:
     code[0] = False
     app = QtWidgets.QApplication(sys.argv) # Create an instance of QtWidgets.QApplication
     window = TIDapp() # Create an instance of our class
-    app.setWindowIcon(QtGui.QIcon("core/qt5/icons/tidos.png"))
+    app.setWindowIcon(QtGui.QIcon("core/qt5/icons/tid.png"))
     rcode = app.exec_() # Start the application
