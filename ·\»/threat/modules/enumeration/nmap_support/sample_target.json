@@ -1,8 +1,0 @@
-[
-    {
-    "ip": "xxx.xxx.xxx.xxx",
-    "nmap": {
-        "-sV": false
-    }
-}
-]
