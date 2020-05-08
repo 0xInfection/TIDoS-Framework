@@ -1,0 +1,114 @@
+2.0.0 (INIT)
+--------------
+
+  Conversion to Python3
+  New console interface
+
+2.0.1-3
+---------
+
+  Created separate file for handling credentials
+  added temporar credential dropping in case of socket.gaierror
+
+INTERMEDIATE
+
+  phpsploit checks if path to script is valid ; else it will ask for a valid path
+  nmapmain: omitted unnecessary display
+
+2.0.1-5
+---------
+
+  fixed: "can't cd into tmp/logs"
+  fixed: XSS byte-like object is required
+  fixed: PHPi xrange
+  improved: automatic dropping of credentials for OSINT-passive modules where they are not needed
+  fixed: autocorrect strikes again in legal disclaimer ;)
+ 
+2.0.1-15
+----------
+
+  fixed: CRLF
+  fixed: Exploit invalid module error
+  fixed: xrange in some modules
+  fixed: string.ascii_letters in some modules
+  fixed: Broken exception syntax in some modules
+  fixed: SQLi error when leaving module
+  improved: show content of found paths in pathtrav module
+  improved: auto modules will carry on with next module when current one fails
+  improved: banners (main, modules)
+  fixed: XPATHi
+  fixed: LFI
+  fixed: HTMLi
+  partially fixed: RCE
+  improved: added support for multiple parameters in various modules
+  improved: pathtrav evasion implemented in LFI, too
+  
+INTERMEDIATE
+
+  fixed: osdetect bytes -> string error
+  improved: vicadd & IPs
+  new module: arpscan
+
+
+[·= VERSION 2.1 - parallelisation ; tor ; options =·]
+
+2.1.0-5
+---------
+
+  added: parallelisation mode for multiple modules to speed up calculation
+  #all port scanners (parallelisation-only)
+  #most of vlnysis-severe (choice through user input)
+  added: "processes" command to set processes to be used in parallelisation
+  added: new core methods to handle parallelisation
+  fixed: TCP stealth scanner unable to find ports
+  fixed: rce crash
+  fixed: all subdom modules
+  fixed: module x has no y in csrf
+  fixed: payload duplication in sqli and xss
+  fixed: getcensys
+  improved: list&find only dispay name, not path
+  improved: interface in "ip" controlled by variable in variables.py
+  improved: non-verbose port scanning is less verbose
+  
+2.1.0-15
+----------
+
+  added: CLI interface for faster interaction with one specific module
+         !!!you need to update your /bin/TIDoS!!!
+         new version in tmp/TIDoS
+  added: tor command to pipe attacks through the Tor network
+         right now, only for vlnysis-severe (except CSRF, subdom)
+  fixed: pathtrav exception during not-evasion attack
+
+2.1.0-51
+----------
+
+  added: set-options for all vlnysis-severe modules and port scanners
+  added: new .val file format for sessions with module properties
+  added: "fetch" command to check and install updates
+  added: cli option for fetch
+  added: parallelisation for more modules
+  added: Tor support for Web crawlers and other scanning modules (port scanners excluded)
+  added: Tor and options for OSINT modules
+  added: stub for upcoming shellcraft module
+  added: parallelisation and options for finscan
+  fixed: payload duplication in XSS
+  fixed: placed finscan in portscanning category
+  fixed: an error in listsplit potentially causing parallelised attacks to crash
+  fixed: Brute Recon method already defined
+  improved: target not necessary when using most aid modules
+  improved: list command divides output in different categories, and sorts it alphabetically
+  
+2.1.5-0
+---------
+
+  fixed: import error in automation modules
+  added: Tor for almost all modules
+
+2.2.5-1
+---------
+
+  added: GUI
+  added: full automation support (see the --file argument)
+  several fixes
+  improved: coloring, asciiart

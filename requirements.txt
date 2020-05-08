@@ -1,7 +1,10 @@
+argparse
+texttable
 sslyze
 tldextract
 lxml
 pillow
+colorama
 scapy
 pexpect
 idna
@@ -16,7 +19,13 @@ emailprotectionslib
 builtwith
 mechanize
 mysql
-mysql-connector-python
 mysql-connector-python-rf
 ptyprocess
 dnslib
+PyQt5
+photon
+
+# Optionals (needed for additional features)
+# ------------------------------------------
+# post-exploitation & control
+# https://github.com/nil0x42/phpsploit

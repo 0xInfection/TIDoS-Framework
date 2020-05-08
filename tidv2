@@ -1,0 +1,483 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+_____, ___
+   '+ .;    
+    , ;   
+     .   
+           
+       .    
+     .;.    
+     .;  
+      :  
+      ,   
+       
+
+┌─[TIDoS]─[]
+└──╼ VainlyStrain
+"""
+
+import sys, platform
+import os, socket
+import requests
+import subprocess, re
+from tidconsole import TIDcon
+from core.methods.cache import createVal, targetparse
+from PyQt5.QtCore import Qt
+import core.variables as variables
+from subprocess import Popen, PIPE
+from core.variables import interface, username
+from PyQt5 import QtWidgets, uic, QtCore, QtGui
+from core.methods.select import mlist as modulelist
+from PyQt5.QtWidgets import QTreeWidgetItem, QTableWidgetItem
+
+shell = TIDcon()
+code = [False]
+
+class TIDapp(QtWidgets.QDialog):
+    def __init__(self):
+        super(TIDapp, self).__init__() # Call the inherited classes __init__ method
+        uic.loadUi("core/qt5/Main.ui", self) # Load the .ui file
+        #menu = self.menuBar() 
+        #vaile_menu = bar.addMenu('TIDoS')
+        #info_action = QtWidgets.QAction('Info', self)
+        #menu.addAction(info_action)
+        self.sessionType.addItem("normal")
+        self.sessionType.addItem("param (.val)")
+        self.versionNumber.setText(variables.r_version)
+        modules = modulelist("all", False)
+        rootrecon = QTreeWidgetItem(self.treeView)
+        rootrecon.setText(0, "Phase 1: Reconnaissance")
+        rootrecon.setFlags(rootrecon.flags() | Qt.ItemIsTristate | Qt.ItemIsUserCheckable)
+        osint = QTreeWidgetItem(rootrecon)
+        osint.setFlags(osint.flags() | Qt.ItemIsTristate | Qt.ItemIsUserCheckable)
+        osint.setText(0, "OSINT/Fingerprinting")
+        self.genTree(osint, modules[0])
+        active = QTreeWidgetItem(rootrecon)
+        active.setFlags(active.flags() | Qt.ItemIsTristate | Qt.ItemIsUserCheckable)
+        active.setText(0, "Active Reconnaissance")
+        self.genTree(active, modules[1])
+        disc = QTreeWidgetItem(rootrecon)
+        disc.setFlags(disc.flags() | Qt.ItemIsTristate | Qt.ItemIsUserCheckable)
+        disc.setText(0, "Information Disclosure")
+        self.genTree(disc, modules[2])
+        scanroot = QTreeWidgetItem(self.treeView)
+        scanroot.setText(0, "Phase 2: Scanning & Enumeration")
+        scanroot.setFlags(scanroot.flags() | Qt.ItemIsTristate | Qt.ItemIsUserCheckable)
+        self.genTree(scanroot, modules[3])
+        port = QTreeWidgetItem(scanroot)
+        port.setText(0, "Port Scanners")
+        port.setFlags(port.flags() | Qt.ItemIsTristate | Qt.ItemIsUserCheckable)
+        self.genTree(port, modules[4])
+        crawl = QTreeWidgetItem(scanroot)
+        crawl.setText(0, "Web Crawlers")
+        crawl.setFlags(crawl.flags() | Qt.ItemIsTristate | Qt.ItemIsUserCheckable)
+        self.genTree(crawl, modules[5])
+        vlnroot = QTreeWidgetItem(self.treeView)
+        vlnroot.setText(0, "Phase 3: Vulnerability Analysis")
+        vlnroot.setFlags(vlnroot.flags() | Qt.ItemIsTristate | Qt.ItemIsUserCheckable)
+        miscon = QTreeWidgetItem(vlnroot)
+        miscon.setText(0, "Misconfigurations")
+        miscon.setFlags(miscon.flags() | Qt.ItemIsTristate | Qt.ItemIsUserCheckable)
+        self.genTree(miscon, modules[6])
+        severe = QTreeWidgetItem(vlnroot)
+        severe.setText(0, "Severe Vulnerabilities")
+        severe.setFlags(severe.flags() | Qt.ItemIsTristate | Qt.ItemIsUserCheckable)
+        self.genTree(severe, modules[7])
+        brute = QTreeWidgetItem(vlnroot)
+        brute.setText(0, "Password Attacks")
+        brute.setFlags(brute.flags() | Qt.ItemIsTristate | Qt.ItemIsUserCheckable)
+        self.genTree(brute, modules[8])
+        sploit = QTreeWidgetItem(self.treeView)
+        sploit.setText(0, "Phase 4: Exploitation")
+        sploit.setFlags(sploit.flags() | Qt.ItemIsTristate | Qt.ItemIsUserCheckable)
+        self.genTree(sploit, modules[9])
+
+        post = QTreeWidgetItem(self.treeView)
+        post.setText(0, "Phase 5: Post Exploitation")
+        post.setFlags(post.flags() | Qt.ItemIsTristate | Qt.ItemIsUserCheckable)
+        self.genTree(post, modules[11])
+
+        aid = QTreeWidgetItem(self.treeView)
+        aid.setText(0, "Additional Modules")
+        aid.setFlags(aid.flags() | Qt.ItemIsTristate | Qt.ItemIsUserCheckable)
+        self.genTree(aid, modules[10])
+        self.treeView.header().hide()
+        self.processNumberLabel.setText(str(variables.processes))
+        self.show() # Show the GUI
+        self.setDBinfo()
+        self.addTargetButton.clicked.connect(self.addTargetInput)
+        self.editTargetButton.clicked.connect(self.editTargetInput)
+        self.deleteTargetButton.clicked.connect(self.deleteTarget)
+        self.loadSessionButton.clicked.connect(self.chooseSession)
+        self.fetchButton.clicked.connect(self.fetchNetInfo)
+        self.optsButton.clicked.connect(self.displayInfo)
+        self.attackButton.clicked.connect(self.attack)
+        self.checkUpdatesButton.clicked.connect(self.checkUpdate)
+        self.processUpdateButton.clicked.connect(self.setProcessNumber)
+
+    def setProcessNumber(self):
+        new = self.processNumberEdit.text()
+        shell.do_processes(new)
+        self.processNumberLabel.setText(str(variables.processes))
+
+    def genTree(self, parent, modulist):
+        for i in range(len(modulist)):
+            if "-all" not in modulist[i]:
+                child = QTreeWidgetItem(parent)
+                child.setFlags(child.flags() | Qt.ItemIsUserCheckable)
+                child.setText(0, modulist[i])
+                child.setCheckState(0, Qt.Unchecked)
+
+    def addTargetInput(self):
+        self.addTargetDialog = QtWidgets.QDialog()
+        uic.loadUi("core/qt5/AddTargetDialog.ui", self.addTargetDialog)
+        self.addTargetDialog.httpBox.addItem("http")
+        self.addTargetDialog.httpBox.addItem("https")
+        self.addTargetDialog.show()
+        self.addTargetDialog.addTargetToListButton.clicked.connect(self.addTarget)
+        self.addTargetDialog.cancelButton.clicked.connect(self.addClose)
+
+    def addTarget(self):
+        base1Error = False
+        base2Error = False
+        try:
+            base = self.addTargetDialog.urlField.text()
+            if ":" in base or "@" in base:
+                base1Error = True
+            elif base == "":
+                base2Error = True
+            assert base != "" and "://" not in base and "@" not in base and ":" not in base
+            user = self.addTargetDialog.userField.text()
+            passwd = self.addTargetDialog.passwordField.text()
+            protocol = self.addTargetDialog.httpBox.currentText()
+            if protocol == "":
+                protocol = "http"
+            port = self.addTargetDialog.portEdit.text()
+            portgiven = True
+            if port == "":
+                portgiven = False
+                if protocol == "https":
+                    port = "443"
+                else:
+                    port = "80"
+            assert int(port) in range(1, 65535)
+            if user != "" and passwd != "":
+                if self.addTargetDialog.ipOnly.isChecked():
+                    target = base
+                else:
+                    target = protocol + "://" + user + ":" + passwd + "@" + base
+                if portgiven:
+                    target = target + ":" + port
+            else:
+                if self.addTargetDialog.ipOnly.isChecked():
+                    target = base
+                else:
+                    target = protocol + "://" + base
+                if portgiven:
+                    target = target + ":" + port
+            self.targetsListWidget.addItem(target)
+            self.targetsListWidget.show()
+            self.addTargetDialog.close()
+        except AssertionError:
+            if base1Error:
+                self.showError("Base URL must be provided without protocol, port and credentials.")
+            elif base2Error:
+                self.showError("Base URL must be provided.")
+            else:
+                self.showError("'{}' is not a valid port number.".format(port))
+            print("AssertionError")
+        except ValueError:
+            self.showError("'{}' is not a valid port number.".format(port))
+
+    def addClose(self):
+        self.addTargetDialog.close()
+
+    def deleteTarget(self, item):
+        for item in self.targetsListWidget.selectedItems():
+            self.targetsListWidget.takeItem(self.targetsListWidget.row(item))
+        self.targetsListWidget.show()
+        
+    def editTargetInput(self):
+        self.editTargetDialog = QtWidgets.QDialog()
+        uic.loadUi("core/qt5/EditTargetDialog.ui", self.editTargetDialog)
+        self.editTargetDialog.httpBox.addItem("http")
+        self.editTargetDialog.httpBox.addItem("https")
+        for item in self.targetsListWidget.selectedItems():
+            target = item.text()
+            if "://" in target:
+                protocol = target.split("://")[0]
+                rest = target.split("://")[1]
+                if "@" in rest:
+                    user = rest.split(":")[0]
+                    passwd = rest.split(":")[1].split("@")[0]
+                    base = rest.split("@")[1]
+                else:
+                    user = ""
+                    passwd = ""
+                    base = rest
+                if ":" in base:
+                    port = base.split(":")[1].split("/")[0]
+                    base = base.split(":")[0]
+                    self.editTargetDialog.portEdit.setText(port)
+                elif protocol == "https":
+                    port = "443"
+                else:
+                    port = "80"
+                index = self.editTargetDialog.httpBox.findText(protocol, QtCore.Qt.MatchFixedString)
+                if index >= 0:
+                    self.editTargetDialog.httpBox.setCurrentIndex(index)
+            else:
+                user = ""
+                passwd = ""
+                base = target
+                self.editTargetDialog.ipOnly.setChecked(True)
+            self.editTargetDialog.userField.setText(user)
+            self.editTargetDialog.passwordField.setText(passwd)
+            self.editTargetDialog.urlField.setText(base)
+        self.editTargetDialog.show()
+        self.editTargetDialog.saveTargetInListButton.clicked.connect(self.editTarget)
+        self.editTargetDialog.cancelButton.clicked.connect(self.closeEdit)
+
+    def editTarget(self):
+        base1Error = False
+        base2Error = False
+        try:
+            base = self.editTargetDialog.urlField.text()
+            if ":" in base or "@" in base:
+                base1Error = True
+            elif base == "":
+                base2Error = True
+            assert base != "" and "://" not in base and "@" not in base and ":" not in base
+            user = self.editTargetDialog.userField.text()
+            passwd = self.editTargetDialog.passwordField.text()
+            protocol = self.editTargetDialog.httpBox.currentText()
+            port = self.editTargetDialog.portEdit.text()
+            if protocol == "":
+                protocol = "http"
+            portgiven = True
+            if port == "":
+                portgiven = False
+                if protocol == "https":
+                    port = "443"
+                else:
+                    port = "80"
+            assert int(port) in range(1, 65535)
+            if user != "" and passwd != "":
+                if self.editTargetDialog.ipOnly.isChecked():
+                    target = base
+                else:
+                    target = protocol + "://" + user + ":" + passwd + "@" + base
+                if portgiven:
+                    target = target + ":" + port
+            else:
+                if self.editTargetDialog.ipOnly.isChecked():
+                    target = base
+                else:
+                    target = protocol + "://" + base
+                if portgiven:
+                    target = target + ":" + port
+            for item in self.targetsListWidget.selectedItems():
+                self.targetsListWidget.takeItem(self.targetsListWidget.row(item))
+            self.targetsListWidget.addItem(target)
+            self.targetsListWidget.show()
+            self.editTargetDialog.close()
+        except AssertionError:
+            if base1Error:
+                self.showError("Base URL must be provided without protocol, port and credentials.")
+            elif base2Error:
+                self.showError("Base URL must be provided.")
+            else:
+                self.showError("'{}' is not a valid port number.".format(port))
+            print("AssertionError")
+        except ValueError:
+            self.showError("'{}' is not a valid port number.".format(port))
+
+    def closeEdit(self):
+        self.editTargetDialog.close()
+
+    def chooseSession(self):
+        if ".val" in self.sessionFileEdit.text().lower() or self.sessionType.currentText() != "normal":
+            self.loadValSession()
+        else:
+            self.loadNormalSession()
+
+    def loadNormalSession(self):
+        #targets loaded into vars.targets at attack launch
+        try:
+            targets = []
+            filepath = self.sessionFileEdit.text()
+            assert os.path.isfile("core/sessioncache/{}".format(filepath)) and filepath != ""
+            with open("core/sessioncache/{}".format(filepath),"r") as f:
+                targets = [line.rstrip("\n") for line in f]
+            self.targetsListWidget.clear()
+            for vic in targets:
+                self.targetsListWidget.addItem(vic)
+            self.targetsListWidget.show()
+        except AssertionError:
+            print("AssertionError")
+            self.showError("'{}' is not a valid session file.".format(filepath))
+
+    def loadValSession(self):
+        try:
+            filepath = self.sessionFileEdit.text()
+            assert os.path.isfile("core/sessioncache/{}".format(filepath)) and filepath != ""
+            targets = shell.do_sessions("load --val {}".format(filepath), gui=True)
+            self.targetsListWidget.clear()
+            for vic in targets:
+                self.targetsListWidget.addItem(vic)
+            self.targetsListWidget.show()
+        except AssertionError:
+            self.showError("'{}' is not a valid session file.".format(filepath))
+            print("AssertionError")
+
+    def fetchNetInfo(self):
+        try:
+            mac = os.popen("cat /sys/class/net/{}/address".format(interface)).read()
+            self.macDisplay.setText(mac)
+            s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+            s.connect(('google.com', 0))
+            localaddr = s.getsockname()[0]
+            self.privIpDisplay.setText(localaddr)
+            ipaddr = requests.get('http://ip.42.pl/raw').text
+            self.publicIpDisplay.setText(ipaddr)
+            def_gw_device = os.popen("route | grep '^default' | grep -o '[^ ]*$'").read()
+            self.whoIsDisplay.clear()
+            self.whoIsDisplay.addItem("Operating System: " + platform.system())
+            self.whoIsDisplay.addItem("Name: " + platform.node())
+            self.whoIsDisplay.addItem("Interface: " + def_gw_device)
+            self.networkTab.show()
+        except Exception as e:
+            self.showError(e)
+            print("Exception encountered: {}".format(e))
+
+    def displayInfo(self):
+        self.infoOptDialog = QtWidgets.QDialog()
+        uic.loadUi("core/qt5/InfoOpts.ui", self.infoOptDialog)
+        try:
+            for item in self.treeView.selectedIndexes():
+                shell.do_load(item.data())
+                info = shell.do_info("", gui=True)
+                self.infoOptDialog.titleLabel.setText(item.data())
+                self.infoOptDialog.infoPanel.setText(info[0])
+                for key, value in info[1].items():
+                    rowPosition = self.infoOptDialog.optionTable.rowCount()
+                    self.infoOptDialog.optionTable.insertRow(rowPosition)
+                    self.infoOptDialog.optionTable.setItem(rowPosition , 0, QTableWidgetItem(key))
+                    self.infoOptDialog.optionTable.setItem(rowPosition , 1, QTableWidgetItem(value[0]))
+                    self.infoOptDialog.optionTable.setItem(rowPosition , 2, QTableWidgetItem(value[1]))
+        except Exception as e:
+            self.showError(e)
+        self.infoOptDialog.show()
+        self.infoOptDialog.cancelButton.clicked.connect(self.closeOpts)
+        self.infoOptDialog.saveButton.clicked.connect(self.saveOpts)
+
+    def saveOpts(self):
+        try:
+            for item in self.treeView.selectedIndexes():
+                shell.do_load(item.data())
+                for i in range(0, self.infoOptDialog.optionTable.rowCount()):
+                    prop = self.infoOptDialog.optionTable.item(i, 0).text()
+                    val = self.infoOptDialog.optionTable.item(i, 2).text()
+                    shell.do_set("{} {}".format(prop, val))
+        except Exception as e:
+            self.showError(e)
+        self.infoOptDialog.close()
+
+    def closeOpts(self):
+        self.infoOptDialog.close()
+
+    def iterItems(self, root):
+        def recurse(parent):
+            for i in range(parent.childCount()):
+                child = parent.child(i)
+                yield child
+                if child.childCount() > 0:
+                    yield from recurse(child)
+        if root is not None:
+            yield from recurse(root)
+
+    def attack(self):
+        tor = self.torBox.isChecked()
+        blacklist = ["OSINT/Fingerprinting", "Active Reconnaissance", "Information Disclosure",
+                     "Port Scanners", "Web Crawlers",
+                     "Misconfigurations", "Severe Vulnerabilities", "Password Attacks"]
+        viclist =  [str(self.targetsListWidget.item(i).text()) for i in range(self.targetsListWidget.count())]
+        modlist = []
+        root = self.treeView.invisibleRootItem()
+        for item in self.iterItems(root):
+            if item.checkState(0) == QtCore.Qt.Checked:
+                if "Phase " not in item.text(0) and "Additional" not in item.text(0):
+                    if item.text(0) not in blacklist:
+                        modlist.append(item.text(0))
+        print(modlist)
+        if not os.path.isfile("core/sessioncache/syn.val"):
+            path = os.path.dirname(os.path.realpath(__file__))
+            if "/home/" not in path:
+                os.system("pkexec /opt/TIDoS/core/methods/create.py OPT {}".format(username))
+            else:
+                os.system("pkexec /home/{0}/TIDoS/core/methods/create.py HOME {0}".format(username))
+        tlist = []
+        for i in viclist:
+            j = targetparse(i)
+            if j:
+                tlist.append(j)
+        createVal(tlist, modlist, "syn.val")   
+        if tor:
+            os.system("konsole --hold -e 'sudo ./tidconsole.py -p -c syn.val'")
+        else:
+            os.system("konsole --hold -e 'sudo ./tidconsole.py -c syn.val'")
+
+    def checkUpdate(self):
+        result = shell.do_fetch("", gui=True)
+        if result[0]:
+            self.fetchOutput.setText("TIDoS latest version is installed: {}".format(result[1]))
+        else:
+            self.fetchOutput.setText("An update is available!\n\nCurrent version:   {}\nAvailable version: {}".format(variables.r_version, result[1]))
+            self.installUpdateButton.setEnabled(True)
+            self.installUpdateButton.clicked.connect(self.installUpdate)
+        self.show()
+
+    def installUpdate(self):
+        path = os.path.dirname(os.path.realpath(__file__))
+        if "/home/" in path:
+            #user = path.split("/")[2]
+            os.system("git stash; git pull")
+        else:
+            os.system("pkexec /opt/TIDoS/core/methods/vpdate.py")
+        code[0] = True
+        self.done(0)
+
+    def setDBinfo(self):
+        try:
+            response = subprocess.check_output(["ls","-lh",variables.database]).decode("utf-8")
+            filesize = re.split("\s+", response)[4]
+            self.sizeLabel.setText(filesize)
+            self.nameLabel.setText(variables.database.split("/")[-1])
+            self.show()
+        except:
+            self.showError("Local 'ls' does not support the '-h' flag.")
+            filesize = "LSh"
+
+    def showError(self, message):
+        self.errorDialog = QtWidgets.QDialog()
+        uic.loadUi("core/qt5/Error.ui", self.errorDialog)
+        self.errorDialog.errorMessage.setText(message)
+        self.errorDialog.show()
+        self.errorDialog.errorOkButton.clicked.connect(self.closeError)
+
+    def closeError(self):
+        self.errorDialog.close()
+
+
+app = QtWidgets.QApplication(sys.argv) # Create an instance of QtWidgets.QApplication
+window = TIDapp() # Create an instance of our class
+app.setWindowIcon(QtGui.QIcon("core/qt5/icons/tidos.png"))
+rcode = app.exec_() # Start the application
+
+while code[0]:
+    code[0] = False
+    app = QtWidgets.QApplication(sys.argv) # Create an instance of QtWidgets.QApplication
+    window = TIDapp() # Create an instance of our class
+    app.setWindowIcon(QtGui.QIcon("core/qt5/icons/tid.png"))
+    rcode = app.exec_() # Start the application
