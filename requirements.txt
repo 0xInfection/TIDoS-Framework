@@ -20,3 +20,4 @@ mysql-connector-python
 mysql-connector-python-rf
 ptyprocess
 dnslib
+xmpppy
