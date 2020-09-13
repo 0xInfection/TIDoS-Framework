@@ -18,7 +18,7 @@ from core.methods.print import summary
 from core.Core.colors import O, GR, R, G, B, C, W, color, RD
 
 info = "This module tries to find path traversal vulnerabilities on the target webpage. It is capable of in-path, as well as query attacks, and features two modes: a simple mode, recovering all possible paths, and a powerful evasion engine, attacking a specific path. Also, the user can provide cookies and his own dictionary."
-searchinfo = "Path Traversal Finder"
+searchinfo = "Advanced Path Traversal Scanning"
 properties = {"DIRECTORY":["Sensitive directory. Attack target will be http://site.com/sensitive", " "], 
               "ATTACK":["Attack vector to be used (1: Query; 2: Path; 3: Cookie; 4: POST; 5: crawler-all", " "],
               "COOKIE":["File containing Authentication Cookie to be used", " "], 
