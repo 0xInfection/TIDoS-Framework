@@ -5,11 +5,11 @@
 </h1>
 
 <p align="center">
-  <a href="https://github.com/VainlyStrain/TIDoS/blob/master/TIDoS">
+  <a href="https://github.com/0xInfection/TIDoS-Framework/blob/master/TIDoS">
     <img src="https://img.shields.io/static/v1.svg?label=Version&message=2.0&color=lightgrey&style=flat-square&logo=dev.to&logoColor=white">
   </a>
   <a href="https://www.python.org/">
-    <img src="https://img.shields.io/static/v1.svg?label=Python&message=3.7&color=lightgrey&style=flat-square&logo=python&logoColor=white">
+    <img src="https://img.shields.io/static/v1.svg?label=Python&message=3.7%2B&color=lightgrey&style=flat-square&logo=python&logoColor=white">
   </a><br>
   The Offensive Web Application Penetration Testing Framework.
 </p>
@@ -71,6 +71,9 @@ Now after these dependencies are finished installing, we need to install the rem
 ```
 pip3 install -r requirements.txt
 ```
+
+TIDoS uses Vailyn to scan for path traversals in a new, improved path traversal module. If you want to use that module, head to `https://github.com/VainlyStrain/Vailyn`, and follow the installation instructions there.
+
 Thats it. You now have TIDoS at your service. Fire it up using:
 ```
 python3 tidv2               #Qt5 interface
@@ -321,30 +324,13 @@ TIDoS presently supports the following: `and more modules are under active devel
 
 ### TIDoS In Action:
 
-Lets see some screenshots of TIDoS in action:
+Lets see a demonstration of TIDoS in action:
 
-- The core framework:
-
-<img src='files/screenshots/2251intro.png'></img>
-
-<img src='files/screenshots/2251help.png' width='49.5%'>  </img>
-<img src='files/screenshots/2251list.png' width='49.5%'>  </img>
-
-<img src='files/screenshots/2251moduleinfo.png' width='32.9%'>  </img>
-<img src='files/screenshots/2251pathtrav.png' width='32.9%'>  </img>
-<img src='files/screenshots/2251parser.png' width='32.9%'></img>
-
-- The Graphical interface:
-
-<img src='files/screenshots/2251guitargets.png' width='49.5%'>  </img>
-<img src='files/screenshots/2251guimodules.png' width='49.5%'>  </img>
-<img src='files/screenshots/2251guiopts.png' width='49.5%'>  </img>
-<img src='files/screenshots/2251guisettings.png' width='49.5%'>  </img>
-<img src='files/screenshots/2251guiedittarget.png' width='49.5%'>  </img>
+[![asciicast](https://asciinema.org/a/359477.svg)](https://asciinema.org/a/359477)
 
 ### Version:
 ```
-v2.0.1-5 [latest release] [#stable]
+v2.0.1-5 [latest release] [#beta]
 ```
 
 ### Disclaimer:

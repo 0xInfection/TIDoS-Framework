@@ -6,6 +6,6 @@
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 
 #This module requires TIDoS Framework
-#https://github.com/VainlyStrain/TIDoS
+#https://github.com/0xInfection/TIDoS-Framework
 
 pass

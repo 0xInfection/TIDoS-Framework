@@ -7,7 +7,7 @@
 
 # Author : @_tID
 # This module requires TIDoS Framework
-# https://github.com/VainlyStrain/TIDoS
+# https://github.com/0xInfection/TIDoS-Framework
 
 patterns = ("<font face=\"Arial\" size=2>error \'800a0005\'</font>",
             "<h2> <i>Runtime Error</i> </h2></span>",

@@ -7,7 +7,7 @@
 
 #Forked from XSSTracer (to recode the entire stuff again)
 #This module requires TIDoS Framework
-#https://github.com/VainlyStrain/TIDoS
+#https://github.com/0xInfection/TIDoS-Framework
 
 
 import socket

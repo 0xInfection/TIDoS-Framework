@@ -7,7 +7,7 @@
 
 #Author : @_tID
 #This module requires TIDoS Framework
-#https://github.com/VainlyStrain/TIDoS
+#https://github.com/0xInfection/TIDoS-Framework
 
 
 from core.methods.tor import session 

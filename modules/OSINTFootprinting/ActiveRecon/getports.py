@@ -7,7 +7,7 @@
 
 #Author : @_tID
 #This script is a part of TIDoS Framework
-#https://github.com/VainlyStrain/TIDoS
+#https://github.com/0xInfection/TIDoS-Framework
 
 
 import time

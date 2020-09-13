@@ -6,7 +6,7 @@
 # -:-:-:-:-:-:-:-:-:-:-:-:#
 
 # This file is a part of TIDoS Framework
-# https://github.com/VainlyStrain/TIDoS
+# https://github.com/0xInfection/TIDoS-Framework
 
 xpath_errors = [
     "::xpath()",

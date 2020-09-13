@@ -7,7 +7,7 @@
 
 # Author: @_tID (Modified version from wascan)
 # This module requires TIDoS Framework
-# https://github.com/VainlyStrain/TIDoS
+# https://github.com/0xInfection/TIDoS-Framework
 
 from re import search
 
