@@ -96,3 +96,7 @@ CMD_LS = "dir /b" if sys.platform.lower().startswith("win") else "\\ls"
 database = './core/database/tidos.db'
 count = 0
 upd = False
+
+vailyndir = ""
+with open("core/doc/vailyn", "r") as vailynfile:
+    vailyndir = vailynfile.read().strip()

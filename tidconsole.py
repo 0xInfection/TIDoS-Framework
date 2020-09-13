@@ -707,6 +707,11 @@ def main():
         with open("core/doc/local","w") as localfile:
             localfile.write(user)
 
+    if varis.vailyndir == "":
+        vailyn = input("Enter Vailyn installation directory (absolute path; required for pathtrav module) :> ")
+        with open("core/doc/vailyn","w") as vailynfile:
+            vailynfile.write(vailyn)
+
     """
     handle arguments. Note that the --app argument for the GUI is handled in
     tmp/tidos (which will be executed after global installation)
