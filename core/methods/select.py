@@ -64,6 +64,7 @@ def attack(target):
             try:
                 j.attack(newtarget)
             except Exception as e:
+                mod = vars.module.split(".")[-1]
                 print(R + " [-] " + "\033[0m" + color.UNDERLINE + "\033[1m" + "Module {} failed on target {}:".format(mod,target.fullurl)+"\033[0m"+ color.CURSIVE +"\n{}".format(e) + C)
     except Exception as e:
         mod = vars.module.split(".")[-1]
