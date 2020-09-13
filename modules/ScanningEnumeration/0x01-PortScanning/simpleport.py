@@ -119,7 +119,7 @@ def scan0x00(host):
 
     if properties["VERBOSE"][1] == " ":
         mn = input(C+'\n [?] Do you want a verbose output (enter if not) :> ')
-        verbose = mn is not ""
+        verbose = mn != ""
     else:
         verbose = properties["VERBOSE"][1] == "1"
     if verbose:

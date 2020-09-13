@@ -34,17 +34,21 @@ def inputin(target):
                 web = 'http://' + web
                 
         if 'http://' in web:
-            po = web.split('//')[1]
+            po = web.split('://')[1]
             port = 80
         elif 'https://' in web:
-            po = web.split('//')[1]
+            po = web.split('://')[1]
             port = 443
         else:
             po = ''
             port = 1337
-        if str(web).endswith('/'):
-            web = po[:-1]
-            po = po[:-1]
+        #if str(web).endswith('/'):
+        wspl = web.split("://")
+        if "/" in wspl[1]:
+            wspl[1] = wspl[1].split("/")[0]
+            web = wspl[0] + "://" + wspl[1]
+            if po != "":
+                po = wspl[1]
         custport = input(" [?] Does the site use a custom port? (enter if not) :> ")
         if custport != "":
             inport = input(" [§] Enter port :> ")
@@ -70,8 +74,8 @@ def inputin(target):
             if user != "" and passwd != "":
                 wl = web.split("://")
                 webfin = wl[0] + "://" + user + ":" + passwd + "@" + wl[1]
-                if port not in [80, 443]:
-                    webfin = webfin + ":" + str(port)
+            if port not in [80, 443]:
+                webfin = webfin + ":" + str(port)
             #vars.targets.append(webfin)
             newTarget = Target(po, ip)
             newTarget.port = port
@@ -112,7 +116,7 @@ def inputip(target, net=False):
     if net:
         vars.targets.append(newTarget)
         print(O+" [+] Target added:"+C+color.TR3+C+G+target+C+color.TR2+C)
-    elif os.system("ping -c 1 -q -W 5 " + target + " > /dev/null") is 0:
+    elif os.system("ping -c 1 -q -W 5 " + target + " > /dev/null") == 0:
         vars.targets.append(newTarget)
         print(O+" [+] Target added:"+C+color.TR3+C+G+target+C+color.TR2+C)
     else:

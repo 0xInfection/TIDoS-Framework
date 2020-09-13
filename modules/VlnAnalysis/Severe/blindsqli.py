@@ -296,7 +296,7 @@ def blindsqli(web, properties):
 
             if properties["PARALLEL"][1] == " ":
                 pa = input(" [?] Parallel Attack? (enter for not) :> ")
-                parallel = pa is not ""
+                parallel = pa != ""
             else:
                 parallel = properties["PARALLEL"][1] == "1"
 

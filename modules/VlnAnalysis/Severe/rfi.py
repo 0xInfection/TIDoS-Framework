@@ -324,7 +324,7 @@ def rfi(web):
 
     if properties["PARALLEL"][1] == " ":
         pa = input(" [?] Parallel Attack? (enter if not) :> ")
-        parallel = pa is not ""
+        parallel = pa != ""
     else:
         parallel = properties["PARALLEL"][1] == "1"
                 

@@ -82,7 +82,7 @@ def cloud0x00(web):
             time.sleep(0.4)
             if properties["BYPASS"][1] == " ":
                 m = input(O+' [+] Do you want TIDoS to try and bypass Cloudflare? (enter if not) :> ')
-                byp = m is not ""
+                byp = m != ""
             else:
                 byp = properties["BYPASS"][1] == "1"
             if byp:

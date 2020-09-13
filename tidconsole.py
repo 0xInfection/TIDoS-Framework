@@ -161,7 +161,7 @@ class TIDcon(Cmd):
                         #print(session)
                         victims = self.sessionhelper(session, gui)
                         print(G+" [+] Restored VAL session: {}".format(session)+C+color.TR2+C)
-                        if om is not "":
+                        if om != "":
                             self.do_load(om)
                     else:
                         load(session)
@@ -240,7 +240,7 @@ class TIDcon(Cmd):
                             start = input(color.END+" [?] Do you want to start the Tor service? (enter if not) :> ")
                         else:
                             start = "yes"
-                        if start is not "":
+                        if start != "":
                             try:
                                 os.system("systemctl start tor")
                                 print(G+" [+] Tor service successfully started."+C+color.TR2+C)
@@ -255,7 +255,7 @@ class TIDcon(Cmd):
                     stop = input(color.END+" [?] Do you want to stop the Tor service? (enter if not) :> ")
                 else:
                     stop = "yes"
-                if stop is not "":
+                if stop != "":
                     try:
                         os.system("systemctl stop tor")
                         print(G+" [+] Tor service successfully stopped."+C+color.TR2+C)
@@ -646,7 +646,7 @@ class TIDcon(Cmd):
                 print(" [!] An update is available! Last version is: {}, installed version is: {}.".format(onver, localver))
                 if not gui:
                     d = input(" [?] Do you want to update the framework? (enter if not) :> ")
-                    if d is not "":
+                    if d != "":
                         path = os.path.dirname(os.path.realpath(__file__))
                         if "/home/" in path:
                             user = path.split("/")[2]

@@ -28,7 +28,7 @@ def creds(inp):
         user = input(" [§] username :> ")
         passwd = input(" [§] password :> ")
         url = inp.split("add")[1].strip()
-        if user is not "" and passwd is not "" and "@" not in url:
+        if user != "" and passwd != "" and "@" not in url:
             if "https" in url:
                 domain = url.split("://")[1]
                 url2 = "https://" + user + ":" + passwd + "@" + domain

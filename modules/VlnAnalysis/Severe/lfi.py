@@ -288,7 +288,7 @@ def lfi(web):
             bug2 = bug2.replace(tmp,"")
     if properties["PARALLEL"][1] == " ":
         pa = input("\n [?] Parallelise Attack? (enter if not) :> ")
-        parallel = pa is not ""
+        parallel = pa != ""
     else:
         parallel = properties["PARALLEL"][1] == "1"
     getFile0x00()

@@ -127,7 +127,7 @@ def scan0x00(target):
 
         if properties["VERBOSE"][1] == " ":
             chk = input(C+' [?] Do you want a verbose output? (enter if not) :> ')
-            verbose = chk is not ""
+            verbose = chk != ""
         else:
             verbose = properties["VERBOSE"][1] == "1"
 

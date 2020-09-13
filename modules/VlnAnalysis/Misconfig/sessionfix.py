@@ -48,7 +48,7 @@ def sessionfix(url):
         coo = ""
     else:
         coo = properties["COOKIE"][1]
-    if coo is not "":
+    if coo != "":
         req = requests.get(url, cookies=coo, verify=True, timeout=7)
     else:
         req = requests.get(url, verify=True, timeout=7)

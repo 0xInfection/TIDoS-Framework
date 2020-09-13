@@ -314,7 +314,7 @@ def pathtrav(web):
             param = properties["DIRECTORY"][1]
         if properties["PARALLEL"][1] == " ":
             pa = input("\n [?] Parallelise Attack? (enter if not) :> ")
-            parallel = pa is not ""
+            parallel = pa != ""
         else:
             parallel = properties["PARALLEL"][1] == "1"
         if properties["COOKIE"][1] == " ":
