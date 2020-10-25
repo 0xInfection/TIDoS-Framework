@@ -92,7 +92,7 @@ def cookiecheck(web):
     lvl3 = ""
     #print(R+'\n    ==================================================')
     #print(R+'\n     C O O K I E   C H E C K  (HTTPOnly/Secure Flags)')
-    #print(R+'    ——·‹›·––·‹›·——·‹›·——·‹›·——·‹›·——·‹›·––·‹›·——·‹›·––\n')
+    #print(R+'    ---<>----<>----<>----<>----<>----<>----<>----<>---\n')
 
     from core.methods.print import pvln
     pvln("Cookie check")            

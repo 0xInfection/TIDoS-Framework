@@ -106,7 +106,7 @@ def auto0x00(web, parallel):
 
         #print(R+'\n    =======================')
         print(R+'\n     X S S  (Cookie Based)')
-        print(R+'    ——·‹›·––·‹›·——·‹›·——·‹›\n')
+        print(R+'    ---<>----<>----<>----<>\n')
                      
 
         sleep(0.5)
@@ -145,7 +145,7 @@ def auto0x00(web, parallel):
 
         #print(R+'\n    ===========================')
         print(R+'\n     X S S  (User-Agent Based)')
-        print(R+'    ——·‹›·––·‹›·——·‹›·——·‹›·––·\n')
+        print(R+'    ---<>----<>----<>----<>----\n')
                      
         success = []
         if not parallel:
@@ -172,7 +172,7 @@ def auto0x00(web, parallel):
 
         #print(R+'\n    ===========================')
         print(R+'\n     X S S  (Referrer Based)')
-        print(R+'    ——·‹›·––·‹›·——·‹›·——·‹›·––·\n')
+        print(R+'    ---<>----<>----<>----<>----\n')
                      
         success = []
         if not parallel:
@@ -240,7 +240,7 @@ def xsspoly0x00(li, bug2, parallel):
     success = []
     #print(R+'\n    ==========================')
     print(R+'\n     X S S  (Polyglot Fuzzer)')
-    print(R+'    ——·‹›·––·‹›·——·‹›·——·‹›·––\n')
+    print(R+'    ---<>----<>----<>----<>---\n')
                  
     try:
         if '?' in str(li) and '=' in str(li):
@@ -296,7 +296,7 @@ def manualatck(pays, bugs, bug2):
 def manual0x00(web, parallel):
     #print(R+'\n    ======================')
     print(R+'\n     X S S  (Manual Mode)')
-    print(R+'    ——·‹›·––·‹›·——·‹›·––·‹\n')
+    print(R+'    ---<>----<>----<>----<\n')
                  
     if properties["PARAM"][1] == " ":
         bug = input(O+' [§] Injectable Endpoint'+R+' (eg. /xss/search.php?q=drake)'+O+' :> ')
@@ -369,7 +369,7 @@ def xss(web):
             web = web[:-1]
         #print(R+'\n    =========================================')
         #print(R+'\n     C R O S S   S I T E   S C R I P T I N G')
-        #print(R+'    ——·‹›·––·‹›·——·‹›·––·‹›·–—·‹›·––·‹›·——·‹›\n')
+        #print(R+'    ---<>----<>----<>----<>----<>----<>----<>\n')
 
         from core.methods.print import pvln
         pvln("Cross site scripting") 

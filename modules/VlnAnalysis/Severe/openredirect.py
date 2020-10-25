@@ -125,7 +125,7 @@ def openredirect(web):
     time.sleep(0.6)
     #print(R+'\n    ===========================================')
     #print(R+'\n     O P E N   R E D I R E C T   C H E C K E R')
-    #print(R+'    ——·‹›·––·‹›·——·‹›·——·‹›·––·‹›·——·‹›·——·‹›·–\n')
+    #print(R+'    ---<>----<>----<>----<>----<>----<>----<>--\n')
 
     from core.methods.print import pvln
     pvln("open redirect checker") 

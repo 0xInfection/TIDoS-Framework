@@ -75,7 +75,7 @@ def smtpbrute(web):
     time.sleep(0.6)
     #print(R+'    =====================')
     #print(R+'\n     S M T P   B R U T E ')
-    #print(R+'    ——·‹›·––·‹›·——·‹›·——·\n')
+    #print(R+'    ---<>----<>----<>----\n')
     from core.methods.print import pbrute
     pbrute("smtp")
                  

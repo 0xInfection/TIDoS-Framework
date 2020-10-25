@@ -120,7 +120,7 @@ def xpathi(web):
     time.sleep(0.5)
     #print(R+'\n    ===============================')
     #print(R+'\n     X P A T H   I N J E C T I O N')
-    #print(R+'    ——·‹›·––·‹›·——·‹›·——·‹›·——·‹›·–\n')
+    #print(R+'    ---<>----<>----<>----<>----<>--\n')
 
     from core.methods.print import pvln
     pvln("xpath Injection") 

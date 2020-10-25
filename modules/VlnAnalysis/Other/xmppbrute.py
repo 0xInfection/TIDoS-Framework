@@ -75,7 +75,7 @@ def xmppbrute(web):
     time.sleep(0.6)
     #print(R+'    =====================')
     #print(R+'\n     X M P P   B R U T E ')
-    #print(R+'    ——·‹›·––·‹›·——·‹›·——·\n')
+    #print(R+'    ---<>----<>----<>----\n')
     from core.methods.print import pbrute
     pbrute("xmpp")
                  

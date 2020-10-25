@@ -80,7 +80,7 @@ def shellshock(web):
     time.sleep(0.5)
     #print(R+'\n    =====================')
     #print(R+'\n     S H E L L S H O C K ')
-    #print(R+'    ——·‹›·––·‹›·——·‹›·——·\n')
+    #print(R+'    ---<>----<>----<>----\n')
 
     from core.methods.print import pvln
     pvln("shellshock") 

@@ -118,7 +118,7 @@ def htmli(web):
     time.sleep(0.5)
     #print(R+'\n    =============================')
     #print(R+'\n     H T M L   I N J E C T I O N')
-    #print(R+'    ——·‹›·––·‹›·——·‹›·––·‹›·–—·‹›\n')
+    #print(R+'    ---<>----<>----<>----<>----<>\n')
 
     from core.methods.print import pvln
     pvln("html injection") 

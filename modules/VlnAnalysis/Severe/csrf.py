@@ -61,7 +61,7 @@ def check0x00(web):
 
     #print(R+'\n   ====================================================')
     #print(R+'\n    C R O S S   S I T E   R E Q U E S T   F O R G E R Y')
-    #print(R+'   ——·‹›·––·‹›·——·‹›·——·‹›·––·‹›·——·‹›·––·‹›·——·‹›·——·‹')
+    #print(R+'   ---<>----<>----<>----<>----<>----<>----<>----<>----<')
 
     from core.methods.print import pvln
     pvln("cross site request forgery") 

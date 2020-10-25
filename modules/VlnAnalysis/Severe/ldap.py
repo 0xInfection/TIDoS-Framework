@@ -92,7 +92,7 @@ def ldap(web):
     time.sleep(0.5)
     #print(R+'\n     =============================')
     #print(R+'\n      L D A P   I N J E C T I O N')
-    #print(R+'     ——·‹›·––·‹›·——·‹›·——·‹›·––·‹›\n')
+    #print(R+'     ---<>----<>----<>----<>----<>\n')
 
     from core.methods.print import pvln
     pvln("ldap Injection") 

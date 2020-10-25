@@ -36,7 +36,7 @@ def sessionfix(url):
     requests = session()
     #print(R+'\n   =================================')
     #print(R+'\n    S E S S I O N   F I X A T I O N')
-    #print(R+'   ——·‹›·––·‹›·——·‹›·——·‹›·––·‹›·——·\n')
+    #print(R+'   ---<>----<>----<>----<>----<>----\n')
 
     from core.methods.print import pvln
     pvln("session fixation") 

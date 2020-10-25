@@ -90,7 +90,7 @@ def subdomover(web):
     lvl3 = ""
     #print(R+'\n    =====================================')
     #print(R+'\n     S U B D O M A I N   T A K E O V E R ')
-    #print(R+'    ——·‹›·––·‹›·——·‹›·——·‹›·——·‹›·——·‹›·–\n')
+    #print(R+'    ---<>----<>----<>----<>----<>----<>--\n')
 
     from core.methods.print import pvln
     pvln("subdomain takeover") 

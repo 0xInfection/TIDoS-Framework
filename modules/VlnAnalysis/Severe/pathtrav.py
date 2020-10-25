@@ -43,7 +43,7 @@ def pathtrav(web):
     time.sleep(0.5)
     #print(R+'\n     ================================================')
     #print(R+'\n      P A T H   T R A V E R S A L  (Sensitive Paths)')
-    #print(R+'     ——·‹›·––·‹›·——·‹›·——·‹›·––·‹›·——·‹›·——·‹›·––·‹›·\n')
+    #print(R+'     ---<>----<>----<>----<>----<>----<>----<>----<>-\n')
 
     from core.methods.print import pvln
     pvln("path traversal") 

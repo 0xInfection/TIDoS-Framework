@@ -40,7 +40,7 @@ class TIDcon(Cmd):
     #design stuff
     intro = ""
     prompt = '{} tid2 > {}'.format(C, color.END)
-    ruler = "—-"
+    ruler = "--"
     doc_header = "Docvmented:"
     misc_header = "Misc.:"
     undoc_header = "NoDocs:"

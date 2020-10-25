@@ -160,14 +160,14 @@ def crawler2(web):
         pass
 
     print(R+'   EXTERNAL LINKS')
-    print(R+'  ––·‹›·––·‹›·––·‹')
+    print(R+'  ---<>----<>----<')
     print(R+'   |')
 
     for lenk in extlinks:
         print(GR+'   + '+lenk)
 
     print(R+'\n   INTERNAL LINKS')
-    print(R+'  ––·‹›·––·‹›·––·‹')
+    print(R+'  ---<>----<>----<')
     print(R+'   |')
 
     for lenk in intlinks:

@@ -75,7 +75,7 @@ def imgext():
 
     #print(R+'\n    =============================')
     print(R+'\n     I M A G E   A N A L Y S I S')
-    print(R+'    ––·‹›·––·‹›·––·‹›·––·‹›·––·‹›\n')
+    print(R+'    ---<>----<>----<>----<>----<>\n')
                  
     name = input(O+' [§] Enter path to image file :> ')
 

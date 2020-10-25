@@ -47,7 +47,7 @@ def ssscript(web):
         webb = web.split("@")[1]
     #print(R+'\n   =======================================')
     #print(R+'\n    S A M E - S I T E   S C R I P T I N G')
-    #print(R+'   ——·‹›·––·‹›·——·‹›·——·‹›·––·‹›·——·‹›·——·\n')
+    #print(R+'   ---<>----<>----<>----<>----<>----<>----\n')
     from core.methods.print import pvln
     pvln("same-site scripting") 
                 
@@ -65,7 +65,7 @@ def ssscript(web):
     os.system('mv '+webb+'-subdomains.lst tmp/')
     #print(R+'\n    =========================')
     print(R+'\n     S - S - S   T E S T E R')
-    print(R+'    ––·‹›·––·‹›·––·‹›·––·‹›·–\n')
+    print(R+'    ---<>----<>----<>----<>--\n')
                  
     try:
         with open('tmp/'+webb+'-subdomains.lst','r') as dom:

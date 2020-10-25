@@ -82,7 +82,7 @@ def auto0x00(web, parallel):
 
         #print(R+'\n    =========================')
         print(R+'\n     S Q L i  (Cookie Based)')
-        print(R+'    ––·‹›·––·‹›·––·‹›·––·‹›·–\n')
+        print(R+'    ---<>----<>----<>----<>--\n')
 
         sleep(0.5)
         vsession = session()
@@ -134,7 +134,7 @@ def auto0x00(web, parallel):
 
         #print(R+'\n    =============================')
         print(R+'\n     S Q L i  (User-Agent Based)')
-        print(R+'    ––·‹›·––·‹›·––·‹›·––·‹›·––·‹›\n')
+        print(R+'    ---<>----<>----<>----<>----<>\n')
         success = []
         requests = session()
         if not parallel:
@@ -206,7 +206,7 @@ def manual0x00(web, parallel, properties):
 
     #print(R+'\n    ========================')
     print(R+'\n     S Q L i  (Manual Mode)')
-    print(R+'    ––·‹›·––·‹›·––·‹›·––·‹›·\n')
+    print(R+'    ---<>----<>----<>----<>-\n')
     requests = session()
     if properties["PARAM"][1] == " ":
         bug = input(O+' [§] Injectable Endpoint'+R+' (eg. /sqli/fetch.php?id=x)'+O+' :> ')
@@ -284,7 +284,7 @@ def errorsqli(web, properties):
             web = web[:-1]
         #print(R+'\n    ==========================================')
         print(R+'\n     S Q L   I N J E C T I O N  (Error Based)')
-        print(R+'    ––·‹›·––·‹›·––·‹›·––·‹›·––·‹›·––·‹›·––·‹›·\n')
+        print(R+'    ---<>----<>----<>----<>----<>----<>----<>-\n')
                      
         print(GR+' [*] Importing error parameters...')
         sleep(0.8)

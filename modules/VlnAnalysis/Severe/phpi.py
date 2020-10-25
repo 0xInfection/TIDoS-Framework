@@ -126,7 +126,7 @@ def phpi(web):
     time.sleep(0.5)
     #print(R+'\n    =====================================')
     #print(R+'\n     P H P   C O D E   I N J E C T I O N')
-    #print(R+'    ——·‹›·––·‹›·——·‹›·——·‹›·––·‹›·——·‹›·—\n')
+    #print(R+'    ---<>----<>----<>----<>----<>----<>--\n')
 
     from core.methods.print import pvln
     pvln("php code Injection") 

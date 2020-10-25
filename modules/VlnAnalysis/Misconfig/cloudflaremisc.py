@@ -53,7 +53,7 @@ def cloud0x00(web):
     web = web.replace('http://','')
     #print(R+'\n   =========================================')
     #print(R+'\n    C L O U D F L A R E   M I S C O N F I G.')
-    #print(R+'   ——·‹›·––·‹›·——·‹›·——·‹›·——·‹›·——·‹›·––·‹›\n')
+    #print(R+'   ---<>----<>----<>----<>----<>----<>----<>\n')
 
     from core.methods.print import pvln
     pvln("cloudflare misconfig.") 

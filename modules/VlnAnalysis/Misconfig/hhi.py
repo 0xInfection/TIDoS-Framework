@@ -30,7 +30,7 @@ def hostheader0x00(web):
 
     #print(R+'\n    ==========================================')
     #print(R+'\n     H O S T  H E A D E R   I N J E C T I O N')
-    #print(R+'    ——·‹›·––·‹›·——·‹›·——·‹›·——·‹›·——·‹›·––·‹›·\n')
+    #print(R+'    ---<>----<>----<>----<>----<>----<>----<>-\n')
 
     from core.methods.print import pvln
     pvln("host header Injection") 

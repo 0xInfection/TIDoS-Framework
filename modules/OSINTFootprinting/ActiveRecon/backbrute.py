@@ -90,7 +90,7 @@ def backbrute(web):
     time.sleep(0.5)
     #print(R+'\n    =======================================')
     print(R+'\n     B A C K D O O R   B R U T E F O R C E')
-    print(R+'    ––·‹›·––·‹›·––·‹›·––·‹›·––·‹›·––·‹›·––·\n')
+    print(R+'    ---<>----<>----<>----<>----<>----<>----\n')
                  
 
     print(C+' [*] Path to file to be used '+O+'(Default: files/fuzz-db/backdoor_paths.lst)...'+C)

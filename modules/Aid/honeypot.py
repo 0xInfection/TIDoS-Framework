@@ -38,7 +38,7 @@ def honeypot(web):
     title()
     #print(R+'    ===================================')
     #print(R+'\n     H O N E Y P O T   D E T E C T O R')
-    #print(R+'    ––·‹›·––·‹›·––·‹›·––·‹›·––·‹›·––·‹›')
+    #print(R+'    ---<>----<>----<>----<>----<>----<>')
                  
     print(GR+' [*] Configuring APi request...')
     time.sleep(0.7)

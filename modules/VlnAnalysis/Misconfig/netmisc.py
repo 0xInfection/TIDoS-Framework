@@ -76,7 +76,7 @@ def netmisc(web):
     lvl3 = ""
     #print(R+'\n    ===================================')
     #print(R+'\n     TELNET ENABLED (Network Misconf.)')
-    #print(R+'    ——·‹›·––·‹›·——·‹›·——·‹›·––·‹›·——·‹›\n')
+    #print(R+'    ---<>----<>----<>----<>----<>----<>\n')
 
     from core.methods.print import pvln
     pvln("network misconf.") 

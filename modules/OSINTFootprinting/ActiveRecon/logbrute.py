@@ -90,7 +90,7 @@ def logbrute(web):
     time.sleep(0.5)
     #print(R+'\n    =====================================')
     print(R+'\n     L O G F I L E   B R U T E F O R C E')
-    print(R+'    ––·‹›·––·‹›·––·‹›·––·‹›·––·‹›·––·‹›·–\n')
+    print(R+'    ---<>----<>----<>----<>----<>----<>--\n')
                  
     print(C+' [*] Path to file to be used '+O+'(Default: files/fuzz-db/log_paths.lst)...'+C)
     fil = input(C+' [§] Your input (Press Enter if default) :> ')

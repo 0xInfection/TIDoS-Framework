@@ -39,7 +39,7 @@ def zone(web):
     try:
         #print(R+'\n   ===========================')
         #print(R+'\n    Z O N E   T R A N S F E R')
-        #print(R+'   ——·‹›·––·‹›·——·‹›·——·‹›·––·\n')
+        #print(R+'   ---<>----<>----<>----<>----\n')
         from core.methods.print import pvln
         pvln("zone transfer") 
                     

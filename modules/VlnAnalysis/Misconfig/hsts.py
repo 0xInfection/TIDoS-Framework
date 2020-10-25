@@ -72,7 +72,7 @@ def hsts(web):
     time.sleep(0.5)
     #print(R+'\n    ================================')
     #print(R+'\n     HTTP STRICT TRANSPORT SECURITY')
-    #print(R+'    ——·‹›·––·‹›·——·‹›·——·‹›·——·‹›·––\n')
+    #print(R+'    ---<>----<>----<>----<>----<>---\n')
     from core.methods.print import pvln
     pvln("hsts") 
                  

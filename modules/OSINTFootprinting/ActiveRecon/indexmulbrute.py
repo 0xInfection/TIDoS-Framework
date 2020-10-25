@@ -90,7 +90,7 @@ def indexmulbrute(web):
     time.sleep(0.5)
     #print(R+'\n    =================================')
     print(R+'\n     M U L T I P L E   I N D I C E S')
-    print(R+'    ––·‹›·––·‹›·––·‹›·––·‹›·––·‹›·––·\n')
+    print(R+'    ---<>----<>----<>----<>----<>----\n')
                  
     print(C+' [*] Path to file to be used '+O+'(Default: files/fuzz-db/multipleindex_paths.lst)...'+C)
     fil = input(C+' [§] Your input (Press Enter if default) :> ')

@@ -38,7 +38,7 @@ def sqli(web):
     time.sleep(0.7)
     #print(R+'\n    ===========================')
     #print(R+'\n     S Q L   ! N J E C T I O N')
-    #print(R+'    ——·‹›·––·‹›·——·‹›·——·‹›·——·\n')
+    #print(R+'    ---<>----<>----<>----<>----\n')
 
     from core.methods.print import pvln
     pvln("sql !njection") 

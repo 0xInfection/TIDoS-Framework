@@ -146,7 +146,7 @@ def scan0x00(host):
         total_time = ending_time - starting_time
         print(P+' [*] Preparing report...\n'+C)
         time.sleep(1)
-        #print(O+' ——·+-------------+')
+        #print(O+' ---+-------------+')
         #print(O+'    [ SCAN REPORT ]    simplescan')
         #print(O+'    +-------------+   -------------')
         #print(O+'             ')

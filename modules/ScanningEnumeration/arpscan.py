@@ -71,7 +71,7 @@ def arp():
         t = table.Texttable()
         headings = ["IP", "MAC", "Manif."]
         t.header(headings)
-        t.set_chars(["—","|","+","—"])
+        t.set_chars(["-","|","+","-"])
         t.set_deco(table.Texttable.HEADER)
         for row in zip(names, macs, manifs):
             t.add_row(row)

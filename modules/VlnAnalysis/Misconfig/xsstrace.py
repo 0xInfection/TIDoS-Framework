@@ -30,7 +30,7 @@ def xsstrace0x00(target):
 
     #print(R+'\n    =====================')
     #print(R+'\n     X S S   T R A C E R ')
-    #print(R+'    ——·‹›·––·‹›·——·‹›·——·\n')
+    #print(R+'    ---<>----<>----<>----\n')
 
     from core.methods.print import pvln
     pvln("xss tracer") 

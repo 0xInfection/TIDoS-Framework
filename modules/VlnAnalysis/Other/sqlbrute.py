@@ -46,7 +46,7 @@ def sqlbrute(web):
     lvl3 = ""
     #print(R+'\n   ===============================')
     #print(R+'\n    S Q L   B R U T E F O R C E R')
-    #print(R+'   ——·‹›·––·‹›·——·‹›·——·‹›·——·‹›·–\n')
+    #print(R+'   ---<>----<>----<>----<>----<>--\n')
     from core.methods.print import pbrute
     pbrute("sql")
     try:

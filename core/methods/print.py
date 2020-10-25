@@ -50,15 +50,15 @@ def loadstyle():
 ____, __{}
    + ;    
    .:,    
-     ’    
-    .     {}‹›{}  {}T I D : 2{}  {}‹›{}
+     '    
+    .     {}<>{}  {}T I D : 2{}  {}<>{}
     + ;   {}{}{}
     ;.    
      ;
      ;
-     ’   
+     '   
     """.format(color.END, R, color.END, RB, color.END, R, C, cursive, swappy, color.END)
-    #loading = "——·‹› TIDoS ‹›·——"
+    
     action = 0
     #while action < 2:
     while thread.isAlive():
@@ -83,13 +83,13 @@ ____, __{}
 ____, __{}
    + ;    
    .:,    
-     ’    
-    .     {}‹›{}  {}T I D : 2{}  {}‹›{}
+     '    
+    .     {}<>{}  {}T I D : 2{}  {}<>{}
     + ;   {}{}{}
     ;.    
      ;
      ;
-     ’   
+     '   
             """.format(color.END, R, color.END, RB, color.END, R, C, cursive, swappy, color.END)
             print(display)
             time.sleep(0.1)
@@ -107,16 +107,16 @@ vaile = '''{0}                      |
 ____, __             .|   
    + ;               .|   
    .{1}:,                       
-     ’                      
+     '                      
     .              /      
     + ;           :,      
     ;.           /,       
    {0}  ;          /;' ;    
      ;         /;{2}|{0}  : ^  
-     ’      / {2}:{0}  ;.’  °   
+     '      / {2}:{0}  ;.'  °   
           '/; \\           
          ./ '. \\      {2}|{0}
-          '.  ’·    __\\,_
+          '.  '-    __\\,_
          {1}   '.      {0}\\{1}`{2};{0}{1} 
               \\      {0}\\ {1}
               .\\.     {0}V{1}   
@@ -200,16 +200,16 @@ tidos2 = """
 
 tidos3 = """
 
-____, · 
+____, - 
    + ;  {0}T H E{1}      ____        _______
    .:,          |   _  \.--.--|       | 
-     ’      |.  |.  {2}|   |  |  |___|   |
+     '      |.  |.  {2}|   |  |  |___|   |
     .  `-|. |.  |.  |    \___/ /  ___/    
     + ;  |: |{1}:  |:  1    /    |:  1  \\
     ;.      |::.|::.. . /     |::{2}.. . |{1} 
      ;      `---`------'      `-------' 
      ;                           
-     ’                           {0}F R A M E W O R K{1}
+     '                           {0}F R A M E W O R K{1}
 """.format(color.CURSIVE, color.END, color.BOLD)
 
 bannerlist = [vaile]
@@ -588,7 +588,7 @@ def progressbar (iteration, total, prefix = '', suffix = '', decimals = 1, lengt
     filledLength = int(length * iteration // total)
     bar = fill * filledLength + "{}༛{}".format(RD, color.END) * (length - filledLength)
     #print('\r%s [%s] %s%% %s' % (prefix, bar, percent, suffix), end = printEnd)
-    print('\r%s ———·›%s»·——— %s%% %s' % (prefix, bar, C+percent+color.END, suffix), end = printEnd)
+    print('\r%s ---->%s»---- %s%% %s' % (prefix, bar, C+percent+color.END, suffix), end = printEnd)
     # Print New Line on Complete
     if iteration == total: 
         print()
@@ -603,13 +603,13 @@ def summary(module, msg):
 {}____, __
    + ;    
    .:,    
-     ’    
-    .     {}‹›{}  {}{}{}  {}‹›{}
+     '    
+    .     {}<>{}  {}{}{}  {}<>{}
     + ;   {}{}{}
     ;.    
      ;
      ;
-     ’   
+     '   
     """.format(color.END, R, color.END, RB, title(module), color.END, R, C, color.CURSIVE, msg, color.END)
     print(display)
 

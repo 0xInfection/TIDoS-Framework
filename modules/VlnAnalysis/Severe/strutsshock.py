@@ -76,7 +76,7 @@ def strutsshock(web):
 	time.sleep(0.5)
 	#print(R+'\n    =======================================')
 	#print(R+'\n     A P A C H E   S T R U T S   S H O C K ')
-	#print(R+'    ——·‹›·––·‹›·——·‹›·——·‹›·——·‹›·——·‹›·——·\n')
+	#print(R+'    ---<>----<>----<>----<>----<>----<>----\n')
 
 	from core.methods.print import pvln
 	pvln("apache struts shock")

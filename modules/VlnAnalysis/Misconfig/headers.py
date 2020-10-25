@@ -177,7 +177,7 @@ def headers(web):
     try:
         #print(R+'\n    =========================================')
         #print(R+'\n     H T T P   H E A D E R   A N A L Y S I S')
-        #print(R+'    ——·‹›·––·‹›·——·‹›·——·‹›·——·‹›·——·‹›·––·‹›\n')
+        #print(R+'    ---<>----<>----<>----<>----<>----<>----<>\n')
 
         from core.methods.print import pvln
         pvln("http header analysis") 

@@ -317,7 +317,7 @@ def rfi(web):
     lvl3 = ""
     #print(R+'\n   ===========================================')
     #print(R+'\n    R E M O T E   F I L E   I N C L U S I O N')
-    #print(R+'   ——·‹›·––·‹›·——·‹›·——·‹›·––·‹›·——·‹›·——·‹›·–\n')
+    #print(R+'   ---<>----<>----<>----<>----<>----<>----<>--\n')
 
     from core.methods.print import pvln
     pvln("remote file inclusion") 

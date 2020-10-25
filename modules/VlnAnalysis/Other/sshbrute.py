@@ -39,7 +39,7 @@ def sshbrute(web):
     lvl3 = ""
     #print(R+'\n   ===============================')
     #print(R+'\n    S S H   B R U T E F O R C E R')
-    #print(R+'   ——·‹›·––·‹›·——·‹›·——·‹›·——·‹›·–\n')
+    #print(R+'   ---<>----<>----<>----<>----<>--\n')
     from core.methods.print import pbrute
     pbrute("ssh")
              

@@ -131,7 +131,7 @@ def icors(web):
     lvl3 = ""
     #print(R+'\n    =========================================')
     #print(R+'\n     iNSECURE CROSS ORIGIN RESCOURCE SHARING')
-    #print(R+'    ——·‹›·––·‹›·——·‹›·——·‹›·——·‹›·––·‹›·——·‹›\n')
+    #print(R+'    ---<>----<>----<>----<>----<>----<>----<>\n')
                  
     from core.methods.print import pvln
     pvln("icors") 

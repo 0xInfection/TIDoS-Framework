@@ -35,7 +35,7 @@ def clickjack(web):
     lvl3 = ""
     #print(R+'\n      ========================')
     #print(R+'\n      C L I C K J A C K I N G')
-    #print(R+'     ——·‹›·––·‹›·——·‹›·——·‹›·—\n')
+    #print(R+'     ---<>----<>----<>----<>--\n')
 
     from core.methods.print import pvln
     pvln("clickjacking") 

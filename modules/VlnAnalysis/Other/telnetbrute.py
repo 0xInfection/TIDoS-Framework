@@ -75,7 +75,7 @@ def telnetbrute(web):
     time.sleep(0.6)
     #print(R+'    =========================')
     #print(R+'\n     T E L N E T   B R U T E ')
-    #print(R+'    ——·‹›·––·‹›·——·‹›·——·‹›·–\n')
+    #print(R+'    ---<>----<>----<>----<>--\n')
     from core.methods.print import pbrute
     pbrute("telnet")
                  

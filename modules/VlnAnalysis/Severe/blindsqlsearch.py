@@ -74,7 +74,7 @@ def blindsqlsearch(web):
     os.system('clear')
     #print(R+'\n    ======================================')
     print(R+'\n     S Q L i   H U N T E R (Auto Awesome)')
-    print(R+'    ––·‹›·––·‹›·––·‹›·––·‹›·––·‹›·––·‹›·––\n')
+    print(R+'    ---<>----<>----<>----<>----<>----<>---\n')
     print(R+'           [B L I N D   B A S E D] \n')
     with open('files/payload-db/blindsql_payloads.lst','r') as pay:
         for payload in pay:

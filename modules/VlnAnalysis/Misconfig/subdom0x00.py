@@ -61,7 +61,7 @@ def subdombrute(web):
     if flist:
         time.sleep(0.5)
         print(R+'\n      B R U T E F O R C E R')
-        print(R+'     ——·‹›·––·‹›·——·‹›·——·‹›\n')
+        print(R+'     ---<>----<>----<>----<>\n')
 
         print(GR+' [*] Bruteforcing for possible subdomains...')
         for url in flist:
@@ -90,7 +90,7 @@ def outer(web):
     wew = []
     time.sleep(0.4)
     print(R+'\n    A P I   R E T R I E V E R  ')
-    print(R+'   ——·‹›·––·‹›·——·‹›·——·‹›·––·')
+    print(R+'   ---<>----<>----<>----<>----')
 
     print(GR + color.BOLD + ' [!] Retriving subdomains...')
     time.sleep(0.4)
@@ -109,7 +109,7 @@ def outer(web):
 def report(web, found, final):
 
     print(R+'\n   R E P O R T')
-    print(R+'  ——·‹›·––·‹›·—\n')
+    print(R+'  ---<>----<>--\n')
 
     if ((len(found) > 0) or (len(final) > 0)):
         print(O+' [!] Subdomains found for '+G+web)
@@ -142,7 +142,7 @@ def subdom0x00(web):
         p = open(fileo,'w+')
         p.close
         print(R+'\n    S U B D O M A I N   G A T H E R E R')
-        print(R+'   ——·‹›·––·‹›·——·‹›·——·‹›·––·‹›·——·‹›·—\n')
+        print(R+'   ---<>----<>----<>----<>----<>----<>--\n')
         time.sleep(0.7)
         print(B+' [*] Initializing Step [1]...')
         subdombrute(web)

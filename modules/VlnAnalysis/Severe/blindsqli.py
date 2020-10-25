@@ -77,7 +77,7 @@ def auto0x00(web, parallel):
 
         #print(R+'\n    =========================')
         print(R+'\n     S Q L i  (Cookie Based)')
-        print(R+'    ––·‹›·––·‹›·––·‹›·––·‹›·–\n')
+        print(R+'    ---<>----<>----<>----<>--\n')
                      
 
         sleep(0.5)
@@ -128,7 +128,7 @@ def auto0x00(web, parallel):
 
         #print(R+'\n    =============================')
         print(R+'\n     S Q L i  (User-Agent Based)')
-        print(R+'    ––·‹›·––·‹›·––·‹›·––·‹›·––·‹›\n')
+        print(R+'    ---<>----<>----<>----<>----<>\n')
                      
         requests = session()           
         getrq = requests.get(web, verify=False)
@@ -198,7 +198,7 @@ def manual0x00(web, parallel, properties):
 
     #print(R+'\n    ========================')
     print(R+'\n     S Q L i  (Manual Mode)')
-    print(R+'    ––·‹›·––·‹›·––·‹›·––·‹›·\n')
+    print(R+'    ---<>----<>----<>----<>-\n')
                  
     requests = session()
     if properties["PARAM"][1] == " ":
@@ -281,7 +281,7 @@ def blindsqli(web, properties):
             web = web[:-1]
     
         print(R+'\n     S Q L   I N J E C T I O N  (Blind Based)')
-        print(R+'    ––·‹›·––·‹›·––·‹›·––·‹›·––·‹›·––·‹›·––·‹›·\n')
+        print(R+'    ---<>----<>----<>----<>----<>----<>----<>-\n')
                      
                      
         print(GR+' [*] Importing error parameters...')

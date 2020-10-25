@@ -240,7 +240,7 @@ def check0x00(website0, gen_headers, parallel):
                 fud += paths[4]
                 cnfy += paths[5]
     #print(G+"\n [+] Retrieved %s interesting paths..." % str(len(gotcha))+C+"\n")
-    #print("\n{}———————{}·‹› {}Pathtrav: {}{} int. paths{} ‹›·{}———————{}\n".format(color.END,C,O,G,str(len(gotcha)),C,color.END,C))
+    #print("\n{}-------{}-<> {}Pathtrav: {}{} int. paths{} <>-{}-------{}\n".format(color.END,C,O,G,str(len(gotcha)),C,color.END,C))
     foundpaths = "   {}{}{}{}{}{}{}{} paths leaked.".format(color.TR5,C, G, str(len(gotcha)), color.END, color.TR2, color.END, color.CURSIVE)
     summary("pathtrav", foundpaths)
     time.sleep(0.5)
@@ -299,7 +299,7 @@ def pathtrav(web):
     time.sleep(0.5)
     #print(R+'\n     ================================================')
     #print(R+'\n      P A T H   T R A V E R S A L  (Sensitive Paths)')
-    #print(R+'     ——·‹›·––·‹›·——·‹›·——·‹›·––·‹›·——·‹›·——·‹›·––·‹›·\n')
+    #print(R+'     ---<>----<>----<>----<>----<>----<>----<>----<>-\n')
 
     from core.methods.print import pvln
     pvln("path traversal") 

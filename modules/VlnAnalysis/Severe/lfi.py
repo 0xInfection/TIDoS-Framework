@@ -259,7 +259,7 @@ def lfi(web):
     time.sleep(0.5)
     #print(R+'\n     =========================================')
     #print(R+'\n      L O C A L   F I L E   I N C L U S I O N')
-    #print(R+'     ——·‹›·––·‹›·——·‹›·——·‹›·––·‹›·——·‹›·——·‹›\n')
+    #print(R+'     ---<>----<>----<>----<>----<>----<>----<>\n')
 
     from core.methods.print import pvln
     pvln("local file inclusion") 

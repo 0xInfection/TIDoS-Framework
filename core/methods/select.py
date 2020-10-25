@@ -105,7 +105,7 @@ def listdisplay(names, descs):
     t = table.Texttable()
     headings = ["Modvle", "Desc."]
     t.header(headings)
-    t.set_chars(["—","|","+","—"])
+    t.set_chars(["-","|","+","-"])
     t.set_deco(table.Texttable.HEADER)
     for row in zip(names, descs):
         t.add_row(row)
