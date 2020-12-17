@@ -382,6 +382,9 @@ class TIDcon(Cmd):
 """)
 
     def do_vicadd(self, inp):
+        if not inp:
+            print(R + " [-] " + "\033[0m" + color.UNDERLINE + "\033[1m" + "No target specified.")
+            return
         if "--ip" in inp:
             ip = inp.replace("--ip", "").strip()
             addtarget.inputip(ip)
