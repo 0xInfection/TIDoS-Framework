@@ -61,7 +61,7 @@ ____, __{}
     
     action = 0
     #while action < 2:
-    while thread.isAlive():
+    while thread.is_alive():
         for i, char in enumerate(loading):
             if i == 0:
                 swappy = "%s%s%s%s" % (red_bold, char.swapcase(), reset, loading[1:])
