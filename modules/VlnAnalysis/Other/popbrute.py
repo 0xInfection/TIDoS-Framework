@@ -96,12 +96,12 @@ def popbrute(web):
                         data = "Nothing found."
                         save_data(database, module, lvl1, lvl2, lvl3, name, data)
                         sys.exit(1)
-                except:
+                except Exception:
                     print(C+' [!] Checking '+B+user+C+' and '+B+password+'...')
         if not found:
             data = "Nothing found."
             save_data(database, module, lvl1, lvl2, lvl3, name, data)
-    except:
+    except Exception:
         print(R+' [-] Target seems to be down!')
 
 def attack(web):

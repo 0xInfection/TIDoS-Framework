@@ -74,7 +74,7 @@ def dnschk(domain):
         print(P+' [!] Fetching map...'+C)
         try:
             os.system('wget -q ' + url)
-        except:
+        except Exception:
             print(R+' [-] Map generation failed!')
             sys.exit(1)
         st = str(domain) + '.png'
@@ -87,7 +87,7 @@ def dnschk(domain):
         try:
             print(GR+' [!] Trying to open DNS Map...')
             os.system('xdg-open tmp/'+st1)
-        except:
+        except Exception:
             print(R+' [-] Failed to open automatically.')
             print(GR+' [!] Please view the map manually.')
     except TypeError:

@@ -425,7 +425,7 @@ class TIDcon(Cmd):
                 os.system("sudo -u {} python3 {}".format(inp, varis.phpsploit))
         except SystemExit:
             pass
-        except:
+        except Exception:
             print(R + " [-] " + "\033[0m" + color.UNDERLINE + "\033[1m" + "phpsploit crashed.")
 
     def help_phpsploit(self):
@@ -661,7 +661,7 @@ class TIDcon(Cmd):
                 print(" [+] You are running the latest version of TIDoS-framework ({}).".format(localver))
             if gui:
                 return (uptodate, localver)
-        except:
+        except Exception:
             print(R + " [-] " + "\033[0m" + color.UNDERLINE + "\033[1m" + "An error occurred fetching...")
 
     def help_fetch(self):

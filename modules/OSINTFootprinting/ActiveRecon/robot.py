@@ -48,7 +48,7 @@ def robot(web):
         print(color.END+m+C)
         data = ">> robots.txt:\n" + m
         save_data(database, module, lvl1, lvl2, lvl3, name, data)
-    except:
+    except Exception:
         print(R+' [-] Robots.txt not found')
         save_data(database, module, lvl1, lvl2, lvl3, name, "robots.txt not found.")
 
@@ -62,7 +62,7 @@ def robot(web):
         print(color.END+m+C)
         data = ">> sitemap.xml:\n" + m
         save_data(database, module, lvl1, lvl2, lvl3, name, data)
-    except:
+    except Exception:
         print(R+' [-] Sitemap.xml not found')
         save_data(database, module, lvl1, lvl2, lvl3, name, "sitemap.xml not found.")
 

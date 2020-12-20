@@ -60,7 +60,7 @@ def mail0x00(url, lvl2):
             elif newline[:1] == "/":
                 combline = url+newline
                 urls.append(str(combline))
-        except:
+        except Exception:
             print(R+' [-] Unhandled Exception Occured!')
 
     try:
@@ -69,7 +69,7 @@ def mail0x00(url, lvl2):
             req = requests.get(uurl).text
             check0x00(req, lvl2, name)
 
-    except:
+    except Exception:
         print(R+' [-] Outbound Query Exception...')
 
     if found == 0x00:

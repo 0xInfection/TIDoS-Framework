@@ -29,7 +29,7 @@ def bruter(user, passwd, ip, flag=False):
     try:
         con = mysql.connect(user=user, password=passwd, host=ip)
         flag = True
-    except:
+    except Exception:
         pass
     return flag
 

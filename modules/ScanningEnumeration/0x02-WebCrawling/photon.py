@@ -50,7 +50,7 @@ def photon(web):
         try:
             try:
                 help_photon = subprocess.call(["photon", "--help"])
-            except:
+            except Exception:
                 #in case of buggy photon pip installation
                 help_photon = subprocess.call(["python3", "core/lib/Photon/photon.py", "--help"])
             arguments = input(" [§] Enter arguments (as you would after $photon -u ROOT on the commandline) :> ")
@@ -66,7 +66,7 @@ def photon(web):
         #command = "photon -u " + root + " " + arguments
         command = ["photon", "-u", root] + arglist
         results_photon = subprocess.check_output(command)
-    except:
+    except Exception:
         command = ["python3", "core/lib/Photon/photon.py", "-u", root] + arglist
         results_photon = subprocess.check_output(command)
     data = results_photon.decode().replace("<<","").replace(">>","")

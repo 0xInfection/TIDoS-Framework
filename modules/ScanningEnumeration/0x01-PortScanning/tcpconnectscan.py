@@ -81,7 +81,7 @@ def portloop(portlist, verbose, ip_host): # Function to scan a given port
                         closed.append(port)
                         if verbose:
                             print(''+R+' [!] Port ' +O+ str(port) +R+ ' detected Closed !')
-            except:
+            except Exception:
                 pass
         
     except KeyboardInterrupt: # In case the user needs to quit

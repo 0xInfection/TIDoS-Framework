@@ -67,7 +67,7 @@ def iphistory(web):
             print(O+' [+] Instance :' +C+color.TR3+C+G+ info['ip'] + ' => ' + info['owner'] + ' - (' + info['last'] + ')'+C+color.TR2+C)
             time.sleep(0.02)
         save_data(database, module, lvl1, lvl2, lvl3, name, str(data))
-    except:
+    except Exception:
         print(R+' [-] No instances of IP History found...')
 
 def attack(web):

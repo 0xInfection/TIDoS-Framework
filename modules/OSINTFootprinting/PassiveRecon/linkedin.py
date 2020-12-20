@@ -12,7 +12,7 @@
 
 try:
     from google import search
-except:
+except Exception:
     from googlesearch import search
 import time
 import urllib.request

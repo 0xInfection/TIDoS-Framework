@@ -59,7 +59,7 @@ def ssscript(web):
             print(O+' [*] Gathering subdomains...')
             print(GR+' [*] Initializing subdomain gathering...')
             subdom0x00(web)
-    except:
+    except Exception:
         print(R+' [-] Exception occured!')
 
     os.system('mv '+webb+'-subdomains.lst tmp/')

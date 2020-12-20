@@ -65,7 +65,7 @@ def cloud0x00(web):
         print(G+' [+] Server detected online...')
         time.sleep(0.5)
         print(G+' [+] Server IP :> '+O+ip_addr)
-    except:
+    except Exception:
         print(R+' [-] Server seems down...')
 
     print(GR+' [*] Trying to identify backend...')
@@ -92,11 +92,11 @@ def cloud0x00(web):
                 serverdetect(web)
             try:
                 ip_addr = bypass.ip_addr
-            except:
+            except Exception:
                 pass
         else:
             print(R+' [-] Website does not seem to be a part of Cloudflare Network...')
-    except:
+    except Exception:
         print(R+' [-] Failed to identify server.\n [-] Some error occured!')
         pass
 

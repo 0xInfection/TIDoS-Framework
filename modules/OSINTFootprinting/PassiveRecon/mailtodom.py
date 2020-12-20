@@ -56,7 +56,7 @@ def getRes0x00():
                             print(O+' [+] Received Domain :'+C+color.TR3+C+G+line+C+color.TR2+C)
             else:
                 print(R+ " [-] Empty domain result for email : "+O+email+C)
-    except:
+    except Exception:
         print(R+" [-] Can't reach url...")
         print(R+' [-] Request timed out!')
 

@@ -47,7 +47,7 @@ def usom(web,ip):
         else:
             print(G+' [+] '+O+web+G+' is clean as per Usom...')
 
-    except:
+    except Exception:
         print(R+' [-] Request to usom.gov.tr timed out!')
         pass
 
@@ -77,7 +77,7 @@ def badip(web,ip):
         else:
             print(G+' [+] '+O+web+G+' is clean as per badips.com...')
 
-    except:
+    except Exception:
         print(R+' [-] Request to badips.com timed out!')
         pass
 
@@ -99,7 +99,7 @@ def blocklistssh(web,ip):
         else:
             print(G+' [+] '+O+web+G+' is clean as per BlockLists...')
 
-    except:
+    except Exception:
         print(R+' [-] Request to BlockLists timed out!')
         pass
 
@@ -121,7 +121,7 @@ def blocklistmail(web,ip):
         else:
             print(G+' [+] '+O+web+G+' is clean as per BlockLists...')
 
-    except:
+    except Exception:
         print(R+' [-] Request to BlockLists timed out!')
         pass
 
@@ -143,7 +143,7 @@ def blocklistapache(web,ip):
         else:
             print(G+' [+] '+O+web+G+' is clean as per BlockLists...')
 
-    except:
+    except Exception:
         print(R+' [-] Request to BlockLists timed out!')
         pass
 
@@ -165,7 +165,7 @@ def blocklistimap(web,ip):
         else:
             print(G+' [+] '+O+web+G+' is clean as per BlockLists...')
 
-    except:
+    except Exception:
         print(R+' [-] Request to BlockLists timed out!')
         pass
 
@@ -187,7 +187,7 @@ def blocklistpop3(web,ip):
         else:
             print(G+' [+] '+O+web+G+' is clean as per BlockLists...')
 
-    except:
+    except Exception:
         print(R+' [-] Request to BlockLists timed out!')
         pass
 
@@ -209,7 +209,7 @@ def blocklistftp(web,ip):
         else:
             print(G+' [+] '+O+web+G+' is clean as per BlockLists...')
 
-    except:
+    except Exception:
         print(R+' [-] Request to BlockLists timed out!')
         pass
 
@@ -231,7 +231,7 @@ def blocklistsip(web,ip):
         else:
             print(G+' [+] '+O+web+G+' is clean as per BlockLists...')
 
-    except:
+    except Exception:
         print(R+' [-] Request to BlockLists timed out!')
         pass
 
@@ -253,7 +253,7 @@ def blocklistbots(web,ip):
         else:
             print(G+' [+] '+O+web+G+' is clean as per BlockLists...')
 
-    except:
+    except Exception:
         print(R+' [-] Request to BlockLists timed out!')
         pass
 
@@ -275,7 +275,7 @@ def blocklistirc(web,ip):
         else:
             print(G+' [+] '+O+web+G+' is clean as per BlockLists...')
 
-    except:
+    except Exception:
         print(R+' [-] Request to BlockLists timed out!')
         pass
 
@@ -297,7 +297,7 @@ def blockliststrong(web,ip):
         else:
             print(G+' [+] '+O+web+G+' is clean as per BlockLists...')
 
-    except:
+    except Exception:
         print(R+' [-] Request to BlockLists timed out!')
         pass
 
@@ -319,7 +319,7 @@ def blocklistbrute(web,ip):
         else:
             print(G+' [+] '+O+web+G+' is clean as per BlockLists...')
 
-    except:
+    except Exception:
         print(R+' [-] Request to BlockLists timed out!')
         pass
 
@@ -341,7 +341,7 @@ def emergethreats(web,ip):
         else:
             print(G+' [+] '+O+web+G+' is clean as per Emerging Threats...')
 
-    except:
+    except Exception:
         print(R+' [-] Request to Emerging Threats timed out!')
         pass
 
@@ -363,7 +363,7 @@ def emergecompro(web,ip):
         else:
             print(G+' [+] '+O+web+G+' is clean as per Emerging Threats...')
 
-    except:
+    except Exception:
         print(R+' [-] Request to Emerging Threats timed out!')
         pass
 
@@ -385,7 +385,7 @@ def binarydefense(web,ip):
         else:
             print(G+' [+] '+O+web+G+' is clean as per Binary Defense...')
 
-    except:
+    except Exception:
         print(R+' [-] Request to Binary Defense timed out!')
         pass
 
@@ -407,7 +407,7 @@ def openphish(web,ip):
         else:
             print(G+' [+] '+O+web+G+' is clean as per Open Phish...')
 
-    except:
+    except Exception:
         print(R+' [-] Request to Open Phish timed out!')
         pass
 
@@ -430,7 +430,7 @@ def zeustracker(web,ip):
         else:
             print(G+' [+] '+O+web+G+' is clean as per Zeus Tracker...')
 
-    except:
+    except Exception:
         print(R+' [-] Request to zeustracker.com timed out!')
         pass
 
@@ -450,7 +450,7 @@ def projecthoneypot(web,ip):
         else:
             print(G+' [+] '+O+web+G+' is clean as per Project HoneyPot...')
 
-    except:
+    except Exception:
         print(R+' [-] Request to projecthoneypot.com timed out!')
         pass
 

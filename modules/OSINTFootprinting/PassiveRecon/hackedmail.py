@@ -63,7 +63,7 @@ def getRes0x00():
                         print(O+" [+] "+email+" found in :" +C+color.TR3+C+G+ str(line['title']) +" (" + str(line['date_leaked'])+')'+C+color.TR2+C)
                         data = email+" found in :" + str(line['title']) +" (" + str(line['date_leaked'])+')'
                         save_data(database, module, lvl1, lvl2, lvl3, "", data)
-                    except:
+                    except Exception:
                         print(R+" [-] Can't parse the leak titles via APi...")
             else:
                 print(R+' [-] Email '+O+email+R+' not found in any breaches!')

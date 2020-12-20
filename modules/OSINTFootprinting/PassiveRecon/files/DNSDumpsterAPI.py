@@ -99,7 +99,7 @@ class DNSDumpsterAPI(object):
             val = soup.find('img', attrs={'class': 'img-responsive'})['src']
             tmp_url = '{}{}'.format(dnsdumpster_url, val)
             image_data = requests.get(tmp_url).content.encode('base64')
-        except:
+        except Exception:
             image_data = None
         finally:
             res['image_data'] = image_data
@@ -110,7 +110,7 @@ class DNSDumpsterAPI(object):
             pattern = r'https://dnsdumpster.com/static/xls/' + domain + '-[0-9]{12}\.xlsx'
             xls_url = re.findall(pattern, req.content)[0]
             xls_data = requests.get(xls_url).content.encode('base64')
-        except:
+        except Exception:
             xls_data = None
         finally:
             res['xls_data'] = xls_data

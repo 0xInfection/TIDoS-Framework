@@ -80,7 +80,7 @@ def sshbrute(web):
                         save_data(database, module, lvl1, lvl2, lvl3, name, data)
                         print(G+' [!] Successful login with ' +O+user+G+ ' and ' +O+password)
                         break
-                except:
+                except Exception:
                     print(C+' [!] Checking '+B+user+C+' and '+B+password+'...')
         if not found:
             data = "Nothing found."
@@ -89,7 +89,7 @@ def sshbrute(web):
         if not found:
             data = "Nothing found."
             save_data(database, module, lvl1, lvl2, lvl3, name, data)
-    except:
+    except Exception:
         print(R+' [-] Target seems to be down!')
     print(G+" [+] Done!")
 

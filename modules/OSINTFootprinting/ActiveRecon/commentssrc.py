@@ -73,7 +73,7 @@ def commentssrc(web):
             elif newline[:1] == "/":
                 combline = web+newline
                 urls.append(str(combline))
-        except:
+        except Exception:
             pass
             print(R+' [-] Unhandled Exception Occured!')
 
@@ -87,7 +87,7 @@ def commentssrc(web):
                 save_data(database, module, lvl1, lvl2, lvl3, name, comment)
                 time.sleep(0.03)
 
-    except:
+    except Exception:
         print(R+' [-] Outbound Query Exception...')
 
     if found == 0x00:

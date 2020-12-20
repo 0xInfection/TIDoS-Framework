@@ -69,14 +69,14 @@ def shellshock0x00(web):
                 try:
                     head = {'User-agent':exp}
                     r=requests.get(web, headers=head, verify=False)
-                except:
+                except Exception:
                     print(R+' [-] Exploit failed...')
 
         else:
             print(R+' [-] 2nd phase of detection does not reveal vulnerability...')
             print(R+' [!] Please check manually...')
     else:
-        print(R+' [-] The web seems immune to shellshock...')
+        print(R+' [-] The website seems immune to shellshock...')
 
 def shellshock_exp(web):
 

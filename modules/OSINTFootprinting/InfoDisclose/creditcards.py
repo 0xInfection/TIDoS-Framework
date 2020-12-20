@@ -60,7 +60,7 @@ def credit0x00(url, lvl2):
             elif newline[:1] == "/":
                 combline = url+newline
                 urls.append(str(combline))
-        except:
+        except Exception:
             print(R+' [-] Unhandled Exception Occured!')
 
     try:
@@ -69,7 +69,7 @@ def credit0x00(url, lvl2):
             req = requests.get(uurl).text
             check0x00(req, lvl2, name)
 
-    except:
+    except Exception:
         print(R+' [-] Outbound Query Exception...')
 
     if found == 0x00:
@@ -101,7 +101,7 @@ def check0x00(req, lvl2, name):
             found = 0x01
             save_data(database, module, lvl1, lvl2, lvl3, name, EXPRESS.group())
 
-    except:
+    except Exception:
         pass
 
     try:
@@ -111,7 +111,7 @@ def check0x00(req, lvl2, name):
             found = 0x01
             save_data(database, module, lvl1, lvl2, lvl3, name, VISA_MASTERCARD.group())
 
-    except:
+    except Exception:
         pass
 
     try:
@@ -121,7 +121,7 @@ def check0x00(req, lvl2, name):
             found = 0x01
             save_data(database, module, lvl1, lvl2, lvl3, name, MASTERCARD.group())
 
-    except:
+    except Exception:
         pass
 
     try:
@@ -131,7 +131,7 @@ def check0x00(req, lvl2, name):
             found = 0x01
             save_data(database, module, lvl1, lvl2, lvl3, name, VISA.group())
 
-    except:
+    except Exception:
         pass
 
     try:
@@ -141,7 +141,7 @@ def check0x00(req, lvl2, name):
             found = 0x01
             save_data(database, module, lvl1, lvl2, lvl3, name, AMEX.group())
 
-    except:
+    except Exception:
         pass
 
     try:
@@ -151,7 +151,7 @@ def check0x00(req, lvl2, name):
             found = 0x01
             save_data(database, module, lvl1, lvl2, lvl3, name, DISCOVER.group())
 
-    except:
+    except Exception:
         pass
 
 def creditcards(web):

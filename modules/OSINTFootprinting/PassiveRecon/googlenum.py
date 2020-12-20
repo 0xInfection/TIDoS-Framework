@@ -60,7 +60,7 @@ def googlenum(web):
             try:
                 resp = requests.get('https://www.googleapis.com/plus/v1/people?query='+web+'&key='
                         +GOOGLE_API_TOKEN+'&maxResults='+maxr).text
-            except:
+            except Exception:
                 print(R+' [-] Access Forbidden (403)...')
             print(O+' [!] Parsing raw-data...'+C)
             time.sleep(1)

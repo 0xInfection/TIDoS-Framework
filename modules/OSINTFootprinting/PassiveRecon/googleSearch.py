@@ -16,7 +16,7 @@ import os
 import urllib.request
 try:
     from google import search
-except:
+except Exception:
     from googlesearch import search
 from time import sleep
 from core.Core.colors import *

@@ -54,7 +54,7 @@ def telnetBrute0x00(ip, usernames, passwords, port, delay):
                     data = "Nothing found."
                     save_data(database, module, lvl1, lvl2, lvl3, name, data)
                 sys.exit(1)
-            except:
+            except Exception:
                 print(GR+ " [*] Checking : "+C+"Username: {} | ".format(username)+B+"Password: {} ".format(password)+R+"...\n")
                 sleep(delay)
     if not found:

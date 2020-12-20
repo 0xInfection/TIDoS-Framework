@@ -68,7 +68,7 @@ def scanport(port, verbose, target):
                 if verbose:
                     print(R+' [!] No cross reference flag detected, port possibly '+O+'closed'+C+R+'...'+'')
                 ret = False
-        except:
+        except Exception:
             pass
         if verbose:
             print(P+' [!] Constructing the RST flagged packet to be sent to reset the connection...'+C)

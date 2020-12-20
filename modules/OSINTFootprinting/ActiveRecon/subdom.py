@@ -74,7 +74,7 @@ def subdombrute(web):
                 ip = socket.gethostbyname(url)
                 print('\n'+O+' [+] Subdomain Found :'+C+color.TR3+C+G+url+C+color.TR2+C+P+'\t\t['+str(ip)+']')
                 found.append(url)
-            except:
+            except Exception:
                 sys.stdout.write(B+'\r [*] Checking : '+C+url)
                 sys.stdout.flush()
     return found

@@ -208,7 +208,7 @@ def checkbrute(payloads, web):
             else:
                 print(O+' [*] Interesting response : '+GR+web0x00+O+' ('+c+')')
 
-        except:
+        except Exception:
             print(R+' [-] Exception Encountered!')
             pass
     return success

@@ -74,7 +74,7 @@ def serverdetect(web):
         print(O+' [+] Server IP :>'+C+color.TR3+C+G+ip_addr+C+color.TR2+C)
         data = "IP: " + ip_addr
         save_data(database, module, lvl1, lvl2, lvl3, name, data)
-    except:
+    except Exception:
         print(R+' [-] Server seems down...')
 
     print(GR+' [*] Trying to identify backend...')
@@ -97,9 +97,9 @@ def serverdetect(web):
             print(O+' [+] Running On :'+C+color.TR3+C+G+ r.headers['X-Powered-By']+C+color.TR2+C)
             data = "Running On: " + r.headers['X-Powered-By']
             save_data(database, module, lvl1, lvl2, lvl3, name, data)
-        except:
+        except Exception:
             pass
-    except:
+    except Exception:
         print(R+' [-] Failed to identify server. Some error occured!')
         pass
 

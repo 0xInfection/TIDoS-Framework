@@ -65,7 +65,7 @@ def scanport(port, verbose, ip_host): # Function to scan a given port
                     if verbose:
                         print(''+O+' [!] Port ' + str(port)+color.TR3 +G+ ' detected Filtered !'+color.TR2 + C)
                     filter.append(port)
-        except:
+        except Exception:
             pass
 
     except KeyboardInterrupt: # In case the user needs to quit

@@ -143,7 +143,7 @@ def apircv(web):
             time.sleep(0.7)
             data = th.text + ":\n" + td
             save_data(database, module, lvl1, lvl2, lvl3, name, data)
-    except:
+    except Exception:
         print(R+' [-] Outbound Query Exception!')
 
 def webtech(web):

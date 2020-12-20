@@ -91,7 +91,7 @@ def getFile0x00():
                         payloads.append(q)
         return payloads
 
-    except:
+    except Exception:
         print(R+' [-] File path '+O+fi+R+' not found!')
 
 def checkpre(payloads, web00, bug2, gen_headers):

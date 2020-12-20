@@ -54,7 +54,7 @@ def request(referer,action,form,opener):
         print("Value Error: "+action)
         return
 
-    except:
+    except Exception:
         return ''
 
 def check0x00(web):
@@ -265,7 +265,7 @@ def csrf(web):
     except ssl.CertificateError:
         print(R+" [-] This module only support domains of startpages...")
 
-    except:
+    except Exception:
         pass
 
 def attack(web):

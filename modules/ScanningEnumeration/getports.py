@@ -85,7 +85,7 @@ def scan0x00(host):
         print(G+'\n [+] Target server detected up and running...'+C+color.TR2+C)
         print(O+' [*] Preparing for scan...'+C)
         pass
-    except:
+    except Exception:
         print(R+' [-] Server not responding...')
         time.sleep(0.3)
         print(R+' [*] Exiting...')

@@ -56,7 +56,7 @@ def phone0x00(url):
             elif newline[:1] == "/":
                 combline = url+newline
                 urls.append(str(combline))
-        except:
+        except Exception:
             print(R+' [-] Unhandled Exception Occured!')
 
     try:
@@ -65,7 +65,7 @@ def phone0x00(url):
             req = requests.get(uurl).text
             check0x00(req, name)
 
-    except:
+    except Exception:
         print(R+' [-] Outbound Query Exception...')
 
     if found == 0x00:
