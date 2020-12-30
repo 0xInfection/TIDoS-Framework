@@ -96,6 +96,12 @@ docker run --interactive --tty --rm tidos bash
 tidos
 ```
 
+Update: TIDoS is now available on Docker Hub. Install and run the container like this:
+
+```
+docker run -it vainlystrain/tidos-framework
+```
+
 #### Updating TIDoS :
 
 To get the current version of TIDoS, move into the installation folder and perform `(sudo) git pull  #sudo if installed by install.py`. Alternatively, you can run the `fetch` command in tidconsole.
