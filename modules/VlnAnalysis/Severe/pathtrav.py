@@ -66,7 +66,7 @@ def pathtrav(web):
             param = properties["DIRECTORY"][1]
 
         target += param.strip()
-        command += ["-v", target]
+        command += ["--victim", target]
 
         if properties["ATTACK"][1] == " ":
             attack = input("\n [!] Select Attack vector (1: Query; 2: Path; 3: Cookie; 4: POST; 5: crawler-all :> ")
@@ -76,7 +76,7 @@ def pathtrav(web):
         attack = attack.strip()
         if attack not in ["1", "2", "3", "4", "5"]:
             raise ValueError("Not a valid attack vector: {}".format(attack))
-        command += ["-a", attack]
+        command += ["--attack", attack]
         
         if properties["COOKIE"][1] == " ":
             input_cookie = input("\n [§] Path to Authentication cookie file [Enter if none] :> ")
@@ -86,7 +86,7 @@ def pathtrav(web):
             input_cookie = properties["COOKIE"][1]
 
         if input_cookie != "":
-            command += ["-c", input_cookie]
+            command += ["--cookie", input_cookie]
 
         if attack == "1":
             if properties["PARAM"][1] == " ":
@@ -94,28 +94,28 @@ def pathtrav(web):
             else:
                 param = properties["PARAM"][1]
 
-            command += ["-p", param]
+            command += ["--param", param]
         elif attack == "4":
             if properties["POST"][1] == " ":
                 post = input("\n [+] Select POST Data (mark injection point with INJECT) :> ")
             else:
                 post = properties["POST"][1]
 
-            command += ["-s", post]
+            command += ["--param", post]
 
         if properties["FILE"][1] == " ":
             file = input(" [+] Select file to be looked for (e.g. /etc/passwd) :> ")
         else:
             file = properties["FILE"][1]
         
-        command += ["-i", file]
+        command += ["--check", file]
 
         if properties["DEPTH"][1] == " ":
             depth = input(" [!] Set Attack depth (int) :> ")
         else:
             depth = properties["DEPTH"][1]
 
-        command += ["-d", depth, "1", "1"]
+        command += ["--depths", depth, "1", "1"]
         command += ["--nosploit"]
         command += ["--notmain"]
 
@@ -127,7 +127,7 @@ def pathtrav(web):
             precise = "yes"
 
         if precise:
-            command += ["-P"]
+            command += ["--precise"]
 
         if properties["TIMEOUT"][1] == " ":
             timeout = input(" [~] Set Request Timeout (enter if none) :> ")
@@ -137,10 +137,10 @@ def pathtrav(web):
             timeout = properties["TIMEOUT"][1]
 
         if timeout != "":
-            command += ["-k", timeout]
+            command += ["--timeout", timeout]
 
         if tor:
-            command += ["-t"]
+            command += ["--tor"]
 
         #output = ""
         #p = subprocess.Popen(command, shell=False, stdout=subprocess.PIPE, cwd=vailyndir)
@@ -149,8 +149,9 @@ def pathtrav(web):
         #    output += out
         try:
             subprocess.run(command, cwd=vailyndir)
-        except Exception:
+        except Exception as e:
             print("Exception occurred running Vailyn. Try upgrading Vailyn to the latest version; if the error persists, please write a bug report at https://github.com/VainlyStrain/Vailyn and mention that it occurred running the TIDoS module.")
+            print("ERROR: {}".format(e))
 
         #save_data(database, module, lvl1, lvl2, lvl3, name, output)
 
