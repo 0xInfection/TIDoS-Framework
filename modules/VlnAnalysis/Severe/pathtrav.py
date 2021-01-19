@@ -26,7 +26,8 @@ properties = {"DIRECTORY":["Sensitive directory. Attack target will be http://si
               "POST":["POST Data to be used with POST (mark injection point with INJECT)", " "], 
               "FILE":["File to be searched for", " "], 
               "DEPTH":["Depth of lookup for the scan (int)", " "],
-              "TIMEOUT":["Timeout to be used for requests (int)", " "]}
+              "TIMEOUT":["Timeout to be used for requests (int)", " "],
+              "PRECISE":["Use exact depth D provided instead of range to D (0/1)", " "]}
 
 def pathtrav(web):
     global name
@@ -70,7 +71,7 @@ def pathtrav(web):
         if properties["ATTACK"][1] == " ":
             attack = input("\n [!] Select Attack vector (1: Query; 2: Path; 3: Cookie; 4: POST; 5: crawler-all :> ")
         else:
-            attack = properties["PARALLEL"][1]
+            attack = properties["ATTACK"][1]
         
         attack = attack.strip()
         if attack not in ["1", "2", "3", "4", "5"]:
@@ -116,6 +117,17 @@ def pathtrav(web):
 
         command += ["-d", depth, "1", "1"]
         command += ["--nosploit"]
+        command += ["--notmain"]
+
+        if properties["PRECISE"][1] == " ":
+            precise = input(" [~] Use exact depth provided instead of range? (enter if not) :> ")
+        elif properties["PRECISE"][1].strip().lower() == "0":
+            precise = ""
+        else:
+            precise = "yes"
+
+        if precise:
+            command += ["-P"]
 
         if properties["TIMEOUT"][1] == " ":
             timeout = input(" [~] Set Request Timeout (enter if none) :> ")
@@ -135,7 +147,10 @@ def pathtrav(web):
         #while p.poll() is None:          
         #    out = p.stdout.readline().decode("utf-8")
         #    output += out
-        subprocess.run(command, cwd=vailyndir)
+        try:
+            subprocess.run(command, cwd=vailyndir)
+        except Exception:
+            print("Exception occurred running Vailyn. Try upgrading Vailyn to the latest version; if the error persists, please write a bug report at https://github.com/VainlyStrain/Vailyn and mention that it occurred running the TIDoS module.")
 
         #save_data(database, module, lvl1, lvl2, lvl3, name, output)
 
