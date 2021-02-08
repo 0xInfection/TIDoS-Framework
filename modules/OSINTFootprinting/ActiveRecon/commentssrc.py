@@ -53,9 +53,9 @@ def commentssrc(web):
 
     for w in links:
         print(GR+' [*] Making the request...')
-        req = requests.get(w).content
+        req = requests.get(w).text
         print(C+' [!] Setting parse parameters...')
-        comments = re.findall('<!--(.*)-->',str(req))
+        comments = re.findall('<!--(.*)-->', req)
         print(O+" [+] Searching for comments on page:"+C+color.TR3+C+G+web+C+color.TR2+C+'\n')
         for comment in comments:
             print(C+'   '+comment)
