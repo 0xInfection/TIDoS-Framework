@@ -25,8 +25,7 @@ import inspect
 
 info = "Incredibly fast crawler designed for OSINT"
 searchinfo = "Incredibly fast crawler designed for OSINT"
-properties = {"ROOT":["Root URL the crawling starts with", " "], "ARGS":["The arguments passed to Photon (formatted as after $photon pROOT )", " "]}
-
+properties = {"ROOT":["Root URL the crawling starts with", " "], "ARGS":["The arguments passed to Photon (formatted as after $photon -u ROOT )", " "]}
 
 def photon(web):
     global name
