@@ -73,7 +73,7 @@ def sshbrute(web):
             for password in sshpass:
                 try:
                     connect = pxssh.pxssh()
-                    connect.login(ip,str(user),password)
+                    connect.login(ip,str(user),password,port=port)
                     if True:
                         found = True
                         data = user + " : " + password
