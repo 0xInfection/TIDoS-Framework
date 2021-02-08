@@ -25,7 +25,7 @@ import inspect
 
 info = "Incredibly fast crawler designed for OSINT"
 searchinfo = "Incredibly fast crawler designed for OSINT"
-properties = {"ROOT":["Root URL the crawling starts with", " "], "ARGS":["The arguments passed to Photon (formatted as after $photon -u ROOT )", " "]}
+properties = {"ROOT":["Root URL the crawling starts with", " "], "ARGS":["The arguments passed to Photon (formatted as after $photon pROOT )", " "]}
 
 
 def photon(web):
@@ -54,7 +54,7 @@ def photon(web):
                 #in case of buggy photon pip installation
                 help_photon = subprocess.call(["python3", "core/lib/Photon/photon.py", "--help"])
             arguments = input(" [§] Enter arguments (as you would after $photon -u ROOT on the commandline) :> ")
-            assert "-u" not in arguments and "--url" not in arguments
+            assert "-u " not in arguments and "--url " not in arguments
         except AssertionError:
             arguments = input(" [-] Argument '-u' already present in command string.\n [§] Enter arguments (as you would after $photon -u ROOT on the commandline) :> ")
     else:
