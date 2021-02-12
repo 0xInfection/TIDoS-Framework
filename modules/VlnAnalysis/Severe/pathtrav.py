@@ -69,17 +69,17 @@ def pathtrav(web):
         command += ["--victim", target]
 
         if properties["ATTACK"][1] == " ":
-            attack = input("\n [!] Select Attack vector (1: Query; 2: Path; 3: Cookie; 4: POST; 5: crawler-all :> ")
+            attack = input("\n [!] Select Attack vector (1: Query; 2: Path; 3: Cookie; 4: POST Plain; 5: POST JSON; A: crawler-all :> ")
         else:
             attack = properties["ATTACK"][1]
         
         attack = attack.strip()
-        if attack not in ["1", "2", "3", "4", "5"]:
+        if attack not in ["1", "2", "3", "4", "5", "A", "a"]:
             raise ValueError("Not a valid attack vector: {}".format(attack))
         command += ["--attack", attack]
         
         if properties["COOKIE"][1] == " ":
-            input_cookie = input("\n [§] Path to Authentication cookie file [Enter if none] :> ")
+            input_cookie = input("\n [§] Authentication cookie (in cookie header format, without Cookie:) [Enter if none] :> ")
         elif properties["COOKIE"][1].lower() == "none":
             input_cookie = ""
         else:
@@ -95,7 +95,7 @@ def pathtrav(web):
                 param = properties["PARAM"][1]
 
             command += ["--param", param]
-        elif attack == "4":
+        elif attack in ["4", "5"]:
             if properties["POST"][1] == " ":
                 post = input("\n [+] Select POST Data (mark injection point with INJECT) :> ")
             else:
