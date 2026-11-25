@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img src='files/logo.png' height='500'></img><br>
+  <img src='static/logo.png' height='260'></img><br>
   TIDoS
   <br>
 </h1>
@@ -21,15 +21,15 @@
 ### Highlights :-
 Here is some light on what the framework is all about:
 -  A complete versatile framework to cover up everything from Reconnaissance to Vulnerability Analysis.
--  Has 5 main phases, subdivided into __14 sub-phases__ consisting a total of __108 modules__.
--  Reconnaissance Phase has 50 modules of its own (including active and passive recon, information disclosure modules).
--  Scanning & Enumeration Phase has got 16 modules (including port scans, WAF analysis, etc)
+-  Has 5 main phases consisting a total of __116 modules__.
+-  Reconnaissance Phase has 54 modules of its own (including active and passive recon, information disclosure modules).
+-  Scanning & Enumeration Phase has got 19 modules (including port scans, WAF & Shodan intel, SSL enumeration, etc.)
 -  Vulnerability Analysis Phase has 37 modules (including most common vulnerabilities in action).
 -  Exploits Castle has only 1 exploit. `(purely developmental)`
 -  And finally, Auxiliaries have got 4 modules. `more under development`
--  All four phases each have an `Auto-Awesome` module which automates every module for you.
+-  All phases each have an `Auto-Awesome` module which automates every module for you.
 -  huge performance boost through multiprocessing
--  Piping Attacks through Tor (not implemented everywhere yet)
+-  Piping Attacks through Tor (verified Tor exit before routing)
 -  You just need the domain, and leave everything is to this tool.
 -  TIDoS has full verbose out support, so you'll know whats going on.
 -  Attacking now even easier with a new GUI
@@ -39,15 +39,16 @@ Here is some light on what the framework is all about:
 -  the interface: TIDoS presents a new, Metasploit-like console interface
 -  Parallelisation: TIDoS uses multiprocessing to speed up attacks
 -  An alternative CLI interface for faster interaction with one specific module
--  Anonymity: Attacking through Tor is possible (95% done)
+-  Anonymity: Attacking through Tor is possible (verified before routing)
 -  Module Completion: Some modules have been feature-extended (e.g. more evasion, supporting more than 1 query parameter)
--  Some new modules: arpscan
+-  WAF fingerprinting now backed by `wafw00f` (~170 signatures)
+-  Findings are recorded to a per-session database
 -  A Graphical User Interface for easier interaction with the toolkit
 -  Supports non-default http(s) ports
 
 ### Upcoming
--  results of modules will be stored in a database
--  new modules: nikto&photon
+-  extended exploitation and post-exploitation modules
+-  new modules: nikto & photon
 
 ### Installation :-
 
@@ -162,11 +163,12 @@ TIDoS presently supports the following: `and more modules are under active devel
 	    - Fatal Errors Enumeration `Includes Full Path Disclosure`
 	    - Internal IP Disclosure `Signature Based`
 	    - Phone Number Havester `Signature Based`
+	    - Secrets & API Keys Disclosure `Signature Based`
 	    - Social Security Number Harvester `US Ones`
 
 * __Scanning & Enumeration__
 
-	+ Remote Server WAF Enumeration `Generic` `54 WAFs`
+	+ Remote Server WAF Enumeration `~170 WAFs` `via wafw00f`
 	+ Port Scanning `Ingenious Modules`
 	    - Simple Port Scanner `via Socket Connections`
 	    - TCP SYN Scan `Highly reliable`
@@ -270,7 +272,7 @@ TIDoS presently supports the following: `and more modules are under active devel
 
 - __Auxillary Modules__
 
-	+ Hash Generator `MD5, SHA1, SHA256, SHA512`
+	+ Hash Generator `MD5, SHA1, SHA224, SHA256, SHA384, SHA512`
 	+ String & Payload Encoder `7 Categories`
 	+ Forensic Image Analysis `Metadata Extraction`
 	+ Web HoneyPot Probability `ShodanLabs HoneyScore` 
@@ -278,7 +280,19 @@ TIDoS presently supports the following: `and more modules are under active devel
 - __Exploitation__ `purely developmental`
 
 	+ ShellShock
-	
+	+ Webshell Generator `php, jsp, asp`
+
+### Testing :-
+
+A deliberately-vulnerable local site and a module test suite live under [tests/](tests/):
+
+```
+.venv/bin/python3 tests/run.py            # deep detection cases + contract smoke
+.venv/bin/python3 tests/run.py --run-smoke  # also run every other module once
+```
+
+See [tests/README.md](tests/README.md) for what it covers and how the fixtures work.
+
 ### Other Tools:
 - `net_info.py` - Displays information about your network. Accessible from 'netinfo' command.
 
@@ -298,4 +312,3 @@ v2.0.1-5 [latest release] [#beta]
 TIDoS is provided as an offensive web application audit framework. It has built-in modules which can reveal potential misconfigurations and vulnerabilties in web applications which could possibly be exploited maliciously.
 
 __THEREFORE, NEITHER THE AUTHOR NOR THE CONTRIBUTORS ARE RESPONSIBLE FOR ANY MISUSE OR DAMAGE DUE TO THIS TOOLKIT.__
-
