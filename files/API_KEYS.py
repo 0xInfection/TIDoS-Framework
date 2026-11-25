@@ -1,19 +1,26 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+"""
+API credentials for TIDoS modules -- read from the environment only.
 
-# -:-:-:-:-:-:-:-:-:-:-:-:#
-#    TIDoS Framework     #
-# -:-:-:-:-:-:-:-:-:-:-:-:#
+Never put key values in this file. Export them instead, e.g.
 
-# This module requires TIDoS Framework
-# https://github.com/0xInfection/TIDoS-Framework
+    export TIDOS_SHODAN_API_KEY=...
 
-# DISCLAIMER: All these API tokens have been publicly disclosed on some repositories
-# or other on GitHub. THESE ARE PUBLICLY AVAILABLE FOR ANYONE TO USE.
+Each name is looked up as TIDOS_<NAME> first, then <NAME>.
+See docs/setup.md for what each key unlocks and where to get it.
+"""
 
-SHODAN_API_KEY = 'olj8BVTzKccQDbfyXSvYYzrrhQhaRW0J'
-CENSYS_UID = '6f5c0df4-3908-430f-9f17-fb350db03fa3'
-CENSYS_SECRET = '9s7nwqeXjJxzBkij4gxFNYC5EQYhX6QG'
-GOOGLE_API_TOKEN = 'AIzaSyDDnc-68uaF-E4gzvJslt1fppiUl9dyTrc'
-FULLCONTACT_API_KEY = 'a82ad9009f6b1b1'
-WHATCMS_ACCESS_TOKEN = '756ab2cfa1ed5575a71e0714ef05c2e228f17b6b1476de7075f7f4d6b4978272376fb3'
+import os
+
+
+def _env(name: str) -> str:
+    return (os.environ.get(f"TIDOS_{name}") or os.environ.get(name) or "").strip()
+
+
+SHODAN_API_KEY = _env("SHODAN_API_KEY")
+CENSYS_API_TOKEN = _env("CENSYS_API_TOKEN")
+GOOGLE_API_TOKEN = _env("GOOGLE_API_TOKEN")
+WHATCMS_ACCESS_TOKEN = _env("WHATCMS_ACCESS_TOKEN")
+VIEWDNS_API_KEY = _env("VIEWDNS_API_KEY")
+HACKERTARGET_API_KEY = _env("HACKERTARGET_API_KEY")

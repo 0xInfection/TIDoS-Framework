@@ -134,9 +134,10 @@ def inputnet(target):
             sca.properties["IP"][1] = range
             sca.properties["NMASK"][1] = mask
             targets = sca.attack("")
-            s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-            s.connect(('google.com', 0))
-            attackerip = s.getsockname()[0].strip()
+            # a UDP connect sends nothing; it only selects our outgoing address
+            with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
+                s.connect(("192.0.2.1", 9))
+                attackerip = s.getsockname()[0]
             for targetip in targets:
                 if targetip != attackerip:
                     inputip(targetip, net=True)

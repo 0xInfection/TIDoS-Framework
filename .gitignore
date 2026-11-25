@@ -1,0 +1,9 @@
+__pycache__/
+*.py[co]
+
+# engagement data -- never commit
+core/database/tidos.db
+tmp/logs/*-logs/
+
+# downloaded tools (Katana, fetched on first crawl)
+tools/bin/

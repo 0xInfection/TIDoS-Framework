@@ -94,6 +94,12 @@ CMD_LS = "dir /b" if sys.platform.lower().startswith("win") else "\\ls"
 
 
 database = './core/database/tidos.db'
+# results DB is per-installation (never tracked in git); create it empty on first run
+if not os.path.exists(database):
+    try:
+        open(database, "a").close()
+    except OSError:
+        pass
 count = 0
 upd = False
 

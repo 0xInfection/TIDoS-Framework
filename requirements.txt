@@ -1,29 +1,24 @@
-argparse
-texttable
-sslyze
-tldextract
-lxml
-pillow
-colorama
-scapy
-pexpect
-idna
-bs4
-six
-tld
-shodan
+# HTTP, parsing and networking
 requests
-python-nmap
-google
-emailprotectionslib
+PySocks
+bs4
+lxml
+tldextract
+dnspython
+texttable
+
+# Scanning and reconnaissance
+scapy
+sslyze
 builtwith
-mechanize
-mysql
-mysql-connector-python-rf
-ptyprocess
-dnslib
+pillow
+
+# Brute-forcing (sshbrute, sqlbrute)
+paramiko
+PyMySQL
+
+# GUI (tidv2)
 PyQt5
-photon
 
 # Optionals (needed for additional features)
 # ------------------------------------------
