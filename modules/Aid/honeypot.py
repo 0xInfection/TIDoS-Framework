@@ -1,68 +1,63 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+"""Honeypot detector -- Shodan HoneyScore for the target's IP."""
 
-#-:-:-:-:-:-:-:-:-:-:-:-:#
-#    TIDoS Framework     #
-#-:-:-:-:-:-:-:-:-:-:-:-:#
+from __future__ import annotations
 
-#This module requires TIDoS Framework
-#https://github.com/0xInfection/TIDoS-Framework
+from core.methods import modkit as kit
+from core.methods.print import title
 
-
-import socket
-#import requests
-from core.methods.tor import session
-import time
-from core.Core.colors import *
-from files.API_KEYS import SHODAN_API_KEY
-
-info = "This module calculates the probability that the target is a honeypot using Shodan HoneyScore."
+info = ("Estimates the probability that the target is a honeypot using Shodan's "
+        "HoneyScore service. Needs TIDOS_SHODAN_API_KEY (see docs/setup.md).")
 searchinfo = "HoneyScore Calculator"
 properties = {}
 
-def title():
-    print("""{}
+ENDPOINT = "https://api.shodan.io/labs/honeyscore/{ip}"
+
+
+def banner():
+    print("""
                 __/   _
-        {}.__  __.{}  \\__/   __
-         {}.-`'-.{}   /  \\__/
-     {}.-.(  oo  ).-.{} _/  \\__/   {}H O N E Y P O T{}
- __ {}:   \\".~~."/   ;{} \\__/
-/  \\_{}`.  Y`--'Y  .'{} _/  \\__   {}D E T E C T O R{}
- __/  {}`./======\\.'{}   \\__/  \\_
-/  \\__/ {}\\======/{}  \\__/  \\__/
-\\__/   {}(_`----'_){}    \\__/  \\ ({}shodan{}){}
-    """.format(color.END,C, color.END,C, color.END,C, color.END,RC,color.END,C, color.END,C, color.END,RC,color.END,C, color.END,C, color.END,C, color.END,RB,color.END,C))
+        .__  __.  \\__/   __
+         .-`'-.   /  \\__/
+     .-.(  oo  ).-. _/  \\__/   {}
+ __ :   \\".~~."/   ; \\__/
+/  \\_`.  Y`--'Y  .' _/  \\__   {}
+ __/  `./======\\.'   \\__/  \\_
+/  \\__/ \\======/  \\__/  \\__/
+\\__/   (_`----'_)    \\__/  \\ (shodan)
+    """.format(title("Honeypot"), title("Detector")))
 
 
 def honeypot(web):
-    title()
-    #print(R+'    ===================================')
-    #print(R+'\n     H O N E Y P O T   D E T E C T O R')
-    #print(R+'    ---<>----<>----<>----<>----<>----<>')
-                 
-    print(GR+' [*] Configuring APi request...')
-    time.sleep(0.7)
-    print(O+' [!] Reading APi Key...')
-    requests = session()
-    if SHODAN_API_KEY != '':
-        print(G+' [+] Key Found : '+O+SHODAN_API_KEY)
-        web0 = web.split('//')[1]
-        ip = socket.gethostbyname(web0)
-        honey = "https://api.shodan.io/labs/honeyscore/"+ip+"?key="+SHODAN_API_KEY
-        req = requests.get(honey).text
-        read = float(req)
-        if read < 5.0:
-            print(G+' [+] Target does not seem to be a potential Honeypot...')
-            print(G+' [+] Honey Score : '+O+str(read*100)+'%')
-
-        else:
-            print(R+' [-] Potential Honeypot Detected!')
-            print(R+' [+] Honey Score : '+O+str(read*100)+'%')
-
+    banner()
+    key = kit.apikey("SHODAN_API_KEY")
+    if not key:
+        return
+    ip = kit.resolve(web)
+    if not ip:
+        kit.bad(f"Could not resolve {kit.host(web)}.")
+        return
+    kit.info(f"Querying Shodan HoneyScore for {ip}...")
+    try:
+        resp = kit.http(timeout=20).get(ENDPOINT.format(ip=ip), params={"key": key})
+    except Exception as e:
+        kit.bad(f"Shodan API unreachable: {type(e).__name__}")
+        return
+    if resp.status_code != 200:
+        kit.bad(f"Shodan API error: HTTP {resp.status_code} -- {resp.text.strip()[:100]}")
+        return
+    try:
+        score = float(resp.text.strip())
+    except ValueError:
+        kit.bad(f"Unexpected Shodan response: {resp.text.strip()[:100]}")
+        return
+    percent = f"{score * 100:.0f}%"
+    if score < 0.5:
+        kit.good(f"Target does not look like a honeypot (HoneyScore {percent}).")
     else:
-        print(R+' [-] Shodan APi key not set!')
-        print(R+' [-] Cannot use this module!')
+        kit.warn(f"Potential honeypot detected (HoneyScore {percent}).")
+
 
 def attack(web):
-    web = web.fullurl
     honeypot(web)

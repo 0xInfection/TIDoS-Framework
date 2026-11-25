@@ -1,48 +1,31 @@
 #!/usr/bin/env python3
-# -*- coding:utf-8 -*-
+# -*- coding: utf-8 -*-
+"""Hash calculator -- common digests of a string."""
 
-#-:-:-:-:-:-:-:-:-:-:-:-:#
-#    TIDoS Framework     #
-#-:-:-:-:-:-:-:-:-:-:-:-:#
+from __future__ import annotations
 
-#Author : @_tID
-#This module requires TIDoS Framework
-#https://github.com/0xInfection/TIDoS-Framework
-
-
-import time
 import hashlib
-from core.Core.colors import *
 
-info = "This module calculates the checksum of a given message using common hash functions."
+from core.methods import modkit as kit
+
+info = ("Calculates MD5, SHA-1, SHA-224, SHA-256, SHA-384 and SHA-512 digests of a "
+        "string. Set STRING to run non-interactively; otherwise you are prompted.")
 searchinfo = "Hash Calculator"
-properties = {}
+properties = {"STRING": ["Text to hash (empty: prompt)", ""]}
 
-def hashes():
+ALGORITHMS = ("md5", "sha1", "sha224", "sha256", "sha384", "sha512")
 
-    #print(R+'\n    =============================')
-    print(R+'\n     H A S H   G E N E R A T O R')
-    print(R+'    ---<>----<>----<>----<>----<>\n')
-    message = input(O+" [§] Enter the string :> ")
-    print(GR+' [+] Generating hashes...')
-    time.sleep(0.6)
 
-    md5 = hashlib.md5(message)
-    md5 = md5.hexdigest()
+def hashes(message: str) -> None:
+    data = message.encode("utf-8", "surrogatepass")
+    kit.info("Generating hashes...")
+    for name in ALGORITHMS:
+        kit.found(name.upper(), hashlib.new(name, data).hexdigest())
 
-    sha1 = hashlib.sha1(message)
-    sha1 = sha1.hexdigest()
-
-    sha256 = hashlib.sha256(message)
-    sha256 = sha256.hexdigest()
-
-    sha512 = hashlib.sha512(message)
-    sha512 = sha512.hexdigest()
-
-    print(G+" [+] MD5 Hash : "+O, md5)
-    print(G+" [+] SHA1 Hash : "+O, sha1)
-    print(G+" [+] SHA256 Hash : "+O, sha256)
-    print(G+" [+] SHA512 Hash : "+O, sha512)
 
 def attack(web):
-    hashes()
+    message = kit.option(properties, "STRING", "Enter the string to hash")
+    if not message:
+        kit.bad("No string given; set STRING or run interactively.")
+        return
+    hashes(message)
