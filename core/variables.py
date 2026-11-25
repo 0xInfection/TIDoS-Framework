@@ -58,12 +58,7 @@ interface = "wlp4s0"
 tor = False
 initip = ""
 
-#to avoid permission denied with gui, set to your unprivileged account
-username=""
-with open("core/doc/local", "r") as localfile:
-    username = localfile.read().strip()
-
-modir = os.path.dirname(os.path.realpath(__file__)) + "/../modules/"
+modir =os.path.dirname(os.path.realpath(__file__)) + "/../modules/"
 sploidir = os.path.dirname(os.path.realpath(__file__)) + "/../modules/SploitLoot/"
 scadir = os.path.dirname(os.path.realpath(__file__)) + "/../modules/ScanningEnumeration/"
 pasdir = os.path.dirname(os.path.realpath(__file__)) + "/../modules/OSINTFootprinting/PassiveRecon/"
@@ -102,7 +97,3 @@ if not os.path.exists(database):
         pass
 count = 0
 upd = False
-
-vailyndir = ""
-with open("core/doc/vailyn", "r") as vailynfile:
-    vailyndir = vailynfile.read().strip()

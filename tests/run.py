@@ -106,6 +106,7 @@ CASES = [
          expect=["No "], forbid=["finding"]),
     Case("rfi", mod(V + "rfi"), "fileinj", "/rfi/inc?file=home", expect=["finding"],
          opts={"RFIMARK": "TIDREMOTE-q8z3"}),  # RFIURL filled in at runtime
+    Case("pathtrav", mod(V + "pathtrav"), "fileinj", "/lfi/read?file=about.php", expect=["confirmed"]),
     Case("phpi", mod(V + "phpi"), "fileinj", "/phpi/eval?code=1", expect=["finding"]),
     Case("rce", mod(V + "rce"), "fileinj", "/rce/ping?host=127.0.0.1", expect=["finding"]),
     Case("htmli", mod(V + "htmli"), "webinj", "/htmli/vuln?q=a", expect=["finding"]),

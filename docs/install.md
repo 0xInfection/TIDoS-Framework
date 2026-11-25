@@ -1,8 +1,7 @@
 # Installing TIDoS
 
 TIDoS runs on **Linux** with **Python 3.7+**. The console must run as **root**,
-because several modules open raw sockets (port scans, ARP, traceroute). The Qt5
-GUI runs as a normal user.
+because several modules open raw sockets (port scans, ARP, traceroute).
 
 Once TIDoS is installed, configure your API keys with [setup.md](setup.md).
 
@@ -47,7 +46,6 @@ What the system tools are used for:
 | `iputils-ping` | `piwebenum`, `vicadd --ip` |
 | `tor` | `tor on` (HTTP via Tor, verified against check.torproject.org); see [setup.md](setup.md#tor) |
 | `tcpdump` | scapy-based scanners |
-| `konsole` | optional; only needed by the GUI |
 
 Python packages worth knowing about: `scapy` powers the raw scanners and
 `arpscan`. `sslyze` powers `ssltlsscan`; current sslyze releases need
@@ -81,12 +79,6 @@ API keys, because sudo drops the environment by default:
 sudo -E .venv/bin/python3 tidconsole.py
 ```
 
-Run the GUI as your normal user:
-
-```bash
-.venv/bin/python3 tidv2
-```
-
 > Always launch from the repository root. TIDoS reads `core/doc/*` and writes
 > `tmp/logs/` relative to the current directory.
 
@@ -106,7 +98,6 @@ Then:
 ```bash
 tidos                        # console (the launcher calls sudo itself)
 tidos -v http://target -l dig
-tidos --app                  # GUI, runs as you
 ```
 
 The launcher passes every `TIDOS_*` environment variable through `sudo`. Export
@@ -119,39 +110,34 @@ flags (see [setup.md](setup.md#api-keys)).
 
 ### Option C: Docker
 
+A Debian-based `Dockerfile` lives at the repository root:
+
 ```bash
-cd tidos-framework/core/docker
+cd tidos-framework
 docker build -t tidos .
-docker run -it --rm --env-file ~/.config/tidos/keys.env tidos bash
-tidos
+docker run -it --rm --env-file ~/.config/tidos/keys.env tidos   # console
+docker run -it --rm tidos bash                                   # drop to a shell
 ```
 
 `--env-file` takes the same `TIDOS_*=value` lines described in
 [setup.md](setup.md#keeping-keys-in-a-file); you can also pass single keys with
 `-e TIDOS_SHODAN_API_KEY=...`.
 
-> The Dockerfile clones the upstream repository from GitHub. It does not copy
-> your local checkout, so local changes only show up in the image once they are
-> pushed. The `vainlystrain/tidos-framework` image on Docker Hub predates this
-> version.
+> The image copies your local checkout (honouring `.dockerignore`), so it builds
+> the code you have on disk. Run with `-it` -- the console is interactive and
+> shows the usage disclaimer on first start.
 
 ## 3. Optional external tools
 
 | Tool | Needed by | Setup |
 |---|---|---|
-| [Katana](https://github.com/projectdiscovery/katana) | all crawling: `crawler1/2/3`, the injection scanners when `PARAM` is empty, `csrf`, `pathtrav_legacy`, `CRAWL=y` in the info-disclosure modules | **Automatic.** The first crawl downloads the pinned release (v1.8.0) for your OS/CPU from GitHub, checks its SHA-256 against the value pinned in `core/methods/katana.py` and installs it in `tools/bin/` (git-ignored), or `~/.cache/tidos/bin/` if the checkout isn't writable. Offline or locked-down hosts: put the binary there yourself, or set `TIDOS_KATANA=/path/to/katana`; `TIDOS_NO_DOWNLOAD=1` turns the download off. Without Katana, scanners still work with `PARAM` set and the info-disclosure modules scan just the target page. |
-| [Vailyn](https://github.com/VainlyStrain/Vailyn) | `pathtrav` (path traversal) | Install per its README. TIDoS asks for the install directory on first launch and stores it in `core/doc/vailyn`. Without Vailyn, use the built-in `lfi` (parameters) and `pathtrav_legacy` (URL path). |
+| [Katana](https://github.com/projectdiscovery/katana) | all crawling: `crawler1/2/3`, the injection scanners when `PARAM` is empty, `csrf`, `pathtrav`, `CRAWL=y` in the info-disclosure modules | **Automatic.** The first crawl downloads the pinned release (v1.8.0) for your OS/CPU from GitHub, checks its SHA-256 against the value pinned in `core/methods/katana.py` and installs it in `tools/bin/` (git-ignored), or `~/.cache/tidos/bin/` if the checkout isn't writable. Offline or locked-down hosts: put the binary there yourself, or set `TIDOS_KATANA=/path/to/katana`; `TIDOS_NO_DOWNLOAD=1` turns the download off. Without Katana, scanners still work with `PARAM` set and the info-disclosure modules scan just the target page. |
 | [phpsploit](https://github.com/nil0x42/phpsploit) | the `phpsploit` console command | Clone next to the TIDoS checkout (`../phpsploit/phpsploit`), or enter the path when asked. |
 
 ## 4. First launch
 
-On the first console start TIDoS:
-
-1. shows the disclaimer and asks you to accept it (stored in `core/doc/choice`);
-2. asks for your **unprivileged user name**, which the GUI uses to avoid
-   root-owned files (stored in `core/doc/local`);
-3. asks for the **Vailyn directory**; leave it empty if you don't use
-   `pathtrav` (stored in `core/doc/vailyn`).
+On the first console start TIDoS shows the disclaimer and asks you to accept it
+(stored in `core/doc/choice`).
 
 Check that everything loads:
 

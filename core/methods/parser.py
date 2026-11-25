@@ -28,9 +28,8 @@ class VaileParser(argparse.ArgumentParser):
         self.print_usage(sys.stderr)
         self.exit(2, '{}[-]\033[0m\033[1m Invalid/missing params\033[0m\n{}[HINT]\033[0m\033[0m {}\n'.format(R, R, message))
     def print_help(self):
-        print('''{}Vsynta.:{} {}tidos{} [-v VIC] [-p] [-a CA] [-s] 
-          [-f] [-l M] [-h] [-c VAL]
-        [--app] [-q]
+        print('''{}Vsynta.:{} {}tidos{} [-v VIC] [-p] [-a CA] [-s]
+          [-f] [-l M] [-h] [-c VAL] [-q]
 
   -v VIC, --victim VIC  {}Target to attack per cli{}
   -l M, --load M        {}Module to load per cli{}
@@ -39,14 +38,13 @@ class VaileParser(argparse.ArgumentParser):
   -s, --session         {}Is VIC a session file?{}
   -q, --quiet           {}Start Console quietly{}
   -f, --fetch           {}Check for & install updates{}
-  -c, --file            {}Automation using VAL file{}
-  --app                 {}Run TIDoS graphical interface{}'''.format(RC, color.END, RB, color.END, RC, color.END, RC, color.END, RC, color.END, RC, color.END, RC, color.END, RC, color.END, RC, color.END, RC, color.END, RC, color.END))
+  -c, --file            {}Automation using VAL file{}'''.format(RC, color.END, RB, color.END, RC, color.END, RC, color.END, RC, color.END, RC, color.END, RC, color.END, RC, color.END, RC, color.END, RC, color.END))
 
 class VaileFormatter(argparse.RawDescriptionHelpFormatter):
     def add_usage(self, usage, actions, groups, prefix=None):
         if prefix is None:
             prefix = RD + 'Vsynta ' + color.END
-            return super(VaileFormatter, self).add_usage("{}tidos{} [-v VIC] [-p] [-a CA] [-s]\n          [-f] [-l M] [-h] [-c VAL]\n        [--app] [-q]".format(RB,color.END), actions, groups, prefix)
+            return super(VaileFormatter, self).add_usage("{}tidos{} [-v VIC] [-p] [-a CA] [-s]\n          [-f] [-l M] [-h] [-c VAL] [-q]".format(RB,color.END), actions, groups, prefix)
 
 def build_parser():
     p = VaileParser(formatter_class=VaileFormatter, add_help=False)

@@ -1,4 +1,4 @@
-"""Fixture for lfi / rfi / pathtrav_legacy / phpi / rce / shellshock / strutsshock.
+"""Fixture for lfi / rfi / pathtrav / phpi / rce / shellshock / strutsshock.
 
 Host 127.0.0.1 -> vulnerable CGI set, Host localhost -> safe CGI set.
 Nothing is ever executed: shell / PHP / OGNL behaviour is emulated with regexes.

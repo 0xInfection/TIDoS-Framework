@@ -48,7 +48,6 @@ Then start TIDoS the way you installed it:
 | Global (`tidos` launcher) | `tidos` | The launcher forwards every `TIDOS_*` variable through sudo. |
 | Local checkout | `sudo -E .venv/bin/python3 tidconsole.py` | `-E` keeps your environment; plain `sudo` drops it. |
 | Local, with restrictive sudoers | `sudo --preserve-env=TIDOS_SHODAN_API_KEY,TIDOS_CENSYS_API_TOKEN .venv/bin/python3 tidconsole.py` | Use this if your sudo policy rejects `-E`. |
-| GUI | `.venv/bin/python3 tidv2` | Runs as you; no sudo involved. |
 | Docker | `docker run -e TIDOS_SHODAN_API_KEY=... ...` or `--env-file` | |
 
 > Keys exported without the prefix (e.g. `SHODAN_API_KEY`) still work, but only
@@ -160,14 +159,13 @@ Per-module behaviour with Tor on:
 
 | Module | Behaviour |
 |---|---|
-| Crawling (`crawler1/2/3`, the scanners' parameter discovery, `csrf`, `pathtrav_legacy`, `CRAWL=y` in the info-disclosure modules) | Katana is given `-proxy socks5://127.0.0.1:9050` |
+| Crawling (`crawler1/2/3`, the scanners' parameter discovery, `csrf`, `pathtrav`, `CRAWL=y` in the info-disclosure modules) | Katana is given `-proxy socks5://127.0.0.1:9050` |
 | `waf`, `webtech`, `getcensys`, `webscan`, `shodan` | HTTP through Tor |
 | `getports`, `simpleport`, `tcpconnectscan`, `servicedetect`, raw scanners, `arpscan`, `ssltlsscan`, `osdetect` | Direct connections; a warning is printed |
 | `nmapmain` | **Refused** unless you `set LEAK y`. nmap's `--proxies` only covers NSE and version probes; host discovery, the port scan itself and DNS go out directly (verified). With `LEAK=y` only TCP-connect profiles run, with `-sT -Pn --proxies`. |
 | Vulnerability scanners (`sqli`, `xss`, `lfi`, ..., `headers`, `icors`, `hhi`, ...) | HTTP through Tor |
 | `*brute` (FTP/POP/SMTP/MySQL/SSH/Telnet/XMPP), `netmisc` | Direct connections; a warning is printed |
 | `zone`, `mailspoof`, `ssscript`, `subdomover` (DNS part), `cloudflaremisc` (origin probes) | Direct DNS / connections; a warning is printed |
-| `pathtrav` | Runs Vailyn, which does not use TIDoS's Tor setting |
 
 `tor off` switches routing back to direct and, on a terminal, offers to stop the
 tor service.
@@ -215,7 +213,7 @@ Commonly used options:
 | `PORT` | `ssltlsscan`, `sslcert` | TLS port (default: the URL's port for https, else 443) |
 | `PARAM` | injection scanners (`sqli`, `xss`, `lfi`, `rfi`, `phpi`, `rce`, `htmli`, `crlf`, `openredirect`, `ldap`, `xpathi`) | Endpoint to test: `/page.php?id=1`, a full URL, or `POST /login user=a&pass=b`. Every parameter in it is tested. Empty: the target URL's own parameters plus a crawl |
 | `DEPTH`, `MAXPOINTS` | injection scanners, `csrf` | Crawl depth when `PARAM` is empty (default 1); cap on parameters tested (default 40) |
-| `COOKIE`, `HEADERS` | `crawler1/2/3`, injection scanners, `csrf`, `pathtrav_legacy`, `cookiecheck`, `icors`, `hhi`, info-disclosure modules, `commentssrc` | Authenticated testing. `COOKIE` is a Cookie header (`PHPSESSID=abc; role=x`); `HEADERS` adds request headers, several separated by `\|\|` (`Authorization: Bearer eyJ... \|\| X-Api-Key: k1`). Both go with every request, including the parameter-discovery crawl. These are never prompted for: set them or they're empty. (`sessionfix` and the Vailyn-based `pathtrav` only take `COOKIE`.) |
+| `COOKIE`, `HEADERS` | `crawler1/2/3`, injection scanners, `csrf`, `pathtrav`, `cookiecheck`, `icors`, `hhi`, info-disclosure modules, `commentssrc` | Authenticated testing. `COOKIE` is a Cookie header (`PHPSESSID=abc; role=x`); `HEADERS` adds request headers, several separated by `\|\|` (`Authorization: Bearer eyJ... \|\| X-Api-Key: k1`). Both go with every request, including the parameter-discovery crawl. These are never prompted for: set them or they're empty. (`sessionfix` only takes `COOKIE`.) |
 | `TECHNIQUE`, `DELAY` | `sqli` | `error`, `boolean`, `time` or `all` (default `error,boolean`; time-based is opt-in because sleep payloads load the target's database); sleep seconds for `time` |
 | `BLIND`, `SLEEP` | `phpi`, `rce` | Time-based checks on/off (default y) and the sleep length (default 5) |
 | `TESTHEADERS` | `xss` | Also test User-Agent, Referer and cookie reflection (default y) |
@@ -290,8 +288,9 @@ tidos -v https://target.example -l passive-all     # every passive module
 > - `htmli`, `crlf` and `openredirect` dropped `DICT`, because their payloads
 >   are built around random markers.
 > - `rfi`'s `DICT` is now an optional list of known vulnerable-application paths.
-> - `pathtrav_legacy` only tests path traversal in the URL path (`DIRECTORY`,
->   `DEPTH`, `MAXDIRS`); traversal through parameters belongs to `lfi`.
+> - `pathtrav` is now a native scanner (no external Vailyn): it tests traversal
+>   both through parameters (`PARAM`) and in the URL path (`DIRECTORY`, `DEPTH`,
+>   `MAXDIRS`). Use `lfi` for absolute-path reads and php:// wrappers.
 
 In the console, `sessions save NAME --val` writes the current targets and the
 options you've `set` to such a file, and `sessions load NAME.val` restores them.

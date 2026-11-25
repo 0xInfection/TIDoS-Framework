@@ -4,7 +4,6 @@
 `tidos` launcher installed to /usr/bin by core/install.py.
 
     tidos [ARGS...]   console (via sudo); ARGS are passed to tidconsole.py
-    tidos --app       Qt5 GUI (runs as the invoking user)
 
 sudo drops the caller's environment, so every TIDOS_* variable (API keys,
 see docs/setup.md) is explicitly preserved across it.
@@ -19,14 +18,11 @@ HOME = "/opt/TIDoS"
 
 def main() -> int:
     args = sys.argv[1:]
-    if "--app" in args:
-        cmd = ["python3", "-B", "tidv2"]
-    else:
-        keep = sorted(k for k in os.environ if k.startswith("TIDOS_"))
-        cmd = ["sudo"]
-        if keep:
-            cmd.append("--preserve-env=" + ",".join(keep))
-        cmd += ["python3", "-B", "tidconsole.py", *args]
+    keep = sorted(k for k in os.environ if k.startswith("TIDOS_"))
+    cmd = ["sudo"]
+    if keep:
+        cmd.append("--preserve-env=" + ",".join(keep))
+    cmd += ["python3", "-B", "tidconsole.py", *args]
     try:
         return subprocess.call(cmd, cwd=HOME)
     except KeyboardInterrupt:

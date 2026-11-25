@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 Evidence helpers for the file inclusion, path traversal and code/command
-injection scanners (lfi, rfi, pathtrav_legacy, phpi, rce, shellshock,
+injection scanners (lfi, rfi, pathtrav, phpi, rce, shellshock,
 strutsshock).
 
     sig = file_signature("../../etc/passwd%00")      # -> "passwd"

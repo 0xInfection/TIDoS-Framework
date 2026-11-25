@@ -18,9 +18,6 @@ pillow
 paramiko
 PyMySQL
 
-# GUI (tidv2)
-PyQt5
-
 # Optionals (needed for additional features)
 # ------------------------------------------
 # post-exploitation & control

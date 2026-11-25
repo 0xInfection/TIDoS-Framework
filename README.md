@@ -14,17 +14,13 @@
   The Offensive Web Application Penetration Testing Framework.
 </p>
 
-> __IMPORTANT__:
->
-> The new Qt5 interface is complete, but has additional dependencies. Take a look at the updated installation instructions.
-
 ### Highlights :-
 Here is some light on what the framework is all about:
 -  A complete versatile framework to cover up everything from Reconnaissance to Vulnerability Analysis.
--  Has 5 main phases consisting a total of __116 modules__.
+-  Has 5 main phases consisting a total of __115 modules__.
 -  Reconnaissance Phase has 54 modules of its own (including active and passive recon, information disclosure modules).
 -  Scanning & Enumeration Phase has got 19 modules (including port scans, WAF & Shodan intel, SSL enumeration, etc.)
--  Vulnerability Analysis Phase has 37 modules (including most common vulnerabilities in action).
+-  Vulnerability Analysis Phase has 36 modules (including most common vulnerabilities in action).
 -  Exploits Castle has only 1 exploit. `(purely developmental)`
 -  And finally, Auxiliaries have got 4 modules. `more under development`
 -  All phases each have an `Auto-Awesome` module which automates every module for you.
@@ -32,7 +28,6 @@ Here is some light on what the framework is all about:
 -  Piping Attacks through Tor (verified Tor exit before routing)
 -  You just need the domain, and leave everything is to this tool.
 -  TIDoS has full verbose out support, so you'll know whats going on.
--  Attacking now even easier with a new GUI
 
 ### Main new features
 -  the programming language: TIDoS is fully ported to Python3
@@ -43,7 +38,6 @@ Here is some light on what the framework is all about:
 -  Module Completion: Some modules have been feature-extended (e.g. more evasion, supporting more than 1 query parameter)
 -  WAF fingerprinting now backed by `wafw00f` (~170 signatures)
 -  Findings are recorded to a per-session database
--  A Graphical User Interface for easier interaction with the toolkit
 -  Supports non-default http(s) ports
 
 ### Upcoming
@@ -58,10 +52,9 @@ TIDoS runs on Linux with Python 3.7+. Quick start:
 git clone https://github.com/0xinfection/tidos-framework.git && cd tidos-framework
 python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
 sudo -E .venv/bin/python3 tidconsole.py   # console (root)
-.venv/bin/python3 tidv2                   # Qt5 GUI
 ```
 
-See [docs/install.md](docs/install.md) for system packages, the global `/opt` install (`tidos` launcher), Docker, optional tools (Vailyn, phpsploit) and updating.
+See [docs/install.md](docs/install.md) for system packages, the global `/opt` install (`tidos` launcher), Docker, optional tools (phpsploit) and updating.
 
 ### Getting Started :-
 

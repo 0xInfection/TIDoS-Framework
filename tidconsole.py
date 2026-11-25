@@ -105,15 +105,11 @@ class TIDcon(Cmd):
 """)
 
     """
-    help loading VAL sessions by setting options, providing terminal output 
-    and the target list to the GUI if in use
+    help loading VAL sessions by setting options and providing terminal output
     """
-    def sessionhelper(self, inp, gui):
+    def sessionhelper(self, inp):
         print()
-        if gui:
-            victims, options = sessionparse(inp, load=False)
-        else:
-            victims, options = sessionparse(inp)
+        victims, options = sessionparse(inp)
         for module, props in options.items():
             self.do_load(module)
             print("{}{}{}{}\n".format(C, color.UNDERLINE, module, C))
@@ -121,12 +117,10 @@ class TIDcon(Cmd):
                 self.do_set("{} {}".format(opt, val))
             self.do_leave("")
             print()
-        if gui:
-            return victims
 
     """
     fully automate the framework providing a VAL file with the -c argument
-    supports different options for different targets, however not while using GUI (TODO)
+    supports different options for different targets
     """
     def automator(self, inp):
         print()
@@ -143,14 +137,11 @@ class TIDcon(Cmd):
                 self.do_leave("")
                 print()
 
-    def do_sessions(self, inp, gui=False):
+    def do_sessions(self, inp):
         if "load" in inp:
             b = varis.targets
             om = varis.module
             varis.targets = []
-            victims = []
-            #for i in varis.targets:
-            #    varis.targets.remove(i)
             session = inp.split("load")[1].strip()
             if session == "":
                 print(R + " [-] " + "\033[0m" + color.UNDERLINE + "\033[1m" + "Syntax: sessions [load|save <SESS_ID>] [list]")
@@ -160,7 +151,7 @@ class TIDcon(Cmd):
                     if ".val" in session or "--val" in session:
                         session = session.replace("--val","").strip()
                         #print(session)
-                        victims = self.sessionhelper(session, gui)
+                        self.sessionhelper(session)
                         print(G+" [+] Restored VAL session: {}".format(session)+C+color.TR2+C)
                         if om != "":
                             self.do_load(om)
@@ -185,8 +176,6 @@ class TIDcon(Cmd):
             os.system("{} core/sessioncache".format(varis.CMD_LS))
         else:
             print(R + " [-] " + "\033[0m" + color.UNDERLINE + "\033[1m" + "Syntax: sessions [load|save <SESS_ID>] [list]")
-        if gui:
-            return victims
 
 
     def help_sessions(self):
@@ -516,13 +505,11 @@ class TIDcon(Cmd):
   [!] VAL "none" for no value ("")
 """)
 
-    def do_info(self, inp, gui=False):
+    def do_info(self, inp):
         if varis.module == "":
             print(R + " [-] " + "\033[0m" + color.UNDERLINE + "\033[1m" + "No module loaded.")
         else:
-            info = select.information(varis.module)
-            if gui:
-                return info
+            select.information(varis.module)
 
     def help_info(self):
         print("""
@@ -618,7 +605,7 @@ class TIDcon(Cmd):
     help_quit = help_q
     help_exit = help_q
 
-    def do_fetch(self, inp, gui=False):
+    def do_fetch(self, inp):
         try:
             localver = varis.e_version.split("#")[0]
             s = session()
@@ -642,20 +629,17 @@ class TIDcon(Cmd):
                     uptodate = False
             if not uptodate:
                 print(" [!] An update is available! Last version is: {}, installed version is: {}.".format(onver, localver))
-                if not gui:
-                    d = input(" [?] Do you want to update the framework? (enter if not) :> ")
-                    if d != "":
-                        path = os.path.dirname(os.path.realpath(__file__))
-                        if "/home/" in path:
-                            user = path.split("/")[2]
-                            os.system("git stash; sudo -u {} git pull".format(user))
-                        else:
-                            os.system("git stash ; git pull ; cp tmp/TIDoS /bin/TIDoS ; chmod +x /bin/TIDoS")
-                        print(G+" [+] Update installed successfully."+C+color.TR2+C)
+                d = input(" [?] Do you want to update the framework? (enter if not) :> ")
+                if d != "":
+                    path = os.path.dirname(os.path.realpath(__file__))
+                    if "/home/" in path:
+                        user = path.split("/")[2]
+                        os.system("git stash; sudo -u {} git pull".format(user))
+                    else:
+                        os.system("git stash ; git pull ; cp tmp/TIDoS /bin/TIDoS ; chmod +x /bin/TIDoS")
+                    print(G+" [+] Update installed successfully."+C+color.TR2+C)
             else:
                 print(" [+] You are running the latest version of TIDoS-framework ({}).".format(localver))
-            if gui:
-                return (uptodate, localver)
         except Exception:
             print(R + " [-] " + "\033[0m" + color.UNDERLINE + "\033[1m" + "An error occurred fetching...")
 
@@ -700,20 +684,7 @@ def main():
             time.sleep(1)
             sys.exit(0)
 
-    if varis.username == "":
-        user = input("Enter your (unprivileged) user name [necessary for GUI] :> ")
-        with open("core/doc/local","w") as localfile:
-            localfile.write(user)
-
-    if varis.vailyndir == "":
-        vailyn = input("Enter Vailyn installation directory (absolute path; required for pathtrav module) :> ")
-        with open("core/doc/vailyn","w") as vailynfile:
-            vailynfile.write(vailyn)
-
-    """
-    handle arguments. Note that the --app argument for the GUI is handled in
-    tmp/tidos (which will be executed after global installation)
-    """
+    # handle arguments
     if opt["load"] and opt["victim"] and not opt["help"] and not opt["list"]:
         s = TIDcon()
         if not opt["quiet"]:
