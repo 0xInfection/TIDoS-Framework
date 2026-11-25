@@ -98,121 +98,28 @@ ____, __{}
 
 
 
-vaile = '''{0}                      |
-                      :   
-                      |   
-                      .   
-                      .   
-                      .   
-____, __             .|   
-   + ;               .|   
-   .{1}:,                       
-     '                      
-    .              /      
-    + ;           :,      
-    ;.           /,       
-   {0}  ;          /;' ;    
-     ;         /;{2}|{0}  : ^  
-     '      / {2}:{0}  ;.'  *   
-          '/; \\           
-         ./ '. \\      {2}|{0}
-          '.  '-    __\\,_
-         {1}   '.      {0}\\{1}`{2};{0}{1} 
-              \\      {0}\\ {1}
-              .\\.     {0}V{1}   
-                \\.               
-                 .,.      
-                   .'.    
-                  ''.;:     
-                    .|.   
-                     | .  
-                     .    
-                     
-'''.format(color.END, color.BOLD, color.CURSIVE)
+lotus = color.BOLD + r'''
+                       (|)
+               \.      |:|      ./
+         \.     \.     |:|     ./     ./
+          \`.    \`.   |:|   .'/    .'/
+           \ `.   \ `. |:| .' /   .' /
+      \.    \  `.  \  `|:|'  /  .'  /    ./
+       `.`.  \   `. \  |:|  / .'   /  .'.'
+         `. `. \   `.\ |:| /.'   / .' .'
+     \_    `.  `.\   `\|:|/'   /.'  .'    _/
+       `-._  `.  \`.  (   )  .'/  .'  _.-'
+           `-._`. \ `-|: :|-' / .'_.-'
+               `-.`_.-|: :|-._'.-'
+      ~ ~ ~ ~ ~ ~ ~ ~ \:::/ ~ ~ ~ ~ ~ ~ ~ ~
+                  ______________
+                     __________
 
-metasploit_hakcers = '''                                                 ,˛
-                                              .:oDFo:.                            
-                                           ./ymM0dayMmy/.                          
-                                        -+dHJ5aGFyZGVyIQ==+-                    
-                                    .:sm⏣~~Destroy.No.Data~~s:`                
-                                 -+h2~~Maintain.No.Persistence~~h+-              
-                             .:odNo2~~Above.All.Else.Do.No.Harm~~Ndo:`          
-                          ./etc/shadow.0days-Data'%20OR%201=1--.No.0MN8'/.      
-                       -++SecKCoin++e.AMd`       `.-://///+hbove.913.ElsMNh+-    
-                      -~/.ssh/id_rsa.Des-                  `htN01UserWroteMe!-  
-                      :dopeAW.No<nano>o                     :is:TЯiKC.sudo-.A:  
-                      :we're.all.alike'`                     The.PFYroy.No.D7:  
-                      :PLACEDRINKHERE!:                      yxp_cmdshell.Ab0:    
-                      :msf>exploit -j.                       :Ns.BOB&ALICEes7:    
-                      :---srwxrwx:-.`                        `MS146.52.No.Per:    
-                      :<script>.Ac816/                        sENbove3101.404:    
-                      :NT_AUTHORITY.Do                        `T:/shSYSTEM-.N:    
-                      :09.14.2011.raid                       /STFU|wall.No.Pr:    
-                      :hevnsntSurb025N.                      dNVRGOING2GIVUUP:    
-                      :#OUTHOUSE-  -s:                       /corykennedyData:    
-                      :$nmap -oS                              SSo.6178306Ence:    
-                      :Awsm.da:                            /shMTl#beats3o.No.:    
-                      :Ring0:                             `dDestRoyREXKC3ta/M:    
-                      :23d:                               sSETEC.ASTRONOMYist:    
-                       /-                        /yo-    .ence.N:(){ :|: & };:    
-                                                 `:Shall.We.Play.A.Game?tron/    
-                                                 ```-ooy.if1ghtf0r+ehUser5`    
-                                               ..th3.H1V3.U2VjRFNN.jMh+.`          
-                                              `MjM~~WE.ARE.se~~MMjMs              
-                                               +~KANSAS.CITY's~-`                  
-                                                J~HAKCERS~./.`                    
-                                                .esc:wq!:`                        
-                                                 +++ATH`                            '''
+              T  I  D  o  S   Framework
+        The Offensive Web Application Pentest Suite
+''' + color.END
 
-
-
-tidos1 = color.BOLD + """
-
-   T H E
-
-         ███      ▄█  ████████▄   ▄██████▄     ▄████████
-     ▀█████████▄ ███  ███   ▀███ ███    ███   ███    ███ 
-        ▀███▀▀██ ███▌ ███    ███ ███    ███   ███    █▀
-         ███   ▀ ███▌ ███    ███ ███    ███   ███
-         ███     ███▌ ███    ███ ███    ███ ▀███████████
-         ███     ███  ███    ███ ███    ███          ███ 
-         ███     ███  ███   ▄███ ███    ███    ▄█    ███
-        ▄████▀   █▀   ████████▀   ▀██████▀   ▄████████▀
-
-                                                 F R A M E W O R K
-""" + color.END
-
-tidos2 = """
-
-   T H E
-
-    _________ ___ ______        _______  
-     |       |   |   _  \.--.--|       | 
-     |.|   | |.  |.  |   |  |  |___|   | 
-     `-|.  |-|.  |.  |    \___/ /  ___/  
-       |:  | |:  |:  1    /    |:  1  \  
-       |::.| |::.|::.. . /     |::.. . | 
-       `---' `---`------'      `-------' 
-       
-                                  F R A M E W O R K
-"""
-
-
-tidos3 = """
-
-____, - 
-   + ;  {0}T H E{1}      ____        _______
-   .:,          |   _  \.--.--|       | 
-     '      |.  |.  {2}|   |  |  |___|   |
-    .  `-|. |.  |.  |    \___/ /  ___/    
-    + ;  |: |{1}:  |:  1    /    |:  1  \\
-    ;.      |::.|::.. . /     |::{2}.. . |{1} 
-     ;      `---`------'      `-------' 
-     ;                           
-     '                           {0}F R A M E W O R K{1}
-""".format(color.CURSIVE, color.END, color.BOLD)
-
-bannerlist = [vaile]
+bannerlist = [lotus]
 
 sp00k70b3r = """
       ___
