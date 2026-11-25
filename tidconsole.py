@@ -20,6 +20,7 @@ _____, ___
 import importlib as imp
 import os
 import platform
+import subprocess
 import sys
 import time
 from cmd import Cmd
@@ -32,7 +33,7 @@ import core.variables as varis
 from core.Core.colors import R, B, C, color, O, G, RD, RC
 from core.methods.cache import load, save, sessionparse, createVal, targetparse
 from core.methods.creds import creds
-from core.methods.tor import torpipe, initcheck, session
+from core.methods.tor import torpipe, initcheck, proxy_listening, session
 from core.methods.parser import build_parser
 
 """The metasploit-like shell, binding the framework together"""
@@ -214,58 +215,47 @@ class TIDcon(Cmd):
   Clear the terminal using the native 'clear' or 'cls' command.
 """)
 
-    def do_tor(self, inp, shell=True):
-        try:
-            initv = varis.initip == ""
-            acc = False
-            if initv:
+    def do_tor(self, inp, shell=None):
+        # prompt only on a terminal; unattended runs (CLI -p, VAL files) never block
+        if shell is None:
+            shell = sys.stdin.isatty()
+        arg = inp.strip().lower()
+        if arg == "on":
+            if not varis.initip:
                 try:
-                    """
-                    check the initial IP - will be used later to verify that Tor
-                    works
-                    """
-                    initcheck()
-                    acc = True
-                except:
-                    acc = False
-            if "on" in inp.lower():
-                #check if Tor service is running; if not, prompt user to start it
-                if acc or not initv:
-                    p = torpipe(True)
-                    if p:
+                    initcheck()  # direct IP, only used to show the before/after
+                except Exception:
+                    pass
+            if torpipe(True):
+                print(O+" [+] Tor"+C+color.TR3+C+G+"ON"+C+color.TR2+C)
+                return
+            if proxy_listening():
+                return  # proxy is up but not a verified Tor exit: torpipe said why
+            start = input(color.END+" [?] Start the tor service now? (enter if not) :> ") if shell else "yes"
+            if start:
+                try:
+                    subprocess.run(["systemctl", "start", "tor"], check=True)
+                    print(G+" [+] Tor service started; waiting for it to bootstrap..."+C+color.TR2+C)
+                    for _ in range(15):
+                        if proxy_listening():
+                            break
+                        time.sleep(1)
+                    if torpipe(True):
                         print(O+" [+] Tor"+C+color.TR3+C+G+"ON"+C+color.TR2+C)
-                    else:
-                        varis.tor = False
-                        if shell:
-                            start = input(color.END+" [?] Do you want to start the Tor service? (enter if not) :> ")
-                        else:
-                            start = "yes"
-                        if start != "":
-                            try:
-                                os.system("systemctl start tor")
-                                print(G+" [+] Tor service successfully started."+C+color.TR2+C)
-                                self.do_tor("on")
-                            except Exception as e:
-                                print(R + " [-] " + "\033[0m" + color.UNDERLINE + "\033[1m" + "Starting Tor service failed:"+"\033[0m"+ color.CURSIVE +"\n{}".format(e) + C)
-                else:
-                    print(R + " [-] " + "\033[0m" + color.UNDERLINE + "\033[1m" + "Starting Tor service failed: Initial IP not set."+"\033[0m" + C)
-            elif "off" in inp.lower():
-                torpipe(False)
-                if shell:
-                    stop = input(color.END+" [?] Do you want to stop the Tor service? (enter if not) :> ")
-                else:
-                    stop = "yes"
-                if stop != "":
-                    try:
-                        os.system("systemctl stop tor")
-                        print(G+" [+] Tor service successfully stopped."+C+color.TR2+C)
-                    except Exception as e:
-                        print(R + " [-] " + "\033[0m" + color.UNDERLINE + "\033[1m" + "Stopping Tor service failed:"+"\033[0m"+ color.CURSIVE +"\n{}".format(e) + C)
-                print(O+" [+] Tor"+C+color.TR3+C+G+"OFF"+C+color.TR2+C)
-            else:
-                print(R + " [-] " + "\033[0m" + color.UNDERLINE + "\033[1m" + "Syntax: tor on|off")
-        except:
-            print(R + " [-] " + "\033[0m" + color.UNDERLINE + "\033[1m" + "Tor connection failed: IPcheck service not available.")
+                except (OSError, subprocess.CalledProcessError) as e:
+                    print(R + " [-] " + "\033[0m" + color.UNDERLINE + "\033[1m" + "Starting Tor service failed:"+"\033[0m"+ color.CURSIVE +"\n{}".format(e) + C)
+        elif arg == "off":
+            torpipe(False)
+            stop = input(color.END+" [?] Also stop the tor service? (enter if not) :> ") if shell else ""
+            if stop:
+                try:
+                    subprocess.run(["systemctl", "stop", "tor"], check=True)
+                    print(G+" [+] Tor service stopped."+C+color.TR2+C)
+                except (OSError, subprocess.CalledProcessError) as e:
+                    print(R + " [-] " + "\033[0m" + color.UNDERLINE + "\033[1m" + "Stopping Tor service failed:"+"\033[0m"+ color.CURSIVE +"\n{}".format(e) + C)
+            print(O+" [+] Tor"+C+color.TR3+C+G+"OFF"+C+color.TR2+C)
+        else:
+            print(R + " [-] " + "\033[0m" + color.UNDERLINE + "\033[1m" + "Syntax: tor on|off")
 
     def help_tor(self):
         print("""
@@ -276,6 +266,11 @@ class TIDcon(Cmd):
   Syntax:
 
     tor on|off
+
+  'tor on' needs a Tor SOCKS proxy on 127.0.0.1:9050 and only succeeds once
+  check.torproject.org confirms the exit is Tor. HTTP requests made by modules
+  (and their DNS lookups) then go through Tor. Raw sockets do not: port scans,
+  ping/traceroute, DNS libraries and TLS certificate grabs.
 """)
 
     def do_netinfo(self, inp):

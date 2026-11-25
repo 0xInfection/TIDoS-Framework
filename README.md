@@ -51,68 +51,22 @@ Here is some light on what the framework is all about:
 
 ### Installation :-
 
-#### Installation Script (Globally) :
-
-To install the framework globally in /opt, run the provided `core/install.py` script as root. After this, you can launch TIDoS simply by typing `tidos` on the command line.
-
-#### Manual Installation (Locally) :
-
-* Clone the repository locally and navigate there:
-```
-git clone https://github.com/0xinfection/tidos-framework.git
-cd tidos-framework
-```
-
-TIDoS needs some libraries to run, which can be installed via `aptitude` or `dnf` Package Managers.
-```
-sudo apt-get install libncurses5 libxml2 nmap tcpdump libexiv2-dev build-essential python3-pip libmariadbclient18 libmysqlclient-dev tor konsole
-```
-Now after these dependencies are finished installing, we need to install the remaining Python Package dependencies, hence run:
-```
-pip3 install -r requirements.txt
-```
-
-TIDoS uses Vailyn to scan for path traversals in a new, improved path traversal module. If you want to use that module, head to `https://github.com/VainlyStrain/Vailyn`, and follow the installation instructions there.
-
-Thats it. You now have TIDoS at your service. Fire it up using:
-```
-python3 tidv2               #Qt5 interface
-sudo python3 tidconsole.py  #console interface
-```
-
-#### Docker image :
-
-You can build it from Dockerfile :
-```
-git clone https://github.com/0xinfection/tidos-framework.git
-cd tidos-framework/core/docker
-docker build -t tidos .
-```
-
-To run TIDoS :
+TIDoS runs on Linux with Python 3.7+. Quick start:
 
 ```
-docker run --interactive --tty --rm tidos bash
-tidos
+git clone https://github.com/0xinfection/tidos-framework.git && cd tidos-framework
+python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
+sudo -E .venv/bin/python3 tidconsole.py   # console (root)
+.venv/bin/python3 tidv2                   # Qt5 GUI
 ```
 
-Update: TIDoS is now available on Docker Hub. Install and run the container like this:
-
-```
-docker run -it vainlystrain/tidos-framework
-```
-
-#### Updating TIDoS :
-
-To get the current version of TIDoS, move into the installation folder and perform `(sudo) git pull  #sudo if installed by install.py`. Alternatively, you can run the `fetch` command in tidconsole.
+See [docs/install.md](docs/install.md) for system packages, the global `/opt` install (`tidos` launcher), Docker, optional tools (Vailyn, phpsploit) and updating.
 
 ### Getting Started :-
 
-To get started, you need to set your own `API KEYS` for various OSINT & Scanning and Enumeration purposes. To do so, open up `API_KEYS.py` under `files/` directory and set your own keys and access tokens for `SHODAN`, `CENSYS`, `FULL CONTACT`, `GOOGLE` and `WHATCMS`.
+Some modules need API keys (Shodan, Censys, ViewDNS, WhatCMS, HackerTarget). TIDoS ships **no** keys: they are read from environment variables such as `TIDOS_SHODAN_API_KEY`. Most modules need no key at all.
 
-> __GOOD NEWS__:
->
-> The latest release of TIDoS includes all API KEYS and ACCESS TOKENS for `SHODAN`, `CENSYS`, `FULL CONTACT`, `GOOGLE` and `WHATCMS` by default. I found these tokens on various repositories on GitHub itself. __You can now use all the modules__ which use the API KEYS. :)
+See [docs/setup.md](docs/setup.md) for the full list of keys, how to pass them through `sudo`, which third-party services each module contacts, Tor, module options and automation.
 
 #### Commands :-
 
@@ -223,7 +177,7 @@ TIDoS presently supports the following: `and more modules are under active devel
 	+ Web Technology Enumeration `Absolute`
 	+ Complete SSL Enumeration `Absolute`
 	+ Operating System Fingerprinting `IMPROVED`
-	+ Banner Grabbing of Services `via Open Ports`
+	+ Shodan Host Intel `banners, CVEs, tags, geo` `via Shodan API or free InternetDB`
 	+ Interactive Scanning with NMap `16 preloaded modules`
 	+ Internet Wide Servers Scan `Using CENSYS Database`
 	+ Web and Links Crawlers
