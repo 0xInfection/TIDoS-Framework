@@ -1,69 +1,115 @@
 #!/usr/bin/env python3
-# coding: utf-8
+# -*- coding: utf-8 -*-
+"""Censys OS identifier -- operating system of the target from Censys host data."""
 
-#-:-:-:-:-:-:-:-:-:-:-:-:#
-#    TIDoS Framework     #
-#-:-:-:-:-:-:-:-:-:-:-:-:#
+from __future__ import annotations
 
-#Author : @_tID
-#This module requires TIDoS Framework
-#https://github.com/0xInfection/TIDoS-Framework
+from core.methods import modkit as kit
+from core.methods.print import pscan
 
-
-import re
-import requests
-import socket
-import http.cookiejar
-import subprocess
-import time
-from modules.ScanningEnumeration.getports import getports
-from core.Core.colors import *
-
-info = "This module tries to determine the target's OS using censys."
+info = ("This module tries to determine the target's OS using the Censys Platform host "
+        "data (needs a Censys Platform personal access token, CENSYS_API_TOKEN).")
 searchinfo = "OS Identifier"
 properties = {}
 
-from core.database.database_module import save_data
-from core.variables import database
-from core.methods.cache import targetname
-import inspect
+API = "https://api.platform.censys.io/v3/global/asset/host/"
+
+
+def censys_session(token: str):
+    return kit.http(timeout=20, headers={"Authorization": f"Bearer {token}",
+                                         "Accept": "application/json"})
+
+
+def lookup_host(session, ip: str) -> dict | None:
+    """Censys host record of an IP: the resource dict, {} when Censys has no
+    record, None on errors (already reported). Raises PermissionError on
+    auth/quota failures so callers can stop querying."""
+    try:
+        resp = session.get(API + ip)
+    except Exception as e:
+        kit.bad(f"Request to Censys failed: {type(e).__name__}")
+        return None
+    if resp.status_code == 200:
+        try:
+            return resp.json().get("result", {}).get("resource") or {}
+        except ValueError:
+            kit.bad("Censys returned an unreadable answer.")
+            return None
+    if resp.status_code == 404:
+        return {}
+    try:
+        err = resp.json().get("error", {})
+        msg = err.get("message", err) if isinstance(err, dict) else err
+    except ValueError:
+        msg = resp.reason
+    if resp.status_code in (401, 403):
+        raise PermissionError(f"Censys refused the token (HTTP {resp.status_code}): {msg}")
+    if resp.status_code == 429:
+        raise PermissionError("Censys quota exceeded; try again later.")
+    kit.bad(f"Censys: HTTP {resp.status_code} {msg}")
+    return None
+
+
+def describe(attr) -> str:
+    """'vendor product version' of a Censys software/OS attribute."""
+    if not isinstance(attr, dict):
+        return str(attr or "")
+    parts = [str(attr[k]) for k in ("vendor", "product", "version") if attr.get(k)]
+    text = " ".join(dict.fromkeys(parts))
+    return text or str(attr.get("cpe") or attr.get("uniform_resource_identifier") or "")
+
+
+def host_os(resource: dict) -> str:
+    """Operating system Censys attributes to a host ('' when unknown)."""
+    os_name = describe(resource.get("operating_system"))
+    if os_name:
+        return os_name
+    for svc in resource.get("services") or []:
+        for attr in svc.get("operating_systems") or [svc.get("operating_system")]:
+            os_name = describe(attr)
+            if os_name:
+                return os_name
+    return ""
+
+
+def censys_os(ip: str, token: str) -> str | None:
+    """OS of `ip` according to Censys: name, '' if unknown, None on failure."""
+    try:
+        resource = lookup_host(censys_session(token), ip)
+    except PermissionError as e:
+        kit.bad(str(e))
+        return None
+    if resource is None:
+        return None
+    return host_os(resource)
+
 
 def getos0x00(web):
-    name = targetname(web)
-    lvl2 = "getcensys"
-    module = "ScanANDEnum"
-    lvl1 = "Scanning & Enumeration"
-    lvl3 = ""
-    global flag
-    flag = 0x00
-    ip_addr = socket.gethostbyname(web)
-    print(C+' [*] Querying Reverse DNS...')
-    time.sleep(0.7)
-    print(O+' [+] Website IP :' +C+color.TR3+C+G+ str(ip_addr)+C+color.TR2+C)
-    time.sleep(0.5)
-    print(GR+' [*] Trying to identify operating system...')
-    time.sleep(0.5)
-    print(C+' [!] Configuring requests...')
-    result = requests.get('https://www.censys.io/ipv4/%s/raw' % ip_addr).text
-    print(GR+' [*] Getting raw data...')
-    time.sleep(0.8)
-    print(R+' [*] Analysing responses...')
-    try:
-        match = re.search(r'&#34;os_description&#34;: &#34;[^<]*&#34;', result)
-        if match:
-            flag = 0x01
-            os = match.group().split('n&#34;: &#34;')[1][:-5]
-            print(B+' [+] Operating System Identified : ' + C+ os)
-            save_data(database, module, lvl1, lvl2, lvl3, name, os)
-        else:
-            print(R+' [-] No exact Operating System matches for '+O+web+C+'...')
-            save_data(database, module, lvl1, lvl2, lvl3, name, "No exact Operating System matches for "+web)
-            os = ""
-            flag = 0x00
-        return (flag, os)
-    except Exception as e:
-        print(R+' [-] Unhandled Exception : '+str(e))
+    pscan("os identification")
+    name = kit.host(web)
+    token = kit.apikey("CENSYS_API_TOKEN")
+    if not token:
+        kit.bad("Censys Search v1/v2 was decommissioned; create a Platform personal access token.")
+        return ""
+    ip = kit.resolve(web)
+    if not ip:
+        kit.bad(f"Cannot resolve {name}.")
+        return ""
+    kit.found("Website IP", ip)
+    kit.info("Looking up the host in Censys...")
+
+    os_name = censys_os(ip, token)
+    if os_name is None:
+        return ""
+    record = kit.Recorder(web, kit.SCAN, "getcensys")
+    if os_name:
+        kit.found("Operating System Identified", os_name)
+        record(os_name)
+    else:
+        kit.bad(f"Censys has no Operating System match for {name} ({ip}).")
+        record(f"No exact Operating System matches for {name}")
+    return os_name
+
 
 def attack(web):
-    web = web.fullurl
     getos0x00(web)

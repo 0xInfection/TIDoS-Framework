@@ -1,290 +1,192 @@
 #!/usr/bin/env python3
-# -*- coding : utf-8
+# -*- coding: utf-8 -*-
+"""Service detection -- connect scan plus banner grabbing on the open ports."""
 
-#-:-:-:-:-:-:-:-:-:-:-:-:#
-#    TIDoS Framework     #
-#-:-:-:-:-:-:-:-:-:-:-:-:#
+from __future__ import annotations
 
-#Author : @_tID
-#This script is a part of TIDoS Framework
-#https://github.com/0xInfection/TIDoS-Framework
-
-
-import time
-import sys
-import os
+import re
 import socket
-import scapy
-from scapy.all import *
-from multiprocessing import Pool, TimeoutError
-from core.methods.multiproc import listsplit
-from core.variables import processes
-from core.Core.colors import *
-from core.methods.print import summary
+import ssl
+import time
+from concurrent.futures import ThreadPoolExecutor
 
-from core.database.database_module import save_data
-from core.variables import database
-from core.methods.cache import targetname
-import inspect
+import core.variables as variables
+from core.Core.colors import C, P, color
+from core.methods import modkit as kit
+from core.methods import portscan
+from core.methods.print import pscan
 
-info = "This module tries to find out what services the target is running."
+info = ("Finds out which services the target runs: TCP connect scan, then a banner "
+        "grab on every open port (waits for the service to talk first, then nudges "
+        "it with an HTTP HEAD request; TLS ports are wrapped first). Shows the "
+        "service and the first banner line. No root needed.")
 searchinfo = "Service Detection"
-properties = {"INIT":["Start of port range to scan.", " "], "FIN":["End of the port range to scan.", " "], "VERBOSE":["Verbose Output? [1/0]", " "]}
-
-# feel free to add your own :)
-common_ports = {
-'20': 'FTP',
-'21': 'FTP',
-'22': 'SSH',
-'23': 'TELNET',
-'25': 'SMTP',
-'53': 'DNS',
-'67': 'DHCP',
-'68': 'DHCP',
-'69': 'TFTP',
-'80': 'HTTP',
-'109': 'POP2',
-'110': 'POP3',
-'111': 'RPCBIND',
-'123': 'NTP',
-'137': 'NETBIOS-NS',
-'138': 'NETBIOS-DGM',
-'139': 'NETBIOS-SSN',
-'143': 'IMAP',
-'156': 'SQL-SERVER',
-'161': 'SNMP',
-'162': 'SNMP II',
-'179': 'BGP',
-'389': 'LDAP',
-'443': 'HTTPS',
-'445': 'NETBIOS-SSN',
-'512': 'EXEC',
-'513': 'LOGIN',
-'546': 'DHCP-CLIENT',
-'547': 'DHCP-SERVER',
-'636': 'LDAPS',
-'995': 'POP3-SSL',
-'993': 'IMAP-SSL',
-'1099': 'RMI-REGISTRY',
-'2121': 'FTP',
-'2049': 'NFS',
-'2086': 'WHM/CPANEL',
-'2087': 'WHM/CPANEL',
-'2082': 'CPANEL',
-'2083': 'CPANEL',
-'3306': 'MYSQL',
-'3632': 'DISTCC',
-'5061': 'SIP-TLS',
-'5432': 'POSTGRESQL',
-'5900': 'VNC',
-'6000': 'X11',
-'6667': 'IRC',
-'8009': 'AJP13',
-'8080': 'HTTP PROXY',
-'8180': 'HTTP',
-'8443': 'PLESK',
-'10000': 'VIRTUALMIN/WEBMIN'
+properties = {
+    "PORTS": ["Ports to scan (e.g. 21,22,80,8000-8100; empty = common ports)", ""],
+    "TIMEOUT": ["Seconds to wait for a banner (default 2)", ""],
 }
 
-def portloop(portlist, host, verbose):
-    open = []
-    closed = []
-    for p in portlist:
-        if verbose:
-            response = check_portv(host, p)
-        else:
-            response = check_port(host, p)
-        if response == 0:
-            print(''+O+' [!] Port ' + str(p)+color.TR3 +G+ ' detected Open !'+color.TR2 + C)
-            open.append(p)
-        else:
-            if verbose:
-                print(''+R+' [!] Port ' +O+ str(p) +R+ ' detected Closed !')
-            closed.append(p)
-    return (open, closed)
+# well-known names for ports the OS service database lacks or names poorly
+COMMON_PORTS = {
+    20: "ftp-data", 21: "ftp", 22: "ssh", 23: "telnet", 25: "smtp", 53: "dns",
+    67: "dhcp", 68: "dhcp", 69: "tftp", 80: "http", 109: "pop2", 110: "pop3",
+    111: "rpcbind", 123: "ntp", 137: "netbios-ns", 138: "netbios-dgm",
+    139: "netbios-ssn", 143: "imap", 156: "sql-server", 161: "snmp", 162: "snmptrap",
+    179: "bgp", 389: "ldap", 443: "https", 445: "microsoft-ds", 512: "exec",
+    513: "login", 546: "dhcpv6-client", 547: "dhcpv6-server", 636: "ldaps",
+    993: "imaps", 995: "pop3s", 1099: "rmiregistry", 2049: "nfs", 2082: "cpanel",
+    2083: "cpanel-ssl", 2086: "whm", 2087: "whm-ssl", 2121: "ftp", 3306: "mysql",
+    3632: "distcc", 5061: "sip-tls", 5432: "postgresql", 5900: "vnc", 6000: "x11",
+    6379: "redis", 6667: "irc", 8009: "ajp13", 8080: "http-proxy", 8180: "http",
+    8443: "https-alt", 10000: "webmin", 27017: "mongodb",
+}
+# ports where we speak first (HTTP) instead of waiting for a greeting
+WEB_PORTS = {80, 81, 443, 591, 3000, 5000, 8000, 8008, 8080, 8081, 8180, 8443, 8888, 9443}
+TLS_PORTS = {443, 465, 636, 993, 995, 2083, 2087, 5061, 8443, 9443}
 
-def get_servicev(port):
-    port = str(port)
-    if port in common_ports:
-        return common_ports[port]
-    else:
-        return 0
+# (banner regex, service) -- first match wins
+SIGNATURES = [
+    (r"^SSH-", "ssh"),
+    (r"^HTTP/\d", "http"),
+    (r"^220[ -].*ftp", "ftp"),
+    (r"^220[ -].*(smtp|mail|postfix|exim|sendmail)", "smtp"),
+    (r"^\+OK", "pop3"),
+    (r"^\* (OK|PREAUTH)", "imap"),
+    (r"^RFB \d", "vnc"),
+    (r"mysql|mariadb", "mysql"),
+    (r"^-(ERR|NOAUTH)|^\+PONG", "redis"),
+    (r"^AMQP", "amqp"),
+]
+SIGNATURES = [(re.compile(rx, re.I), name) for rx, name in SIGNATURES]
 
-def check_portv(host, port, result = 1):
+READ_SIZE = 2048
+BANNER_WIDTH = 60
 
+
+def _read(sock) -> bytes:
     try:
+        return sock.recv(READ_SIZE)
+    except (socket.timeout, OSError):
+        return b""
 
-        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        sock.settimeout(0.5)
-        print(C+"\n [*] Connecting to '%s' via port %s" % (host, port))
-        r = sock.connect_ex((host, port))
-        #print(GR+' [*] Analysing results...')
-        time.sleep(0.0015)
 
-        if r == 0:
-            result = r
+def _nudge(sock, host: str) -> bytes:
+    try:
+        sock.sendall(f"HEAD / HTTP/1.0\r\nHost: {host}\r\nUser-Agent: {kit.USER_AGENT}\r\n\r\n".encode())
+    except OSError:
+        return b""
+    return _read(sock)
 
+
+def grab(ip: str, port: int, host: str = "", timeout: float = 2.0) -> tuple[bytes, bool]:
+    """Banner of ip:port and whether TLS was used; b'' if the service stays silent."""
+    tls = port in TLS_PORTS
+    try:
+        sock = socket.create_connection((ip, port), timeout=timeout)
+    except OSError:
+        return b"", False
+    try:
+        if tls:
+            ctx = ssl.create_default_context()
+            ctx.check_hostname = False
+            ctx.verify_mode = ssl.CERT_NONE
+            try:
+                sock = ctx.wrap_socket(sock, server_hostname=host or None)
+            except (ssl.SSLError, OSError):
+                sock.close()
+                tls = False  # not TLS after all: start over in plaintext
+                sock = socket.create_connection((ip, port), timeout=timeout)
+        banner = b"" if port in WEB_PORTS else _read(sock)
+        return banner or _nudge(sock, host or ip), tls
+    except OSError:
+        return b"", tls
+    finally:
         sock.close()
 
-    except Exception as e:
-        print(''+R+' [!] Exception detected at port %s !' % port)
-        pass
 
-    return result
+def first_line(banner: bytes) -> str:
+    """First printable line of a banner; for HTTP, the status plus Server header."""
+    text = banner.decode("utf-8", errors="replace")
+    lines = [re.sub(r"[^\x20-\x7e]+", " ", l).strip() for l in text.splitlines()]
+    lines = [l for l in lines if l]
+    if not lines:
+        return ""
+    line = lines[0]
+    if line.startswith("HTTP/"):
+        server = next((l.split(":", 1)[1].strip() for l in lines[1:]
+                       if l.lower().startswith("server:")), "")
+        if server:
+            line = f"{line} ({server})"
+    return line
 
-def check_port(host, port, result = 1):
 
-    try:
-        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        sock.settimeout(0.5)
-        r = sock.connect_ex((host, port))
-        if r == 0:
-            result = r
-        sock.close()
-    except Exception:
-        pass
+def identify(port: int, banner: str, tls: bool = False) -> str:
+    for rx, name in SIGNATURES:
+        if rx.search(banner):
+            if name == "http" and tls:
+                return "https"
+            return name
+    return COMMON_PORTS.get(port) or portscan.service(port)
 
-    return result
 
-def get_service(port):
-    port = str(port)
-    if port in common_ports:
-        return common_ports[port]
-    else:
-        return 0
-
-def service0x00(host):
-
-    #print(R+'\n   ===================================')
-    #print(R + "    S E R V I C E   D E T E C T I O N")
-    #print(R + '   ===================================\n')
-    from core.methods.print import pscan
-    pscan("service detection")
-    if properties["INIT"][1] == " ":
-        start_port = input(C+' [§] Enter initial port :> ')
-    else:
-        start_port = properties["INIT"][1]
-    if properties["FIN"][1] == " ":
-        end_port = input(C+' [§] Enter ending port :> ')
-    else:
-        end_port = properties["FIN"][1]
-
-    start_port = int(start_port)
-    end_port = int(end_port)
-
-    open_ports = []
-    closed_ports = []
-
-    try:
-        ip = socket.gethostbyname(host)
-        print(G+'\n [+] Target server detected up and running...'+C+color.TR2+C)
-        print(O+' [*] Preparing for scan...'+C)
-        pass
-    except Exception:
-        print(R+' [-] Server not responding...')
-        time.sleep(0.3)
-        print(R+' [*] Exiting...')
-        quit()
-
-    if properties["VERBOSE"][1] == " ":
-        mn = input(C+'\n [?] Do you want a verbose output (enter if not) :> ')
-        verbose = mn != ""
-    else:
-        verbose = properties["VERBOSE"][1] == "1"
-    if verbose:
-        print(''+P+'\n [+] Verbose mode selected !\n')
-        print(GR+" [!] Scanning %s from port %s - %s: " % (host, start_port, end_port))
-    print(G+" [*] Scanning started at %s" %(time.strftime("%I:%M:%S %p"))+C+color.TR2+C)
-    starting_time = time.time()
-    try:
-        if verbose:
-            print(O+" [*] Scan in progress.."+C)
-            time.sleep(0.8)
-        portrange = range(start_port, end_port+1)
-        prtlst = listsplit(portrange, round(len(portrange)/processes))
-        with Pool(processes=processes) as pool:
-            res = [pool.apply_async(portloop, args=(l,host,verbose,)) for l in prtlst]
-            #res1 = pool.apply_async(portloop, )
-            for i in res:
-                j = i.get()
-                open_ports += j[0]
-                closed_ports += j[1]
-
-        print(G+"\n [+] Scanning completed at %s" %(time.strftime("%I:%M:%S %p"))+C+color.TR2+C)
-        ending_time = time.time()
-        total_time = ending_time - starting_time
-        print(P+' [*] Preparing report...\n'+C)
-        time.sleep(1)
-        openports = "   {}{}{}{}{}{}{}{} ports open.".format(color.TR5,C, G, str(len(open_ports)), color.END, color.TR2, color.END, color.CURSIVE)
-        summary("servicedetect", openports)
-        print()
-
-        print(P+'    +--------+----------+-----------+')
-        print(P+'    |  '+C+'PORT  '+P+'|  '+C+'STATE   '+P+'|  '+C+'SERVICE  '+P+'|')
-        print(P+'    +--------+----------+-----------+')
-
-        if open_ports:
-            data = "Port:Service >>\n"
-            for i in sorted(open_ports):
-                service = get_servicev(i)
-                if not service:
-                    service = "Unknown"
-                m = str(service)
-                c = str(i)
-                data = data + "\n" + c + ":" + m
-                if len(c) == 1:
-                    print(P+'    |   '+C+c+P+'    |   '+C+'OPEN   '+P+'|  '+C+m+'')
-                    print(P+'    +--------+----------+-----------+')
-                    time.sleep(0.2)
-                elif len(c) == 2:
-                    print(P+'    |   '+C+c+'   '+P+'|   '+C+'OPEN   '+P+'|   '+C+m+'')
-                    print(P+'    +--------+----------+-----------+')
-                    time.sleep(0.2)
-                elif len(c) == 3:
-                    print(P+'    |  '+C+c+'   '+P+'|   '+C+'OPEN   '+P+'|   '+C+m+'')
-                    print(P+'    +--------+----------+-----------+')
-                    time.sleep(0.2)
-                elif len(c) == 4:
-                    print(P+'    |  '+C+c+'  '+P+'|   '+C+'OPEN   '+P+'|   '+C+m+'')
-                    print(P+'    +--------+----------+-----------+')
-                    time.sleep(0.2)
-                elif len(c) == 5:
-                    print(P+'    | '+C+c+'  '+P+'|   '+C+'OPEN   '+P+'|   '+C+m+'')
-                    print(P+'    +--------+----------+-----------+')
-                    time.sleep(0.2)
-            save_data(database, module, lvl1, lvl2, lvl3, name, data)
-        else:
-            save_data(database, module, lvl1, lvl2, lvl3, name, "No open ports found.")
-            print(R+"\n [-] No open ports found.!!\n")
-        print(B+'\n [!] ' + str(len(closed_ports)) + ' closed ports not shown')
-        print(G+" [+] Host %s scanned in %s seconds" %(host, total_time)+C+color.TR2+C+"\n")
-
-    except KeyboardInterrupt:
-        print(R+"\n [-] User requested shutdown... ")
-        print(' [-] Exiting...\n')
-        quit()
+def report(rows: list[tuple[int, str, str]]) -> None:
+    line = f"{P}    +--------+------------------+{'-' * (BANNER_WIDTH + 2)}+{color.END}"
+    print(line)
+    print(f"{P}    |{C}  PORT  {P}|{C}  SERVICE         {P}|{C} {'BANNER':<{BANNER_WIDTH}} {P}|{color.END}")
+    print(line)
+    for port, name, banner in rows:
+        print(f"{P}    |{C} {port:>6} {P}|{C}  {name:<16.16}{P}|"
+              f"{C} {banner or '-':<{BANNER_WIDTH}.{BANNER_WIDTH}} {P}|{color.END}")
+    print(line)
 
 
 def servicedetect(web):
-    global name
-    name = targetname(web)
-    global lvl2
-    lvl2 = "servicedetect"
-    global module
-    module = "ScanANDEnum"
-    global lvl1
-    lvl1 = "Port Scanning"
-    global lvl3
-    lvl3 = ""
-    time.sleep(0.5)
-    if 'http://' in web:
-        web = web.replace('http://','')
-    elif 'https://' in web:
-        web = web.replace('https://','')
+    pscan("service detection")
+    ports = portscan.ports_option(properties)
+    if not ports:
+        kit.bad("No valid ports to scan.")
+        return []
+    timeout = max(0.2, kit.number(properties, "TIMEOUT", "Seconds to wait for a banner", 2))
+    portscan.warn_tor()
+    ip = portscan.resolve_ip(web)
+    if not ip:
+        return []
+
+    host = kit.host(web)
+    kit.info(f"Scanning {len(ports)} ports on {host} ({ip})...")
+    start = time.time()
+    try:
+        open_ports = portscan.connect_scan(ip, ports)
+        if open_ports:
+            kit.info(f"Grabbing banners from {len(open_ports)} open port(s)...")
+        workers = max(1, min(variables.processes * 4, len(open_ports) or 1, 64))
+        with ThreadPoolExecutor(max_workers=workers) as pool:
+            grabs = list(pool.map(lambda p: grab(ip, p, host, timeout), open_ports))
+    except KeyboardInterrupt:
+        kit.bad("Scan interrupted by user.")
+        return []
+    elapsed = time.time() - start
+
+    rows = []
+    for port, (raw, tls) in zip(open_ports, grabs):
+        banner = first_line(raw)
+        rows.append((port, identify(port, banner, tls), banner))
+
+    record = kit.Recorder(web, kit.PORTSCAN, "servicedetect")
+    if rows:
+        kit.good(f"{len(rows)} port(s) open")
+        print()
+        report(rows)
+        record("Port:Service >>\n" + "\n".join(
+            f"{p}:{name}" + (f" | {banner}" if banner else "") for p, name, banner in rows))
     else:
-        pass
-    service0x00(web)
+        kit.bad("No open ports found!")
+        record("No open ports found.")
+    if len(ports) > len(rows):
+        kit.info(f"{len(ports) - len(rows)} closed ports not shown")
+    kit.good(f"Host {host} scanned in {elapsed:.2f} seconds")
+    return rows
+
 
 def attack(web):
-    web = web.fullurl
     servicedetect(web)

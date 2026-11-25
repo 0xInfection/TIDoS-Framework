@@ -1,126 +1,126 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+"""Webserver enumeration -- services and web servers of the target's IPs from Censys."""
 
-#-:-:-:-:-:-:-:-:-:-:-:-:#
-#    TIDoS Framework     #
-#-:-:-:-:-:-:-:-:-:-:-:-:#
-
-#Author : @_tID
-#This module requires TIDoS Framework
-#https://github.com/0xInfection/TIDoS-Framework
-
+from __future__ import annotations
 
 import socket
-import sys
-import json
-#import requests
-from core.methods.tor import session
-import re
-import time
-from core.Core.colors import *
-from time import sleep
-from core.database.database_module import save_data
-from core.variables import database
-from core.methods.cache import targetname
-import inspect
 
-info = "This module scans the CENSYS database for IP addresses belonging to the target."
+from core.methods import modkit as kit
+from core.methods.print import pscan
+from modules.ScanningEnumeration.getcensys import censys_session, describe, lookup_host
+
+info = ("This module looks up the IP addresses of the target in the Censys Platform "
+        "database and fingerprints their services and web servers (needs a Censys "
+        "Platform personal access token, CENSYS_API_TOKEN).")
 searchinfo = "Webserver enumeration"
 properties = {}
 
+
+def addresses(web) -> list[str]:
+    """All IPv4 addresses of the target."""
+    name = kit.host(web)
+    if kit.is_ip(name):
+        return [name]
+    try:
+        return sorted(set(socket.gethostbyname_ex(name)[2]))
+    except (OSError, UnicodeError):
+        ip = kit.resolve(web)
+        return [ip] if ip else []
+
+
+def header(headers, wanted: str) -> str:
+    """Value of a header from Censys' (dict or list shaped) header data."""
+    if isinstance(headers, dict):
+        items = headers.items()
+    elif isinstance(headers, list):
+        items = ((h.get("key") or h.get("name"), h.get("value") or h.get("values"))
+                 for h in headers if isinstance(h, dict))
+    else:
+        return ""
+    for key, value in items:
+        if str(key).lower().replace("_", "-") != wanted:
+            continue
+        if isinstance(value, dict):
+            value = value.get("headers") or value.get("value") or ""
+        if isinstance(value, list):
+            value = ", ".join(str(v) for v in value)
+        return str(value)
+    return ""
+
+
+def http_info(svc: dict) -> tuple[str, str]:
+    """(title, server) of an HTTP service record."""
+    title = server = ""
+    for ep in svc.get("endpoints") or [svc]:
+        web_data = ep.get("http") or {}
+        title = title or str(web_data.get("html_title") or web_data.get("title") or "")
+        server = server or header(web_data.get("headers"), "server")
+    return title.strip(), server.strip()
+
+
+def show(ip: str, resource: dict) -> list[str]:
+    """Print the services of a Censys host record; returns lines to store."""
+    lines = []
+    services = sorted(resource.get("services") or [], key=lambda s: s.get("port") or 0)
+    ports = ", ".join(f"{s.get('port')}/{s.get('protocol') or '?'}" for s in services)
+    kit.found(f"IP {ip}", ports or "no services indexed")
+    lines.append(f"IP :> {ip} - Services :> {ports}")
+    asn = resource.get("autonomous_system") or {}
+    if asn:
+        kit.bullet(f"AS{asn.get('asn', '?')} {asn.get('name', '')}".strip())
+    for svc in services:
+        port, proto = svc.get("port"), svc.get("protocol") or "?"
+        software = ", ".join(filter(None, (describe(s) for s in svc.get("software") or [])))
+        title, server = http_info(svc) if "HTTP" in proto.upper() else ("", "")
+        print()
+        kit.found(f"Port {port}", proto)
+        kit.kv_table([("Software", software), ("Server", server), ("Title", title)])
+        if server:
+            lines.append(f"{ip}:{port} Server :> {server}")
+        if title:
+            lines.append(f"{ip}:{port} Title :> {title}")
+    return lines
+
+
 def webscan(web):
-    global name
-    name = targetname(web)
-    global lvl2
-    lvl2 = inspect.stack()[0][3]
-    global module
-    module = "ScanANDEnum"
-    global lvl1
-    lvl1 = "Scanning & Enumeration"
-    global lvl3
-    lvl3 = ""
-    requests = session()
-    try:
-        #print(R+'\n    ===========================================')
-        #print(R+'     W E B S E R V E R   E N U M E R A T I O N')
-        #print(R+'    ===========================================')
-        from core.methods.print import pscan
-        pscan("webserver enumeration")
-        print(C+' [This module will scan the whole CENSYS database for')
-        print(C+'      collecting domain based IP Addresses and ')
-        print(C+'           fingerprint them accordingly]\n')
-        time.sleep(0.6)
-        print(R+' [-] WARNING: Use this module with caution!')
-        print(GR+' [*] Importing API Key...')
+    pscan("webserver enumeration")
+    token = kit.apikey("CENSYS_API_TOKEN")
+    if not token:
+        kit.bad("Censys Search v1/v2 was decommissioned; create a Platform personal access token.")
+        return {}
+    name = kit.host(web)
+    ips = addresses(web)
+    if not ips:
+        kit.bad(f"Cannot resolve {name}.")
+        return {}
+    kit.found("Identified IPs", ", ".join(ips))
+    kit.info("Querying Censys for the target's servers...")
+
+    session = censys_session(token)
+    record = kit.Recorder(web, kit.SCAN, "webscan")
+    results = {}
+    for ip in ips:
         try:
-            from files.API_KEYS import CENSYS_UID, CENSYS_SECRET
-        except (IOError, ImportError):
-            print(R+' [-] Error while importing key...')
+            resource = lookup_host(session, ip)
+        except PermissionError as e:
+            kit.bad(str(e))
+            return results
+        if resource is None:
+            continue
+        if not resource:
+            kit.bad(f"Censys has no record of {ip}.")
+            continue
+        results[ip] = resource
+        print()
+        kit.good(f"Censys record found for {ip}")
+        record(show(ip, resource))
 
-        web = web.split('//')[1]
-        print(C+' [!] Obtaining reverse DNS lookup...')
-        time.sleep(0.7)
-        ip = web
-        print(O+' [+] Identified IP :'+C+color.TR3+C+G+str(ip)+C+color.TR2+C)
-        print(GR+' [*] Starting internet wide server scan...')
-        if CENSYS_SECRET != '' and CENSYS_UID != '':
+    if not results:
+        kit.bad(f"No Censys data found for {name}.")
+        record(f"No Censys data found for {name}")
+    return results
 
-            print(O+' [+] Found Censys UID Key :'+C+color.TR3+C+G+CENSYS_UID+C+color.TR2+C)
-            print(O+' [+] Found Censys Secret Token :'+C+color.TR3+C+G+CENSYS_SECRET+C+color.TR2+C)
-
-            pages = float('inf')
-            page = 1
-
-            print(GR+' [*] Setting scan parameters...')
-            while page <= pages:
-
-                base_url = 'https://www.censys.io/api/v1'
-                params = {'query' : ip, 'page' : page}
-                res = requests.post(base_url + "/search/ipv4", json = params, auth = (CENSYS_UID, CENSYS_SECRET))
-                payload = res.json()
-
-                for r in payload['results']:
-
-                    ip = r["ip"]
-                    proto = r["protocols"]
-                    proto = [p.split("/")[0] for p in proto]
-                    proto.sort(key=float)
-                    protoList = ','.join(map(str, proto))
-
-                    print(B+' [+] IP : '+C+str(ip)+C+' - Protocols : '+str(protoList))
-
-                    if '80' in protoList:
-                        view(ip, base_url, CENSYS_UID, CENSYS_SECRET, requests)
-
-                pages = payload['metadata']['pages']
-                page += 1
-
-        else:
-            print(R+' [-] CENSYS API TOKENs not set!')
-            print(R+' [-] This module cannot be used!')
-
-    except Exception as e:
-        print(R+' [-] Unhandled Exception Encountered!')
-        print(R+' [-] Error : '+str(e))
-
-def view(server, ur, uid, sec, requests):
-
-    res = requests.get(ur + ("/view/ipv4/%s" % server), auth = (uid, sec))
-    payload = res.json()
-
-    try:
-        if 'title' in payload['80']['http']['get'].keys():
-            print(C+" [+] Title : "+GR+"%s" % payload['80']['http']['get']['title'])
-            data = "Title :> " + payload['80']['http']['get']['title']
-            save_data(database, module, lvl1, lvl2, lvl3, name, data)
-        if 'server' in payload['80']['http']['get']['headers'].keys():
-            print(C+" [+] Server : "+GR+"%s" % payload['80']['http']['get']['headers']['server'])
-            data = "Server :> " + payload['80']['http']['get']['headers']['server']
-            save_data(database, module, lvl1, lvl2, lvl3, name, data)
-
-    except Exception as error:
-        print(R+' [-] Exception : '+str(error))
 
 def attack(web):
-    web = web.fullurl
     webscan(web)
