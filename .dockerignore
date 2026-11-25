@@ -1,0 +1,22 @@
+# VCS and CI
+.git
+.github
+
+# Python bytecode
+**/__pycache__
+*.py[co]
+
+# Local virtualenvs
+.venv
+venv
+
+# Engagement data and runtime output (never bake into the image)
+tmp/logs
+core/database/tidos.db
+
+# Downloaded tools (fetched on first crawl)
+tools/bin
+
+# OS / editor cruft
+.DS_Store
+.directory
