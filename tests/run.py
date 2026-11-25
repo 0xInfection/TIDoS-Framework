@@ -221,7 +221,7 @@ def contract_smoke(needle: str) -> tuple[int, int, int]:
         try:
             m = importlib.import_module(dotted)
             # files placed in module dirs without the module contract are helpers
-            # (e.g. wafimpo, a helper of waf); they aren't listed by discovery.
+            # (e.g. DNSDumpsterAPI, a helper of dnsdump); not listed by discovery.
             if not any(hasattr(m, a) for a in ("searchinfo", "attack")):
                 helpers += 1
                 continue

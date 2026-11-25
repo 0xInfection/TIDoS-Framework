@@ -11,6 +11,7 @@ texttable
 scapy
 sslyze
 builtwith
+wafw00f
 pillow
 
 # Brute-forcing (sshbrute, sqlbrute)

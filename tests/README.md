@@ -27,7 +27,7 @@ information-disclosure modules (`emailext`, `creditcards`, `ssn`, `phone`,
 **Contract smoke** — imports every module under `modules/` and checks it
 exposes the `info` / `searchinfo` / `properties` / `attack` contract the
 console, CLI and GUI rely on. Helper files placed in module directories (e.g.
-`wafimpo`) are skipped, as discovery doesn't list them.
+`DNSDumpsterAPI`) are skipped, as discovery doesn't list them.
 
 **Run smoke** (`--run-smoke`) — runs each remaining module once against the
 site, bounded by a per-module timeout, failing only on an unhandled exception.
