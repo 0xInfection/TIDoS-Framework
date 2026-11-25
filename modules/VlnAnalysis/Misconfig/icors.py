@@ -1,145 +1,140 @@
 #!/usr/bin/env python3
-# coding: utf-8
+# -*- coding: utf-8 -*-
+"""Insecure CORS -- which foreign origins may read the target's responses?"""
 
-#-:-:-:-:-:-:-:-:-:-:-:-:#
-#    TIDoS Framework     #
-#-:-:-:-:-:-:-:-:-:-:-:-:#
+from __future__ import annotations
 
-#This module requires TIDoS Framework
-#https://github.com/0xInfection/TIDoS-Framework
+from dataclasses import dataclass
+from urllib.parse import urlsplit
 
+import requests
 
-import re
-import sys
-import ssl
-import urllib.request
-import urllib.parse
-import time
-from core.Core.colors import *
+from core.methods import modkit as kit
+from core.methods.inject import marker
+from core.methods.print import pvln
 
-from core.database.database_module import save_data
-from core.variables import database
-from core.methods.cache import targetname
-import inspect
-
-info = "This module searches for several misconfigurations in domain of ICORS."
+info = ("This module searches for CORS misconfigurations. It sends requests with crafted "
+        "Origin headers (arbitrary origin, null, prefix/suffix lookalikes such as "
+        "evil-target.com and target.com.evil.com, an unescaped-dot lookalike, a subdomain and "
+        "an http:// downgrade of the target) and reports every origin the server explicitly "
+        "trusts in Access-Control-Allow-Origin. Trust combined with "
+        "Access-Control-Allow-Credentials: true lets that origin read authenticated data "
+        "(the severe case).")
 searchinfo = "Insecure Cross Origin Resource Sharing"
-properties = {}
+properties = {
+    **kit.AUTH_OPTIONS,
+}
 
-def check0x00(url):
 
-    print(GR+' [*] Making request with random cookie value...')
-    time.sleep(0.4)
-    host = re.sub("^https?://", "", url)
-    if 'https://' in url:
-        print(O+' [!] Ignoring certificate errors...')
-        acao = cors0x00(url, True, True)
-    else:
-        print(GR+' [*] Passing values...')
-        acao = cors0x00(url, False, True)
+@dataclass
+class Probe:
+    name: str
+    origin: str
+    severity_creds: str     # severity when credentials are allowed
+    severity_plain: str     # severity without credentials
+    why: str
 
-    if acao:
 
-        if (acao == "no_acac" or "*" == acao):
-            print(O+'\n [+] Access Control Allow Origin present (Without Credentials)...')
-            save_data(database, module, lvl1, lvl2, lvl3, name, "Access Control Allow Origin present (Without Credentials).")
-        elif acao == "*":
-            print(O+' [!] Access Control Allow Origin present (point blank)...')
-            save_data(database, module, lvl1, lvl2, lvl3, name, "Access Control Allow Origin present (point blank).")
-        elif acao in ["//", "://"]:
-            print(G+' [+] Possible iCORS vulnerability found!...')
-            print(G+' [+] Access Control Allow Origin : '+O+'Any Origin Allowed...')
-            save_data(database, module, lvl1, lvl2, lvl3, name, "Possible iCORS vulnerability found!\nAccess Control Allow Origin: Any Origin Allowed.")
-        elif re.findall("\s|,|\|", acao):
-            print(R+' [¬] Access Control Allow Origin present (multiple Credentials)...')
-            save_data(database, module, lvl1, lvl2, lvl3, name, "Access Control Allow Origin present (multiple Credentials).")
-        elif re.findall("\*.", acao):
-            print(R+' [-] Invalid iCORS : Only "*" is valid...')
-            save_data(database, module, lvl1, lvl2, lvl3, name, "Invalid iCORS : Only "*" is valid.")
-        elif re.findall("fiddle.jshell.net|s.codepen.io", acao):
-            print(GR+' [!] Access Control Allow Origin : Developer backdoor found!...')
-            save_data(database, module, lvl1, lvl2, lvl3, name, "Access Control Allow Origin : Developer backdoor found!")
-        elif "evil.org" in cors0x00(url, "evil.org"):
-            print(G+' [+] Access Control Allow Origin present : Origin Reflection...')
-            save_data(database, module, lvl1, lvl2, lvl3, name, "Access Control Allow Origin present : Origin Reflection.")
-        elif "null" == cors0x00(url, "null").lower():
-            print(G+' [+] Access Control Allow Origin present : Null Misconfiguration...')
-            save_data(database, module, lvl1, lvl2, lvl3, name, "Access Control Allow Origin present : Null Misconfiguration.")
-        elif host+".tk" in cors0x00(url, host+".tk"):
-            print(G+' [+] Access Control Allow Origin present : Post-domain Wildcard...')
-            save_data(database, module, lvl1, lvl2, lvl3, name, "Access Control Allow Origin present : Post-domain Wildcard.")
-        elif "not"+host in cors0x00(url, "not"+url):
-            print(GR+' [¬] Access Control Allow Origin present : Post-Subdomain WildCard...')
-            save_data(database, module, lvl1, lvl2, lvl3, name, "Access Control Allow Origin present : Post-Subdomain WildCard.")
-        elif "sub."+host in cors0x00(url, "sub."+url):
-            print(G+' [+] Access Control Allow Origin present : Arbitrary Subdomains Allowed...')
-            save_data(database, module, lvl1, lvl2, lvl3, name, "Access Control Allow Origin present : Arbitrary Subdomains Allowed.")
-        elif cors0x00(url, url, True).startswith("http://"):
-            print(G+' [+] Access Control Allow Origin present : Non-SSL Sites Allowed...')
-            save_data(database, module, lvl1, lvl2, lvl3, name, "Access Control Allow Origin present : Non-SSL Sites Allowed.")
-        else:
-            print(G+' [+] Access Control Allow Origin present : '+acao)
-            save_data(database, module, lvl1, lvl2, lvl3, name, "Access Control Allow Origin present: " + acao)
+def probes(url: str, host: str, domain: str) -> list[Probe]:
+    rnd = marker(6)
+    scheme = urlsplit(url).scheme
+    out = [
+        Probe("arbitrary origin", f"https://{rnd}.com", "HIGH", "LOW",
+              "any website is trusted"),
+        Probe("null origin", "null", "HIGH", "LOW",
+              "the 'null' origin (sandboxed iframes, data: URLs) is trusted"),
+        Probe("suffix match", f"https://{rnd}{domain}", "HIGH", "LOW",
+              f"any domain ending in '{domain}' is trusted (attacker registers {rnd}{domain})"),
+        Probe("prefix match", f"https://{host}.{rnd}.com", "HIGH", "LOW",
+              f"any domain starting with '{host}' is trusted"),
+        Probe("subdomain", f"https://{rnd}.{domain}", "LOW", "INFO",
+              "every subdomain is trusted (an XSS or takeover on any subdomain reads this endpoint)"),
+    ]
+    if "." in host:
+        first, rest = host.split(".", 1)
+        out.append(Probe("unescaped dot", f"https://{first}{rnd[:1]}{rest}", "HIGH", "LOW",
+                         "the allowlist regex has an unescaped '.' (matches any character)"))
+    if scheme == "https":
+        out.append(Probe("http downgrade", f"http://{host}", "MEDIUM", "INFO",
+                         "the plain-HTTP origin is trusted: a network attacker injecting into "
+                         "http:// pages can read HTTPS responses"))
+    return out
 
-    else:
-        print(R+' [-] Not vulnerable to iCORS...')
-        save_data(database, module, lvl1, lvl2, lvl3, name, "Not vulnerable to iCORS.")
-    time.sleep(1)
 
-def cors0x00(url, ssltest, firstrun=False):
-
+def ask(session, url: str, origin: str):
+    """(ACAO, ACAC, Vary) for a request carrying `origin`; None on errors."""
     try:
+        r = session.get(url, headers={"Origin": origin} if origin else None,
+                        allow_redirects=False)
+    except requests.RequestException as e:
+        kit.bad(f"Request failed: {type(e).__name__}")
+        return None
+    return (r.headers.get("Access-Control-Allow-Origin", "").strip(),
+            r.headers.get("Access-Control-Allow-Credentials", "").strip().lower() == "true",
+            "origin" in r.headers.get("Vary", "").lower())
 
-        request = urllib.request.Request(url)
-        print(C+' [!] Setting origin : '+url)
-        request.add_header('Origin', url)
-        request.add_header('Cookie', "")
-        print(C+' [!] Setting user agent...')
-        request.add_header('User-Agent', 'Mozilla/5.0 (Windows NT 6.1; WOW64)')
-        if 'https://' not in url:
-            response = urllib.request.urlopen(request, timeout=10)
-        else:
-            response = urllib.request.urlopen(request, timeout=10, context=ssl._create_unverified_context())
-        acao = response.info().getheader('Access-Control-Allow-Origin')
-        acac = str(response.info().getheader('Access-Control-Allow-Credentials')).lower() == "true"
-        vary = "Origin" in str(response.info().getheader('Vary'))
-
-        if not acac:
-            print(O+' [*] Checking whether Access-Control-Allow-Credentials header value present...')
-            acao = "no_acac"
-        if acac and acao != '*':
-            print(G+" [+] Access-Control-Allow-Credentials present...")
-        if vary:
-            print(O+ " [!] Access-Control-Allow-Origin dynamically generated...")
-
-        return acao
-
-    except Exception as e:
-        print(R+' [-] Something happened...')
-        print(R+' [-] Error : '+str(e))
 
 def icors(web):
-    global name
-    name = targetname(web)
-    global lvl2
-    lvl2 = inspect.stack()[0][3]
-    global module
-    module = "VulnAnalysis"
-    global lvl1
-    lvl1 = "Basic Bugs & Misconfigurations"
-    global lvl3
-    lvl3 = ""
-    #print(R+'\n    =========================================')
-    #print(R+'\n     iNSECURE CROSS ORIGIN RESCOURCE SHARING')
-    #print(R+'    ---<>----<>----<>----<>----<>----<>----<>\n')
-                 
-    from core.methods.print import pvln
-    pvln("icors") 
+    pvln("icors")
+    record = kit.Recorder(web, kit.MISCONFIG, "icors")
+    session = kit.http(headers=kit.request_headers(properties))
 
+    # test the final URL: CORS is evaluated on the response that is read
+    try:
+        url = session.get(kit.url(web), allow_redirects=True).url
+    except requests.RequestException as e:
+        kit.bad(f"Could not reach {kit.url(web)}: {type(e).__name__}")
+        return []
+    host = urlsplit(url).hostname or kit.host(web)
+    domain = kit.domain(web) if not kit.is_ip(host) else host
+    kit.info(f"Testing {url}")
 
-    check0x00(web)
-    time.sleep(1)
+    base = ask(session, url, "")
+    if base and base[0]:
+        kit.info(f"Without Origin: Access-Control-Allow-Origin: {base[0]}"
+                 + (" (with credentials)" if base[1] else ""))
+
+    findings = []
+    wildcard = reflects_any = False
+    for p in probes(url, host, domain):
+        if reflects_any and p.name != "null origin":
+            continue  # implied by the arbitrary-origin finding
+        res = ask(session, url, p.origin)
+        if res is None:
+            continue
+        acao, acac, vary = res
+        if acao == "*":
+            wildcard = True
+            continue
+        if acao.lower() != p.origin.lower():
+            continue
+        sev = p.severity_creds if acac else p.severity_plain
+        cred = "with credentials" if acac else "without credentials"
+        line = f"[{sev}] {p.name}: Origin '{p.origin}' reflected in ACAO {cred} -- {p.why}"
+        if not vary and acao == p.origin and p.name == "arbitrary origin":
+            line += "; no 'Vary: Origin' (cache poisoning risk)"
+        findings.append((sev, line))
+        reflects_any = reflects_any or p.name == "arbitrary origin"
+
+    if wildcard:
+        kit.info("Access-Control-Allow-Origin: * (public read access; browsers never send "
+                 "credentials with a wildcard).")
+        record("ACAO: * (public, no credentials)")
+    if not findings:
+        kit.good("No insecure CORS configuration found.")
+        record("No insecure CORS configuration found.")
+        return []
+    order = ("HIGH", "MEDIUM", "LOW", "INFO")
+    for sev, line in sorted(findings, key=lambda f: order.index(f[0])):
+        if sev in ("HIGH", "MEDIUM"):
+            kit.found("CORS misconfiguration", line)
+        else:
+            kit.warn(line)
+        record(line)
+    if any(s == "HIGH" for s, _ in findings):
+        kit.warn("An attacker page can read this endpoint's responses with the victim's cookies.")
+    return findings
+
 
 def attack(web):
-    web = web.fullurl
     icors(web)

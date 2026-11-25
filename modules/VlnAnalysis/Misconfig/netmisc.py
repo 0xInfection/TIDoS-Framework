@@ -1,91 +1,91 @@
 #!/usr/bin/env python3
-# coding: utf-8
+# -*- coding: utf-8 -*-
+"""Telnet exposure -- cleartext remote login reachable on the target."""
 
-#-:-:-:-:-:-:-:-:-:-:-:-:#
-#    TIDoS Framework     #
-#-:-:-:-:-:-:-:-:-:-:-:-:#
+from __future__ import annotations
 
-#This module requires TIDoS Framework
-#https://github.com/0xInfection/TIDoS-Framework
-
-
-import nmap
-import time
-from core.Core.colors import *
 import socket
-from core.database.database_module import save_data
-from core.variables import database
-from core.methods.cache import targetname
-import inspect
+import time
 
-info = "This module discovers possible Telnet misconfiguration."
+import core.variables as variables
+from core.methods import modkit as kit
+from core.methods.print import pvln
+
+info = ("This module discovers Telnet misconfiguration: it connects to the Telnet port(s) and "
+        "confirms the service by its option negotiation (IAC commands) or login banner. "
+        "Telnet sends credentials in cleartext. Raw TCP: not routed through Tor.")
 searchinfo = "Telnet Checker"
-properties = {}
+properties = {
+    "PORT": ["Telnet port(s), comma separated", ""],
+}
 
-def netmisc0x00(web):
+IAC = 0xFF
+COMMANDS = range(0xFB, 0xFF)    # WILL WONT DO DONT
+LOGIN_HINTS = (b"login:", b"username:", b"user name:", b"password:", b"telnet")
 
-    web = web.replace('http://','')
-    web = web.replace('https://','')
-    ip = socket.gethostbyname(web)
-    port = 23 # telnet port
+
+def probe(ip: str, port: int, timeout: float = 5.0):
+    """('closed'|'telnet'|'open', banner text)."""
     try:
-        print(O+' [!] Configuring scanner for telnet ports...')
-        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        sock.settimeout(5)
-        print(C+"\n [*] Connecting to '%s' via port %s" % (ip, port))
-        r = sock.connect_ex((ip, port))
-        time.sleep(0.1)
-        if r == 0:
-            print(G+' [+] Telnet port detected open!')
-            time.sleep(0.5)
-            print(O+' [*] Confirming...')
-            nmScan = nmap.PortScanner()
-            nmScan.scan(ip, '23')
-            port = 23
-            thisDict = nmScan[ip]['tcp'][port]
-            print(G+' [+] Telnet network misconfiguration confirmed!')
-            save_data(database, module, lvl1, lvl2, lvl3, name, "Telnet misconfiguration confirmed!")
-            time.sleep(0.5)
-            if thisDict['version']:
-                print(G+' [+] Port ' + str(port) + ': ' +C+ thisDict['product'] +GR+ ', v' + thisDict['version'])
-                data = "Port " + str(port) + ": " + thisDict["product"] + ", v" + thisDict["version"]
-                save_data(database, module, lvl1, lvl2, lvl3, name, data)
-            else:
-                print(G+' [+] Port ' + str(port) + ': ' +C+ thisDict['product'])
-                data = "Port " + str(port) + ": " + thisDict["product"]
-                save_data(database, module, lvl1, lvl2, lvl3, name, data)
-        else:
-            print(R+' [-] Telnet Disabled!')
-            save_data(database, module, lvl1, lvl2, lvl3, name, "Telnet disabled.")
-        sock.close()
+        sock = socket.create_connection((ip, port), timeout=timeout)
+    except OSError:
+        return "closed", ""
+    data = b""
+    with sock:
+        sock.settimeout(1.5)
+        end = time.monotonic() + 4
+        while time.monotonic() < end and len(data) < 2048:
+            try:
+                chunk = sock.recv(1024)
+            except OSError:
+                break
+            if not chunk:
+                break
+            data += chunk
+            if any(h in data.lower() for h in LOGIN_HINTS):
+                break
+    negotiates = any(data[i] == IAC and data[i + 1] in COMMANDS for i in range(len(data) - 1))
+    text = " ".join(bytes(b for b in data if 32 <= b < 127 or b in (9, 10, 13)).decode().split())
+    if negotiates or any(h in data.lower() for h in LOGIN_HINTS):
+        return "telnet", text
+    return "open", text
 
-    except Exception as e:
-        print('\n'+R+' [!] Exception detected at port %s !' % port)
-        print(R+' [-] Error : '+str(e))
 
 def netmisc(web):
-    global name
-    name = targetname(web)
-    global lvl2
-    lvl2 = inspect.stack()[0][3]
-    global module
-    module = "VulnAnalysis"
-    global lvl1
-    lvl1 = "Basic Bugs & Misconfigurations"
-    global lvl3
-    lvl3 = ""
-    #print(R+'\n    ===================================')
-    #print(R+'\n     TELNET ENABLED (Network Misconf.)')
-    #print(R+'    ---<>----<>----<>----<>----<>----<>\n')
+    pvln("network misconf.")
+    record = kit.Recorder(web, kit.MISCONFIG, "netmisc")
+    if variables.tor:
+        kit.warn("Raw TCP connections do NOT go through Tor.")
+    ip = kit.resolve(web)
+    if not ip:
+        kit.bad(f"Could not resolve {kit.host(web)}.")
+        return []
+    raw = kit.option(properties, "PORT", "Telnet port(s)", "23")
+    ports = [int(p) for p in raw.replace(" ", "").split(",") if p.isdigit() and 0 < int(p) < 65536]
+    if not ports:
+        kit.warn(f"Invalid PORT '{raw}', using 23.")
+        ports = [23]
 
-    from core.methods.print import pvln
-    pvln("network misconf.") 
-                 
+    findings = []
+    for port in ports:
+        kit.info(f"Connecting to {ip}:{port}...")
+        state, banner = probe(ip, port)
+        if state == "closed":
+            kit.bullet(f"{port}/tcp closed or filtered")
+            record(f"{port}/tcp closed: Telnet not exposed.")
+        elif state == "telnet":
+            kit.found("Telnet exposed", f"{ip}:{port}" + (f" -- {banner[:80]}" if banner else ""))
+            findings.append(port)
+            record(f"[MEDIUM] Telnet service on {port}/tcp (cleartext login)"
+                   + (f": {banner[:200]}" if banner else ""))
+        else:
+            kit.warn(f"{port}/tcp open but does not speak Telnet"
+                     + (f" (banner: {banner[:80]})" if banner else ""))
+            record(f"{port}/tcp open, not Telnet" + (f": {banner[:200]}" if banner else ""))
+    if not findings:
+        kit.good("Telnet is not exposed.")
+    return findings
 
-    print(GR+' [*] Loading up port scanner...')
-    netmisc0x00(web)
-    time.sleep(0.5)
 
 def attack(web):
-    web = web.fullurl
     netmisc(web)

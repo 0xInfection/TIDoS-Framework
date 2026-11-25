@@ -1,64 +1,49 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+"""SQL injection scanner -- error-based, boolean-blind and time-blind."""
 
-#-:-:-:-:-:-:-:-:-:-:-:-:#
-#    TIDoS Framework     #
-#-:-:-:-:-:-:-:-:-:-:-:-:#
+from core.methods import inject
+from core.methods import modkit as kit
+from core.methods import webinj
+from core.methods import sqli as engine
+from core.methods.print import pvln
 
-#Author: @_tID
-#This script is a part of TIDoS Framework
-#https://github.com/0xInfection/TIDoS-Framework
-
-
-import sys
-import time
-from core.database.database_module import save_data
-from core.variables import database
-from core.methods.cache import targetname
-import inspect
-from modules.VlnAnalysis.Severe.errorsqli import errorsqli
-from modules.VlnAnalysis.Severe.blindsqli import blindsqli
-from core.Core.colors import *
-
-info = "This module scans the target for SQL Injection flaws, supporting both blind and error-based injection."
+info = ("Tests every parameter (PARAM, or the ones found by crawling) for SQL injection: "
+        "error-based (MySQL/MariaDB, PostgreSQL, MSSQL, Oracle, SQLite, DB2, Access... error "
+        "messages caused by a quote that the balanced payload does not cause), boolean-blind "
+        "(true/false condition pairs compared with the baseline) and time-blind (DBMS sleep "
+        "functions, confirmed with a zero-delay control and a second delay). Reports a DBMS guess.")
 searchinfo = "SQL Injection Scanner"
-properties = {"PARAM":["Directory and Parameter to attack (eg /vuln/page.php?q=lmao)", " "], "PARALLEL":["Parallelise Attack? [1/0]", " "]}
+properties = {
+    **inject.OPTIONS,
+    **webinj.COOKIE_OPTION,
+    "TECHNIQUE": ["Techniques: error, boolean, time or all, comma separated (default error,boolean)", ""],
+    "DELAY": ["Sleep used by time-based payloads, seconds (default 3; confirmed with twice that)", ""],
+}
 
-def sqli(web):
-    global name
-    name = targetname(web)
-    global lvl2
-    lvl2 = inspect.stack()[0][3]
-    global module
-    module = "VulnAnalysis"
-    global lvl1
-    lvl1 = "Critical Vulnerabilities"
-    global lvl3
-    lvl3 = ""
-    time.sleep(0.7)
-    #print(R+'\n    ===========================')
-    #print(R+'\n     S Q L   ! N J E C T I O N')
-    #print(R+'    ---<>----<>----<>----<>----\n')
+DEFAULT_DELAY = 3.0
 
-    from core.methods.print import pvln
-    pvln("sql !njection") 
-                 
-    time.sleep(0.6)
-    print(O+' Choose from the options:\n')
-    print(B+'  [1] '+C+'Error Based SQLi'+W+' (Manual + Automated)')
-    print(B+'  [2] '+C+'Blind Based SQLi'+W+' (Manual + Automated)\n')
-    print(B+'  [99] '+C+'Back to Console\n')
-    v = input(O+' [§] TID :> ')
 
-    if v.strip() == '1':
-        errorsqli(web, properties)
-    elif v.strip() == '2':
-        blindsqli(web, properties)
-    elif v.strip() == '99':
-        pass
-    else:
-        print(R+' [-] U high dude?')
+def sqli(target):
+    pvln("sql !njection")
+    chosen = kit.option(properties, "TECHNIQUE", "Techniques (error,boolean,time,all)", "error,boolean")
+    techniques = engine.parse_techniques(chosen)
+    if not techniques:
+        kit.bad(f"Unknown TECHNIQUE '{chosen}'. Use error, boolean, time or all.")
+        return
+    delay = DEFAULT_DELAY
+    if "time" in techniques:
+        delay = max(1.0, kit.number(properties, "DELAY", "Sleep delay in seconds", DEFAULT_DELAY))
 
-def attack(web):
-    web = web.fullurl
-    sqli(web)
+    points = inject.discover(target, properties)
+    if not points:
+        return
+    kit.info(f"Techniques: {', '.join(techniques)}" + (f" (delay {delay:g}s)" if "time" in techniques else ""))
+    session = webinj.session(properties, timeout=15)
+    findings = inject.scan(points, engine.make_check(session, techniques, delay))
+    inject.report(findings, kit.Recorder(target, kit.CRITICAL, "sqli"),
+                  clean="No SQL injection found.")
+
+
+def attack(target):
+    sqli(target)

@@ -1,124 +1,104 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+"""Host header injection -- does the application build URLs from Host?"""
 
-#-:-:-:-:-:-:-:-:-:-:-:-:#
-#    TIDoS Framework     #
-#-:-:-:-:-:-:-:-:-:-:-:-:#
+from __future__ import annotations
 
-#Author : @_tID
-#This module requires TIDoS Framework
-#https://github.com/0xInfection/TIDoS-Framework
+import re
 
+import requests
 
-import socket
-import time
-import sys
-import getopt
-import http.client
-from core.Core.colors import *
+from core.methods import modkit as kit
+from core.methods.inject import marker
+from core.methods.print import pvln
 
-from core.database.database_module import save_data
-from core.variables import database
-from core.methods.cache import targetname
-import inspect
-
-info = "This module tries to determine if the target is vulnerable to Host Header Injection Attacks."
+info = ("This module tries to determine if the target is vulnerable to Host Header Injection. "
+        "It sends a random host name in Host, X-Forwarded-Host, X-Host, X-Forwarded-Server, "
+        "X-HTTP-Host-Override and Forwarded, and reports a finding only when that host comes "
+        "back in the Location header or inside links/URLs of the page (password-reset "
+        "poisoning, cache poisoning, open redirect). Plain-text echoes on successful pages are "
+        "reported as 'possible'; echoes on error pages are ignored.")
 searchinfo = "Host Header Injection"
-properties = {}
+properties = {
+    **kit.AUTH_OPTIONS,
+}
 
-def hostheader0x00(web):
+OVERRIDES = ("X-Forwarded-Host", "X-Host", "X-Forwarded-Server", "X-HTTP-Host-Override",
+             "Forwarded")
+URL_CONTEXT = r"""(?:https?:)?//{host}|(?:href|src|action|content|url)\s*=\s*["']?[^"'\s>]*{host}"""
 
-    #print(R+'\n    ==========================================')
-    #print(R+'\n     H O S T  H E A D E R   I N J E C T I O N')
-    #print(R+'    ---<>----<>----<>----<>----<>----<>----<>-\n')
 
-    from core.methods.print import pvln
-    pvln("host header Injection") 
-                 
+def classify(resp, canary: str) -> tuple[str, str] | None:
+    """(confidence, evidence) when `canary` is reflected in a meaningful place."""
+    loc = resp.headers.get("Location", "")
+    if canary in loc.lower():
+        return "confirmed", f"Location: {loc}"
+    for name, value in resp.headers.items():
+        if name.lower() not in ("location", "content-length") and canary in value.lower():
+            return "confirmed", f"{name}: {value[:150]}"
+    body = resp.text.lower() if resp.content else ""
+    if canary not in body:
+        return None
+    m = re.search(URL_CONTEXT.format(host=re.escape(canary)), body)
+    if m:
+        start = max(0, m.start() - 40)
+        return "confirmed", "URL in body: ..." + resp.text[start:m.end() + 40].strip() + "..."
+    if resp.status_code < 400:
+        i = body.index(canary)
+        return "possible", "text in body: ..." + resp.text[max(0, i - 40):i + 60].strip() + "..."
+    return None
 
-    port = input(O+' [§] Enter the port to use (eg. 80) :> ')
-
-    if port == 443:
-        print(O+" [!] Using HTTPS <port 443>...")
-        print(GR+' [*] Setting headers...')
-        headers = {
-                'User-Agent': 'The Infected Drake [@_tID] on Systems (TIDoS)',
-                'Content-Type': 'application/x-www-form-urlencoded',
-                }
-
-        print(GR+' [*] Requesting response...')
-        conn = http.client.HTTPSConnection(web)
-        conn.request("GET", "/", "", headers)
-        response = conn.getresponse()
-        print(' [*] Reading the response...')
-        data = response.read()
-
-        print(O+' [!] Response : '+GR, response.status, response.reason)
-        print(O+' [!] Data (raw) : \n'+GR)
-        print(data + '\n')
-        save_data(database, module, lvl1, lvl2, lvl3, name, str(data))
-
-    else:
-        print(GR+' [*] Setting buffers...')
-        buffer1 = "TRACE / HTTP/1.1"
-        buffer2 = "Test: <script>alert(tID)</script>"
-        buffer3 = "Host: " + web
-        buffer4 = "GET / HTTP/1.1"
-
-        s=socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        print(GR+' [*] Making the connection...')
-        result=s.connect_ex((web,int(port)))
-        s.settimeout(1.0)
-
-        if result == 0:
-
-            print(C+' [*] Setting injection frame buffers...')
-            frame_inject = "codesploit"
-            buffer1 = "GET / HTTP/1.1"
-            print(B+' [+] Buffer Set : '+C+buffer1)
-            buffer2 = "Host: teamcodesploit.gq"
-            print(B+' [+] Buffer Set : '+C+buffer2)
-            time.sleep(0.5)
-            print(GR+' [+] Sending buffers...')
-            s.send(buffer1 + "\n")
-            s.send(buffer2 + "\n\n")
-            print(O+' [!] Receiving response...')
-            data1 = s.recv(1024)
-            s.close()
-            time.sleep(0.7)
-            print(GR+' [+] Analysing results...')
-            if frame_inject.lower() in data1.lower():
-                print(G+' [+] Site is vulnerable to Host Header Injection.')
-                save_data(database, module, lvl1, lvl2, lvl3, name, "Site is vulnerable to Host Header Injection!")
-            else:
-                print(R+' [-] Site is immune against Host Header Injection...')
-                save_data(database, module, lvl1, lvl2, lvl3, name, "Site is immune against Host Header Injection.")
-
-            print("")
-            print(GR+' [*] Obtaining header dump data...')
-            print("")
-            print(O+data1)
-            save_data(database, module, lvl1, lvl2, lvl3, name, str(data1))
-            time.sleep(1)
 
 def hhi(web):
-    global name
-    name = targetname(web)
-    global lvl2
-    lvl2 = inspect.stack()[0][3]
-    global module
-    module = "VulnAnalysis"
-    global lvl1
-    lvl1 = "Basic Bugs & Misconfigurations"
-    global lvl3
-    lvl3 = ""
-    time.sleep(0.5)
-    if 'http' in web:
-        web = web.replace('http://','')
-        web = web.replace('https://','')
+    pvln("host header Injection")
+    record = kit.Recorder(web, kit.MISCONFIG, "hhi")
+    session = kit.http(headers=kit.request_headers(properties))
+    url = kit.url(web) + "/"
+    real = kit.host(web)
 
-    hostheader0x00(web)
+    try:
+        base = session.get(url, allow_redirects=False)
+    except requests.RequestException as e:
+        kit.bad(f"Could not reach {url}: {type(e).__name__}")
+        return []
+    kit.info(f"Baseline: HTTP {base.status_code}")
+
+    findings = []
+    for header in ("Host",) + OVERRIDES:
+        canary = f"{marker(8)}.com"
+        if header == "Host":
+            hdrs = {"Host": canary}
+        elif header == "Forwarded":
+            hdrs = {"Forwarded": f"host={canary}"}
+        else:
+            hdrs = {header: canary}
+        try:
+            r = session.get(url, headers=hdrs, allow_redirects=False)
+        except requests.RequestException as e:
+            kit.info(f"{header}: request failed ({type(e).__name__})")
+            continue
+        hit = classify(r, canary)
+        if hit is None:
+            kit.bullet(f"{header}: not reflected (HTTP {r.status_code})")
+            continue
+        conf, evidence = hit
+        line = f"{header}: injected host reflected [{conf}] ({evidence})"
+        if conf == "confirmed":
+            kit.found("Host header injection", line)
+        else:
+            kit.warn(line)
+        findings.append(f"HTTP {r.status_code} {line}")
+
+    if not findings:
+        kit.good(f"The application does not build URLs from an injected host ({real}).")
+        record("No host header injection found.")
+        return []
+    for f in findings:
+        record(f)
+    kit.info("Check password reset / e-mail links and cached pages: they may embed the "
+             "attacker's host.")
+    return findings
+
 
 def attack(web):
-    web = web.fullurl
     hhi(web)

@@ -1,141 +1,236 @@
 #!/usr/bin/env python3
-# coding: utf-8
+# -*- coding: utf-8 -*-
+"""Cloudflare misconfiguration -- is the origin server reachable around Cloudflare?"""
 
-#-:-:-:-:-:-:-:-:-:-:-:-:#
-#    TIDoS Framework     #
-#-:-:-:-:-:-:-:-:-:-:-:-:#
+from __future__ import annotations
 
-#This module requires TIDoS Framework
-#https://github.com/0xInfection/TIDoS-Framework
-
-
-#import requests
-import time
+import ipaddress
 import re
-import socket
-import core.lib.mechanize as mechanize
-import http.cookiejar
-from urllib.parse import urlencode
-from re import search
-from core.Core.colors import *
-from core.variables import tor
-from core.methods.tor import session
+from concurrent.futures import ThreadPoolExecutor
+from urllib.parse import urlsplit
+
+import requests
+from requests.adapters import HTTPAdapter
+
+import core.variables as variables
+from core.methods import dnsmisc
+from core.methods import modkit as kit
+from core.methods.inject import ratio
+from core.methods.print import pvln
+from core.methods.mailauth import parse_spf, spf_records
 from modules.OSINTFootprinting.ActiveRecon.serverdetect import serverdetect
-from core.database.database_module import save_data
-from core.variables import database
-from core.methods.cache import targetname
-import inspect
-br = mechanize.Browser()
 
-cj = http.cookiejar.LWPCookieJar()
-br.set_cookiejar(cj)
-
-br.set_handle_equiv(True)
-br.set_handle_redirect(True)
-br.set_handle_referer(True)
-br.set_handle_robots(False)
-
-torproxies = {'http':'socks5h://localhost:9050', 'https':'socks5h://localhost:9050'}
-if tor:
-    br.set_proxies(torproxies)
-
-br.set_handle_refresh(mechanize._http.HTTPRefreshProcessor(), max_time=1)
-br.addheaders = [
-    ('User-agent', 'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.1) Gecko/2008071615 Fedora/3.0.1-1.fc9 Firefox/3.0.1')]
-
-info = "This module searches for Cloudflare misconfigurations and tries to bypass protections."
+info = ("This module searches for Cloudflare misconfigurations. It confirms the target is "
+        "behind Cloudflare (Server/CF-RAY headers, Cloudflare IP ranges), then (BYPASS) "
+        "collects non-Cloudflare IPs of the domain -- common unproxied subdomains (direct, "
+        "origin, mail, ftp, cpanel, dev...), MX hosts, SPF ip4/a/mx entries and, with PASSIVE, "
+        "HackerTarget host records -- and requests the site from each IP with the right Host "
+        "header/SNI. An IP serving the same page is an exposed origin: attackers can bypass "
+        "the Cloudflare WAF and DDoS protection by connecting to it directly.")
 searchinfo = "Cloudflare Misconfig & Bypass"
-properties = {"BYPASS":["Bypass Cloudflare if present [1/0]", " "]}
+properties = {
+    "BYPASS": ["Hunt for the origin IP behind Cloudflare (y/n or 1/0)", ""],
+    "PASSIVE": ["Also use HackerTarget host records as candidates (y/n)", ""],
+}
 
-def cloud0x00(web):
-    requests = session()
-    web = web.replace('https://','')
-    web = web.replace('http://','')
-    #print(R+'\n   =========================================')
-    #print(R+'\n    C L O U D F L A R E   M I S C O N F I G.')
-    #print(R+'   ---<>----<>----<>----<>----<>----<>----<>\n')
+# https://www.cloudflare.com/ips/ (stable for years)
+CF_RANGES = [ipaddress.ip_network(n) for n in (
+    "173.245.48.0/20", "103.21.244.0/22", "103.22.200.0/22", "103.31.4.0/22",
+    "141.101.64.0/18", "108.162.192.0/18", "190.93.240.0/20", "188.114.96.0/20",
+    "197.234.240.0/22", "198.41.128.0/17", "162.158.0.0/15", "104.16.0.0/13",
+    "104.24.0.0/14", "172.64.0.0/13", "131.0.72.0/22",
+    "2400:cb00::/32", "2606:4700::/32", "2803:f800::/32", "2405:b500::/32",
+    "2405:8100::/32", "2a06:98c0::/29", "2c0f:f248::/32")]
 
-    from core.methods.print import pvln
-    pvln("cloudflare misconfig.") 
-                
-    time.sleep(0.4)
-    print(GR+' [*] Checking server status...')
+LABELS = ("direct", "direct-connect", "origin", "origin-www", "www-origin", "backend", "server",
+          "cpanel", "whm", "webmail", "mail", "smtp", "pop", "imap", "ftp", "sftp", "dev",
+          "staging", "stage", "test", "beta", "old", "admin", "vpn", "remote", "ns1", "ns2",
+          "autodiscover", "api", "app", "portal", "blog", "shop")
+MAX_CANDIDATES = 40
+TITLE = re.compile(r"<title[^>]*>(.*?)</title>", re.I | re.S)
+
+
+def is_cloudflare(ip: str) -> bool:
     try:
-        ip_addr = socket.gethostbyname(web)
-        print(G+' [+] Server detected online...')
-        time.sleep(0.5)
-        print(G+' [+] Server IP :> '+O+ip_addr)
-    except Exception:
-        print(R+' [-] Server seems down...')
+        a = ipaddress.ip_address(ip)
+    except ValueError:
+        return False
+    return any(a in net for net in CF_RANGES if net.version == a.version)
 
-    print(GR+' [*] Trying to identify backend...')
-    time.sleep(0.4)
-    web = 'http://' + web
+
+def routable(ip: str) -> bool:
     try:
-        print(GR+' [*] Making the no-verify request...')
-        time.sleep(0.6)
-        r = requests.get(web, verify=False)
-        header = r.headers['Server']
-        if 'cloudflare' in header:
-            print(O+' [+] The website is behind '+R+'Cloudflare.')
-            print(G+' [+] Server : Cloudflare')
-            time.sleep(0.4)
-            if properties["BYPASS"][1] == " ":
-                m = input(O+' [+] Do you want TIDoS to try and bypass Cloudflare? (enter if not) :> ')
-                byp = m != ""
-            else:
-                byp = properties["BYPASS"][1] == "1"
-            if byp:
-                bypass(web)
-            else:
-                print(R+' [-] Invalid choice...')
-                serverdetect(web)
-            try:
-                ip_addr = bypass.ip_addr
-            except Exception:
-                pass
-        else:
-            print(R+' [-] Website does not seem to be a part of Cloudflare Network...')
-    except Exception:
-        print(R+' [-] Failed to identify server.\n [-] Some error occured!')
-        pass
+        return ipaddress.ip_address(ip).is_global
+    except ValueError:
+        return False
 
-def bypass(domain):
 
-    print(GR+' [*] Trying to get real IP...')
-    post = urlencode({'cfS': domain})
-    result = br.open(
-        'http://www.crimeflare.info/cgi-bin/cfsearch.cgi ', post).read()
+class SNIAdapter(HTTPAdapter):
+    """Connect to an IP while sending the site's name as TLS SNI."""
 
-    match = search(r' \b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b', result)
-    if match:
-        bypass.ip_addr = match.group().split(' ')[1][:-1]
-        print(G+' [+] Cloudflare found misconfigured!')
-        time.sleep(0.4)
-        print(GR+' [*] Identifying IP...')
-        time.sleep(0.5)
-        print(G+' [+] Real IP Address : ' + bypass.ip_addr + '\n')
-        save_data(database, module, lvl1, lvl2, lvl3, name, "Cloudflare misconfigured! IP address: {}".format(bypass.ip_addr))
+    def __init__(self, server_hostname: str, **kw):
+        self.server_hostname = server_hostname
+        super().__init__(**kw)
+
+    def init_poolmanager(self, *args, **kw):
+        kw["server_hostname"] = self.server_hostname
+        super().init_poolmanager(*args, **kw)
+
+    def proxy_manager_for(self, proxy, **kw):
+        kw["server_hostname"] = self.server_hostname
+        return super().proxy_manager_for(proxy, **kw)
+
+
+def title(text: str) -> str:
+    m = TITLE.search(text or "")
+    return " ".join(m.group(1).split())[:120] if m else ""
+
+
+def same_site(ref, resp) -> str:
+    """Why `resp` (from a candidate IP) is the same page as `ref`, or ''."""
+    if "cf-ray" in {k.lower() for k in resp.headers}:
+        return ""
+    if ref.status_code != resp.status_code:
+        return ""
+    if ref.is_redirect:
+        a = ref.headers.get("Location", "")
+        return f"same redirect ({a})" if a and a == resp.headers.get("Location", "") else ""
+    t = title(ref.text)
+    if t and t == title(resp.text):
+        return f"same title '{t}'"
+    r = ratio(ref.text, resp.text)
+    return f"{r:.0%} identical body" if r >= 0.9 and len(ref.text) > 200 else ""
+
+
+def candidates(host: str, domain: str, passive: bool) -> dict[str, set]:
+    """ip -> sources, for non-Cloudflare public IPs related to the domain."""
+    found: dict[str, set] = {}
+
+    def add(ip, source):
+        if routable(ip) and not is_cloudflare(ip):
+            found.setdefault(ip, set()).add(source)
+
+    names = {domain, host} | {f"{label}.{domain}" for label in LABELS}
+    mx = dnsmisc.mx(domain)
+    names |= set(mx)
+    spf = spf_records(dnsmisc.txt(domain))
+    if spf:
+        for term in spf[0].split()[1:]:
+            mech = term.lstrip("+~?-").lower()
+            kind, _, val = mech.partition(":")
+            if kind == "ip4" and (val.endswith("/32") or "/" not in val):
+                add(val.split("/")[0], "SPF ip4")
+            elif kind in ("a", "mx") and val:
+                names.add(val.split("/")[0])
+        parsed = parse_spf(spf[0])
+        names |= {i for i in parsed.includes if i.endswith(domain)}
+
+    with ThreadPoolExecutor(max_workers=max(1, min(variables.processes, 16))) as pool:
+        for name, ips in zip(names, pool.map(lambda n: dnsmisc.addresses(n, ipv6=False), names)):
+            for ip in ips:
+                add(ip, f"{'MX ' if name in mx else ''}{name}")
+
+    if passive:
+        text = kit.hackertarget("hostsearch", domain, timeout=40)
+        for line in (text or "").splitlines():
+            name, _, ip = line.partition(",")
+            if ip:
+                add(ip.strip(), f"HackerTarget {name.strip()}")
+    return found
+
+
+def check_ip(ip: str, host: str, ref, path: str):
+    """(ip, scheme, reason) when the IP serves the site, else None."""
+    for scheme in ("https", "http"):
+        s = kit.http(timeout=8)
+        if scheme == "https":
+            s.mount("https://", SNIAdapter(host))
+        netloc = f"[{ip}]" if ":" in ip else ip
+        try:
+            r = s.get(f"{scheme}://{netloc}{path}", headers={"Host": host}, allow_redirects=False)
+        except requests.RequestException:
+            continue
+        why = same_site(ref, r)
+        if why:
+            return ip, scheme, why
+    return None
+
+
+def bypass(web, ref, host: str, domain: str, record) -> list[str]:
+    kit.info("Collecting origin IP candidates (subdomains, MX, SPF)...")
+    passive = kit.flag(properties, "PASSIVE", "Use HackerTarget host records", True)
+    found = candidates(host, domain, passive)
+    if not found:
+        kit.bad("No non-Cloudflare IPs found for the domain.")
+        record("Behind Cloudflare; no origin IP candidates found.")
+        return []
+    ips = sorted(found, key=lambda i: (-len(found[i]), i))[:MAX_CANDIDATES]
+    kit.info(f"Requesting the site from {len(ips)} candidate IP(s) with Host: {host}...")
+    parts = urlsplit(ref.url)
+    path = (parts.path or "/") + (f"?{parts.query}" if parts.query else "")
+    with ThreadPoolExecutor(max_workers=max(1, min(variables.processes, 16))) as pool:
+        results = [r for r in pool.map(lambda ip: check_ip(ip, host, ref, path), ips) if r]
+
+    origins = []
+    for ip, scheme, why in results:
+        src = ", ".join(sorted(found[ip]))
+        kit.found("Origin server exposed", f"{ip} via {scheme} ({why}; found in: {src})")
+        record(f"[HIGH] Cloudflare bypass: origin {ip} serves the site directly over {scheme} "
+               f"({why}; found in: {src})")
+        origins.append(ip)
+    others = [ip for ip in ips if ip not in origins]
+    if others:
+        kit.info("Other non-Cloudflare IPs of the domain (not serving this site):")
+        for ip in others[:15]:
+            kit.bullet(f"{ip}  ({', '.join(sorted(found[ip]))})")
+    if not origins:
+        kit.good("No candidate IP serves the site: origin not exposed (as far as we can tell).")
+        record("Behind Cloudflare; origin not found among "
+               f"{len(ips)} candidate IPs: {', '.join(others[:15])}")
     else:
-        print(R+' [-] Cloudflare properly configured...')
-        print(R+' [-] Unable to find remote IP!\n')
-        save_data(database, module, lvl1, lvl2, lvl3, name, "Cloudflare properly configured.")
-        pass
+        kit.info("Restrict the origin firewall to Cloudflare IP ranges (or use Cloudflare Tunnel).")
+    return origins
+
 
 def cloudflaremisc(web):
-    global name
-    name = targetname(web)
-    global lvl2
-    lvl2 = inspect.stack()[0][3]
-    global module
-    module = "VulnAnalysis"
-    global lvl1
-    lvl1 = "Basic Bugs & Misconfigurations"
-    global lvl3
-    lvl3 = ""
-    time.sleep(0.5)
-    cloud0x00(web)
+    pvln("cloudflare misconfig.")
+    record = kit.Recorder(web, kit.MISCONFIG, "cloudflaremisc")
+    host = kit.host(web)
+    domain = kit.domain(web)
+    dnsmisc.warn_tor()
+    ips = dnsmisc.addresses(host) if not kit.is_ip(host) else [host]
+    if ips:
+        kit.found("Server IP", ", ".join(ips))
+    try:
+        ref = kit.http().get(kit.url(web) + "/", allow_redirects=False)
+    except requests.RequestException as e:
+        kit.bad(f"Could not reach {kit.url(web)}: {type(e).__name__}")
+        return []
+
+    evidence = []
+    if "cloudflare" in ref.headers.get("Server", "").lower():
+        evidence.append("Server: cloudflare")
+    if "CF-RAY" in ref.headers:
+        evidence.append(f"CF-RAY: {ref.headers['CF-RAY']}")
+    cf_ips = [ip for ip in ips if is_cloudflare(ip)]
+    if cf_ips:
+        evidence.append("IP in Cloudflare ranges: " + ", ".join(cf_ips))
+    if not evidence:
+        kit.bad("The website does not seem to be behind Cloudflare.")
+        record("Not behind Cloudflare.")
+        return []
+    kit.warn("The website is behind Cloudflare: " + "; ".join(evidence))
+    direct = [ip for ip in ips if not is_cloudflare(ip) and routable(ip)]
+    if cf_ips and direct:
+        kit.found("Partly unproxied", "the host also resolves to " + ", ".join(direct))
+        record("[MEDIUM] Host also resolves to non-Cloudflare IPs: " + ", ".join(direct))
+
+    if not kit.flag(properties, "BYPASS", "Try to find the origin IP behind Cloudflare", True):
+        record("Behind Cloudflare (" + "; ".join(evidence) + ")")
+        serverdetect(web)
+        return []
+    return bypass(web, ref, host, domain, record)
+
 
 def attack(web):
-    web = web.fullurl
     cloudflaremisc(web)

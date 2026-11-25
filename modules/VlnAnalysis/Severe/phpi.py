@@ -1,205 +1,92 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+"""PHP code injection (eval/assert/create_function contexts)."""
 
-#-:-:-:-:-:-:-:-:-:-:-:-:#
-#    TIDoS Framework     #
-#-:-:-:-:-:-:-:-:-:-:-:-:#
+from __future__ import annotations
 
-#Author: @_tID
-#This module requires TIDoS Framework
-#https://github.com/0xInfection/TIDoS-Framework
+import random
+
+from core.methods import fileinj, inject
+from core.methods import modkit as kit
+from core.methods import webinj
+from core.methods.print import pvln
+
+info = ("Finds PHP code injection in request parameters. Each parameter gets PHP that prints the "
+        "product of two random numbers, wrapped in context-breaking templates (DICT); a hit is confirmed "
+        "with a second, PHP-specific computation (strrev of a random number). Neither value can appear by "
+        "echoing the payload, and both must be absent from the baseline. With BLIND, usleep() payloads (not valid SQL, so a SQL injection "
+        "point does not trip them) are timed against usleep(0) controls, twice with growing delays.")
+searchinfo = "PHP Code Injection Scanner"
+DEFAULT_DICT = "files/payload-db/php_payloads.lst"
+properties = {
+    **inject.OPTIONS,
+    **webinj.COOKIE_OPTION,
+    "DICT": [f"Context templates with a {{code}} placeholder (default {DEFAULT_DICT})", ""],
+    "BLIND": ["Also run time-based (sleep) checks (y/n, default y)", ""],
+    "SLEEP": ["Seconds to sleep in time-based checks (default 5)", ""],
+}
+
+CONFIRMED = "PHP code injection (confirmed)"
+BLIND = "PHP code injection (time-based, likely)"
 
 
-import os
-import sys
-import requests as wrn
-import time
-from re import search
-from core.Core.colors import *
-from random import choice
-from string import ascii_uppercase, ascii_lowercase
-from requests.packages.urllib3.exceptions import InsecureRequestWarning
-from multiprocessing import Pool, TimeoutError
-from core.variables import processes
-from core.methods.tor import session
-from core.methods.multiproc import listsplit
+def reversible() -> int:
+    """Random 9-digit number whose reverse has no leading zero and differs from it."""
+    while True:
+        n = random.randint(10 ** 8, 10 ** 9 - 1)
+        if n % 10 and str(n) != str(n)[::-1]:
+            return n
 
-from core.database.database_module import save_data
-from core.variables import database
-from core.methods.cache import targetname
-import inspect
 
-wrn.packages.urllib3.disable_warnings(InsecureRequestWarning)
-payloads = []
+def check(point: inject.Point, s, templates: list[str], delay: int):
+    baseline = fileinj.body(point.send(s, point.original)) + fileinj.body(point.send(s, inject.marker()))
 
-info = "This module searches for PHP injection vulnerabilities and, if found, tries to inject payloads from TIDoS's payload database or from a user-specified file."
-searchinfo = "PHP Injection Module"
-properties = {"PARAM":["Directory and Parameter to attack (eg /vuln/page.php?q=lmao)", " "], "PARALLEL":["Parallelise Attack? [1/0]", " "], "DICT":["Path to dictionary to be used in normal attacks (default: files/fuzz-db/php_payloads.lst)", " "]}
+    def run(tpl: str, code: str) -> str:
+        return fileinj.body(fileinj.send(point, s, tpl.replace("{code}", code)))
 
-def genRandStr0x00(n):
-    return ''.join([choice(ascii_uppercase+ascii_lowercase) for o in range(0,int(n))]) # fetch random string
+    for tpl in templates:
+        a, b = fileinj.numbers()
+        product = str(a * b)
+        if product in baseline or product not in run(tpl, f"print({a}*{b})"):
+            continue
+        n = reversible()
+        rev = str(n)[::-1]
+        if rev in baseline or rev not in run(tpl, f"print(strrev({n}))"):
+            continue
+        yield inject.Finding(point, tpl.replace("{code}", f"print({a}*{b})"),
+                             f"print({a}*{b}) -> {product}; print(strrev({n})) -> {rev}", CONFIRMED)
+        return
 
-def check0x00(web0x00, pay, gen_headers):
-    requests = session()
-    try:
-        success = []
-        hunt = 0x00
-        print(GR+' [*] Making the request...')
-        rq = requests.get(web0x00, headers=gen_headers, allow_redirects=False, verify=False)
-        c = rq.content
-        print(O+' [!] Analysing responses...')
-        time.sleep(0.7)
-        if search(r"root\:\/bin\/bash|"+pay,str(c)): # regex for vuln
-            hunt = 0x01
-            print(G+' [+] Potential PHP Code Injection Flaw discovered!')
-            print(GR+' [*] Injecting payloads...')
-            time.sleep(0.4)
-            print(B+' [+] Vulnerable Link : '+C+web0x00)
-            print(B+' [+] Payload : '+C+pay)
-            print(O+' [+] Response : \033[0m\n')
-            print(c)
-            success.append(pay)
-        else:
-            print(R+' [-] Payload '+O+pay+R+' unsuccessful...')
-            print(R+' [-] No successful code injection at : '+O+web0x00)
+    if not delay:
+        return
+    for tpl in templates:
+        def probe(d: float, tpl=tpl):
+            resp, took = fileinj.timed(lambda: fileinj.send(point, s, tpl.replace("{code}", f"usleep({int(d) * 1000000})")))
+            return took if resp is not None else None
+        ev = fileinj.time_confirm(probe, delay)
+        if ev:
+            yield inject.Finding(point, tpl.replace("{code}", f"usleep({delay * 1000000})"), ev, BLIND)
+            return
 
-    except Exception as e:
-        print(R+' [-] Exception encountered!')
-        print(R+' [-] Error : '+str(e))
-
-    return success
-
-def getFile0x00():
-
-    try:
-        print(GR+' [*] Importing filepath...')
-        if properties["DICT"][1] == " ":
-            print(O+' [§] Enter path to file (default: files/payload-db/php_payloads.lst)...')
-            w = input(O+' [§] Your input (Press Enter if default) :> '+C)
-        elif properties["DICT"][1].lower() == "none":
-            w = ""
-        else:
-            w = properties["DICT"][1]
-        if w == '':
-            fi = 'files/payload-db/php_payloads.lst'
-            print(GR+' [*] Importing payloads...')
-            with open(fi,'r') as q0:
-                for q in q0:
-                    q = q.strip('\n')
-                    m = q.replace('drake', genRandStr0x00(30)) # replace with a random string
-                    payloads.append(m)
-        else:
-            fi = w
-            if os.path.exists(fi) == True:
-                print(G+' [+] File '+fi+' found...')
-                print(GR+' [*] Importing payloads...')
-                with open(fi,'r') as q0:
-                    for q in q0:
-                        q = q.strip('\n')
-                        m = q.replace('drake', genRandStr0x00(30))
-                        payloads.append(m)
-
-    except IOError:
-        print(R+' [-] File path '+O+fi+R+' not found!')
-
-def checkpre(payloads, web00, bug2, gen_headers):
-    success = []
-    for pay in payloads:
-        print(GR+'\n [*] Setting parameters...')
-        web0x00 = web00 + pay + bug2
-        print(C+' [+] Using payload : '+B+str(pay))
-        print(B+' [+] Using !nfected Url : '+GR+str(web0x00)) # display whats going on
-        success += check0x00(web0x00, pay, gen_headers) # check the outupt of the fuzz
-    return success
 
 def phpi(web):
-    global name
-    name = targetname(web)
-    global lvl2
-    lvl2 = inspect.stack()[0][3]
-    global module
-    module = "VulnAnalysis"
-    global lvl1
-    lvl1 = "Critical Vulnerabilities"
-    global lvl3
-    lvl3 = ""
-    time.sleep(0.5)
-    #print(R+'\n    =====================================')
-    #print(R+'\n     P H P   C O D E   I N J E C T I O N')
-    #print(R+'    ---<>----<>----<>----<>----<>----<>--\n')
+    pvln("php code injection")
+    rec = kit.Recorder(web, kit.CRITICAL, "phpi")
+    templates = [t for t in inject.payloads(properties, DEFAULT_DICT, label="template") if "{code}" in t]
+    if not templates:
+        kit.bad("No templates with a {code} placeholder.")
+        return []
+    blind = kit.flag(properties, "BLIND", "Run time-based checks", True)
+    delay = max(1, kit.integer(properties, "SLEEP", "Seconds to sleep in time-based checks", 5)) if blind else 0
+    points = inject.discover(web, properties)
+    if not points:
+        rec("No injection points found.")
+        return []
+    s = webinj.session(properties, timeout=max(15, 2 * delay + 15))
+    findings = inject.scan(points, lambda p: check(p, s, templates, delay))
+    inject.report(findings, rec, clean="No PHP code injection found.")
+    return findings
 
-    from core.methods.print import pvln
-    pvln("php code Injection") 
-                 
-
-    gen_headers =    {'User-Agent':'Mozilla/5.0 (Windows; U; Windows NT 6.1; rv:2.2) Gecko/20110201',
-                      'Accept-Language':'en-US;',
-                      'Accept-Encoding': 'gzip, deflate',
-                      'Accept': 'text/php, application/xhtml+xml, application/xml;', # important -> text/php
-                      'Connection':'close'}
-
-    print(GR+' [*] Initiating '+R+'Parameter Based Check...')
-    if properties["PARAM"][1] == " ":
-        param = input(O+' [§] Scope parameter (eg. /vuln/page.php?q=lmao) :> ')
-    else:
-        param = properties["PARAM"][1]
-    if param.startswith('/') == False:
-        param = '/' + param
-
-    choice = ""
-    if "&" in param:
-        ln = len(param.split("&"))
-        choice = input(" [!] Discovered {} parameters. Which one to use? (enter name) :> ".format(ln))
-        if not choice in param:
-            sys.exit(" [-] Param {} not found.".format(choice))
-
-    bug2 = ""
-    if choice != "":
-        n = param.split(choice + "=")[1]
-        if "&" in n:
-            bug2 = param.split(choice)[1]
-            tmp = bug2.split("&")[0]
-            bug2 = bug2.replace(tmp,"")
-
-    if properties["PARALLEL"][1] == " ":
-        pa = input("\n [?] Parallelise Attack? (enter if not) :> ")
-        parallel = pa != ""
-    else:
-        parallel = properties["PARALLEL"][1] == "1"
-
-    getFile0x00() # get the file with payloads
-    web00 = web + param.split(choice + '=')[0] + choice + '='
-    try:
-        success = []
-        if not parallel:
-            for pay in payloads:
-                print(GR+'\n [*] Setting parameters...')
-                web0x00 = web00 + pay + bug2
-                print(C+' [+] Using payload : '+B+str(pay))
-                print(B+' [+] Using !nfected Url : '+GR+str(web0x00)) # display whats going on
-                success += check0x00(web0x00, pay, gen_headers) # check the outupt of the fuzz
-        else:
-            paylists = listsplit(payloads, round(len(payloads)/processes))
-            with Pool(processes=processes) as pool:
-                res = [pool.apply_async(checkpre, args=(l, web00, bug2, gen_headers,)) for l in paylists]
-                for y in res:
-                    i = y.get()
-                    success += i
-        if success:
-            data = "CRLF Injection Vulnerability found!\nVulnerable param: " + web00 + "\nPayloads: " + str(success)
-            save_data(database, module, lvl1, lvl2, lvl3, name, data)
-            print(" [+] PHPi Vulnerability found! Successful payloads:")
-            for i in success:
-                print(i)
-        else:
-            print(R + "\n [-] No payload succeeded."+C)
-            save_data(database, module, lvl1, lvl2, lvl3, name, "No payload succeeded.")
-    except Exception as e: # if error
-        print(R+' [-] Unexpected Exception Encountered!')
-        print(R+' [-] Exception : '+str(e))
-
-    print(G+'\n [+] PHPi Module Completed!')
 
 def attack(web):
-    web = web.fullurl
     phpi(web)

