@@ -1,6 +1,10 @@
 __pycache__/
 *.py[co]
 
+# OS / editor cruft
+.DS_Store
+.directory
+
 # engagement data -- never commit
 core/database/tidos.db
 tmp/logs/*-logs/
