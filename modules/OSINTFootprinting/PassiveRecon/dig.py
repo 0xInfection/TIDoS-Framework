@@ -1,25 +1,35 @@
-import subprocess
-from core.database.database_module import save_data
-from core.variables import database
-import inspect
-from core.methods.tor import session
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""Dig DNS lookup -- passive recon."""
 
-info = "Dig DNS lookup module"
+from core.methods import modkit as kit
+from core.methods.print import posintpas
+
+info = ("Queries the target's DNS records with the system `dig` tool. TYPE selects "
+        "the record type (A, AAAA, MX, NS, TXT, SOA, ANY, ...).")
 searchinfo = "Dig DNS lookup"
-properties = {}
+properties = {
+    "TYPE": ["DNS record type to query (A, AAAA, MX, NS, TXT, ANY, ...)", ""],
+}
+
 
 def dig(target):
-    requests = session()
-    name = target.name
-    module = "ReconANDOSINT"
-    lvl1 = "Passive Reconnaissance & OSINT"
-    lvl2=inspect.stack()[0][3]
-    lvl3=''
-    DIGSCAN = "dig "+name
-    results_dig = subprocess.check_output(DIGSCAN, shell=True)
-    data=results_dig.decode().replace("<<","").replace(">>","")
-    save_data(database, module, lvl1, lvl2, lvl3, name, data)
-    return
+    posintpas("dig lookup")
+    name = kit.host(target)
+    rtype = kit.option(properties, "TYPE", "Record type", "A").upper()
+    if not name or name.startswith("-") or not rtype.isalnum():
+        kit.bad(f"Refusing to dig '{name}' / type '{rtype}'.")
+        return ""
+
+    kit.info(f"Running dig {name} {rtype}...")
+    out = kit.command(["dig", name, rtype], timeout=60)
+    if out is None:
+        return ""
+    data = out.replace("<<", "").replace(">>", "")
+    print(data)
+    kit.Recorder(target, kit.PASSIVE, "dig")(data)
+    return data
+
 
 def attack(web):
     dig(web)

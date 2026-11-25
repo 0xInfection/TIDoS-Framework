@@ -1,129 +1,84 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+"""WebDAV enumeration -- probes the SEARCH and PROPFIND methods."""
 
-#-:-:-:-:-:-:-:-:-:-:-:-:#
-#    TIDoS Framework     #
-#-:-:-:-:-:-:-:-:-:-:-:-:#
+from __future__ import annotations
 
-#Author: @_tID
-#This module requires TIDoS Framework
-#https://github.com/0xInfection/TIDoS-Framework
-
-
-import os
 import re
-import time
-import urllib.request
-from re import search, I
-from core.Core.colors import *
 
-content_type = 'application/xml; charset="utf-8"'
+import requests
 
-info = "DAV HTTP Enumeration module."
+from core.methods import modkit as kit
+from core.methods.print import posintact
+
+info = ("DAV HTTP enumeration module. Sends WebDAV SEARCH and PROPFIND requests to "
+        "the target and reports when they return a DAV directory listing.")
 searchinfo = "DAV HTTP Enumeration"
 properties = {}
 
-from core.database.database_module import save_data
-from core.variables import database
-from core.methods.cache import targetname
-import inspect
+HEADERS = {"Content-Type": 'application/xml; charset="utf-8"'}
 
-def htsearch(url, name):
-    lvl2 = "dav"
-    module = "ReconANDOSINT"
-    lvl1 = "Active Reconnaissance"
-    lvl3 = ""
-    print(C+' [!] Setting headers...')
-    time.sleep(0.7)
-    headers = {'Content-Type' : content_type}
-    print(C+' [!] Setting buffers...')
-    content =  "<?xml version='1.0'?>\r\n"
-    content += "<g:searchrequest xmlns:g='DAV:'>\r\n"
-    content += "<g:sql>\r\n"
-    content += "Select 'DAV:displayname' from scope()\r\n"
-    content += "</g:sql>\r\n"
-    content += "</g:searchrequest>\r\n"
-    time.sleep(0.7)
-    print(GR+' [*] Setting the parameters...')
-    req = urllib.request.Request(url,headers=headers,data=content)
-    req.get_method = lambda : sr
+SEARCH_BODY = """<?xml version="1.0"?>
+<g:searchrequest xmlns:g="DAV:">
+<g:sql>
+Select "DAV:displayname" from scope()
+</g:sql>
+</g:searchrequest>
+"""
+
+PROPFIND_BODY = """<?xml version="1.0"?>
+<a:propfind xmlns:a="DAV:">
+<a:prop>
+<a:displayname/>
+</a:prop>
+</a:propfind>
+"""
+
+# (method, label, body, extra headers, signature of a DAV listing)
+PROBES = [
+    ("SEARCH", "htsearch", SEARCH_BODY, {},
+     re.compile(r"<\w*:?response\b|<\w*:?status\b|xmlns:\w+=[\"']DAV:[\"']", re.I)),
+    ("PROPFIND", "profind", PROPFIND_BODY, {"Depth": "1"},
+     re.compile(r"<\w*:?href\b|<\w*:?multistatus\b", re.I)),
+]
+
+
+def probe(session, url, method, body, headers, signature) -> bool | None:
+    """True/False: DAV listing or not; None: the request itself failed."""
     try:
-        time.sleep(0.7)
-        print(GR+' [*] Making the request...')
-        resp = urllib.request.urlopen(req)
-    except urllib.error.HTTPError as e:
-        print(R+' [-] Exception : '+str(e))
+        r = session.request(method, url, data=body.encode(),
+                            headers={**HEADERS, **headers}, allow_redirects=False)
+    except requests.RequestException as e:
+        kit.bad(f"{method} request failed: {type(e).__name__}")
+        return None
+    kit.info(f"{method} -> HTTP {r.status_code}")
+    # 207 Multi-Status is the proper WebDAV answer; some servers send 200
+    return r.status_code in (200, 207) and bool(signature.search(r.text))
 
-    print(C+' [+] Matching the signatures...')
-    time.sleep(0.7)
-    regexp = r'<a:response>|<a:status>|xmlns:a=\"DAV:\"'
-    if re.search(regexp,resp.read()) and str(resp.code) == '200':
-        print(G+' [+] HTTP Search Method found Enabled!'+C+color.TR2+C)
-        print(O+' [+] DAV Directory Listing at :'+C+color.TR3+C+G+url+C+color.TR2+C)
-        save_data(database, module, lvl1, lvl2, lvl3, name, "htsearch: "+url)
-    else:
-        print(R+' [-] No HTTP Searching Profiling Found...')
-        save_data(database, module, lvl1, lvl2, lvl3, name, "No HTTP Searching Profiling Found.")
-
-def profind(url, name):
-    lvl2 = "dav"
-    module = "ReconANDOSINT"
-    lvl1 = "Active Reconnaissance"
-    lvl3 = ""
-    print(C+' [!] Setting headers...')
-    headers = {'Depth' : 1,
-               'Content-Type' : content_type}
-    time.sleep(0.7)
-    print(C+' [!] Setting buffers...')
-    content = "<?xml version='1.0'?>\r\n"
-    content += "<a:propfind xmlns:a='DAV:'>\r\n"
-    content += "<a:prop>\r\n"
-    content += "<a:displayname:/>\r\n"
-    content += "</a:prop>\r\n"
-    content += "</a:propfind>\r\n"
-    time.sleep(0.7)
-    print(GR+' [*] Setting the parameters...')
-    req = urllib.request.Request(url,headers=headers,data=content)
-    req.get_method = lambda : pro
-    time.sleep(0.7)
-    try:
-        print(GR+' [*] Making the request...')
-        resp = urllib.request.urlopen(req)
-    except urllib.error.HTTPError as e:
-        print(R+' [-] Exception : '+str(e))
-    time.sleep(0.7)
-    print(C+' [+] Matching the signatures...')
-    if 'D:href' in resp.read() and resp.code == 200:
-        print(G+' [+] HTTP Profind Method Found Enabled!'+C+color.TR2+C)
-        print(O+' [+] DAV Directory Listing at :'+C+color.TR3+C+G+url+C+color.TR2+C)
-        save_data(database, module, lvl1, lvl2, lvl3, name, "profind: "+url)
-    else:
-        print(R+' [-] No Profind HTTP Profiling Found...')
-        save_data(database, module, lvl1, lvl2, lvl3, name, "No Profind HTTP Profiling Found.")
 
 def dav(web):
-    name = targetname(web)
-    time.sleep(0.7)
-    #print(R+'\n    =========================================')
-    #print(R+'     D A V   H T T P   E N U M E R A T I O N')
-    #print(R+'    =========================================\n')
-    from core.methods.print import posintact
-    posintact("dav http enumeration") 
-    time.sleep(0.7)
-    print(C+' [!] Loading HTTP methods...')
-    global pro, sr
-    pro = 'PROFIND'
-    sr = 'SEARCH'
-    print(GR+'\n [*] Initiating HTTP Search module...')
-    htsearch(web, name)
-    print(C+' [+] HTTP Search module Completed!')
-    time.sleep(1)
-    print(GR+'\n [*] Initiating HTTP Profind Moule...')
-    profind(web, name)
-    print(C+' [+] HTTP Profind Module Completed!')
+    posintact("dav http enumeration")
+    url = kit.url(web)
+    session = kit.http()
+    record = kit.Recorder(web, kit.ACTIVE, "dav")
 
-    print(G+' [+] HTTP Profiling of DAV Completed!'+C+color.TR2+C+'\n')
+    enabled = []
+    for method, label, body, headers, signature in PROBES:
+        kit.info(f"Probing HTTP {method}...")
+        result = probe(session, url, method, body, headers, signature)
+        if result is None:
+            continue
+        if result:
+            kit.found(f"HTTP {method} enabled, DAV directory listing at", url)
+            record(f"{label}: {url}")
+            enabled.append(method)
+        else:
+            kit.bad(f"No HTTP {method} profiling found.")
+            record(f"No HTTP {method} profiling found.")
+
+    kit.good("HTTP profiling of DAV completed!")
+    return enabled
+
 
 def attack(web):
-    web = web.fullurl
     dav(web)

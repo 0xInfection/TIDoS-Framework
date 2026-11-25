@@ -1,100 +1,55 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-
-#-:-:-:-:-:-:-:-:-:-:-:-:#
-#    TIDoS Framework     #
-#-:-:-:-:-:-:-:-:-:-:-:-:#
-
-#Author : @_tID
-#This module requires TIDoS Framework
-#https://github.com/0xInfection/TIDoS-Framework
-
+"""Error hunter -- information disclosure."""
 
 import re
-import sys
-sys.path.append('files/signaturedb/')
-import time
-from core.methods.tor import session
-from core.Core.colors import *
-from re import search
-from bs4 import BeautifulSoup
-from files.signaturedb.commonerror_signatures import patterns
-urls = []
-links = []
-found = 0x00
 
-from core.database.database_module import save_data
-from core.variables import database
-from core.methods.cache import targetname
-import inspect
+from core.methods import harvest
+from core.methods import modkit as kit
+from core.methods.print import pleak
+from files.signaturedb.commonerror_signatures import SIGNATURES
 
-info = "This module tries to find errors in target's source code."
+info = ("Finds server-side error messages, debug pages and stack traces leaking "
+        "in the target's pages, and names the technology behind them (PHP, "
+        "Laravel, ASP.NET, Java/Spring/Tomcat, Django, Flask, Rails, Node.js, "
+        "Go, and MySQL/PostgreSQL/MSSQL/Oracle/SQLite database errors).")
 searchinfo = "Error hunter"
-properties = {}
+properties = {
+    "CRAWL": ["Also scan same-host pages linked from the target (y/n)", ""],
+    **kit.AUTH_OPTIONS,
+}
 
-def check0x00(content,url, lvl2, name):
-    for pattern in patterns:
-        print(C+' [!] Finding '+B+pattern+C+' ...')
-        time.sleep(0.005)
-        if search(pattern, content):
-            print(O+' [!] Possible error at '+C+color.TR3+C+G+url+C+color.TR2+C)
-            print(G+" [+] Found : \"%s\" at %s" % (pattern,url)+C+color.TR2+C)
-            data = str(pattern) + " @ " + str(url)
-            save_data(database, module, lvl1, lvl2, lvl3, name, data)
-            found = 0x01
+COMPILED = [(tech, re.compile(rx, re.I | re.S)) for tech, rx in SIGNATURES]
 
-def request(url, lvl2):
-    name = targetname(url)
-    requests = session()
-    time.sleep(0.5)
-    links = [url]
-    po = url.split('//')[1]
-    for w in links:
-        print(GR+' [*] Scraping Page: '+O+url+C)
-        req = requests.get(w).text
-        check0x00(req, url, lvl2, name)
 
-    soup = BeautifulSoup(req,'lxml')
-    for line in soup.find_all('a', href=True):
-        newline = line['href']
-        try:
-            if newline[:4] == "http":
-                if po in newline:
-                    urls.append(str(newline))
-            elif newline[:1] == "/":
-                combline = url+newline
-                urls.append(str(combline))
-        except Exception:
-            print(R+' [-] Unhandled Exception Occured!')
+BLOCK_END = re.compile(r"\n|<br\s*/?>|</(?:p|div|pre|h\d|title|li|td|tr|table|body)>", re.I)
 
-    try:
-        for uurl in urls:
-            print("\n"+O+" [+] Scraping Page: "+C+color.TR3+C+G+uurl+C+color.TR2+C)
-            req = requests.get(uurl).text
-            check0x00(req, url, lvl2, name)
 
-    except Exception:
-        print(R+' [-] Outbound Query Exception...')
+def _snippet(body: str, start: int, width: int = 110) -> str:
+    """The error message starting at `start`: up to the end of its line or
+    block element, tags stripped, single-spaced."""
+    chunk = body[start:start + 400]
+    end = BLOCK_END.search(chunk, 1)
+    text = re.sub(r"<[^>]+>", "", chunk[:end.start()] if end else chunk)
+    text = " ".join(text.split())
+    return text if len(text) <= width else text[:width - 3] + "..."
 
-    if found == 0x00:
-        print(R+'\n [-] No Errors found in Source Code!\n')
-        save_data(database, module, lvl1, lvl2, lvl3, name, "No Errors found in Source Code.")
 
-    print(G+' [+] Scraping Done!'+C+color.TR2+C)
+def extract(body):
+    seen = set()
+    for tech, rx in COMPILED:
+        if tech in seen:
+            continue  # one finding per technology per page is enough
+        m = rx.search(body)
+        if m:
+            seen.add(tech)
+            yield f"{tech}: {_snippet(body, m.start())}"
+
 
 def errors(web):
-    global module, lvl1, lvl3
-    module = "ReconANDOSINT"
-    lvl1 = "Information Disclosure"
-    lvl3 = ""
-    lvl2 = inspect.stack()[0][3]
-    from core.methods.print import pleak
     pleak("error hunter")
-    print(C+'  [This module covers up Full Path Disclosures]\n')
-    print(GR+' [*] Making the request...')
-    time.sleep(0.5)
-    request(web, lvl2)
+    return harvest.run(web, properties, noun="error signatures", lvl2="errors", extract=extract)
+
 
 def attack(web):
-    web = web.fullurl
     errors(web)

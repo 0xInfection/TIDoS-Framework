@@ -1,127 +1,94 @@
 #!/usr/bin/env python3
-# coding:  utf-8
+# -*- coding: utf-8 -*-
+"""CMS detector -- WhatCMS API lookup plus local builtwith fingerprinting."""
 
-#-:-:-:-:-:-:-:-:-:-:-:-:#
-#    TIDoS Framework     #
-#-:-:-:-:-:-:-:-:-:-:-:-:#
+from __future__ import annotations
 
-#Author : @_tID
-#This module requires TIDoS Framework
-#https://github.com/0xInfection/TIDoS-Framework
-
-
-import core.lib.mechanize as mechanize
-import re
-from re import *
-import http.cookiejar
-import requests as wrn
-from core.methods.tor import session
-from core.variables import tor
-import json
-import time
 import builtwith
-from time import sleep
-from core.Core.colors import *
-import urllib.request
-from urllib.request import urlparse
-from core.database.database_module import save_data
-from core.variables import database
-from core.methods.cache import targetname
-import inspect
+import requests
 
-info = "This module tries to determine if the target is running a CMS."
+from core.methods import modkit as kit
+from core.methods.print import posintact
+
+info = ("This module tries to determine if the target is running a CMS. It asks the "
+        "WhatCMS.org API (needs WHATCMS_ACCESS_TOKEN) and fingerprints the page "
+        "headers and HTML locally with builtwith.")
 searchinfo = "CMS Detector"
 properties = {}
 
-br = mechanize.Browser()
+WHATCMS_API = "https://whatcms.org/API/CMS"
 
-cj = http.cookiejar.LWPCookieJar()
-br.set_cookiejar(cj)
 
-torproxies = {'http':'socks5h://localhost:9050', 'https':'socks5h://localhost:9050'}
-if tor:
-    br.set_proxies(torproxies)
-
-br.set_handle_equiv(True)
-br.set_handle_redirect(True)
-br.set_handle_referer(True)
-br.set_handle_robots(False)
-from requests.packages.urllib3.exceptions import InsecureRequestWarning
-wrn.packages.urllib3.disable_warnings(InsecureRequestWarning)
-br.set_handle_refresh(mechanize._http.HTTPRefreshProcessor(), max_time=1)
-br.addheaders = [('User-agent', 'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.1) Gecko/2008071615 Fedora/3.0.1-1.fc9 Firefox/3.0.1')]
-
-def getcmslook(web, name):
-    requests = session()
-    global found
-    global dtect
-    web = web.split('//')[1]
-    print(GR+' [*] Passive Fingerprinting CMS...')
-    time.sleep(1)
-    print(C+' [!] Setting priority to False...')
-    dtect = False
-    print(GR+' [*] Importing token...')
+def whatcms(web) -> str | None:
+    """CMS name (with version) according to WhatCMS, None if unknown."""
+    target = kit.host(web)
+    if kit.is_ip(target) or target == "localhost":
+        kit.warn("WhatCMS needs a public hostname, skipping lookup.")
+        return None
+    kit.info("Passive fingerprinting via WhatCMS.org...")
+    key = kit.apikey("WHATCMS_ACCESS_TOKEN")
+    if not key:
+        kit.warn("Skipping WhatCMS lookup.")
+        return None
     try:
-        from files.API_KEYS import WHATCMS_ACCESS_TOKEN
-        print(O+' [+] Token detected :'+C+color.TR3+C+G+WHATCMS_ACCESS_TOKEN+C+color.TR2+C)
-        request = requests.get('https://whatcms.org/APIEndpoint/Detect?url=' + web + '&key=' + WHATCMS_ACCESS_TOKEN, verify=False)
-        response = json.loads(request.text)
-        status = response['result']['code']
-        if 'retry' in response:
-            print(R+' [-] Outbound Query Exception!')
-        else:
-            if status == 200:
-                dtect = True
-                print(O+' [+] CMS Detected:' +C+color.TR3+C+G+ response['result']['name']+C+color.TR2+C+'\n')
-                save_data(database, module, lvl1, lvl2, lvl3, name, response['result']['name'])
-            else:
-                dtect = False
-    except ImportError:
-        print(R+' [-] No API Token detected. Skipping first module...')
-        time.sleep(0.4)
+        res = kit.http().get(WHATCMS_API, params={"key": key, "url": target}).json()
+    except (requests.RequestException, ValueError) as e:
+        kit.bad(f"WhatCMS query failed: {type(e).__name__}")
+        return None
+    result = res.get("result") or {}
+    if result.get("code") != 200:
+        kit.bad(f"WhatCMS: {result.get('msg') or 'no answer'}")
+        return None
+    name = " ".join(filter(None, (result.get("name"), result.get("version"))))
+    return name or None
 
-def cmsenum(web, name):
 
-    print(GR+' [*] Active Fingerprinting CMS...\n')
-    resp = builtwith.parse(web)
-    print(C+' [*] Parsing raw-data...')
-    time.sleep(0.7)
-    res = json.dumps(resp)
-    r = json.loads(res)
+def fingerprint(web) -> list[str] | None:
+    """CMS names builtwith finds in the target's headers and HTML (None on failure)."""
+    kit.info("Active fingerprinting of the target page...")
+    url = kit.url(web)
     try:
-        if "cms" in r:
-            print(O+' [+] CMS Detected :'+C+color.TR3+C+G+'%s' % (r['cms'])+C+color.TR2+C)
-            dtect = True
-            save_data(database, module, lvl1, lvl2, lvl3, name, str(r['cms']))
-            time.sleep(0.7)
+        r = kit.http().get(url)
+    except requests.RequestException as e:
+        kit.bad(f"Could not fetch {url}: {type(e).__name__}")
+        return None
+    try:
+        techs = builtwith.builtwith(r.url, headers=r.headers, html=r.text)
+    except Exception as e:  # third-party regex soup, don't let it kill the run
+        kit.bad(f"builtwith failed: {e}")
+        return []
+    others = {k: v for k, v in techs.items() if k != "cms"}
+    if others:
+        kit.info("Other technologies:")
+        kit.kv_table((k, ", ".join(v)) for k, v in sorted(others.items()))
+    return techs.get("cms", [])
 
-    except Exception as e:
-        print(R+' [-] Error while CMS Enumeration...')
-        print(R+' [-] Exception : '+str(e))
 
 def cms(web):
-    global lvl1, lvl2, lvl3, module
-    lvl2 = "cms"
-    module = "ReconANDOSINT"
-    lvl1 = "Active Reconnaissance"
-    lvl3 = ""
-    name = targetname(web)
-    #print(R+'\n   =========================')
-    #print(R+'    C M S   D E T E C T O R')
-    #print(R+'   =========================\n')
-    from core.methods.print import posintact
-    posintact("cms detector") 
-    time.sleep(0.4)
-    print(GR+' [*] Parsing the web URL... ')
-    time.sleep(0.4)
-    print(C+' [!] Initiating Content Management System Detection!')
-    getcmslook(web, name)
-    cmsenum(web, name)
-    if dtect == False:
-        print(R+" [-] "+O+web+R + " doesn't seem to use a CMS")
-        save_data(database, module, lvl1, lvl2, lvl3, name, "No CMS detected.")
-    print(G+' [+] CMS Detection Module Completed!'+C+color.TR2+C)
+    posintact("cms detector")
+    record = kit.Recorder(web, kit.ACTIVE, "cms")
+
+    detected = []
+    name = whatcms(web)
+    if name:
+        kit.found("CMS detected (WhatCMS)", name)
+        detected.append(name)
+    local = fingerprint(web)
+    for name in local or []:
+        kit.found("CMS detected", name)
+        if name not in detected:
+            detected.append(name)
+
+    if detected:
+        record(detected)
+    elif local is None:
+        kit.bad("Could not determine the CMS.")
+    else:
+        kit.bad(f"{kit.url(web)} doesn't seem to use a CMS")
+        record("No CMS detected.")
+    kit.good("CMS detection module completed!")
+    return detected
+
 
 def attack(web):
-    web = web.fullurl
     cms(web)

@@ -1,75 +1,76 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+"""IP history lookup (ViewDNS) -- passive recon."""
 
-#-:-:-:-:-:-:-:-:-:-:-:-:#
-#    TIDoS Framework     #
-#-:-:-:-:-:-:-:-:-:-:-:-:#
+from __future__ import annotations
 
-#Author: @_tID
-#This module requires TIDoS Framework
-#https://github.com/0xInfection/TIDoS-Framework
+from bs4 import BeautifulSoup
 
+from core.methods import modkit as kit
+from core.methods.print import posintpas
 
-from core.methods.tor import session
-from bs4 import *
-import time
-import lxml
-import urllib3
-import json
-from core.Core.colors import *
-
-from core.database.database_module import save_data
-from core.variables import database
-from core.methods.cache import targetname
-import inspect
-
-info = "Display the history of the target's IP."
+info = "Display the history of the target's IP (via ViewDNS.info)."
 searchinfo = "IP History lookup"
 properties = {}
 
+WEB = "https://viewdns.info/iphistory/"
+API = "https://api.viewdns.info/iphistory/"
+
+
+def from_page(session, domain: str) -> list[dict] | None:
+    """Scrape the public page; None when it is unavailable (Cloudflare, etc.)."""
+    resp = session.get(WEB, params={"domain": domain})
+    if resp.status_code != 200:
+        return None
+    table = BeautifulSoup(resp.text, "lxml").find("table", attrs={"border": "1"})
+    if table is None:
+        return None
+    rows = []
+    for tr in table.find_all("tr")[1:]:
+        td = [c.get_text(strip=True) for c in tr.find_all("td")]
+        if len(td) >= 4:
+            rows.append({"ip": td[0], "owner": td[2], "last": td[3]})
+    return rows
+
+
+def from_api(session, domain: str, key: str) -> list[dict] | None:
+    data = session.get(API, params={"domain": domain, "apikey": key, "output": "json"}).json()
+    records = (data.get("response") or {}).get("records")
+    if records is None:
+        kit.bad(f"ViewDNS API error: {data.get('response') or data}")
+        return None
+    return [{"ip": r.get("ip", ""), "owner": r.get("owner", ""), "last": r.get("lastseen", "")}
+            for r in records]
+
+
 def iphistory(web):
-    name = targetname(web)
-    module = "ReconANDOSINT"
-    lvl1 = "Passive Reconnaissance & OSINT"
-    lvl3=''
-    lvl2=inspect.stack()[0][3]
-    requests = session()
+    posintpas("ip history")
+    domain = kit.host(web)
+    session = kit.http(timeout=20)
+
+    kit.info(f"Looking up the IP history of {domain}...")
     try:
-        #print(R+'\n    =====================')
-        #print(R+'     I P   H I S T O R Y')
-        #print(R+'    =====================\n')
-        from core.methods.print import posintpas
-        posintpas("ip history")
-        print(GR+' [*] Parsing Url...')
-        web0 = web.split('//')[-1]
-        if "@" in web0:
-            web0 = web0.split("@")[1]
+        rows = from_page(session, domain)
+        if rows is None:
+            kit.warn("viewdns.info refused the request (Cloudflare challenge); trying the ViewDNS API...")
+            key = kit.apikey("VIEWDNS_API_KEY", quiet=True)
+            rows = from_api(session, domain, key) if key else None
+    except Exception as e:
+        kit.bad(f"Request to ViewDNS failed: {e}")
+        return []
+    if rows is None:
+        kit.bad("IP history is unavailable without a ViewDNS API key.")
+        return []
+    if not rows:
+        kit.bad("No instances of IP history found.")
+        return []
 
-        print(web0)
+    kit.good(f"{len(rows)} instance(s) found:")
+    for r in rows:
+        kit.found("Instance", f"{r['ip']} => {r['owner']} - ({r['last']})")
+    kit.Recorder(web, kit.PASSIVE, "iphistory")(rows)
+    return rows
 
-        print(C+' [!] Making the request...')
-        html = requests.get('http://viewdns.info/iphistory/?domain=' + web0).text
-        print(GR+' [*] Parsing raw-data...')
-        time.sleep(0.7)
-        soup = BeautifulSoup(html,'lxml')
-        print(C+' [!] Setting parameters...')
-        table = soup.findAll('table', attrs={'border':'1'})[0]
-        print(C+' [!] Finding IP history instances...')
-        trs = table.findAll('tr')
-        trs.pop(0)
-
-        print(C+'\n [+] Following instances were found...')
-        data = []
-        for tr in trs:
-            td = tr.findAll('td')
-            info = {'ip' : td[0].text, 'owner' : td[2].text.rstrip(), 'last' : td[3].text}
-            data.append(info)
-            print(O+' [+] Instance :' +C+color.TR3+C+G+ info['ip'] + ' => ' + info['owner'] + ' - (' + info['last'] + ')'+C+color.TR2+C)
-            time.sleep(0.02)
-        save_data(database, module, lvl1, lvl2, lvl3, name, str(data))
-    except Exception:
-        print(R+' [-] No instances of IP History found...')
 
 def attack(web):
-    web = web.fullurl
     iphistory(web)

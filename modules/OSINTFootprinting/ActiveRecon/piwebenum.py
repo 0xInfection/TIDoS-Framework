@@ -1,58 +1,75 @@
 #!/usr/bin/env python3
-# coding:  utf-8
+# -*- coding: utf-8 -*-
+"""(N)Ping enumeration -- ICMP ping plus an nping TCP probe of the web port."""
 
-#-:-:-:-:-:-:-:-:-:-:-:-:#
-#    TIDoS Framework     #
-#-:-:-:-:-:-:-:-:-:-:-:-:#
+import shutil
+from urllib.parse import urlsplit
 
-#Author : @_tID
-#This module requires TIDoS Framework
-#https://github.com/0xInfection/TIDoS-Framework
+from core.methods import modkit as kit
+from core.methods.print import posintact
 
-
-import os, time
-from core.methods.tor import session
-from time import sleep
-from core.Core.colors import *
-from core.database.database_module import save_data
-from core.variables import database
-from core.methods.cache import targetname
-import inspect
-
-info = "Ping/NPing Enumeration."
+info = ("Pings the target (ICMP) and probes its web port with nping (TCP connect). "
+        "Uses the local nping binary when installed, otherwise the HackerTarget "
+        "nping API (needs HACKERTARGET_API_KEY).")
 searchinfo = "(N)Ping Enumeration"
-properties = {}
+properties = {
+    "COUNT": ["Number of probes to send", ""],
+}
+
+
+
+def web_port(web) -> int:
+    parts = urlsplit(kit.url(web))
+    try:
+        return parts.port or (443 if parts.scheme == "https" else 80)
+    except ValueError:
+        return 80
+
+
+def ping(host, count):
+    kit.info(f"Pinging {host} ({count} packets)...")
+    out = kit.command(["ping", "-c", str(count), host], timeout=count * 5 + 10)
+    if out:
+        print(out.rstrip() + "\n")
+    return out
+
+
+def nping(host, port, count):
+    if shutil.which("nping"):
+        kit.info(f"Probing {host}:{port} with nping (TCP connect)...")
+        return kit.command(["nping", "--tcp-connect", "-p", str(port), "-c", str(count), host],
+                           timeout=count * 5 + 10)
+
+    kit.warn("nping is not installed, falling back to the HackerTarget API...")
+    if not kit.apikey("HACKERTARGET_API_KEY"):  # nping endpoint is key-only
+        return None
+    return kit.hackertarget("nping", host)
+
 
 def piwebenum(web):
-    name = targetname(web)
-    lvl2 = "piwebenum"
-    module = "ReconANDOSINT"
-    lvl1 = "Active Reconnaissance"
-    lvl3 = ""
-    requests = session()
-    time.sleep(0.4)
-    web = web.split('//')[1]
-    #print(R+'\n   =============================================')
-    #print(R+'    P I N G / N P I N G   E N U M E R A T I O N')
-    #print(R+'   =============================================\n')
-    from core.methods.print import posintact
-    posintact("(n)ping enumeration") 
-    print(GR + ' [!] Pinging website...')
-    time.sleep(0.5)
-    print(C+' [*] Using adaptative ping and debug mode with count 5...')
-    time.sleep(0.4)
-    print(GR+' [!] Press Ctrl+C to stop\n'+color.END)
-    os.system('ping -D -c 5 '+ web)
-    print('')
-    time.sleep(0.6)
-    print(C+' [*] Trying NPing (NMap Ping)...')
-    print(C+" [~] Result: \n")
-    print('')
-    text = requests.get('http://api.hackertarget.com/nping/?q=' + web).text
-    nping = str(text)
-    print(color.END+ nping +C+'\n')
-    save_data(database, module, lvl1, lvl2, lvl3, name, nping)
+    posintact("(n)ping enumeration")
+    record = kit.Recorder(web, kit.ACTIVE, "piwebenum")
+    host = kit.host(web)
+    count = max(1, kit.integer(properties, "COUNT", "Number of probes", 5))
+
+    results = []
+    out = ping(host, count)
+    if out:
+        results.append(">> ping:\n" + out)
+
+    out = nping(host, web_port(web), count)
+    if out:
+        print(out.rstrip() + "\n")
+        results.append(">> nping:\n" + out)
+
+    if results:
+        record("\n".join(results))
+        kit.good("Enumeration done.")
+    else:
+        kit.bad("Neither ping nor nping returned results.")
+        record("No ping/nping results.")
+    return results
+
 
 def attack(web):
-    web = web.fullurl
     piwebenum(web)

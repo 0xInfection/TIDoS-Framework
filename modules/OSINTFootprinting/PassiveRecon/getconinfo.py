@@ -1,110 +1,107 @@
 #!/usr/bin/env python3
-# coding: utf-8
+# -*- coding: utf-8 -*-
+"""Domain contact info (RDAP) -- passive recon."""
 
-#-:-:-:-:-:-:-:-:-:-:-:-:#
-#    TIDoS Framework     #
-#-:-:-:-:-:-:-:-:-:-:-:-:#
+from __future__ import annotations
 
-#Author : @_tID
-#This module requires TIDoS Framework
-#https://github.com/0xInfection/TIDoS-Framework
+import re
 
+from core.methods import modkit as kit
+from core.methods.print import posintpas
 
-from core.methods.tor import session
-import time
-from core.Core.colors import *
-
-from core.database.database_module import save_data
-from core.variables import database
-from core.methods.cache import targetname
-import inspect
-
-info = "Find domain contact info."
+info = "Find domain contact info (registrar, registrant, admin/tech/abuse contacts) via RDAP."
 searchinfo = "Domain Contact Info"
 properties = {}
 
-def getconinfo(domain):
-    module = "ReconANDOSINT"
-    lvl1 = "Passive Reconnaissance & OSINT"
-    lvl2 = inspect.stack()[0][3]
-    lvl3 = ""
-    name = targetname(domain)
-    requests = session()
-    web = domain
-    if "@" in web:
-        domain = domain.split("@")[1]
-        if "https" in web:
-            domain = "https://" + domain
-        else:
-            domain = "http://" + domain
-    #print(R+'\n    =======================================')
-    #print(R+'     D O M A I N   C O N T A C T   I N F O')
-    #print(R+'    =======================================\n')
-    from core.methods.print import posintpas
-    posintpas("domain contact info")
-    time.sleep(0.6)
-    print(GR+' [*] Importing API Key...')
+RDAP = "https://rdap.org/domain/"
+VCARD = {"fn": "Name", "org": "Organization", "email": "Email", "tel": "Phone", "adr": "Address"}
+
+
+def vcard(entity: dict) -> list[tuple[str, str]]:
+    """Human-readable (label, value) pairs from an entity's jCard."""
+    out = []
+    for prop, params, _, value in (entity.get("vcardArray") or [None, []])[1]:
+        if prop not in VCARD:
+            continue
+        if prop == "adr":
+            value = (params or {}).get("label") or ", ".join(
+                v if isinstance(v, str) else " ".join(v) for v in value if v)
+        elif isinstance(value, list):
+            value = " ".join(str(v) for v in value if v)
+        value = re.sub(r"^(tel|mailto):", "", str(value)).strip()
+        if value:
+            out.append((VCARD[prop], value))
+    return out
+
+
+def contacts(doc: dict) -> list[tuple[str, list[tuple[str, str]]]]:
+    """(roles, vcard) for every entity of an RDAP document, nested ones included."""
+    found = []
+    stack = list(doc.get("entities") or [])
+    while stack:
+        ent = stack.pop(0)
+        card = vcard(ent)
+        if card:
+            found.append((", ".join(ent.get("roles") or ["contact"]), card))
+        stack.extend(ent.get("entities") or [])
+    return found
+
+
+def fetch(session, url: str) -> dict | None:
     try:
-        from files.API_KEYS import FULLCONTACT_API_KEY
-    except (IOError, ImportError):
-        print(R+' [-] Error while importing key...')
-
-    try:
-
-        if FULLCONTACT_API_KEY != '':
-            print(O+' [+] Found API Key :'+C+color.TR3+C+G+FULLCONTACT_API_KEY+C+color.TR2+C)
-            base_url = 'https://api.fullcontact.com/v2/company/lookup.json'
-            print(GR+' [*] Looking up info...')
-            time.sleep(0.7)
-            payload = {'domain':domain, 'apiKey':FULLCONTACT_API_KEY}
-            resp = requests.get(base_url, params=payload)
-
-            if resp.status_code == 200:
-
-                print(G+' [+] Found domain info!'+C+color.TR2+C)
-                w = resp.text.encode('ascii', 'ignore')
-                result = resp.text
-                quest = w.splitlines()
-                print(O+' [!] Parsing info...'+C+'\n')
-                print(R+' [+] REPORT :-\n')
-                time.sleep(1)
-                for q in quest:
-                    q = q.replace('"','')
-                    if ':' in q and '[' not in q and '{' not in q:
-                        q1 = q.split(':',1)[0].strip().title()
-                        q2 = q.split(':',1)[1].strip().replace(',','')
-                        if q1.lower() == 'typeid' or q1.lower() == 'number' or q1.lower() == 'type':
-                            print(C+'\n   [+] '+q1+' : '+GR+q2)
-                        else:
-                            print(C+'   [+] '+q1+' : '+GR+q2)
-                        time.sleep(0.01)
-
-                    elif ('{' or '[' in q) and (':' in q):
-                        w1 = q.split(':',1)[0].strip().upper()
-                        w2 = q.split(':',1)[1].strip()
-                        if w1.lower() == 'keywords':
-                            print(C+'\n   [+] '+w1+' : '+GR+w2)
-                        else:
-                            print(C+'\n [+] '+w1+' :-'+'\n')
-
-                data = result
-                save_data(database, module, lvl1, lvl2, lvl3, name, data)
-
-            else:
-                print(R+' [-] Did not find any info about domain '+O+domain+C)
-                print(R+' [+] Try with another one...')
-                save_data(database, module, lvl1, lvl2, lvl3, name, "Did not find any info about domain "+domain)
-
-        else:
-            print(R+' [-] FULL CONTACT API TOKEN not set!')
-            print(R+' [-] This module cannot be used!')
-
+        resp = session.get(url)
     except Exception as e:
-        print(R+' [-] Encountered Exception : '+str(e))
+        kit.bad(f"RDAP request failed: {e}")
+        return None
+    if resp.status_code == 404:
+        return None
+    try:
+        return resp.json()
+    except ValueError:
+        kit.bad(f"Unexpected RDAP answer (HTTP {resp.status_code}).")
+        return None
 
-    print(G+'\n [+] Public Contact Info Module Completed!'+C+color.TR2+C+'\n')
+
+def getconinfo(web):
+    posintpas("domain contact info")
+    domain = kit.domain(web)
+    session = kit.http(timeout=20, headers={"Accept": "application/rdap+json"})
+
+    kit.info(f"Looking up contact info for {domain} via RDAP...")
+    doc = fetch(session, RDAP + domain)
+    record = kit.Recorder(web, kit.PASSIVE, "getconinfo")
+    if not doc or "errorCode" in doc:
+        kit.bad(f"Did not find any info about domain {domain}.")
+        record(f"Did not find any info about domain {domain}")
+        return []
+
+    found = contacts(doc)
+    # thin registries (.com/.net) keep the real contacts at the registrar
+    for link in doc.get("links") or []:
+        if link.get("rel") == "related" and "rdap" in link.get("type", "rdap"):
+            extra = fetch(session, link["href"])
+            if extra:
+                found += [c for c in contacts(extra) if c not in found]
+
+    events = {e.get("eventAction"): e.get("eventDate") for e in doc.get("events") or []}
+    kit.good(f"Found domain info for {domain}!")
+    kit.kv_table([("Domain", doc.get("ldhName", domain).lower()),
+                  ("Status", ", ".join(doc.get("status") or [])),
+                  ("Registered", events.get("registration")),
+                  ("Expires", events.get("expiration")),
+                  ("Nameservers", ", ".join(ns.get("ldhName", "").lower()
+                                            for ns in doc.get("nameservers") or []))])
+    lines = []
+    for roles, card in found:
+        kit.good(roles.title())
+        kit.kv_table(card, indent=5)
+        lines += [f"{roles}: {k}: {v}" for k, v in card]
+    if not found:
+        kit.warn("No contact entities published (likely redacted for privacy).")
+    record(lines or f"No public contacts for {domain}")
+    kit.good("Public Contact Info Module Completed!")
+    return found
 
 
 def attack(web):
-    web = web.fullurl
     getconinfo(web)

@@ -1,512 +1,131 @@
 #!/usr/bin/env python3
-# coding: utf-8
+# -*- coding: utf-8 -*-
+"""Threat intelligence -- passive recon (checks public block/threat lists)."""
 
-#-:-:-:-:-:-:-:-:-:-:-:-:#
-#    TIDoS Framework     #
-#-:-:-:-:-:-:-:-:-:-:-:-:#
+from __future__ import annotations
 
-#Author : @_tID
-#This module requires TIDoS Framework
-#https://github.com/0xInfection/TIDoS-Framework
-
-
-import requests as wrn
-from core.methods.tor import session
+import ipaddress
+import re
 import socket
-import time
-from core.Core.colors import *
-from requests.packages.urllib3.exceptions import InsecureRequestWarning
-from core.database.database_module import save_data
-from core.variables import database
-from core.methods.cache import targetname
-import inspect
+from concurrent.futures import ThreadPoolExecutor
+from typing import NamedTuple
+from urllib.parse import urlsplit
 
-wrn.packages.urllib3.disable_warnings(InsecureRequestWarning)
+import requests
+
+from core.methods import modkit as kit
+from core.methods.print import posintpas
 
 info = "Find out if the target site is harmful or not."
 searchinfo = "Threat Intelligence Module"
 properties = {}
 
-flaglist = []
 
-def usom(web,ip):
-    requests = session()
-    print(O+'\n [!] Checking on '+G+'Usom threatlist...')
+class Feed(NamedTuple):
+    name: str
+    url: str
+    kind: str     # "ip": list of IPs/CIDRs, "host": list of domains or URLs
+    verdict: str  # what a hit means
+
+
+BLOCKLIST_DE = "https://lists.blocklist.de/lists/{}.txt"
+
+FEEDS = [
+    Feed("BlockList.de SSH", BLOCKLIST_DE.format("ssh"), "ip", "attacks on SSH services"),
+    Feed("BlockList.de Mail", BLOCKLIST_DE.format("mail"), "ip", "attacks on SMTP services"),
+    Feed("BlockList.de SIP", BLOCKLIST_DE.format("sip"), "ip", "attacks on SIP / VoIP services"),
+    Feed("BlockList.de FTP", BLOCKLIST_DE.format("ftp"), "ip", "attacks on FTP services"),
+    Feed("BlockList.de POP3", BLOCKLIST_DE.format("pop3"), "ip", "attacks on POP3 services"),
+    Feed("BlockList.de IMAP", BLOCKLIST_DE.format("imap"), "ip", "attacks on IMAP services"),
+    Feed("BlockList.de Bots", BLOCKLIST_DE.format("bots"), "ip", "acting as HTTPD / bad bot"),
+    Feed("BlockList.de Strong IPs", BLOCKLIST_DE.format("strongips"), "ip", "persistent attacks (strong IPs)"),
+    Feed("BlockList.de Apache", BLOCKLIST_DE.format("apache"), "ip", "attacks on Apache services"),
+    Feed("BlockList.de Brute-force", BLOCKLIST_DE.format("bruteforcelogin"), "ip", "brute-force logins"),
+    Feed("Emerging Threats", "https://rules.emergingthreats.net/fwrules/emerging-Block-IPs.txt",
+         "ip", "listed in the Emerging Threats block list"),
+    Feed("Emerging Threats Compromised", "https://rules.emergingthreats.net/blockrules/compromised-ips.txt",
+         "ip", "known compromised host"),
+    Feed("Binary Defense", "https://www.binarydefense.com/banlist.txt", "ip", "banned by the Artillery feed"),
+    Feed("Feodo Tracker", "https://feodotracker.abuse.ch/downloads/ipblocklist.txt", "ip", "botnet C2 server"),
+    Feed("Project Honey Pot", "https://www.projecthoneypot.org/list_of_ips.php", "ip", "malicious activity"),
+    Feed("OpenPhish", "https://openphish.com/feed.txt", "host", "hosting phishing pages"),
+    Feed("Phishing Army", "https://phishing.army/download/phishing_army_blocklist.txt", "host", "phishing domain"),
+]
+
+IP_RX = re.compile(r"\b\d{1,3}(?:\.\d{1,3}){3}(?:/\d{1,2})?\b")
+
+
+def listed(feed: Feed, body: str, host: str, ip: str) -> bool:
+    """Exact match of the target's IP (or CIDR containing it) / hostname."""
+    if feed.kind == "ip":
+        if not ip:
+            return False
+        tokens = IP_RX.findall(body)
+        if ip in tokens:
+            return True
+        addr = ipaddress.ip_address(ip)
+        for cidr in (t for t in tokens if "/" in t):
+            try:
+                if addr in ipaddress.ip_network(cidr, strict=False):
+                    return True
+            except ValueError:
+                continue
+        return False
+    wanted = {host.lower(), ip}
+    for line in body.splitlines():
+        line = line.strip()
+        if not line or line.startswith("#"):
+            continue
+        name = urlsplit(line).hostname if "://" in line else line.split()[0]
+        if (name or "").lower() in wanted:
+            return True
+    return False
+
+
+def fetch(session, feed: Feed) -> str | Exception:
     try:
-        print(GR+' [*] Making a reverse DNS query...')
-        print(G+' [+] DNS : '+O+ip)
-        flag= False
-        print(GR+' [*] Making the request...')
-        resp = requests.get('https://www.usom.gov.tr/url-list.txt', verify=False, timeout=10).content
-        for i in str(resp).splitlines():
-            if ip in i:
-                flag = True
-                flaglist.append("usom")
-        if flag == True:
-            print(R+' [+] '+O+web+G+' is harmful and has been reported on Usom...')
-        else:
-            print(G+' [+] '+O+web+G+' is clean as per Usom...')
+        resp = session.get(feed.url)
+        resp.raise_for_status()
+        return resp.text
+    except requests.RequestException as e:
+        return e
 
-    except Exception:
-        print(R+' [-] Request to usom.gov.tr timed out!')
-        pass
-
-def badip(web,ip):
-    requests = session()
-    print(O+'\n [!] Checking on '+G+'Bad IPs threatlist...')
-    try:
-        flag= False
-        print(GR+' [*] Making the request...')
-        resp = requests.get("https://www.badips.com/get/info/"+str(ip), verify=False, timeout=10).content
-        print(O+' [*] Parsing raw-data...')
-        time.sleep(0.7)
-        res = json.dumps(resp)
-        r = json.loads(res)
-        if r['Listed'] == 'True':
-            flag = True
-        else:
-            flag = False
-
-        if flag == True:
-            print(R+' [+] '+O+web+G+' is harmful and has been reported on badips.com...')
-            print(G+' [+] Bad IP : '+O+r['suc'])
-            print(G+" [+] Country : "+O+r['CountryCode'])
-            print(G+" [+] Report number: "+O+str(r['ReporterCount']['sum']))
-            print(G+" [+] Category: " +O+r['Categories'][0])
-            flaglist.append("badips")
-        else:
-            print(G+' [+] '+O+web+G+' is clean as per badips.com...')
-
-    except Exception:
-        print(R+' [-] Request to badips.com timed out!')
-        pass
-
-def blocklistssh(web,ip):
-    requests = session()
-    print(O+'\n [!] Checking on '+G+'BlockLists SSH threatlist...')
-    try:
-        flag= False
-        print(GR+' [*] Making the request...')
-        resp = requests.get('https://lists.blocklist.de/lists/ssh.txt', verify=False, timeout=10).text
-        print(C+' [!] Parsing raw data...')
-        time.sleep(0.5)
-        for i in resp.splitlines():
-            if ip in i:
-                flag = True
-        if flag == True:
-            print(R+' [+] '+O+web+G+' has been reported for attacks on SSH services...')
-            flaglist.append("blocklists: ssh threatlist")
-        else:
-            print(G+' [+] '+O+web+G+' is clean as per BlockLists...')
-
-    except Exception:
-        print(R+' [-] Request to BlockLists timed out!')
-        pass
-
-def blocklistmail(web,ip):
-    requests = session()
-    print(O+'\n [!] Checking on '+G+'BlockLists Mail threatlist...')
-    try:
-        flag= False
-        print(GR+' [*] Making the request...')
-        resp = requests.get('https://lists.blocklist.de/lists/mail.txt', verify=False, timeout=10).text
-        print(C+' [!] Parsing raw data...')
-        time.sleep(0.5)
-        for i in resp.splitlines():
-            if ip in i:
-                flag = True
-        if flag == True:
-            print(R+' [+] '+O+web+G+' has been reported for attacks on SMTP services...')
-            flaglist.append("blocklists: smtp threatlist")
-        else:
-            print(G+' [+] '+O+web+G+' is clean as per BlockLists...')
-
-    except Exception:
-        print(R+' [-] Request to BlockLists timed out!')
-        pass
-
-def blocklistapache(web,ip):
-    requests = session()
-    print(O+'\n [!] Checking on '+G+'BlockLists APACHE threatlist...')
-    try:
-        flag= False
-        print(GR+' [*] Making the request...')
-        resp = requests.get('https://lists.blocklist.de/lists/apache.txt', verify=False, timeout=10).text
-        print(C+' [!] Parsing raw data...')
-        time.sleep(0.5)
-        for i in resp.splitlines():
-            if ip in i:
-                flag = True
-        if flag == True:
-            print(R+' [+] '+O+web+G+' has been reported for attacks on Apache services...')
-            flaglist.append("blocklists: apache threatlist")
-        else:
-            print(G+' [+] '+O+web+G+' is clean as per BlockLists...')
-
-    except Exception:
-        print(R+' [-] Request to BlockLists timed out!')
-        pass
-
-def blocklistimap(web,ip):
-    requests = session()
-    print(O+'\n [!] Checking on '+G+'BlockLists IMAP threatlist...')
-    try:
-        flag= False
-        print(GR+' [*] Making the request...')
-        resp = requests.get('https://lists.blocklist.de/lists/imap.txt', verify=False, timeout=10).text
-        print(C+' [!] Parsing raw data...')
-        time.sleep(0.5)
-        for i in resp.splitlines():
-            if ip in i:
-                flag = True
-        if flag == True:
-            print(R+' [+] '+O+web+G+' has been reported for attacks on IMAP services...')
-            flaglist.append("blocklists: imap threatlist")
-        else:
-            print(G+' [+] '+O+web+G+' is clean as per BlockLists...')
-
-    except Exception:
-        print(R+' [-] Request to BlockLists timed out!')
-        pass
-
-def blocklistpop3(web,ip):
-    requests = session()
-    print(O+'\n [!] Checking on '+G+'BlockLists POP3 threatlist...')
-    try:
-        flag= False
-        print(GR+' [*] Making the request...')
-        resp = requests.get('https://lists.blocklist.de/lists/pop3.txt', verify=False, timeout=10).text
-        print(C+' [!] Parsing raw data...')
-        time.sleep(0.5)
-        for i in resp.splitlines():
-            if ip in i:
-                flag = True
-        if flag == True:
-            print(R+' [+] '+O+web+G+' has been reported for attacks on POP3 services...')
-            flaglist.append("blocklists: pop3 threatlist")
-        else:
-            print(G+' [+] '+O+web+G+' is clean as per BlockLists...')
-
-    except Exception:
-        print(R+' [-] Request to BlockLists timed out!')
-        pass
-
-def blocklistftp(web,ip):
-    requests = session()
-    print(O+'\n [!] Checking on '+G+'BlockLists FTP threatlist...')
-    try:
-        flag= False
-        print(GR+' [*] Making the request...')
-        resp = requests.get('https://lists.blocklist.de/lists/ftp.txt', verify=False, timeout=10).text
-        print(C+' [!] Parsing raw data...')
-        time.sleep(0.5)
-        for i in resp.splitlines():
-            if ip in i:
-                flag = True
-        if flag == True:
-            print(R+' [+] '+O+web+G+' has been reported for attacks on FTP services...')
-            flaglist.append("blocklists: ftp threatlist")
-        else:
-            print(G+' [+] '+O+web+G+' is clean as per BlockLists...')
-
-    except Exception:
-        print(R+' [-] Request to BlockLists timed out!')
-        pass
-
-def blocklistsip(web,ip):
-    requests = session()
-    print(O+'\n [!] Checking on '+G+'BlockLists SIP & VoIP threatlist...')
-    try:
-        flag= False
-        print(GR+' [*] Making the request...')
-        resp = requests.get('https://lists.blocklist.de/lists/sip.txt', verify=False, timeout=10).text
-        print(C+' [!] Parsing raw data...')
-        time.sleep(0.5)
-        for i in resp.splitlines():
-            if ip in i:
-                flag = True
-        if flag == True:
-            print(R+' [+] '+O+web+G+' has been reported for attacks on SIP, VoIP services...')
-            flaglist.append("blocklists: sip threatlist")
-        else:
-            print(G+' [+] '+O+web+G+' is clean as per BlockLists...')
-
-    except Exception:
-        print(R+' [-] Request to BlockLists timed out!')
-        pass
-
-def blocklistbots(web,ip):
-    requests = session()
-    print(O+'\n [!] Checking on '+G+'BlockLists Bots threatlist...')
-    try:
-        flag= False
-        print(GR+' [*] Making the request...')
-        resp = requests.get('https://lists.blocklist.de/lists/bots.txt', verify=False, timeout=10).text
-        print(C+' [!] Parsing raw data...')
-        time.sleep(0.5)
-        for i in resp.splitlines():
-            if ip in i:
-                flag = True
-        if flag == True:
-            print(R+' [+] '+O+web+G+' has been reported for attacks as HTTPD Bots, BAD Bots...')
-            flaglist.append("blocklists: bots threatlist")
-        else:
-            print(G+' [+] '+O+web+G+' is clean as per BlockLists...')
-
-    except Exception:
-        print(R+' [-] Request to BlockLists timed out!')
-        pass
-
-def blocklistirc(web,ip):
-    requests = session()
-    print(O+'\n [!] Checking on '+G+'BlockLists IRC threatlist...')
-    try:
-        flag= False
-        print(GR+' [*] Making the request...')
-        resp = requests.get('https://lists.blocklist.de/lists/ircbot.txt', verify=False, timeout=10).text
-        print(C+' [!] Parsing raw data...')
-        time.sleep(0.5)
-        for i in resp.splitlines():
-            if ip in i:
-                flag = True
-        if flag == True:
-            print(R+' [+] '+O+web+G+' has been reported for attacks as IRC Bot...')
-            flaglist.append("blocklists: irc threatlist")
-        else:
-            print(G+' [+] '+O+web+G+' is clean as per BlockLists...')
-
-    except Exception:
-        print(R+' [-] Request to BlockLists timed out!')
-        pass
-
-def blockliststrong(web,ip):
-    requests = session()
-    print(O+'\n [!] Checking on '+G+'BlockLists Strong threatlist...')
-    try:
-        flag= False
-        print(GR+' [*] Making the request...')
-        resp = requests.get('https://lists.blocklist.de/lists/strongips.txt', verify=False, timeout=10).text
-        print(C+' [!] Parsing raw data...')
-        time.sleep(0.5)
-        for i in resp.splitlines():
-            if ip in i:
-                flag = True
-        if flag == True:
-            print(R+' [+] '+O+web+G+' has been reported for attacks as Strong IPs...')
-            flaglist.append("blocklists: strongips threatlist")
-        else:
-            print(G+' [+] '+O+web+G+' is clean as per BlockLists...')
-
-    except Exception:
-        print(R+' [-] Request to BlockLists timed out!')
-        pass
-
-def blocklistbrute(web,ip):
-    requests = session()
-    print(O+'\n [!] Checking on '+G+'BlockLists Bruteforce Login IPs threatlist...')
-    try:
-        flag= False
-        print(GR+' [*] Making the request...')
-        resp = requests.get('https://lists.blocklist.de/lists/bruteforcelogin.txt', verify=False, timeout=10).text
-        print(C+' [!] Parsing raw data...')
-        time.sleep(0.5)
-        for i in resp.splitlines():
-            if ip in i:
-                flag = True
-        if flag == True:
-            print(R+' [+] '+O+web+G+' has been reported for attacks via Bruteforce on services...')
-            flaglist.append("blocklists: brute threatlist")
-        else:
-            print(G+' [+] '+O+web+G+' is clean as per BlockLists...')
-
-    except Exception:
-        print(R+' [-] Request to BlockLists timed out!')
-        pass
-
-def emergethreats(web,ip):
-    requests = session()
-    print(O+'\n [!] Checking on '+G+'Emerging Threats latest threatlist...')
-    try:
-        flag= False
-        print(GR+' [*] Making the request...')
-        resp = requests.get('http://rules.emergingthreats.net/fwrules/emerging-Block-IPs.txt', verify=False, timeout=10).text
-        print(C+' [!] Parsing raw data...')
-        time.sleep(0.5)
-        for i in resp.splitlines():
-            if ip in i:
-                flag = True
-        if flag == True:
-            print(R+' [+] '+O+web+G+' is harmful and has been reported on Emerging Threats...')
-            flaglist.append("emerging threats")
-        else:
-            print(G+' [+] '+O+web+G+' is clean as per Emerging Threats...')
-
-    except Exception:
-        print(R+' [-] Request to Emerging Threats timed out!')
-        pass
-
-def emergecompro(web,ip):
-    requests = session()
-    print(O+'\n [!] Checking on '+G+'Emerging Threats comrpmised IPs threatlist...')
-    try:
-        flag= False
-        print(GR+' [*] Making the request...')
-        resp = requests.get('http://rules.emergingthreats.net/blockrules/compromised-ips.txt', verify=False, timeout=10).text
-        print(C+' [!] Parsing raw data...')
-        time.sleep(0.5)
-        for i in resp.splitlines():
-            if ip in i:
-                flag = True
-        if flag == True:
-            print(R+' [+] '+O+web+G+' is harmful and has been reported on Emerging Threats...')
-            flaglist.append("emerging threats: compromised ips")
-        else:
-            print(G+' [+] '+O+web+G+' is clean as per Emerging Threats...')
-
-    except Exception:
-        print(R+' [-] Request to Emerging Threats timed out!')
-        pass
-
-def binarydefense(web,ip):
-    requests = session()
-    print(O+'\n [!] Checking on '+G+'Binary Defense threatlist...')
-    try:
-        flag= False
-        print(GR+' [*] Making the request...')
-        resp = requests.get('http://www.binarydefense.com/banlist.txt', verify=False, timeout=10).text
-        print(C+' [!] Parsing raw data...')
-        time.sleep(0.5)
-        for i in resp.splitlines():
-            if ip in i:
-                flag = True
-        if flag == True:
-            print(R+' [+] '+O+web+G+' has a banned IP and has been reported on Binary Defense...')
-            flaglist.append("binary defense")
-        else:
-            print(G+' [+] '+O+web+G+' is clean as per Binary Defense...')
-
-    except Exception:
-        print(R+' [-] Request to Binary Defense timed out!')
-        pass
-
-def openphish(web,ip):
-    requests = session()
-    print(O+'\n [!] Checking on '+G+'openphish.com threatlist...')
-    try:
-        flag= False
-        print(GR+' [*] Making the request...')
-        resp = requests.get('https://openphish.com/feed.txt', verify=False, timeout=10).text
-        print(C+' [!] Parsing raw data...')
-        time.sleep(0.5)
-        for i in resp.splitlines():
-            if ip in i:
-                flag = True
-        if flag == True:
-            print(R+' [+] '+O+web+G+' is a harmful phishing site and has been reported on Open Phish...')
-            flaglist.append("openphish")
-        else:
-            print(G+' [+] '+O+web+G+' is clean as per Open Phish...')
-
-    except Exception:
-        print(R+' [-] Request to Open Phish timed out!')
-        pass
-
-def zeustracker(web,ip):
-    requests = session()
-    print(O+'\n [!] Checking on '+G+'zeustracker.com threatlist...')
-    try:
-        flag= False
-        print(GR+' [*] Making the request...')
-        resp = requests.get('https://zeustracker.abuse.ch/blocklist.php?download=badips', verify=False, timeout=10).text
-        print(C+' [!] Parsing raw data...')
-        time.sleep(0.5)
-        for i in resp.splitlines():
-            if ip in i:
-                flag = True
-                break
-        if flag == True:
-            print(R+' [+] '+O+web+G+' is a harmful phishing site and has been reported on Zeus Tracker...')
-            flaglist.append("zeustracker")
-        else:
-            print(G+' [+] '+O+web+G+' is clean as per Zeus Tracker...')
-
-    except Exception:
-        print(R+' [-] Request to zeustracker.com timed out!')
-        pass
-
-def projecthoneypot(web,ip):
-    requests = session()
-    print(O+'\n [!] Checking on '+G+'Project HoneyPot threatlist...')
-    try:
-        flag= False
-        print(GR+' [*] Making the request...')
-        resp = requests.get('https://www.projecthoneypot.org/list_of_ips.php', verify=False, timeout=10).text
-        if str(ip) in resp:
-            flag = True
-
-        if flag == True:
-            print(R+' [+] '+O+web+G+' is a harmful site and has been reported on Project HoneyPot...')
-            flaglist.append("project honeypot")
-        else:
-            print(G+' [+] '+O+web+G+' is clean as per Project HoneyPot...')
-
-    except Exception:
-        print(R+' [-] Request to projecthoneypot.com timed out!')
-        pass
 
 def threatintel(web):
-    name = targetname(web)
-    module = "ReconANDOSINT"
-    lvl1 = "Passive Reconnaissance & OSINT"
-    lvl3=''
-    lvl2=inspect.stack()[0][3]
-    time.sleep(0.7)
-    #print(R+'\n    =======================================')
-    #print(R+'     T H R E A T   I N T E L L I G E N C E')
-    #print(R+'    =======================================\n')
-    from core.methods.print import posintpas
     posintpas("threat intelligence")
-    print(O+' [Data in these threatlists is the latest data')
-    print(O+'            not older than a week!]\n')
-    print(C+' [!] Parsing Url..')
-    time.sleep(0.7)
-    web = web.replace('https://','')
-    web = web.replace('http://','')
-    if "@" in web:
-        web = web.split("@")[1]
-    print(O+' [!] Getting host information...')
-    time.sleep(0.8)
-    ip = socket.gethostbyname(web)
-    print(G+' [+] DNS : '+O+str(ip))
-    print(C+' [!] Loading up modules...')
-    time.sleep(0.7)
-    print(GR+' [*] Starting gathering...')
-    usom(web,ip)
-    badip(web,ip)
-    blocklistssh(web,ip)
-    blocklistmail(web,ip)
-    blocklistsip(web,ip)
-    blocklistftp(web,ip)
-    blocklistpop3(web,ip)
-    blocklistirc(web,ip)
-    blocklistimap(web,ip)
-    blocklistbots(web,ip)
-    blockliststrong(web,ip)
-    blocklistapache(web,ip)
-    blocklistbrute(web,ip)
-    emergethreats(web,ip)
-    emergecompro(web,ip)
-    binarydefense(web,ip)
-    openphish(web,ip)
-    zeustracker(web,ip)
-    projecthoneypot(web,ip)
-    if flaglist:
-        data = web + " appeared as a threat on the following lists: " + str(flaglist)
+    host = kit.host(web)
+    try:
+        ip = host if kit.is_ip(host) else socket.gethostbyname(host)
+        kit.found("DNS", ip)
+    except OSError:
+        ip = ""
+        kit.warn(f"Could not resolve {host}; only domain-based lists will be checked.")
+
+    kit.info(f"Checking {len(FEEDS)} threat lists (data refreshed daily by their maintainers) ...")
+    session = kit.http(timeout=30)
+    with ThreadPoolExecutor(max_workers=8) as pool:
+        bodies = list(pool.map(lambda f: fetch(session, f), FEEDS))
+
+    flagged, failed = [], []
+    for feed, body in zip(FEEDS, bodies):
+        if isinstance(body, Exception):
+            kit.bad(f"{feed.name}: list unavailable ({body.__class__.__name__})")
+            failed.append(feed.name)
+        elif listed(feed, body, host, ip):
+            kit.warn(f"{feed.name}: {host} is listed -- {feed.verdict}")
+            flagged.append(feed.name.lower())
+        else:
+            kit.good(f"{feed.name}: {host} is clean")
+
+    if flagged:
+        kit.warn(f"{host} appeared on {len(flagged)} threat list(s).")
+        data = f"{host} appeared as a threat on the following lists: {flagged}"
     else:
-        data = web + " seems to be clean."
-    save_data(database, module, lvl1, lvl2, lvl3, name, data)
-    print(G+' [+] Done!')
+        kit.good(f"{host} seems to be clean ({len(FEEDS) - len(failed)} list(s) checked).")
+        data = f"{host} seems to be clean."
+    kit.Recorder(web, kit.PASSIVE, "threatintel")(data)
+    return flagged
+
 
 def attack(web):
-    web = web.fullurl
     threatintel(web)
