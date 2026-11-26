@@ -28,6 +28,8 @@ _____, ___
 """
 
 import os, re
+import subprocess
+import sys
 import time
 import random
 from time import sleep
@@ -41,11 +43,17 @@ from core.methods.fetch import fetchinit
 from core.Core.colors import *
 
 
+def clear():
+    """Clear the terminal. No-op when output is not a TTY (piped/redirected)."""
+    if sys.stdout.isatty():
+        print("\033[3J\033[H\033[2J", end="", flush=True)
+
+
 def loadstyle():
     success = False
     thread = threading.Thread(target=fetchinit, args=(1,))
     thread.start()
-    os.system(vars.CMD_CLEAR)
+    clear()
     red_bold = R
     cursive = color.END + "\033[3m"
     reset = cursive
@@ -103,7 +111,7 @@ ____, __{}
             """.format(color.END, R, color.END, RB, color.END, R, C, cursive, swappy, color.END)
             print(display)
             time.sleep(0.1)
-            os.system(vars.CMD_CLEAR)
+            clear()
         action += 1
 
 
@@ -278,7 +286,7 @@ def f00l():
         elif "sudo" in inp or "su " in inp or inp == "su":
             print("{}: Permission denied.".format(inp.split(" ")[0]))
         else:
-            os.system(inp)
+            subprocess.run(inp, shell=True)
             
     time.sleep(2)
     troll = """
@@ -312,7 +320,7 @@ def f00l():
     print("Happy April Fools Day! And thank you for using TIDoS. ~Vainly")
 
 def banner():
-    os.system(vars.CMD_CLEAR)
+    clear()
     if currentMonth == 10:
         print(sp00k70b3r)
     elif currentDay == 1 and currentMonth == 4:
@@ -380,107 +388,39 @@ TIDoS Attack was provided as an open-source, royalty-free penetration testing to
 def title(mod):
     return " ".join(mod[i].upper() for i in range(0, len(mod)))
 
+def _modbanner(phase, mod):
+    # Clean, newline-spaced module banner (no ASCII art). Keeps bold styling.
+    print()
+    print(" " + color.BOLD + phase + color.END)
+    print(" " + color.BOLD + title(mod) + color.END)
+    print()
+
 def posintpas(mod):
-    print("""
-   ,_       
- ,'  `\\,_   
- |_,-'_)    
- /##c '\\  (   {}O S I N T   P A S S I V E{}
-' |'  -{{.  )
-  /\\__-' \\[]        {}{}{}
- /`-_`\\     
- '     \\    
-""".format(color.END, C, RC, title(mod), C))
+    _modbanner("O S I N T · P A S S I V E", mod)
 
 def posint(mod):
-    print("""
-   ,_       
- ,'  `\\,_   
- |_,-'_)    
- /##c '\\  (   {}O S I N T{}
-' |'  -{{.  )
-  /\\__-' \\[]        {}{}{}
- /`-_`\\     
- '     \\    
-""".format(color.END, C, RC, title(mod), C))
+    _modbanner("O S I N T", mod)
 
 def posintact(mod):
-    print("""
-   ,_       
- ,'  `\\,_   
- |_,-'_)    
- /##c '\\  (   {}O S I N T   A C T I V E{}
-' |'  -{{.  )
-  /\\__-' \\[]        {}{}{}
- /`-_`\\     
- '     \\    
-""".format(color.END, C, RC, title(mod), C))
+    _modbanner("O S I N T · A C T I V E", mod)
 
 def psploit(mod):
-    print("""
-      ,--.!,
-   __/   -*-    {}S P L O I T{}
- ,d08b.  '|`
- 0088MM     {}{}{}
- `9MMP'  
-""".format(color.END, C, RC, title(mod), C))
+    _modbanner("S P L O I T", mod)
 
 def ppost(mod):
-    print("""
-       /\\
-      /  \\
-     /    \\   {}P O S T{}
-    /      \\
-   /        \\   {}S P L O I T {}
-  /          \\
- / /\\/\\  /\\/\\ \\   {}{}{}
-/ /    \\/    \\ \\
-\\/            \\/
-""".format(color.END, C, color.END, C, RC, title(mod), C))
+    _modbanner("P O S T · S P L O I T", mod)
 
 def pvln(mod):
-    print("""
-   (
-   '\\
-  '  )       {}V L N Y S I S{}
-##-------->     
-  .  )       {}{}{}
-   ./
-   (
-""".format(color.END, C, RC, title(mod), C))
+    _modbanner("V U L N · A N A L Y S I S", mod)
 
 def pscan(mod):
-    print("""
-       /\\
-      /  \\
-     /    \\   {}S C A N N I N G   &{}
-    /      \\
-   /        \\   {}E N U M E R A T I O N{}
-  /          \\
- / /\\/\\  /\\/\\ \\   {}{}{}
-/ /    \\/    \\ \\
-\\/            \\/
-""".format(color.END, C, color.END, C, RC, title(mod), C))
+    _modbanner("S C A N · E N U M", mod)
 
 def pbrute(mod):
-    print("""
- .--.
-/.-. '----------.   {}B R U T E F O R C E{}
-\\'-' .--"--""-"-'       {}{}{}
- '--'
-""".format(color.END, C, RC, title(mod), C))
+    _modbanner("B R U T E F O R C E", mod)
 
 def pleak(mod):
-    print("""
-   ,_       
- ,'  `\\,_   
- |_,-'_)    
- /##c '\\  (   {}I N F D I S C{}
-' |'  -{{.  )
-  /\\__-' \\[]        {}{}{}
- /`-_`\\     
- '     \\ 
-""".format(color.END, C, RC, title(mod), C))
+    _modbanner("I N F O · D I S C L O S U R E", mod)
 
 def cprint(text1, text2):
     print(RC + text1 + color.END + RB + text2 + color.END)
@@ -571,7 +511,7 @@ def loadstyle2():
             #progressbar(i, 30, fill="{}༛{}".format(color.END, color.END), length=20, suffix=" {} -".format(disp))
             progressbar(i, 30, fill="{}༛{}".format(color.END, color.END), length=20, suffix="-", prefix=disp+" ୰")
     time.sleep(0.75)
-    os.system("clear")
+    clear()
 
 def upinfo():
     if vars.upd:
