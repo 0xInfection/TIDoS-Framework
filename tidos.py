@@ -30,6 +30,7 @@ _____, ___
 import importlib as imp
 import os
 import platform
+import shutil
 import subprocess
 import sys
 import time
@@ -182,7 +183,12 @@ class TIDcon(Cmd):
                 else:
                     save(session)
         elif "list" in inp:
-            os.system("{} core/sessioncache".format(varis.CMD_LS))
+            cache = os.path.join("core", "sessioncache")
+            try:
+                names = sorted(n for n in os.listdir(cache) if not n.startswith("."))
+            except OSError:
+                names = []
+            print("  ".join(names) if names else " [-] No saved sessions.")
         else:
             print(R + " [-] " + "\033[0m" + color.UNDERLINE + "\033[1m" + "Syntax: sessions [load|save <SESS_ID>] [list]")
 
@@ -203,7 +209,7 @@ class TIDcon(Cmd):
 """)
 
     def do_clear(self, inp):
-        os.system(varis.CMD_CLEAR)
+        prnt.clear()
 
     def help_clear(self):
         print("""
@@ -413,9 +419,9 @@ class TIDcon(Cmd):
                     filecheck()
             filecheck()
             if inp == "":
-                os.system("python3 {}".format(varis.phpsploit))
+                subprocess.run([sys.executable, varis.phpsploit])
             else:
-                os.system("sudo -u {} python3 {}".format(inp, varis.phpsploit))
+                subprocess.run(["sudo", "-u", inp, "python3", varis.phpsploit])
         except SystemExit:
             pass
         except Exception:
@@ -643,9 +649,13 @@ class TIDcon(Cmd):
                     path = os.path.dirname(os.path.realpath(__file__))
                     if "/home/" in path:
                         user = path.split("/")[2]
-                        os.system("git stash; sudo -u {} git pull".format(user))
+                        subprocess.run(["git", "stash"])
+                        subprocess.run(["sudo", "-u", user, "git", "pull"])
                     else:
-                        os.system("git stash ; git pull ; cp tmp/TIDoS /bin/TIDoS ; chmod +x /bin/TIDoS")
+                        subprocess.run(["git", "stash"])
+                        subprocess.run(["git", "pull"])
+                        shutil.copy("tmp/TIDoS", "/bin/TIDoS")
+                        os.chmod("/bin/TIDoS", 0o755)
                     print(G+" [+] Update installed successfully."+C+color.TR2+C)
             else:
                 print(" [+] You are running the latest version of TIDoS-framework ({}).".format(localver))
@@ -663,10 +673,11 @@ class TIDcon(Cmd):
 # tidos shell main function
 
 def main():
-    os.system(varis.CMD_CLEAR)
-    # currently, only Linux is supported
-    if str(platform.system()) != "Linux":
-        sys.exit(" [!] TIDoS needs a Linux-based OS.")
+    prnt.clear()
+    # POSIX only: Linux and macOS are supported (several modules need root, and
+    # the console relies on os.geteuid / POSIX shells).
+    if platform.system() not in ("Linux", "Darwin"):
+        sys.exit(" [!] TIDoS needs a Linux or macOS host.")
 
     argv = sys.argv[1:]
     # With arguments -> non-interactive CLI; with none -> interactive console.

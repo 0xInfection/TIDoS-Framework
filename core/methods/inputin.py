@@ -11,7 +11,10 @@
 #https://github.com/0xInfection/TIDoS-Framework
 
 import os
+import shutil
 import socket
+import subprocess
+import sys
 import time
 import string
 
@@ -67,7 +70,9 @@ def inputin(target):
             print(O + ' [+] IP Detected :' + C+color.TR3+C+G + ip+C+color.TR2+C)
             time.sleep(0.5)
             print('')
-            os.system('cd tmp/logs/ && rm -rf ' + po + '-logs && mkdir ' + po + '-logs/')
+            logdir = os.path.join("tmp", "logs", po + "-logs")
+            shutil.rmtree(logdir, ignore_errors=True)
+            os.makedirs(logdir, exist_ok=True)
             user = input(" [?] Enter username (leave blank if none): ")
             passwd = input(" [?] Enter password (leave blank if none): ")
             webfin = web
@@ -116,7 +121,9 @@ def inputip(target, net=False):
     if net:
         vars.targets.append(newTarget)
         print(O+" [+] Target added:"+C+color.TR3+C+G+target+C+color.TR2+C)
-    elif os.system("ping -c 1 -q -W 5 " + target + " > /dev/null") == 0:
+    elif subprocess.run(
+            ["ping", "-c", "1", "-q", "-t" if sys.platform == "darwin" else "-W", "5", target],
+            stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL).returncode == 0:
         vars.targets.append(newTarget)
         print(O+" [+] Target added:"+C+color.TR3+C+G+target+C+color.TR2+C)
     else:

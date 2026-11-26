@@ -27,7 +27,7 @@ _____, ___
 └──╼ VainlyStrain
 """
 
-import os, sys, multiprocessing
+import os, multiprocessing
 
 global modir
 global sploidir
@@ -93,9 +93,6 @@ vas = "modules.VlnAnalysis.Severe."
 po = "modules.PostSploit."
 
 dlist = [ai, op, oa, od, po, sc, sc1, sc2, sp, vam, vao, vas]
-
-CMD_CLEAR = "cls" if sys.platform.lower().startswith("win") else "clear"
-CMD_LS = "dir /b" if sys.platform.lower().startswith("win") else "\\ls"
 
 
 database = './core/database/tidos.db'

@@ -28,4 +28,10 @@ _____, ___
 """
 
 import os
-os.system("cd /opt/TIDoS ; git stash ; git pull ; cp tmp/TIDoS /bin/TIDoS ; chmod +x /bin/TIDoS")
+import shutil
+import subprocess
+
+subprocess.run(["git", "stash"], cwd="/opt/TIDoS")
+subprocess.run(["git", "pull"], cwd="/opt/TIDoS")
+shutil.copy("/opt/TIDoS/tmp/TIDoS", "/bin/TIDoS")
+os.chmod("/bin/TIDoS", 0o755)
