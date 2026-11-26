@@ -46,7 +46,7 @@ Here is some light on what the framework is all about:
 
 ### Installation :-
 
-TIDoS runs on Linux with Python 3.7+. Quick start:
+TIDoS runs on Linux and macOS with Python 3.7+. Quick start:
 
 ```
 git clone https://github.com/0xinfection/tidos-framework.git && cd tidos-framework
@@ -104,6 +104,9 @@ readable path, `<phase>[/<sub-phase>]/<module>`:
 tidos --list                          # every module and its path
 tidos --list osint                    # just one phase
 tidos --info osint/passiverecon/getgeoip
+tidos --check                         # which libraries and tools are available
+tidos --results                       # targets with stored findings
+tidos --results example.com           # dump findings recorded for a target
 
 tidos -u http://host -m osint/passiverecon/getgeoip      # one module
 tidos -u http://host -m osint/passiverecon               # a whole sub-phase
@@ -113,8 +116,11 @@ tidos -u http://host -m sqli --set PARAM=/p.php?id=1 --set COOKIE=sid=abc
 ```
 
 `-u/--url` and `-m/--module` are repeatable; `--set OPT=VALUE` sets a module
-option; `--tor`, `--processes N` and `-q/--quiet` round it out. Running `tidos`
-with no arguments opens the interactive console above.
+option; `--tor`, `--processes N` and `-q/--quiet` round it out. `--check`
+reports available dependencies and `--results [target]` reads back findings
+recorded in the session database. Running `tidos` with no arguments opens the
+interactive console above. See [docs/cli-usage.md](docs/cli-usage.md) for the
+full command-line guide.
 
 ### Flawless Features :-
 

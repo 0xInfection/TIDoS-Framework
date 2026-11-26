@@ -10,7 +10,36 @@
 #This module requires TIDoS Framework
 #https://github.com/0xInfection/TIDoS-Framework
 
+import os
 import sqlite3
+
+# Internal table name -> human label, one per TIDoS phase.
+PHASE_TABLES = {
+    "ReconANDOSINT": "Reconnaissance & OSINT",
+    "ScanANDEnum":   "Scanning & Enumeration",
+    "VulnAnalysis":  "Vulnerability Analysis",
+    "Exploitation":  "Exploitation",
+    "AuxModules":    "Auxiliary Modules",
+}
+
+
+def _table_exists(cursor, name):
+    cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name=?", (name,))
+    return cursor.fetchone() is not None
+
+
+def _columns(cursor, table):
+    return [row[1] for row in cursor.execute('PRAGMA table_info("{}")'.format(table))]
+
+
+def _ensure_schema(cursor, module):
+    """Create the phase table if missing, or add the `host` column to an older one."""
+    if not _table_exists(cursor, module):
+        cursor.execute(
+            'CREATE TABLE "{}" (id INTEGER PRIMARY KEY, lvl1 text not null, '
+            'lvl2 text, lvl3 text, number int, host text, data blob)'.format(module))
+    elif "host" not in _columns(cursor, module):
+        cursor.execute('ALTER TABLE "{}" ADD COLUMN host text'.format(module))
 
 # This module contains three functions:
 #   1. save_data - inserts data into the database, and automatically creates tables and
@@ -36,36 +65,43 @@ import sqlite3
 def save_data(database, module, lvl1, lvl2, lvl3, host, data):
     connection = sqlite3.connect(database)
     cursor = connection.cursor()
-    check_table = 'SELECT name FROM sqlite_master WHERE type=\'table\' AND name=\'{}\''.format(module)
-    cursor.execute(check_table)
-    checker = cursor.fetchone()
-    if checker == None:
-        create_table = 'CREATE TABLE {} (\
-            id INTEGER PRIMARY KEY, \
-            lvl1 text not null, \
-            lvl2 text, \
-            lvl3 text, \
-            number int, \
-            data blob);'.format(module)
-        cursor.execute(create_table)
-        connection.commit()
-    check_entries = 'SELECT number FROM {} WHERE lvl1="{}" AND lvl2="{}" AND lvl3="{}"'.format(module, lvl1, lvl2, lvl3)
-    cursor.execute(check_entries)
-    printable = cursor.fetchall()
-    ctr = 0
-    high = []
-    while ctr < len(printable):
-        high.append(printable[ctr][0])
-        ctr += 1
-    if high == []:
-        highest = 1
-    else:
-        highest = max(high) + 1
-    insert_into_table = 'INSERT INTO {} (lvl1, lvl2, lvl3, number, data) VALUES (?, ?, ?, ?, ?);'.format(module)
-    table_entry_parameters = (lvl1, lvl2, lvl3, highest, data)
-    cursor.execute(insert_into_table, table_entry_parameters)
+    _ensure_schema(cursor, module)
+    # entry number is per (host, lvl1, lvl2, lvl3) so each target counts from 1
+    cursor.execute(
+        'SELECT number FROM "{}" WHERE lvl1=? AND lvl2=? AND lvl3=? AND host=?'.format(module),
+        (lvl1, lvl2, lvl3, host))
+    existing = [row[0] for row in cursor.fetchall() if row[0] is not None]
+    highest = max(existing) + 1 if existing else 1
+    cursor.execute(
+        'INSERT INTO "{}" (lvl1, lvl2, lvl3, number, host, data) VALUES (?, ?, ?, ?, ?, ?);'.format(module),
+        (lvl1, lvl2, lvl3, highest, host, data))
     connection.commit()
     connection.close()
+
+
+def fetch_results(database, host_filter=None):
+    """Read findings back, grouped by target host.
+
+    Returns {host: [(phase_label, lvl1, lvl2, lvl3, number, data), ...]}.
+    `host_filter` is a case-insensitive substring; None returns every host.
+    """
+    grouped = {}
+    if not os.path.exists(database):
+        return grouped
+    connection = sqlite3.connect(database)
+    cursor = connection.cursor()
+    for table, label in PHASE_TABLES.items():
+        if not _table_exists(cursor, table):
+            continue
+        host_col = "host" if "host" in _columns(cursor, table) else "''"
+        query = 'SELECT lvl1, lvl2, lvl3, number, {}, data FROM "{}"'.format(host_col, table)
+        for lvl1, lvl2, lvl3, number, host, data in cursor.execute(query):
+            host = host or "(unknown target)"
+            if host_filter and host_filter.lower() not in host.lower():
+                continue
+            grouped.setdefault(host, []).append((label, lvl1, lvl2, lvl3, number, data))
+    connection.close()
+    return grouped
 
 def retrieve_data(database, module, lvl1, lvl2, lvl3, num):
     connection = sqlite3.connect(database)

@@ -1,7 +1,10 @@
 # Installing TIDoS
 
-TIDoS runs on **Linux** with **Python 3.7+**. The console must run as **root**,
-because several modules open raw sockets (port scans, ARP, traceroute).
+TIDoS runs on **Linux** and **macOS** with **Python 3.7+**. The console must run
+as **root**, because several modules open raw sockets (port scans, ARP,
+traceroute). On macOS, install the external tools with Homebrew (`brew install
+nmap tcpdump tor`, etc.) and use the local checkout below — the global `/opt`
+installer is Debian-only.
 
 Once TIDoS is installed, configure your API keys with [setup.md](setup.md).
 
@@ -56,7 +59,15 @@ power `sshbrute` and `sqlbrute`; without them those two modules say so and stop.
 and stops.
 
 If a tool is missing, the module that needs it stops and says so. The rest of
-the framework keeps working.
+the framework keeps working. To see at a glance which Python libraries and
+external tools TIDoS can find on this host, run:
+
+```bash
+tidos --check
+```
+
+It lists every dependency, whether it's present, and what each one powers;
+required packages missing make it exit non-zero.
 
 ## 2. Install TIDoS
 

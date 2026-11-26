@@ -22,6 +22,9 @@ Modules are addressed by a readable path, <phase>[/<subphase>]/<module>, e.g.
     tidos -u http://host -m all --tor
     tidos -u http://host -m sqli --set PARAM=/p.php?id=1 --set COOKIE=sid=abc
     tidos --info osint/passiverecon/getgeoip
+    tidos --check                                     # report available libs/tools
+    tidos --results                                   # list targets with stored findings
+    tidos --results example.com                       # dump findings for a target
 
 Running with no arguments starts the interactive console instead.
 """
@@ -30,7 +33,9 @@ from __future__ import annotations
 
 import argparse
 import importlib
+import importlib.util
 import os
+import shutil
 import socket
 import sys
 from dataclasses import dataclass
@@ -257,6 +262,130 @@ def cmd_run(urls: list[str], selectors: list[str], sets: dict,
 
 
 # --------------------------------------------------------------------------
+# environment check (`tidos --check`)
+# --------------------------------------------------------------------------
+
+# import name -> (pip name, required?, what it powers)
+PY_LIBS = [
+    ("requests",   "requests",   True,  "HTTP engine (every web module)"),
+    ("bs4",        "bs4",        True,  "HTML parsing (crawlers, scrapers)"),
+    ("lxml",       "lxml",       True,  "fast HTML/XML parser"),
+    ("texttable",  "texttable",  True,  "module listings / tables"),
+    ("tldextract", "tldextract", True,  "domain parsing"),
+    ("dns",        "dnspython",  True,  "DNS recon modules"),
+    ("socks",      "PySocks",    False, "Tor routing (tor on)"),
+    ("scapy",      "scapy",      False, "raw-socket scanners, arpscan"),
+    ("sslyze",     "sslyze",     False, "ssltlsscan (needs Python 3.9+)"),
+    ("builtwith",  "builtwith",  False, "technology fingerprinting"),
+    ("wafw00f",    "wafw00f",    False, "WAF detection"),
+    ("PIL",        "pillow",     False, "imgext EXIF/GPS reader"),
+    ("paramiko",   "paramiko",   False, "sshbrute"),
+    ("pymysql",    "PyMySQL",    False, "sqlbrute"),
+]
+
+# tool name -> what it powers
+EXT_TOOLS = [
+    ("nmap",       "nmapmain, osdetect, piwebenum"),
+    ("tcpdump",    "scapy-based scanners"),
+    ("tor",        "Tor routing (tor on)"),
+    ("dig",        "dig module"),
+    ("traceroute", "traceroute module"),
+    ("ping",       "piwebenum, vicadd --ip"),
+]
+
+
+def cmd_check() -> int:
+    """Report which Python libraries and external tools TIDoS can find."""
+    kit.info("TIDoS environment check")
+    missing_required = 0
+
+    print("\n Python libraries")
+    for mod, pip_name, required, powers in PY_LIBS:
+        present = importlib.util.find_spec(mod) is not None
+        tag = "required" if required else "optional"
+        if present:
+            kit.good(f"{mod:<12} present   ({powers})")
+        elif required:
+            missing_required += 1
+            kit.bad(f"{mod:<12} MISSING   [{tag}] {powers}  ->  pip install {pip_name}")
+        else:
+            kit.warn(f"{mod:<12} missing   [{tag}] {powers}  ->  pip install {pip_name}")
+
+    if sys.version_info < (3, 9):
+        kit.warn(f"Python {sys.version_info.major}.{sys.version_info.minor}: "
+                 "sslyze falls back to a basic stdlib TLS check (needs 3.9+).")
+
+    print("\n External tools")
+    for tool, powers in EXT_TOOLS:
+        path = shutil.which(tool)
+        if path:
+            kit.good(f"{tool:<12} present   ({path})")
+        else:
+            kit.warn(f"{tool:<12} missing   ({powers})")
+
+    print("\n Crawler")
+    try:
+        from core.methods import katana
+        path = katana.find()
+        if path:
+            kit.good(f"{'katana':<12} present   ({path})")
+        else:
+            on_path = shutil.which("katana")
+            hint = f"found {on_path} but not the pinned version" if on_path \
+                else "fetched automatically on first crawl, or set TIDOS_KATANA=/path"
+            kit.warn(f"{'katana':<12} missing   ({hint})")
+    except Exception as e:  # noqa: BLE001  (e.g. TIDOS_KATANA points at a non-executable)
+        kit.warn(f"{'katana':<12} error     ({type(e).__name__}: {e})")
+
+    print()
+    if missing_required:
+        kit.bad(f"{missing_required} required package(s) missing -- "
+                "run: pip install -r requirements.txt")
+        return 1
+    kit.good("All required packages present.")
+    return 0
+
+
+# --------------------------------------------------------------------------
+# stored findings (`tidos --results [target]`)
+# --------------------------------------------------------------------------
+
+def cmd_results(target: str | None) -> int:
+    """Show findings recorded in the session database, grouped by target."""
+    from core.database.database_module import fetch_results
+    grouped = fetch_results(variables.database, target)
+
+    if not grouped:
+        if target:
+            kit.bad(f"No stored findings for '{target}'.")
+        else:
+            kit.info("No findings recorded yet -- run some modules first.")
+        return 0
+
+    # no target given: print a per-target summary
+    if not target:
+        kit.info("Stored findings by target:")
+        for host in sorted(grouped):
+            kit.good(f"{host}  ({len(grouped[host])} record(s))")
+        kit.info("View one with: tidos --results <target>")
+        return 0
+
+    # a target (substring) given: dump its findings
+    for host in sorted(grouped):
+        print()
+        kit.info(f"Findings for {host}")
+        rows = sorted(grouped[host], key=lambda r: (r[0], r[1], r[2], r[3], r[4]))
+        for label, lvl1, lvl2, lvl3, number, data in rows:
+            path = " / ".join(p for p in (label, lvl1, lvl2, lvl3) if p)
+            print()
+            kit.good(f"{path}  #{number}")
+            text = data.decode(errors="replace") if isinstance(data, bytes) else str(data)
+            for line in text.splitlines() or [text]:
+                kit.bullet(line)
+    return 0
+
+
+# --------------------------------------------------------------------------
 # argument parsing
 # --------------------------------------------------------------------------
 
@@ -273,7 +402,9 @@ def build_parser() -> argparse.ArgumentParser:
                "  tidos -u http://host -m osint/passiverecon\n"
                "  tidos -u http://host -m osint/all --tor\n"
                "  tidos -u http://host -m sqli --set PARAM=/p.php?id=1 --set COOKIE=sid=abc\n"
-               "  tidos --info osint/passiverecon/getgeoip\n",
+               "  tidos --info osint/passiverecon/getgeoip\n"
+               "  tidos --check\n"
+               "  tidos --results example.com\n",
     )
     p.add_argument("-u", "--url", action="append", metavar="URL", default=[],
                    help="target URL (repeatable; comma-separated values accepted)")
@@ -285,6 +416,10 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--list", nargs="?", const="", metavar="CATEGORY",
                    help="list modules (optionally only a phase/sub-phase) and exit")
     p.add_argument("--info", metavar="PATH", help="show a module's description and options, then exit")
+    p.add_argument("--check", action="store_true",
+                   help="report which Python libraries and external tools are available, then exit")
+    p.add_argument("--results", nargs="?", const="", metavar="TARGET",
+                   help="show findings recorded in the database (optionally for one target), then exit")
     p.add_argument("--tor", action="store_true", help="route HTTP through Tor (verified first)")
     p.add_argument("--processes", type=int, metavar="N", help="worker processes for parallel modules")
     p.add_argument("-q", "--quiet", action="store_true", help="do not print the banner")
@@ -317,6 +452,10 @@ def main(argv: list[str]) -> int:
     if not args.quiet:
         prnt.banner()
 
+    if args.check:
+        return cmd_check()
+    if args.results is not None:
+        return cmd_results(args.results or None)
     if args.list is not None:
         return cmd_list(args.list or None)
     if args.info:
