@@ -1,5 +1,15 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+#
+#
+
+#-:-:-:-:-:-:-:-:-:-:-:-:#
+#    TIDoS Framework     #
+#-:-:-:-:-:-:-:-:-:-:-:-:#
+
+#This module requires TIDoS Framework
+#https://github.com/0xInfection/TIDoS-Framework
+
 """Test suite for the TIDoS modules, driven against the local vulnerable site.
 
     python3 tests/run.py                # deep detection tests + contract smoke

@@ -1,5 +1,15 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+#
+#
+
+#-:-:-:-:-:-:-:-:-:-:-:-:#
+#    TIDoS Framework     #
+#-:-:-:-:-:-:-:-:-:-:-:-:#
+
+#This module requires TIDoS Framework
+#https://github.com/0xInfection/TIDoS-Framework
+
 """Traceroute -- maps the network path to the target with the system traceroute."""
 
 import os

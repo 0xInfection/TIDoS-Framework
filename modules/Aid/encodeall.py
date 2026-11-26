@@ -1,5 +1,15 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+#
+#
+
+#-:-:-:-:-:-:-:-:-:-:-:-:#
+#    TIDoS Framework     #
+#-:-:-:-:-:-:-:-:-:-:-:-:#
+
+#This module requires TIDoS Framework
+#https://github.com/0xInfection/TIDoS-Framework
+
 """String encoder -- common encodings of a string, side by side."""
 
 from __future__ import annotations

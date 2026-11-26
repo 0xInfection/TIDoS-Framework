@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
-# coding: utf-8
+# -*- coding: utf-8 -*-
+#
+#
 
-# -:-:-:-:-:-:-:-:-:-:-:-:#
+#-:-:-:-:-:-:-:-:-:-:-:-:#
 #    TIDoS Framework     #
-# -:-:-:-:-:-:-:-:-:-:-:-:#
+#-:-:-:-:-:-:-:-:-:-:-:-:#
 
-# This module requires TIDoS Framework
-# https://github.com/0xInfection/TIDoS-Framework
-
-
+#This module requires TIDoS Framework
+#https://github.com/0xInfection/TIDoS-Framework
 
 import os
 import socket

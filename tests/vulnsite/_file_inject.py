@@ -1,3 +1,15 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+#
+#
+
+#-:-:-:-:-:-:-:-:-:-:-:-:#
+#    TIDoS Framework     #
+#-:-:-:-:-:-:-:-:-:-:-:-:#
+
+#This module requires TIDoS Framework
+#https://github.com/0xInfection/TIDoS-Framework
+
 """Fixture for lfi / rfi / pathtrav / phpi / rce / shellshock / strutsshock.
 
 Host 127.0.0.1 -> vulnerable CGI set, Host localhost -> safe CGI set.

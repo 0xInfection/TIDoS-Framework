@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+#
+#
 
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 #    TIDoS Framework     #
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 
-# This module requires TIDoS Framework
-# https://github.com/0xInfection/TIDoS-Framework
+#This module requires TIDoS Framework
+#https://github.com/0xInfection/TIDoS-Framework
 
 """Dictionary brute force of FTP logins (plain FTP or explicit FTP over TLS)."""
 

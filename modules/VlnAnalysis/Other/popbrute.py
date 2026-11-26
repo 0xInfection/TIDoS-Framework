@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+#
+#
 
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 #    TIDoS Framework     #
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 
-# This module requires TIDoS Framework
-# https://github.com/0xInfection/TIDoS-Framework
+#This module requires TIDoS Framework
+#https://github.com/0xInfection/TIDoS-Framework
 
 """Dictionary brute force of POP3 logins (POP3S auto-selected on port 995)."""
 

@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+#
+#
 
-# -:-:-:-:-:-:-:-:-:-:-:-:#
+#-:-:-:-:-:-:-:-:-:-:-:-:#
 #    TIDoS Framework     #
-# -:-:-:-:-:-:-:-:-:-:-:-:#
+#-:-:-:-:-:-:-:-:-:-:-:-:#
 
-# This file is a part of TIDoS Framework
-# https://github.com/0xInfection/TIDoS-Framework
+#This module requires TIDoS Framework
+#https://github.com/0xInfection/TIDoS-Framework
 
 """Signatures used by the file inclusion / path traversal scanners.
 
