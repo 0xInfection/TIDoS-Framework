@@ -1,5 +1,15 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+#
+#
+
+#-:-:-:-:-:-:-:-:-:-:-:-:#
+#    TIDoS Framework     #
+#-:-:-:-:-:-:-:-:-:-:-:-:#
+
+#This module requires TIDoS Framework
+#https://github.com/0xInfection/TIDoS-Framework
+
 """
 _____, ___
    '+ .;.    
@@ -323,9 +333,7 @@ def randomsg():
         return random.choice(msg_list.readlines()).strip()
 
 def bannerbelownew():
-    #print("   {}tidos{}{}{}{}{}{}{}{}{}{}".format(color.END, color.END, color.TR6, color.END, RB, vars.e_version.split("#")[0],C,color.TR3,G,vars.e_version.split("#")[1],color.TR2) + C)
-    #print("   {}tidconsole{}{}{}{}{}{}{}{}{}{}".format(color.END, color.END, color.TR6, color.END, RB, vars.version,C,color.TR3,G,vars.e_version.split("#")[1],color.TR2) + C)
-    print("   {}tidconsole{}{}{}{}{}{}{}{}{}{}".format(color.END, color.END, color.TR6, color.END, RB, vars.version,C,color.TR3,G,vars.count,color.TR2) + C)
+    print("   {}tidos{}{}{}{}{}{}{}{}{}{}".format(color.END, color.END, color.TR6, color.END, RB, vars.version,C,color.TR3,G,vars.count,color.TR2) + C)
     print("  {}{}{}".format(RC, randomsg(), color.END))
 
 

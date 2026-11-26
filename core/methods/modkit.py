@@ -1,5 +1,15 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+#
+#
+
+#-:-:-:-:-:-:-:-:-:-:-:-:#
+#    TIDoS Framework     #
+#-:-:-:-:-:-:-:-:-:-:-:-:#
+
+#This module requires TIDoS Framework
+#https://github.com/0xInfection/TIDoS-Framework
+
 """
 Shared building blocks for TIDoS modules.
 
@@ -271,7 +281,7 @@ def warn(msg: str) -> None:
 
 def found(label: str, value) -> None:
     """`[+] Label :> value` in the framework's powerline style."""
-    print(f"{O} [+] {label} :>{C}{color.TR3}{C}{G}{value}{C}{color.TR2}{color.END}")
+    print(f"{O} [+] {label} :> {C}{color.TR3}{C}{G}{value}{C}{color.TR2}{color.END}")
 
 
 def bullet(text, indent: int = 3) -> None:

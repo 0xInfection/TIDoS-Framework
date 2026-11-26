@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+#
+#
 
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 #    TIDoS Framework     #
@@ -7,58 +10,51 @@
 #This module requires TIDoS Framework
 #https://github.com/0xInfection/TIDoS-Framework
 
+# Colour has been stripped from TIDoS output: every colour constant below is an
+# empty string, so all normal output prints plain. Text STYLES (bold, underline,
+# italic and the reset) are kept so the ASCII banners still render with emphasis.
 ###############################
 class color:
-    PURPLE = '\033[95m'
-    CYAN = '\033[96m'
-    DARKCYAN = '\033[36m'
-    BLUE = '\033[94m'
-    GREEN = '\033[92m'
-    YELLOW = '\033[93m'
-    RED = '\033[91m'
+    # colours -- all disabled
+    PURPLE = ''
+    CYAN = ''
+    DARKCYAN = ''
+    BLUE = ''
+    GREEN = ''
+    YELLOW = ''
+    RED = ''
+    HEADER = ''
+    OKBLUE = ''
+    OKGREEN = ''
+    WARNING = ''
+    FAIL = ''
+    # powerline palette -- disabled (these also carried the '|' separators)
+    TR1 = ''
+    TR2 = ''
+    TR3 = ''
+    TR4 = ''
+    TR5 = ''
+    TR6 = ''
+    VBG = ''
+    TITLE = ''
+    BAR = ''
+    # text styles -- kept (not colours)
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
     CURSIVE = '\033[3m'
     END = '\033[0m'
-    HEADER = '\033[95m'
-    OKBLUE = '\033[94m'
-    OKGREEN = '\033[92m'
-    WARNING = '\033[93m'
-    FAIL = '\033[91m'
-    #TR1 = '\033[0m\033[48;2;58;49;58m\033[38;2;225;214;225m\uE0B0'
-    #TR2 = '\033[0m\033[38;2;225;214;225m\uE0B0'
-    #TR3 = '\033[0m\033[48;2;225;214;225m\033[38;2;58;49;58m\uE0B0'
-    #TR4 = '\033[0m\033[38;2;58;49;58m\uE0B0'
-    #TR5 = '\033[0m\033[48;2;225;214;225m\033[38;2;19;14;19m\uE0B0'
-    #TR6 = '\033[0m\033[48;2;58;49;58m\033[38;2;19;14;19m\uE0B0'
 
-    TR1 = '\033[0m\033[48;2;58;49;58m\033[38;2;225;214;225m|'
-    TR2 = '\033[0m\033[38;2;225;214;225m|'
-    TR3 = '\033[0m\033[48;2;225;214;225m\033[38;2;58;49;58m|'
-    TR4 = '\033[0m\033[38;2;58;49;58m|'
-    TR5 = '\033[0m\033[48;2;225;214;225m\033[38;2;19;14;19m|'
-    TR6 = '\033[0m\033[48;2;58;49;58m\033[38;2;19;14;19m|'
-    VBG = '\033[48;2;19;14;19m'
-    TITLE = '\033[38;2;85;72;85m'
-    BAR = '\033[38;2;225;214;225m'
-    #TR1 = '\033[48;2;58;49;58m\033[38;2;225;214;225m\u25B6'
-
-W  = '\033[0m\033[1;0m'  # white (normal)
-#R  = '\033[1;31m' # red
-R = '\033[0m\033[38;2;58;49;58m\033[1m'
-#G  = '\033[0m\033[1m' # green
-#G = '\033[0m\033[48;2;255;255;255m\033[38;2;58;49;58m\033[1m'
-G = '\033[0m\033[48;2;225;214;225m\033[38;2;58;49;58m\033[1m'
-#G = '\033[0m\033[48;2;85;72;85m\033[38;2;225;214;225m'
-#O  = '\033[0m\033[1m' # orange
-O = '\033[0m\033[48;2;58;49;58m'
-B  = '\033[0m\033[1m' # blue
-#P  = '\033[0m\033[1m' # purple
-P = '\033[0m\033[38;2;58;49;58m\033[3m'
-C  = '\033[0m\033[1m' # cyan
-GR = '\033[0m\033[1m' # gray
-T  = '\033[0m\033[1m' # tan
-RB = '\033[48;2;58;49;58m'
-RC = '\033[0m\033[38;2;58;49;58m\033[3m'
-RD = '\033[0m\033[38;2;58;49;58m'
+# module-level accents -- all disabled
+W = ''
+R = ''
+G = ''
+O = ''
+B = ''
+P = ''
+C = ''
+GR = ''
+T = ''
+RB = ''
+RC = ''
+RD = ''
 ###############################
