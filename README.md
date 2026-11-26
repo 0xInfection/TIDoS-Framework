@@ -33,7 +33,7 @@ Here is some light on what the framework is all about:
 -  the programming language: TIDoS is fully ported to Python3
 -  the interface: TIDoS presents a new, Metasploit-like console interface
 -  Parallelisation: TIDoS uses multiprocessing to speed up attacks
--  An alternative CLI interface for faster interaction with one specific module
+-  A path-addressed command line: `tidos -u <url> -m <phase>/<sub>/<module>` (see below)
 -  Anonymity: Attacking through Tor is possible (verified before routing)
 -  Module Completion: Some modules have been feature-extended (e.g. more evasion, supporting more than 1 query parameter)
 -  WAF fingerprinting now backed by `wafw00f` (~170 signatures)
@@ -51,7 +51,7 @@ TIDoS runs on Linux with Python 3.7+. Quick start:
 ```
 git clone https://github.com/0xinfection/tidos-framework.git && cd tidos-framework
 python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
-sudo -E .venv/bin/python3 tidconsole.py   # console (root)
+sudo -E .venv/bin/python3 tidos.py   # console (root)
 ```
 
 See [docs/install.md](docs/install.md) for system packages, the global `/opt` install (`tidos` launcher), Docker, optional tools (phpsploit) and updating.
@@ -94,6 +94,27 @@ __                                                    __
     M needs loaded modvle
     V [! potentially] need loaded target(s)
 ```
+
+### Command line :-
+
+Besides the console, modules run non-interactively. They are addressed by a
+readable path, `<phase>[/<sub-phase>]/<module>`:
+
+```bash
+tidos --list                          # every module and its path
+tidos --list osint                    # just one phase
+tidos --info osint/passiverecon/getgeoip
+
+tidos -u http://host -m osint/passiverecon/getgeoip      # one module
+tidos -u http://host -m osint/passiverecon               # a whole sub-phase
+tidos -u http://host -m osint/all                        # a whole phase
+tidos -u http://host -m all --tor                        # everything, via Tor
+tidos -u http://host -m sqli --set PARAM=/p.php?id=1 --set COOKIE=sid=abc
+```
+
+`-u/--url` and `-m/--module` are repeatable; `--set OPT=VALUE` sets a module
+option; `--tor`, `--processes N` and `-q/--quiet` round it out. Running `tidos`
+with no arguments opens the interactive console above.
 
 ### Flawless Features :-
 

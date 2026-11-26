@@ -76,7 +76,7 @@ Run the console as root with the venv's interpreter. `-E` keeps your exported
 API keys, because sudo drops the environment by default:
 
 ```bash
-sudo -E .venv/bin/python3 tidconsole.py
+sudo -E .venv/bin/python3 tidos.py
 ```
 
 > Always launch from the repository root. TIDoS reads `core/doc/*` and writes
@@ -97,7 +97,8 @@ Then:
 
 ```bash
 tidos                        # console (the launcher calls sudo itself)
-tidos -v http://target -l dig
+tidos --list                 # list every module and its path
+tidos -u http://target -m osint/activerecon/dig
 ```
 
 The launcher passes every `TIDOS_*` environment variable through `sudo`. Export
@@ -125,7 +126,8 @@ docker run -it --rm tidos bash                                   # drop to a she
 
 > The image copies your local checkout (honouring `.dockerignore`), so it builds
 > the code you have on disk. Run with `-it` -- the console is interactive and
-> shows the usage disclaimer on first start.
+> shows the usage disclaimer on first start. See [using-docker.md](using-docker.md)
+> for CLI one-shots, API keys, keeping output and Tor.
 
 ## 3. Optional external tools
 

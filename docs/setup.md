@@ -46,8 +46,8 @@ Then start TIDoS the way you installed it:
 | Install type | Command | Why |
 |---|---|---|
 | Global (`tidos` launcher) | `tidos` | The launcher forwards every `TIDOS_*` variable through sudo. |
-| Local checkout | `sudo -E .venv/bin/python3 tidconsole.py` | `-E` keeps your environment; plain `sudo` drops it. |
-| Local, with restrictive sudoers | `sudo --preserve-env=TIDOS_SHODAN_API_KEY,TIDOS_CENSYS_API_TOKEN .venv/bin/python3 tidconsole.py` | Use this if your sudo policy rejects `-E`. |
+| Local checkout | `sudo -E .venv/bin/python3 tidos.py` | `-E` keeps your environment; plain `sudo` drops it. |
+| Local, with restrictive sudoers | `sudo --preserve-env=TIDOS_SHODAN_API_KEY,TIDOS_CENSYS_API_TOKEN .venv/bin/python3 tidos.py` | Use this if your sudo policy rejects `-E`. |
 | Docker | `docker run -e TIDOS_SHODAN_API_KEY=... ...` or `--env-file` | |
 
 > Keys exported without the prefix (e.g. `SHODAN_API_KEY`) still work, but only
@@ -252,15 +252,29 @@ they stop with a clear message and suggest an unprivileged alternative:
 
 ## Automation
 
-**One module, one target:**
+The command line runs modules directly, addressed by path
+(`<phase>[/<sub>]/<module>`). Run `tidos` with no arguments for the interactive
+console.
 
 ```bash
-tidos -v https://target.example -l whoischeckup
-tidos -v https://target.example -l passive-all     # every passive module
+tidos --list                          # every module and its path
+tidos --list osint                    # just one phase
+tidos --info osint/passiverecon/getgeoip
+
+tidos -u https://target.example -m osint/passiverecon/whoischeckup
+tidos -u https://target.example -m osint/passiverecon       # a whole sub-phase
+tidos -u https://target.example -m osint/all                # a whole phase
+tidos -u https://target.example -m all --tor                # everything, via Tor
+tidos -u https://target.example -m sqli --set PARAM=/p.php?id=1 --set COOKIE=sid=abc
 ```
 
-**Several modules with options, several targets: VAL files.** Put the file in
-`core/sessioncache/` and run `tidos -c NAME`:
+`-u/--url` and `-m/--module` are repeatable (and accept comma-separated values);
+`--set OPT=VALUE` sets a module option (repeatable); `--tor` routes HTTP through
+Tor; `--processes N` sets the worker count; `-q/--quiet` drops the banner.
+
+**Saved multi-target / multi-option runs: VAL files.** In the interactive
+console, `sessions save NAME --val` writes the current targets and the options
+you've `set`, and `sessions load NAME.val` restores them. The format:
 
 ```text
 <victim https://target.example>

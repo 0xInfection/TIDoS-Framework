@@ -4,6 +4,7 @@
 |---|---|
 | [install.md](install.md) | System packages, local / global / Docker installs, optional tools, first launch, updating |
 | [setup.md](setup.md) | API keys and environment variables, third-party services each module contacts, Tor, module options, automation, output locations |
+| [using-docker.md](using-docker.md) | Building and running TIDoS in Docker: the console, CLI one-shots, API keys, keeping output, Tor |
 
 Quick start:
 
@@ -11,5 +12,5 @@ Quick start:
 git clone https://github.com/0xinfection/tidos-framework.git && cd tidos-framework
 python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
 export TIDOS_SHODAN_API_KEY=...          # only the keys you need; see setup.md
-sudo -E .venv/bin/python3 tidconsole.py
+sudo -E .venv/bin/python3 tidos.py
 ```
