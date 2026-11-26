@@ -44,7 +44,7 @@ COPY . .
 
 # `tidos` launcher: start the console from the repo root (it reads core/doc/*
 # and writes tmp/logs/ relative to the working directory).
-RUN printf '#!/bin/sh\ncd /opt/TIDoS && exec python3 -B tidconsole.py "$@"\n' \
+RUN printf '#!/bin/sh\ncd /opt/TIDoS && exec python3 -B tidos.py "$@"\n' \
         > /usr/local/bin/tidos \
     && chmod +x /usr/local/bin/tidos
 

@@ -3,7 +3,7 @@
 """
 `tidos` launcher installed to /usr/bin by core/install.py.
 
-    tidos [ARGS...]   console (via sudo); ARGS are passed to tidconsole.py
+    tidos [ARGS...]   console (via sudo); ARGS are passed to tidos.py
 
 sudo drops the caller's environment, so every TIDOS_* variable (API keys,
 see docs/setup.md) is explicitly preserved across it.
@@ -22,7 +22,7 @@ def main() -> int:
     cmd = ["sudo"]
     if keep:
         cmd.append("--preserve-env=" + ",".join(keep))
-    cmd += ["python3", "-B", "tidconsole.py", *args]
+    cmd += ["python3", "-B", "tidos.py", *args]
     try:
         return subprocess.call(cmd, cwd=HOME)
     except KeyboardInterrupt:

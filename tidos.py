@@ -1,5 +1,15 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+#
+#
+
+#-:-:-:-:-:-:-:-:-:-:-:-:#
+#    TIDoS Framework     #
+#-:-:-:-:-:-:-:-:-:-:-:-:#
+
+#This module requires TIDoS Framework
+#https://github.com/0xInfection/TIDoS-Framework
+
 """
 _____, ___
    '+ .;    
@@ -34,7 +44,6 @@ from core.Core.colors import R, B, C, color, O, G, RD, RC
 from core.methods.cache import load, save, sessionparse, createVal, targetparse
 from core.methods.creds import creds
 from core.methods.tor import torpipe, initcheck, proxy_listening, session
-from core.methods.parser import build_parser
 
 """The metasploit-like shell, binding the framework together"""
 class TIDcon(Cmd):
@@ -654,95 +663,39 @@ class TIDcon(Cmd):
 # tidos shell main function
 
 def main():
-    #parse arguments
-    parser = build_parser()
-    opt = vars(parser.parse_args())
-    args = parser.parse_args()
     os.system(varis.CMD_CLEAR)
-    #currently, only Linux is supported - TODO support other OSes as well
+    # currently, only Linux is supported
     if str(platform.system()) != "Linux":
-        sys.exit(
-            R + " [!] " + color.UNDERLINE + "\033[1m" + "You are not using a Linux Based OS! Linux is a must-have for "
-                                                        "this script!" + color.END)
-    #some modules require root permissions to work
+        sys.exit(" [!] TIDoS needs a Linux-based OS.")
+
+    argv = sys.argv[1:]
+    # With arguments -> non-interactive CLI; with none -> interactive console.
+    if argv:
+        from core.methods import cli
+        sys.exit(cli.main(argv))
+
+    # Interactive console: root only, since several modules open raw sockets.
     if not os.geteuid() == 0:
-        sys.exit(R + " [!] " + "\033[0m" + color.UNDERLINE + "\033[1m" + "Must be run as root." + B + " :)" + color.END)
-    #prompt the user with the terms&conditions if not already accepted
+        sys.exit(" [!] Must be run as root.  :)")
+    # prompt the user with the terms & conditions if not already accepted
     if 'no' in open('core/doc/choice').read():
         prnt.disclaimer()
-
-        a1 = input(B + ' [?] Do you agree to these terms and conditions? :> ' + C)
+        a1 = input(' [?] Do you agree to these terms and conditions? :> ')
         if a1.lower().startswith('y'):
-            print(B + ' [+] That\'s awesome! Move on...')
+            print(" [+] That's awesome! Move on...")
             time.sleep(3)
-            FILE = open("core/doc/choice", "w")
-            FILE.write('yes')
-            FILE.close()
-
+            with open("core/doc/choice", "w") as fh:
+                fh.write('yes')
         else:
-            print(R + ' [!] ' + "\033[0m" + color.UNDERLINE + "\033[1m" + 'You have to agree!' + color.END)
+            print(' [!] You have to agree!')
             time.sleep(1)
             sys.exit(0)
 
-    # handle arguments
-    if opt["load"] and opt["victim"] and not opt["help"] and not opt["list"]:
-        s = TIDcon()
-        if not opt["quiet"]:
-            prnt.banner()
-            #prnt.bannerbelownew()
-        prnt.upinfo()
-        if not opt["session"]:
-            s.do_vicadd(args.victim)
-        else:
-            s.do_sessions("load {}".format(args.victim))
-        s.do_load(args.load)
-        if opt["tor"]:
-            s.do_tor("on")
-            if varis.tor:
-               s.do_attack("")
-               s.do_tor("off")
-        else:
-            s.do_attack("")
-    elif opt["file"]:
-        if not opt["quiet"]:
-            prnt.banner()
-            #prnt.bannerbelownew()
-        prnt.upinfo()
-        s = TIDcon()
-        if opt["tor"]:
-            s.do_tor("on")
-            if varis.tor:
-               s.automator(args.file)
-               s.do_tor("off")
-        else:
-            s.automator(args.file)
-        print("Done.")
-    elif opt["help"]:
-        if not opt["quiet"]:
-            prnt.banner()
-            #prnt.bannerbelownew()
-        prnt.upinfo()
-        parser.print_help()
-    elif opt["list"]:
-        s = TIDcon()
-        if not opt["quiet"]:
-            prnt.banner()
-        prnt.upinfo()
-        s.do_list(args.list)
-    elif opt["fetch"]:
-        s = TIDcon()
-        s.do_fetch("")
-    elif opt["victim"] and not opt["load"] or opt["load"] and not opt["victim"]:
-        parser.error("'-v' and '-l' are required for CLI attack.")
-    else:
-        if not opt["quiet"]:
-            prnt.loadstyle()
-            prnt.banner()
-            #prnt.bannerbelownew()
-            prnt.upinfo()
-        TIDcon().cmdloop()
-        print(R + "[TIDoS] " + "\033[0m" + color.END + "Alvida, my chosen")
-        #print(R + "[TIDoS] "+color.END+RC+prnt.randomsg()+color.END)
+    prnt.loadstyle()
+    prnt.banner()
+    prnt.upinfo()
+    TIDcon().cmdloop()
+    print("[TIDoS] Alvida, my chosen")
 
 if __name__ == '__main__':
     main()
