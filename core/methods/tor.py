@@ -5,8 +5,8 @@
 #    TIDoS Framework     #
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 
-#This module requires TIDoS Framework
-#https://github.com/0xInfection/TIDoS-Framework
+# This module requires TIDoS Framework
+# https://github.com/0xInfection/TIDoS-Framework
 
 """
 Tor support: HTTP sessions for modules and the `tor on|off` switch.

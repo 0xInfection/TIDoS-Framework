@@ -5,8 +5,8 @@
 #    TIDoS Framework     #
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 
-#This module requires TIDoS Framework
-#https://github.com/0xInfection/TIDoS-Framework
+# This module requires TIDoS Framework
+# https://github.com/0xInfection/TIDoS-Framework
 
 """Same-site scripting -- localhost.<domain> resolving to the loopback address."""
 

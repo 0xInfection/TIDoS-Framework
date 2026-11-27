@@ -5,8 +5,8 @@
 #    TIDoS Framework     #
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 
-#This module requires TIDoS Framework
-#https://github.com/0xInfection/TIDoS-Framework
+# This module requires TIDoS Framework
+# https://github.com/0xInfection/TIDoS-Framework
 
 """Local file inclusion / file read through request parameters."""
 

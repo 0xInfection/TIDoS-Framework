@@ -5,8 +5,8 @@
 #    TIDoS Framework     #
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 
-#This module requires TIDoS Framework
-#https://github.com/0xInfection/TIDoS-Framework
+# This module requires TIDoS Framework
+# https://github.com/0xInfection/TIDoS-Framework
 
 """Cookie security flags (Secure / HttpOnly / SameSite / prefixes)."""
 

@@ -5,8 +5,8 @@
 #    TIDoS Framework     #
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 
-#This module requires TIDoS Framework
-#https://github.com/0xInfection/TIDoS-Framework
+# This module requires TIDoS Framework
+# https://github.com/0xInfection/TIDoS-Framework
 
 """
 Small dnspython wrappers for the DNS misconfiguration modules

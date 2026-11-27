@@ -5,8 +5,8 @@
 #    TIDoS Framework     #
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 
-#This module requires TIDoS Framework
-#https://github.com/0xInfection/TIDoS-Framework
+# This module requires TIDoS Framework
+# https://github.com/0xInfection/TIDoS-Framework
 
 """SQLi/XSS fixture on 127.0.0.1:8771. Vulnerable endpoints run real (sqlite) SQL built by
 string concatenation; SLEEP(n) is registered as a sqlite function to mimic MySQL."""
