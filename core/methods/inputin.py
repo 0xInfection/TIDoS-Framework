@@ -56,7 +56,7 @@ def inputin(target):
             try:
                 port = int(inport)
                 assert port in range(1, 65535)
-            except:
+            except (ValueError, AssertionError):
                 print(R+" [!] Not a valid port value"+C)
         print(GR + ' [*] Checking server status...')
         time.sleep(0.6)

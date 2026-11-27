@@ -61,6 +61,10 @@ def _ensure_schema(cursor, module):
 #       passed in and out of the database.
 
 def save_data(database, module, lvl1, lvl2, lvl3, host, data):
+    # `module` is interpolated into SQL as a table name, so it must be one of
+    # the known phase tables -- never attacker/caller controlled free text.
+    if module not in PHASE_TABLES:
+        raise ValueError(f"Unknown results table {module!r}; expected one of {list(PHASE_TABLES)}")
     connection = sqlite3.connect(database)
     cursor = connection.cursor()
     _ensure_schema(cursor, module)

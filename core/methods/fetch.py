@@ -49,5 +49,5 @@ def fetchinit(a):
                 uptodate = False
         if not uptodate:
             varis.upd = True
-    except:
+    except Exception:
         pass
