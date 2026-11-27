@@ -1,85 +1,69 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-
+#
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 #    TIDoS Framework     #
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 
-#Author : @_tID
-#This module requires TIDoS Framework
-#https://github.com/0xInfection/TIDoS-Framework
+# This module requires TIDoS Framework
+# https://github.com/0xInfection/TIDoS-Framework
 
+"""Page links -- passive recon."""
 
-import time
-import os
-import sys
-sys.path.append('tmp/')
-from core.methods.tor import session
-from core.Core.colors import *
+from __future__ import annotations
 
-from core.database.database_module import save_data
-from core.variables import database
-from core.methods.cache import targetname
-import inspect
+from urllib.parse import urldefrag, urljoin, urlsplit
 
-final_links = []
+import requests
+from bs4 import BeautifulSoup
+
+from core.methods import modkit as kit
+from core.methods.print import posintpas
 
 info = "Find Links pointing to the target."
 searchinfo = "Page Links"
 properties = {}
 
+
+def page_links(base: str, html: str) -> tuple[list[str], list[str]]:
+    """(same-host, external) links of a page, deduplicated in page order."""
+    host = urlsplit(base).hostname
+    internal, external = [], []
+    for a in BeautifulSoup(html, "lxml").find_all("a", href=True):
+        link = urldefrag(urljoin(base, a["href"].strip()))[0]
+        parts = urlsplit(link)
+        if parts.scheme not in ("http", "https"):
+            continue
+        (internal if parts.hostname == host else external).append(link)
+    return list(dict.fromkeys(internal)), list(dict.fromkeys(external))
+
+
 def links(web):
-    name = targetname(web)
-    module = "ReconANDOSINT"
-    lvl1 = "Passive Reconnaissance & OSINT"
-    lvl3=''
-    lvl2=inspect.stack()[0][3]
-    requests = session()
-    #print(R+'\n   =====================')
-    #print(R+'    P A G E   L I N K S ')
-    #print(R+'   =====================\n')
-    from core.methods.print import posintpas
     posintpas("page links")
-    time.sleep(0.4)
-    print('' + GR + color.BOLD + ' [!] Fetching links to the website...')
-    time.sleep(0.4)
-    print(GR +" [~] Result: "+ color.END)
+    base = kit.url(web)
+    kit.info(f"Fetching links from {base} ...")
+    try:
+        resp = kit.http().get(base)
+    except requests.RequestException as e:
+        kit.bad(f"Could not fetch {base}: {e}")
+        return []
 
+    internal, external = page_links(resp.url or base, resp.text)
+    if not internal and not external:
+        kit.bad("No links found on the page.")
+        kit.Recorder(web, kit.PASSIVE, "links")("No links found.")
+        return []
 
-    if "https://" in web:
-        web0 = web.replace('https://','')
-    else:
-        web0 = web.replace('http://','')
-    if "@" in web:
-        if "https" in web:
-            web = "https://" + web.split("@")[1]
-        else:
-            web = "http://" + web.split("@")[1]
-        web0 = web0.split("@")[1]
+    for link in internal:
+        kit.found("Found link", link)
+    if external:
+        kit.info(f"{len(external)} external link(s):")
+        for link in external:
+            kit.bullet(link)
+    kit.good(f"{len(internal)} same-host and {len(external)} external link(s).")
+    kit.Recorder(web, kit.PASSIVE, "links")(internal + external)
+    return internal
 
-    domains = [web]
-    for dom in domains:
-        text = requests.get('http://api.hackertarget.com/pagelinks/?q=' + dom).text
-        result = str(text)
-        if 'null' not in result and 'no links found' not in result:
-
-            woo = result.splitlines()
-            for w in woo:
-                if str(web0).lower() in w.lower():
-                    final_links.append(w)
-
-            print(C+'\n [!] Receiving links...')
-            for p in final_links:
-                print(O+' [+] Found link :'+C+color.TR3+C+G+p+C+color.TR2+C)
-                time.sleep(0.06)
-
-            save_data(database, module, lvl1, lvl2, lvl3, name, str(final_links))
-            print('')
-
-        else:
-            print(R+' [-] Outbound Query Exception!')
-            time.sleep(0.8)
 
 def attack(web):
-    web = web.fullurl
     links(web)

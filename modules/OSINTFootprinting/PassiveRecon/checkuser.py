@@ -1,92 +1,110 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-
+#
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 #    TIDoS Framework     #
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 
-#Author: @_tID
-#This module requires TIDoS Framework
-#https://github.com/0xInfection/TIDoS-Framework
+# This module requires TIDoS Framework
+# https://github.com/0xInfection/TIDoS-Framework
 
-# WARNING : may return false positives
+"""Alias (username) check across public websites -- passive recon."""
 
+from __future__ import annotations
 
-import os, time
-import tld
-import threading
-from core.methods.tor import session
-from core.Core.colors import *
+import re
+from concurrent.futures import ThreadPoolExecutor
 
-from core.database.database_module import save_data
-from core.variables import database
-from core.methods.cache import targetname
-import inspect
+from core.methods import modkit as kit
+from core.methods.print import posintpas
 
-tasks=[]
-data = []
-headers = {'X-Requested-With':'XMLHttpRequest'}
-
-info = "Alias Check"
+info = ("Checks whether the target's aliases (usernames) are registered on popular websites. "
+        "May return false positives when a site rate-limits or changes its pages.")
 searchinfo = "Alias Check"
-properties = {}
+properties = {
+    "USERNAMES": ["Aliases to check, comma separated (default: target usernames, else the domain name)", ""],
+    "THREADS": ["Number of concurrent requests", ""],
+}
+
+# name -> (profile URL, text that only appears when the user does NOT exist;
+#          None = the site answers 404 for unknown users)
+SITES = {
+    "GitHub": ("https://github.com/{}", None),
+    "GitLab": ("https://gitlab.com/api/v4/users?username={}", "[]"),
+    "Bitbucket": ("https://bitbucket.org/{}/", None),
+    "SourceForge": ("https://sourceforge.net/u/{}/profile", None),
+    "Docker Hub": ("https://hub.docker.com/v2/users/{}/", None),
+    "PyPI": ("https://pypi.org/user/{}/", None),
+    "npm": ("https://www.npmjs.com/~{}", None),
+    "Keybase": ("https://keybase.io/{}", None),
+    "Dev.to": ("https://dev.to/{}", None),
+    "Hacker News": ("https://news.ycombinator.com/user?id={}", "No such user."),
+    "Pastebin": ("https://pastebin.com/u/{}", None),
+    "Vimeo": ("https://vimeo.com/{}", None),
+    "SoundCloud": ("https://soundcloud.com/{}", None),
+    "Gravatar": ("https://en.gravatar.com/{}.json", None),
+    "Steam": ("https://steamcommunity.com/id/{}", "The specified profile could not be found"),
+    "Reddit": ("https://www.reddit.com/user/{}/about.json", None),
+    "Wikipedia": ("https://en.wikipedia.org/w/api.php?action=query&list=users&format=json&ususers={}",
+                  '"missing"'),
+}
+
+USERNAME_RE = re.compile(r"[\w.-]{1,64}")
 
 
-def thread(url,service,hostname):
+def probe(session, site: str, user: str) -> tuple[str, bool | None]:
+    """(site, True if taken / False if free / None if inconclusive)."""
+    url, missing = SITES[site]
     try:
-        requests = session()
-        req = requests.get(url, headers = headers)
-        if 'notavailable' in req.text:
-            print(' [+] Found '+hostname+' : '+service)
-            data.append(service)
-    except Exception as e:
-        print(R+' [-] Incurred Exception : '+str(e))
+        resp = session.get(url.format(user), allow_redirects=False)
+    except Exception:
+        return site, None
+    if resp.status_code == 404 or 300 <= resp.status_code < 400:
+        return site, False
+    if resp.status_code != 200:
+        return site, None
+    if missing is not None:
+        return site, missing not in resp.text
+    return site, True
 
-def check0x00(host, lvl2):
-    module = "ReconANDOSINT"
-    lvl1 = "Passive Reconnaissance & OSINT"
-    lvl3 = ""
-    for user in host.usernames:
-        print(GR+" [*] Searching alias "+O+user+GR+" on " + str(len(services)) + " websites...\n")
-        for service in services:
-            url = 'http://checkusernames.com/usercheckv2.php?target=' + service + '&username=' + user
-            #check = threading.Thread(target=thread,args=(url,service,host.name))
-            check = threading.Thread(target=thread,args=(url,service,user))
-            tasks.append(check)
-    print(GR+' [¬] Result : \n')
-    for task in tasks:
-        task.start()
-    for task in tasks:
-        task.join()
-    
-        #print(host.database, host.module, host.lvl1, host.lvl2, host.lvl3, host.name, data)
-    save_data(database, module, lvl1, lvl2, lvl3, host.fullurl, str(data))
+
+def usernames(web) -> list[str]:
+    known = list(getattr(web, "usernames", None) or [])
+    default = ",".join(known) or kit.domain(web).split(".")[0]
+    raw = kit.option(properties, "USERNAMES", "Aliases to check (comma separated)", default)
+    names = [u.strip().lstrip("@") for u in raw.split(",") if u.strip()]
+    for bad_name in [u for u in names if not USERNAME_RE.fullmatch(u)]:
+        kit.bad(f"Skipping invalid alias: {bad_name}")
+    return list(dict.fromkeys(u for u in names if USERNAME_RE.fullmatch(u)))
 
 
 def checkuser(web):
+    posintpas("check alias")
+    users = usernames(web)
+    if not users:
+        kit.bad("No alias to check (set USERNAMES).")
+        return {}
+    threads = max(1, kit.integer(properties, "THREADS", "Concurrent requests", 10))
+    session = kit.http(headers={"X-Requested-With": "XMLHttpRequest"})
+    record = kit.Recorder(web, kit.PASSIVE, "checkuser")
 
-    time.sleep(0.6)
-    #print(R+'\n    =======================')
-    #print(R+'     C H E C K   A L I A S')
-    #print(R+'    =======================\n')
-    from core.methods.print import posintpas
-    posintpas("check alias") 
-    
-    if len(web.usernames) < 1:
-        print(" [!] No usernames have been set for target {}".format(web.fullurl))
-        a = "a"
-        while a != "":
-            a = input(" [§] Add username (enter if done) :> ")
-            if a != "":
-                web.usernames.append(a)
-    
-    time.sleep(0.7)
-    global services
-    services = ['YouTube', 'Hypemachine', 'Yahoo', 'Linkagogo', 'Coolspotters', 'Wikipedia', 'Twitter', 'gdgt', 'BlogMarks', 'LinkedIn', 'Ebay', 'Tumblr', 'Pinterest','yotify', 'Blogger', 'Flickr', 'FortyThreeMarks,Moof', 'HuffingtonPost', 'Wordpress', 'DailyMotion', 'LiveJournal', 'vimeo', 'DeviantArt', 'reddit','StumbleUpon', 'Answers', 'Sourceforge', 'Wikia', 'ArmChairGM', 'Photobucket', 'MySpace', 'Etsy,SlideShare', 'Fiverr', 'scribd', 'Squidoo', 'ImageShack','ThemeForest', 'SoundCloud', 'Tagged', 'Hulu', 'Typepad', 'Hubpages', 'weebly', 'Zimbio', 'github', 'TMZ', 'WikiHow', 'Delicious', 'zillow', 'Jimdo', 'goodreads','Segnalo', 'Netlog', 'Issuu', 'ForumNokia', 'UStream', 'Gamespot', 'MetaCafe', 'askfm', 'hi5', 'JustinTV', 'Blekko', 'Skyrock', 'Cracked', 'foursquare', 'LastFM','posterous', 'steam', 'Opera', 'Dreamstime', 'Fixya', 'UltimateGuitar', 'docstoc', 'FanPop', 'Break', 'tinyurl', 'Kongregate', 'Disqus', 'Armorgames', 'Behance','ChaCha', 'CafeMom', 'Liveleak', 'Topix', 'lonelyplanet', 'Stardoll', 'Instructables', 'Polyvore', 'Proboards', 'Weheartit', 'Diigo', 'Gawker', 'FriendFeed','Videobash', 'Technorati', 'Gravatar', 'Dribbble', 'formspringme', 'myfitnesspal', '500px', 'Newgrounds', 'GrindTV', 'smugmug', 'ibibo', 'ReverbNation', 'Netvibes','Slashdot', 'Fool', 'Plurk', 'zedge', 'Discogs', 'YardBarker', 'Ebaumsworld', 'sparkpeople', 'Sharethis', 'Xmarks', 'Crunchbase', 'FunnyOrDie,Suite101', 'OVGuide','Veoh', 'Yuku', 'Experienceproject', 'Fotolog', 'Hotklix', 'Epinions', 'Hyves', 'Sodahead', 'Stylebistro', 'fark', 'AboutMe', 'Metacritic', 'Toluna', 'Mobypicture','Gather', 'Datpiff', 'mouthshut', 'blogtalkradio', 'Dzone', 'APSense', 'Bigstockphoto', 'n4g', 'Newsvine', 'ColourLovers', 'Icanhazcheezburger', 'Xanga','InsaneJournal', 'redbubble', 'Kaboodle', 'Folkd', 'Bebo', 'Getsatisfaction', 'WebShots', 'threadless', 'Active', 'GetGlue', 'Shockwave', 'Pbase']
-    print(C+' [!] Loaded '+str(len(services))+' services...')
-    lvl2 = inspect.stack()[0][3]
-    
-    check0x00(web, lvl2)
+    results = {}
+    for user in users:
+        kit.info(f"Searching alias {user} on {len(SITES)} websites...")
+        with ThreadPoolExecutor(threads) as pool:
+            answers = list(pool.map(lambda s: probe(session, s, user), SITES))
+        taken = [site for site, hit in answers if hit]
+        unknown = [site for site, hit in answers if hit is None]
+        for site in taken:
+            kit.found(user, f"{site} : {SITES[site][0].format(user)}")
+        if not taken:
+            kit.bad(f"Alias {user} not found on any site.")
+        if unknown:
+            kit.warn(f"Inconclusive (blocked / rate-limited): {', '.join(unknown)}")
+        results[user] = taken
+        record([f"{user}: {site}" for site in taken] or f"{user}: not found")
+    return results
+
 
 def attack(web):
     checkuser(web)

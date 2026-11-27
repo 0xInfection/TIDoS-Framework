@@ -1,121 +1,79 @@
 #!/usr/bin/env python3
-# coding:  utf-8
-
+# -*- coding: utf-8 -*-
+#
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 #    TIDoS Framework     #
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 
-#Author : @_tID
-#This module requires TIDoS Framework
-#https://github.com/0xInfection/TIDoS-Framework
+# This module requires TIDoS Framework
+# https://github.com/0xInfection/TIDoS-Framework
 
+"""Traceroute -- maps the network path to the target with the system traceroute."""
 
 import os
-from time import sleep
-from core.Core.colors import *
-from core.database.database_module import save_data
-from core.variables import database
-from core.methods.cache import targetname
-import inspect
+import sys
 
-info = "Traceroute module."
+from core.methods import modkit as kit
+from core.methods.print import posintact
+
+info = ("Runs the system traceroute against the target. PROTO selects the probe "
+        "type: udp (default, unprivileged), icmp (ECHO) or tcp (SYN, usually needs "
+        "root). FRAGMENT=n sets the don't-fragment bit, DEBUG=y enables socket "
+        "level debugging.")
 searchinfo = "Traceroute module"
-properties = {}
+properties = {
+    "PROTO": ["Probe type: udp, icmp or tcp", ""],
+    "FRAGMENT": ["Allow fragmented packets (y/n); n sets don't-fragment", ""],
+    "DEBUG": ["Enable socket level debugging (y/n)", ""],
+    "MAXHOPS": ["Maximum number of hops", ""],
+}
 
-#TODO DB saving
+PROTOS = {"udp": "udp", "u": "udp", "icmp": "icmp", "i": "icmp", "tcp": "tcp", "t": "tcp"}
+
+
+def build(host, proto, fragment, debug, maxhops):
+    args = ["traceroute", "-m", str(maxhops), "-w", "2"]
+    if proto == "icmp":
+        args.append("-I")
+    elif proto == "tcp":
+        args += ["-T"] if sys.platform.startswith("linux") else ["-P", "tcp"]
+    if not fragment:
+        args.append("-F")
+    if debug:
+        args.append("-d")
+    return args + [host]
+
+
 def traceroute(web):
-    name = targetname(web)
-    lvl2 = "traceroute"
-    module = "ReconANDOSINT"
-    lvl1 = "Active Reconnaissance"
-    lvl3 = ""
-    #print(R+'\n   =====================')
-    #print(R+'    T R A C E R O U T E')
-    #print(R+'   =====================\n')
-    from core.methods.print import posintact
-    posintact("traceroute") 
+    posintact("traceroute")
+    record = kit.Recorder(web, kit.ACTIVE, "traceroute")
+    host = kit.host(web)
 
-    web = web.replace('https://','')
-    web = web.replace('http://','')
-    m = input(C+' [?] Do you want to fragment the packets? (y/n) :> ')
-    if m == 'y' or m == 'Y':
-        print(GR+' [!] Using fragmented packets...')
-        p = input(C+' [§] Enter the network type to be used [(I)CMP/(T)CP] :> ')
-        if p == 'icmp' or p == 'ICMP' or p == 'I' or p == 'i':
-            print(GR+' [*] Using ICMP ECHO type for traceroute...')
-            w = input(C+' [*] Enable socket level debugging? (y/n) :> ')
-            if w == 'y' or w == 'Y':
-                print(GR+' [+] Enabling socket level debugging...')
-                sleep(0.3)
-                print(GR+' [+] Starting traceroute...'+C)
-                os.system('traceroute -I -d '+web)
-            elif w == 'n' or w == 'N':
-                sleep(0.3)
-                print(GR+' [+] Starting traceroute...'+C)
-                os.system('traceroute -I '+web)
-            else:
-                print(R+' [-] Invalid choice...')
-                traceroute(web)
-        elif p == 'tcp' or p == 'TCP' or p == 't' or p == 'T':
-            print(GR+' [*] Using TCP/SYN for traceroute...')
-            w = input(C+' [*] Enable socket level debugging? (y/n) :> ')
-            if w == 'y' or w == 'Y':
-                print(GR+' [+] Enabling socket level debugging...')
-                sleep(0.3)
-                print(GR+' [+] Starting traceroute...'+C)
-                os.system('traceroute -T -d '+web)
-            elif w == 'n' or w == 'N':
-                sleep(0.3)
-                print(GR+' [+] Starting traceroute...'+C)
-                os.system('traceroute -T '+web)
-            else:
-                print(R+' [-] Invalid choice...')
-                traceroute(web)
-        else:
-            print(R+' [-] Invalid choice...')
-            traceroute(web)
-    elif m == 'n' or m == 'N':
-        print(GR+' [!] Using unfragmented packets...')
-        p = input(C+' [§] Enter the network type to be used (ICMP/TCP) :> ')
-        if p == 'icmp' or p == 'ICMP' or p == 'I' or p == 'i':
-            print(GR+' [*] Using ICMP ECHO type for traceroute...')
-            w = input(C+' [*] Enable socket level debugging? (y/n) :> ')
-            if w == 'y' or w == 'Y':
-                print(GR+' [+] Enabling socket level debugging...')
-                sleep(0.3)
-                print(GR+' [+] Starting traceroute...'+C)
-                os.system('traceroute -I -d -F '+web)
-            elif w == 'n' or w == 'N':
-                sleep(0.3)
-                print(GR+' [+] Starting traceroute...'+C)
-                os.system('traceroute -I -F '+web)
-            else:
-                print(R+' [-] Invalid choice...')
-                traceroute(web)
-        elif p == 'tcp' or p == 'TCP' or p == 't' or p == 'T':
-            print(GR+' [*] Using TCP/SYN for traceroute...')
-            w = input(C+' [*] Enable socket level debugging? (y/n) :> ')
-            if w == 'y' or w == 'Y':
-                print(GR+' [+] Enabling socket level debugging...')
-                sleep(0.3)
-                print(GR+' [+] Starting traceroute...'+C)
-                os.system('traceroute -T -d -F '+web)
-            elif w == 'n' or w == 'N':
-                sleep(0.3)
-                print(GR+' [+] Starting traceroute...'+C)
-                os.system('traceroute -T -F '+web)
-            else:
-                print(R+' [-] Invalid choice...')
-                traceroute(web)
-        else:
-            print(R+' [-] Invalid choice...')
-            traceroute(web)
-    else:
-        print(R+' [-] Invalid choice...')
-        traceroute(web)
+    choice = kit.option(properties, "PROTO", "Probe type [udp/icmp/tcp]", "udp").lower()
+    proto = PROTOS.get(choice)
+    if not proto:
+        kit.bad(f"Unknown probe type '{choice}' (use udp, icmp or tcp).")
+        return None
+    fragment = kit.flag(properties, "FRAGMENT", "Allow fragmented packets", True)
+    debug = kit.flag(properties, "DEBUG", "Enable socket level debugging", False)
+    maxhops = max(1, min(kit.integer(properties, "MAXHOPS", "Maximum hops", 30), 64))
 
-    print(G+' [+] Traceroute done.'+C+color.TR2+C+'\n')
+    if proto != "udp" and sys.platform.startswith("linux") and os.geteuid() != 0:
+        kit.warn(f"{proto.upper()} traceroute usually needs root; it may fail.")
+
+    kit.info(f"Tracing route to {host} using {proto.upper()} "
+             f"({'fragmented' if fragment else 'unfragmented'} packets, max {maxhops} hops)...")
+    out = kit.command(build(host, proto, fragment, debug, maxhops), timeout=maxhops * 3 * 2 + 30)
+    if not out:
+        record("Traceroute failed.")
+        return None
+
+    print(out.rstrip() + "\n")
+    hops = [line for line in out.splitlines() if line.strip()[:1].isdigit()]
+    kit.good(f"Traceroute done ({len(hops)} hops).")
+    record(out)
+    return out
+
 
 def attack(web):
-    web = web.fullurl
     traceroute(web)

@@ -1,34 +1,33 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-_____, ___
-   '+ .;    
-    , ;   
-     .   
-           
-       .    
-     .;.    
-     .;  
-      :  
-      ,   
-       
+`tidos` launcher installed to /usr/bin by core/install.py.
 
-┌─[TIDoS]─[]
-└──╼ VainlyStrain
+    tidos [ARGS...]   console (via sudo); ARGS are passed to tidos.py
+
+sudo drops the caller's environment, so every TIDOS_* variable (API keys,
+see docs/setup.md) is explicitly preserved across it.
 """
 
-import os 
+import os
+import subprocess
 import sys
 
-script = "tidconsole.py"
-app = "tidv2"
+HOME = "/opt/TIDoS"
 
-if len(sys.argv) > 1:
-    if "--app" not in sys.argv:
-        for i in range(1, len(sys.argv)):
-            script += " {}".format(sys.argv[i])
-        os.system("cd /opt/TIDoS ; sudo python3 -B {}".format(script))
-    else:
-        os.system("cd /opt/TIDoS ; python3 -B {}".format(app))
-else:
-    os.system("cd /opt/TIDoS ; sudo python3 -B {}".format(script))
+
+def main() -> int:
+    args = sys.argv[1:]
+    keep = sorted(k for k in os.environ if k.startswith("TIDOS_"))
+    cmd = ["sudo"]
+    if keep:
+        cmd.append("--preserve-env=" + ",".join(keep))
+    cmd += ["python3", "-B", "tidos.py", *args]
+    try:
+        return subprocess.call(cmd, cwd=HOME)
+    except KeyboardInterrupt:
+        return 130
+
+
+if __name__ == "__main__":
+    sys.exit(main())

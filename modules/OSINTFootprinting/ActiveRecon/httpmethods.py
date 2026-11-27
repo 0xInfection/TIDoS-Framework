@@ -1,64 +1,61 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-
+#
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 #    TIDoS Framework     #
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 
-#Author: @_tID
-#This module requires TIDoS Framework
-#https://github.com/0xInfection/TIDoS-Framework
+# This module requires TIDoS Framework
+# https://github.com/0xInfection/TIDoS-Framework
 
+"""HTTP methods lister -- what an OPTIONS request says the server allows."""
 
-import http.client
-import time
-from core.Core.colors import *
-from core.database.database_module import save_data
-from core.variables import database
-from core.methods.cache import targetname
-import inspect
+import requests
 
-info = "Lists allowed HTTP methods."
+from core.methods import modkit as kit
+from core.methods.print import posintact
+
+info = ("Lists the HTTP methods the target allows (OPTIONS request; Allow, Public and "
+        "CORS headers) and flags the risky ones.")
 searchinfo = "HTTP Methods Lister"
 properties = {}
 
+RISKY = {"PUT", "DELETE", "TRACE", "TRACK", "CONNECT", "PATCH", "PROPFIND",
+         "PROPPATCH", "MKCOL", "COPY", "MOVE", "LOCK", "UNLOCK", "SEARCH"}
+HEADERS = ("Allow", "Public", "Access-Control-Allow-Methods")
+
+
 def httpmethods(web):
-    name = targetname(web)
-    lvl2 = "httpmethods"
-    module = "ReconANDOSINT"
-    lvl1 = "Active Reconnaissance"
-    lvl3 = ""
+    posintact("http methods")
+    url = kit.url(web)
+    record = kit.Recorder(web, kit.ACTIVE, "httpmethods")
     try:
-        #print(R+'\n    =========================')
-        #print(R+'     H T T P   M E T H O D S ')
-        #print(R+'    =========================\n')
+        r = kit.http().options(url, allow_redirects=False)
+    except requests.RequestException as e:
+        kit.bad(f"OPTIONS request failed: {type(e).__name__}")
+        return []
 
-        from core.methods.print import posintact
-        posintact("http methods") 
+    methods = []
+    for header in HEADERS:
+        for m in r.headers.get(header, "").split(","):
+            m = m.strip().upper()
+            if m and m not in methods:
+                methods.append(m)
 
-        print(GR+' [*] Parsing Url...')
-        time.sleep(0.7)
-        web = web.replace('https://','')
-        web = web.replace('http://','')
-        print(C+' [!] Making the connection...')
-        conn = http.client.HTTPConnection(web)
-        conn.request('OPTIONS','/')
-        response = conn.getresponse()
-        q = str(response.getheader('allow'))
-        if 'None' not in q:
-            print(G+' [+] The following HTTP methods are allowed...'+C+color.TR2+C)
-            methods = q.split(',')
-            for method in methods:
-                print(O+'     '+method+C)
-            save_data(database, module, lvl1, lvl2, lvl3, name, q)
-        else:
-            print(R+' [-] HTTP Method Options Request Unsuccessful...')
-            save_data(database, module, lvl1, lvl2, lvl3, name, "HTTP Method Options Request Unsuccessful.")
+    if not methods:
+        kit.bad(f"HTTP method OPTIONS request unsuccessful (HTTP {r.status_code}, no Allow header).")
+        record("HTTP Method Options Request Unsuccessful.")
+        return []
 
-    except Exception as e:
-        print(R+' [-] Exception Encountered!')
-        print(R+' [-] Error : '+str(e))
+    kit.good("The following HTTP methods are allowed...")
+    for m in methods:
+        kit.bullet(f"{m}  (risky)" if m in RISKY else m)
+    risky = [m for m in methods if m in RISKY]
+    if risky:
+        kit.warn(f"Potentially dangerous methods enabled: {', '.join(risky)}")
+    record(", ".join(methods))
+    return methods
+
 
 def attack(web):
-    web = web.fullurl
     httpmethods(web)

@@ -1,74 +1,78 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-
+#
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 #    TIDoS Framework     #
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 
-#Author: @_tID
-#This module requires TIDoS Framework
-#https://github.com/0xInfection/TIDoS-Framework
+# This module requires TIDoS Framework
+# https://github.com/0xInfection/TIDoS-Framework
 
+"""Email to domain -- passive recon (reverse WhoIS on an email address)."""
 
-import os
-import sys
-import requests as wrn
-from core.methods.tor import session
+from __future__ import annotations
+
 import re
-import time
-from core.Core.colors import *
-from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
-wrn.packages.urllib3.disable_warnings(InsecureRequestWarning)
+import requests
 
-info = "This module tries to find the domain for a given email address."
+from core.methods import modkit as kit
+from core.methods.print import posintpas
+
+info = ("This module tries to find the domain for a given email address "
+        "(reverse WhoIS via the ViewDNS API, needs VIEWDNS_API_KEY).")
 searchinfo = "Find domain from email"
-properties = {}
+properties = {
+    "EMAIL": ["Email address to look up", ""],
+}
 
-def getRes0x00():
-    requests = session()
-    email = input(C+' [§] Enter the email :> '+R)
-    if '@' in email and '.' in email:
-        pass
-    else:
-        email = input(C+' [§] Enter a valid email :> '+R)
+API = "https://api.viewdns.info/reversewhois/"
+EMAIL_RX = re.compile(r"[^@\s]+@[^@\s]+\.[A-Za-z]{2,}")
 
-    print(GR+' [*] Setting headers... (behaving as a browser)...')
-    time.sleep(0.7)
-    headers =   {'User-Agent':'Mozilla/5.0 (Windows; U; Windows NT 6.1; rv:2.2) Gecko/20110201',
-                 'Accept-Language':'en-US;',
-                 'Accept-Encoding': 'gzip, deflate',
-                 'Accept': 'text/html,application/xhtml+xml,application/xml;',
-                 'Connection':'close'}
-    print(P+' [!] Making the no-verify request...'+C)
-    time.sleep(0.5)
-    url = "https://whoisology.com/search_ajax/search?action=email&value="+email+"&page=1&section=admin"
-    result = ''
+
+def lookup(email: str, key: str) -> list[dict] | None:
+    """Domains registered with `email`, or None on API failure."""
     try:
-        result = requests.get(url, headers=headers, verify=False, timeout=10).content
-        if result != '':
-            regex = re.compile('whoisology\.com\/(.*?)">')
-            stuff = regex.findall(result)
-            if len(stuff) > 0:
-                for line in stuff:
-                    if line.strip() != '':
-                        if '.' in line:
-                            print(O+' [+] Received Domain :'+C+color.TR3+C+G+line+C+color.TR2+C)
-            else:
-                print(R+ " [-] Empty domain result for email : "+O+email+C)
-    except Exception:
-        print(R+" [-] Can't reach url...")
-        print(R+' [-] Request timed out!')
+        resp = kit.http(timeout=30).get(API, params={"q": email, "apikey": key, "output": "json"})
+        data = resp.json()
+    except (requests.RequestException, ValueError) as e:
+        kit.bad(f"ViewDNS request failed: {e}")
+        return None
+    if data.get("success") is False or "error" in data:
+        err = data.get("error")
+        kit.bad(f"ViewDNS: {err.get('message', err) if isinstance(err, dict) else err}")
+        return None
+    return (data.get("response") or {}).get("matches") or []
 
-def mailtodom():
-    time.sleep(0.6)
-    #print(R+'\n    ===============================')
-    #print(R+'     E M A I L   T O   D O M A I N ')
-    #print(R+'    ===============================\n')
-    from core.methods.print import posintpas
+
+def mailtodom(web=None):
     posintpas("email to domain")
-    time.sleep(0.7)
-    getRes0x00()
+    email = kit.option(properties, "EMAIL", "Enter the email")
+    if not EMAIL_RX.fullmatch(email):
+        kit.bad(f"'{email}' is not a valid email address (set EMAIL)." if email
+                else "No email given (set EMAIL).")
+        return []
+    key = kit.apikey("VIEWDNS_API_KEY")
+    if not key:
+        return []
+
+    kit.info(f"Looking up domains registered with {email} ...")
+    matches = lookup(email, key)
+    if matches is None:
+        return []
+    if not matches:
+        kit.bad(f"Empty domain result for email: {email}")
+        return []
+    domains = []
+    for m in matches:
+        m = m if isinstance(m, dict) else {"domain": str(m)}
+        extra = ", ".join(filter(None, (m.get("created_date"), m.get("registrar"))))
+        kit.found("Received domain", f"{m.get('domain')} ({extra})" if extra else m.get("domain"))
+        domains.append(m.get("domain", ""))
+    kit.good(f"{len(domains)} domain(s) registered with {email}.")
+    kit.Recorder(web or email.split("@")[1], kit.PASSIVE, "mailtodom")([email] + domains)
+    return domains
+
 
 def attack(web):
-    mailtodom()
+    mailtodom(web)

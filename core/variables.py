@@ -1,5 +1,13 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+#
+#-:-:-:-:-:-:-:-:-:-:-:-:#
+#    TIDoS Framework     #
+#-:-:-:-:-:-:-:-:-:-:-:-:#
+
+# This module requires TIDoS Framework
+# https://github.com/0xInfection/TIDoS-Framework
+
 """
 _____, ___
    '+ .;.    
@@ -17,7 +25,7 @@ _____, ___
 └──╼ VainlyStrain
 """
 
-import os, sys, multiprocessing
+import os, multiprocessing
 
 global modir
 global sploidir
@@ -48,8 +56,14 @@ global interface
 
 version = "2.0"
 r_version = ""
-with open("core/doc/version", "r") as versionfile:
-    r_version = versionfile.read().strip()
+# Read relative to this file (not the cwd): variables is imported before the
+# console chdir's to the repo root, e.g. via the installed `tidos` command.
+_versionfile = os.path.join(os.path.dirname(os.path.abspath(__file__)), "doc", "version")
+try:
+    with open(_versionfile, "r") as versionfile:
+        r_version = versionfile.read().strip()
+except OSError:
+    r_version = version
 e_version = r_version + "#lsp"
 module = ""
 targets = []
@@ -58,12 +72,7 @@ interface = "wlp4s0"
 tor = False
 initip = ""
 
-#to avoid permission denied with gui, set to your unprivileged account
-username=""
-with open("core/doc/local", "r") as localfile:
-    username = localfile.read().strip()
-
-modir = os.path.dirname(os.path.realpath(__file__)) + "/../modules/"
+modir =os.path.dirname(os.path.realpath(__file__)) + "/../modules/"
 sploidir = os.path.dirname(os.path.realpath(__file__)) + "/../modules/SploitLoot/"
 scadir = os.path.dirname(os.path.realpath(__file__)) + "/../modules/ScanningEnumeration/"
 pasdir = os.path.dirname(os.path.realpath(__file__)) + "/../modules/OSINTFootprinting/PassiveRecon/"
@@ -89,14 +98,13 @@ po = "modules.PostSploit."
 
 dlist = [ai, op, oa, od, po, sc, sc1, sc2, sp, vam, vao, vas]
 
-CMD_CLEAR = "cls" if sys.platform.lower().startswith("win") else "clear"
-CMD_LS = "dir /b" if sys.platform.lower().startswith("win") else "\\ls"
-
 
 database = './core/database/tidos.db'
+# results DB is per-installation (never tracked in git); create it empty on first run
+if not os.path.exists(database):
+    try:
+        open(database, "a").close()
+    except OSError:
+        pass
 count = 0
 upd = False
-
-vailyndir = ""
-with open("core/doc/vailyn", "r") as vailynfile:
-    vailyndir = vailynfile.read().strip()

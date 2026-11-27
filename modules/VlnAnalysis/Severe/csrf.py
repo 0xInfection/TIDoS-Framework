@@ -1,273 +1,247 @@
 #!/usr/bin/env python3
-#-*- coding: utf-8 -*-
-
+# -*- coding: utf-8 -*-
+#
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 #    TIDoS Framework     #
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 
-#Author: 0xInfection (@_tID)
+# This module requires TIDoS Framework
+# https://github.com/0xInfection/TIDoS-Framework
 
-#Modified version of CSRFProbe
-#https://github.com/the-Infected-drake/CSRFProbe
-#This module requires TIDoS Framework
-#https://github.com/0xInfection/TIDoS-Framework
+"""Cross-site request forgery -- heuristic form analysis."""
 
+from __future__ import annotations
 
-import difflib
-import http.cookiejar
-from bs4 import BeautifulSoup
-import urllib
-import urllib.request
+import math
 import re
-import time
-import ssl
-import sys
-sys.path.append('files/')
-from modules.VlnAnalysis.Severe.Crawler import *
-from modules.VlnAnalysis.Severe.Form import *
-from modules.VlnAnalysis.Severe.uri import *
-from core.Core.colors import *
+from collections import Counter
+from urllib.parse import urljoin
 
-from core.database.database_module import save_data
-from core.variables import database
-from core.methods.cache import targetname
-import inspect
+from bs4 import BeautifulSoup
 
-ssl.match_hostname = lambda cert, hostname: True
+from core.methods import modkit as kit
+from core.methods.print import pvln
 
-info = "This module tests for Cross Site Request Forgery flaws."
+info = ("Heuristic CSRF review (nothing is submitted). Crawls the target (DEPTH) and, for "
+        "every state-changing form (POST, not a search box), looks for an anti-CSRF token: "
+        "hidden fields with token-like names or high-entropy values, or a csrf meta tag for "
+        "JavaScript frameworks. Each page is loaded twice in one session and once in a fresh "
+        "session to see whether the token is per-request, per-session or static. Session "
+        "cookies are checked for SameSite. Verdicts are heuristic and per form.")
 searchinfo = "Cross Site Request Forgery module"
-properties = {}
+properties = {
+    "DEPTH": ["Crawl depth for finding forms (default 1; 0 = target page only)", ""],
+    **kit.AUTH_OPTIONS,
+}
 
-def request(referer,action,form,opener):
+DEFAULT_DEPTH = 1
+MAX_PAGES = 60
 
-    data = urllib.parse.urlencode(form)
-    headers = {'User-Agent' : 'Mozilla/5.0 (Windows 8.0; U; Windows NT 5.2; en-US; rv:1.9.1.3) Gecko/20090824 Firefox/3.5.3 (.NET CLR 3.5.30729)','Referer' : referer}
+TOKEN_NAME = re.compile(
+    r"csrf|xsrf|_token|token$|^token|nonce|authenticity|requestverification|form_?key|"
+    r"__requestdigest|antiforgery|^_?state$|form_build_id|^sesskey$|^ticket$", re.I)
+META_TOKEN = re.compile(r"csrf|xsrf|request-?verification|antiforgery", re.I)
+SESSION_COOKIE = re.compile(r"sess|sid$|^sid|auth|token|login|user|jwt|remember|"
+                            r"^_?_?(?:host-|secure-)", re.I)
+SEARCH_FIELD = re.compile(r"^(?:q|s|query|search|keywords?|term|k|lang(?:uage)?|locale|sort|page)$", re.I)
+SKIP_TYPES = ("submit", "button", "image", "reset")
+LABELS = {
+    "vulnerable": "Likely CSRF",
+    "weak": "Weak CSRF protection",
+    "possible": "No CSRF token (needs review)",
+    "mitigated": "CSRF mitigated by SameSite",
+    "protected": "CSRF protected",
+}
+RISKY = ("vulnerable", "weak")
+
+
+def entropy(value: str) -> float:
+    """Shannon entropy in bits per character."""
+    if not value:
+        return 0.0
+    n = len(value)
+    return -sum(c / n * math.log2(c / n) for c in Counter(value).values())
+
+
+def random_looking(value: str) -> bool:
+    return len(value) >= 16 and entropy(value) >= 3.5 and not value.isalpha()
+
+
+def forms_of(page_url: str, html: str) -> list[dict]:
+    """Forms of a page: method, action, fields {name: (type, value)}, tokens."""
+    soup = BeautifulSoup(html, "lxml")
+    meta = [m.get("name") or m.get("property") for m in soup.find_all("meta", content=True)
+            if META_TOKEN.search(m.get("name") or m.get("property") or "")]
+    out = []
+    for f in soup.find_all("form"):
+        fields = {}
+        for i in f.find_all(("input", "select", "textarea", "button"), attrs={"name": True}):
+            fields[i["name"]] = ((i.get("type") or i.name).lower(), i.get("value") or "")
+        tokens = {name: value for name, (typ, value) in fields.items()
+                  if typ == "hidden" and (TOKEN_NAME.search(name) or random_looking(value))}
+        out.append({
+            "method": (f.get("method") or "GET").upper(),
+            "action": urljoin(page_url, f.get("action") or page_url),
+            "fields": fields,
+            "tokens": tokens,
+            "meta": meta,
+        })
+    return out
+
+
+def _key(form: dict) -> tuple:
+    return form["method"], form["action"], tuple(sorted(form["fields"]))
+
+
+def state_changing(form: dict) -> bool:
+    if form["method"] != "POST":
+        return False
+    names = [n for n, (typ, _) in form["fields"].items() if typ not in SKIP_TYPES and typ != "hidden"]
+    return not names or not all(SEARCH_FIELD.match(n) for n in names)
+
+
+def cookie_flags(session) -> list[tuple[str, str]]:
+    """(name, SameSite value or '') of session-looking cookies the site set."""
+    flags = []
+    for c in session.cookies:
+        if SESSION_COOKIE.search(c.name):
+            same = ""
+            for k, v in c._rest.items():  # http.cookiejar keeps unknown attributes here
+                if k.lower() == "samesite":
+                    same = (v or "").capitalize()
+            flags.append((c.name, same))
+    return flags
+
+
+def token_behaviour(name: str, first: dict, again: dict | None, other: dict | None) -> str:
+    v1 = first["tokens"].get(name, "")
+    v2 = (again or {}).get("tokens", {}).get(name)
+    v3 = (other or {}).get("tokens", {}).get(name)
+    if v3 is not None and v3 == v1:
+        return "static"           # same value in two independent sessions
+    if v2 is not None and v2 != v1:
+        return "per-request"
+    if v3 is not None:
+        return "per-session"
+    return "unknown"
+
+
+def verdict(form: dict, again: dict | None, other: dict | None, cookies,
+            supplied: bool = False) -> tuple[str, str]:
+    """(level, explanation); level is one of LABELS. `supplied`: the session
+    cookie came from the COOKIE option, so its SameSite attribute is unknown."""
+    samesite = {s for _, s in cookies}
+    strict = bool(cookies) and samesite <= {"Strict", "Lax"}
+    if form["tokens"]:
+        notes = []
+        for name in form["tokens"]:
+            notes.append(f"{name} ({token_behaviour(name, form, again, other)})")
+        if all("(static)" in n for n in notes):
+            return "weak", "token is static (identical across sessions): " + ", ".join(notes)
+        return "protected", "anti-CSRF token: " + ", ".join(notes)
+    if form["meta"]:
+        return "protected", f"no form token, but page exposes a CSRF meta tag ({', '.join(form['meta'])}) " \
+                            "for JavaScript submission -- verify the request carries it"
+    if strict:
+        return "mitigated", "no anti-CSRF token; session cookies are SameSite=" + "/".join(sorted(samesite))
+    if not cookies and supplied:
+        return "possible", "no anti-CSRF token; the session cookie was supplied via COOKIE, so its " \
+                           "SameSite attribute is unknown -- check the Set-Cookie at login " \
+                           "(SameSite=None, or unset outside Chromium's Lax default, makes this exploitable)"
+    if not cookies:
+        return "possible", "no anti-CSRF token, but no session cookie was set while " \
+                           "unauthenticated -- re-check when logged in"
+    detail = ", ".join(f"{n}=SameSite:{s or 'unset'}" for n, s in cookies)
+    return "vulnerable", f"no anti-CSRF token; session cookies without SameSite protection ({detail})"
+
+
+def fetch_forms(session, url: str) -> list[dict]:
     try:
-        return opener.open(action,data).read()
-
-    except urllib.error.HTTPError:
-        print("HTTP Error 1: "+action)
-        return
-
-    except ValueError:
-        print("Value Error: "+action)
-        return
-
+        r = session.get(url)
     except Exception:
-        return ''
+        return []
+    if "html" not in (r.headers.get("Content-Type") or "text/html").lower():
+        return []
+    return forms_of(r.url, r.text)
 
-def check0x00(web):
 
-    #print(R+'\n   ====================================================')
-    #print(R+'\n    C R O S S   S I T E   R E Q U E S T   F O R G E R Y')
-    #print(R+'   ---<>----<>----<>----<>----<>----<>----<>----<>----<')
+def pages_with_forms(web, depth: int, headers: dict) -> list[str]:
+    from core.methods import crawler  # late import: bs4/lxml
+    start = kit.url(web)
+    if depth <= 0:
+        return [start]
+    kit.info(f"Crawling {start} (depth {depth}) for forms...")
+    res = crawler.crawl(web, depth, max_pages=MAX_PAGES, headers=headers)
+    if res.error:
+        kit.warn(f"{res.error} Analysing the target page only.")
+    pages = list(dict.fromkeys(f.page for f in res.forms))
+    return pages or [start]
 
-    from core.methods.print import pvln
-    pvln("cross site request forgery") 
 
-    time.sleep(0.7)
-    print(O+' [This module has only full support for domains of startpages]')
-    print(O+'   [Hence, may not satisfactorily work for all domains]\n')
+def analyse(url: str, headers: dict):
+    """[(form, level, explanation)] for the state-changing forms of `url`.
 
-    if 'http' not in web:
-        web = 'http://' + web
+    `a` is the user's session (COOKIE/HEADERS), `b` a second visitor that
+    shares only the non-cookie headers, to see whether tokens are per session."""
+    other_headers = {k: v for k, v in headers.items() if k.lower() != "cookie"}
+    a, b = kit.http(headers=headers), kit.http(headers=other_headers)
+    first = fetch_forms(a, url)
+    again = {_key(f): f for f in fetch_forms(a, url)}
+    other = {_key(f): f for f in fetch_forms(b, url)}
+    cookies = cookie_flags(a)
+    supplied = any(k.lower() == "cookie" for k in headers)
+    out = []
+    for form in first:
+        if state_changing(form):
+            level, why = verdict(form, again.get(_key(form)), other.get(_key(form)), cookies, supplied)
+            out.append((form, level, why))
+    return out
 
-    # Just to make sure BeautifulSoup is working properly :)
-    form1="""<form action="/drupal/?q=node&amp;destination=node"  accept-charset="UTF-8" method="post" id="user-login-form">
-    <div><div class="form-item" id="edit-name-wrapper">
-     <label for="edit-name">Username: <span class="form-required" title="This field is required.">*</span></label>
-     <input type="text" maxlength="60" name="name" id="edit-name" size="15" value="test1" class="form-text required" />
-    </div>
-    <div class="form-item" id="edit-pass-wrapper">
-     <label for="edit-pass">Password: <span class="form-required" title="This field is required.">*</span></label>
-     <input type="password" value="a9z8e7" name="pass" id="edit-pass"  maxlength="60"  size="15"  class="form-text required" />
-    </div>
-    <input type="submit" name="op" id="edit-submit" value="Log in"  class="form-submit" />
-    <div class="item-list"><ul><li class="first"><a href="/drupal/?q=user/register" title="Create a new user account.">Create new account</a></li>
-    <li class="last"><a href="/drupal/?q=user/password" title="Request new password via e-mail.">Request new password</a></li>
-    </ul></div><input type="hidden" name="form_build_id" id="form-6a060c0861888b7321fab4f5ac6cb908" value="form-6a060c0861888b7321fab4f5ac6cb908"  />
-    <input type="hidden" name="form_id" id="edit-user-login-block" value="user_login_block"  />
-    </div></form> """
-
-    form2="""<form action="/drupal/?q=node&amp;destination=node"  accept-charset="UTF-8" method="post" id="user-login-form">
-    <div><div class="form-item" id="edit-name-wrapper">
-     <label for="edit-name">Username: <span class="form-required" title="This field is required.">*</span></label>
-     <input type="text" maxlength="60" name="name" id="edit-name" size="15" value="test2" class="form-text required" />
-    </div>
-    <div class="form-item" id="edit-pass-wrapper">
-     <label for="edit-pass">Password: <span class="form-required" title="This field is required.">*</span></label>
-     <input type="password" value="a9z8e7" name="pass" id="edit-pass"  maxlength="60"  size="15"  class="form-text required" />
-    </div>
-    <input type="submit" name="op" id="edit-submit" value="Log in"  class="form-submit" />
-    <div class="item-list"><ul><li class="first"><a href="/drupal/?q=user/register" title="Create a new user account.">Create new account</a></li>
-    <li class="last"><a href="/drupal/?q=user/password" title="Request new password via e-mail.">Request new password</a></li>
-    </ul></div><input type="hidden" name="form_build_id" id="form-6a060c0861888b7321fab4f5ac6cb908" value="form-6a060c0861888b7321fab4f5ac6cb908"  />
-    <input type="hidden" name="form_id" id="edit-user-login-block" value="user_login_block"  />
-    </div></form> """
-
-    Cookie0 = http.cookiejar.CookieJar()
-    Cookie1 = http.cookiejar.CookieJar()
-
-    resp1 = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(Cookie0))
-    resp2 = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(Cookie1))
-
-    actionDone = []
-
-    csrf=''
-    init1 = web
-    form = Form()
-
-    # Hope it works properly (no lxml error ;=;)
-    bs1=BeautifulSoup(form1).findAll('form',action=True)[0]
-    bs2=BeautifulSoup(form2).findAll('form',action=True)[0]
-
-    action = init1
-
-    resp1.open(action)
-    resp2.open(action)
-
-    crawler = Crawler(init1,resp1)
-    print(GR+" [*] Initializing crawling...")
-
-    global url
-    try:
-        vln = []
-        while crawler.noinit():
-            url = crawler.next()
-            print(C+' [+] Crawling :> ' +B+ url)
-
-            try:
-                soup=crawler.process(web)
-                if not soup:
-                    continue
-
-                i=0
-                print(O+' [*] Retrieving all forms on ' +C+ url +O+'...')
-                for m in getAllForms(soup):
-                    action = buildAction(url,m['action'])
-                    if not action in actionDone and action!='':
-                        try:
-                            print()
-                            result = form.prepareFormInputs(m)
-                            r1 = request(url, action, result, resp1)
-                            result = form.prepareFormInputs(m)
-                            r2 = request(url, action, result, resp2)
-
-                            if(len(csrf)>0):
-                                if not re.search(csrf, r2):
-                                    print(G+ '[+] Looks like we got a CSRF vulnerability on '+O+url+G+'!\n')
-                                    vln.append(url)
-                                    try:
-                                        if m['name']:
-                                            print(R+'\n  =====')
-                                            print(R+'   PoC')
-                                            print(R+'  =====\n')
-                                            print(B+' [+] URL : ' +P+url)
-                                            print(C+' [+] Name : ' +O+m['name'])
-                                            print(G+' [+] Action : ' +O+m['action'])
-
-                                    except KeyError:
-
-                                        print(R+'\n  =====')
-                                        print(R+'   PoC')
-                                        print(R+'  =====\n')
-                                        print(B+' [+] URL : ' +P+url)
-                                        print(G+' [+] Action : ' +O+m['action'])
-
-                                    print(O+' [+] Code : '+W+urllib.parse.urlencode(result))
-                                    print('')
-
-                                continue
-
-                            o2 = resp2.open(url).read()
-
-                            try:
-                                form2 = getAllForms(BeautifulSoup(o2))[i]
-
-                            except IndexError:
-                                print(R+' [-] Form Error')
-                                continue
-
-                            contents2 = form.prepareFormInputs(form2)
-                            r3 = request(url,action,contents2,resp2)
-
-                            checkdiff = difflib.ndiff(r1.splitlines(1),r2.splitlines(1))
-                            checkdiff0 = difflib.ndiff(r1.splitlines(1),r3.splitlines(1))
-
-                            result12 = []
-                            for n in checkdiff:
-                                if re.match('\+|-',n):
-                                    result12.append(n)
-                            result13 = []
-                            for n in checkdiff0:
-                                if re.match('\+|-',n):
-                                    result13.append(n)
-
-                            if len(result12)<=len(result13):
-
-                                try:
-                                    if m['name']:
-
-                                        print(R+'\n  =====')
-                                        print(R+'   PoC')
-                                        print(R+'  =====\n')
-                                        print(B+' [+] URL : ' +P+url)
-                                        print(C+' [+] Name : ' +O+m['name'])
-                                        print(G+' [+] Action : ' +W+m['action'])
-
-                                except KeyError:
-
-                                    print(R+'\n  =====')
-                                    print(R+'   PoC')
-                                    print(R+'  =====\n')
-                                    print(B+' [+] URL : ' +P+url)
-                                    print(G+' [+] Action : ' +W+m['action'])
-
-                                print(O+' [+] Code : '+W+urllib.parse.urlencode(result))
-                                print('')
-
-                        except urllib.error.HTTPError as msg:
-                            print(msg.__str__())
-                            pass
-
-                    actionDone.append(action)
-                    i+=1
-
-            except urllib.error.URLError as e:
-                print(R+' [-] Exception at %s' % url)
-                print(R+' [-] Error : '+str(e))
-                continue
-        if vln:
-            data = "Vulnerable Forms found! :> " + str(vln)
-            save_data(database, module, lvl1, lvl2, lvl3, name, data)
-        else:
-            save_data(database, module, lvl1, lvl2, lvl3, name, "No vulnerable forms found.")
-    except KeyboardInterrupt:
-        print(R+"\n [-] Interrupted by user")
 
 def csrf(web):
-    global name
-    name = targetname(web)
-    global lvl2
-    lvl2 = inspect.stack()[0][3]
-    global module
-    module = "VulnAnalysis"
-    global lvl1
-    lvl1 = "Critical Vulnerabilities"
-    global lvl3
-    lvl3 = ""
-    try:
-        time.sleep(0.5)
-        time.sleep(0.5)
-        check0x00(web)
-        print(G+" [+] Scan completed!")
-    except ssl.CertificateError:
-        print(R+" [-] This module only support domains of startpages...")
+    pvln("cross site request forgery")
+    record = kit.Recorder(web, kit.CRITICAL, "csrf")
+    depth = max(0, kit.integer(properties, "DEPTH", "Crawl depth", DEFAULT_DEPTH))
+    headers = kit.request_headers(properties)
+    results, seen = [], set()
+    for page in pages_with_forms(web, depth, headers):
+        for form, level, why in analyse(page, headers):
+            key = (_key(form), level)   # same form on many pages: report once per verdict
+            if key in seen:
+                continue
+            seen.add(key)
+            results.append((page, form, level, why))
 
-    except Exception:
-        pass
+    if not results:
+        kit.bad("No state-changing (POST) forms found.")
+        record("No state-changing (POST) forms found.")
+        return []
+
+    lines = []
+    for page, form, level, why in results:
+        label = LABELS[level]
+        fields = ", ".join(n for n, (t, _) in form["fields"].items() if t not in SKIP_TYPES)
+        line = f"[{label}] POST {form['action']} (form on {page}; fields: {fields}) -- {why}"
+        if level in RISKY:
+            kit.found(label, f"POST {form['action']}")
+        elif level == "possible":
+            kit.warn(f"{label}: POST {form['action']}")
+        else:
+            kit.info(f"{label}: POST {form['action']}")
+        kit.bullet(why, 6)
+        lines.append(line)
+    risky = [lvl for _, _, lvl, _ in results if lvl in RISKY]
+    print()
+    if risky:
+        kit.good(f"{len(risky)} of {len(results)} form(s) lack effective CSRF protection "
+                 "(heuristic: confirm by replaying the request cross-site).")
+    else:
+        review = sum(1 for _, _, lvl, _ in results if lvl == "possible")
+        kit.bad(f"No clearly unprotected forms among {len(results)} state-changing form(s)"
+                + (f"; {review} without a token need review (see above)." if review else "."))
+    record(["Heuristic CSRF analysis (per form):"] + lines)
+    return results
+
 
 def attack(web):
-    web = web.fullurl
     csrf(web)

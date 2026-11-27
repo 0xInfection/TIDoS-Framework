@@ -1,0 +1,19 @@
+__pycache__/
+*.py[co]
+
+# OS / editor cruft
+.DS_Store
+.directory
+
+# engagement data -- never commit
+core/database/tidos.db
+tmp/logs/*-logs/
+
+# downloaded tools (Katana, fetched on first crawl)
+tools/bin/
+
+# python build / editable-install artifacts
+*.egg-info/
+build/
+dist/
+.venv/

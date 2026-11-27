@@ -1,39 +1,42 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-
-# -:-:-:-:-:-:-:-:-:-:-:-:#
+#
+#-:-:-:-:-:-:-:-:-:-:-:-:#
 #    TIDoS Framework     #
-# -:-:-:-:-:-:-:-:-:-:-:-:#
+#-:-:-:-:-:-:-:-:-:-:-:-:#
 
-# This file is a part of TIDoS Framework
+# This module requires TIDoS Framework
 # https://github.com/0xInfection/TIDoS-Framework
 
-xpath_errors = [
-    "::xpath()",
-    "XPATH syntax error\\:",
-    "XPathException",
-    "XPath\\:",
-    "XPath\\(\\)",
-    "System.Xml.XPath.XPathException\\:",
-    "MS\\.Internal\\.Xml\\.",
-    "Unknown error in XPath",
-    "org.apache.xpath.XPath",
-    "A closing bracket expected in",
-    "An operand in Union Expression does not produce a node-set",
-    "Cannot convert expression to a number",
-    "Document Axis does not allow any context Location Steps",
-    "Empty Path Expression",
-    "Empty Relative Location Path",
-    "Empty Union Expression",
-    "Expected \\'\\)\\' in",
-    "Expected node test or name specification after axis operator",
-    "Incompatible XPath key",
-    "Incorrect Variable Binding",
-    "libxml2 library function failed",
-    "xmlsec library function",
-    "error \\'80004005\\'",
-    "A document must contain exactly one root element\\.",
-    "Expected token \\']\\'",
-    "\\<p\\>msxml4.dll\\<\\/font\\>",
-    "4005 Notes error: Query is not understandable"
+"""
+XPath error signatures: (label, case-insensitive regex).
+
+Only messages that XPath engines emit for a malformed expression. Generic
+XML-parser and COM errors (libxml2 failures, 80004005, "exactly one root
+element") were dropped. The scanner additionally requires the signature to
+be absent from the baseline responses.
+"""
+
+XPATH_ERRORS = [
+    (".NET XPathException", r"System\.Xml\.XPath\.XPathException"),
+    (".NET MS.Internal.Xml", r"MS\.Internal\.Xml\.XPath"),
+    (".NET token", r"(?:'[^']{0,80}' has an invalid token|Expected token '[\])]')"),
+    ("Java XPathExpressionException", r"javax\.xml\.xpath\.XPathExpressionException"),
+    ("Xalan", r"org\.apache\.xpath\.(?:XPath|compiler)\w*|com\.sun\.org\.apache\.xpath"),
+    ("Saxon", r"net\.sf\.saxon\.(?:trans|s9api)\.\w*Exception|XPST0003"),
+    ("PHP DOMXPath", r"DOMXPath::(?:query|evaluate)\(\)[^<\n]{0,80}(?:Invalid expression|Invalid predicate|Unfinished literal)"),
+    ("PHP SimpleXML xpath", r"SimpleXMLElement::xpath\(\)[^<\n]{0,80}Invalid"),
+    ("libxml2 XPath", r"XPath error\s*:?\s*(?:Invalid (?:expression|predicate)|Unfinished literal|"
+                      r"Undefined namespace prefix|Invalid number of arguments)"),
+    ("lxml XPathEvalError", r"lxml\.etree\.XPath(?:Eval|Syntax)Error|XPath(?:Eval|Syntax)Error"),
+    ("Python ElementTree", r"SyntaxError: (?:invalid predicate|prefix .{1,40} not found in prefix map)"),
+    ("XPathException", r"\bXPathException\b"),
+    ("Unknown error in XPath", r"Unknown error in XPath"),
+    ("XPATH syntax error", r"XPATH syntax error"),
+    ("MSXML", r"msxml\d?\.dll[^<\n]{0,80}(?:expected|unfinished|token)"),
+    ("XPath operand", r"An operand in Union Expression does not produce a node-set|"
+                      r"Expected node test or name specification after axis operator|"
+                      r"Document Axis does not allow any context Location Steps|"
+                      r"Empty (?:Path|Relative Location Path|Union) Expression"),
+    ("Lotus Notes", r"Notes error: Query is not understandable"),
 ]

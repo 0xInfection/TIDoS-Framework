@@ -1,5 +1,13 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+#
+#-:-:-:-:-:-:-:-:-:-:-:-:#
+#    TIDoS Framework     #
+#-:-:-:-:-:-:-:-:-:-:-:-:#
+
+# This module requires TIDoS Framework
+# https://github.com/0xInfection/TIDoS-Framework
+
 """
 _____, ___
    '+ .;.    
@@ -79,7 +87,9 @@ def set(mod, param, value):
     try:
         try:
             j = imp.import_module(vars.module)
-            j.properties[param][1] = value
+            # replace, don't mutate: option entries shared between modules
+            # (inject.OPTIONS, kit.AUTH_OPTIONS) must not leak a value set in one
+            j.properties[param] = [j.properties[param][0], value]
             #print("{} > {}".format(param, value))
             print(O+param+C+color.TR3+C+G+value+C+color.TR2+C)
         except ImportError:

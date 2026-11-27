@@ -1,17 +1,18 @@
 #!/usr/bin/env python3
-# coding: utf-8
-
-# -:-:-:-:-:-:-:-:-:-:-:-:#
+# -*- coding: utf-8 -*-
+#
+#-:-:-:-:-:-:-:-:-:-:-:-:#
 #    TIDoS Framework     #
-# -:-:-:-:-:-:-:-:-:-:-:-:#
+#-:-:-:-:-:-:-:-:-:-:-:-:#
 
 # This module requires TIDoS Framework
 # https://github.com/0xInfection/TIDoS-Framework
 
-
-
 import os
+import shutil
 import socket
+import subprocess
+import sys
 import time
 import string
 
@@ -55,7 +56,7 @@ def inputin(target):
             try:
                 port = int(inport)
                 assert port in range(1, 65535)
-            except:
+            except (ValueError, AssertionError):
                 print(R+" [!] Not a valid port value"+C)
         print(GR + ' [*] Checking server status...')
         time.sleep(0.6)
@@ -67,7 +68,9 @@ def inputin(target):
             print(O + ' [+] IP Detected :' + C+color.TR3+C+G + ip+C+color.TR2+C)
             time.sleep(0.5)
             print('')
-            os.system('cd tmp/logs/ && rm -rf ' + po + '-logs && mkdir ' + po + '-logs/')
+            logdir = os.path.join("tmp", "logs", po + "-logs")
+            shutil.rmtree(logdir, ignore_errors=True)
+            os.makedirs(logdir, exist_ok=True)
             user = input(" [?] Enter username (leave blank if none): ")
             passwd = input(" [?] Enter password (leave blank if none): ")
             webfin = web
@@ -116,7 +119,9 @@ def inputip(target, net=False):
     if net:
         vars.targets.append(newTarget)
         print(O+" [+] Target added:"+C+color.TR3+C+G+target+C+color.TR2+C)
-    elif os.system("ping -c 1 -q -W 5 " + target + " > /dev/null") == 0:
+    elif subprocess.run(
+            ["ping", "-c", "1", "-q", "-t" if sys.platform == "darwin" else "-W", "5", target],
+            stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL).returncode == 0:
         vars.targets.append(newTarget)
         print(O+" [+] Target added:"+C+color.TR3+C+G+target+C+color.TR2+C)
     else:
@@ -134,9 +139,10 @@ def inputnet(target):
             sca.properties["IP"][1] = range
             sca.properties["NMASK"][1] = mask
             targets = sca.attack("")
-            s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-            s.connect(('google.com', 0))
-            attackerip = s.getsockname()[0].strip()
+            # a UDP connect sends nothing; it only selects our outgoing address
+            with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
+                s.connect(("192.0.2.1", 9))
+                attackerip = s.getsockname()[0]
             for targetip in targets:
                 if targetip != attackerip:
                     inputip(targetip, net=True)

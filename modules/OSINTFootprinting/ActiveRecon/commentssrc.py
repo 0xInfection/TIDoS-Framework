@@ -1,101 +1,65 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-
+#
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 #    TIDoS Framework     #
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 
-#Author: @_tID
-#This module requires TIDoS Framework
-#https://github.com/0xInfection/TIDoS-Framework
+# This module requires TIDoS Framework
+# https://github.com/0xInfection/TIDoS-Framework
 
+"""Comment scraper -- HTML comments left in the target's pages."""
 
-import lxml
-import os
-from core.methods.tor import session
+from __future__ import annotations
+
 import re
-import requests as wrn
-import time
-from bs4 import BeautifulSoup
-import sys
-from core.Core.colors import *
-found = 0x00
-urls = []
-links = []
 
-from core.database.database_module import save_data
-from core.variables import database
-from core.methods.cache import targetname
-import inspect
+from core.methods import harvest
+from core.methods import modkit as kit
+from core.methods.print import posintact
 
-info = "This module hunts down comments in the source code. It is recommended to run the crawlers before using this module."
+info = ("This module hunts down HTML comments in the source code of the target page "
+        "and of the same-host pages it links to.")
 searchinfo = "Comment Scraper"
-properties = {}
+properties = {
+    "CRAWL": ["Also scan same-host pages linked from the target (y/n)", ""],
+    **kit.AUTH_OPTIONS,
+}
+
+COMMENT = re.compile(r"<!--(.*?)-->", re.S)
+
+
+def extract(body: str) -> list[str]:
+    """Unique, whitespace-normalised, non-empty comments of a page."""
+    comments = (" ".join(c.split()) for c in COMMENT.findall(body))
+    return list(dict.fromkeys(c for c in comments if c))
+
 
 def commentssrc(web):
-    name = targetname(web)
-    lvl2 = "commentssrc"
-    module = "ReconANDOSINT"
-    lvl1 = "Active Reconnaissance"
-    lvl3 = ""
-    requests = session()
-    #print(R+'\n    =================================')
-    #print(R+'     C O M M E N T S   S C R A P E R')
-    #print(R+'    =================================')
-    from core.methods.print import posintact
-    posintact("comment scraper") 
-    print(C+' [It is recommended to run ScanEnum/Crawlers')
-    print(C+'       before running this module]\n')
-    print(GR+' [*] Importing links...')
-    po = web.split('//')[1]
-    #p = 'tmp/logs/'+po+'-logs/'+po+'-links.lst'
-    links = [web]
+    posintact("comment scraper")
+    deep = kit.flag(properties, "CRAWL", "Also scan pages linked from the target?", True)
+    pages = harvest.crawl(web, deep, headers=kit.request_headers(properties))
+    record = kit.Recorder(web, kit.ACTIVE, "commentssrc")
 
-    for w in links:
-        print(GR+' [*] Making the request...')
-        req = requests.get(w).text
-        print(C+' [!] Setting parse parameters...')
-        comments = re.findall('<!--(.*)-->', req)
-        print(O+" [+] Searching for comments on page:"+C+color.TR3+C+G+web+C+color.TR2+C+'\n')
-        for comment in comments:
-            print(C+'   '+comment)
-            save_data(database, module, lvl1, lvl2, lvl3, name, comment)
-            time.sleep(0.03)
-            found = 0x01
+    everything = {}
+    for page, body in pages.items():
+        comments = extract(body)
+        if not comments:
+            continue
+        kit.found("Comments on page", page)
+        for c in comments:
+            kit.bullet(c)
+        everything.update(dict.fromkeys(comments))
 
-    soup = BeautifulSoup(req,'lxml')
-    for line in soup.find_all('a'):
-        newline = line.get('href')
-        try:
-            if newline[:4] == "http":
-                if web in newline:
-                    urls.append(str(newline))
-            elif newline[:1] == "/":
-                combline = web+newline
-                urls.append(str(combline))
-        except Exception:
-            pass
-            print(R+' [-] Unhandled Exception Occured!')
+    if everything:
+        kit.good(f"{len(everything)} unique comment(s) across {len(pages)} page(s)")
+        record(list(everything))
+    elif pages:
+        kit.bad("No comments found in source code!")
+        record("No comments found in source code.")
+    kit.good("Comments scraping done!")
+    return list(everything)
 
-    try:
-        for uurl in urls:
-            print(O+"\n [+] Searching for comments on page: "+C+color.TR3+C+G+uurl+C+color.TR2+C+'\n')
-            req = requests.get(uurl)
-            comments = re.findall('<!--(.*)-->',req.text)
-            for comment in comments:
-                print(C+'   '+comment)
-                save_data(database, module, lvl1, lvl2, lvl3, name, comment)
-                time.sleep(0.03)
-
-    except Exception:
-        print(R+' [-] Outbound Query Exception...')
-
-    if found == 0x00:
-        print(R+' [-] No comments found in source code!')
-        save_data(database, module, lvl1, lvl2, lvl3, name, "No comments found in source code.")
-
-    print(G+' [+] Comments Scraping Done!'+C+color.TR2+C)
 
 def attack(web):
-    web = web.fullurl
     commentssrc(web)

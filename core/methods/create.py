@@ -1,5 +1,13 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+#
+#-:-:-:-:-:-:-:-:-:-:-:-:#
+#    TIDoS Framework     #
+#-:-:-:-:-:-:-:-:-:-:-:-:#
+
+# This module requires TIDoS Framework
+# https://github.com/0xInfection/TIDoS-Framework
+
 """
 _____, ___
    '+ .;    
@@ -19,6 +27,8 @@ _____, ___
 
 import argparse
 import os
+import shutil
+from pathlib import Path
 
 p = argparse.ArgumentParser()
 p.add_argument('intype',
@@ -33,6 +43,9 @@ p.add_argument('user',
 args = p.parse_args()
 print(args.intype)
 if args.intype == "OPT":
-    os.system("touch /opt/TIDoS/core/sessioncache/syn.val && chown {0}:{0} /opt/TIDoS/core/sessioncache/syn.val".format(args.user))
+    synval = Path("/opt/TIDoS/core/sessioncache/syn.val")
 else:
-    os.system("touch /home/{0}/TIDoS/core/sessioncache/syn.val && chown {0}:{0} /home/{0}/TIDoS/core/sessioncache/syn.val".format(args.user))
+    synval = Path("/home/{0}/TIDoS/core/sessioncache/syn.val".format(args.user))
+synval.parent.mkdir(parents=True, exist_ok=True)
+synval.touch(exist_ok=True)
+shutil.chown(synval, user=args.user, group=args.user)

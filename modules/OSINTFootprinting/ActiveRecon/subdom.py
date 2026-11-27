@@ -1,164 +1,142 @@
 #!/usr/bin/env python3
-# coding: utf-8
-
+# -*- coding: utf-8 -*-
+#
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 #    TIDoS Framework     #
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 
-#Author : @_tID
-#This module requires TIDoS Framework
-#https://github.com/0xInfection/TIDoS-Framework
+# This module requires TIDoS Framework
+# https://github.com/0xInfection/TIDoS-Framework
 
+"""Subdomain gatherer -- concurrent DNS bruteforce plus passive sources."""
 
-import time
 import os
+import socket
 import sys
-from core.methods.tor import session
-from time import sleep
-from tld import get_fld
-from core.Core.colors import *
-from core.database.database_module import save_data
-from core.variables import database
-from core.methods.cache import targetname
-import inspect
+import uuid
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
-sublist = []
-flist = []
-found = []
-total = []
+import core.variables as variables
+from core.methods import modkit as kit
+from core.methods.print import posintact
 
-info = "This module tries to find subdomains and stores them in a file."
+info = ("Finds subdomains of the target's domain by concurrent DNS bruteforce "
+        "(wildcard DNS aware) and passive sources (HackerTarget hostsearch, crt.sh "
+        "certificate transparency). Results are stored in the database and in "
+        "tmp/logs/<host>-logs/<host>-subdomains.lst.")
 searchinfo = "Subdomain Gatherer"
-properties = {}
+properties = {
+    "WORDLIST": ["Wordlist of subdomain labels to bruteforce", ""],
+    "BRUTE": ["Bruteforce subdomains over DNS (y/n)", ""],
+    "PASSIVE": ["Query passive sources: HackerTarget, crt.sh (y/n)", ""],
+}
 
-def subdombrute(web):
+DEFAULT_WORDLIST = "files/fuzz-db/subdomain_paths.lst"
+CLEAR_LINE = "\r\033[K"
+
+
+def resolve(name):
+    """Set of IPv4 addresses for `name` (empty if it does not resolve)."""
     try:
-        print(GR+' [*] Importing wordlist path to be bruteforced... "files/subdomains.lst"')
-        with open('files/fuzz-db/subdomain_paths.lst','r') as lol:
-            for path in lol:
-                a = path.replace("\n","")
-                sublist.append(a)
+        return set(socket.gethostbyname_ex(name)[2])
+    except (OSError, UnicodeError):
+        return set()
 
-    except IOError:
-        print(R+' [-] Wordlist not found!')
 
-    global found
-    if 'http://' in web:
-        web = web.replace('http://','')
-    elif 'https://' in web:
-        web = web.replace('https://','')
-    else:
-        pass
+def bruteforce(domain, labels):
+    wildcard = resolve(f"{uuid.uuid4().hex[:16]}.{domain}")
+    if wildcard:
+        kit.warn(f"Wildcard DNS detected ({', '.join(sorted(wildcard))}); "
+                 "ignoring hits that resolve only there.")
 
-    web = 'http://' + web
-
-    tld0 = get_fld(web)
-
-    if len(sublist) > 0:
-        for m in sublist:
-            furl = str(m) + '.' + str(tld0)
-            flist.append(furl)
-
-    if flist:
-        time.sleep(0.5)
-        print(R+'\n      B R U T E F O R C E R')
-        print(R+'     ---<>----<>----<---<>--\n')
-        print(GR+' [*] Bruteforcing for possible subdomains...')
-        for url in flist:
-            if 'http://' in url:
-                url = url.replace('http://','')
-            elif 'https://' in url:
-                url = url.replace('https://','')
-
-            try:
-                ip = socket.gethostbyname(url)
-                print('\n'+O+' [+] Subdomain Found :'+C+color.TR3+C+G+url+C+color.TR2+C+P+'\t\t['+str(ip)+']')
-                found.append(url)
-            except Exception:
-                sys.stdout.write(B+'\r [*] Checking : '+C+url)
-                sys.stdout.flush()
+    names = [f"{label.strip('.')}.{domain}" for label in labels]
+    workers = max(1, min(variables.processes, 64))
+    progress = sys.stdout.isatty()
+    found = {}
+    kit.info(f"Bruteforcing {len(names)} names with {workers} threads...")
+    with ThreadPoolExecutor(max_workers=workers) as pool:
+        futures = {pool.submit(resolve, n): n for n in names}
+        for done, fut in enumerate(as_completed(futures), 1):
+            name, ips = futures[fut], fut.result()
+            if ips and not ips <= wildcard:
+                found[name] = ips
+                if progress:
+                    print(CLEAR_LINE, end="")
+                kit.found("Subdomain found", f"{name}  [{', '.join(sorted(ips))}]")
+            if progress:
+                print(f"{CLEAR_LINE} [*] {done}/{len(names)} names checked", end="", flush=True)
+    if progress:
+        print(CLEAR_LINE, end="")
     return found
 
-def outer(web):
-    requests = session()
-    global final
-    final = []
-    wew = []
-    time.sleep(0.4)
-    print(R+'\n    A P I   R E T R I E V E R  ')
-    print(R+'   ---<>----<>----<---<>----<>')
 
-    print(GR + color.BOLD + ' [!] Retriving subdomains...')
-    time.sleep(0.4)
-    print(""+ GR + color.BOLD + " [~] Result: "+ color.END)
-    dom = 'http://' + web
-    text = requests.get('http://api.hackertarget.com/hostsearch/?q=' + dom).text
-    result = str(text)
-    if 'error' not in result:
-        print(color.END + result+C)
-        mopo = result.splitlines()
-        for mo in mopo:
-            ro = mo.split(',')[0]
-            final.append(str(ro))
+def hackertarget(session, domain):
+    text = kit.hackertarget("hostsearch", domain, timeout=40)
+    if text is None:
+        return None  # kit already said why
+    return [line.split(",")[0] for line in text.splitlines() if "," in line]
 
-def report(web, found, final):
 
-    print(R+'\n   R E P O R T')
-    print(R+'  ---<>----<>--\n')
-    if ((len(found) > 0) or (len(final) > 0)):
-        print(O+' [!] Subdomains found for'+C+color.TR3+C+G+web+C+color.TR2+C)
-        print(C+'  |')
-        for m in found:
-            print(C+ '  +-- ' +GR+ m)
-            total.append(m)
-        for p in final:
-            if p not in found:
-                print(C+ '  +-- '+GR+p)
-                total.append(p)
+def crtsh(session, domain):
+    r = session.get("https://crt.sh/", params={"q": f"%.{domain}", "output": "json"})
+    r.raise_for_status()
+    return [n for entry in r.json() for n in entry.get("name_value", "").split("\n")]
 
-    else:
-        print(R+' [-] No Subdomains found for ' + O+web+C)
-    print('\n')
-    return total
+
+def passive(domain):
+    session = kit.http(timeout=40)
+    names = set()
+    for label, source in (("HackerTarget", hackertarget), ("crt.sh", crtsh)):
+        kit.info(f"Querying {label}...")
+        try:
+            hits = source(session, domain)
+        except Exception as e:
+            kit.bad(f"{label} failed: {str(e)[:120] or type(e).__name__}")
+            continue
+        if hits is None:
+            continue
+        hits = {h.strip().lower().lstrip("*.") for h in hits}
+        hits = {h for h in hits if h.endswith("." + domain)}
+        kit.good(f"{label}: {len(hits)} subdomains")
+        names |= hits
+    return names
+
 
 def subdom(web):
-    name = targetname(web)
-    global fileo
-
-    if 'http' in web:
-        web = web.replace('http://','')
-        web = web.replace('https://','')
-    webb = web
-    if "@" in web:
-        webb = web.split("@")[1]
-    fileo = 'tmp/logs/'+webb+'-logs/'+str(webb)+'-subdomains.lst'
-    p = open(fileo,'w+')
-    p.close
-    #print(R+'\n   =====================================')
-    #print(R+'    S U B D O M A I N   G A T H E R E R')
-    #print(R+'   =====================================\n')
-    from core.methods.print import posintact
     posintact("subdomain gatherer")
-    time.sleep(0.7)
-    print(B+' [*] Initializing Step [1]...')
-    subdombrute(web)
-    print(C+'\n [+] Module [1] Bruteforce Completed!\n')
-    print(B+' [*] Initializing Step [2]...')
-    outer(web)
-    print(C+' [+] Module [2] API Retriever Completed!\n')
-    acc = report(web, found, final)
-    print(C+' [*] Writing found subdomains to DB...')
-    lvl2 = "subdom"
-    module = "ReconANDOSINT"
-    lvl1 = "Active Reconnaissance"
-    lvl3 = ""
-    if acc:
-        for pwn in acc:
-            save_data(database, module, lvl1, lvl2, lvl3, name, str(pwn))
-    else:
-        save_data(database, module, lvl1, lvl2, lvl3, name, "No subdomains found for "+web)
-    print(C+' [+] Done!')
+    record = kit.Recorder(web, kit.ACTIVE, "subdom")
+    domain = kit.domain(web)
+    if kit.is_ip(domain):
+        kit.bad("Target is an IP address; subdomain enumeration needs a domain name.")
+        return []
+
+    results = set()
+    if kit.flag(properties, "BRUTE", "Bruteforce subdomains over DNS", True):
+        labels = kit.wordlist(kit.option(properties, "WORDLIST", "Subdomain wordlist",
+                                         DEFAULT_WORDLIST))
+        if labels:
+            results |= set(bruteforce(domain, labels))
+    if kit.flag(properties, "PASSIVE", "Query passive sources", True):
+        results |= passive(domain)
+
+    subs = sorted(results)
+    if not subs:
+        kit.bad(f"No subdomains found for {domain}")
+        record(f"No subdomains found for {domain}")
+        return subs
+
+    kit.good(f"{len(subs)} subdomains found for {domain}")
+    for s in subs:
+        kit.bullet(s)
+    logs = kit.logdir(web)
+    stem = os.path.basename(logs)[:-len("-logs")]
+    path = os.path.join(logs, f"{stem}-subdomains.lst")
+    with open(path, "w") as fh:
+        fh.write("\n".join(subs) + "\n")
+    kit.info(f"Saved to {path}")
+    record(subs)
+    return subs
+
 
 def attack(web):
-    web = web.fullurl
     subdom(web)

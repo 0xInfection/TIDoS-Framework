@@ -1,105 +1,105 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-
+#
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 #    TIDoS Framework     #
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 
-#Author : @_tID
-#This module requires TIDoS Framework
-#https://github.com/0xInfection/TIDoS-Framework
+# This module requires TIDoS Framework
+# https://github.com/0xInfection/TIDoS-Framework
 
+"""Censys domain recon (Censys Platform API) -- passive recon."""
 
-import os
+from __future__ import annotations
+
 import json
-from core.methods.tor import session
-import time
-from core.Core.colors import *
+import os
 
-from core.database.database_module import save_data
-from core.variables import database
-from core.methods.cache import targetname
-import inspect
+from core.methods import modkit as kit
+from core.methods.print import posintpas
 
-info = "Find information about domains using CENSYS."
+info = "Find information about domains using CENSYS (needs a Censys Platform personal access token)."
 searchinfo = "CENSYS Domain Recon"
-properties = {}
+properties = {
+    "PORTS": ["Web property ports to look up, comma separated", ""],
+}
+
+API = "https://api.platform.censys.io/v3/global/asset/webproperty/"
+
+
+def flatten(obj, prefix: str = ""):
+    """Yield ('a.b[0].c', value) pairs for a JSON document."""
+    if isinstance(obj, dict):
+        for k, v in obj.items():
+            yield from flatten(v, f"{prefix}.{k}" if prefix else k)
+    elif isinstance(obj, list):
+        for i, v in enumerate(obj):
+            yield from flatten(v, f"{prefix}[{i}]")
+    else:
+        yield prefix, obj
+
+
+def lookup(session, prop: str) -> dict | None:
+    resp = session.get(API + prop)
+    if resp.status_code == 200:
+        return resp.json().get("result", {}).get("resource") or {}
+    try:
+        err = resp.json().get("error", {})
+        msg = err.get("message", err) if isinstance(err, dict) else err
+    except ValueError:
+        msg = resp.reason
+    if resp.status_code in (401, 403):
+        raise PermissionError(f"Censys refused the token (HTTP {resp.status_code}): {msg}")
+    if resp.status_code == 429:
+        raise PermissionError("Censys quota exceeded; try again later or use your own token.")
+    kit.bad(f"{prop}: HTTP {resp.status_code} {msg}")
+    return None
+
 
 def censysdom(web):
-    name = targetname(web)
-    module = "ReconANDOSINT"
-    lvl1 = "Passive Reconnaissance & OSINT"
-    lvl2 = inspect.stack()[0][3]
-    lvl3 = ""
-    requests = session()
-    #print(R+'\n    =======================================')
-    #print(R+'     C E N S Y S   D O M A I N   R E C O N')
-    #print(R+'    =======================================\n')
-    from core.methods.print import posintpas
-    posintpas("censys domain recon") 
+    posintpas("censys domain recon")
+    token = kit.apikey("CENSYS_API_TOKEN")
+    if not token:
+        kit.bad("Censys Search v1/v2 was decommissioned; create a Platform personal access token.")
+        return {}
+    name = kit.host(web)
+    ports = [p.strip() for p in kit.option(properties, "PORTS", "Ports", "443,80").split(",")
+             if p.strip().isdigit()]
+    session = kit.http(timeout=20, headers={"Authorization": f"Bearer {token}",
+                                            "Accept": "application/json"})
 
-    time.sleep(0.6)
-    print(GR+' [*] Importing API Key...')
-    try:
-        from files.API_KEYS import CENSYS_UID, CENSYS_SECRET
-    except IOError as ImportError:
-        print(R+' [-] Error while importing key...')
+    results = {}
+    for port in ports:
+        prop = f"{name}:{port}"
+        kit.info(f"Looking up web property {prop}...")
+        try:
+            data = lookup(session, prop)
+        except PermissionError as e:
+            kit.bad(str(e))
+            return {}
+        except Exception as e:
+            kit.bad(f"Request to Censys failed: {e}")
+            continue
+        if not data:
+            continue
+        results[prop] = data
+        kit.good(f"Found info for {prop}!")
+        kit.kv_table(flatten(data))
 
-    web = web.split('//')[1]
-    if "@" in web:
-        web = web.split("@")[1]
-    if CENSYS_SECRET != '' and CENSYS_UID != '':
-        print(O+' [+] Found Censys UID Key : '+C+color.TR3+C+G+CENSYS_UID+C+color.TR2+C)
-        print(O+' [+] Found Censys Secret Token : '+C+color.TR3+C+G+CENSYS_SECRET+C+color.TR2+C)
-        base_url = 'https://www.censys.io/api/v1'
-        print(GR+' [*] Looking up info...')
-        time.sleep(0.7)
-        resp = requests.get(base_url + "/view/websites/"+web, auth=(CENSYS_UID, CENSYS_SECRET))
-        if 'quota_exceeded' in resp.text:
-            print(R+' [-] Daily limit reached for this module. Use you own API key for CENSYS.')
+    record = kit.Recorder(web, kit.PASSIVE, "censysdom")
+    if not results:
+        kit.bad(f"Did not find any info about domain {name}.")
+        record(f"Did not find any info about domain {name}")
+        return {}
 
-        if resp.status_code == 200:
+    dump = json.dumps(results, indent=4, ensure_ascii=True)
+    record(dump)
+    path = os.path.join(kit.logdir(web), f"{name}-censys-data.json")
+    with open(path, "w") as fh:
+        fh.write(dump)
+    kit.good(f"Censys data stored in {os.path.abspath(path)}")
+    return results
 
-            print(G+' [+] Found domain info!'+C+color.TR2+C)
-            w = resp.text.encode('utf-8')
-            asio = json.dumps(resp.json(), indent=4)
-            data = asio.splitlines()
-            save_data(database, module, lvl1, lvl2, lvl3, name, str(data))
-            quest = asio.splitlines()
-            print(O+' [!] Parsing info...'+C+'\n')
-            time.sleep(1)
-            for q in quest:
-                q = q.replace('"','')
-                if ':' in q and '[' not in q and '{' not in q:
-                    q1 = q.split(':',1)[0].strip().title()
-                    q2 = q.split(':',1)[1].strip().replace(',','')
-                    print(C+'   [+] '+q1+' : '+GR+q2)
-                    time.sleep(0.01)
-
-                elif ('{' or '[' in q) and (':' in q):
-                    w1 = q.split(':',1)[0].strip().upper()
-                    w2 = q.split(':',1)[1].strip()
-                    print(C+'\n [+] '+w1+' :-'+'\n')
-
-                elif '{' not in q and '[' not in q and ']' not in q and '}' not in q:
-                    print(GR+'   [+] '+q.replace(',','').strip())
-
-            print(C+' [!] Saving retrieved CENSYS data...')
-            time.sleep(1)
-            with open('tmp/logs/'+web+'-logs/'+web+'-censys-data.json', 'w+') as file:
-                json.dump(resp.json(), file, ensure_ascii=True,indent=4)
-                eq = os.getcwd()
-                print(C+' [+] Censys Data stored '+eq+'/tmp/logs/'+web+'-logs/'+web+'-censys-data.json')
-
-        else:
-            print(R+' [-] Did not find any info about domain '+O+web+C)
-            print(R+' [+] Try with another one...')
-            save_data(database, module, lvl1, lvl2, lvl3, name, "Did not find any info about domain "+web)
-
-    else:
-        print(R+' [-] CENSYS API TOKENs not set!')
-        print(R+' [-] This module cannot be used!')
 
 def attack(web):
-    web = web.fullurl
     censysdom(web)

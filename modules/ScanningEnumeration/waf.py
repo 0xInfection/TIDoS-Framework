@@ -1,155 +1,118 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-
+#
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 #    TIDoS Framework     #
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 
-#Author: @_tID
-#This module requires TIDoS Framework
-#https://github.com/0xInfection/TIDoS-Framework
+# This module requires TIDoS Framework
+# https://github.com/0xInfection/TIDoS-Framework
 
+"""WAF fingerprinter -- names the firewall / filtering proxy in front of the target.
 
-import os
-import re
-import sys
-import time
+Detection is delegated to wafw00f (https://github.com/EnableSecurity/wafw00f),
+which ships ~170 WAF/CDN signatures and is maintained upstream. wafw00f drives
+its own requests, so when `tor on` is active we hand it our Tor SOCKS proxy.
+"""
+
+from __future__ import annotations
+
+import logging
+
 import requests
-sys.path.append('files/signaturedb/waf/')
-from core.Core.colors import *
-from modules.ScanningEnumeration.wafimpo import *
 
-from time import sleep
-from core.database.database_module import save_data
-from core.variables import database
-from core.methods.cache import targetname
-import inspect
+import core.variables as variables
+from core.methods import modkit as kit
+from core.methods import tor
+from core.methods.print import pscan
 
-wafs = ['Airlock','Anquanboa','Armor','Asm','AWS','Baidu','Barracuda','BetterWPSecurity','F5 BigIP','BinarySec','BlackDoS','Cisco ACE XML',
- 'Cloudflare','Cloudfront','Comodo','Data Power','Deny All','Dot Defender','Edge Cast','Expression Engine','Forti Web','Hyper Guard','Incapsula',
- 'Isa Server','Jiasule','Known Sec','Kona','ModSecurity','Net Continuum','Net Scaler','New Defense','NS Focus','Palo Alto','Profense', 'Radware',
-'RequestValidation Mode','Safe3','SafeDog','Secure IIS','Secure Ngnix','Site Lock','Sonic Wall','Sophos','Sting Ray','Sucuri','Teros',
-'Traffic Sheild','URL Scan','USPSes','Varnish','Wall Alarm','Web Knight','Yundun','Yunsuo']
-
-info = "This module tries to fingerprint the firewall the targeted Web application uses."
+info = ("This module fingerprints the firewall the targeted Web application sits "
+        "behind. It uses wafw00f, which sends a normal request and a batch of "
+        "attack requests (SQLi, XSS, LFI, ...) and matches ~170 WAF/CDN signatures "
+        "(vendor headers, cookies, server banners and block pages). If no product "
+        "matches but the target still behaves defensively, it reports a generic, "
+        "unidentified WAF/filter and the evidence for it.")
 searchinfo = "Firewall Fingerprinter"
 properties = {}
 
-def getReq0x00(web):
 
-    print(C+' [!] Making the request...')
-    req = requests.get(web)
-    sleep(0.7)
-    return req.headers,req.content
+def _proxies():
+    """wafw00f-style proxy dict honouring `tor on`, or None for a direct connection."""
+    if variables.tor:
+        return {"http": tor.TOR_PROXY, "https": tor.TOR_PROXY}
+    return None
 
-def detectWaf0x00(headers,content):
-
-    waf0x00 = (
-            airlock(headers,content),
-            anquanboa(headers,content),
-            armor(headers,content),
-            asm(headers,content),
-            aws(headers,content),
-            baidu(headers,content),
-            barracuda(headers,content),
-            betterwpsecurity(headers,content),
-            bigip(headers,content),
-            binarysec(headers,content),
-            blockdos(headers,content),
-            ciscoacexml(headers,content),
-            cloudflare(headers,content),
-            cloudfront(headers,content),
-            comodo(headers,content),
-            datapower(headers,content),
-            denyall(headers,content),
-            dotdefender(headers,content),
-            edgecast(headers,content),
-            expressionengine(headers,content),
-            fortiweb(headers,content),
-            hyperguard(headers,content),
-            incapsula(headers,content),
-            isaserver(headers,content),
-            jiasule(headers,content),
-            knownsec(headers,content),
-            kona(headers,content),
-            modsecurity(headers,content),
-            netcontinuum(headers,content),
-            netscaler(headers,content),
-            newdefend(headers,content),
-            nsfocus(headers,content),
-            paloalto(headers,content),
-            profense(headers,content),
-            radware(headers,content),
-            requestvalidationmode(headers,content),
-            safe3(headers,content),
-            safedog(headers,content),
-            secureiis(headers,content),
-            senginx(headers,content),
-            sitelock(headers,content),
-            sonicwall(headers,content),
-            sophos(headers,content),
-            stingray(headers,content),
-            sucuri(headers,content),
-            teros(headers,content),
-            trafficshield(headers,content),
-            urlscan(headers,content),
-            uspses(headers,content),
-            varnish(headers,content),
-            wallarm(headers,content),
-            webknight(headers,content),
-            yundun(headers,content),
-            yunsuo(headers,content)
-            )
-    return waf0x00
 
 def waf(web):
-    global name
-    name = targetname(web)
-    global lvl2
-    lvl2 = inspect.stack()[0][3]
-    global module
-    module = "ScanANDEnum"
-    global lvl1
-    lvl1 = "Scanning & Enumeration"
-    global lvl3
-    lvl3 = ""
-    check = 0x00
-    time.sleep(0.7)
-    #print(R+'\n    ===============================')
-    #print(R+'     W A F   E N U M E R A T I O N ')
-    #print(R+'    ===============================\n')
-    from core.methods.print import pscan
     pscan("waf enumeration")
-    time.sleep(0.7)
-    print(GR+' [*] Testing the firewall/loadbalancer...')
-    time.sleep(1)
-    head, con = getReq0x00(web)
-    waftypes = detectWaf0x00(head, con)
-    for i in range(0,len(waftypes)):
+    url = kit.url(web)
+    record = kit.Recorder(web, kit.SCAN, "waf")
+
+    try:
+        from wafw00f.main import WAFW00F
+    except ImportError:
+        kit.bad("wafw00f is not installed. Install it with: pip install wafw00f")
+        return []
+
+    # Reach the target with our own (Tor-aware) session first, both to fail early
+    # with a clear message and to surface the Server banner.
+    kit.info(f"Sending a normal request to {url}...")
+    try:
+        resp = kit.http().get(url)
+    except requests.RequestException as e:
+        kit.bad(f"Could not reach {url}: {type(e).__name__}")
+        return []
+    server = resp.headers.get("Server")
+
+    # wafw00f chatters on its own logger; keep the console clean.
+    logging.getLogger("wafw00f").setLevel(logging.CRITICAL)
+
+    kit.info("Probing with attack payloads and matching WAF signatures (wafw00f)...")
+    scanner = WAFW00F(target=url, proxies=_proxies(), followredirect=True, timeout=10)
+    try:
+        result = scanner.identwaf(findall=True)
+    except Exception as e:  # noqa: BLE001 -- wafw00f raises a variety of request errors
+        kit.bad(f"WAF fingerprinting failed: {type(e).__name__}")
+        return []
+    # identwaf returns (list, url) on current wafw00f, a bare list on older ones.
+    detected = list(result[0]) if isinstance(result, tuple) else list(result)
+
+    generic = ""
+    if not detected:
         try:
-            if waftypes[i] != None and waftypes[i] != '':
-                print(GR+'\n [*] Response seems to be matching a WAF signature...')
-                time.sleep(0.6)
-                print(C+' [+] The website seems to be behind a WAF...')
-                time.sleep(0.6)
-                print(B+' [+] Firewall Detected : ' +C+waftypes[i])
-                check = 0x01
-                save_data(database, module, lvl1, lvl2, lvl3, name, waftypes[i])
-                break
-
-            else:
-                print(B+' [+] Matching signatures for : '+C+wafs[i], end='', flush=True)
-                time.sleep(0.1)
-
-        except Exception as e:
+            if scanner.genericdetect():
+                generic = scanner.knowledge["generic"]["reason"]
+        except Exception:  # noqa: BLE001
             pass
 
-    if check == 0x00:
-        save_data(database, module, lvl1, lvl2, lvl3, name, "Generic detection failed to fingerprint WAF.")
-        print(R+' [-] Generic detection failed to fingerprint WAF...')
+    kit.kv_table([
+        ("Target", url),
+        ("Server", server),
+        ("Signatures checked", str(len(scanner.wafdetections))),
+    ])
 
-    print('\n'+G+' [+] WAF Fingerprinting module completed!'+C+color.TR2+C+'\n')
+    lines = []
+    if detected:
+        for name in detected:
+            kit.found("Firewall detected", name)
+            lines.append(name)
+        if len(detected) > 1:
+            kit.info("More than one product matched; the target may chain a CDN and a WAF.")
+    elif generic:
+        kit.found("Firewall detected", "generic / unidentified WAF")
+        for part in str(generic).splitlines():
+            part = part.strip()
+            if part:
+                kit.bullet(part)
+        lines.append("Generic WAF/filter likely: " + " ".join(str(generic).split()))
+    else:
+        kit.bad("No WAF detected: no signature matched and the target did not behave defensively.")
+        lines.append("No WAF detected.")
+
+    record(lines)
+    kit.good("WAF fingerprinting module completed!")
+    return detected or (["generic"] if generic else [])
+
 
 def attack(web):
-    web = web.fullurl
     waf(web)

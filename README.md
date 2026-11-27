@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img src='files/logo.png' height='500'></img><br>
+  <img src='static/logo.png' height='260'></img><br>
   TIDoS
   <br>
 </h1>
@@ -14,105 +14,53 @@
   The Offensive Web Application Penetration Testing Framework.
 </p>
 
-> __IMPORTANT__:
->
-> The new Qt5 interface is complete, but has additional dependencies. Take a look at the updated installation instructions.
-
 ### Highlights :-
 Here is some light on what the framework is all about:
 -  A complete versatile framework to cover up everything from Reconnaissance to Vulnerability Analysis.
--  Has 5 main phases, subdivided into __14 sub-phases__ consisting a total of __108 modules__.
--  Reconnaissance Phase has 50 modules of its own (including active and passive recon, information disclosure modules).
--  Scanning & Enumeration Phase has got 16 modules (including port scans, WAF analysis, etc)
--  Vulnerability Analysis Phase has 37 modules (including most common vulnerabilities in action).
+-  Has 5 main phases consisting a total of __115 modules__.
+-  Reconnaissance Phase has 54 modules of its own (including active and passive recon, information disclosure modules).
+-  Scanning & Enumeration Phase has got 19 modules (including port scans, WAF & Shodan intel, SSL enumeration, etc.)
+-  Vulnerability Analysis Phase has 36 modules (including most common vulnerabilities in action).
 -  Exploits Castle has only 1 exploit. `(purely developmental)`
 -  And finally, Auxiliaries have got 4 modules. `more under development`
--  All four phases each have an `Auto-Awesome` module which automates every module for you.
+-  All phases each have an `Auto-Awesome` module which automates every module for you.
 -  huge performance boost through multiprocessing
--  Piping Attacks through Tor (not implemented everywhere yet)
+-  Piping Attacks through Tor (verified Tor exit before routing)
 -  You just need the domain, and leave everything is to this tool.
 -  TIDoS has full verbose out support, so you'll know whats going on.
--  Attacking now even easier with a new GUI
 
 ### Main new features
 -  the programming language: TIDoS is fully ported to Python3
 -  the interface: TIDoS presents a new, Metasploit-like console interface
 -  Parallelisation: TIDoS uses multiprocessing to speed up attacks
--  An alternative CLI interface for faster interaction with one specific module
--  Anonymity: Attacking through Tor is possible (95% done)
+-  A path-addressed command line: `tidos -u <url> -m <phase>/<sub>/<module>` (see below)
+-  Anonymity: Attacking through Tor is possible (verified before routing)
 -  Module Completion: Some modules have been feature-extended (e.g. more evasion, supporting more than 1 query parameter)
--  Some new modules: arpscan
--  A Graphical User Interface for easier interaction with the toolkit
+-  WAF fingerprinting now backed by `wafw00f` (~170 signatures)
+-  Findings are recorded to a per-session database
 -  Supports non-default http(s) ports
 
 ### Upcoming
--  results of modules will be stored in a database
--  new modules: nikto&photon
+-  extended exploitation and post-exploitation modules
+-  new modules: nikto & photon
 
 ### Installation :-
 
-#### Installation Script (Globally) :
-
-To install the framework globally in /opt, run the provided `core/install.py` script as root. After this, you can launch TIDoS simply by typing `tidos` on the command line.
-
-#### Manual Installation (Locally) :
-
-* Clone the repository locally and navigate there:
-```
-git clone https://github.com/0xinfection/tidos-framework.git
-cd tidos-framework
-```
-
-TIDoS needs some libraries to run, which can be installed via `aptitude` or `dnf` Package Managers.
-```
-sudo apt-get install libncurses5 libxml2 nmap tcpdump libexiv2-dev build-essential python3-pip libmariadbclient18 libmysqlclient-dev tor konsole
-```
-Now after these dependencies are finished installing, we need to install the remaining Python Package dependencies, hence run:
-```
-pip3 install -r requirements.txt
-```
-
-TIDoS uses Vailyn to scan for path traversals in a new, improved path traversal module. If you want to use that module, head to `https://github.com/VainlyStrain/Vailyn`, and follow the installation instructions there.
-
-Thats it. You now have TIDoS at your service. Fire it up using:
-```
-python3 tidv2               #Qt5 interface
-sudo python3 tidconsole.py  #console interface
-```
-
-#### Docker image :
-
-You can build it from Dockerfile :
-```
-git clone https://github.com/0xinfection/tidos-framework.git
-cd tidos-framework/core/docker
-docker build -t tidos .
-```
-
-To run TIDoS :
+TIDoS runs on Linux and macOS with Python 3.7+. Quick start:
 
 ```
-docker run --interactive --tty --rm tidos bash
-tidos
+git clone https://github.com/0xinfection/tidos-framework.git && cd tidos-framework
+python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
+sudo -E .venv/bin/python3 tidos.py   # console (root)
 ```
 
-Update: TIDoS is now available on Docker Hub. Install and run the container like this:
-
-```
-docker run -it vainlystrain/tidos-framework
-```
-
-#### Updating TIDoS :
-
-To get the current version of TIDoS, move into the installation folder and perform `(sudo) git pull  #sudo if installed by install.py`. Alternatively, you can run the `fetch` command in tidconsole.
+See [docs/install.md](docs/install.md) for system packages, the global `/opt` install (`tidos` launcher), Docker, optional tools (phpsploit) and updating.
 
 ### Getting Started :-
 
-To get started, you need to set your own `API KEYS` for various OSINT & Scanning and Enumeration purposes. To do so, open up `API_KEYS.py` under `files/` directory and set your own keys and access tokens for `SHODAN`, `CENSYS`, `FULL CONTACT`, `GOOGLE` and `WHATCMS`.
+Some modules need API keys (Shodan, Censys, ViewDNS, WhatCMS, HackerTarget). TIDoS ships **no** keys: they are read from environment variables such as `TIDOS_SHODAN_API_KEY`. Most modules need no key at all.
 
-> __GOOD NEWS__:
->
-> The latest release of TIDoS includes all API KEYS and ACCESS TOKENS for `SHODAN`, `CENSYS`, `FULL CONTACT`, `GOOGLE` and `WHATCMS` by default. I found these tokens on various repositories on GitHub itself. __You can now use all the modules__ which use the API KEYS. :)
+See [docs/setup.md](docs/setup.md) for the full list of keys, how to pass them through `sudo`, which third-party services each module contacts, Tor, module options and automation.
 
 #### Commands :-
 
@@ -146,6 +94,33 @@ __                                                    __
     M needs loaded modvle
     V [! potentially] need loaded target(s)
 ```
+
+### Command line :-
+
+Besides the console, modules run non-interactively. They are addressed by a
+readable path, `<phase>[/<sub-phase>]/<module>`:
+
+```bash
+tidos --list                          # every module and its path
+tidos --list osint                    # just one phase
+tidos --info osint/passiverecon/getgeoip
+tidos --check                         # which libraries and tools are available
+tidos --results                       # targets with stored findings
+tidos --results example.com           # dump findings recorded for a target
+
+tidos -u http://host -m osint/passiverecon/getgeoip      # one module
+tidos -u http://host -m osint/passiverecon               # a whole sub-phase
+tidos -u http://host -m osint/all                        # a whole phase
+tidos -u http://host -m all --tor                        # everything, via Tor
+tidos -u http://host -m sqli --set PARAM=/p.php?id=1 --set COOKIE=sid=abc
+```
+
+`-u/--url` and `-m/--module` are repeatable; `--set OPT=VALUE` sets a module
+option; `--tor`, `--processes N` and `-q/--quiet` round it out. `--check`
+reports available dependencies and `--results [target]` reads back findings
+recorded in the session database. Running `tidos` with no arguments opens the
+interactive console above. See [docs/cli-usage.md](docs/cli-usage.md) for the
+full command-line guide.
 
 ### Flawless Features :-
 
@@ -208,11 +183,12 @@ TIDoS presently supports the following: `and more modules are under active devel
 	    - Fatal Errors Enumeration `Includes Full Path Disclosure`
 	    - Internal IP Disclosure `Signature Based`
 	    - Phone Number Havester `Signature Based`
+	    - Secrets & API Keys Disclosure `Signature Based`
 	    - Social Security Number Harvester `US Ones`
 
 * __Scanning & Enumeration__
 
-	+ Remote Server WAF Enumeration `Generic` `54 WAFs`
+	+ Remote Server WAF Enumeration `~170 WAFs` `via wafw00f`
 	+ Port Scanning `Ingenious Modules`
 	    - Simple Port Scanner `via Socket Connections`
 	    - TCP SYN Scan `Highly reliable`
@@ -223,7 +199,7 @@ TIDoS presently supports the following: `and more modules are under active devel
 	+ Web Technology Enumeration `Absolute`
 	+ Complete SSL Enumeration `Absolute`
 	+ Operating System Fingerprinting `IMPROVED`
-	+ Banner Grabbing of Services `via Open Ports`
+	+ Shodan Host Intel `banners, CVEs, tags, geo` `via Shodan API or free InternetDB`
 	+ Interactive Scanning with NMap `16 preloaded modules`
 	+ Internet Wide Servers Scan `Using CENSYS Database`
 	+ Web and Links Crawlers
@@ -316,7 +292,7 @@ TIDoS presently supports the following: `and more modules are under active devel
 
 - __Auxillary Modules__
 
-	+ Hash Generator `MD5, SHA1, SHA256, SHA512`
+	+ Hash Generator `MD5, SHA1, SHA224, SHA256, SHA384, SHA512`
 	+ String & Payload Encoder `7 Categories`
 	+ Forensic Image Analysis `Metadata Extraction`
 	+ Web HoneyPot Probability `ShodanLabs HoneyScore` 
@@ -324,7 +300,19 @@ TIDoS presently supports the following: `and more modules are under active devel
 - __Exploitation__ `purely developmental`
 
 	+ ShellShock
-	
+	+ Webshell Generator `php, jsp, asp`
+
+### Testing :-
+
+A deliberately-vulnerable local site and a module test suite live under [tests/](tests/):
+
+```
+.venv/bin/python3 tests/run.py            # deep detection cases + contract smoke
+.venv/bin/python3 tests/run.py --run-smoke  # also run every other module once
+```
+
+See [tests/README.md](tests/README.md) for what it covers and how the fixtures work.
+
 ### Other Tools:
 - `net_info.py` - Displays information about your network. Accessible from 'netinfo' command.
 
@@ -344,4 +332,3 @@ v2.0.1-5 [latest release] [#beta]
 TIDoS is provided as an offensive web application audit framework. It has built-in modules which can reveal potential misconfigurations and vulnerabilties in web applications which could possibly be exploited maliciously.
 
 __THEREFORE, NEITHER THE AUTHOR NOR THE CONTRIBUTORS ARE RESPONSIBLE FOR ANY MISUSE OR DAMAGE DUE TO THIS TOOLKIT.__
-

@@ -1,99 +1,98 @@
 #!/usr/bin/env python3
-# coding:  utf-8
-
+# -*- coding: utf-8 -*-
+#
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 #    TIDoS Framework     #
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 
-#Author: 0xInfection (@_tID)
-#This module requires TIDoS Framework
-#https://github.com/0xInfection/TIDoS-Framework
+# This module requires TIDoS Framework
+# https://github.com/0xInfection/TIDoS-Framework
 
+"""Same-site scripting -- localhost.<domain> resolving to the loopback address."""
 
+from __future__ import annotations
+
+import ipaddress
 import os
-import time
-import sys
-import subprocess
-sys.path.append('files/')
-from core.Core.colors import *
-from modules.VlnAnalysis.Misconfig.subdom0x00 import *
 
-from core.database.database_module import save_data
-from core.variables import database
-from core.methods.cache import targetname
-import inspect
+from core.methods import dnsmisc
+from core.methods import modkit as kit
+from core.methods.inject import marker
+from core.methods.print import pvln
 
-info = "This module hunts for Same Site scripting vulnerabilities."
+info = ("This module hunts for Same-Site Scripting: a 'localhost.<domain>' DNS record (or any "
+        "known subdomain) pointing to 127.0.0.1/::1/0.0.0.0. A page served by any local "
+        "service on the victim's machine then counts as same-site with the target and can "
+        "read cookies scoped to the domain. Subdomains found earlier by the Subdomain Gatherer "
+        "(tmp/logs/<host>-logs/<host>-subdomains.lst) are checked too.")
 searchinfo = "Same Site Scripting"
 properties = {}
 
+
+def loopback(ips: list[str]) -> list[str]:
+    out = []
+    for ip in ips:
+        try:
+            a = ipaddress.ip_address(ip)
+        except ValueError:
+            continue
+        if a.is_loopback or a.is_unspecified:
+            out.append(ip)
+    return out
+
+
+def known_subdomains(web) -> list[str]:
+    logs = kit.logdir(web)
+    stem = os.path.basename(logs)[:-len("-logs")]
+    path = os.path.join(logs, f"{stem}-subdomains.lst")
+    return kit.wordlist(path) if os.path.exists(path) else []
+
+
 def ssscript(web):
-    global name
-    name = targetname(web)
-    global lvl2
-    lvl2 = inspect.stack()[0][3]
-    global module
-    module = "VulnAnalysis"
-    global lvl1
-    lvl1 = "Basic Bugs & Misconfigurations"
-    global lvl3
-    lvl3 = ""
-    vuln = []
-    novuln = []
-    web = web.replace('https://','')
-    web = web.replace('http://','')
-    webb = web
-    if "@" in web:
-        webb = web.split("@")[1]
-    #print(R+'\n   =======================================')
-    #print(R+'\n    S A M E - S I T E   S C R I P T I N G')
-    #print(R+'   ---<>----<>----<>----<>----<>----<>----\n')
-    from core.methods.print import pvln
-    pvln("same-site scripting") 
-                
-    time.sleep(0.5)
-    try:
-        if os.path.exists('files/'+webb+'-subdomains.lst') == True:
-            pass
-        else:
-            print(O+' [*] Gathering subdomains...')
-            print(GR+' [*] Initializing subdomain gathering...')
-            subdom0x00(web)
-    except Exception:
-        print(R+' [-] Exception occured!')
+    pvln("same-site scripting")
+    record = kit.Recorder(web, kit.MISCONFIG, "ssscript")
+    host = kit.host(web)
+    if kit.is_ip(host):
+        kit.bad("Target is an IP address; same-site scripting needs a domain name.")
+        record("Not applicable: target is an IP address.")
+        return []
+    dnsmisc.warn_tor()
+    domain = kit.domain(web)
 
-    os.system('mv '+webb+'-subdomains.lst tmp/')
-    #print(R+'\n    =========================')
-    print(R+'\n     S - S - S   T E S T E R')
-    print(R+'    ---<>----<>----<>----<>--\n')
-                 
-    try:
-        with open('tmp/'+webb+'-subdomains.lst','r') as dom:
-            for m in dom:
-                m = m.replace('\n','')
-                print(C+' [*] Running tests on '+GR+m+C+' for Same-Site Scripting...')
-                time.sleep(1.5)
-                try:
-                    mp = socket.gethostbyname(m)
-                    if '127.0.0.1' in mp or '0.0.0.0' in mp:
-                        time.sleep(0.7)
-                        print(G+' [+] This website is vulnerable to Same Site Scripting!')
-                        vuln.append(web)
-                        save_data(database, module, lvl1, lvl2, lvl3, name, "This website is vulnerable to Same Site Scripting!")
-                    else:
-                        time.sleep(0.7)
-                        print(R+' [-] '+O+m+R+' is immune to Same-Site Scripting!')
-                        save_data(database, module, lvl1, lvl2, lvl3, name, m+" is immune to Same Site Scripting.")
-                        novuln.append(web)
+    names = list(dict.fromkeys(f"localhost.{d}" for d in (domain, host)))
+    subs = known_subdomains(web)
+    if subs:
+        kit.info(f"Also checking {len(subs)} known subdomains.")
+    names += [s for s in subs if s not in names]
 
-                except socket.gaierror:
-                    time.sleep(0.7)
-                    pass
-    except Exception as e:
-        print(R+' [-] Error occured while processing module')
-        print(R+' [-] Error : '+str(e))
-        pass
+    wildcard = loopback(dnsmisc.addresses(f"{marker(10)}.{domain}"))
+    if wildcard:
+        kit.warn(f"Wildcard DNS of {domain} resolves to {', '.join(wildcard)}: "
+                 "every name under it is affected.")
+
+    findings = []
+    for name in names:
+        ips = dnsmisc.addresses(name)
+        bad = loopback(ips)
+        if bad:
+            line = f"{name} resolves to {', '.join(bad)}"
+            kit.found("Same-site scripting", line)
+            findings.append(line)
+        elif name.startswith("localhost."):
+            kit.bullet(f"{name}: " + (", ".join(ips) if ips else "does not resolve"))
+
+    if wildcard and not findings:
+        findings.append(f"*.{domain} (wildcard) resolves to {', '.join(wildcard)}")
+    if not findings:
+        kit.good("No name of the domain points to the loopback address.")
+        record("Not vulnerable to same-site scripting.")
+        return []
+    for f in findings:
+        record(f"[MEDIUM] Same-site scripting: {f}")
+    kit.info("Remove these records: any local service on a visitor's machine becomes same-site "
+             "with the target.")
+    return findings
+
 
 def attack(web):
-    web = web.fullurl
     ssscript(web)

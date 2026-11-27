@@ -1,0 +1,53 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tidos-framework"
+version = "2.0"
+description = "The Offensive Web Application Penetration Testing Framework"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "GPL-3.0-or-later" }
+authors = [{ name = "0xInfection" }]
+keywords = ["pentest", "security", "web", "osint", "scanner", "offensive-security"]
+classifiers = [
+    "Environment :: Console",
+    "Intended Audience :: Information Technology",
+    "Operating System :: POSIX :: Linux",
+    "Operating System :: MacOS",
+    "Programming Language :: Python :: 3",
+    "Topic :: Security",
+]
+dependencies = [
+    "requests>=2.28,<3",
+    "PySocks>=1.7,<2",
+    "beautifulsoup4>=4.11,<5",
+    "lxml>=4.9,<7",
+    "tldextract>=3.4,<6",
+    "dnspython>=2.3,<3",
+    "texttable>=1.6,<2",
+    "scapy>=2.5,<3",
+    "sslyze>=5.1,<7",
+    "builtwith>=1.3,<2",
+    "wafw00f>=2.2,<3",
+    "pillow>=9.5,<12",
+    "paramiko>=3.0,<4",
+    "PyMySQL>=1.0,<2",
+]
+
+[project.urls]
+Homepage = "https://github.com/0xInfection/TIDoS-Framework"
+Repository = "https://github.com/0xInfection/TIDoS-Framework"
+
+[project.scripts]
+tidos = "tidos:main"
+
+# Flat layout: the top-level `tidos` module plus the `core` and `modules`
+# packages. An editable install (`pip install -e .`) keeps the data files
+# (core/doc, files/, tmp/) in the checkout, where the framework expects them.
+[tool.setuptools]
+py-modules = ["tidos"]
+
+[tool.setuptools.packages.find]
+include = ["core*", "modules*"]

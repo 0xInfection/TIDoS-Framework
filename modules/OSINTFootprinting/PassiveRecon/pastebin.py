@@ -1,76 +1,51 @@
 #!/usr/bin/env python3
-# coding: utf-8
-
+# -*- coding: utf-8 -*-
+#
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 #    TIDoS Framework     #
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 
-#Author : @_tID
-#This module requires TIDoS Framework
-#https://github.com/0xInfection/TIDoS-Framework
+# This module requires TIDoS Framework
+# https://github.com/0xInfection/TIDoS-Framework
 
+"""Pastebin posts -- passive recon (Google dork against pastebin.com)."""
 
-try:
-    from google import search
-except Exception:
-    from googlesearch import search
-import time
-import urllib.request
-from random import randint
-from time import sleep
-from core.Core.colors import *
-
-from core.database.database_module import save_data
-from core.variables import database
-from core.methods.cache import targetname
-import inspect
+from core.methods import modkit as kit
+from core.methods.google import Blocked, blocked_hint, search
+from core.methods.print import posintpas
 
 info = "Find Pastebin posts."
 searchinfo = "Find Pastebin posts."
-properties = {}
+properties = {
+    "LIMIT": ["Maximum number of results", ""],
+}
 
-def getposts(web, name, lvl2):
-    web0 = web
-    if "@" in web0:
-        web0 = web0.split("@")[1]
-    site = str(web0)
-    def clear_cookie():
-        fo = open(".google-cookie", "w")
-        fo.close()
-
-
-    def google_it (dork, name, lvl2):
-        clear_cookie()
-        data = []
-        module = "ReconANDOSINT"
-        lvl1 = "Passive Reconnaissance & OSINT"
-        lvl3=''
-        for title in search(dork, stop=30):
-            print(B+' [!] Post Found :> '+C+title)
-            data.append(title)
-            time.sleep(0.5)
-        save_data(database, module, lvl1, lvl2, lvl3, name, str(data))
-
-    try:
-        print(C+" [*] Finding Pastebin posts ...\n")
-        google_it("site:pastebin.com intext:"+site+"", name, lvl2)
-
-    except urllib.error.HTTPError as err:
-        if err.code == 503:
-            print(R+' [-] Captcha appeared...\n')
-            pass
 
 def pastebin(web):
-    name = targetname(web)
-    lvl2=inspect.stack()[0][3]
-    time.sleep(0.6)
-    #print(R+'\n    =============================')
-    #print(R+'     P A S T E B I N   P O S T S')
-    #print(R+'    =============================\n')
-    from core.methods.print import posintpas
     posintpas("pastebin posts")
-    getposts(web, name, lvl2)
+    site = kit.domain(web)
+    limit = kit.integer(properties, "LIMIT", "Maximum number of results", 30)
+
+    kit.info(f"Finding Pastebin posts mentioning {site}...")
+    try:
+        posts = search(f'site:pastebin.com intext:"{site}"', limit)
+    except Blocked:
+        blocked_hint()
+        return []
+    except Exception as e:
+        kit.bad(f"Search failed: {e}")
+        return []
+
+    posts = [p for p in posts if "pastebin.com" in p]
+    if not posts:
+        kit.bad("No Pastebin posts found.")
+        return []
+    for post in posts:
+        kit.found("Post found", post)
+    kit.good(f"{len(posts)} Pastebin post(s) found.")
+    kit.Recorder(web, kit.PASSIVE, "pastebin")(posts)
+    return posts
+
 
 def attack(web):
-    web = web.fullurl
     pastebin(web)

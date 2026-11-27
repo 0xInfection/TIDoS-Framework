@@ -1,101 +1,99 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-
+#
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 #    TIDoS Framework     #
 #-:-:-:-:-:-:-:-:-:-:-:-:#
 
-#Author: @_tID
-#This module requires TIDoS Framework
-#https://github.com/0xInfection/TIDoS-Framework
+# This module requires TIDoS Framework
+# https://github.com/0xInfection/TIDoS-Framework
 
+"""Image analysis -- read EXIF metadata (and GPS coordinates) from an image."""
 
-import time
-import PIL.ExifTags
-from PIL.ExifTags import TAGS, GPSTAGS
-from PIL import Image
-from core.Core.colors import *
-from collections import namedtuple
+from __future__ import annotations
+
 import os
 
-Header= namedtuple('Header',
-    "profile_size,cmm_type,version,device_class,colour_space,"
-    "PCS,date_time,signature,sig_platform,flags,dev_manufacturer,"
-    "dev_model,dev_attributes,intent,illuminant,sig_creator,"
-    "id"
-    )
+from core.methods import modkit as kit
 
-info = "Image Analysis based on metadata."
+info = ("Forensic image analysis: extracts EXIF metadata from an image and, when "
+        "present, decodes the GPS coordinates to decimal latitude/longitude. "
+        "Set PATH to run non-interactively. Requires Pillow.")
 searchinfo = "Image Analysis"
-properties = {}
-
-def gps(exif):
-
-    gpsinfo = {}
-    if 'GPSInfo' in exif:
-        Nsec = exif['GPSInfo'][2][2][0] / float(exif['GPSInfo'][2][2][1])
-        Nmin = exif['GPSInfo'][2][1][0] / float(exif['GPSInfo'][2][1][1])
-        Ndeg = exif['GPSInfo'][2][0][0] / float(exif['GPSInfo'][2][0][1])
-        Wsec = exif['GPSInfo'][4][2][0] / float(exif['GPSInfo'][4][2][1])
-        Wmin = exif['GPSInfo'][4][1][0] / float(exif['GPSInfo'][4][1][1])
-        Wdeg = exif['GPSInfo'][4][0][0] / float(exif['GPSInfo'][4][0][1])
-        if exif['GPSInfo'][1] == 'N':
-            Nmult = 1
-        else:
-            Nmult = -1
-        if exif['GPSInfo'][1] == 'E':
-            Wmult = 1
-        else:
-            Wmult = -1
-        Lat = Nmult * (Ndeg + (Nmin + Nsec/60.0)/60.0)
-        Lng = Wmult * (Wdeg + (Wmin + Wsec/60.0)/60.0)
-        exif['GPSInfo'] = {"Lat" : Lat, "Lng" : Lng}
+properties = {"PATH": ["Path to the image file (empty: prompt)", ""]}
 
 
-def exif1meta(image_path):
+def _ratio(value) -> float:
+    """A single EXIF rational -> float (modern Pillow gives IFDRational)."""
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        num, den = value
+        return num / den if den else 0.0
 
-    ret = {}
-    image = Image.open(image_path)
-    if hasattr(image, '_getexif'):
-        exifinfo = image._getexif()
-        if exifinfo is not None:
-            for tag, value in exifinfo.items():
-                decoded = TAGS.get(tag, tag)
-                ret[decoded] = value
-    gps(ret)
-    return ret
 
-def exif3meta(image_path):
+def gps_coordinates(gps: dict):
+    """(lat, lng) in decimal degrees from a GPSInfo dict, or None."""
+    try:
+        lat_ref, lat = gps[1], gps[2]
+        lng_ref, lng = gps[3], gps[4]
+    except (KeyError, TypeError):
+        return None
+    lat_ref = lat_ref.decode() if isinstance(lat_ref, bytes) else str(lat_ref)
+    lng_ref = lng_ref.decode() if isinstance(lng_ref, bytes) else str(lng_ref)
 
-    print(GR+'\n [*] Reading METADATA info...')
-    for tag, value in Image.open(image_path)._getexif().iteritems():
-        print(O+' [+] '+str(TAGS.get(tag))+' : '+C+str(value))
+    def to_degrees(dms):
+        d, m, s = (_ratio(x) for x in dms)
+        return d + m / 60.0 + s / 3600.0
 
-def imgext():
+    lat_deg = to_degrees(lat) * (-1 if lat_ref.upper().startswith("S") else 1)
+    lng_deg = to_degrees(lng) * (-1 if lng_ref.upper().startswith("W") else 1)
+    return lat_deg, lng_deg
 
-    #print(R+'\n    =============================')
-    print(R+'\n     I M A G E   A N A L Y S I S')
-    print(R+'    ---<>----<>----<>----<>----<>\n')
-                 
-    name = input(O+' [§] Enter path to image file :> ')
 
-    if os.path.exists(name):
-        print(GR+" [+] Metadata for file: %s " %(name))
-        try:
-            print(O+' [!] Extracting METADATA info...\n')
-            time.sleep(0.7)
-            exifData = {}
-            exif = exif1meta(name)
-            for metadata in exif:
-                print(G+" [+] "+str(metadata)+O+ " - Value :"+C+" %s " %(str(exif[metadata])))
-                time.sleep(0.1)
-            exif3meta(name)
+def read_exif(path: str) -> dict:
+    """{tag name: value} of an image's EXIF, GPSInfo kept raw for decoding."""
+    from PIL import Image
+    from PIL.ExifTags import TAGS
 
-        except Exception as e:
-            print(R+' [-] Caught Exception : '+str(e))
-    else:
-        print(R+' [-] No such file/directory present...')
-    print(G+'\n [+] Forensic Image Analysis Done!\n')
+    with Image.open(path) as image:
+        raw = getattr(image, "_getexif", lambda: None)()
+    if not raw:
+        return {}
+    return {TAGS.get(tag, tag): value for tag, value in raw.items()}
+
+
+def imgext(path: str):
+    if not os.path.isfile(path):
+        kit.bad(f"No such file: {path}")
+        return
+    try:
+        exif = read_exif(path)
+    except ImportError:
+        kit.bad("Pillow is not installed: pip install pillow (see docs/install.md).")
+        return
+    except Exception as e:
+        kit.bad(f"Could not read image: {type(e).__name__}: {e}")
+        return
+    if not exif:
+        kit.warn("No EXIF metadata found in this image.")
+        return
+
+    kit.info(f"EXIF metadata for {path}:")
+    gps = exif.pop("GPSInfo", None)
+    kit.kv_table((tag, value) for tag, value in sorted(exif.items(), key=lambda kv: str(kv[0])))
+    if isinstance(gps, dict):
+        coords = gps_coordinates(gps)
+        if coords:
+            lat, lng = coords
+            kit.found("GPS", f"{lat:.6f}, {lng:.6f}")
+            kit.found("Map", f"https://maps.google.com/?q={lat:.6f},{lng:.6f}")
+    kit.good("Image analysis done.")
+
 
 def attack(web):
-    imgext()
+    path = kit.option(properties, "PATH", "Enter the path to the image")
+    if not path:
+        kit.bad("No path given; set PATH or run interactively.")
+        return
+    imgext(path)

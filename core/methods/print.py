@@ -1,5 +1,13 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+#
+#-:-:-:-:-:-:-:-:-:-:-:-:#
+#    TIDoS Framework     #
+#-:-:-:-:-:-:-:-:-:-:-:-:#
+
+# This module requires TIDoS Framework
+# https://github.com/0xInfection/TIDoS-Framework
+
 """
 _____, ___
    '+ .;.    
@@ -18,6 +26,8 @@ _____, ___
 """
 
 import os, re
+import subprocess
+import sys
 import time
 import random
 from time import sleep
@@ -31,11 +41,17 @@ from core.methods.fetch import fetchinit
 from core.Core.colors import *
 
 
+def clear():
+    """Clear the terminal. No-op when output is not a TTY (piped/redirected)."""
+    if sys.stdout.isatty():
+        print("\033[3J\033[H\033[2J", end="", flush=True)
+
+
 def loadstyle():
     success = False
     thread = threading.Thread(target=fetchinit, args=(1,))
     thread.start()
-    os.system(vars.CMD_CLEAR)
+    clear()
     red_bold = R
     cursive = color.END + "\033[3m"
     reset = cursive
@@ -93,126 +109,33 @@ ____, __{}
             """.format(color.END, R, color.END, RB, color.END, R, C, cursive, swappy, color.END)
             print(display)
             time.sleep(0.1)
-            os.system(vars.CMD_CLEAR)
+            clear()
         action += 1
 
 
 
-vaile = '''{0}                      |
-                      :   
-                      |   
-                      .   
-                      .   
-                      .   
-____, __             .|   
-   + ;               .|   
-   .{1}:,                       
-     '                      
-    .              /      
-    + ;           :,      
-    ;.           /,       
-   {0}  ;          /;' ;    
-     ;         /;{2}|{0}  : ^  
-     '      / {2}:{0}  ;.'  *   
-          '/; \\           
-         ./ '. \\      {2}|{0}
-          '.  '-    __\\,_
-         {1}   '.      {0}\\{1}`{2};{0}{1} 
-              \\      {0}\\ {1}
-              .\\.     {0}V{1}   
-                \\.               
-                 .,.      
-                   .'.    
-                  ''.;:     
-                    .|.   
-                     | .  
-                     .    
-                     
-'''.format(color.END, color.BOLD, color.CURSIVE)
+lotus = color.BOLD + r'''
+                       (|)
+               \.      |:|      ./
+         \.     \.     |:|     ./     ./
+          \`.    \`.   |:|   .'/    .'/
+           \ `.   \ `. |:| .' /   .' /
+      \.    \  `.  \  `|:|'  /  .'  /    ./
+       `.`.  \   `. \  |:|  / .'   /  .'.'
+         `. `. \   `.\ |:| /.'   / .' .'
+     \_    `.  `.\   `\|:|/'   /.'  .'    _/
+       `-._  `.  \`.  (   )  .'/  .'  _.-'
+           `-._`. \ `-|: :|-' / .'_.-'
+               `-.`_.-|: :|-._'.-'
+      ~ ~ ~ ~ ~ ~ ~ ~ \:::/ ~ ~ ~ ~ ~ ~ ~ ~
+                  ______________
+                     __________
 
-metasploit_hakcers = '''                                                 ,˛
-                                              .:oDFo:.                            
-                                           ./ymM0dayMmy/.                          
-                                        -+dHJ5aGFyZGVyIQ==+-                    
-                                    .:sm⏣~~Destroy.No.Data~~s:`                
-                                 -+h2~~Maintain.No.Persistence~~h+-              
-                             .:odNo2~~Above.All.Else.Do.No.Harm~~Ndo:`          
-                          ./etc/shadow.0days-Data'%20OR%201=1--.No.0MN8'/.      
-                       -++SecKCoin++e.AMd`       `.-://///+hbove.913.ElsMNh+-    
-                      -~/.ssh/id_rsa.Des-                  `htN01UserWroteMe!-  
-                      :dopeAW.No<nano>o                     :is:TЯiKC.sudo-.A:  
-                      :we're.all.alike'`                     The.PFYroy.No.D7:  
-                      :PLACEDRINKHERE!:                      yxp_cmdshell.Ab0:    
-                      :msf>exploit -j.                       :Ns.BOB&ALICEes7:    
-                      :---srwxrwx:-.`                        `MS146.52.No.Per:    
-                      :<script>.Ac816/                        sENbove3101.404:    
-                      :NT_AUTHORITY.Do                        `T:/shSYSTEM-.N:    
-                      :09.14.2011.raid                       /STFU|wall.No.Pr:    
-                      :hevnsntSurb025N.                      dNVRGOING2GIVUUP:    
-                      :#OUTHOUSE-  -s:                       /corykennedyData:    
-                      :$nmap -oS                              SSo.6178306Ence:    
-                      :Awsm.da:                            /shMTl#beats3o.No.:    
-                      :Ring0:                             `dDestRoyREXKC3ta/M:    
-                      :23d:                               sSETEC.ASTRONOMYist:    
-                       /-                        /yo-    .ence.N:(){ :|: & };:    
-                                                 `:Shall.We.Play.A.Game?tron/    
-                                                 ```-ooy.if1ghtf0r+ehUser5`    
-                                               ..th3.H1V3.U2VjRFNN.jMh+.`          
-                                              `MjM~~WE.ARE.se~~MMjMs              
-                                               +~KANSAS.CITY's~-`                  
-                                                J~HAKCERS~./.`                    
-                                                .esc:wq!:`                        
-                                                 +++ATH`                            '''
+              T  I  D  o  S   Framework
+        The Offensive Web Application Pentest Suite
+''' + color.END
 
-
-
-tidos1 = color.BOLD + """
-
-   T H E
-
-         ███      ▄█  ████████▄   ▄██████▄     ▄████████
-     ▀█████████▄ ███  ███   ▀███ ███    ███   ███    ███ 
-        ▀███▀▀██ ███▌ ███    ███ ███    ███   ███    █▀
-         ███   ▀ ███▌ ███    ███ ███    ███   ███
-         ███     ███▌ ███    ███ ███    ███ ▀███████████
-         ███     ███  ███    ███ ███    ███          ███ 
-         ███     ███  ███   ▄███ ███    ███    ▄█    ███
-        ▄████▀   █▀   ████████▀   ▀██████▀   ▄████████▀
-
-                                                 F R A M E W O R K
-""" + color.END
-
-tidos2 = """
-
-   T H E
-
-    _________ ___ ______        _______  
-     |       |   |   _  \.--.--|       | 
-     |.|   | |.  |.  |   |  |  |___|   | 
-     `-|.  |-|.  |.  |    \___/ /  ___/  
-       |:  | |:  |:  1    /    |:  1  \  
-       |::.| |::.|::.. . /     |::.. . | 
-       `---' `---`------'      `-------' 
-       
-                                  F R A M E W O R K
-"""
-
-
-tidos3 = """
-
-____, - 
-   + ;  {0}T H E{1}      ____        _______
-   .:,          |   _  \.--.--|       | 
-     '      |.  |.  {2}|   |  |  |___|   |
-    .  `-|. |.  |.  |    \___/ /  ___/    
-    + ;  |: |{1}:  |:  1    /    |:  1  \\
-    ;.      |::.|::.. . /     |::{2}.. . |{1} 
-     ;      `---`------'      `-------' 
-     ;                           
-     '                           {0}F R A M E W O R K{1}
-""".format(color.CURSIVE, color.END, color.BOLD)
-
-bannerlist = [vaile]
+bannerlist = [lotus]
 
 sp00k70b3r = """
       ___
@@ -361,7 +284,7 @@ def f00l():
         elif "sudo" in inp or "su " in inp or inp == "su":
             print("{}: Permission denied.".format(inp.split(" ")[0]))
         else:
-            os.system(inp)
+            subprocess.run(inp, shell=True)
             
     time.sleep(2)
     troll = """
@@ -395,7 +318,7 @@ def f00l():
     print("Happy April Fools Day! And thank you for using TIDoS. ~Vainly")
 
 def banner():
-    os.system(vars.CMD_CLEAR)
+    clear()
     if currentMonth == 10:
         print(sp00k70b3r)
     elif currentDay == 1 and currentMonth == 4:
@@ -416,9 +339,7 @@ def randomsg():
         return random.choice(msg_list.readlines()).strip()
 
 def bannerbelownew():
-    #print("   {}tidos{}{}{}{}{}{}{}{}{}{}".format(color.END, color.END, color.TR6, color.END, RB, vars.e_version.split("#")[0],C,color.TR3,G,vars.e_version.split("#")[1],color.TR2) + C)
-    #print("   {}tidconsole{}{}{}{}{}{}{}{}{}{}".format(color.END, color.END, color.TR6, color.END, RB, vars.version,C,color.TR3,G,vars.e_version.split("#")[1],color.TR2) + C)
-    print("   {}tidconsole{}{}{}{}{}{}{}{}{}{}".format(color.END, color.END, color.TR6, color.END, RB, vars.version,C,color.TR3,G,vars.count,color.TR2) + C)
+    print("   {}tidos{}{}{}{}{}{}{}{}{}{}".format(color.END, color.END, color.TR6, color.END, RB, vars.version,C,color.TR3,G,vars.count,color.TR2) + C)
     print("  {}{}{}".format(RC, randomsg(), color.END))
 
 
@@ -465,107 +386,39 @@ TIDoS Attack was provided as an open-source, royalty-free penetration testing to
 def title(mod):
     return " ".join(mod[i].upper() for i in range(0, len(mod)))
 
+def _modbanner(phase, mod):
+    # Clean, newline-spaced module banner (no ASCII art). Keeps bold styling.
+    print()
+    print(" " + color.BOLD + phase + color.END)
+    print(" " + color.BOLD + title(mod) + color.END)
+    print()
+
 def posintpas(mod):
-    print("""
-   ,_       
- ,'  `\\,_   
- |_,-'_)    
- /##c '\\  (   {}O S I N T   P A S S I V E{}
-' |'  -{{.  )
-  /\\__-' \\[]        {}{}{}
- /`-_`\\     
- '     \\    
-""".format(color.END, C, RC, title(mod), C))
+    _modbanner("O S I N T · P A S S I V E", mod)
 
 def posint(mod):
-    print("""
-   ,_       
- ,'  `\\,_   
- |_,-'_)    
- /##c '\\  (   {}O S I N T{}
-' |'  -{{.  )
-  /\\__-' \\[]        {}{}{}
- /`-_`\\     
- '     \\    
-""".format(color.END, C, RC, title(mod), C))
+    _modbanner("O S I N T", mod)
 
 def posintact(mod):
-    print("""
-   ,_       
- ,'  `\\,_   
- |_,-'_)    
- /##c '\\  (   {}O S I N T   A C T I V E{}
-' |'  -{{.  )
-  /\\__-' \\[]        {}{}{}
- /`-_`\\     
- '     \\    
-""".format(color.END, C, RC, title(mod), C))
+    _modbanner("O S I N T · A C T I V E", mod)
 
 def psploit(mod):
-    print("""
-      ,--.!,
-   __/   -*-    {}S P L O I T{}
- ,d08b.  '|`
- 0088MM     {}{}{}
- `9MMP'  
-""".format(color.END, C, RC, title(mod), C))
+    _modbanner("S P L O I T", mod)
 
 def ppost(mod):
-    print("""
-       /\\
-      /  \\
-     /    \\   {}P O S T{}
-    /      \\
-   /        \\   {}S P L O I T {}
-  /          \\
- / /\\/\\  /\\/\\ \\   {}{}{}
-/ /    \\/    \\ \\
-\\/            \\/
-""".format(color.END, C, color.END, C, RC, title(mod), C))
+    _modbanner("P O S T · S P L O I T", mod)
 
 def pvln(mod):
-    print("""
-   (
-   '\\
-  '  )       {}V L N Y S I S{}
-##-------->     
-  .  )       {}{}{}
-   ./
-   (
-""".format(color.END, C, RC, title(mod), C))
+    _modbanner("V U L N · A N A L Y S I S", mod)
 
 def pscan(mod):
-    print("""
-       /\\
-      /  \\
-     /    \\   {}S C A N N I N G   &{}
-    /      \\
-   /        \\   {}E N U M E R A T I O N{}
-  /          \\
- / /\\/\\  /\\/\\ \\   {}{}{}
-/ /    \\/    \\ \\
-\\/            \\/
-""".format(color.END, C, color.END, C, RC, title(mod), C))
+    _modbanner("S C A N · E N U M", mod)
 
 def pbrute(mod):
-    print("""
- .--.
-/.-. '----------.   {}B R U T E F O R C E{}
-\\'-' .--"--""-"-'       {}{}{}
- '--'
-""".format(color.END, C, RC, title(mod), C))
+    _modbanner("B R U T E F O R C E", mod)
 
 def pleak(mod):
-    print("""
-   ,_       
- ,'  `\\,_   
- |_,-'_)    
- /##c '\\  (   {}I N F D I S C{}
-' |'  -{{.  )
-  /\\__-' \\[]        {}{}{}
- /`-_`\\     
- '     \\ 
-""".format(color.END, C, RC, title(mod), C))
+    _modbanner("I N F O · D I S C L O S U R E", mod)
 
 def cprint(text1, text2):
     print(RC + text1 + color.END + RB + text2 + color.END)
@@ -656,7 +509,7 @@ def loadstyle2():
             #progressbar(i, 30, fill="{}༛{}".format(color.END, color.END), length=20, suffix=" {} -".format(disp))
             progressbar(i, 30, fill="{}༛{}".format(color.END, color.END), length=20, suffix="-", prefix=disp+" ୰")
     time.sleep(0.75)
-    os.system("clear")
+    clear()
 
 def upinfo():
     if vars.upd:

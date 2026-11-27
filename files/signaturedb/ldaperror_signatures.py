@@ -1,33 +1,40 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-
-# -:-:-:-:-:-:-:-:-:-:-:-:#
+#
+#-:-:-:-:-:-:-:-:-:-:-:-:#
 #    TIDoS Framework     #
-# -:-:-:-:-:-:-:-:-:-:-:-:#
+#-:-:-:-:-:-:-:-:-:-:-:-:#
 
-# This file is a part of TIDoS Framework
+# This module requires TIDoS Framework
 # https://github.com/0xInfection/TIDoS-Framework
 
-ldap_errors = [
-    "supplied argument is not a valid ldap",
-    "javax.naming.NameNotFoundException",
-    "javax.naming.directory.InvalidSearchFilterException",
-    "Invalid DN syntax",
-    "LDAPException|com.sun.jndi.ldap",
-    "Search: Bad search filter",
-    "Protocol error occurred",
-    "Size limit has exceeded",
-    "The alias is invalid",
-    "Module Products.LDAPMultiPlugins",
-    "Object does not exist",
-    "The syntax is invalid",
-    "A constraint violation occurred",
-    "An inappropriate matching occurred",
-    "Unknown error occurred",
-    "Unknown exception encountered",
-    "The search filter is incorrect",
-    "Local error occurred",
-    "The search filter is invalid",
-    "The search filter cannot be recognized",
-    "IPWorksASP.LDAP"
+"""
+LDAP error signatures: (label, case-insensitive regex).
+
+Only messages that LDAP client libraries emit for a malformed search filter
+or DN. Generic phrases ("Object does not exist", "Unknown error occurred",
+"The syntax is invalid"...) were dropped: they appear on ordinary pages.
+The scanner additionally requires the signature to be absent from the
+baseline responses.
+"""
+
+LDAP_ERRORS = [
+    ("PHP ldap_search", r"ldap_(?:search|list|read|bind)\(\)[^<\n]{0,80}(?:bad search filter|"
+                        r"invalid dn syntax|filter error|search: )"),
+    ("PHP ldap resource", r"supplied argument is not a valid ldap"),
+    ("Java InvalidSearchFilter", r"javax\.naming\.directory\.InvalidSearchFilterException"),
+    ("Java InvalidName", r"javax\.naming\.InvalidNameException"),
+    ("Java NameNotFound", r"javax\.naming\.NameNotFoundException"),
+    ("JNDI LDAP", r"com\.sun\.jndi\.ldap\.\w+"),
+    ("UnboundID/Novell LDAPException", r"(?:com\.unboundid|com\.novell)\.ldap\.\w*LDAPException"),
+    ("LDAPException", r"LDAPException\b[^<\n]{0,80}(?:filter|DN|syntax|parenthes)"),
+    ("Bad search filter", r"\bbad search filter\b"),
+    ("Unbalanced parenthesis", r"unbalanced parenthes[ie]s[^<\n]{0,40}filter|filter[^<\n]{0,60}unbalanced parenthes"),
+    (".NET DirectoryServices", r"System\.DirectoryServices(?:\.Protocols)?\.(?:DirectoryServicesCOMException|LdapException)"),
+    (".NET invalid filter", r"The (?:search filter|filter) (?:is invalid|is incorrect|cannot be recognized)"),
+    ("Invalid DN syntax", r"\binvalid DN syntax\b"),
+    ("python-ldap", r"ldap\.FILTER_ERROR|ldap3\.core\.exceptions\.LDAP\w+"),
+    ("Net::LDAP", r"Net::LDAP::Filter"),
+    ("Zope LDAPMultiPlugins", r"Products\.LDAPMultiPlugins"),
+    ("IPWorks LDAP", r"IPWorksASP\.LDAP"),
 ]

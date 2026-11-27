@@ -1,5 +1,13 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+#
+#-:-:-:-:-:-:-:-:-:-:-:-:#
+#    TIDoS Framework     #
+#-:-:-:-:-:-:-:-:-:-:-:-:#
+
+# This module requires TIDoS Framework
+# https://github.com/0xInfection/TIDoS-Framework
+
 """
 _____, ___
    '+ .;.    
@@ -41,5 +49,5 @@ def fetchinit(a):
                 uptodate = False
         if not uptodate:
             varis.upd = True
-    except:
+    except Exception:
         pass
