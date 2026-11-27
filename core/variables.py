@@ -56,8 +56,14 @@ global interface
 
 version = "2.0"
 r_version = ""
-with open("core/doc/version", "r") as versionfile:
-    r_version = versionfile.read().strip()
+# Read relative to this file (not the cwd): variables is imported before the
+# console chdir's to the repo root, e.g. via the installed `tidos` command.
+_versionfile = os.path.join(os.path.dirname(os.path.abspath(__file__)), "doc", "version")
+try:
+    with open(_versionfile, "r") as versionfile:
+        r_version = versionfile.read().strip()
+except OSError:
+    r_version = version
 e_version = r_version + "#lsp"
 module = ""
 targets = []

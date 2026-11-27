@@ -11,3 +11,9 @@ tmp/logs/*-logs/
 
 # downloaded tools (Katana, fetched on first crawl)
 tools/bin/
+
+# python build / editable-install artifacts
+*.egg-info/
+build/
+dist/
+.venv/

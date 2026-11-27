@@ -80,18 +80,21 @@ Recent Debian and Ubuntu releases block `pip install` into the system Python
 git clone https://github.com/0xinfection/tidos-framework.git
 cd tidos-framework
 python3 -m venv .venv
-.venv/bin/pip install -r requirements.txt
+.venv/bin/pip install -e .
 ```
 
-Run the console as root with the venv's interpreter. `-E` keeps your exported
-API keys, because sudo drops the environment by default:
+`pip install -e .` installs the dependencies and a `tidos` command that points
+at this checkout. Run the console as root; `-E` keeps your exported API keys,
+because sudo drops the environment by default:
 
 ```bash
-sudo -E .venv/bin/python3 tidos.py
+sudo -E .venv/bin/tidos                 # or: sudo -E .venv/bin/python3 tidos.py
 ```
 
-> Always launch from the repository root. TIDoS reads `core/doc/*` and writes
-> `tmp/logs/` relative to the current directory.
+The `tidos` command works from any directory -- it anchors itself to the
+checkout, where TIDoS reads `core/doc/*` and `files/*` and writes `tmp/logs/`.
+(If you prefer not to install, `pip install -r requirements.txt` and run
+`python3 tidos.py` from the repository root instead.)
 
 ### Option B: global install to /opt
 

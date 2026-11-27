@@ -671,6 +671,10 @@ class TIDcon(Cmd):
 # tidos shell main function
 
 def main():
+    # TIDoS reads core/doc/* and files/* and writes tmp/logs/ relative to the
+    # repository root, so anchor there -- this lets the installed `tidos`
+    # command work from any directory, not just the checkout.
+    os.chdir(os.path.dirname(os.path.abspath(__file__)))
     prnt.clear()
     # POSIX only: Linux and macOS are supported (several modules need root, and
     # the console relies on os.geteuid / POSIX shells).
