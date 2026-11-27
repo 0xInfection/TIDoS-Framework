@@ -32,6 +32,7 @@ from __future__ import annotations
 import argparse
 import importlib
 import importlib.util
+import json
 import os
 import shutil
 import socket
@@ -172,13 +173,22 @@ def apply_options(mod, sets: dict) -> None:
 # commands
 # --------------------------------------------------------------------------
 
-def cmd_list(category: str | None) -> int:
+def cmd_list(category: str | None, as_json: bool = False) -> int:
     registry = discover()
     if category:
         registry = resolve(category, registry)
         if not registry:
+            if as_json:
+                print("[]")
+                return 0
             kit.bad(f"No modules under '{category}'. Try: tidos --list")
             return 1
+    if as_json:
+        print(json.dumps(
+            [{"path": m.path, "name": m.info, "module": m.dotted}
+             for m in sorted(registry, key=lambda x: x.path)],
+            indent=2))
+        return 0
     groups: dict[str, list[Mod]] = {}
     for m in registry:
         groups.setdefault(m.path.split("/")[0], []).append(m)
@@ -348,10 +358,23 @@ def cmd_check() -> int:
 # stored findings (`tidos --results [target]`)
 # --------------------------------------------------------------------------
 
-def cmd_results(target: str | None) -> int:
+def cmd_results(target: str | None, as_json: bool = False) -> int:
     """Show findings recorded in the session database, grouped by target."""
     from core.database.database_module import fetch_results
     grouped = fetch_results(variables.database, target)
+
+    if as_json:
+        out = {}
+        for host, rows in grouped.items():
+            out[host] = [
+                {"phase": label, "lvl1": lvl1, "lvl2": lvl2, "lvl3": lvl3,
+                 "number": number,
+                 "data": data.decode(errors="replace") if isinstance(data, bytes) else str(data)}
+                for label, lvl1, lvl2, lvl3, number, data in
+                sorted(rows, key=lambda r: (r[0], r[1], r[2], r[3], r[4]))
+            ]
+        print(json.dumps(out, indent=2))
+        return 0
 
     if not grouped:
         if target:
@@ -418,6 +441,8 @@ def build_parser() -> argparse.ArgumentParser:
                    help="report which Python libraries and external tools are available, then exit")
     p.add_argument("--results", nargs="?", const="", metavar="TARGET",
                    help="show findings recorded in the database (optionally for one target), then exit")
+    p.add_argument("--json", action="store_true",
+                   help="machine-readable JSON output (with --list or --results)")
     p.add_argument("--tor", action="store_true", help="route HTTP through Tor (verified first)")
     p.add_argument("--processes", type=int, metavar="N", help="worker processes for parallel modules")
     p.add_argument("-q", "--quiet", action="store_true", help="do not print the banner")
@@ -447,15 +472,15 @@ def main(argv: list[str]) -> int:
     from core.methods import print as prnt
     args = build_parser().parse_args(argv)
 
-    if not args.quiet:
+    if not args.quiet and not args.json:
         prnt.banner()
 
     if args.check:
         return cmd_check()
     if args.results is not None:
-        return cmd_results(args.results or None)
+        return cmd_results(args.results or None, args.json)
     if args.list is not None:
-        return cmd_list(args.list or None)
+        return cmd_list(args.list or None, args.json)
     if args.info:
         return cmd_info(args.info)
 

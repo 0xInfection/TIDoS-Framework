@@ -228,6 +228,27 @@ tidos --results 127.0.0.1
 Each record is labelled with its phase and module path and numbered per target.
 The database is git-ignored and rebuilds itself on first write.
 
+## JSON output
+
+`--list` and `--results` emit machine-readable JSON with `--json` (the banner is
+suppressed automatically, so the output is a clean document you can pipe to
+`jq`):
+
+```bash
+tidos --list osint --json
+tidos --results example.com --json
+```
+
+```json
+[
+  {
+    "path": "osint/passiverecon/getgeoip",
+    "name": "GeoIP Lookup",
+    "module": "modules.OSINTFootprinting.PassiveRecon.getgeoip"
+  }
+]
+```
+
 ## Full option reference
 
 ```text
@@ -247,6 +268,7 @@ usage: tidos [-h] [-u URL] [-m PATH] [--set OPT=VALUE] [--list [CATEGORY]]
                       available, then exit
   --results [TARGET]  show findings recorded in the database (optionally for
                       one target), then exit
+  --json              machine-readable JSON output (with --list or --results)
   --tor               route HTTP through Tor (verified first)
   --processes N       worker processes for parallel modules
   -q, --quiet         do not print the banner
